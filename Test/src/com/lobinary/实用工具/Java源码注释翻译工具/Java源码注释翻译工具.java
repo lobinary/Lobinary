@@ -1,22 +1,23 @@
 package com.lobinary.实用工具.Java源码注释翻译工具;
 
+import java.awt.Color;
 import java.awt.Container;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 
+import com.lobinary.java.多线程.TU;
 import com.lobinary.实用工具.主窗口.实用工具标签标准类;
-import com.lobinary.工具类.GTU;
-import com.lobinary.工具类.JAU;
-import com.lobinary.工具类.file.FileUtil;
-import com.lobinary.工具类.http.HttpUtil;
+import com.lobinary.工具类.JAU2;
 
 public class Java源码注释翻译工具 extends 实用工具标签标准类 {
 
@@ -27,6 +28,12 @@ public class Java源码注释翻译工具 extends 实用工具标签标准类 {
 	private JTextField 源码文件夹路径 = new JTextField("C:/test");
 	private JFileChooser fileFolderChooser = new JFileChooser("");
 	private boolean 正在执行 = false;
+	private JTextField 线程1处理文件内容;
+	private JTextField 线程2处理文件内容;
+	private JTextField 线程3处理文件内容;
+	private JTextField 线程4处理文件内容;
+	
+	private List<File> 该目录下所有文件列表;
 	
 	/**
 	 * Create the panel.
@@ -79,6 +86,78 @@ public class Java源码注释翻译工具 extends 实用工具标签标准类 {
 		});
 		选择源码目录按钮.setBounds(1174, 0, 106, 23);
 		add(选择源码目录按钮);
+		
+		总文件数量 = new JLabel("总文件数量：0个");
+		总文件数量.setForeground(Color.BLUE);
+		总文件数量.setFont(new Font("宋体", Font.PLAIN, 50));
+		总文件数量.setBounds(14, 36, 854, 88);
+		add(总文件数量);
+		
+		已完成文件数量 = new JLabel("已完成文件数量：0个");
+		已完成文件数量.setForeground(new Color(0, 128, 0));
+		已完成文件数量.setFont(new Font("宋体", Font.PLAIN, 50));
+		已完成文件数量.setBounds(14, 103, 854, 88);
+		add(已完成文件数量);
+		
+		剩余文件数量 = new JLabel("剩余文件数量：0个");
+		剩余文件数量.setForeground(new Color(95, 158, 160));
+		剩余文件数量.setFont(new Font("宋体", Font.PLAIN, 50));
+		剩余文件数量.setBounds(14, 167, 854, 88);
+		add(剩余文件数量);
+		
+		任务执行进度 = new JProgressBar();
+		任务执行进度.setBounds(14, 268, 1102, 63);
+		add(任务执行进度);
+		
+		JLabel 当前处理文件列表 = new JLabel("当前处理文件列表");
+		当前处理文件列表.setFont(new Font("宋体", Font.PLAIN, 30));
+		当前处理文件列表.setBounds(14, 358, 330, 55);
+		add(当前处理文件列表);
+		
+		JLabel 线程1 = new JLabel("线程1：");
+		线程1.setFont(new Font("宋体", Font.BOLD, 20));
+		线程1.setBounds(14, 444, 84, 34);
+		add(线程1);
+		
+		JLabel 线程2 = new JLabel("线程2：");
+		线程2.setFont(new Font("宋体", Font.BOLD, 20));
+		线程2.setBounds(14, 491, 84, 34);
+		add(线程2);
+		
+		JLabel 线程3 = new JLabel("线程3：");
+		线程3.setFont(new Font("宋体", Font.BOLD, 20));
+		线程3.setBounds(14, 538, 84, 34);
+		add(线程3);
+		
+		JLabel 线程4 = new JLabel("线程4：");
+		线程4.setFont(new Font("宋体", Font.BOLD, 20));
+		线程4.setBounds(14, 585, 84, 34);
+		add(线程4);
+		
+		线程1处理文件内容 = new JTextField();
+		线程1处理文件内容.setEditable(false);
+		线程1处理文件内容.setBounds(82, 439, 1004, 36);
+		add(线程1处理文件内容);
+		线程1处理文件内容.setColumns(10);
+		
+		线程2处理文件内容 = new JTextField();
+		线程2处理文件内容.setEditable(false);
+		线程2处理文件内容.setColumns(10);
+		线程2处理文件内容.setBounds(82, 485, 1004, 36);
+		add(线程2处理文件内容);
+		
+		线程3处理文件内容 = new JTextField();
+		线程3处理文件内容.setEditable(false);
+		线程3处理文件内容.setColumns(10);
+		线程3处理文件内容.setBounds(82, 532, 1004, 36);
+		add(线程3处理文件内容);
+		
+		线程4处理文件内容 = new JTextField();
+		线程4处理文件内容.setEditable(false);
+		线程4处理文件内容.setColumns(10);
+		线程4处理文件内容.setBounds(82, 579, 1004, 36);
+		add(线程4处理文件内容);
+		线程3处理文件内容.setText("");
 	}
 	
 	private void 选择源码路径(final Container 父窗口) {
@@ -101,277 +180,149 @@ public class Java源码注释翻译工具 extends 实用工具标签标准类 {
 			if(根目录下路径与文件==null||根目录下路径与文件.length==0){
 				alert("该目录下无文件");
 			}else{
-				List<File> 该目录下所有文件列表 = 扫描目录下的文件(源码根路径);
-				int Java文件个数 = 0;
-				for(File f:该目录下所有文件列表){
-					if(f.getName().endsWith(".java")||f.getName().endsWith(".Java")||f.getName().endsWith(".JAVA")){
-						Java文件个数++;
-//						翻译当前Java文件的注释(f);
-						JAU.翻译(f);
-					}
+				当前线程个数=0;
+				当前线程个数 = 0;
+				文件总数 = 0;
+				完成文件个数 = 0;
+				
+				该目录下所有文件列表 = 扫描目录下的文件(源码根路径);
+				文件总数 = 该目录下所有文件列表.size();
+				
+				总文件数量.setText("总文件数量："+文件总数+"个");
+				已完成文件数量.setText("已完成文件数量："+0+"个");
+				剩余文件数量.setText("剩余文件数量："+文件总数+"个");
+				
+				for (int i = 0; i < 4; i++) {
+					new Thread(){
+						@Override
+						public void run() {
+							this.setName(获取线程名称());
+							while(true){
+								File f = 获取需要翻译的文件();
+								if(f==null)break;
+								更新正在翻译的文件状态(this.getName(),f);
+								try {
+									JAU2.翻译(f);
+								} catch (Exception e) {
+									任务异常(this.getName(),e);
+									e.printStackTrace();
+								}
+								更新完成文件个数();
+							}
+							更新线程完成状态(this.getName());
+						}
+					}.start();
 				}
-				if(Java文件个数>0){
-					alert("翻译完成，共"+Java文件个数+"个Java文件的注释被更改");
+				while(!任务异常&&完成文件个数>0){
+					TU.s(1000);
+				}
+				if(文件总数>0){
+					alert("翻译完成，共"+完成文件个数+"个Java文件的注释被更改");
 				}else{
-					alert("该目录下没有Java文件");
+					alert("该目录下没有Java文件或已经全部翻译完毕");
 				}
 			}
 		}else{
 			alert("源码根路径不存在");
 		}
 	}
-
-	private void 翻译当前Java文件的注释(File f) throws Exception {
-		List<String> list = FileUtil.readLine2List(f);
-		String 翻译完成标志 = "/***** Lobxxx Translate Finished ******/";
-//		if(list.get(0).equals(翻译完成标志)){
-//			out("发现已经翻译完成的java文件:"+f.getAbsolutePath());
-//			return ;//如果是已经翻译的文件，将会被跳过
-//		}
-		boolean 注释开始 = false;
-		List<String> 注释数据 = new ArrayList<String>();
-		for (int i=0;i<list.size();i++) {
-			String l = list.get(i);
-			if(l.contains("*/")||l.contains("@ClassName")||
-					l.contains("@author")||l.contains("@date")||
-					l.contains("@version")||l.contains("@param")||
-					l.contains("@see")||l.contains("@since")){
-				if(注释开始){
-					注释开始 = false;
-					String 注释数据完整字符串 = 解析注释数据(注释数据);
-					System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-					System.out.println(注释数据完整字符串);
-					注释数据.clear();
-					String 翻译后的注释数据 = 翻译数据(注释数据完整字符串);
-					System.out.println(翻译后的注释数据);
-					System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-					String 前缀数据Str;
-					String 前缀数据 ;
-					int 向上计数器 = 1;
-					while(true){
-						try {
-							前缀数据Str = list.get(i-向上计数器);
-							前缀数据 = 前缀数据Str.substring(0,前缀数据Str.indexOf("*"))+"* ";
-							break;
-						} catch (Exception e) {
-							向上计数器++;
-						}
-					}
-					List<String> 调整翻译后的注释数据 = 装配注释数据(前缀数据,翻译后的注释数据);
-					list.add(i,前缀数据);
-					list.addAll(i, 调整翻译后的注释数据);
-					list.add(i,前缀数据+"<p>");
-//				}else{
-//					out("===================报错文件内容如下================================");
-//					out(f);
-//					out("===================报错文件内容如上================================");
-//					throw new Exception("文件"+f.getAbsolutePath()+"发现不能处理的注释代码:"+l);
-				}
-			}
-			if(注释开始){
-				注释数据.add(l);
-				out(i+":"+l);
-			}
-			if(l.contains("/**")||l.contains("/*")){
-				if(!l.endsWith("*/"))注释开始 = true;
-			}
+	
+	private synchronized void 更新正在翻译的文件状态(String name, File f) {
+		switch (name) {
+		case "1":
+			线程1处理文件内容.setText(f.getAbsolutePath());
+			break;
+		case "2":
+			线程2处理文件内容.setText(f.getAbsolutePath());
+			break;
+		case "3":
+			线程3处理文件内容.setText(f.getAbsolutePath());
+			break;
+		case "4":
+			线程4处理文件内容.setText(f.getAbsolutePath());
+			break;
+		default:
+			break;
 		}
-		list.add(0,翻译完成标志);
-		FileUtil.insertList2File(list, f);
+	}
+
+	private synchronized void 更新线程完成状态(String threadName) {
+		switch (threadName) {
+		case "1":
+			线程1处理文件内容.setBackground(Color.green);
+			break;
+		case "2":
+			线程2处理文件内容.setBackground(Color.green);
+			break;
+		case "3":
+			线程3处理文件内容.setBackground(Color.green);
+			break;
+		case "4":
+			线程4处理文件内容.setBackground(Color.green);
+			break;
+		default:
+			break;
+		}
 	}
 	
-	/**
-	 * 将普通数据装配成前边带*的注释数据
-	 * @param 翻译后的注释数据
-	 * @return
-	 * @throws Exception 
-	 * 
-	 */
-	private List<String> 装配注释数据(String 前缀,String 翻译后的注释数据) throws Exception {
-		List<String> 注释数据 = new ArrayList<String>();
-		int 每行的长度 = 80;
-		int 上次截取位置 = 0;
-		boolean 标签记录标志 = false;
-		String 已经记录的数据 = "";
-		int 当前缩进长度 = 0;
-		for (int i = 1; i <= 翻译后的注释数据.length(); i++) {
-			
-			String 本次字符 = 翻译后的注释数据.substring(i-1, i);
-			
-			if("<".equals(本次字符)||"{".equals(本次字符)){//存储特殊数据
-				标签记录标志 = true;
-			}
-			
-			
-			if(标签记录标志){
-				
-				已经记录的数据 += 本次字符;
-				
-				switch (已经记录的数据) {
+	private synchronized String 获取线程名称(){
+		当前线程个数++;
+		return ""+当前线程个数;
+	}
+	
+	private int 当前线程个数 = 0;
 
-				case "<b":
-				case "<a":
-					break;
-					
-				case "<p":
-				case "<table":
-				case "</table":
-				case "<tr":
-				case "</tr":
-				case "<td":
-				case "</td":
-				case "</ td":
-				case "<th":
-				case "</th":
-				case "<pre":
-				case "</pre":
-				
-				/**
-				 * 
-				 * 对于该类标志 <p class="cls" > test </p>
-				 * 转换成 <p class="cls" >
-				 * 		   very important
-				 * 		   <b>
-				 * 		     test
-				 * 		   </b>
-				 *         case
-				 * 		 </p>
-				 * 规则如下：
-				 * 	查看标签是否需要换行：
-				 * 		否：则继续输入，但是需要注意不应该将标签分割成两行，宁愿长度较长
-				 * 		是：终止当前记录的数据，查看是缩进标签还是不缩进标签，并根据换行标签缩进规则，对标签进行换行
-				 */
-					if("<p".equals(已经记录的数据)){
-						String 下一位字符 = 翻译后的注释数据.length()>=i?翻译后的注释数据.substring(i-1, i):null;
-						if(下一位字符!=null&&"r".equals(下一位字符)){//如果是pre，则继续往下执行
-							break;
-						}
-					}
-					
-					
-					
-//					System.out.println("发现特殊数据:"+已经记录的数据);
-					String s = null;
-//					System.out.println("截取数据："+上次截取位置+","+(i-已经记录的数据.length()));//481 482 <tr>
-					try {
-						s = 翻译后的注释数据.substring(上次截取位置, i-已经记录的数据.length());
-					} catch (Exception e) {
-						System.out.println("发现截取异常数据："+翻译后的注释数据);
-						throw e;
-					}
-					注释数据.add(前缀+s);
-					System.out.println(前缀+s);
-					s = 翻译后的注释数据.substring(i-已经记录的数据.length(), i);
-					注释数据.add(前缀+s);
-					System.out.println(前缀+s);
-					上次截取位置 = i;
-					标签记录标志 = false;
-					已经记录的数据 = "";
-					break;
-
-				default:
-					
-					if(已经记录的数据.length()>50){
-						throw new Exception("发现未识别标签：["+已经记录的数据+"]");
-//						标签记录标志 = false;
-//						已经记录的数据 = "";
-					}
-					
-					/**
-					 * 下方的注释表明，java中的注释都是闭环的，也就是<a 后边都会跟随</a>,所以以此作为准则
-					 * 如果我们设定<a为不换行标签的话，那么就一定要等到</a>后在换行，否则就抛出异常
-				     * <a href="{@docRoot}/../platform/serialization/spec/output.html">
-				     * Object Serialization Specification, Section 6.2, "Stream Elements"</a>
-					 */
-					if(">".equals(本次字符)||"}".equals(本次字符)){
-						if(i-上次截取位置>每行的长度){
-							s = 翻译后的注释数据.substring(上次截取位置, i);
-							上次截取位置 = i;
-							注释数据.add(前缀+s);
-						}else{
-							标签记录标志 = false;
-						}
-					}
-					break;
-				}
-			}else{
-				if(i%每行的长度==0){
-					try {
-						while( i < 翻译后的注释数据.length()&&!本次字符.equals(" ")){
-							i++;
-						}
-					} catch (Exception e) {
-						System.out.println("错误数据："+翻译后的注释数据);
-						System.out.println("错误数据："+i);
-						e.printStackTrace();
-						throw e;
-					}
-					String s = 翻译后的注释数据.substring(上次截取位置, i);
-					上次截取位置 = i;
-					注释数据.add(前缀+s);
-				}
-			}
-
-
-			if(">".equals(本次字符)){//存储特殊数据
-				标签记录标志 = false;
-			}
-			
+	private int 文件总数 = 0;
+	private int 完成文件个数 = 0;
+	private boolean 任务异常 = false;
+	private JLabel 总文件数量;
+	private JLabel 已完成文件数量;
+	private JLabel 剩余文件数量;
+	private JProgressBar 任务执行进度;
+	private synchronized void 任务异常(String threadName,Throwable e){
+		任务异常 = true;
+		switch (threadName) {
+		case "1":
+			线程1处理文件内容.setBackground(Color.red);
+			break;
+		case "2":
+			线程2处理文件内容.setBackground(Color.red);
+			break;
+		case "3":
+			线程3处理文件内容.setBackground(Color.red);
+			break;
+		case "4":
+			线程4处理文件内容.setBackground(Color.red);
+			break;
+		default:
+			break;
 		}
-		return 注释数据;
+		alert("扫描文件报错："+e);
 	}
-
-	/**
-	 * 将字符串进行翻译
-	 * @param 注释数据完整字符串
-	 * @return
-	 * @throws Exception 
-	 */
-	private String 翻译数据(String 注释数据完整字符串) throws Exception {
-		String 翻译后数据 = GTU.t(注释数据完整字符串);
-		return 翻译后数据;
+	
+	public synchronized void 更新完成文件个数(){
+		完成文件个数++;
+		总文件数量.setText("总文件数量："+文件总数+"个");
+		已完成文件数量.setText("已完成文件数量："+完成文件个数+"个");
+		剩余文件数量.setText("剩余文件数量："+(文件总数-完成文件个数)+"个");
+		任务执行进度.setValue(完成文件个数/文件总数*100);
 	}
-
-	/**
-	 * 将对应数据予以解析(整体翻译，不是单行的翻译)
-	 * @param 注释数据
-	 * @return
-	 */
-	private String 解析注释数据(List<String> 注释数据) {
-		StringBuilder sb = new StringBuilder();
-		System.out.println("##########################解析后的数据每个字符串VVVV################################");
-		for (int i = 0; i < 注释数据.size(); i++) {
-			String s = 注释数据.get(i).trim();
-			if(s.startsWith("*")){
-				s = s.substring(1).trim();
-			}
-			if(s.length()>0){
-				sb.append(" ").append(s);
-				System.out.println(s);
-			}else{
-				sb.append(" \\n ").append(s);
-				System.out.println(" \n ");
-			}
-		}
-		
-		System.out.println("##########################解析后的数据完整字符串VVV################################");
-		System.out.println("解析后的数据完整字符串:"+sb.toString());
-		System.out.println("##########################解析后的数据完整字符串AAA################################");
-		return sb.toString();
+	
+	public synchronized File 获取需要翻译的文件(){
+		if(任务异常)return null;//任务出现异常，让所有线程全部终止
+		return 该目录下所有文件列表.size()>0 ? 该目录下所有文件列表.remove(0) : null;
 	}
-
 	
 	private List<File> 扫描目录下的文件(File 目录){
 		List<File> 该目录下所有文件列表 = new ArrayList<File>();
 		File[] 目录或文件 = 目录.listFiles();
-		for (File file : 目录或文件) {
-			if(file.isFile()){
-				该目录下所有文件列表.add(file);
+		for (File f : 目录或文件) {
+			if(f.isFile()&&f.getName().endsWith(".java")||f.getName().endsWith(".Java")||f.getName().endsWith(".JAVA")){
+				该目录下所有文件列表.add(f);
 			}else{
-				该目录下所有文件列表.addAll(扫描目录下的文件(file));
+				该目录下所有文件列表.addAll(扫描目录下的文件(f));
 			}
 		}
 		return 该目录下所有文件列表;
 	}
-	
 }
