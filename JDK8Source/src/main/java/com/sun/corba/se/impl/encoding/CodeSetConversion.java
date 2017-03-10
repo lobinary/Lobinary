@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,15 @@ import com.sun.corba.se.spi.logging.CORBALogDomains;
  *           CharBuffer and byte[] & ByteBuffer, especially
  *           DirectByteBuffers.
  *
+ * <p>
+ *  CORBA代码集转换的类,接口和工厂方法的集合
+ * 
+ *  这主要是用来屏蔽sunio转换器的其他代码,可能会改变,以及提供一些基本的翻译转换到CORBA错误异常在这里需要一些额外的工作,以方便的方式CORBA说,它使用UTF-16作为00 -11-03 sp
+ * ec。
+ * 
+ * REVISIT  - 由于nioCharset和nioCharsetEncoder / Decoder使用NIO ByteBuffer和NIO CharBuffer,这个类和CDR流之间的交互和接口应该
+ * 更仔细地进行优化,以避免不必要的数据在char []和CharBuffer和byte [ ]&ByteBuffer,尤其是DirectByteBuffers。
+ * 
  */
 public class CodeSetConversion
 {
@@ -69,6 +79,13 @@ public class CodeSetConversion
      * 1)  convert
      * 2)  Optional getNumBytes and/or getAlignment (if necessary)
      * 3)  getBytes (see warning)
+     * <p>
+     *  char到字节转换的抽象
+     * 
+     *  必须按正确的顺序使用：
+     * 
+     *  1)convert 2)可选getNumBytes和/或getAlignment(如果需要)3)getBytes(参见警告)
+     * 
      */
     public abstract static class CTBConverter
     {
@@ -105,6 +122,9 @@ public class CodeSetConversion
 
     /**
      * Abstraction for byte to char conversion.
+     * <p>
+     *  字节到字符转换的抽象
+     * 
      */
     public abstract static class BTCConverter
     {
@@ -131,6 +151,9 @@ public class CodeSetConversion
      * Implementation of CTBConverter which uses a nio.Charset.CharsetEncoder
      * to do the real work.  Handles translation of exceptions to the
      * appropriate CORBA versions.
+     * <p>
+     *  实现使用nioCharsetCharsetEncoder做真正工作的CTBConverter处理异常到相应的CORBA版本的翻译
+     * 
      */
     private class JavaCTBConverter extends CTBConverter
     {
@@ -285,6 +308,9 @@ public class CodeSetConversion
     /**
      * Special UTF16 converter which can either always write a BOM
      * or use a specified byte order without one.
+     * <p>
+     * 特殊的UTF16转换器,可以总是写一个BOM或使用指定的字节顺序没有一个
+     * 
      */
     private class UTF16CTBConverter extends JavaCTBConverter
     {
@@ -307,6 +333,9 @@ public class CodeSetConversion
      * Implementation of BTCConverter which uses a sun.io.ByteToCharConverter
      * for the real work.  Handles translation of exceptions to the
      * appropriate CORBA versions.
+     * <p>
+     *  实现使用sunioByteToCharConverter的实际工作的BTCConverter处理异常到相应的CORBA版本的翻译
+     * 
      */
     private class JavaBTCConverter extends BTCConverter
     {
@@ -400,6 +429,9 @@ public class CodeSetConversion
          * Utility method to find a CharsetDecoder in the
          * cache or create a new one if necessary.  Throws an
          * INTERNAL if the code set is unknown.
+         * <p>
+         *  实用程序方法在缓存中查找CharsetDecoder或创建一个新的(如果必要)如果代码集未知,则抛出INTERNAL
+         * 
          */
         protected CharsetDecoder getConverter(String javaCodeSetName) {
 
@@ -430,6 +462,11 @@ public class CodeSetConversion
      *
      * The solution is to check for the byte order marker, and if we
      * need to do something differently, switch internal converters.
+     * <p>
+     *  用于UTF16的特殊转换器,因为它需要可选地支持字节顺序标记,而内部Java转换器要求它或要求它不在那里
+     * 
+     *  解决方案是检查字节顺序标记,如果我们需要做不同的事情,切换内部转换器
+     * 
      */
     private class UTF16BTCConverter extends JavaBTCConverter
     {
@@ -472,6 +509,9 @@ public class CodeSetConversion
 
         /**
          * Utility method for determining if a UTF-16 byte order marker is present.
+         * <p>
+         *  用于确定是否存在UTF-16字节顺序标记的实用方法
+         * 
          */
         private boolean hasUTF16ByteOrderMarker(byte[] array, int offset, int length) {
             // If there aren't enough bytes to represent the marker and data,
@@ -493,6 +533,9 @@ public class CodeSetConversion
          * is that if our sun.io converter requires byte order markers,
          * and then we see a CORBA wstring/wchar without them, we
          * switch to the sun.io converter that doesn't require them.
+         * <p>
+         * 在CORBA中处理UTF-16的当前解决方案是,如果我们的sunio转换器需要字节顺序标记,然后我们看到没有它们的CORBA wstring / wchar,我们切换到不需要它们的sunio转换器
+         * 
          */
         private void switchToConverter(OSFCodeSetRegistry.Entry newCodeSet) {
 
@@ -503,6 +546,9 @@ public class CodeSetConversion
 
     /**
      * CTB converter factory for single byte or variable length encodings.
+     * <p>
+     *  CTB转换器工厂为单字节或可变长度编码
+     * 
      */
     public CTBConverter getCTBConverter(OSFCodeSetRegistry.Entry codeset) {
         int alignment = (!codeset.isFixedWidth() ?
@@ -523,6 +569,13 @@ public class CodeSetConversion
      * If you select useByteOrderMarkers, there is no guarantee that the encoding
      * will use the endianness specified.
      *
+     * <p>
+     *  CTB转换器工厂用于多字节(主要是固定)编码
+     * 
+     *  由于字节顺序标记的尴尬和使用UCS-2的可能性,必须同时指定流的字节顺序以及是否使用字节顺序标记(如果适用)UCS-2没有字节顺序标记UTF-16有可选标记
+     * 
+     *  如果选择useByteOrderMarkers,则不能保证编码将使用指定的字节顺序
+     * 
      */
     public CTBConverter getCTBConverter(OSFCodeSetRegistry.Entry codeset,
                                         boolean littleEndian,
@@ -562,6 +615,9 @@ public class CodeSetConversion
 
     /**
      * BTCConverter factory for single byte or variable width encodings.
+     * <p>
+     * BTCConverter工厂为单字节或可变宽度编码
+     * 
      */
     public BTCConverter getBTCConverter(OSFCodeSetRegistry.Entry codeset) {
         return new JavaBTCConverter(codeset);
@@ -569,6 +625,9 @@ public class CodeSetConversion
 
     /**
      * BTCConverter factory for fixed width multibyte encodings.
+     * <p>
+     *  BTCConverter工厂用于固定宽度多字节编码
+     * 
      */
     public BTCConverter getBTCConverter(OSFCodeSetRegistry.Entry codeset,
                                         boolean defaultToLittleEndian) {
@@ -587,6 +646,11 @@ public class CodeSetConversion
      *
      * Returns the proper negotiated OSF character encoding number or
      * CodeSetConversion.FALLBACK_CODESET.
+     * <p>
+     *  遵循CORBA规范中的代码集协商算法99-10-07 1372
+     * 
+     *  返回正确的协商OSF字符编码或CodeSetConversionFALLBACK_CODESET
+     * 
      */
     private int selectEncoding(CodeSetComponentInfo.CodeSetComponent client,
                                CodeSetComponentInfo.CodeSetComponent server) {
@@ -655,6 +719,9 @@ public class CodeSetConversion
     /**
      * Perform the code set negotiation algorithm and come up with
      * the two encodings to use.
+     * <p>
+     *  执行代码集协商算法,并提出要使用的两种编码
+     * 
      */
     public CodeSetComponentInfo.CodeSetContext negotiate(CodeSetComponentInfo client,
                                                          CodeSetComponentInfo server) {
@@ -689,6 +756,8 @@ public class CodeSetConversion
 
     /**
      * CodeSetConversion is a singleton, and this is the access point.
+     * <p>
+     *  CodeSetConversion是一个单例,这是接入点
      */
     public final static CodeSetConversion impl() {
         return CodeSetConversionHolder.csc ;

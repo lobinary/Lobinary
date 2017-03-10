@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2002, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,13 @@
   Date       Who                What
   11Jun1998  dl               Create public version
    5Aug1998  dl               Added some convenient time constants
+/* <p>
+/*  文件：Syncjava
+/* 
+/*  最初由Doug Lea撰写并发布到公共领域这可能用于任何目的,无需确认感谢您的帮助和支持Sun Microsystems Labs,并且每个人贡献,测试和使用此代码
+/* 
+/*  历史：日期谁谁11Jun1998 dl创建公共版本5Aug1998 dl添加了一些方便的时间常数
+/* 
 */
 
 package com.sun.corba.se.impl.orbutil.concurrent;
@@ -279,6 +287,57 @@ package com.sun.corba.se.impl.orbutil.concurrent;
  * <p>
 
  * <p>[<a href="http://gee.cs.oswego.edu/dl/classes/EDU/oswego/cs/dl/util/concurrent/intro.html"> Introduction to this package. </a>]
+ * <p>
+ *  锁,门和条件的主界面
+ * <p>
+ * 同步对象隔离在多个线程间共享的特定逻辑状态,资源可用性,事件等的等待和通知使用同步有时(但绝不总是)与使用纯Java监视器方法相比增加了灵活性和效率,锁定,有时(但绝不总是)更简单的编程
+ * <p>
+ * 
+ *  大多数同步件主要用于(但不是排他地)在结构之前/之后,例如：
+ * <pre>
+ *  class X {同步门; //
+ * 
+ *  public void m(){try {gateacquire(); // block until condition hold try {// method body} finally {gaterelease()}
+ * } catch(InterruptedException ex){// evasive action}}。
+ * 
+ *  public void m2(Sync cond){//使用提供的条件try {if(condattempt(10)){//尝试条件10 ms try {//方法体} finally {condrelease ){// evasive action}
+ * }}。
+ * </pre>
+ * 同步可以在有些繁琐但更灵活的替换中用于内置的Java同步块例如：
+ * <pre>
+ *  class HandSynched {private double state_ = 00;私有最终同步锁; //使用构造函数中提供的锁类型public HandSynched(Sync l){lock = l; }
+ * }。
+ * 
+ *  public void changeState(double d){try {lockacquire(); try {state_ = updateFunction(d); } finally {lockrelease(); }
+ * } catch(InterruptedException ex){}}。
+ * 
+ *  public double getState(){double d = 00; try {lockacquire(); try {d = accessFunction(state_); } final
+ * ly {lockrelease(); }} catch(InterruptedException ex){} return d; } private double updateFunction(doub
+ * le d){} private double accessFunction(double d){}}。
+ * </pre>
+ *  如果你有很多这样的方法,他们采取一个通用的形式,你可以标准化使用包装器一些这些包装器在LockedExecutor标准化,但你可以使其他例如：
+ * <pre>
+ * class HandSynchedV2 {private double state_ = 00;私有最终同步锁; //使用构造函数中提供的锁类型public HandSynchedV2(Sync l){lock = l; }
+ * }。
+ * 
+ *  protected void runSafely(Runnable r){try {lockacquire(); try {rrun(); } finally {lockrelease(); }} c
+ * atch(InterruptedException ex){//传播不抛出ThreadcurrentThread()interrupt(); }}。
+ * 
+ *  public void changeState(double d){runSafely(new Runnable(){public void run(){state_ = updateFunction(d);}
+ * }); } //}。
+ * </pre>
+ * <p>
+ *  麻烦这种结构的一个原因是使用死锁 - 避免在处理涉及多个对象的锁时的回退例如,这里是一个Cell类,它使用尝试回退和重试,如果两个单元格试图交换值与每个其他同时
+ * <pre>
+ * class Cell {long value; Sync lock = //一些同步实现类void swapValue(Cell other){for(;;){try {lockacquire(); try {if(otherlockattempt(100)){try {long t = value; value = othervalue; othervalue = t;返回; }
+ *  finally {otherlockrelease(); }}} finally {lockrelease(); }} catch(InterruptedException ex){return; }
+ * }}}。
+ * /pre>
+ * <p>
+ *  这里是一个甚至fancier版本,使用锁重新排序冲突：
+ * <pre>
+ *  class Cell {long value;同步锁=; private static boolean trySwap(Cell a,Cell b){alockacquire(); try {！(！blockattempt(0))return false; try {long t = avalue; avalue = bvalue; bvalue = t; return true; }
+ * 
 **/
 
 
@@ -291,6 +350,32 @@ public interface Sync {
    *  been acquired, and that no
    *  corresponding release should be performed. Conversely,
    *  a normal return guarantees that the acquire was successful.
+   * <p>
+   *  finally {otherlockrelease(); }} finally {lockrelease(); } return false; }}。
+   * 
+   *  void swapValue(Cell other){try {while(！trySwap(this,other)&&！tryswap(other,this))Threadsleep } catch
+   * (InterruptedException ex){return; }}。
+   * 
+   * /pre>
+   * <p>
+   * 中断通常尽可能早地处理通常,如果在进入方法时检测到中断,并且在周围等待的任何后续上下文中检测到中断,则在捕获和尝试(msec)中抛出InterruptedExceptions。
+   * 但是,在release()中忽略中断状态, ;。
+   * <p>
+   *  通过返回值尝试报告故障的定时版本如果需要,您可以将此类构造转换为使用异常throws via
+   * <pre>
+   *  if(！cattempt(timeval))throw new TimeoutException(timeval);
+   * </pre>
+   * <p>
+   *  TimoutSync包装器类可以用于自动化这样的用法
+   * <p>
+   *  所有时间值以毫秒为单位表示为longs,其具有LongMAX_VALUE的最大值,或几乎300,000个世纪。
+   * 不知道JVM是否实际正确地处理这样的极值值为了方便起见,一些有用的时间值被定义为静态常量。
+   * <p>
+   * 所有三个同步方法的实现保证以某种方式使用Java <code> synchronized </code>方法或块,并且因此需要在JLS第17章中描述的存储器操作,其确保变量在构造之前/之后被加载和刷新。
+   * <p>
+   *  同步也可以在自旋锁结构中使用虽然通常最好只使用acquire(),但是可以实现各种形式的忙等待一个简单的例子(但是可能永远不会优于使用acquire())：
+   * <pre>
+   * 
   **/
 
   public void acquire() throws InterruptedException;
@@ -311,6 +396,17 @@ public interface Sync {
    * unintended ways. For example, deadlocks may be encountered
    * when called in an unintended context.
    * <p>
+   * <p>
+   *  class X {Sync lock = void spinUntilAcquired()throws InterruptedException {//两个阶段//首先旋转而不暂停int purespins = 10; for(int i = 0; i <purespins; ++ i){if(lockattempt(0))return true; } //第二阶段 - 使用定时等待long waitTime = 1; // 1 millisecond for(;;){if(lockattempt(waitTime))return true; else waitTime = waitTime * 3/2 + 1; // increase 50％}}}。
+   * </pre>
+   * <p>
+   * 此外,纯同步控制,Syncs可能在任何上下文需要前/后方法有用例如,您可以使用ObservableSync(可能作为LayeredSync的一部分),以获得回调之前和之后的每个方法调用给定类
+   * <p>
+   * 
+   *  <p> [<a href="http://geecsoswegoedu/dl/classes/EDU/oswego/cs/dl/util/concurrent/introhtml">此套件简介</a>
+   * ]。
+   * 
+   * 
    * @param msecs the number of milleseconds to wait.
    * An argument less than or equal to zero means not to wait at all.
    * However, this may still require
@@ -331,6 +427,10 @@ public interface Sync {
    * still throw unchecked exceptions such as Error or NullPointerException
    * when faced with uncontinuable errors. However, these should normally
    * only be caught by higher-level error handlers.
+   * <p>
+   *  等待(可能永远)直到成功通过仅在中断时失败中断总是导致"干净"失败在失败时,可以确定它未​​被获取,并且不应执行相应的释放。相反,正常返回保证获得成功
+   * 
+   * 
   **/
 
   public void release();

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -67,6 +68,14 @@ import sun.corba.SharedSecrets;
 * <li>convertIntegerToShort coerces an Integer into a Short.</li>
 * </ul>
 * Other operations can be directly defined, and combined using these basic operations.
+* <p>
+*  用于属性解析支持以下操作：
+* <ul>
+* <li> maskErrorAction(Operation op)执行op并返回结果如果op抛出异常,结果为null <li> indexAction(int arg)返回value的[arg]元素,
+* 它必须是Object [] < li> <li> identityAction()返回值</li> <li> booleanAction()返回表示String值的真或假值的布尔值</li> </li>
+*  <li> classAction()返回String类型的类,由ORB类加载器加载</li> <li> stringAction li> setFlagAction()总是返回BooleanTRUE 
+* </li> <li> URLAction()返回javanetString值的网址,它必须是有效的网址</li> <li> integerRangeAction(int min,int max)为Str
+* ing值返回一个Integer,该值必须是一个十进制整数, 结果</li> <li> convertIntegerToShort将Integer强制转换为Short<li> maskErrorActio
 */
 public abstract class OperationFactory {
     private OperationFactory() {}

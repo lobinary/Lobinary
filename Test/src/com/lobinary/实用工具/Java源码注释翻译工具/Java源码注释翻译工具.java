@@ -28,7 +28,7 @@ public class Java源码注释翻译工具 extends 实用工具标签标准类 {
 	 * 
 	 */
 	private static final long serialVersionUID = 3767156681875412565L;
-	private JTextField 源码文件夹路径 = new JTextField("C:/test");
+	private JTextField 源码文件夹路径 = new JTextField("D:/tool/Git/Lobinary/JDK8Source/src/main/java");
 	private JFileChooser fileFolderChooser = new JFileChooser("");
 	private boolean 正在执行 = false;
 	private JTextField 线程1处理文件内容;
@@ -49,7 +49,14 @@ public class Java源码注释翻译工具 extends 实用工具标签标准类 {
 		JButton 翻译按钮 = new JButton("开始翻译");
 		翻译按钮.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(正在执行)alert("程序正在执行中，请等待执行完毕");
+				if(正在执行){
+					翻译按钮.setText("终止翻译中");
+					终止任务 = true;
+					return ;
+				}else{
+					翻译按钮.setText("结束翻译");
+				}
+				
 				new Thread(new Runnable() {
 					@Override
 					public void run() {
@@ -68,15 +75,16 @@ public class Java源码注释翻译工具 extends 实用工具标签标准类 {
 							alert("扫描文件报错："+e1);
 						}
 						正在执行 = false;
+						翻译按钮.setText("开始翻译");
 					}
 				}).start();
 				
 			}
 		});
-		翻译按钮.setBounds(0, 0, 93, 23);
+		翻译按钮.setBounds(0, 0, 121, 23);
 		add(翻译按钮);
 		
-		源码文件夹路径.setBounds(100, 1, 1064, 21);
+		源码文件夹路径.setBounds(122, 1, 1042, 21);
 		add(源码文件夹路径);
 		源码文件夹路径.setColumns(10);
 		
@@ -189,7 +197,7 @@ public class Java源码注释翻译工具 extends 实用工具标签标准类 {
 		add(label_3);
 		
 		每次翻译的长度 = new JTextField();
-		每次翻译的长度.setText("1500");
+		每次翻译的长度.setText("800");
 		每次翻译的长度.setColumns(10);
 		每次翻译的长度.setBounds(614, 33, 106, 33);
 		add(每次翻译的长度);
@@ -230,7 +238,7 @@ public class Java源码注释翻译工具 extends 实用工具标签标准类 {
 			}else{
 				JAU.每行翻译后的注释的推荐长度 = Integer.parseInt(每行翻译后的注释的推荐长度.getText());
 				GTU.每次翻译的长度 = Integer.parseInt(每次翻译的长度.getText());
-				任务异常 = false;
+				终止任务 = false;
 				当前线程个数=0;
 				当前线程个数 = 0;
 				文件总数 = 0;
@@ -247,24 +255,26 @@ public class Java源码注释翻译工具 extends 实用工具标签标准类 {
 					Thread t = new Thread(){
 						@Override
 						public void run() {
+							File f = null;
 							try {
 								this.setName(获取线程名称());
-								while(!任务异常){
-									File f = 获取需要翻译的文件();
+								while(!终止任务){
+									更新线程状态(this.getName(),Color.BLUE);
+									f = 获取需要翻译的文件();
 									if(f==null)break;
 									更新正在翻译的文件状态(this.getName(),f);
 									boolean 是否翻译 = false;
 									try {
 										是否翻译 = JAU2.翻译(f);
 									} catch (Exception e) {
-										任务异常(this.getName(),e);
+										任务异常(this.getName(),f,e);
 										e.printStackTrace();
 									}
 									更新完成文件个数(是否翻译);
 									更新线程状态(this.getName(),Color.BLUE);
 								}
 							} catch (Exception e) {
-								任务异常(this.getName(),e);
+								任务异常(this.getName(),f,e);
 								e.printStackTrace();
 							}
 							更新线程状态(this.getName(),Color.orange);
@@ -274,9 +284,17 @@ public class Java源码注释翻译工具 extends 实用工具标签标准类 {
 					t.start();
 					线程列表.add(t);
 				}
-				while(!任务异常&&文件总数!=完成文件个数){
+				
+				boolean isRun = true;
+				while(isRun){
+					isRun = false;
+					for (Thread t:线程列表) {
+						if(t.isAlive()){
+							isRun = true;
+							break;
+						}
+					}
 					TU.s(1000);
-					System.out.println("监听中。。。。。");
 				}
 				if(文件总数>0){
 					alert("翻译完成");
@@ -338,7 +356,7 @@ public class Java源码注释翻译工具 extends 实用工具标签标准类 {
 	private int 异常文件个数 = 0;
 	private int 成功文件个数 = 0;
 	private int 完成文件个数 = 0;
-	private boolean 任务异常 = false;
+	private boolean 终止任务 = false;
 	private JLabel 总文件数量;
 	private JLabel 已完成文件数量;
 	private JLabel 剩余文件数量;
@@ -348,12 +366,12 @@ public class Java源码注释翻译工具 extends 实用工具标签标准类 {
 	private JLabel 异常文件数量;
 	private JLabel 成功文件数量;
 
-	private synchronized void 任务异常(String threadName,Throwable e){
+	private synchronized void 任务异常(String threadName,File f,Throwable e){
 //		任务异常 = true;
 		异常文件个数++;
 		异常文件数量.setText("异常文件数量："+异常文件个数+"个");
 		更新线程状态(threadName, Color.red);
-		out("扫描文件报错："+e);
+		out("扫描文件"+f.getAbsolutePath()+"报错："+e);
 		TU.s(1000);
 	}
 	
@@ -368,7 +386,7 @@ public class Java源码注释翻译工具 extends 实用工具标签标准类 {
 	}
 	
 	public synchronized File 获取需要翻译的文件(){
-		if(任务异常)return null;//任务出现异常，让所有线程全部终止
+		if(终止任务)return null;//任务出现异常，让所有线程全部终止
 		return 该目录下所有文件列表.size()>0 ? 该目录下所有文件列表.remove(0) : null;
 	}
 	

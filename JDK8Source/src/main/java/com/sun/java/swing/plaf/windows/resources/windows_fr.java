@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package com.sun.java.swing.plaf.windows.resources;
 
 import java.util.ListResourceBundle;

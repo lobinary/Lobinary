@@ -1,5 +1,7 @@
 package com.lobinary.工具类;
 
+import java.awt.Color;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -23,8 +25,15 @@ public class O {
 	public static void show(String ss, Object o) {
 		System.out.println(ss + "\t ===> \t "+ o);
 	}
-	
-	public static void o(List<?> list,String title){
+
+	public static void o(Object[] list,String title){
+		System.out.println("******************************************"+title+"************************************************");
+		for (Object o : list) {
+			System.out.println(o);
+		}
+		System.out.println("******************************************"+title+"************************************************");
+	}
+	public static void o(Collection<?> list,String title){
 		System.out.println("******************************************"+title+"************************************************");
 		for (Object o : list) {
 			System.out.println(o);

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,6 +57,31 @@ package com.sun.org.apache.bcel.internal.classfile;
  * individuals on behalf of the Apache Software Foundation.  For more
  * information on the Apache Software Foundation, please see
  * <http://www.apache.org/>.
+ * <p>
+ *  Apache软件许可证,版本11
+ * 
+ *  版权所有(c)2001 Apache软件基金会保留所有权利
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  1源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明
+ * 
+ *  2二进制形式的再分发必须在随分发版提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明
+ * 
+ * 3包含在重新分发中的最终用户文档(如果有的话)必须包括以下声明："本产品包括Apache Software Foundation(http：// wwwapacheorg /)开发的软件。
+ * 或者,此确认可能出现在软件本身,如果和第三方承诺通常出现的地方。
+ * 
+ *  4未经事先书面许可,不得使用"Apache"和"Apache Software Foundation"和"Apache BCEL"这些名称来认可或推广从本软件衍生的产品对于书面许可,请联系apache
+ *  @ apacheorg。
+ * 
+ *  5未经Apache软件基金会事先书面许可,不得将本软件衍生的产品称为"Apache","Apache BCEL"或"Apache"名称。
+ * 
+ * 本软件按"原样"提供,任何明示或暗示的保证,包括但不限于适销性和针对特定用途的适用性的默示担保,在任何情况下均不得免责,APACHE软件基金会或其参与人应负赔偿责任对于任何直接,间接,偶发,特殊,惩罚性
+ * 或后果性损害(包括但不限于替代商品或服务的采购;使用,数据或利润损失;或业务中断)责任,无论是在合同,严格责任或侵权(包括疏忽或其他方式),以任何方式使用本软件,即使已被告知此类损害的可能性======
+ * ==============================================================。
+ * 
+ * 此软件包括许多个人代表Apache软件基金会所做的自愿捐款有关Apache软件基金会的更多信息,请参阅<http：// wwwapacheorg />
+ * 
  */
 
 import com.sun.org.apache.bcel.internal.Constants;
@@ -67,6 +93,10 @@ import java.util.zip.*;
 /**
  * Utility functions that do not really belong to any class in particular.
  *
+ * <p>
+ *  实用函数不真正属于任何类
+ * 
+ * 
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
  */
 public abstract class Utility {
@@ -74,6 +104,9 @@ public abstract class Utility {
                                       * during parsing in signatureToString().
                                       * Read by methodSignatureToString().
                                       * Set by side effect,but only internally.
+                                      * <p>
+                                      *  在解析期间在signatureToString()读取methodSignatureToString()设置副作用,但只在内部
+                                      * 
                                       */
   private static boolean wide=false; /* The `WIDE' instruction is used in the
                                       * byte code to allow 16-bit wide indices
@@ -83,10 +116,17 @@ public abstract class Utility {
                                       * byte which is combined with the
                                       * following byte to form a
                                       * 16-bit value.
+                                      * <p>
+                                      *  字节代码以允许局部变量的16位宽索引此操作码在一个`ILOAD'之前,例如紧接在后面的操作代码需要一个额外的字节,与下一个字节组合形成一个16位值
+                                      * 
                                       */
   /**
    * Convert bit field of flags into string such as `static final'.
    *
+   * <p>
+   *  将标志位字段转换为字符串,如"static final"
+   * 
+   * 
    * @param  access_flags Access flags
    * @return String representation of flags
    */
@@ -102,6 +142,12 @@ public abstract class Utility {
    * because SUN used the same value for the flags `ACC_SUPER' and
    * `ACC_SYNCHRONIZED'.
    *
+   * <p>
+   *  将标志位字段转换为字符串,如"static final"
+   * 
+   * 特殊情况：使用新的编译器和ACC_SUPER标志编译的类将被称为"同步"。这是因为SUN对标志"ACC_SUPER"和"ACC_SYNCHRONIZED"使用相同的值,
+   * 
+   * 
    * @param  access_flags Access flags
    * @param  for_class access flags are for class qualifiers ?
    * @return String representation of flags
@@ -120,6 +166,9 @@ public abstract class Utility {
          * `ACC_SUPER' flag would be said to be "synchronized". This is
          * because SUN used the same value for the flags `ACC_SUPER' and
          * `ACC_SYNCHRONIZED'.
+         * <p>
+         *  "ACC_SUPER"标志将被称为"同步"这是因为SUN对标志"ACC_SUPER"和"ACC_SYNCHRONIZED"使用相同的值,
+         * 
          */
         if(for_class && ((p == Constants.ACC_SUPER) || (p == Constants.ACC_INTERFACE)))
           continue;
@@ -132,6 +181,8 @@ public abstract class Utility {
   }
 
   /**
+  /* <p>
+  /* 
    * @return "class" or "interface", depending on the ACC_INTERFACE flag
    */
   public static final String classOrInterface(int access_flags) {
@@ -144,6 +195,10 @@ public abstract class Utility {
    * `num' opcodes (including their operands), use -1 if you want to
    * decompile everything.
    *
+   * <p>
+   *  从代码行"index"开始拆分JVM字节代码的字节数组,并返回反汇编的字符串表示解码只有`num'opcodes(包括它们的操作数),如果你想反编译一切,使用-1
+   * 
+   * 
    * @param  code byte code array
    * @param  constant_pool Array of constants
    * @param  index offset in `code' array
@@ -188,6 +243,10 @@ public abstract class Utility {
    * Disassemble a stream of byte codes and return the
    * string representation.
    *
+   * <p>
+   *  拆分字节码流并返回字符串表示形式
+   * 
+   * 
    * @param  bytes stream of bytes
    * @param  constant_pool Array of constants
    * @param  verbose be verbose, e.g. print constant pool index
@@ -206,6 +265,9 @@ public abstract class Utility {
 
     /* Special case: Skip (0-3) padding bytes, i.e., the
      * following bytes are 4-byte-aligned
+     * <p>
+     *  后面的字节是4字节对齐
+     * 
      */
     if((opcode == Constants.TABLESWITCH) || (opcode == Constants.LOOKUPSWITCH)) {
       int remainder = bytes.getIndex() % 4;
@@ -225,6 +287,7 @@ public abstract class Utility {
 
     switch(opcode) {
       /* Table switch has variable length arguments.
+      /* <p>
        */
     case Constants.TABLESWITCH:
       low  = bytes.readInt();
@@ -249,6 +312,7 @@ public abstract class Utility {
       break;
 
       /* Lookup switch has variable length arguments.
+      /* <p>
        */
     case Constants.LOOKUPSWITCH: {
 
@@ -278,6 +342,9 @@ public abstract class Utility {
 
     /* Two address bytes + offset from start of byte stream form the
      * jump target
+     * <p>
+     *  跳转目标
+     * 
      */
     case Constants.GOTO:      case Constants.IFEQ:      case Constants.IFGE:      case Constants.IFGT:
     case Constants.IFLE:      case Constants.IFLT:      case Constants.JSR: case Constants.IFNE:
@@ -288,12 +355,14 @@ public abstract class Utility {
       break;
 
       /* 32-bit wide jumps
+      /* <p>
        */
     case Constants.GOTO_W: case Constants.JSR_W:
       buf.append("\t\t#" + ((bytes.getIndex() - 1) + bytes.readInt()));
       break;
 
       /* Index byte references local variable (register)
+      /* <p>
        */
     case Constants.ALOAD:  case Constants.ASTORE: case Constants.DLOAD:  case Constants.DSTORE: case Constants.FLOAD:
     case Constants.FSTORE: case Constants.ILOAD:  case Constants.ISTORE: case Constants.LLOAD:  case Constants.LSTORE:
@@ -312,6 +381,9 @@ public abstract class Utility {
        * Remember wide byte which is used to form a 16-bit address in the
        * following instruction. Relies on that the method is called again with
        * the following opcode.
+       * <p>
+       * 记住在下面的指令中用于形成一个16位地址的宽字节依赖于使用以下操作码再次调用该方法
+       * 
        */
     case Constants.WIDE:
       wide      = true;
@@ -319,12 +391,14 @@ public abstract class Utility {
       break;
 
       /* Array of basic type.
+      /* <p>
        */
     case Constants.NEWARRAY:
       buf.append("\t\t<" + Constants.TYPE_NAMES[bytes.readByte()] + ">");
       break;
 
       /* Access object/class fields.
+      /* <p>
        */
     case Constants.GETFIELD: case Constants.GETSTATIC: case Constants.PUTFIELD: case Constants.PUTSTATIC:
       index = bytes.readUnsignedShort();
@@ -334,6 +408,7 @@ public abstract class Utility {
       break;
 
       /* Operands are references to classes in constant pool
+      /* <p>
        */
     case Constants.NEW:
     case Constants.CHECKCAST:
@@ -346,6 +421,7 @@ public abstract class Utility {
       break;
 
       /* Operands are references to methods in constant pool
+      /* <p>
        */
     case Constants.INVOKESPECIAL: case Constants.INVOKESTATIC: case Constants.INVOKEVIRTUAL:
       index = bytes.readUnsignedShort();
@@ -365,6 +441,7 @@ public abstract class Utility {
       break;
 
       /* Operands are references to items in constant pool
+      /* <p>
        */
     case Constants.LDC_W: case Constants.LDC2_W:
       index = bytes.readUnsignedShort();
@@ -384,6 +461,7 @@ public abstract class Utility {
       break;
 
       /* Array of references.
+      /* <p>
        */
     case Constants.ANEWARRAY:
       index = bytes.readUnsignedShort();
@@ -394,6 +472,7 @@ public abstract class Utility {
       break;
 
       /* Multidimensional array of references.
+      /* <p>
        */
     case Constants.MULTIANEWARRAY: {
       index          = bytes.readUnsignedShort();
@@ -406,6 +485,7 @@ public abstract class Utility {
     break;
 
     /* Increment local variable.
+    /* <p>
      */
     case Constants.IINC:
       if(wide) {
@@ -450,6 +530,10 @@ public abstract class Utility {
    * Shorten long class names, <em>java/lang/String</em> becomes
    * <em>String</em>.
    *
+   * <p>
+   *  缩短长类名称,<em> java / lang / String </em>变为<em>字符串</em>
+   * 
+   * 
    * @param str The long class name
    * @return Compacted class name
    */
@@ -463,6 +547,11 @@ public abstract class Utility {
    * class name starts with this string and the flag <em>chopit</em> is true.
    * Slashes <em>/</em> are converted to dots <em>.</em>.
    *
+   * <p>
+   *  如果类名以此字符串开头,并且标志<em> chopit </em>为true,则缩短长类名<em> str </em>,即剪掉<em>前缀</em> em> / </em>转换为点<em> </em>
+   * 。
+   * 
+   * 
    * @param str The long class name
    * @param prefix The prefix the get rid off
    * @param chopit Flag that determines whether chopping is executed or not
@@ -492,6 +581,11 @@ public abstract class Utility {
    * e.g.. If <em>chopit</em> is <em>true</em> the prefix <em>java.lang</em>
    * is also removed.
    *
+   * <p>
+   *  缩短长类名,<em> java / lang / String </em>变成<em> javalangString </em>,例如If <em> chopit </em> is <em> true
+   *  </em> > javalang </em>也被移除。
+   * 
+   * 
    * @param str The long class name
    * @param chopit Flag that determines whether chopping is executed or not
    * @return Compacted class name
@@ -509,6 +603,8 @@ public abstract class Utility {
   }
 
   /**
+  /* <p>
+  /* 
    * @return `flag' with bit `i' set to 1
    */
   public static final int setBit(int flag, int i) {
@@ -516,6 +612,8 @@ public abstract class Utility {
   }
 
   /**
+  /* <p>
+  /* 
    * @return `flag' with bit `i' set to 0
    */
   public static final int clearBit(int flag, int i) {
@@ -524,6 +622,8 @@ public abstract class Utility {
   }
 
   /**
+  /* <p>
+  /* 
    * @return true, if bit `i' in `flag' is set
    */
   public static final boolean isSet(int flag, int i) {
@@ -534,6 +634,10 @@ public abstract class Utility {
    * Converts string containing the method return and argument types
    * to a byte code method signature.
    *
+   * <p>
+   *  将包含方法返回和参数类型的字符串转换为字节代码方法签名
+   * 
+   * 
    * @param  ret Return type of method
    * @param  argv Types of method arguments
    * @return Byte code representation of method signature
@@ -562,6 +666,8 @@ public abstract class Utility {
   }
 
   /**
+  /* <p>
+  /* 
    * @param  signature    Method signature
    * @return Array of argument types
    * @throws  ClassFormatException
@@ -573,6 +679,8 @@ public abstract class Utility {
   }
 
   /**
+  /* <p>
+  /* 
    * @param  signature    Method signature
    * @param chopit Shorten class names ?
    * @return Array of argument types
@@ -605,6 +713,8 @@ public abstract class Utility {
     return types;
   }
   /**
+  /* <p>
+  /* 
    * @param  signature    Method signature
    * @return return type of method
    * @throws  ClassFormatException
@@ -615,6 +725,8 @@ public abstract class Utility {
     return methodSignatureReturnType(signature, true);
   }
   /**
+  /* <p>
+  /* 
    * @param  signature    Method signature
    * @param chopit Shorten class names ?
    * @return return type of method
@@ -641,6 +753,10 @@ public abstract class Utility {
   /**
    * Converts method signature to string with all class names compacted.
    *
+   * <p>
+   *  将方法签名转换为字符串,并压缩所有类名
+   * 
+   * 
    * @param signature to convert
    * @param name of method
    * @param access flags of method
@@ -680,6 +796,21 @@ public abstract class Utility {
    * `void _main(String[])' and throws a `ClassFormatException' when the parsed
    * type is invalid.
    *
+   * <p>
+   * 返回类型签名表示方法的返回值它是以下语法中的一系列字节：
+   * 
+   *  <return_signature> :: = <field_type> | V
+   * 
+   *  字符V表示该方法不返回值。否则,签名指示返回值的类型。参数签名表示传递给方法的参数：
+   * 
+   *  <argument_signature> :: = <field_type>
+   * 
+   *  方法签名表示方法期望的参数,以及它返回的值<method_signature> :: =(<arguments_signature>)<return_signature> <arguments_signature>
+   *  :: = <argument_signature> *。
+   * 
+   *  这种方法将这样的字符串转换为Java类型声明,如`void _main(String [])',并在解析类型无效时抛出`ClassFormatException'
+   * 
+   * 
    * @param  signature    Method signature
    * @param  name         Method name
    * @param  access       Method access rights
@@ -751,6 +882,10 @@ public abstract class Utility {
   /**
    * Replace all occurences of <em>old</em> in <em>str</em> with <em>new</em>.
    *
+   * <p>
+   * 将<em> str </em>中的所有<em>旧</em>替换为<em>新</em>
+   * 
+   * 
    * @param str String to permute
    * @param old String to be replaced
    * @param new Replacement string
@@ -785,6 +920,10 @@ public abstract class Utility {
   /**
    * Converts signature to string with all class names compacted.
    *
+   * <p>
+   *  将签名转换为所有压缩的类名称的字符串
+   * 
+   * 
    * @param signature to convert
    * @return Human readable signature
    */
@@ -821,6 +960,21 @@ public abstract class Utility {
    * `String[]' and throws a `ClassFormatException' when the parsed type is
    * invalid.
    *
+   * <p>
+   *  字段签名表示函数的参数的值或变量的值。它是由以下语法生成的一系列字节：
+   * 
+   * <PRE>
+   *  <field_signature> :: = <field_type> :: = <field_type> <field_type> :: = <base_type> | <object_type> 
+   * | <array_type> <base_type> :: = B | C | D | F | I | J | S | Z <object_type> :: = L <fullclassname>; <array_type>
+   *  :: = [<field_type>。
+   * 
+   * 基本类型的含义如下：B字节有符号字节C字符字符D双精度双精度浮点数浮点数浮点型单精度浮点数I整数J长整数L <fullclassname>;给定类的对象S short signed short Z bo
+   * olean true或false [<field sig> array。
+   * </PRE>
+   * 
+   *  此方法将此字符串转换为Java类型声明,如`String []',并在解析类型无效时抛出`ClassFormatException'
+   * 
+   * 
    * @param  signature  Class signature
    * @param chopit Flag that determines whether chopping is executed or not
    * @return Java type declaration
@@ -889,6 +1043,10 @@ public abstract class Utility {
   /** Parse Java type such as "char", or "java.lang.String[]" and return the
    * signature in byte code format, e.g. "C" or "[Ljava/lang/String;" respectively.
    *
+   * <p>
+   *  字符码格式的签名,例如"C"或"[Ljava / lang / String;"分别
+   * 
+   * 
    * @param  type Java type
    * @return byte code signature
    */
@@ -980,6 +1138,10 @@ public abstract class Utility {
   /**
    * Return type of method signature as a byte value as defined in <em>Constants</em>
    *
+   * <p>
+   *  将方法签名的类型作为字符值返回,如在<em>常量</em>中定义
+   * 
+   * 
    * @param  signature in format described above
    * @return type of method signature
    * @see    Constants
@@ -1003,6 +1165,10 @@ public abstract class Utility {
   /**
    * Return type of signature as a byte value as defined in <em>Constants</em>
    *
+   * <p>
+   *  将签名的类型作为字符值返回,如<em>常量</em>中定义
+   * 
+   * 
    * @param  signature in format described above
    * @return type of signature
    * @see    Constants
@@ -1032,6 +1198,7 @@ public abstract class Utility {
   }
 
   /** Map opcode names to opcode numbers. E.g., return Constants.ALOAD for "aload"
+  /* <p>
    */
   public static short searchOpcode(String name) {
     name = name.toLowerCase();
@@ -1046,6 +1213,9 @@ public abstract class Utility {
   /**
    * Convert (signed) byte to (unsigned) short value, i.e., all negative
    * values become positive.
+   * <p>
+   *  将(有符号)字节转换为(无符号)短值,即所有负值变为正
+   * 
    */
   private static final short byteToShort(byte b) {
     return (b < 0)? (short)(256 + b) : (short)b;
@@ -1053,6 +1223,8 @@ public abstract class Utility {
 
   /** Convert bytes into hexidecimal string
    *
+   * <p>
+   * 
    * @return bytes as hexidecimal string, e.g. 00 FA 12 ...
    */
   public static final String toHexString(byte[] bytes) {
@@ -1078,6 +1250,10 @@ public abstract class Utility {
    * Return a string for an integer justified left or right and filled up with
    * `fill' characters if necessary.
    *
+   * <p>
+   * 返回一个左对齐或右对齐的整数的字符串,如果必要,填充'fill'字符
+   * 
+   * 
    * @param i integer to format
    * @param length length of desired string
    * @param left_justify format left or right
@@ -1091,6 +1267,10 @@ public abstract class Utility {
   /**
    * Fillup char with up to length characters with char `fill' and justify it left or right.
    *
+   * <p>
+   *  填充字符与长度字符与char'填充',并向左或向右对齐
+   * 
+   * 
    * @param str string to format
    * @param length length of desired string
    * @param left_justify format left or right
@@ -1167,6 +1347,7 @@ public abstract class Utility {
   }
 
   /** @return true, if character is one of (a, ... z, A, ... Z, 0, ... 9, _)
+  /* <p>
    */
   public static boolean isJavaIdentifierPart(char ch) {
     return ((ch >= 'a') && (ch <= 'z')) ||
@@ -1188,6 +1369,13 @@ public abstract class Utility {
    *
    * <p>This operation inflates the original byte array by roughly 40-50%</p>
    *
+   * <p>
+   *  只包含以下字符：(a,z,A,Z,0,9,_,$)编码算法本身不太聪明：如果当前字节的ASCII值已经是有效的Java标识符部分,否则,如果值不在200247范围内,则将转义字符($)后跟<p> <ul>
+   *  <li>为ASCII值作为十六进制字符串</li> <li>如果值在200247范围内,则不使用小写十六进制字符串</li> <ul> </p>。
+   * 
+   *  <p>此操作将原始字节数组膨胀大约40-50％</p>
+   * 
+   * 
    * @param bytes the byte array to convert
    * @param compress use gzip to minimize string
    */
@@ -1216,6 +1404,8 @@ public abstract class Utility {
 
   /** Decode a string back to a byte array.
    *
+   * <p>
+   * 
    * @param bytes the byte array to convert
    * @param uncompress use gzip to uncompress the stream of bytes
    */
@@ -1286,6 +1476,9 @@ public abstract class Utility {
 
   /** Decode characters into bytes.
    * Used by <a href="Utility.html#decode(java.lang.String, boolean)">decode()</a>
+   * <p>
+   * 用于<a href=\"Utilityhtml#decode(javalangString, boolean)\"> decode()</a>
+   * 
    */
   private static class JavaReader extends FilterReader {
     public JavaReader(Reader in) {
@@ -1329,6 +1522,9 @@ public abstract class Utility {
 
   /** Encode bytes into valid java identifier characters.
    * Used by <a href="Utility.html#encode(byte[], boolean)">encode()</a>
+   * <p>
+   *  用于<a href=\"Utilityhtml#encode(byte[], boolean)\"> encode()</a>
+   * 
    */
   private static class JavaWriter extends FilterWriter {
     public JavaWriter(Writer out) {
@@ -1370,6 +1566,8 @@ public abstract class Utility {
 
   /**
    * Escape all occurences of newline chars '\n', quotes \", etc.
+   * <p>
+   *  转义所有出现的换行字符'\n',引号\\"等
    */
   public static final String convertString(String label) {
     char[]       ch  = label.toCharArray();

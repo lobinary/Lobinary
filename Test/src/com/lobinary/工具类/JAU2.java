@@ -41,7 +41,7 @@ public class JAU2 {
 	}
 
 	public static void main(String[] args) throws Exception {
-		File f = new File("C:/test/CheckboxMenuItem.java");
+		File f = new File("C:/test/javasource/Node.java");
 		翻译(f);
 	}
 	
@@ -95,7 +95,14 @@ public class JAU2 {
 			}
 		}
 		
-		Map<Integer, List<String>> 翻译后注释数据 = 翻译注释数据(注释数据Map);
+		Map<Integer, List<String>> 翻译后注释数据 = new HashMap<Integer, List<String>>();
+		if(注释数据Map.size()==0){
+			O.o(java文件数据List, "翻译数据为空-所有待翻译数据JAU2-100行");
+		}else{
+			翻译后注释数据 = 翻译注释数据(注释数据Map);
+		}
+		
+		
 		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 		for (Integer key:注释数据Map.keySet()) {
 			for (String s :注释数据Map.get(key)) {
@@ -150,19 +157,26 @@ public class JAU2 {
 	 * @throws Exception 
 	 */
 	private static Map<Integer, List<String>> 翻译注释数据(Map<Integer, List<String>> 注释数据Map) throws Exception {
-		
+		if(注释数据Map.size()==0)return 注释数据Map;
 		List<注释数据对象> 所有待翻译数据 = new ArrayList<注释数据对象>();
 		
 		//将所有组的注释合并到一个list中翻译
+		int ind=0;
 		for(Integer 所在行数:注释数据Map.keySet()){
+			ind++;
 			List<String> 单组翻译数据 = 注释数据Map.get(所在行数);
 			if(所有待翻译数据.size()>0)所有待翻译数据.add(null);//我们通过null来分割不同组的翻译
-			所有待翻译数据.addAll(解析注释(单组翻译数据));
+			List<注释数据对象> 解析注释 = 解析注释(单组翻译数据);
+			if(ind==注释数据Map.size()&&解析注释.size()==0)所有待翻译数据.add(null);
+			所有待翻译数据.addAll(解析注释);
 		}
 		
 		//将所有注释统一翻译
 		List<String> 所有翻译数据  = 翻译分组数据(所有待翻译数据);//返回的数据是通过null来进行分割的
+		O.o(所有待翻译数据, "所有待翻译数据");
 		O.o(所有翻译数据, "所有翻译数据163");
+		O.o(注释数据Map, "注释数据Map");
+		
 		Map<Integer, List<String>> 返回数据 = new HashMap<Integer, List<String>>();
 		
 		// 将翻译后的数据装配回原Map中
@@ -181,6 +195,11 @@ public class JAU2 {
 					break;
 				}
 			}
+			System.out.println("------------------所在行数:"+所在行数+"---------------------------");
+			O.o(注释数据Map.get(所在行数), "原始数据");
+			System.out.println("------------------所在行数:"+所在行数+"---------------------------");
+			O.o(单组翻译数据, "翻译后数据");
+			System.out.println("------------------所在行数:"+所在行数+"---------------------------");
 			返回数据.put(所在行数, 单组翻译数据);
 		}
 
@@ -268,7 +287,10 @@ public class JAU2 {
 				准备翻译的所有原始数据.add(每行临时数据.get本行内容());
 			}
 		}
-		
+		if(准备翻译的所有原始数据.size()==0){
+			O.o(所有待翻译数据, "翻译数据为空-所有待翻译数据JAU2-272行");
+			throw new Exception("翻译数据为空");
+		}
 		List<String> 翻译后的所有数据 = 翻译数据(准备翻译的所有原始数据);
 		
 		for (注释数据对象 每行临时数据 : 所有待翻译数据) {
@@ -276,7 +298,7 @@ public class JAU2 {
 				结果数据.add(null);
 				continue;
 			}
-			System.out.println("准备对注释进行翻译，原始注释数据为："+每行临时数据.get本行内容());
+			System.out.println("翻译注释开始，原始注释数据为："+每行临时数据.get本行内容());
 			if(每行临时数据.get本行属性()==注释数据对象.空行){
 				if(结果数据.size()>0&&结果数据.get(结果数据.size()-1).length()!=0){
 					结果数据.add(""); 
@@ -286,7 +308,7 @@ public class JAU2 {
 			}else{
 				String 翻译后的数据 = 翻译后的所有数据.remove(0);
 				if(每行翻译后的注释的推荐长度>翻译后的数据.length()){
-					System.out.println("翻译后的数据:"+翻译后的数据);
+					System.out.println("注释翻译结束，翻译后的数据为:"+翻译后的数据);
 					结果数据.add(翻译后的数据);
 				}else{
 					结果数据.addAll(超长数据格式化(翻译后的数据));

@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.script.Invocable;
@@ -27,7 +26,7 @@ public class GTU {
 	private static long a = 4217964721L;
 	private static long b = -3320670651L;
 	private static int r = 413550;
-	public static int 每次翻译的长度 = 1500;
+	public static int 每次翻译的长度 = 700;
 	private static Invocable invocable;
 	static {
 		try {
@@ -78,6 +77,7 @@ public class GTU {
 	 * @throws Exception 
 	 */
 	public static List<String> t(List<String> q) throws Exception{
+		if(q.size()==0)return q;
 		log.info("**************************************准备翻译数据**************************************************");
 		for (String 每个数据 : q) {
 			log.info(每个数据);
@@ -96,19 +96,19 @@ public class GTU {
 		String 分割标识符 = "\n";
 		for (String 每条翻译数据 : q) {
 			if(翻译缓冲池.length()!=0)翻译缓冲池.append(分割标识符);
-			翻译缓冲池.append(每条翻译数据);
+			翻译缓冲池.append(每条翻译数据.replace("\\n", "#n#"));
 		}
 		String 翻译后的数据 = 换行符翻译(翻译缓冲池.toString());//#ꪪ#
 		String[] 翻译后的分组数据 = 翻译后的数据.split("\\\\n".trim());
 		if(翻译后的分组数据.length==q.size()){
 			for (String 分割后的数据 : 翻译后的分组数据) {
-				result.add(分割后的数据);
+				result.add(分割后的数据.replace("#n#", "\\n"));
 			}
 		}else{
 			log.info("*****************************原始/分割后数据***********************************************************************************************************");
 			for (int i = 0; i < q.size(); i++) {
-				log.info(q.get(i));
-				if(i<翻译后的分组数据.length)log.info(翻译后的分组数据[i]);
+				log.info("原始:"+q.get(i));
+				if(i<翻译后的分组数据.length)log.info("分割:"+翻译后的分组数据[i]);
 			}
 			log.info("*****************************原始/分割后数据***********************************************************************************************************");
 			throw new Exception("翻译异常，分割后数据长度和原数据长度不一致(原"+q.size()+":译"+翻译后的分组数据.length+")");
@@ -136,7 +136,7 @@ public class GTU {
 				if(本次翻译数据.length()>0)本次翻译数据.append("\n");
 				本次翻译数据.append(每段文字);
 			}else{
-				String 翻译后数据 = translate(本次翻译数据.toString());
+				String 翻译后数据 = t(本次翻译数据.toString());
 				本次翻译数据.delete(0, 本次翻译数据.length());
 				本次翻译数据.append(每段文字);
 				if(最终翻译数据.length()>0)最终翻译数据.append("\\n");
@@ -144,7 +144,7 @@ public class GTU {
 			}
 		}
 		if(本次翻译数据.length()>0){
-			String 翻译后数据 = translate(本次翻译数据.toString());
+			String 翻译后数据 = t(本次翻译数据.toString());
 			本次翻译数据.delete(0, 本次翻译数据.length());
 			if(最终翻译数据.length()>0)最终翻译数据.append("\\n");
 			最终翻译数据.append(翻译后数据);
@@ -160,48 +160,29 @@ public class GTU {
 		//XXX 分割翻译丢数据
 		//			   ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms
 //		if(q.contains("ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms."))return "";
+		
 		StringBuilder 最终翻译数据 = new StringBuilder();
-		String 本次翻译数据 = null;
-		int 上一个点的位置 = 0;//用于记录上一个点的位置
-		int 上次截取的最后位置 = 0;//用于记录上次截取后的最后位置
+		String 本次翻译数据 = "";
 		log.info("接收到原始翻译数据为:"+q);
-		for (int i = 0; i < q.length(); i++) {
-			String s = q.substring(i,i+1);
-			if(s.equals(".")){
-				i++;
-				if(i - 上次截取的最后位置  > 每次翻译的长度){//当前点到上一个点的长度是不是超长了
-					if(上一个点的位置==上次截取的最后位置){//如果超长了，并且上次截取的位置等于上一个点
-						//这个时候只能强制截取，因为单句已经超长，并且更新上一个点的位置
-						本次翻译数据 = q.substring(上次截取的最后位置,上次截取的最后位置+每次翻译的长度);
-						上次截取的最后位置 = 上次截取的最后位置+每次翻译的长度;
-						上一个点的位置 = 上次截取的最后位置;
-					}else{//如果超长了，但是上一个点和最后截取的点不相等，那么就证明我们这个点已经是第二句或者更多句的话，
-						//那么我们就截取上到一句话，上一个点的位置不需要动，只需要更改最后截取位置就行
-						本次翻译数据 = q.substring(上次截取的最后位置,上一个点的位置);
-						上次截取的最后位置 = 上一个点的位置;
-					}
-					最终翻译数据.append(translate(本次翻译数据));
-					i = 上次截取的最后位置;
-				}
-				上一个点的位置 = i;
+		String[] 通过点分割数据 = q.split("\\.");
+		
+		for (int i = 0; i < 通过点分割数据.length; i++) {
+			int 本句话长度 = 通过点分割数据[i].length();
+			if(本次翻译数据.length()+本句话长度<每次翻译的长度){//小于长度 续数据
+				本次翻译数据 = 本次翻译数据 + 通过点分割数据[i];
 			}else{
-				if(每次翻译的长度<(i-上次截取的最后位置)){
-					本次翻译数据 = q.substring(上次截取的最后位置,上一个点的位置);
-					最终翻译数据.append(translate(本次翻译数据));
-					上次截取的最后位置 = 上一个点的位置;
-				}
-			}
-			
-			if(i == q.length()-1){
-				if(上次截取的最后位置!=i){
-					本次翻译数据 = q.substring(上次截取的最后位置,i+1);
-					最终翻译数据.append(translate(本次翻译数据));
-					上次截取的最后位置 = i;
+				if(本次翻译数据.length()>0)最终翻译数据.append(translate(本次翻译数据));
+				if(本句话长度>每次翻译的长度){
+					for (int j = 0; j < (本句话长度/每次翻译的长度)+1; j++) {
+						最终翻译数据.append(translate(通过点分割数据[i].substring((j)*每次翻译的长度,Math.min((j+1)*每次翻译的长度,本句话长度))));
+					}
+				}else{
+					本次翻译数据 = "" + 通过点分割数据[i];
 				}
 			}
 		}
-		if(上次截取的最后位置==0){
-			最终翻译数据.append(translate(q));
+		if(本次翻译数据.length()>0){
+			最终翻译数据.append(translate(本次翻译数据));
 		}
 		String 翻译最终数据 = 最终翻译数据.toString();
 		log.info("最后翻译结果为:"+翻译最终数据);
@@ -212,6 +193,7 @@ public class GTU {
 	public static String translate(String q) throws Exception {
 		String tk = 加签(q);
 		q = URLEncoder.encode(q, "UTF-8");
+		if(q.length()>1500)throw new Exception("请求长度超限,最大只允许:"+每次翻译的长度+",当前为:"+q.length());
 //		//log.info(q);
 		String url = "http://translate.google.cn/translate_a/single?client=t&sl=auto&tl=zh-CN&hl=zh-CN&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&source=btn&ssel=0&tsel=0&kc=1&tk="
 				+ tk + "&q=" + q;
@@ -224,7 +206,7 @@ public class GTU {
 			resp = HttpUtil.sendGet(url,"UTF-8");
 			请求总耗时 = 请求总耗时 + (System.currentTimeMillis()-st);
 		} catch (Exception e) {
-			throw new Exception("连接谷歌翻译服务器失败,请求网址为:"+url);
+			throw new Exception("连接谷歌翻译服务器失败,请求长度为:"+q.length()+",请求网址为:"+url);
 		}
 		System.out.println("谷歌服务器返回的数据为:"+resp);
 		log.info("单次翻译前数据为："+q);
@@ -234,78 +216,23 @@ public class GTU {
 	}
 
 	private static String 解析返回数据(String j) throws Exception {
-		boolean end = false;
-		StringBuilder sb = new StringBuilder();
-		int index = 2;
 		log.info(j);
-//		System.out.print("  ");
-		int 左括号数量 = 1;
-		List<String> 分段数据 = new ArrayList<String>();
-		while(!end){
-			String jc = j.substring(index, index+1);
-			if(jc.equals("["))左括号数量++;
-			if(jc.equals("]"))左括号数量--;
-			if(左括号数量==0)break;
-			
-			if(jc.equals("\\")){
-				index++;
-				jc = j.substring(index, index+1);
-				switch (jc) {
-				case "u":
-					index++;
-					jc = j.substring(index, index+4);
-					int data = Integer.parseInt(jc, 16);
-			         sb.append((char) data);
-			         index += 3;
-					break;
-				case "n":
-					sb.append("\\n");
-					break;
-				case "\"":
-					sb.append("\"");
-					break;
-				default:
-					sb.append(jc);
-					break;
-				}
-			}else{
-				sb.append(jc);
-			}
-			if(左括号数量==1&&!sb.toString().equals(",")){
-				分段数据.add(sb.toString());
-				sb = new StringBuilder();
-			}else if(sb.toString().equals(",")){
-				sb = new StringBuilder();
-			}
-			index++;
-			if(index>=j.length())break;
-		}
-//		log.info(sb.toString());
-//		log.info("==========================================================================================================");
-//		for (String sss : 分段数据) {
-//			log.info(sss);
-//		}
-//		log.info("==========================================================================================================");
-//		log.info(分段数据.size());
+		
 		StringBuffer 整合后翻译数据 = new StringBuffer();
-		for (int i = 0; i < 分段数据.size(); i++) {
-			String 单条翻译数据 = 分段数据.get(i);
-//			log.info(i+":"+单条翻译数据);
-			if(单条翻译数据.startsWith("[\"")){
-				if(!单条翻译数据.contains("\",\""))throw new Exception("发现未知格式翻译数据:"+单条翻译数据);
-				String 翻译数据 = 单条翻译数据.substring(2,单条翻译数据.indexOf("\",\""));
-//				log.info(翻译数据);
-				整合后翻译数据.append(翻译数据);
+		String[] 分割数据 = j.substring(3).split("\\],\\[");
+		for (int i = 0; i < 分割数据.length; i++) {
+			String s = 分割数据[i];
+			System.out.println(s);
+			
+			if(s.startsWith("\"")){
+				s = s.substring(1,s.lastIndexOf("\",\""));
+				整合后翻译数据.append(translateUnicode(s));
 			}else{
-				if(i==分段数据.size()-1){
-					break;
-				}else{
-					throw new Exception("发现未知格式翻译数据:"+单条翻译数据);
-				}
+				break;
 			}
 		}
 //		//log.info("========================================================================================");
-//		//log.info(整合后翻译数据.toString());
+		log.info(整合后翻译数据.toString());
 		return 整合后翻译数据.toString()
 				.replaceAll("“", "\"")
 				.replaceAll("”", "\"")
@@ -317,6 +244,35 @@ public class GTU {
 				.replaceAll("＆", "&")
 				.replaceAll("？", "?");
 	}
+	
+	
+
+	/**
+	 * 将字符串中的unicode编码进行转换
+	 * @param s
+	 * @return
+	 */
+	private static String translateUnicode(String s) {
+		if(!s.contains("\\u"))return s;
+		StringBuffer result = new StringBuffer();
+		for (int i = 0; i < s.length(); i++) {
+			if(s.length()-i<6){
+				result.append(s.substring(i, s.length()));
+				break;
+			}
+			String temp = s.substring(i, i+6);
+			if(temp.startsWith("\\u")){
+				int data = Integer.parseInt(temp.substring(2,6),16);
+				result.append((char) data);
+				i = i+5;
+			}else{
+				result.append(s.substring(i, i+1));
+			}
+			
+		}
+		return result.toString();
+	}
+
 
 	/**
 	 * <p>
@@ -332,6 +288,28 @@ public class GTU {
 	 * @throws Exception
 	 */
 	public static void main(String[] args) throws Exception {
+		
+		/**
+		 * 测试翻译效果
+		 */
+		String ss = "[[[\"基本类型的含义如下：B字节有符号字节C字符字符D双精度双精度浮点数浮点数浮点型单精度浮点数I整数J长整数L \\u003cfullclassname\\u003e;\",\"The meaning of the base types is as follows: B byte signed byte C char character D double double precision IEEE float F float single precision IEEE float I int integer J long long integer L\\u003cfullclassname\\u003e;\",,,3],[\"给定类的对象S short signed short Z boolean true或false [\\u003cfield sig\\u003e array\\n \",\"an object of the given class S short signed short Z boolean true or false [\\u003cfield sig\\u003e  array\\n \",,,3],[\"此方法将此字符串转换为Java类型声明，如`String []'，并在解析类型无效时抛出`ClassFormatException'\\n \",\"This method converts this string into a Java type declaration such as `String[]' and throws a `ClassFormatException' when the parsed type is invalid\\n \",,,3],[\"字符码格式的签名，例如“C”或“[Ljava / lang / String;”\",\"signature in byte code format, eg \\\"C\\\" or \\\"[Ljava/lang/String;\\\"\",,,3],[\"分别\\n \",\"respectively\\n \",,,1],[\"将方法签名的类型作为字符值返回，如在\\u003cem\\u003e常量\\u003c/ em\\u003e中定义\\n \",\"Return type of method signature as a byte value as defined in \\u003cem\\u003eConstants\\u003c/em\\u003e\\n \",,,3],[\"将签名的类型作为字符值返回，如\\u003cem\\u003e常量\\u003c/ em\\u003e中定义\\n \",\"Return type of signature as a byte value as defined in \\u003cem\\u003eConstants\\u003c/em\\u003e\\n \",,,3],[\"将（有符号）字节转换为（无符号）短值，即所有负值变为正\",\"Convert (signed) byte to (unsigned) short value, ie, all negative values become positive\",,,3],[,,\"Jīběn lèixíng de hányì rúxià:B zì jié yǒu fúhào zì jié C zìfú zìfú D shuāng jīngdù shuāng jīngdù fú diǎnshù fú diǎnshù fú diǎn xíng dān jīngdù fú diǎnshù I zhěngshù J zhǎng zhěngshù L \\u003cfullclassname\\u003e; gěi dìng lèi de duìxiàng S short signed short Z boolean true huò false [\\u003cfield sig\\u003e array\\n cǐ fāngfǎ jiāng cǐ zìfú chuàn zhuǎnhuàn wèi Java lèixíng shēngmíng, rú `String []', bìng zài jiěxī lèixíng wúxiào shí pāo chū `ClassFormatException'\\n zìfú mǎ géshì de qiānmíng, lìrú “C” huò “[Ljava/ lang/ String;” fēnbié\\n jiāng fāngfǎ qiānmíng de lèixíng zuòwéi zìfú zhí fǎnhuí, rú zài \\u003cem\\u003echángliàng \\u003c/ em\\u003ezhōng dìngyì\\n jiāng qiānmíng de lèixíng zuòwéi zìfú zhí fǎnhuí, rú \\u003cem\\u003echángliàng \\u003c/ em\\u003ezhōng dìngyì\\n jiāng (yǒu fúhào) zì jié zhuǎnhuàn wèi (wú fúhào) duǎn zhí, jí suǒyǒu fù zhí biàn wèi zhèng\"]],,\"en\",,,[[\"The meaning of the base types is as follows: B byte signed byte C char character D double double precision IEEE float F float single precision IEEE float I int integer J long long integer L\\u003cfullclassname\\u003e;\",,[[\"基本类型的含义如下：B字节有符号字节C字符字符D双精度双精度浮点数浮点数浮点型单精度浮点数I整数J长整数L \\u003cfullclassname\\u003e;\",0,true,false],[\"基本类型的含义如下：B字节符号字节c char字符的字符D双双精度IEEE浮点˚F浮动单精度IEEE浮点I INT整数j长长整型→\\u003cfullclassname\\u003e;\",0,true,false]],[[0,205]],\"The meaning of the base types is as follows: B byte signed byte C char character D double double precision IEEE float F float single precision IEEE float I int integer J long long integer L\\u003cfullclassname\\u003e;\",0,0],[\"an object of the given class S short signed short Z boolean true or false [\\u003cfield sig\\u003e  array\",,[[\"给定类的对象S short signed short Z boolean true或false [\\u003cfield sig\\u003e array\",0,true,false],[\"给定类的对象短篇小说符号短ž布尔真或假的[\\u003c现场SIG\\u003e阵列\",0,true,false]],[[0,93]],\"an object of the given class S short signed short Z boolean true or false [\\u003cfield sig\\u003e  array\",0,0],[\"\\n \",,,[[0,3]],\"\\n \",0,0],[\"This method converts this string into a Java type declaration such as `String[]' and throws a `ClassFormatException' when the parsed type is invalid\",,[[\"此方法将此字符串转换为Java类型声明，如`String []'，并在解析类型无效时抛出`ClassFormatException'\",0,true,false],[\"这种方法这个字符串到Java类型声明转换，如`的String []'，并抛出一个`ClassFormatException“当解析类型无效\",0,true,false]],[[0,148]],\"This method converts this string into a Java type declaration such as `String[]' and throws a `ClassFormatException' when the parsed type is invalid\",0,0],[\"\\n \",,,[[0,3]],\"\\n \",0,0],[\"signature in byte code format, eg \\\"C\\\" or \\\"[Ljava/lang/String;\\\"\",,[[\"字符码格式的签名，例如“C”或“[Ljava / lang / String;”\",0,true,false],[\"签名字节码格式，例如“C”或“[Ljava /朗/字符串;”\",0,true,false]],[[0,62]],\"signature in byte code format, eg \\\"C\\\" or \\\"[Ljava/lang/String;\\\"\",0,0],[\"respectively\",,[[\"分别\",1000,true,false],[\"分别\",1000,true,false]],[[0,12]],\"respectively\",0,0],[\"\\n \",,,[[0,3]],\"\\n \",0,0],[\"Return type of method signature as a byte value as defined in \\u003cem\\u003eConstants\\u003c/em\\u003e\",,[[\"将方法签名的类型作为字符值返回，如在\\u003cem\\u003e常量\\u003c/ em\\u003e中定义\",0,true,false],[\"返回方法签名的类型作为字节值中定义的\\u003cem\\u003e常量\\u003c/ em\\u003e的\",0,true,false]],[[0,80]],\"Return type of method signature as a byte value as defined in \\u003cem\\u003eConstants\\u003c/em\\u003e\",0,0],[\"\\n \",,,[[0,3]],\"\\n \",0,0],[\"Return type of signature as a byte value as defined in \\u003cem\\u003eConstants\\u003c/em\\u003e\",,[[\"将签名的类型作为字符值返回，如\\u003cem\\u003e常量\\u003c/ em\\u003e中定义\",0,true,false],[\"返回签名的类型作为字节值中定义的\\u003cem\\u003e常量\\u003c/ em\\u003e的\",0,true,false]],[[0,73]],\"Return type of signature as a byte value as defined in \\u003cem\\u003eConstants\\u003c/em\\u003e\",0,0],[\"\\n \",,,[[0,3]],\"\\n \",0,0],[\"Convert (signed) byte to (unsigned) short value, ie, all negative values become positive\",,[[\"将（有符号）字节转换为（无符号）短值，即所有负值变为正\",0,true,false],[\"转换（符号）字节（无符号）短值，即，所有的负值变为正\",0,true,false]],[[0,88]],\"Convert (signed) byte to (unsigned) short value, ie, all negative values become positive\",0,0]],0.99448156,,[[\"en\"],,[0.99448156],[\"en\"]]]";
+		String r = 解析返回数据(ss);
+		System.out.println(r);
+		
+		
+		
+//		String[] a = ss.substring(3).split("\\],\\[");
+//		List<String> 分段数据 = new ArrayList<String>();
+//		for (int i = 0; i < a.length; i++) {
+//			String s = a[i];
+//			if(s.startsWith("\"")){
+//				分段数据.add(s);
+//			}else{
+//				break;
+//			}
+//		}
+//		O.o(分段数据, "测试数据");
+		
 /**
  * 翻译总长度1896
 准备对数据进行加签2814908780,1382763536,413547,i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.
@@ -378,19 +356,25 @@ Exception in thread "main" java.io.IOException: Server returned HTTP response co
 		 * ,0,0]],0.29146308,,[["en"],,[0.29146308],["en"]],,,,,,[["want","to",
 		 * "eat","something","want to","to eat","want to eat"]]]
 		 */
-		//log.info(resp);
+//		log.info(resp);
 		
 		/**
 		 * 测试list翻译效果
 		 */
-		List<String> l = new ArrayList<String>();
-		l.add("i");
-		l.add("love");
-		l.add("you");
-		List<String> t = t(l);
-		for (int i = 0; i < t.size(); i++) {
-			System.out.println(t.get(i));
-		}
+//		List<String> l = new ArrayList<String>();
+//		l.add("i");
+//		l.add("love\\n");
+//		l.add("you");
+//		List<String> t = t(l);
+//		for (int i = 0; i < t.size(); i++) {
+//			System.out.println(t.get(i));
+//		}
+		
+//		/**
+//		 * 测试超长数据
+//		 */
+//		String ts = "<tr><th>Key</th> <th>Description of Associated Value</th></tr> <tr><td><code>javaversion</code></td> <td>Java Runtime Environment version</td></tr> <tr><td><code>javavendor</code></td> <td>Java Runtime Environment vendor</td></tr> <tr><td><code>javavendorurl</code></td> <td>Java vendor URL</td></tr> <tr><td><code>javahome</code></td> <td>Java installation directory</td></tr> <tr><td><code>javavmspecificationversion</code></td> <td>Java Virtual Machine specification version</td></tr> <tr><td><code>javavmspecificationvendor</code></td> <td>Java Virtual Machine specification vendor</td></tr> <tr><td><code>javavmspecificationname</code></td> <td>Java Virtual Machine specification name</td></tr> <tr><td><code>javavmversion</code></td> <td>Java Virtual Machine implementation version</td></tr> <tr><td><code>javavmvendor</code></td> <td>Java Virtual Machine implementation vendor</td></tr> <tr><td><code>javavmname</code></td> <td>Java Virtual Machine implementation name</td></tr> <tr><td><code>javaspecificationversion</code></td> <td>Java Runtime Environment specification  version</td></tr> <tr><td><code>javaspecificationvendor</code></td> <td>Java Runtime Environment specification  vendor</td></tr> <tr><td><code>javaspecificationname</code></td> <td>Java Runtime Environment specification  name</td></tr> <tr><td><code>javaclass";
+//		t(ts);
 	}
 
 	public static String 加签(String query) throws Exception {

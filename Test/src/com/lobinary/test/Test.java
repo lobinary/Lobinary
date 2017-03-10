@@ -262,6 +262,16 @@ public class Test {
 			String kk = 换行分割.substring(k,k+2);
 			if(kk.equals("\\n"))System.out.println("碰到了");
 		}
+		
+//		System.out.println(Throwable.class);\
+//		String ssss = "";
+//		System.out.println(ssss.substring(0,8));
+		
+		
+		String 换行符替换 = "this is the enter '\\n' or '\\t'";
+		System.out.println(换行符替换.replace("\\n", "#n#").replace("#n#", "\\n"));
+		
+		
 	}
 	
 }
