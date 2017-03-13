@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,12 @@
  * patents. This notice and attribution to Taligent may not be removed.
  *   Taligent is a registered trademark of Taligent, Inc.
  *
+ * <p>
+ *  (C)版权Taligent,Inc 1996,1997  - 保留所有权利(C)版权所有IBM Corp 1996-1998  - 保留所有权利
+ * 
+ *  此源代码和文档的原始版本由IBM的全资子公司Taligent,Inc拥有版权和所有权。
+ * 这些资料根据Taligent和Sun之间的许可协议的条款提供此技术受多个美国和国际专利保护Taligent是Taligent的注册商标。Taligent是Taligent的注册商标。
+ * 
  */
 
 package java.text;
@@ -239,6 +246,82 @@ import java.util.Locale;
  * </pre>
  * </blockquote>
  *
+ * <p>
+ * <code> RuleBasedCollat​​or </code>类是<code> Collat​​or </code>的一个具体子类,提供了一个简单的,数据驱动的表整理器。
+ * 使用这个类,你可以创建一个自定义的基于表的<code> Collat​​or < / code> <code> RuleBasedCollat​​or </code>将字符映射到排序键。
+ * 
+ * <p>
+ *  <code> RuleBasedCollat​​or </code>对效率有以下限制(其他子类可用于更复杂的语言)：
+ * <ol>
+ *  <li>如果由&lt; modifier&gt;控制的特殊归类规则指定它适用于整个collat​​or对象<li>所有未提到的字符都在排序规则顺序的结尾
+ * </ol>
+ * 
+ * <p>
+ *  排序规则表由排序规则列表组成,其中每个规则是以下三种形式之一：
+ * <pre>
+ * &lt; modifier&gt; &lt;关系&gt; &lt; text-argument&gt; &lt; reset&gt; &lt; text-argument&gt;
+ * </pre>
+ *  规则元素的定义如下：
+ * <UL>
+ *  <LI> <strong>文本参数</strong>：文本参数是任何字符序列,不包括特殊字符(即常用空格字符[0009-000D,0020])和规则语法字符[0021-002F,如果需要这些字符,可以
+ * 将它们放在单引号中(例如&符号&gt;'&amp;')注意,不带引号的空格字符将被忽略;例如<code> b c </code>被视为<code> bc </code> <LI> <strong>修饰符
+ * </strong>：目前有两个修饰符打开特殊排序规则。
+ * <UL>
+ * <LI>'@'：打开重音的反向排序(次要差异),如法语<LI>"！ ：打开泰语/老挝元音辅音交换如果范围\\ U0E40- \\ U0E44范围内的泰国元音在范围\\ U0E01- \\ U0E2E范围
+ * 之前的泰语辅音或者范围\\ U0EC0- \\ U0EC4在范围\\ U0E81- \\ U0EAE的老挝辅音之前,则元音被放置在辅音之后用于整理目的。
+ * </UL>
+ *  <p>'@'：表示口音按照法语<LI> <strong>关系</strong>向后排序：关系如下：
+ * <UL>
+ *  <LI>'&lt;' ：大,作为字母差异(主)<LI>'; ：较大,作为重音差(次要)<LI>','：较大,作为大小写差异(第三)<LI>'='：等于
+ * </UL>
+ * <LI> <strong>重置</strong>：有一个主要用于收缩和展开的重置,但也可用于在一组规则的末尾添加修改<p>'&amp; '' ：表示下一个规则在复位文本参数将被排序的位置之后
+ * </UL>
+ * 
+ * <p>
+ *  这听起来比在实践中更复杂例如,以下是表达相同事物的等效方式：
+ * <blockquote>
+ * <pre>
+ *  例如, b < c a < b&amp; b < c a < c&amp;例如, b
+ * </pre>
+ * </blockquote>
+ *  请注意,顺序很重要,因为后续项紧接在text参数之后。以下内容不等效：
+ * <blockquote>
+ * <pre>
+ *  例如, b&amp;例如, c a < c&amp;例如, b
+ * </pre>
+ * </blockquote>
+ * 文本参数必须已经存在于序列中,或者文本参数的一些初始子串必须存在(例如"a&lt; b&amp; ae&lt; e"是有效的,因为在序列中存在"a"在"ae"被重置之前)在后一种情况下,不输入"ae"并
+ * 将其视为单个字符;相反,"e"被排序,好像它被扩展为两个字符："a",后面是"e"。
+ * 这种差异出现在自然语言中：在传统的西班牙语中"ch"被看作好象它收缩到一个单一的字符作为"c <ch <d"),而在传统的德语中,a-umlaut被视为扩展为两个字符(表示为"a,A <b,B&amp; ae; \\ u00e3&amp; u00c3")[\\ u00e3和\\ u00c3当然是a-umlaut的转义序列]。
+ * <p>
+ * <strong>可忽略字符</strong>
+ * <p>
+ *  对于可忽略的字符,第一个规则必须以关系开头(我们上面使用的例子是真正的片段;"a&lt; b"应该是"&lt; a&lt; b")。
+ *  "&lt;",则所有所有文本参数直到第一个"&lt;"是可忽略的例如,", - &lt; a&lt; b"使" - "一个可忽略的字符,我们在前面看到"黑鸟"一词在不同语言的样本中,你看到大多数口音是
+ * 可忽略的。
+ *  对于可忽略的字符,第一个规则必须以关系开头(我们上面使用的例子是真正的片段;"a&lt; b"应该是"&lt; a&lt; b")。
+ * 
+ *  <p> <strong>规范化和重音</strong>
+ * <p>
+ * <code> RuleBasedCollat​​or </code>自动处理其规则表以包括重音字符的预组合和组合字符版本即使提供的规则字符串仅包含基本字符和单独的组合重音字符,预组成的重音字符匹配将在表
+ * 中输入来自规则字符串的所有规范字符组合。
+ * <p>
+ * 这允许您使用RuleBasedCollat​​or来比较重音字符串,即使将collat​​or设置为NO_DECOMPOSITION有两个注意事项,但是首先,如果要整理的字符串包含可能不是按照规范顺序的
+ * 组合序列,您应该将collat​​or设置为CANONICAL_DECOMPOSITION或FULL_DECOMPOSITION以启用组合序列的排序其次,如果字符串包含具有兼容性分解的字符(例如全角和半
+ * 角形式),则必须使用FULL_DECOMPOSITION,因为规则表只包括规范映射。
+ * 
+ *  <p> <strong>错误</strong>
+ * <p>
+ *  以下是错误：
+ * <UL>
+ * <LI>文本参数包含无引号的标点符号(例如"a <bc <d")<LI>没有文本参数(例如"a <,b")<LI>的关系或复位字符>其中文本参数(或文本参数的初始子串)尚未在序列中的重置(例如"a <b&amp; e <f")。
+ * </UL>
+ *  如果产生其中一个错误,<code> RuleBasedCollat​​or </code>会抛出<code> ParseException </code>
+ * 
+ * <P> <STRONG>例子</STRONG> <p>简单：其中,A&LT; B&LT; C&LT; d <P>挪威：其中,A,A&LT; B,B&LT; C, C&LT; D,D&LT; E,E&LT
+ * ; F,F&LT;克,&LT; H,H&LT; I,I LT;,j将&LT; K- K&LT; L,L&LT;男, M&LT; N,N&LT; O,O-&LT; p,p&LT;问中,q,R,R&LT; 
+ * S,S&LT; T,T&LT; U,U&LT; V,V&LT; W, W&所述; X中,X,Y,Y LT; Z,z,其中; \\ u00E6 \\ u00C6&下; \\ u00F8 \\ u00D8&
+ * 
  * @see        Collator
  * @see        CollationElementIterator
  * @author     Helena Shih, Laura Werner, Richard Gillam
@@ -270,6 +353,45 @@ public class RuleBasedCollator extends Collator{
      * RuleBasedCollator constructor.  This takes the table rules and builds
      * a collation table out of them.  Please see RuleBasedCollator class
      * description for more details on the collation rule syntax.
+     * <p>
+     * 下; \\ u00E5 =一个\\ u030A \\ u00C5 =一个\\ u030A; AA,AA'。
+     * 
+     * <p>
+     *  要创建一个<代码> RuleBasedCollat​​or </code>的使用为您量身定做专门的规则对象,构造的<code> RuleBasedCollat​​or </代码>与包含在<代码>规则的
+     * 字符串</code>对象。
+     * 例如：。
+     * <blockquote>
+     * <pre>
+     *  简单的字符串="&LT; A&LT; B&LT; C&LT; D组; RuleBasedCollat​​or mySimple =新RuleBasedCollat​​or(简单);
+     * </pre>
+     * </blockquote>
+     *  或者：
+     * <blockquote>
+     * <pre>
+     * 串挪威="&LT; A,A&LT; B,B&LT; C C&LT; D,D&LT; E,E&LT; F,F&LT;克,&LT; H,H&LT;我,我+&LT;,j将&LT; K- K&LT; L,L&L
+     * T; M,M&LT; N,N&LT; O,O-&LT; p,p&LT; Q,Q&LT; R,R + &LT; S,S&LT; T,T&LT; U,U&LT; V,V&LT; W,W&LT; X中,X,Y
+     * ,Y&LT; Z,Z +&LT; \\ u00E6 \\ u00C6 + //拉丁字母AE&安培; AE&LT; \\ u00F8 \\ u00D8 + //拉丁字母的O&amp;并与笔划LT; \\ 
+     * u00E5 = A \\ u030A \\ u00C5 = A \\ u030A"与环以上+ //拉丁字母A";"与上述环AA,AA + //拉丁字母A; RuleBasedCollat​​or myN
+     * orwegian =新RuleBasedCollat​​or(挪威);。
+     * </pre>
+     * </blockquote>
+     * 
+     * <p>
+     * 可以通过连接规则字符串创建新的排序规则字符串例如,{@link #getRules()}返回的规则可以连接以组合多个<code> RuleBasedCollat​​or </code>
+     * 
+     * <p>
+     *  以下示例演示如何更改非间距重音符的顺序,
+     * <blockquote>
+     * <pre>
+     * //旧规则字符串oldRules ="= \\ u0301; \\ u0300; \\ u0302; \\ u0308"// main accents +"; \\ u0327; \\ u0303; \
+     * \ u0304; \\ u0305"// main accents +"; \\ u0306; \\ u0307; \\ u0309; \\ u030A"// main accents +"; \\ u
+     * 030B; \\ u030C; \\ u030D; \\ u030E"// main accents +"; \\ u030F; \\ u0310; \\ u0311; \\ u0312"// main
+     *  a","a","a","a","b","c","c","e"和"c" //改变重音字符的顺序String addOn ="&amp; \\ u0300; \\ u0308; \\ u0302"; Ru
+     * leBasedCollat​​or myCollat​​or = new RuleBasedCollat​​or(oldRules + addOn);。
+     * </pre>
+     * </blockquote>
+     * 
+     * 
      * @see java.util.Locale
      * @param rules the collation rules to build the collation table from.
      * @exception ParseException A format exception
@@ -285,6 +407,8 @@ public class RuleBasedCollator extends Collator{
      * RuleBasedCollator constructor.  This takes the table rules and builds
      * a collation table out of them.  Please see RuleBasedCollator class
      * description for more details on the collation rule syntax.
+     * <p>
+     * 
      * @see java.util.Locale
      * @param rules the collation rules to build the collation table from.
      * @param decomp the decomposition strength used to build the
@@ -302,6 +426,9 @@ public class RuleBasedCollator extends Collator{
 
     /**
      * "Copy constructor."  Used in clone() for performance.
+     * <p>
+     * RuleBasedCollat​​or构造函数这需要表规则并构建一个排序规则表。有关排序规则语法的更多详细信息,请参阅RuleBasedCollat​​or类描述
+     * 
      */
     private RuleBasedCollator(RuleBasedCollator that) {
         setStrength(that.getStrength());
@@ -311,6 +438,10 @@ public class RuleBasedCollator extends Collator{
 
     /**
      * Gets the table-based rules for the collation object.
+     * <p>
+     *  RuleBasedCollat​​or构造函数这需要表规则并构建一个排序规则表。有关排序规则语法的更多详细信息,请参阅RuleBasedCollat​​or类描述
+     * 
+     * 
      * @return returns the collation rules that the table collation object
      * was created from.
      */
@@ -322,6 +453,10 @@ public class RuleBasedCollator extends Collator{
     /**
      * Returns a CollationElementIterator for the given String.
      *
+     * <p>
+     *  "复制构造函数"用于clone()中的性能
+     * 
+     * 
      * @param source the string to be collated
      * @return a {@code CollationElementIterator} object
      * @see java.text.CollationElementIterator
@@ -333,6 +468,10 @@ public class RuleBasedCollator extends Collator{
     /**
      * Returns a CollationElementIterator for the given CharacterIterator.
      *
+     * <p>
+     *  获取排序规则对象的基于表的规则
+     * 
+     * 
      * @param source the character iterator to be collated
      * @return a {@code CollationElementIterator} object
      * @see java.text.CollationElementIterator
@@ -349,6 +488,10 @@ public class RuleBasedCollator extends Collator{
      * than, greater than or equal to another string in a language.
      * This can be overriden in a subclass.
      *
+     * <p>
+     *  返回给定String的Collat​​ionElementIterator
+     * 
+     * 
      * @exception NullPointerException if <code>source</code> or <code>target</code> is null.
      */
     public synchronized int compare(String source, String target)
@@ -567,6 +710,9 @@ public class RuleBasedCollator extends Collator{
      * Transforms the string into a series of characters that can be compared
      * with CollationKey.compareTo. This overrides java.text.Collator.getCollationKey.
      * It can be overriden in a subclass.
+     * <p>
+     *  返回给定CharacterIterator的Collat​​ionElementIterator
+     * 
      */
     public synchronized CollationKey getCollationKey(String source)
     {
@@ -699,6 +845,9 @@ public class RuleBasedCollator extends Collator{
 
     /**
      * Standard override; no change in semantics.
+     * <p>
+     * 比较基于排序规则存储在两个不同字符串中的字符数据返回有关字符串是小于,大于还是等于语言中的另一个字符串的信息这可以在子类中覆盖
+     * 
      */
     public Object clone() {
         // if we know we're not actually a subclass of RuleBasedCollator
@@ -720,6 +869,10 @@ public class RuleBasedCollator extends Collator{
 
     /**
      * Compares the equality of two collation objects.
+     * <p>
+     *  将字符串转换为一系列字符,可以与Collat​​ionKeycompareTo进行比较这将覆盖javatextCollat​​orgetCollat​​ionKey它可以在子类中被覆盖
+     * 
+     * 
      * @param obj the table-based collation object to be compared with this.
      * @return true if the current table-based collation object is the same
      * as the table-based collation object obj; false otherwise.
@@ -734,6 +887,9 @@ public class RuleBasedCollator extends Collator{
 
     /**
      * Generates the hash code for the table-based collation object
+     * <p>
+     *  标准覆盖;没有语义的变化
+     * 
      */
     public int hashCode() {
         return getRules().hashCode();
@@ -741,6 +897,9 @@ public class RuleBasedCollator extends Collator{
 
     /**
      * Allows CollationElementIterator access to the tables object
+     * <p>
+     *  比较两个排序规则对象的相等性
+     * 
      */
     RBCollationTables getTables() {
         return tables;

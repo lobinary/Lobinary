@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会
+ * 
+ *  根据Apache许可证第20版("许可证")授权;您不得使用此文件,除非符合许可证您可以在获取许可证的副本
+ * 
+ *  http：// wwwapacheorg / licenses / LICENSE-20
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件将按"原样"基础分发,无任何明示或暗示的保证或条件。请参阅许可证管理权限和限制许可证
+ * 
  */
 /*
  * $Id: XPathParser.java,v 1.2.4.1 2005/09/14 19:46:02 jeffsuttor Exp $
+ * <p>
+ *  $ Id：XPathParserjava,v 1241 2005/09/14 19:46:02 jeffsuttor Exp $
+ * 
  */
 package com.sun.org.apache.xpath.internal.compiler;
 
@@ -37,6 +50,9 @@ import com.sun.org.apache.xpath.internal.res.XPATHErrorResources;
  * Tokenizes and parses XPath expressions. This should really be named
  * XPathParserImpl, and may be renamed in the future.
  * @xsl.usage general
+ * <p>
+ * 标记和解析XPath表达式这应该真正地命名为XPathParserImpl,并且可能在将来重命名@xslusage general
+ * 
  */
 public class XPathParser
 {
@@ -47,11 +63,17 @@ public class XPathParser
 
   /**
    * The XPath to be processed.
+   * <p>
+   *  要处理的XPath
+   * 
    */
   private OpMap m_ops;
 
   /**
    * The next token in the pattern.
+   * <p>
+   *  模式中的下一个标记
+   * 
    */
   transient String m_token;
 
@@ -59,16 +81,25 @@ public class XPathParser
    * The first char in m_token, the theory being that this
    * is an optimization because we won't have to do charAt(0) as
    * often.
+   * <p>
+   *  m_token中的第一个字符,理论是这是一个优化,因为我们不必经常做charAt(0)
+   * 
    */
   transient char m_tokenChar = 0;
 
   /**
    * The position in the token queue is tracked by m_queueMark.
+   * <p>
+   *  令牌队列中的位置由m_queueMark跟踪
+   * 
    */
   int m_queueMark = 0;
 
   /**
    * Results from checking FilterExpr syntax
+   * <p>
+   *  检查FilterExpr语法的结果
+   * 
    */
   protected final static int FILTER_MATCH_FAILED     = 0;
   protected final static int FILTER_MATCH_PRIMARY    = 1;
@@ -76,6 +107,9 @@ public class XPathParser
 
   /**
    * The parser constructor.
+   * <p>
+   *  解析器构造函数
+   * 
    */
   public XPathParser(ErrorListener errorListener, javax.xml.transform.SourceLocator sourceLocator)
   {
@@ -85,6 +119,9 @@ public class XPathParser
 
   /**
    * The prefix resolver to map prefixes to namespaces in the OpMap.
+   * <p>
+   *  前缀解析器将前缀映射到OpMap中的命名空间
+   * 
    */
   PrefixResolver m_namespaceContext;
 
@@ -93,6 +130,10 @@ public class XPathParser
    * in order that a parse doesn't
    * have to be done each time the expression is evaluated.
    *
+   * <p>
+   *  给定一个字符串,init一个用于选择的XPath对象,以便在每次评估表达式时不必进行解析
+   * 
+   * 
    * @param compiler The compiler object.
    * @param expression A string conforming to the XPath grammar.
    * @param namespaceContext An object that is able to resolve prefixes in
@@ -169,6 +210,10 @@ public class XPathParser
    * Given an string, init an XPath object for pattern matches,
    * in order that a parse doesn't
    * have to be done each time the expression is evaluated.
+   * <p>
+   *  给定一个字符串,init模式匹配的XPath对象,以便每次评估表达式时不必进行解析
+   * 
+   * 
    * @param compiler The XPath object to be initialized.
    * @param expression A String representing the XPath.
    * @param namespaceContext An object that is able to resolve prefixes in
@@ -221,6 +266,7 @@ public class XPathParser
   }
 
   /** The error listener where syntax errors are to be sent.
+  /* <p>
    */
   private ErrorListener m_errorListener;
 
@@ -235,6 +281,10 @@ public class XPathParser
    * errors will be sent.  If the error listener is not set, syntax errors
    * will be sent to System.err.
    *
+   * <p>
+   * 允许应用程序注册错误事件处理程序,其中将发送语法错误如果未设置错误侦听器,则语法错误将发送到Systemerr
+   * 
+   * 
    * @param handler Reference to error listener where syntax errors will be
    *                sent.
    */
@@ -246,6 +296,10 @@ public class XPathParser
   /**
    * Return the current error listener.
    *
+   * <p>
+   *  返回当前错误侦听器
+   * 
+   * 
    * @return The error listener, which should not normally be null, but may be.
    */
   public ErrorListener getErrorListener()
@@ -256,6 +310,10 @@ public class XPathParser
   /**
    * Check whether m_token matches the target string.
    *
+   * <p>
+   *  检查m_token是否与目标字符串匹配
+   * 
+   * 
    * @param s A string reference or null.
    *
    * @return If m_token is null, returns false (or true if s is also null), or
@@ -269,6 +327,10 @@ public class XPathParser
   /**
    * Check whether m_tokenChar==c.
    *
+   * <p>
+   *  检查是否m_tokenChar == c
+   * 
+   * 
    * @param c A character to be tested.
    *
    * @return If m_token is null, returns false, or return true if c matches
@@ -283,6 +345,10 @@ public class XPathParser
    * Look ahead of the current token in order to
    * make a branching decision.
    *
+   * <p>
+   *  查看当前令牌以便做出分支决定
+   * 
+   * 
    * @param c the character to be tested for.
    * @param n number of tokens to look ahead.  Must be
    * greater than 1.
@@ -314,6 +380,10 @@ public class XPathParser
    * Look behind the first character of the current token in order to
    * make a branching decision.
    *
+   * <p>
+   *  查看当前令牌的第一个字符的后面,以做出分支决定
+   * 
+   * 
    * @param c the character to compare it to.
    * @param n number of tokens to look behind.  Must be
    * greater than 1.  Note that the look behind terminates
@@ -357,6 +427,10 @@ public class XPathParser
    * look behind the current token in order to
    * see if there is a useable token.
    *
+   * <p>
+   *  查看当前令牌后面,以查看是否有可用的令牌
+   * 
+   * 
    * @param n number of tokens to look behind.  Must be
    * greater than 1.  Note that the look behind terminates
    * at either the beginning of the string or on a '|'
@@ -389,6 +463,10 @@ public class XPathParser
    * Look ahead of the current token in order to
    * make a branching decision.
    *
+   * <p>
+   *  查看当前令牌以便做出分支决定
+   * 
+   * 
    * @param s the string to compare it to.
    * @param n number of tokens to lookahead.  Must be
    * greater than 1.
@@ -418,6 +496,9 @@ public class XPathParser
   /**
    * Retrieve the next token from the command and
    * store it in m_token string.
+   * <p>
+   *  从命令中检索下一个令牌并将其存储在m_token字符串中
+   * 
    */
   private final void nextToken()
   {
@@ -437,6 +518,10 @@ public class XPathParser
   /**
    * Retrieve a token relative to the current token.
    *
+   * <p>
+   *  检索相对于当前令牌的令牌
+   * 
+   * 
    * @param i Position relative to current token.
    *
    * @return The string at the given index, or null if the index is out
@@ -463,6 +548,9 @@ public class XPathParser
   /**
    * Retrieve the previous token from the command and
    * store it in m_token string.
+   * <p>
+   *  从命令检索以前的令牌并将其存储在m_token字符串中
+   * 
    */
   private final void prevToken()
   {
@@ -485,6 +573,10 @@ public class XPathParser
    * Consume an expected token, throwing an exception if it
    * isn't there.
    *
+   * <p>
+   * 使用期望的令牌,如果不存在则抛出异常
+   * 
+   * 
    * @param expected The string to be expected.
    *
    * @throws javax.xml.transform.TransformerException
@@ -513,6 +605,10 @@ public class XPathParser
    * Consume an expected token, throwing an exception if it
    * isn't there.
    *
+   * <p>
+   *  使用期望的令牌,如果不存在则抛出异常
+   * 
+   * 
    * @param expected the character to be expected.
    *
    * @throws javax.xml.transform.TransformerException
@@ -541,6 +637,10 @@ public class XPathParser
   /**
    * Warn the user of a problem.
    *
+   * <p>
+   *  警告用户有问题
+   * 
+   * 
    * @param msg An error msgkey that corresponds to one of the constants found
    *            in {@link com.sun.org.apache.xpath.internal.res.XPATHErrorResources}, which is
    *            a key for a format string.
@@ -572,6 +672,10 @@ public class XPathParser
    * Notify the user of an assertion error, and probably throw an
    * exception.
    *
+   * <p>
+   *  通知用户断言错误,并可能抛出异常
+   * 
+   * 
    * @param b  If false, a runtime exception will be thrown.
    * @param msg The assertion message, which should be informative.
    *
@@ -594,6 +698,10 @@ public class XPathParser
    * Notify the user of an error, and probably throw an
    * exception.
    *
+   * <p>
+   *  通知用户出现错误,并可能抛出异常
+   * 
+   * 
    * @param msg An error msgkey that corresponds to one of the constants found
    *            in {@link com.sun.org.apache.xpath.internal.res.XPATHErrorResources}, which is
    *            a key for a format string.
@@ -639,6 +747,18 @@ public class XPathParser
    * can check if the exception is an instance of XPathStylesheetDOM3Exception
    * and take appropriate action.
    *
+   * <p>
+   *  添加此方法以支持DOM 3 XPath API
+   * <p>
+   *  这个方法就像error(String,Object []);除了底层的TransformerException是XpathStylesheetDOM3Exception(它扩展了Transformer
+   * Exception)。
+   * <p>
+   * 所以老的XPath代码在Xalan不受此影响对老的XPath代码的行为error()或errorForDOM3()被调用,因为它总是捕获TransformerException对象,并且不知道XPath
+   * StylesheetDOM3Exception的新子类旧的XPath代码运行如以前。
+   * <p>
+   *  但是,更新的DOM3 XPath代码捕获TransformerException可以检查异常是否是XPathStylesheetDOM3Exception的实例,并采取适当的措施
+   * 
+   * 
    * @param msg An error msgkey that corresponds to one of the constants found
    *            in {@link com.sun.org.apache.xpath.internal.res.XPATHErrorResources}, which is
    *            a key for a format string.
@@ -670,6 +790,10 @@ public class XPathParser
    * Dump the remaining token queue.
    * Thanks to Craig for this.
    *
+   * <p>
+   *  转储剩余的令牌队列感谢Craig为此
+   * 
+   * 
    * @return A dump of the remaining token queue, which may be appended to
    *         an error message.
    */
@@ -703,6 +827,10 @@ public class XPathParser
   /**
    * Given a string, return the corresponding function token.
    *
+   * <p>
+   *  给定一个字符串,返回相应的函数标记
+   * 
+   * 
    * @param key A local name of a function.
    *
    * @return   The function ID, which may correspond to one of the FUNC_XXX
@@ -741,6 +869,10 @@ public class XPathParser
    * the length value of the operation, but will update
    * the length value for the total expression.
    *
+   * <p>
+   *  插入操作空间此操作不会设置操作的长度值,但会更新总表达式的长度值
+   * 
+   * 
    * @param pos The position where the op is to be inserted.
    * @param length The length of the operation space in the op map.
    * @param op The op code to the inserted.
@@ -764,6 +896,10 @@ public class XPathParser
    * the length value of the operation, and will update
    * the length value for the total expression.
    *
+   * <p>
+   * 插入操作空间此操作将设置操作的长度值,并将更新总表达式的长度值
+   * 
+   * 
    * @param length The length of the operation.
    * @param op The op code to the inserted.
    */
@@ -785,6 +921,10 @@ public class XPathParser
    * Expr  ::=  OrExpr
    *
    *
+   * <p>
+   *  Expr :: = OrExpr
+   * 
+   * 
    * @throws javax.xml.transform.TransformerException
    */
   protected void Expr() throws javax.xml.transform.TransformerException
@@ -799,6 +939,10 @@ public class XPathParser
    * | OrExpr 'or' AndExpr
    *
    *
+   * <p>
+   *  OrExpr :: = AndExpr | OrExpr'或'AndExpr
+   * 
+   * 
    * @throws javax.xml.transform.TransformerException
    */
   protected void OrExpr() throws javax.xml.transform.TransformerException
@@ -826,6 +970,10 @@ public class XPathParser
    * | AndExpr 'and' EqualityExpr
    *
    *
+   * <p>
+   *  AndExpr :: = EqualityExpr | AndExpr'和'EqualityExpr
+   * 
+   * 
    * @throws javax.xml.transform.TransformerException
    */
   protected void AndExpr() throws javax.xml.transform.TransformerException
@@ -848,6 +996,8 @@ public class XPathParser
 
   /**
    *
+   * <p>
+   * 
    * @returns an Object which is either a String, a Number, a Boolean, or a vector
    * of nodes.
    *
@@ -905,6 +1055,10 @@ public class XPathParser
 
   /**
    * .
+   * <p>
+   *  
+   * 
+   * 
    * @returns an Object which is either a String, a Number, a Boolean, or a vector
    * of nodes.
    *
@@ -990,6 +1144,13 @@ public class XPathParser
    * | AdditiveExpr '-' MultiplicativeExpr
    *
    *
+   * <p>
+   *  这需要处理操作的构造,使得它们以预先固定的顺序被评估。因此,对于9 + 7-6,而不是| + | 9 |  -  | 7 | 6 |,这需要被评估为|  -  | + | 9 | 7 | 6 |
+   * 
+   *  AdditiveExpr :: = MultiplicativeExpr | AdditiveExpr'+'MultiplicativeExpr | AdditiveExpr' - 'Multipli
+   * cativeExpr。
+   * 
+   * 
    * @param addPos Position where expression is to be added, or -1 for append.
    *
    * @return the position at the end of the equality expression.
@@ -1048,6 +1209,13 @@ public class XPathParser
    * | MultiplicativeExpr 'mod' UnaryExpr
    * | MultiplicativeExpr 'quo' UnaryExpr
    *
+   * <p>
+   *  这需要处理操作的构造,使得它们以预先固定的顺序被评估。因此,对于9 + 7-6,而不是| + | 9 |  -  | 7 | 6 |,这需要被评估为|  -  | + | 9 | 7 | 6 |
+   * 
+   * MultiplicativeExpr :: = UnaryExpr | MultiplicExpr MultiplyOperator UnaryExpr | MultiplicativeExpr'div
+   * 'UnaryExpr | MultiplicativeExpr'mod'UnaryExpr | MultiplicativeExpr'quo'UnaryExpr。
+   * 
+   * 
    * @param addPos Position where expression is to be added, or -1 for append.
    *
    * @return the position at the end of the equality expression.
@@ -1125,6 +1293,10 @@ public class XPathParser
    * | '-' UnaryExpr
    *
    *
+   * <p>
+   *  UnaryExpr :: = UnionExpr | ' - 'UnaryExpr
+   * 
+   * 
    * @throws javax.xml.transform.TransformerException
    */
   protected void UnaryExpr() throws javax.xml.transform.TransformerException
@@ -1153,6 +1325,10 @@ public class XPathParser
    * StringExpr  ::=  Expr
    *
    *
+   * <p>
+   *  StringExpr :: = Expr
+   * 
+   * 
    * @throws javax.xml.transform.TransformerException
    */
   protected void StringExpr() throws javax.xml.transform.TransformerException
@@ -1173,6 +1349,10 @@ public class XPathParser
    * StringExpr  ::=  Expr
    *
    *
+   * <p>
+   *  StringExpr :: = Expr
+   * 
+   * 
    * @throws javax.xml.transform.TransformerException
    */
   protected void BooleanExpr() throws javax.xml.transform.TransformerException
@@ -1199,6 +1379,10 @@ public class XPathParser
    * NumberExpr  ::=  Expr
    *
    *
+   * <p>
+   *  NumberExpr :: = Expr
+   * 
+   * 
    * @throws javax.xml.transform.TransformerException
    */
   protected void NumberExpr() throws javax.xml.transform.TransformerException
@@ -1224,6 +1408,12 @@ public class XPathParser
    * | UnionExpr '|' PathExpr
    *
    *
+   * <p>
+   *  右侧表达式的上下文是左侧表达式的上下文右侧表达式的结果是节点集左侧的结果UnionExpr是右侧表达式的结果的并集
+   * 
+   *  UnionExpr :: = PathExpr | UnionExpr'|' PathExpr
+   * 
+   * 
    * @throws javax.xml.transform.TransformerException
    */
   protected void UnionExpr() throws javax.xml.transform.TransformerException
@@ -1267,6 +1457,11 @@ public class XPathParser
    * | FilterExpr '/' RelativeLocationPath
    * | FilterExpr '//' RelativeLocationPath
    *
+   * <p>
+   *  PathExpr :: = LocationPath | FilterExpr | FilterExpr'/'RelativeLocationPath | FilterExpr'//'Relative
+   * LocationPath。
+   * 
+   * 
    * @throws XSLProcessorException thrown if the active ProblemListener and XPathContext decide
    * the error condition is severe enough to halt processing.
    *
@@ -1326,6 +1521,10 @@ public class XPathParser
    * FilterExpr  ::=  PrimaryExpr
    * | FilterExpr Predicate
    *
+   * <p>
+   *  FilterExpr :: = PrimaryExpr | FilterExpr谓词
+   * 
+   * 
    * @throws XSLProcessorException thrown if the active ProblemListener and XPathContext decide
    * the error condition is severe enough to halt processing.
    *
@@ -1377,6 +1576,10 @@ public class XPathParser
      *   Predicate();
      *   m_ops.m_opMap[opPos + OpMap.MAPINDEX_LENGTH] = m_ops.m_opMap[OpMap.MAPINDEX_LENGTH] - opPos;
      * }
+     * <p>
+     * if(tokenIs('[')){Predicate(); m_opsm_opMap [opPos + OpMapMAPINDEX_LENGTH] = m_opsm_opMap [OpMapMAPINDEX_LENGTH]  -  opPos; }
+     * }。
+     * 
      */
   }
 
@@ -1388,6 +1591,10 @@ public class XPathParser
    * | Number
    * | FunctionCall
    *
+   * <p>
+   *  PrimaryExpr :: = VariableReference | '('Expr')'|文字|数字|函数调用
+   * 
+   * 
    * @return true if this method successfully matched a PrimaryExpr
    *
    * @throws javax.xml.transform.TransformerException
@@ -1460,6 +1667,10 @@ public class XPathParser
    * Argument    ::=    Expr
    *
    *
+   * <p>
+   *  Argument :: = Expr
+   * 
+   * 
    * @throws javax.xml.transform.TransformerException
    */
   protected void Argument() throws javax.xml.transform.TransformerException
@@ -1478,6 +1689,10 @@ public class XPathParser
    *
    * FunctionCall    ::=    FunctionName '(' ( Argument ( ',' Argument)*)? ')'
    *
+   * <p>
+   *  FunctionCall :: = FunctionName'('(Argument(','Argument)*)?')'
+   * 
+   * 
    * @return true if, and only if, a FunctionCall was matched
    *
    * @throws javax.xml.transform.TransformerException
@@ -1569,6 +1784,10 @@ public class XPathParser
    * | AbsoluteLocationPath
    *
    *
+   * <p>
+   *  LocationPath :: = RelativeLocationPath | AbsoluteLocationPath
+   * 
+   * 
    * @throws javax.xml.transform.TransformerException
    */
   protected void LocationPath() throws javax.xml.transform.TransformerException
@@ -1618,6 +1837,10 @@ public class XPathParser
    * | RelativeLocationPath '/' Step
    * | AbbreviatedRelativeLocationPath
    *
+   * <p>
+   *  RelativeLocationPath :: = Step | RelativeLocationPath'/'Step | AbbreviatedRelativeLocationPath
+   * 
+   * 
    * @returns true if, and only if, a RelativeLocationPath was matched
    *
    * @throws javax.xml.transform.TransformerException
@@ -1650,6 +1873,10 @@ public class XPathParser
    * Step    ::=    Basis Predicate
    * | AbbreviatedStep
    *
+   * <p>
+   *  Step :: =基础谓词|简称步骤
+   * 
+   * 
    * @returns false if step was empty (or only a '/'); true, otherwise
    *
    * @throws javax.xml.transform.TransformerException
@@ -1752,6 +1979,10 @@ public class XPathParser
    * Basis    ::=    AxisName '::' NodeTest
    * | AbbreviatedBasis
    *
+   * <p>
+   *  Basis :: = AxisName'::'NodeTest |缩写碱基
+   * 
+   * 
    * @throws javax.xml.transform.TransformerException
    */
   protected void Basis() throws javax.xml.transform.TransformerException
@@ -1797,6 +2028,10 @@ public class XPathParser
    * Basis    ::=    AxisName '::' NodeTest
    * | AbbreviatedBasis
    *
+   * <p>
+   *  Basis :: = AxisName'::'NodeTest |缩写碱基
+   * 
+   * 
    * @return FROM_XXX axes type, found in {@link com.sun.org.apache.xpath.internal.compiler.Keywords}.
    *
    * @throws javax.xml.transform.TransformerException
@@ -1825,6 +2060,10 @@ public class XPathParser
    * | NodeType '(' ')'
    * | 'processing-instruction' '(' Literal ')'
    *
+   * <p>
+   *  NodeTest :: = WildcardName | NodeType'('')'| 'processing-instruction''('Literal')'
+   * 
+   * 
    * @param axesType FROM_XXX axes type, found in {@link com.sun.org.apache.xpath.internal.compiler.Keywords}.
    *
    * @throws javax.xml.transform.TransformerException
@@ -1927,6 +2166,10 @@ public class XPathParser
    * Predicate ::= '[' PredicateExpr ']'
    *
    *
+   * <p>
+   *  Predicate :: ='['PredicateExpr']'
+   * 
+   * 
    * @throws javax.xml.transform.TransformerException
    */
   protected void Predicate() throws javax.xml.transform.TransformerException
@@ -1945,6 +2188,10 @@ public class XPathParser
    * PredicateExpr ::= Expr
    *
    *
+   * <p>
+   *  PredicateExpr :: = Expr
+   * 
+   * 
    * @throws javax.xml.transform.TransformerException
    */
   protected void PredicateExpr() throws javax.xml.transform.TransformerException
@@ -1967,6 +2214,10 @@ public class XPathParser
    * Prefix ::=  NCName
    * LocalPart ::=  NCName
    *
+   * <p>
+   * QName :: =(Prefix'：')? LocalPart Prefix :: = NCName LocalPart :: = NCName
+   * 
+   * 
    * @throws javax.xml.transform.TransformerException
    */
   protected void QName() throws javax.xml.transform.TransformerException
@@ -1996,6 +2247,9 @@ public class XPathParser
   /**
    * NCName ::=  (Letter | '_') (NCNameChar)
    * NCNameChar ::=  Letter | Digit | '.' | '-' | '_' | CombiningChar | Extender
+   * <p>
+   *  NCName :: =(Letter |'_')(NCNameChar)NCNameChar :: = Letter |数字| ''| ' - '| '_'|组合Char |扩展器
+   * 
    */
   protected void NCName()
   {
@@ -2014,6 +2268,12 @@ public class XPathParser
    * | "'" [^']* "'"
    *
    *
+   * <p>
+   *  Literal的值是"或"字符内的字符序列
+   * 
+   *  Literal :: ='"'[^"] *'"'|"'"[^'] *"'"
+   * 
+   * 
    * @throws javax.xml.transform.TransformerException
    */
   protected void Literal() throws javax.xml.transform.TransformerException
@@ -2054,6 +2314,10 @@ public class XPathParser
    * Number ::= [0-9]+('.'[0-9]+)? | '.'[0-9]+
    *
    *
+   * <p>
+   *  Number :: = [0-9] +(''[0-9] +)? | ''[0-9] +
+   * 
+   * 
    * @throws javax.xml.transform.TransformerException
    */
   protected void Number() throws javax.xml.transform.TransformerException
@@ -2097,6 +2361,10 @@ public class XPathParser
    * | Pattern '|' LocationPathPattern
    *
    *
+   * <p>
+   *  Pattern :: = LocationPathPattern |模式'|' LocationPathPattern
+   * 
+   * 
    * @throws javax.xml.transform.TransformerException
    */
   protected void Pattern() throws javax.xml.transform.TransformerException
@@ -2125,6 +2393,11 @@ public class XPathParser
    * | '//'? RelativePathPattern
    *
    *
+   * <p>
+   *  LocationPathPattern :: ='/'RelativePathPattern? | IdKeyPattern(('/'|'//')RelativePathPattern)? | '//
+   * '? RelativePathPattern。
+   * 
+   * 
    * @throws javax.xml.transform.TransformerException
    */
   protected void LocationPathPattern() throws javax.xml.transform.TransformerException
@@ -2228,6 +2501,10 @@ public class XPathParser
    * (Also handle doc())
    *
    *
+   * <p>
+   *  IdKeyPattern :: ='id''('Literal')'| 'key''('Literal','Literal')'(也处理doc())
+   * 
+   * 
    * @throws javax.xml.transform.TransformerException
    */
   protected void IdKeyPattern() throws javax.xml.transform.TransformerException
@@ -2241,6 +2518,11 @@ public class XPathParser
    * | RelativePathPattern '/' StepPattern
    * | RelativePathPattern '//' StepPattern
    *
+   * <p>
+   *  RelativePathPattern :: = StepPattern | RelativePathPattern'/'StepPattern | RelativePathPattern'//'St
+   * epPattern。
+   * 
+   * 
    * @throws javax.xml.transform.TransformerException
    */
   protected void RelativePathPattern()
@@ -2266,6 +2548,10 @@ public class XPathParser
    *
    * StepPattern  ::=  AbbreviatedNodeTestStep
    *
+   * <p>
+   * StepPattern :: = AbbreviatedNodeTestStep
+   * 
+   * 
    * @param isLeadingSlashPermitted a boolean indicating whether a slash can
    *        appear at the start of this step
    *
@@ -2283,6 +2569,9 @@ public class XPathParser
    *
    * AbbreviatedNodeTestStep    ::=    '@'? NodeTest Predicate
    *
+   * <p>
+   *  AbbreviatedNodeTestStep :: ='@'? NodeTest谓词
+   * 
    * @param isLeadingSlashPermitted a boolean indicating whether a slash can
    *        appear at the start of this step
    *

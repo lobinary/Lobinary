@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2005 Apache软件基金会
+ * 
+ *  根据Apache许可证第20版("许可证")授权;您不得使用此文件,除非符合许可证您可以在获取许可证的副本
+ * 
+ *  http：// wwwapacheorg / licenses / LICENSE-20
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件将按"原样"基础分发,无任何明示或暗示的保证或条件。请参阅许可证管理权限和限制许可证
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.xs.traversers;
@@ -128,6 +138,13 @@ import org.xml.sax.helpers.XMLReaderFactory;
  *
  * @xerces.internal
  *
+ * <p>
+ * 这个类的目的是协调对应于模式的语法对象的构造为了做到这一点,它必须准备解析多个模式文档(例如,如果最初引用的模式文档包含<include>或<redefined >信息项)如果任何模式导入模式,其他语法
+ * 可能会被构造为副作用。
+ * 
+ *  @xercesinternal
+ * 
+ * 
  * @author Neil Graham, IBM
  * @author Pavani Mukthipudi, Sun Microsystems
  *
@@ -256,6 +273,11 @@ public class XSDHandler {
      * <p>Security manager in effect.</p>
      *
      * <p>Protected to allow access by any traverser.</p>
+     * <p>
+     *  <p>安全管理员生效</p>
+     * 
+     *  <p>受保护,允许任何遍历程序访问</p>
+     * 
      */
     protected XMLSecurityManager fSecureProcessing = null;
 
@@ -334,6 +356,9 @@ public class XSDHandler {
         String documentURI = null;
         /**
          * REVISIT: Casting until DOM Level 3 interfaces are available. -- mrglavas
+         * <p>
+         *  REVISIT：投射到DOM级别3接口可用 -  mrglavas
+         * 
          */
         if(ele.getOwnerDocument() instanceof com.sun.org.apache.xerces.internal.impl.xs.opti.SchemaDOM){
             documentURI = ((com.sun.org.apache.xerces.internal.impl.xs.opti.SchemaDOM) ele.getOwnerDocument()).getDocumentURI();
@@ -493,6 +518,55 @@ public class XSDHandler {
      * called from the Validator and it will make the
      * resulting grammar available; it returns a reference to this object just
      * in case.  A reset(XMLComponentManager) must be called before this methods is called.
+     * <p>
+     * XSDAttributeGroupTraverser fAttributeGroupTraverser; XSDAttributeTraverser fAttributeTraverser; XSDCo
+     * mplexTypeTraverser fComplexTypeTraverser; XSDElementTraverser fElementTraverser; XSDGroupTraverser fG
+     * roupTraverser; XSDKeyrefTraverser fKeyrefTraverser; XSDNotationTraverser fNotationTraverser; XSDSimpl
+     * eTypeTraverser fSimpleTypeTraverser; XSDUniqueOrKeyTraverser fUniqueOrKeyTraverser; XSDWildcardTraver
+     * ser fWildCardTraverser;。
+     * 
+     *  SchemaDVFactory fDVFactory; SchemaDOMParser fSchemaParser; SchemaContentHandler fXSContentHandler; S
+     * tAXSchemaParser fStAXSchemaParser; XML11Configuration fAnnotationValidator; XSAnnotationGrammarPool f
+     * GrammarBucketAdapter;。
+     * 
+     *  //这些数据都需要本地元素的递延//遍历成员
+     * 
+     * //存储延迟本地元素的数组的初始大小private static final int INIT_STACK_SIZE = 30; //用于存储延迟本地元素的数组的增量大小private static f
+     * inal int INC_STACK_SIZE = 10; //数组的当前位置(延迟本地元素的数量)private int fLocalElemStackPos = 0;。
+     * 
+     *  private XSParticleDecl [] fParticle = new XSParticleDecl [INIT_STACK_SIZE]; private Element [] fLoca
+     * lElementDecl = new Element [INIT_STACK_SIZE]; private XSDocumentInfo [] fLocalElementDecl_schema = ne
+     * w XSDocumentInfo [INIT_STACK_SIZE]; // JACK private int [] fAllContext = new int [INIT_STACK_SIZE]; p
+     * rivate XSObject [] fParent = new XSObject [INIT_STACK_SIZE]; private String [] [] fLocalElemNamespace
+     * Context = new String [INIT_STACK_SIZE] [1];。
+     * 
+     * //对于keyrefs的延迟遍历//需要这些数据成员
+     * 
+     *  //存储的数组的初始大小deferred keyrefs private static final int INIT_KEYREF_STACK = 2; //存储deferred keyrefs的数组
+     * 的增量大小private static final int INC_KEYREF_STACK_AMOUNT = 2; //数组的当前位置(#of deferred keyrefs)private int
+     *  fKeyrefStackPos = 0;。
+     * 
+     *  private Element [] fKeyrefs = new Element [INIT_KEYREF_STACK]; private XSDocumentInfo [] fKeyrefsMap
+     * XSDocumentInfo = new XSDocumentInfo [INIT_KEYREF_STACK]; private XSElementDecl [] fKeyrefElems = new 
+     * XSElementDecl [INIT_KEYREF_STACK]; private String [] [] fKeyrefNamespaceContext = new String [INIT_KE
+     * YREF_STACK] [1];。
+     * 
+     * // global decls：map from decl name to decl object SymbolHash fGlobalAttrDecls = new SymbolHash(); Sym
+     * bolHash fGlobalAttrGrpDecls = new SymbolHash(); SymbolHash fGlobalElemDecls = new SymbolHash(); Symbo
+     * lHash fGlobalGroupDecls = new SymbolHash(); SymbolHash fGlobalNotationDecls = new SymbolHash(); Symbo
+     * lHash fGlobalIDConstraintDecls = new SymbolHash(); SymbolHash fGlobalTypeDecls = new SymbolHash();。
+     * 
+     *  // Constructors public XSDHandler(){fHiddenNodes = new Hashtable(); fSchemaParser = new SchemaDOMParser(new SchemaParsingConfig()); }
+     * }。
+     * 
+     *  //应该可以使用相同的XSDHandler来解析多个模式文档;这将允许一个被构造的公共XSDHandler(XSGrammarBucket gBucket){this(); fGrammarBucket = gBucket;。
+     * 
+     * //注意：不要在内部使用SchemaConfiguration //因为// XMLSchemaValidator会实例化XSDHandler fSchemaGrammarDescription = n
+     * ew XSDDescription(); } // end constructor。
+     * 
+     *  / **此方法启动模式的解析它可能会从校验器调用,它将使得生成的语法可用;它返回对此对象的引用,以防在调用此方法之前必须调用reset(XMLComponentManager)
+     * 
+     * 
      * @param is
      * @param desc
      * @param locationPairs
@@ -712,6 +786,9 @@ public class XSDHandler {
     /**
      * Pull the grammar out of the bucket simply using
      * its TNS as a key
+     * <p>
+     *  只需使用其TNS作为键,将语法拉出桶
+     * 
      */
     SchemaGrammar getGrammar(String tns) {
         return fGrammarBucket.getGrammar(tns);
@@ -721,6 +798,9 @@ public class XSDHandler {
      * First try to find a grammar in the bucket, if failed, consult the
      * grammar pool. If a grammar is found in the pool, then add it (and all
      * imported ones) into the bucket.
+     * <p>
+     *  首先尝试在桶中找到语法,如果失败,请查阅语法池如果在池中找到语法,则将其(和所有导入的)添加到桶中
+     * 
      */
     protected SchemaGrammar findGrammar(XSDDescription desc, boolean ignoreConflict) {
         SchemaGrammar sg = fGrammarBucket.getGrammar(desc.getTargetNamespace());
@@ -1163,6 +1243,11 @@ public class XSDHandler {
      * grammar, check to see if the grammar bucket has a newer version.
      * If a new instance is found, we update the import list with the
      * newer version.
+     * <p>
+     *  命名空间增长
+     * 
+     * 通过给定语法的导入列表,并为每个导入的语法,检查语法桶是否有更新的版本如果找到新的实例,我们更新导入列表与较新的版本
+     * 
      */
     private void updateImportListFor(SchemaGrammar grammar) {
         Vector importedGrammars = grammar.getImportedGrammars();
@@ -1185,6 +1270,11 @@ public class XSDHandler {
      * that has the same namespace as newGrammar, but a different instance,
      * then update the import list and replace the old grammar instance with
      * the new one
+     * <p>
+     *  命名空间增长
+     * 
+     *  去处理语法桶,对于桶中的每个语法检查导入列表如果导入列表中存在与newGrammar具有相同命名空间但是不同实例的语法,则更新导入列表,并将旧语法实例替换为新的那一个
+     * 
      */
     private void updateImportListWith(SchemaGrammar newGrammar) {
         SchemaGrammar[] schemaGrammars = fGrammarBucket.getGrammars();
@@ -2039,6 +2129,10 @@ public class XSDHandler {
     /**
      * resolveSchema method is responsible for resolving location of the schema (using XMLEntityResolver),
      * and if it was succefully resolved getting the schema Document.
+     * <p>
+     *  resolveSchema方法负责解析模式的位置(使用XMLEntityResolver),如果成功解析获得模式文档
+     * 
+     * 
      * @param desc
      * @param mustResolve
      * @param referElement
@@ -2122,6 +2216,10 @@ public class XSDHandler {
 
     /**
      * getSchemaDocument method uses XMLInputSource to parse a schema document.
+     * <p>
+     *  getSchemaDocument方法使用XMLInputSource来解析模式文档
+     * 
+     * 
      * @param schemaNamespace
      * @param schemaSource
      * @param mustResolve
@@ -2189,6 +2287,10 @@ public class XSDHandler {
 
     /**
      * getSchemaDocument method uses SAXInputSource to parse a schema document.
+     * <p>
+     * getSchemaDocument方法使用SAXInputSource来解析模式文档
+     * 
+     * 
      * @param schemaNamespace
      * @param schemaSource
      * @param mustResolve
@@ -2309,6 +2411,10 @@ public class XSDHandler {
 
     /**
      * getSchemaDocument method uses DOMInputSource to parse a schema document.
+     * <p>
+     *  getSchemaDocument方法使用DOMInputSource来解析模式文档
+     * 
+     * 
      * @param schemaNamespace
      * @param schemaSource
      * @param mustResolve
@@ -2374,6 +2480,10 @@ public class XSDHandler {
 
     /**
      * getSchemaDocument method uses StAXInputSource to parse a schema document.
+     * <p>
+     *  getSchemaDocument方法使用StAXInputSource来解析模式文档
+     * 
+     * 
      * @param schemaNamespace
      * @param schemaSource
      * @param mustResolve
@@ -2453,6 +2563,9 @@ public class XSDHandler {
     /**
      * Code shared between the various getSchemaDocument() methods which
      * stores mapping information for the document.
+     * <p>
+     *  在存储文档的映射信息的各种getSchemaDocument()方法之间共享的代码
+     * 
      */
     private Element getSchemaDocument0(XSDKey key, String schemaId, Element schemaElement) {
         // now we need to store the mapping information from system id
@@ -2469,6 +2582,9 @@ public class XSDHandler {
 
     /**
      * Error handling code shared between the various getSchemaDocument() methods.
+     * <p>
+     *  错误处理在各种getSchemaDocument()方法之间共享的代码
+     * 
      */
     private Element getSchemaDocument1(boolean mustResolve, boolean hasInput,
             XMLInputSource schemaSource, Element referElement, IOException ioe) {
@@ -2498,6 +2614,10 @@ public class XSDHandler {
 
     /**
      * getSchemaDocument method uses XMLInputSource to parse a schema document.
+     * <p>
+     *  getSchemaDocument方法使用XMLInputSource来解析模式文档
+     * 
+     * 
      * @param schemaNamespace
      * @param schemaSource
      * @param mustResolve
@@ -3026,6 +3146,10 @@ public class XSDHandler {
         /*final XSComplexTypeDefinition enclosingType = decl.getEnclosingCTDefinition();
         if (enclosingType != null) {
             addRelatedType(enclosingType, componentList, namespace, dependencies);
+        /* <p>
+        /*  if(enclosingType！= null){addRelatedType(enclosingType,componentList,namespace,dependencies);
+        /* 
+        /* 
         }*/
     }
 
@@ -3035,6 +3159,10 @@ public class XSDHandler {
         /*final XSTypeDefinition enclosingType = decl.getEnclosingCTDefinition();
         if (enclosingType != null) {
             addRelatedType(enclosingType, componentList, namespace, dependencies);
+        /* <p>
+        /*  if(enclosingType！= null){addRelatedType(enclosingType,componentList,namespace,dependencies);
+        /* 
+        /* 
         }*/
 
         final XSElementDeclaration subElemDecl = decl.getSubstitutionGroupAffiliation();
@@ -3605,6 +3733,9 @@ public class XSDHandler {
     /**
      * Traverse all the deferred local elements. This method should be called
      * by traverseSchemas after we've done with all the global declarations.
+     * <p>
+     * 遍历所有的延迟局部元素在我们完成所有的全局声明之后,这个方法应该被traverseSchemas调用
+     * 
      */
     void traverseLocalElements() {
         fElementTraverser.fDeferTraversingLocalElements = false;
@@ -3697,6 +3828,10 @@ public class XSDHandler {
      * Note that redefines must be handled carefully:  if there
      * is a collision, it may be because we're redefining something we know about
      * or because we've found the thing we're redefining.
+     * <p>
+     *  如果这个组件被重新定义它居住在正确的模式它然后重命名组件正确如果它检测到冲突 - 重复的定义 - 然后它抱怨注意,重新定义必须仔细处理：如果有冲突,它可能因为我们正在重新定义我们所知道的东西,或者因为
+     * 我们发现了我们正在重新定义的东西。
+     * 
      */
     void checkForDuplicateNames(String qName, int declType,
             Map<String,Element> registry, Map<String,XSDocumentInfo> registry_sub, Element currComp,
@@ -4062,6 +4197,12 @@ public class XSDHandler {
           // obviously the requesting doc didn't include, redefine or
            // import the one containing decl...
             return null;
+        /* <p>
+        /* 逻辑在这里是不必要的,模式工作组最近决定允许从一个文档的模式组件引用任何其他组件,只要有一些include / import /重新定义路径之间如果他们反转这个决定代码在这里虽然 -  neilg //
+        /* 现在看看fDependencyMap,看看这是否可达if((Vector)fDependencyMapget(currSchema))contains(declDocInfo)){return declDocInfo; }
+        /*  //显然请求文档没有包含,重新定义或者//导入一个包含decl的消息return return null;。
+        /* 
+        /* 
             **********/
     } // findXSDocumentForDecl(XSDocumentInfo, Element):  XSDocumentInfo
 
@@ -4091,6 +4232,9 @@ public class XSDHandler {
      * Extract location information from an Element node, and create a
      * new SimpleLocator object from such information. Returning null means
      * no information can be retrieved from the element.
+     * <p>
+     *  从Element节点提取位置信息,并从此类信息创建一个新的SimpleLocator对象Returning null表示不能从元素中检索任何信息
+     * 
      */
     public SimpleLocator element2Locator(Element e) {
         if (!( e instanceof ElementImpl))
@@ -4104,6 +4248,9 @@ public class XSDHandler {
      * Extract location information from an Element node, store such
      * information in the passed-in SimpleLocator object, then return
      * true. Returning false means can't extract or store such information.
+     * <p>
+     * 从Element节点提取位置信息,将这些信息存储在传递的SimpleLocator对象中,然后返回true返回false意味着无法提取或存储此类信息
+     * 
      */
     public boolean element2Locator(Element e, SimpleLocator l) {
         if (l == null)
@@ -4173,6 +4320,9 @@ public class XSDHandler {
      * grammars from the grammar bucket. It will also return an object for the
      * schema for schemas which will contain at least the relevant declarations
      * for annotations.
+     * <p>
+     *  用于验证注释的语法池这将返回语法桶中的所有语法它还将为模式返回一个对象,该模式至少包含注释的相关声明
+     * 
      */
     private static class XSAnnotationGrammarPool implements XMLGrammarPool {
 
@@ -4191,6 +4341,9 @@ public class XSDHandler {
                          * If the grammar bucket already contains the schema for schemas
                          * then we already have the definitions for the parts relevant
                          * to annotations.
+                         * <p>
+                         *  如果语法桶已经包含模式的模式,那么我们已经具有与注释相关的部分的定义
+                         * 
                          */
                         for (int i = 0; i < schemaGrammars.length; ++i) {
                             if (SchemaSymbols.URI_SCHEMAFORSCHEMA.equals(schemaGrammars[i].getTargetNamespace())) {
@@ -4277,6 +4430,16 @@ public class XSDHandler {
      * 2 input streams are provided, but no system ID is provided. We can't tell
      * whether the 2 streams have the same content, so we treat them as not
      * duplicate.
+     * <p>
+     *  用于标识对模式文档的引用,如果相同的文档用相同的键引用两次,则我们只需要解析一次
+     * 
+     * 当比较2个XSDKey时,可以使用下表来确定它们是否相等：inc red imp pre ins inc N / L? N / L N / L N / L红色? N /L≤ ? ? imp N / L 
+     * N / P N / P N / P pre N / N / P N / P N / P ins N / N / P N / P N / P。
+     * 
+     * 其中：N / L：当它们具有相同的命名空间和位置时重复? ：不清楚从规范REVISIT：简化的过程,也考虑到它是非常罕见的,我们将它们视为不重复N / P：不可能imp / pre / ins引用的命名
+     * 空间,当我们第一次遇到一个模式文档一个命名空间,我们创建一个语法并将它存储在语法桶中,当我们看到另一个引用相同的命名空间,我们首先检查是否一个语法具有相同的命名空间已经在桶中,这是真的在这种情况下,所以
+     * 我们赢了创建另一个XSDKey。
+     * 
      */
     private static class XSDKey {
         String systemId;
@@ -4308,6 +4471,12 @@ public class XSDHandler {
                     key.referType == XSDDescription.CONTEXT_REDEFINE) {
                 if (referType != key.referType)
                     return false;
+            /* <p>
+            /* 从表中得出的结论：两个XSDKey的重复只有当所有以下都是真的：1他们都是"重新定义",或既不是"重新定义"; 2它们有相同的命名空间; 3它们具有相同的非空位置
+            /* 
+            /*  约3：如果两个都没有非空位置,那么提供2个输入流但没有提供系统ID的情况我们不能确定2个流是否具有相同的内容,因此我们将它们视为不重复
+            /* 
+            /* 
             }**/
 
             // condition 2: same namespace
@@ -4333,6 +4502,10 @@ public class XSDHandler {
     }
 
     /**
+    /* <p>
+    /*  keyreferType == XSDDescriptionCONTEXT_REDEFINE){if(referType！= keyreferType)return false;
+    /* 
+    /* 
      * @param state
      */
     public void setGenerateSyntheticAnnotations(boolean state) {

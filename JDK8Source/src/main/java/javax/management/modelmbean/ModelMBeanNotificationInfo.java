@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -23,6 +24,8 @@
  *
  */
 /*
+/* <p>
+/* 
  * @author    IBM Corp.
  *
  * Copyright IBM Corp. 1999-2000.  All rights reserved.
@@ -89,6 +92,28 @@ import javax.management.RuntimeOperationsException;
  *
  * <p>The <b>serialVersionUID</b> of this class is <code>-7445681389570207141L</code>.
  *
+ * <p>
+ *  <p> ModelMBeanNotificationInfo对象描述由ModelMBean发出的通知它是MBeanNotificationInfo的子类,添加了相关的描述符和描述符接口的实现</p>。
+ * 
+ * <P id="descriptor">
+ *  描述符中的字段被定义,但不限于,以下注意,当该表中的类型是Number时,也可以使用作为Long的十进制表示的String </P>
+ * 
+ * <table border="1" cellpadding="5" summary="ModelMBeanNotificationInfo Fields">
+ * <tr> <th>名称</th> <th>类型</th> <th>含义</th> </tr> <tr> <td>名称</td> <td>字符串</td> <td>通知名称</td> </tr> <tr>
+ *  <td> descriptorType </td> <td>字符串</td> <td>必须是"notification"</td> </tr> <tr > <td> severity </td> <td>
+ *  Number </td> <td> 0-6其中0：未知; 1：不可恢复; 2：关键,失败; 3：重大,严重; 4：次要,边际,误差; 5：警告; 6：正常,清除,信息</td> </tr> <tr> 
+ * <td> messageID </td> <td>字符串</td> <td>消息文本的唯一键(允许翻译,分析) / td> </tr> <tr> <td> messageText </td> <td>字
+ * 符串</td> <td>通知文本</td> </tr> <tr> <td> > <td>字符串</td> <td> T日志消息,F  - 不记录消息</td> </tr> <tr> <td> logfi
+ * le </td> <td> String </td> <td>适用于操作系统的完全限定文件名</td> </td> </td> </td> </td> </td> </td> <tr> <td> pre
+ * sentationString </td> <td> String </td> <td> XML格式的字符串以允许显示数据</td> </tr>。
+ * </table>
+ * 
+ * <p>默认描述符包含名称,descriptorType,displayName和severity(= 6)字段name和displayName字段的默认值是Notification类的名称(由<code>
+ *  name </code>参数指定)的ModelMBeanNotificationInfo构造函数)</p>。
+ * 
+ *  <p>此类的<b> serialVersionUID </b>是<code> -7445681389570207141L </code>
+ * 
+ * 
  * @since 1.5
  */
 
@@ -125,6 +150,8 @@ public class ModelMBeanNotificationInfo
     // Actual serial version and serial form
     private static final long serialVersionUID;
     /**
+    /* <p>
+    /* 
      * @serialField notificationDescriptor Descriptor The descriptor
      *   containing the appropriate metadata for this instance
      */
@@ -150,6 +177,8 @@ public class ModelMBeanNotificationInfo
     // END Serialization compatibility stuff
 
     /**
+    /* <p>
+    /* 
      * @serial The descriptor containing the appropriate metadata for
      *         this instance
      */
@@ -161,6 +190,10 @@ public class ModelMBeanNotificationInfo
      * Constructs a ModelMBeanNotificationInfo object with a default
      * descriptor.
      *
+     * <p>
+     *  构造具有默认描述符的ModelMBeanNotificationInfo对象
+     * 
+     * 
      * @param notifTypes The array of strings (in dot notation) containing
      *     the notification types that may be emitted.
      * @param name The name of the Notification class.
@@ -176,6 +209,10 @@ public class ModelMBeanNotificationInfo
     /**
      * Constructs a ModelMBeanNotificationInfo object.
      *
+     * <p>
+     *  构造ModelMBeanNotificationInfo对象
+     * 
+     * 
      * @param notifTypes The array of strings (in dot notation)
      *        containing the notification types that may be emitted.
      * @param name The name of the Notification class.
@@ -211,6 +248,10 @@ public class ModelMBeanNotificationInfo
      * Constructs a new ModelMBeanNotificationInfo object from this
      * ModelMBeanNotfication Object.
      *
+     * <p>
+     *  从此ModelMBeanNotfication对象构造一个新的ModelMBeanNotificationInfo对象
+     * 
+     * 
      * @param inInfo the ModelMBeanNotificationInfo to be duplicated
      *
      **/
@@ -223,6 +264,10 @@ public class ModelMBeanNotificationInfo
     /**
      * Creates and returns a new ModelMBeanNotificationInfo which is a
      * duplicate of this ModelMBeanNotificationInfo.
+     * <p>
+     *  创建并返回一个新的ModelMBeanNotificationInfo,它是此ModelMBeanNotificationInfo的副本
+     * 
+     * 
      **/
     public Object clone () {
         if (MODELMBEAN_LOGGER.isLoggable(Level.FINER)) {
@@ -237,6 +282,10 @@ public class ModelMBeanNotificationInfo
      * Returns a copy of the associated Descriptor for the
      * ModelMBeanNotificationInfo.
      *
+     * <p>
+     *  返回ModelMBeanNotificationInfo的关联描述符的副本
+     * 
+     * 
      * @return Descriptor associated with the
      * ModelMBeanNotificationInfo object.
      *
@@ -272,6 +321,11 @@ public class ModelMBeanNotificationInfo
      * RuntimeOperationsException wrapping an
      * IllegalArgumentException is thrown.
      *
+     * <p>
+     * 设置ModelMBeanNotificationInfo的相关描述符(完全替换)如果新描述符为空,则相关描述符将恢复为默认描述符描述符在分配之前已验证如果新描述符无效,则会抛出包含IllegalArgu
+     * mentException的RuntimeOperationsException异常。
+     * 
+     * 
      * @param inDescriptor replaces the Descriptor associated with the
      * ModelMBeanNotification interface
      *
@@ -293,6 +347,10 @@ public class ModelMBeanNotificationInfo
      * Returns a human readable string containing
      * ModelMBeanNotificationInfo.
      *
+     * <p>
+     *  返回一个包含ModelMBeanNotificationInfo的可读字符串
+     * 
+     * 
      * @return a string describing this object.
      **/
     public String toString() {
@@ -333,6 +391,13 @@ public class ModelMBeanNotificationInfo
      * name=this.getName(),severity="6"
      *
      *
+     * <p>
+     *  克隆传递的描述符,设置默认值,并检查有效性如果描述符无效(例如有错误的"名称"),这表示编程错误和一个RuntimeOperationsException将抛出
+     * 
+     * 如果尚未设置以下字段,则将默认为：descriptorType ="notification",displayName = thisgetName(),name = thisgetName(),seve
+     * rity ="6"。
+     * 
+     * 
      * @param in Descriptor to be checked, or null which is equivalent to an
      * empty Descriptor.
      * @exception RuntimeOperationsException if Descriptor is invalid
@@ -389,6 +454,10 @@ public class ModelMBeanNotificationInfo
     /**
      * Deserializes a {@link ModelMBeanNotificationInfo} from an
      * {@link ObjectInputStream}.
+     * <p>
+     *  从{@link ObjectInputStream}反序列化{@link ModelMBeanNotificationInfo}
+     * 
+     * 
      **/
     private void readObject(ObjectInputStream in)
         throws IOException, ClassNotFoundException {
@@ -400,6 +469,9 @@ public class ModelMBeanNotificationInfo
     /**
      * Serializes a {@link ModelMBeanNotificationInfo} to an
      * {@link ObjectOutputStream}.
+     * <p>
+     *  将{@link ModelMBeanNotificationInfo}序列化为{@link ObjectOutputStream}
+     * 
      **/
     private void writeObject(ObjectOutputStream out)
         throws IOException {

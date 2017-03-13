@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableInterceptor;
 
 
@@ -221,6 +222,70 @@ package org.omg.PortableInterceptor;
    *       14.</li>
    * </ol>
    *
+   * <p>
+   *  请求信息,客户端请求拦截器可访问
+   * <p>
+   *  <code> ClientRequestInfo </code>上的一些属性和操作在所有拦截点都无效下表显示了每个属性或操作的有效性如果它无效,则尝试访问它将导致一个<code> BAD_INV_OR
+   * DER < / code>以标准次要代码14抛出。
+   * <p>
+   * 
+   * <table border=1 summary="Shows the validity of each attribute or operation">
+   * <thead>
+   * <tr>
+   * <th> </th> <th id ="send_req"> send_request </th> <th id ="send_poll"> send_poll </th> <th id ="rec_reply">
+   *  receive_reply </th> <th id ="rec_ex"> receive_exception </th> <th id ="rec_oth"> receive_other </th>
+   * 。
+   * </tr>
+   * </thead>
+   * <tbody>
+   * 
+   * <tr>
+   *  <td id ="ri"colspan = 6> <i>从RequestInfo继承：</i> </td>
+   * </tr>
+   * 
+   *  <tr> <th id ="req_id"> <p align ="left"> request_id </p> </th> <td headers ="ri req_id send_req"> ye
+   * s </td> <td headers ="ri req_id send"> yes </td> <td header ="ri req_id rec_oth"> yes </td> <td header ="ri req_id rec_reply">
+   *  yes </td> <td headers ="ri req_id rec_ex" / td> </tr>。
+   * 
+   *  <tr> <th id ="op"> <p align ="left">操作</p> </th> <td headers ="ri op send_req"> yes </td> <td headers ="ri op send_poll">
+   *  yes </td> <td headers ="ri op rec_oth"> yes </td> <td header ="ri op rec_ex"> yes </td> / td> </tr>。
+   * 
+   * <tr> <th id ="arg"> <p align ="left">参数</p> </th> <td headers ="ri arg send_req"> yes <sub> 1 </sub> 
+   * </td > <td header ="ri arg send_toll"> no </td> <td header ="ri arg rec_reply"> yes </td> <td headers = "ri arg rec_oth">
+   *  no </td> </tr>。
+   * 
+   *  <tr> <th id ="exc"> <p align ="left">例外</p> </th> <td headers ="ri exc send_req"> yes </td> <td headers ="ri exc "</td>
+   * "</td> <td header ="ri exc rec_oth"> yes </td> <td header = / td> </tr>。
+   * 
+   *  <tr> <th id ="con"> <p align ="left">上下文</p> </th> <td headers ="ri con send_req"> yes </td> <td headers ="ri con </td>
+   *  <td header ="ri con rec_oth"> yes </td> </td> </td> </td> </td> / td> </tr>。
+   * 
+   * <tr> <th id ="op_con"> <p align ="left"> operation_context </p> </th> <td headers ="ri op_con send_req">
+   *  yes </td> <td headers ="ri op_con "</td> <td header ="ri op_con rec_oth"> yes </td> <td header ="ri op_con rec_ex">
+   *  yes </td> / td>。
+   * </tr>
+   * 
+   *  <tr> <th id ="result"> <p align ="left"> result </p> </th> <td headers ="ri result send_req"> no </td>
+   *  <td headers ="ri result </td> <td header ="ri result rec_ex"> no </td> <td header ="ri result rec_oth">
+   *  no </td> <td header ="ri result rec_reply" / td>。
+   * </tr>
+   * 
+   * <tr> <th id ="res_exp"> <p align ="left"> response_expected </p> </th> <td headers ="ri res_exp send_req">
+   *  yes </td> <td headers ="ri res_exp </td> <td header ="ri res_exp rec_ex"> yes </td> <td headers ="ri res_exp rec_oth">
+   *  yes </td> </td> / td> </tr>。
+   * 
+   *  <tr> <th id ="sync_sco"> <p align ="left"> sync_scope </p> </th> <td headers ="ri sync_sco send_req">
+   *  yes </td> <td headers ="ri sync_sco send_poll>> </td> <td header ="ri sync_sco rec_oth"> yes </td> <td header ="ri sync_sco rec_reply">
+   *  yes </td> <td headers ="ri sync_sco rec_ex" / td>。
+   * </tr>
+   * 
+   * <tr> <th id ="rep_stat"> <p align ="left"> reply_status </p> </th> <td headers ="ri rep_stat send_req">
+   *  no </td> <td headers ="ri rep_stat </td> <td header ="ri rep_stat rec_ex"> yes </td> <td headers ="ri rep_stat rec_oth">
+   *  yes </td> / td> </tr>。
+   * 
+   *  <tr> <th id ="for_ref"> <p align ="left"> forward_reference </p> </th> <td headers ="ri for_ref send_req">
+   *  no </td> <td headers ="ri for_ref send_poll"> no </td> <td headers ="ri for_ref rec_oth"> no </td> <td headers ="ri for_ref rec_ex">
+   * 
    * @see ClientRequestInterceptor
    */
 public interface ClientRequestInfo extends ClientRequestInfoOperations, org.omg.PortableInterceptor.RequestInfo, org.omg.CORBA.portable.IDLEntity 

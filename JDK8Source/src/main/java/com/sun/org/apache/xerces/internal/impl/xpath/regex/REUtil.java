@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2002,2004 Apache软件基金会
+ * 
+ *  根据Apache许可证第20版("许可证")授权;您不得使用此文件,除非符合许可证您可以在获取许可证的副本
+ * 
+ *  http：// wwwapacheorg / licenses / LICENSE-20
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件将按"原样"基础分发,无任何明示或暗示的保证或条件。请参阅许可证管理权限和限制许可证
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.xpath.regex;
@@ -25,6 +35,9 @@ import java.text.CharacterIterator;
 /**
  * @xerces.internal
  *
+ * <p>
+ *  @xercesinternal
+ * 
  */
 public final class REUtil {
     private REUtil() {
@@ -178,6 +191,10 @@ public final class REUtil {
     /**
      * Sample entry.
      * <div>Usage: <KBD>com.sun.org.apache.xerces.internal.utils.regex.REUtil &lt;regex&gt; &lt;string&gt;</KBD></div>
+     * <p>
+     * 示例条目<div>用法：<KBD> comsunorgapachexercesinternalutilsregexREUtil&lt; regex&gt; &lt; string&gt; </KBD> 
+     * </div>。
+     * 
      */
     public static void main(String[] argv) {
         String pattern = null;
@@ -251,6 +268,10 @@ public final class REUtil {
      * Creates a RegularExpression instance.
      * This method caches created instances.
      *
+     * <p>
+     *  创建RegularExpression实例此方法缓存创建的实例
+     * 
+     * 
      * @see RegularExpression#RegularExpression(java.lang.String, java.lang.String)
      */
     public static RegularExpression createRegex(String pattern, String options)
@@ -286,6 +307,8 @@ public final class REUtil {
 
     /**
      *
+     * <p>
+     * 
      * @see RegularExpression#matches(java.lang.String)
      */
     public static boolean matches(String regex, String target) throws ParseException {
@@ -294,6 +317,8 @@ public final class REUtil {
 
     /**
      *
+     * <p>
+     * 
      * @see RegularExpression#matches(java.lang.String)
      */
     public static boolean matches(String regex, String options, String target) throws ParseException {
@@ -304,6 +329,7 @@ public final class REUtil {
 
     /**
      *
+     * <p>
      */
     public static String quoteMeta(String literal) {
         int len = literal.length();

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2008, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -414,6 +415,169 @@ mh.invokeExact(System.out, "Hello, world.");
  * Attempts to create method handles with impossible method types lead to an {@link IllegalArgumentException}.
  * In particular, a method handle&rsquo;s type must not have an arity of the exact maximum 255.
  *
+ * <p>
+ *  方法句柄是对底层方法,构造函数,字段或类似的低级操作的类型化,直接可执行的引用,具有参数或返回值的可选变换这些变换是非常通用的,包括{@linkplain #asType转换},{@linkplain #bindTo insertion}
+ * ,{@linkplain javalanginvokeMethodHandles#dropArguments deletion}和{@linkplain javalanginvokeMethodHandles#filterArguments substitution}
+ * 。
+ * 
+ * <h1>方法句柄内容</h1>方法句柄根据它们的参数和返回类型动态和强类型它们不通过其底层方法的名称或定义类来区分方法句柄必须使用符号类型描述符它匹配方法句柄自己的{@linkplain #type类型描述符}
+ * 。
+ * <p>
+ *  每个方法句柄通过{@link #type type}访问器报告它的类型描述符这个类型描述符是一个{@link javalanginvokeMethodType MethodType}对象,它的结构是一
+ * 系列类,其中之一是方法的返回类型(或{@code voidclass} if none)。
+ * <p>
+ *  方法句柄的类型控制它接受的调用类型,以及适用于它的转换类型
+ * <p>
+ * 方法句柄包含一对名为{@link #invokeExact invokeExact}和{@link #invoke invoke}的特殊调用器方法。
+ * 两个调用器方法提供对方法句柄的底层方法,构造函数,字段或其他操作的直接访问,参数和返回值的转换两个调用者都接受与方法句柄自己类型完全匹配的调用。plain,不精确的调用者还接受一系列其他调用类型。
+ * <p>
+ * 方法句柄是不可变的,并且没有可见状态当​​然,它们可以绑定到底层方法或者显示关于Java内存模型的状态的数据,任何方法句柄将表现得好像所有的(内部)字段都是最终变量。
+ * 意味着对应用程序可见的任何方法句柄将始终完全形成即使方法句柄通过数据竞争中的共享变量发布也是如此。
+ * <p>
+ * 方法句柄不能由用户子类实现可能(或可能不)创建{@code MethodHandle}的内部子类,它可能通过{@link javalangObject#getClass ObjectgetClass}操
+ * 作可见。
+ * 程序员不应从方法句柄它的特定类,作为方法句柄类层次结构(如果有的话)可能随时间或跨不同供应商的实现而改变。
+ * 
+ * <h1>方法句柄编译</h1> Java方法调用表达式命名{@code invokeExact}或{@code invoke}可以从Java源代码调用方法句柄从源代码的角度来看,这些方法可以接受任何参数
+ * 和它们的结果可以转换为任何返回类型。
+ * 正式地,这是通过提供调用者方法{@code Object}返回类型和变量arity {@code Object}参数来实现的,但它们具有称为<em>签名多态性的额外质量</em >它将这种调用自由直接连
+ * 接到JVM执行堆栈。
+ * <p>
+ * 与虚拟方法一样,源代码级调用{@code invokeExact}和{@code invoke}编译为{@code invokevirtual}指令更奇怪的是,编译器必须记录实际的参数类型,并且不能执行
+ * 方法调用对参数的转换,而是必须根据自己的未转换类型在堆栈上推送它们方法句柄对象本身在参数之前推送到栈上编译器然后使用符号类型描述符调用方法句柄,描述符的参数和返回类型。
+ * <p>
+ * 要发出一个完整的符号类型描述符,编译器还必须确定返回类型这是基于对方法调用表达式的转换(如果有),或者如果调用是一个表达式,则为{@code Object},否则{代码void}如果调用是语句转换可以是
+ * 原始类型(但不是{@code void})。
+ * <p>
+ *  作为一个角的情况,一个未广播的{@code null}参数被赋予{@code javalangVoid}的符号类型描述符。
+ * 类型为{@code Void}的歧义是无害的,因为没有类型{@code Void}除了空引用。
+ * 
+ * <h1>方法句柄调用</h1>第一次执行{@code invokevirtual}指令时,它通过符号解析指令中的名称并验证方法调用是静态合法而被链接。
+ * 这对于{ @code invokeExact}和{@code invoke}在这种情况下,检查编译器发出的符号类型描述符是否包含正确的语法和名称,因此,调用方法句柄的{@code invokevirtual}
+ * 指令将始终链接,只要符号类型描述符在语法上形成良好并且类型存在。
+ * <h1>方法句柄调用</h1>第一次执行{@code invokevirtual}指令时,它通过符号解析指令中的名称并验证方法调用是静态合法而被链接。
+ * <p>
+ * 当链接之后执行{@code invokevirtual}时,首先由JVM检查接收方法句柄的类型,以确保它匹配符号类型描述符如果类型匹配失败,则意味着调用者调用的方法不是呈现在调用的单个方法句柄上
+ * <p>
+ *  在{@code invokeExact}的情况下,调用的类型描述符(在解析符号类型名称之后)必须与接收方法句柄的方法类型完全匹配。
+ * 在纯粹,不完全{@code invoke}的情况下,解析类型描述符必须是接收者的{@link #asType asType}方法的有效参数因此,plain {@code invoke}比{@code invokeExact}
+ * 。
+ *  在{@code invokeExact}的情况下,调用的类型描述符(在解析符号类型名称之后)必须与接收方法句柄的方法类型完全匹配。
+ * <p>
+ * 在类型匹配之后,直接调用{@code invokeExact}并立即调用方法句柄的底层方法(或其他行为,视情况而定)
+ * <p>
+ *  如果调用者指定的符号类型描述符与方法句柄自己的类型完全匹配,那么对{@code invoke}的调用的工作方式与调用{@code invokeExact}的方法相同。
+ * 如果存在类型不匹配,{@code invoke}尝试调整接收方法句柄的类型,好像通过调用{@link #asType asType},以获得一个精确可调用的方法句柄{@code M2}。
+ * 这允许在调用者和被调用者之间进行更强大的方法类型协商。
+ * <p>
+ *  (<em>注意：</em>调整后的方法句柄{@code M2}不能直接观察到,因此实现不需要实现它)
+ * 
+ * <h1>调用检查</h1>在典型的程序中,方法句柄类型匹配通常会成功,但如果匹配失败,JVM将直接(在{@code invokeExact}的情况下)抛出一个{@link WrongMethodTypeException}
+ * 或者通过失败的{@code asType}调用(在{@code invoke}的情况下)。
+ * <p>
+ *  因此,在静态类型程序中可能显示为链接错误的方法类型不匹配可能在使用方法句柄的程序中显示为动态{@code WrongMethodTypeException}
+ * <p>
+ * 因为方法类型包含"活"{@code Class}对象,所以方法类型匹配考虑了类型名和类加载器。
+ * 因此,即使在一个类加载器{@code L1}中创建了一个方法句柄{@code M}用于另一个{@code L2},方法句柄调用是类型安全的,因为调用者的符号类型描述符(如在{@code L2}中解析的)
+ * 与原始的callee方法的符号类型描述符匹配,如{@code L1}当{@code M}创建并分配了类型时,{@code L1}中的分辨率发生,而{@code invokevirtual}指令被链接时,
+ * {@code L2}中的分辨率发生。
+ * 因为方法类型包含"活"{@code Class}对象,所以方法类型匹配考虑了类型名和类加载器。
+ * <p>
+ * 除了检查类型描述符之外,方法句柄调用其底层方法的能力是不受限的如果一个方法句柄由一个可访问该方法的类在一个非公开的方法上形成,结果句柄可以在任何地方使用由接收到它的引用的任何调用者
+ * <p>
+ *  与Core Reflection API(每次调用反射方法时都会检查访问权限)不同,在创建方法句柄时执行方法句柄访问检查<a href=\"MethodHandlesLookuphtml#access\">
+ *  </a>在{ @code ldc}(见下文),访问检查作为链接常量方法句柄下的常量池条目的一部分来执行。
+ * <p>
+ * 因此,非公共方法或非公共类中的方法的句柄通常应该保密。它们不应该被传递给不可信代码,除非它们从不可信代码的使用是无害的
+ * 
+ *  <h1>方法句柄创建</h1> Java代码可以创建一个方法句柄,该句柄可以直接访问该代码可访问的任何方法,构造函数或字段。
+ * 这是通过一个反射的,基于能力的API来完成的,它称为{@link javalanginvokeMethodHandlesLookup MethodHandlesLookup }例如,一个静态方法句柄可以
+ * 从{@link javalanginvokeMethodHandlesLookup#findStatic LookupfindStatic}获得。
+ *  <h1>方法句柄创建</h1> Java代码可以创建一个方法句柄,该句柄可以直接访问该代码可访问的任何方法,构造函数或字段。
+ * 还有来自Core Reflection API对象的转换方法,例如{@link javalanginvokeMethodHandlesLookup#unreflect Lookupunreflect}。
+ *  <h1>方法句柄创建</h1> Java代码可以创建一个方法句柄,该句柄可以直接访问该代码可访问的任何方法,构造函数或字段。
+ * <p>
+ * 像类和字符串一样,对应于可访问字段,方法和构造器的方法句柄也可以直接在类文件的常量池中表示为由{@code ldc}字节码加载的常量。
+ * 一种新类型的常量池条目{@代码CONSTANT_MethodHandle}直接指向相关的{@code CONSTANT_Methodref},{@code CONSTANT_InterfaceMethodref}
+ * 或{@code CONSTANT_Fieldref}常量池条目(有关方法句柄常量的完整详细信息,请参阅Java虚拟机规范第448和5435节)。
+ * 像类和字符串一样,对应于可访问字段,方法和构造器的方法句柄也可以直接在类文件的常量池中表示为由{@code ldc}字节码加载的常量。
+ * <p>
+ * 由具有变量arity修饰符位({@code 0x0080})的方法或构造函数的查找或常量加载产生的方法句柄具有相应的变量arity,就好像它们是借助{@link #asVarargsCollector asVarargsCollector}
+ * 。
+ * <p>
+ *  方法引用可以指静态或非静态方法在非静态情况下,方法句柄类型包括显式接收器参数,在任何其他参数前面添加。
+ * 在方法句柄类型中,初始接收器参数根据最初请求该方法的类(例如,如果通过{@code ldc}获得非静态方法句柄,则接收器的类型是在常量池条目中命名的类)。
+ * <p>
+ * 方法句柄常量经历相同的链接时间访问检查其对应的字节码指令,并且{@code ldc}指令将抛出相应的链接错误,如果字节码行为将抛出这样的错误
+ * <p>
+ *  作为其结果,对受保护成员的访问仅限于访问类或其子类中的一个的接收者,并且访问类必须又是受保护成员的定义类的子类(或包兄弟)引用指的是当前包外部的类的受保护的非静态方法或字段,接收器参数将缩小到访问类的
+ * 类型。
+ * <p>
+ * 当调用虚方法的方法句柄时,该方法总是在接收器中查找(即第一个参数)
+ * <p>
+ *  还可以创建特定虚拟方法实现的非虚拟方法句柄这些不基于接收器类型执行虚拟查找这样的方法句柄模拟{@code invokespecial}指令对同一方法的影响
+ * 
+ * <h1>使用示例</h1>以下是一些使用示例：<blockquote> <pre> {@ code Object x,y;字符串s; int i; MethodType mt; MethodHandle mh; MethodHandlesLookup lookup = MethodHandleslookup(); // mt is(char,char)String mt = MethodTypemethodType(Stringclass,charclass,charclass); mh = lookupfindVirtual(Stringclass,"replace",mt); s =(String)mhinvokeExact("daddy",'d','n'); // invokeExact(Ljava / lang / String; CC)Ljava / lang / String; assertEquals(s,"nanny"); //弱类型调用(使用MHsinvoke)s =(String)mhinvokeWithArguments("sappy",'p','v'); assertEquals(s,"savvy"); // mt is(Object [])List mt = MethodTypemethodType(javautilListclass,Object [] class); mh = lookupfindStatic(javautilArraysclass,"asList",mt); assert(mhisVarargsCollector()); x = mhinvoke("one","two"); // invoke(Ljava / lang / String; Ljava / lang / String;)Ljava / lang / Object; assertEquals(x,javautilArraysasList("one","two")); // mt is(Object,Object,Object)Object mt = MethodTypegenericMethodType(3); mh = mhasType(mt); x = mhinvokeExact((Object)1,(Object)2,(Object)3); // invokeExact(Ljava / lang / Object; Ljava / lang / Object; Ljava / lang / Object;)Ljava / lang / Object; assertEquals(x,javautilArraysasList(1,2,3)); // mt is()int mt = MethodTypemethodType(intclass); mh = lookupfindVirtual(javautilListclass,"size",mt); i =(int)mhinvokeExact(javautilArraysasList(1,2,3)); // invokeExact(Ljava / util / List;)我断言(i == 3); mt = MethodTypemethodType(voidclass,Stringclass); mh = lookupfindVirtual(javaioPrintStreamclass,"println",mt); mhinvokeExact(Systemout,"Hello,world"; // invokeExact(Ljava / io / PrintStream; Ljava / lang / String;)V}
+ *  </pre> </blockquote>上述每次调用{@code invokeExact}或plain {@code invoke}具有以下注释中指示的符号类型描述符的单调用虚拟指令在这些示例中,假定
+ * 帮助方法{@code assertEquals}是在其参数上调用{@link javautilObjects#equals(Object,Object)Objectsequals}并断言结果是真的。
+ * 
+ * <h1>异常</h1>方法{@code invokeExact}和{@code invoke}被声明为抛出{@link javalangThrowable Throwable},这就是说,没有对方法句柄
+ * 可以抛出的静态限制。
+ *  JVM不区分已检查和未检查的异常(当然除了它们的类之外),对于将检查异常归于方法句柄调用没有特别影响字节码形状但是在Java源代码中,执行方法句柄调用的方法必须要么显式地抛出{@code Throwable}
+ * ,要么必须在本地捕获所有throwables,只重写在上下文中合法的那些,以及包装非法的。
+ * 
+ * <h1> <a name=\"sigpoly\"> </a>签名多态性</h1> {@code invokeExact}和纯粹{@code invoke}的异常编译和链接行为由术语<em>签名多态性</em>
+ * 如Java语言规范中定义的,签名多态方法是可以与任何广泛的调用签名和返回类型。
+ * <p>
+ *  在源代码中,对签名多态方法的调用将被编译,而不管所请求的符号类型描述符如同通常,Java编译器针对命名的方法发出具有给定符号类型描述符的{@code invokevirtual}指令。
+ * 不寻常的部分是符号类型描述符从实际的参数和返回类型派生,而不是从方法声明。
+ * <p>
+ * 当JVM处理包含签名多态调用的字节码时,它将成功链接任何这样的调用,而不管其符号类型描述符(为了保持类型安全,JVM将通过适当的动态类型检查来保护这样的调用,如别处所述)
+ * <p>
+ *  包括编译器后端的字节码生成器需要为这些方法发出未转换的符号类型描述符确定符号链接的工具需要接受这种未转换的描述符,而不报告链接错误
+ * 
+ * <h1>方法句柄和Core Reflection API之间的互操作</h1>使用{@link javalanginvokeMethodHandlesLookup Lookup} API中的工厂方法,由
+ * Core Reflection API对象表示的任何类成员都可以转换为行为相同的方法句柄例如,反射{@link javalangreflectMethod Method}可以使用{@link javalanginvokeMethodHandlesLookup#unreflect Lookupunreflect}
+ * 转换为方法句柄。
+ * 生成的方法句柄通常提供对底层类成员的更直接和有效的访问。
+ * <p>
+ * 作为一种特殊情况,当Core Reflection API用于查看此类中的签名多态方法{@code invokeExact}或纯{@code invoke}时,它们显示为普通的非多态方法。
+ * 它们的反射外观, @link javalangClass#getDeclaredMethod ClassgetDeclaredMethod}不受其在此API中的特殊状态的影响例如,{@link javalangreflectMethod#getModifiers MethodgetModifiers}
+ * 将报告任何类似声明的方法所需的修饰符位,包括{@code native}和{@code varargs}位。
+ * 作为一种特殊情况,当Core Reflection API用于查看此类中的签名多态方法{@code invokeExact}或纯{@code invoke}时,它们显示为普通的非多态方法。
+ * <p>
+ * 与任何反射的方法一样,这些方法(当反射时)可以通过{@link javalangreflectMethod#invoke javalangreflectMethodinvoke}调用。
+ * 但是,这种反射调用不会导致方法句柄调用这样的调用,如果传递所需的参数(一个单一的,的类型{@code Object []}),将忽略该参数,并将抛出一个{@code UnsupportedOperationException}
+ * 。
+ * 与任何反射的方法一样,这些方法(当反射时)可以通过{@link javalangreflectMethod#invoke javalangreflectMethodinvoke}调用。
+ * <p>
+ *  由于{@code invokevirtual}指令可以在任何符号类型描述符下本地调用方法句柄,所以这个反射视图与通过字节码的这些方法的正常表示冲突。
+ * 因此,当{@code ClassgetDeclaredMethod}反射观察时,这两个本地方法可能仅被视为占位符。
+ * <p>
+ * 为了获得特定类型描述符的invoker方法,使用{@link javalanginvokeMethodHandles#exactInvoker MethodHandlesexactInvoker}或{@link javalanginvokeMethodHandles#invoker MethodHandlesinvoker}
+ *  {@link javalanginvokeMethodHandlesLookup#findVirtual LookupfindVirtual} API也能够返回方法句柄为任何指定的类型描述符调用{@code invokeExact}
+ * 或plain {@code invoke}。
+ * 
+ * <h1>方法句柄和Java泛型之间的互操作</h1>可以在使用Java泛型类型声明的方法,构造函数或字段上获取方法句柄与Core Reflection API一样,方法句柄的类型将被构造从源级类型的擦除
+ * 当调用方法句柄时,其参数的类型或返回值类型转换类型可以是通用类型或类型实例如果发生这种情况,编译器将在构造时替换那些类型的消除{@code invokevirtual}指令的符号类型描述符。
+ * <p>
+ *  方法句柄不是用Java参数化(通用)类型表示类似函数的类型,因为类函数类型和参数化Java类型之间有三个不匹配
+ * <ul>
+ * <li>方法类型涵盖所有可能的arity,从无参数到允许的参数的<a href=\"MethodHandlehtml#maxarity\">最大数目</a>通用变量不可变,因此不能表示此</li > <li>
+ * 方法类型可以指定基本类型的参数,而不是其范围的</li> <li>方法句柄(组合器)的高阶函数通常是泛泛的函数类型,包括多个arity使用Java类型参数</li>表示这种生成性是不可能的。
+ * </ul>
+ * 
+ *  <h1> <a name=\"maxarity\"> </a>属性限制</h1> JVM对任何类型的所有方法和构造函数施加255个堆栈参数的绝对限制此限制在某些情况下可能显得更具限制性：
+ * <ul>
+ * <li>一个{@code long}或{@code double}参数计数为两个参数插槽</li> </li> <li>非静态方法会为调用方法的对象消耗额外的参数< li>构造函数为正在构造的对象消耗一
+ * 个额外的参数<li>由于方法句柄{@code invoke}方法(或其他签名多态方法)是非虚拟的,因此它会消耗额外的参数方法句柄本身,以及任何非虚拟接收器对象。
+ * </ul>
+ * 这些限制意味着无法创建某些方法句柄,仅仅是因为JVM对堆栈参数的限制。
+ * 例如,如果静态JVM方法只接受255个参数,则无法为其创建方法句柄尝试使用不可能的方法类型创建方法句柄导致{@link IllegalArgumentException}特别是,方法句柄的类型不能有精确
+ * 的最大255。
+ * 这些限制意味着无法创建某些方法句柄,仅仅是因为JVM对堆栈参数的限制。
+ * 
+ * 
  * @see MethodType
  * @see MethodHandles
  * @author John Rose, JSR 292 EG
@@ -424,6 +588,9 @@ public abstract class MethodHandle {
     /**
      * Internal marker interface which distinguishes (to the Java compiler)
      * those methods which are <a href="MethodHandle.html#sigpoly">signature polymorphic</a>.
+     * <p>
+     *  内部标记界面,用于区分(对于Java编译器)<a href=\"MethodHandlehtml#sigpoly\">标记多态性</a>
+     * 
      */
     @java.lang.annotation.Target({java.lang.annotation.ElementType.METHOD})
     @java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy.RUNTIME)
@@ -432,12 +599,22 @@ public abstract class MethodHandle {
     private final MethodType type;
     /*private*/ final LambdaForm form;
     // form is not private so that invokers can easily fetch it
+    /* <p>
+    /*  //表单不是私有的,所以调用者可以轻松地获取它
+    /* 
+    /* 
     /*private*/ MethodHandle asTypeCache;
     // asTypeCache is not private so that invokers can easily fetch it
 
     /**
      * Reports the type of this method handle.
      * Every invocation of this method handle via {@code invokeExact} must exactly match this type.
+     * <p>
+     *  // asTypeCache不是私有的,所以调用者可以很容易地获取它
+     * 
+     * / **报告此方法句柄的类型每次通过{@code invokeExact}调用此方法句柄都必须与此类型完全匹配
+     * 
+     * 
      * @return the method handle type
      */
     public MethodType type() {
@@ -448,6 +625,9 @@ public abstract class MethodHandle {
      * Package-private constructor for the method handle implementation hierarchy.
      * Method handle inheritance will be contained completely within
      * the {@code java.lang.invoke} package.
+     * <p>
+     *  方法句柄实现层次结构的Package-private构造方法方法句柄继承将完全包含在{@code javalanginvoke}包中
+     * 
      */
     // @param type type (permanently assigned) of the new method handle
     /*non-public*/ MethodHandle(MethodType type, LambdaForm form) {
@@ -471,6 +651,19 @@ public abstract class MethodHandle {
      * {@link java.lang.reflect.Method#invoke java.lang.reflect.Method.invoke}, via JNI,
      * or indirectly via {@link java.lang.invoke.MethodHandles.Lookup#unreflect Lookup.unreflect},
      * it will throw an {@code UnsupportedOperationException}.
+     * <p>
+     *  typegetClass(); // explicit NPE formgetClass(); // explicit NPE thistype = type; thisform = form;
+     * 
+     *  formprepare(); // TO DO：尝试延迟此步骤直到调用之前}
+     * 
+     *  / **调用方法句柄,允许任何调用者类型描述符,但需要一个精确的类型匹配{@code invokeExact}的调用点处的符号类型描述符必须与此方法句柄的{@link #type type}完全匹配。
+     * 允许在参数或返回值。
+     * <p>
+     * 当通过Core Reflection API观察这个方法时,它将作为单个本地方法出现,取一个对象数组并返回一个对象如果这个本地方法通过{@link javalangreflectMethod#invoke javalangreflectMethodinvoke}
+     * 直接调用,通过JNI或间接通过{@link javalanginvokeMethodHandlesLookup#unreflect Lookupunreflect},它会抛出一个{@code UnsupportedOperationException}
+     * 。
+     * 
+     * 
      * @param args the signature-polymorphic parameter list, statically represented using varargs
      * @return the signature-polymorphic result, statically represented using {@code Object}
      * @throws WrongMethodTypeException if the target's type is not identical with the caller's symbolic type descriptor
@@ -507,6 +700,24 @@ public abstract class MethodHandle {
      * {@link java.lang.reflect.Method#invoke java.lang.reflect.Method.invoke}, via JNI,
      * or indirectly via {@link java.lang.invoke.MethodHandles.Lookup#unreflect Lookup.unreflect},
      * it will throw an {@code UnsupportedOperationException}.
+     * <p>
+     *  调用方法句柄,允许任何调用者类型描述符,并且可选地对参数和返回值执行转换
+     * <p>
+     *  如果调用站点的符号类型描述符与此方法句柄的{@link #type type}完全匹配,则调用将像{@link #invokeExact invokeExact}
+     * <p>
+     * 否则,调用将如同通过调用{@link #asType asType}来调整此方法句柄以将此方法句柄调整为所需类型,然后调用继续进行,如同通过{@link #invokeExact invokeExact}
+     * 调用方法句柄。
+     * <p>
+     *  不能保证{@code asType}调用实际上被调用如果JVM可以预测调用的结果,它可以直接对调用者的参数执行适配,并根据其自己的确切类型调用目标方法句柄
+     * <p>
+     * 在{@code invoke}的调用点处解析的类型描述符必须是接收者{@code asType}方法的有效参数。
+     * 特别地,调用者必须指定与被调用者的类型相同的参数,如果被调用者不是{@linkplain #asVarargsCollector variable arity collector}。
+     * <p>
+     *  当通过Core Reflection API观察这个方法时,它将作为单个本地方法出现,取一个对象数组并返回一个对象如果这个本地方法通过{@link javalangreflectMethod#invoke javalangreflectMethodinvoke}
+     * 直接调用,通过JNI或间接通过{@link javalanginvokeMethodHandlesLookup#unreflect Lookupunreflect},它会抛出一个{@code UnsupportedOperationException}
+     * 。
+     * 
+     * 
      * @param args the signature-polymorphic parameter list, statically represented using varargs
      * @return the signature-polymorphic result, statically represented using {@code Object}
      * @throws WrongMethodTypeException if the target's type cannot be adjusted to the caller's symbolic type descriptor
@@ -529,6 +740,15 @@ public abstract class MethodHandle {
      * operations on outgoing argument values.)
      * The caller can assume that the incoming result value is part of the range
      * of the callee's return type.
+     * <p>
+     * 用于信任调用符合简化签名的方法句柄的私有方法类型不匹配不会抛出{@code WrongMethodTypeException},但可能导致JVM崩溃
+     * <p>
+     *  调用者签名被限制为以下基本类型：Object,int,long,float,double和void return
+     * <p>
+     *  调用者负责通过确保每个输出参数值是相应被调用者参数类型的范围的成员来保持类型正确性(因此调用者应该对输出参数值发出适当的强制转换和整数缩减操作)。
+     * 调用者可以假定传入结果值是被调用方返回类型范围的一部分。
+     * 
+     * 
      * @param args the signature-polymorphic parameter list, statically represented using varargs
      * @return the signature-polymorphic result, statically represented using {@code Object}
      */
@@ -538,6 +758,11 @@ public abstract class MethodHandle {
      * Private method for trusted invocation of a MemberName of kind {@code REF_invokeVirtual}.
      * The caller signature is restricted to basic types as with {@code invokeBasic}.
      * The trailing (not leading) argument must be a MemberName.
+     * <p>
+     * / **用于可信调用类型MemberName的私有方法{@code REF_invokeVirtual}调用者签名仅限于使用{@code invokeBasic}的基本类型。
+     * 尾随(不是引导)参数必须是MemberName。
+     * 
+     * 
      * @param args the signature-polymorphic parameter list, statically represented using varargs
      * @return the signature-polymorphic result, statically represented using {@code Object}
      */
@@ -547,6 +772,11 @@ public abstract class MethodHandle {
      * Private method for trusted invocation of a MemberName of kind {@code REF_invokeStatic}.
      * The caller signature is restricted to basic types as with {@code invokeBasic}.
      * The trailing (not leading) argument must be a MemberName.
+     * <p>
+     *  / **用于可信调用类型的MemberName的私有方法{@code REF_invokeStatic}调用者签名仅限于使用{@code invokeBasic}的基本类型。
+     * 尾随(不是引导)参数必须是MemberName。
+     * 
+     * 
      * @param args the signature-polymorphic parameter list, statically represented using varargs
      * @return the signature-polymorphic result, statically represented using {@code Object}
      */
@@ -556,6 +786,11 @@ public abstract class MethodHandle {
      * Private method for trusted invocation of a MemberName of kind {@code REF_invokeSpecial}.
      * The caller signature is restricted to basic types as with {@code invokeBasic}.
      * The trailing (not leading) argument must be a MemberName.
+     * <p>
+     *  / **用于可信调用类型MemberName的私有方法{@code REF_invokeSpecial}调用者签名仅限于使用{@code invokeBasic}的基本类型。
+     * 尾随(不是引导)参数必须是MemberName。
+     * 
+     * 
      * @param args the signature-polymorphic parameter list, statically represented using varargs
      * @return the signature-polymorphic result, statically represented using {@code Object}
      */
@@ -565,6 +800,11 @@ public abstract class MethodHandle {
      * Private method for trusted invocation of a MemberName of kind {@code REF_invokeInterface}.
      * The caller signature is restricted to basic types as with {@code invokeBasic}.
      * The trailing (not leading) argument must be a MemberName.
+     * <p>
+     * / **用于可信调用类型MemberName的私有方法{@code REF_invokeInterface}调用者签名仅限于使用{@code invokeBasic}的基本类型。
+     * 尾随(不是头)参数必须是MemberName。
+     * 
+     * 
      * @param args the signature-polymorphic parameter list, statically represented using varargs
      * @return the signature-polymorphic result, statically represented using {@code Object}
      */
@@ -613,6 +853,32 @@ public abstract class MethodHandle {
      * {@code invokeWithArguments} can be accessed normally via the Core Reflection API and JNI.
      * It can therefore be used as a bridge between native or reflective code and method handles.
      *
+     * <p>
+     *  / **执行变量arity调用,将给定列表中的参数传递给方法句柄,就像通过来自调用站点的不精确的{@link #invoke invoke},它仅提及类型{@code Object},并且arity是
+     * 参数列表的长度。
+     * <p>
+     *  具体来说,执行如同通过以下步骤进行,尽管如果JVM可以预测它们的效果,则不能保证调用该方法
+     * <ul>
+     * <li>确定参数数组的长度为{@code N}对于空引用,{@code N = 0} </li> <li>确定{@code N}的一般类型{@code TN} </li> <li>将原始目标方法句柄{@code MH0}
+     * 强制为所需类型,如{@code MH1 = MH0asType(TN)} </li > <li>将数组扩展到{@code N}单独的参数{@code A0,} </li> <li>在解压缩的参数上调用类
+     * 型调整的方法句柄：MH1invokeExact(A0,)</li> li>将返回值作为{@code Object}引用</li>。
+     * </ul>
+     * <p>
+     *  由于{@code asType}步骤的操作,必要时应用以下参数转换：
+     * <ul>
+     *  <li>参考投放<li>取消装箱<li>拓宽原始转换
+     * </ul>
+     * <p>
+     * 如果调用返回的结果是一个原语,则返回的是boxed,如果返回类型为void,则强制返回null
+     * <p>
+     *  这个调用相当于下面的代码：<blockquote> <pre> {@ code MethodHandle invoker = MethodHandlesspreadInvoker(thistype(),0); Object result = invokerinvokeExact(this,arguments); }
+     *  </pre> </blockquote>。
+     * <p>
+     *  与签名多态方法{@code invokeExact}和{@code invoke}不同,{@code invokeWithArguments}可以通过Core Reflection API和JNI正常
+     * 访问。
+     * 因此,它可以用作本机或反射代码和方法句柄之间的桥梁。
+     * 
+     * 
      * @param arguments the arguments to pass to the target
      * @return the result returned by the target
      * @throws ClassCastException if an argument cannot be converted by reference casting
@@ -636,6 +902,13 @@ public abstract class MethodHandle {
      *   invokeWithArguments(arguments.toArray()
      * }</pre></blockquote>
      *
+     * <p>
+     * 执行可变arity调用,将给定数组中的参数传递给方法句柄,就像通过来自调用站点的不准确的{@link #invoke invoke},它仅提及类型{@code Object},并且其语义是参数数组的长度
+     * 。
+     * <p>
+     *  此方法也等效于以下代码：<blockquote> <pre> {@ code invokeWithArguments(argumentstoArray()} </pre> </blockquote>。
+     * 
+     * 
      * @param arguments the arguments to pass to the target
      * @return the result returned by the target
      * @throws NullPointerException if {@code arguments} is a null reference
@@ -737,6 +1010,47 @@ public abstract class MethodHandle {
      * Although an unboxing operation may accept several kinds of wrappers,
      * if none are available, a {@code ClassCastException} will be thrown.
      *
+     * <p>
+     *  生成适配器方法句柄,其将当前方法句柄的类型适配为新类型所得到的方法句柄被保证报告等于期望的新类型的类型
+     * <p>
+     *  如果原始类型和新类型相等,则返回{@code this}
+     * <p>
+     *  新方法句柄在被调用时将执行以下步骤：
+     * <ul>
+     * <li>转换传入的参数列表以匹配原始方法句柄的参数列表<li>在转换的参数列表上调用原始方法句柄<li>将原始方法句柄返回的任何结果转换为新方法句柄的返回类型
+     * </ul>
+     * <p>
+     *  此方法提供{@link #invokeExact invokeExact}和plain,不精确{@link #invoke invoke}之间的关键行为差异当调用者的类型描述符精确地调用被调用者时,这
+     * 两种方法执行相同的步骤,但是当类型不同时, plain {@link #invoke invoke}也调用{@code asType}(或一些内部等价物),以匹配调用者和被调用者的类型。
+     * <p>
+     * 如果当前方法是一个变量arity方法句柄参数列表转换可能涉及到转换和收集几个参数到数组,如{@linkplain #asVarargsCollector在其他地方描述}在其他情况下,所有的转换应用< em>
+     * ,这意味着每个参数或返回值被转换为恰好一个参数或返回值(或没有返回值)。
+     * 应用的转换通过查阅旧方法句柄类型和新方法句柄类型的相应组件类型。
+     * <p>
+     * 让<em> T0 <em>和<em> T1 </em>是相应的新旧参数类型,或旧的和新的返回类型。
+     * 具体来说,对于一些有效的索引{@code i} / em> {@ code = newTypeparameterType(i)}和<em> T1 </em> {@ code = thistype()parameterType(i)}
+     * 否则, / em> {@ code = thistype()returnType()}和<em> T1 </em> {@ code = newTypereturnType()}如果类型相同,新的方法句柄
+     * 不会改变相应的参数,返回值(如果有)否则,如果可能,应用以下转换之一：。
+     * 让<em> T0 <em>和<em> T1 </em>是相应的新旧参数类型,或旧的和新的返回类型。
+     * <ul>
+     * <li>如果<em> </em>和<em> T1 </em>是引用,则会应用到<em> T1 </em>的转换(类型不需要在任何特定方法这是因为null的动态值可以转换为任何引用类型)<li>如果<em>
+     *  T0 </em>和<em> T1 </em>是原语,那么Java方法调用转换(JLS 53)如果存在(具体来说,<em> </em>必须通过扩展的基元转换转换为<em> T1 </em>)<li>如果
+     * <em> T0 </em> <em> T1 </em>引用,如果存在Java转换转换(JLS 55)(具体来说,值从<em> T0 </em>加载到其包装器类,需要<em> T1 </em>)<li>如
+     * 果<em> T0 </em>是引用而且<em> T1 </em>是原语,则将在运行时应用拆箱转换,可能后面是Java方法调用转换原始值(这些是原始扩展转换)<em>必须是一个包装器类或一个超类型(在<em>
+     *  T0 </em>是Object的情况下,这些是允许的转换通过{@link javalangreflectMethod#invoke javalangreflectMethodinvoke})开箱转换必
+     * 须有成功的可能性,这意味着如果<em> T0 </em>本身不是包装类,必须存在至少一个包装类<em> TW </em>,它是<em> T0 </em>的子类型,其开箱原始值可以扩展为<em> T1 </em>
+     * <li>如果返回类型<em> T1 </em>标记为void,则会舍弃任何返回的值<li>如果返回类型<em> T0 </em>无效,<em> T1 </em >引用,引入一个空值<li>如果返回类型<em>
+     *  T0 </em>是void和<em> T1 </em>。
+     * </ul>
+     * (<em>注意：</em> <em> </em>和<em> </em>都可以视为静态类型,因为这两种类型都不会特别对应<em>的任何实际参数或返回值)
+     * <p>
+     *  如果无法进行任何所需的成对转换,则无法进行方法句柄转换
+     * <p>
+     * 在运行时,应用于引用参数或返回值的转换可能需要其他可能失败的运行时检查解包装操作可能失败,因为原始引用为空,导致{@link javalangNullPointerException NullPointerException}
+     * 取消装箱操作或引用转换也可能失败引用一个错误类型的对象引起一个{@link javalangClassCastException ClassCastException}虽然一个拆箱操作可以接受几种类型的
+     * 包装器,如果没有可用的,一个{@code ClassCastException}将被抛出。
+     * 
+     * 
      * @param newType the expected type of the new method handle
      * @return a method handle which delegates to {@code this} after performing
      *           any necessary argument conversions, and arranges for any
@@ -849,6 +1163,27 @@ assertEquals("[A, B, C]", (String) caString3.invokeExact('A', 'B', 'C'));
 MethodHandle caToString2 = caString3.asSpreader(char[].class, 2);
 assertEquals("[A, B, C]", (String) caToString2.invokeExact('A', "BC".toCharArray()));
      * }</pre></blockquote>
+     * <p>
+     *  if(！typeisConvertibleTo(newType))throw new WrongMethodTypeException("can not convert"+ this +"to"+ n
+     * ewType); return asTypeCache = MethodHandleImplmakePairwiseConvert(this,newType,true); }}。
+     * 
+     * / **创建一个<em>数组扩展</em>方法句柄,它接受一个尾数组参数并将其元素作为位置参数传播新的方法句柄作为<i> target </i>方法句柄适配器的类型将与目标的类型相同,除了目标类型的最终
+     * {@code arrayLength}参数被类型为{@code arrayType}的单个数组参数替换,。
+     * <p>
+     *  如果数组元素类型与原始目标上的任何对应的参数类型不同,则原始目标适用于直接获取数组元素,就像调用{@link #asType asType}
+     * <p>
+     * 当被调用时,适配器用数组的元素替换后面的数组参数,每个元素作为它自己的参数的参数(保留参数的顺序)。它们通过转换和/或拆箱成对转换为尾随参数的类型目标最后目标被称为最终返回的目标由适配器不变地返回
+     * <p>
+     *  在调用目标之前,适配器会验证数组是否包含足够多的元素,以便为目标方法句柄提供正确的参数计数(当需要零个元素时,该数组也可能为null)
+     * <p>
+     * 如果调用适配器时,提供的数组参数没有正确数量的元素,适配器将抛出一个{@link IllegalArgumentException}而不是调用目标
+     * <p>
+     * 下面是一些简单的数组扩展方法句柄示例：<blockquote> <pre> {@ code MethodHandle equals = publicLookup()findVirtual(Stringclass,"equals",methodType(booleanclass,Objectclass)); assert((boolean)equalsinvokeExact("me",(Object)"me")); assert(！(boolean)equalsinvokeExact("me",(Object)"thee")); //从两个数组传播这两个参数：MethodHandle eq2 = equalsasSpreader(Object [] class,2); assert((boolean)eq2invokeExact(new Object [] {"me","me"}
+     * )); assert(！(boolean)eq2invokeExact(new Object [] {"me","thee"})); //尝试从除了2阵列之外的任何东西扩散：for(int n = 0;
+     *  n <= 10; n ++){Object [] badArityArgs =(n == 2?null：new Object [n]); try {assert((boolean)eq2invokeExact(badArityArgs)&& false); } catch(IllegalArgumentException ex){} // OK} //从一个String数组传播两个参数：MethodHandle eq2s = equalsasSpreader(String [] class,2); assert((boolean)eq2sinvokeExact(new String [] {"me","me"})); assert(！(boolean)eq2sinvokeExact(new String [] {"me","thee"})); //从第一个数组扩展第二个参数：MethodHandle eq1 = equalsasSpreader(Object [] class,1); assert((boolean)eq1invokeExact("me",new Object [] {"me"})); assert(！(boolean)eq1invokeExact("me",new Object [] {"thee"})); //从0数组或null传播没有参数：MethodHandle eq0 = equalsasSpreader(Object [] class,0); assert((boolean)eq0invokeExact("me",(Object)"me",new Object [0])); assert(！(boolean)eq0invokeExact("me",(Object)"thee",(Object [])null)); // asSpreader和asCollector是近似反转的：for(int n = 0; n <= 2; n ++){for(Class < CharSequence [] class}){MethodHandle equals2 = equalsasSpreader(a,n)asCollector(a,n); assert((boolean)equals2invokeWithArguments("me","me")); assert(！(boolean)equals2invokeWithArguments("me","thee")); }} MethodHandle caToString = publicLookup()findStatic(Arraysclass,"toString",methodType(Stringclass,char [] class)); assertEquals("[A,B,C]",(String)caToStringinvokeExact("ABC"toCharArray())); MethodHandle caString3 = caToStringasCollector(char [] class,3); assertEquals("[A,B,C]",(String)caString3invokeExact('A','B','C')); MethodHandle caToString2 = caString3asSpreader(char []类,2); assertEquals("[A,B,C]",(String)caToString2invokeExact('A',"BC"toCharArray } </pre>
+     *  </blockquote>。
+     * 
+     * 
      * @param arrayType usually {@code Object[]}, the type of the array argument from which to extract the spread arguments
      * @param arrayLength the number of arguments to spread from an incoming array argument
      * @return a new method handle which spreads its final array argument,
@@ -877,6 +1212,9 @@ assertEquals("[A, B, C]", (String) caToString2.invokeExact('A', "BC".toCharArray
     /**
      * See if {@code asSpreader} can be validly called with the given arguments.
      * Return the type of the method handle call after spreading but before conversions.
+     * <p>
+     * 看看是否可以使用给定的参数有效地调用{@code asSpreader}返回扩展后但转换前的方法句柄调用的类型
+     * 
      */
     private MethodType asSpreaderChecks(Class<?> arrayType, int arrayLength) {
         spreadArrayChecks(arrayType, arrayLength);
@@ -975,6 +1313,40 @@ MethodHandle longsToString = publicLookup()
   .asCollector(long[].class, 1);
 assertEquals("[123]", (String) longsToString.invokeExact((long)123));
      * }</pre></blockquote>
+     * <p>
+     *  创建一个<em>数组收集</em>方法句柄,它接受给定数量的尾随位置参数并将它们收集到数组参数中。
+     * 新方法句柄作为其<i>目标</i>方法句柄适配器的类型将与目标的类型相同,除了单个结尾参数(通常是类型为{@code arrayType})被{@code arrayLength}参数替换,其类型是元素
+     * 类型为{ @code arrayType}。
+     *  创建一个<em>数组收集</em>方法句柄,它接受给定数量的尾随位置参数并将它们收集到数组参数中。
+     * <p>
+     * 如果数组类型与原始目标上的最终参数类型不同,则原始目标适用于直接获取数组类型,就像调用{@link #asType asType}
+     * <p>
+     *  当调用时,适配器用一个类型为{@code arrayType}的新数组替换其后面的{@code arrayLength}参数,其元素包括(按顺序)替换的参数。
+     * 最后,目标被称为目标最终返回的返回不变由适配器。
+     * <p>
+     *  (当{@code arrayLength}为0时,数组也可以是共享常量)
+     * <p>
+     * (<em>注意：</em> {@code arrayType}通常与原始目标的最后一个参数类型相同它是一个显式参数,用于{@code asSpreader}的对称性,也允许目标使用一个简单的{@code Object}
+     * 作为它的最后一个参数类型)。
+     * <p>
+     *  为了创建一个不限于收集的特定数量参数的收集适配器,请改用{@link #asVarargsCollector asVarargsCollector}
+     * <p>
+     * 这里是一些数组收集方法句柄的例子：<block> </code> {@ code MethodHandle deepToString = publicLookup()findStatic(Arraysclass,"deepToString",methodType(Stringclass,Object [] class) assertEquals("[won]",(String)deepToStringinvokeExact(new Object [] {"won"}
+     * )); methodHandle ts1 = deepToStringasCollector(Object [] class,1); assertEquals(methodType(Stringclas
+     * s,Objectclass),ts1type()); // assertEquals("[won]",(String)ts1invokeExact(new Object [] {"won"})); //
+     *  FAIL assertEquals("[[won]]",(String)ts1invokeExact((Object)new Object [] {"won"}) // arrayType可以是Obj
+     * ect []的子类型MethodHandle ts2 = deepToStringasCollector(String [] class,2); assertEquals(methodType(Stri
+     * ngclass,Stringclass,Stringclass),ts2type()); assertEquals("[two,too]",(String)ts2invokeExact("two","t
+     * oo")); MethodHandle ts0 = deepToStringasCollector(Object [] class,0); assertEquals("[]",(String)ts0in
+     * vokeExact()); //收集器可以嵌套,Lisp风格的MethodHandle ts22 = deepToStringasCollector(Object [] class,3)asCollec
+     * tor(String [] class,2); assertEquals("[A,B,[C,D]]",((String)ts22invokeExact((Object)'A',(Object)"B","
+     * C","D")) // arrayType可以是任何基本数组类型MethodHandle bytesToString = publicLookup()findStatic(Arraysclass,"to
+     * String",methodType(Stringclass,byte [] class))asCollector(byte [] class,3); assertEquals("[1,2,3]",(S
+     * tring)bytesToStringinvokeExact((byte)1,(byte)2,(byte)3)方法Handle longsToString = publicLookup()findSta
+     * tic(Arraysclass,"toString",methodType(Stringclass,long [] class))asCollector类,1); assertEquals("[123]
+     * ",(String)longsToStringinvokeExact((long)123)); } </pre> </blockquote>。
+     * 
+     * 
      * @param arrayType often {@code Object[]}, the type of the array argument which will collect the arguments
      * @param arrayLength the number of arguments to collect into a new array argument
      * @return a new method handle which collects some trailing argument
@@ -1006,6 +1378,9 @@ assertEquals("[123]", (String) longsToString.invokeExact((long)123));
     /**
      * See if {@code asCollector} can be validly called with the given arguments.
      * Return false if the last parameter is not an exact match to arrayType.
+     * <p>
+     * 看看是否可以使用给定的参数有效地调用{@code asCollector}返回false如果最后一个参数不是与arrayType的精确匹配
+     * 
      */
     /*non-public*/ boolean asCollectorChecks(Class<?> arrayType, int arrayLength) {
         spreadArrayChecks(arrayType, arrayLength);
@@ -1158,6 +1533,63 @@ assertEquals("[three, thee, tee]", Arrays.toString((Object[])ls.get(0)));
      * effect on this decision, only a comparison between the symbolic
      * type descriptor of the call site and the type descriptor of the method handle.)
      *
+     * <p>
+     *  spreadArrayChecks(arrayType,arrayLength); int nargs = type()parameterCount(); if(nargs！= 0){Class <>> lastParam = type()parameterType(nargs-1); if(lastParam == arrayType)return true; if(lastParamisAssignableFrom(arrayType))return false; }
+     *  throw newIllegalArgumentException("array type not assignable to trailing argument",this,arrayType); 
+     * }}。
+     * 
+     *  / **创建一个可以接受任意数量的尾随位置参数的<em>变量arity </em>适配器,并将它们收集到数组参数中
+     * <p>
+     * 适配器的类型和行为将与目标的类型和行为相同,除了某些{@code invoke}和{@code asType}请求可能导致尾随位置参数被收集到目标的尾随参数中。
+     * 另外,适配器的最后一个参数类型将是{@code arrayType},即使目标具有不同的最后一个参数类型。
+     * <p>
+     *  如果方法句柄已经是变量arity并且其尾参数类型与{@code arrayType}相同,则此转换可能返回{@code this}
+     * <p>
+     * 当使用{@link #invokeExact invokeExact}调用时,适配器调用没有参数更改的目标(<em>注意：</em>此行为与{@linkplain #asCollector固定收集器}不
+     * 同,整数数组的不确定长度,而不是固定数量的参数)。
+     * <p>
+     *  当使用纯粹,不完全的{@link #invoke invoke}调用时,如果调用者类型与适配器相同,适配器使用{@code invokeExact}调用目标(这是{@code invoke}的正常行为
+     * 类型匹配)。
+     * <p>
+     * 否则,如果调用者和适配器的性质相同,并且调用者的拖尾参数类型是与适配器的拖尾参数类型相同或可分配的引用类型,则参数和返回值被成对转换,如同通过{ @link #asType asType}在固定的方法句
+     * 柄。
+     * <p>
+     *  否则,arity不同,或者适配器的拖尾参数类型不能从相应的调用方类型分配。
+     * 在这种情况下,适配器用一个新的数组{@code arrayType}替换原始尾随参数位置向前的所有尾随参数,其元素包括(按顺序)替换的参数。
+     * <p>
+     * 调用者类型必须提供至少足够的参数和正确的类型,以满足目标对位置参数在尾数组参数之前的要求。因此,调用者必须至少提供{@code N-1}个参数,其中{@code N}是目标的实体。
+     * 此外,必须存在从传入的参数到目标的参数的转换与其他对{@code invoke}的使用一样,如果这些基本要求没有被满足,{@code WrongMethodTypeException }可能会抛出。
+     * <p>
+     *  在所有情况下,目标最终返回的都由适配器不加改变地返回
+     * <p>
+     * 在最后的情况下,它就好像目标方法句柄暂时适应了一个{@linkplain #asCollector固定的收集器}到调用者类型所需的arity(与{@code asCollector}一样,如果数组长度为
+     * 零,可以使用共享常量而不是新数组如果对{@code asCollector}的隐含调用将抛出一个{@code IllegalArgumentException}或{@code WrongMethodTypeException}
+     * ,对变量arity适配器的调用必须抛出{@code WrongMethodTypeException})。
+     * <p>
+     * {@link #asType asType}的行为也专用于变量arity适配器,为了保持不变量,平滑,不精确的{@code invoke}总是等同于调整目标类型的{@code asType}调用,然后调
+     * 用{@code invokeExact}因此,当且仅当适配器和请求的类型在arity或trailing参数类型中不同时,变量arity适配器通过构建固定的arity收集器来响应{@code asType}
+     * 请求。
+     * 所得到的固定arity收集器其类型通过成对转换进一步调整(如果需要)到所请求的类型,如同通过另一个{@code asType}。
+     * <p>
+     * 当通过执行{@code CONSTANT_MethodHandle}常数的{@code ldc}指令获得方法句柄,并且目标方法被标记为变量arity方法(使用修饰符位{@code 0x0080})时,方
+     * 法句柄将接受多个arity,就好像方法句柄常量是通过调用{@code asVarargsCollector}。
+     * <p>
+     *  为了创建收集预定数量的参数并且其类型反映此预定数量的收集适配器,请改用{@link #asCollector asCollector}
+     * <p>
+     * 除非{@code asVarargsCollector},{@code MethodHandle}和{@code MethodHandles}中的所有方法都将返回一个具有固定数的方法句柄,除非它们被指定
+     * 返回其原始操作数(例如,方法句柄自己的类型的{@code asType}),。
+     * <p>
+     *  在已经是变量arity的方法句柄上调用{@code asVarargsCollector}将产生一个具有相同类型和行为的方法句柄它可能(或可能不)返回原来的变量arity方法句柄
+     * <p>
+     * 这里是一个列表制作变量arity方法句柄的例子：<blockquote> <pre> {@ code MethodHandle deepToString = publicLookup()findStatic(Arraysclass,"deepToString",methodType(Stringclass,Object [] class) MethodHandle ts1 = deepToStringasVarargsCollector(Object [] class); assertEquals("[won]",(String)ts1invokeExact(new Object [] {"won"}
+     * )); assertEquals("[won]",(String)ts1invoke(new Object [] {"won"})); assertEquals("[won]",(String)ts1i
+     * nvoke("won")); assertEquals("[won]]",(String)ts1invoke((Object)new Object [] {"won"})); // findStatic
+     * 的ArraysasList()产生一个变量arity方法句柄：MethodHandle asList = publicLookup()findStatic(Arraysclass,"asList",me
+     * thodType(Listclass,Object [] class) assertEquals(methodType(List类,Object []类),asListtype()); assert(a
+     * sListisVarargsCollector()); assertEquals("[]",asListinvoke()toString()); assertEquals("[1]",asListinv
+     * oke(1)toString()); assertEquals("[two,too]",asListinvoke("two","too")toString()); String [] argv = {"three","thee","tee"}
+     * ; assertEquals("[three,thee,tee]",asListinvoke(argv)toString()); assertEquals("[three,thee,tee]",asLi
+     * 
      * @param arrayType often {@code Object[]}, the type of the array argument which will collect the arguments
      * @return a new method handle which can collect any number of trailing arguments
      *         into an array, before calling the original method handle
@@ -1187,6 +1619,15 @@ assertEquals("[three, thee, tee]", Arrays.toString((Object[])ls.get(0)));
      * <li>an {@code ldc} instruction of a {@code CONSTANT_MethodHandle}
      *     which resolves to a variable arity Java method or constructor
      * </ul>
+     * <p>
+     * stinvoke((Object [])argv)toString()); List ls =(List)asListinvoke((Object)argv); assertEquals(1,lssiz
+     * e()); assertEquals("[three,thee,tee]",ArraystoString((Object [])lsget(0))); } </pre> </blockquote>。
+     * <p style="font-size:smaller;">
+     * <em>讨论：</em>这些规则被设计为变量arity方法的Java规则的动态类型变体在这两种情况下,变量arity方法或方法句柄的调用者可以传递零个或多个位置参数, else传递任何长度的预先收集的数
+     * 组用户应该知道最后一个参数的特殊作用,以及类型匹配对最后一个参数的影响,它决定了一个单个尾部参数是否被解释为一个整数数组或要收集的数组的单个元素请注意,拖尾参数的动态类型对此决策没有影响,只有调用点的符
+     * 号类型描述符和方法句柄的类型描述符之间的比较)。
+     * 
+     * 
      * @return true if this method handle accepts more than one arity of plain, inexact {@code invoke} calls
      * @see #asVarargsCollector
      * @see #asFixedArity
@@ -1234,6 +1675,14 @@ assertEquals(1, ((List) asListVar.invoke((Object)argv)).size());
 assertEquals("[three, thee, tee]", asListFix.invoke((Object)argv).toString());
      * }</pre></blockquote>
      *
+     * <p>
+     * 确定此方法句柄是否支持{@linkplain #asVarargsCollector variable arity}调用此类方法句柄源于以下来源：
+     * <ul>
+     *  <li>调用{@linkplain #asVarargsCollector asVarargsCollector} <li>调用{@linkplain javalanginvokeMethodHandlesLookup lookup method}
+     * ,该方法解析为一个变量arity Java方法或构造函数<li> {@code ldc}指令{ @code CONSTANT_MethodHandle},它解析为一个变量arity Java方法或构造函
+     * 数。
+     * </ul>
+     * 
      * @return a new method handle which accepts only a fixed number of arguments
      * @see #asVarargsCollector
      * @see #isVarargsCollector
@@ -1261,6 +1710,24 @@ assertEquals("[three, thee, tee]", asListFix.invoke((Object)argv).toString());
      * <p>
      * (<em>Note:</em>  Because method handles are immutable, the target method handle
      * retains its original type and behavior.)
+     * <p>
+     *  创建一个<em>固定的</em>方法句柄,否则等效于当前方法句柄
+     * <p>
+     * 如果当前方法句柄不是{@linkplain #asVarargsCollector variable arity},则返回当前方法句柄。
+     * 即使当前方法句柄不能是{@code asVarargsCollector}的有效输入,也是true,。
+     * <p>
+     *  否则,得到的固定方法句柄具有与当前方法句柄相同的类型和行为,除了{@link #isVarargsCollector isVarargsCollector}将为false固定方法句柄可以(可能不是)前
+     * 一个参数到{@code asVarargsCollector}。
+     * <p>
+     * 下面是一个列表制作变量arity方法句柄的示例：<blockquote> <pre> {@ code MethodHandle asListVar = publicLookup()findStatic(Arraysclass,"asList",methodType(Listclass,Object [] class))asVarargsCollector Object [] class); MethodHandle asListFix = asListVarasFixedArity(); assertEquals("[1]",asListVarinvoke(1)toString());异常catch = null; try {asListFixinvoke((Object)1); }
+     *  catch(Exception ex){caught = ex; } assert(catch instanceof ClassCastException); assertEquals("[two,t
+     * oo]",asListVarinvoke("two","too")toString()); try {asListFixinvoke("two","too"); } catch(Exception ex
+     * ){caught = ex; } assert(caught instanceof WrongMethodTypeException); Object [] argv = {"three","thee","tee"}
+     * ; assertEquals("[three,thee,tee]",asListVarinvoke(argv)toString()); assertEquals("[three,thee,tee]",a
+     * sListFixinvoke(argv)toString()); assertEquals(1,((List)asListVarinvoke((Object)argv))size()); assertE
+     * quals("[three,thee,tee]",asListFixinvoke((Object)argv)toString()); } </pre> </blockquote>。
+     * 
+     * 
      * @param x  the value to bind to the first argument of the target
      * @return a new method handle which prepends the given value to the incoming
      *         argument list, before calling the original method handle
@@ -1288,6 +1755,16 @@ assertEquals("[three, thee, tee]", asListFix.invoke((Object)argv).toString());
      * to the string representation.
      * Therefore, the present syntax should not be parsed by applications.)
      *
+     * <p>
+     * 将值{@code x}绑定到方法句柄的第一个参数,而不调用它新的方法句柄通过将当前方法句柄绑定到给定的参数来适配其<i> target </i>的绑定句柄将与目标的类型相同,除了将省略单个前导参考参数。
+     * <p>
+     *  当被调用时,绑定句柄插入给定的值{@code x}作为目标的新的引导参数。其他的参数也不被改变。目标最终返回什么被绑定的句柄
+     * <p>
+     *  引用{@code x}必须可转换为目标的第一个参数类型
+     * <p>
+     *  (<em>注意：</em>由于方法句柄是不可变的,目标方法句柄保留其原始类型和行为)
+     * 
+     * 
      * @return a string representation of the method handle
      */
     @Override
@@ -1300,6 +1777,12 @@ assertEquals("[three, thee, tee]", asListFix.invoke((Object)argv).toString());
     }
     /** Return a string with a several lines describing the method handle structure.
      *  This string would be suitable for display in an IDE debugger.
+     * <p>
+     * 返回方法句柄的字符串表示形式,以字符串{@code"MethodHandle"}开头,并以方法句柄类型的字符串表示形式结束换句话说,此方法返回一个等于以下值的字符串：<blockquote> < pre>
+     *  {@ code"MethodHandle"+ type()toString()} </pre> </blockquote>。
+     * <p>
+     *  (<em>注意：</em>此API的未来版本可能会向字符串表示形式添加更多信息)因此,应用程序不应解析当前语法)
+     * 
      */
     String debugString() {
         return type+" : "+internalForm()+internalProperties();
@@ -1412,6 +1895,10 @@ assertEquals("[three, thee, tee]", asListFix.invoke((Object)argv).toString());
 
     /** Require this method handle to be a BMH, or else replace it with a "wrapper" BMH.
      *  Many transforms are implemented only for BMHs.
+     * <p>
+     *  此字符串将适合在IDE调试器中显示
+     * 
+     * 
      *  @return a behaviorally equivalent BMH
      */
     abstract BoundMethodHandle rebind();
@@ -1422,6 +1909,9 @@ assertEquals("[three, thee, tee]", asListFix.invoke((Object)argv).toString());
      * Threads may continue running the old form indefinitely,
      * but it is likely that the new one will be preferred for new executions.
      * Use with discretion.
+     * <p>
+     *  许多变换仅针对BMH实现
+     * 
      */
     /*non-public*/
     void updateForm(LambdaForm newForm) {

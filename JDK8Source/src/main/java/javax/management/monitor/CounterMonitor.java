@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -74,6 +75,26 @@ import static javax.management.monitor.MonitorNotification.*;
  * <CODE>Integer</CODE>, <CODE>Short</CODE>, <CODE>Long</CODE>).
  *
  *
+ * <p>
+ *  定义一个监视器MBean,用于观察计数器属性的值
+ * 
+ *  <P>计数器监视器在计数器的值达到或超过称为比较级别的阈值时发送{@link MonitorNotification#THRESHOLD_VALUE_EXCEEDED阈值通知}。
+ * 通知标志必须设置为<CODE> true </CODE>。
+ * 
+ * 此外,偏移机制使得能够检测特定的计数间隔。如果偏移值不为​​零,每当阈值被计数器值达到比较电平触发时,该比较电平增加偏移值。这被视为作为瞬时发生,即,在计数递增之前。
+ * 因此,对于每个级别,阈值在每次计数增加等于偏移值的间隔时触发事件通知。
+ * 
+ *  <P>如果计数器可以包围其最大值,则需要指定模数。模数是计数器复位为零时的值
+ * 
+ * <P>如果使用计数器差值模式,则导出的计量器的值被计算为两个连续观察值的观察计数器值之间的差值。如果该差值为负,则导出的计量器的值增加模量导出的计量值(V [t])使用以下方法计算：
+ * 
+ * <UL>
+ *  如果(计数器[t]  - 计数器[t-GP])为正则那么计数器[t]计数器[t-GP] GP])为负,则V [t] =计数器[t]  - 计数器[t-GP] + MODULUS
+ * </UL>
+ * 
+ *  这种计数器监视器的实现需要观察属性是整数类型(<CODE>字节</CODE>,<CODE>整数</CODE>,<CODE> Short </CODE> CODE>)
+ * 
+ * 
  * @since 1.5
  */
 public class CounterMonitor extends Monitor implements CounterMonitorMBean {
@@ -82,6 +103,9 @@ public class CounterMonitor extends Monitor implements CounterMonitorMBean {
      * ------------------------------------------
      *  PACKAGE CLASSES
      * ------------------------------------------
+     * <p>
+     * ------------------------------------------包装类------------------------------------
+     * 
      */
 
     static class CounterMonitorObservedObject extends ObservedObject {
@@ -151,17 +175,26 @@ public class CounterMonitor extends Monitor implements CounterMonitorMBean {
      * ------------------------------------------
      *  PRIVATE VARIABLES
      * ------------------------------------------
+     * <p>
+     *  ------------------------------------------私人变数------ ------------------------------------
+     * 
      */
 
     /**
      * Counter modulus.
      * <BR>The default value is a null Integer object.
+     * <p>
+     *  计数器模数<BR>默认值为null整数对象
+     * 
      */
     private Number modulus = INTEGER_ZERO;
 
     /**
      * Counter offset.
      * <BR>The default value is a null Integer object.
+     * <p>
+     *  计数器偏移量<BR>默认值为null整数对象
+     * 
      */
     private Number offset = INTEGER_ZERO;
 
@@ -169,6 +202,9 @@ public class CounterMonitor extends Monitor implements CounterMonitorMBean {
      * Flag indicating if the counter monitor notifies when exceeding
      * the threshold.  The default value is set to
      * <CODE>false</CODE>.
+     * <p>
+     *  指示计数器监视器在超过阈值时通知的标志默认值设置为<CODE> false </CODE>
+     * 
      */
     private boolean notify = false;
 
@@ -178,6 +214,9 @@ public class CounterMonitor extends Monitor implements CounterMonitorMBean {
      * difference between two consecutive observed values.  Otherwise,
      * the derived gauge is directly the value of the observed
      * attribute.  The default value is set to <CODE>false</CODE>.
+     * <p>
+     *  表示是否使用计数器差值模式的标志如果使用计数器差值模式,导出的量表是两个连续观测值之间的差异。否则,导出的量表直接是观测属性的值。默认值设置为<CODE> false </CODE>
+     * 
      */
     private boolean differenceMode = false;
 
@@ -186,6 +225,9 @@ public class CounterMonitor extends Monitor implements CounterMonitorMBean {
      * the threshold when a new object is added to the list and reset
      * the threshold to its initial value each time the counter
      * resets.
+     * <p>
+     * 初始计数器阈值此值用于在将新对象添加到列表时初始化阈值,并在每次计数器重置时将阈值重置为其初始值
+     * 
      */
     private Number initThreshold = INTEGER_ZERO;
 
@@ -209,10 +251,16 @@ public class CounterMonitor extends Monitor implements CounterMonitorMBean {
      * ------------------------------------------
      *  CONSTRUCTORS
      * ------------------------------------------
+     * <p>
+     *  ------------------------------------------建筑师------- -----------------------------------
+     * 
      */
 
     /**
      * Default constructor.
+     * <p>
+     *  默认构造函数
+     * 
      */
     public CounterMonitor() {
     }
@@ -221,10 +269,16 @@ public class CounterMonitor extends Monitor implements CounterMonitorMBean {
      * ------------------------------------------
      *  PUBLIC METHODS
      * ------------------------------------------
+     * <p>
+     *  ------------------------------------------公共方法------------------------------------
+     * 
      */
 
     /**
      * Starts the counter monitor.
+     * <p>
+     *  启动计数器监视器
+     * 
      */
     public synchronized void start() {
         if (isActive()) {
@@ -247,6 +301,9 @@ public class CounterMonitor extends Monitor implements CounterMonitorMBean {
 
     /**
      * Stops the counter monitor.
+     * <p>
+     *  停止计数器监视器
+     * 
      */
     public synchronized void stop() {
         doStop();
@@ -259,6 +316,10 @@ public class CounterMonitor extends Monitor implements CounterMonitorMBean {
      * Gets the derived gauge of the specified object, if this object is
      * contained in the set of observed MBeans, or <code>null</code> otherwise.
      *
+     * <p>
+     *  获取指定对象的派生尺寸(如果此对象包含在观察MBean的集合中),否则返回<code> null </code>
+     * 
+     * 
      * @param object the name of the object whose derived gauge is to
      * be returned.
      *
@@ -275,6 +336,10 @@ public class CounterMonitor extends Monitor implements CounterMonitorMBean {
      * this object is contained in the set of observed MBeans, or
      * <code>0</code> otherwise.
      *
+     * <p>
+     *  获取指定对象的派生标尺时间戳(如果此对象包含在观察MBean的集合中),否则为<code> 0 </code>
+     * 
+     * 
      * @param object the name of the object whose derived gauge
      * timestamp is to be returned.
      *
@@ -291,6 +356,10 @@ public class CounterMonitor extends Monitor implements CounterMonitorMBean {
      * this object is contained in the set of observed MBeans, or
      * <code>null</code> otherwise.
      *
+     * <p>
+     * 获取指定对象的当前阈值(如果此对象包含在观察到的MBean的集合中),否则返回<code> null </code>
+     * 
+     * 
      * @param object the name of the object whose threshold is to be
      * returned.
      *
@@ -323,6 +392,10 @@ public class CounterMonitor extends Monitor implements CounterMonitorMBean {
     /**
      * Gets the initial threshold value common to all observed objects.
      *
+     * <p>
+     *  获取所有观察到的对象共有的初始阈值
+     * 
+     * 
      * @return The initial threshold.
      *
      * @see #setInitThreshold
@@ -338,6 +411,12 @@ public class CounterMonitor extends Monitor implements CounterMonitorMBean {
      * <BR>The current threshold of every object in the set of
      * observed MBeans is updated consequently.
      *
+     * <p>
+     *  设置所有观察对象的公共初始阈值
+     * 
+     *  <BR>因此更新观察MBeans集合中每个对象的当前阈值
+     * 
+     * 
      * @param value The initial threshold value.
      *
      * @exception IllegalArgumentException The specified
@@ -377,6 +456,10 @@ public class CounterMonitor extends Monitor implements CounterMonitorMBean {
      * Returns the derived gauge of the first object in the set of
      * observed MBeans.
      *
+     * <p>
+     *  返回观测MBean集合中第一个对象的导出标准
+     * 
+     * 
      * @return The derived gauge.
      *
      * @deprecated As of JMX 1.2, replaced by
@@ -395,6 +478,10 @@ public class CounterMonitor extends Monitor implements CounterMonitorMBean {
      * Gets the derived gauge timestamp of the first object in the set
      * of observed MBeans.
      *
+     * <p>
+     *  获取观察到的MBean集合中的第一个对象的导出度量标记时间戳
+     * 
+     * 
      * @return The derived gauge timestamp.
      *
      * @deprecated As of JMX 1.2, replaced by
@@ -413,6 +500,10 @@ public class CounterMonitor extends Monitor implements CounterMonitorMBean {
      * Gets the threshold value of the first object in the set of
      * observed MBeans.
      *
+     * <p>
+     *  获取观察MBean集合中第一个对象的阈值
+     * 
+     * 
      * @return The threshold value.
      *
      * @see #setThreshold
@@ -427,6 +518,10 @@ public class CounterMonitor extends Monitor implements CounterMonitorMBean {
     /**
      * Sets the initial threshold value.
      *
+     * <p>
+     *  设置初始阈值
+     * 
+     * 
      * @param value The initial threshold value.
      *
      * @exception IllegalArgumentException The specified threshold is
@@ -445,6 +540,10 @@ public class CounterMonitor extends Monitor implements CounterMonitorMBean {
     /**
      * Gets the offset value common to all observed MBeans.
      *
+     * <p>
+     *  获取所有观察到的MBean公用的偏移值
+     * 
+     * 
      * @return The offset value.
      *
      * @see #setOffset
@@ -456,6 +555,10 @@ public class CounterMonitor extends Monitor implements CounterMonitorMBean {
     /**
      * Sets the offset value common to all observed MBeans.
      *
+     * <p>
+     *  设置所有观察到的MBean的公共偏移值
+     * 
+     * 
      * @param value The offset value.
      *
      * @exception IllegalArgumentException The specified
@@ -486,6 +589,10 @@ public class CounterMonitor extends Monitor implements CounterMonitorMBean {
     /**
      * Gets the modulus value common to all observed MBeans.
      *
+     * <p>
+     * 获取所有观察到的MBeans共有的模量值
+     * 
+     * 
      * @see #setModulus
      *
      * @return The modulus value.
@@ -497,6 +604,10 @@ public class CounterMonitor extends Monitor implements CounterMonitorMBean {
     /**
      * Sets the modulus value common to all observed MBeans.
      *
+     * <p>
+     *  设置所有观察到的MBean公用的模值
+     * 
+     * 
      * @param value The modulus value.
      *
      * @exception IllegalArgumentException The specified
@@ -533,6 +644,10 @@ public class CounterMonitor extends Monitor implements CounterMonitorMBean {
      * Gets the notification's on/off switch value common to all
      * observed MBeans.
      *
+     * <p>
+     *  获取所有观察到的MBean公用的通知的开/关切换值
+     * 
+     * 
      * @return <CODE>true</CODE> if the counter monitor notifies when
      * exceeding the threshold, <CODE>false</CODE> otherwise.
      *
@@ -546,6 +661,10 @@ public class CounterMonitor extends Monitor implements CounterMonitorMBean {
      * Sets the notification's on/off switch value common to all
      * observed MBeans.
      *
+     * <p>
+     *  将通知的开/关切换值设置为所有观察到的MBean的公共
+     * 
+     * 
      * @param value The notification's on/off switch value.
      *
      * @see #getNotify
@@ -559,6 +678,10 @@ public class CounterMonitor extends Monitor implements CounterMonitorMBean {
     /**
      * Gets the difference mode flag value common to all observed MBeans.
      *
+     * <p>
+     *  获取所有观察到的MBean公用的差模式标志值
+     * 
+     * 
      * @return <CODE>true</CODE> if the difference mode is used,
      * <CODE>false</CODE> otherwise.
      *
@@ -571,6 +694,10 @@ public class CounterMonitor extends Monitor implements CounterMonitorMBean {
     /**
      * Sets the difference mode flag value common to all observed MBeans.
      *
+     * <p>
+     *  将差值模式标志值设置为所有观察到的MBean的公共值
+     * 
+     * 
      * @param value The difference mode flag value.
      *
      * @see #getDifferenceMode
@@ -596,6 +723,9 @@ public class CounterMonitor extends Monitor implements CounterMonitorMBean {
      * Returns a <CODE>NotificationInfo</CODE> object containing the
      * name of the Java class of the notification and the notification
      * types sent by the counter monitor.
+     * <p>
+     *  返回一个<CODE> NotificationInfo </CODE>对象,其中包含通知Java类的名称和计数器监视器发送的通知类型
+     * 
      */
     @Override
     public MBeanNotificationInfo[] getNotificationInfo() {
@@ -606,11 +736,18 @@ public class CounterMonitor extends Monitor implements CounterMonitorMBean {
      * ------------------------------------------
      *  PRIVATE METHODS
      * ------------------------------------------
+     * <p>
+     *  ------------------------------------------私有方法------ ------------------------------------
+     * 
      */
 
     /**
      * Updates the derived gauge attribute of the observed object.
      *
+     * <p>
+     *  更新观察对象的派生规格属性
+     * 
+     * 
      * @param scanCounter The value of the observed attribute.
      * @param o The observed object.
      * @return <CODE>true</CODE> if the derived gauge value is valid,
@@ -668,6 +805,10 @@ public class CounterMonitor extends Monitor implements CounterMonitorMBean {
      * Updates the notification attribute of the observed object
      * and notifies the listeners only once if the notify flag
      * is set to <CODE>true</CODE>.
+     * <p>
+     * 更新观察对象的通知属性,如果通知标志设置为<CODE> true </CODE>,则通知监听器一次。
+     * 
+     * 
      * @param o The observed object.
      */
     private synchronized MonitorNotification updateNotifications(
@@ -718,6 +859,10 @@ public class CounterMonitor extends Monitor implements CounterMonitorMBean {
 
     /**
      * Updates the threshold attribute of the observed object.
+     * <p>
+     *  更新观察对象的阈值属性
+     * 
+     * 
      * @param o The observed object.
      */
     private synchronized void updateThreshold(CounterMonitorObservedObject o) {
@@ -794,6 +939,10 @@ public class CounterMonitor extends Monitor implements CounterMonitorMBean {
      * differenceMode flag is set to <CODE>true</CODE>.  Integer types
      * only are allowed.
      *
+     * <p>
+     *  当differenceMode标志设置为<CODE> true时,设置指定观察对象的派生规格</CODE>仅允许使用整数类型
+     * 
+     * 
      * @param scanCounter The value of the observed attribute.
      * @param mod The counter modulus value.
      * @param o The observed object.
@@ -805,6 +954,10 @@ public class CounterMonitor extends Monitor implements CounterMonitorMBean {
            l == (byte)l (mod 256) for any long l,
            (byte) ((byte)l1 + (byte)l2) == (byte) (l1 + l2),
            and likewise for subtraction.  So it's the same as if
+        /* <p>
+        /*  由于对于任何长l,(字节)((字节)l1 +(字节)l2)==(字节)(l1 + l2)的l ==(字节)l(mod 256)和同样减法所以它是相同的如果
+        /* 
+        /* 
            we had done the arithmetic in the smaller type.*/
 
         long derived =
@@ -830,11 +983,18 @@ public class CounterMonitor extends Monitor implements CounterMonitorMBean {
      * ------------------------------------------
      *  PACKAGE METHODS
      * ------------------------------------------
+     * <p>
+     *  ------------------------------------------包装方法------ ------------------------------------
+     * 
      */
 
     /**
      * Factory method for ObservedObject creation.
      *
+     * <p>
+     *  ObservedObject创建的工厂方法
+     * 
+     * 
      * @since 1.6
      */
     @Override
@@ -853,6 +1013,9 @@ public class CounterMonitor extends Monitor implements CounterMonitorMBean {
      * "object" and "attribute" after checking that the type of the
      * supplied observed attribute value is one of the value types
      * supported by this monitor.
+     * <p>
+     * 此方法在检查所提供的观察属性值的类型是此监视器支持的值类型之一之后,全局地为给定的"对象"和"属性"设置派生的量规类型
+     * 
      */
     @Override
     synchronized boolean isComparableTypeValid(ObjectName object,
@@ -958,6 +1121,10 @@ public class CounterMonitor extends Monitor implements CounterMonitorMBean {
      *   If the optional offset or modulus have not been initialized, their
      *   default value is an Integer object with a value equal to zero.
      *
+     * <p>
+     *  测试指定观察对象的阈值,偏移和模数是否与计数器的类型相同只允许整数类型
+     * 
+     * 
      * @param object The observed object.
      * @param attribute The observed attribute.
      * @param value The sample value.

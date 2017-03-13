@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,10 @@ import java.net.URI;
  * might override some of these methods and might also provide
  * additional fields and methods.
  *
+ * <p>
+ *  向给定文件对象的转发调用此类的子类可能会覆盖这些方法中的一些,并且还可能提供其他字段和方法
+ * 
+ * 
  * @param <F> the kind of file object forwarded to by this object
  * @author Peter von der Ah&eacute;
  * @since 1.6
@@ -45,11 +50,18 @@ public class ForwardingFileObject<F extends FileObject> implements FileObject {
 
     /**
      * The file object which all methods are delegated to.
+     * <p>
+     *  委托所有方法的文件对象
+     * 
      */
     protected final F fileObject;
 
     /**
      * Creates a new instance of ForwardingFileObject.
+     * <p>
+     *  创建一个新的ForwardingFileObject实例
+     * 
+     * 
      * @param fileObject delegate to this file object
      */
     protected ForwardingFileObject(F fileObject) {
@@ -66,6 +78,8 @@ public class ForwardingFileObject<F extends FileObject> implements FileObject {
     }
 
     /**
+    /* <p>
+    /* 
      * @throws IllegalStateException {@inheritDoc}
      * @throws UnsupportedOperationException {@inheritDoc}
      * @throws IOException {@inheritDoc}
@@ -75,6 +89,8 @@ public class ForwardingFileObject<F extends FileObject> implements FileObject {
     }
 
     /**
+    /* <p>
+    /* 
      * @throws IllegalStateException {@inheritDoc}
      * @throws UnsupportedOperationException {@inheritDoc}
      * @throws IOException {@inheritDoc}
@@ -84,6 +100,8 @@ public class ForwardingFileObject<F extends FileObject> implements FileObject {
     }
 
     /**
+    /* <p>
+    /* 
      * @throws IllegalStateException {@inheritDoc}
      * @throws UnsupportedOperationException {@inheritDoc}
      * @throws IOException {@inheritDoc}
@@ -93,6 +111,8 @@ public class ForwardingFileObject<F extends FileObject> implements FileObject {
     }
 
     /**
+    /* <p>
+    /* 
      * @throws IllegalStateException {@inheritDoc}
      * @throws UnsupportedOperationException {@inheritDoc}
      * @throws IOException {@inheritDoc}
@@ -102,6 +122,8 @@ public class ForwardingFileObject<F extends FileObject> implements FileObject {
     }
 
     /**
+    /* <p>
+    /* 
      * @throws IllegalStateException {@inheritDoc}
      * @throws UnsupportedOperationException {@inheritDoc}
      * @throws IOException {@inheritDoc}

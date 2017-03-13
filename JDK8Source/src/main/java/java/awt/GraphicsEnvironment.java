@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -48,6 +49,13 @@ import sun.security.action.GetPropertyAction;
  * has a number of {@link GraphicsConfiguration} objects associated with
  * it.  These objects specify the different configurations in which the
  * <code>GraphicsDevice</code> can be used.
+ * <p>
+ *  <code> GraphicsEnvironment </code>类描述了特定平台上Java(tm)应用程序可用的{@link GraphicsDevice}对象和{@link javaawtFont}
+ * 对象的集合此<code> GraphicsEnvironment </code >可以是本地的或在远程机器上<code> GraphicsDevice </code>对象可以是屏幕,打印机或图像缓冲区,
+ * 并且是{@link Graphics2D}绘制方法的目标每个<code> GraphicsDevice </code> of {@link GraphicsConfiguration}与其相关联的对象这
+ * 些对象指定可以使用<code> GraphicsDevice </code>的不同配置。
+ * 
+ * 
  * @see GraphicsDevice
  * @see GraphicsConfiguration
  */
@@ -57,23 +65,36 @@ public abstract class GraphicsEnvironment {
 
     /**
      * The headless state of the Toolkit and GraphicsEnvironment
+     * <p>
+     * Toolkit和GraphicsEnvironment的无头状态
+     * 
      */
     private static Boolean headless;
 
     /**
      * The headless state assumed by default
+     * <p>
+     *  默认情况下假定无头状态
+     * 
      */
     private static Boolean defaultHeadless;
 
     /**
      * This is an abstract class and cannot be instantiated directly.
      * Instances must be obtained from a suitable factory or query method.
+     * <p>
+     *  这是一个抽象类,不能直接实例化实例必须从合适的工厂或查询方法获得
+     * 
      */
     protected GraphicsEnvironment() {
     }
 
     /**
      * Returns the local <code>GraphicsEnvironment</code>.
+     * <p>
+     *  返回局部<code> GraphicsEnvironment </code>
+     * 
+     * 
      * @return the local <code>GraphicsEnvironment</code>
      */
     public static synchronized GraphicsEnvironment getLocalGraphicsEnvironment() {
@@ -88,6 +109,10 @@ public abstract class GraphicsEnvironment {
      * Creates and returns the GraphicsEnvironment, according to the
      * system property 'java.awt.graphicsenv'.
      *
+     * <p>
+     *  创建并返回GraphicsEnvironment,根据系统属性"javaawtgraphicsenv"
+     * 
+     * 
      * @return the graphics environment
      */
     private static GraphicsEnvironment createGE() {
@@ -130,6 +155,10 @@ public abstract class GraphicsEnvironment {
      * a HeadlessException is thrown from areas of the Toolkit
      * and GraphicsEnvironment that are dependent on a display,
      * keyboard, or mouse.
+     * <p>
+     *  测试此环境中是否可以支持显示器,键盘和鼠标如果此方法返回true,则会从Toolkit和GraphicsEnvironment的依赖于显示器,键盘或鼠标的区域抛出HeadlessException
+     * 
+     * 
      * @return <code>true</code> if this environment cannot support
      * a display, keyboard, and mouse; <code>false</code>
      * otherwise
@@ -141,6 +170,8 @@ public abstract class GraphicsEnvironment {
     }
 
     /**
+    /* <p>
+    /* 
      * @return warning message if headless state is assumed by default;
      * null otherwise
      * @since 1.5
@@ -155,6 +186,8 @@ public abstract class GraphicsEnvironment {
     }
 
     /**
+    /* <p>
+    /* 
      * @return the value of the property "java.awt.headless"
      * @since 1.4
      */
@@ -200,6 +233,10 @@ public abstract class GraphicsEnvironment {
 
     /**
      * Check for headless state and throw HeadlessException if headless
+     * <p>
+     *  检查无头状态,如果无头则抛出HeadlessException
+     * 
+     * 
      * @since 1.4
      */
     static void checkHeadless() throws HeadlessException {
@@ -214,6 +251,10 @@ public abstract class GraphicsEnvironment {
      * <code>HeadlessException</code> will be thrown from areas of the
      * graphics environment that are dependent on a display, keyboard, or
      * mouse.
+     * <p>
+     * 返回此图形环境中是否可以支持显示器,键盘和鼠标。如果此操作返回true,则将从依赖于显示器,键盘或图形界面的图形环境区域抛出<code> HeadlessException </code>老鼠
+     * 
+     * 
      * @return <code>true</code> if a display, keyboard, and mouse
      * can be supported in this environment; <code>false</code>
      * otherwise
@@ -230,6 +271,10 @@ public abstract class GraphicsEnvironment {
     /**
      * Returns an array of all of the screen <code>GraphicsDevice</code>
      * objects.
+     * <p>
+     *  返回所有屏幕<code> GraphicsDevice </code>对象的数组
+     * 
+     * 
      * @return an array containing all the <code>GraphicsDevice</code>
      * objects that represent screen devices
      * @exception HeadlessException if isHeadless() returns true
@@ -240,6 +285,10 @@ public abstract class GraphicsEnvironment {
 
     /**
      * Returns the default screen <code>GraphicsDevice</code>.
+     * <p>
+     *  返回默认画面<code> GraphicsDevice </code>
+     * 
+     * 
      * @return the <code>GraphicsDevice</code> that represents the
      * default screen device
      * @exception HeadlessException if isHeadless() returns true
@@ -251,6 +300,10 @@ public abstract class GraphicsEnvironment {
     /**
      * Returns a <code>Graphics2D</code> object for rendering into the
      * specified {@link BufferedImage}.
+     * <p>
+     *  返回一个<code> Graphics2D </code>对象,用于渲染到指定的{@link BufferedImage}
+     * 
+     * 
      * @param img the specified <code>BufferedImage</code>
      * @return a <code>Graphics2D</code> to be used for rendering into
      * the specified <code>BufferedImage</code>
@@ -277,6 +330,16 @@ public abstract class GraphicsEnvironment {
      * returned in the <code>Font</code> array.  The other variations
      * must be derived by the application.
      *
+     * <p>
+     * 返回包含此<code> GraphicsEnvironment </code>中可用的所有字体的一点大小实例的数组。
+     * 典型用法是允许用户选择特定字体然后,应用程序可以调整字体大小并设置各种字体属性通过调用所选实例上的<code> derivFont </code>方法。
+     * <p>
+     *  此方法为应用程序提供了对使用<code> Font </code>实例渲染文本的最精确控制。
+     * 如果此<code> GraphicsEnvironment </code>中的字体有多个可编程变量,代码>字体</code>在数组中返回,并且其他变体必须由应用程序派生。
+     * <p>
+     * 如果此环境中的字体有多个可编程变量,例如多主字体,则在<code> Font </code>数组中只返回该字体的一个实例。其他变体必须由应用程序派生
+     * 
+     * 
      * @return an array of <code>Font</code> objects
      * @see #getAvailableFontFamilyNames
      * @see java.awt.Font
@@ -297,6 +360,13 @@ public abstract class GraphicsEnvironment {
      * italic, giving the font system flexibility in choosing its own best
      * match among multiple fonts in the same font family.
      *
+     * <p>
+     *  返回一个数组,该数组包含由<code> LocalegetDefault()返回的<code> GraphicsEnvironment </code>本地化默认语言环境中所有字体族的名称</code>
+     * 。
+     * <p>
+     *  典型用法是向用户呈现用于选择特定姓氏。然后,应用可以在创建字体时结合诸如粗体或斜体的样式指定该名称,从而给予字体系统在选择其自己的最佳方面的灵活性匹配同一个字体系列中的多种字体
+     * 
+     * 
      * @return an array of <code>String</code> containing font family names
      * localized for the default locale, or a suitable alternative
      * name if no name exists for this locale.
@@ -317,6 +387,12 @@ public abstract class GraphicsEnvironment {
      * italic, giving the font system flexibility in choosing its own best
      * match among multiple fonts in the same font family.
      *
+     * <p>
+     * 返回一个数组,该数组包含指定语言环境的本地化<code> GraphicsEnvironment </code>中的所有字体系列的名称
+     * <p>
+     *  典型用法是向用户呈现用于选择特定姓氏。然后,应用可以在创建字体时结合诸如粗体或斜体的样式指定该名称,从而给予字体系统在选择其自己的最佳方面的灵活性匹配同一个字体系列中的多种字体
+     * 
+     * 
      * @param l a {@link Locale} object that represents a
      * particular geographical, political, or cultural region.
      * Specifying <code>null</code> is equivalent to
@@ -357,6 +433,18 @@ public abstract class GraphicsEnvironment {
      * <p>Notice that an application can supersede the registration
      * of an earlier created font with a new one.
      * </ul>
+     * <p>
+     * 在此<code> GraphicsEnvironment </code>中注册<i>创建的</i> <code> Font </code>创建的字体是从调用{@link Font#createFont}
+     * 返回的字体,通过调用{@link Font#derivFont}创建字体调用此方法后,可用于通过名称或家族名构造新的<code> Font </code>,并由{@链接#getAvailableFontFamilyNames}
+     * 和{@link #getAllFonts}在这个应用程序或applet的执行上下文这意味着applet不能注册字体,他们是可见的其他applet。
+     * <p>
+     *  此方法可能不注册字体,因此返回<code> false </code>的原因是：
+     * <ul>
+     * <li>字体不是<i>已创建</i> <code>字体</code> <li>字体与此<code> GraphicsEnvironment中已创建的<code> Font </code> </code>
+     * 例如,如果名称是系统字体的名称,或者是{@link Font}类的文档中描述的逻辑字体,这取决于字体是否也可能冲突,如果它有相同的姓氏作为系统字体<p>请注意,应用程序可以取代使用新的字体注册早期创建的
+     * 字体。
+     * </ul>
+     * 
      * @return true if the <code>font</code> is successfully
      * registered in this <code>GraphicsEnvironment</code>.
      * @throws NullPointerException if <code>font</code> is null
@@ -388,6 +476,14 @@ public abstract class GraphicsEnvironment {
      * different font, clients should expect different metrics, and may need
      * to recalculate window sizes and layout. Therefore this method should
      * be called before user interface initialisation.
+     * <p>
+     * 表示在将逻辑字体映射到物理字体时对区域设置特定字体的首选项调用此方法表示字体渲染应主要使用特定于主要写入系统(由默认编码和初始默认语言环境指示的字体)的字体。
+     * 例如,如果主要写系统是日语,则字符应该使用日语字体呈现,如果可能的话,并且其他字体应该只用于日语字体没有字形的字符。
+     * <p>
+     * 调用此方法导致的字体呈现行为的实际更改是实现相关的;它可能没有任何效果,或者所请求的行为可能已经匹配默认行为。
+     * 轻量级和对等组件中的字体渲染的行为可能不同由于调用此方法请求不同的字体,客户端应该期望不同的度量,并且可能需要重新计算窗口大小和布局因此,该方法应在用户界面初始化之前调用。
+     * 
+     * 
      * @since 1.5
      */
     public void preferLocaleFonts() {
@@ -409,6 +505,13 @@ public abstract class GraphicsEnvironment {
      * different font, clients should expect different metrics, and may need
      * to recalculate window sizes and layout. Therefore this method should
      * be called before user interface initialisation.
+     * <p>
+     * 表示在逻辑字体映射到物理字体中的比例超比非比例(例如双间隔CJK字体)字体的首选项如果默认映射包含存在比例和非比例变体的字体,则调用此方法指示映射应使用比例变量
+     * <p>
+     *  调用此方法导致的字体呈现行为的实际更改是实现相关的;它可能没有任何效果在轻量级和对等组件中的字体渲染之间的行为可能不同由于调用此方法请求不同的字体,客户端应该期望不同的度量,并可能需要重新计算窗口大小
+     * 和布局因此,此方法应该之前调用用户界面初始化。
+     * 
+     * 
      * @since 1.5
      */
     public void preferProportionalFonts() {
@@ -420,6 +523,10 @@ public abstract class GraphicsEnvironment {
      * Returns the Point where Windows should be centered.
      * It is recommended that centered Windows be checked to ensure they fit
      * within the available display area using getMaximumWindowBounds().
+     * <p>
+     * 返回Windows应该居中的点建议使用getMaximumWindowBounds()来检查居中的Windows,以确保它们适合可用的显示区域。
+     * 
+     * 
      * @return the point where Windows should be centered
      *
      * @exception HeadlessException if isHeadless() returns true
@@ -446,6 +553,11 @@ public abstract class GraphicsEnvironment {
      * To get the usable bounds of a single display, use
      * <code>GraphicsConfiguration.getBounds()</code> and
      * <code>Toolkit.getScreenInsets()</code>.
+     * <p>
+     *  返回中心窗口的最大边界这些边界考虑本地窗口系统中的对象(例如任务栏和菜单栏)返回的边界将驻留在单个显示器上,但有一个例外：在多屏幕系统上,Windows应在所有显示器,此方法返回整个显示区域的边界
+     * <p>
+     *  要获得单个显示的可用边界,使用<code> GraphicsConfigurationgetBounds()</code>和<code> ToolkitgetScreenInsets()</code>
+     * 
      * @return  the maximum bounds for centered Windows
      *
      * @exception HeadlessException if isHeadless() returns true

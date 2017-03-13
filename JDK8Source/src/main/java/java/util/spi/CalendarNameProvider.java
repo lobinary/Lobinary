@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -161,6 +162,75 @@ import java.util.Map;
  *
  * <p>Time zone names are supported by {@link TimeZoneNameProvider}.
  *
+ * <p>
+ *  用于提供{@code Calendar}字段值的本地化字符串表示(显示名称)的服务提供程序的抽象类
+ * 
+ *  <p> <a name=\"calendartypes\"> <b>日历类型</b> </a>
+ * 
+ *  <p>日历类型用于指定{@link #getDisplayName(String,int,int,int,Locale)getDisplayName}和{@link #getDisplayNames(String,int,int,Locale)getDisplayNames}
+ * 方法的日历系统提供日历字段值名称有关详细信息,请参阅{@link Calendar#getCalendarType()}。
+ * 
+ *  <p> <b>日历字段</b>
+ * 
+ * <p>日历字段使用{@link Calendar}中定义的常量指定。以下是日历常用字段及其每个日历系统支持的值
+ * 
+ * <table style="border-bottom:1px solid" border="1" cellpadding="3" cellspacing="0" summary="Field values">
+ * <tr>
+ *  <th>字段</th> <th>值</th> <th>描述</th>
+ * </tr>
+ * <tr>
+ *  <td valign ="top"> {@ link Calendar#MONTH} </td> <td valign ="top"> {@ link Calendar#JANUARY} to {@link Calendar#UNDECIMBER}
+ *  </td> <td> Month编号为0(例如,0  -  1月,11  -  12月)某些日历系统有13个月如果支持的区域设置需要,格式化和独立窗体中需要支持月份名称如果没有区分两个形式,应以两种形
+ * 式</td>返回相同的名称。
+ * </tr>
+ * <tr>
+ * <td valign ="top"> {@ link Calendar#DAY_OF_WEEK} </td> <td valign ="top"> {@ link Calendar#SUNDAY} to
+ *  {@link Calendar#SATURDAY} </td> <td> Day星期日编号从1开始(即1  - 星期日,7  - 星期六)。
+ * </td>。
+ * </tr>
+ * <tr>
+ *  <td valign ="top"> {@ link Calendar#AM_PM} </td> <td valign ="top"> {@ link Calendar#AM} to {@link Calendar#PM}
+ *  </td> <td> 0 -  AM,1  -  PM </td>。
+ * </tr>
+ * </table>
+ * 
+ *  <p style ="margin-top：20px">以下是特定于日历的字段及其支持的值
+ * 
+ * <table style="border-bottom:1px solid" border="1" cellpadding="3" cellspacing="0" summary="Calendar type and field values">
+ * <tr>
+ *  <th>日历类型</th> <th>字段</th> <th>值</th> <th>描述</th>
+ * </tr>
+ * <tr>
+ *  <td rowspan ="2"valign ="top"> {@ code"gregory"} </td> <td rowspan ="2"valign ="top"> {@ link Calendar#ERA}
+ *  </td> <td > 0 </td> <td> {@ link javautilGregorianCalendar#BC}(BCE)</td>。
+ * </tr>
+ * <tr>
+ *  <td> 1 </td> <td> {@ link javautilGregorianCalender#AD}(CE)</td>
+ * </tr>
+ * <tr>
+ * <td rowspan ="2"valign ="top"> {@ code"buddhist"} </td> <td rowspan ="2"valign ="top"> {@ link Calendar#ERA}
+ *  </td> <td > 0 </td> <td> BC(BCE)</td>。
+ * </tr>
+ * <tr>
+ *  <td> 1 </td> <td> BE(佛教时代)</td>
+ * </tr>
+ * <tr>
+ *  <td rowspan ="6"valign ="top"> {@ code"japanese"} </td> <td rowspan ="5"valign ="top"> {@ link Calendar#ERA}
+ *  </td> <td > 0 </td> <td> Seireki(Meiji之前)</td>。
+ * </tr>
+ * <tr>
+ *  <td> 1 </td> <td> Meiji </td>
+ * </tr>
+ * <tr>
+ *  <td> 2 </td> <td> Taisho </td>
+ * </tr>
+ * <tr>
+ *  <td> 3 </td> <td> Showa </td>
+ * </tr>
+ * <tr>
+ *  <td> 4 </td> <td> Heisei </td>
+ * </tr>
+ * 
  * @author Masayoshi Okutsu
  * @since 1.8
  * @see CalendarDataProvider
@@ -170,6 +240,32 @@ public abstract class CalendarNameProvider extends LocaleServiceProvider {
     /**
      * Sole constructor. (For invocation by subclass constructors, typically
      * implicit.)
+     * <p>
+     * <tr>
+     *  <td> {@ link Calendar#YEAR} </td> <td> 1 </td> <td>每个时代的第一年当长式样式({@link Calendar#LONG_FORMAT}链接日历#LO
+     * NG_STANDALONE})另请参见<a href=\"//text/SimpleDateFormathtml#year\"> Year表示在{@code SimpleDateFormat} </a>
+     *  </td>。
+     * </tr>
+     * <tr>
+     * <td rowspan ="2"valign ="top"> {@ code"roc"} </td> <td rowspan ="2"valign ="top"> {@ link Calendar#ERA}
+     *  </td> <td > 0 </td> <td> ROC之前</td>。
+     * </tr>
+     * <tr>
+     *  <td> 1 </td> <td> ROC </td>
+     * </tr>
+     * <tr>
+     *  <td rowspan ="2"valign ="top"> {@ code"islamic"} </td> <td rowspan ="2"valign ="top"> {@ link Calendar#ERA}
+     *  </td> <td > 0 </td> <td> Before AH </td>之前。
+     * </tr>
+     * <tr>
+     *  <td> 1 </td> <td> Anno Hijrah(AH)</td>
+     * </tr>
+     * </table>
+     * 
+     *  <p> {@code"gregory"}的日历字段值名称必须与{@link javatextspiDateFormatSymbolsProvider}提供的日期时间符号一致
+     * 
+     *  <p>时区名称由{@link TimeZoneNameProvider}支持
+     * 
      */
     protected CalendarNameProvider() {
     }
@@ -203,6 +299,10 @@ public abstract class CalendarNameProvider extends LocaleServiceProvider {
      *                Calendar.LONG_STANDALONE, Locale.ENGLISH);
      * </pre>
      *
+     * <p>
+     *  唯一构造函数(对于通过子类构造函数调用,通常是隐式的)
+     * 
+     * 
      * @param calendarType
      *              the calendar type. (Any calendar type given by {@code locale}
      *              is ignored.)
@@ -263,6 +363,26 @@ public abstract class CalendarNameProvider extends LocaleServiceProvider {
      * getDisplayNames("gregory", Calendar.MONTH, Calendar.ALL_STYLES, Locale.ENGLISH);
      * </pre>
      *
+     * <p>
+     * 返回给定<code>样式</code>和<code>语言环境</code>中日历的字符串表示(显示名称)<code>字段值</code>如果不适用字符串表示形式, null </code>
+     * 
+     *  <p> {@ code field}是一个{@code Calendar}字段索引,例如{@link Calendar#MONTH}时区字段{@link Calendar#ZONE_OFFSET}和{@link Calendar#DST_OFFSET}
+     * 如果指定了任何时区字段,则必须返回此方法支持的<em> </em> {@code null}。
+     * 
+     *  <p> {@ code value}是{@code field}值的数字表示形式例如,如果{@code field}为{@link Calendar#DAY_OF_WEEK},则有效值为{@link Calendar#SUNDAY}
+     *  {@link日历#SATURDAY}(含)。
+     * 
+     * <p> {@ code style}给出了字符串表示的样式。
+     * 它是{@link日历#SHORT_FORMAT}({@link日历#SHORT SHORT}),{@link日历#SHORT_STANDALONE},{@link日历# LONG_FORMAT}({@link Calendar#LONG LONG}
+     * ),{@link Calendar#LONG_STANDALONE},{@link Calendar#NARROW_FORMAT}或{@link Calendar#NARROW_STANDALONE}。
+     * <p> {@ code style}给出了字符串表示的样式。
+     * 
+     *  <p>例如,以下调用将返回{@code"Sunday"}
+     * <pre>
+     *  getDisplayName("gregory",CalendarDAY_OF_WEEK,CalendarSUNDAY,CalendarLONG_STANDALONE,LocaleENGLISH);。
+     * </pre>
+     * 
+     * 
      * @param calendarType
      *              the calendar type. (Any calendar type given by {@code locale}
      *              is ignored.)

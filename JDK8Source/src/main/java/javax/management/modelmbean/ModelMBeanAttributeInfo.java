@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -23,6 +24,8 @@
  *
  */
 /*
+/* <p>
+/* 
  * @author    IBM Corp.
  *
  * Copyright IBM Corp. 1999-2000.  All rights reserved.
@@ -108,6 +111,37 @@ import javax.management.RuntimeOperationsException;
  *
  * <p>The <b>serialVersionUID</b> of this class is <code>6181543027787327345L</code>.
  *
+ * <p>
+ *  <p> ModelMBeanAttributeInfo对象描述了ModelMBean的属性。
+ * 它是MBeanAttributeInfo的子类,添加了相关的描述符和DescriptorAccess接口的实现</p>。
+ * 
+ * <P id="descriptor">
+ *  描述符中的字段被定义,但不限于,以下注意,当该表中的类型是Number时,也可以使用作为Long的十进制表示的String </P>
+ * 
+ * <table border="1" cellpadding="5" summary="ModelMBeanAttributeInfo Fields">
+ * <tr> <th>名称</th> <th>类型</th> <th>含义</th> </tr> <tr> <td>名称</td> <td>字符串</td> <td>属性名称</td> </tr> <tr>
+ *  <td> descriptorType </td> <td>字符串</td> <td>必须是"属性"</td> </tr> <tr属性</td> </td> <tr> <td>的当前(缓存)值默认值</td>
+ * 对象</td> / td> <td>对象</td> <td>属性的默认值</td> </tr> <tr> <td> displayName </td> <td>字符串</td> <td>属性用于显示</td>
+ *  </tr> <tr> <td> getMethod </td> <td> String </td> <td> get方法的操作描述符名称</td> </tr > <tr> <td> setMethod
+ *  </td> <td> String </td> <td> set方法的操作描述符的名称</td> </tr> <tr> <td> protocolMap </td> < td>描述符</td> <td>
+ * 请参阅JMX规范文档中的"协议映射支持"部分映射必须适用于属性,并且条目可以在运行时更新或扩充。
+ * </td> </tr> <tr> <td> persistPolicy </td> <td> String </td> <td> OnUpdate | OnTimer | NoMoreOftenThan
+ *  | OnUnregister | Always | Never查看JMX规范文档中的"MBean Descriptor Fields"部分</td> </tr> <tr> <td> persistPe
+ * riod </td> <td> Number </td> <td>持续周期的频率(以秒为单位)当persistPolicy为"OnTimer"或"NoMoreOftenThan"时使用</td> </tr>
+ *  <tr> <td> currencyTimeLimit </td> <td> Number </td> <td> <a href=\"#value=field\">值</a>有效的时间：&lt; 0 
+ * never,= 0 always,&gt; 0秒</td> </tr> <tr> <td> lastUpdatedTimeStamp < / td> <td> Number </td> <td>设置<a href=\"#value-field\">
+ * 值</a>时</td> </td>显示</td> </td> </td> </td> 1-4其中1：总是可见,4：很少可见</td> > <tr> <td> presentationString </td>
+ *  <td> String </td> <td> XML格式的字符串以允许显示数据</td>。
+ * </table>
+ * 
+ * <p>默认描述符包含name,descriptorType和displayName字段name和displayName字段的默认值是属性的名称</p>
+ * 
+ *  <p> <b>注意：</b>由于本规范之前版本的不一致,建议不要对<code> currencyTimeLimit </code>使用负值或零值。
+ * 表示高速缓存的值从不有效,省略<code> currencyTimeLimit </code>字段要指示它始终有效,请对此字段使用非常大的数字</p>。
+ * 
+ *  <p>此类的<b> serialVersionUID </b>是<code> 6181543027787327345L </code>
+ * 
+ * 
  * @since 1.5
  */
 
@@ -144,6 +178,8 @@ public class ModelMBeanAttributeInfo
     // Actual serial version and serial form
     private static final long serialVersionUID;
     /**
+    /* <p>
+    /* 
      * @serialField attrDescriptor Descriptor The {@link Descriptor}
      * containing the metadata corresponding to this attribute
      */
@@ -169,6 +205,8 @@ public class ModelMBeanAttributeInfo
     // END Serialization compatibility stuff
 
         /**
+        /* <p>
+        /* 
          * @serial The {@link Descriptor} containing the metadata corresponding to
          * this attribute
          */
@@ -183,6 +221,11 @@ public class ModelMBeanAttributeInfo
          * on the {@code Method} objects that contain the {@link
          * DescriptorKey} meta-annotation.
          *
+         * <p>
+         * 使用默认描述符构造ModelMBeanAttributeInfo对象构造对象的{@link Descriptor}将包含由包含{@link DescriptorKey}元注释的{@code Method}
+         * 对象上的任何注释贡献的字段。
+         * 
+         * 
          * @param name The name of the attribute.
          * @param description A human readable description of the attribute. Optional.
          * @param getter The method used for reading the attribute value.
@@ -222,6 +265,11 @@ public class ModelMBeanAttributeInfo
          * objects that contain the {@link DescriptorKey}
          * meta-annotation.
          *
+         * <p>
+         *  构造ModelMBeanAttributeInfo对象构造的对象的{@link描述符}将包含由{@code Method}对象中的任何注释贡献的字段,这些对象包含{@link DescriptorKey}
+         * 元注释。
+         * 
+         * 
          * @param name The name of the attribute.
          * @param description A human readable description of the attribute. Optional.
          * @param getter The method used for reading the attribute value.
@@ -264,6 +312,10 @@ public class ModelMBeanAttributeInfo
         /**
          * Constructs a ModelMBeanAttributeInfo object with a default descriptor.
          *
+         * <p>
+         *  构造具有默认描述符的ModelMBeanAttributeInfo对象
+         * 
+         * 
          * @param name The name of the attribute
          * @param type The type or class name of the attribute
          * @param description A human readable description of the attribute.
@@ -295,6 +347,10 @@ public class ModelMBeanAttributeInfo
         /**
          * Constructs a ModelMBeanAttributeInfo object.
          *
+         * <p>
+         *  构造一个ModelMBeanAttributeInfo对象
+         * 
+         * 
          * @param name The name of the attribute
          * @param type The type or class name of the attribute
          * @param description A human readable description of the attribute.
@@ -336,6 +392,10 @@ public class ModelMBeanAttributeInfo
          * ModelMBeanAttributeInfo Object.  A default descriptor will
          * be created.
          *
+         * <p>
+         *  从此ModelMBeanAttributeInfo对象构造一个新的ModelMBeanAttributeInfo对象将创建一个默认描述符
+         * 
+         * 
          * @param inInfo the ModelMBeanAttributeInfo to be duplicated
          */
 
@@ -361,6 +421,10 @@ public class ModelMBeanAttributeInfo
          * Gets a copy of the associated Descriptor for the
          * ModelMBeanAttributeInfo.
          *
+         * <p>
+         * 获取ModelMBeanAttributeInfo的相关描述符的副本
+         * 
+         * 
          * @return Descriptor associated with the
          * ModelMBeanAttributeInfo object.
          *
@@ -388,6 +452,11 @@ public class ModelMBeanAttributeInfo
         * assigned.  If the new Descriptor is invalid, then a
         * RuntimeOperationsException wrapping an
         * IllegalArgumentException is thrown.
+        * <p>
+        *  设置ModelMBeanAttributeDescriptor的相关描述符(完全替换)如果新描述符为null,则相关描述符将恢复为默认描述符。
+        * 描述符在分配之前进行验证如果新描述符无效,则抛出包含IllegalArgumentException的RuntimeOperationsException异常。
+        * 
+        * 
         * @param inDescriptor replaces the Descriptor associated with the
         * ModelMBeanAttributeInfo
         *
@@ -403,6 +472,10 @@ public class ModelMBeanAttributeInfo
         /**
         * Creates and returns a new ModelMBeanAttributeInfo which is a duplicate of this ModelMBeanAttributeInfo.
         *
+        * <p>
+        *  创建并返回一个新的ModelMBeanAttributeInfo,它是此ModelMBeanAttributeInfo的副本
+        * 
+        * 
         * @exception RuntimeOperationsException for illegal value for
         * field Names or field Values.  If the descriptor construction
         * fails for any reason, this exception will be thrown.
@@ -422,6 +495,9 @@ public class ModelMBeanAttributeInfo
         /**
         * Returns a human-readable version of the
         * ModelMBeanAttributeInfo instance.
+        * <p>
+        *  返回一个人类可读的版本的ModelMBeanAttributeInfo实例
+        * 
         */
         @Override
         public String toString()
@@ -444,6 +520,12 @@ public class ModelMBeanAttributeInfo
          * The following fields will be defaulted if they are not already set:
          * displayName=this.getName(),name=this.getName(),descriptorType = "attribute"
          *
+         * <p>
+         * 克隆传递的描述符,设置默认值,并检查有效性如果描述符无效(例如有错误的"名称"),这表示编程错误和一个RuntimeOperationsException将抛出
+         * 
+         *  如果尚未设置以下字段,则将默认为：displayName = thisgetName(),name = thisgetName(),descriptorType ="attribute"
+         * 
+         * 
          * @param in Descriptor to be checked, or null which is equivalent to
          * an empty Descriptor.
          * @exception RuntimeOperationsException if Descriptor is invalid
@@ -497,6 +579,9 @@ public class ModelMBeanAttributeInfo
 
     /**
      * Deserializes a {@link ModelMBeanAttributeInfo} from an {@link ObjectInputStream}.
+     * <p>
+     *  从{@link ObjectInputStream}反序列化{@link ModelMBeanAttributeInfo}
+     * 
      */
     private void readObject(ObjectInputStream in)
             throws IOException, ClassNotFoundException {
@@ -507,6 +592,8 @@ public class ModelMBeanAttributeInfo
 
     /**
      * Serializes a {@link ModelMBeanAttributeInfo} to an {@link ObjectOutputStream}.
+     * <p>
+     *  将{@link ModelMBeanAttributeInfo}序列化为{@link ObjectOutputStream}
      */
     private void writeObject(ObjectOutputStream out)
             throws IOException {

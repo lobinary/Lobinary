@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2011, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -44,6 +45,12 @@ import static java.lang.Math.ulp;
  * The actual storage representation of the coordinates is left to
  * the subclass.
  *
+ * <p>
+ *  <code> CubicCurve2D </code>类在{@code(x,y)}坐标空间中定义了一个三次参数曲线段
+ * <p>
+ *  这个类只是存储2D三维曲线段的所有对象的抽象超类。坐标的实际存储表示是留给子类
+ * 
+ * 
  * @author      Jim Graham
  * @since 1.2
  */
@@ -52,12 +59,20 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
     /**
      * A cubic parametric curve segment specified with
      * {@code float} coordinates.
+     * <p>
+     *  用{@code float}坐标指定的三次参数曲线段
+     * 
+     * 
      * @since 1.2
      */
     public static class Float extends CubicCurve2D implements Serializable {
         /**
          * The X coordinate of the start point
          * of the cubic curve segment.
+         * <p>
+         *  三次曲线段起点的X坐标
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -66,6 +81,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
         /**
          * The Y coordinate of the start point
          * of the cubic curve segment.
+         * <p>
+         *  三次曲线段起点的Y坐标
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -74,6 +93,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
         /**
          * The X coordinate of the first control point
          * of the cubic curve segment.
+         * <p>
+         *  三次曲线段的第一个控制点的X坐标
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -82,6 +105,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
         /**
          * The Y coordinate of the first control point
          * of the cubic curve segment.
+         * <p>
+         *  三次曲线段的第一个控制点的Y坐标
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -90,6 +117,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
         /**
          * The X coordinate of the second control point
          * of the cubic curve segment.
+         * <p>
+         * 三次曲线段的第二控制点的X坐标
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -98,6 +129,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
         /**
          * The Y coordinate of the second control point
          * of the cubic curve segment.
+         * <p>
+         *  三次曲线段的第二控制点的Y坐标
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -106,6 +141,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
         /**
          * The X coordinate of the end point
          * of the cubic curve segment.
+         * <p>
+         *  三次曲线段的终点的X坐标
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -114,6 +153,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
         /**
          * The Y coordinate of the end point
          * of the cubic curve segment.
+         * <p>
+         *  三次曲线段的终点的Y坐标
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -122,6 +165,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
         /**
          * Constructs and initializes a CubicCurve with coordinates
          * (0, 0, 0, 0, 0, 0, 0, 0).
+         * <p>
+         *  构造并初始化坐标为(0,0,0,0,0,0,0,0)的CubicCurve
+         * 
+         * 
          * @since 1.2
          */
         public Float() {
@@ -131,6 +178,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
          * Constructs and initializes a {@code CubicCurve2D} from
          * the specified {@code float} coordinates.
          *
+         * <p>
+         *  从指定的{@code float}坐标构造和初始化{@code CubicCurve2D}
+         * 
+         * 
          * @param x1 the X coordinate for the start point
          *           of the resulting {@code CubicCurve2D}
          * @param y1 the Y coordinate for the start point
@@ -159,6 +210,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getX1() {
@@ -167,6 +222,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getY1() {
@@ -175,6 +234,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public Point2D getP1() {
@@ -183,6 +246,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getCtrlX1() {
@@ -191,6 +258,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getCtrlY1() {
@@ -199,6 +270,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public Point2D getCtrlP1() {
@@ -207,6 +282,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getCtrlX2() {
@@ -215,6 +294,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getCtrlY2() {
@@ -223,6 +306,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public Point2D getCtrlP2() {
@@ -231,6 +318,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getX2() {
@@ -239,6 +330,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getY2() {
@@ -247,6 +342,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public Point2D getP2() {
@@ -255,6 +354,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public void setCurve(double x1, double y1,
@@ -276,6 +379,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
          * Sets the location of the end points and control points
          * of this curve to the specified {@code float} coordinates.
          *
+         * <p>
+         *  将此曲线的终点和控制点的位置设置为指定的{@code float}坐标
+         * 
+         * 
          * @param x1 the X coordinate used to set the start point
          *           of this {@code CubicCurve2D}
          * @param y1 the Y coordinate used to set the start point
@@ -311,6 +418,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public Rectangle2D getBounds2D() {
@@ -328,6 +439,9 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
         /*
          * JDK 1.6 serialVersionUID
+         * <p>
+         * JDK 16 serialVersionUID
+         * 
          */
         private static final long serialVersionUID = -1272015596714244385L;
     }
@@ -335,12 +449,20 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
     /**
      * A cubic parametric curve segment specified with
      * {@code double} coordinates.
+     * <p>
+     *  用{@code double}坐标指定的三次参数曲线段
+     * 
+     * 
      * @since 1.2
      */
     public static class Double extends CubicCurve2D implements Serializable {
         /**
          * The X coordinate of the start point
          * of the cubic curve segment.
+         * <p>
+         *  三次曲线段起点的X坐标
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -349,6 +471,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
         /**
          * The Y coordinate of the start point
          * of the cubic curve segment.
+         * <p>
+         *  三次曲线段起点的Y坐标
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -357,6 +483,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
         /**
          * The X coordinate of the first control point
          * of the cubic curve segment.
+         * <p>
+         *  三次曲线段的第一个控制点的X坐标
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -365,6 +495,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
         /**
          * The Y coordinate of the first control point
          * of the cubic curve segment.
+         * <p>
+         *  三次曲线段的第一个控制点的Y坐标
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -373,6 +507,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
         /**
          * The X coordinate of the second control point
          * of the cubic curve segment.
+         * <p>
+         *  三次曲线段的第二控制点的X坐标
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -381,6 +519,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
         /**
          * The Y coordinate of the second control point
          * of the cubic curve segment.
+         * <p>
+         *  三次曲线段的第二控制点的Y坐标
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -389,6 +531,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
         /**
          * The X coordinate of the end point
          * of the cubic curve segment.
+         * <p>
+         *  三次曲线段的终点的X坐标
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -397,6 +543,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
         /**
          * The Y coordinate of the end point
          * of the cubic curve segment.
+         * <p>
+         *  三次曲线段的终点的Y坐标
+         * 
+         * 
          * @since 1.2
          * @serial
          */
@@ -405,6 +555,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
         /**
          * Constructs and initializes a CubicCurve with coordinates
          * (0, 0, 0, 0, 0, 0, 0, 0).
+         * <p>
+         *  构造并初始化坐标为(0,0,0,0,0,0,0,0)的CubicCurve
+         * 
+         * 
          * @since 1.2
          */
         public Double() {
@@ -414,6 +568,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
          * Constructs and initializes a {@code CubicCurve2D} from
          * the specified {@code double} coordinates.
          *
+         * <p>
+         * 从指定的{@code double}坐标构造和初始化{@code CubicCurve2D}
+         * 
+         * 
          * @param x1 the X coordinate for the start point
          *           of the resulting {@code CubicCurve2D}
          * @param y1 the Y coordinate for the start point
@@ -442,6 +600,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getX1() {
@@ -450,6 +612,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getY1() {
@@ -458,6 +624,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public Point2D getP1() {
@@ -466,6 +636,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getCtrlX1() {
@@ -474,6 +648,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getCtrlY1() {
@@ -482,6 +660,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public Point2D getCtrlP1() {
@@ -490,6 +672,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getCtrlX2() {
@@ -498,6 +684,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getCtrlY2() {
@@ -506,6 +696,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public Point2D getCtrlP2() {
@@ -514,6 +708,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getX2() {
@@ -522,6 +720,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public double getY2() {
@@ -530,6 +732,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public Point2D getP2() {
@@ -538,6 +744,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public void setCurve(double x1, double y1,
@@ -557,6 +767,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
         /**
          * {@inheritDoc}
+         * <p>
+         *  {@inheritDoc}
+         * 
+         * 
          * @since 1.2
          */
         public Rectangle2D getBounds2D() {
@@ -574,6 +788,9 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
         /*
          * JDK 1.6 serialVersionUID
+         * <p>
+         *  JDK 16 serialVersionUID
+         * 
          */
         private static final long serialVersionUID = -4202960122839707295L;
     }
@@ -585,6 +802,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
      * the information necessary to satisfy the various accessor
      * methods below.
      *
+     * <p>
+     *  这是一个不能直接实例化的抽象类类型特定的实现子类可用于实例化,并提供了许多格式来存储满足下面各种存取器方法所需的信息
+     * 
+     * 
      * @see java.awt.geom.CubicCurve2D.Float
      * @see java.awt.geom.CubicCurve2D.Double
      * @since 1.2
@@ -594,6 +815,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
     /**
      * Returns the X coordinate of the start point in double precision.
+     * <p>
+     *  以双精度返回起点的X坐标
+     * 
+     * 
      * @return the X coordinate of the start point of the
      *         {@code CubicCurve2D}.
      * @since 1.2
@@ -602,6 +827,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
     /**
      * Returns the Y coordinate of the start point in double precision.
+     * <p>
+     *  以双精度返回起点的Y坐标
+     * 
+     * 
      * @return the Y coordinate of the start point of the
      *         {@code CubicCurve2D}.
      * @since 1.2
@@ -610,6 +839,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
     /**
      * Returns the start point.
+     * <p>
+     *  返回起点
+     * 
+     * 
      * @return a {@code Point2D} that is the start point of
      *         the {@code CubicCurve2D}.
      * @since 1.2
@@ -618,6 +851,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
     /**
      * Returns the X coordinate of the first control point in double precision.
+     * <p>
+     * 以双精度返回第一个控制点的X坐标
+     * 
+     * 
      * @return the X coordinate of the first control point of the
      *         {@code CubicCurve2D}.
      * @since 1.2
@@ -626,6 +863,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
     /**
      * Returns the Y coordinate of the first control point in double precision.
+     * <p>
+     *  以双精度返回第一个控制点的Y坐标
+     * 
+     * 
      * @return the Y coordinate of the first control point of the
      *         {@code CubicCurve2D}.
      * @since 1.2
@@ -634,6 +875,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
     /**
      * Returns the first control point.
+     * <p>
+     *  返回第一个控制点
+     * 
+     * 
      * @return a {@code Point2D} that is the first control point of
      *         the {@code CubicCurve2D}.
      * @since 1.2
@@ -643,6 +888,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
     /**
      * Returns the X coordinate of the second control point
      * in double precision.
+     * <p>
+     *  以双精度返回第二个控制点的X坐标
+     * 
+     * 
      * @return the X coordinate of the second control point of the
      *         {@code CubicCurve2D}.
      * @since 1.2
@@ -652,6 +901,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
     /**
      * Returns the Y coordinate of the second control point
      * in double precision.
+     * <p>
+     *  以双精度返回第二个控制点的Y坐标
+     * 
+     * 
      * @return the Y coordinate of the second control point of the
      *         {@code CubicCurve2D}.
      * @since 1.2
@@ -660,6 +913,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
     /**
      * Returns the second control point.
+     * <p>
+     *  返回第二个控制点
+     * 
+     * 
      * @return a {@code Point2D} that is the second control point of
      *         the {@code CubicCurve2D}.
      * @since 1.2
@@ -668,6 +925,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
     /**
      * Returns the X coordinate of the end point in double precision.
+     * <p>
+     *  以双精度返回终点的X坐标
+     * 
+     * 
      * @return the X coordinate of the end point of the
      *         {@code CubicCurve2D}.
      * @since 1.2
@@ -676,6 +937,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
     /**
      * Returns the Y coordinate of the end point in double precision.
+     * <p>
+     *  以双精度返回终点的Y坐标
+     * 
+     * 
      * @return the Y coordinate of the end point of the
      *         {@code CubicCurve2D}.
      * @since 1.2
@@ -684,6 +949,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
     /**
      * Returns the end point.
+     * <p>
+     *  返回结束点
+     * 
+     * 
      * @return a {@code Point2D} that is the end point of
      *         the {@code CubicCurve2D}.
      * @since 1.2
@@ -694,6 +963,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
      * Sets the location of the end points and control points of this curve
      * to the specified double coordinates.
      *
+     * <p>
+     *  将此曲线的终点和控制点的位置设置为指定的双坐标
+     * 
+     * 
      * @param x1 the X coordinate used to set the start point
      *           of this {@code CubicCurve2D}
      * @param y1 the Y coordinate used to set the start point
@@ -721,6 +994,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
      * Sets the location of the end points and control points of this curve
      * to the double coordinates at the specified offset in the specified
      * array.
+     * <p>
+     *  将此曲线的终点和控制点的位置设置为指定数组中指定偏移处的双坐标
+     * 
+     * 
      * @param coords a double array containing coordinates
      * @param offset the index of <code>coords</code> from which to begin
      *          setting the end points and control points of this curve
@@ -737,6 +1014,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
     /**
      * Sets the location of the end points and control points of this curve
      * to the specified <code>Point2D</code> coordinates.
+     * <p>
+     * 将此曲线的终点和控制点的位置设置为指定的<code> Point2D </code>坐标
+     * 
+     * 
      * @param p1 the first specified <code>Point2D</code> used to set the
      *          start point of this curve
      * @param cp1 the second specified <code>Point2D</code> used to set the
@@ -756,6 +1037,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
      * Sets the location of the end points and control points of this curve
      * to the coordinates of the <code>Point2D</code> objects at the specified
      * offset in the specified array.
+     * <p>
+     *  将此曲线的终点和控制点的位置设置为指定数组中指定偏移处的<code> Point2D </code>对象的坐标
+     * 
+     * 
      * @param pts an array of <code>Point2D</code> objects
      * @param offset  the index of <code>pts</code> from which to begin setting
      *          the end points and control points of this curve to the
@@ -772,6 +1057,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
     /**
      * Sets the location of the end points and control points of this curve
      * to the same as those in the specified <code>CubicCurve2D</code>.
+     * <p>
+     *  将此曲线的终点和控制点的位置设置为与指定的<code> CubicCurve2D </code>中的位置相同。
+     * 
+     * 
      * @param c the specified <code>CubicCurve2D</code>
      * @since 1.2
      */
@@ -785,6 +1074,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
      * by the indicated control points. The flatness is the maximum distance
      * of a control point from the line connecting the end points.
      *
+     * <p>
+     *  返回由指示的控制点指定的三次曲线的平坦度的平方平坦度是控制点与连接端点的直线的最大距离
+     * 
+     * 
      * @param x1 the X coordinate that specifies the start point
      *           of a {@code CubicCurve2D}
      * @param y1 the Y coordinate that specifies the start point
@@ -819,6 +1112,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
      * by the indicated control points. The flatness is the maximum distance
      * of a control point from the line connecting the end points.
      *
+     * <p>
+     * 返回由指示的控制点指定的三次曲线的平坦度平坦度是控制点与连接端点的直线的最大距离
+     * 
+     * 
      * @param x1 the X coordinate that specifies the start point
      *           of a {@code CubicCurve2D}
      * @param y1 the Y coordinate that specifies the start point
@@ -852,6 +1149,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
      * by the control points stored in the indicated array at the
      * indicated index. The flatness is the maximum distance
      * of a control point from the line connecting the end points.
+     * <p>
+     *  返回由指定数组中存储的控制点在指定索引处指定的三次曲线平坦度的平方。平坦度是控制点与连接端点的直线的最大距离
+     * 
+     * 
      * @param coords an array containing coordinates
      * @param offset the index of <code>coords</code> from which to begin
      *          getting the end points and control points of the curve
@@ -872,6 +1173,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
      * by the control points stored in the indicated array at the
      * indicated index.  The flatness is the maximum distance
      * of a control point from the line connecting the end points.
+     * <p>
+     *  返回指定数组中存储的控制点在指定索引处指定的三次曲线的平坦度平坦度是控制点与连接端点的直线的最大距离
+     * 
+     * 
      * @param coords an array containing coordinates
      * @param offset the index of <code>coords</code> from which to begin
      *          getting the end points and control points of the curve
@@ -891,6 +1196,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
      * Returns the square of the flatness of this curve.  The flatness is the
      * maximum distance of a control point from the line connecting the
      * end points.
+     * <p>
+     *  返回此曲线的平坦度的平方平坦度是控制点与连接端点的线之间的最大距离
+     * 
+     * 
      * @return the square of the flatness of this curve.
      * @since 1.2
      */
@@ -903,6 +1212,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
      * Returns the flatness of this curve.  The flatness is the
      * maximum distance of a control point from the line connecting the
      * end points.
+     * <p>
+     * 返回此曲线的平坦度平坦度是控制点与连接端点的线之间的最大距离
+     * 
+     * 
      * @return the flatness of this curve.
      * @since 1.2
      */
@@ -916,6 +1229,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
      * subdivided curves into the left and right curve parameters.
      * Either or both of the left and right objects may be the same
      * as this object or null.
+     * <p>
+     *  细分该三次曲线并将所得到的两个细分曲线存储到左和右曲线参数中。左和右对象中的任一个或两者可以与该对象相同或为零
+     * 
+     * 
      * @param left the cubic curve object for storing for the left or
      * first half of the subdivided curve
      * @param right the cubic curve object for storing for the right or
@@ -932,6 +1249,11 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
      * <code>left</code> and <code>right</code> curve parameters.
      * Either or both of the <code>left</code> and <code>right</code> objects
      * may be the same as the <code>src</code> object or <code>null</code>.
+     * <p>
+     *  细分由<code> src </code>参数指定的三次曲线,并将生成的两个细分曲线存储到<code> left </code>和<code> right </code>曲线参数。
+     * 代码>左</code>和<code>右</code>对象可以与<code> src </code>对象或<code> null </code>。
+     * 
+     * 
      * @param src the cubic curve to be subdivided
      * @param left the cubic curve object for storing the left or
      * first half of the subdivided curve
@@ -987,6 +1309,14 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
      * and <code>right</code> and to use offsets, such as <code>rightoff</code>
      * equals (<code>leftoff</code> + 6), in order
      * to avoid allocating extra storage for this common point.
+     * <p>
+     * 将指定存储在<code> src </code>数组中的坐标指定的三次曲线存储在索引<code> srcoff </code>到(<code> srcoff </code>&nbsp; +&nbsp; 
+     * 7)在<code> left </code>和<code> right </code>数组中的任何一个或两个可以是<code> null </code>与<code> src </code>数组相同的数
+     * 组请注意,第一个细分曲线中的最后一个点与第二个细分曲线中的第一个点相同。
+     * 因此,可以为<code> left </code>和<code> right </code>,并使用偏移量,例如<code> rightoff </code> equals(<code> leftoff
+     *  </code> + 6),以避免分配额外的存储空间为这个共同点。
+     * 
+     * 
      * @param src the array holding the coordinates for the source curve
      * @param srcoff the offset into the array of the beginning of the
      * the 6 source coordinates
@@ -1061,6 +1391,14 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
      * A return value of -1 is used to distinguish a constant equation
      * that might be always 0 or never 0 from an equation that has no
      * zeroes.
+     * <p>
+     * 求解其系数位于<code> eqn </code>数组中的三次方,并将非复杂根返回到同一数组,返回根数解决的三次方由以下等式表示：
+     * <pre>
+     *  eqn = {c,b,a,d} dx ^ 3 + ax ^ 2 + bx + c = 0
+     * </pre>
+     *  返回值-1用于将可能始终为0或永不为0的常数方程与不具有零的方程区分开
+     * 
+     * 
      * @param eqn an array containing coefficients for a cubic
      * @return the number of roots, or -1 if the equation is a constant.
      * @since 1.2
@@ -1079,6 +1417,11 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
      * A return value of -1 is used to distinguish a constant equation,
      * which may be always 0 or never 0, from an equation which has no
      * zeroes.
+     * <p>
+     *  求解其系数在<code> eqn </code>数组中的立方,并将非复数根放入<code> res </code>数组中,返回根数立方求解由以下等式表示：使用-1的返回值来将常数等式(其可以始终为0或
+     * 永不为0)与等式(1)区分开,等式其没有零。
+     * 
+     * 
      * @param eqn the specified array of coefficients to use to solve
      *        the cubic equation
      * @param res the array that contains the non-complex roots
@@ -1384,6 +1727,45 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
      * so the result is reliable. The proof isn't difficult, but it's a bit
      * long to include here.
      * Precondition: eqn must represent a cubic polynomial
+     * <p>
+     * res [0] = x1; } // return 1} else if(critCount == 0){res [0] = bisectRootWithHint(eqn,x0,xe,res [1]); // return 1}
+     * } else if(num == 2 && critCount == 2){// XXX：这里我们假设res [0]比res [1]更好的精度//这是真的,因为这个方法只有使用from solveCubic //将res [0]的根,它将计算任何方法甚至//如果num == 1如果这个方法从任何其他方法使用,或//如果solveCubic实现改变,这个假设应该//被重新评估,并且goodRoot的选择可能必须变成// goodRoot =(abs(eqn'(res [0]))> abs(eqn'(res [1])))? res [0]：res [1] //其中eqn'是等式的导数double goodRoot = res [0]; double badRoot = res [1]; double x1 = intervals [0]; double x2 = intervals [1]; //如果一个三次曲线真的有2个根,这些根之一必须是//在一个临界点不能是goodRoot,所以我们计算x是//是从goodRoot最远的临界点如果有两个//根,x必须是第二个,所以我们在x评估eqn,如果//它是零(或足够接近)我们把x放在res [1](或badRoot,如果// | solveEqn(eqn, badRoot)| <| solveEqn(eqn,3,x)|但是这不应该经常发生)double x = abs(x1  -  goodRoot)> abs(x2  -  goodRoot)? x1：x2; double fx = solveEqn(eqn,3,x);。
+     * 
+     * if(iszero(fx,10000000 * ulp(x))){double badRootVal = solveEqn(eqn,3,badRoot) res [1] = abs(badRootVal)<abs(fx)? badRoot：x; return 2; }} // else只有一个根 -  goodRoot,它已经在res [0]。
+     * 
+     *  return 1; }}
+     * 
+     *  //使用newton的方法private static double refineRootWithHint(double [] eqn,double min,double max,double t){if(！inInterval(t,min,max)){return t; }
+     *  double [] deriv = {eqn [1],2 * eqn [2],3 * eqn [3]}; double origt = t; for(int i = 0; i <3; i ++){double slope = solveEqn(deriv,2,t) double y = solveEqn(eqn,3,t);双delta =  - (y /斜率); double newt = t + delta;。
+     * 
+     *  if(slope == 0 || y == 0 || t == newt){break; }}
+     * 
+     *  t = newt; } if(within(t,origt,1000 * ulp(origt))&& inInterval(t,min,max)){return t; } return origt; 
+     * }}。
+     * 
+     * private double double bisectRootWithHint(double [] eqn,double x0,double xe,double hint){double delta1 = Mathmin(abs(hint-x0)/ 64,00625); double delta2 = Mathmin(abs(hint-xe)/ 64,00625); double x02 = hint-delta1; double xe2 = hint + delta2; double fx02 = solveEqn(eqn,3,x02); double fxe2 = solveEqn(eqn,3,xe2); while(oppositeSigns(fx02,fxe2)){if(x02> = xe2){return x02; }
+     *  x0 = x02; xe = xe2; delta1 / = 64; delta2 / = 64; x02 = hint-delta1; xe2 = hint + delta2; fx02 = sol
+     * veEqn(eqn,3,x02); fxe2 = solveEqn(eqn,3,xe2); } if(fx02 == 0){return x02; } if(fxe2 == 0){return xe2; }
+     * }。
+     * 
+     *  return bisectRoot(eqn,x0,xe); }}
+     * 
+     * private double bisectRoot(double [] eqn,double x0,double xe){double fx0 = solveEqn(eqn,3,x0); double m = x0 +(xe-x0)/ 2; while(m！= x0 && m！= xe){double fm = solveEqn(eqn,3,m); if(fm == 0){return m; }
+     *  if(oppositeSigns(fx0,fm)){xe = m; } else {fx0 = fm; x0 = m; } m = x0 +(xe-x0)/ 2; } return m; }}。
+     * 
+     *  private static boolean inInterval(double t,double min,double max){return min <= t && t <= max; }}
+     * 
+     *  private double boolean within(double x,double y,double err){double d = y  -  x; return(d <= err && d> = -err); }
+     * }。
+     * 
+     *  private static boolean iszero(double x,double err){return within(x,0,err); }}
+     * 
+     *  private static boolean oppositeSigns(double x1,double x2){return(x1 <0 && x2> 0)|| (x1> 0 && x2 <0); }}。
+     * 
+     * 私有静态双解决方案(double eqn [],int order,double t){double v = eqn [order]; while(--order> = 0){v = v * t + eqn [order]; }
+     *  return v; }}。
+     * 
+     *  / *计算M + 1其中M是eqn中所有根的上界参见：http：// enw​​ikipediaorg / wiki / Sturm％27s_theorem#应用程序上述链接不包含证明,但我[dlil
      */
     private static double getRootUpperBound(double[] eqn) {
         double d = eqn[3];
@@ -1399,6 +1781,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     * a]它自己所以结果是可靠的证明是不困难的,但它有一点包括在这里前提条件：eqn必须表示三次多项式。
+     * 
+     * 
      * @since 1.2
      */
     public boolean contains(double x, double y) {
@@ -1407,6 +1793,9 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
              * A NaN always produces a negative response to any test
              * and Infinity values cannot be "inside" any path so
              * they should return false as well.
+             * <p>
+             *  {@inheritDoc}
+             * 
              */
             return false;
         }
@@ -1428,6 +1817,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  NaN总是对任何测试产生负响应,无限值不能在任何路径"内部",所以它们也应该返回假
+     * 
+     * 
      * @since 1.2
      */
     public boolean contains(Point2D p) {
@@ -1436,6 +1829,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public boolean intersects(double x, double y, double w, double h) {
@@ -1455,6 +1852,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public boolean intersects(Rectangle2D r) {
@@ -1463,6 +1864,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public boolean contains(double x, double y, double w, double h) {
@@ -1499,6 +1904,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public boolean contains(Rectangle2D r) {
@@ -1507,6 +1916,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public Rectangle getBounds() {
@@ -1521,6 +1934,10 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
      * guarantee that modifications to the geometry of this
      * <code>CubicCurve2D</code> object do not affect any iterations of
      * that geometry that are already in process.
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @param at an optional <code>AffineTransform</code> to be applied to the
      * coordinates as they are returned in the iteration, or <code>null</code>
      * if untransformed coordinates are desired
@@ -1541,6 +1958,11 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
      * guarantee that modifications to the geometry of this
      * <code>CubicCurve2D</code> object do not affect any iterations of
      * that geometry that are already in process.
+     * <p>
+     * 返回一个定义形状边界的迭代对象这个类的迭代器不是多线程安全的,这意味着这个<code> CubicCurve2D </code>类不保证修改这个<code> CubicCurve2D </code>对象
+     * 不会影响已经在处理的几何的任何迭代。
+     * 
+     * 
      * @param at an optional <code>AffineTransform</code> to be applied to the
      * coordinates as they are returned in the iteration, or <code>null</code>
      * if untransformed coordinates are desired
@@ -1559,6 +1981,11 @@ public abstract class CubicCurve2D implements Shape, Cloneable {
     /**
      * Creates a new object of the same class as this object.
      *
+     * <p>
+     *  返回一个定义了扁平形状的边界的迭代对象这个类的迭代器不是多线程安全的,这意味着这个<code> CubicCurve2D </code>类不保证修改这个<code> CubicCurve2D </code>
+     * 对象不会影响已经在处理的几何的任何迭代。
+     * 
+     * 
      * @return     a clone of this instance.
      * @exception  OutOfMemoryError            if there is not enough memory.
      * @see        java.lang.Cloneable

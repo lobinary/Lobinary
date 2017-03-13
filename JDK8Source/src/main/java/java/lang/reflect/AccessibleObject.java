@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,15 @@ import java.lang.annotation.Annotation;
  *
  * <p>By default, a reflected object is <em>not</em> accessible.
  *
+ * <p>
+ *  AccessibleObject类是Field,Method和Constructor对象的基类它提供了标记反射对象作为抑制默认Java语言访问控制检查使用时的能力访问检查 - 对于公共,默认(包)访问
+ * ,受保护,和私有成员 - 在使用字段,方法或构造方法设置或获取字段,调用方法或创建和初始化类的新实例时执行。
+ * 
+ * <p>在反射对象中设置{@code accessible}标志允许具有足够特权的复杂应用程序(例如Java对象序列化或其他持久性机制)以通常被禁止的方式操作对象
+ * 
+ *  <p>默认情况下,反射对象<em>不能</em>可访问
+ * 
+ * 
  * @see Field
  * @see Method
  * @see Constructor
@@ -60,6 +70,9 @@ public class AccessibleObject implements AnnotatedElement {
      * The Permission object that is used to check whether a client
      * has sufficient privilege to defeat Java language access
      * control checks.
+     * <p>
+     *  用于检查客户端是否具有足够的特权来击败Java语言访问控制检查的Permission对象
+     * 
      */
     static final private java.security.Permission ACCESS_PERMISSION =
         new ReflectPermission("suppressAccessChecks");
@@ -82,6 +95,16 @@ public class AccessibleObject implements AnnotatedElement {
      * accessibility of elements beyond (and including) the element for which
      * the exception occurred is unchanged.
      *
+     * <p>
+     *  便利方法为具有单个安全检查的对象数组设置{@code accessible}标志(为了效率)
+     * 
+     *  <p>首先,如果有安全管理员,则会使用{@code ReflectPermission("suppressAccessChecks")}权限调用其{@code checkPermission}方法
+     * 
+     * <p>如果{@code flag}为{@code true},但是输入{@code array}的任何元素的可访问性不能更改(例如,如果元素对象是类{@link javalangClass}的{@link Constructor}
+     * 对象。
+     * 在发生这种SecurityException的情况下,对于数组元素,将对象的可访问性设置为{@code flag} upto(并排除)异常发生;超出(并包括)发生异常的元素的元素的可访问性未改变。
+     * 
+     * 
      * @param array the array of AccessibleObjects
      * @param flag  the new value for the {@code accessible} flag
      *              in each object
@@ -118,6 +141,19 @@ public class AccessibleObject implements AnnotatedElement {
      * java.lang.reflect.Constructor} object for the class
      * {@code java.lang.Class}, and {@code flag} is true.
      *
+     * <p>
+     * 将此对象的{@code accessible}标志设置为指定的布尔值值{@code true}表示反映的对象在使用时应禁止Java语言访问检查值{@code false}表示反射对象应执行Java语言访
+     * 问检查。
+     * 
+     *  <p>首先,如果有安全管理员,则会使用{@code ReflectPermission("suppressAccessChecks")}权限调用其{@code checkPermission}方法
+     * 
+     *  <p>如果{@code flag}为{@code true},则会引发{@code SecurityException},但此对象的辅助功能可能无法更改(例如,如果此元素对象是{@link Constructor}
+     * 对象class {@link javalangClass})。
+     * 
+     * <p>如果此对象是类{@code javalangClass}的{@link javalangreflectConstructor}对象,并且{@code flag}为true,则会引发{@code SecurityException}
+     * 。
+     * 
+     * 
      * @param flag the new value for the {@code accessible} flag
      * @throws SecurityException if the request is denied.
      * @see SecurityManager#checkPermission
@@ -130,6 +166,8 @@ public class AccessibleObject implements AnnotatedElement {
     }
 
     /* Check that you aren't exposing java.lang.Class.<init> or sensitive
+    /* <p>
+    /* 
        fields in java.lang.Class. */
     private static void setAccessible0(AccessibleObject obj, boolean flag)
         throws SecurityException
@@ -147,6 +185,10 @@ public class AccessibleObject implements AnnotatedElement {
     /**
      * Get the value of the {@code accessible} flag for this object.
      *
+     * <p>
+     *  获取此对象的{@code accessible}标志的值
+     * 
+     * 
      * @return the value of the object's {@code accessible} flag
      */
     public boolean isAccessible() {
@@ -155,6 +197,9 @@ public class AccessibleObject implements AnnotatedElement {
 
     /**
      * Constructor: only used by the Java Virtual Machine.
+     * <p>
+     *  构造函数：仅由Java虚拟机使用
+     * 
      */
     protected AccessibleObject() {}
 
@@ -174,6 +219,8 @@ public class AccessibleObject implements AnnotatedElement {
             new sun.reflect.ReflectionFactory.GetReflectionFactoryAction());
 
     /**
+    /* <p>
+    /* 
      * @throws NullPointerException {@inheritDoc}
      * @since 1.5
      */
@@ -183,6 +230,10 @@ public class AccessibleObject implements AnnotatedElement {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws NullPointerException {@inheritDoc}
      * @since 1.5
      */
@@ -192,6 +243,8 @@ public class AccessibleObject implements AnnotatedElement {
     }
 
    /**
+   /* <p>
+   /* 
      * @throws NullPointerException {@inheritDoc}
      * @since 1.8
      */
@@ -201,6 +254,8 @@ public class AccessibleObject implements AnnotatedElement {
     }
 
     /**
+    /* <p>
+    /* 
      * @since 1.5
      */
     public Annotation[] getAnnotations() {
@@ -208,6 +263,8 @@ public class AccessibleObject implements AnnotatedElement {
     }
 
     /**
+    /* <p>
+    /* 
      * @throws NullPointerException {@inheritDoc}
      * @since 1.8
      */
@@ -220,6 +277,8 @@ public class AccessibleObject implements AnnotatedElement {
     }
 
     /**
+    /* <p>
+    /* 
      * @throws NullPointerException {@inheritDoc}
      * @since 1.8
      */
@@ -232,6 +291,8 @@ public class AccessibleObject implements AnnotatedElement {
     }
 
     /**
+    /* <p>
+    /* 
      * @since 1.5
      */
     public Annotation[] getDeclaredAnnotations()  {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2002,2004,2005 Apache软件基金会
+ * 
+ *  根据Apache许可证第20版("许可证")授权;您不得使用此文件,除非符合许可证您可以在获取许可证的副本
+ * 
+ *  http：// wwwapacheorg / licenses / LICENSE-20
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件将按"原样"基础分发,无任何明示或暗示的保证或条件。请参阅许可证管理权限和限制许可证
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.xpath.regex;
@@ -485,6 +495,245 @@ import com.sun.org.apache.xerces.internal.util.IntStack;
  *
  * @xerces.internal
  *
+ * <p>
+ * 使用非确定性有限自动机(NFA)的正则表达式匹配引擎此引擎不符合POSIX正则表达式
+ * 
+ * <hr width="50%">
+ *  <h3>如何使用</h3>
+ * 
+ * <dl>
+ *  <dt>标准方式
+ * <dd>
+ * <pre>
+ *  RegularExpression re = new RegularExpression(<var> regex </var>); if(rematches(text)){}
+ * </pre>
+ * 
+ *  <dt> B捕获组
+ * <dd>
+ * <pre>
+ *  RegularExpression re = new RegularExpression(<var> regex </var>); Match match = new Match(); if(rema
+ * tches(text,match)){//你可以使用<code> Match </code>类的方法引用捕获的文本}。
+ * </pre>
+ * 
+ * </dl>
+ * 
+ *  <h4>不区分大小写的匹配</h4>
+ * <pre>
+ *  RegularExpression re = new RegularExpression(<var> regex </var>,"i"); if(rematches(text)> = 0){}
+ * </pre>
+ * 
+ * <h4>选项</h4> <p>您可以指定<a href=\"#RegularExpression(javalangString, javalangString)\"> <code> RegularExp
+ * ression(</code> <var> regex </var> <code> ,</code> <var> options </var> <code>)</code> </a>或<a href=\"#setPattern(javalangString, javalangString)\">
+ *  <code> setPattern(</code> var> regex </var> <code>,</code> <var> options </var> <code>)</var>。
+ * </p>
+ * <dl>
+ * <dt> <a name=\"I_OPTION\"> <code>"i"</code> </a> <dd>此选项指示不区分大小写的匹配<dt> <a name=\"M_OPTION\"> <code>"
+ *  m </code> </a> <dd class ="REGEX"> <kbd> ^ </kbd>和<kbd> $ </kbd>考虑文本中的EOL字符<dt> <a name = S_OPTION">
+ *  <code>"s"</code> </a> <dd class ="REGEX"> <kbd> </kbd>匹配任何一个字符<dt> <a name=\"U_OPTION\"> <code> "u"</code>
+ *  </a> <dd class ="REGEX">重新定义<Kbd> \\ d \\ D \\ w \\ W \\ s \\ S \\ b \\ B \\ \\> </kbd>变为Unicode <dt>
+ *  <a name=\"W_OPTION\"> <code>"w"</code> </a> <dd class ="REGEX">通过此选项,<kbd> \\ b \\ B \\使用'Unicode正则表
+ * 达式指南'修订版4的方法处理'\\'</kbd>当同时指定"w"和"u"时,<kbd> \\ b \\ B \\ \\> </kbd>处理"w"选项<dt> <a name=\"COMMA_OPTION\">
+ *  <code>","</code> </a> <dd>解析器将字符类中的逗号视为范围分隔符<kbd class ="REGEX"> [ a,b] </kbd>匹配不含此选项的<kbd> a </kbd>
+ * 或<kbd>,</kbd>或<kbd> b </kbd> ] </kbd>使用此选项匹配<kbd> a </kbd>或<kbd> b </kbd>。
+ * 
+ * <dt> <a name=\"X_OPTION\"> <code>"X"</code> </a>
+ * <dd class="REGEX">
+ *  通过此选项,引擎会符合<a href=\"http://wwww3org/TR/2000/WD-xmlschema-2-20000407/#regexs\"> XML模式：正则表达式</a> <code>
+ *  match( )</code>方法不执行子订单匹配,但是整个字符串匹配。
+ * 
+ * </dl>
+ * 
+ * <hr width="50%">
+ *  <h3>语法</h3>
+ * <table border="1" bgcolor="#ddeeff">
+ * <tr>
+ * <td>
+ *  <h4>与Perl 5正则表达式的差异</h4>
+ * <ul>
+ * <li>有六位十六进制字符表示(<kbd> \\ u005cv </kbd> <var> HHHHHH </var>)<li>支持字符类的减法,联合和交集操作<li>不支持： <kbd> \\ </kbd>
+ *  <var> ooo </var>(八进制字符表示),<Kbd> \\ G </kbd>,<kbd> \\ C </kbd>,<kbd> \\ l </kbd > <var> c </var>,<kbd>
+ *  \\ u005c u </kbd> <var> c </var>,<kbd> \\ L </kbd>,<kbd> \\ U </kbd> kbd> \\ E </kbd>,<kbd> \\ Q </kbd>
+ * ,<kbd> \\ N {</kbd> <var> name </var> <kbd>} </kbd> ?{<kbd> <var> code </var> <kbd>})</kbd>,<Kbd>(?? 
+ * {<kbd> <var> code </var> <kbd>})。
+ * </ul>
+ * </td>
+ * </tr>
+ * </table>
+ * 
+ *  <P>元字符是`<KBD> * +? {[()| \\ ^ $ </KBD>'</P>
+ * <ul>
+ *  <li>角色
+ * <dl>
+ * <dd class ="REGEX"> <kbd> </kbd>(A句号)<dd>匹配除以下字符之外的任何一个字符<dd> LINE FEED(U + 000A),CARRIAGE RETURN(U +
+ *  000D),PARAGRAPH SEPARATOR(U + 2029),LINE SEPARATOR(U + 2028)<dd>此表达式匹配Unicode中的一个代码点它可以匹配一对代理<dd>当<a href=\"#S_OPTION\">
+ * "s"选项</a>,则它匹配包括上述四个字符的任何字符。
+ * 
+ *  <dt class ="REGEX"> <Kbd> \\ e \\ f\n\\ r \\ t </kbd> 000A),运输返回(U + 000D),水平分配(U + 0009)
+ * 
+ * <dt class ="REGEX"> <kbd> \\ c </kbd> <var> C </var> <dd>匹配控制字符<var> C </var>必须是'<kbd> @ </kbd>','<kbd>
+ *  A </kbd>' - '<kbd> Z </kbd>','<kbd> [</kbd>','<kbd> \\ u005c </kbd> ,'<kbd>] </kbd>','<kbd> ^ </kbd>
+ * ','<kbd> _ </kbd>'匹配字符代码小于字符代码的控制字符例如,<kbd> \\ cJ </kbd>匹配LINE FEED(U + 000A),并且<kbd> \\ c [ </kbd>匹配
+ * ESCAPE(U + 001B)。
+ * 
+ *  <dt class ="REGEX">非元字符<dd>匹配字符
+ * 
+ *  <dt class ="REGEX"> <KBD> \\ </KBD> +元字符<dd>匹配元字符
+ * 
+ * <dt class ="REGEX"> <kbd> \\ u005cx </kbd> <var> HH </var> <kbd> \\ u005cx {</kbd> <var> HHHH </var> <kbd>}
+ *  </kbd > <dd>在Unicode中匹配其代码点为<var> HH </var>(十六进制)的字符只能为<kbd> \\ u005cx </kbd> <var> HH </var>和<kbd> 
+ * \\ u005cx {</kbd> <var> HHHH </var> <kbd>}的可变长度数字</kbd>。
+ * 
+ *  <！ -  <dt class ="REGEX"> <kbd> \\ u005c u </kbd> <var> HHHH </var> <dd>匹配其代码点为<var> HHHH </var>十六进制
+ * )。
+ * -->
+ * 
+ *  <dt class ="REGEX"> <kbd> \\ u005cv </kbd> <var> HHHHHH </var> <dd>在Unicode中匹配其代码点为<var> HHHHHH </var>
+ * (十六进制)。
+ * 
+ * <dt class ="REGEX"> <kbd> \\ g </kbd> <dd>匹配字形<dd class ="REGEX">它等效于<kbd>(?[\\ p {ASSIGNED} p {M} \\
+ *  p {C}])?(?：\\ p {M} | [\\ x {094}} \\ x {0CDD} \\ x { 0BCD} \\ x {0C4D} \\ x {0CCD} \\ x {0D4D} \\ x
+ *  {0E3A} \\ x {0F84}] \\ p {L} | [\\ x {1160}  -  \\ x {11A7} x {11A8}  -  \\ x {11FF}] | [\\ x {FF9E}
+ *  \\ x {FF9F}])* </kbd>。
+ * 
+ *  <dt class ="REGEX"> <kbd> \\ X </kbd> <dd class ="REGEX">匹配组合字符序列它等效于<kbd>(?：\\ PM \\ pM *)</kbd>
+ * </dl>
+ * </li>
+ * 
+ *  <li>字符类
+ * <dl>
+ * + * <dt class ="REGEX"> <kbd> [</kbd> <var> R <sub> 1 </sub> </var> <var> R <sub> 2 </sub> </var> <var>
+ *  </var> <var> R <sub> n </sub> </var> <kbd>] </kbd>(不含<a href=\"#COMMA_OPTION\">" )+ * <dt class ="REGEX">
+ *  <kbd> [</kbd> <var> R <sub> 1 </sub> </var> <kbd>,</kbd> <var> 2 </sub> </var> <kbd>,</kbd> <var> </var>
+ *  <kbd>,</kbd> <var> R <sub> n </sub> </var> <kbd >] </kbd>(使用<a href=\"#COMMA_OPTION\">","选项</a>)<dd>
+ * 正字符类匹配范围中的字符<dd> <var> R < / sub> </var>：。
+ * <ul>
+ * <li class ="REGEX">字符(包括<Kbd> \\ e \\ f\n\\ r \\ t </kbd> <kbd> \\ u005cx </kbd> <var> HH </var> <kbd>
+ *  \\ u005cx {</kbd> <var> HHHH </var> <kbd>} </kbd> <！-kbd> \\ u005c u </kbd> <var> HHHH </var-> <kbd>
+ *  \\ u005cv </kbd> <var> HHHHHH </var>)<p>此范围符合字符<li class ="REGEX"> <var> C <sub> 1 </sub> </var> <kbd>
+ *  </kbd> <var> C <sub> 2 </sub> </var> <p>此范围匹配具有> = <var> C < / var>的代码点和<= <var> C <sub> 2 </sub> </var>
+ * 的代码点+ * <li class ="REGEX"> POSIX字符类：<Kbd> ：alpha：] [：alnum：] [：ascii：] [：cntrl：] [：digit：] [：graph：]
+ *  [：lower：] [：print：] [：punct： ：upper：] [：xdigit：] </kbd>,+ *和负的POSIX字符类,如<kbd> [：^ alpha：] </kbd> <p>
+ * <li class ="REGEX"> <kbd> \\ d \\ D \\ s \\ S \\ w \\ W \\ p {</kbd> <var> name </var> <kbd>} \\ P {</kbd> < var> name </var> <kbd>}
+ *  </kbd> <p>这些表达式指定与以下表达式相同的范围。
+ * </ul>
+ * <p class ="REGEX">合并枚举范围(联合运算)<kbd> [a-ec-z] </kbd>等效于<kbd> [a-z] </kbd>
+ * 
+ *  <dt class ="REGEX"> <kbd> [^ </kbd> <var> R <sub> 1 </sub> </var> <var> R <sub> 2 </sub> </var> var>
+ *  </var> <var> R <sub> n </sub> </var> <kbd>] </kbd>(不带<a href=\"#COMMA_OPTION\">" )<dt class ="REGEX">
+ *  <kbd> [^ </kbd> <var> R <sub> 1 </sub> </var> <kbd>,</kbd> <var> R sub </sub> </var> <kbd>,</kbd> <var>
+ *  </var> <kbd>,</kbd> <var> R <sub> n </sub> </var> <kbd> ] </kbd>(带有<a href=\"#COMMA_OPTION\">","选项</a>
+ * )<dd>负字符类它与不在范围中的字符匹配。
+ * 
+ * <dt class ="REGEX"> <kbd>(?[</kbd> <var> ranges </var> <kbd>] </kbd> <var> op </var> <kbd> <var> rang
+ * es </var> <kbd>] </kbd> <var> op </var> <kbd> [</kbd> <var> ranges </var> <kbd>] </kbd> <Kbd >)</kbd>
+ * (<var> op </var> is <kbd>  -  </kbd>或<kbd> + </kbd>或<kbd>&</kbd>)<字符类的交集<dd class ="REGEX">例如,<kbd>(?
+ * [AZ]  -  [CF])</kbd>等效于<kbd> [A-BD-EG-Z] </kbd >和<kbd>(α[0x00-0x7f]  -  [K]和[\\ p {Lu}])等于<kbd> [A-JL
+ * -Z] </kbd> <dd>这个操作的结果是一个<u>正字符类</u>,即使一个表达式包含任何负字符类你必须在不区分大小写的匹配例如,<kbd>(λ[^ b])</kbd>等价于<kbd> [\\ x
+ * 00-ac- \\ x {10ffff}] </kbd>,其等效于<kbd> [^ b ] </kbd>在区分大小写匹配中但是,在不区分大小写的匹配中,<kbd>(?[^ b])</kbd>匹配任何字符
+ * ,因为它包括'<kbd> B </kbd> <kbd>将<kbd> <match> <kbd> [^ bb] </kbd>处理为<kbd> [^ Bb] </kbd>。
+ * 
+ * <dt class ="REGEX"> <kbd> [</kbd> <var> R <sub> 1 </sub> R <sub> 2 </sub> </var> <kbd>  -  [ <var> R 
+ * <sub> n </sub> R <sub> n + 1 </sub> </var> <kbd>]] </kbd>(使用<a href=\"#X_OPTION\">"X "选项</a>)</dt> <dd>
+ *  XML模式的字符类减法在指定<a href=\"#X_OPTION\">"X"选项</a>时,可以使用此语法。
+ * 
+ *  <dt class ="REGEX"> <kbd> \\ d </kbd> <dd class ="REGEX">等效于<kbd> [0-9] </kbd> <dd>当<a href ="#U_OPTION ">
+ * 设置"u"选项</a>,它等效于<span class ="REGEX"> <kbd> \\ p {Nd} </kbd> </span>。
+ * 
+ *  <dt class ="REGEX"> <kbd> \\ D </kbd> <dd class ="REGEX">等效于<kbd> [^ 0-9] </kbd> <dd> U_OPTION">设置"u
+ * "选项</a>,它等效于<span class ="REGEX"> <kbd> \\ P {Nd} </kbd> </span>。
+ * 
+ * <dt class ="REGEX"> <kbd> \\ s </kbd> <dd class ="REGEX">等效于<kbd> [\\ f\n\\ r \\ t] </kbd> <dd> a hre
+ * f ="#U_OPTION">设置"u"选项</a>,则等效于<span class ="REGEX"> <kbd> [\\ f\n\\ r \\ t \\ p {Z} ] </kbd> </span>
+ * 。
+ * 
+ *  <dt class ="REGEX"> <kbd> \\ S </kbd> <dd class ="REGEX">等效于<kbd> [^ \\ f\n\\ r \\ t] </kbd> <dd> <a href=\"#U_OPTION\">
+ * 设置了"u"选项</a>,它等效于<span class ="REGEX"> <kbd> [^ \\ f\n\\ r \\ t \\ p { Z}] </kbd> </span>。
+ * 
+ *  <dt class ="REGEX"> <kbd> \\ w </kbd> <dd class ="REGEX">等效于<kbd> [a-zA-Z0-9 _] </kbd> <dd> ="#U_OPT
+ * ION">设置"u"选项</a>,则它等效于<span class ="REGEX"> <kbd> [\\ p {Lu} \\ p {Ll} \\ p {Lo} p {Nd} _] </kbd> </span>
+ * 。
+ * 
+ * <dt class ="REGEX"> <kbd> \\ W </kbd> <dd class ="REGEX">等效于<kbd> [^ a-zA-Z0-9 _] </kbd> <dd> href ="
+ * #U_OPTION">设置"u"选项</a>,它等效于<span class ="REGEX"> <kbd> [^ \\ p {Lu} \\ p {Ll} \\ p {Lo } \\ p {Nd} _]
+ *  </kbd> </span>。
+ * 
+ *  <dt class ="REGEX"> <kbd> \\ p {</kbd> <var> name </var> <kbd>} </kbd> <dd>在指定的一般类别中匹配一个字符<a href=\"ftp://ftpunicodeorg/Public/UNIDATA/UnicodeDatatxt\">
+ *  <kbd> UnicodeDatatxt </kbd> </a>)或指定的<a href ="ftp：// ftpunicodeorg / Public / UNIDATA / Blockstxt ">
+ * 阻止</a>以下名称可用：。
+ * <dl>
+ *  <dt> Unicode通用分类：<dd> <kbd> L,M,N,Z,C,P,S,Lu,Ll,Lt,Lm,Lo,Mn,Me,Mc,Nd,Nl,No,Zs ,Z1,Zp,Cc,Cf,Cn,Co,Cs,
+ * Pd,Ps,Pe,Pc,Po,Sm,Sc,Sk,。
+ * </kbd>
+ * <dd>(目前Cn类别包括U + 10000-U + 10FFFF个字符)<dt> Unicode块：<dd> <kbd>基本拉丁语,拉丁语-1补充,拉丁语扩展-A,拉丁语扩展-B,IPA扩展,间距修饰
+ * 字母,希腊语,西里尔语,亚美尼亚语,希伯来语,阿拉伯语,梵文,孟加拉语,古尔穆奇语,古吉拉特语,奥里亚语,泰米尔语,泰卢固语,卡纳达语,马拉雅拉姆语,泰语,老挝语,西藏语,格鲁吉亚语,附加,希腊语扩展,
+ * 一般标点,上标和下标,货币符号,符号组合标志,字母符号,数字形式,箭头,数学运算符,杂项技术,控制图片,光学字符识别,封闭字母数字,几何形状,杂项符号,标志,CJK Sym标题,平假名,片假名,Bopo
+ * mofo,韩文兼容性Jamo,Kanbun,封闭的CJK字母和月份,CJK兼容性,CJK统一表意文字,韩文音节,高代理,高私人使用代理,低代理,字母表示形式,阿拉伯语表示形式-A,组合半标记,CJK兼容
+ * 性表格,小形式变形,阿拉伯语表示形式-B,特殊,半宽和全宽形式。
+ * </kbd>
+ * <dt>其他：<dd> <kbd> </kbd>(<kbd> [<u> p {ASSIGNED} </kbd>等效于<kbd> \\ P {Cn} </kbd>)<dd> <kbd> UNASSGINE
+ * D </kbd>(<kbd> \\ p {UNASSIGNED} </kbd>到<kbd> \\ p {Cn} </kbd>)。
+ * </dl>
+ * 
+ *  <dt class ="REGEX"> <kbd> \\ P {</var> <var> name </var> <kbd>} </kbd> <dd>匹配不在指定的常规类别或指定块
+ * </dl>
+ * </li>
+ * 
+ *  <li>选择和量词
+ * <dl>
+ *  <dt class ="REGEX"> <VAR> X </VAR> <kbd> | </kbd> <VAR> Y </VAR> <dd>
+ * 
+ *  <dt class ="REGEX"> <VAR> X </VAR> <kbd> * </KBD> <dd>匹配0或更多<var> X </var>
+ * 
+ *  <dt class ="REGEX"> <VAR> X </VAR> <kbd> + </KBD> <dd>匹配1个或多个<var> X </var>
+ * 
+ *  <dt class ="REGEX"> <VAR> X </VAR> <kbd>?</KBD> <dd>匹配0或1 <var> X </var>
+ * 
+ * <dt class ="REGEX"> <var> X </var> <kbd> {</kbd> <var> number </var> <kbd>} </kbd> <dd> var> times
+ * 
+ *  <dt class ="REGEX"> <var> X </var> <kbd> {</kbd> <var> min </var> <kbd>,} </kbd> <dd>
+ * 
+ *  <dt class ="REGEX"> <var> X </var> <kbd> {</kbd> <var> min </var> <kbd>,</kbd> <var> max </var> <kbd >}
+ *  </kbd> <dd>。
+ * 
+ *  <dt class ="REGEX"> <VAR> X </VAR> <kbd> *?</kbd> <dt class ="REGEX"> <VAR> X </VAR> <kbd> +?</<dt class ="REGEX">
+ *  <VAR> X </VAR> <kbd> ?? </kbd> <dt class ="REGEX"> <var> X </var> <kbd> {</kbd> var> min </var> <kbd>,}
+ * ?</kbd> <dt class ="REGEX"> <var> X </var> <kbd> {</kbd> <var> min </var> kbd>,</kbd> <var> max </var> <kbd>}
+ * ?</kbd> <dd>非贪婪匹配。
+ * </dl>
+ * </li>
+ * 
+ *  <li>分组,捕获和反向引用
+ * <dl>
+ * <dt class ="REGEX"> <KBD>(?：</kbd> <VAR> X </VAR> <kbd>)</KBD> <dd>分组"<KBD> foo + </<KBD> foo </KBD>"
+ * 或"<KBD> foooo </KBD>"如果你想要匹配"<KBD> foofoo </KBD>"或"<KBD> foofoofoo </KBD>写"<KBD>(?: foo)+ </KBD>"。
+ * 
+ *  <dt class ="REGEX"> <KBD>(</kbd> <VAR> X </VAR> <kbd>)</KBD> <dd>使用捕获分组它创建一个组,应用程序可以知道目标文本<a href=\"#matches(javalangString,comsunorgapachexercesinternalutilsregexMatch)\">
+ * 匹配(字符串,匹配)</a> </code>匹配<code> Match </code>实例的方法的组</code> group表示整个该正则表达式<VAR> N </VAR> th gorup是<VAR>
+ *  N </VAR>左括号的内部。
+ * 
+ * <p>例如,正则表达式是"<FONT color = blue> <KBD> *([^ <：] *)+&lt;([^>] *)&gt; * </KBD> FONT>",目标文本为"<FONT color = red>
+ *  <KBD> From：TAMURA Kent&lt; kent @ trlibmcojp&gt; </KBD> </FONT>"：。
+ * <ul>
+ *  <li> <code> MatchgetCapturedText(0)</code>："<FONT color = red> <KBD> TAMURA Kent&lt; kent @ trlibmco
+ * jp&gt; </KBD> </FONT>"<li> <code> MatchgetCapturedText 1)</code>："<FONT color = red> <KBD> TAMURA Ken
+ * t </KBD> </FONT>"<li> <code> MatchgetCapturedText <KBD> kent @ trlibmcojp </KBD> </FONT>"。
+ * </ul>
+ * 
+ *  <dt class ="REGEX"> <kbd> \\ 1 \\ 2 \\ 3 \\ 4 \\ 5 \\ 6 \\ 7 \\ 8 \\ 9 </kbd>
+ * <dd>
+ * 
+ *  <dt class ="REGEX"> <kbd>(?> </kbd> <var> X </var> <kbd>)</kbd> <dd>独立表达式组
+ * 
+ * <dt class ="REGEX"> <kbd>(?</kbd> <var> options </var> <kbd>：</kbd> <var> X </var> <kbd>)</kbd> < dt class ="REGEX">
+ *  <kbd>(?</kbd> <var> options </var> <kbd>  -  </kbd> <var> options2 </var> <kbd>：</kbd> <var > X </var>
+ *  <kbd>)</kbd> <dd> <dd> <var> options </var>或<var> options2 </var> 'w'请注意,它不能包含'u'。
+ * 
+ *  <dt class ="REGEX"> <kbd>(?</kbd> <var> options </var> <kbd>)</kbd> <var> options </var> <kbd>  -  </kbd>
+ *  <var> options2 </var> <kbd>)</kbd> <dd> <dd>这些表达式必须位于组的开头。
+ * </dl>
+ * </li>
+ * 
+ * 
  * @author TAMURA Kent &lt;kent@trl.ibm.co.jp&gt;
  * @version $Id: RegularExpression.java,v 1.9 2010/07/27 05:02:34 joehw Exp $
  */
@@ -496,6 +745,85 @@ public class RegularExpression implements java.io.Serializable {
 
     /**
      * Compiles a token tree into an operation flow.
+     * <p>
+     *  <li>锚点
+     * <dl>
+     *  <dt class ="REGEX"> <kbd> \\ A </kbd> <dd>匹配文本的beginnig
+     * 
+     * <dt class ="REGEX"> <kbd> \\ Z </kbd> <dd>匹配文本的结尾,或文本结尾处的EOL字符之前,或者在结尾处的CARRIAGE RETURN + LINE FEED文本
+     * 。
+     * 
+     *  <dt class ="REGEX"> <kbd> \\ z </kbd> <dd>匹配文本的结尾
+     * 
+     *  <dt class ="REGEX"> <kbd> ^ </kbd> <dd>匹配文本的开头它等效于<span class ="REGEX"> <Kbd> \\ A </kbd> </span> <dd>
+     * 设置<a href=\"#M_OPTION\">"m"选项</a>时,它匹配文本的开头,或者在一个EOL字符之后(LINE FEED(U + 000A),CARRIAGE RETURN (U + 000
+     * D),行分隔符(U + 2028),分段分隔符(U + 2029))。
+     * 
+     * <dt class ="REGEX"> <kbd> $ </kbd> <dd>匹配文本的结尾,或文本结尾处的EOL字符之前,或文本结尾处的CARRIAGE RETURN + LINE FEED <dd>
+     *  <a href=\"#M_OPTION\">设置了"m"选项</a>时,它匹配文本的结尾或EOL字符之前。
+     * 
+     *  <dt class ="REGEX"> <kbd> \\ b </kbd> <dd>匹配字边界(请参见<a href=\"#W_OPTION\">"w"选项</a>)
+     * 
+     *  <dt class ="REGEX"> <kbd> \\ B </kbd> <dd>匹配非字边界(请参见<a href=\"#W_OPTION\">"w"选项</a>)
+     * 
+     *  <dt class ="REGEX"> <kbd> \\&lt; </kbd> <dd>匹配字词的开头(请参阅<a href=\"#W_OPTION\">"w"选项</a>)
+     * 
+     *  <dt class ="REGEX"> <kbd> \\&gt; </kbd> <dd>匹配单词的结尾(请参见<a href=\"#W_OPTION\">"w"选项</a>)
+     * </dl>
+     * </li>
+     *  <li>前瞻和后瞻
+     * <dl>
+     * <dt class ="REGEX"> <kbd>(?= </kbd> <var> X </var> <kbd>)</kbd> <dd>
+     * 
+     *  <dt class ="REGEX"> <kbd>(?! </kbd> <var> X </var> <kbd>)</kbd> <dd>
+     * 
+     *  <dt class ="REGEX"> <kbd>(?<= </kbd> <var> X </var> <kbd>)</kbd> <dd> Lookbehind <
+     * 
+     *  <dt class ="REGEX"> <kbd>(?&lt;！</kbd> <var> X </var> <kbd>)</kbd> <dd> Negative lookbehind
+     * </dl>
+     * </li>
+     * 
+     *  <li>其他
+     * <dl>
+     * <dt class ="REGEX"> <kbd>(?(</Kbd> <var> condition </var> <Kbd>)</kbd> <var> yes-pattern </var> <kbd>
+     *  | < kbd> <var> no-pattern </var> <kbd>)</kbd>,<dt class ="REGEX"> < )</kbd> <var> yes-pattern </var>
+     *  <kbd>)</kbd> <dd> <dt class ="REGEX"> < var> <kbd>)</kbd> <dd>注释注释字符串由除'<kbd>之外的字符组成)</kbd>'不能在字符类中。
+     * </dl>
+     * </li>
+     * </ul>
+     * 
+     * <hr width="50%">
+     *  <h3>正则表达式</h3>的BNF
+     * <pre>
+     * regex :: =('(?'options')')? term('|'term)* term :: = factor + factor :: = anchors | atom(('*'|'+'|'''
+     * ''minmax)'?'? | ''('#'[^)] *')'minmax :: ='{'([0-9] + | [0-9] +','|','[0-9] + | -9] +','[0-9] +)'}'at
+     * om :: = char | '''| char-class | '('regex')'| '(?：'regex')'| '\\'[0-9] | '\\ w'| '\\ W'| '\\ d'| '\\ 
+     * D'| '\\ s'| '\\ S'| category-block | '\\ X'| '(?>'regex')'| '(?'options'：'regex')'| ''''''''''''''(''
+     * ''''''''' [imsw] +)? anchors :: ='^'| '$'| '\\ A'| '\\ Z'| '\\ z'| '\\ b'| '\\ B'| '\\&lt;' | '\\>'lo
+     * oks :: ='(?='regex')'| '(?！'regex')'| '(α<='regex')' '(?&lt ;!'regex')'char :: ='\\\\'| '\\'[efnrtv] | '\\ c'[@ -_] |代码点| character-1 category-block :: ='\\'[pP] category-symbol-1 | ('\\ p {'|'\\ P {')(category-symbol | block-name | other-properties)'}'category-symbol-1 :: ='L' 'M'| 'N'| 'Z'| 'C'| 'P'| 'S'category-symbol :: = category-symbol-1 | 'Lu'| 'L1'| 'Lt | 'Lm'| Lo'| 'Mn'| 'Me'| 'Mc'| 'Nd'| 'Nl'|'不'| 'Zs'| 'Zl'| 'Zp'| 'Cc'| 'Cf'| 'Cn'| 'Co'| 'Cs'| 'Pd'| 'Ps'| 'Pe'| 'Pc'| 'Po'| 'Sm'| 'Sc'| 'Sk'| 'so'block-name :: =(见上文)other-properties :: ='ALL'| 'ASSIGNED'| 'UNASSIGNED'character-1 :: =(除元字符之外的任何字符)regex :: =('(?'options')')? term('|'term)* term :: = factor + factor :: = anchors | atom(('*'|'+'|'''''minmax)'?'? | ''('#'[^)] *')'minmax :: ='{'([0-9] + | [0-9] +','|','[0-9] + | -9] +','[0-9] +)'}'atom :: = char | ''。
+     * 
+     * char-class :: ='['ranges']'| '''''''''''['ranges']'([ -  +&]'['ranges']')?')'ranges :: ='^'? (范围<a href=\"#COMMA_OPTION\">
+     * ','?</a>)+ range :: ='\\ d'| '\\ w'| '\\ s'| '\\ D'| '\\ W'| '\\ S'| category-block | range-char | ra
+     * nge-char' - 'range-char range-char :: ='\\ ['| '\\]'| '\\\\'| '\\'[,-efnrtv] |代码点| character-2 code-p
+     * oint :: ='\\ x'hex-char hex-char | '\\ x {'hex-char +'}'<！ -  | '\\ u005c u'hex-char hex-char hex-char hex-char  - >
+     *  | '\\ v'hex-char hex-char hex-char hex-char hex-char hex-char hex-char hex-char :: = [0-9a-fA-F] cha
+     * racter-2 :: = - ,)。
+     * </pre>
+     * 
+     * <hr width="50%">
+     *  <h3> TODO </h3>
+     * <ul>
+     *  <li> <a href=\"http://wwwunicodeorg/unicode/reports/tr18/\"> Unicode正则表达式准则</a>
+     * <ul>
+     *  <li> 24规范等同<li> 3级
+     * </ul>
+     *  <li>解析性能
+     * </ul>
+     * 
+     * <hr width="50%">
+     * 
+     * @xercesinternal
+     * 
      */
     private synchronized void compile(Token tok) {
         if (this.operations != null)
@@ -506,6 +834,9 @@ public class RegularExpression implements java.io.Serializable {
 
     /**
      * Converts a token to an operation.
+     * <p>
+     *  将令牌树编译为操作流
+     * 
      */
     private Op compile(Token tok, Op next, boolean reverse) {
         Op ret;
@@ -665,6 +996,10 @@ public class RegularExpression implements java.io.Serializable {
     /**
      * Checks whether the <var>target</var> text <strong>contains</strong> this pattern or not.
      *
+     * <p>
+     *  将令牌转换为操作
+     * 
+     * 
      * @return true if the target is matched to this regular expression.
      */
     public boolean matches(char[]  target) {
@@ -675,6 +1010,10 @@ public class RegularExpression implements java.io.Serializable {
      * Checks whether the <var>target</var> text <strong>contains</strong> this pattern
      * in specified range or not.
      *
+     * <p>
+     *  检查<var> target </var>文本<strong>是否包含</strong>此模式
+     * 
+     * 
      * @param start Start offset of the range.
      * @param end  End offset +1 of the range.
      * @return true if the target is matched to this regular expression.
@@ -686,6 +1025,10 @@ public class RegularExpression implements java.io.Serializable {
     /**
      * Checks whether the <var>target</var> text <strong>contains</strong> this pattern or not.
      *
+     * <p>
+     *  检查<var> target </var>文本<strong>是否在指定范围内包含</strong>此模式
+     * 
+     * 
      * @param match A Match instance for storing matching result.
      * @return Offset of the start position in <VAR>target</VAR>; or -1 if not match.
      */
@@ -698,6 +1041,10 @@ public class RegularExpression implements java.io.Serializable {
      * Checks whether the <var>target</var> text <strong>contains</strong> this pattern
      * in specified range or not.
      *
+     * <p>
+     *  检查<var> target </var>文本<strong>是否包含</strong>此模式
+     * 
+     * 
      * @param start Start offset of the range.
      * @param end  End offset +1 of the range.
      * @param match A Match instance for storing matching result.
@@ -744,6 +1091,9 @@ public class RegularExpression implements java.io.Serializable {
         /*
          * The pattern has only fixed string.
          * The engine uses Boyer-Moore.
+         * <p>
+         *  检查<var> target </var>文本<strong>是否在指定范围内包含</strong>此模式
+         * 
          */
         if (this.fixedStringOnly) {
             //System.err.println("DEBUG: fixed-only: "+this.fixedString);
@@ -764,6 +1114,9 @@ public class RegularExpression implements java.io.Serializable {
          * The pattern contains a fixed string.
          * The engine checks with Boyer-Moore whether the text contains the fixed string or not.
          * If not, it return with false.
+         * <p>
+         *  模式只有固定的字符串引擎使用Boyer-Moore
+         * 
          */
         if (this.fixedString != null) {
             int o = this.fixedStringTable.matches(target, con.start, con.limit);
@@ -780,6 +1133,9 @@ public class RegularExpression implements java.io.Serializable {
 
         /*
          * Checks whether the expression starts with ".*".
+         * <p>
+         *  模式包含一个固定字符串引擎检查Boyer-Moore文本是否包含固定字符串如果不是,返回false
+         * 
          */
         if (this.operations != null
             && this.operations.type == Op.CLOSURE && this.operations.getChild().type == Op.DOT) {
@@ -806,6 +1162,9 @@ public class RegularExpression implements java.io.Serializable {
 
         /*
          * Optimization against the first character.
+         * <p>
+         *  检查表达式是否以"*"开头
+         * 
          */
         else if (this.firstChar != null) {
             //System.err.println("DEBUG: with firstchar-matching: "+this.firstChar);
@@ -827,6 +1186,9 @@ public class RegularExpression implements java.io.Serializable {
 
         /*
          * Straightforward matching.
+         * <p>
+         * 针对第一个字符进行优化
+         * 
          */
         else {
             for (matchStart = con.start;  matchStart <= limit;  matchStart ++) {
@@ -851,6 +1213,10 @@ public class RegularExpression implements java.io.Serializable {
     /**
      * Checks whether the <var>target</var> text <strong>contains</strong> this pattern or not.
      *
+     * <p>
+     *  直接匹配
+     * 
+     * 
      * @return true if the target is matched to this regular expression.
      */
     public boolean matches(String  target) {
@@ -861,6 +1227,10 @@ public class RegularExpression implements java.io.Serializable {
      * Checks whether the <var>target</var> text <strong>contains</strong> this pattern
      * in specified range or not.
      *
+     * <p>
+     *  检查<var> target </var>文本<strong>是否包含</strong>此模式
+     * 
+     * 
      * @param start Start offset of the range.
      * @param end  End offset +1 of the range.
      * @return true if the target is matched to this regular expression.
@@ -872,6 +1242,10 @@ public class RegularExpression implements java.io.Serializable {
     /**
      * Checks whether the <var>target</var> text <strong>contains</strong> this pattern or not.
      *
+     * <p>
+     *  检查<var> target </var>文本<strong>是否在指定范围内包含</strong>此模式
+     * 
+     * 
      * @param match A Match instance for storing matching result.
      * @return Offset of the start position in <VAR>target</VAR>; or -1 if not match.
      */
@@ -883,6 +1257,10 @@ public class RegularExpression implements java.io.Serializable {
      * Checks whether the <var>target</var> text <strong>contains</strong> this pattern
      * in specified range or not.
      *
+     * <p>
+     *  检查<var> target </var>文本<strong>是否包含</strong>此模式
+     * 
+     * 
      * @param start Start offset of the range.
      * @param end  End offset +1 of the range.
      * @param match A Match instance for storing matching result.
@@ -935,6 +1313,9 @@ public class RegularExpression implements java.io.Serializable {
         /*
          * The pattern has only fixed string.
          * The engine uses Boyer-Moore.
+         * <p>
+         *  检查<var> target </var>文本<strong>是否在指定范围内包含</strong>此模式
+         * 
          */
         if (this.fixedStringOnly) {
             //System.err.println("DEBUG: fixed-only: "+this.fixedString);
@@ -955,6 +1336,9 @@ public class RegularExpression implements java.io.Serializable {
          * The pattern contains a fixed string.
          * The engine checks with Boyer-Moore whether the text contains the fixed string or not.
          * If not, it return with false.
+         * <p>
+         *  模式只有固定的字符串引擎使用Boyer-Moore
+         * 
          */
         if (this.fixedString != null) {
             int o = this.fixedStringTable.matches(target, con.start, con.limit);
@@ -971,6 +1355,9 @@ public class RegularExpression implements java.io.Serializable {
 
         /*
          * Checks whether the expression starts with ".*".
+         * <p>
+         *  模式包含一个固定字符串引擎检查Boyer-Moore文本是否包含固定字符串如果不是,返回false
+         * 
          */
         if (this.operations != null
             && this.operations.type == Op.CLOSURE && this.operations.getChild().type == Op.DOT) {
@@ -997,6 +1384,9 @@ public class RegularExpression implements java.io.Serializable {
 
         /*
          * Optimization against the first character.
+         * <p>
+         *  检查表达式是否以"*"开头
+         * 
          */
         else if (this.firstChar != null) {
             //System.err.println("DEBUG: with firstchar-matching: "+this.firstChar);
@@ -1018,6 +1408,9 @@ public class RegularExpression implements java.io.Serializable {
 
         /*
          * Straightforward matching.
+         * <p>
+         *  针对第一个字符进行优化
+         * 
          */
         else {
             for (matchStart = con.start;  matchStart <= limit;  matchStart ++) {
@@ -1040,6 +1433,10 @@ public class RegularExpression implements java.io.Serializable {
     }
 
     /**
+    /* <p>
+    /* 直接匹配
+    /* 
+    /* 
      * @return -1 when not match; offset of the end of matched string when match.
      */
     private int match(Context con, Op op, int offset, int dx, int opts) {
@@ -1550,6 +1947,8 @@ public class RegularExpression implements java.io.Serializable {
     /**
      * Checks whether the <var>target</var> text <strong>contains</strong> this pattern or not.
      *
+     * <p>
+     * 
      * @return true if the target is matched to this regular expression.
      */
     public boolean matches(CharacterIterator target) {
@@ -1560,6 +1959,10 @@ public class RegularExpression implements java.io.Serializable {
     /**
      * Checks whether the <var>target</var> text <strong>contains</strong> this pattern or not.
      *
+     * <p>
+     *  检查<var> target </var>文本<strong>是否包含</strong>此模式
+     * 
+     * 
      * @param match A Match instance for storing matching result.
      * @return Offset of the start position in <VAR>target</VAR>; or -1 if not match.
      */
@@ -1608,6 +2011,9 @@ public class RegularExpression implements java.io.Serializable {
         /*
          * The pattern has only fixed string.
          * The engine uses Boyer-Moore.
+         * <p>
+         *  检查<var> target </var>文本<strong>是否包含</strong>此模式
+         * 
          */
         if (this.fixedStringOnly) {
             //System.err.println("DEBUG: fixed-only: "+this.fixedString);
@@ -1628,6 +2034,9 @@ public class RegularExpression implements java.io.Serializable {
          * The pattern contains a fixed string.
          * The engine checks with Boyer-Moore whether the text contains the fixed string or not.
          * If not, it return with false.
+         * <p>
+         *  模式只有固定的字符串引擎使用Boyer-Moore
+         * 
          */
         if (this.fixedString != null) {
             int o = this.fixedStringTable.matches(target, con.start, con.limit);
@@ -1644,6 +2053,9 @@ public class RegularExpression implements java.io.Serializable {
 
         /*
          * Checks whether the expression starts with ".*".
+         * <p>
+         *  模式包含一个固定字符串引擎检查Boyer-Moore文本是否包含固定字符串如果不是,返回false
+         * 
          */
         if (this.operations != null
             && this.operations.type == Op.CLOSURE && this.operations.getChild().type == Op.DOT) {
@@ -1670,6 +2082,9 @@ public class RegularExpression implements java.io.Serializable {
 
         /*
          * Optimization against the first character.
+         * <p>
+         *  检查表达式是否以"*"开头
+         * 
          */
         else if (this.firstChar != null) {
             //System.err.println("DEBUG: with firstchar-matching: "+this.firstChar);
@@ -1691,6 +2106,9 @@ public class RegularExpression implements java.io.Serializable {
 
         /*
          * Straightforward matching.
+         * <p>
+         *  针对第一个字符进行优化
+         * 
          */
         else {
             for (matchStart = con.start;  matchStart <= limit;  matchStart ++) {
@@ -1716,21 +2134,35 @@ public class RegularExpression implements java.io.Serializable {
 
     /**
      * A regular expression.
+     * <p>
+     *  直接匹配
+     * 
+     * 
      * @serial
      */
     String regex;
     /**
+    /* <p>
+    /*  正则表达式
+    /* 
+    /* 
      * @serial
      */
     int options;
 
     /**
      * The number of parenthesis in the regular expression.
+     * <p>
+     * 
      * @serial
      */
     int nofparen;
     /**
      * Internal representation of the regular expression.
+     * <p>
+     *  正则表达式中的括号数
+     * 
+     * 
      * @serial
      */
     Token tokentree;
@@ -2089,6 +2521,9 @@ public class RegularExpression implements java.io.Serializable {
 
     /**
      * Prepares for matching.  This method is called just before starting matching.
+     * <p>
+     *  正则表达式的内部表示
+     * 
      */
     void prepare() {
         if (Op.COUNT)  Op.nofinstances = 0;
@@ -2099,6 +2534,9 @@ public class RegularExpression implements java.io.Serializable {
             anchor.next = this.operations;
             this.operations = anchor;
         }
+        if  (this.operations.type == Op.CLOSURE && this.operations.getChild().type == Op.DOT) { // .* <p>
+        if  (this.operations.type == Op.CLOSURE && this.operations.getChild().type == Op.DOT) { // .*  准备匹配此方法在开始匹配之前调用
+        if  (this.operations.type == Op.CLOSURE && this.operations.getChild().type == Op.DOT) { // .* 
         */
         if (Op.COUNT)  System.err.println("DEBUG: The number of operations: "+Op.nofinstances);
 
@@ -2164,6 +2602,11 @@ public class RegularExpression implements java.io.Serializable {
      * captures matched text, and <span class="REGEX"><kbd>(:?</kbd><var>X</var><kbd>)</kbd></span>
      * does not capture.
      *
+     * <p>
+     * if(thisoperationstype == OpCLOSURE && thisoperationsgetChild()type == OpDOT){// * Op anchor = OpcreateAnchor(isSet(thisoptions,SINGLE_LINE)?'A'：'@');是什么意思? thisoperations = anchor; }
+     * }。
+     * 
+     * 
      * @see #RegularExpression(java.lang.String,int)
      * @see #setPattern(java.lang.String,int)
     static final int MARK_PARENS = 1<<0;
@@ -2171,27 +2614,44 @@ public class RegularExpression implements java.io.Serializable {
 
     /**
      * "i"
+     * <p>
+     *  选项如果指定此选项,则<span class ="REGEX"> <kbd>(</kbd> <var> X </var> <kbd>)</kbd> </span>捕获匹配的文本, span class
+     *  ="REGEX"> <kbd>(：?</kbd> <var> X </var> <kbd>)</kbd> </span>。
+     * 
      */
     static final int IGNORE_CASE = 1<<1;
 
     /**
      * "s"
+     * <p>
+     *  "一世"
+     * 
      */
     static final int SINGLE_LINE = 1<<2;
 
     /**
      * "m"
+     * <p>
+     *  "s"
+     * 
      */
     static final int MULTIPLE_LINES = 1<<3;
 
     /**
      * "x"
+     * <p>
+     *  "m"
+     * 
      */
     static final int EXTENDED_COMMENT = 1<<4;
 
     /**
      * This option redefines <span class="REGEX"><kbd>\d \D \w \W \s \S</kbd></span>.
      *
+     * <p>
+     *  "X"
+     * 
+     * 
      * @see #RegularExpression(java.lang.String,int)
      * @see #setPattern(java.lang.String,int)
      * @see #UNICODE_WORD_BOUNDARY
@@ -2207,6 +2667,10 @@ public class RegularExpression implements java.io.Serializable {
      * <p>By this option, the engine checks word boundaries with the method of
      * 'Unicode Regular Expression Guidelines' Revision 4.
      *
+     * <p>
+     *  此选项重新定义<span class ="REGEX"> <kbd> \\ d \\ D \\ w \\ W \\ s \\ S </kbd> </span>
+     * 
+     * 
      * @see #RegularExpression(java.lang.String,int)
      * @see #setPattern(java.lang.String,int)
      */
@@ -2214,18 +2678,31 @@ public class RegularExpression implements java.io.Serializable {
 
     /**
      * "H"
+     * <p>
+     * 一个选项这使得能够处理<span class ="REGEX"> <kbd> \\ b \\ B \\ \\> </kbd> </span> <p>默认情况下,引擎考虑单词字符(<span class ="REGEX">
+     *  <Kbd> \\ w </kbd> </span>)和非字字符是一个字边界<p>通过这个选项,引擎用'Unicode正则表达式指南'修订版4的方法检查字边界。
+     * 
      */
     static final int PROHIBIT_HEAD_CHARACTER_OPTIMIZATION = 1<<7;
     /**
      * "F"
+     * <p>
+     *  "H"
+     * 
      */
     static final int PROHIBIT_FIXED_STRING_OPTIMIZATION = 1<<8;
     /**
      * "X". XML Schema mode.
+     * <p>
+     *  "F"
+     * 
      */
     static final int XMLSCHEMA_MODE = 1<<9;
     /**
      * ",".
+     * <p>
+     *  "X"XML模式模式
+     * 
      */
     static final int SPECIAL_COMMA = 1<<10;
 
@@ -2237,6 +2714,10 @@ public class RegularExpression implements java.io.Serializable {
     /**
      * Creates a new RegularExpression instance.
      *
+     * <p>
+     *  ","
+     * 
+     * 
      * @param regex A regular expression
      * @exception org.apache.xerces.utils.regex.ParseException <VAR>regex</VAR> is not conforming to the syntax.
      */
@@ -2247,6 +2728,10 @@ public class RegularExpression implements java.io.Serializable {
     /**
      * Creates a new RegularExpression instance with options.
      *
+     * <p>
+     *  创建一个新的RegularExpression实例
+     * 
+     * 
      * @param regex A regular expression
      * @param options A String consisted of "i" "m" "s" "u" "w" "," "X"
      * @exception org.apache.xerces.utils.regex.ParseException <VAR>regex</VAR> is not conforming to the syntax.
@@ -2258,6 +2743,10 @@ public class RegularExpression implements java.io.Serializable {
     /**
      * Creates a new RegularExpression instance with options.
      *
+     * <p>
+     *  使用选项创建一个新的RegularExpression实例
+     * 
+     * 
      * @param regex A regular expression
      * @param options A String consisted of "i" "m" "s" "u" "w" "," "X"
      * @exception org.apache.xerces.utils.regex.ParseException <VAR>regex</VAR> is not conforming to the syntax.
@@ -2276,6 +2765,9 @@ public class RegularExpression implements java.io.Serializable {
 
     /**
      *
+     * <p>
+     *  使用选项创建一个新的RegularExpression实例
+     * 
      */
     public void setPattern(String newPattern) throws ParseException {
         this.setPattern(newPattern, Locale.getDefault());
@@ -2299,6 +2791,7 @@ public class RegularExpression implements java.io.Serializable {
     }
     /**
      *
+     * <p>
      */
     public void setPattern(String newPattern, String options) throws ParseException {
         this.setPattern(newPattern, options, Locale.getDefault());
@@ -2310,6 +2803,7 @@ public class RegularExpression implements java.io.Serializable {
 
     /**
      *
+     * <p>
      */
     public String getPattern() {
         return this.regex;
@@ -2317,6 +2811,7 @@ public class RegularExpression implements java.io.Serializable {
 
     /**
      * Represents this instence in String.
+     * <p>
      */
     public String toString() {
         return this.tokentree.toString(this.options);
@@ -2327,6 +2822,10 @@ public class RegularExpression implements java.io.Serializable {
      * The order of letters in it may be different from a string specified
      * in a constructor or <code>setPattern()</code>.
      *
+     * <p>
+     *  在String中表示此实例
+     * 
+     * 
      * @see #RegularExpression(java.lang.String,java.lang.String)
      * @see #setPattern(java.lang.String,java.lang.String)
      */
@@ -2336,6 +2835,9 @@ public class RegularExpression implements java.io.Serializable {
 
     /**
      *  Return true if patterns are the same and the options are equivalent.
+     * <p>
+     *  返回一个选项字符串其中的字母顺序可能不同于在构造函数或<code> setPattern()中指定的字符串</code>
+     * 
      */
     public boolean equals(Object obj) {
         if (obj == null)  return false;
@@ -2351,6 +2853,9 @@ public class RegularExpression implements java.io.Serializable {
 
     /**
      *
+     * <p>
+     * 如果模式相同并且选项是等效的,则返回true
+     * 
      */
     public int hashCode() {
         return (this.regex+"/"+this.getOptions()).hashCode();
@@ -2360,6 +2865,7 @@ public class RegularExpression implements java.io.Serializable {
      * Return the number of regular expression groups.
      * This method returns 1 when the regular expression has no capturing-parenthesis.
      *
+     * <p>
      */
     public int getNumberOfGroups() {
         return this.nofparen;

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -71,6 +72,23 @@ import sun.misc.MessageUtils;
  * character is encountered. This appears to give behavior closer to
  * the popular browsers.
  *
+ * <p>
+ *  一个简单的DTD驱动的HTML解析器解析器从InputStream中读取一个HTML文件,并在遇到标签和数据时调用各种方法(应在子类中重写)
+ * <p>
+ *  不幸的是,有许多执行不好的HTML解析器,因此有许多格式不正确的HTML文件这个解析器试图解析大多数HTML文件这意味着实现有时偏离SGML规范,有利于HTML
+ * <p>
+ *  解析器将\\ r和\\ r\n视为\n按照SGML / HTML规范中的规定,忽略starttags和结束标记之间的换行符
+ * <p>
+ * html规范没有指定空间如何被合并非常好具体来说,下面的场景不讨论(注意,这里应该使用空格,但我使用&amp; nbsp强制显示空格)：
+ * <p>
+ *  '&lt; b&gt; blah&nbsp;&lt; i&gt;&nbsp;&lt; strike&gt;&nbsp; foo',可以被视为：&lt; b&gt; blah&nbsp;&lt; i&g
+ * t;&lt; strike&gt; foo' ：'&lt; p&gt; <a href ="xx"&gt;&nbsp;&lt; em&gt;使用&lt; / em&gt;&lt; / a&gt;&lt; / p&似乎被视为：'&lt; p&gt;&lt; a href ="xx"&gt;&lt; em&gt;使用&lt; / em&gt;&lt; / a&gt;&lt; / p&。
+ * <p>
+ * 如果<code> strict </code>为false,当遇到断开流的标签(<code> TagElementbreaksFlows </code>)或尾部空格时,所有空格将被忽略,直到遇到非空格字
+ * 符。
+ * 使行为更接近流行的浏览器。
+ * 
+ * 
  * @see DTD
  * @see TagElement
  * @see SimpleAttributeSet
@@ -128,6 +146,15 @@ class Parser implements DTDConstants {
      * ignoreSpace will be set back to false the first time a
      * non whitespace character is encountered. This appears to give
      * behavior closer to the popular browsers.
+     * <p>
+     *  html规范不指定空间如何合并非常好如果strict == false,ignoreSpace用于尝试和模仿流行的浏览器的行为
+     * <p>
+     *  有问题的情况是：'bb blah&lt; i&gt;&lt; strike&gt; foo',其可以被视为：'b blah&lt; i&gt;&lt; strike&gt; foo'以及： p>&lt
+     * ; a href ="xx">&lt; em&gt;使用&lt; / a&gt;&lt; / p>,看起来像是：&lt; p&gt;&lt; a href = ">&lt; em>使用&lt; / em
+     * &gt;&lt; / a>&lt; / p>。
+     * <p>
+     * 当一个标签打破流,或者尾随空格被遇到ignoreSpace被设置为true从那时起,所有的空格将被忽略ignoreSpace将被设置回第一次一个非空格字符遇到这似乎让行为更接近流行的浏览器
+     * 
      */
     private boolean ignoreSpace;
 
@@ -137,6 +164,9 @@ class Parser implements DTDConstants {
      * with certain common classes of erroneous HTML constructs.
      * Strict or not, in either case an error will be recorded.
      *
+     * <p>
+     *  此标志确定解析器是否将严格执行SGML兼容性如果为false,它将宽松某些常见的错误的HTML结构的类别严格或不,在任一情况下将记录错误
+     * 
      */
     protected boolean strict = false;
 
@@ -156,6 +186,10 @@ class Parser implements DTDConstants {
     //
     /** The start position of the current block. Block is overloaded here,
      * it really means the current start position for the current comment,
+     * <p>
+     *  它真的意味着当前注释的当前开始位置,
+     * 
+     * 
      * tag, text. Use getBlockStartPosition to access this. */
     private int currentBlockStartPos;
     /** Start position of the last block. */
@@ -164,6 +198,9 @@ class Parser implements DTDConstants {
     /**
      * array for mapping numeric references in range
      * 130-159 to displayable Unicode characters.
+     * <p>
+     *  数组,用于将范围130-159中的数字引用映射到可显示的Unicode字符
+     * 
      */
     private static final char[] cp1252Map = {
         8218,  // &#130;
@@ -204,6 +241,8 @@ class Parser implements DTDConstants {
 
 
     /**
+    /* <p>
+    /* 
      * @return the line number of the line currently being parsed
      */
     protected int getCurrentLine() {
@@ -216,6 +255,9 @@ class Parser implements DTDConstants {
      * the current comment tag, text, block.... This is provided for
      * subclassers that wish to know the start of the current block when
      * called with one of the handleXXX methods.
+     * <p>
+     * 返回当前块的开始位置块在这里被重载,它真的意味着当前注释标签,文本块的当前开始位置这是为希望知道当前块的开始的子类提供的, handleXXX方法
+     * 
      */
     int getBlockStartPosition() {
         return Math.max(0, lastBlockStartPos - 1);
@@ -223,6 +265,9 @@ class Parser implements DTDConstants {
 
     /**
      * Makes a TagElement.
+     * <p>
+     *  创建TagElement
+     * 
      */
     protected TagElement makeTag(Element elem, boolean fictional) {
         return new TagElement(elem, fictional);
@@ -242,12 +287,18 @@ class Parser implements DTDConstants {
 
     /**
      * Called when PCDATA is encountered.
+     * <p>
+     *  在遇到PCDATA时调用
+     * 
      */
     protected void handleText(char text[]) {
     }
 
     /**
      * Called when an HTML title tag is encountered.
+     * <p>
+     *  在遇到HTML标题标记时调用
+     * 
      */
     protected void handleTitle(char text[]) {
         // default behavior is to call handleText. Subclasses
@@ -257,6 +308,9 @@ class Parser implements DTDConstants {
 
     /**
      * Called when an HTML comment is encountered.
+     * <p>
+     *  在遇到HTML注释时调用
+     * 
      */
     protected void handleComment(char text[]) {
     }
@@ -288,24 +342,36 @@ class Parser implements DTDConstants {
 
     /**
      * Called when an empty tag is encountered.
+     * <p>
+     *  遇到空标签时调用
+     * 
      */
     protected void handleEmptyTag(TagElement tag) throws ChangedCharSetException {
     }
 
     /**
      * Called when a start tag is encountered.
+     * <p>
+     *  遇到开始标记时调用
+     * 
      */
     protected void handleStartTag(TagElement tag) {
     }
 
     /**
      * Called when an end tag is encountered.
+     * <p>
+     *  遇到结束标记时调用
+     * 
      */
     protected void handleEndTag(TagElement tag) {
     }
 
     /**
      * An error has occurred.
+     * <p>
+     *  发生了错误
+     * 
      */
     protected void handleError(int ln, String msg) {
         /*
@@ -313,11 +379,18 @@ class Parser implements DTDConstants {
         System.out.println("**** " + stack);
         System.out.println("line " + ln + ": error: " + msg);
         System.out.println();
+        System.out.println("* <p>
+        System.out.println("*  ThreaddumpStack(); Systemoutprintln("****"+ stack); Systemoutprintln("line"+ ln +"：error："+ msg); Sy
+        System.out.println("* stemoutprintln();。
+        System.out.println("* 
         */
     }
 
     /**
      * Output text.
+     * <p>
+     *  输出文本
+     * 
      */
     void handleText(TagElement tag) {
         if (tag.breaksFlow()) {
@@ -369,6 +442,9 @@ class Parser implements DTDConstants {
 
     /**
      * Invoke the error handler.
+     * <p>
+     *  调用错误处理程序
+     * 
      */
     protected void error(String err, String arg1, String arg2,
         String arg3) {
@@ -390,6 +466,9 @@ class Parser implements DTDConstants {
      * Handle a start tag. The new tag is pushed
      * onto the tag stack. The attribute list is
      * checked for required attributes.
+     * <p>
+     * 处理开始标签将新标签推入标签堆栈检查属性列表是否有必需的属性
+     * 
      */
     protected void startTag(TagElement tag) throws ChangedCharSetException {
         Element elem = tag.getElement();
@@ -430,6 +509,9 @@ class Parser implements DTDConstants {
             /*
         } else if (elem.getName().equals("form")) {
             handleStartTag(tag);
+            /* <p>
+            /*  } else if(elemgetName()equals("form")){handleStartTag(tag);
+            /* 
             */
         } else {
             recent = elem;
@@ -441,6 +523,9 @@ class Parser implements DTDConstants {
     /**
      * Handle an end tag. The end tag is popped
      * from the tag stack.
+     * <p>
+     *  处理结束标记结束标记从标记堆栈弹出
+     * 
      */
     protected void endTag(boolean omitted) {
         handleText(stack.tag);
@@ -467,6 +552,11 @@ class Parser implements DTDConstants {
            legalElementContext()) and #pcdata.  We also ignore the
            <font> tag in the context of <ul> and <ol> We additonally
            ignore the <meta> and the <style> tag if the body tag has
+        /* <p>
+        /*  除了<td>,<th>(这些我们在legalElementContext()中处理)和#pcdata之外的表我们还忽略了<ul>和<ol>的上下文中的<font>标记。
+        /* 我们另外忽略了<meta> <style>标记(如果正文标记有)。
+        /* 
+        /* 
            been seen. **/
         if ((elemName.equals("html") && seenHtml) ||
             (elemName.equals("head") && seenHead) ||
@@ -498,6 +588,9 @@ class Parser implements DTDConstants {
 
     /**
      * Marks the first time a tag has been seen in a document
+     * <p>
+     *  标记文档中第一次看到标记
+     * 
      */
 
     protected void markFirstTime(Element elem) {
@@ -520,6 +613,9 @@ class Parser implements DTDConstants {
 
     /**
      * Create a legal content for an element.
+     * <p>
+     *  为元素创建法律内容
+     * 
      */
     boolean legalElementContext(Element elem) throws ChangedCharSetException {
 
@@ -708,6 +804,9 @@ class Parser implements DTDConstants {
 
     /**
      * Create a legal context for a tag.
+     * <p>
+     *  为标记创建法律上下文
+     * 
      */
     void legalTagContext(TagElement tag) throws ChangedCharSetException {
         if (legalElementContext(tag.getElement())) {
@@ -741,6 +840,9 @@ class Parser implements DTDConstants {
     /**
      * Error context. Something went wrong, make sure we are in
      * the document's body context
+     * <p>
+     *  错误上下文出错了,请确保我们在文档的正文上下文中
+     * 
      */
     void errorContext() throws ChangedCharSetException {
         for (; (stack != null) && (stack.tag.getElement() != dtd.body) ; stack = stack.next) {
@@ -754,6 +856,9 @@ class Parser implements DTDConstants {
 
     /**
      * Add a char to the string buffer.
+     * <p>
+     *  向字符串缓冲区添加一个字符
+     * 
      */
     void addString(int c) {
         if (strpos  == str.length) {
@@ -766,6 +871,9 @@ class Parser implements DTDConstants {
 
     /**
      * Get the string that's been accumulated.
+     * <p>
+     *  获取已累积的字符串
+     * 
      */
     String getString(int pos) {
         char newStr[] = new char[strpos - pos];
@@ -806,6 +914,9 @@ class Parser implements DTDConstants {
     /**
      * Skip space.
      * [5] 297:5
+     * <p>
+     *  跳过空格[5] 297：5
+     * 
      */
     void skipSpace() throws IOException {
         while (true) {
@@ -841,6 +952,9 @@ class Parser implements DTDConstants {
      * Parse identifier. Uppercase characters are folded
      * to lowercase when lower is true. Returns falsed if
      * no identifier is found. [55] 346:17
+     * <p>
+     * 解析标识符当lower为true时,大写字符将被折叠为小写。如果未找到标识符,则返回假的。[55] 346：17
+     * 
      */
     boolean parseIdentifier(boolean lower) throws IOException {
         switch (ch) {
@@ -899,6 +1013,9 @@ class Parser implements DTDConstants {
 
     /**
      * Parse an entity reference. [59] 350:17
+     * <p>
+     *  解析实体引用[59] 350：17
+     * 
      */
     private char[] parseEntityReference() throws IOException {
         int pos = strpos;
@@ -1029,6 +1146,13 @@ class Parser implements DTDConstants {
      * in the range 130-159 (which are control chars in Unicode set)
      * to displayable characters with other codes.
      *
+     * <p>
+     *  将数字字符引用转换为字符数组
+     * 
+     *  通常,引用中的代码应始终转换为具有相同代码的Unicode字符,但由于Cp1252字符集的广泛使用,大多数浏览器将130-159范围内的数字引用(它们是Unicode集中的控制字符)映射到可显示字符与
+     * 其他代码。
+     * 
+     * 
      * @param c the code of numeric character reference.
      * @return a char array corresponding to the reference code.
      */
@@ -1049,6 +1173,9 @@ class Parser implements DTDConstants {
 
     /**
      * Parse a comment. [92] 391:7
+     * <p>
+     *  解析评论[92] 391：7
+     * 
      */
     void parseComment() throws IOException {
 
@@ -1065,6 +1192,11 @@ class Parser implements DTDConstants {
                       requirement and this character can appear anywhere in the
                       comment.  The parser reads on until it sees the following
                       pattern: "-->" or "--!>".
+                  /* <p>
+                  /* 已经被解析,' - '字符仅仅作为注释终止的一部分有效,并且更多地它必须存在于偶数中。因此,如果strict是真的,我们假定注释已经被终止并返回。
+                  /* 然而,如果strict是false,没有偶数要求,并且此字符可以出现在注释的任何位置。解析器读取,直到它看到以下模式：" - >"或" - ！>"。
+                  /* 
+                  /* 
                    **/
                 if (!strict && (strpos != 0) && (str[strpos - 1] == '-')) {
                     if ((ch = readCh()) == '>') {
@@ -1139,6 +1271,9 @@ class Parser implements DTDConstants {
 
     /**
      * Parse literal content. [46] 343:1 and [47] 344:1
+     * <p>
+     *  解析文字内容[46] 343：1和[47] 344：1
+     * 
      */
     void parseLiteral(boolean replace) throws IOException {
         while (true) {
@@ -1213,6 +1348,9 @@ class Parser implements DTDConstants {
 
     /**
      * Parse attribute value. [33] 331:1
+     * <p>
+     *  解析属性值331：1
+     * 
      */
     String parseAttributeValue(boolean lower) throws IOException {
         int delim = -1;
@@ -1293,10 +1431,17 @@ class Parser implements DTDConstants {
                     /* In SGML a construct like <img src=/cgi-bin/foo?x=1>
                        is considered invalid since an = sign can only be contained
                        in an attributes value if the string is quoted.
+                    /* <p>
+                    /*  被认为无效,因为如果字符串被引用,则=符号只能包含在属性值中
+                    /* 
                        */
                     error("attvalerr");
                     /* If strict is true then we return with the string we have thus far.
                        Otherwise we accept the = sign as part of the attribute's value and
+                    /* <p>
+                    /*  否则,我们接受=符号作为属性值的一部分
+                    /* 
+                    /* 
                        process the rest of the img tag. */
                     if (strict) {
                         return getString(0);
@@ -1335,6 +1480,9 @@ class Parser implements DTDConstants {
 
     /**
      * Parse attribute specification List. [31] 327:17
+     * <p>
+     *  解析属性规范列表[31] 327：17
+     * 
      */
     void parseAttributeSpecificationList(Element elem) throws IOException {
 
@@ -1480,6 +1628,9 @@ class Parser implements DTDConstants {
     /**
      * Parses th Document Declaration Type markup declaration.
      * Currently ignores it.
+     * <p>
+     * Parses th文档声明类型标记声明当前忽略它
+     * 
      */
     public String parseDTDMarkup() throws IOException {
 
@@ -1523,6 +1674,9 @@ class Parser implements DTDConstants {
      * Parse markup declarations.
      * Currently only handles the Document Type Declaration markup.
      * Returns true if it is a markup declaration false otherwise.
+     * <p>
+     *  解析标记声明当前仅处理文档类型声明标记如果它是标记声明,则返回true否则
+     * 
      */
     protected boolean parseMarkupDeclarations(StringBuffer strBuff) throws IOException {
 
@@ -1537,6 +1691,9 @@ class Parser implements DTDConstants {
 
     /**
      * Parse an invalid tag.
+     * <p>
+     *  解析无效标记
+     * 
      */
     void parseInvalidTag() throws IOException {
         // ignore all data upto the close bracket '>'
@@ -1558,6 +1715,9 @@ class Parser implements DTDConstants {
 
     /**
      * Parse a start or end tag.
+     * <p>
+     *  解析开始或结束标记
+     * 
      */
     void parseTag() throws IOException {
         Element elem;
@@ -1743,6 +1903,10 @@ class Parser implements DTDConstants {
                     return;
                 }
             }
+            /* <p>
+            /*  if(！strict && elemgetName()equals("form")){if(lastFormSent！= null){handleEndTag(lastFormSent);返回; } 
+            /* else {// do nothing return; }}。
+            /* 
             */
 
             if (unknown) {
@@ -1922,6 +2086,10 @@ class Parser implements DTDConstants {
             they do have a start and an end tag, we will
             not put this tag on the stack.  This is to deal
             several pages in the web oasis that choose to
+        /* <p>
+        /*  他们在任何上下文中都是合法的另外,即使他们有一个开始和结束标记,我们不会把这个标签放在堆栈这是要处理几个网页的网页绿洲,选择
+        /* 
+        /* 
             start and end forms in any possible location. **/
 
         /*
@@ -1933,6 +2101,10 @@ class Parser implements DTDConstants {
                 lastFormSent = tag;
             }
         } else {
+        /* <p>
+        /*  if(！strict && elemgetName()equals("form")){if(lastFormSent == null){lastFormSent = tag; } else {handleEndTag(lastFormSent); lastFormSent = tag; }
+        /* } else {。
+        /* 
         */
             // Smlly, if a tag is unknown, we will apply
             // no legalTagContext logic to it.
@@ -1951,6 +2123,9 @@ class Parser implements DTDConstants {
             }
             /*
         }
+            /* <p>
+            /*  }}
+            /* 
             */
 
         startTag(tag);
@@ -2042,6 +2217,9 @@ class Parser implements DTDConstants {
 
     /**
      * Parse Content. [24] 320:1
+     * <p>
+     * 解析内容[24] 320：1
+     * 
      */
     void parseContent() throws IOException {
         Thread curThread = Thread.currentThread();
@@ -2214,6 +2392,9 @@ class Parser implements DTDConstants {
     /**
      * Returns the end of line string. This will return the end of line
      * string that has been encountered the most, one of \r, \n or \r\n.
+     * <p>
+     *  返回行尾的字符串这将返回遇到最多的行结束字符串,\\ r,\n或\\ r\n
+     * 
      */
     String getEndOfLineString() {
         if (crlfCount >= crCount) {
@@ -2236,6 +2417,9 @@ class Parser implements DTDConstants {
 
     /**
      * Parse an HTML stream, given a DTD.
+     * <p>
+     *  解析HTML流,给定DTD
+     * 
      */
     public synchronized void parse(Reader in) throws IOException {
         this.in = in;
@@ -2295,6 +2479,11 @@ class Parser implements DTDConstants {
      * (past the content-type) we may suffer a MalformedInputException. For
      * this reason the initial size is 1 and when the body is encountered the
      * size is adjusted to 256.
+     * <p>
+     *  输入缓存这比调用每个字节的BufferedReader的同步方法要快得多。
+     * 测量完成5/30/97表明有更大的缓冲区没有意义：将缓冲区增加到8192对一个程序丢弃一个没有可测量的影响字符(从http URL读取到本地机器)注意：如果当前编码是伪造的,并且我们读得太多(超过内容类
+     * 型),我们可能遭受MalformedInputException因此,初始大小为1,当遇到身体的大小被调整到256。
+     *  输入缓存这比调用每个字节的BufferedReader的同步方法要快得多。
      */
     private char buf[] = new char[1];
     private int pos;
@@ -2302,6 +2491,8 @@ class Parser implements DTDConstants {
     /*
         tracks position relative to the beginning of the
         document.
+    /* <p>
+    /* 
     */
     private int currentPosition;
 

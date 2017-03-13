@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2000-2002,2004,2005 Apache软件基金会
+ * 
+ *  根据Apache许可证第20版("许可证")授权;您不得使用此文件,除非符合许可证您可以在获取许可证的副本
+ * 
+ *  http：// wwwapacheorg / licenses / LICENSE-20
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件将按"原样"基础分发,无任何明示或暗示的保证或条件。请参阅许可证管理权限和限制许可证
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.xpath;
@@ -33,6 +43,12 @@ import com.sun.org.apache.xerces.internal.xni.QName;
  *
  * @xerces.internal
  *
+ * <p>
+ *  裸体最小XPath解析器
+ * 
+ *  @xercesinternal
+ * 
+ * 
  * @author Andy Clark, IBM
  * @author Sunitha Reddy, Sun Microsystems
  */
@@ -81,6 +97,9 @@ public class XPath {
     /**
      * Returns a representation of all location paths for this XPath.
      * XPath = locationPath ( '|' locationPath)
+     * <p>
+     * 返回此XPath的所有位置路径的表示XPath = locationPath('|'locationPath)
+     * 
      */
     public LocationPath[] getLocationPaths() {
         LocationPath[] ret=new LocationPath[fLocationPaths.length];
@@ -121,6 +140,11 @@ public class XPath {
      *
      * If <tt>b</tt> is false, this method throws XPathException
      * to report the error.
+     * <p>
+     *  由{@link #parseExpression(NamespaceContext)}方法使用以验证假设
+     * 
+     *  如果<tt> b </tt>为false,此方法将抛出XPathException以报告错误
+     * 
      */
     private static void check( boolean b ) throws XPathException {
         if(!b)      throw new XPathException("c-general-xpath");
@@ -130,6 +154,9 @@ public class XPath {
      * Used by the {@link #parseExpression(NamespaceContext)} method
      * to build a {@link LocationPath} object from the accumulated
      * {@link Step}s.
+     * <p>
+     *  由{@link #parseExpression(NamespaceContext)}方法用于从累积的{@link Step}构建一个{@link LocationPath}对象
+     * 
      */
     private LocationPath buildLocationPath( Vector stepsVector ) throws XPathException {
         int size = stepsVector.size();
@@ -144,6 +171,9 @@ public class XPath {
     /**
      * This method is implemented by using the XPathExprScanner and
      * examining the list of tokens that it returns.
+     * <p>
+     *  此方法通过使用XPathExprScanner并检查其返回的令牌列表来实现
+     * 
      */
     private void parseExpression(final NamespaceContext context)
         throws XPathException {
@@ -319,6 +349,9 @@ public class XPath {
     /**
      * Used by {@link #parseExpression} to parse a node test
      * from the token list.
+     * <p>
+     *  用于{@link #parseExpression}从标记列表解析节点测试
+     * 
      */
     private NodeTest parseNodeTest( int typeToken, Tokens xtokens, NamespaceContext context )
         throws XPathException {
@@ -367,6 +400,12 @@ public class XPath {
      *
      * @xerces.internal
      *
+     * <p>
+     *  XPath表达式的位置路径表示形式
+     * 
+     *  @xercesinternal
+     * 
+     * 
      * @author Andy Clark, IBM
      */
     public static class LocationPath
@@ -434,6 +473,12 @@ public class XPath {
      *
      * @xerces.internal
      *
+     * <p>
+     *  由轴和节点测试组成的位置路径步骤
+     * 
+     *  @xercesinternal
+     * 
+     * 
      * @author Andy Clark, IBM
      */
     public static class Step
@@ -498,6 +543,12 @@ public class XPath {
      *
      * @xerces.internal
      *
+     * <p>
+     *  轴
+     * 
+     *  @xercesinternal
+     * 
+     * 
      * @author Andy Clark, IBM
      */
     public static class Axis
@@ -567,6 +618,12 @@ public class XPath {
      *
      * @xerces.internal
      *
+     * <p>
+     *  节点测试
+     * 
+     * @xercesinternal
+     * 
+     * 
      * @author Andy Clark, IBM
      */
     public static class NodeTest
@@ -681,6 +738,12 @@ public class XPath {
      *
      * @xerces.internal
      *
+     * <p>
+     *  令牌列表
+     * 
+     *  @xercesinternal
+     * 
+     * 
      * @author Glenn Marcy, IBM
      * @author Andy Clark, IBM
      *
@@ -693,6 +756,10 @@ public class XPath {
          * [28] ExprToken ::= '(' | ')' | '[' | ']' | '.' | '..' | '@' | ',' | '::'
          *                  | NameTest | NodeType | Operator | FunctionName
          *                  | AxisName | Literal | Number | VariableReference
+         * <p>
+         *  [28] ExprToken :: ='('|')'| '['| ']'| ''| ''| '@'| ','| '::'| NameTest | NodeType |运算符| FunctionName
+         *  |轴名称文字|数字| VariableReference。
+         * 
          */
         public static final int
             EXPRTOKEN_OPEN_PAREN                    =   0,
@@ -850,6 +917,7 @@ public class XPath {
 
         /**
          *
+         * <p>
          */
         private static final int INITIAL_TOKEN_COUNT = 1 << 8;
         private int[] fTokens = new int[INITIAL_TOKEN_COUNT];
@@ -865,6 +933,9 @@ public class XPath {
 
         /**
          * Current position in the token list.
+         * <p>
+         *  令牌列表中的当前位置
+         * 
          */
         private int fCurrentTokenIndex;
 
@@ -978,6 +1049,9 @@ public class XPath {
 
         /**
          * Resets the current position to the head of the token list.
+         * <p>
+         *  将当前位置重置为令牌列表的头
+         * 
          */
         public void rewind() {
             fCurrentTokenIndex=0;
@@ -985,6 +1059,9 @@ public class XPath {
         /**
          * Returns true if the {@link #getNextToken()} method
          * returns a valid token.
+         * <p>
+         *  如果{@link #getNextToken()}方法返回有效的令牌,则返回true
+         * 
          */
         public boolean hasMore() {
             return fCurrentTokenIndex<fTokenCount;
@@ -995,6 +1072,11 @@ public class XPath {
          *
          * If there's no such next token, this method throws
          * <tt>new XPathException("c-general-xpath");</tt>.
+         * <p>
+         *  在当前位置获取令牌,然后将当前位置前进一个
+         * 
+         *  如果没有这样的下一个标记,这个方法会抛出<tt> new XPathException("c-general-xpath"); </tt>
+         * 
          */
         public int nextToken() throws XPathException {
             if( fCurrentTokenIndex==fTokenCount )
@@ -1007,6 +1089,11 @@ public class XPath {
          *
          * If there's no such next token, this method throws
          * <tt>new XPathException("c-general-xpath");</tt>.
+         * <p>
+         *  在当前位置获取令牌,而不推进当前位置
+         * 
+         *  如果没有这样的下一个标记,这个方法会抛出<tt> new XPathException("c-general-xpath"); </tt>
+         * 
          */
         public int peekToken() throws XPathException {
             if( fCurrentTokenIndex==fTokenCount )
@@ -1019,6 +1106,11 @@ public class XPath {
          * If there's no current token or if the current token
          * is not a string token, this method throws
          * <tt>new XPathException("c-general-xpath");</tt>.
+         * <p>
+         * 在当前位置获取一个字符串的令牌
+         * 
+         *  如果没有当前令牌或者当前令牌不是字符串令牌,则此方法会抛出<tt> new XPathException("c-general-xpath"); </tt>
+         * 
          */
         public String nextTokenAsString() throws XPathException {
             String s = getTokenString(nextToken());
@@ -1213,6 +1305,10 @@ public class XPath {
     /**
      * @xerces.internal
      *
+     * <p>
+     *  @xercesinternal
+     * 
+     * 
      * @author Glenn Marcy, IBM
      * @author Andy Clark, IBM
      *
@@ -1231,6 +1327,13 @@ public class XPath {
          *  P,  Q,  R,  S,  T,  U,  V,  W,  X,  Y,  Z,  [,  \,  ],  ^,  _,  // 5
          *  `,  a,  b,  c,  d,  e,  f,  g,  h,  i,  j,  k,  l,  m,  n,  o,  // 6
          *  p,  q,  r,  s,  t,  u,  v,  w,  x,  y,  z,  {,  |,  },  ~, DEL  // 7
+         * <p>
+         *  7位ASCII子集
+         * 
+         * 0 1 2 3 4 5 6 7 8 9 ABCDEF 0,0,0,0,0,0,0,0,0,HT,LF,0,0,CR,0,0,0 // 0,0,0, 0,0,0,0,0,0,0,0,1,0,0,0,0,0
+         * ,0, ,*,+,,,  - ,,/,// 2 0,1,2,3,4,5,6,7,8,9, A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W a,b,c,d,e,
+         * f,g,h,i,j,k,l,m,n, o,// 6 p,q,r,s,t,u,v,w,x,y,z,{,。
+         * 
          */
         private static final byte
             CHARTYPE_INVALID            =  0,   // invalid XML character
@@ -1273,6 +1376,9 @@ public class XPath {
 
         /**
          * Symbol literals
+         * <p>
+         *  符号字面值
+         * 
          */
 
         //
@@ -1322,6 +1428,7 @@ public class XPath {
 
         /**
          *
+         * <p>
          */
         public boolean scanExpr(SymbolTable symbolTable,
                                 XPath.Tokens tokens, String data,
@@ -1596,6 +1703,37 @@ public class XPath {
                 case CHARTYPE_DIGIT:
                     addToken(tokens, XPath.Tokens.EXPRTOKEN_NUMBER);
                     starIsMultiplyOperator = true;
+                // [29] Literal ::= '"' [^"]* <p>
+                // [29] Literal ::= '"' [^"]* } else if(ch =='/'){addToken(tokens,XPathTokensEXPRTOKEN_PERIOD); starIsMultiplyOperator = true; currentOffset ++; }
+                // [29] Literal ::= '"' [^"]*  else if(ch =='|'){addToken(tokens,XPathTokensEXPRTOKEN_PERIOD); starIsMultiplyOperator = true; currentOffset ++;打破; }
+                // [29] Literal ::= '"' [^"]*  else if(ch ==''|| ch == 0x0A || ch == 0x09 || ch == 0x0D){//如果下一个令牌不存在或者| do {if(++ currentOffset == endOffset){break; }
+                // [29] Literal ::= '"' [^"]*  ch = datacharAt(currentOffset); } while(ch ==''|| ch == 0x0A || ch == 0x09 || ch == 0x0D); if(curren
+                // [29] Literal ::= '"' [^"]* tOffset == endOffset || ch =='|'|| ch =='/'){addToken(tokens,XPathTokensEXPRTOKEN_PERIOD); starIsMultiplyOperator = true;打破; }
+                // [29] Literal ::= '"' [^"]*  throw new XPathException("c-general-xpath"); } else {//''throw new XPathException("c-general-xpath"); }
+                // [29] Literal ::= '"' [^"]*  if(currentOffset == endOffset){break; } break; case CHARTYPE_ATSIGN：//'@'addToken(tokens,XPathTokens
+                // [29] Literal ::= '"' [^"]* EXPRTOKEN_ATSIGN); starIsMultiplyOperator = false; if(++ currentOffset == endOffset){break; } break; 
+                // [29] Literal ::= '"' [^"]* case CHARTYPE_COMMA：//','addToken(tokens,XPathTokensEXPRTOKEN_COMMA); starIsMultiplyOperator = false;
+                // [29] Literal ::= '"' [^"]*  if(++ currentOffset == endOffset){break; } break; case CHARTYPE_COLON：//'::'if(++ currentOffset == e
+                // [29] Literal ::= '"' [^"]* ndOffset){// Systemoutprintln("abort 1a"); return false; // REVISIT} ch = datacharAt(currentOffset); 
+                // [29] Literal ::= '"' [^"]* if(ch！='：'){// Systemoutprintln("abort 1b"); return false; // REVISIT} addToken(tokens,XPathTokensEXP
+                // [29] Literal ::= '"' [^"]* RTOKEN_DOUBLE_COLON); starIsMultiplyOperator = false; if(++ currentOffset == endOffset){break; } brea
+                // [29] Literal ::= '"' [^"]* k; case CHARTYPE_SLASH：//'/'和'//'if(++ currentOffset == endOffset){addToken(tokens,XPathTokensEXPRTOKEN_OPERATOR_SLASH); starIsMultiplyOperator = false;打破; }
+                // [29] Literal ::= '"' [^"]*  ch = datacharAt(currentOffset); if(ch =='/'){//'//'addToken(tokens,XPathTokensEXPRTOKEN_OPERATOR_DOUBLE_SLASH); starIsMultiplyOperator = false; if(++ currentOffset == endOffset){break; }
+                // [29] Literal ::= '"' [^"]* } else {addToken(tokens,XPathTokensEXPRTOKEN_OPERATOR_SLASH); starIsMultiplyOperator = false; } break
+                // [29] Literal ::= '"' [^"]* ; case CHARTYPE_UNION：//'|' addToken(tokens,XPathTokensEXPRTOKEN_OPERATOR_UNION); starIsMultiplyOpera
+                // [29] Literal ::= '"' [^"]* tor = false; if(++ currentOffset == endOffset){break; } break; case CHARTYPE_PLUS：//'+'addToken(token
+                // [29] Literal ::= '"' [^"]* s,XPathTokensEXPRTOKEN_OPERATOR_PLUS); starIsMultiplyOperator = false; if(++ currentOffset == endOffs
+                // [29] Literal ::= '"' [^"]* et){break; } break; case CHARTYPE_MINUS：//' - 'addToken(tokens,XPathTokensEXPRTOKEN_OPERATOR_MINUS); 
+                // [29] Literal ::= '"' [^"]* starIsMultiplyOperator = false; if(++ currentOffset == endOffset){break; } break; case CHARTYPE_EQUAL
+                // [29] Literal ::= '"' [^"]* ：//'='addToken(tokens,XPathTokensEXPRTOKEN_OPERATOR_EQUAL); starIsMultiplyOperator = false; if(++ cur
+                // [29] Literal ::= '"' [^"]* rentOffset == endOffset){break; } break; case CHARTYPE_EXCLAMATION：//'！='if(++ currentOffset == endOf
+                // [29] Literal ::= '"' [^"]* fset){// Systemoutprintln("abort 2a"); return false; // REVISIT} ch = datacharAt(currentOffset); if(c
+                // [29] Literal ::= '"' [^"]* h！='='){// Systemoutprintln("abort 2b"); return false; // REVISIT} addToken(tokens,XPathTokensEXPRTOK
+                // [29] Literal ::= '"' [^"]* EN_OPERATOR_NOT_EQUAL); starIsMultiplyOperator = false; if(++ currentOffset == endOffset){break; } br
+                // [29] Literal ::= '"' [^"]* eak; case CHARTYPE_LESS：//'<'和'<='if(++ currentOffset == endOffset){addToken(tokens,XPathTokensEXPRTOKEN_OPERATOR_LESS); starIsMultiplyOperator = false;打破; } ch = datacharAt(currentOffset); if(ch =='='){//'<='addToken(tokens,XPathTokensEXPRTOKEN_OPERATOR_LESS_EQUAL); starIsMultiplyOperator = false; if(++ currentOffset == endOffset){break; }} else {addToken(tokens,XPathTokensEXPRTOKEN_OPERATOR_LESS); starIsMultiplyOperator = false; } break; case CHARTYPE_GREATER：//'>
+                // [29] Literal ::= '"' [^"]* '和'> ='if(++ currentOffset == endOffset){addToken(tokens,XPathTokensEXPRTOKEN_OPERATOR_GREATER); starIsMultiplyOperator = false;打破; }
+                // [29] Literal ::= '"' [^"]*  ch = datacharAt(currentOffset); if(ch =='='){//'> ='addToken(tokens,XPathTokensEXPRTOKEN_OPERATOR_GREATER_EQUAL); starIsMultiplyOperator = false; if(++ currentOffset == endOffset){break; }
+                // [29] Literal ::= '"' [^"]* 
                     currentOffset = scanNumber(tokens, data, endOffset, currentOffset/*, encoding*/);
                     break;
                 //
@@ -1900,6 +2038,18 @@ public class XPath {
                 /*** // REVISIT: Make sure this is a negation. ***
                 if ((XMLCharacterProperties.fgCharFlags[ch] &
                      XMLCharacterProperties.E_InitialNameCharFlag) == 0)
+                /* <p>
+                /* } else {addToken(tokens,XPathTokensEXPRTOKEN_OPERATOR_GREATER); starIsMultiplyOperator = false; } bre
+                /* ak; // // [29] Literal :: ='''[^"] *'"'|"'"[^'] *"'"// case CHARTYPE_QUOTE：//'\\" int qchar = ch; if(
+                /* ++ currentOffset == endOffset){// Systemoutprintln("abort 2c"); return false; // REVISIT} ch = datach
+                /* arAt(currentOffset); int litOffset = currentOffset; while(ch！= qchar){if(++ currentOffset == endOffset){// Systemoutprintln("abort 2d"); return false; // REVISIT}
+                /*  ch = datacharAt(currentOffset); } int litLength = currentOffset  -  litOffset; addToken(tokens,XPath
+                /* TokensEXPRTOKEN_LITERAL); starIsMultiplyOperator = true; tokensaddToken(symbolTableaddSymbol(datasubs
+                /* tring(litOffset,litOffset + litLength))); if(++ currentOffset == endOffset){break; } break; // // [30
+                /* ] Number :: = Digits(''Digits?)? | ''Digits // [31] Digits :: = [0-9] + // case CHARTYPE_DIGIT：addTok
+                /* en(tokens,XPathTokensEXPRTOKEN_NUMBER); starIsMultiplyOperator = true;。
+                /* 
+                /* 
                 /***/
                 {
                     return currentOffset;
@@ -1918,6 +2068,13 @@ public class XPath {
                     /*** // REVISIT: Make sure this is a negation. ***
                     if ((XMLCharacterProperties.fgCharFlags[ch] &
                          XMLCharacterProperties.E_NameCharFlag) == 0)
+                    /* <p>
+                    /* 打破; // // [36] VariableReference :: ='$'QName // case CHARTYPE_DOLLAR：if(++ currentOffset == endOffse
+                    /* t){// Systemoutprintln("abort 3a"); return false; // REVISIT} nameOffset = currentOffset; currentOffs
+                    /* et = scanNCName(data,endOffset,currentOffset); if(currentOffset == nameOffset){// Systemoutprintln("abort 3b"); return false; // REVISIT}
+                    /*  if(currentOffset <endOffset){ch = datacharAt(currentOffset); } else {ch = -1; } nameHandle = symbolTableaddSymbol(datasubstring(nameOffset,currentOffset)); if(ch！='：'){prefixHandle = XMLSymbolsEMPTY_STRING; } else {prefixHandle = nameHandle; if(++ currentOffset == endOffset){// Systemoutprintln("abort 4a"); return false; // REVISIT} nameOffset = currentOffset; currentOffset = scanNCName(data,endOffset,currentOffset); if(currentOffset == nameOffset){// Systemoutprintln("abort 4b"); return false; // REVISIT} if(currentOffset <endOffset){ch = datacharAt(currentOffset); } else {ch = -1; } nameHandle = symbolTableaddSymbol(datasubstring(nameOffset,currentOffset)); } addToken(tokens,XPathTokensEXPRTOKEN_VARIABLE_REFERENCE); starIsMultiplyOperator = true; tokensaddToken(prefixHandle); tokensaddToken(nameHandle);打破; // // [37] NameTest :: ='*'| NCName'：''*'| QName // [34] MultiplyOperator :: ='*'// case CHARTYPE_STAR：//'*'// // 37词法结构// //如果存在前面的令牌并且前面的令牌不是@,::,(,[,或//)运算符中的一个,那么*必须被识别为MultiplyOperator // //否则,不能将令牌识别为MultiplyOperator // if(starIsMultiplyOperator){addToken(tokens,XPathTokensEXPRTOKEN_OPERATOR_MULT); starIsMultiplyOperator = false;} else {addToken(tokens,XPathTokensEXPRTOKEN_NAMETEST_ANY); starIsMultiplyOperator = true;} if(++ currentOffset = = endOffset){break;} break; // // NCName,QName和非终端// case CHARTYPE_NONASCII：//可能是一个有效的非ASCII字母(BaseChar | Ideographic)case CHARTYPE_LETTER：case CHARTYPE_UNDERSCORE：// / / 37词法结构// //如果存在前面的令牌并且前面的令牌不是@,::,(,[,或//)操作符中的一个,则NCName必须被识别为OperatorName // //如果NCName之后的字符(可能在插入ExprWhitespace之后)是(,//,那么该标记必须被识别为NodeType或FunctionName // //如果在NCName之后的两个字符(可能在插入ExprWhitespace之后)//是： ：,则该令牌必须被识别为AxisName // //否则,该令牌不能被识别为OperatorName,NodeType,// FunctionName或AxisName// // [33] OperatorName :: ='和'| '或'| 'mod'| 'div'// [38] NodeType :: ='comment'| 'text'| 'processing-instruction'| 'node'// [35] FunctionName :: = QName  -  NodeType // [6] AxisName :: =(见上文)// // [37] NameTest :: ='*'| NCName'：''*'| QName // [5] NCName :: =(Letter |'_')(NCNameChar)* // [?] NCNameChar :: = Letter |数字| ''| ' - '| '_'('NCNameChar'的ascii子集)// [?] QName :: =(NCName'：')? NCName // [?] Letter :: = [A-Za-z]('Letter'的ascii子集)// [?] Digit :: = [0-9]('Digit'的ascii子集)// nameOffset = currentOffset; currentOffset = scanNCName(data,endOffset,currentOffset); if(currentOffset == nameOffset){// Systemoutprintln("abort 4c"); return false; // REVISIT} if(currentOffset <endOffset){ch = datacharAt(currentOffset); } else {ch = -1; } nameHandle = symbolTableaddSymbol(datasubstring(nameOffset,currentOffset)); boolean isNameTestNCName = false; boolean isAxisName = false; prefixHandle = XMLSymbolsEMPTY_STRING; if(ch =='：'){if(++ currentOffset == endOffset){// Systemoutprintln("abort 5"); return false; // REVISIT} ch = datacharAt(currentOffset); if(ch =='*'){if(++ currentOffset <endOffset){ch = datacharAt(currentOffset); } isNameTestNCName = true; } else if(ch =='：'){if(++ currentOffset <endOffset){ch = datacharAt(currentOffset); } isAxisName = true; } else {prefixHandle = nameHandle; nameOffset = currentOffset; currentOffset = scanNCName(data,endOffset,currentOffset); if(currentOffset == nameOffset){// Systemoutprintln("abort 5b"); return false; // REVISIT} if(currentOffset <endOffset){ch = datacharAt(currentOffset); } else {ch = -1; } nameHandle = symbolTableaddSymbol(datasubstring(nameOffset,currentOffset)); }} // // [39] ExprWhitespace :: = S // while(ch ==''|| ch == 0x0A || ch == 0x09 || ch == 0x0D){if(++ currentOffset == endOffset){break; } ch = datacharAt(currentOffset); } // //如果存在前面的令牌并且前面的令牌不是@,::,(,[,或//)运算符中的一个,则NCName必须被识别为运算符//如果(starIsMultiplyOperator){如果(nameHandle == fAndSymbol){addToken(令牌,XPathTokensEXPRTOKEN_OPERATOR_AND); starIsMultiplyOperator = FALSE; }否则如果(nameHandle == fOrSymbol){addToken(令牌,XPathTokensEXPRTOKEN_OPERATOR_OR); starIsMultiplyOperator = FALSE; }否则如果(nameHandle == fModSymbol){addToken(令牌,XPathTokensEXPRTOKEN_OPERATOR_MOD); starIsMultiplyOperator = FALSE; }否则如果(nameHandle == fDivSymbol){addToken(令牌,XPathTokensEXPRTOKEN_OPERATOR_DIV); starIsMultiplyOperator = FALSE; }否则{// Systemoutprintln("中止6");返回false; //重温}如果(isNameTestNCName){// Systemoutprintln("中止7");返回false; //重新审视 - 的NCName：*凡operatorname需要}否则,如果(isAxisName){// Systemoutprintln("abort 8"); return false; // REVISIT  -  AxisName :: where operatorName is required} break; } // //如果在一个NCName之后的字符(可能在插入ExprWhitespace之后)是(,//那么该标记必须被识别为NodeType或FunctionName // if(ch =='('&&！isNameTestNCName &&！isAxisName )else if(nameHandle == fPISymbol){addToken(tokens,XPathTokensEXPRTOKEN_NODETYPE_PI)){if(nameHandle == fCommentSymbol){addToken(tokens,XPathTokensEXPRTOKEN_NODETYPE_PI) ;} else if(nameHandle == fNodeSymbol){addToken(tokens,XPathTokensEXPRTOKEN_NODETYPE_NODE);} else {addToken(tokens,XPathTokensEXPRTOKEN_FUNCTION_NAME); tokensaddToken(prefixHandle); tokensaddToken(nameHandle); } addToken(tokens,XPathTokensEXPRTOKEN_OPEN_PAREN); starIsMultiplyOperator = false; if(++ currentOffset == endOffset){break; } break; } // //如果NCName之后的两个字符(可能在插入ExprWhitespace之后)为::,则该标记必须被识别为AxisName // if(isAxisName ||(ch =='：'&& currentOffset + 1 <endOffset && datacharAt(currentOffset + 1)=='：')){if(nameHandle == fAncestorSymbol){addToken(tokens,XPathTokensEXPRTOKEN_AXISNAME_ANCESTOR); } else if(nameHandle == fAncestorOrSelfSymbol){addToken(tokens,XPathTokensEXPRTOKEN_AXISNAME_ANCESTOR_OR_SELF); } else if(nameHandle == fAttributeSymbol){addToken(tokens,XPathTokensEXPRTOKEN_AXISNAME_ATTRIBUTE); }否则如果(nameHandle == fChildSymbol){addToken(令牌,XPathTokensEXPRTOKEN_AXISNAME_CHILD); }否则如果(nameHandle == fDescendantSymbol){addToken(令牌,XPathTokensEXPRTOKEN_AXISNAME_DESCENDANT); }否则如果(nameHandle == fDescendantOrSelfSymbol){addToken(令牌,XPathTokensEXPRTOKEN_AXISNAME_DESCENDANT_OR_SELF); }否则如果(nameHandle == fFollowingSymbol){addToken(令牌,XPathTokensEXPRTOKEN_AXISNAME_FOLLOWING); }否则如果(nameHandle == fFollowingSiblingSymbol){addToken(令牌,XPathTokensEXPRTOKEN_AXISNAME_FOLLOWING_SIBLING); }否则如果(nameHandle == fNamespaceSymbol){addToken(令牌,XPathTokensEXPRTOKEN_AXISNAME_NAMESPACE); }否则如果(nameHandle == fParentSymbol){addToken(令牌,XPathTokensEXPRTOKEN_AXISNAME_PARENT); } else if(nameHandle == fPrecedingSymbol){addToken(tokens,XPathTokensEXPRTOKEN_AXISNAME_PRECEDING); } else if(nameHandle == fPrecedingSiblingSymbol){addToken(tokens,XPathTokensEXPRTOKEN_AXISNAME_PRECEDING_SIBLING); } else if(nameHandle == fSelfSymbol){addToken(tokens,XPathTokensEXPRTOKEN_AXISNAME_SELF); } else {// Systemoutprintln("abort 9"); return false; // REVISIT} if(isNameTestNCName){// Systemoutprintln("abort 10"); return false; // REVISIT  - "NCName：* ::"其中"AxisName ::"是必需的} addToken(tokens,XPathTokensEXPRTOKEN_DOUBLE_COLON); starIsMultiplyOperator = false; if(！isAxisName){currentOffset ++; if(++ currentOffset == endOffset){break; }} break; } // //否则,不能将令牌识别为OperatorName,NodeType,// FunctionName或AxisName // if(isNameTestNCName){addToken(tokens,XPathTokensEXPRTOKEN_NAMETEST_NAMESPACE); starIsMultiplyOperator = true; tokensaddToken(nameHandle); } else {addToken(tokens,XPathTokensEXPRTOKEN_NAMETEST_QNAME); starIsMultiplyOperator = true; tokensaddToken(prefixHandle); tokensaddToken(nameHandle); } break; }} if(XPathTokensDUMP_TOKENS){tokensdumpTokens(); } return true; } // // [5] NCName :: =(Letter |'_')(NCNameChar)* // [6]数字| '''| ' - '| '_'|组合Char |扩展// int scanNCName(String data,int endOffset,int currentOffset){int ch = datacharAt(currentOffset);如果((X> Y> Y),则返回0,否则返回0,否则返回0。
+                    /* 
+                    /* 
                     /***/
                     {
                         break;
@@ -1952,6 +2109,10 @@ public class XPath {
             }
             if (ch == '.') {
                 if (++currentOffset < endOffset) {
+                whole = (whole * <p>
+                whole = (whole * if((XMLCharacterPropertiesfgCharFlags [ch]&XMLCharacterPropertiesE_NameCharFlag)== 0)
+                whole = (whole * 
+                whole = (whole * 
                     /** int start = currentOffset; **/
                     ch = data.charAt(currentOffset);
                     while (ch >= '0' && ch <= '9') {
@@ -1964,6 +2125,10 @@ public class XPath {
                     if (part != 0) {
                         /***
                         part = tokens.addSymbol(data, start, currentOffset - start, encoding);
+                        /* <p>
+                        /*  int ch = datacharAt(currentOffset); int whole = 0; int part = 0; while(ch> ='0'&& ch <='9'){whole =(whole * 10)+(ch-'0'); if(++ currentOffset == endOffset){break; } ch = datacharAt(currentOffset); } if(ch ==''){if(++ currentOffset <endOffset){。
+                        /* 
+                        /* 
                         /***/
                         throw new RuntimeException("find a solution!");
                         //part = fStringPool.addSymbol(data.substring(start, currentOffset));
@@ -1987,6 +2152,9 @@ public class XPath {
          * to disallow certain tokens from being used in the scanned
          * XPath expression. This is a convenient way of allowing only
          * a subset of XPath.
+         * <p>
+         *  part = tokensaddSymbol(data,start,currentOffset  -  start,encoding);
+         * 
          */
         protected void addToken(XPath.Tokens tokens, int token)
             throws XPathException {

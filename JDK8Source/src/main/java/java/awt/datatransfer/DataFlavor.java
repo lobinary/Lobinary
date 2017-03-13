@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -112,6 +113,42 @@ import static sun.security.util.SecurityConstants.GET_CLASSLOADER_PERMISSION;
  * How to Use Drag and Drop and Data Transfer</a>,
  * section in <em>Java Tutorial</em>.
  *
+ * <p>
+ *  {@code DataFlavor}提供有关数据的元信息{@code DataFlavor}通常用于访问剪贴板上的数据,或者在拖放操作期间
+ * <p>
+ *  {@code DataFlavor}的实例封装了<a href=\"http://wwwietforg/rfc/rfc2045txt\"> RFC 2045 </a>和<a href ="http：// wwwietforg / rfc中定义的内容类型/ rfc2046txt">
+ *  RFC 2046 </a>内容类型通常称为MIME类型。
+ * <p>
+ *  内容类型由媒体类型(称为主要类型),子类型和可选参数组成。
+ * 有关详细信息,请参见<a href=\"http://wwwietforg/rfc/rfc2045txt\"> RFC 2045 </a> MIME类型的语法。
+ * <p>
+ * JRE数据传输实现解释参数"类" MIME类型作为<B>表示类</b>。表示类反映了正在传输的对象的类。
+ * 换句话说,表示类是由{@link Transferable#getTransferData}返回的对象类型。
+ * 例如, {@link #imageFlavor}的MIME类型是{@code"image / x-java-image; class = javaawtImage"},主要类型是{@code image}
+ * ,子类型是{@code x-java-image },表示类是{@code javaawtImage}当{@code getTransferData}被{@code imageFlavor}的{@code DataFlavor}
+ * 调用时,返回一个{@code javaawtImage}的实例。
+ * 换句话说,表示类是由{@link Transferable#getTransferData}返回的对象类型。
+ * 重要的是要注意{ @code DataFlavor}对表示类没有检查错误{@code DataFlavor}的消费者(例如{@code Transferable})要遵守表示类。
+ * <br>
+ * 请注意,如果在创建{@code DataFlavor}时未指定表示类,则使用默认表示类。请参阅{@code DataFlavor}的构造函数的相应文档
+ * <p>
+ *  此外,{@code DataFlavor}实例与"文本"主MIME类型可以具有"字符集"参数有关"文本"参数的详细信息,请参阅<a href=\"http://wwwietforg/rfc/rfc2046txt\">
+ *  RFC 2046 </a>和{@link #selectBestTextFlavor}。
+ *  MIME类型和"字符集"参数。
+ * <p>
+ * {@code DataFlavors}的平等性由主类型,子类型和表示类型确定。有关详细信息,请参阅{@link #equals(DataFlavor)}当确定相等时,忽略任何可选参数。
+ * 例如,代码DataFlavors}被认为是相同的：。
+ * <pre>
+ *  DataFlavor flavor1 = new DataFlavor(Objectclass,"X-test / test; class =&lt; javalangObject&gt ;; foo
+ *  = bar"); DataFlavor flavor2 = new DataFlavor(Objectclass,"X-test / test; class =&lt; javalangObject&
+ * gt ;; x = y"); //以下返回true flavor1equals(flavor2);。
+ * </pre>
+ *  如上所述,{@code flavor1}和{@code flavor2}被认为是相同的因此,要求{@code Transferable} {@code DataFlavor}返回相同的结果
+ * <p>
+ * 有关使用Swing使用数据传输的详细信息,请参阅<a href=\"https://docsoraclecom/javase/tutorial/uiswing/dnd/indexhtml\">如何使用拖
+ * 放和数据传输</a>部分Java教程</em>。
+ * 
+ * 
  * @author      Blake Sullivan
  * @author      Laurence P. G. Cable
  * @author      Jeff Dunn
@@ -125,6 +162,10 @@ public class DataFlavor implements Externalizable, Cloneable {
      * Tries to load a class from: the bootstrap loader, the system loader,
      * the context loader (if one is present) and finally the loader specified.
      *
+     * <p>
+     *  尝试加载类：引导加载程序,系统加载程序,上下文加载程序(如果存在)和最后加载程序指定
+     * 
+     * 
      * @param className the name of the class to be loaded
      * @param fallback the fallback loader
      * @return the class loaded
@@ -165,6 +206,9 @@ public class DataFlavor implements Externalizable, Cloneable {
 
     /*
      * private initializer
+     * <p>
+     *  私有初始化
+     * 
      */
     static private DataFlavor createConstant(Class<?> rc, String prn) {
         try {
@@ -176,6 +220,9 @@ public class DataFlavor implements Externalizable, Cloneable {
 
     /*
      * private initializer
+     * <p>
+     *  私有初始化
+     * 
      */
     static private DataFlavor createConstant(String mt, String prn) {
         try {
@@ -187,6 +234,9 @@ public class DataFlavor implements Externalizable, Cloneable {
 
     /*
      * private initializer
+     * <p>
+     *  私有初始化
+     * 
      */
     static private DataFlavor initHtmlDataFlavor(String htmlFlavorType) {
         try {
@@ -204,6 +254,11 @@ public class DataFlavor implements Externalizable, Cloneable {
      *     representationClass = java.lang.String
      *     mimeType           = "application/x-java-serialized-object"
      * </pre>
+     * <p>
+     *  代表Java Unicode String类的<code> DataFlavor </code>,其中：
+     * <pre>
+     *  representationClass = javalangString mimeType ="application / x-java-serialized-object"
+     * </pre>
      */
     public static final DataFlavor stringFlavor = createConstant(java.lang.String.class, "Unicode String");
 
@@ -213,6 +268,11 @@ public class DataFlavor implements Externalizable, Cloneable {
      * <pre>
      *     representationClass = java.awt.Image
      *     mimeType            = "image/x-java-image"
+     * </pre>
+     * <p>
+     *  代表Java Image类的<code> DataFlavor </code>,其中：
+     * <pre>
+     *  representationClass = javaawtImage mimeType ="image / x-java-image"
      * </pre>
      */
     public static final DataFlavor imageFlavor = createConstant("image/x-java-image; class=java.awt.Image", "Image");
@@ -230,6 +290,15 @@ public class DataFlavor implements Externalizable, Cloneable {
      * is not well-defined. "unicode" implies a particular platform's
      * implementation of Unicode, not a cross-platform implementation.
      *
+     * <p>
+     * <code> DataFlavor </code>表示使用Unicode编码的纯文本,其中：
+     * <pre>
+     *  representationClass = InputStream mimeType ="text / plain; charset = unicode"
+     * </pre>
+     *  此<code> DataFlavor </code>已被<b>弃用</b>,因为(1)它的表示是一个InputStream,一个基于8位的表示,而Unicode是一个16位字符集;和(2)字符集"un
+     * icode"没有明确定义"unicode"意味着特定平台的Unicode实现,而不是跨平台实现。
+     * 
+     * 
      * @deprecated as of 1.3. Use <code>DataFlavor.getReaderForText(Transferable)</code>
      *             instead of <code>Transferable.getTransferData(DataFlavor.plainTextFlavor)</code>.
      */
@@ -243,6 +312,12 @@ public class DataFlavor implements Externalizable, Cloneable {
      * The representation class associated with this <code>DataFlavor</code>
      * identifies the Java type of an object returned as a reference
      * from an invocation <code>java.awt.datatransfer.getTransferData</code>.
+     * <p>
+     *  MIME内容 - 应用程序的类型/ x-java-serialized-object表示已经被持久化的Java对象的图形
+     * 
+     * 与此<code> DataFlavor </code>关联的表示类标识从调用返回作为引用的对象的Java类型<code> javaawtdatatransfergetTransferData </code>
+     * 。
+     * 
      */
     public static final String javaSerializedObjectMimeType = "application/x-java-serialized-object";
 
@@ -252,6 +327,10 @@ public class DataFlavor implements Externalizable, Cloneable {
      * representation class of <code>java.util.List</code> is used.
      * Each element of the list is required/guaranteed to be of type
      * <code>java.io.File</code>.
+     * <p>
+     *  为了向/从Java(和底层平台)传输文件列表,使用<code>该类型/子类型的<code> DataFlavor </code>和<code> javautilList </code>的表示类。
+     * 列表的每个元素需要/保证是<code> javaioFile </code>类型。
+     * 
      */
     public static final DataFlavor javaFileListFlavor = createConstant("application/x-java-file-list;class=java.util.List", null);
 
@@ -267,6 +346,13 @@ public class DataFlavor implements Externalizable, Cloneable {
      * <code>Transferable.getTransferData</code> for a <code>DataFlavor</code>
      * with this MIME Content-Type is required to be
      * an instance of the representation Class of the <code>DataFlavor</code>.
+     * <p>
+     * 要将引用传递给在同一个JVM上的<code> Transferable </code>接口中没有相关MIME内容类型的任意Java对象引用,使用此类型/子类型的<code> DataFlavor </code>
+     * 使用,与<code> representationClass </code>等于类/接口的类型通过<code>可传递</code>。
+     * <p>
+     *  对于具有此MIME Con​​tent-Type的<code> DataFlavor </code>,从<code> TransferablegetTransferData </code>返回的对象引
+     * 用需要是<code> DataFlavor </code>。
+     * 
      */
     public static final String javaJVMLocalObjectMimeType = "application/x-java-jvm-local-objectref";
 
@@ -277,6 +363,10 @@ public class DataFlavor implements Externalizable, Cloneable {
      * where the representation class of the <code>DataFlavor</code>
      * represents the type of the <code>Remote</code> interface to be
      * transferred.
+     * <p>
+     * 为了通过拖放<code> ACTION_LINK </code>操作将一个活动链接传递给一个远程对象,应该使用一个应用程序的Mime内容类型/ x-java-remote-object,代码> Data
+     * Flavor </code>表示要传输的<code> Remote </code>接口的类型。
+     * 
      */
     public static final String javaRemoteObjectMimeType = "application/x-java-remote-object";
 
@@ -292,6 +382,12 @@ public class DataFlavor implements Externalizable, Cloneable {
      *     representationClass = String
      *     mimeType           = "text/html"
      * </pre>
+     * <p>
+     *  表示一个HTML标记的标记标记由在源边上选择的部分组成因此标记中的某些标记可​​能不成对如果flavor用于表示{@link Transferable}实例中的数据,则不会进行其他更改made此Dat
+     * aFlavor实例表示与DataFlavor实例相同的HTML标记,其内容MIME类型不包含文档参数,表示类是String类。
+     * <pre>
+     * representationClass = String mimeType ="text / html"
+     * </pre>
      */
     public static DataFlavor selectionHtmlFlavor = initHtmlDataFlavor("selection");
 
@@ -303,6 +399,11 @@ public class DataFlavor implements Externalizable, Cloneable {
      * <pre>
      *     representationClass = String
      *     mimeType           = "text/html"
+     * </pre>
+     * <p>
+     *  表示HTML标记的一部分如果可能,从本机系统接收的标记将使用对标记进行补充,以形成格式良好的HTML标记。如果flavor用于表示{@link Transferable}实例中的数据,将进行更改
+     * <pre>
+     *  representationClass = String mimeType ="text / html"
      * </pre>
      */
     public static DataFlavor fragmentHtmlFlavor = initHtmlDataFlavor("fragment");
@@ -317,6 +418,12 @@ public class DataFlavor implements Externalizable, Cloneable {
      *     representationClass = String
      *     mimeType           = "text/html"
      * </pre>
+     * <p>
+     *  表示HTML标记的一部分如果可能,从本机系统接收的标记将用附加标记进行补充,以构成格式良好的HTML文档如果使用flavor来表示{@link Transferable}实例中的数据,则不会将进行额外
+     * 的更改。
+     * <pre>
+     *  representationClass = String mimeType ="text / html"
+     * </pre>
      */
     public static  DataFlavor allHtmlFlavor = initHtmlDataFlavor("all");
 
@@ -326,6 +433,10 @@ public class DataFlavor implements Externalizable, Cloneable {
      * <code>Externalizable</code> interface.  It is not
      * intended for public (client) use.
      *
+     * <p>
+     * 构造新的<code> DataFlavor </code>此构造函数仅用于支持<code> Externalizable </code>接口的目的。它不适用于公共
+     * 
+     * 
      * @since 1.2
      */
     public DataFlavor() {
@@ -335,6 +446,10 @@ public class DataFlavor implements Externalizable, Cloneable {
     /**
      * Constructs a fully specified <code>DataFlavor</code>.
      *
+     * <p>
+     *  构造完全指定的<code> DataFlavor </code>
+     * 
+     * 
      * @exception NullPointerException if either <code>primaryType</code>,
      *            <code>subType</code> or <code>representationClass</code> is null
      */
@@ -382,6 +497,14 @@ public class DataFlavor implements Externalizable, Cloneable {
      *    representationClass = representationClass
      *    mimeType            = application/x-java-serialized-object
      * </pre>
+     * <p>
+     *  构造表示Java类的<code> DataFlavor </code>
+     * <p>
+     *  返回的<code> DataFlavor </code>将具有以下特征：
+     * <pre>
+     *  representationClass = representationClass mimeType = application / x-java-serialized-object
+     * </pre>
+     * 
      * @param representationClass the class used to transfer data in this flavor
      * @param humanPresentableName the human-readable string used to identify
      *                 this flavor; if this parameter is <code>null</code>
@@ -412,6 +535,19 @@ public class DataFlavor implements Externalizable, Cloneable {
      *     representationClass = InputStream
      *     mimeType            = mimeType
      * </pre>
+     * <p>
+     *  构造代表<code> MimeType </code>的<code> DataFlavor </code>
+     * <p>
+     *  返回的<code> DataFlavor </code>将具有以下特征：
+     * <p>
+     * 如果<code> mimeType </code>是"application / x-java-serialized-object; class =&lt; representation class&g
+     * t;",结果与调用<code> new DataFlavor(Class：forName(&lt;表示类&gt;)</code>。
+     * <p>
+     *  除此以外：
+     * <pre>
+     *  representationClass = InputStream mimeType = mimeType
+     * </pre>
+     * 
      * @param mimeType the string used to identify the MIME type for this flavor;
      *                 if the the <code>mimeType</code> does not specify a
      *                 "class=" parameter, or if the class is not successfully
@@ -455,6 +591,19 @@ public class DataFlavor implements Externalizable, Cloneable {
      *     representationClass = InputStream
      *     mimeType            = mimeType
      * </pre>
+     * <p>
+     *  构造代表<code> MimeType </code>的<code> DataFlavor </code>
+     * <p>
+     *  返回的<code> DataFlavor </code>将具有以下特征：
+     * <p>
+     *  如果mimeType是"application / x-java-serialized-object; class =&lt; representation class&gt;",则结果与调用<code>
+     *  new DataFlavor(Class：forName(&lt; representation class&gt;)</code >。
+     * <p>
+     *  除此以外：
+     * <pre>
+     *  representationClass = InputStream mimeType = mimeType
+     * </pre>
+     * 
      * @param mimeType the string used to identify the MIME type for this flavor
      * @param humanPresentableName the human-readable string used to
      *          identify this flavor
@@ -483,6 +632,12 @@ public class DataFlavor implements Externalizable, Cloneable {
      * representation class. If the string does not contain "class=" parameter,
      * <code>java.io.InputStream</code> is used as default.
      *
+     * <p>
+     * 从<code> mimeType </code>字符串构造<code> DataFlavor </code>字符串可以指定"class =&lt; fully specified Java class 
+     * name&gt;参数使用所需的表示类创建一个<code> DataFlavor </code>如果字符串不包含"class ="参数,则使用<code> javaioInputStream </code>
+     * 。
+     * 
+     * 
      * @param mimeType the string used to identify the MIME type for this flavor;
      *                 if the class specified by "class=" parameter is not
      *                 successfully loaded, then an
@@ -507,6 +662,10 @@ public class DataFlavor implements Externalizable, Cloneable {
    /**
     * Common initialization code called from various constructors.
     *
+    * <p>
+    *  从各种构造函数调用的公共初始化代码
+    * 
+    * 
     * @param mimeType the MIME Content Type (must have a class= param)
     * @param humanPresentableName the human Presentable Name or
     *                 <code>null</code>
@@ -559,6 +718,12 @@ public class DataFlavor implements Externalizable, Cloneable {
      * flavor's charset is also included. See <code>selectBestTextFlavor</code>
      * for a list of text flavors which support the charset parameter.
      *
+     * <p>
+     * 此<code> DataFlavor </code>及其参数的字符串表示形式<code> String </code>包含<code> DataFlavor </code>类的名称,此类型的MIME类型
+     * 及其表示类If这个flavor有一个主要的MIME类型"text",支持charset参数,并且有一个编码表示形式,也包括flavor的字符集。
+     * 参见<code> selectBestTextFlavor </code>了解支持charset参数。
+     * 
+     * 
      * @return  string representation of this <code>DataFlavor</code>
      * @see #selectBestTextFlavor
      */
@@ -604,6 +769,16 @@ public class DataFlavor implements Externalizable, Cloneable {
      * Sun's implementation for Solaris and Linux uses the encoding
      * <code>iso-10646-ucs-2</code>.
      *
+     * <p>
+     *  返回表示带有Unicode编码的纯文本的<code> DataFlavor </code>,其中：
+     * <pre>
+     *  representationClass = javaioInputStream mimeType ="text / plain; charset =&lt; platform default Unic
+     * ode encoding&gt;"。
+     * </pre>
+     * Sun的Microsoft Windows实现使用编码<code> utf-16le </code> Sun的Solaris实现和Linux使用编码<code> iso-10646-ucs-2 </code>
+     * 。
+     * 
+     * 
      * @return a <code>DataFlavor</code> representing plain text
      *    with Unicode encoding
      * @since 1.3
@@ -728,6 +903,56 @@ public class DataFlavor implements Externalizable, Cloneable {
      * flavor has one of the three specified representations, then one of those
      * flavors will be chosen non-deterministically.
      *
+     * <p>
+     *  从<code> DataFlavor </code> s Only <code> DataFlavorstringFlavor </code>数组中选择最佳文本<code> DataFlavor </code>
+     * ,以及具有主MIME类型为"text" ",被考虑选择。
+     * <p>
+     *  风味首先按照它们的MIME类型按以下顺序排序：
+     * <ul>
+     * <li>"text / sgml"<li>"text / xml"<li>"text / html"<li>"text / rtf"<li>"text / rich" >"text / tab-sepa
+     * rated-values"<li>"text / t140"<li>"text / rfc822-headers"<li>"text / parityfec" text / directory"<li>
+     * "text / css"<li>"text / calendar"<li>"application / x-java-serialized-object"<li>"text / plain"其他&gt;
+     * 。
+     * </ul>
+     *  <p>例如,将通过"text / html"选择"text / sgml",将通过<code> DataFlavorplainTextFlavor </code>选择<code> DataFlavor
+     * stringFlavor </code>。
+     * <p>
+     *  如果两个或多个口味在数组中共享最好的MIME类型,那么将检查该MIME类型以查看它是否支持charset参数
+     * <p>
+     *  以下MIME类型支持或被视为支持charset参数：
+     * <ul>
+     * <li>"text / richtext"<li>"text / url-list"<li>"text / <li>"text / directory"<li>"text / css"<li>"text
+     *  / calendar"<li>"application / x-java-serialized-object"。
+     * </ul>
+     *  以下MIME类型不支持或视为不支持charset参数：
+     * <ul>
+     *  <li>"text / rtf"<li>"text / tab-separated-values"<li>"text / t140"<li>"text / rfc822-headers"
+     * </ul>
+     * 对于"text /&lt; other&gt;" MIME类型,第一次JRE需要确定MIME类型是否支持charset参数,它将检查该参数是否显式地列在任意选择的使用该MIME类型的<code> Dat
+     * aFlavor </code>中。
+     * 如果是, JRE将从这一点假定MIME类型支持charset参数,并且不会再次检查如果没有显式地列出参数,则JRE将假定从该点开始MIME类型不支持charset参数,并且不会检查再次因为这个检查是在任
+     * 意选择的&lt; code&gt; DataFlavor&lt; / code&gt;上执行的,开发人员必须确保所有<code> DataFlavor </code> MIME类型指定charset参数
+     * (如果该MIME类型支持)开发人员不应该依赖JRE将平台的默认字符集替换为"text /&lt; other&gt;" DataFlavor不遵守此限制将导致未定义的行为。
+     * <p>
+     * 如果数组中最好的MIME类型不支持charset参数,那么共享该MIME类型的类型将按照它们的表示类按以下顺序排序：<code> javaioInputStream </code>,<code> jav
+     * anioByteBuffer < code>,<code> [B </code>,&lt; all others&gt;。
+     * <p>
+     *  如果两个或多个口味共享最佳表示类,或者如果没有口味具有三个指定表示中的一个,那么那些口味之一将被非确定性地选择
+     * <p>
+     * 如果数组中最好的MIME类型支持charset参数,那么共享该MIME类型的风格将按照它们的表示类按以下顺序排序：<code> javaioReader </code>,<code> javalangS
+     * tring </code >,<code> javanioCharBuffer </code>,<code> [C </code>,&lt; all others&gt;。
+     * <p>
+     * 如果两个或多个口味共享最佳表示类,并且该表示是四个明确列出的之一,那么那些口味之一将被非确定性地选择。
+     * 然而,如果没有口味具有四个指定表示中的一个,则口味将然后按其字符集排序Unicode字符集,如"UTF-16","UTF-8","UTF-16BE","UTF-16LE"及其别名,被认为是最好的之后,平
+     * 台默认字符集和其别名被选择为"US-ASCII"并且其别名最差所有其他字符集按字母顺序选择,但只有Java平台的此实现支持的字符集才会被考虑。
+     * 如果两个或多个口味共享最佳表示类,并且该表示是四个明确列出的之一,那么那些口味之一将被非确定性地选择。
+     * <p>
+     * 如果两个或多个口味共享最好的字符集,则口味将再次通过它们的表示类按以下顺序排序：<code> javaioInputStream </code>,<code> javanioByteBuffer </code>
+     * ,<code> / code>,&lt; all others&gt;。
+     * <p>
+     *  如果两个或多个口味共享最佳表示类,或者如果没有口味具有三个指定表示中的一个,那么那些口味之一将被非确定性地选择
+     * 
+     * 
      * @param availableFlavors an array of available <code>DataFlavor</code>s
      * @return the best (highest fidelity) flavor according to the rules
      *         specified above, or <code>null</code>,
@@ -770,6 +995,12 @@ public class DataFlavor implements Externalizable, Cloneable {
          * <code>DataFlavor</code>s are ordered according to the rules outlined
          * for <code>selectBestTextFlavor</code>.
          *
+         * <p>
+         *  比较两个<code> DataFlavor </code>对象返回一个负整数,零或正整数作为第一个<code> DataFlavor </code>比第二个更糟糕,等于或更好
+         * <p>
+         *  <code> DataFlavor </code>根据<code> selectBestTextFlavor </code>中列出的规则进行排序
+         * 
+         * 
          * @param obj1 the first <code>DataFlavor</code> to be compared
          * @param obj2 the second <code>DataFlavor</code> to be compared
          * @return a negative integer, zero, or a positive integer as the first
@@ -815,6 +1046,16 @@ public class DataFlavor implements Externalizable, Cloneable {
      * decode it accordingly. See <code>selectBestTextFlavor</code> for a list
      * of text flavors which do not support the charset parameter.
      *
+     * <p>
+     * 支持的表示类有<code> javaioReader </code>,<code> javalangString </code>,<code> javanioCharBuffer </code >,<code>
+     *  [C </code>,<code> javaioInputStream </code>,<code> javanioByteBuffer </code>。
+     * <p>
+     * 因为不支持charset参数的文本风格以非标准格式编码,所以不应该为这种风格调用此方法。
+     * 但是,为了保持向后兼容性,如果为这种风格调用此方法,则此方法将处理风味,如同它支持charset参数,并尝试相应地解码查看<code> selectBestTextFlavor </code>以获取不支
+     * 持charset参数的文本风格的列表。
+     * 因为不支持charset参数的文本风格以非标准格式编码,所以不应该为这种风格调用此方法。
+     * 
+     * 
      * @param transferable the <code>Transferable</code> whose data will be
      *        requested in this flavor
      *
@@ -888,6 +1129,10 @@ public class DataFlavor implements Externalizable, Cloneable {
 
     /**
      * Returns the MIME type string for this <code>DataFlavor</code>.
+     * <p>
+     *  返回此<code> DataFlavor </code>的MIME类型字符串
+     * 
+     * 
      * @return the MIME type string for this flavor
      */
     public String getMimeType() {
@@ -898,6 +1143,10 @@ public class DataFlavor implements Externalizable, Cloneable {
      * Returns the <code>Class</code> which objects supporting this
      * <code>DataFlavor</code> will return when this <code>DataFlavor</code>
      * is requested.
+     * <p>
+     *  返回<code> Class </code>当请求此<code> DataFlavor </code>时,支持此<code> DataFlavor </code>
+     * 
+     * 
      * @return the <code>Class</code> which objects supporting this
      * <code>DataFlavor</code> will return when this <code>DataFlavor</code>
      * is requested
@@ -910,6 +1159,10 @@ public class DataFlavor implements Externalizable, Cloneable {
      * Returns the human presentable name for the data format that this
      * <code>DataFlavor</code> represents.  This name would be localized
      * for different countries.
+     * <p>
+     * 返回此<code> DataFlavor </code>表示的数据格式的人类可呈现名称此名称将针对不同国家/地区进行本地化
+     * 
+     * 
      * @return the human presentable name for the data format that this
      *    <code>DataFlavor</code> represents
      */
@@ -919,6 +1172,10 @@ public class DataFlavor implements Externalizable, Cloneable {
 
     /**
      * Returns the primary MIME type for this <code>DataFlavor</code>.
+     * <p>
+     *  返回此<code> DataFlavor </code>的主要MIME类型
+     * 
+     * 
      * @return the primary MIME type of this <code>DataFlavor</code>
      */
     public String getPrimaryType() {
@@ -927,6 +1184,10 @@ public class DataFlavor implements Externalizable, Cloneable {
 
     /**
      * Returns the sub MIME type of this <code>DataFlavor</code>.
+     * <p>
+     *  返回此<code> DataFlavor </code>的子MIME类型
+     * 
+     * 
      * @return the Sub MIME type of this <code>DataFlavor</code>
      */
     public String getSubType() {
@@ -938,6 +1199,11 @@ public class DataFlavor implements Externalizable, Cloneable {
      * if <code>paramName</code> equals "humanPresentableName".  Otherwise
      * returns the MIME type value associated with <code>paramName</code>.
      *
+     * <p>
+     *  如果<code> paramName </code>等于"humanPresentableName",则返回此<code> DataFlavor </code>的人类可呈现的名称否则返回与<code>
+     *  paramName </code>。
+     * 
+     * 
      * @param paramName the parameter name requested
      * @return the value of the name parameter, or <code>null</code>
      *  if there is no associated value
@@ -955,6 +1221,10 @@ public class DataFlavor implements Externalizable, Cloneable {
      * Sets the human presentable name for the data format that this
      * <code>DataFlavor</code> represents. This name would be localized
      * for different countries.
+     * <p>
+     *  设置此<code> DataFlavor </code>表示的数据格式的人类可表示名称此名称将针对不同国家/地区进行本地化
+     * 
+     * 
      * @param humanPresentableName the new human presentable name
      */
     public void setHumanPresentableName(String humanPresentableName) {
@@ -977,6 +1247,15 @@ public class DataFlavor implements Externalizable, Cloneable {
      * <code>selectBestTextFlavor</code> for a list of text flavors which
      * support the charset parameter.
      *
+     * <p>
+     *  {@inheritDoc}
+     * <p>
+     * {@code DataFlavor}类的equals比较实现如下：当且仅当它们的MIME主类型以及子类型和表示类相等时,两个<code> DataFlavor </code>被认为是相等的此外,如果主类
+     * 型是"text",子类型表示支持charset参数的文本flavor,并且表示类不是<code> javaioReader </code>,<code> javalangString </code>,<code>
+     *  javanioCharBuffer </code>或<code> [C </code>,<code> charset </code>]参数也必须相等如果没有明确指定一个或两个<code> DataFl
+     * avor </code>假设参见<code> selectBestTextFlavor </code>,以获取支持charset参数的文本类型列表。
+     * 
+     * 
      * @param o the <code>Object</code> to compare with <code>this</code>
      * @return <code>true</code> if <code>that</code> is equivalent to this
      *         <code>DataFlavor</code>; <code>false</code> otherwise
@@ -991,6 +1270,10 @@ public class DataFlavor implements Externalizable, Cloneable {
      * The only difference being that it takes a {@code DataFlavor} instance
      * as a parameter.
      *
+     * <p>
+     * 此方法具有与{@link #equals(Object)}相同的行为唯一的区别是它需要一个{@code DataFlavor}实例作为参数
+     * 
+     * 
      * @param that the <code>DataFlavor</code> to compare with
      *        <code>this</code>
      * @return <code>true</code> if <code>that</code> is equivalent to this
@@ -1051,6 +1334,12 @@ public class DataFlavor implements Externalizable, Cloneable {
      *
      * If <code>representationClass</code> needs to be compared, then
      * <code>equals(new DataFlavor(s))</code> may be used.
+     * <p>
+     *  仅比较比较中不考虑<code> mimeType </code>与传递的<code> String </code>和<code> representationClass </code>
+     * 
+     *  如果<code> representationClass </code>需要比较,则可以使用<code> equals(new DataFlavor(s))</code>
+     * 
+     * 
      * @deprecated As inconsistent with <code>hashCode()</code> contract,
      *             use <code>isMimeTypeEqual(String)</code> instead.
      * @param s the {@code mimeType} to compare.
@@ -1072,6 +1361,11 @@ public class DataFlavor implements Externalizable, Cloneable {
      * guaranteed that <code>DataFlavor</code>'s hash code is equal
      * to the hash code of the <code>String</code>.
      *
+     * <p>
+     *  返回此<code> DataFlavor </code>的散列码对于两个相等的<code> DataFlavor </code>,散列码相等对于与<code> DataFlavorequals(Str
+     * ing)< / code>,但不能保证<code> DataFlavor </code>的散列码等于<code> String </code>的散列码。
+     * 
+     * 
      * @return a hash code for this <code>DataFlavor</code>
      */
     public int hashCode() {
@@ -1116,6 +1410,10 @@ public class DataFlavor implements Externalizable, Cloneable {
     /**
      * Identical to {@link #equals(DataFlavor)}.
      *
+     * <p>
+     *  与{@link #equals(DataFlavor)}相同
+     * 
+     * 
      * @param that the <code>DataFlavor</code> to compare with
      *        <code>this</code>
      * @return <code>true</code> if <code>that</code> is equivalent to this
@@ -1132,6 +1430,10 @@ public class DataFlavor implements Externalizable, Cloneable {
      * is equivalent to the MIME type of this <code>DataFlavor</code>.
      * Parameters are not included in the comparison.
      *
+     * <p>
+     * 返回传递的MIME类型的字符串表示形式是否等同于此<code> DataFlavor </code>的MIME类型参数未包含在比较中
+     * 
+     * 
      * @param mimeType the string representation of the MIME type
      * @return true if the string representation of the MIME type passed in is
      *         equivalent to the MIME type of this <code>DataFlavor</code>;
@@ -1157,6 +1459,10 @@ public class DataFlavor implements Externalizable, Cloneable {
      * Compares the <code>mimeType</code> of two <code>DataFlavor</code>
      * objects. No parameters are considered.
      *
+     * <p>
+     *  比较两个<code> DataFlavor </code>对象的<code> mimeType </code>没有考虑参数
+     * 
+     * 
      * @param dataFlavor the <code>DataFlavor</code> to be compared
      * @return true if the <code>MimeType</code>s are equal,
      *  otherwise false
@@ -1170,6 +1476,10 @@ public class DataFlavor implements Externalizable, Cloneable {
      * Compares the <code>mimeType</code> of two <code>DataFlavor</code>
      * objects.  No parameters are considered.
      *
+     * <p>
+     *  比较两个<code> DataFlavor </code>对象的<code> mimeType </code>没有考虑参数
+     * 
+     * 
      * @return true if the <code>MimeType</code>s are equal,
      *  otherwise false
      */
@@ -1185,6 +1495,10 @@ public class DataFlavor implements Externalizable, Cloneable {
      * Checks if the representation class is one of the standard text
      * representation classes.
      *
+     * <p>
+     *  检查表示类是否是标准文本表示类之一
+     * 
+     * 
      * @return true if the representation class is one of the standard text
      *              representation classes, otherwise false
      */
@@ -1197,6 +1511,9 @@ public class DataFlavor implements Externalizable, Cloneable {
 
    /**
     * Does the <code>DataFlavor</code> represent a serialized object?
+    * <p>
+    *  <code> DataFlavor </code>是否代表一个序列化对象?
+    * 
     */
 
     public boolean isMimeTypeSerializedObject() {
@@ -1214,6 +1531,9 @@ public class DataFlavor implements Externalizable, Cloneable {
    /**
     * Does the <code>DataFlavor</code> represent a
     * <code>java.io.InputStream</code>?
+    * <p>
+    *  <code> DataFlavor </code>是否代表一个<code> javaioInputStream </code>?
+    * 
     */
 
     public boolean isRepresentationClassInputStream() {
@@ -1225,6 +1545,10 @@ public class DataFlavor implements Externalizable, Cloneable {
      * <code>DataFlavor</code> is <code>java.io.Reader</code> or a subclass
      * thereof.
      *
+     * <p>
+     *  返回此<code> DataFlavor </code>的表示类是<code> javaioReader </code>或其子类
+     * 
+     * 
      * @since 1.4
      */
     public boolean isRepresentationClassReader() {
@@ -1236,6 +1560,10 @@ public class DataFlavor implements Externalizable, Cloneable {
      * <code>DataFlavor</code> is <code>java.nio.CharBuffer</code> or a
      * subclass thereof.
      *
+     * <p>
+     * 返回此<code> DataFlavor </code>的表示类是<code> javanioCharBuffer </code>还是其子类
+     * 
+     * 
      * @since 1.4
      */
     public boolean isRepresentationClassCharBuffer() {
@@ -1247,6 +1575,10 @@ public class DataFlavor implements Externalizable, Cloneable {
      * <code>DataFlavor</code> is <code>java.nio.ByteBuffer</code> or a
      * subclass thereof.
      *
+     * <p>
+     *  返回此<code> DataFlavor </code>的表示类是<code> javanioByteBuffer </code>还是其子类
+     * 
+     * 
      * @since 1.4
      */
     public boolean isRepresentationClassByteBuffer() {
@@ -1255,6 +1587,10 @@ public class DataFlavor implements Externalizable, Cloneable {
 
    /**
     * Returns true if the representation class can be serialized.
+    * <p>
+    *  如果表示类可以序列化,则返回true
+    * 
+    * 
     * @return true if the representation class can be serialized
     */
 
@@ -1264,6 +1600,10 @@ public class DataFlavor implements Externalizable, Cloneable {
 
    /**
     * Returns true if the representation class is <code>Remote</code>.
+    * <p>
+    *  如果表示类是<code> Remote </code>,则返回true
+    * 
+    * 
     * @return true if the representation class is <code>Remote</code>
     */
 
@@ -1274,6 +1614,10 @@ public class DataFlavor implements Externalizable, Cloneable {
    /**
     * Returns true if the <code>DataFlavor</code> specified represents
     * a serialized object.
+    * <p>
+    *  如果指定的<code> DataFlavor </code>表示序列化对象,则返回true
+    * 
+    * 
     * @return true if the <code>DataFlavor</code> specified represents
     *   a Serialized Object
     */
@@ -1285,6 +1629,10 @@ public class DataFlavor implements Externalizable, Cloneable {
     /**
      * Returns true if the <code>DataFlavor</code> specified represents
      * a remote object.
+     * <p>
+     *  如果指定的<code> DataFlavor </code>表示远程对象,则返回true
+     * 
+     * 
      * @return true if the <code>DataFlavor</code> specified represents
      *  a Remote Object
      */
@@ -1299,6 +1647,10 @@ public class DataFlavor implements Externalizable, Cloneable {
    /**
     * Returns true if the <code>DataFlavor</code> specified represents
     * a list of file objects.
+    * <p>
+    *  如果指定的<code> DataFlavor </code>表示文件对象的列表,则返回true
+    * 
+    * 
     * @return true if the <code>DataFlavor</code> specified represents
     *   a List of File objects
     */
@@ -1336,6 +1688,22 @@ public class DataFlavor implements Externalizable, Cloneable {
      * See <code>selectBestTextFlavor</code> for a list of text flavors which
      * support the charset parameter.
      *
+     * <p>
+     * 返回这个<code> DataFlavor </code>是否是Java平台实现的有效文本风格只有与主MIME类型相同的<code> DataFlavorstringFlavor </code>和<code>
+     *  DataFlavor </code>的"文本"可以是有效的文本风格。
+     * <p>
+     * 如果这个flavor支持charset参数,它必须等同于<code> DataFlavorstringFlavor </code>,或者它的表示形式必须是<code> javaioReader </code>
+     * ,<code> javalangString </code>,<code> javanioCharBuffer < / code>,<code> [C </code>,<code> javaioInpu
+     * tStream </code>,<code> javanioByteBuffer </code>或<code> [B </code>如果表示是<code> javaioInputStream </code>
+     * ,<code> javanioByteBuffer </code>或<code> [B </code>,那么此平台的<code> charset </code>参数必须由Java平台的这个实现支持。
+     * 未指定,则假定平台缺省字符集(始终支持)。
+     * <p>
+     * 如果这个flavor不支持charset参数,它的表示形式必须是<code> javaioInputStream </code>,<code> javanioByteBuffer </code>或<code>
+     * 。
+     * <p>
+     *  有关支持charset参数的文本格式列表,请参阅<code> selectBestTextFlavor </code>
+     * 
+     * 
      * @return <code>true</code> if this <code>DataFlavor</code> is a valid
      *         text flavor as described above; <code>false</code> otherwise
      * @see #selectBestTextFlavor
@@ -1348,6 +1716,9 @@ public class DataFlavor implements Externalizable, Cloneable {
 
    /**
     * Serializes this <code>DataFlavor</code>.
+    * <p>
+    *  将此<code> DataFlavor </code>序列化
+    * 
     */
 
    public synchronized void writeExternal(ObjectOutput os) throws IOException {
@@ -1364,6 +1735,9 @@ public class DataFlavor implements Externalizable, Cloneable {
 
    /**
     * Restores this <code>DataFlavor</code> from a Serialized state.
+    * <p>
+    *  从序列化状态恢复此<code> DataFlavor </code>
+    * 
     */
 
    public synchronized void readExternal(ObjectInput is) throws IOException , ClassNotFoundException {
@@ -1398,6 +1772,10 @@ public class DataFlavor implements Externalizable, Cloneable {
 
    /**
     * Returns a clone of this <code>DataFlavor</code>.
+    * <p>
+    *  返回此<code> DataFlavor </code>的克隆
+    * 
+    * 
     * @return a clone of this <code>DataFlavor</code>
     */
 
@@ -1421,6 +1799,15 @@ public class DataFlavor implements Externalizable, Cloneable {
     *
     * This method is never invoked by this implementation from 1.1 onwards.
     *
+    * <p>
+    *  对每个MIME类型参数调用<code> DataFlavor </code>,以允许<code> DataFlavor </code>子类处理特殊参数,如text / plain <code> cha
+    * rset </code>参数,其值不区分大小写(MIME类型参数值应该区分大小写。
+    * <p>
+    * 对每个参数名称/值对调用此方法,并应返回<code> parameterValue </code>的规范化表示
+    * 
+    *  从11开始,此方法从未调用此方法
+    * 
+    * 
     * @deprecated
     */
     @Deprecated
@@ -1437,6 +1824,12 @@ public class DataFlavor implements Externalizable, Cloneable {
     *
     * This method is never invoked by this implementation from 1.1 onwards.
     *
+    * <p>
+    *  调用每个MIME类型字符串以给予<code> DataFlavor </code>子类型改变MIME类型的规范化的机会一个可能的用途是在MIME中不存在的情况下添加默认参数/值对类型字符串传入
+    * 
+    *  从11开始,此方法从未调用此方法
+    * 
+    * 
     * @deprecated
     */
     @Deprecated
@@ -1446,6 +1839,7 @@ public class DataFlavor implements Externalizable, Cloneable {
 
     /*
      * fields
+     * <p>
      */
 
     /* placeholder for caching any platform-specific data for flavor */

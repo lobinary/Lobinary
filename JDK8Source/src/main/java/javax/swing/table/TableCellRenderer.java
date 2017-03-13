@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -32,6 +33,10 @@ import javax.swing.*;
  * This interface defines the method required by any object that
  * would like to be a renderer for cells in a <code>JTable</code>.
  *
+ * <p>
+ *  此接口定义任何对象想要成为<code> JTable </code>中的单元格的渲染器所需的方法。
+ * 
+ * 
  * @author Alan Chung
  */
 
@@ -66,6 +71,16 @@ public interface TableCellRenderer {
      * or not the table is being printed, check the return value from
      * {@link javax.swing.JComponent#isPaintingForPrint()}.
      *
+     * <p>
+     *  返回用于绘制单元格的组件此方法用于在绘制之前正确配置渲染器
+     * <p>
+     *  <code> TableCellRenderer </code>也负责渲染表示表的当前DnD删除位置的单元格,如果它有一个如果这个渲染器关心渲染DnD删除位置,它应该直接查询表以查看给定行和列表示删除
+     * 位置：。
+     * <pre>
+     * JTableDropLocation dropLocation = tablegetDropLocation(); if(dropLocation！= null&amp;&amp;！dropLocati
+     * onisInsertRow()&amp;&amp;！dropLocationisInsertColumn()&amp;&amp; dropLocationgetRow()== row&amp;&amp;
+     *  dropLocationgetColumn()== column){。
+     * 
      * @param   table           the <code>JTable</code> that is asking the
      *                          renderer to draw; can be <code>null</code>
      * @param   value           the value of the cell to be rendered.  It is

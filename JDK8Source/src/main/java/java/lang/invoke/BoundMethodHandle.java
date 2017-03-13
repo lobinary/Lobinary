@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2008, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,9 +50,16 @@ import jdk.internal.org.objectweb.asm.Type;
  * when the handle is created, not when it is invoked.
  *
  * All bound arguments are encapsulated in dedicated species.
+ * <p>
+ *  模拟预定参数上的调用指令的方法句柄的风味JVM在创建句柄时调度到正确的方法,而不是在调用它时
+ * 
+ *  所有绑定参数封装在专用物种中
+ * 
  */
 /*non-public*/ abstract class BoundMethodHandle extends MethodHandle {
 
+/* <p>
+/* 
     /*non-public*/ BoundMethodHandle(MethodType type, LambdaForm form) {
         super(type, form);
         assert(speciesData() == speciesData(form));
@@ -82,6 +90,15 @@ import jdk.internal.org.objectweb.asm.Type;
         }
     }
 
+    /* <p>
+    /*  super(type,form); assert(speciesData()== speciesData(form)); }}
+    /* 
+    /*  // // BMH API and internals //
+    /* 
+    /* static BoundMethodHandle bindSingle(MethodType type,LambdaForm form,BasicType xtype,Object x){//对于某些类型签名,存在预定义的具体BMH类try {switch(xtype){case L_TYPE：return bindSingle(type,form,x ); //使用已知的快速路径case I_TYPE：return(BoundMethodHandle)SpeciesDataEMPTYextendWith(I_TYPE)constructor()invokeBasic(type,form,ValueConversionswidenSubword(x)); case J_TYPE：return(BoundMethodHandle)SpeciesDataEMPTYextendWith(J_TYPE)constructor()invokeBasic(type,form,(long)x); case F_TYPE：return(BoundMethodHandle)SpeciesDataEMPTYextendWith(F_TYPE)constructor()invokeBasic(type,form,(float)x); case D_TYPE：return(BoundMethodHandle)SpeciesDataEMPTYextendWith(D_TYPE)constructor()invokeBasic(type,form,(double)x); default：throw newInternalError("unexpected xtype："+ xtype); }
+    /* } catch(Throwable t){throw newInternalError(t); }}。
+    /* 
+    /* 
     /*non-public*/
     LambdaFormEditor editor() {
         return form.editor();
@@ -131,6 +148,9 @@ import jdk.internal.org.objectweb.asm.Type;
     /**
      * A reinvoker MH has this form:
      * {@code lambda (bmh, arg*) { thismh = bmh[0]; invokeBasic(thismh, arg*) }}
+     * <p>
+     * reinvoker MH具有这种形式：{@code lambda(bmh,arg *){thismh = bmh [0]; invokeBasic(thismh,arg *)}}
+     * 
      */
     static BoundMethodHandle makeReinvoker(MethodHandle target) {
         LambdaForm form = DelegatingMethodHandle.makeReinvokerForm(
@@ -142,9 +162,14 @@ import jdk.internal.org.objectweb.asm.Type;
     /**
      * Return the {@link SpeciesData} instance representing this BMH species. All subclasses must provide a
      * static field containing this value, and they must accordingly implement this method.
+     * <p>
+     *  返回表示此BMH类的{@link SpeciesData}实例所有子类必须提供一个包含此值的静态字段,因此必须相应地实现此方法
+     * 
      */
     /*non-public*/ abstract SpeciesData speciesData();
 
+    /* <p>
+    /* 
     /*non-public*/ static SpeciesData speciesData(LambdaForm form) {
         Object c = form.names[0].constraint;
         if (c instanceof SpeciesData)
@@ -155,6 +180,12 @@ import jdk.internal.org.objectweb.asm.Type;
 
     /**
      * Return the number of fields in this BMH.  Equivalent to speciesData().fieldCount().
+     * <p>
+     *  Object c = formnames [0] constraint; if(c instanceof SpeciesData)return(SpeciesData)c; //如果没有BMH约束,那
+     * 么使用null约束return SpeciesDataEMPTY; }}。
+     * 
+     *  / **返回此BMH中的字段数等价于speciesData()fieldCount()
+     * 
      */
     /*non-public*/ abstract int fieldCount();
 
@@ -172,6 +203,12 @@ import jdk.internal.org.objectweb.asm.Type;
         return Arrays.asList(boundValues);
     }
 
+    /* <p>
+    /*  @Override Object internalProperties(){return"\n&BMH ="+ internalValues(); }}
+    /* 
+    /* @Override final Object internalValues(){Object [] boundValues = new Object [speciesData()fieldCount()]; for(int i = 0; i <boundValueslength; ++ i){boundValues [i] = arg(i); } return ArraysasList(boundValues); }}。
+    /* 
+    /* 
     /*non-public*/ final Object arg(int i) {
         try {
             switch (speciesData().fieldType(i)) {
@@ -191,11 +228,29 @@ import jdk.internal.org.objectweb.asm.Type;
     // cloning API
     //
 
+    /* <p>
+    /*  try {switch(speciesData()fieldType(i)){case L_TYPE：return speciesData()getters [i] invokeBasic(this); case I_TYPE：return(int)speciesData()getters [i] invokeBasic(this); case J_TYPE：return(long)speciesData()getters [i] invokeBasic(this); case F_TYPE：return(float)speciesData()getters [i] invokeBasic(this); case D_TYPE：return(double)speciesData()getters [i] invokeBasic(this); }
+    /* } catch(Throwable ex){throw newInternalError(ex); } throw new InternalError("unexpected type："+ speci
+    /* esData()typeChars +""+ i); }}。
+    /* 
+    /*  // // clone API //
+    /* 
+    /* 
     /*non-public*/ abstract BoundMethodHandle copyWith(MethodType mt, LambdaForm lf);
+    /* <p>
+    /* 
     /*non-public*/ abstract BoundMethodHandle copyWithExtendL(MethodType mt, LambdaForm lf, Object narg);
+    /* <p>
+    /* 
     /*non-public*/ abstract BoundMethodHandle copyWithExtendI(MethodType mt, LambdaForm lf, int    narg);
+    /* <p>
+    /* 
     /*non-public*/ abstract BoundMethodHandle copyWithExtendJ(MethodType mt, LambdaForm lf, long   narg);
+    /* <p>
+    /* 
     /*non-public*/ abstract BoundMethodHandle copyWithExtendF(MethodType mt, LambdaForm lf, float  narg);
+    /* <p>
+    /* 
     /*non-public*/ abstract BoundMethodHandle copyWithExtendD(MethodType mt, LambdaForm lf, double narg);
 
     //
@@ -210,22 +265,47 @@ import jdk.internal.org.objectweb.asm.Type;
             this.argL0 = argL0;
         }
         @Override
+    /* <p>
+    /* // //关闭引导循环所需的具体BMH类//
+    /* 
+    /*  private //让它私有以强制用户访问封闭类第一个static final class Species_L extends BoundMethodHandle {final Object argL0; private Species_L(MethodType mt,LambdaForm lf,Object argL0){super(mt,lf); thisargL0 = argL0; }
+    /*  @Override。
+    /* 
+    /* 
         /*non-public*/ SpeciesData speciesData() {
             return SPECIES_DATA;
         }
         @Override
+        /* <p>
+        /*  返回SPECIES_DATA; } @覆盖
+        /* 
+        /* 
         /*non-public*/ int fieldCount() {
             return 1;
         }
+        /* <p>
+        /*  return 1; }}
+        /* 
+        /* 
         /*non-public*/ static final SpeciesData SPECIES_DATA = SpeciesData.getForClass("L", Species_L.class);
+        /* <p>
+        /* 
         /*non-public*/ static BoundMethodHandle make(MethodType mt, LambdaForm lf, Object argL0) {
             return new Species_L(mt, lf, argL0);
         }
         @Override
+        /* <p>
+        /*  return new Species_L(mt,lf,argL0); } @覆盖
+        /* 
+        /* 
         /*non-public*/ final BoundMethodHandle copyWith(MethodType mt, LambdaForm lf) {
             return new Species_L(mt, lf, argL0);
         }
         @Override
+        /* <p>
+        /*  return new Species_L(mt,lf,argL0); } @覆盖
+        /* 
+        /* 
         /*non-public*/ final BoundMethodHandle copyWithExtendL(MethodType mt, LambdaForm lf, Object narg) {
             try {
                 return (BoundMethodHandle) SPECIES_DATA.extendWith(L_TYPE).constructor().invokeBasic(mt, lf, argL0, narg);
@@ -234,6 +314,11 @@ import jdk.internal.org.objectweb.asm.Type;
             }
         }
         @Override
+        /* <p>
+        /*  try {return(BoundMethodHandle)SPECIES_DATAextendWith(L_TYPE)constructor()invokeBasic(mt,lf,argL0,narg); }
+        /*  catch(Throwable ex){throw uncaughtException(ex); }} @覆盖。
+        /* 
+        /* 
         /*non-public*/ final BoundMethodHandle copyWithExtendI(MethodType mt, LambdaForm lf, int narg) {
             try {
                 return (BoundMethodHandle) SPECIES_DATA.extendWith(I_TYPE).constructor().invokeBasic(mt, lf, argL0, narg);
@@ -242,6 +327,11 @@ import jdk.internal.org.objectweb.asm.Type;
             }
         }
         @Override
+        /* <p>
+        /* try {return(BoundMethodHandle)SPECIES_DATAextendWith(I_TYPE)constructor()invokeBasic(mt,lf,argL0,narg); }
+        /*  catch(Throwable ex){throw uncaughtException(ex); }} @覆盖。
+        /* 
+        /* 
         /*non-public*/ final BoundMethodHandle copyWithExtendJ(MethodType mt, LambdaForm lf, long narg) {
             try {
                 return (BoundMethodHandle) SPECIES_DATA.extendWith(J_TYPE).constructor().invokeBasic(mt, lf, argL0, narg);
@@ -250,6 +340,11 @@ import jdk.internal.org.objectweb.asm.Type;
             }
         }
         @Override
+        /* <p>
+        /*  try {return(BoundMethodHandle)SPECIES_DATAextendWith(J_TYPE)constructor()invokeBasic(mt,lf,argL0,narg); }
+        /*  catch(Throwable ex){throw uncaughtException(ex); }} @覆盖。
+        /* 
+        /* 
         /*non-public*/ final BoundMethodHandle copyWithExtendF(MethodType mt, LambdaForm lf, float narg) {
             try {
                 return (BoundMethodHandle) SPECIES_DATA.extendWith(F_TYPE).constructor().invokeBasic(mt, lf, argL0, narg);
@@ -258,6 +353,11 @@ import jdk.internal.org.objectweb.asm.Type;
             }
         }
         @Override
+        /* <p>
+        /*  try {return(BoundMethodHandle)SPECIES_DATAextendWith(F_TYPE)constructor()invokeBasic(mt,lf,argL0,narg); }
+        /*  catch(Throwable ex){throw uncaughtException(ex); }} @覆盖。
+        /* 
+        /* 
         /*non-public*/ final BoundMethodHandle copyWithExtendD(MethodType mt, LambdaForm lf, double narg) {
             try {
                 return (BoundMethodHandle) SPECIES_DATA.extendWith(D_TYPE).constructor().invokeBasic(mt, lf, argL0, narg);
@@ -280,6 +380,16 @@ import jdk.internal.org.objectweb.asm.Type;
      * The shortest possible BMH has zero fields; its class is SimpleMethodHandle.
      * BMH species are not interrelated by subtyping, even though it would appear that
      * a shorter BMH could serve as a supertype of a longer one which extends it.
+     * <p>
+     *  try {return(BoundMethodHandle)SPECIES_DATAextendWith(D_TYPE)constructor()invokeBasic(mt,lf,argL0,narg); }
+     *  catch(Throwable ex){throw uncaughtException(ex); }}}。
+     * 
+     *  // // BMH species meta-data //
+     * 
+     * / **用于混合BMH类型的元数据包装器每个BMH类型对应于基本字段类型(LIJFD)的给定序列。字段是不可变的;它们的值在对象构造中完全指定每个BMH类型提供可以用于λ形式的获取器函数的数组。
+     * 通过克隆较短的BMH并添加一个或多个新的字段值来构造BMH。
+     * 最短的BMH具有零字段;它的类是SimpleMethodHandle BMH种类不是通过子类型相互关联,即使看起来更短的BMH可以用作更长的BMH的超型,其延伸它。
+     * 
      */
     static class SpeciesData {
         private final String                             typeChars;
@@ -295,9 +405,17 @@ import jdk.internal.org.objectweb.asm.Type;
         /*non-public*/ int fieldCount() {
             return typeCodes.length;
         }
+        /* <p>
+        /*  return typeCodeslength; }}
+        /* 
+        /* 
         /*non-public*/ BasicType fieldType(int i) {
             return typeCodes[i];
         }
+        /* <p>
+        /*  return typeCodes [i]; }}
+        /* 
+        /* 
         /*non-public*/ char fieldTypeChar(int i) {
             return typeChars.charAt(i);
         }
@@ -315,6 +433,13 @@ import jdk.internal.org.objectweb.asm.Type;
          * Return a {@link LambdaForm.Name} containing a {@link LambdaForm.NamedFunction} that
          * represents a MH bound to a generic invoker, which in turn forwards to the corresponding
          * getter.
+         * <p>
+         * return typeCharscharAt(i); } Object fieldSignature(){return typeChars; } public class <? extends BoundMethodHandle>
+         *  fieldHolder(){return clazz; } public String toString(){return"SpeciesData <"+ fieldSignature()+">"; }
+         * }。
+         * 
+         *  / **返回一个包含{@link LambdaFormNamedFunction}的{@link LambdaFormName},它表示绑定到通用调用者的MH,然后转发给相应的getter
+         * 
          */
         NamedFunction getterFunction(int i) {
             NamedFunction nf = nominalGetters[i];
@@ -467,6 +592,15 @@ import jdk.internal.org.objectweb.asm.Type;
      * A BMH species has a number of fields with the concrete (possibly erased) types of
      * bound values. Setters are provided as an API in BMH. Getters are exposed as MHs,
      * which can be included as names in lambda forms.
+     * <p>
+     *  生成混凝土BMH类
+     * 
+     *  具体的BMH种类适合于绑定遵守给定类型模式的多个值。参考类型被擦除
+     * 
+     *  BMH物种按类型模式缓存
+     * 
+     * BMH物种具有许多具有具体(可能已擦除)类型的绑定值的字段Setter作为BMH中的API提供Getters被公开为MH,它们可以作为lambda形式的名称包含
+     * 
      */
     static class Factory {
 
@@ -554,6 +688,26 @@ import jdk.internal.org.objectweb.asm.Type;
          * }
          * </pre>
          *
+         * <p>
+         *  为绑定类型的给定组合生成BMH的具体子类
+         * 
+         *  混凝土BMH物种遵守以下模式：
+         * 
+         * <pre>
+         *  class Species _ [[types]] extends BoundMethodHandle {[[fields]] final SpeciesData speciesData(){return SpeciesDataget("[types]]"); }
+         * }。
+         * </pre>
+         * 
+         *  {@code [[types]]}签名正是传递给此方法的字符串
+         * 
+         *  {@code [[fields]]}节包含类型签名中每个字符的一个字段定义,遵循{@link #makeFieldName}定义中描述的命名模式,
+         * 
+         * 例如,用于两个参考和一个整数边界值的混凝土BMH物质将具有以下形状：
+         * 
+         * <pre>
+         * class BoundMethodHandle {private static final class Species_LLI extends BoundMethodHandle {final Object argL0; final object argL1; final int argI2; private Species_LLI(MethodType mt,LambdaForm lf,Object argL0,Object argL1,int argI2){super(mt,lf); thisargL0 = argL0; thisargL1 = argL1; thisargI2 = argI2; }
+         *  final SpeciesData speciesData(){return SPECIES_DATA; } final int fieldCount(){return 3; } static fin
+         * 
          * @param types the type signature, wherein reference types are erased to 'L'
          * @return the generated concrete BMH class
          */
@@ -798,6 +952,16 @@ import jdk.internal.org.objectweb.asm.Type;
          * Field names in concrete BMHs adhere to this pattern:
          * arg + type + index
          * where type is a single character (L, I, J, F, D).
+         * <p>
+         * al SpeciesData SPECIES_DATA = SpeciesDatagetForClass("LLI",Species_LLI类); static BoundMethodHandle ma
+         * ke(MethodType mt,LambdaForm lf,Object argL0,Object argL1,int argI2){return new Species_LLI(mt,lf,argL0,argL1,argI2); }
+         *  final BoundMethodHandle copyWith(MethodType mt,LambdaForm lf){return new Species_LLI(mt,lf,argL0,argL1,argI2); }
+         *  final BoundMethodHandle copyWithExtendL(MethodType mt,LambdaForm lf,Object narg){return SPECIES_DATAextendWith(L_TYPE)constructor()invokeBasic(mt,lf,argL0,argL1,argI2,narg); }
+         *  final BoundMethodHandle copyWithExtendI(MethodType mt,LambdaForm lf,int narg){return SPECIES_DATAextendWith(I_TYPE)constructor()invokeBasic(mt,lf,argL0,argL1,argI2,narg); }
+         *  final BoundMethodHandle copyWithExtendJ(MethodType mt,LambdaForm lf,long narg){return SPECIES_DATAextendWith(J_TYPE)constructor()invokeBasic(mt,lf,argL0,argL1,argI2,narg); }
+         *  final final BoundMethodHandle copyWithExtendF(MethodType mt,LambdaForm lf,float narg){return SPECIES_DATAextendWith(F_TYPE)constructor()invokeBasic(mt,lf,argL0,argL1,argI2,narg); }
+         *  public final BoundMethodHandle copyWithExtendD(MethodType mt,LambdaForm lf,double narg){return SPECIES_DATAextendWith(D_TYPE)constructor()invokeBasic(mt,lf,argL0,argL1,argI2,narg); }
+         * }。
          */
         private static String makeFieldName(String types, int index) {
             assert index >= 0 && index < types.length();
@@ -825,6 +989,9 @@ import jdk.internal.org.objectweb.asm.Type;
 
     /**
      * All subclasses must provide such a value describing their type signature.
+     * <p>
+     * </pre>
+     * 
      */
     static final SpeciesData SPECIES_DATA = SpeciesData.EMPTY;
 

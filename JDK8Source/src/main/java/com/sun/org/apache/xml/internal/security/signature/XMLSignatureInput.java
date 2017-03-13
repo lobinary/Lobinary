@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)有关版权所有权的其他信息,请参阅随本作品分发的NOTICE文件。
+ * ASF根据Apache许可证第20版("许可证")向您授予此文件;您不得使用此文件,除非符合许可证您可以在获取许可证的副本。
+ * 
+ *  http：// wwwapacheorg / licenses / LICENSE-20
+ * 
+ * 除非适用法律要求或书面同意,否则根据许可证分发的软件将按"原样"基础分发,无任何明示或暗示的保证或条件。请参阅许可证管理权限和限制许可证
+ * 
  */
 package com.sun.org.apache.xml.internal.security.signature;
 
@@ -51,6 +60,10 @@ import org.xml.sax.SAXException;
 /**
  * Class XMLSignatureInput
  *
+ * <p>
+ *  类XMLSignatureInput
+ * 
+ * 
  * @author Christian Geuer-Pollmann
  * $todo$ check whether an XMLSignatureInput can be _both_, octet stream _and_ node set?
  */
@@ -62,33 +75,52 @@ public class XMLSignatureInput {
      *       * as a collection of nodes
      *       * or as subnode excluding or not comments and excluding or
      *         not other nodes.
+     * <p>
+     *  XMLSignature输入可以是：一个byteArray类似于/或没有InputStream或一个nodeSet定义为：*作为节点的集合*或作为子节点排除或不评论和排除或不是其他节点
+     * 
      */
 
     /**
      * Some InputStreams do not support the {@link java.io.InputStream#reset}
      * method, so we read it in completely and work on our Proxy.
+     * <p>
+     *  一些InputStream不支持{@link javaioInputStream#reset}方法,所以我们完全阅读它并使用我们的代理
+     * 
      */
     private InputStream inputOctetStreamProxy = null;
     /**
      * The original NodeSet for this XMLSignatureInput
+     * <p>
+     *  此XMLSignatureInput的原始NodeSet
+     * 
      */
     private Set<Node> inputNodeSet = null;
     /**
      * The original Element
+     * <p>
+     *  原始元素
+     * 
      */
     private Node subNode = null;
     /**
      * Exclude Node *for enveloped transformations*
+     * <p>
+     * 排除节点*用于包络转换*
+     * 
      */
     private Node excludeNode = null;
     /**
      *
+     * <p>
      */
     private boolean excludeComments = false;
 
     private boolean isNodeSet = false;
     /**
      * A cached bytes
+     * <p>
+     *  缓存的字节
+     * 
      */
     private byte[] bytes = null;
 
@@ -100,16 +132,26 @@ public class XMLSignatureInput {
      * information. Such data characteristics are provided as parameters to the
      * Transform algorithm and should be described in the specification for the
      * algorithm.
+     * <p>
+     *  一些转换可能需要明确的MIME类型,字符集(IANA注册的"字符集")或其他有关他们从早期的转换或源数据接收的数据的信息,但本文档中指定的转换算法不需要这样的显式信息。
+     * 数据特性作为参数提供给变换算法,并且应在用于算法的规范中描述。
+     * 
      */
     private String mimeType = null;
 
     /**
      * Field sourceURI
+     * <p>
+     *  字段sourceURI
+     * 
      */
     private String sourceURI = null;
 
     /**
      * Node Filter list.
+     * <p>
+     *  节点过滤器列表
+     * 
      */
     private List<NodeFilter> nodeFilters = new ArrayList<NodeFilter>();
 
@@ -124,6 +166,12 @@ public class XMLSignatureInput {
      * This is a comfort method, which internally converts the byte[] array into
      * an InputStream
      * <p>NOTE: no defensive copy</p>
+     * <p>
+     *  从八位字节数组构造XMLSignatureInput
+     * <p>
+     *  这是一个舒适的方法,在内部转换byte []数组为InputStream <p>注意：没有防御的副本</p>
+     * 
+     * 
      * @param inputOctets an octet array which including XML document or node
      */
     public XMLSignatureInput(byte[] inputOctets) {
@@ -135,6 +183,10 @@ public class XMLSignatureInput {
      * Constructs a <code>XMLSignatureInput</code> from an octet stream. The
      * stream is directly read.
      *
+     * <p>
+     * 从八位字节流构造一个<code> XMLSignatureInput </code>流直接读取
+     * 
+     * 
      * @param inputOctetStream
      */
     public XMLSignatureInput(InputStream inputOctetStream)  {
@@ -145,6 +197,10 @@ public class XMLSignatureInput {
      * Construct a XMLSignatureInput from a subtree rooted by rootNode. This
      * method included the node and <I>all</I> his descendants in the output.
      *
+     * <p>
+     *  从以rootNode为根的子树构造XMLSignatureInput此方法包括节点和其输出中的<I>所有</I>后代
+     * 
+     * 
      * @param rootNode
      */
     public XMLSignatureInput(Node rootNode) {
@@ -154,6 +210,10 @@ public class XMLSignatureInput {
     /**
      * Constructor XMLSignatureInput
      *
+     * <p>
+     *  构造函数XMLSignatureInput
+     * 
+     * 
      * @param inputNodeSet
      */
     public XMLSignatureInput(Set<Node> inputNodeSet) {
@@ -162,6 +222,10 @@ public class XMLSignatureInput {
 
     /**
      * Check if the structure needs to be expanded.
+     * <p>
+     *  检查结构是否需要扩展
+     * 
+     * 
      * @return true if so.
      */
     public boolean isNeedsToBeExpanded() {
@@ -170,6 +234,10 @@ public class XMLSignatureInput {
 
     /**
      * Set if the structure needs to be expanded.
+     * <p>
+     *  设置是否需要扩展结构
+     * 
+     * 
      * @param needsToBeExpanded true if so.
      */
     public void setNeedsToBeExpanded(boolean needsToBeExpanded) {
@@ -180,6 +248,10 @@ public class XMLSignatureInput {
      * Returns the node set from input which was specified as the parameter of
      * {@link XMLSignatureInput} constructor
      *
+     * <p>
+     *  返回从{@link XMLSignatureInput}构造函数的参数指定的输入的节点集合
+     * 
+     * 
      * @return the node set
      * @throws SAXException
      * @throws IOException
@@ -193,6 +265,10 @@ public class XMLSignatureInput {
 
     /**
      * Get the Input NodeSet.
+     * <p>
+     *  获取输入节点集
+     * 
+     * 
      * @return the Input NodeSet.
      */
     public Set<Node> getInputNodeSet() {
@@ -202,6 +278,10 @@ public class XMLSignatureInput {
     /**
      * Returns the node set from input which was specified as the parameter of
      * {@link XMLSignatureInput} constructor
+     * <p>
+     *  返回从{@link XMLSignatureInput}构造函数的参数指定的输入的节点集合
+     * 
+     * 
      * @param circumvent
      *
      * @return the node set
@@ -236,6 +316,10 @@ public class XMLSignatureInput {
      * Returns the Octet stream(byte Stream) from input which was specified as
      * the parameter of {@link XMLSignatureInput} constructor
      *
+     * <p>
+     *  从作为{@link XMLSignatureInput}构造函数的参数指定的输入返回Octet流(字节Stream)
+     * 
+     * 
      * @return the Octet stream(byte Stream) from input which was specified as
      * the parameter of {@link XMLSignatureInput} constructor
      * @throws IOException
@@ -254,6 +338,8 @@ public class XMLSignatureInput {
     }
 
     /**
+    /* <p>
+    /* 
      * @return real octet stream
      */
     public InputStream getOctetStreamReal() {
@@ -264,6 +350,10 @@ public class XMLSignatureInput {
      * Returns the byte array from input which was specified as the parameter of
      * {@link XMLSignatureInput} constructor
      *
+     * <p>
+     * 从输入中返回指定为{@link XMLSignatureInput}构造函数的参数的字节数组
+     * 
+     * 
      * @return the byte[] from input which was specified as the parameter of
      * {@link XMLSignatureInput} constructor
      *
@@ -283,6 +373,10 @@ public class XMLSignatureInput {
     /**
      * Determines if the object has been set up with a Node set
      *
+     * <p>
+     *  确定是否已使用节点集设置对象
+     * 
+     * 
      * @return true if the object has been set up with a Node set
      */
     public boolean isNodeSet() {
@@ -293,6 +387,10 @@ public class XMLSignatureInput {
     /**
      * Determines if the object has been set up with an Element
      *
+     * <p>
+     *  确定是否已使用元素设置对象
+     * 
+     * 
      * @return true if the object has been set up with an Element
      */
     public boolean isElement() {
@@ -303,6 +401,10 @@ public class XMLSignatureInput {
     /**
      * Determines if the object has been set up with an octet stream
      *
+     * <p>
+     *  确定对象是否已使用八位字节流设置
+     * 
+     * 
      * @return true if the object has been set up with an octet stream
      */
     public boolean isOctetStream() {
@@ -314,6 +416,10 @@ public class XMLSignatureInput {
      * Determines if {@link #setOutputStream} has been called with a
      * non-null OutputStream.
      *
+     * <p>
+     *  确定是否已使用非空OutputStream调用{@link #setOutputStream}
+     * 
+     * 
      * @return true if {@link #setOutputStream} has been called with a
      * non-null OutputStream
      */
@@ -324,6 +430,10 @@ public class XMLSignatureInput {
     /**
      * Determines if the object has been set up with a ByteArray
      *
+     * <p>
+     *  确定对象是否已使用ByteArray设置
+     * 
+     * 
      * @return true is the object has been set up with an octet stream
      */
     public boolean isByteArray() {
@@ -333,6 +443,10 @@ public class XMLSignatureInput {
     /**
      * Is the object correctly set up?
      *
+     * <p>
+     *  对象是否正确设置?
+     * 
+     * 
      * @return true if the object has been set up correctly
      */
     public boolean isInitialized() {
@@ -342,6 +456,10 @@ public class XMLSignatureInput {
     /**
      * Returns mimeType
      *
+     * <p>
+     *  返回mimeType
+     * 
+     * 
      * @return mimeType
      */
     public String getMIMEType() {
@@ -351,6 +469,10 @@ public class XMLSignatureInput {
     /**
      * Sets mimeType
      *
+     * <p>
+     *  设置mimeType
+     * 
+     * 
      * @param mimeType
      */
     public void setMIMEType(String mimeType) {
@@ -360,6 +482,10 @@ public class XMLSignatureInput {
     /**
      * Return SourceURI
      *
+     * <p>
+     *  返回SourceURI
+     * 
+     * 
      * @return SourceURI
      */
     public String getSourceURI() {
@@ -369,6 +495,10 @@ public class XMLSignatureInput {
     /**
      * Sets SourceURI
      *
+     * <p>
+     *  设置SourceURI
+     * 
+     * 
      * @param sourceURI
      */
     public void setSourceURI(String sourceURI) {
@@ -378,6 +508,9 @@ public class XMLSignatureInput {
     /**
      * Method toString
      * @inheritDoc
+     * <p>
+     *  方法toString @inheritDoc
+     * 
      */
     public String toString() {
         if (isNodeSet()) {
@@ -402,6 +535,10 @@ public class XMLSignatureInput {
     /**
      * Method getHTMLRepresentation
      *
+     * <p>
+     *  方法getHTMLRepresentation
+     * 
+     * 
      * @throws XMLSignatureException
      * @return The HTML representation for this XMLSignature
      */
@@ -413,6 +550,10 @@ public class XMLSignatureInput {
     /**
      * Method getHTMLRepresentation
      *
+     * <p>
+     *  方法getHTMLRepresentation
+     * 
+     * 
      * @param inclusiveNamespaces
      * @throws XMLSignatureException
      * @return The HTML representation for this XMLSignature
@@ -426,6 +567,10 @@ public class XMLSignatureInput {
 
     /**
      * Gets the exclude node of this XMLSignatureInput
+     * <p>
+     *  获取此XMLSignatureInput的排除节点
+     * 
+     * 
      * @return Returns the excludeNode.
      */
     public Node getExcludeNode() {
@@ -434,6 +579,10 @@ public class XMLSignatureInput {
 
     /**
      * Sets the exclude node of this XMLSignatureInput
+     * <p>
+     *  设置此XMLSignatureInput的排除节点
+     * 
+     * 
      * @param excludeNode The excludeNode to set.
      */
     public void setExcludeNode(Node excludeNode) {
@@ -442,6 +591,10 @@ public class XMLSignatureInput {
 
     /**
      * Gets the node of this XMLSignatureInput
+     * <p>
+     *  获取此XMLSignatureInput的节点
+     * 
+     * 
      * @return The excludeNode set.
      */
     public Node getSubNode() {
@@ -449,6 +602,8 @@ public class XMLSignatureInput {
     }
 
     /**
+    /* <p>
+    /* 
      * @return Returns the excludeComments.
      */
     public boolean isExcludeComments() {
@@ -456,6 +611,8 @@ public class XMLSignatureInput {
     }
 
     /**
+    /* <p>
+    /* 
      * @param excludeComments The excludeComments to set.
      */
     public void setExcludeComments(boolean excludeComments) {
@@ -463,6 +620,8 @@ public class XMLSignatureInput {
     }
 
     /**
+    /* <p>
+    /* 
      * @param diOs
      * @throws IOException
      * @throws CanonicalizationException
@@ -503,6 +662,8 @@ public class XMLSignatureInput {
     }
 
     /**
+    /* <p>
+    /* 
      * @param os
      */
     public void setOutputStream(OutputStream os) {
@@ -525,6 +686,8 @@ public class XMLSignatureInput {
     }
 
     /**
+    /* <p>
+    /* 
      * @param filter
      */
     public void addNodeFilter(NodeFilter filter) {
@@ -541,6 +704,8 @@ public class XMLSignatureInput {
     }
 
     /**
+    /* <p>
+    /* 
      * @return the node filters
      */
     public List<NodeFilter> getNodeFilters() {
@@ -548,6 +713,8 @@ public class XMLSignatureInput {
     }
 
     /**
+    /* <p>
+    /* 
      * @param b
      */
     public void setNodeSet(boolean b) {

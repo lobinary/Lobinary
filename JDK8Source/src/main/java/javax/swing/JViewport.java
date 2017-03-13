@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -94,6 +95,26 @@ import java.io.Serializable;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  通过它查看基本信息的"视口"或"舷窗"当您滚动时,视口是什么移动它就像通过相机的取景器窥视移动取景器向上带来新的东西在视图的顶部,失去的东西在底部
+ * <p>
+ *  默认情况下,<code> JViewport </code>是不透明的要改变这个,使用<code> setOpaque </code>方法
+ * <p>
+ * <b>注意：</b>我们实现了一个更快的滚动算法,不需要一个缓冲区来绘制算法的工作原理如下：<ol> <li>视图和父视图,并检查他们是否<代码> JComponents </code>,如果不是,则停
+ * 止并重绘整个视口<li>如果视口被祖先遮挡,则停止并重绘整个视口<li>计算将变为可见的区域它与视口一样大,停止并重绘整个视图区域<li>获取祖先<code> Window </code>的图形,并在滚
+ * 动区域上执行<code> copyArea </code> <li>消息视图以重新绘制新可见区域<li>下一次在视口上调用绘画时,如果剪辑区域小于视口大小,则启动计时器重绘整个区域。
+ * </ol>
+ * 一般来说,这种方法要快得多与后备存储方法相比,这避免了维护屏幕外缓冲区并且必须执行两个<code> copyArea </code>的开销。与非后备存储情况相比,这种方法将大大减少绘制地区
+ * <p>
+ * 当视口被另一个窗口遮挡或部分离屏时,此方法可能导致比后备存储方法更慢的时间当另一个窗口遮蔽视口时,copyArea将复制垃圾,系统将生成一个绘制事件,以通知我们我们需要绘制新暴露的区域处理此问题的唯一方
+ * 法是重新绘制整个视口,这可能会导致比后备存储案例更慢的性能在大多数应用程序中,用户很少会在视口被另一个窗口或屏幕遮蔽时进行滚动,因此这种优化通常值得被遮蔽时的性能损失。
+ * <p>
+ *  <strong>警告：</strong> Swing不是线程安全的更多信息,请参见<a href=\"package-summaryhtml#threading\"> Swing的线程策略</a>
+ * <p>
+ * <strong>警告：</strong>此类的序列化对象将不与未来的Swing版本兼容当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ * 支持长期存储所有JavaBeans&trade;已添加到<code> javabeans </code>包中请参见{@link javabeansXMLEncoder}。
+ * 
+ * 
  * @author Hans Muller
  * @author Philip Milne
  * @see JScrollPane
@@ -101,24 +122,33 @@ import java.io.Serializable;
 public class JViewport extends JComponent implements Accessible
 {
     /**
+    /* <p>
+    /* 
      * @see #getUIClassID
      * @see #readObject
      */
     private static final String uiClassID = "ViewportUI";
 
     /** Property used to indicate window blitting should not be done.
+    /* <p>
      */
     static final Object EnableWindowBlit = "EnableWindowBlit";
 
     /**
      * True when the viewport dimensions have been determined.
      * The default is false.
+     * <p>
+     *  确定视口尺寸时为true默认值为false
+     * 
      */
     protected boolean isViewSizeSet = false;
 
     /**
      * The last <code>viewPosition</code> that we've painted, so we know how
      * much of the backing store image is valid.
+     * <p>
+     *  我们绘制的最后一个<code> viewPosition </code>,所以我们知道后备存储映像的有效性
+     * 
      */
     protected Point lastPaintPosition = null;
 
@@ -128,6 +158,10 @@ public class JViewport extends JComponent implements Accessible
      * operations instead of by accessing the view object to construct the
      * display.  The default is <code>false</code>.
      *
+     * <p>
+     * 当此视口维护其内容的屏幕外图像时,为真,因此可以使用快速"bit-blit"操作而不是通过访问视图对象来构造显示器来进行一些滚动。默认是<code> false </code>
+     * 
+     * 
      * @deprecated As of Java 2 platform v1.3
      * @see #setScrollMode
      */
@@ -152,11 +186,22 @@ public class JViewport extends JComponent implements Accessible
      * class and have the <code>JList</code> manage this case by using
      * <code>setBackingStoreEnabled</code>.  The default is
      * <code>false</code>.
+     * <p>
+     * <code> scrollUnderway </code>标志用于<code> JList </code>等组件。
+     * 当在<code> JList </code>上按下缩小键并且所选单元格是列表中的最后一个时, <code> scrollpane </code>这里,旧的选择单元格需要重绘,所以我们需要一个标志,使视口
+     * 做优化的绘画只有当显式调用<code> setViewPosition(Point)</code >当通过其他路由调用<code> setBounds </code>时,标志关闭,并且视图重新绘制通常另
+     * 一种方法是从<code> JViewport </code>类中删除此类,并使<code> JList </code>使用<code> setBackingStoreEnabled </code>来管理
+     * 这种情况。
+     * <code> scrollUnderway </code>标志用于<code> JList </code>等组件。默认是<code> false </code>。
+     * 
      */
     protected boolean scrollUnderway = false;
 
     /*
      * Listener that is notified each time the view changes size.
+     * <p>
+     * 每次视图更改大小时通知的侦听器
+     * 
      */
     private ComponentListener viewListener = null;
 
@@ -164,6 +209,9 @@ public class JViewport extends JComponent implements Accessible
      * <code>JViewport</code> instance since the
      * event's only (read-only) state is the source property.  The source
      * of events generated here is always "this".
+     * <p>
+     *  <code> JViewport </code>实例,因为事件的唯一(只读)状态是源属性此处生成的事件的源始终是"this"
+     * 
      */
     private transient ChangeEvent changeEvent = null;
 
@@ -171,6 +219,10 @@ public class JViewport extends JComponent implements Accessible
       * Use <code>graphics.copyArea</code> to implement scrolling.
       * This is the fastest for most applications.
       *
+      * <p>
+      *  使用<code> graphicscopyArea </code>实现滚动这是大多数应用程序的最快
+      * 
+      * 
       * @see #setScrollMode
       * @since 1.3
       */
@@ -182,6 +234,10 @@ public class JViewport extends JComponent implements Accessible
       * This mode may offer advantages over "blit mode"
       * in some cases, but it requires a large chunk of extra RAM.
       *
+      * <p>
+      *  将视口内容绘制到屏幕外图像这是以前的<code> JTable的默认模式</code>在某些情况下,这种模式可能比"blit模式"更有优势,但它需要一大块额外的RAM
+      * 
+      * 
       * @see #setScrollMode
       * @since 1.3
       */
@@ -194,12 +250,18 @@ public class JViewport extends JComponent implements Accessible
       * Either of the other two options will provide better performance
       * in most cases.
       *
+      * <p>
+      *  此模式使用非常简单的方法在每次滚动时重绘滚动窗格的全部内容这是Swing 10和Swing 11中的默认行为在大多数情况下,其他两个选项之一将提供更好的性能
+      * 
+      * 
       * @see #setScrollMode
       * @since 1.3
       */
     public static final int SIMPLE_SCROLL_MODE = 0;
 
     /**
+    /* <p>
+    /* 
       * @see #setScrollMode
       * @since 1.3
       */
@@ -233,6 +295,9 @@ public class JViewport extends JComponent implements Accessible
     /**
      * This is set to true in <code>setViewPosition</code>
      * if doing a window blit and the viewport is obscured.
+     * <p>
+     * 这在<code> setViewPosition </code>中设置为true,如果执行window blit并且视口被遮盖
+     * 
      */
     private transient boolean repaintAll;
 
@@ -242,22 +307,34 @@ public class JViewport extends JComponent implements Accessible
      * If true, and scrolling happens the
      * repaint manager is not cleared which then allows for the repaint
      * previously invoked to succeed.
+     * <p>
+     *  如果<code> repaintAll </code>为true,并且剪辑矩形与边界不匹配,则在paint中设置为true如果为true,并且滚动发生,重绘管理器不会被清除,这允许以前调用的重绘成功。
+     * 
      */
     private transient boolean waitingForRepaint;
 
     /**
      * Instead of directly invoking repaint, a <code>Timer</code>
      * is started and when it fires, repaint is invoked.
+     * <p>
+     *  不是直接调用重绘,而是启动一个<code> Timer </code>,当它触发时,调用重绘
+     * 
      */
     private transient Timer repaintTimer;
 
     /**
      * Set to true in paintView when paint is invoked.
+     * <p>
+     *  在paintView被调用时设置为true
+     * 
      */
     private transient boolean inBlitPaint;
 
     /**
      * Whether or not a valid view has been installed.
+     * <p>
+     *  是否已安装有效视图
+     * 
      */
     private boolean hasHadValidView;
 
@@ -266,6 +343,10 @@ public class JViewport extends JComponent implements Accessible
      * with viewport (see the BasicScrollPaneUI#syncScrollPaneWithViewport method).
      * This flag allows to invoke that method while ScrollPaneLayout#layoutContainer
      * is running.
+     * <p>
+     *  当视图更改时,我们必须与视口同步滚动条值(请参阅BasicScrollPaneUI#syncScrollPaneWithViewport方法)此标志允许调用该方法,而ScrollPaneLayout#
+     * layoutContainer正在运行。
+     * 
      */
     private boolean viewChanged;
 
@@ -283,6 +364,10 @@ public class JViewport extends JComponent implements Accessible
     /**
      * Returns the L&amp;F object that renders this component.
      *
+     * <p>
+     * 返回呈现此组件的L&amp; F对象
+     * 
+     * 
      * @return a <code>ViewportUI</code> object
      * @since 1.3
      */
@@ -294,6 +379,10 @@ public class JViewport extends JComponent implements Accessible
     /**
      * Sets the L&amp;F object that renders this component.
      *
+     * <p>
+     *  设置呈现此组件的L&amp; F对象
+     * 
+     * 
      * @param ui  the <code>ViewportUI</code> L&amp;F object
      * @see UIDefaults#getUI
      * @beaninfo
@@ -311,6 +400,10 @@ public class JViewport extends JComponent implements Accessible
     /**
      * Resets the UI property to a value from the current look and feel.
      *
+     * <p>
+     *  将UI属性重置为当前外观的值
+     * 
+     * 
      * @see JComponent#updateUI
      */
     public void updateUI() {
@@ -322,6 +415,10 @@ public class JViewport extends JComponent implements Accessible
      * Returns a string that specifies the name of the L&amp;F class
      * that renders this component.
      *
+     * <p>
+     *  返回一个字符串,指定呈现此组件的L&amp; F类的名称
+     * 
+     * 
      * @return the string "ViewportUI"
      *
      * @see JComponent#getUIClassID
@@ -339,6 +436,11 @@ public class JViewport extends JComponent implements Accessible
      * the <code>constraints</code> and <code>index</code>
      * arguments are ignored.)
      *
+     * <p>
+     *  设置<code> JViewport </code>是一个轻量级子元素,可以是<code> null </code>(由于只有一个子元素占据整个视口,所以<code> constraints </code>
+     *  <code> index </code>参数被忽略)。
+     * 
+     * 
      * @param child       the lightweight <code>child</code> of the viewport
      * @param constraints the <code>constraints</code> to be respected
      * @param index       the index
@@ -352,6 +454,10 @@ public class JViewport extends JComponent implements Accessible
     /**
      * Removes the <code>Viewport</code>s one lightweight child.
      *
+     * <p>
+     *  删除<code> Viewport </code>的一个轻量级子级
+     * 
+     * 
      * @see #setView
      */
     public void remove(Component child) {
@@ -375,6 +481,15 @@ public class JViewport extends JComponent implements Accessible
      * than the viewport, scrolling will be confined to the viewport's
      * bounds.
      *
+     * <p>
+     *  滚动视图,使视图中的<code> Rectangle </code>变得可见
+     * <p>
+     * 如果视图当前无效,则尝试在滚动之前验证视图 -  <code> isValid </code>返回false为了避免在创建包含层次结构时进行过度验证,如果其中一个祖先没有对等体,或者没有验证根祖先,或者
+     * 其中一个祖先不是<code> Window </code>或<code> Applet </code>。
+     * <p>
+     *  注意这个方法不会滚动到有效的视口之外;例如,如果<code> contentRect </code>大于视口,则滚动将局限于视口的边界
+     * 
+     * 
      * @param contentRect the <code>Rectangle</code> to display
      * @see JComponent#isValidateRoot
      * @see java.awt.Component#isValid
@@ -470,6 +585,11 @@ public class JViewport extends JComponent implements Accessible
      * <code>RepaintManager</code> is then invoked with
      * <code>removeInvalidComponent</code>. This
      * is the synchronous version of a <code>revalidate</code>.
+     * <p>
+     * 当发现一个返回<code> true </code>的组件到<code> isValidateRoot </code>时,升级<code> Viewport </code>的父节点如果所有<code> 
+     * Component </code>然后将调用<code> RepaintManager </code>。
+     * <code> removeInvalidComponent </code>这是<code>的同步版本</code> revalidate </code>。
+     * 
      */
     private void validateView() {
         Component validateRoot = SwingUtilities.getValidateRoot(this, false);
@@ -494,6 +614,9 @@ public class JViewport extends JComponent implements Accessible
       *  proper direction and amount to move by. The integer variables are named
       *  width, but this method is applicable to height also. The code assumes that
       *  parentWidth/childWidth are positive and childAt can be negative.
+      * <p>
+      *  正确的方向和移动量整数变量命名为width,但此方法适用于height也代码假设parentWidth / childWidth是正的,childAt可以是负数
+      * 
       */
     private int positionAdjustment(int parentWidth, int childWidth, int childAt)    {
 
@@ -555,6 +678,14 @@ public class JViewport extends JComponent implements Accessible
      * method will throw an exception as borders are not supported on
      * a <code>JViewPort</code>.
      *
+     * <p>
+     * 视口通过正常的父/子剪辑(通常视图沿着滚动的相反方向移动)来"滚动"其子(称为"视图")。
+     * 非<code> null </code> -zero insets,不支持,防止这个组件的几何变得足够复杂,阻止子类化创建一个带有边框的<code> JViewport </code>,将它添加到<code>
+     *  JPanel </code>具有边框<p>注意：如果<code> border </code>为非<code> null </code>,则此方法将抛出异常,因为<code> JViewPort </code不支持边框>
+     * 。
+     * 视口通过正常的父/子剪辑(通常视图沿着滚动的相反方向移动)来"滚动"其子(称为"视图")。
+     * 
+     * 
      * @param border the <code>Border</code> to set
      * @exception IllegalArgumentException this method is not implemented
      */
@@ -569,6 +700,10 @@ public class JViewport extends JComponent implements Accessible
      * Returns the insets (border) dimensions as (0,0,0,0), since borders
      * are not supported on a <code>JViewport</code>.
      *
+     * <p>
+     *  将插入(边框)尺寸返回为(0,0,0,0),因为<code> JViewport </code>不支持边框。
+     * 
+     * 
      * @return a <code>Rectangle</code> of zero dimension and zero origin
      * @see #setBorder
      */
@@ -582,6 +717,11 @@ public class JViewport extends JComponent implements Accessible
      * <code>Insets</code> object will be reinitialized, and
      * all existing values within this object are overwritten.
      *
+     * <p>
+     * 返回包含此<code> JViewport </code>的插入值的<code> Insets </code>对象传入的<code> Insets </code>对象将重新初始化,并且此对象内的所有现有
+     * 值都将被覆盖。
+     * 
+     * 
      * @param insets the <code>Insets</code> object which can be reused
      * @return this viewports inset values
      * @see #getInsets
@@ -633,6 +773,11 @@ public class JViewport extends JComponent implements Accessible
      * implementation rather than messaging the <code>JViewport</code>'s
      * children directly.
      *
+     * <p>
+     *  <code> JViewport </code>覆盖此方法的默认实现(在<code> JComponent </code>中)返回false这将确保绘图机制将调用<code> Viewport </code>
+     * 代码> paint </code>实现,而不是直接发送消息给JViewport </code>的子代。
+     * 
+     * 
      * @return false
      */
     public boolean isOptimizedDrawingEnabled() {
@@ -644,6 +789,10 @@ public class JViewport extends JComponent implements Accessible
      * painting to originate from {@code JViewport}, or one of its
      * ancestors. Otherwise returns {@code false}.
      *
+     * <p>
+     *  如果滚动模式是{@code BACKINGSTORE_SCROLL_MODE},导致绘画来源于{@code JViewport}或其祖先之一,则返回true否则返回{@code false}
+     * 
+     * 
      * @return true if if scroll mode is a {@code BACKINGSTORE_SCROLL_MODE}.
      * @see JComponent#isPaintingOrigin()
      */
@@ -654,6 +803,9 @@ public class JViewport extends JComponent implements Accessible
 
     /**
      * Only used by the paint method below.
+     * <p>
+     *  仅由下面的paint方法使用
+     * 
      */
     private Point getViewLocation() {
         Component view = getView();
@@ -676,6 +828,13 @@ public class JViewport extends JComponent implements Accessible
      * bits. (In case you were curious.)
      * </blockquote>
      *
+     * <p>
+     * 根据是否启用了<code> backingStore </code>,可以通过后备存储器绘制图像,也可以仅绘制最近曝光的部分,使用后备存储来"
+     * <blockquote>
+     *  术语"blit"是PDP-10 BLT(BLOCK Transfer)指令的发音版本,它复制了一个位块(如果你好奇的话)
+     * </blockquote>
+     * 
+     * 
      * @param g the <code>Graphics</code> context within which to paint
      */
     public void paint(Graphics g)
@@ -820,6 +979,10 @@ public class JViewport extends JComponent implements Accessible
      * Sets the bounds of this viewport.  If the viewport's width
      * or height has changed, fire a <code>StateChanged</code> event.
      *
+     * <p>
+     *  设置此视口的边界如果视口的宽度或高度已更改,则触发<code> StateChanged </code>事件
+     * 
+     * 
      * @param x left edge of the origin
      * @param y top edge of the origin
      * @param w width in pixels
@@ -846,6 +1009,10 @@ public class JViewport extends JComponent implements Accessible
       * You may want to change this mode to get maximum performance for your
       * use case.
       *
+      * <p>
+      *  用于控制滚动视口内容的方法您可能想要更改此模式以获得最佳性能的用例
+      * 
+      * 
       * @param mode one of the following values:
       * <ul>
       * <li> JViewport.BLIT_SCROLL_MODE
@@ -874,6 +1041,10 @@ public class JViewport extends JComponent implements Accessible
     /**
       * Returns the current scrolling mode.
       *
+      * <p>
+      *  返回当前滚动模式
+      * 
+      * 
       * @return the <code>scrollMode</code> property
       * @see #setScrollMode
       * @since 1.3
@@ -886,6 +1057,10 @@ public class JViewport extends JComponent implements Accessible
      * Returns <code>true</code> if this viewport is maintaining
      * an offscreen image of its contents.
      *
+     * <p>
+     *  如果此视口正在维护其内容的离屏图像,则返回<code> true </code>
+     * 
+     * 
      * @return <code>true</code> if <code>scrollMode</code> is
      *    <code>BACKINGSTORE_SCROLL_MODE</code>
      *
@@ -905,6 +1080,11 @@ public class JViewport extends JComponent implements Accessible
      * Rather than repainting the entire viewport we use
      * <code>Graphics.copyArea</code> to effect some of the scroll.
      *
+     * <p>
+     * 如果此视口将保持其内容的离屏图像,则为true该图像用于降低对<code> viewPosition </code>的小一维更改的成本。
+     * 而不是重新绘制整个视口,我们使用<code> GraphicscopyArea <代码>来实现一些滚动。
+     * 
+     * 
      * @param enabled if true, maintain an offscreen backing store
      *
      * @deprecated As of Java 2 platform v1.3, replaced by
@@ -929,6 +1109,10 @@ public class JViewport extends JComponent implements Accessible
     /**
      * Returns the <code>JViewport</code>'s one child or <code>null</code>.
      *
+     * <p>
+     *  返回<code> JViewport </code>的一个子元素或<code> null </code>
+     * 
+     * 
      * @return the viewports child, or <code>null</code> if none exists
      *
      * @see #setView
@@ -941,6 +1125,10 @@ public class JViewport extends JComponent implements Accessible
      * Sets the <code>JViewport</code>'s one lightweight child
      * (<code>view</code>), which can be <code>null</code>.
      *
+     * <p>
+     *  设置<code> JViewport </code>是一个轻量级子元素(<code> view </code>),可以是<code> null </code>
+     * 
+     * 
      * @param view the viewport's new lightweight child
      *
      * @see #getView
@@ -950,6 +1138,9 @@ public class JViewport extends JComponent implements Accessible
         /* Remove the viewport's existing children, if any.
          * Note that removeAll() isn't used here because it
          * doesn't call remove() (which JViewport overrides).
+         * <p>
+         *  注意,removeAll()在这里不使用,因为它不调用remove()(JViewport覆盖)
+         * 
          */
         int n = getComponentCount();
         for(int i = n - 1; i >= 0; i--) {
@@ -984,6 +1175,10 @@ public class JViewport extends JComponent implements Accessible
      * preferred size, otherwise return the view's current size.
      * If there is no view, return 0,0.
      *
+     * <p>
+     *  如果视图的大小没有被显式设置,返回首选大小,否则返回视图的当前大小如果没有视图,返回0,0
+     * 
+     * 
      * @return a <code>Dimension</code> object specifying the size of the view
      */
     public Dimension getViewSize() {
@@ -1004,6 +1199,10 @@ public class JViewport extends JComponent implements Accessible
     /**
      * Sets the size of the view.  A state changed event will be fired.
      *
+     * <p>
+     *  设置视图的大小状态改变的事件将被触发
+     * 
+     * 
      * @param newSize a <code>Dimension</code> object specifying the new
      *          size of the view
      */
@@ -1027,6 +1226,10 @@ public class JViewport extends JComponent implements Accessible
      * Returns the view coordinates that appear in the upper left
      * hand corner of the viewport, or 0,0 if there's no view.
      *
+     * <p>
+     * 返回显示在视口左上角的视图坐标,如果没有视图,则返回0,0
+     * 
+     * 
      * @return a <code>Point</code> object giving the upper left coordinates
      */
     public Point getViewPosition() {
@@ -1047,6 +1250,10 @@ public class JViewport extends JComponent implements Accessible
      * Sets the view coordinates that appear in the upper left
      * hand corner of the viewport, does nothing if there's no view.
      *
+     * <p>
+     *  设置显示在视口左上角的视图坐标,如果没有视图,则不执行任何操作
+     * 
+     * 
      * @param p  a <code>Point</code> object giving the upper left coordinates
      */
     public void setViewPosition(Point p)
@@ -1061,6 +1268,9 @@ public class JViewport extends JComponent implements Accessible
         /* Collect the old x,y values for the views location
          * and do the song and dance to avoid allocating
          * a Rectangle object if we don't have to.
+         * <p>
+         *  并做歌曲和舞蹈,以避免分配一个Rectangle对象,如果我们不必
+         * 
          */
         if (view instanceof JComponent) {
             JComponent c = (JComponent)view;
@@ -1075,6 +1285,9 @@ public class JViewport extends JComponent implements Accessible
 
         /* The view scrolls in the opposite direction to mouse
          * movement.
+         * <p>
+         *  运动
+         * 
          */
         int newX = -x;
         int newY = -y;
@@ -1132,6 +1345,10 @@ public class JViewport extends JComponent implements Accessible
      * and size is <code>getExtentSize</code>.
      * This is the visible part of the view, in view coordinates.
      *
+     * <p>
+     *  返回一个矩形,其起点是<code> getViewPosition </code>,size是<code> getExtentSize </code>这是视图的可见部分,在视图坐标
+     * 
+     * 
      * @return a <code>Rectangle</code> giving the visible part of
      *          the view using view coordinates.
      */
@@ -1147,6 +1364,10 @@ public class JViewport extends JComponent implements Accessible
      * The parameters are modified
      * to return the values required for the blit.
      *
+     * <p>
+     *  计算blit的参数,其中后备存储图像当前在左上角包含<code> oldLoc </code>,并且我们滚动到<code> newLoc </code>。修改参数以返回所需的值为blit
+     * 
+     * 
      * @param dx  the horizontal delta
      * @param dy  the vertical delta
      * @param blitFrom the <code>Point</code> we're blitting from
@@ -1223,6 +1444,10 @@ public class JViewport extends JComponent implements Accessible
     /**
      * Returns the size of the visible part of the view in view coordinates.
      *
+     * <p>
+     * 返回视图坐标中视图的可见部分的大小
+     * 
+     * 
      * @return a <code>Dimension</code> object giving the size of the view
      */
     @Transient
@@ -1236,6 +1461,10 @@ public class JViewport extends JComponent implements Accessible
      * Subclasses of viewport that support "logical coordinates"
      * will override this method.
      *
+     * <p>
+     *  将像素坐标中的大小转换为视图坐标支持"逻辑坐标"的视口的子类将覆盖此方法
+     * 
+     * 
      * @param size  a <code>Dimension</code> object using pixel coordinates
      * @return a <code>Dimension</code> object converted to view coordinates
      */
@@ -1248,6 +1477,10 @@ public class JViewport extends JComponent implements Accessible
      * Subclasses of viewport that support "logical coordinates"
      * will override this method.
      *
+     * <p>
+     *  将像素坐标中的点转换为视图坐标支持"逻辑坐标"的视口的子类将覆盖此方法
+     * 
+     * 
      * @param p  a <code>Point</code> object using pixel coordinates
      * @return a <code>Point</code> object converted to view coordinates
      */
@@ -1259,6 +1492,10 @@ public class JViewport extends JComponent implements Accessible
     /**
      * Sets the size of the visible part of the view using view coordinates.
      *
+     * <p>
+     *  使用视图坐标设置视图的可见部分的大小
+     * 
+     * 
      * @param newExtent  a <code>Dimension</code> object specifying
      *          the size of the view
      */
@@ -1281,6 +1518,12 @@ public class JViewport extends JComponent implements Accessible
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     *  视图的侦听器
+     * <p>
+     * <strong>警告：</strong>此类的序列化对象将不与未来的Swing版本兼容当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     * 支持长期存储所有JavaBeans&trade;已添加到<code> javabeans </code>包中请参见{@link javabeansXMLEncoder}。
+     * 
      */
     protected class ViewListener extends ComponentAdapter implements Serializable
     {
@@ -1292,6 +1535,10 @@ public class JViewport extends JComponent implements Accessible
 
     /**
      * Creates a listener for the view.
+     * <p>
+     *  为视图创建侦听器
+     * 
+     * 
      * @return a <code>ViewListener</code>
      */
     protected ViewListener createViewListener() {
@@ -1304,6 +1551,11 @@ public class JViewport extends JComponent implements Accessible
      * layout manager (or <code>null</code>) in the constructor.  Returns
      * the <code>LayoutManager</code> to install on the <code>JViewport</code>.
      *
+     * <p>
+     *  子类可以覆盖此在安装一个不同的布局管理器(或<code> null </code>)在构造函数中返回<code> LayoutManager </code>安装在<code> JViewport </code>
+     * 。
+     * 
+     * 
      * @return a <code>LayoutManager</code>
      */
     protected LayoutManager createLayoutManager() {
@@ -1316,6 +1568,10 @@ public class JViewport extends JComponent implements Accessible
      * notified each time the view's
      * size, position, or the viewport's extent size has changed.
      *
+     * <p>
+     *  在每次视图的大小,位置或视口的范围大小已更改时通知的列表中添加<code> ChangeListener </code>
+     * 
+     * 
      * @param l the <code>ChangeListener</code> to add
      * @see #removeChangeListener
      * @see #setViewPosition
@@ -1331,6 +1587,10 @@ public class JViewport extends JComponent implements Accessible
      * time the views size, position, or the viewports extent size
      * has changed.
      *
+     * <p>
+     * 从每次视图大小,位置或视口范围大小已更改时通知的列表中删除<code> ChangeListener </code>
+     * 
+     * 
      * @param l the <code>ChangeListener</code> to remove
      * @see #addChangeListener
      */
@@ -1342,6 +1602,10 @@ public class JViewport extends JComponent implements Accessible
      * Returns an array of all the <code>ChangeListener</code>s added
      * to this JViewport with addChangeListener().
      *
+     * <p>
+     *  通过addChangeListener()返回添加到此JViewport的所有<code> ChangeListener </code>
+     * 
+     * 
      * @return all of the <code>ChangeListener</code>s added or an empty
      *         array if no listeners have been added
      * @since 1.4
@@ -1354,6 +1618,10 @@ public class JViewport extends JComponent implements Accessible
      * Notifies all <code>ChangeListeners</code> when the views
      * size, position, or the viewports extent size has changed.
      *
+     * <p>
+     *  当视图大小,位置或视口范围大小更改时,通知所有<code> ChangeListeners </code>
+     * 
+     * 
      * @see #addChangeListener
      * @see #removeChangeListener
      * @see EventListenerList
@@ -1375,6 +1643,10 @@ public class JViewport extends JComponent implements Accessible
      * Always repaint in the parents coordinate system to make sure
      * only one paint is performed by the <code>RepaintManager</code>.
      *
+     * <p>
+     *  始终在父级坐标系中重绘,以确保只有一个绘图由<code> RepaintManager </code>执行
+     * 
+     * 
      * @param     tm   maximum time in milliseconds before update
      * @param     x    the <code>x</code> coordinate (pixels over from left)
      * @param     y    the <code>y</code> coordinate (pixels down from top)
@@ -1399,6 +1671,11 @@ public class JViewport extends JComponent implements Accessible
      * implementations. The returned string may be empty but may not
      * be <code>null</code>.
      *
+     * <p>
+     *  返回此<code> JViewport </code>的字符串表示形式此方法仅用于调试目的,返回的字符串的内容和格式可能因实现而异。
+     * 返回的字符串可能为空,但可能不是< code> null </code>。
+     * 
+     * 
      * @return  a string representation of this <code>JViewport</code>
      */
     protected String paramString() {
@@ -1424,6 +1701,10 @@ public class JViewport extends JComponent implements Accessible
      * the <code>windowBlit</code> property.
      * (The <code>putClientProperty</code> property is final).
      *
+     * <p>
+     * 通知属性更改的侦听器这是子类化以更新<code> windowBlit </code>属性(<code> putClientProperty </code>属性是final)
+     * 
+     * 
      * @param propertyName a string containing the property name
      * @param oldValue the old value of the property
      * @param newValue  the new value of the property
@@ -1443,6 +1724,9 @@ public class JViewport extends JComponent implements Accessible
     /**
      * Returns true if the component needs to be completely repainted after
      * a blit and a paint is received.
+     * <p>
+     *  如果组件需要在接收到blit和绘制后完全重绘,则返回true
+     * 
      */
     private boolean needsRepaintAfterBlit() {
         // Find the first heavy weight ancestor. isObscured and
@@ -1489,6 +1773,10 @@ public class JViewport extends JComponent implements Accessible
      * If the repaint manager has a dirty region for the view, the view is
      * asked to paint.
      *
+     * <p>
+     *  如果重绘管理器对视图具有脏区域,则会要求视图绘制
+     * 
+     * 
      * @param g  the <code>Graphics</code> context within which to paint
      */
     private void flushViewDirtyRegion(Graphics g, Rectangle dirty) {
@@ -1513,6 +1801,10 @@ public class JViewport extends JComponent implements Accessible
     /**
      * Used when blitting.
      *
+     * <p>
+     *  用于blitting时
+     * 
+     * 
      * @param g  the <code>Graphics</code> context within which to paint
      * @return true if blitting succeeded; otherwise false
      */
@@ -1610,6 +1902,10 @@ public class JViewport extends JComponent implements Accessible
      * Called to paint the view, usually when <code>blitPaint</code>
      * can not blit.
      *
+     * <p>
+     *  调用绘制视图,通常当<code> blitPaint </code>不能blit时
+     * 
+     * 
      * @param g the <code>Graphics</code> context within which to paint
      */
     private void paintView(Graphics g) {
@@ -1645,6 +1941,9 @@ public class JViewport extends JComponent implements Accessible
      * when the view isn't showing will work,
      * or rather <code>copyArea</code> will work,
      * but will not produce the expected behavior.
+     * <p>
+     *  如果视口没有被其祖先之一或其祖先儿童遮盖,并且如果视口显示Blitting当视图不显示将工作,或者<code> copyArea </code>将工作,但将会工作,返回true不会产生预期的行为
+     * 
      */
     private boolean canUseWindowBlitter() {
         if (!isShowing() || (!(getParent() instanceof JComponent) &&
@@ -1727,6 +2026,11 @@ public class JViewport extends JComponent implements Accessible
      * AccessibleJViewport.
      * A new AccessibleJViewport instance is created if necessary.
      *
+     * <p>
+     * 获取与此JViewport关联的AccessibleContext对于视口,AccessibleContext采用AccessibleJViewport的形式如果必要,创建一个新的AccessibleJ
+     * Viewport实例。
+     * 
+     * 
      * @return an AccessibleJViewport that serves as the
      *         AccessibleContext of this JViewport
      */
@@ -1750,11 +2054,19 @@ public class JViewport extends JComponent implements Accessible
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     *  这个类实现了<code> JViewport </code>类的辅助功能支持它提供了适用于viewport用户界面元素的Java辅助功能API的实现
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将不与未来的Swing版本兼容当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     * 支持长期存储所有JavaBeans&trade;已添加到<code> javabeans </code>包中请参见{@link javabeansXMLEncoder}。
      */
     protected class AccessibleJViewport extends AccessibleJComponent {
         /**
          * Get the role of this object.
          *
+         * <p>
+         * 
+         * 
          * @return an instance of AccessibleRole describing the role of
          * the object
          */

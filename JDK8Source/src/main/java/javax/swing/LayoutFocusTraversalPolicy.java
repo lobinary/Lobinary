@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -42,6 +43,13 @@ import sun.awt.SunToolkit;
  * <code>ComponentOrientation</code> for more information. All columns in a
  * row are fully traversed before proceeding to the next row.
  *
+ * <p>
+ *  SortingFocusTraversalPolicy,用于根据组件的大小,位置和方向对组件进行排序根据组件的大小和位置,组件大致分为行和列。
+ * 对于具有水平方向的容器,列从左到右或从右到左,和行从上到下运行对于具有垂直方向的容器,列从上到下运行,行从左到右或从右到左运行有关详细信息,请参见<code> ComponentOrientation 
+ * </code>在进行到下一行之前完全遍历。
+ *  SortingFocusTraversalPolicy,用于根据组件的大小,位置和方向对组件进行排序根据组件的大小和位置,组件大致分为行和列。
+ * 
+ * 
  * @author David Mendenhall
  *
  * @see java.awt.ComponentOrientation
@@ -57,6 +65,9 @@ public class LayoutFocusTraversalPolicy extends SortingFocusTraversalPolicy
 
     /**
      * Constructs a LayoutFocusTraversalPolicy.
+     * <p>
+     *  构造LayoutFocusTraversalPolicy
+     * 
      */
     public LayoutFocusTraversalPolicy() {
         super(new LayoutComparator());
@@ -65,6 +76,9 @@ public class LayoutFocusTraversalPolicy extends SortingFocusTraversalPolicy
     /**
      * Constructs a LayoutFocusTraversalPolicy with the passed in
      * <code>Comparator</code>.
+     * <p>
+     * 使用<code> Comparator </code>中传递的构造LayoutFocusTraversalPolicy
+     * 
      */
     LayoutFocusTraversalPolicy(Comparator<? super Component> c) {
         super(c);
@@ -83,6 +97,16 @@ public class LayoutFocusTraversalPolicy extends SortingFocusTraversalPolicy
      * If aContainer is <a href="../../java/awt/doc-files/FocusSpec.html#FocusTraversalPolicyProviders">focus
      * traversal policy provider</a>, the focus is always transferred down-cycle.
      *
+     * <p>
+     *  返回在aComponent aContainer必须是aComponent的焦点循环根之后应该接收焦点的组件
+     * <p>
+     *  默认情况下,LayoutFocusTraversalPolicy隐式传输焦点下循环。
+     * 也就是说,在正常焦点遍历期间,在焦点循环根之后遍历的组件将是焦点循环根的默认组件焦点此行为可以使用<code> setImplicitDownCycleTraversal < / code>方法。
+     * <p>
+     *  如果aContainer是<a href=\"//java/awt/doc-files/FocusSpechtml#FocusTraversalPolicyProviders\">焦点遍历策略提供程序
+     * </a>,焦点总是传递下行周期。
+     * 
+     * 
      * @param aContainer a focus cycle root of aComponent or a focus traversal policy provider
      * @param aComponent a (possibly indirect) child of aContainer, or
      *        aContainer itself
@@ -119,6 +143,16 @@ public class LayoutFocusTraversalPolicy extends SortingFocusTraversalPolicy
      * If aContainer is <a href="../../java/awt/doc-files/FocusSpec.html#FocusTraversalPolicyProviders">focus
      * traversal policy provider</a>, the focus is always transferred down-cycle.
      *
+     * <p>
+     * 返回在aComponent aContainer必须是aComponent的焦点循环根之前应该接收焦点的组件
+     * <p>
+     *  默认情况下,LayoutFocusTraversalPolicy隐式传输焦点下循环。
+     * 也就是说,在正常焦点遍历期间,在焦点循环根之后遍历的组件将是焦点循环根的默认组件焦点此行为可以使用<code> setImplicitDownCycleTraversal < / code>方法。
+     * <p>
+     *  如果aContainer是<a href=\"//java/awt/doc-files/FocusSpechtml#FocusTraversalPolicyProviders\">焦点遍历策略提供程序
+     * </a>,焦点总是传递下行周期。
+     * 
+     * 
      * @param aContainer a focus cycle root of aComponent or a focus traversal policy provider
      * @param aComponent a (possibly indirect) child of aContainer, or
      *        aContainer itself
@@ -147,6 +181,10 @@ public class LayoutFocusTraversalPolicy extends SortingFocusTraversalPolicy
      * to determine the next Component to focus when traversal wraps in the
      * forward direction.
      *
+     * <p>
+     *  返回遍历循环中的第一个组件此方法用于确定在向前方向上遍历卷绕时要聚焦的下一个组件
+     * 
+     * 
      * @param aContainer a focus cycle root of aComponent or a focus traversal policy provider whose
      *        first Component is to be returned
      * @return the first Component in the traversal cycle of aContainer,
@@ -171,6 +209,10 @@ public class LayoutFocusTraversalPolicy extends SortingFocusTraversalPolicy
      * to determine the next Component to focus when traversal wraps in the
      * reverse direction.
      *
+     * <p>
+     * 返回遍历循环中的最后一个组件此方法用于确定在相反方向上遍历换行时要聚焦的下一个组件
+     * 
+     * 
      * @param aContainer a focus cycle root of aComponent or a focus traversal policy provider whose
      *        last Component is to be returned
      * @return the last Component in the traversal cycle of aContainer,
@@ -211,6 +253,13 @@ public class LayoutFocusTraversalPolicy extends SortingFocusTraversalPolicy
      *     <code>DefaultFocusTraversalPolicy.accept(aComponent)</code>.
      * </ol>
      *
+     * <p>
+     *  确定指定的<code> Component </code>是否为新焦点所有者可接受的选择此方法执行以下操作序列：
+     * <ol>
+     * <li>检查<code> aComponent </code>是否可见,可显示,启用和可聚焦如果任何这些属性是<code> false </code>,此方法将返回<code> false </code>
+     *  <li >如果<code> aComponent </code>是<code> JTable </code>的一个实例,则返回<code> true </code> <li> > JComboBox 
+     * </code>,然后返回<code> aComponentgetUI()isFocusTraversable(aComponent)的值</code> <li>如果<code> aComponent </code>
+     * 
      * @param aComponent the <code>Component</code> whose fitness
      *                   as a focus owner is to be tested
      * @see java.awt.Component#isVisible

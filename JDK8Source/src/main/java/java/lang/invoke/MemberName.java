@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2008, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -67,6 +68,18 @@ import java.util.Objects;
  * allows invocation.  A MemberName is much lighter than a Method,
  * since it contains about 7 fields to the 16 of Method (plus its sub-arrays),
  * and those seven fields omit much of the information in Method.
+ * <p>
+ *  {@code MemberName}是一个完全表征方法或字段引用的紧凑符号数据成员名称指字段,方法,构造函数或成员类型每个成员名称都有一个简单的名称(字符串)和类型类或方法类型)成员名称也可以具有非空
+ * 的声明类,或者它可以是简单的裸名称/类型对成员名称也可以具有非零修饰符标记最后,成员名称可以被解析或unresolved如果它被解析,存在的命名。
+ * <p>
+ * 无论是否解析,成员名称不向其拥有者提供访问权限或调用能力。它仅仅是链接到并正确使用命名成员所需的所有符号信息的紧凑表示
+ * <p>
+ *  当解析时,成员名的内部实现可能包括对JVM元数据的引用此表示是无状态的,只有描述性它不提供私人信息,没有使用成员的能力
+ * <p>
+ * 相比之下,{@linkplain javalangreflectMethod}包含一个方法的内部(除了它的字节码)更全面的信息,并允许调用一个MemberName比方法轻得多,因为它包含大约7个字段到1
+ * 6的方法(加上它的子数组),这七个字段省略了Method中的大部分信息。
+ * 
+ * 
  * @author jrose
  */
 /*non-public*/ final class MemberName implements Member, Cloneable {
@@ -80,6 +93,13 @@ import java.util.Objects;
 
     /** Return the declaring class of this member.
      *  In the case of a bare name and type, the declaring class will be null.
+     * <p>
+     *  private class <?> clazz; //在其中定义方法的类private String name; //可能为null如果尚未实现私有对象类型; //可能为null如果尚未实现priva
+     * te int flags; // modifier bits;请参阅reflectModifier // @注入JVM_Method * vmtarget; // @ Injected int vmin
+     * dex;私有对象解析; // if null,this guy is resolved。
+     * 
+     * / **返回此成员的声明类在裸名和类型的情况下,声明类将为null
+     * 
      */
     public Class<?> getDeclaringClass() {
         return clazz;
@@ -94,6 +114,9 @@ import java.util.Objects;
      *  For a type, it is the same as {@link Class#getSimpleName}.
      *  For a method or field, it is the simple name of the member.
      *  For a constructor, it is always {@code "&lt;init&gt;"}.
+     * <p>
+     *  对于一个类型,它与{@link Class#getSimpleName}相同。对于方法或字段,它是成员的简单名称对于构造函数,它总是{@code"&lt; init&gt;"}
+     * 
      */
     public String getName() {
         if (name == null) {
@@ -117,6 +140,9 @@ import java.util.Objects;
 
     /** Return the declared type of this member, which
      *  must be a method or constructor.
+     * <p>
+     *  必须是一个方法或构造函数
+     * 
      */
     public MethodType getMethodType() {
         if (type == null) {
@@ -159,6 +185,9 @@ import java.util.Objects;
     /** Return the actual type under which this method or constructor must be invoked.
      *  For non-static methods or constructors, this is the type with a leading parameter,
      *  a reference to declaring class.  For static methods, it is the same as the declared type.
+     * <p>
+     *  对于非静态方法或构造函数,这是具有前导参数的类型,对声明类的引用对于静态方法,它与声明类型相同
+     * 
      */
     public MethodType getInvocationType() {
         MethodType itype = getMethodOrFieldType();
@@ -182,6 +211,9 @@ import java.util.Objects;
     /** Return the declared type of this member, which
      *  must be a field or type.
      *  If it is a type member, that type itself is returned.
+     * <p>
+     *  必须是字段或类型如果它是一个类型成员,则返回该类型本身
+     * 
      */
     public Class<?> getFieldType() {
         if (type == null) {
@@ -223,6 +255,9 @@ import java.util.Objects;
 
     /** Utility method to produce the signature of this member,
      *  used within the class file format to describe its type.
+     * <p>
+     *  在类文件格式中用来描述它的类型
+     * 
      */
     public String getSignature() {
         if (type == null) {
@@ -238,6 +273,8 @@ import java.util.Objects;
     }
 
     /** Return the modifier flags of this member.
+    /* <p>
+    /* 
      *  @see java.lang.reflect.Modifier
      */
     public int getModifiers() {
@@ -245,6 +282,7 @@ import java.util.Objects;
     }
 
     /** Return the reference kind of this member, or zero if none.
+    /* <p>
      */
     public byte getReferenceKind() {
         return (byte) ((flags >>> MN_REFERENCE_KIND_SHIFT) & MN_REFERENCE_KIND_MASK);
@@ -342,6 +380,21 @@ import java.util.Objects;
 
     /** Utility method to query if this member is a method handle invocation (invoke or invokeExact).
      *  Also returns true for the non-public MH.invokeBasic.
+     * <p>
+     * int refKind = getReferenceKind(); if(refKind == originalRefKind)return true;开关(originalRefKind){case REF_invokeInterface：//查找一个接口方法,可以获得(eg)ObjecthashCode assert(refKind == REF_invokeVirtual || refKind == REF_invokeSpecial)：this; return true; case REF_invokeVirtual：case REF_newInvokeSpecial：//查找一个虚拟的,可以获取(eg)final StringhashCode assert(refKind == REF_invokeSpecial)：this; return true; }
+     *  assert(false)：this +"！="+ MethodHandleNativesrefKindName((byte)originalRefKind); return true; } priv
+     * ate boolean staticIsConsistent(){byte refKind = getReferenceKind();返回MethodHandleNativesrefKindIsStatic(refKind)== isStatic()|| getModifiers()== 0; }
+     *  private boolean vminfoIsConsistent(){byte refKind = getReferenceKind(); assert(isResolved()); // else不调用Object vminfo = MethodHandleNativesgetMemberVMInfo(this); assert(vminfo instanceof Object []); long vmindex =(Long)((Object [])vminfo)[0]; Object vmtarget =((Object [])vminfo)[1]; if(MethodHandleNativesrefKindIsField(refKind)){assert(vmindex> = 0)：vmindex +"："+ this; assert(vmtarget instanceof Class); }
+     *  else {if(MethodHandleNativesrefKindDoesDispatch(refKind))assert(vmindex> = 0)：vmindex +"："+ this; else assert(vmindex <0)：vmindex; assert(vmtarget instanceof MemberName)：vmtarget +"in"+ this; } return true; }}。
+     * 
+     * private MemberName changeReferenceKind(byte refKind,byte oldKind){assert(getReferenceKind()== oldKind); assert(MethodHandleNativesrefKindIsValid(refKind)); flags + =(((int)refKind-oldKind)<< MN_REFERENCE_KIND_SHIFT);返回这个; }}。
+     * 
+     *  private boolean testFlags(int mask,int value){return(flags&mask)== value; } private boolean testAllF
+     * lags(int mask){return testFlags(mask,mask); } private boolean testAnyFlags(int mask){return！testFlags(mask,0); }
+     * }。
+     * 
+     *  / ** Utility方法来查询这个成员是否是方法句柄调用(invoke或invokeExact)也为非公共的MHinvokeBasic返回true
+     * 
      */
     public boolean isMethodHandleInvoke() {
         final int bits = MH_INVOKE_MODS &~ Modifier.PUBLIC;
@@ -497,6 +550,9 @@ import java.util.Objects;
     /**
      * Calls down to the VM to fill in the fields.  This method is
      * synchronized to avoid racing calls.
+     * <p>
+     *  调用虚拟机填写字段此方法被同步以避免赛车呼叫
+     * 
      */
     private void expandFromVM() {
         if (type != null) {
@@ -563,6 +619,9 @@ import java.util.Objects;
     }
     /** If this MN is not REF_newInvokeSpecial, return a clone with that ref. kind.
      *  In that case it must already be REF_invokeSpecial.
+     * <p>
+     *  在这种情况下,它必须已经是REF_invokeSpecial
+     * 
      */
     public MemberName asConstructor() {
         switch (getReferenceKind()) {
@@ -578,6 +637,10 @@ import java.util.Objects;
      *  REF_invokeVirtual of a final to REF_invokeSpecial, and REF_invokeInterface
      *  in some corner cases to either of the previous two; this transform
      *  undoes that change under the assumption that it occurred.)
+     * <p>
+     * REF_invokeVirtual;也切换到REF_invokeInterface如果clazzisInterface最终的结果是获得一个完全虚拟化版本的MN(注意解析在JVM有时会虚拟化,更改REF_
+     * invokeVirtual最终到REF_invokeSpecial和REF_invokeInterface在某些角落的情况下,两个;该变换在发生它的假设下撤销该变化)。
+     * 
      */
     public MemberName asNormalOriginal() {
         byte normalVirtual = clazz.isInterface() ? REF_invokeInterface : REF_invokeVirtual;
@@ -609,6 +672,7 @@ import java.util.Objects;
             this.type = new Object[] { void.class, ctor.getParameterTypes() };
     }
     /** Create a name for the given reflected field.  The resulting name will be in a resolved state.
+    /* <p>
      */
     public MemberName(Field fld) {
         this(fld, false);
@@ -653,6 +717,9 @@ import java.util.Objects;
      * This is a placeholder for a signature-polymorphic instance
      * (of MH.invokeExact, etc.) that the JVM does not reify.
      * See comments on {@link MethodHandleNatives#linkMethod}.
+     * <p>
+     *  为签名多态调用器创建名称这是JVM不实现的签名多态实例(MHinvokeExact等)的占位符请参阅有关{@link MethodHandleNatives#linkMethod}的注释。
+     * 
      */
     static MemberName makeMethodHandleInvoke(String name, MethodType type) {
         return makeMethodHandleInvoke(name, type, MH_INVOKE_MODS | SYNTHETIC);
@@ -678,6 +745,9 @@ import java.util.Objects;
 
     /** Get the definition of this member name.
      *  This may be in a super-class of the declaring class of this member.
+     * <p>
+     *  这可能在这个成员的声明类的超类中
+     * 
      */
     public MemberName getDefinition() {
         if (!isResolved())  throw new IllegalStateException("must be resolved: "+this);
@@ -705,6 +775,9 @@ import java.util.Objects;
      *  Does not take into account any actual class members, so even if
      *  two member names resolve to the same actual member, they may
      *  be distinct references.
+     * <p>
+     * 不考虑任何实际的类成员,因此即使两个成员名称解析为同一个实际成员,它们可能是不同的引用
+     * 
      */
     public boolean equals(MemberName that) {
         if (this == that)  return true;
@@ -720,6 +793,9 @@ import java.util.Objects;
      *  Declaring class, name, type, reference kind.
      *  The declaring class may be supplied as null if this is to be a bare name and type.
      *  The resulting name will in an unresolved state.
+     * <p>
+     *  声明类,名称,类型,引用类型声明类可以作为null提供,如果这将是一个裸名和类型生成的名称将处于未解决状态
+     * 
      */
     public MemberName(Class<?> defClass, String name, Class<?> type, byte refKind) {
         init(defClass, name, type, flagsMods(IS_FIELD, 0, refKind));
@@ -731,6 +807,10 @@ import java.util.Objects;
      *  The declaring class may be supplied as null if this is to be a bare name and type.
      *  The last argument is optional, a boolean which requests REF_invokeSpecial.
      *  The resulting name will in an unresolved state.
+     * <p>
+     *  声明类,名称,类型,引用类型当且仅当名称为{@code"&lt; init&gt;"}时,它将是一个构造函数。
+     * 声明类可以作为null提供,如果它是一个裸名和类型最后一个参数是可选的,请求REF_invokeSpecial的布尔值结果名称将处于未解决状态。
+     * 
      */
     public MemberName(Class<?> defClass, String name, MethodType type, byte refKind) {
         int initFlags = (name != null && name.equals(CONSTRUCTOR_NAME) ? IS_CONSTRUCTOR : IS_METHOD);
@@ -739,6 +819,9 @@ import java.util.Objects;
     }
     /** Create a method, constructor, or field name from the given components:
      *  Reference kind, declaring class, name, type.
+     * <p>
+     *  引用类,声明类,名称,类型
+     * 
      */
     public MemberName(byte refKind, Class<?> defClass, String name, Object type) {
         int kindFlags;
@@ -762,6 +845,7 @@ import java.util.Objects;
         initResolved(false);
     }
     /** Query whether this member name is resolved to a non-static, non-final method.
+    /* <p>
      */
     public boolean hasReceiverTypeDispatch() {
         return MethodHandleNatives.refKindDoesDispatch(getReferenceKind());
@@ -771,6 +855,9 @@ import java.util.Objects;
      *  A resolved member name is one for which the JVM has found
      *  a method, constructor, field, or type binding corresponding exactly to the name.
      *  (Document?)
+     * <p>
+     * 解析的成员名是JVM已找到一个方法,构造函数,字段或类型绑定的名称(Document?)
+     * 
      */
     public boolean isResolved() {
         return resolution == null;
@@ -811,6 +898,10 @@ import java.util.Objects;
      *  For methods and constructors, it is {@code "DeclaringClass.name(ptype...)rtype"}.
      *  If the declaring class is null, the prefix {@code "DeclaringClass."} is omitted.
      *  If the member is unresolved, a prefix {@code "*."} is prepended.
+     * <p>
+     *  对于类型,它只是类型自己的字符串(由{@code toString}报告)对于字段,它是{@code"DeclaringClassname / type"}对于方法和构造函数,它是{@code"DeclaringClassname(ptype)rtype "}
+     * 如果声明类为null,则省略前缀{@code"DeclaringClass"}如果成员未解析,则前缀{@code"*"}。
+     * 
      */
     @SuppressWarnings("LocalVariableHidesMemberVariable")
     @Override
@@ -884,6 +975,9 @@ import java.util.Objects;
     }
     /** A factory type for resolving member names with the help of the VM.
      *  TBD: Define access-safe public constructors for this factory.
+     * <p>
+     *  return FactoryINSTANCE; } / **用于在VM TBD的帮助下解析成员名称的工厂类型：为此工厂定义访问安全公共构造函数
+     * 
      */
     /*non-public*/ static class Factory {
         private Factory() { } // singleton pattern
@@ -954,6 +1048,23 @@ import java.util.Objects;
          *  Access checking is performed on behalf of the given {@code lookupClass}.
          *  If lookup fails or access is not permitted, null is returned.
          *  Otherwise a fresh copy of the given member is returned, with modifier bits filled in.
+         * <p>
+         *  private Factory(){} //单例模式static Factory INSTANCE = new Factory();
+         * 
+         * private static int ALLOWED_FLAGS = ALL_KINDS;
+         * 
+         * ///查询列表<MemberName> getMembers(Class <?> defc,String matchName,Object matchType,int matchFlags,Class 
+         * <?> lookupClass){matchFlags&= ALLOWED_FLAGS; String matchSig = null; if(matchType！= null){matchSig = BytecodeDescriptorunparse(matchType); if(matchSigstartsWith("("))matchFlags&=〜(ALL_KINDS&〜IS_INVOCABLE); else matchFlags&=〜(ALL_KINDS&〜IS_FIELD);}
+         *  final int BUF_MAX = 0x2000; int len1 = matchName == null? == null 4：1; MemberName [] buf = newMember
+         * Buffer(len1); int totalCount = 0; ArrayList <MemberName []> bufs = null; int bufCount = 0; for(;;){bufCount = MethodHandleNativesgetMembers(defc, matchName,matchSig,matchFlags,lookupClass,totalCount,buf); if(bufCount <= buf长度){if(bufCount <0)bufCount = 0; totalCount + = bufCount;打破; } // JVM返回给我们的意图溢出！ totalCount + = buflength; int excess = bufCount  -  buflength; if(bufs == null)bufs = new ArrayList <>
+         * (1); bufsadd(buf); int len2 = buflength; len2 = Mathmax(len2,excess); len2 = Mathmax(len2,totalCount 
+         * / 4); buf = newMemberBuffer(Mathmin(BUF_MAX,len2)); } ArrayList <MemberName> result = new ArrayList <>
+         * (totalCount); if(bufs！= null){for(MemberName [] buf0：bufs){CollectionsaddAll(result,buf0); }} resulta
+         * ddAll(ArraysasList(buf)subList(0,bufCount)); //签名匹配与类型匹配不同,因为//一个签名可能对应于几种类型//所以如果matchType是一个Class或M
+         * ethodType,refilter的结果if(matchType！= null && matchType！= matchSig){for(Iterator <MemberName> it = resultiterator(); ithasNext();){MemberName m = itnext(); if(！matchTypeequals(mgetType()))itremove(); }
+         * } return result; } / **生成给定成员的已解析版本如果{@code searchSupers}为true,则搜索超级类型(对于继承的成员)。
+         * 代表给定的{@code lookupClass}执行访问检查如果查找失败或访问不成功allowed,返回null否则返回给定成员的新副本,并填入修饰符位。
+         * 
          */
         private MemberName resolve(byte refKind, MemberName ref, Class<?> lookupClass) {
             MemberName m = ref.clone();  // JVM will side-effect the ref
@@ -978,6 +1089,10 @@ import java.util.Objects;
          *  Access checking is performed on behalf of the given {@code lookupClass}.
          *  If lookup fails or access is not permitted, a {@linkplain ReflectiveOperationException} is thrown.
          *  Otherwise a fresh copy of the given member is returned, with modifier bits filled in.
+         * <p>
+         * 如果{@code searchSupers}为true,则搜索超级类型(对于继承的成员)。代表给定的{@code lookupClass}执行访问检查。
+         * 如果查找失败或不允许访问,则抛出{@linkplain ReflectiveOperationException}否则,返回给定成员的新副本,其中填充修饰符位。
+         * 
          */
         public
         <NoSuchMemberException extends ReflectiveOperationException>
@@ -996,6 +1111,10 @@ import java.util.Objects;
          *  Access checking is performed on behalf of the given {@code lookupClass}.
          *  If lookup fails or access is not permitted, return null.
          *  Otherwise a fresh copy of the given member is returned, with modifier bits filled in.
+         * <p>
+         *  如果{@code searchSupers}为true,则搜索超级类型(对于继承的成员)。代表给定的{@code lookupClass}执行访问检查。
+         * 如果查找失败或不允许访问,返回null否则,给定成员的新副本返回,修饰符位填充。
+         * 
          */
         public
         MemberName resolveOrNull(byte refKind, MemberName m, Class<?> lookupClass) {
@@ -1008,6 +1127,9 @@ import java.util.Objects;
          *  Super types are searched (for inherited members) if {@code searchSupers} is true.
          *  Access checking is performed on behalf of the given {@code lookupClass}.
          *  Inaccessible members are not added to the last.
+         * <p>
+         * 如果{@code searchSupers}为true,则搜索超级类型(对于继承的成员)。代表给定的{@code lookupClass}执行访问检查。不可访问的成员不会添加到最后一个
+         * 
          */
         public List<MemberName> getMethods(Class<?> defc, boolean searchSupers,
                 Class<?> lookupClass) {
@@ -1018,6 +1140,10 @@ import java.util.Objects;
          *  Returned methods will match the name (if not null) and the type (if not null).
          *  Access checking is performed on behalf of the given {@code lookupClass}.
          *  Inaccessible members are not added to the last.
+         * <p>
+         *  如果{@code searchSupers}为true,则搜索超级类型(对于继承的成员)返回的方法将匹配名称(如果不为null)和类型(如果不为空)访问检查代表给定的{@code lookupClass}
+         * 不可访问的成员不添加到最后。
+         * 
          */
         public List<MemberName> getMethods(Class<?> defc, boolean searchSupers,
                 String name, MethodType type, Class<?> lookupClass) {
@@ -1027,6 +1153,9 @@ import java.util.Objects;
         /** Return a list of all constructors defined by the given class.
          *  Access checking is performed on behalf of the given {@code lookupClass}.
          *  Inaccessible members are not added to the last.
+         * <p>
+         *  访问检查是代表给定的{@code lookupClass}不可访问的成员不被添加到最后
+         * 
          */
         public List<MemberName> getConstructors(Class<?> defc, Class<?> lookupClass) {
             return getMembers(defc, null, null, IS_CONSTRUCTOR, lookupClass);
@@ -1035,6 +1164,9 @@ import java.util.Objects;
          *  Super types are searched (for inherited members) if {@code searchSupers} is true.
          *  Access checking is performed on behalf of the given {@code lookupClass}.
          *  Inaccessible members are not added to the last.
+         * <p>
+         * 如果{@code searchSupers}为true,则搜索超级类型(对于继承的成员)。代表给定的{@code lookupClass}执行访问检查。不可访问的成员不会添加到最后一个
+         * 
          */
         public List<MemberName> getFields(Class<?> defc, boolean searchSupers,
                 Class<?> lookupClass) {
@@ -1045,6 +1177,10 @@ import java.util.Objects;
          *  Returned fields will match the name (if not null) and the type (if not null).
          *  Access checking is performed on behalf of the given {@code lookupClass}.
          *  Inaccessible members are not added to the last.
+         * <p>
+         *  如果{@code searchSupers}为true,则搜索超级类型(对于继承的成员)返回的字段将匹配名称(如果不为null)和类型(如果不为空)访问检查代表给定的{@code lookupClass}
+         * 不可访问的成员不添加到最后。
+         * 
          */
         public List<MemberName> getFields(Class<?> defc, boolean searchSupers,
                 String name, Class<?> type, Class<?> lookupClass) {
@@ -1055,6 +1191,7 @@ import java.util.Objects;
          *  Super types are searched (for inherited members) if {@code searchSupers} is true.
          *  Access checking is performed on behalf of the given {@code lookupClass}.
          *  Inaccessible members are not added to the last.
+         * <p>
          */
         public List<MemberName> getNestedTypes(Class<?> defc, boolean searchSupers,
                 Class<?> lookupClass) {

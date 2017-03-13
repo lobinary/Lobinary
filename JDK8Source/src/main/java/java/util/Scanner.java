@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -299,6 +300,128 @@ import sun.misc.LRUCache;
  * </dl>
  * <p>Whitespace is not significant in the above regular expressions.
  *
+ * <p>
+ *  一个简单的文本扫描器,可以使用正则表达式解析基本类型和字符串
+ * 
+ *  <p> <code> Scanner </code>使用定界符模式将其输入分成符号,默认情况下匹配空格。然后可以使用各种<tt>下一个</tt>将所得到的符号转换为不同类型的值方法
+ * 
+ *  <p>例如,此代码允许用户从<tt> Systemin </tt>：<blockquote> <pre> {@ code Scanner sc = new Scanner(Systemin); int i = scnextInt(); }
+ *  </pre> </blockquote>。
+ * 
+ * <p>作为另一个例子,此代码允许从文件中的条目<code> myNumbers </code>中分配<code> long </code>类型：<blockquote> <pre> {@ code Scanner sc = new Scanner (new File("myNumbers")); while(schasNextLong()){long aLong = scnextLong(); }
+ * } </pre> </blockquote>。
+ * 
+ *  <p>扫描器也可以使用除空格之外的分隔符。
+ * 此示例从字符串中读取几个项目：<blockquote> <pre> {@ code String input ="1 fish 2 fish red fish blue fish"; Scanner s = new Scanner(input)useDelimiter("\\\\ s * fish \\\\ s *"); Systemoutprintln(snextInt()); Systemoutprintln(snextInt()); systemoutprintln(snext()); Systemoutprintln(snext()); sclose(); }
+ *  </pre> </blockquote>。
+ *  <p>扫描器也可以使用除空格之外的分隔符。
+ * <p>
+ *  打印以下输出：<blockquote> <pre> {@ code 1 2 red blue} </pre> </blockquote>
+ * 
+ * <p>使用此代码可以生成相同的输出,它使用正则表达式一次解析所有四个标记：<blockquote> <pre> {@ code String input ="1 fish 2 fish red fish blue fish";扫描仪s =新扫描仪(输入); sfindInLine("(\\\\ d +)fish(\\\\ d +)fish(\\\\ w +)fish(\\\\ w +)"); MatchResult result = smatch(); for(int i = 1; i <= resultgroupCount(); i ++)Systemoutprintln(resultgroup(i)); sclose(); } </pre>
+ *  </blockquote>。
+ * 
+ *  <p>扫描程序使用的<a name=\"default-delimiter\">默认空格分隔符</a>由{@link javalangCharacter} {@ link javalangCharacter}
+ * 识别。
+ * {@ link javalangCharacter#isWhitespace(char)isWhitespace} {@link# reset}方法将把扫描器的分隔符的值重置为默认的空白分隔符,而不管它
+ * 以前是否被更改过。
+ * 
+ * <p>扫描操作可能会阻止等待输入
+ * 
+ *  <p> {@link #next}和{@link #hasNext}方法及其原始类型随播广告方法(例如{@link #nextInt}和{@link #hasNextInt})首先跳过任何与分隔符相符
+ * 的输入模式,然后尝试返回下一个令牌<tt> hasNext </tt>和<tt>下一个</tt>方法可能会阻塞等待进一步的输入<tt> hasNext </tt>到其相关的<tt>下一个</tt>方法是
+ * 否会阻塞。
+ * 
+ * <p> {@link #findInLine},{@link #findWithinHorizo​​n}和{@link #skip}方法独立于分隔符模式运行这些方法将尝试匹配指定的模式,不考虑输入中的分
+ * 隔符,因此可以在分隔符不相关的特殊情况下使用这些方法可能阻止等待更多的输入。
+ * 
+ *  <p>当扫描程序抛出{@link InputMismatchException}时,扫描程序将不会传递导致异常的令牌,因此可能会通过其他方法检索或跳过此异常
+ * 
+ * <p>根据分隔模式的类型,可能会返回空令牌。
+ * 例如,模式<tt>"\\\\ s +"</tt>将不返回空令牌,因为它匹配分隔符的多个实例定界模式< tt>"\\\\ s"</tt>可能返回空令牌,因为它一次只传递一个空格。
+ * 
+ *  <p>扫描器可以从任何实现{@link javalangReadable}接口的对象读取文本如果对底层可读的{@link javalangReadable#read}方法的调用引发{@link javaioIOException}
+ * ,则扫描器假定结束输入已达到最底层可读的<tt> IOException </tt>可以通过{@link #ioException}方法检索。
+ * 
+ * <p>当<code> Scanner </code>关闭时,如果源代码实现{@link javaioCloseable}接口,它将关闭其输入源
+ * 
+ *  <p> <code>扫描程序</code>对于没有外部同步的多线程使用是不安全的
+ * 
+ *  <p>除非另有说明,否则将<code> null </code>参数传递给<code> Scanner </code>的任何方法都会导致抛出<code> NullPointerException </code>
+ * 。
+ * 
+ *  <p>除非使用{@link #useRadix}方法设置了不同的基数,否则扫描仪将默认将数字解释为十进制。
+ * {@link #reset}方法会将扫描仪的基数值重置为<code> 10 </code>,无论它以前是否被更改过。
+ * 
+ *  <h3> <a name=\"localized-numbers\">本地化号码</a> </h3>
+ * 
+ * <p>此类的实例能够扫描标准格式的数字以及扫描程序的区域设置的格式扫描程序的<a name=\"initial-locale\">初始语言环境</a>是返回的值{@link javautilLocale#getDefault(LocaleCategory)LocalegetDefault(LocaleCategoryFORMAT)}
+ * 方法;它可以通过{@link #useLocale}方法更改。
+ * {@link #reset}方法会将扫描程序的区域设置的值重置为初始区域设置,而不管之前是否更改过。
+ * 
+ * <p>本地化格式是根据以下参数定义的,对于特定区域设置,从该区域设置的{@link javatextDecimalFormat DecimalFormat}对象<tt> df </tt>中获取,以及它的
+ * 和{@link javatextDecimalFormatSymbols DecimalFormatSymbols }对象,<tt> dfs </tt>。
+ * 
+ * <blockquote> <dl> <dt> <i> LocalGroupSeparator&nbsp; </i> <dd>用于分隔数千个群组的字符,<i>,</i>&nbsp; <tt> dfs </tt>
+ *  {@link javatextDecimalFormatSymbols#getGroupingSeparator getGroupingSeparator()} <dt> <i> LocalDecim
+ * alSeparator&nbsp; </i> <dd>用于小数点的字符,即<i> </i>&nbsp; <tt> </t> {@ link javatextDecimalFormatSymbols#getDecimalSeparator getDecimalSeparator()}
+ *  <dt> <i> LocalPositivePrefix&nbsp; </i> <dd>出现在正数之前的字符串(可能为空),<i> </i> <tt> df </tt> {@ link javatextDecimalFormat#getPositivePrefix getPositivePrefix()}
+ *  <dt> <i> LocalPositiveSuffix&nbsp; </i> <dd>在正数后出现的字符串可以为空),<i> ie </i>&nbsp; <tt> df </tt> {@ link javatextDecimalFormat#getPositiveSuffix getPositiveSuffix()}
+ *  <dt> <i> LocalNegativePrefix&nbsp;&nbsp; </i> <dd>在负数之前出现的字符串(可能为空),<i>,</i> tt> df </tt> {@ link javatextDecimalFormat#getNegativePrefix getNegativePrefix()}
+ *  <dt> <i> LocalNegativeSuffix&nbsp;&nbsp; </i> <dd>出现在负数(可能为空) > </i> </i> </i> </i> </i> </i> </i> </i>
+ *  </i> <dt </i> <dt </tt> {@ link javatextDecimalFormat#getNegativeSuffix getNegativeSuffix()浮点值的浮点数,<i> </i> <tt> dfs </tt> {@ link javatextDecimalFormatSymbols#getNaN getNaN()}
+ *  <dt> <i> LocalInfinity& i> <dd>表示浮点值的无穷大的字符串,<i> </i> <tt> dfs </tt> {@ link javatextDecimalFormatSymbols#getInfinity getInfinity()}
+ *  </dl> </blockquote>。
+ * 
+ * <h4> <a name=\"number-syntax\">数字语法</a> </h4>
+ * 
+ *  <p>可以通过此类的实例解析为数字的字符串按照以下正则表达式语法来指定,其中Rmax是所使用的基数中的最高位(例如,Rmax是基数10中的9 )
+ * 
+ * <dl>
+ *  <dt> <i> NonAsciiDigit </i>：<dd>一个非ASCII字符c,其中{@link javalangCharacter#isDigit CharacterisDigit} <tt>
+ * (c)</tt>返回true。
+ * 
+ *  <dt> <i> Non0Digit </i>：<dd> <tt> [1  -  </tt> Rmax <tt>] | </tt> <i> NonASCIIDigit </i>
+ * 
+ *  <dt> <i>数字</i>：<dd> <tt> [0- </tt> <Rmax <tt>] | </tt> <i> NonASCIIDigit </i>
+ * 
+ * <dt> <i> GroupedNumeral </i>：<dd> <tt>(&nbsp; </tt> <i> Non0Digit </i> <i> Digit </i> <tt>?</tt> i> D
+ * igit </i> <tt>?</tt> <dd>&nbsp;&nbsp;&nbsp;&nbsp; <tt>(&nbsp; </tt> <i> LocalGroupSeparator </i> i> <i>
+ *  Digit </i> <i> Digit </i> <tt>)+)</tt>。
+ * 
+ *  <dt> <i>数字</i>：<dd> <tt>((</tt> <i> Digit </i> <tt> +)| </tt> <i> GroupedNumeral </i> <tt>)</tt>
+ * 
+ *  <dt> <a name=\"Integer-regex\"> <i>整数</i>：</a> <dd> <tt>([ -  +]?(</tt> <i>数字</i > <tt>))</tt> <dd> 
+ * <tt> | </tt> <i> LocalPositivePrefix </i> <i>数字</i> <i> LocalPositiveSuffix </i> <dd> <tt> | </tt> <i>
+ *  LocalNegativePrefix </i> <i>数字</i> <i> LocalNegativeSuffix </i>。
+ * 
+ *  <dt> <i>十进制数</i>：<dd> <i>数字</i> <dd> <tt> </tt> <i>数字</i> <i> LocalDecimalSeparator </i> <i>数字</i> <tt>
+ *  * </tt> <dd> <tt> </tt> <i> LocalDecimalSeparator </i> <i>数字</i> <tt> + </tt>。
+ * 
+ * <dt> <i>指数</i>：<dd> <tt>([eE] [+  - ]?</tt> <i> Digit </i> <tt> +)</tt>
+ * 
+ *  <dt> <a name=\"Decimal-regex\"> <i>小数</i>：</a> <dd> <tt>([ -  +]?</tt> <i> <i>指数</i> <tt>?)</tt> <dd>
+ *  <tt> | </tt> <i> LocalPositivePrefix </i> <i> DecimalNumeral </i> </i> LocalPositiveSuffix </i> <i> 
+ * Exponent </i> <tt>?</tt> <dd> <tt> | </tt> <i> LocalNegativePrefix </i> <i> DecimalNumeral </i> <i> L
+ * ocalNegativeSuffix </i> <i> Exponent </i> <tt>?</tt>。
+ * 
+ *  <dt> <i> HexFloat </i>：<dd> <tt> [ -  +]? 0 [x-x] [0-9a-fA-F] * \\ [0-9a-fA-F] +([pP] [ -  +]?[0-9] 
+ * +)。
+ * 
+ *  <dt> <i> NonNumber </i>：<dd> <tt> NaN | </tt> <i> LocalNan </i> <tt> |无限| </tt> <i> LocalInfinity </i>
+ * 。
+ * 
+ * <dt> <i> SignedNonNumber </i>：<dd> <tt>([ -  +]?</tt> <i> NonNumber </i> <tt>)</tt> <dd> <tt> | </tt>
+ *  <i> LocalPositivePrefix </i> <i> NonNumber </i> <i> LocalPositiveSuffix </i> <dd> <tt> | </tt> <i> L
+ * ocalNegativePrefix </i> <i> NonNumber </i> <i> LocalNegativeSuffix </i>。
+ * 
+ *  <dt> <a name=\"Float-regex\"> <i>浮动</i> </a>：<dd> <i>小数点</i> <tt> | </tt> <i> HexFloat </i> <tt> | </tt>
+ *  <i> SignedNonNumber </i>。
+ * 
+ * </dl>
+ *  <p>空格在上述正则表达式中不重要
+ * 
+ * 
  * @since   1.5
  */
 public final class Scanner implements Iterator<String>, Closeable {
@@ -389,6 +512,9 @@ public final class Scanner implements Iterator<String>, Closeable {
 
     /**
      * Locale dependent values used to scan numbers
+     * <p>
+     *  用于扫描数字的区域设置相关值
+     * 
      */
     private String groupSeparator = "\\,";
     private String decimalSeparator = "\\.";
@@ -401,6 +527,9 @@ public final class Scanner implements Iterator<String>, Closeable {
 
     /**
      * Fields and an accessor method to match booleans
+     * <p>
+     *  字段和一个存取器方法来匹配布尔
+     * 
      */
     private static volatile Pattern boolPattern;
     private static final String BOOLEAN_PATTERN = "true|false";
@@ -414,6 +543,9 @@ public final class Scanner implements Iterator<String>, Closeable {
 
     /**
      * Fields and methods to match bytes, shorts, ints, and longs
+     * <p>
+     *  匹配字节,短整型,整数和长整型的字段和方法
+     * 
      */
     private Pattern integerPattern;
     private String digits = "0123456789abcdefghijklmnopqrstuvwxyz";
@@ -447,6 +579,9 @@ public final class Scanner implements Iterator<String>, Closeable {
 
     /**
      * Fields and an accessor method to match line separators
+     * <p>
+     *  字段和一个访问器方法来匹配行分隔符
+     * 
      */
     private static volatile Pattern separatorPattern;
     private static volatile Pattern linePattern;
@@ -470,6 +605,9 @@ public final class Scanner implements Iterator<String>, Closeable {
 
     /**
      * Fields and methods to match floats and doubles
+     * <p>
+     *  匹配浮点和双精度的字段和方法
+     * 
      */
     private Pattern floatPattern;
     private Pattern decimalPattern;
@@ -524,6 +662,10 @@ public final class Scanner implements Iterator<String>, Closeable {
      * Constructs a <code>Scanner</code> that returns values scanned
      * from the specified source delimited by the specified pattern.
      *
+     * <p>
+     * 构造一个<code> Scanner </code>,它返回从指定模式所分隔的指定源扫描的值
+     * 
+     * 
      * @param source A character source implementing the Readable interface
      * @param pattern A delimiting pattern
      */
@@ -544,6 +686,10 @@ public final class Scanner implements Iterator<String>, Closeable {
      * Constructs a new <code>Scanner</code> that produces values scanned
      * from the specified source.
      *
+     * <p>
+     *  构造新的<code>扫描程序</code>,生成从指定源扫描的值
+     * 
+     * 
      * @param  source A character source implementing the {@link Readable}
      *         interface
      */
@@ -557,6 +703,11 @@ public final class Scanner implements Iterator<String>, Closeable {
      * into characters using the underlying platform's
      * {@linkplain java.nio.charset.Charset#defaultCharset() default charset}.
      *
+     * <p>
+     *  构造一个生成从指定输入流扫描的值的新<代码>扫描程序</code>使用基础平台的{@linkplain javaniocharsetCharset#defaultCharset()default charset}
+     * 将流中的字节转换为字符。
+     * 
+     * 
      * @param  source An input stream to be scanned
      */
     public Scanner(InputStream source) {
@@ -568,6 +719,10 @@ public final class Scanner implements Iterator<String>, Closeable {
      * from the specified input stream. Bytes from the stream are converted
      * into characters using the specified charset.
      *
+     * <p>
+     *  构造新的<code> Scanner </code>,生成从指定输入流扫描的值使用指定的字符集将流中的字节转换为字符
+     * 
+     * 
      * @param  source An input stream to be scanned
      * @param charsetName The encoding type used to convert bytes from the
      *        stream into characters to be scanned
@@ -581,6 +736,10 @@ public final class Scanner implements Iterator<String>, Closeable {
 
     /**
      * Returns a charset object for the given charset name.
+     * <p>
+     *  返回给定字符集名称的charset对象
+     * 
+     * 
      * @throws NullPointerException          is csn is null
      * @throws IllegalArgumentException      if the charset is not supported
      */
@@ -604,6 +763,11 @@ public final class Scanner implements Iterator<String>, Closeable {
      * characters using the underlying platform's
      * {@linkplain java.nio.charset.Charset#defaultCharset() default charset}.
      *
+     * <p>
+     * 构造新的<code> Scanner </code>,生成从指定文件扫描的值使用基础平台的{@linkplain javaniocharsetCharset#defaultCharset()default charset}
+     * 将文件中的字节转换为字符。
+     * 
+     * 
      * @param  source A file to be scanned
      * @throws FileNotFoundException if source is not found
      */
@@ -616,6 +780,10 @@ public final class Scanner implements Iterator<String>, Closeable {
      * from the specified file. Bytes from the file are converted into
      * characters using the specified charset.
      *
+     * <p>
+     *  构造新的<code>扫描程序</code>,生成从指定文件扫描的值使用指定的字符集将文件中的字节转换为字符
+     * 
+     * 
      * @param  source A file to be scanned
      * @param charsetName The encoding type used to convert bytes from the file
      *        into characters to be scanned
@@ -655,6 +823,11 @@ public final class Scanner implements Iterator<String>, Closeable {
      * characters using the underlying platform's
      * {@linkplain java.nio.charset.Charset#defaultCharset() default charset}.
      *
+     * <p>
+     *  构造新的<code> Scanner </code>,生成从指定文件扫描的值使用基础平台的{@linkplain javaniocharsetCharset#defaultCharset()default charset}
+     * 将文件中的字节转换为字符。
+     * 
+     * 
      * @param   source
      *          the path to the file to be scanned
      * @throws  IOException
@@ -673,6 +846,10 @@ public final class Scanner implements Iterator<String>, Closeable {
      * from the specified file. Bytes from the file are converted into
      * characters using the specified charset.
      *
+     * <p>
+     * 构造新的<code>扫描程序</code>,生成从指定文件扫描的值使用指定的字符集将文件中的字节转换为字符
+     * 
+     * 
      * @param   source
      *          the path to the file to be scanned
      * @param   charsetName
@@ -696,6 +873,10 @@ public final class Scanner implements Iterator<String>, Closeable {
      * Constructs a new <code>Scanner</code> that produces values scanned
      * from the specified string.
      *
+     * <p>
+     *  构造一个新的<code> Scanner </code>,用于生成从指定字符串扫描的值
+     * 
+     * 
      * @param  source A string to scan
      */
     public Scanner(String source) {
@@ -708,6 +889,11 @@ public final class Scanner implements Iterator<String>, Closeable {
      * characters using the underlying platform's
      * {@linkplain java.nio.charset.Charset#defaultCharset() default charset}.
      *
+     * <p>
+     *  构造一个生成从指定通道扫描的值的新<代码>扫描程序</code>使用基础平台的{@linkplain javaniocharsetCharset#defaultCharset()default charset}
+     * 将源中的字节转换为字符。
+     * 
+     * 
      * @param  source A channel to scan
      */
     public Scanner(ReadableByteChannel source) {
@@ -724,6 +910,10 @@ public final class Scanner implements Iterator<String>, Closeable {
      * from the specified channel. Bytes from the source are converted into
      * characters using the specified charset.
      *
+     * <p>
+     *  构造一个新的<code> Scanner </code>,用于生成从指定通道扫描的值使用指定的字符集将源中的字节转换为字符
+     * 
+     * 
      * @param  source A channel to scan
      * @param charsetName The encoding type used to convert bytes from the
      *        channel into characters to be scanned
@@ -897,6 +1087,17 @@ public final class Scanner implements Iterator<String>, Closeable {
      * 1. valid string means it was found
      * 2. null with needInput=false means we won't ever find it
      * 3. null with needInput=true means try again after readInput
+     * <p>
+     *  返回与指定模式匹配的"完整令牌"
+     * 
+     * 如果被delims包围,令牌是完整的;部分令牌由delims前缀,但不由它们后缀
+     * 
+     *  位置前进到完整令牌的结束
+     * 
+     *  Pattern == null表示接受任何令牌
+     * 
+     *  三重返回：1有效字符串意味着它找到2 null with needInput = false意味着我们不会找到它3 null与needInput = true意味着再次尝试后readInput
+     * 
      */
     private String getCompleteTokenInBuffer(Pattern pattern) {
         matchValid = false;
@@ -1084,6 +1285,15 @@ public final class Scanner implements Iterator<String>, Closeable {
      * <p>Attempting to perform search operations after a scanner has
      * been closed will result in an {@link IllegalStateException}.
      *
+     * <p>
+     *  关闭此扫描仪
+     * 
+     *  <p>如果此扫描程序尚未关闭,则如果其底层的{@linkplain javalangReadable readable}也实现了{@link javaioCloseable}接口,那么将调用可读的<tt>
+     * 关闭</tt>方法。
+     * 如果此扫描程序已经关闭然后调用这个方法将没有效果。
+     * 
+     * <p>尝试在扫描程序关闭后执行搜索操作将导致{@link IllegalStateException}
+     * 
      */
     public void close() {
         if (closed)
@@ -1105,6 +1315,10 @@ public final class Scanner implements Iterator<String>, Closeable {
      * <code>Scanner</code>'s underlying <code>Readable</code>. This method
      * returns <code>null</code> if no such exception exists.
      *
+     * <p>
+     *  返回<code>最后抛出的<code> IOException </code> </>> </>> </>>此方法返回<code> null </code>
+     * 
+     * 
      * @return the last exception thrown by this scanner's readable
      */
     public IOException ioException() {
@@ -1115,6 +1329,10 @@ public final class Scanner implements Iterator<String>, Closeable {
      * Returns the <code>Pattern</code> this <code>Scanner</code> is currently
      * using to match delimiters.
      *
+     * <p>
+     *  返回此代码<code> </code>当前正在使用<code> Pattern </code>匹配分隔符
+     * 
+     * 
      * @return this scanner's delimiting pattern.
      */
     public Pattern delimiter() {
@@ -1124,6 +1342,10 @@ public final class Scanner implements Iterator<String>, Closeable {
     /**
      * Sets this scanner's delimiting pattern to the specified pattern.
      *
+     * <p>
+     *  将此扫描仪的分隔图案设置为指定的图案
+     * 
+     * 
      * @param pattern A delimiting pattern
      * @return this scanner
      */
@@ -1143,6 +1365,14 @@ public final class Scanner implements Iterator<String>, Closeable {
      * <p> Invoking the {@link #reset} method will set the scanner's delimiter
      * to the <a href= "#default-delimiter">default</a>.
      *
+     * <p>
+     *  将此扫描器的分隔模式设置为从指定的<code> String </code>构造的模式
+     * 
+     *  <p>调用此方法的形式<tt> useDelimiter(pattern)</tt>的行为与调用<tt> useDelimiter(Patterncompile(pattern))完全相同</tt>。
+     * 
+     * <p>调用{@link #reset}方法会将扫描程序的分隔符设置为<a href= \"#default-delimiter\">默认值</a>
+     * 
+     * 
      * @param pattern A string specifying a delimiting pattern
      * @return this scanner
      */
@@ -1158,6 +1388,12 @@ public final class Scanner implements Iterator<String>, Closeable {
      * primitive matching regular expressions; see
      * <a href= "#localized-numbers">localized numbers</a> above.
      *
+     * <p>
+     *  返回此扫描程序的区域设置
+     * 
+     *  <p>扫描器的区域设置影响其默认基元与其匹配的正则表达式的许多元素;请参阅上面的<a href= \"#localized-numbers\">本地化数字</a>
+     * 
+     * 
      * @return this scanner's locale
      */
     public Locale locale() {
@@ -1174,6 +1410,14 @@ public final class Scanner implements Iterator<String>, Closeable {
      * <p>Invoking the {@link #reset} method will set the scanner's locale to
      * the <a href= "#initial-locale">initial locale</a>.
      *
+     * <p>
+     *  将此扫描仪的区域设置设置为指定的区域设置
+     * 
+     *  <p>扫描器的区域设置会影响其默认基元与其匹配的正则表达式的许多元素;请参阅上面的<a href= \"#localized-numbers\">本地化数字</a>
+     * 
+     *  <p>调用{@link #reset}方法会将扫描器的区域设置设置为<a href= \"#initial-locale\">初始区域设置</a>
+     * 
+     * 
      * @param locale A string specifying the locale to use
      * @return this scanner
      */
@@ -1223,6 +1467,12 @@ public final class Scanner implements Iterator<String>, Closeable {
      * number matching regular expressions; see
      * <a href= "#localized-numbers">localized numbers</a> above.
      *
+     * <p>
+     *  返回此扫描仪的默认基数
+     * 
+     * <p>扫描器的基数影响与默认数字匹配的正则表达式的元素;请参阅上面的<a href= \"#localized-numbers\">本地化数字</a>
+     * 
+     * 
      * @return the default radix of this scanner
      */
     public int radix() {
@@ -1243,6 +1493,17 @@ public final class Scanner implements Iterator<String>, Closeable {
      * <p>Invoking the {@link #reset} method will set the scanner's radix to
      * <code>10</code>.
      *
+     * <p>
+     *  将此扫描仪的默认基数设置为指定的基数
+     * 
+     *  <p>扫描器的基数影响与默认数字匹配的正则表达式的元素;请参阅上面的<a href= \"#localized-numbers\">本地化数字</a>
+     * 
+     *  <p>如果基数小于<code> CharacterMIN_RADIX </code>或大于<code> CharacterMAX_RADIX </code>,则会抛出<code> IllegalArg
+     * umentException </code>。
+     * 
+     *  <p>调用{@link #reset}方法会将扫描程序的基数设置为<code> 10 </code>
+     * 
+     * 
      * @param radix The radix to use when scanning numbers
      * @return this scanner
      * @throws IllegalArgumentException if radix is out of range
@@ -1285,6 +1546,14 @@ public final class Scanner implements Iterator<String>, Closeable {
      * {@link #findWithinHorizon}, and {@link #skip} methods will make a
      * match available if they succeed.
      *
+     * <p>
+     * 返回此扫描程序执行的最后一次扫描操作的匹配结果如果未执行匹配,或上一次匹配未成功,此方法将抛出<code> IllegalStateException </code>
+     * 
+     *  <p> <code> Scanner </code>的各种<code> next </code>方法使匹配结果可用,如果它们完成而不抛出异常例如,在调用{@link #nextInt}方法返回一个in
+     * t,此方法返回<code> MatchResult </code>,用于搜索上面定义的<a href=\"#Integer-regex\"> <i> Integer </i> </a>正则表达式如果成功
+     * ,{@link #findInLine},{@link #findWithinHorizo​​n}和{@link #skip}方法将提供匹配。
+     * 
+     * 
      * @return a match result for the last match operation
      * @throws IllegalStateException  If no match result is available
      */
@@ -1299,6 +1568,10 @@ public final class Scanner implements Iterator<String>, Closeable {
      * string representation of a <code>Scanner</code> contains information
      * that may be useful for debugging. The exact format is unspecified.
      *
+     * <p>
+     * <p>返回<code> Scanner的字符串表示</code> <code> Scanner </code>的字符串表示包含可能对调试有用的信息确切的格式未指定
+     * 
+     * 
      * @return  The string representation of this scanner
      */
     public String toString() {
@@ -1326,6 +1599,10 @@ public final class Scanner implements Iterator<String>, Closeable {
      * This method may block while waiting for input to scan.
      * The scanner does not advance past any input.
      *
+     * <p>
+     *  如果此扫描程序在其输入中有另一个标记,则返回true此方法可能在等待输入进行扫描时阻止扫描程序不会超过任何输入
+     * 
+     * 
      * @return true if and only if this scanner has another token
      * @throws IllegalStateException if this scanner is closed
      * @see java.util.Iterator
@@ -1349,6 +1626,11 @@ public final class Scanner implements Iterator<String>, Closeable {
      * to scan, even if a previous invocation of {@link #hasNext} returned
      * <code>true</code>.
      *
+     * <p>
+     *  查找并返回来自此扫描程序的下一个完整令牌完整令牌前面和后面是与分隔符模式匹配的输入此方法可能会在等待输入扫描时阻塞,即使以前对{@link #hasNext}的调用返回<code > true </code>
+     * 。
+     * 
+     * 
      * @return the next token
      * @throws NoSuchElementException if no more tokens are available
      * @throws IllegalStateException if this scanner is closed
@@ -1376,6 +1658,10 @@ public final class Scanner implements Iterator<String>, Closeable {
      * The remove operation is not supported by this implementation of
      * <code>Iterator</code>.
      *
+     * <p>
+     *  <code> Iterator </code>的实现不支持删除操作
+     * 
+     * 
      * @throws UnsupportedOperationException if this method is invoked.
      * @see java.util.Iterator
      */
@@ -1391,6 +1677,12 @@ public final class Scanner implements Iterator<String>, Closeable {
      * behaves in exactly the same way as the invocation
      * <tt>hasNext(Pattern.compile(pattern))</tt>.
      *
+     * <p>
+     * 如果下一个标记与从指定字符串构造的模式匹配,则返回true扫描程序不超过任何输入
+     * 
+     *  <p>以<tt> hasNext(pattern)</tt>的形式调用此方法的行为与调用<tt> hasNext(Patterncompile(pattern))完全相同</tt>
+     * 
+     * 
      * @param pattern a string specifying the pattern to scan
      * @return true if and only if this scanner has another token matching
      *         the specified pattern
@@ -1409,6 +1701,12 @@ public final class Scanner implements Iterator<String>, Closeable {
      * behaves in exactly the same way as the invocation
      * <tt>next(Pattern.compile(pattern))</tt>.
      *
+     * <p>
+     *  如果匹配从指定字符串构造的模式,则返回下一个标记如果匹配成功,则扫描器前进超过与模式匹配的输入
+     * 
+     *  <p>以<tt> next(pattern)</tt>格式调用此方法的行为与调用<tt> next(Patterncompile(pattern))</tt>
+     * 
+     * 
      * @param pattern a string specifying the pattern to scan
      * @return the next token
      * @throws NoSuchElementException if no such tokens are available
@@ -1424,6 +1722,10 @@ public final class Scanner implements Iterator<String>, Closeable {
      * the delimiter pattern. This method may block while waiting for input.
      * The scanner does not advance past any input.
      *
+     * <p>
+     * 如果下一个完整令牌与指定模式匹配,则返回true。完整令牌由与分隔符模式匹配的输入作为前缀和后缀。此方法在等待输入时可能会阻塞扫描器不会超过任何输入
+     * 
+     * 
      * @param pattern the pattern to scan for
      * @return true if and only if this scanner has another token matching
      *         the specified pattern
@@ -1456,6 +1758,11 @@ public final class Scanner implements Iterator<String>, Closeable {
      * If the match is successful, the scanner advances past the input that
      * matched the pattern.
      *
+     * <p>
+     *  返回下一个令牌,如果它匹配指定的模式此方法可能会阻塞,等待输入扫描,即使以前的调用{@link #hasNext(Pattern)}返回<code> true </code>如果匹配成功,扫描器前进经
+     * 过匹配图案的输入。
+     * 
+     * 
      * @param pattern the pattern to scan for
      * @return the next token
      * @throws NoSuchElementException if no more tokens are available
@@ -1491,6 +1798,10 @@ public final class Scanner implements Iterator<String>, Closeable {
      * This method may block while waiting for input. The scanner does not
      * advance past any input.
      *
+     * <p>
+     *  如果此扫描程序的输入中有另一行,则返回true此方法可能在等待输入时阻止扫描程序不超过任何输入
+     * 
+     * 
      * @return true if and only if this scanner has another line of input
      * @throws IllegalStateException if this scanner is closed
      */
@@ -1526,6 +1837,14 @@ public final class Scanner implements Iterator<String>, Closeable {
      * for a line separator, it may buffer all of the input searching for
      * the line to skip if no line separators are present.
      *
+     * <p>
+     *  使扫描仪前进到当前行,并返回被跳过的输入
+     * 
+     * 此方法返回当前行的其余部分,不包括末尾的任何行分隔符。位置设置为下一行的开始
+     * 
+     *  <p>由于此方法继续搜索查找分隔符的输入,如果没有行分隔符,它可以缓冲所有要跳过的行的输入搜索
+     * 
+     * 
      * @return the line that was skipped
      * @throws NoSuchElementException if no line was found
      * @throws IllegalStateException if this scanner is closed
@@ -1558,6 +1877,12 @@ public final class Scanner implements Iterator<String>, Closeable {
      * behaves in exactly the same way as the invocation
      * <tt>findInLine(Pattern.compile(pattern))</tt>.
      *
+     * <p>
+     *  尝试查找从指定字符串构造的模式的下一个出现,忽略定界符
+     * 
+     *  <p>调用<tt> findInLine(pattern)</tt>形式的此方法的行为与调用<tt> findInLine(Patterncompile(pattern))完全相同</tt>
+     * 
+     * 
      * @param pattern a string specifying the pattern to search for
      * @return the text that matched the specified pattern
      * @throws IllegalStateException if this scanner is closed
@@ -1580,6 +1905,14 @@ public final class Scanner implements Iterator<String>, Closeable {
      * for the specified pattern, it may buffer all of the input searching for
      * the desired token if no line separators are present.
      *
+     * <p>
+     * 尝试查找指定模式的下一个出现忽略分隔符如果在下一个行分隔符之前找到该模式,则扫描器前进超过匹配的输入,并返回与该模式匹配的字符串如果在输入中未检测到此类模式,下一行分隔符,则返回<code> null 
+     * </code>,并且扫描器的位置不变。
+     * 该方法可以阻止等待与模式匹配的输入。
+     * 
+     *  <p>由于此方法继续搜索通过输入查找指定的模式,如果没有行分隔符,它可以缓冲所有输入搜索所需的令牌
+     * 
+     * 
      * @param pattern the pattern to scan for
      * @return the text that matched the specified pattern
      * @throws IllegalStateException if this scanner is closed
@@ -1625,6 +1958,13 @@ public final class Scanner implements Iterator<String>, Closeable {
      * the invocation
      * <tt>findWithinHorizon(Pattern.compile(pattern, horizon))</tt>.
      *
+     * <p>
+     *  尝试查找从指定字符串构造的模式的下一个出现,忽略定界符
+     * 
+     * <p>对调用<tt> findWithinHorizo​​n(pattern)</tt>形式的此方法的行为与调用<tt> findWithinHorizo​​n(Patterncompile(patte
+     * rn,horizo​​n))完全相同</tt>。
+     * 
+     * 
      * @param pattern a string specifying the pattern to search for
      * @param horizon the search horizon
      * @return the text that matched the specified pattern
@@ -1660,6 +2000,20 @@ public final class Scanner implements Iterator<String>, Closeable {
      * <p>If horizon is negative, then an IllegalArgumentException is
      * thrown.
      *
+     * <p>
+     *  尝试查找指定模式的下一个出现
+     * 
+     *  <p>此方法搜索输入直到指定的搜索范围,忽略定界符如果找到模式,则扫描器超过匹配的输入并返回与模式匹配的字符串。如果未检测到此类模式,则返回null并且扫描仪的位置保持不变。
+     * 此方法可能阻止等待与模式匹配的输入。
+     * 
+     * <p>扫描器永远不会搜索超过当前位置的<code>地平线</code>代码点注意匹配可能会被地平线剪切;如果地平线已经较大,则任意匹配结果可能不同。
+     * 扫描仪将地平线视为透明的非锚定边界(参见{@link Matcher#useTransparentBounds}和{@link Matcher#useAnchoringBounds})。
+     * 
+     *  <p>如果地平线是<code> 0 </code>,则地平线被忽略,并且此方法继续搜索输入,寻找指定的模式,无边界。在这种情况下,它可以缓冲所有输入搜索模式
+     * 
+     *  <p>如果地平线为负,则抛出IllegalArgumentException
+     * 
+     * 
      * @param pattern the pattern to scan for
      * @param horizon the search horizon
      * @return the text that matched the specified pattern
@@ -1707,6 +2061,17 @@ public final class Scanner implements Iterator<String>, Closeable {
      * <code>NoSuchElementException</code> by using a pattern that can
      * match nothing, e.g., <code>sc.skip("[ \t]*")</code>.
      *
+     * <p>
+     * 忽略与指定模式匹配的输入,忽略定界符如果指定模式的定位匹配成功,此方法将跳过输入
+     * 
+     *  <p>如果在当前位置找不到与指定模式的匹配,则不跳过任何输入,并且会抛出<tt> NoSuchElementException </tt>
+     * 
+     *  <p>由于此方法寻求在扫描仪的当前位置开始匹配指定的模式,因此可以匹配大量输入(例如"*")的模式可能会导致扫描仪缓冲大量输入
+     * 
+     *  <p>请注意,通过使用可以匹配任何内容的模式,例如<code> scskip("[\\ t] *")</code>,可以跳过某些没有冒险的<code> NoSuchElementException </code>
+     * 。
+     * 
+     * 
      * @param pattern a string specifying the pattern to skip over
      * @return this scanner
      * @throws NoSuchElementException if the specified pattern is not found
@@ -1741,6 +2106,12 @@ public final class Scanner implements Iterator<String>, Closeable {
      * behaves in exactly the same way as the invocation
      * <tt>skip(Pattern.compile(pattern))</tt>.
      *
+     * <p>
+     *  跳过与从指定字符串构造的模式匹配的输入
+     * 
+     * <p>以<tt> skip(pattern)</tt>的形式调用此方法的行为与调用<tt> skip(Patterncompile(pattern))完全相同</tt>
+     * 
+     * 
      * @param pattern a string specifying the pattern to skip over
      * @return this scanner
      * @throws IllegalStateException if this scanner is closed
@@ -1757,6 +2128,10 @@ public final class Scanner implements Iterator<String>, Closeable {
      * created from the string "true|false".  The scanner does not
      * advance past the input that matched.
      *
+     * <p>
+     *  如果此扫描程序的输入中的下一个标记可以使用从字符串"true | false"创建的不区分大小写的模式解释为布尔值,则返回true扫描程序不会超过匹配的输入
+     * 
+     * 
      * @return true if and only if this scanner's next token is a valid
      *         boolean value
      * @throws IllegalStateException if this scanner is closed
@@ -1772,6 +2147,11 @@ public final class Scanner implements Iterator<String>, Closeable {
      * If the match is successful, the scanner advances past the input that
      * matched.
      *
+     * <p>
+     *  将输入的下一个标记扫描为布尔值并返回该值如果下一个标记无法转换为有效的布尔值,则此方法将抛出<code> InputMismatchException </code>如果匹配成功,则扫描仪前进输入匹配
+     * 。
+     * 
+     * 
      * @return the boolean scanned from the input
      * @throws InputMismatchException if the next token is not a valid boolean
      * @throws NoSuchElementException if input is exhausted
@@ -1787,6 +2167,10 @@ public final class Scanner implements Iterator<String>, Closeable {
      * interpreted as a byte value in the default radix using the
      * {@link #nextByte} method. The scanner does not advance past any input.
      *
+     * <p>
+     * 如果此扫描程序输入中的下一个标记可以使用{@link #nextByte}方法在默认基数中解释为字节值,则返回true。扫描程序不超过任何输入
+     * 
+     * 
      * @return true if and only if this scanner's next token is a valid
      *         byte value
      * @throws IllegalStateException if this scanner is closed
@@ -1800,6 +2184,10 @@ public final class Scanner implements Iterator<String>, Closeable {
      * interpreted as a byte value in the specified radix using the
      * {@link #nextByte} method. The scanner does not advance past any input.
      *
+     * <p>
+     *  如果此扫描程序输入中的下一个标记可以使用{@link #nextByte}方法解释为指定基数中的字节值,则返回true扫描程序不超过任何输入
+     * 
+     * 
      * @param radix the radix used to interpret the token as a byte value
      * @return true if and only if this scanner's next token is a valid
      *         byte value
@@ -1829,6 +2217,13 @@ public final class Scanner implements Iterator<String>, Closeable {
      * invocation <tt>nextByte(radix)</tt>, where <code>radix</code>
      * is the default radix of this scanner.
      *
+     * <p>
+     *  将输入的下一个令牌作为<tt>字节</tt>进行扫描
+     * 
+     *  <p>以<tt> nextByte()</tt>的形式调用此方法的行为与调用<tt> nextByte(radix)</tt>完全相同,其中<code> radix </code >是此扫描仪的默认基
+     * 数。
+     * 
+     * 
      * @return the <tt>byte</tt> scanned from the input
      * @throws InputMismatchException
      *         if the next token does not match the <i>Integer</i>
@@ -1858,6 +2253,15 @@ public final class Scanner implements Iterator<String>, Closeable {
      * {@link Byte#parseByte(String, int) Byte.parseByte} with the
      * specified radix.
      *
+     * <p>
+     * 将输入的下一个令牌作为<tt>字节进行扫描</tt>如果下一个令牌无法转换为有效的字节值,则此方法将抛出<code> InputMismatchException </code>,如下所述如果翻译成功,
+     * 扫描仪前进超过匹配的输入。
+     * 
+     * <p>如果下一个令牌与上面定义的<a href=\"#Integer-regex\"> <i> Integer </i> </a>正则表达式匹配,则令牌将转换为<tt>字节</tt >值,如果删除所有特
+     * 定于语言环境的前缀,组分隔符和区域设置特定的后缀,则通过{@link Character#digit Characterdigit}将非ASCII数字映射为ASCII数字,如果语言环境特定的否定前缀和后
+     * 缀,并将结果字符串传递给{@link Byte#parseByte(String,int)ByteparseByte}和指定的基数。
+     * 
+     * 
      * @param radix the radix used to interpret the token as a byte value
      * @return the <tt>byte</tt> scanned from the input
      * @throws InputMismatchException
@@ -1893,6 +2297,10 @@ public final class Scanner implements Iterator<String>, Closeable {
      * interpreted as a short value in the default radix using the
      * {@link #nextShort} method. The scanner does not advance past any input.
      *
+     * <p>
+     *  如果此扫描程序输入中的下一个标记可以使用{@link #nextShort}方法在默认基数中解释为短值,则返回true扫描程序不会超过任何输入
+     * 
+     * 
      * @return true if and only if this scanner's next token is a valid
      *         short value in the default radix
      * @throws IllegalStateException if this scanner is closed
@@ -1906,6 +2314,10 @@ public final class Scanner implements Iterator<String>, Closeable {
      * interpreted as a short value in the specified radix using the
      * {@link #nextShort} method. The scanner does not advance past any input.
      *
+     * <p>
+     * 如果此扫描程序输入中的下一个标记可以使用{@link #nextShort}方法解释为指定基数中的短值,则返回true扫描程序不会超过任何输入
+     * 
+     * 
      * @param radix the radix used to interpret the token as a short value
      * @return true if and only if this scanner's next token is a valid
      *         short value in the specified radix
@@ -1935,6 +2347,13 @@ public final class Scanner implements Iterator<String>, Closeable {
      * invocation <tt>nextShort(radix)</tt>, where <code>radix</code>
      * is the default radix of this scanner.
      *
+     * <p>
+     *  将输入的下一个令牌作为<tt> short </tt>进行扫描
+     * 
+     *  <p>以<tt> nextShort()</tt>的形式调用此方法的行为与调用<tt> nextShort(radix)</tt>完全相同,其中<code> radix </code >是此扫描仪的默
+     * 认基数。
+     * 
+     * 
      * @return the <tt>short</tt> scanned from the input
      * @throws InputMismatchException
      *         if the next token does not match the <i>Integer</i>
@@ -1964,6 +2383,15 @@ public final class Scanner implements Iterator<String>, Closeable {
      * {@link Short#parseShort(String, int) Short.parseShort} with the
      * specified radix.
      *
+     * <p>
+     *  将输入的下一个标记作为<tt> short </tt>进行扫描如果下一个标记无法转换为有效的短值,则此方法将抛出<code> InputMismatchException </code>如果翻译成功,
+     * 扫描仪前进超过匹配的输入。
+     * 
+     * <p>如果下一个令牌与上面定义的<a href=\"#Integer-regex\"> <i> Integer </i> </a>正则表达式匹配,则令牌将转换为<tt> short </tt >值,如果
+     * 删除所有特定于语言环境的前缀,组分隔符和区域设置特定的后缀,则通过{@link Character#digit Characterdigit}将非ASCII数字映射为ASCII数字,如果语言环境特定的否
+     * 定前缀和后缀,并将结果字符串传递给具有指定基数的{@link Short#parseShort(String,int)ShortparseShort}。
+     * 
+     * 
      * @param radix the radix used to interpret the token as a short value
      * @return the <tt>short</tt> scanned from the input
      * @throws InputMismatchException
@@ -1999,6 +2427,10 @@ public final class Scanner implements Iterator<String>, Closeable {
      * interpreted as an int value in the default radix using the
      * {@link #nextInt} method. The scanner does not advance past any input.
      *
+     * <p>
+     *  如果此扫描程序输入中的下一个标记可以使用{@link #nextInt}方法在默认基数中解释为int值,则返回true扫描程序不会超过任何输入
+     * 
+     * 
      * @return true if and only if this scanner's next token is a valid
      *         int value
      * @throws IllegalStateException if this scanner is closed
@@ -2012,6 +2444,10 @@ public final class Scanner implements Iterator<String>, Closeable {
      * interpreted as an int value in the specified radix using the
      * {@link #nextInt} method. The scanner does not advance past any input.
      *
+     * <p>
+     * 如果此扫描程序的输入中的下一个标记可以使用{@link #nextInt}方法解释为指定基数中的int值,则返回true扫描程序不超过任何输入
+     * 
+     * 
      * @param radix the radix used to interpret the token as an int value
      * @return true if and only if this scanner's next token is a valid
      *         int value
@@ -2037,6 +2473,9 @@ public final class Scanner implements Iterator<String>, Closeable {
      * The integer token must be stripped of prefixes, group separators,
      * and suffixes, non ascii digits must be converted into ascii digits
      * before parse will accept it.
+     * <p>
+     *  整数标记必须去除前缀,组分隔符和后缀,非ASCII数字必须在解析接受之前转换为ASCII数字
+     * 
      */
     private String processIntegerToken(String token) {
         String result = token.replaceAll(""+groupSeparator, "");
@@ -2065,6 +2504,12 @@ public final class Scanner implements Iterator<String>, Closeable {
      * invocation <tt>nextInt(radix)</tt>, where <code>radix</code>
      * is the default radix of this scanner.
      *
+     * <p>
+     *  将输入的下一个标记作为<tt> int </tt>进行扫描
+     * 
+     *  <p>调用<tt> nextInt()</tt>形式的方法与调用<tt> nextInt(radix)</tt>的方式完全相同,其中<code> radix </code >是此扫描仪的默认基数
+     * 
+     * 
      * @return the <tt>int</tt> scanned from the input
      * @throws InputMismatchException
      *         if the next token does not match the <i>Integer</i>
@@ -2094,6 +2539,15 @@ public final class Scanner implements Iterator<String>, Closeable {
      * {@link Integer#parseInt(String, int) Integer.parseInt} with the
      * specified radix.
      *
+     * <p>
+     * 将输入的下一个标记作为<tt> int </tt>进行扫描如果下一个标记无法转换为有效的int值,则此方法将抛出<code> InputMismatchException </code>,如下所述如果翻
+     * 译成功,扫描仪前进超过匹配的输入。
+     * 
+     * <p>如果下一个令牌与上面定义的<a href=\"#Integer-regex\"> <i> Integer </i> </a>正则表达式匹配,则令牌将转换为<tt> int </tt >值,如果删除
+     * 所有特定于语言环境的前缀,组分隔符和区域设置特定的后缀,则通过{@link Character#digit Characterdigit}将非ASCII数字映射为ASCII数字,如果语言环境特定的否定前
+     * 缀和后缀,并将结果字符串传递给具有指定基数的{@link Integer#parseInt(String,int)IntegerparseInt}。
+     * 
+     * 
      * @param radix the radix used to interpret the token as an int value
      * @return the <tt>int</tt> scanned from the input
      * @throws InputMismatchException
@@ -2129,6 +2583,10 @@ public final class Scanner implements Iterator<String>, Closeable {
      * interpreted as a long value in the default radix using the
      * {@link #nextLong} method. The scanner does not advance past any input.
      *
+     * <p>
+     *  如果此扫描程序输入中的下一个标记可以使用{@link #nextLong}方法在默认基数中解释为长整型值,则返回true扫描程序不超过任何输入
+     * 
+     * 
      * @return true if and only if this scanner's next token is a valid
      *         long value
      * @throws IllegalStateException if this scanner is closed
@@ -2142,6 +2600,10 @@ public final class Scanner implements Iterator<String>, Closeable {
      * interpreted as a long value in the specified radix using the
      * {@link #nextLong} method. The scanner does not advance past any input.
      *
+     * <p>
+     * 如果此扫描程序输入中的下一个标记可以使用{@link #nextLong}方法在指定基数中解释为长整型值,则返回true扫描程序不会超过任何输入
+     * 
+     * 
      * @param radix the radix used to interpret the token as a long value
      * @return true if and only if this scanner's next token is a valid
      *         long value
@@ -2171,6 +2633,13 @@ public final class Scanner implements Iterator<String>, Closeable {
      * invocation <tt>nextLong(radix)</tt>, where <code>radix</code>
      * is the default radix of this scanner.
      *
+     * <p>
+     *  将输入的下一个标记扫描为<tt>长</tt>
+     * 
+     *  <p>以<tt> nextLong()</tt>的形式调用此方法的行为与调用<tt> nextLong(radix)</tt>完全相同,其中<code> radix </code >是此扫描仪的默认基
+     * 数。
+     * 
+     * 
      * @return the <tt>long</tt> scanned from the input
      * @throws InputMismatchException
      *         if the next token does not match the <i>Integer</i>
@@ -2200,6 +2669,15 @@ public final class Scanner implements Iterator<String>, Closeable {
      * {@link Long#parseLong(String, int) Long.parseLong} with the
      * specified radix.
      *
+     * <p>
+     *  将输入的下一个标记作为<tt> long </tt>进行扫描如果下一个标记无法转换为有效的长整型值,则此方法将抛出<code> InputMismatchException </code>如果翻译成功
+     * ,扫描仪前进超过匹配的输入。
+     * 
+     * <p>如果下一个令牌与上面定义的<a href=\"#Integer-regex\"> <i> Integer </i> </a>正则表达式匹配,则令牌将转换为<tt> long </tt >值,如果删
+     * 除所有特定于语言环境的前缀,组分隔符和区域设置特定的后缀,则通过{@link Character#digit Characterdigit}将非ASCII数字映射为ASCII数字,如果语言环境特定的否定
+     * 前缀和后缀,并将结果字符串传递给具有指定基数的{@link Long#parseLong(String,int)LongparseLong}。
+     * 
+     * 
      * @param radix the radix used to interpret the token as an int value
      * @return the <tt>long</tt> scanned from the input
      * @throws InputMismatchException
@@ -2236,6 +2714,11 @@ public final class Scanner implements Iterator<String>, Closeable {
      *
      * If there are non-ascii digits in the token these digits must
      * be processed before the token is passed to parseFloat.
+     * <p>
+     *  浮点代码必须删除前缀,组分隔符和后缀,非ASCII数字必须在parseFloat接受之前转换为ascii数字
+     * 
+     * 如果令牌中有非ASCII数字,则这些数字必须在令牌传递给parseFloat之前进行处理
+     * 
      */
     private String processFloatToken(String token) {
         String result = token.replaceAll(groupSeparator, "");
@@ -2287,6 +2770,10 @@ public final class Scanner implements Iterator<String>, Closeable {
      * interpreted as a float value using the {@link #nextFloat}
      * method. The scanner does not advance past any input.
      *
+     * <p>
+     *  如果此扫描程序输入中的下一个标记可以使用{@link #nextFloat}方法解释为浮点值,则返回true扫描程序不超过任何输入
+     * 
+     * 
      * @return true if and only if this scanner's next token is a valid
      *         float value
      * @throws IllegalStateException if this scanner is closed
@@ -2325,6 +2812,16 @@ public final class Scanner implements Iterator<String>, Closeable {
      * is passed to {@link Float#parseFloat(String) Float.parseFloat} as
      * appropriate.
      *
+     * <p>
+     *  将输入的下一个令牌作为<tt> float </tt>进行扫描如果下一个令牌无法转换为有效的浮点值,则此方法将抛出<code> InputMismatchException </code>如果翻译成功
+     * ,扫描仪前进超过匹配的输入。
+     * 
+     * <p>如果下一个令牌与上面定义的<a href=\"#Float-regex\"> <i> Float </i> </a>正则表达式匹配,则令牌将转换为<tt> float </tt >值,如果删除所有
+     * 特定于语言环境的前缀,组分隔符和区域设置特定的后缀,则通过{@link Character#digit Characterdigit}将非ASCII数字映射为ASCII数字,如果语言环境特定的否定前缀和
+     * 后缀,并将结果字符串传递给{@link Float#parseFloat FloatparseFloat}如果令牌匹配本地化的NaN或无穷大字符串,那么"Nan"或"Infinity"将传递到{@link Float#parseFloat String)FloatparseFloat}
+     * 。
+     * 
+     * 
      * @return the <tt>float</tt> scanned from the input
      * @throws InputMismatchException
      *         if the next token does not match the <i>Float</i>
@@ -2354,6 +2851,10 @@ public final class Scanner implements Iterator<String>, Closeable {
      * interpreted as a double value using the {@link #nextDouble}
      * method. The scanner does not advance past any input.
      *
+     * <p>
+     * 如果此扫描程序输入中的下一个标记可以使用{@link #nextDouble}方法解释为双精度值,则返回true扫描程序不超过任何输入
+     * 
+     * 
      * @return true if and only if this scanner's next token is a valid
      *         double value
      * @throws IllegalStateException if this scanner is closed
@@ -2392,6 +2893,16 @@ public final class Scanner implements Iterator<String>, Closeable {
      * is passed to {@link Double#parseDouble(String) Double.parseDouble} as
      * appropriate.
      *
+     * <p>
+     *  将输入的下一个标记作为<tt> double </tt>进行扫描如果下一个标记无法转换为有效的双精度值,则此方法将抛出<code> InputMismatchException </code>如果翻译
+     * 成功,过去匹配的输入。
+     * 
+     * <p>如果下一个令牌与上面定义的<a href=\"#Float-regex\"> <i> Float </i> </a>正则表达式匹配,则令牌将转换为<tt> double </tt >值,如果删除所
+     * 有特定于语言环境的前缀,组分隔符和区域设置特定的后缀,则通过{@link Character#digit Characterdigit}将非ASCII数字映射为ASCII数字,如果语言环境特定的否定前缀
+     * 和后缀,并将结果字符串传递给{@link Double#parseDouble DoubleparseDouble}如果令牌匹配本地化的NaN或无穷大字符串,那么"Nan"或"Infinity"将传递到
+     * {@link Double#parseDouble String)DoubleparseDouble}。
+     * 
+     * 
      * @return the <tt>double</tt> scanned from the input
      * @throws InputMismatchException
      *         if the next token does not match the <i>Float</i>
@@ -2425,6 +2936,10 @@ public final class Scanner implements Iterator<String>, Closeable {
      * {@link #nextBigInteger} method. The scanner does not advance past any
      * input.
      *
+     * <p>
+     * 如果此扫描程序输入中的下一个标记可以使用{@link #nextBigInteger}方法在默认基数中解释为<code> BigInteger </code>,则返回true扫描程序不会超过任何输入
+     * 
+     * 
      * @return true if and only if this scanner's next token is a valid
      *         <code>BigInteger</code>
      * @throws IllegalStateException if this scanner is closed
@@ -2439,6 +2954,10 @@ public final class Scanner implements Iterator<String>, Closeable {
      * the {@link #nextBigInteger} method. The scanner does not advance past
      * any input.
      *
+     * <p>
+     *  如果此扫描程序输入中的下一个标记可以使用{@link #nextBigInteger}方法解释为指定基数中的<code> BigInteger </code>,则返回true扫描程序不会超过任何输入。
+     * 
+     * 
      * @param radix the radix used to interpret the token as an integer
      * @return true if and only if this scanner's next token is a valid
      *         <code>BigInteger</code>
@@ -2469,6 +2988,13 @@ public final class Scanner implements Iterator<String>, Closeable {
      * invocation <tt>nextBigInteger(radix)</tt>, where <code>radix</code>
      * is the default radix of this scanner.
      *
+     * <p>
+     *  将输入的下一个标记作为{@link javamathBigInteger BigInteger}
+     * 
+     *  <p>以<tt> nextBigInteger()</tt>的形式调用此方法的行为与调用<tt> nextBigInteger(radix)</tt>完全相同,其中<code> radix </code >
+     * 是此扫描仪的默认基数。
+     * 
+     * 
      * @return the <tt>BigInteger</tt> scanned from the input
      * @throws InputMismatchException
      *         if the next token does not match the <i>Integer</i>
@@ -2493,6 +3019,14 @@ public final class Scanner implements Iterator<String>, Closeable {
      * java.math.BigInteger#BigInteger(java.lang.String)
      * BigInteger(String, int)} constructor with the specified radix.
      *
+     * <p>
+     * 将输入的下一个标记作为{@link javamathBigInteger BigInteger}
+     * 
+     *  <p>如果下一个令牌与上面定义的<a href=\"#Integer-regex\"> <i> Integer </i> </a>正则表达式匹配,则令牌将转换为<tt> BigInteger </tt >
+     * 值,如同通过删除所有组分隔符,通过{@link Character#digit Characterdigit}将非ASCII数字映射为ASCII数字,并将生成的字符串传递给{@link javamathBigInteger#BigInteger(javalangString)BigInteger )}
+     * 构造函数与指定的基数。
+     * 
+     * 
      * @param radix the radix used to interpret the token
      * @return the <tt>BigInteger</tt> scanned from the input
      * @throws InputMismatchException
@@ -2529,6 +3063,10 @@ public final class Scanner implements Iterator<String>, Closeable {
      * {@link #nextBigDecimal} method. The scanner does not advance past any
      * input.
      *
+     * <p>
+     *  如果此扫描程序输入中的下一个标记可以使用{@link #nextBigDecimal}方法解释为<code> BigDecimal </code>,则返回true扫描程序不会超过任何输入
+     * 
+     * 
      * @return true if and only if this scanner's next token is a valid
      *         <code>BigDecimal</code>
      * @throws IllegalStateException if this scanner is closed
@@ -2560,6 +3098,14 @@ public final class Scanner implements Iterator<String>, Closeable {
      * java.math.BigDecimal#BigDecimal(java.lang.String) BigDecimal(String)}
      * constructor.
      *
+     * <p>
+     * 将输入的下一个标记扫描为{@link javamathBigDecimal BigDecimal}
+     * 
+     *  <p>如果下一个令牌与上面定义的<a href=\"#Decimal-regex\"> <i> Decimal </i> </a>正则表达式匹配,则令牌将转换为<tt> BigDecimal </tt >
+     * 值,如同通过删除所有组分隔符,通过{@link Character#digit Characterdigit}将非ASCII数字映射为ASCII数字,并将结果字符串传递到{@link javamathBigDecimal#BigDecimal(javalangString)BigDecimal(String)}
+     * 构造函数。
+     * 
+     * 
      * @return the <tt>BigDecimal</tt> scanned from the input
      * @throws InputMismatchException
      *         if the next token does not match the <i>Decimal</i>
@@ -2603,6 +3149,13 @@ public final class Scanner implements Iterator<String>, Closeable {
      *          .useRadix(10);
      * }</pre></blockquote>
      *
+     * <p>
+     *  重置此扫描仪
+     * 
+     *  <p>重置扫描程序会丢弃所有通过调用{@link #useDelimiter},{@link #useLocale}或{@link #useRadix}更改的所有显式状态信息。
+     * 
+     * <p>以<tt> scannerreset()</tt>的形式调用此方法的行为与调用的方式完全相同
+     * 
      * @return this scanner
      *
      * @since 1.6

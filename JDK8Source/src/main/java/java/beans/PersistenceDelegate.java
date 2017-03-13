@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -78,6 +79,27 @@ package java.beans;
  * <li>
  * Performing the initialization of the object.
  * </ul>
+ * <p>
+ * PersistenceDelegate类负责根据类的公共API中的方法表达给定类的实例的状态而不是将持久性的责任与类本身相关联,例如通过<code>由<code> ObjectOutputStream 
+ * </code>使用的readObject </code>和<code> writeObject </code>方法,像使用这个委托模型的<code> XMLEncoder </code>的流可以独立于类
+ * 本身通常,类是最好的地方放这样的信息和约定可以很容易地表示在这个授权方案做然而,有时候,单个类中的小问题会阻止整个对象图形被写入,这可能使应用程序开发人员无法追索,而是尝试在本地隐藏有问题的类,或者使用
+ * 替代的持久化技术。
+ * 这些,授权模型为应用程序开发人员提供了一个相对干净的机制来干预序列化过程的所有部分,而不需要修改不是应用程序本身的一部分的类的实现。
+ * <p>
+ * 除了使用委托模型,该持久化方案不同于传统的串行化方案,需要不具有相应的<code> readObject </code>方法的<code> writeObject </code>方法的模拟<code> 
+ * writeObject <代码>根据其公共API对每个实例进行模拟编码,并且不需要定义<code> readObject </code>模拟,因为用于读取序列化形式的过程由方法调用的语义定义,如Java
+ * 语言规范破坏<code> writeObject </code>和<code> readObject </code>实现之间的依赖关系是可能随着版本的不同而改变的关键因素,他们所指的类。
+ * <p>
+ * 持久性委托,可以控制对象的持久性的所有方面,包括：
+ * <ul>
+ * <li>
+ *  决定是否可以将实例变更为同一类别的另一个实例
+ * <li>
+ *  通过调用公共构造函数或公共工厂方法实例化对象
+ * <li>
+ *  执行对象的初始化
+ * </ul>
+ * 
  * @see XMLEncoder
  *
  * @since 1.4
@@ -103,6 +125,14 @@ public abstract class PersistenceDelegate {
      * from the stream, and the <code>instantiate</code> method
      * is called to create a new candidate for this object.
      *
+     * <p>
+     *  <code> writeObject </code>是对持久性的单个入口点,并由传统的委托模式中的<code> Encoder </code>使用。虽然此方法不是最终的,但它不需要是子类正常情况下
+     * <p>
+     * 这个实现首先检查流是否已经遇到这个对象接下来调用<code> mutatesTo </code>方法来查看从流返回的候选者是否可以被突变为<code> oldInstance </code>代码>如果可
+     * 以,调用<code> initialize </code>方法来执行初始化。
+     * 如果没有,则从流中删除候选项,并调用<code> instantiate </code>方法创建一个新的此对象的候选项。
+     * 
+     * 
      * @param oldInstance The instance that will be created by this expression.
      * @param out The stream to which this expression will be written.
      *
@@ -133,6 +163,15 @@ public abstract class PersistenceDelegate {
      * The default behavior returns <code>true</code>
      * if the classes of the two instances are the same.
      *
+     * <p>
+     * 如果<code> oldInstance </code>的<em>等效</em>副本可以通过将一系列语句应用于<code> newInstance </code>来创建,则返回true。
+     * 在此方法的规范中,等同于修改的实例在其公共API中的相关方法的行为中与<code> oldInstance </code>不可区分[注意：我们使用短语<em>相关</em>方法而不是< / em>方法只
+     * 是因为,为了严格正确,像<code> hashCode </code>和<code> toString </code>等方法可以防止大多数类生成其实例的真正无法区分的副本]。
+     * 如果<code> oldInstance </code>的<em>等效</em>副本可以通过将一系列语句应用于<code> newInstance </code>来创建,则返回true。
+     * <p>
+     *  如果两个实例的类相同,则默认行为返回<code> true </code>
+     * 
+     * 
      * @param oldInstance The instance to be copied.
      * @param newInstance The instance that is to be modified.
      * @return True if an equivalent copy of <code>newInstance</code> may be
@@ -157,6 +196,16 @@ public abstract class PersistenceDelegate {
      * the value of the expression (as returned by <code>getValue</code>)
      * will be identical to <code>oldInstance</code>.
      *
+     * <p>
+     * 返回值为<code> oldInstance </code>的表达式此方法用于表征应用于创建给定对象的构造函数或工厂方法。
+     * 例如,持久性的<code> instantiate </code>方法<code> Field </code>类的委托可以定义如下：。
+     * <pre>
+     *  字段f =(Field)oldInstance; return new Expression(f,fgetDeclaringClass(),"getField",new Object [] {fgetName()}
+     * );。
+     * </pre>
+     *  注意,我们声明返回的表达式的值,使得表达式的值(由<code> getValue </code>返回)与<code> oldInstance </code>
+     * 
+     * 
      * @param oldInstance The instance that will be created by this expression.
      * @param out The stream to which this expression will be written.
      * @return An expression whose value is <code>oldInstance</code>.
@@ -198,6 +247,15 @@ public abstract class PersistenceDelegate {
      * The default implementation, calls the <code>initialize</code>
      * method of the type's superclass.
      *
+     * <p>
+     * 在<code> newInstance </code>上产生一系列带有副作用的语句,以使新实例变为<em>等效于<code> oldInstance </code>。
+     * 在此方法的规范中,等效于,在方法返回之后,修改的实例在其公共API中的所有方法的行为中与<code> newInstance </code>不可区分。
+     * <p>
+     * 实现通常通过产生一系列涉及<code> oldInstance </code>及其公开可用状态的"发生的"语句来实现这个目标。
+     * 这些语句使用其<code> writeExpression </code>方法发送到输出流它返回一个涉及克隆环境中的元素的表达式,它在读取期间模拟输入流的状态每个返回的语句都会将旧环境替换为存在于新对象
+     * 中的对象。
+     * 实现通常通过产生一系列涉及<code> oldInstance </code>及其公开可用状态的"发生的"语句来实现这个目标。
+     * 
      * @param type the type of the instances
      * @param oldInstance The instance to be copied.
      * @param newInstance The instance that is to be modified.

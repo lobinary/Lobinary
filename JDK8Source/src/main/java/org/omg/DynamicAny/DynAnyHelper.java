@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.DynamicAny;
 
 
@@ -75,6 +76,19 @@ package org.omg.DynamicAny;
     * org.omg.CORBA.Object interface. However, any attempt to invoke operations exported through the Object
     * interface may raise the standard NO_IMPLEMENT exception.
     * An attempt to use a DynAny object with the DII may raise the NO_IMPLEMENT exception.
+    * <p>
+    * 任何值都可以动态解释(遍历)并通过DynAny对象构造DynAny对象与对应于插入到任何<P>中的值的副本的数据值相关联DynAny对象可以被视为组件的有序集合DynAnys对于表示基本类型(例如lon
+    * g)或无组件类型(如空异常)的DynAnys,组件的有序集合为空每个DynAny对象将当前位置的概念保留到其组件DynAnys的集合中当前位置由从0到n-1的索引值来标识,其中n是分量的数目。
+    * 特殊索引值-1指示指向无处的当前位置对于不能具有当前位置的值(例如空异常),索引值固定为-1如果使用具有组件的值初始化DynAny,则将索引初始化为0在创建未初始化的DynAny(即是一个没有值的Dyn
+    * Any,但允许组件的TypeCode),当前位置取决于由DynAny表示的值的类型(当前位置设置为0或-1,这取决于新的DynAny是否获取默认值对于其组件)<P>迭代操作rewind,seek和nex
+    * t可用于更改当前位置,current_component操作返回当前位置的组件。
+    * component_count操作返回DynAny的组件数量总的来说,这些操作允许对DynAny的组件进行迭代,例如,(递归地)检查其内容。
+    * 构造的DynAny对象是与构造的类型相关联的DynAny对象。
+    * 有一个不同的接口,继承自DynAny接口,与IDL中的每种构造类型相关联(固定,枚举,结构,序列,联合,数组,异常和值类型)构造的DynAny对象导出操作,可以创建新的DynAny对象,与构造的数据值的
+    * 组件相关联作为示例,DynStruct与结构值相关联这意味着DynStruct可以被视为拥有组件的有序集合,每个结构成员DynStruct对象导出的操作允许创建新的DynAny对象,每个对象都与stru
+    * ct <P>的成员相关联。
+    * 构造的DynAny对象是与构造的类型相关联的DynAny对象。
+    * 如果DynAny对象是从另一个(构造的)DynAny对象获取的,例如表示结构成员的DynAny从DynStruct创建的成员DynAny在逻辑上包含在DynStruct中调用插入或获取操作保持当前位置不
     */
 abstract public class DynAnyHelper
 {

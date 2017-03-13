@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -756,6 +757,449 @@ import java.util.stream.StreamSupport;
  * O'Reilly and Associates, 2006.</a>
  * </p>
  *
+ * <p>
+ *  正则表达式的编译表示
+ * 
+ *  <p>指定为字符串的正则表达式必须首先编译为此类的实例。
+ * 然后,生成的模式可用于创建{@link Matcher}对象,该对象可以匹配任意{@linkplain javalangCharSequence字符序列}正则表达式所有执行匹配的状态都驻留在匹配器中,因
+ * 此许多匹配器可以共享相同的模式。
+ *  <p>指定为字符串的正则表达式必须首先编译为此类的实例。
+ * 
+ *  因此,典型的调用序列
+ * 
+ * <blockquote> <pre> Pattern p = Pattern {@link #compile compile}("a * b"); Matcher m = p {@link #matcher matcher}
+ * ("aaaaab"); boolean b = m {@link Matcher#matches matches}(); </pre> </blockquote>。
+ * 
+ *  <p> {@link #matches matches}方法由此类定义,以方便当正则表达式仅使用一次时此方法在单个调用中编译表达式并匹配输入序列。
+ * 
+ *  <blockquote> <pre> boolean b = Patternmatches("a * b","aaaaab"); </pre> </blockquote>
+ * 
+ *  等同于上面的三个语句,虽然对于重复匹配,它效率较低,因为它不允许重新使用编译模式
+ * 
+ * <p>此类的实例是不可变的,并且对于多个并发线程安全使用{@link Matcher}类的实例对此类使用不安全
+ * 
+ *  <h3> <a name=\"sum\">正则表达式结构摘要</a> </h3>
+ * 
+ *  <table border ="0"cellpadding ="1"cellspacing ="0"
+ * summary="Regular expression constructs, and what they match">
+ * 
+ * <tr align="left">
+ *  <th align ="left"id ="construct">构造</th> <th align ="left"id ="matches">匹配</th>
+ * </tr>
+ * 
+ *  <tr> <th>&nbsp; </th> </tr> <tr align ="left"> <th colspan ="2"id ="characters">字符</th>
+ * 
+ * <tr> <td valign ="top"headers ="构造字符"> <i> x </i> </td> <td header ="matches">字符<i> x </i> </td > </td>
+ *  </td> <td header ="matches">反斜杠字符</td> </td> </td> </tr> <tr> <td valign ="top"headers ="construct characters">
+ *  <tt> \\ 0 </tt> <i> n </i> </td> <td headers ="matches">八进制值<tt> 0 </tt> <i> n </i>(0&lt; tt&gt;&lt;
+ *  = </tt>&nbsp; n </i>&lt; tt&gt; ; = </tt>&nbsp; 7)</td> </tr> <tr> <td valign ="top"headers ="construct characters">
+ *  <tt> \\ 0 </tt> <i> i> </td> <td headers ="matches">八进制值<tt> 0的字符</tt> <i> nn </i>(0&nbsp; <tt>&lt; 
+ * = </tt> <i> n </i> <tt> <= </tt>&nbsp; 7)</td> </tr> <tr> <td valign ="top"headers ="construct characters" tt>
+ *  \\ 0 </tt> <i> mnn </i> </td> <td headers ="matches"> Th具有八进制值<tt> 0 </tt> </i>(0 <tt> <= </tt> <i> 
+ * m </i>&lt; tt&gt; ; = </tt>&nbsp; 3,0&nbsp; <tt>&lt; = </tt>&nbsp; <i> n </i>&nbsp; <tt>&lt; = </tt>&
+ * nbsp; td> </tr> <tr> <td valign ="top"headers ="construct characters"> <tt> \\ x </tt> <i> hh </i> </td>
+ *  <td headers ="matches ">十六进制值字符<tt> 0x </tt> <i> hh </i> </td> </tr> <tr> <td valign ="top"headers ="construct characters" <tt>
+ *  \\ u </tt> <i> hhhh </i> </td> <td headers ="matches">带十六进制值的字符<tt> 0x </tt> <i> hhhh < i> </td> </t>
+ *  <tr> <td valign ="top"headers ="construct characters"> <tt> \\ x </tt> <i> {hh} </i>({@link javalangCharacter#MIN_CODE_POINT CharacterMIN_CODE_POINT}
+ * )的字符。
+ * </tt> </tt> </tt> &nbsp;&lt; =&nbsp; <tt> 0x </tt> <i> hh </i>&lt; =&nbsp; {@link javalangCharacter#MAX_CODE_POINT CharacterMAX_CODE_POINT}
+ * )</td> </tr> <tr> <td valign ="top"headers ="matches"> <tt> \\ t </tt> </td> <td headers ="matches"> 
+ * <tt>'\\ u0009'</tt>)</td> </tr> <tr> <td valign ="top"headers ="construct characters"> <tt> \n</tt> /
+ *  td> <td headers ="matches">换行符(换行符)字符(<tt>'\\ u000A'</tt>)</td> </tr> <tr> <td valign = ="构造字符"> <tt>
+ *  \\ r </tt> </td> <td headers ="matches">回车符(<tt>'\\ u000D'</tt>)</td> < / tr> <tr> <td valign ="top"headers ="构造字符">
+ *  <tt> \\ f </tt> </td> <td headers ="matches">换页字符'\\ u000C'</tt>)</td> </tr> <tr> <td valign ="top"headers ="construct characters">
+ *  <tt> \\ a </tt> </td> <td headers ="matches">警报(铃)字符(<tt>'\\ u0007'</tt>)</td> </tr> <tr> <td valign =s ="construct characters">
+ *  <tt> \\ e </tt> </td> <td headers ="matches">转义字符(<tt>'\\ u001B'</tt>)</td> tr> <tr> <td valign ="top"headers ="construct characters">
+ *  <tt> \\ c </tt> <i> x </i> </td> <td headers ="matches">与<i> </i> </td> </tr>对应的字符h} </i>({@link javalangCharacter#MIN_CODE_POINT CharacterMIN_CODE_POINT}
+ * )的字符。
+ * </tt> </tt> </tt> &nbsp;&lt; =&nbsp; <tt> 0x </tt> <i> hh </i>&lt; =&nbsp; {@link javalangCharacter#MAX_CODE_POINT Character。
+ * 
+ * <tr> <th>&nbsp; </th> </tr> <tr align ="left"> <th colspan ="2"id ="classes">字符类</th>
+ * 
+ * <tr> <td valign ="top"headers ="construct classes"> {@ code [abc]} </td> <td headers ="matches"> {@ code a}
+ * ,{@code b} @code c}(simple class)</td> </tr> <tr> <td valign ="top"headers ="construct classes"> {@ code [^ abc]}
+ *  </td> <td headers = matches"> {@code a},{@code b}或{@code c}(否定)以外的任何字符</td> </tr> <tr> <td valign ="top"headers = ">
+ *  {@ code [a-zA-Z]} </td> <td headers ="matches"> {@ code a}到{@code z}或{@code A}到{@code Z} (range)</td>
+ *  </tr> <tr> <td valign ="top"headers ="construct classes"> {@ code [ad [mp]]} </td> <td headers ="matches">
+ *  {@code a}到{@code d}或{@code m}到{@code p}：{@code [a-dm-p]}(union)</td> </tr> <td valign ="top"headers ="construct classes">
+ *  {@ code [a-z && [def]]} </td> <td headers ="matches"> {@ code d},{@ code e}或{@code f}(intersection)</tr>
+ *  <tr> <td valign ="top"headers ="construct classes"> {@ code [a-z && [^ bc]除了{@code b}和{@code c}：{@code [ad-z]}
+ * (减法)之外,还包括{td> <td header ="matches"> {@ code a} td> </tr> <tr> <td valign ="top"headers ="construct classes">
+ *  {@ code [a-z && [^ mp]]} </td> <td headers ="matches"代码a}到{@code z},而不是{@code m}到{@code p}：{@code [a-lq-z]}(减法)</td>
+ *  </tr> <tr> th> </th> </tr>。
+ * 
+ * <tr align ="left"> <th colspan ="2"id ="predef">预定义字符类</th> </tr>
+ * 
+ * <tr> <td valign ="top"headers ="construct predef"> <tt></td> </td> <td headers ="matches">任何字符(可能不匹配<a href=\"#lt\">
+ * 行终止符</a>)</td> </tr> <tr > <td valign ="top"headers ="construct predef"> <tt> \\ d </tt> </td> <td headers ="matches">
+ * 一个数字：<tt> [0-9] </tt > </td> </td> <td> </td> <td header ="matches"> </td> </td> </td> </td> <td valign ="top"headers ="construct predef"数字：<tt>
+ *  [^ 0-9] </tt> </td> </tr> <tr> <td valign ="top"headers ="construct predef"> <tt> \\ h </tt> / td> <td headers ="matches">
+ * 水平空格字符：<tt> [\\ t \\ xA0 \\ u1680 \\ u180e \\ u2000- \\ u200a \\ u202f \\ u205f \\ u3000] </tt> </td>
+ *  tr> <tr> <td valign ="top"headers ="construct predef"> <tt> \\ H </tt> </td> <td headers ="matches">
+ * 非水平空白字符：<tt> [^ \\ h] </tt> </td> </tr> <tr> <td valign ="top"headers ="construct predef"> <tt> \\ s 
+ * </tt><td headers ="matches">空格字符：<tt> [\\ t\n\\ x0B \\ f \\ r] </tt> </td> </tr> <tr> <td valign = headers ="construct predef">
+ *  <tt> \\ S </tt> </td> <td headers ="matches">非空格字符：<tt> [^ \\ s] </tt> </td> </t> <tt> <td header ="matches">
+ * 垂直空格字符：<tt> </t> [\n\\ x0B \\ f \\ r \\ x85 \\ u2028 \\ u2028] </tt> </td> </tr> <tr> <td valign ="top"headers ="construct predef">
+ *  <tt> V </tt> </td> <td headers ="matches">非垂直空格字符：<tt> [^ \\ v] </tt> </td> </tr> <tr> <td valign ="top"headers ="construct predef">
+ *  <tt> \\ w </tt> </td> <td headers ="matches">一个字符：<tt> [a-zA-Z_0-9] tt> </td> </tt> </td> </td> <td header ="matches">
+ *  </td> </td>字符：<tt> [^ \\ w] </tt> </td> </tr> <tr> <th>&nbsp; </th> </tr> <tr align ="left"> <th colspan ="2"id = posix">
+ *  <b> POSIX字符类(仅限于US-ASCII)</b> </th> </tr><tr> <td valign ="top"headers ="construct predef"> <tt>。
+ * 
+ * <tr> <td valign ="top"headers ="construct posix"> {@ code \\ p {Lower}} </td> <td headers ="matches">
+ * 小写字母字符：{@code [az ]} </td> </td> <td header ="matches"> </td> </td> </td> <td valign ="top"headers ="construct posix" -case字母字符：{@ code [AZ]} </td>
+ *  </tr> <tr> <td valign ="top"headers ="construct posix"> {@ code \\ p {ASCII}} </td> <td headers ="matches">
+ * 所有ASCII：{@ code [\\ x00- \\ x7F]} </td> </tr> <tr> <td valign ="top"headers ="construct posix"> {@ code \\ p {Alpha}
+ * } </td> <td headers ="matches">字母字符：{@ code [\\ p {Lower} \\ p {Upper}]} </td> </tr> <tr> < td valign ="top"headers ="construct posix">
+ *  {@ code \\ p {Digit}} </td> <td headers ="matches">十进制数字：{@code [0-9]} </td > </tr> <tr> <td valign ="top"headers ="construct posix">
+ *  {@ code \\ p {Alnum}} </td> <td headers ="matches">一个字母数字字符：{@ code [\\ p {Alpha} \\ p {Digit}]} </td>
+ *  </tr> <tr> <td valign ="top"headers ="construct posix" > {@ code \\ p {Punct}} </td> <td headers ="matches">
+ * 标点：{@code！"#$％&'()* +, - / :; <=>?@ [\\] ^ _`{|}〜} </td> </tr> <！ -  {@code [\\！ \\ +,\\  -  \\ /：; \\ <= \\> \\?@ \\ [\\\\\\] \\ ^ _`\\ {\\ | \\}
+ * 〜]}。
+ * {@code [\X21-\X2F\X31-\X40\X5B-\X60\X7B-\X7E]} -->
+ * <tr> <td valign ="top"headers ="construct posix"> {@ code \\ p {Graph}} </td> <td headers ="matches">
+ * 可见字符：{@code [\\ p {Alnum } \\ p {Punct}]} </td> </tr> <tr> <td valign ="top"headers ="construct posix">
+ *  {@ code \\ p {Print}} </td> <td headers = "matches">可打印字符：{@code [\\ p {Graph} \\ x20]} </td> </tr> 
+ * <tr> <td valign ="top"headers ="construct posix" p {Blank}} </td> <td headers ="matches">一个空格或制表符：{@code [\\ t]}
+ *  </td> </tr> <tr> <td valign = ="construct posix"> {@ code \\ p {Cntrl}} </td> <td headers ="matches">
+ * 控制字符：{@code [\\ x00- \\ x1F \\ x7F]} </td> tr> <tr> <td valign ="top"headers ="construct posix"> {@ code \\ p {XDigit}
+ * } </td> <td headers ="matches">十六进制数字：{@code [ 9a-fA-F]} </td> </tr> <tr> <td valign ="top"headers ="construct posix">
+ *  {@ code \\ p {Space}} </td> <tdheaders ="matches">空格字符：{@code [\\ t\n\\ x0B \\ f \\ r]} </td> </tr>。
+ * 
+ * <tr> <th>&nbsp; </th> </tr> <tr align ="left"> <th colspan ="2"> javalangCharacter类(简单<a href=\"#jcc\">
+ *  java字符类型< a>)</th> </tr>。
+ * 
+ *  <tr> <td valign ="top"> <tt> \\ p {javaLowerCase} </tt> </td> <td>等效于javalangCharacterisLowerCase()</td>
+ *  </tr> <tr> <td valign = "top"> <tt> \\ p {javaUpperCase} </tt> </td> <td>等效于javalangCharacterisUpper
+ * Case()</td> </tr> <tr> <td valign ="top"> <tt> \\ p {javaWhitespace} </tt> </td> <td>等效于javalangChara
+ * cterisWhitespace()</td> </tr> <tr> <td valign ="top"> <tt> \\ p {javaMirrored} tt> </td> <td>等效于javal
+ * angCharacterisMirrored()</td> </tr>。
+ * 
+ * Unicode脚本,块,类别和二进制属性的类</span> </span> </span> </span> </span> th> </tr> <tr> <td valign ="top"headers ="construct unicode">
+ *  {@ code \\ p {IsLatin}} </td> <td headers ="matches">拉丁语脚本字符<a href=\"#usc\"> script </a>)</td> </tr>
+ *  <tr> <td valign ="top"headers ="construct unicode"> {@ code \\ p {InGreek}} < / td> <td headers ="matches">
+ * 希腊语块中的字符(<a href=\"#ubc\">块</a>)</td> </tr> <tr> <td valign = top"headers ="construct unicode"> {@ code \\ p {Lu}
+ * } </td> <td headers ="matches">大写字母(<a href=\"#ucc\">类别</a>)< / td> </tr> <tr> <td valign ="top"headers ="construct unicode">
+ *  {@ code \\ p {IsAlphabetic}} </td> <td headers ="matches">字母字符a href ="#ubpc">二进制属性</a>)</td> </tr> 
+ * <tr> <td valign ="top"headers ="construct unicode"> {@ code \\ p {Sc}} </td> <td headers ="matches">货
+ * 币符号</td > </tr> <tr> <td valign ="top"headers ="construct unicode"> {@ code \\ P {InGreek}} </td> <td headers ="matches">
+ *  block(negation)</td> </tr> <tr> <td valign ="top"headers ="construct unicode"> {@ code [\\ p {L} && 
+ * [^ \\ p {Lu} / td> <td headers ="matches">除大写字母以外的任何字母(减法)</td> </tr>。
+ * 
+ * <tr> <th>&nbsp; </th> </tr> <tr align ="left"> <th colspan ="2"id ="bounds">边界匹配</th>
+ * 
+ * <tr> <td valign ="top"headers ="construct bounds"> <tt> ^ </tt> </td> <td headers ="matches">一行的开头</td>
+ *  <tr> <td valign ="top"headers ="construct bounds"> <tt> $ </tt> </td> <td headers ="matches">行尾</td>
+ *  <tr> <td valign ="top"headers ="construct bounds"> <tt> \\ b </tt> </td> <td headers ="matches">字边界</td>
+ *  </tr> <td valign ="top"headers ="construct bounds"> <tt> \\ B </tt> </td> <td headers ="matches">非字边
+ * 界</td> <tr> <td valign ="top"headers ="construct bounds"> <tt> \\ A </tt> </td> <td headers ="matches">
+ * 输入开始</td> </tr > <tr> <td valign ="top"headers ="construct bounds"> <tt> \\ G </tt> </td> <td headers ="matches">
+ * 上一场比赛结束</td> / tr> <tr> <td valign ="top"headers ="construct bounds"> <tt> \\ Z </tt> </td> <td headers =s">
+ * 输入结束但对于最终的<a href=\"#lt\">终止符</a>,如果任何</td> </tr> <tr> <td valign ="top"headers = "construct bounds">
+ *  <tt> \\ z </tt> </td> <td headers ="matches">输入结束</td> </tr>。
+ * 
+ * <tr> <th> </th> </tr> <tr align ="left"> <th colspan ="2"id ="lineending"> Linebreak matcher </th> </tr>
+ *  <td valign ="top"headers ="construct lineending"> <tt> \\ R </tt> </td> <td headers ="matches">任何Uni
+ * code换行序列,相当于<tt> \\ u000D \\ u000A | [\\ u000A \\ u000B \\ u000C \\ u000D \\ u0085 \\ u2028 \\ u2029]
+ *  </tt> </td> </tr>。
+ * 
+ *  <tr> <th>&nbsp; </th> </tr> <tr align ="left"> <th colspan ="2"id ="greedy">贪婪量词</th>
+ * 
+ * <tr> <td valign ="top"headers ="construct greedy"> <i> X </i> <tt>?</tt> </td> <td headers ="matches">
+ *  < / i>,一次或根本不需要</td> </tr> <tr> <td valign ="top"headers ="construct greedy"> <i> X </i> <tt> * </tt>
+ *  </td> </t> <tr> <td valign ="top"headers ="construct greedy"> </td> <td header ="matches"> <i> X </i>
+ *  <i> X </i> <tt> + </tt> </td> <td headers ="matches"> <i> X </i>,一次或多次</td> </tr> tr> <td valign ="top"headers ="construct greedy">
+ *  <i> X </i> <tt> {</tt> <i> n </i> <tt>} </tt> td> <td header ="matches"> <i> X </i>,完全<i> n </td> </tr>
+ *  <tr> <td valign ="top"headers =构造贪婪"> <i> X </i> <tt> {</tt> <i> n </i> <tt>,} </tt> </td> <td headers ="matches" i>
+ *  X </i>,至少<i> n次</td> </tr> <tr> <td valign ="top"headers ="construct greedy"> < i> <tt> {</tt> <i> n </t>,</tt>/ i> <tt>}
+ *  </tt> </td> <td headers ="matches"> <i> X </i>,至少<i> n </i>但不超过<i> </i>次</td> </tr>。
+ * 
+ * <tr> <th>&nbsp; </th> </tr> <tr align ="left"> <th colspan ="2"id ="reluc">勉强量词</th>
+ * 
+ * <tr> <td valign ="top"headers ="construct reluc"> <i> X </i> <tt> ?? </tt> </td> <td headers ="matches">
+ *  <i> X </i> </t> </t> <td valign ="top"headers ="construct reluc"> <i> X </i> <tt> tt> </td> <td headers ="matches">
+ *  <i> X </i>,零次或多次</td> </tr> <tr> <td valign ="top"headers = "> </i> </td> </td> </td> </td> </td> tr
+ * > <tr> <td valign ="top"headers ="construct reluc"> <i> </tt> {</tt> <i> n </i> <tt> tt> </td> <td headers ="matches"> <i> X </i>,恰好<i> n </i>次</td> </tr> <tr> <td valign = "headers ="construct reluc"> <i> </tt> </tt> </tt> </td> </td> <td header =至少<i> n </i>次</td> </tr> <tr> <td valign ="top"headers ="construct reluc"> </i> X </i> <tt> {</tt> </i> <tt>,</tt>i> <tt>}
+ *  </tt> </td> <td headers ="matches"> <i> X </i>,至少<i> n </i>但不超过<i> </i>次</td> </tr>。
+ * 
+ * <tr> <th>&nbsp; </th> </tr> <tr align ="left"> <th colspan ="2"id ="poss"> Possessive quantifiers </th>
+ * 。
+ * 
+ * <tr> <td valign ="top"headers ="construct poss"> <i> X </i> <tt>?</tt> </td> <td headers ="matches"> 
+ * < </td> </tr> <tr> <td valign ="top"headers ="construct poss"> <i> X </i> <tt> * + </tt> </td> <td headers ="matches">
+ *  <i> X </i>,零次或多次</td> </tr> <tr> <td valign ="top"headers = "> <i> X </i> <tt> ++ </tt> </td> <td headers ="matches">
+ *  <i> X </i> tr> <tr> <td valign ="top"headers ="construct poss"> </i> <tt> {</tt> <i> n </i> <tt>} + 
+ * tt> </td> <td headers ="matches"> <i> X </i>,恰好<i> n </i>次</td> </tr> <tr> <td valign = "headers ="construct poss">
+ *  <i> X </i> <tt> {</tt> <i> n </i> <tt>,} + </tt> </td> <td headers = "matches"> <i> X </i>,至少<i> n </i>
+ * 次</td> </tr> <tr> <td valign ="top"headers ="construct poss"> < i> X <tt> {</tt> <i> n <tt>,</tt> <i> m <tt>}
+ *  + </tt> </td> <td headers ="matches"> <i> X </i>,至少<i> n </i>但不超过<m> </td> </tr>。
+ * 
+ * <tr> <th>&nbsp; </th> </tr> <tr align ="left"> <th colspan ="2"id ="logical">逻辑运算符</th>
+ * 
+ *  <tr> <td valign ="top"headers ="construct logical"> <i> XY </i> </td> <td headers ="matches"> <i> X 
+ * </i> Y </i> </td> </t> </t> <tr> <td valign ="top"headers ="construct logical"> <i> X </i> <tt> | </tt>
+ *  <i> Y </i> </td> <td header ="matches"> <i> X </i>或<i> Y </i> </td> </tr> <tr> <td valign = top"headers ="construct logical">
+ *  <tt>(</tt> <i> X </i> <tt>)</tt> </td> <td headers ="matches"> X, a href ="#cg">捕获组</a> </td> </tr>。
+ * 
+ *  <tr> <th>&nbsp; </th> </tr> <tr align ="left"> <th colspan ="2"id ="backref">返回参考</th>
+ * 
+ * <tr> <td valign ="bottom"headers ="construct backref"> <tt> \\ </tt> <i> n </i> </td> <td valign ="bottom"headers ="matches">
+ * 无论</i> </p> </p> </sup> <a href=\"#cg\">捕获组</a>匹配</td>。
+ * 
+ *  <tr> <td valign ="bottom"headers ="construct backref"> <tt> \\ </tt> <i> k </i>&lt; <i> name </i>&gt
+ * ; </td valign ="bottom"headers ="matches">无论<a href=\"#groupname\">命名捕获组</a>"名称"是否匹配</td> </tr>。
+ * 
+ *  <tr> <th>&nbsp; </th> </tr> <tr align ="left"> <th colspan ="2"id ="quot">报价</th>
+ * 
+ * <tr> <td valign ="top"headers ="construct quot"> <tt> \\ </tt> </td> <td headers ="matches">没有,但引用以下字
+ * 符</td> tr> <tr> <td valign ="top"headers ="construct quot"> <tt> \\ Q </tt> </td> <td headers ="matches">
+ * 不引用所有字符, \\ E </tt> </td> </td> </td> <td header ="matches "> </td> </tr> <！ -  Metachars：！$()* + <>?
+ * [\\] ^ {|} >。
+ * 
+ *  <tr> <th>&nbsp; </th> </tr> <tr align ="left"> <th colspan ="2"id ="special">特殊结构(命名捕获和非捕获) th> </tr>
+ * 。
+ * 
+ * <tr> <td valign ="top"headers ="construct special"> <tt>(?&lt; <a href=\"#groupname\"> name </a>&gt; 
+ * </tt> <i> X < i> <tt>)</tt> </td> <td headers ="matches"> <i> X </i>作为命名捕获群组</td> </tr> <tr> <td valign ="top"headers ="construct special">
+ *  <tt>(?：</tt> <i> X </i> <tt>)</tt> </td> <td headers ="matches"> <i> X </i>作为非捕获组</td> </tr> <tr> <td valign ="top"headers ="construct special">
+ *  <tt>(?idmsuxU-idmsuxU)&nbsp ; </tt> </td> <td headers ="matches">没有任何内容,但会显示<a href=\"#CASE_INSENSITIVE\">
+ *  i </a> <a href=\"#UNIX_LINES\"> d </a > <a href=\"#MULTILINE\"> m </a> <a href=\"#DOTALL\"> s </a> <a href=\"#UNICODE_CASE\">
+ *  u </a> <a href ="#评论"> x </a> <a href=\"#UNICODE_CHARACTER_CLASS\"> U </a>开 - 关</td> </tr> <tr> <td valign ="top"headers ="construct special">
+ *  < tt>(?idmsux-idmsux：</tt> <i> X </i> <tt>)</tt>&nbsp;&nbsp; </td> <td headers ="matches"> <i> X </i>
+ * ,作为<a href=\"#cg\">非捕获组</a>给定标志<a href=\"#CASE_INSENSITIVE\"> i </a> <a href=\"#UNIX_LINES\"> d </a> 
+ * <a href=\"#MULTILINE\"> m </a> <a href ="# DOTALL"> </a> <a href=\"#UNICODE_CASE\"> u </a> <a href=\"#COMMENTS\">
+ *  x </a>开 - 关</td> </tr> <tr> <td valign ="top"headers ="construct special"> <tt>(?= </tt> <i> X </i> 
+ * <tt>)</tt> </td> <td headers ="matches "</td> </tr> <tr> <td valign ="top"headers ="construct special">
+ *  <tt>(?！</tt> <i> X </i> <tt>)</tt> </td> <td headers ="matches"> <i> X </i> / tr> <tr> <td valign ="top"headers ="construct special">
+ *  <tt>(?<= </tt> <i> X </i> <tt>)</tt> td> <td headers ="matches"> <i> X </i>,通过零宽度正向查找</td> </tr> <tr>
+ * <td valign ="top"headers ="construct special"> <tt>(?&lt; / tt> <i> X </i> <tt>)</tt> </td> <td headers = "matches">
+ *  <i> X </i>,通过零宽度阴影后端</td> </tr> <tr> <td valign ="top"headers ="construct special"> <tt> ; </tt> <i>
+ *  X </i> <tt>)</tt> </td> <td headers ="matches"> <i> X </i> </td> </tr>。
+ * 
+ * </table>
+ * 
+ * <hr>
+ * 
+ * <h3> <a name=\"bs\">反斜杠,转义和引用</a> </h3>
+ * 
+ *  <p>反斜杠字符(<tt>'\\'</tt>)用于引入如上表中定义的转义结构,以及引用字符,否则将被解释为非转义结构。
+ * 因此,表达式<tt > \\\\ </tt>匹配单个反斜杠,<tt> \\ {</tt>匹配左括号。
+ * 
+ *  <p>在任何不表示转义构造的字母字符之前使用反斜杠是一个错误;这些保留用于未来对正则表达式语言的扩展反斜杠可以在非字母字符之前使用,而不管该字符是否是非转义结构的一部分
+ * 
+ * <p> Java源代码中字符串文字中的反斜杠按<cite> Java&trade;语言规范</cite>作为Unicode转义(第33节)或其他字符转义(第3106节)因此,必须在表示正则表达式的字符串
+ * 文字中加双反斜杠,以保护它们不被Java字节码编译器解释。
+ * 字符串字面值<例如,当解释为正则表达式时匹配单个退格字符,而<tt>"\\\\ b"</tt>匹配单词边界字符串文字<tt>"</b> \\(hello \\)"</tt>是非法的,并导致编译时错误;为
+ * 了匹配字符串<tt>(hello)</tt>,必须使用字符串文字<tt>"\\\\(hello \\\\)"</tt>。
+ * 
+ * <h3> <a name=\"cc\">字符类</a> </h3>
+ * 
+ *  <p>字符类可以出现在其他字符类中,并且可以由联合运算符(隐式)和交集运算符(<tt>&amp; </tt>)组成。联合运算符表示包含每个字符的类即在其操作数类中的至少一个中。
+ * 交集运算符表示包含其操作数类中的每个字符的类。
+ * 
+ *  <p>字符类运算符的优先级如下,从最高到最低：
+ * 
+ *  <blockquote> <table border ="0"cellpadding ="1"cellspacing ="0"
+ * summary="Precedence of character class operators.">
+ * <tr> <th> 1&nbsp;&nbsp;&nbsp;&nbsp; </th> <td>字面转义&nbsp;&nbsp;&nbsp;&nbsp; </td> <td> <tt> \\ x </tt>
+ *  </tr> <tr> <th> 2&nbsp;&nbsp;&nbsp;&nbsp; </th> <td>分组</td> <td> <tt> [] </tt> <tr> <th> 3&nbsp;&nbs
+ * p;&nbsp;&nbsp; </th> <td>范围</td> <td> <tt> az </tt> </td> </tr> <tr> <th > 4&nbsp;&nbsp;&nbsp;&nbsp; 
+ * </th> <td>联盟</td> <td> <tt> [ae] [iu] </tt> </td> </tr> > 5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </th> <td>交
+ * 集</td> <td> {@ code [a-z && [aeiou]]} </td> </tr> blockquote>。
+ * 
+ *  <p>请注意,一个不同的元字符集在字符类中比在一个字符类之外有效。例如,正则表达式<tt> </tt>在字符类中失去其特殊含义,而表达式<tt> -  </tt>成为范围形成元字符
+ * 
+ * <h3> <a name=\"lt\">行终止符</a> </h3>
+ * 
+ *  <p> </i>行终止符</i>是一个一个或两个字符的序列,标记输入字符序列的行的结尾。以下行被识别为行终止符：
+ * 
+ * <ul>
+ * 
+ *  <li>换行符(换行符)字符(<tt>'\n'</tt>),
+ * 
+ *  <li>回车字符后紧跟换行符(<tt>"\\ r\n"</tt>),
+ * 
+ *  <li>独立回车字元(<tt>'\\ r'</tt>),
+ * 
+ *  <li>下一个字符(<tt>'\\ u0085'</tt>),
+ * 
+ *  <li>分隔符字符(<tt>'\\ u2028'</tt>)或
+ * 
+ *  <li>段落分隔符字符(<tt>'\\ u2029 </tt>)
+ * 
+ * </ul>
+ *  <p>如果{@link #UNIX_LINES}模式已激活,则唯一识别的行终止符是换行符
+ * 
+ * <p>正则表达式<tt> </tt>匹配除了行终止符之外的任何字符,除非指定了{@link #DOTALL}标志
+ * 
+ *  <p>默认情况下,正则表达式<tt> ^ </tt>和<tt> $ </tt>忽略行终止符,并且只分别匹配整个输入序列的开头和结尾如果{@link #MULTILINE}模式被激活,然后<tt> ^ 
+ * </tt>匹配在输入开始和任何行终止符之后,除了在输入结束时在{@link #MULTILINE}模式<tt> $ </tt>匹配就在行终止符之前或输入序列的末尾。
+ * 
+ *  <h3> <a name=\"cg\">分组和捕获</a> </h3>
+ * 
+ * <h4> <a name=\"gnumber\">群组编号</a> </h4> <p>捕获组的编号方式是从左到右计算其左括号在表达式<tt>((A) C)))</tt>,例如,有四个这样的组：</p>。
+ * 
+ *  <blockquote> <table cellpadding = 1 cellspacing = 0 summary ="Capturing group numbersings"> <tr> <th>
+ *  1&nbsp;&nbsp;&nbsp;&nbsp; </th> <td> <tt>((A) C)))</tt> </td> </tr> <tr> <th> 2&nbsp;&nbsp;&nbsp;&nb
+ * sp; </th> <td> <tt>(A)</tt> </td > </tr> <tr> <th> 3&nbsp;&nbsp;&nbsp;&nbsp; </th> <td> <tt>(B(C))</tt>
+ *  </td> <th> 4&nbsp;&nbsp;&nbsp;&nbsp; </th> <td> <tt>(C)</tt> </td> </tr> </table> </blockquote>。
+ * 
+ *  <p>组零始终代表整个表达式
+ * 
+ * <p>捕获组是这样命名的,因为在匹配期间,匹配该组的输入序列的每个子序列被保存。捕获的子序列可以在后面通过反向引用用于表达式,并且也可以从匹配操作完成后匹配
+ * 
+ *  <h4> <a name=\"groupname\">群组名称</a> </h4> <p>捕获群组也可以分配有"名称",<tt>命名捕获群组</tt>然后被后面引用的"名称"组名称由以下字符组成第一个
+ * 字符必须是<tt>字母</tt>。
+ * 
+ * <ul>
+ * <li>大写字母<tt>'A'</tt>至<tt>'Z'</tt>(<tt>'\\ u0041'</tt>&nbsp; through&nbsp; <tt>'\\ u005a' </tt>)</tt>(
+ * <tt>'</tt>)</tt> tt>'\\ u007a'</tt>),<li>数字<tt>'0'</tt>至<tt>'9'</tt>(<tt>'\\ u0030'</tt> &nbsp; throu
+ * gh&nbsp; <tt>'\\ u0039'</tt>),。
+ * </ul>
+ * 
+ *  <p> A <tt>命名捕获组</tt>仍按<a href=\"#gnumber\">组号</a>中所述进行编号
+ * 
+ * <p>与组关联的捕获输入始终是组最近匹配的子序列如果组由于量化第二次计算,则如果第二个计算失败,则先前捕获的值(如果有)将被保留。
+ * 例如,将第2组设置为<tt>"b"</tt>全部替换<tt>(a(b)?)+ </tt>的字符串<tt>"aba"</tt>捕获的输入在每次匹配的开始被丢弃。
+ * 
+ *  <p>以<tt>(?</tt>)开头的群组是纯粹的,<i>不捕获</i>群组,不捕获文字,不计入群组总计,捕获</i>组
+ * 
+ *  <h3> Unicode支持</h3>
+ * 
+ * <p>此课程符合<a href=\"http://wwwunicodeorg/reports/tr18/\"> Unicode技术标准#18：Unicode正则表达式</i> </a>的第1级,加上RL
+ * 21规范等效。
+ * <p>
+ *  <b> Java转义序列</b>如Java源代码中的<tt> \\ u2014 </tt>按照<cite> Java&trade;语言规范</cite>此类转义序列也直接由正则表达式解析器实现,以便可
+ * 以在从文件或从键盘读取的表达式中使用Unicode转义。
+ * 因此,字符串<tt>"\\ u2014"</tt >和<tt>"\\\\ u2014"</tt>,而不等于,编译成相同的模式,匹配十六进制值<tt> 0x2014 </tt>。
+ * <p>
+ * Unicode字符也可以通过使用<b>十六进制符号</b>(十六进制代码点值)直接按照构造<tt> \\ x {} </tt>中的描述在正则表达式中表示,例如a补充字符U + 2011F可以指定为<tt>
+ *  \\ x {2011F} </tt>,而不是替代对<2>连续的两个Unicode转义序列<tt> \\ uD840 </tt> <tt> \\ uDD1F </tt >。
+ * <p>
+ *  Unicode脚本,块,类别和二进制属性用<tt> \\ p </tt>和<tt> \\ P </tt>结构写成Perl <tt> \\ p {</tt> <i> </i> <tt>} </tt>匹配
+ * 如果输入具有属性<i> prop </i>,而<tt> \\ P {</tt> <i> prop </i> <tt> } </tt>不匹配,如果输入具有该属性。
+ * <p>
+ * 脚本,块,类别和二进制属性可以在字符类的内部和外部使用
+ * 
+ * <p>
+ *  <b> <a name=\"usc\">脚本</a> </b>使用前缀{@code Is}指定,如{@code IsHiragana}或使用{@code script}关键字(或其简写形式{@code sc}
+ * ),如{@code script = Hiragana}或{@code sc = Hiragana}。
+ * <p>
+ *  <code> Pattern </code>支持的脚本名称是由{@link javalangCharacterUnicodeScript#forName(String)UnicodeScriptforName}
+ * 接受和定义的有效脚本名称。
+ * 
+ * <p>
+ *  <b> <a name=\"ubc\">块</a> </b>使用前缀{@code In}指定,如{@code InMongolian}中所述,或使用关键字{@code block}或其简写形式{@code blk}
+ * ),如{@code block = Mongolian}或{@code blk = Mongolian}。
+ * <p>
+ * <code> Pattern </code>支持的块名称是由{@link javalangCharacterUnicodeBlock#forName(String)UnicodeBlockforName}
+ * 接受和定义的有效块名称。
+ * <p>
+ * 
+ *  可以使用可选前缀{@code Is}指定<b> <a name=\"ucc\">类别</a> </b>：{@code \\ p {L}}和{@code \\ p { IsL}}表示Unicode字符的
+ * 类别与脚本和块相同,类别也可以使用关键字{@code general_category}(或其简写形式{@code gc})指定,如{@code general_category = Lu}或{@code gc = Lu}
+ * 。
+ * <p>
+ *  支持的类别是
+ * <a href="http://www.unicode.org/unicode/standard/standard.html">
+ *  <@> {@link javalangCharacter Character}类指定的版本中的Unicode标准</i> </a>类别名称是标准中定义的,包括规范性和信息性
+ * <p>
+ * 
+ * <b> <a name=\"ubpc\">二进制属性</a> </b>使用前缀{@code Is}指定,如{@code IsAlphabetic}中所支持的二进制属性<code> Pattern <代码>
+ * 。
+ * <ul>
+ *  <li>字母<li>字母<li>字母<li>小写字母<li>大写字母<li>标题<li>标点符号<li>控制<li> White_Space <li>数字<li> Hex_Digit <li> Joi
+ * n_Control <li > Noncharacter_Code_Point <li>已分配。
+ * </ul>
+ * <p>
+ *  以下<b>预定义字符类</b>和<b> POSIX字符类</b>符合<a href ="http： // wwwunicodeorg / reports / tr18 /"> <i> Unicode正
+ * 则表达式</i> </a>,当指定{@link #UNICODE_CHARACTER_CLASS}标志时。
+ * 
+ *  <table border ="0"cellpadding ="1"cellspacing ="0"
+ * summary="predefined and posix character classes in Unicode mode">
+ * <tr align="left">
+ * <th align ="left"id ="predef_classes">类</th> <th align ="left"id ="predef_matches">匹配</th>
+ * /tr>
+ * <tr> <td> <tt> \\ p {Lower} </tt> </td> <td>小写字符：<tt> \\ p {IsLowercase} </tt> </td> </tr> <td> <tt> 
+ * \\ p {Upper} </tt> </td> <td>大写字符：<tt> \\ p {IsUppercase} </tt> </td> </tr> <tr > <td> <tt> \\ p {ASCII}
+ *  </tt> </td> <td>所有ASCII：<tt> [\\ x00- \\ x7F] </tt> </td> > <td> <tt> \\ p {Alpha} </tt> </td> <td>字
+ * 母字符：<tt> \\ p {IsAlphabetic} </tt> </td> <td> <tt> \\ p {Digit} </tt> </td> <td>十进制数字字符：<tt> p {IsDigit}
+ *  </tt> </td> </tr> <tr>字母数字字符：<tt> [\\ p {IsAlphabetic} \\ p {IsDigit}] </tt> </td> </tr> <tr> <td> <tt>
+ *  \\ p {Punct} </tt> </td> <td>标点符号：<tt> p {IsPunctuation} </tt> <tr> <td> <tt> \\ p {Graph} </tt> </td>
+ *  <td>一个可见字元：<tt> [^ \\ p {IsWhite_Space} \\ p {gc = Cc} \\ p {gc = Cs} \\ p {gc = Cn}] </tt> </td> </tr>
+ *  <tr> <td> <tt> \\ p {Print} </tt> </td> <td>可打印字符：{@code [\\ p {Graph} \\ p {Blank} && [^ \\ p {Cntrl}
+ * ]]} </td> </<tr> <td> <tt> \\ p {Blank} </tt> </td> <td>空格或制表符：{@code [\\ p {IsWhite_Space} && [^ \\ 
+ * p {gc = Zl} \\ p {gc = Zp} \\ x0a \\ x0b \\ x0c \\ x0d \\ x85]]} </td> </tr> <tr> <td> <tt> \\ p {Cntrl}
+ *  </tt> <td>控制字符：<tt> \\ p {gc = Cc} </tt> </td> </tr> <tr> <td> <tt> \\ p {XDigit} </tt> > <td>十六进制数字
+ * ：<tt> [\\ p {gc = Nd} \\ p {IsHex_Digit}] </tt> </td> </tr> <tr> <td> <tt> \\ p {Space } </tt> </td> 
+ * <td>空格字符：<tt> \\ p {IsWhite_Space} </tt> </td> </tr> <tr> <td> <tt> \\ d </tt > </td> <td>数字：<tt> \\ 
+ * p {IsDigit} </tt> </td> </tr> <tr> <td> <tt> \\ D </tt> <td>非数字：<tt> [^ \\ d] </tt> </td> </tr> <tr> 
+ * <td> <tt> \\ s </tt>空格字符：<tt> \\ p {IsWhite_Space} </tt> </td> </tr> <tr> <td> <tt> \\ S </tt> </td> 
+ * <td>字符：<tt> [^ \\ s] </tt> </td> </tr> <tr> <td> <tt> \\ w </tt> </td> <td> \\ p {Alpha} \\ p {gc = Mn}
+ *  \\ p {gc = Me} \\ p {gc = Mc} \\ p {Digit} \\ p {gc = Pc} \\ p {IsJoin_Control}] </tt> td> <tt> [^ \
+ * \ w] </tt> </td> </td> </td> </tr>。
+ * </table>
+ * <p>
+ * <a name="jcc">
+ * 类似javalangCharacter布尔值的类别是<i> methodname </i>方法(除了已弃用的方法)可通过相同的<tt> \\ p {</tt> <i> prop </i> <tt> } 
+ * </tt>语法,其中指定的属性名称为<tt> java <i> methodname </i> </tt> </a>。
+ * 
+ *  <h3>与Perl 5的比较</h3>
+ * 
+ *  <p> <code> Pattern </code>引擎执行传统的基于NFA的匹配与有序交替,如Perl 5
+ * 
+ *  <p>此类不支持的Perl构造：</p>
+ * 
+ * <ul>
+ *  <li> <p>预定义字符类(Unicode字符)<p> <tt> \\ X&nbsp;&nbsp;&nbsp;&nbsp; </tt>
+ * <a href="http://www.unicode.org/reports/tr18/#Default_Grapheme_Clusters">
+ *  <i>扩展字形集</i> </a> </p> </li>
+ * 
+ * <li> <p>对于<i> n </i> <sup> th的反向构造,<tt> \\ g {</tt> <i> n </i> <tt>} </href=\"#cg\">捕获组</a>和<t ht> </ht>
+ *  </ht> </ht> </tt> <i> </i> <tt> ="#groupname">命名捕获组</a> </p> </li>。
+ * 
+ *  <li> <p>以Unicode名称命名的字符结构<tt> \\ N {</tt> <i> name </i> <tt>} </tt> li>
+ * 
+ *  <li> <p>条件结构<tt>(?(</tt> <i>条件</i> <tt>)</tt> <i> X </i> <tt>)</tt >和<tt>(</tt> <i>条件</i> <tt>)</tt>
+ *  <i> X </i> <tt> | </tt> i> <tt>)</tt>,</p> </li>。
+ * 
+ *  <li> <p>嵌入代码构造<tt>(?{</tt> <i>代码</i> <tt>})</tt>和<tt>(?? {</tt> i> code </i> <tt>})</tt>,</p> </li>。
+ * 
+ *  <li> <p>嵌入的注释语法<tt>(?#comment)</tt>和</p> </li>
+ * 
+ * <li> <p>预处理操作<tt> \\ l </tt> <tt> \\ u </tt>,<tt> \\ L </tt>和<tt> \\ U </tt> p> </li>
+ * 
+ * </ul>
+ * 
+ *  <p>此类别支持但不受Perl支持的构造：</p>
+ * 
+ * <ul>
+ * 
+ *  <li> <p> <a href=\"#cc\">上述</a>的字符类结合和交集</p> </li>
+ * 
+ * </ul>
+ * 
+ *  <p>与Perl的显着差异：</p>
+ * 
+ * <ul>
+ * 
+ * <li> <p>在Perl中,<tt> \\ 1 </tt>至<tt> \\ 9 </tt>始终被解释为反引用;如果至少存在多个子表达式,则大于<tt> 9 </tt>的反斜杠转义数将被视为反向引用,否
+ * 则将其解释为八进制转义在此类中,八进制转义必须始终以a零在此类中,<tt> \\ 1 </tt>到<tt> \\ 9 </tt>始终被解释为反向引用,如果至少存在多个子表达式,则接受更大的数作为反向引用
+ * 那么指向正则表达式,否则解析器将删除数字,直到数字小于或等于现有的组数,或者它是一个数字</p> </li>。
+ * 
+ * <li> <p> Perl使用<tt> g </tt>标志请求恢复最后一次匹配的匹配此功能由{@link Matcher}类隐式提供：重复调用{@除非匹配器被重置,否则链接匹配器#find find}方
+ * 法将在最后一个匹配剩余的位置恢复。
+ * </p> </li>。
+ * 
+ *  <li> <p>在Perl中,表达式顶层的嵌入式标志会影响整个表达式在此类中,嵌入式标志始终在它们出现的时刻生效,无论它们是在顶层还是在组内;在后一种情况下,标志在组的末尾恢复,如在Perl </p>
+ *  </li>中。
+ * 
+ * </ul>
+ * 
+ * <p>有关正则表达式构造的行为的更准确描述,请参见<a href=\"http://wwworeillycom/catalog/regex3/\"> <i>掌握正则表达式,第3版</i>,Jeffrey
+ *  EF Friedl,O'Reilly and Associates,2006 </a>。
+ * </p>
+ * 
+ * 
  * @see java.lang.String#split(String, int)
  * @see java.lang.String#split(String)
  *
@@ -781,6 +1225,14 @@ public final class Pattern
      *
      * The flags are duplicated so that the familiar Perl match flag
      * names are available.
+     * <p>
+     *  正则表达式修饰符值除了作为参数传递之外,它们还可以作为内联修饰符传递。例如,以下语句具有相同的效果
+     * <pre>
+     *  RegExp r1 = RegExpcompile("abc",PatternI | PatternM); RegExp r2 = RegExpcompile("(?im)abc",0);
+     * </pre>
+     * 
+     *  这些标志是重复的,以便熟悉的Perl匹配标志名称可用
+     * 
      */
 
     /**
@@ -791,6 +1243,13 @@ public final class Pattern
      *
      * <p> Unix lines mode can also be enabled via the embedded flag
      * expression&nbsp;<tt>(?d)</tt>.
+     * <p>
+     *  启用Unix行模式
+     * 
+     *  <p>在此模式下,只有<tt>'\n'</tt>行终止符在<tt> </tt>,<tt> ^ </tt>和<tt> $ </tt>
+     * 
+     * <p> Unix行模式也可以通过嵌入的标志表达式启用<tt>(?d)</tt>
+     * 
      */
     public static final int UNIX_LINES = 0x01;
 
@@ -806,6 +1265,15 @@ public final class Pattern
      * expression&nbsp;<tt>(?i)</tt>.
      *
      * <p> Specifying this flag may impose a slight performance penalty.  </p>
+     * <p>
+     *  启用不区分大小写的匹配
+     * 
+     *  <p>默认情况下,不区分大小写的匹配假设只有US-ASCII字符集中的字符正在匹配可以通过与此标志结合指定{@link #UNICODE_CASE}标志来启用符合Unicode的大小写不敏感匹配
+     * 
+     *  <p>不区分大小写的匹配也可以通过嵌入的标记表达式启用<tt>(?i)</tt>
+     * 
+     *  <p>指定此标记可能会造成轻微的性能损失</p>
+     * 
      */
     public static final int CASE_INSENSITIVE = 0x02;
 
@@ -817,6 +1285,13 @@ public final class Pattern
      *
      * <p> Comments mode can also be enabled via the embedded flag
      * expression&nbsp;<tt>(?x)</tt>.
+     * <p>
+     *  允许在模式中的空格和注释
+     * 
+     *  <p>在此模式下,忽略空格,并且忽略从<tt>#</tt>开始的嵌入注释,直到行结束
+     * 
+     * <p>评论模式也可以通过嵌入的标志表达式启用<tt>(?x)</tt>
+     * 
      */
     public static final int COMMENTS = 0x04;
 
@@ -830,6 +1305,13 @@ public final class Pattern
      *
      * <p> Multiline mode can also be enabled via the embedded flag
      * expression&nbsp;<tt>(?m)</tt>.  </p>
+     * <p>
+     *  启用多行模式
+     * 
+     *  <p>在多行模式中,表达式<tt> ^ </tt>和<tt> $ </tt>分别匹配行终止符或输入序列的结尾之前或之前。默认情况下,这些表达式仅匹配在整个输入序列的开始和结束
+     * 
+     *  <p>多行模式也可以通过嵌入的标志表达式启用<tt>(?m)</tt> </p>
+     * 
      */
     public static final int MULTILINE = 0x08;
 
@@ -846,6 +1328,16 @@ public final class Pattern
      * become superfluous.
      *
      * <p> There is no embedded flag character for enabling literal parsing.
+     * <p>
+     *  启用模式的文字解析
+     * 
+     *  <p>当指定此标志时,指定模式的输入字符串将被视为字符字符序列。输入序列中的字符或转义序列将没有特殊含义
+     * 
+     * <p>标志CASE_INSENSITIVE和UNICODE_CASE在与此标志结合使用时保留对匹配的影响其他标志变得多余
+     * 
+     *  <p>没有用于启用文字解析的嵌入标志字符
+     * 
+     * 
      * @since 1.5
      */
     public static final int LITERAL = 0x10;
@@ -860,6 +1352,13 @@ public final class Pattern
      * <p> Dotall mode can also be enabled via the embedded flag
      * expression&nbsp;<tt>(?s)</tt>.  (The <tt>s</tt> is a mnemonic for
      * "single-line" mode, which is what this is called in Perl.)  </p>
+     * <p>
+     *  启用dotall模式
+     * 
+     *  <p>在dotall模式下,表达式<tt> </tt>匹配任何字符,包括行终止符默认情况下,此表达式不匹配行终止符
+     * 
+     *  <p> Dotall模式也可以通过嵌入的标志表达式启用<tt>(?s)</tt>(<tt> s </tt>是"单行"模式的助记符,这在Perl中调用)</p>
+     * 
      */
     public static final int DOTALL = 0x20;
 
@@ -876,6 +1375,16 @@ public final class Pattern
      * expression&nbsp;<tt>(?u)</tt>.
      *
      * <p> Specifying this flag may impose a performance penalty.  </p>
+     * <p>
+     *  启用支持Unicode的大小写折叠
+     * 
+     * <p>当指定此标志时,通过{@link #CASE_INSENSITIVE}标志启用时,不区分大小写的匹配以与Unicode标准一致的方式完成。
+     * 默认情况下,不区分大小写的匹配假设只有美国-ASCII字符集正在匹配。
+     * 
+     *  <p>也可以通过嵌入的标志表达式启用Unicode感知的大小写折叠<tt>(?u)</tt>
+     * 
+     *  <p>指定此标志可能会造成性能损失</p>
+     * 
      */
     public static final int UNICODE_CASE = 0x40;
 
@@ -892,6 +1401,16 @@ public final class Pattern
      * equivalence.
      *
      * <p> Specifying this flag may impose a performance penalty.  </p>
+     * <p>
+     *  启用规范等价
+     * 
+     * <p>当指定此标志时,如果且仅当它们的完全规范分解匹配,那么两个字符将被视为匹配。
+     * 例如,表达式<tt>"a \\ u030A"</tt>将匹配字符串< tt>"\\ u00E5"</tt>当指定此标志时默认情况下,匹配不考虑规范等效。
+     * 
+     *  <p>没有用于启用规范等效的嵌入标志字符
+     * 
+     *  <p>指定此标志可能会造成性能损失</p>
+     * 
      */
     public static final int CANON_EQ = 0x80;
 
@@ -913,6 +1432,19 @@ public final class Pattern
      * folding.
      * <p>
      * Specifying this flag may impose a performance penalty.  </p>
+     * <p>
+     *  启用<i>预定义字符类</i>和<i> POSIX字符类的Unicode版本</i>
+     * 
+     * <p>当指定此标志时,(仅限US-ASCII)<i>预定义字符类</i>和<i> POSIX字符类</i>符合<a href ="http：// wwwunicodeorg / reports / tr18 /">
+     *  <i> Unicode技术标准#18：Unicode正则表达式</i> </a>附件C：兼容性属性</i>。
+     * <p>
+     *  UNICODE_CHARACTER_CLASS模式也可以通过嵌入的标志表达式启用<tt>(?U)</tt>
+     * <p>
+     *  该标志意味着UNICODE_CASE,也就是说,它启用Unicode感知的案例折叠
+     * <p>
+     *  指定此标志可能会造成性能损失</p>
+     * 
+     * 
      * @since 1.7
      */
     public static final int UNICODE_CHARACTER_CLASS = 0x100;
@@ -920,6 +1452,9 @@ public final class Pattern
     /* Pattern has only two serialized components: The pattern string
      * and the flags, which are all that is needed to recompile the pattern
      * when it is deserialized.
+     * <p>
+     *  和标志,这些都是在反序列化时重新编译模式所需要的
+     * 
      */
 
     /** use serialVersionUID from Merlin b59 for interoperability */
@@ -928,6 +1463,10 @@ public final class Pattern
     /**
      * The original regular-expression pattern string.
      *
+     * <p>
+     *  原始的正则表达式模式字符串
+     * 
+     * 
      * @serial
      */
     private String pattern;
@@ -935,6 +1474,10 @@ public final class Pattern
     /**
      * The original pattern flags.
      *
+     * <p>
+     *  原始模式标志
+     * 
+     * 
      * @serial
      */
     private int flags;
@@ -942,17 +1485,26 @@ public final class Pattern
     /**
      * Boolean indicating this Pattern is compiled; this is necessary in order
      * to lazily compile deserialized Patterns.
+     * <p>
+     * 指示此Pattern的布尔值被编译;这是必要的,以便懒惰编译反序列化模式
+     * 
      */
     private transient volatile boolean compiled = false;
 
     /**
      * The normalized pattern string.
+     * <p>
+     *  标准化模式字符串
+     * 
      */
     private transient String normalizedPattern;
 
     /**
      * The starting point of state machine for the find operation.  This allows
      * a match to start anywhere in the input.
+     * <p>
+     *  查找操作的状态机的起始点这允许匹配在输入中的任何位置开始
+     * 
      */
     transient Node root;
 
@@ -960,50 +1512,77 @@ public final class Pattern
      * The root of object tree for a match operation.  The pattern is matched
      * at the beginning.  This may include a find that uses BnM or a First
      * node.
+     * <p>
+     *  匹配操作的对象树的根模式在开始时匹配可以包括使用BnM或第一个节点的find
+     * 
      */
     transient Node matchRoot;
 
     /**
      * Temporary storage used by parsing pattern slice.
+     * <p>
+     *  解析模式切片使用的临时存储
+     * 
      */
     transient int[] buffer;
 
     /**
      * Map the "name" of the "named capturing group" to its group id
      * node.
+     * <p>
+     *  将"命名捕获组"的"名称"映射到其组id节点
+     * 
      */
     transient volatile Map<String, Integer> namedGroups;
 
     /**
      * Temporary storage used while parsing group references.
+     * <p>
+     *  解析组引用时使用的临时存储
+     * 
      */
     transient GroupHead[] groupNodes;
 
     /**
      * Temporary null terminated code point array used by pattern compiling.
+     * <p>
+     *  模式编译使用的临时空终止代码点数组
+     * 
      */
     private transient int[] temp;
 
     /**
      * The number of capturing groups in this Pattern. Used by matchers to
      * allocate storage needed to perform a match.
+     * <p>
+     *  此模式中捕获组的数量由匹配器用于分配执行匹配所需的存储空间
+     * 
      */
     transient int capturingGroupCount;
 
     /**
      * The local variable count used by parsing tree. Used by matchers to
      * allocate storage needed to perform a match.
+     * <p>
+     * 解析树使用的本地变量计数由匹配器用于分配执行匹配所需的存储
+     * 
      */
     transient int localCount;
 
     /**
      * Index into the pattern string that keeps track of how much has been
      * parsed.
+     * <p>
+     *  索引到模式字符串,跟踪已经解析的数量
+     * 
      */
     private transient int cursor;
 
     /**
      * Holds the length of the pattern string.
+     * <p>
+     *  保留模式字符串的长度
+     * 
      */
     private transient int patternLength;
 
@@ -1012,12 +1591,19 @@ public final class Pattern
      * It is set to true during compiling if
      * (1) There is supplementary char in pattern, or
      * (2) There is complement node of Category or Block
+     * <p>
+     *  如果Start节点可能匹配补充字符,则在编译期间设置为true(1)在模式中有补充字符,或(2)类别或块的补充节点
+     * 
      */
     private transient boolean hasSupplementary;
 
     /**
      * Compiles the given regular expression into a pattern.
      *
+     * <p>
+     *  将给定的正则表达式编译为模式
+     * 
+     * 
      * @param  regex
      *         The expression to be compiled
      * @return the given regular expression compiled into a pattern
@@ -1032,6 +1618,10 @@ public final class Pattern
      * Compiles the given regular expression into a pattern with the given
      * flags.
      *
+     * <p>
+     *  将给定的正则表达式编译为具有给定标志的模式
+     * 
+     * 
      * @param  regex
      *         The expression to be compiled
      *
@@ -1057,6 +1647,10 @@ public final class Pattern
     /**
      * Returns the regular expression from which this pattern was compiled.
      *
+     * <p>
+     *  返回编译此模式的正则表达式
+     * 
+     * 
      * @return  The source of this pattern
      */
     public String pattern() {
@@ -1068,6 +1662,10 @@ public final class Pattern
      * is the regular expression from which this pattern was
      * compiled.</p>
      *
+     * <p>
+     *  <p>返回此模式的字符串表示形式这是编译此模式的正则表达式</p>
+     * 
+     * 
      * @return  The string representation of this pattern
      * @since 1.5
      */
@@ -1078,6 +1676,10 @@ public final class Pattern
     /**
      * Creates a matcher that will match the given input against this pattern.
      *
+     * <p>
+     * 创建匹配此模式的给定输入的匹配器
+     * 
+     * 
      * @param  input
      *         The character sequence to be matched
      *
@@ -1097,6 +1699,10 @@ public final class Pattern
     /**
      * Returns this pattern's match flags.
      *
+     * <p>
+     *  返回此模式的匹配标志
+     * 
+     * 
      * @return  The match flags specified when this pattern was compiled
      */
     public int flags() {
@@ -1120,6 +1726,20 @@ public final class Pattern
      * <p> If a pattern is to be used multiple times, compiling it once and reusing
      * it will be more efficient than invoking this method each time.  </p>
      *
+     * <p>
+     *  编译给定的正则表达式,并尝试匹配给定的输入
+     * 
+     *  <p>表单的这个方便方法的调用
+     * 
+     *  <blockquote> <pre> Patternmatches(regex,input); </pre> </blockquote>
+     * 
+     *  表现方式与表达式完全相同
+     * 
+     *  <blockquote> <pre> Patterncompile(regex)matcher(input)matches()</pre> </blockquote>
+     * 
+     *  <p>如果一个模式要被多次使用,编译一次并重用它将比每次调用此方法更有效</p>
+     * 
+     * 
      * @param  regex
      *         The expression to be compiled
      *
@@ -1190,6 +1810,32 @@ public final class Pattern
      *     <td><tt>{ "b", "", ":and:f" }</tt></td></tr>
      * </table></blockquote>
      *
+     * <p>
+     *  围绕该模式的匹配分割给定的输入序列
+     * 
+     * <p>此方法返回的数组包含输入序列的每个子字符串,由匹配此模式的另一个子序列终止,或由输入序列的末尾终止。
+     * 数组中的子字符串按照它们出现的顺序输入如果此模式不匹配输入的任何子序列,则结果数组只有一个元素,即字符串形式的输入序列。
+     * 
+     *  <p>当在输入序列的开头有正宽度匹配时,在结果数组的开头包含一个空的前导子串。开头的零宽度匹配从不产生这样的空引导子串
+     * 
+     * <p> <tt> limit </tt>参数控制应用模式的次数,因此影响结果数组的长度如果limit <i> n </i>大于零,则模式将最多应用<i> </i>  -  1次,数组的长度不会大于<i>
+     *  n,并且数组的最后一个条目将包含除最后匹配之外的所有输入分隔符如果<i> n </i>是非正的,则该模式将被应用尽可能多的次数,并且该阵列可以具有任何长度。
+     * 如果<n> n <0>那么该模式将被应用为尽可能多次,该数组可以有任意长度,并且尾随的空字符串将被丢弃。
+     * 
+     *  <p>例如,输入<tt>"boo：and：foo"</tt>会使用以下参数生成以下结果：
+     * 
+     * <blockquote> <table cellpadding = 1 cellspacing = 0
+     * summary="Split examples showing regex, limit, and result">
+     * <tr> <th align ="left"> <i>正则表达式&nbsp;&nbsp;&nbsp;&nbsp; </i> </th> <th align ="left"> <i> Limit&nbsp
+     * ;&nbsp;&nbsp;&nbsp; / i> </th> <th align ="left"> </i> </b> td> <td align = center> 2 </td> <td> <tt>
+     *  {"boo","and：foo"} </tt> </td> </tr> <tr> <td align = center >：</td> <td align = center> 5 </td> <td>
+     *  <tt> {"boo","and","foo"} </tt> </td> </tr> <tr > <td align = center>：</td> <td align = center> -2 </td>
+     *  <td> <tt> {"boo","and","foo"} </tt> </td > </tr> <tr> <td align = center> o </td> <td align = center>
+     *  5 </td> <td> <tt> {"b","","：and：f" ,"",""} </tt> </td> </tr> <tr> <td align = center> o </td> <td align = center>
+     *  -2 </td> <td> <tt > {"b","","：and：f","",""} </tt> </td> </tr> <tr> <td align = center> o </td> <td align = center>
+     *  0 </td> <td> <tt> {"b","","：and：f"} </tt> </td> <// blockquote>。
+     * 
+     * 
      * @param  input
      *         The character sequence to be split
      *
@@ -1263,6 +1909,21 @@ public final class Pattern
      * </table></blockquote>
      *
      *
+     * <p>
+     * 围绕该模式的匹配分割给定的输入序列
+     * 
+     *  <p>此方法的工作原理是通过调用具有给定输入序列的双参数{@link #split(javalangCharSequence,int)split}方法,并且限制参数为零。
+     * 因此,尾随空字符串不包括在结果数组中< / p>。
+     * 
+     *  <p>例如,输入<tt>"boo：and：foo"</tt>会使用这些表达式产生以下结果：
+     * 
+     *  <blockquote> <table cellpadding = 1 cellspacing = 0
+     * summary="Split examples showing regex and result">
+     *  <tr> <th> <th> </i> </th> <th align ="left"> <i>正确格式</i> </</tr> <tr> <td align = center>：</td> <td>
+     *  <tt> {"boo","and","foo"} </tt> </td> </tr> <td align = center> o </td> <td> <tt> {"b","","：and：f"} </tt>
+     *  </td> </blockquote>。
+     * 
+     * 
      * @param  input
      *         The character sequence to be split
      *
@@ -1283,6 +1944,13 @@ public final class Pattern
      * or escape sequences in the input sequence will be given no special
      * meaning.
      *
+     * <p>
+     * 返回指定<code> String </code>的文字模式<code> String </code>
+     * 
+     *  <p>此方法产生可用于创建<code> Pattern </code>的<code> String </code>,该<code> Pattern </code>匹配字符串<code> s </code>
+     * ,如同它是一个文字模式</p>输入序列中的字符或转义序列没有特殊意义。
+     * 
+     * 
      * @param  s The string to be literalized
      * @return  A literal string replacement
      * @since 1.5
@@ -1309,6 +1977,9 @@ public final class Pattern
     /**
      * Recompile the Pattern instance from a stream.  The original pattern
      * string is read in and the object tree is recompiled from it.
+     * <p>
+     *  从流重新编译Pattern实例读入原始模式字符串,并从中重新编译对象树
+     * 
      */
     private void readObject(java.io.ObjectInputStream s)
         throws java.io.IOException, ClassNotFoundException {
@@ -1334,6 +2005,9 @@ public final class Pattern
      * string and match flags are all that is needed to completely describe
      * a Pattern. An empty pattern string results in an object tree with
      * only a Start node and a LastNode node.
+     * <p>
+     *  这个私有构造函数用于创建所有模式模式字符串和匹配标志是完全描述模式所需要的所有模式一个空模式字符串导致一个只有一个Start节点和一个LastNode节点的对象树
+     * 
      */
     private Pattern(String p, int f) {
         pattern = p;
@@ -1358,6 +2032,9 @@ public final class Pattern
     /**
      * The pattern is converted to normalizedD form and then a pure group
      * is constructed to match canonical equivalences of the characters.
+     * <p>
+     * 将模式转换为归一化形式,然后构建纯组以匹配字符的规范等效
+     * 
      */
     private void normalize() {
         boolean inCharClass = false;
@@ -1403,6 +2080,9 @@ public final class Pattern
      * Complete the character class being parsed and add a set
      * of alternations to it that will match the canonical equivalences
      * of the characters within the class.
+     * <p>
+     *  完成要解析的字符类,并向其中添加一组替换字符,以匹配类中字符的规范等价
+     * 
      */
     private int normalizeCharClass(StringBuilder newPattern, int i) {
         StringBuilder charClass = new StringBuilder();
@@ -1460,6 +2140,9 @@ public final class Pattern
      * Given a specific sequence composed of a regular character and
      * combining marks that follow it, produce the alternation that will
      * match all canonical equivalences of that sequence.
+     * <p>
+     *  给定由正则字符和其后的组合标记组成的特定序列,产生将匹配该序列的所有规范等价的交替
+     * 
      */
     private String produceEquivalentAlternation(String source) {
         int len = countChars(source, 0, 1);
@@ -1493,6 +2176,9 @@ public final class Pattern
      * are invalid because of combining class collisions, and these
      * possibilities must be removed because they are not canonically
      * equivalent.
+     * <p>
+     * 返回一个字符串数组,其中包含输入字符串中所有可能的字符排列。这用于获取一组合并标记的所有可能排序的列表请注意,由于组合类冲突,一些排列无效,这些可能性必须被去除,因为它们不是典型地等同的
+     * 
      */
     private String[] producePermutations(String input) {
         if (input.length() == countChars(input, 0, 1))
@@ -1564,6 +2250,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
      * that is the composition of the leading character with its first
      * combining mark followed by the remaining combining marks. Returns
      * null if the first two characters cannot be further composed.
+     * <p>
+     *  尝试通过组合第一个字符与其后的第一个组合标记组合输入返回一个字符串,它是前面字符的组成,其前面有第一个组合标记,后面是剩余的组合标记如果前两个字符不能进一步组合,则返回null
+     * 
      */
     private String composeOneStep(String input) {
         int len = countChars(input, 0, 2);
@@ -1581,6 +2270,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     /**
      * Preprocess any \Q...\E sequences in `temp', meta-quoting them.
      * See the description of `quotemeta' in perlfunc(1).
+     * <p>
+     *  预处理'temp'中的任何\\ Q \\ E序列,元引用它们在perlfunc(1)中查看`quotemeta'
+     * 
      */
     private void RemoveQEQuoting() {
         final int pLen = patternLength;
@@ -1612,6 +2304,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
                      * A unicode escape \[0xu] could be before this quote,
                      * and we don't want this numeric char to processed as
                      * part of the escape.
+                     * <p>
+                     * unicode转义\\ [0xu]可能在此引号之前,我们不希望此数字char被处理为转义的一部分
+                     * 
                      */
                     newtemp[j++] = '\\';
                     newtemp[j++] = 'x';
@@ -1652,6 +2347,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     /**
      * Copies regular expression to an int array and invokes the parsing
      * of the expression which will create the object tree.
+     * <p>
+     *  将正则表达式复制到int数组,并调用将创建对象树的表达式的解析
+     * 
      */
     private void compile() {
         // Handle canonical equivalences
@@ -1732,6 +2430,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * Used to print out a subtree of the Pattern to help with debugging.
+     * <p>
+     *  用于打印模式的子树以帮助调试
+     * 
      */
     private static void printObjectTree(Node node) {
         while(node != null) {
@@ -1771,6 +2472,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     /**
      * Used to accumulate information about a subtree of the object graph
      * so that optimizations can be applied to the subtree.
+     * <p>
+     *  用于累积有关对象图的子树的信息,以便优化可以应用于子树
+     * 
      */
     static final class TreeInfo {
         int minLength;
@@ -1793,10 +2497,16 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
      * The following private methods are mainly used to improve the
      * readability of the code. In order to let the Java compiler easily
      * inline them, we should not put many assertions or error checks in them.
+     * <p>
+     *  以下私有方法主要用于提高代码的可读性为了让Java编译器轻松地将它们内联,我们不应该在其中放置许多断言或错误检查
+     * 
      */
 
     /**
      * Indicates whether a particular flag is set or not.
+     * <p>
+     *  指示是否设置特定标志
+     * 
      */
     private boolean has(int f) {
         return (flags & f) != 0;
@@ -1804,6 +2514,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * Match next character, signal error if failed.
+     * <p>
+     *  匹配下一个字符,如果失败则信号错误
+     * 
      */
     private void accept(int ch, String s) {
         int testChar = temp[cursor++];
@@ -1816,6 +2529,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * Mark the end of pattern with a specific character.
+     * <p>
+     *  用特定字符标记模式的结尾
+     * 
      */
     private void mark(int c) {
         temp[patternLength] = c;
@@ -1823,6 +2539,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * Peek the next character, and do not advance the cursor.
+     * <p>
+     * 查看下一个字符,而不要前进光标
+     * 
      */
     private int peek() {
         int ch = temp[cursor];
@@ -1833,6 +2552,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * Read the next character, and advance the cursor by one.
+     * <p>
+     *  读取下一个字符,并将光标向前移动一个
+     * 
      */
     private int read() {
         int ch = temp[cursor++];
@@ -1844,6 +2566,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     /**
      * Read the next character, and advance the cursor by one,
      * ignoring the COMMENTS setting
+     * <p>
+     *  读取下一个字符,并将光标向前移动一个,忽略COMMENTS设置
+     * 
      */
     private int readEscaped() {
         int ch = temp[cursor++];
@@ -1852,6 +2577,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * Advance the cursor by one, and peek the next character.
+     * <p>
+     *  将光标前进一个,并查看下一个字符
+     * 
      */
     private int next() {
         int ch = temp[++cursor];
@@ -1863,6 +2591,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     /**
      * Advance the cursor by one, and peek the next character,
      * ignoring the COMMENTS setting
+     * <p>
+     *  将光标前进一个,并忽略下一个字符,忽略COMMENTS设置
+     * 
      */
     private int nextEscaped() {
         int ch = temp[++cursor];
@@ -1871,6 +2602,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * If in xmode peek past whitespace and comments.
+     * <p>
+     *  如果在xmode偷看过去空格和注释
+     * 
      */
     private int peekPastWhitespace(int ch) {
         while (ASCII.isSpace(ch) || ch == '#') {
@@ -1885,6 +2619,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * If in xmode parse past whitespace and comments.
+     * <p>
+     *  如果在xmode中解析过去的空格和注释
+     * 
      */
     private int parsePastWhitespace(int ch) {
         while (ASCII.isSpace(ch) || ch == '#') {
@@ -1898,6 +2635,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * xmode parse past comment to end of line.
+     * <p>
+     *  xmode将过去的注释解析到行尾
+     * 
      */
     private int parsePastLine() {
         int ch = temp[cursor++];
@@ -1908,6 +2648,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * xmode peek past comment to end of line.
+     * <p>
+     *  xmode偷看过去的评论到行尾
+     * 
      */
     private int peekPastLine() {
         int ch = temp[++cursor];
@@ -1918,6 +2661,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * Determines if character is a line separator in the current mode
+     * <p>
+     *  确定字符在当前模式下是否为行分隔符
+     * 
      */
     private boolean isLineSeparator(int ch) {
         if (has(UNIX_LINES)) {
@@ -1932,6 +2678,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * Read the character after the next one, and advance the cursor by two.
+     * <p>
+     *  读取下一个字符后,将光标前移两位
+     * 
      */
     private int skip() {
         int i = cursor;
@@ -1942,6 +2691,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * Unread one next character, and retreat cursor by one.
+     * <p>
+     *  未读取一个下一个字符,并将光标缩回一个
+     * 
      */
     private void unread() {
         cursor--;
@@ -1950,6 +2702,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     /**
      * Internal method used for handling all syntax errors. The pattern is
      * displayed with a pointer to aid in locating the syntax error.
+     * <p>
+     * 用于处理所有语法错误的内部方法模式将使用指针显示,以帮助定位语法错误
+     * 
      */
     private PatternSyntaxException error(String s) {
         return new PatternSyntaxException(s, normalizedPattern,  cursor - 1);
@@ -1958,6 +2713,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     /**
      * Determines if there is any supplementary character or unpaired
      * surrogate in the specified range.
+     * <p>
+     *  确定在指定范围内是否有任何补充字符或不成对的代理
+     * 
      */
     private boolean findSupplementary(int start, int end) {
         for (int i = start; i < end; i++) {
@@ -1970,6 +2728,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     /**
      * Determines if the specified code point is a supplementary
      * character or unpaired surrogate.
+     * <p>
+     *  确定指定的代码点是补充字符还是不成对的代理
+     * 
      */
     private static final boolean isSupplementary(int ch) {
         return ch >= Character.MIN_SUPPLEMENTARY_CODE_POINT ||
@@ -1979,12 +2740,18 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     /**
      *  The following methods handle the main parsing. They are sorted
      *  according to their precedence order, the lowest one first.
+     * <p>
+     *  以下方法处理主解析它们根据它们的优先顺序排序,最低的一个首先
+     * 
      */
 
     /**
      * The expression is parsed with branch nodes added for alternations.
      * This may be called recursively to parse sub expressions that may
      * contain alternations.
+     * <p>
+     *  该表达式用为交替添加的分支节点来解析。这可以递归地被解析以解析可能包含交替的子表达式
+     * 
      */
     private Node expr(Node end) {
         Node prev = null;
@@ -2036,6 +2803,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     @SuppressWarnings("fallthrough")
     /**
      * Parsing of sequences between alternations.
+     * <p>
+     *  序列在交替之间的解析
+     * 
      */
     private Node sequence(Node end) {
         Node head = null;
@@ -2151,6 +2921,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     @SuppressWarnings("fallthrough")
     /**
      * Parse and add a new Single or Slice.
+     * <p>
+     *  解析并添加一个新的单或切片
+     * 
      */
     private Node atom() {
         int first = 0;
@@ -2248,6 +3021,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
      * can. The first digit is always treated as a backref, but
      * multi digit numbers are only treated as a backref if at
      * least that many backrefs exist at this point in the regex.
+     * <p>
+     * 解析backref贪婪,取尽可能多的数字第一个数字总是被视为backref,但多数字数字只被视为一个backref如果至少那么多的backrefs存在于正则表达式的这一点
+     * 
      */
     private Node ref(int refNum) {
         boolean done = false;
@@ -2292,6 +3068,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
      * to handle the escape sequence.
      * If the returned value is greater than zero, it is the value that
      * matches the escape sequence.
+     * <p>
+     *  解析转义序列以确定需要匹配的实际值如果返回-1并且create为true,则会向树中添加一个新对象以处理转义序列。如果返回的值大于零,则该值为匹配转义序列
+     * 
      */
     private int escape(boolean inclass, boolean create, boolean isrange) {
         int ch = skip();
@@ -2477,6 +3256,11 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
      * Consumes a ] on the way out if consume is true. Usually consume
      * is true except for the case of [abc&&def] where def is a separate
      * right hand node with "understood" brackets.
+     * <p>
+     *  解析字符类,并返回与其匹配的节点
+     * 
+     *  如果consume为true,则在出口处使用a]通常消耗是真的,除了[abc && def]的情况,其中def是具有"理解"括号的单独的右手节点
+     * 
      */
     private CharProperty clazz(boolean consume) {
         CharProperty prev = null;
@@ -2596,6 +3380,13 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
               toLowerCase(u+212a) ==> u+006B
            (6)AngstromSign u+212b
               toLowerCase(u+212b) ==> u+00e5
+        /* <p>
+        /* 在处理下面列出的代码点的unicode case折叠时,使用"single"节点代替bit(1)大写超出范围：u + 00ff,u + 00b5到UpperCase(u + 00ff) - > u + 
+        /* 0178 toUpperCase(u + 00b5) - > u + 039c(2)LatinSmallLetterLongS u + 17f toUpperCase(u + 017f)→u + 005
+        /* 3(3)LatinSmallLetterDotlessI u + 131 toUpperCase(u + 0131)→u + 0049(4)LatinCapitalLetterIWithDotAbove
+        /*  u + 0130 toLowerCase u + 0130) - > u + 0069(5)KelvinSign u + 212a toLowerCase(u + 212a)==> u + 006B(
+        /* 6)AngstromSign u + 212b toLowerCase(u + 212b)==> u + 00e5。
+        /* 
         */
         int d;
         if (ch < 256 &&
@@ -2612,6 +3403,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     /**
      * Parse a single character or a character range in a character class
      * and return its representative node.
+     * <p>
+     *  解析字符类中的单个字符或字符范围,并返回其代表性节点
+     * 
      */
     private CharProperty range(BitClass bits) {
         int ch = peek();
@@ -2667,6 +3461,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * Parses a Unicode character family and returns its representative node.
+     * <p>
+     *  解析Unicode字符系列并返回其代表性节点
+     * 
      */
     private CharProperty family(boolean singleLetter,
                                 boolean maybeComplement)
@@ -2748,6 +3545,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     /**
      * Returns a CharProperty matching all characters belong to
      * a UnicodeScript.
+     * <p>
+     *  返回与属于UnicodeScript的所有字符匹配的CharProperty
+     * 
      */
     private CharProperty unicodeScriptPropertyFor(String name) {
         final Character.UnicodeScript script;
@@ -2761,6 +3561,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * Returns a CharProperty matching all characters in a UnicodeBlock.
+     * <p>
+     * 返回与UnicodeBlock中的所有字符匹配的CharProperty
+     * 
      */
     private CharProperty unicodeBlockPropertyFor(String name) {
         final Character.UnicodeBlock block;
@@ -2774,6 +3577,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * Returns a CharProperty matching all characters in a named property.
+     * <p>
+     *  返回与指定属性中的所有字符匹配的CharProperty
+     * 
      */
     private CharProperty charPropertyNodeFor(String name) {
         CharProperty p = CharPropertyNames.charPropertyFor(name);
@@ -2785,6 +3591,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     /**
      * Parses and returns the name of a "named capturing group", the trailing
      * ">" is consumed after parsing.
+     * <p>
+     *  解析并返回"命名捕获组"的名称,解析后消耗尾随的">"
+     * 
      */
     private String groupname(int ch) {
         StringBuilder sb = new StringBuilder();
@@ -2804,6 +3613,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
      * Parses a group and returns the head node of a set of nodes that process
      * the group. Sometimes a double return system is used where the tail is
      * returned in root.
+     * <p>
+     *  解析一个组并返回一组处理组的节点的头节点有时使用双返回系统,其中尾在根中返回
+     * 
      */
     private Node group0() {
         boolean capturingGroup = false;
@@ -2974,6 +3786,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
      * Create group head and tail nodes using double return. If the group is
      * created with anonymous true then it is a pure group and should not
      * affect group counting.
+     * <p>
+     *  使用双返回创建组头和尾节点如果组是使用匿名true创建的,那么它是一个纯组,不应影响组计数
+     * 
      */
     private Node createGroup(boolean anonymous) {
         int localIndex = localCount++;
@@ -2990,6 +3805,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     @SuppressWarnings("fallthrough")
     /**
      * Parses inlined match flags and set them appropriately.
+     * <p>
+     *  解析匹配标记并适当地设置它们
+     * 
      */
     private void addFlag() {
         int ch = peek();
@@ -3033,6 +3851,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     /**
      * Parses the second part of inlined match flags and turns off
      * flags appropriately.
+     * <p>
+     *  解析内联匹配标记的第二部分,并适当关闭标记
+     * 
      */
     private void subFlag() {
         int ch = peek();
@@ -3082,6 +3903,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
      * Processes repetition. If the next character peeked is a quantifier
      * then new nodes must be appended to handle the repetition.
      * Prev could be a single or a group, so it could be a chain of nodes.
+     * <p>
+     * 进程重复如果下一个被偷看的字符是一个量词,那么必须附加新的节点来处理重复。Prev可以是单个或一组,因此它可以是一个节点链
+     * 
      */
     private Node closure(Node prev) {
         Node atom;
@@ -3163,6 +3987,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      *  Utility method for parsing control escape sequences.
+     * <p>
+     *  解析控制转义序列的实用方法
+     * 
      */
     private int c() {
         if (cursor < patternLength) {
@@ -3173,6 +4000,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      *  Utility method for parsing octal escape sequences.
+     * <p>
+     *  解析八进制转义序列的实用方法
+     * 
      */
     private int o() {
         int n = read();
@@ -3194,6 +4024,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      *  Utility method for parsing hexadecimal escape sequences.
+     * <p>
+     *  解析十六进制转义序列的实用方法
+     * 
      */
     private int x() {
         int n = read();
@@ -3218,6 +4051,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      *  Utility method for parsing unicode escape sequences.
+     * <p>
+     *  解析unicode转义序列的实用方法
+     * 
      */
     private int cursor() {
         return cursor;
@@ -3311,6 +4147,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
      *  Creates a bit vector for matching Latin-1 values. A normal BitClass
      *  never matches values above Latin-1, and a complemented BitClass always
      *  matches values above Latin-1.
+     * <p>
+     *  创建用于匹配Latin-1值的位向量正常的BitClass从不匹配拉丁-1以上的值,并且补充的BitClass总是匹配拉丁文1以上的值
+     * 
      */
     private static final class BitClass extends BmpCharProperty {
         final boolean[] bits;
@@ -3337,6 +4176,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      *  Returns a suitably optimized, single character matcher.
+     * <p>
+     *  返回适当优化的单字符匹配器
+     * 
      */
     private CharProperty newSingle(final int ch) {
         if (has(CASE_INSENSITIVE)) {
@@ -3360,6 +4202,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      *  Utility method for creating a string slice matcher.
+     * <p>
+     *  创建字符串切片匹配器的实用方法
+     * 
      */
     private Node newSlice(int[] buf, int count, boolean hasSupplementary) {
         int[] tmp = new int[count];
@@ -3388,12 +4233,18 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
      * is made of individual elements that handle constructs in the Pattern.
      * Each type of object knows how to match its equivalent construct with
      * the match() method.
+     * <p>
+     * 以下类是表示编译正则表达式的对象树的构建组件。对象树由处理模式中的构造的各个元素组成。每种类型的对象知道如何将其等效构造与match()方法匹配
+     * 
      */
 
     /**
      * Base class for all node classes. Subclasses should override the match()
      * method as appropriate. This class is an accepting node, so its match()
      * always returns true.
+     * <p>
+     *  所有节点类的基类子类应该适当地覆盖match()方法此类是一个接受节点,因此其match()始终返回true
+     * 
      */
     static class Node extends Object {
         Node next;
@@ -3402,6 +4253,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
         }
         /**
          * This method implements the classic accept node.
+         * <p>
+         *  此方法实现经典的接受节点
+         * 
          */
         boolean match(Matcher matcher, int i, CharSequence seq) {
             matcher.last = i;
@@ -3411,6 +4265,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
         }
         /**
          * This method is good for all zero length assertions.
+         * <p>
+         *  此方法适用于所有零长度断言
+         * 
          */
         boolean study(TreeInfo info) {
             if (next != null) {
@@ -3426,6 +4283,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
          * This method implements the classic accept node with
          * the addition of a check to see if the match occurred
          * using all of the input.
+         * <p>
+         *  此方法实现经典的接受节点,添加一个检查,以查看是否使用所有输入发生匹配
+         * 
          */
         boolean match(Matcher matcher, int i, CharSequence seq) {
             if (matcher.acceptMode == Matcher.ENDANCHOR && i != matcher.to)
@@ -3442,6 +4302,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
      * This basically tries to match repeatedly at each spot in the
      * input string, moving forward after each try. An anchored search
      * or a BnM will bypass this node completely.
+     * <p>
+     * 用于可以在输入字符串中的任何位置开始的RE这基本上尝试在输入字符串中的每个位置重复匹配,在每次尝试之后向前移动锚定搜索或BnM将完全绕过该节点
+     * 
      */
     static class Start extends Node {
         int minLength;
@@ -3478,6 +4341,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /*
      * StartS supports supplementary characters, including unpaired surrogates.
+     * <p>
+     *  StartS支持补充字符,包括不成对的代理
+     * 
      */
     static final class StartS extends Start {
         StartS(Node node) {
@@ -3517,6 +4383,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
      * Node to anchor at the beginning of input. This object implements the
      * match for a \A sequence, and the caret anchor will use this if not in
      * multiline mode.
+     * <p>
+     *  节点锚定在输入的开始此对象实现\\ A序列的匹配,插入符锚将使用此,如果不是在多线模式
+     * 
      */
     static final class Begin extends Node {
         boolean match(Matcher matcher, int i, CharSequence seq) {
@@ -3536,6 +4405,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     /**
      * Node to anchor at the end of input. This is the absolute end, so this
      * should not match at the last newline before the end as $ will.
+     * <p>
+     *  节点锚定在输入的结尾这是绝对结束,所以这应该不匹配在最后一个换行符之前的$将
+     * 
      */
     static final class End extends Node {
         boolean match(Matcher matcher, int i, CharSequence seq) {
@@ -3552,6 +4424,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     /**
      * Node to anchor at the beginning of a line. This is essentially the
      * object to match for the multiline ^.
+     * <p>
+     *  节点锚定在行的开始这基本上是与多行匹配的对象
+     * 
      */
     static final class Caret extends Node {
         boolean match(Matcher matcher, int i, CharSequence seq) {
@@ -3583,6 +4458,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * Node to anchor at the beginning of a line when in unixdot mode.
+     * <p>
+     *  在unixdot模式下,节点锚定在一行的开头
+     * 
      */
     static final class UnixCaret extends Node {
         boolean match(Matcher matcher, int i, CharSequence seq) {
@@ -3610,6 +4488,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     /**
      * Node to match the location where the last match ended.
      * This is used for the \G construct.
+     * <p>
+     * 节点匹配最后一个匹配结束的位置这用于\\ G结构
+     * 
      */
     static final class LastMatch extends Node {
         boolean match(Matcher matcher, int i, CharSequence seq) {
@@ -3631,6 +4512,15 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
      *
      * Like ^ the $ operator matches at a position, it does not match the
      * line terminators themselves.
+     * <p>
+     *  节点锚定在线的末端或基于多行模式的输入结束
+     * 
+     *  当不处于多线模式时,$只能在输入的最后端匹配,除非输入结束于在最后一行终止符之前匹配的行终止符
+     * 
+     *  请注意,\\ r\n被认为是原子行终止符
+     * 
+     *  像^运算符在一个位置匹配,它不匹配行终止符本身
+     * 
      */
     static final class Dollar extends Node {
         boolean multiline;
@@ -3692,6 +4582,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     /**
      * Node to anchor at the end of a line or the end of input based on the
      * multiline mode when in unix lines mode.
+     * <p>
+     *  在unix行模式下,节点锚定在行的结尾或基于多行模式的输入结束
+     * 
      */
     static final class UnixDollar extends Node {
         boolean multiline;
@@ -3732,6 +4625,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * Node class that matches a Unicode line ending '\R'
+     * <p>
+     *  匹配以'\\ R'结尾的Unicode行的节点类
+     * 
      */
     static final class LineEnding extends Node {
         boolean match(Matcher matcher, int i, CharSequence seq) {
@@ -3762,6 +4658,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     /**
      * Abstract node class to match one character satisfying some
      * boolean property.
+     * <p>
+     *  抽象节点类匹配一个字符满足一些布尔属性
+     * 
      */
     private static abstract class CharProperty extends Node {
         abstract boolean isSatisfiedBy(int ch);
@@ -3790,6 +4689,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     /**
      * Optimized version of CharProperty that works only for
      * properties never satisfied by Supplementary characters.
+     * <p>
+     * CharProperty的优化版本,仅适用于补充字符不满足的属性
+     * 
      */
     private static abstract class BmpCharProperty extends CharProperty {
         boolean match(Matcher matcher, int i, CharSequence seq) {
@@ -3805,6 +4707,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * Node class that matches a Supplementary Unicode character
+     * <p>
+     *  与补充Unicode字符匹配的节点类
+     * 
      */
     static final class SingleS extends CharProperty {
         final int c;
@@ -3816,6 +4721,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * Optimization -- matches a given BMP character
+     * <p>
+     *  优化 - 匹配给定的BMP字符
+     * 
      */
     static final class Single extends BmpCharProperty {
         final int c;
@@ -3827,6 +4735,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * Case insensitive matches a given BMP character
+     * <p>
+     *  不区分大小写匹配给定的BMP字符
+     * 
      */
     static final class SingleI extends BmpCharProperty {
         final int lower;
@@ -3842,6 +4753,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * Unicode case insensitive matches a given Unicode character
+     * <p>
+     *  Unicode不区分大小写匹配给定的Unicode字符
+     * 
      */
     static final class SingleU extends CharProperty {
         final int lower;
@@ -3856,6 +4770,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * Node class that matches a Unicode block.
+     * <p>
+     *  与Unicode块匹配的节点类
+     * 
      */
     static final class Block extends CharProperty {
         final Character.UnicodeBlock block;
@@ -3869,6 +4786,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * Node class that matches a Unicode script
+     * <p>
+     *  与Unicode脚本匹配的节点类
+     * 
      */
     static final class Script extends CharProperty {
         final Character.UnicodeScript script;
@@ -3882,6 +4802,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * Node class that matches a Unicode category.
+     * <p>
+     *  与Unicode类别匹配的节点类
+     * 
      */
     static final class Category extends CharProperty {
         final int typeMask;
@@ -3893,6 +4816,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * Node class that matches a Unicode "type"
+     * <p>
+     *  与Unicode"类型"匹配的节点类
+     * 
      */
     static final class Utype extends CharProperty {
         final UnicodeProp uprop;
@@ -3904,6 +4830,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * Node class that matches a POSIX type.
+     * <p>
+     *  与POSIX类型匹配的节点类
+     * 
      */
     static final class Ctype extends BmpCharProperty {
         final int ctype;
@@ -3915,6 +4844,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * Node class that matches a Perl vertical whitespace
+     * <p>
+     *  与Perl垂直空格匹配的节点类
+     * 
      */
     static final class VertWS extends BmpCharProperty {
         boolean isSatisfiedBy(int cp) {
@@ -3925,6 +4857,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * Node class that matches a Perl horizontal whitespace
+     * <p>
+     *  与Perl水平空格匹配的节点类
+     * 
      */
     static final class HorizWS extends BmpCharProperty {
         boolean isSatisfiedBy(int cp) {
@@ -3937,6 +4872,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * Base class for all Slice nodes
+     * <p>
+     *  所有Slice节点的基类
+     * 
      */
     static class SliceNode extends Node {
         int[] buffer;
@@ -3953,6 +4891,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     /**
      * Node class for a case sensitive/BMP-only sequence of literal
      * characters.
+     * <p>
+     *  区分大小写的纯文本字符序列的节点类
+     * 
      */
     static final class Slice extends SliceNode {
         Slice(int[] buf) {
@@ -3976,6 +4917,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     /**
      * Node class for a case_insensitive/BMP-only sequence of literal
      * characters.
+     * <p>
+     * 用于case_insensitive / BMP纯文字字符序列的节点类
+     * 
      */
     static class SliceI extends SliceNode {
         SliceI(int[] buf) {
@@ -4001,6 +4945,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     /**
      * Node class for a unicode_case_insensitive/BMP-only sequence of
      * literal characters. Uses unicode case folding.
+     * <p>
+     *  unicode_case_insensitive / BMP纯文字字符序列的节点类使用Unicode字符大小写折叠
+     * 
      */
     static final class SliceU extends SliceNode {
         SliceU(int[] buf) {
@@ -4026,6 +4973,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     /**
      * Node class for a case sensitive sequence of literal characters
      * including supplementary characters.
+     * <p>
+     *  文字字符的区分大小写的序列的节点类,包括补充字符
+     * 
      */
     static final class SliceS extends SliceNode {
         SliceS(int[] buf) {
@@ -4055,6 +5005,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     /**
      * Node class for a case insensitive sequence of literal characters
      * including supplementary characters.
+     * <p>
+     *  包含补充字符的文字字符不区分大小写的序列的节点类
+     * 
      */
     static class SliceIS extends SliceNode {
         SliceIS(int[] buf) {
@@ -4087,6 +5040,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     /**
      * Node class for a case insensitive sequence of literal characters.
      * Uses unicode case folding.
+     * <p>
+     *  不区分大小写的字符序列的节点类使用Unicode字符大小写折叠
+     * 
      */
     static final class SliceUS extends SliceIS {
         SliceUS(int[] buf) {
@@ -4103,6 +5059,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * Returns node for matching characters within an explicit value range.
+     * <p>
+     *  返回显式值范围内匹配字符的节点
+     * 
      */
     private static CharProperty rangeFor(final int lower,
                                          final int upper) {
@@ -4114,6 +5073,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     /**
      * Returns node for matching characters within an explicit value
      * range in a case insensitive manner.
+     * <p>
+     *  以不区分大小写的方式返回显式值范围内匹配字符的节点
+     * 
      */
     private CharProperty caseInsensitiveRangeFor(final int lower,
                                                  final int upper) {
@@ -4137,6 +5099,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     /**
      * Implements the Unicode category ALL and the dot metacharacter when
      * in dotall mode.
+     * <p>
+     *  在dotall模式下,实现Unicode类别ALL和点元字符
+     * 
      */
     static final class All extends CharProperty {
         boolean isSatisfiedBy(int ch) {
@@ -4146,6 +5111,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * Node class for the dot metacharacter when dotall is not enabled.
+     * <p>
+     * 未启用dotall时,点元字符的节点类
+     * 
      */
     static final class Dot extends CharProperty {
         boolean isSatisfiedBy(int ch) {
@@ -4158,6 +5126,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     /**
      * Node class for the dot metacharacter when dotall is not enabled
      * but UNIX_LINES is enabled.
+     * <p>
+     *  未启用dotall但启用了UNIX_LINES时,点元字符的节点类
+     * 
      */
     static final class UnixDot extends CharProperty {
         boolean isSatisfiedBy(int ch) {
@@ -4167,6 +5138,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * The 0 or 1 quantifier. This one class implements all three types.
+     * <p>
+     *  0或1量词这一个类实现所有三种类型
+     * 
      */
     static final class Ques extends Node {
         Node atom;
@@ -4208,6 +5182,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
      * Handles the curly-brace style repetition with a specified minimum and
      * maximum occurrences. The * quantifier is handled as a special case.
      * This class handles the three types.
+     * <p>
+     *  处理具有指定的最小和最大出现的大括号风格重复。*量词作为特殊情况处理此类处理三种类型
+     * 
      */
     static final class Curly extends Node {
         Node atom;
@@ -4351,6 +5328,10 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
      * in a recursive way. The * quantifier is handled as a special case.
      * If capture is true then this class saves group settings and ensures
      * that groups are unset when backing off of a group match.
+     * <p>
+     *  在确定性情况下使用指定的最小和最大出现次数处理卷曲括号样式重复这是对Prolog和循环系统的迭代优化,它将以递归方式处理这个*量词作为特殊情况处理如果capture为true,此类保存组设置,并确保在
+     * 退出组匹配时取消设置组。
+     * 
      */
     static final class GroupCurly extends Node {
         Node atom;
@@ -4561,6 +5542,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
      * "next" but not the "study", so we can collect the TreeInfo
      * of each atom node without including the TreeInfo of the
      * "next".
+     * <p>
+     * 分支中每个原子节点末尾的Guard节点用于将"匹配"操作链接到"下一个"而不是"研究",因此我们可以收集每个原子节点的TreeInfo,而不包括TreeInfo下一个"
+     * 
      */
     static final class BranchConn extends Node {
         BranchConn() {};
@@ -4576,6 +5560,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
      * Handles the branching of alternations. Note this is also used for
      * the ? quantifier to branch between the case where it matches once
      * and where it does not occur.
+     * <p>
+     *  处理交替的分支注意这也用于?量化器在其匹配一次和不发生的情况之间分支
+     * 
      */
     static final class Branch extends Node {
         Node[] atoms = new Node[2];
@@ -4646,6 +5633,11 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
      * in the expression. The locals will have a negative value in them to
      * indicate that we do not want to unset the group if the reference
      * doesn't match.
+     * <p>
+     *  GroupHead保存组在本地开始的位置,并在匹配完成后恢复它们
+     * 
+     *  当在表达式中稍后访问对此组的引用时,使用matchRef。本地值在其中具有负值,以指示如果引用不匹配,我们不想取消设置组
+     * 
      */
     static final class GroupHead extends Node {
         int localIndex;
@@ -4672,6 +5664,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
      * Recursive reference to a group in the regular expression. It calls
      * matchRef because if the reference fails to match we would not unset
      * the group.
+     * <p>
+     * 递归引用正则表达式中的组它调用matchRef,因为如果引用不匹配,我们不会取消设置组
+     * 
      */
     static final class GroupRef extends Node {
         GroupHead head;
@@ -4696,6 +5691,11 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
      *
      * The GroupTail node is also used when a previous group is referenced,
      * and in that case no group information needs to be set.
+     * <p>
+     *  当组成功匹配时,GroupTail处理组开始和结束位置的设置。它还必须能够取消设置必须回退的组
+     * 
+     *  当引用前一个组时,也会使用GroupTail节点,在这种情况下,不需要设置组信息
+     * 
      */
     static final class GroupTail extends Node {
         int localIndex;
@@ -4731,6 +5731,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * This sets up a loop to handle a recursive quantifier structure.
+     * <p>
+     *  这设置了一个循环来处理递归的量词结构
+     * 
      */
     static final class Prolog extends Node {
         Loop loop;
@@ -4750,6 +5753,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
      * is called from the Prolog to save the index of where the group
      * beginning is stored. A zero length group check occurs in the
      * normal match but is skipped in the matchInit.
+     * <p>
+     *  处理贪心Curly的重复计数从Prolog中调用matchInit以保存存储组开头的索引零长度组检查在正常匹配中发生,但在matchInit中被跳过
+     * 
      */
     static class Loop extends Node {
         Node body;
@@ -4822,6 +5828,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
      * is called from the Prolog to save the index of where the group
      * beginning is stored. A zero length group check occurs in the
      * normal match but is skipped in the matchInit.
+     * <p>
+     * 处理不愿意的Curly的重复计数从Prolog中调用matchInit以保存存储组开头的索引零长度组检查在正常匹配中发生,但在matchInit中被跳过
+     * 
      */
     static final class LazyLoop extends Loop {
         LazyLoop(int countIndex, int beginIndex) {
@@ -4880,6 +5889,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     /**
      * Refers to a group in the regular expression. Attempts to match
      * whatever the group referred to last matched.
+     * <p>
+     *  引用正则表达式中的一个组尝试匹配上次匹配的引用的组
+     * 
      */
     static class BackRef extends Node {
         int groupIndex;
@@ -4975,6 +5987,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
      * finding the atom efficiently without passing an instance of it
      * (greedy problem) and without a lot of wasted search time (reluctant
      * problem).
+     * <p>
+     *  搜索直到其原子的下一个实例这对于有效地查找原子而不通过其实例(贪婪问题)和没有大量​​浪费的搜索时间(不情愿的问题)是有用的,
+     * 
      */
     static final class First extends Node {
         Node atom;
@@ -5043,6 +6058,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * Zero width positive lookahead.
+     * <p>
+     *  零宽正前瞻
+     * 
      */
     static final class Pos extends Node {
         Node cond;
@@ -5068,6 +6086,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * Zero width negative lookahead.
+     * <p>
+     *  零宽度负前瞻
+     * 
      */
     static final class Neg extends Node {
         Node cond;
@@ -5101,6 +6122,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     /**
      * For use with lookbehinds; matches the position where the lookbehind
      * was encountered.
+     * <p>
+     *  用于lookbehinds;匹配遇到lookbehind的位置
+     * 
      */
     static Node lookbehindEnd = new Node() {
         boolean match(Matcher matcher, int i, CharSequence seq) {
@@ -5110,6 +6134,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * Zero width positive lookbehind.
+     * <p>
+     *  零宽度正后仰
+     * 
      */
     static class Behind extends Node {
         Node cond;
@@ -5144,6 +6171,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     /**
      * Zero width positive lookbehind, including supplementary
      * characters or unpaired surrogates.
+     * <p>
+     * 零宽度正后仰,包括补充字符或不成对的代理
+     * 
      */
     static final class BehindS extends Behind {
         BehindS(Node cond, int rmax, int rmin) {
@@ -5177,6 +6207,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * Zero width negative lookbehind.
+     * <p>
+     *  零宽度负后备
+     * 
      */
     static class NotBehind extends Node {
         Node cond;
@@ -5211,6 +6244,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     /**
      * Zero width negative lookbehind, including supplementary
      * characters or unpaired surrogates.
+     * <p>
+     *  零宽度负期望,包括补充字符或不成对的代理
+     * 
      */
     static final class NotBehindS extends NotBehind {
         NotBehindS(Node cond, int rmax, int rmin) {
@@ -5243,6 +6279,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * Returns the set union of two CharProperty nodes.
+     * <p>
+     *  返回两个CharProperty节点的集合
+     * 
      */
     private static CharProperty union(final CharProperty lhs,
                                       final CharProperty rhs) {
@@ -5253,6 +6292,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * Returns the set intersection of two CharProperty nodes.
+     * <p>
+     *  返回两个CharProperty节点的交集
+     * 
      */
     private static CharProperty intersection(final CharProperty lhs,
                                              final CharProperty rhs) {
@@ -5263,6 +6305,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * Returns the set difference of two CharProperty nodes.
+     * <p>
+     *  返回两个CharProperty节点的设置差异
+     * 
      */
     private static CharProperty setDifference(final CharProperty lhs,
                                               final CharProperty rhs) {
@@ -5277,6 +6322,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
      * characters include underscores, letters, and digits. Non spacing marks
      * can are also part of a word if they have a base character, otherwise
      * they are ignored for purposes of finding word boundaries.
+     * <p>
+     *  句柄字边界包括一个字段,允许这一类处理不同类型的字边界,我们可以匹配。字符包括下划线,字母和数字。非间距标记也可以是字的一部分,如果它们有基本字符,否则为了找到单词边界而被忽略
+     * 
      */
     static final class Bound extends Node {
         static int LEFT = 0x1;
@@ -5333,6 +6381,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     /**
      * Non spacing marks only count as word characters in bounds calculations
      * if they have a base character.
+     * <p>
+     * 如果具有基本字符,则非间距标记仅在边界计算中计为字字符
+     * 
      */
     private static boolean hasBaseCharacter(Matcher matcher, int i,
                                             CharSequence seq)
@@ -5377,6 +6428,18 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
      * next occurrence of the subset in the pattern.
      *
      * Boyer-Moore search methods adapted from code by Amy Yu.
+     * <p>
+     *  尝试使用Boyer-Moore字符串匹配算法匹配输入中的切片该算法基于如下思想：如果匹配从右到左匹配,则模式可以在搜索文本中向前移动得更远
+     * <p>
+     *  将模式与输入的一个字符(从模式中最右边的字符到左边)进行比较如果已找到所有匹配模式的字符,如果字符不匹配,则模式向右移动一个距离,即最多两个函数,错误的字符移位和良好的后缀移位这种移位在一个时间检查上
+     * 比初始的一个位置更快地移动尝试的匹配位置通过输入。
+     * <p>
+     * 错误的字符移位基于不匹配的文本中的字符如果字符没有出现在模式中,则模式可以完全移动到错误字符之外。如果字符在模式中出现,则模式可以移位以将该模式与该字符的下一个出现对齐
+     * <p>
+     *  良好的后缀移位是基于这样的想法,即图案右侧的一些子集已经匹配。当发现坏的字符时,如果子集在图案中不再出现,则图案可以向右移动图案长度,或者到模式中子集的下一次出现的距离的量
+     * 
+     *  Boyer-Moore的搜索方法改编自Amy Yu的代码
+     * 
      */
     static class BnM extends Node {
         int[] buffer;
@@ -5389,6 +6452,9 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
          * are used to see if chars match; This keeps the tables small
          * and covers the heavily used ASCII range, but occasionally
          * results in an aliased match for the bad character shift.
+         * <p>
+         * Pre计算产生错误字符移位和良好后缀移位所需的数组只有最后7位用于查看chars是否匹配;这会使表格保持较小,并覆盖大量使用的ASCII范围,但偶尔会导致错误字符移位的别名匹配
+         * 
          */
         static Node optimize(Node node) {
             if (!(node instanceof Slice)) {
@@ -5491,6 +6557,9 @@ NEXT:       while (i <= last) {
     /**
      * Supplementary support version of BnM(). Unpaired surrogates are
      * also handled by this class.
+     * <p>
+     *  BnM()的补充支持版本此类也处理未配对的代理
+     * 
      */
     static final class BnMS extends BnM {
         int lengthInChars;
@@ -5542,6 +6611,9 @@ NEXT:       while (i <= last) {
 
     /**
      *  This must be the very first initializer.
+     * <p>
+     *  这必须是第一个初始化程序
+     * 
      */
     static Node accept = new Node();
 
@@ -5749,6 +6821,10 @@ NEXT:       while (i <= last) {
     /**
      * Creates a predicate which can be used to match a string.
      *
+     * <p>
+     *  创建一个可用于匹配字符串的谓词
+     * 
+     * 
      * @return  The predicate which can be used for matching on a string
      * @since   1.8
      */
@@ -5780,6 +6856,13 @@ NEXT:       while (i <= last) {
      * execution of the terminal stream operation.  Otherwise, the result of the
      * terminal stream operation is undefined.
      *
+     * <p>
+     *  从给定输入序列创建围绕此模式匹配的流
+     * 
+     * <p>此方法返回的流包含输入序列的每个子字符串,由匹配此模式的另一个子序列终止,或由输入序列的末尾终止。流中的子字符串按照它们出现的顺序输入Trailing空字符串将被丢弃,并且不会在流中遇到
+     * 
+     *  <p>如果此模式与输入的任何子序列不匹配,则生成的流只有一个元素,即字符串形式的输入序列
+     * 
      * @param   input
      *          The character sequence to be split
      *

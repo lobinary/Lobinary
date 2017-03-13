@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -176,6 +177,68 @@ import java.util.*;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  <code> SpringLayout </code>根据一组约束布置其关联容器的子项请参见<a href=\"https://docsoraclecom/javase/tutorial/uiswing/layout/springhtml\">
+ * 如何使用SpringLayout </a>在<em> Java教程</em>中使用<code> SpringLayout </code>的示例。
+ * 
+ * <p>
+ * 由<code> Spring </code>对象表示的每个约束控制两个组件边之间的垂直或水平距离。边可以属于容器的任何子项,也可以属于容器本身。
+ * 例如,组件可以使用控制组件的西(左)和东(右)边缘之间的距离的约束来表示。组件的可允许的<em> y </em>坐标可以通过约束北(顶部)边缘和其容器的北边缘。
+ * 
+ * <P>
+ * 一个<code> SpringLayout </code> -controlled容器的每个子对象以及容器本身都有一组与之相关的约束。
+ * 这些约束由一个<code> SpringLayoutConstraints </code> <code> SpringLayout </code>创建约束,使它们的关联组件具有由组件的{@link javaawtComponent#getMinimumSize}
+ *  {@link javaawtComponent#getPreferredSize}和{@link javaawtComponent#getPreferredSize}返回的最小, getMaximum
+ * Size}方法<em> x </em>和<em> y </em>位置最初没有约束,所以在你限制它们之前,<code> Component </code>到父<code> Container </code>
+ * 的<code> Insets </code>。
+ * 一个<code> SpringLayout </code> -controlled容器的每个子对象以及容器本身都有一组与之相关的约束。
+ * 
+ * <p>
+ * 您可以通过几种方式更改组件的约束。您可以使用{@link #putConstraint putConstraint}方法之一建立一个弹簧链接同一容器中两个组件的边缘。
+ * 或者,您可以获取相应的<code> SpringLayoutConstraints </code >对象使用{@link #getConstraints getConstraints},然后修改其中一个
+ * 或多个弹簧或者您可以使用{@link #getConstraint getConstraint}获取组件特定边缘的弹簧,并修改它您还可以将您自己的当使用{@link Container#add(Component,Object)}
+ * 将组件添加到其容器时,通过指定constraints对象,可以使用组件创建<code> SpringLayoutConstraints </code>。
+ * 您可以通过几种方式更改组件的约束。您可以使用{@link #putConstraint putConstraint}方法之一建立一个弹簧链接同一容器中两个组件的边缘。
+ * 
+ * <p>
+ * 代表每个约束的<code> Spring </code>对象具有最小值,首选值,最大值和当前值。
+ * 根据{@link Spring中给出的公式,spring的当前值介于最小值和最大值之间#sum}方法描述当最小值,首选值和最大值相同时,当前值总是等于它们;这个不灵活的弹簧被称为<em> strut </em>
+ * 你可以使用工厂方法创建struts {@link Spring#constant(int)} <code> Spring </code>类还提供了工厂方法创建其他类型的弹簧,包括依赖于其他弹簧的弹簧。
+ * 代表每个约束的<code> Spring </code>对象具有最小值,首选值,最大值和当前值。
+ * 
+ * <p>
+ * 在<code> SpringLayout </code>中,每个边缘的位置取决于只有一个其他边缘的位置。
+ * 如果随后添加了一个约束来为边缘创建新的绑定,则丢弃前一个绑定,并且边缘保留取决于单个边缘弹簧应该只连接在容器和其直接孩子的边缘之间;当提供链接来自不同容器(内部或外部)的组件边缘的约束时,<code> 
+ * SpringLayout </code>的行为是未定义的。
+ * 在<code> SpringLayout </code>中,每个边缘的位置取决于只有一个其他边缘的位置。
+ * 
+ * <h3>
+ *  SpringLayout与其他布局管理器
+ * </h3>
+ * 
+ * <blockquote>
+ * <hr>
+ * <strong>注意：</strong>与许多布局管理器不同,<code> SpringLayout </code>不会自动设置其管理的组件的位置如果您手动编码使用<code> SpringLayout
+ *  </code >,请记住通过约束西/东和北/南位置来初始化组件位置。
+ * <p>
+ *  根据您使用的约束,您可能还需要明确设置容器的大小
+ * <hr>
+ * </blockquote>
+ * 
+ * <p>
+ *  尽管<code> SpringLayout </code>的简单,它可以模拟大多数其他布局管理器的行为对于某些功能,例如由<code> FlowLayout </code>提供的换行符,您需要创建一个
+ * 专用子类的<code> Spring </code>类。
+ * 
+ * <p>
+ * <code> SpringLayout </code>还提供了一种解决许多难以解决的布局问题的方法,这些问题不能通过<code> Box </code> es的嵌套组合来解决。
+ *  <code> LayoutManager2 </code>正确合并,因此可以嵌套其他布局管理器 - 这种技术可以优于创建其他布局管理器隐含的约束。
+ * <p>
+ *  <code> SpringLayout </code>的布局操作的渐近复杂性在约束(和/或分量)的数量上是线性的,
+ * <p>
+ * <strong>警告：</strong>此类的序列化对象将不与未来的Swing版本兼容当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ * 支持长期存储所有JavaBeans&trade;已添加到<code> javabeans </code>包中请参见{@link javabeansXMLEncoder}。
+ * 
+ * 
  * @see Spring
  * @see SpringLayout.Constraints
  *
@@ -194,27 +257,43 @@ public class SpringLayout implements LayoutManager2 {
 
     /**
      * Specifies the top edge of a component's bounding rectangle.
+     * <p>
+     *  指定组件边界矩形的顶边
+     * 
      */
     public static final String NORTH  = "North";
 
     /**
      * Specifies the bottom edge of a component's bounding rectangle.
+     * <p>
+     *  指定组件边界矩形的底边
+     * 
      */
     public static final String SOUTH  = "South";
 
     /**
      * Specifies the right edge of a component's bounding rectangle.
+     * <p>
+     *  指定组件边界矩形的右边缘
+     * 
      */
     public static final String EAST   = "East";
 
     /**
      * Specifies the left edge of a component's bounding rectangle.
+     * <p>
+     *  指定组件边界矩形的左边缘
+     * 
      */
     public static final String WEST   = "West";
 
     /**
      * Specifies the horizontal center of a component's bounding rectangle.
      *
+     * <p>
+     *  指定组件边界矩形的水平中心
+     * 
+     * 
      * @since 1.6
      */
     public static final String HORIZONTAL_CENTER   = "HorizontalCenter";
@@ -222,6 +301,10 @@ public class SpringLayout implements LayoutManager2 {
     /**
      * Specifies the vertical center of a component's bounding rectangle.
      *
+     * <p>
+     *  指定组件边界矩形的垂直中心
+     * 
+     * 
      * @since 1.6
      */
     public static final String VERTICAL_CENTER   = "VerticalCenter";
@@ -229,6 +312,10 @@ public class SpringLayout implements LayoutManager2 {
     /**
      * Specifies the baseline of a component.
      *
+     * <p>
+     * 指定组件的基线
+     * 
+     * 
      * @since 1.6
      */
     public static final String BASELINE   = "Baseline";
@@ -236,6 +323,10 @@ public class SpringLayout implements LayoutManager2 {
     /**
      * Specifies the width of a component's bounding rectangle.
      *
+     * <p>
+     *  指定组件边界矩形的宽度
+     * 
+     * 
      * @since 1.6
      */
     public static final String WIDTH = "Width";
@@ -243,6 +334,10 @@ public class SpringLayout implements LayoutManager2 {
     /**
      * Specifies the height of a component's bounding rectangle.
      *
+     * <p>
+     *  指定组件边界矩形的高度
+     * 
+     * 
      * @since 1.6
      */
     public static final String HEIGHT = "Height";
@@ -313,6 +408,37 @@ public class SpringLayout implements LayoutManager2 {
      * <code>Constraints</code>
      * object throws away the <em>least recently set</em>
      * constraint so as to make the formulas hold.
+     * <p>
+     *  一个<code> Constraints </code>对象保存着一个约束,它控制着一个组件在一个由<code> SpringLayout </code>控制的容器中的大小和位置变化。
+     * </code> <code> Rectangle </code>,因为它具有<code> x </code>,<code> y </code>,<code> width </code>和<code> h
+     * eight <然而,在<code> Constraints </code>对象中,这些属性具有<code> Spring </code>值而不是整数。
+     *  一个<code> Constraints </code>对象保存着一个约束,它控制着一个组件在一个由<code> SpringLayout </code>控制的容器中的大小和位置变化。
+     * 此外,<code> Constraints </code>对象可以被操纵为四个边 - 北,南,东和西 - 使用<code>约束</code>属性。
+     * 
+     * <p>
+     * 下面的公式对于<code> Constraints </code>对象总是正确的(这里WEST和<code> x </code>是同义词,NORTH和<code> y </code>)：
+     * 
+     * <pre>
+     *  EAST = WEST + WIDTH SOUTH = NORTH + HEIGHT HORIZONTAL_CENTER = WEST + WIDTH / 2 VERTICAL_CENTER = NO
+     * RTH + HEIGHT / 2 ABSOLUTE_BASELINE = NORTH + RELATIVE_BASELINE *。
+     * </pre>
+     * <p>
+     *  例如,如果您指定了WIDTH和WEST(X)位置,则EAST计算为WEST + WIDTH。如果您改为指定WIDTH和EAST位置,则WEST(X)位置计算为EAST  -  WIDTH
+     * <p>
+     *  [RELATIVE_BASELINE是在调用SpringLayoutConstraints(Component)构造函数时或在使用SpringLayout对象注册约束对象时自动设置的专用约束]
+     * <p>
+     * <b>注意</b>：在本文档中,操作符代表<code> Spring </code>类中的方法。
+     * 例如,"a + b"等于<code> Springsum(a,b)</code >,并且"a-b"等于<code> Springsum(a,Springminus(b))</code>有关弹簧算法的更多
+     * 细节,请参阅{@link Spring Spring API文档}。
+     * <b>注意</b>：在本文档中,操作符代表<code> Spring </code>类中的方法。
+     * 
+     * <p>
+     * 
+     * 因为<code> Constraints </code>对象的属性 - 表示它的边,大小和位置 - 都可以独立设置,但是是相互关联的,一个<code> Constraints </code> </em>
+     * 例如,如果已设置<code> WEST </code>,<code> WIDTH </code>和<code> EAST </code>边,必须执行步骤以确保为了做到这一点,<code> Constra
+     * ints </code>对象抛出了<em>最近最近设置的</em>约束,以便使公式保持不变。
+     * 
+     * 
      * @since 1.4
      */
     public static class Constraints {
@@ -334,6 +460,9 @@ public class SpringLayout implements LayoutManager2 {
 
        /**
         * Creates an empty <code>Constraints</code> object.
+        * <p>
+        *  创建一个空的<code> Constraints </code>对象
+        * 
         */
        public Constraints() {
        }
@@ -345,6 +474,11 @@ public class SpringLayout implements LayoutManager2 {
         * The <code>height</code> and <code>width</code> springs
         * have <code>null</code> values.
         *
+        * <p>
+        * 使用<code> x </code>和<code> y </code>属性的指定值创建<code> Constraints </code>对象<code> height </code>和<code> w
+        * idth < / code> springs具有<code> null </code>值。
+        * 
+        * 
         * @param x  the spring controlling the component's <em>x</em> value
         * @param y  the spring controlling the component's <em>y</em> value
         */
@@ -363,6 +497,11 @@ public class SpringLayout implements LayoutManager2 {
         * <code>Constraints</code> object of a given component,
         * it replaces them with suitable defaults.
         *
+        * <p>
+        *  创建<code> x </code>,<code> y </code>,<code> width </code>和<code> height </code> / code>属性注意：如果<code> 
+        * SpringLayout </code>类在给定组件的<code> Constraints </code>对象中遇到<code> null </code>值,。
+        * 
+        * 
         * @param x  the spring value for the <code>x</code> property
         * @param y  the spring value for the <code>y</code> property
         * @param width  the spring value for the <code>width</code> property
@@ -387,6 +526,12 @@ public class SpringLayout implements LayoutManager2 {
          * methods, which track the size characteristics of the component
          * when they change.
          *
+         * <p>
+         * 使用适当的<code> x </code>,<code> y </code>,<code> width </code>和<code> height </code>弹簧创建<组件,<code> c </code>
+         *  <code> x </code>和<code> y </code>弹簧是在调用此方法时,组件位置初始化的常量弹簧< / code>和<code> height </code>弹簧是由<code> Sp
+         * ringwidth()</code>和<code> Springheight()</code>方法创建的特殊弹簧,组件。
+         * 
+         * 
          * @param c  the component whose characteristics will be reflected by this Constraints object
          * @throws NullPointerException if <code>c</code> is null.
          * @since 1.5
@@ -503,6 +648,10 @@ public class SpringLayout implements LayoutManager2 {
         * which controls the <code>x</code> value
         * of a component's location.
         *
+        * <p>
+        *  设置<code> x </code>属性,它控制组件位置的<code> x </code>值
+        * 
+        * 
         * @param x the spring controlling the <code>x</code> value
         *          of a component's location
         *
@@ -517,6 +666,10 @@ public class SpringLayout implements LayoutManager2 {
        /**
         * Returns the value of the <code>x</code> property.
         *
+        * <p>
+        *  返回<code> x </code>属性的值
+        * 
+        * 
         * @return the spring controlling the <code>x</code> value
         *         of a component's location
         *
@@ -541,6 +694,10 @@ public class SpringLayout implements LayoutManager2 {
         * which controls the <code>y</code> value
         * of a component's location.
         *
+        * <p>
+        * 设置<code> y </code>属性,它控制组件位置的<code> y </code>值
+        * 
+        * 
         * @param y the spring controlling the <code>y</code> value
         *          of a component's location
         *
@@ -555,6 +712,10 @@ public class SpringLayout implements LayoutManager2 {
        /**
         * Returns the value of the <code>y</code> property.
         *
+        * <p>
+        *  返回<code> y </code>属性的值
+        * 
+        * 
         * @return the spring controlling the <code>y</code> value
         *         of a component's location
         *
@@ -576,6 +737,9 @@ public class SpringLayout implements LayoutManager2 {
 /*
                } else if (defined(verticalHistory, BASELINE, VERTICAL_CENTER)) {
                    y = scale(difference(baseline, heightToRelativeBaseline(scale(verticalCenter, 2))), 1f/(1-2*0.5f));
+                   y = scale(difference(baseline, heightToRelativeBaseline(scale(verticalCenter, 2))), 1f/(1-2* <p>
+                   y = scale(difference(baseline, heightToRelativeBaseline(scale(verticalCenter, 2))), 1f/(1-2*  }; if(verticalHistory,BASELINE,VERTICAL_CENTER)){y = scale(difference(baseline,heightToRelativeBaseline(scale(verticalCenter,2))),1f /(1-2 * 05f)。
+                   y = scale(difference(baseline, heightToRelativeBaseline(scale(verticalCenter, 2))), 1f/(1-2* 
 */
                }
            }
@@ -586,6 +750,10 @@ public class SpringLayout implements LayoutManager2 {
         * Sets the <code>width</code> property,
         * which controls the width of a component.
         *
+        * <p>
+        *  设置<code> width </code>属性,它控制组件的宽度
+        * 
+        * 
         * @param width the spring controlling the width of this
         * <code>Constraints</code> object
         *
@@ -600,6 +768,10 @@ public class SpringLayout implements LayoutManager2 {
        /**
         * Returns the value of the <code>width</code> property.
         *
+        * <p>
+        *  返回<code> width </code>属性的值
+        * 
+        * 
         * @return the spring controlling the width of a component
         *
         * @see #setWidth
@@ -620,6 +792,10 @@ public class SpringLayout implements LayoutManager2 {
         * Sets the <code>height</code> property,
         * which controls the height of a component.
         *
+        * <p>
+        *  设置<code> height </code>属性,它控制组件的高度
+        * 
+        * 
         * @param height the spring controlling the height of this <code>Constraints</code>
         * object
         *
@@ -634,6 +810,10 @@ public class SpringLayout implements LayoutManager2 {
        /**
         * Returns the value of the <code>height</code> property.
         *
+        * <p>
+        *  返回<code> height </code>属性的值
+        * 
+        * 
         * @return the spring controlling the height of a component
         *
         * @see #setHeight
@@ -731,6 +911,16 @@ public class SpringLayout implements LayoutManager2 {
         * <b>Note:</b> This method can affect {@code x} and {@code y} values
         * previously set for this {@code Constraints}.
         *
+        * <p>
+        * 设置弹簧控制指定的边缘边缘必须具有以下值之一：<code> SpringLayoutNORTH </code>,<code> SpringLayoutSOUTH </code>,<code> Sprin
+        * gLayoutEAST </code>,<code> SpringLayoutWEST <代码>,<code> SpringLayoutHORIZONTAL_CENTER </code>,<code> 
+        * SpringLayoutVERTICAL_CENTER </code>,<code> SpringLayoutBASELINE </code>,<code> SpringLayoutWIDTH </code>
+        * 或<code> SpringLayoutHEIGHT </code> <code> String </code>作为边界传递的值,不执行任何操作对于<code> null </code>边缘,会抛出<code>
+        *  NullPointerException </code>。
+        * <p>
+        *  <b>注意：</b>此方法会影响先前为此{@code Constraints}设定的{@code x}和{@code y}值,
+        * 
+        * 
         * @param edgeName the edge to be set
         * @param s the spring controlling the specified edge
         *
@@ -788,6 +978,14 @@ public class SpringLayout implements LayoutManager2 {
         * <code>null</code> will be returned. Throws
         * <code>NullPointerException</code> for a <code>null</code> edge.
         *
+        * <p>
+        * 返回指定边的值,可能是一个派生值,或者甚至<code> null </code>边必须有以下值之一：<code> SpringLayoutNORTH </code>,<code> SpringLayou
+        * tSOUTH <代码>,<code> SpringLayoutEAST </code>,<code> SpringLayoutWEST </code>,<code> SpringLayoutHORIZO
+        * NTAL_CENTER </code>,<code> SpringLayoutVERTICAL_CENTER </code>,<code> SpringLayoutBASELINE </code> > 
+        * SpringLayoutWIDTH </code>或<code> SpringLayoutHEIGHT </code>对于任何其他作为边界传递的<code> String </code>值,将返回<code>
+        *  null </code> Throws <code> NullPointerException <代码>用于<code> null </code>边。
+        * 
+        * 
         * @param edgeName the edge whose value
         *                 is to be returned
         *
@@ -867,6 +1065,28 @@ public class SpringLayout implements LayoutManager2 {
            getConstraint().setValue(size);
        }
 
+       /* <p>
+       /* Spring [] allSprings = {x,y,width,height,east,south,horizo​​ntalCenter,verticalCenter,baseline}; for(
+       /* Spring s：allSprings){if(s！= null){ssetValue(SpringUNSET); }}}}。
+       /* 
+       /*  private static class SpringProxy extends Spring {private String edgeName;私有组件c; private SpringLayout l;。
+       /* 
+       /*  public SpringProxy(String edgeName,Component c,SpringLayout l){thisedgeName = edgeName; thisc = c; thisl = 1; }
+       /* }。
+       /* 
+       /*  private spring getConstraint(){return lgetConstraints(c)getConstraint(edgeName); }}
+       /* 
+       /*  public int getMinimumValue(){return getConstraint()getMinimumValue(); }}
+       /* 
+       /*  public int getPreferredValue(){return getConstraint()getPreferredValue(); }}
+       /* 
+       /*  public int getMaximumValue(){return getConstraint()getMaximumValue(); }}
+       /* 
+       /* public int getValue(){return getConstraint()getValue(); }}
+       /* 
+       /*  public void setValue(int size){getConstraint()setValue(size); }}
+       /* 
+       /* 
        /*pp*/ boolean isCyclic(SpringLayout l) {
            return l.isCyclic(getConstraint());
        }
@@ -878,6 +1098,13 @@ public class SpringLayout implements LayoutManager2 {
 
     /**
      * Constructs a new <code>SpringLayout</code>.
+     * <p>
+     *  return lisCyclic(getConstraint()); }}
+     * 
+     *  public String toString(){return"SpringProxy for"+ edgeName +"edge of"+ cgetName()+""; }}
+     * 
+     *  / **构造一个新的<code> SpringLayout </code>
+     * 
      */
     public SpringLayout() {}
 
@@ -943,12 +1170,27 @@ public class SpringLayout implements LayoutManager2 {
      * Has no effect,
      * since this layout manager does not
      * use a per-component string.
+     * <p>
+     *  if(s == null){return false; } if(cyclicSpringscontains(s)){return true; } if(acyclicSpringscontains(
+     * s)){return false; } cyclicSpringsadd(s); boolean result = sisCyclic(this); if(！result){acyclicSpringsadd(s); cyclicSpringsremove(s); }
+     *  else {Systemerrprintln(s +"is cyclic"); } return result; }}。
+     * 
+     *  private Spring abandonCycles(Spring s){return isCyclic(s)? cyclicReference：s; }}
+     * 
+     *  // LayoutManager方法
+     * 
+     * / **没有效果,因为这个布局管理器不使用每个组件的字符串
+     * 
      */
     public void addLayoutComponent(String name, Component c) {}
 
     /**
      * Removes the constraints associated with the specified component.
      *
+     * <p>
+     *  删除与指定组件关联的约束
+     * 
+     * 
      * @param c the component being removed from the container
      */
     public void removeLayoutComponent(Component c) {
@@ -991,6 +1233,10 @@ public class SpringLayout implements LayoutManager2 {
      * <code>SpringLayout.Constraints</code>,
      * associates the constraints with the specified component.
      * <p>
+     * <p>
+     *  如果<code>约束</code>是<code> SpringLayoutConstraints </code>的一个实例,将约束与指定的组件
+     * <p>
+     * 
      * @param   component the component being added
      * @param   constraints the component's constraints
      *
@@ -1004,6 +1250,9 @@ public class SpringLayout implements LayoutManager2 {
 
     /**
      * Returns 0.5f (centered).
+     * <p>
+     *  返回05f(居中)
+     * 
      */
     public float getLayoutAlignmentX(Container p) {
         return 0.5f;
@@ -1011,6 +1260,9 @@ public class SpringLayout implements LayoutManager2 {
 
     /**
      * Returns 0.5f (centered).
+     * <p>
+     *  返回05f(居中)
+     * 
      */
     public float getLayoutAlignmentY(Container p) {
         return 0.5f;
@@ -1029,6 +1281,12 @@ public class SpringLayout implements LayoutManager2 {
      *     value(e1, c1) = value(e2, c2) + pad</pre>
      * to take place during all subsequent layout operations.
      * <p>
+     * <p>
+     *  链接边缘之间的固定距离的组件<code> c1 </code>到edge <code> c2 </code>的边缘<code> e2 </code>将导致赋值
+     * <pre>
+     *  在所有后续布局操作期间发生的值(e1,c1)=值(e2,c2)+ pad </
+     * <p>
+     * 
      * @param   e1 the edge of the dependent
      * @param   c1 the component of the dependent
      * @param   pad the fixed distance between dependent and anchor
@@ -1056,6 +1314,14 @@ public class SpringLayout implements LayoutManager2 {
      * <code>SpringLayout.HORIZONTAL_CENTER</code> or
      * <code>SpringLayout.BASELINE</code>.
      * <p>
+     * <p>
+     * 组件<code> c2 </code>的组件<code> c1 </code>到edge <code> e2 </code>的边缘<code> e1 </code> As edge <code>(e2,
+     * c2) <code>(e2,c2)</code>和<code> s </code>的(弹簧)和来计算</code> changes value,edge <code>(e1,c1)</代码>每个边必须有
+     * 以下值之一：<code> SpringLayoutNORTH </code>,<code> SpringLayoutEOU </code>,<code> SpringLayoutEAST </code>
+     * ,<code> SpringLayoutWEST </code> > SpringLayoutVERTICAL_CENTER </code>,<code> SpringLayoutHORIZONTAL_
+     * CENTER </code>或<code> SpringLayoutBASELINE </code>。
+     * <p>
+     * 
      * @param   e1 the edge of the dependent
      * @param   c1 the component of the dependent
      * @param   s the spring linking dependent and anchor
@@ -1141,6 +1407,11 @@ public class SpringLayout implements LayoutManager2 {
      * whose characteristics track the characteristics
      * of the component as they change.
      *
+     * <p>
+     * 返回指定组件的约束注意,与<code> GridBagLayout </code> <code> getConstraints </code>方法不同,此方法不克隆约束如果没有约束与此组件相关联,默认约
+     * 束对象定位在0,0相对于父的Insets及其宽度/高度约束到组件的最小,最大和首选大小在调用此方法时大小特征不会冻结;而是此方法返回一个约束对象,其特性跟踪组件的特性,因为它们改变。
+     * 
+     * 
      * @param       c the component whose constraints will be returned
      *
      * @return      the constraints for the specified component
@@ -1175,6 +1446,10 @@ public class SpringLayout implements LayoutManager2 {
      * internally by <code>SpringLayout</code> so that
      * the layout operation always terminates.
      *
+     * <p>
+     * 返回控制组件的指定边缘与其父元素的顶部或左边缘之间的距离的弹簧此方法将返回一个代理,该代理跟踪边的特性,即使边缘是随后的反弹代理意在用于允许用户以任何顺序定义布局的约束的构建器环境中使用,但代理提供了在
+     * 布局的约束之间创建循环依赖的方法。
+     * 
      * @param edgeName must be one of
      * <code>SpringLayout.NORTH</code>,
      * <code>SpringLayout.SOUTH</code>,

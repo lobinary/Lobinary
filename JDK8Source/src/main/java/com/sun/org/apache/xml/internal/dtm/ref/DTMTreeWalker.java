@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会
+ * 
+ *  根据Apache许可证第20版("许可证")授权;您不得使用此文件,除非符合许可证您可以在获取许可证的副本
+ * 
+ *  http：// wwwapacheorg / licenses / LICENSE-20
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件将按"原样"基础分发,无任何明示或暗示的保证或条件。请参阅许可证管理权限和限制许可证
+ * 
  */
 /*
  * $Id: DTMTreeWalker.java,v 1.2.4.1 2005/09/15 08:15:05 suresh_emailid Exp $
+ * <p>
+ *  $ Id：DTMTreeWalkerjava,v 1241 2005/09/15 08:15:05 suresh_emailid Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.dtm.ref;
 
@@ -37,6 +50,11 @@ import org.xml.sax.ext.LexicalHandler;
  * I think normally this class should not be needed, because
  * of DTM#dispatchToEvents.
  * @xsl.usage advanced
+ * <p>
+ * 这个类执行DTM树的预订步骤,在调用ContentHandler接口时调用它。因此,它更像是访问者设计模式,而不是DOM的TreeWalker
+ * 
+ *  我认为通常这个类不应该需要,因为DTM#dispatchToEvents @xslusage高级
+ * 
  */
 public class DTMTreeWalker
 {
@@ -50,6 +68,10 @@ public class DTMTreeWalker
   /**
    * Set the DTM to be traversed.
    *
+   * <p>
+   *  设置要移动的DTM
+   * 
+   * 
    * @param dtm The Document Table Model to be used.
    */
   public void setDTM(DTM dtm)
@@ -60,6 +82,10 @@ public class DTMTreeWalker
   /**
    * Get the ContentHandler used for the tree walk.
    *
+   * <p>
+   *  获取用于树行走的ContentHandler
+   * 
+   * 
    * @return the ContentHandler used for the tree walk
    */
   public ContentHandler getcontentHandler()
@@ -70,6 +96,10 @@ public class DTMTreeWalker
   /**
    * Set the ContentHandler used for the tree walk.
    *
+   * <p>
+   *  设置用于树遍历的ContentHandler
+   * 
+   * 
    * @param ch the ContentHandler to be the result of the tree walk.
    */
   public void setcontentHandler(ContentHandler ch)
@@ -80,6 +110,9 @@ public class DTMTreeWalker
 
   /**
    * Constructor.
+   * <p>
+   *  构造函数
+   * 
    */
   public DTMTreeWalker()
   {
@@ -87,6 +120,10 @@ public class DTMTreeWalker
 
   /**
    * Constructor.
+   * <p>
+   *  构造函数
+   * 
+   * 
    * @param   contentHandler The implemention of the
    * contentHandler operation (toXMLString, digest, ...)
    */
@@ -101,6 +138,10 @@ public class DTMTreeWalker
    * (postorder) are invoked for each node as we traverse over them,
    * with the result that the node is written out to m_contentHandler.
    *
+   * <p>
+   *  作为访问器startNode(preorder)和endNode(postorder)在每个节点被遍历时被调用,结果是该节点被写出到m_contentHandler
+   * 
+   * 
    * @param pos Node in the tree at which to start (and end) traversal --
    * in other words, the root of the subtree to traverse over.
    *
@@ -151,6 +192,10 @@ public class DTMTreeWalker
    * (postorder) are invoked for each node as we traverse over them,
    * with the result that the node is written out to m_contentHandler.
    *
+   * <p>
+   * 作为访问器startNode(preorder)和endNode(postorder)在每个节点被遍历时被调用,结果是该节点被写出到m_contentHandler
+   * 
+   * 
    * @param pos Node in the tree where to start traversal
    * @param top Node in the tree where to end traversal.
    * If top==DTM.NULL, run through end of document.
@@ -199,6 +244,9 @@ public class DTMTreeWalker
 
   /**
    * Optimized dispatch of characters.
+   * <p>
+   *  优化的字符分派
+   * 
    */
   private final void dispatachChars(int node)
      throws org.xml.sax.SAXException
@@ -210,6 +258,10 @@ public class DTMTreeWalker
    * Start processing given node
    *
    *
+   * <p>
+   *  开始处理给定节点
+   * 
+   * 
    * @param node Node to process
    *
    * @throws org.xml.sax.SAXException
@@ -358,6 +410,9 @@ public class DTMTreeWalker
    * End processing of given node
    *
    *
+   * <p>
+   *  结束对给定节点的处理
+   * 
    * @param node Node we just finished processing
    *
    * @throws org.xml.sax.SAXException

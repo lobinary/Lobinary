@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -112,6 +113,52 @@ import java.util.Locale;
  * encoding. For more information on Unicode terminology, refer to the
  * <a href="http://www.unicode.org/glossary/">Unicode Glossary</a>.
  *
+ * <p>
+ *  {@code Character}类在对象中封装了原始类型{@code char}的值一个类型为{@code Character}的对象包含一个类型为{@code char}的单个字段,
+ * <p>
+ *  此外,此类提供了几种方法来确定字符的类别(小写字母,数字等),并将字符从大写转换为小写,反之亦然
+ * <p>
+ *  字符信息基于Unicode标准版本620
+ * <p>
+ * 类{@code Character}的方法和数据由Unicode数据</i>文件中的信息定义,该文件是Unicode Consortium维护的Unicode字符数据库的一部分此文件指定各种属性,包括名
+ * 称和一般类别用于每个定义的Unicode代码点或字符范围。
+ * <p>
+ *  该文件及其说明可从以下位置的Unicode Consortium获得：
+ * <ul>
+ *  <li> <a href=\"http://wwwunicodeorg\"> http：// wwwunicodeorg </a>
+ * </ul>
+ * 
+ *  <h3> <a name=\"unicode\"> Unicode字符表示</a> </h3>
+ * 
+ * <p> {@code char}数据类型(以及{@code Character}对象封装的值)基于原始的Unicode规范,该规范将字符定义为固定宽度的16位实体。
+ * 被改变以允许其表示需要多于16位的字符。
+ * 合法的<em>代码点</em>的范围现在是U + 0000到U + 10FFFF,被称为<em> Unicode标量值</em>请参阅Unicode标准中的U + <i> n </i>符号的<a href=\"http://wwwunicodeorg/reports/tr27/#notation\">
+ *  <i>定义</i> </a> )。
+ * 被改变以允许其表示需要多于16位的字符。
+ * 
+ * <p> <a name=\"BMP\">从U + 0000到U + FFFF </a>的字符集有时称为<em>基本多语言平面(BMP)</em> <a name = "补充">其代码点大于U + FFF
+ * F的字符</a>称为补充字符Java平台在{@code char}数组中使用UTF-16表示,在{ @code String}和{@code StringBuffer}类在此表示中,补充字符表示为一对{@code char}
+ * 值,第一个来自<em> high-surrogates </em>范围(\\ uD800- \\ uDBFF),第二个来自<em> low-surrogates </em>范围(\\ uDC00- \\
+ *  uDFFF)。
+ * 
+ * <p>因此,{@code char}值表示基本多语言平面(BMP)代码点,包括UTF-16编码的代理代码点或代码单元。
+ * {@code int}值表示所有Unicode代码点,包括补充代码点{@code int}的低(最低有效)21位用于表示Unicode代码点,高位(最高有效位)11位必须为零除非另有规定,否则补充字符和
+ * 代理{@code char}值如下：。
+ * <p>因此,{@code char}值表示基本多语言平面(BMP)代码点,包括UTF-16编码的代理代码点或代码单元。
+ * 
+ * <ul>
+ * <li>仅接受{@code char}值的方法不支持补充字符将来自代理范围的{@code char}值视为未定义字符例如,{@code CharacterisLetter('\\ u005CuD840')}
+ * 返回{ @code false},即使这个特定的值如果后面跟任何低代理值在字符串中将表示一个字母。
+ * 
+ *  <li>接受{@code int}值的方法支持所有Unicode字符,包括补充字符例如,{@code CharacterisLetter(0x2F81A)}返回{@code true},因为代码点值表
+ * 示一个字母(CJK表意文字)。
+ * </ul>
+ * 
+ * <p>在Java SE API文档中,<em> Unicode码点</em>用于U + 0000和U + 10FFFF之间的字符值,并使用<em> Unicode码单位</em>对于作为UTF-16 </em>
+ * 编码的代码单元的16位{@code char}值有关Unicode术语的详细信息,请参阅<a href ="http：// wwwunicodeorg / glossary / "> Unicode词汇
+ * 表</a>。
+ * 
+ * 
  * @author  Lee Boynton
  * @author  Guy Steele
  * @author  Akira Tanaka
@@ -128,6 +175,11 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * {@code digit} method, the {@code forDigit} method, and the
      * {@code toString} method of class {@code Integer}.
      *
+     * <p>
+     *  可用于字符串转换的最小基数此字段的常量值是基数转换方法中的基数自变量所允许的最小值,例如{@code digit}方法,{@Digit}方法和类{@code Integer}的{@code toString}
+     * 方法。
+     * 
+     * 
      * @see     Character#digit(char, int)
      * @see     Character#forDigit(int, int)
      * @see     Integer#toString(int, int)
@@ -142,6 +194,11 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * {@code digit} method, the {@code forDigit} method, and the
      * {@code toString} method of class {@code Integer}.
      *
+     * <p>
+     * 可用于字符串转换的最大基数此字段的常量值是基数转换方法中的基数自变量所允许的最大值,例如{@code digit}方法,{@Digit}方法和类{@code Integer}的{@code toString}
+     * 方法。
+     * 
+     * 
      * @see     Character#digit(char, int)
      * @see     Character#forDigit(int, int)
      * @see     Integer#toString(int, int)
@@ -153,6 +210,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * The constant value of this field is the smallest value of type
      * {@code char}, {@code '\u005Cu0000'}.
      *
+     * <p>
+     *  此字段的常量值是类型{@code char},{@code'\\ u005Cu0000'}的最小值
+     * 
+     * 
      * @since   1.0.2
      */
     public static final char MIN_VALUE = '\u0000';
@@ -161,6 +222,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * The constant value of this field is the largest value of type
      * {@code char}, {@code '\u005CuFFFF'}.
      *
+     * <p>
+     *  此字段的常量值是类型{@code char},{@code'\\ u005CuFFFF'}的最大值
+     * 
+     * 
      * @since   1.0.2
      */
     public static final char MAX_VALUE = '\uFFFF';
@@ -169,6 +234,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * The {@code Class} instance representing the primitive type
      * {@code char}.
      *
+     * <p>
+     *  表示原始类型{@code char}的{@code Class}实例
+     * 
+     * 
      * @since   1.1
      */
     @SuppressWarnings("unchecked")
@@ -176,194 +245,323 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
     /*
      * Normative general types
+     * <p>
+     *  规范的一般类型
+     * 
      */
 
     /*
      * General character types
+     * <p>
+     *  一般字符类型
+     * 
      */
 
     /**
      * General category "Cn" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的常规类别"Cn"
+     * 
+     * 
      * @since   1.1
      */
     public static final byte UNASSIGNED = 0;
 
     /**
      * General category "Lu" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的一般类别"Lu"
+     * 
+     * 
      * @since   1.1
      */
     public static final byte UPPERCASE_LETTER = 1;
 
     /**
      * General category "Ll" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的通用类别"L1"
+     * 
+     * 
      * @since   1.1
      */
     public static final byte LOWERCASE_LETTER = 2;
 
     /**
      * General category "Lt" in the Unicode specification.
+     * <p>
+     * Unicode规范中的常规类别"Lt"
+     * 
+     * 
      * @since   1.1
      */
     public static final byte TITLECASE_LETTER = 3;
 
     /**
      * General category "Lm" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的常规类别"Lm"
+     * 
+     * 
      * @since   1.1
      */
     public static final byte MODIFIER_LETTER = 4;
 
     /**
      * General category "Lo" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的常规类别"Lo"
+     * 
+     * 
      * @since   1.1
      */
     public static final byte OTHER_LETTER = 5;
 
     /**
      * General category "Mn" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的常规类别"Mn"
+     * 
+     * 
      * @since   1.1
      */
     public static final byte NON_SPACING_MARK = 6;
 
     /**
      * General category "Me" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的常规类别"Me"
+     * 
+     * 
      * @since   1.1
      */
     public static final byte ENCLOSING_MARK = 7;
 
     /**
      * General category "Mc" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的一般类别"Mc"
+     * 
+     * 
      * @since   1.1
      */
     public static final byte COMBINING_SPACING_MARK = 8;
 
     /**
      * General category "Nd" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的常规类别"Nd"
+     * 
+     * 
      * @since   1.1
      */
     public static final byte DECIMAL_DIGIT_NUMBER        = 9;
 
     /**
      * General category "Nl" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的常规类别"Nl"
+     * 
+     * 
      * @since   1.1
      */
     public static final byte LETTER_NUMBER = 10;
 
     /**
      * General category "No" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的常规类别"否"
+     * 
+     * 
      * @since   1.1
      */
     public static final byte OTHER_NUMBER = 11;
 
     /**
      * General category "Zs" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的常规类别"Zs"
+     * 
+     * 
      * @since   1.1
      */
     public static final byte SPACE_SEPARATOR = 12;
 
     /**
      * General category "Zl" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的一般类别"Zl"
+     * 
+     * 
      * @since   1.1
      */
     public static final byte LINE_SEPARATOR = 13;
 
     /**
      * General category "Zp" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的常规类别"Zp"
+     * 
+     * 
      * @since   1.1
      */
     public static final byte PARAGRAPH_SEPARATOR = 14;
 
     /**
      * General category "Cc" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的常规类别"Cc"
+     * 
+     * 
      * @since   1.1
      */
     public static final byte CONTROL = 15;
 
     /**
      * General category "Cf" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的常规类别"Cf"
+     * 
+     * 
      * @since   1.1
      */
     public static final byte FORMAT = 16;
 
     /**
      * General category "Co" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的常规类别"Co"
+     * 
+     * 
      * @since   1.1
      */
     public static final byte PRIVATE_USE = 18;
 
     /**
      * General category "Cs" in the Unicode specification.
+     * <p>
+     * Unicode规范中的常规类别"Cs"
+     * 
+     * 
      * @since   1.1
      */
     public static final byte SURROGATE = 19;
 
     /**
      * General category "Pd" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的常规类别"Pd"
+     * 
+     * 
      * @since   1.1
      */
     public static final byte DASH_PUNCTUATION = 20;
 
     /**
      * General category "Ps" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的一般类别"Ps"
+     * 
+     * 
      * @since   1.1
      */
     public static final byte START_PUNCTUATION = 21;
 
     /**
      * General category "Pe" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的通用类别"Pe"
+     * 
+     * 
      * @since   1.1
      */
     public static final byte END_PUNCTUATION = 22;
 
     /**
      * General category "Pc" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的通用类别"Pc"
+     * 
+     * 
      * @since   1.1
      */
     public static final byte CONNECTOR_PUNCTUATION = 23;
 
     /**
      * General category "Po" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的一般类别"Po"
+     * 
+     * 
      * @since   1.1
      */
     public static final byte OTHER_PUNCTUATION = 24;
 
     /**
      * General category "Sm" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的常规类别"Sm"
+     * 
+     * 
      * @since   1.1
      */
     public static final byte MATH_SYMBOL = 25;
 
     /**
      * General category "Sc" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的常规类别"Sc"
+     * 
+     * 
      * @since   1.1
      */
     public static final byte CURRENCY_SYMBOL = 26;
 
     /**
      * General category "Sk" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的常规类别"Sk"
+     * 
+     * 
      * @since   1.1
      */
     public static final byte MODIFIER_SYMBOL = 27;
 
     /**
      * General category "So" in the Unicode specification.
+     * <p>
+     *  通用类别"So"在Unicode规范中
+     * 
+     * 
      * @since   1.1
      */
     public static final byte OTHER_SYMBOL = 28;
 
     /**
      * General category "Pi" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的通用类别"Pi"
+     * 
+     * 
      * @since   1.4
      */
     public static final byte INITIAL_QUOTE_PUNCTUATION = 29;
 
     /**
      * General category "Pf" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的常规类别"Pf"
+     * 
+     * 
      * @since   1.4
      */
     public static final byte FINAL_QUOTE_PUNCTUATION = 30;
 
     /**
      * Error flag. Use int (code point) to avoid confusion with U+FFFF.
+     * <p>
+     *  错误标志使用int(代码点)以避免与U + FFFF混淆
+     * 
      */
     static final int ERROR = 0xFFFFFFFF;
 
@@ -371,120 +569,200 @@ class Character implements java.io.Serializable, Comparable<Character> {
     /**
      * Undefined bidirectional character type. Undefined {@code char}
      * values have undefined directionality in the Unicode specification.
+     * <p>
+     * 未定义的双向字符类型未定义的{@code char}值在Unicode规范中具有未定义的方向性
+     * 
+     * 
      * @since 1.4
      */
     public static final byte DIRECTIONALITY_UNDEFINED = -1;
 
     /**
      * Strong bidirectional character type "L" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的强双向字符类型"L"
+     * 
+     * 
      * @since 1.4
      */
     public static final byte DIRECTIONALITY_LEFT_TO_RIGHT = 0;
 
     /**
      * Strong bidirectional character type "R" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的强双向字符类型"R"
+     * 
+     * 
      * @since 1.4
      */
     public static final byte DIRECTIONALITY_RIGHT_TO_LEFT = 1;
 
     /**
     * Strong bidirectional character type "AL" in the Unicode specification.
+    * <p>
+    *  Unicode规范中的强双向字符类型"AL"
+    * 
+    * 
      * @since 1.4
      */
     public static final byte DIRECTIONALITY_RIGHT_TO_LEFT_ARABIC = 2;
 
     /**
      * Weak bidirectional character type "EN" in the Unicode specification.
+     * <p>
+     *  在Unicode规范中弱的双向字符类型"EN"
+     * 
+     * 
      * @since 1.4
      */
     public static final byte DIRECTIONALITY_EUROPEAN_NUMBER = 3;
 
     /**
      * Weak bidirectional character type "ES" in the Unicode specification.
+     * <p>
+     *  在Unicode规范中弱的双向字符类型"ES"
+     * 
+     * 
      * @since 1.4
      */
     public static final byte DIRECTIONALITY_EUROPEAN_NUMBER_SEPARATOR = 4;
 
     /**
      * Weak bidirectional character type "ET" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的双向字符类型"ET"较弱
+     * 
+     * 
      * @since 1.4
      */
     public static final byte DIRECTIONALITY_EUROPEAN_NUMBER_TERMINATOR = 5;
 
     /**
      * Weak bidirectional character type "AN" in the Unicode specification.
+     * <p>
+     *  在Unicode规范中弱的双向字符类型"AN"
+     * 
+     * 
      * @since 1.4
      */
     public static final byte DIRECTIONALITY_ARABIC_NUMBER = 6;
 
     /**
      * Weak bidirectional character type "CS" in the Unicode specification.
+     * <p>
+     *  在Unicode规范中弱的双向字符类型"CS"
+     * 
+     * 
      * @since 1.4
      */
     public static final byte DIRECTIONALITY_COMMON_NUMBER_SEPARATOR = 7;
 
     /**
      * Weak bidirectional character type "NSM" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的弱双向字符类型"NSM"
+     * 
+     * 
      * @since 1.4
      */
     public static final byte DIRECTIONALITY_NONSPACING_MARK = 8;
 
     /**
      * Weak bidirectional character type "BN" in the Unicode specification.
+     * <p>
+     * 在Unicode规范中弱的双向字符类型"BN"
+     * 
+     * 
      * @since 1.4
      */
     public static final byte DIRECTIONALITY_BOUNDARY_NEUTRAL = 9;
 
     /**
      * Neutral bidirectional character type "B" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的中性双向字符类型"B"
+     * 
+     * 
      * @since 1.4
      */
     public static final byte DIRECTIONALITY_PARAGRAPH_SEPARATOR = 10;
 
     /**
      * Neutral bidirectional character type "S" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的中性双向字符类型"S"
+     * 
+     * 
      * @since 1.4
      */
     public static final byte DIRECTIONALITY_SEGMENT_SEPARATOR = 11;
 
     /**
      * Neutral bidirectional character type "WS" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的中性双向字符类型"WS"
+     * 
+     * 
      * @since 1.4
      */
     public static final byte DIRECTIONALITY_WHITESPACE = 12;
 
     /**
      * Neutral bidirectional character type "ON" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的中性双向字符类型"ON"
+     * 
+     * 
      * @since 1.4
      */
     public static final byte DIRECTIONALITY_OTHER_NEUTRALS = 13;
 
     /**
      * Strong bidirectional character type "LRE" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的强双向字符类型"LRE"
+     * 
+     * 
      * @since 1.4
      */
     public static final byte DIRECTIONALITY_LEFT_TO_RIGHT_EMBEDDING = 14;
 
     /**
      * Strong bidirectional character type "LRO" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的强双向字符类型"LRO"
+     * 
+     * 
      * @since 1.4
      */
     public static final byte DIRECTIONALITY_LEFT_TO_RIGHT_OVERRIDE = 15;
 
     /**
      * Strong bidirectional character type "RLE" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的强双向字符类型"RLE"
+     * 
+     * 
      * @since 1.4
      */
     public static final byte DIRECTIONALITY_RIGHT_TO_LEFT_EMBEDDING = 16;
 
     /**
      * Strong bidirectional character type "RLO" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的强双向字符类型"RLO"
+     * 
+     * 
      * @since 1.4
      */
     public static final byte DIRECTIONALITY_RIGHT_TO_LEFT_OVERRIDE = 17;
 
     /**
      * Weak bidirectional character type "PDF" in the Unicode specification.
+     * <p>
+     *  Unicode规范中的双向字符类型"PDF"较弱
+     * 
+     * 
      * @since 1.4
      */
     public static final byte DIRECTIONALITY_POP_DIRECTIONAL_FORMAT = 18;
@@ -496,6 +774,12 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * in the UTF-16 encoding, constant {@code '\u005CuD800'}.
      * A high-surrogate is also known as a <i>leading-surrogate</i>.
      *
+     * <p>
+     *  a的最小值
+     * <a href="http://www.unicode.org/glossary/#high_surrogate_code_unit">
+     * UTF-16编码中的Unicode高代理代码单元,常量{@code'\\ u005CuD800'}高代理也称为<i>前导代理</i>
+     * 
+     * 
      * @since 1.5
      */
     public static final char MIN_HIGH_SURROGATE = '\uD800';
@@ -507,6 +791,12 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * in the UTF-16 encoding, constant {@code '\u005CuDBFF'}.
      * A high-surrogate is also known as a <i>leading-surrogate</i>.
      *
+     * <p>
+     *  a的最大值
+     * <a href="http://www.unicode.org/glossary/#high_surrogate_code_unit">
+     *  UTF-16编码中的Unicode高代理代码单元,常量{@code'\\ u005CuDBFF'}高代理也称为<i>领先代理</i>
+     * 
+     * 
      * @since 1.5
      */
     public static final char MAX_HIGH_SURROGATE = '\uDBFF';
@@ -518,6 +808,12 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * in the UTF-16 encoding, constant {@code '\u005CuDC00'}.
      * A low-surrogate is also known as a <i>trailing-surrogate</i>.
      *
+     * <p>
+     *  a的最小值
+     * <a href="http://www.unicode.org/glossary/#low_surrogate_code_unit">
+     *  UTF-16编码中的Unicode低代理代码单元,常量{@code'\\ u005CuDC00'}低代理也称为<i>尾随代理</i>
+     * 
+     * 
      * @since 1.5
      */
     public static final char MIN_LOW_SURROGATE  = '\uDC00';
@@ -529,6 +825,12 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * in the UTF-16 encoding, constant {@code '\u005CuDFFF'}.
      * A low-surrogate is also known as a <i>trailing-surrogate</i>.
      *
+     * <p>
+     *  a的最大值
+     * <a href="http://www.unicode.org/glossary/#low_surrogate_code_unit">
+     *  UTF-16编码中的Unicode低代理代码单元,常量{@code'\\ u005CuDFFF'}低代理也称为<i>尾随代理</i>
+     * 
+     * 
      * @since 1.5
      */
     public static final char MAX_LOW_SURROGATE  = '\uDFFF';
@@ -537,6 +839,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * The minimum value of a Unicode surrogate code unit in the
      * UTF-16 encoding, constant {@code '\u005CuD800'}.
      *
+     * <p>
+     * UTF-16编码中的Unicode代理单元的最小值,常量{@code'\\ u005CuD800'}
+     * 
+     * 
      * @since 1.5
      */
     public static final char MIN_SURROGATE = MIN_HIGH_SURROGATE;
@@ -545,6 +851,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * The maximum value of a Unicode surrogate code unit in the
      * UTF-16 encoding, constant {@code '\u005CuDFFF'}.
      *
+     * <p>
+     *  UTF-16编码中的Unicode代理单元的最大值,常量{@code'\\ u005CuDFFF'}
+     * 
+     * 
      * @since 1.5
      */
     public static final char MAX_SURROGATE = MAX_LOW_SURROGATE;
@@ -554,6 +864,12 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * <a href="http://www.unicode.org/glossary/#supplementary_code_point">
      * Unicode supplementary code point</a>, constant {@code U+10000}.
      *
+     * <p>
+     *  a的最小值
+     * <a href="http://www.unicode.org/glossary/#supplementary_code_point">
+     *  Unicode补充代码点</a>,常量{@code U + 10000}
+     * 
+     * 
      * @since 1.5
      */
     public static final int MIN_SUPPLEMENTARY_CODE_POINT = 0x010000;
@@ -563,6 +879,12 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * <a href="http://www.unicode.org/glossary/#code_point">
      * Unicode code point</a>, constant {@code U+0000}.
      *
+     * <p>
+     *  a的最小值
+     * <a href="http://www.unicode.org/glossary/#code_point">
+     *  Unicode代码点</a>,常量{@code U + 0000}
+     * 
+     * 
      * @since 1.5
      */
     public static final int MIN_CODE_POINT = 0x000000;
@@ -572,6 +894,12 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * <a href="http://www.unicode.org/glossary/#code_point">
      * Unicode code point</a>, constant {@code U+10FFFF}.
      *
+     * <p>
+     *  a的最大值
+     * <a href="http://www.unicode.org/glossary/#code_point">
+     *  Unicode代码点</a>,常数{@code U + 10FFFF}
+     * 
+     * 
      * @since 1.5
      */
     public static final int MAX_CODE_POINT = 0X10FFFF;
@@ -584,6 +912,11 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * Other portions of the Java API may define other subsets for their
      * own purposes.
      *
+     * <p>
+     *  此类的实例表示Unicode字符集的特定子集{@code Character}类中定义的唯一子集系列是{@link CharacterUnicodeBlock} Java API的其他部分可以为其自己
+     * 的目的定义其他子集。
+     * 
+     * 
      * @since 1.2
      */
     public static class Subset  {
@@ -593,6 +926,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
         /**
          * Constructs a new {@code Subset} instance.
          *
+         * <p>
+         *  构造一个新的{@code Subset}实例
+         * 
+         * 
          * @param  name  The name of this subset
          * @exception NullPointerException if name is {@code null}
          */
@@ -609,6 +946,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
          * {@code this} and the argument refer to the same
          * object; since this method is {@code final}, this
          * guarantee holds for all subclasses.
+         * <p>
+         * 比较两个{@code Subset}对象的相等性这个方法返回{@code true}当且仅当{@code this}和参数引用同一个对象;因为此方法是{@code final},所以此保证适用于所有子类
+         * 。
+         * 
          */
         public final boolean equals(Object obj) {
             return (this == obj);
@@ -620,6 +961,9 @@ class Character implements java.io.Serializable, Comparable<Character> {
          * is {@code final} in order to ensure that the
          * {@code equals} and {@code hashCode} methods will
          * be consistent in all subclasses.
+         * <p>
+         *  返回由{@link Object#hashCode}方法定义的标准哈希码此方法是{@code final},以确保{@code equals}和{@code hashCode}方法在所有子类中都一致。
+         * 
          */
         public final int hashCode() {
             return super.hashCode();
@@ -627,6 +971,9 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Returns the name of this subset.
+         * <p>
+         *  返回此子集的名称
+         * 
          */
         public final String toString() {
             return name;
@@ -642,6 +989,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * used for a specific script or purpose. A character is contained by
      * at most one Unicode block.
      *
+     * <p>
+     *  表示Unicode规范中的字符块的字符子集家族字符块通常定义用于特定脚本或目的的字符字符最多包含一个Unicode块
+     * 
+     * 
      * @since 1.2
      */
     public static final class UnicodeBlock extends Subset {
@@ -651,6 +1002,9 @@ class Character implements java.io.Serializable, Comparable<Character> {
         /**
          * Creates a UnicodeBlock with the given identifier name.
          * This name must be the same as the block identifier.
+         * <p>
+         * 使用给定的标识符名称创建UnicodeBlock此名称必须与块标识符相同
+         * 
          */
         private UnicodeBlock(String idName) {
             super(idName);
@@ -660,6 +1014,9 @@ class Character implements java.io.Serializable, Comparable<Character> {
         /**
          * Creates a UnicodeBlock with the given identifier name and
          * alias name.
+         * <p>
+         *  使用给定的标识名称和别名创建UnicodeBlock
+         * 
          */
         private UnicodeBlock(String idName, String alias) {
             this(idName);
@@ -669,6 +1026,9 @@ class Character implements java.io.Serializable, Comparable<Character> {
         /**
          * Creates a UnicodeBlock with the given identifier name and
          * alias names.
+         * <p>
+         *  创建具有给定标识符名称和别名的UnicodeBlock
+         * 
          */
         private UnicodeBlock(String idName, String... aliases) {
             this(idName);
@@ -678,6 +1038,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Basic Latin" Unicode character block.
+         * <p>
+         *  "基本拉丁"Unicode字符块的常量
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock  BASIC_LATIN =
@@ -687,6 +1051,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Latin-1 Supplement" Unicode character block.
+         * <p>
+         *  Unicode字符块的"Latin-1补充"的常量
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock LATIN_1_SUPPLEMENT =
@@ -696,6 +1064,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Latin Extended-A" Unicode character block.
+         * <p>
+         *  "Latin Extended-A"Unicode字符块的常量
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock LATIN_EXTENDED_A =
@@ -705,6 +1077,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Latin Extended-B" Unicode character block.
+         * <p>
+         *  "Latin Extended-B"Unicode字符块的常量
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock LATIN_EXTENDED_B =
@@ -714,6 +1090,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "IPA Extensions" Unicode character block.
+         * <p>
+         *  常量为"IPA扩展"的Unicode字符块
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock IPA_EXTENSIONS =
@@ -723,6 +1103,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Spacing Modifier Letters" Unicode character block.
+         * <p>
+         *  常量为"间距修饰字母"Unicode字符块
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock SPACING_MODIFIER_LETTERS =
@@ -732,6 +1116,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Combining Diacritical Marks" Unicode character block.
+         * <p>
+         *  "组合变音符号"Unicode字符块的常量
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock COMBINING_DIACRITICAL_MARKS =
@@ -744,6 +1132,12 @@ class Character implements java.io.Serializable, Comparable<Character> {
          * <p>
          * This block was previously known as the "Greek" block.
          *
+         * <p>
+         *  Unicode字符块的"希腊和科普特"常量
+         * <p>
+         * 这个块以前称为"希腊语"块
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock GREEK =
@@ -753,6 +1147,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Cyrillic" Unicode character block.
+         * <p>
+         *  "Cyrillic"Unicode字符块的常量
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock CYRILLIC =
@@ -760,6 +1158,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Armenian" Unicode character block.
+         * <p>
+         *  "亚美尼亚"Unicode字符块的常量
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock ARMENIAN =
@@ -767,6 +1169,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Hebrew" Unicode character block.
+         * <p>
+         *  "希伯来语"Unicode字符块的常量
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock HEBREW =
@@ -774,6 +1180,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Arabic" Unicode character block.
+         * <p>
+         *  "阿拉伯语"Unicode字符块的常量
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock ARABIC =
@@ -781,6 +1191,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Devanagari" Unicode character block.
+         * <p>
+         *  "Devanagari"Unicode字符块的常量
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock DEVANAGARI =
@@ -788,6 +1202,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Bengali" Unicode character block.
+         * <p>
+         *  常量为"孟加拉语"Unicode字符块
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock BENGALI =
@@ -795,6 +1213,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Gurmukhi" Unicode character block.
+         * <p>
+         *  常量为"Gurmukhi"Unicode字符块
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock GURMUKHI =
@@ -802,6 +1224,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Gujarati" Unicode character block.
+         * <p>
+         *  常量为"古吉拉特语"Unicode字符块
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock GUJARATI =
@@ -809,6 +1235,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Oriya" Unicode character block.
+         * <p>
+         *  Unicode字符块的"Oriya"常量
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock ORIYA =
@@ -816,6 +1246,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Tamil" Unicode character block.
+         * <p>
+         *  Unicode字符块的"泰米尔语"常量
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock TAMIL =
@@ -823,6 +1257,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Telugu" Unicode character block.
+         * <p>
+         *  常量为"Telugu"Unicode字符块
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock TELUGU =
@@ -830,6 +1268,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Kannada" Unicode character block.
+         * <p>
+         *  Unicode字符块的"Kannada"常量
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock KANNADA =
@@ -837,6 +1279,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Malayalam" Unicode character block.
+         * <p>
+         *  常量为"马来亚拉姆"Unicode字符块
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock MALAYALAM =
@@ -844,6 +1290,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Thai" Unicode character block.
+         * <p>
+         *  "泰语"Unicode字符块的常量
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock THAI =
@@ -851,6 +1301,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Lao" Unicode character block.
+         * <p>
+         * "Lao"Unicode字符块的常量
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock LAO =
@@ -858,6 +1312,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Tibetan" Unicode character block.
+         * <p>
+         *  常量为"西藏"Unicode字符块
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock TIBETAN =
@@ -865,6 +1323,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Georgian" Unicode character block.
+         * <p>
+         *  "格鲁吉亚"Unicode字符块的常量
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock GEORGIAN =
@@ -872,6 +1334,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Hangul Jamo" Unicode character block.
+         * <p>
+         *  常量为"Hangul Jamo"的Unicode字符块
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock HANGUL_JAMO =
@@ -881,6 +1347,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Latin Extended Additional" Unicode character block.
+         * <p>
+         *  "Latin Extended Additional"Unicode字符块的常量
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock LATIN_EXTENDED_ADDITIONAL =
@@ -890,6 +1360,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Greek Extended" Unicode character block.
+         * <p>
+         *  常量为"希腊扩展"Unicode字符块
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock GREEK_EXTENDED =
@@ -899,6 +1373,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "General Punctuation" Unicode character block.
+         * <p>
+         *  常量为"一般标点符号"Unicode字符块
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock GENERAL_PUNCTUATION =
@@ -909,6 +1387,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
         /**
          * Constant for the "Superscripts and Subscripts" Unicode character
          * block.
+         * <p>
+         *  常量为"上标和下标"Unicode字符块
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock SUPERSCRIPTS_AND_SUBSCRIPTS =
@@ -918,6 +1400,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Currency Symbols" Unicode character block.
+         * <p>
+         *  常量为"货币符号"Unicode字符块
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock CURRENCY_SYMBOLS =
@@ -930,6 +1416,12 @@ class Character implements java.io.Serializable, Comparable<Character> {
          * character block.
          * <p>
          * This block was previously known as "Combining Marks for Symbols".
+         * <p>
+         *  Unicode字符块的"组合符号的符号"的常量
+         * <p>
+         *  此块以前称为"组合符号的符号"
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock COMBINING_MARKS_FOR_SYMBOLS =
@@ -941,6 +1433,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Letterlike Symbols" Unicode character block.
+         * <p>
+         *  常量为"字母符号"Unicode字符块
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock LETTERLIKE_SYMBOLS =
@@ -950,6 +1446,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Number Forms" Unicode character block.
+         * <p>
+         * "数字形式"的Unicode字符块的常量
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock NUMBER_FORMS =
@@ -959,6 +1459,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Arrows" Unicode character block.
+         * <p>
+         *  "箭头"的Unicode字符块的常量
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock ARROWS =
@@ -966,6 +1470,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Mathematical Operators" Unicode character block.
+         * <p>
+         *  常量为"数学运算符"的Unicode字符块
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock MATHEMATICAL_OPERATORS =
@@ -975,6 +1483,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Miscellaneous Technical" Unicode character block.
+         * <p>
+         *  "其他技术"Unicode字符块的常量
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock MISCELLANEOUS_TECHNICAL =
@@ -984,6 +1496,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Control Pictures" Unicode character block.
+         * <p>
+         *  常量为"控制图片"Unicode字符块
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock CONTROL_PICTURES =
@@ -993,6 +1509,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Optical Character Recognition" Unicode character block.
+         * <p>
+         *  常量为"光学字符识别"的Unicode字符块
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock OPTICAL_CHARACTER_RECOGNITION =
@@ -1002,6 +1522,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Enclosed Alphanumerics" Unicode character block.
+         * <p>
+         *  "Enclosed Alphanumerics"Unicode字符块的常量
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock ENCLOSED_ALPHANUMERICS =
@@ -1011,6 +1535,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Box Drawing" Unicode character block.
+         * <p>
+         *  常量为"框图"的Unicode字符块
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock BOX_DRAWING =
@@ -1020,6 +1548,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Block Elements" Unicode character block.
+         * <p>
+         *  常量为"块元素"的Unicode字符块
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock BLOCK_ELEMENTS =
@@ -1029,6 +1561,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Geometric Shapes" Unicode character block.
+         * <p>
+         *  常量为"几何形状"Unicode字符块
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock GEOMETRIC_SHAPES =
@@ -1038,6 +1574,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Miscellaneous Symbols" Unicode character block.
+         * <p>
+         *  Unicode字符块的"其他符号"的常量
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock MISCELLANEOUS_SYMBOLS =
@@ -1047,6 +1587,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Dingbats" Unicode character block.
+         * <p>
+         *  常量为"Dingbats"Unicode字符块
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock DINGBATS =
@@ -1054,6 +1598,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "CJK Symbols and Punctuation" Unicode character block.
+         * <p>
+         * 常量为"CJK符号和标点"Unicode字符块
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock CJK_SYMBOLS_AND_PUNCTUATION =
@@ -1063,6 +1611,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Hiragana" Unicode character block.
+         * <p>
+         *  Unicode字符块的"平假名"常量
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock HIRAGANA =
@@ -1070,6 +1622,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Katakana" Unicode character block.
+         * <p>
+         *  "片假名"Unicode字符块的常量
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock KATAKANA =
@@ -1077,6 +1633,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Bopomofo" Unicode character block.
+         * <p>
+         *  Unicode字符块的"Bopomofo"常量
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock BOPOMOFO =
@@ -1084,6 +1644,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Hangul Compatibility Jamo" Unicode character block.
+         * <p>
+         *  常量为"韩文兼容性Jamo"的Unicode字符块
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock HANGUL_COMPATIBILITY_JAMO =
@@ -1093,6 +1657,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Kanbun" Unicode character block.
+         * <p>
+         *  Unicode字符块的"Kanbun"常量
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock KANBUN =
@@ -1100,6 +1668,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Enclosed CJK Letters and Months" Unicode character block.
+         * <p>
+         *  常量为"封闭的CJK字母和数月"Unicode字符块
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock ENCLOSED_CJK_LETTERS_AND_MONTHS =
@@ -1109,6 +1681,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "CJK Compatibility" Unicode character block.
+         * <p>
+         *  Unicode字符块的"CJK兼容性"的常量
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock CJK_COMPATIBILITY =
@@ -1118,6 +1694,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "CJK Unified Ideographs" Unicode character block.
+         * <p>
+         *  Unicode字符块的"CJK统一表意文字"的常量
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock CJK_UNIFIED_IDEOGRAPHS =
@@ -1127,6 +1707,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Hangul Syllables" Unicode character block.
+         * <p>
+         *  常量为"韩文音节"的Unicode字符块
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock HANGUL_SYLLABLES =
@@ -1136,6 +1720,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Private Use Area" Unicode character block.
+         * <p>
+         *  常量为"私用区"的Unicode字符块
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock PRIVATE_USE_AREA =
@@ -1146,6 +1734,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
         /**
          * Constant for the "CJK Compatibility Ideographs" Unicode character
          * block.
+         * <p>
+         *  "CJK兼容表意文字"Unicode字符块的常量
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock CJK_COMPATIBILITY_IDEOGRAPHS =
@@ -1155,6 +1747,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Alphabetic Presentation Forms" Unicode character block.
+         * <p>
+         * 常量为"字母表示形式"的Unicode字符块
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock ALPHABETIC_PRESENTATION_FORMS =
@@ -1165,6 +1761,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
         /**
          * Constant for the "Arabic Presentation Forms-A" Unicode character
          * block.
+         * <p>
+         *  Unicode字符块的"阿拉伯语表示形式-A"的常量
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock ARABIC_PRESENTATION_FORMS_A =
@@ -1174,6 +1774,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Combining Half Marks" Unicode character block.
+         * <p>
+         *  Unicode字符块的"组合半标记"的常量
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock COMBINING_HALF_MARKS =
@@ -1183,6 +1787,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "CJK Compatibility Forms" Unicode character block.
+         * <p>
+         *  常量为"CJK兼容性表单"的Unicode字符块
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock CJK_COMPATIBILITY_FORMS =
@@ -1192,6 +1800,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Small Form Variants" Unicode character block.
+         * <p>
+         *  常量为"小形式变量"Unicode字符块
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock SMALL_FORM_VARIANTS =
@@ -1201,6 +1813,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Arabic Presentation Forms-B" Unicode character block.
+         * <p>
+         *  常量为"阿拉伯语表单B"Unicode字符块
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock ARABIC_PRESENTATION_FORMS_B =
@@ -1211,6 +1827,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
         /**
          * Constant for the "Halfwidth and Fullwidth Forms" Unicode character
          * block.
+         * <p>
+         *  Unicode字符块的"半宽和全宽窗体"的常量
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock HALFWIDTH_AND_FULLWIDTH_FORMS =
@@ -1220,12 +1840,18 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Specials" Unicode character block.
+         * <p>
+         *  常量为"特殊"Unicode字符块
+         * 
+         * 
          * @since 1.2
          */
         public static final UnicodeBlock SPECIALS =
             new UnicodeBlock("SPECIALS");
 
         /**
+        /* <p>
+        /* 
          * @deprecated As of J2SE 5, use {@link #HIGH_SURROGATES},
          *             {@link #HIGH_PRIVATE_USE_SURROGATES}, and
          *             {@link #LOW_SURROGATES}. These new constants match
@@ -1239,6 +1865,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Syriac" Unicode character block.
+         * <p>
+         *  Unicode字符块的"Syriac"常量
+         * 
+         * 
          * @since 1.4
          */
         public static final UnicodeBlock SYRIAC =
@@ -1246,6 +1876,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Thaana" Unicode character block.
+         * <p>
+         *  常量为"Thaana"Unicode字符块
+         * 
+         * 
          * @since 1.4
          */
         public static final UnicodeBlock THAANA =
@@ -1253,6 +1887,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Sinhala" Unicode character block.
+         * <p>
+         *  常量为"僧伽罗"Unicode字符块
+         * 
+         * 
          * @since 1.4
          */
         public static final UnicodeBlock SINHALA =
@@ -1260,6 +1898,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Myanmar" Unicode character block.
+         * <p>
+         *  常量为"缅甸"Unicode字符块
+         * 
+         * 
          * @since 1.4
          */
         public static final UnicodeBlock MYANMAR =
@@ -1267,6 +1909,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Ethiopic" Unicode character block.
+         * <p>
+         * "埃塞俄比亚"Unicode字符块的常量
+         * 
+         * 
          * @since 1.4
          */
         public static final UnicodeBlock ETHIOPIC =
@@ -1274,6 +1920,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Cherokee" Unicode character block.
+         * <p>
+         *  Unicode字符块的"Cherokee"常量
+         * 
+         * 
          * @since 1.4
          */
         public static final UnicodeBlock CHEROKEE =
@@ -1281,6 +1931,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Unified Canadian Aboriginal Syllabics" Unicode character block.
+         * <p>
+         *  常量为"统一加拿大原住民音节"的Unicode字符块
+         * 
+         * 
          * @since 1.4
          */
         public static final UnicodeBlock UNIFIED_CANADIAN_ABORIGINAL_SYLLABICS =
@@ -1290,6 +1944,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Ogham" Unicode character block.
+         * <p>
+         *  Unicode字符块的"Ogham"常量
+         * 
+         * 
          * @since 1.4
          */
         public static final UnicodeBlock OGHAM =
@@ -1297,6 +1955,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Runic" Unicode character block.
+         * <p>
+         *  Unicode字符块的"Runic"常量
+         * 
+         * 
          * @since 1.4
          */
         public static final UnicodeBlock RUNIC =
@@ -1304,6 +1966,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Khmer" Unicode character block.
+         * <p>
+         *  "高棉"Unicode字符块的常量
+         * 
+         * 
          * @since 1.4
          */
         public static final UnicodeBlock KHMER =
@@ -1311,6 +1977,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Mongolian" Unicode character block.
+         * <p>
+         *  常量为"蒙古语"的Unicode字符块
+         * 
+         * 
          * @since 1.4
          */
         public static final UnicodeBlock MONGOLIAN =
@@ -1318,6 +1988,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Braille Patterns" Unicode character block.
+         * <p>
+         *  常量为"盲文模式"Unicode字符块
+         * 
+         * 
          * @since 1.4
          */
         public static final UnicodeBlock BRAILLE_PATTERNS =
@@ -1327,6 +2001,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "CJK Radicals Supplement" Unicode character block.
+         * <p>
+         *  常量为"CJK Radicals Supplement"Unicode字符块
+         * 
+         * 
          * @since 1.4
          */
         public static final UnicodeBlock CJK_RADICALS_SUPPLEMENT =
@@ -1336,6 +2014,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Kangxi Radicals" Unicode character block.
+         * <p>
+         *  常量为"康熙激进"Unicode字符块
+         * 
+         * 
          * @since 1.4
          */
         public static final UnicodeBlock KANGXI_RADICALS =
@@ -1345,6 +2027,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Ideographic Description Characters" Unicode character block.
+         * <p>
+         *  "表意描述字符"的常量Unicode字符块
+         * 
+         * 
          * @since 1.4
          */
         public static final UnicodeBlock IDEOGRAPHIC_DESCRIPTION_CHARACTERS =
@@ -1354,6 +2040,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Bopomofo Extended" Unicode character block.
+         * <p>
+         *  常量为"Bopomofo扩展"的Unicode字符块
+         * 
+         * 
          * @since 1.4
          */
         public static final UnicodeBlock BOPOMOFO_EXTENDED =
@@ -1363,6 +2053,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "CJK Unified Ideographs Extension A" Unicode character block.
+         * <p>
+         * Unicode字符块的"CJK统一表意文字扩展名A"的常量
+         * 
+         * 
          * @since 1.4
          */
         public static final UnicodeBlock CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A =
@@ -1372,6 +2066,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Yi Syllables" Unicode character block.
+         * <p>
+         *  常量为"彝音节"Unicode字符块
+         * 
+         * 
          * @since 1.4
          */
         public static final UnicodeBlock YI_SYLLABLES =
@@ -1381,6 +2079,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Yi Radicals" Unicode character block.
+         * <p>
+         *  常量为"Yi Radicals"Unicode字符块
+         * 
+         * 
          * @since 1.4
          */
         public static final UnicodeBlock YI_RADICALS =
@@ -1390,6 +2092,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Cyrillic Supplementary" Unicode character block.
+         * <p>
+         *  Unicode字符块的"西里尔字符补充"常量
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock CYRILLIC_SUPPLEMENTARY =
@@ -1401,6 +2107,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Tagalog" Unicode character block.
+         * <p>
+         *  Unicode字符块的"Tagalog"常量
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock TAGALOG =
@@ -1408,6 +2118,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Hanunoo" Unicode character block.
+         * <p>
+         *  常量为"Hanunoo"的Unicode字符块
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock HANUNOO =
@@ -1415,6 +2129,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Buhid" Unicode character block.
+         * <p>
+         *  常量为"Buhid"的Unicode字符块
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock BUHID =
@@ -1422,6 +2140,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Tagbanwa" Unicode character block.
+         * <p>
+         *  Unicode字符块的"Tagbanwa"常量
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock TAGBANWA =
@@ -1429,6 +2151,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Limbu" Unicode character block.
+         * <p>
+         *  常量为"Limbu"的Unicode字符块
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock LIMBU =
@@ -1436,6 +2162,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Tai Le" Unicode character block.
+         * <p>
+         *  Unicode字符块的"Tai Le"常量
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock TAI_LE =
@@ -1445,6 +2175,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Khmer Symbols" Unicode character block.
+         * <p>
+         *  常量为"高棉符号"Unicode字符块
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock KHMER_SYMBOLS =
@@ -1454,6 +2188,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Phonetic Extensions" Unicode character block.
+         * <p>
+         *  常量为"拼音扩展"Unicode字符块
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock PHONETIC_EXTENSIONS =
@@ -1463,6 +2201,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Miscellaneous Mathematical Symbols-A" Unicode character block.
+         * <p>
+         *  Unicode字符块的"杂项数学符号 -  A"的常量
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock MISCELLANEOUS_MATHEMATICAL_SYMBOLS_A =
@@ -1472,6 +2214,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Supplemental Arrows-A" Unicode character block.
+         * <p>
+         * Unicode字符块的"Supplemental Arrows-A"常量
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock SUPPLEMENTAL_ARROWS_A =
@@ -1481,6 +2227,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Supplemental Arrows-B" Unicode character block.
+         * <p>
+         *  "Supplemental Arrows-B"Unicode字符块的常量
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock SUPPLEMENTAL_ARROWS_B =
@@ -1491,6 +2241,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
         /**
          * Constant for the "Miscellaneous Mathematical Symbols-B" Unicode
          * character block.
+         * <p>
+         *  Unicode字符块的"杂项数学符号-B"的常量
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock MISCELLANEOUS_MATHEMATICAL_SYMBOLS_B =
@@ -1501,6 +2255,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
         /**
          * Constant for the "Supplemental Mathematical Operators" Unicode
          * character block.
+         * <p>
+         *  常量为"补充数学运算符"的Unicode字符块
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock SUPPLEMENTAL_MATHEMATICAL_OPERATORS =
@@ -1511,6 +2269,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
         /**
          * Constant for the "Miscellaneous Symbols and Arrows" Unicode character
          * block.
+         * <p>
+         *  "其他符号和箭头"的常量Unicode字符块
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock MISCELLANEOUS_SYMBOLS_AND_ARROWS =
@@ -1521,6 +2283,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
         /**
          * Constant for the "Katakana Phonetic Extensions" Unicode character
          * block.
+         * <p>
+         *  常量为"片假名拼音扩展"的Unicode字符块
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock KATAKANA_PHONETIC_EXTENSIONS =
@@ -1530,6 +2296,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Yijing Hexagram Symbols" Unicode character block.
+         * <p>
+         *  常量为"易经六卦符号"Unicode字符块
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock YIJING_HEXAGRAM_SYMBOLS =
@@ -1539,6 +2309,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Variation Selectors" Unicode character block.
+         * <p>
+         *  常量为"变量选择器"Unicode字符块
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock VARIATION_SELECTORS =
@@ -1548,6 +2322,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Linear B Syllabary" Unicode character block.
+         * <p>
+         *  Unicode字符块的"线性B音节"的常量
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock LINEAR_B_SYLLABARY =
@@ -1557,6 +2335,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Linear B Ideograms" Unicode character block.
+         * <p>
+         *  Unicode字符块的"Linear B Ideograms"的常量
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock LINEAR_B_IDEOGRAMS =
@@ -1566,6 +2348,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Aegean Numbers" Unicode character block.
+         * <p>
+         *  常量为"爱琴海数字"的Unicode字符块
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock AEGEAN_NUMBERS =
@@ -1575,6 +2361,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Old Italic" Unicode character block.
+         * <p>
+         * "Old Italic"Unicode字符块的常量
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock OLD_ITALIC =
@@ -1584,6 +2374,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Gothic" Unicode character block.
+         * <p>
+         *  "哥特式"Unicode字符块的常量
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock GOTHIC =
@@ -1591,6 +2385,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Ugaritic" Unicode character block.
+         * <p>
+         *  "Ugaritic"Unicode字符块的常量
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock UGARITIC =
@@ -1598,6 +2396,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Deseret" Unicode character block.
+         * <p>
+         *  Unicode字符块的"Deseret"常量
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock DESERET =
@@ -1605,6 +2407,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Shavian" Unicode character block.
+         * <p>
+         *  "Shavian"Unicode字符块的常量
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock SHAVIAN =
@@ -1612,6 +2418,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Osmanya" Unicode character block.
+         * <p>
+         *  常量为"Osmanya"Unicode字符块
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock OSMANYA =
@@ -1619,6 +2429,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Cypriot Syllabary" Unicode character block.
+         * <p>
+         *  "Cypriot Syllabary"Unicode字符块的常量
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock CYPRIOT_SYLLABARY =
@@ -1628,6 +2442,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Byzantine Musical Symbols" Unicode character block.
+         * <p>
+         *  常数为"拜占庭音乐符号"Unicode字符块
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock BYZANTINE_MUSICAL_SYMBOLS =
@@ -1637,6 +2455,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Musical Symbols" Unicode character block.
+         * <p>
+         *  常量为"音乐符号"Unicode字符块
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock MUSICAL_SYMBOLS =
@@ -1646,6 +2468,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Tai Xuan Jing Symbols" Unicode character block.
+         * <p>
+         *  常量为"Tai Xuan Jing Symbols"的Unicode字符块
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock TAI_XUAN_JING_SYMBOLS =
@@ -1656,6 +2482,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
         /**
          * Constant for the "Mathematical Alphanumeric Symbols" Unicode
          * character block.
+         * <p>
+         *  "数学字母数字符号"的常量Unicode字符块
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock MATHEMATICAL_ALPHANUMERIC_SYMBOLS =
@@ -1666,6 +2496,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
         /**
          * Constant for the "CJK Unified Ideographs Extension B" Unicode
          * character block.
+         * <p>
+         *  Unicode字符块的"CJK统一表意文字扩展名B"的常量
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock CJK_UNIFIED_IDEOGRAPHS_EXTENSION_B =
@@ -1675,6 +2509,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "CJK Compatibility Ideographs Supplement" Unicode character block.
+         * <p>
+         * "CJK兼容性表意文字补充"Unicode字符块的常量
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock CJK_COMPATIBILITY_IDEOGRAPHS_SUPPLEMENT =
@@ -1684,6 +2522,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Tags" Unicode character block.
+         * <p>
+         *  常量为"标签"Unicode字符块
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock TAGS =
@@ -1692,6 +2534,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
         /**
          * Constant for the "Variation Selectors Supplement" Unicode character
          * block.
+         * <p>
+         *  "变量选择器补充"的Unicode字符块的常量
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock VARIATION_SELECTORS_SUPPLEMENT =
@@ -1702,6 +2548,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
         /**
          * Constant for the "Supplementary Private Use Area-A" Unicode character
          * block.
+         * <p>
+         *  Unicode字符块的"Supplementary Private Use Area-A"的常量
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock SUPPLEMENTARY_PRIVATE_USE_AREA_A =
@@ -1712,6 +2562,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
         /**
          * Constant for the "Supplementary Private Use Area-B" Unicode character
          * block.
+         * <p>
+         *  "补充私人使用区域B"的Unicode字符块的常量
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock SUPPLEMENTARY_PRIVATE_USE_AREA_B =
@@ -1724,6 +2578,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
          * This block represents codepoint values in the high surrogate
          * range: U+D800 through U+DB7F
          *
+         * <p>
+         *  "高代理"的常量Unicode字符块此块表示高代理范围中的代码点值：U + D800到U + DB7F
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock HIGH_SURROGATES =
@@ -1737,6 +2595,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
          * This block represents codepoint values in the private use high
          * surrogate range: U+DB80 through U+DBFF
          *
+         * <p>
+         *  "高私人使用代理"的常量Unicode字符块此块表示私人使用高代理范围中的代码点值：U + DB80到U + DBFF
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock HIGH_PRIVATE_USE_SURROGATES =
@@ -1749,6 +2611,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
          * This block represents codepoint values in the low surrogate
          * range: U+DC00 through U+DFFF
          *
+         * <p>
+         * "低代理"的常量Unicode字符块此块表示低代理范围中的代码点值：U + DC00到U + DFFF
+         * 
+         * 
          * @since 1.5
          */
         public static final UnicodeBlock LOW_SURROGATES =
@@ -1758,6 +2624,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Arabic Supplement" Unicode character block.
+         * <p>
+         *  常量为"阿拉伯语补充"Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock ARABIC_SUPPLEMENT =
@@ -1767,6 +2637,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "NKo" Unicode character block.
+         * <p>
+         *  Unicode字符块的"NKo"常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock NKO =
@@ -1774,6 +2648,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Samaritan" Unicode character block.
+         * <p>
+         *  常量为"撒玛利亚人"Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock SAMARITAN =
@@ -1781,6 +2659,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Mandaic" Unicode character block.
+         * <p>
+         *  "Mandaic"Unicode字符块的常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock MANDAIC =
@@ -1788,6 +2670,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Ethiopic Supplement" Unicode character block.
+         * <p>
+         *  常量为"埃塞俄比亚补充"Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock ETHIOPIC_SUPPLEMENT =
@@ -1798,6 +2684,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
         /**
          * Constant for the "Unified Canadian Aboriginal Syllabics Extended"
          * Unicode character block.
+         * <p>
+         *  常量为"加拿大原住民音节扩展"Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock UNIFIED_CANADIAN_ABORIGINAL_SYLLABICS_EXTENDED =
@@ -1807,6 +2697,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "New Tai Lue" Unicode character block.
+         * <p>
+         *  常量为"新太郎"的Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock NEW_TAI_LUE =
@@ -1816,6 +2710,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Buginese" Unicode character block.
+         * <p>
+         *  Unicode字符块的"Buginese"常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock BUGINESE =
@@ -1823,6 +2721,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Tai Tham" Unicode character block.
+         * <p>
+         *  Unicode字符块的"Tai Tham"常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock TAI_THAM =
@@ -1832,6 +2734,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Balinese" Unicode character block.
+         * <p>
+         *  常量为"巴厘岛"Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock BALINESE =
@@ -1839,6 +2745,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Sundanese" Unicode character block.
+         * <p>
+         *  "Sundanese"Unicode字符块的常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock SUNDANESE =
@@ -1846,6 +2756,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Batak" Unicode character block.
+         * <p>
+         * 常量为"Batak"Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock BATAK =
@@ -1853,6 +2767,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Lepcha" Unicode character block.
+         * <p>
+         *  Unicode字符块的"Lepcha"常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock LEPCHA =
@@ -1860,6 +2778,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Ol Chiki" Unicode character block.
+         * <p>
+         *  常量为"Ol Chiki"的Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock OL_CHIKI =
@@ -1869,6 +2791,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Vedic Extensions" Unicode character block.
+         * <p>
+         *  常量为"Vedic扩展"的Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock VEDIC_EXTENSIONS =
@@ -1879,6 +2805,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
         /**
          * Constant for the "Phonetic Extensions Supplement" Unicode character
          * block.
+         * <p>
+         *  常量为"语音扩展补充"Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock PHONETIC_EXTENSIONS_SUPPLEMENT =
@@ -1889,6 +2819,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
         /**
          * Constant for the "Combining Diacritical Marks Supplement" Unicode
          * character block.
+         * <p>
+         *  常量为"组合变音符补充"Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock COMBINING_DIACRITICAL_MARKS_SUPPLEMENT =
@@ -1898,6 +2832,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Glagolitic" Unicode character block.
+         * <p>
+         *  "Glagolitic"Unicode字符块的常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock GLAGOLITIC =
@@ -1905,6 +2843,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Latin Extended-C" Unicode character block.
+         * <p>
+         *  "Latin Extended-C"Unicode字符块的常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock LATIN_EXTENDED_C =
@@ -1914,6 +2856,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Coptic" Unicode character block.
+         * <p>
+         *  "Coptic"Unicode字符块的常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock COPTIC =
@@ -1921,6 +2867,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Georgian Supplement" Unicode character block.
+         * <p>
+         *  常量为"格鲁吉亚补充"Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock GEORGIAN_SUPPLEMENT =
@@ -1930,6 +2880,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Tifinagh" Unicode character block.
+         * <p>
+         *  Unicode字符块的"Tifinagh"常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock TIFINAGH =
@@ -1937,6 +2891,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Ethiopic Extended" Unicode character block.
+         * <p>
+         *  常量为"埃塞俄比亚扩展"Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock ETHIOPIC_EXTENDED =
@@ -1946,6 +2904,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Cyrillic Extended-A" Unicode character block.
+         * <p>
+         *  "Cyrillic Extended-A"Unicode字符块的常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock CYRILLIC_EXTENDED_A =
@@ -1955,6 +2917,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Supplemental Punctuation" Unicode character block.
+         * <p>
+         * 常量为"补充标点"Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock SUPPLEMENTAL_PUNCTUATION =
@@ -1964,6 +2930,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "CJK Strokes" Unicode character block.
+         * <p>
+         *  Unicode字符块的"CJK笔画"的常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock CJK_STROKES =
@@ -1973,6 +2943,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Lisu" Unicode character block.
+         * <p>
+         *  "Lisu"Unicode字符块的常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock LISU =
@@ -1980,6 +2954,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Vai" Unicode character block.
+         * <p>
+         *  常量为"Vai"Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock VAI =
@@ -1987,6 +2965,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Cyrillic Extended-B" Unicode character block.
+         * <p>
+         *  Unicode字符块的"Cyrillic Extended-B"常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock CYRILLIC_EXTENDED_B =
@@ -1996,6 +2978,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Bamum" Unicode character block.
+         * <p>
+         *  Unicode字符块的"Bamum"常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock BAMUM =
@@ -2003,6 +2989,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Modifier Tone Letters" Unicode character block.
+         * <p>
+         *  Unicode字符块的"修饰符音调字母"的常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock MODIFIER_TONE_LETTERS =
@@ -2012,6 +3002,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Latin Extended-D" Unicode character block.
+         * <p>
+         *  "Latin Extended-D"Unicode字符块的常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock LATIN_EXTENDED_D =
@@ -2021,6 +3015,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Syloti Nagri" Unicode character block.
+         * <p>
+         *  常量为"Syloti Nagri"Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock SYLOTI_NAGRI =
@@ -2030,6 +3028,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Common Indic Number Forms" Unicode character block.
+         * <p>
+         *  常量"常用指数表单"的Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock COMMON_INDIC_NUMBER_FORMS =
@@ -2039,6 +3041,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Phags-pa" Unicode character block.
+         * <p>
+         *  Unicode字符块的"Phags-pa"常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock PHAGS_PA =
@@ -2047,6 +3053,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Saurashtra" Unicode character block.
+         * <p>
+         *  Unicode字符块的"Saurashtra"常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock SAURASHTRA =
@@ -2054,6 +3064,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Devanagari Extended" Unicode character block.
+         * <p>
+         *  常量为"Devanagari扩展"的Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock DEVANAGARI_EXTENDED =
@@ -2063,6 +3077,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Kayah Li" Unicode character block.
+         * <p>
+         * 常数为"Kayah Li"Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock KAYAH_LI =
@@ -2072,6 +3090,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Rejang" Unicode character block.
+         * <p>
+         *  Unicode字符块的"Rejang"常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock REJANG =
@@ -2079,6 +3101,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Hangul Jamo Extended-A" Unicode character block.
+         * <p>
+         *  "Hangul Jamo Extended-A"Unicode字符块的常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock HANGUL_JAMO_EXTENDED_A =
@@ -2088,6 +3114,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Javanese" Unicode character block.
+         * <p>
+         *  常量为"爪哇"Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock JAVANESE =
@@ -2095,6 +3125,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Cham" Unicode character block.
+         * <p>
+         *  Unicode字符块的"Cham"常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock CHAM =
@@ -2102,6 +3136,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Myanmar Extended-A" Unicode character block.
+         * <p>
+         *  常量为"缅甸Extended-A"Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock MYANMAR_EXTENDED_A =
@@ -2111,6 +3149,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Tai Viet" Unicode character block.
+         * <p>
+         *  "Tai Viet"Unicode字符块的常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock TAI_VIET =
@@ -2120,6 +3162,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Ethiopic Extended-A" Unicode character block.
+         * <p>
+         *  Unicode字符块的"Ethiopic Extended-A"常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock ETHIOPIC_EXTENDED_A =
@@ -2129,6 +3175,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Meetei Mayek" Unicode character block.
+         * <p>
+         *  常量为"Meetei Mayek"Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock MEETEI_MAYEK =
@@ -2138,6 +3188,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Hangul Jamo Extended-B" Unicode character block.
+         * <p>
+         *  "Hangul Jamo Extended-B"Unicode字符块的常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock HANGUL_JAMO_EXTENDED_B =
@@ -2147,6 +3201,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Vertical Forms" Unicode character block.
+         * <p>
+         *  "垂直窗体"Unicode字符块的常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock VERTICAL_FORMS =
@@ -2156,6 +3214,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Ancient Greek Numbers" Unicode character block.
+         * <p>
+         *  常量为"古希腊数字"的Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock ANCIENT_GREEK_NUMBERS =
@@ -2165,6 +3227,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Ancient Symbols" Unicode character block.
+         * <p>
+         *  常量为"古代符号"的Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock ANCIENT_SYMBOLS =
@@ -2174,6 +3240,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Phaistos Disc" Unicode character block.
+         * <p>
+         * 常量为"Phaistos Disc"Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock PHAISTOS_DISC =
@@ -2183,6 +3253,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Lycian" Unicode character block.
+         * <p>
+         *  常量为"Lycian"Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock LYCIAN =
@@ -2190,6 +3264,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Carian" Unicode character block.
+         * <p>
+         *  "Carian"Unicode字符块的常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock CARIAN =
@@ -2197,6 +3275,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Old Persian" Unicode character block.
+         * <p>
+         *  常量为"老波斯"Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock OLD_PERSIAN =
@@ -2206,6 +3288,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Imperial Aramaic" Unicode character block.
+         * <p>
+         *  常量为"帝国亚拉姆"的Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock IMPERIAL_ARAMAIC =
@@ -2215,6 +3301,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Phoenician" Unicode character block.
+         * <p>
+         *  常量为"腓尼基"Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock PHOENICIAN =
@@ -2222,6 +3312,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Lydian" Unicode character block.
+         * <p>
+         *  "Lydian"Unicode字符块的常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock LYDIAN =
@@ -2229,6 +3323,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Kharoshthi" Unicode character block.
+         * <p>
+         *  Unicode字符块的"Kharoshthi"常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock KHAROSHTHI =
@@ -2236,6 +3334,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Old South Arabian" Unicode character block.
+         * <p>
+         *  常量为"旧南阿拉伯"Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock OLD_SOUTH_ARABIAN =
@@ -2245,6 +3347,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Avestan" Unicode character block.
+         * <p>
+         *  "Avestan"Unicode字符块的常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock AVESTAN =
@@ -2252,6 +3358,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Inscriptional Parthian" Unicode character block.
+         * <p>
+         *  Unicode字符块的"Inscriptional Parthian"常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock INSCRIPTIONAL_PARTHIAN =
@@ -2261,6 +3371,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Inscriptional Pahlavi" Unicode character block.
+         * <p>
+         *  Unicode字符块的"Inscriptional Pahlavi"的常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock INSCRIPTIONAL_PAHLAVI =
@@ -2270,6 +3384,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Old Turkic" Unicode character block.
+         * <p>
+         *  常量为"古老的突厥"Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock OLD_TURKIC =
@@ -2279,6 +3397,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Rumi Numeral Symbols" Unicode character block.
+         * <p>
+         * 常量为"Rumi数字符号"Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock RUMI_NUMERAL_SYMBOLS =
@@ -2288,6 +3410,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Brahmi" Unicode character block.
+         * <p>
+         *  Unicode字符块的"Brahmi"常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock BRAHMI =
@@ -2295,6 +3421,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Kaithi" Unicode character block.
+         * <p>
+         *  常量为"Kaithi"Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock KAITHI =
@@ -2302,6 +3432,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Cuneiform" Unicode character block.
+         * <p>
+         *  "Cuneiform"Unicode字符块的常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock CUNEIFORM =
@@ -2310,6 +3444,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
         /**
          * Constant for the "Cuneiform Numbers and Punctuation" Unicode
          * character block.
+         * <p>
+         *  常量为"楔形数字和标点"Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock CUNEIFORM_NUMBERS_AND_PUNCTUATION =
@@ -2319,6 +3457,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Egyptian Hieroglyphs" Unicode character block.
+         * <p>
+         *  常量为"埃及象形文字"的Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock EGYPTIAN_HIEROGLYPHS =
@@ -2328,6 +3470,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Bamum Supplement" Unicode character block.
+         * <p>
+         *  常量为"Bamum Supplement"Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock BAMUM_SUPPLEMENT =
@@ -2337,6 +3483,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Kana Supplement" Unicode character block.
+         * <p>
+         *  Unicode字符块的"假名补充"的常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock KANA_SUPPLEMENT =
@@ -2347,6 +3497,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
         /**
          * Constant for the "Ancient Greek Musical Notation" Unicode character
          * block.
+         * <p>
+         *  常量为"古希腊音乐符号"Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock ANCIENT_GREEK_MUSICAL_NOTATION =
@@ -2356,6 +3510,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Counting Rod Numerals" Unicode character block.
+         * <p>
+         *  常数为"计数杆数字"Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock COUNTING_ROD_NUMERALS =
@@ -2365,6 +3523,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Mahjong Tiles" Unicode character block.
+         * <p>
+         *  常量为"Mahjong Tiles"的Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock MAHJONG_TILES =
@@ -2374,6 +3536,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Domino Tiles" Unicode character block.
+         * <p>
+         *  常量为"Domino Tiles"的Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock DOMINO_TILES =
@@ -2383,6 +3549,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Playing Cards" Unicode character block.
+         * <p>
+         * 常量为"扑克牌"的Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock PLAYING_CARDS =
@@ -2393,6 +3563,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
         /**
          * Constant for the "Enclosed Alphanumeric Supplement" Unicode character
          * block.
+         * <p>
+         *  "包含字母数字补充"的Unicode字符块的常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock ENCLOSED_ALPHANUMERIC_SUPPLEMENT =
@@ -2403,6 +3577,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
         /**
          * Constant for the "Enclosed Ideographic Supplement" Unicode character
          * block.
+         * <p>
+         *  "封闭表意文字补充"Unicode字符块的常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock ENCLOSED_IDEOGRAPHIC_SUPPLEMENT =
@@ -2413,6 +3591,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
         /**
          * Constant for the "Miscellaneous Symbols And Pictographs" Unicode
          * character block.
+         * <p>
+         *  常量为"杂项符号和象形图"Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock MISCELLANEOUS_SYMBOLS_AND_PICTOGRAPHS =
@@ -2422,6 +3604,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Emoticons" Unicode character block.
+         * <p>
+         *  常量为"表情符号"Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock EMOTICONS =
@@ -2429,6 +3615,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Transport And Map Symbols" Unicode character block.
+         * <p>
+         *  常量为"运输和地图符号"Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock TRANSPORT_AND_MAP_SYMBOLS =
@@ -2438,6 +3628,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Alchemical Symbols" Unicode character block.
+         * <p>
+         *  Unicode字符块的"Alchemical Symbols"常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock ALCHEMICAL_SYMBOLS =
@@ -2448,6 +3642,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
         /**
          * Constant for the "CJK Unified Ideographs Extension C" Unicode
          * character block.
+         * <p>
+         *  Unicode字符块的"CJK统一表意文字扩展名C"的常量
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock CJK_UNIFIED_IDEOGRAPHS_EXTENSION_C =
@@ -2458,6 +3656,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
         /**
          * Constant for the "CJK Unified Ideographs Extension D" Unicode
          * character block.
+         * <p>
+         *  常量为"CJK统一表意文字扩展名D"的Unicode字符块
+         * 
+         * 
          * @since 1.7
          */
         public static final UnicodeBlock CJK_UNIFIED_IDEOGRAPHS_EXTENSION_D =
@@ -2467,6 +3669,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Arabic Extended-A" Unicode character block.
+         * <p>
+         *  Unicode字符块的"阿拉伯语扩展-A"的常量
+         * 
+         * 
          * @since 1.8
          */
         public static final UnicodeBlock ARABIC_EXTENDED_A =
@@ -2476,6 +3682,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Sundanese Supplement" Unicode character block.
+         * <p>
+         *  常量为"Sund ese补充"Unicode字符块
+         * 
+         * 
          * @since 1.8
          */
         public static final UnicodeBlock SUNDANESE_SUPPLEMENT =
@@ -2485,6 +3695,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Meetei Mayek Extensions" Unicode character block.
+         * <p>
+         * 常量为"Meetei Mayek扩展"的Unicode字符块
+         * 
+         * 
          * @since 1.8
          */
         public static final UnicodeBlock MEETEI_MAYEK_EXTENSIONS =
@@ -2494,6 +3708,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Meroitic Hieroglyphs" Unicode character block.
+         * <p>
+         *  常量为"Meroitic象形文字"Unicode字符块
+         * 
+         * 
          * @since 1.8
          */
         public static final UnicodeBlock MEROITIC_HIEROGLYPHS =
@@ -2503,6 +3721,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Meroitic Cursive" Unicode character block.
+         * <p>
+         *  Unicode字符块的"Meroitic Cursive"常量
+         * 
+         * 
          * @since 1.8
          */
         public static final UnicodeBlock MEROITIC_CURSIVE =
@@ -2512,6 +3734,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Sora Sompeng" Unicode character block.
+         * <p>
+         *  常量为"Sora Sompeng"Unicode字符块
+         * 
+         * 
          * @since 1.8
          */
         public static final UnicodeBlock SORA_SOMPENG =
@@ -2521,6 +3747,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Chakma" Unicode character block.
+         * <p>
+         *  常量为"Chakma"Unicode字符块
+         * 
+         * 
          * @since 1.8
          */
         public static final UnicodeBlock CHAKMA =
@@ -2528,6 +3758,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Sharada" Unicode character block.
+         * <p>
+         *  常量为"Sharada"Unicode字符块
+         * 
+         * 
          * @since 1.8
          */
         public static final UnicodeBlock SHARADA =
@@ -2535,6 +3769,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Takri" Unicode character block.
+         * <p>
+         *  Unicode字符块的"Takri"常量
+         * 
+         * 
          * @since 1.8
          */
         public static final UnicodeBlock TAKRI =
@@ -2542,6 +3780,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
         /**
          * Constant for the "Miao" Unicode character block.
+         * <p>
+         *  "Miao"Unicode字符块的常量
+         * 
+         * 
          * @since 1.8
          */
         public static final UnicodeBlock MIAO =
@@ -2550,6 +3792,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
         /**
          * Constant for the "Arabic Mathematical Alphabetic Symbols" Unicode
          * character block.
+         * <p>
+         *  常量为"阿拉伯数学字母符号"Unicode字符块
+         * 
+         * 
          * @since 1.8
          */
         public static final UnicodeBlock ARABIC_MATHEMATICAL_ALPHABETIC_SYMBOLS =
@@ -3086,6 +4332,13 @@ class Character implements java.io.Serializable, Comparable<Character> {
          * characters</a>.  To support all Unicode characters, including
          * supplementary characters, use the {@link #of(int)} method.
          *
+         * <p>
+         *  返回表示包含给定字符的Unicode块的对象,如果字符不是定义块的成员,则返回{@code null}
+         * 
+         * <p> <b>注意：</b>此方法无法处理<a href=\"Characterhtml#supplementary\">补充字符</a>要支持所有Unicode字符(包括补充字符),请使用{@link #of int)}
+         * 方法。
+         * 
+         * 
          * @param   c  The character in question
          * @return  The {@code UnicodeBlock} instance representing the
          *          Unicode block of which this character is a member, or
@@ -3102,6 +4355,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
          * {@code null} if the character is not a member of a
          * defined block.
          *
+         * <p>
+         *  返回表示包含给定字符(Unicode代码点)的Unicode块的对象,如果该字符不是定义块的成员,则返回{@code null}
+         * 
+         * 
          * @param   codePoint the character (Unicode code point) in question.
          * @return  The {@code UnicodeBlock} instance representing the
          *          Unicode block of which this character is a member, or
@@ -3162,6 +4419,21 @@ class Character implements java.io.Serializable, Comparable<Character> {
          * If the Unicode Standard changes block names, both the previous and
          * current names will be accepted.
          *
+         * <p>
+         *  返回具有给定名称的UnicodeBlock块名称由Unicode标准确定文件Blocks-&lt; version&gt; txt为标准的特定版本定义块{@link Character}类指定其支持的
+         * 标准的版本。
+         * <p>
+         *  此方法接受以下形式的块名称：
+         * <ol>
+         * <li>由Unicode标准定义的规范块名称例如,标准定义了一个"基本拉丁语"块因此,此方法接受"基本拉丁语"作为有效的块名称每个UnicodeBlock的文档提供规范名称<li>除去所有空格的规范块名
+         * 称例如,"BasicLatin"是"基本拉丁"块的有效块名称<li>每个常量UnicodeBlock标识符的文本表示法例如,此方法将返回{@link #BASIC_LATIN}块如果提供了"BASIC_
+         * LATIN"名称此形式用下划线替换规范名称中的所有空格和连字符。
+         * </ol>
+         * 最后,对所有有效的块名称形式忽略字符大小写例如,"BASIC_LATIN"和"basic_latin"都是有效的块名称en_US语言环境的大小写映射规则用于为块名称验证提供不区分大小写的字符串比较
+         * <p>
+         *  如果Unicode标准更改块名称,则将接受先前和当前名称
+         * 
+         * 
          * @param blockName A {@code UnicodeBlock} name.
          * @return The {@code UnicodeBlock} instance identified
          *         by {@code blockName}
@@ -3191,521 +4463,836 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * {@link Character.UnicodeScript#COMMON Common} or
      * {@link Character.UnicodeScript#UNKNOWN Unknown}.
      *
+     * <p>
+     * 代表<a href=\"http://wwwunicodeorg/reports/tr24/\"> Unicode标准附录#24：脚本名称</i>中定义的字符脚本的字符子集家族每个Unicode字符分配
+     * 给单个Unicode脚本,例如{@link CharacterUnicodeScript#LATIN Latin}或以下三个特殊值之一{@link CharacterUnicodeScript#INHERITED Inherited}
+     * ,{@link CharacterUnicodeScript#COMMON Common }或{@link CharacterUnicodeScript#UNKNOWN Unknown}。
+     * 
+     * 
      * @since 1.7
      */
     public static enum UnicodeScript {
         /**
          * Unicode script "Common".
+         * <p>
+         *  Unicode脚本"Common"
+         * 
          */
         COMMON,
 
         /**
          * Unicode script "Latin".
+         * <p>
+         *  Unicode脚本"拉丁语"
+         * 
          */
         LATIN,
 
         /**
          * Unicode script "Greek".
+         * <p>
+         *  Unicode脚本"希腊语"
+         * 
          */
         GREEK,
 
         /**
          * Unicode script "Cyrillic".
+         * <p>
+         *  Unicode脚本"Cyrillic"
+         * 
          */
         CYRILLIC,
 
         /**
          * Unicode script "Armenian".
+         * <p>
+         *  Unicode脚本"亚美尼亚语"
+         * 
          */
         ARMENIAN,
 
         /**
          * Unicode script "Hebrew".
+         * <p>
+         *  Unicode脚本"希伯来语"
+         * 
          */
         HEBREW,
 
         /**
          * Unicode script "Arabic".
+         * <p>
+         *  Unicode脚本"阿拉伯语"
+         * 
          */
         ARABIC,
 
         /**
          * Unicode script "Syriac".
+         * <p>
+         *  Unicode脚本"Syriac"
+         * 
          */
         SYRIAC,
 
         /**
          * Unicode script "Thaana".
+         * <p>
+         *  Unicode脚本"Thaana"
+         * 
          */
         THAANA,
 
         /**
          * Unicode script "Devanagari".
+         * <p>
+         *  Unicode脚本"Devanagari"
+         * 
          */
         DEVANAGARI,
 
         /**
          * Unicode script "Bengali".
+         * <p>
+         * Unicode脚本"孟加拉语"
+         * 
          */
         BENGALI,
 
         /**
          * Unicode script "Gurmukhi".
+         * <p>
+         *  Unicode脚本"Gurmukhi"
+         * 
          */
         GURMUKHI,
 
         /**
          * Unicode script "Gujarati".
+         * <p>
+         *  Unicode脚本"古吉拉特语"
+         * 
          */
         GUJARATI,
 
         /**
          * Unicode script "Oriya".
+         * <p>
+         *  Unicode脚本"Oriya"
+         * 
          */
         ORIYA,
 
         /**
          * Unicode script "Tamil".
+         * <p>
+         *  Unicode脚本"泰米尔语"
+         * 
          */
         TAMIL,
 
         /**
          * Unicode script "Telugu".
+         * <p>
+         *  Unicode脚本"Telugu"
+         * 
          */
         TELUGU,
 
         /**
          * Unicode script "Kannada".
+         * <p>
+         *  Unicode脚本"Kannada"
+         * 
          */
         KANNADA,
 
         /**
          * Unicode script "Malayalam".
+         * <p>
+         *  Unicode脚本"Malayalam"
+         * 
          */
         MALAYALAM,
 
         /**
          * Unicode script "Sinhala".
+         * <p>
+         *  Unicode脚本"僧伽罗"
+         * 
          */
         SINHALA,
 
         /**
          * Unicode script "Thai".
+         * <p>
+         *  Unicode脚本"泰语"
+         * 
          */
         THAI,
 
         /**
          * Unicode script "Lao".
+         * <p>
+         *  Unicode脚本"老挝"
+         * 
          */
         LAO,
 
         /**
          * Unicode script "Tibetan".
+         * <p>
+         *  Unicode脚本"Tibetan"
+         * 
          */
         TIBETAN,
 
         /**
          * Unicode script "Myanmar".
+         * <p>
+         *  Unicode脚本"缅甸"
+         * 
          */
         MYANMAR,
 
         /**
          * Unicode script "Georgian".
+         * <p>
+         *  Unicode脚本"Georgian"
+         * 
          */
         GEORGIAN,
 
         /**
          * Unicode script "Hangul".
+         * <p>
+         *  Unicode脚本"Hangul"
+         * 
          */
         HANGUL,
 
         /**
          * Unicode script "Ethiopic".
+         * <p>
+         *  Unicode脚本"Ethiopic"
+         * 
          */
         ETHIOPIC,
 
         /**
          * Unicode script "Cherokee".
+         * <p>
+         *  Unicode脚本"Cherokee"
+         * 
          */
         CHEROKEE,
 
         /**
          * Unicode script "Canadian_Aboriginal".
+         * <p>
+         *  Unicode脚本"Canadian_Aboriginal"
+         * 
          */
         CANADIAN_ABORIGINAL,
 
         /**
          * Unicode script "Ogham".
+         * <p>
+         *  Unicode脚本"Ogham"
+         * 
          */
         OGHAM,
 
         /**
          * Unicode script "Runic".
+         * <p>
+         *  Unicode脚本"Runic"
+         * 
          */
         RUNIC,
 
         /**
          * Unicode script "Khmer".
+         * <p>
+         *  Unicode脚本"高棉"
+         * 
          */
         KHMER,
 
         /**
          * Unicode script "Mongolian".
+         * <p>
+         *  Unicode脚本"蒙古语"
+         * 
          */
         MONGOLIAN,
 
         /**
          * Unicode script "Hiragana".
+         * <p>
+         *  Unicode脚本"平假名"
+         * 
          */
         HIRAGANA,
 
         /**
          * Unicode script "Katakana".
+         * <p>
+         *  Unicode脚本"片假名"
+         * 
          */
         KATAKANA,
 
         /**
          * Unicode script "Bopomofo".
+         * <p>
+         *  Unicode脚本"Bopomofo"
+         * 
          */
         BOPOMOFO,
 
         /**
          * Unicode script "Han".
+         * <p>
+         *  Unicode脚本"Han"
+         * 
          */
         HAN,
 
         /**
          * Unicode script "Yi".
+         * <p>
+         *  Unicode脚本"Yi"
+         * 
          */
         YI,
 
         /**
          * Unicode script "Old_Italic".
+         * <p>
+         *  Unicode脚本"Old_Italic"
+         * 
          */
         OLD_ITALIC,
 
         /**
          * Unicode script "Gothic".
+         * <p>
+         *  Unicode脚本"哥特式"
+         * 
          */
         GOTHIC,
 
         /**
          * Unicode script "Deseret".
+         * <p>
+         * Unicode脚本"Deseret"
+         * 
          */
         DESERET,
 
         /**
          * Unicode script "Inherited".
+         * <p>
+         *  Unicode脚本"Inherited"
+         * 
          */
         INHERITED,
 
         /**
          * Unicode script "Tagalog".
+         * <p>
+         *  Unicode脚本"Tagalog"
+         * 
          */
         TAGALOG,
 
         /**
          * Unicode script "Hanunoo".
+         * <p>
+         *  Unicode脚本"Hanunoo"
+         * 
          */
         HANUNOO,
 
         /**
          * Unicode script "Buhid".
+         * <p>
+         *  Unicode脚本"Buhid"
+         * 
          */
         BUHID,
 
         /**
          * Unicode script "Tagbanwa".
+         * <p>
+         *  Unicode脚本"Tagbanwa"
+         * 
          */
         TAGBANWA,
 
         /**
          * Unicode script "Limbu".
+         * <p>
+         *  Unicode脚本"Limbu"
+         * 
          */
         LIMBU,
 
         /**
          * Unicode script "Tai_Le".
+         * <p>
+         *  Unicode脚本"Tai_Le"
+         * 
          */
         TAI_LE,
 
         /**
          * Unicode script "Linear_B".
+         * <p>
+         *  Unicode脚本"Linear_B"
+         * 
          */
         LINEAR_B,
 
         /**
          * Unicode script "Ugaritic".
+         * <p>
+         *  Unicode脚本"Ugaritic"
+         * 
          */
         UGARITIC,
 
         /**
          * Unicode script "Shavian".
+         * <p>
+         *  Unicode脚本"Shavian"
+         * 
          */
         SHAVIAN,
 
         /**
          * Unicode script "Osmanya".
+         * <p>
+         *  Unicode脚本"Osmanya"
+         * 
          */
         OSMANYA,
 
         /**
          * Unicode script "Cypriot".
+         * <p>
+         *  Unicode脚本"Cypriot"
+         * 
          */
         CYPRIOT,
 
         /**
          * Unicode script "Braille".
+         * <p>
+         *  Unicode脚本"盲文"
+         * 
          */
         BRAILLE,
 
         /**
          * Unicode script "Buginese".
+         * <p>
+         *  Unicode脚本"Buginese"
+         * 
          */
         BUGINESE,
 
         /**
          * Unicode script "Coptic".
+         * <p>
+         *  Unicode脚本"Coptic"
+         * 
          */
         COPTIC,
 
         /**
          * Unicode script "New_Tai_Lue".
+         * <p>
+         *  Unicode脚本"New_Tai_Lue"
+         * 
          */
         NEW_TAI_LUE,
 
         /**
          * Unicode script "Glagolitic".
+         * <p>
+         *  Unicode脚本"Glagolitic"
+         * 
          */
         GLAGOLITIC,
 
         /**
          * Unicode script "Tifinagh".
+         * <p>
+         *  Unicode脚本"Tifinagh"
+         * 
          */
         TIFINAGH,
 
         /**
          * Unicode script "Syloti_Nagri".
+         * <p>
+         *  Unicode脚本"Syloti_Nagri"
+         * 
          */
         SYLOTI_NAGRI,
 
         /**
          * Unicode script "Old_Persian".
+         * <p>
+         *  Unicode脚本"Old_Persian"
+         * 
          */
         OLD_PERSIAN,
 
         /**
          * Unicode script "Kharoshthi".
+         * <p>
+         *  Unicode脚本"Kharoshthi"
+         * 
          */
         KHAROSHTHI,
 
         /**
          * Unicode script "Balinese".
+         * <p>
+         *  Unicode脚本"巴厘岛"
+         * 
          */
         BALINESE,
 
         /**
          * Unicode script "Cuneiform".
+         * <p>
+         *  Unicode脚本"Cuneiform"
+         * 
          */
         CUNEIFORM,
 
         /**
          * Unicode script "Phoenician".
+         * <p>
+         *  Unicode脚本"腓尼基"
+         * 
          */
         PHOENICIAN,
 
         /**
          * Unicode script "Phags_Pa".
+         * <p>
+         *  Unicode脚本"Phags_Pa"
+         * 
          */
         PHAGS_PA,
 
         /**
          * Unicode script "Nko".
+         * <p>
+         *  Unicode脚本"Nko"
+         * 
          */
         NKO,
 
         /**
          * Unicode script "Sundanese".
+         * <p>
+         *  Unicode脚本"Sundanese"
+         * 
          */
         SUNDANESE,
 
         /**
          * Unicode script "Batak".
+         * <p>
+         * Unicode脚本"Batak"
+         * 
          */
         BATAK,
 
         /**
          * Unicode script "Lepcha".
+         * <p>
+         *  Unicode脚本"Lepcha"
+         * 
          */
         LEPCHA,
 
         /**
          * Unicode script "Ol_Chiki".
+         * <p>
+         *  Unicode脚本"Ol_Chiki"
+         * 
          */
         OL_CHIKI,
 
         /**
          * Unicode script "Vai".
+         * <p>
+         *  Unicode脚本"Vai"
+         * 
          */
         VAI,
 
         /**
          * Unicode script "Saurashtra".
+         * <p>
+         *  Unicode脚本"Saurashtra"
+         * 
          */
         SAURASHTRA,
 
         /**
          * Unicode script "Kayah_Li".
+         * <p>
+         *  Unicode脚本"Kayah_Li"
+         * 
          */
         KAYAH_LI,
 
         /**
          * Unicode script "Rejang".
+         * <p>
+         *  Unicode脚本"Rejang"
+         * 
          */
         REJANG,
 
         /**
          * Unicode script "Lycian".
+         * <p>
+         *  Unicode脚本"Lycian"
+         * 
          */
         LYCIAN,
 
         /**
          * Unicode script "Carian".
+         * <p>
+         *  Unicode脚本"Carian"
+         * 
          */
         CARIAN,
 
         /**
          * Unicode script "Lydian".
+         * <p>
+         *  Unicode脚本"Lydian"
+         * 
          */
         LYDIAN,
 
         /**
          * Unicode script "Cham".
+         * <p>
+         *  Unicode脚本"Cham"
+         * 
          */
         CHAM,
 
         /**
          * Unicode script "Tai_Tham".
+         * <p>
+         *  Unicode脚本"Tai_Tham"
+         * 
          */
         TAI_THAM,
 
         /**
          * Unicode script "Tai_Viet".
+         * <p>
+         *  Unicode脚本"Tai_Viet"
+         * 
          */
         TAI_VIET,
 
         /**
          * Unicode script "Avestan".
+         * <p>
+         *  Unicode脚本"Avestan"
+         * 
          */
         AVESTAN,
 
         /**
          * Unicode script "Egyptian_Hieroglyphs".
+         * <p>
+         *  Unicode脚本"Egyptian_Hieroglyphs"
+         * 
          */
         EGYPTIAN_HIEROGLYPHS,
 
         /**
          * Unicode script "Samaritan".
+         * <p>
+         *  Unicode脚本"撒玛利亚人"
+         * 
          */
         SAMARITAN,
 
         /**
          * Unicode script "Mandaic".
+         * <p>
+         *  Unicode脚本"Mandaic"
+         * 
          */
         MANDAIC,
 
         /**
          * Unicode script "Lisu".
+         * <p>
+         *  Unicode脚本"Lisu"
+         * 
          */
         LISU,
 
         /**
          * Unicode script "Bamum".
+         * <p>
+         *  Unicode脚本"Bamum"
+         * 
          */
         BAMUM,
 
         /**
          * Unicode script "Javanese".
+         * <p>
+         *  Unicode脚本"爪哇"
+         * 
          */
         JAVANESE,
 
         /**
          * Unicode script "Meetei_Mayek".
+         * <p>
+         *  Unicode脚本"Meetei_Mayek"
+         * 
          */
         MEETEI_MAYEK,
 
         /**
          * Unicode script "Imperial_Aramaic".
+         * <p>
+         *  Unicode脚本"Imperial_Aramaic"
+         * 
          */
         IMPERIAL_ARAMAIC,
 
         /**
          * Unicode script "Old_South_Arabian".
+         * <p>
+         *  Unicode脚本"Old_South_Arabian"
+         * 
          */
         OLD_SOUTH_ARABIAN,
 
         /**
          * Unicode script "Inscriptional_Parthian".
+         * <p>
+         *  Unicode脚本"Inscriptional_Parthian"
+         * 
          */
         INSCRIPTIONAL_PARTHIAN,
 
         /**
          * Unicode script "Inscriptional_Pahlavi".
+         * <p>
+         *  Unicode脚本"Inscriptional_Pahlavi"
+         * 
          */
         INSCRIPTIONAL_PAHLAVI,
 
         /**
          * Unicode script "Old_Turkic".
+         * <p>
+         *  Unicode脚本"Old_Turkic"
+         * 
          */
         OLD_TURKIC,
 
         /**
          * Unicode script "Brahmi".
+         * <p>
+         *  Unicode脚本"Brahmi"
+         * 
          */
         BRAHMI,
 
         /**
          * Unicode script "Kaithi".
+         * <p>
+         * Unicode脚本"Kaithi"
+         * 
          */
         KAITHI,
 
         /**
          * Unicode script "Meroitic Hieroglyphs".
+         * <p>
+         *  Unicode脚本"Meroitic象形文字"
+         * 
          */
         MEROITIC_HIEROGLYPHS,
 
         /**
          * Unicode script "Meroitic Cursive".
+         * <p>
+         *  Unicode脚本"Meroitic Cursive"
+         * 
          */
         MEROITIC_CURSIVE,
 
         /**
          * Unicode script "Sora Sompeng".
+         * <p>
+         *  Unicode脚本"Sora Seng"
+         * 
          */
         SORA_SOMPENG,
 
         /**
          * Unicode script "Chakma".
+         * <p>
+         *  Unicode脚本"Chakma"
+         * 
          */
         CHAKMA,
 
         /**
          * Unicode script "Sharada".
+         * <p>
+         *  Unicode脚本"Sharada"
+         * 
          */
         SHARADA,
 
         /**
          * Unicode script "Takri".
+         * <p>
+         *  Unicode脚本"Takri"
+         * 
          */
         TAKRI,
 
         /**
          * Unicode script "Miao".
+         * <p>
+         *  Unicode脚本"Miao"
+         * 
          */
         MIAO,
 
         /**
          * Unicode script "Unknown".
+         * <p>
+         *  Unicode脚本"未知"
+         * 
          */
         UNKNOWN;
 
@@ -4464,6 +6051,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
          * Returns the enum constant representing the Unicode script of which
          * the given character (Unicode code point) is assigned to.
          *
+         * <p>
+         *  返回表示给定字符(Unicode代码点)分配给的Unicode脚本的枚举常量
+         * 
+         * 
          * @param   codePoint the character (Unicode code point) in question.
          * @return  The {@code UnicodeScript} constant representing the
          *          Unicode script of which this character is assigned to.
@@ -4500,6 +6091,14 @@ class Character implements java.io.Serializable, Comparable<Character> {
          * case-insensitive string comparisons for script name validation.
          * <p>
          *
+         * <p>
+         * 返回具有给定的Unicode脚本名称或脚本名称别名的UnicodeScript常量脚本名称及其别名由Unicode标准确定文件脚本&lt; version&gt; txt和PropertyValueAl
+         * iases&lt; version&gt; txt定义脚本名称和脚本名称别名版本的标准{@link Character}类指定它支持的标准的版本。
+         * <p>
+         *  所有有效脚本名称的字符大小被忽略en_US语言环境的大小写映射规则用于为脚本名称验证提供不区分大小写的字符串比较
+         * <p>
+         * 
+         * 
          * @param scriptName A {@code UnicodeScript} name.
          * @return The {@code UnicodeScript} constant identified
          *         by {@code scriptName}
@@ -4520,6 +6119,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
     /**
      * The value of the {@code Character}.
      *
+     * <p>
+     *  {@code Character}的值
+     * 
+     * 
      * @serial
      */
     private final char value;
@@ -4531,6 +6134,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * Constructs a newly allocated {@code Character} object that
      * represents the specified {@code char} value.
      *
+     * <p>
+     *  构造一个新分配的{@code Character}对象,该对象表示指定的{@code char}值
+     * 
+     * 
      * @param  value   the value to be represented by the
      *                  {@code Character} object.
      */
@@ -4562,6 +6169,13 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * '\u005Cu0000'} to {@code '\u005Cu007F'}, inclusive, and may
      * cache other values outside of this range.
      *
+     * <p>
+     * 返回表示指定的<tt> char </tt>值的<tt>字符</tt>实例如果不需要新的<tt> Character </tt>实例,则通常应优先使用构造函数{@link #Character(char)}
+     * ,因为此方法可能通过缓存频繁请求的值来产生明显更好的空间和时间性能。
+     * 
+     *  此方法将始终将{@code'\\ u005Cu0000'}范围内的值缓存到{@code'\\ u005Cu007F'}(含),并可缓存此范围之外的其他值
+     * 
+     * 
      * @param  c a char value.
      * @return a <tt>Character</tt> instance representing <tt>c</tt>.
      * @since  1.5
@@ -4575,6 +6189,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
 
     /**
      * Returns the value of this {@code Character} object.
+     * <p>
+     *  返回此{@code Character}对象的值
+     * 
+     * 
      * @return  the primitive {@code char} value represented by
      *          this object.
      */
@@ -4586,6 +6204,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * Returns a hash code for this {@code Character}; equal to the result
      * of invoking {@code charValue()}.
      *
+     * <p>
+     *  返回此{@code Character}的哈希码;等于调用{@code charValue()}的结果
+     * 
+     * 
      * @return a hash code value for this {@code Character}
      */
     @Override
@@ -4597,6 +6219,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * Returns a hash code for a {@code char} value; compatible with
      * {@code Character.hashCode()}.
      *
+     * <p>
+     *  返回{@code char}值的哈希码;兼容{@code CharacterhashCode()}
+     * 
+     * 
      * @since 1.8
      *
      * @param value The {@code char} for which to return a hash code.
@@ -4612,6 +6238,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * {@code null} and is a {@code Character} object that
      * represents the same {@code char} value as this object.
      *
+     * <p>
+     * 将此对象与指定对象进行比较当且仅当参数不是{@code null}并且是与此对象表示相同{@code char}值的{@code Character}对象时,结果是{@code true}
+     * 
+     * 
      * @param   obj   the object to compare with.
      * @return  {@code true} if the objects are the same;
      *          {@code false} otherwise.
@@ -4630,6 +6260,11 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * {@code char} value represented by this
      * {@code Character} object.
      *
+     * <p>
+     *  返回表示此{@code Character}的值的{@code String}对象结果是长度为1的字符串,其唯一的组成部分是由此{@code Character}对象表示的原始{@code char}
+     * 值。
+     * 
+     * 
      * @return  a string representation of this object.
      */
     public String toString() {
@@ -4642,6 +6277,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * specified {@code char}.  The result is a string of length
      * 1 consisting solely of the specified {@code char}.
      *
+     * <p>
+     *  返回表示指定的{@code char}的{@code String}对象结果是一个长度为1的字符串,仅由指定的{@code char}
+     * 
+     * 
      * @param c the {@code char} to be converted
      * @return the string representation of the specified {@code char}
      * @since 1.4
@@ -4655,6 +6294,12 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * <a href="http://www.unicode.org/glossary/#code_point">
      * Unicode code point value</a>.
      *
+     * <p>
+     *  确定指定的代码点是否有效
+     * <a href="http://www.unicode.org/glossary/#code_point">
+     *  Unicode代码点值</a>
+     * 
+     * 
      * @param  codePoint the Unicode code point to be tested
      * @return {@code true} if the specified code point value is between
      *         {@link #MIN_CODE_POINT} and
@@ -4674,6 +6319,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * is in the <a href="#BMP">Basic Multilingual Plane (BMP)</a>.
      * Such code points can be represented using a single {@code char}.
      *
+     * <p>
+     * 确定指定的字符(Unicode代码点)是否位于<a href=\"#BMP\">基本多语言平面(BMP)</a>中此类代码点可以使用单个{@code char}
+     * 
+     * 
      * @param  codePoint the character (Unicode code point) to be tested
      * @return {@code true} if the specified code point is between
      *         {@link #MIN_VALUE} and {@link #MAX_VALUE} inclusive;
@@ -4692,6 +6341,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * Determines whether the specified character (Unicode code point)
      * is in the <a href="#supplementary">supplementary character</a> range.
      *
+     * <p>
+     *  确定指定的字符(Unicode代码点)是否在<a href=\"#supplementary\">补充字符</a>范围内
+     * 
+     * 
      * @param  codePoint the character (Unicode code point) to be tested
      * @return {@code true} if the specified code point is between
      *         {@link #MIN_SUPPLEMENTARY_CODE_POINT} and
@@ -4715,6 +6368,14 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * <a href="#supplementary">supplementary characters</a>
      * in the UTF-16 encoding.
      *
+     * <p>
+     *  确定给定的{@code char}值是否为
+     * <a href="http://www.unicode.org/glossary/#high_surrogate_code_unit">
+     *  Unicode高代理代码单元</a>(也称为<u>代表代码单元</i>)
+     * 
+     *  <p>此类值本身并不代表字符,而是用于UTF-16编码中的<a href=\"#supplementary\">补充字符</a>表示法
+     * 
+     * 
      * @param  ch the {@code char} value to be tested.
      * @return {@code true} if the {@code char} value is between
      *         {@link #MIN_HIGH_SURROGATE} and
@@ -4740,6 +6401,14 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * <a href="#supplementary">supplementary characters</a>
      * in the UTF-16 encoding.
      *
+     * <p>
+     *  确定给定的{@code char}值是否为
+     * <a href="http://www.unicode.org/glossary/#low_surrogate_code_unit">
+     *  Unicode低代理代码单元</a>(也称为<i>尾随代理代码单元</i>)
+     * 
+     * <p>此类值本身并不代表字符,而是用于UTF-16编码中的<a href=\"#supplementary\">补充字符</a>表示法
+     * 
+     * 
      * @param  ch the {@code char} value to be tested.
      * @return {@code true} if the {@code char} value is between
      *         {@link #MIN_LOW_SURROGATE} and
@@ -4765,6 +6434,15 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * a {@linkplain #isLowSurrogate(char) low-surrogate code unit} or
      * a {@linkplain #isHighSurrogate(char) high-surrogate code unit}.
      *
+     * <p>
+     *  确定给定的{@code char}值是否为Unicode <i>代理代码单元</i>
+     * 
+     *  <p>此类值本身并不代表字符,而是用于UTF-16编码中的<a href=\"#supplementary\">补充字符</a>表示法
+     * 
+     *  <p>当且仅当它是{@linkplain #isLowSurrogate(char)低代理码单元}或{@linkplain #isHighSurrogate(char)高代理码单元}时,char值是代
+     * 理代码单元}。
+     * 
+     * 
      * @param  ch the {@code char} value to be tested.
      * @return {@code true} if the {@code char} value is between
      *         {@link #MIN_SURROGATE} and
@@ -4787,6 +6465,15 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * isHighSurrogate(high) && isLowSurrogate(low)
      * }</pre></blockquote>
      *
+     * <p>
+     *  确定指定的{@code char}值对是否有效
+     * <a href="http://www.unicode.org/glossary/#surrogate_pair">
+     *  Unicode代理对</a>
+     * 
+     * <p>此方法等效于以下表达式：<blockquote> <pre> {@ code isHighSurrogate(high)&& isLowSurrogate(low)} </pre> </blockquote>
+     * 。
+     * 
+     * 
      * @param  high the high-surrogate code value to be tested
      * @param  low the low-surrogate code value to be tested
      * @return {@code true} if the specified high and
@@ -4809,6 +6496,12 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * character value using {@link #isValidCodePoint(int) isValidCodePoint}
      * if necessary.
      *
+     * <p>
+     *  确定表示指定字符(Unicode代码点)所需的{@code char}值的数量如果指定的字符等于或大于0x10000,则方法返回2否则,该方法返回1
+     * 
+     *  <p>此方法不会将指定的字符验证为有效的Unicode代码点调用者必须使用{@link #isValidCodePoint(int)isValidCodePoint}(必要时)验证字符值
+     * 
+     * 
      * @param   codePoint the character (Unicode code point) to be tested.
      * @return  2 if the character is a valid supplementary character; 1 otherwise.
      * @see     Character#isSupplementaryCodePoint(int)
@@ -4824,6 +6517,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * surrogate pair. The caller must validate it using {@link
      * #isSurrogatePair(char, char) isSurrogatePair} if necessary.
      *
+     * <p>
+     * 将指定的代理对转换为其补充代码点值此方法不验证指定的代理对调用者必须使用{@link #isSurrogatePair(char,char)isSurrogatePair}验证它
+     * 
+     * 
      * @param  high the high-surrogate code unit
      * @param  low the low-surrogate code unit
      * @return the supplementary code point composed from the
@@ -4851,6 +6548,11 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * corresponding to this surrogate pair is returned. Otherwise,
      * the {@code char} value at the given index is returned.
      *
+     * <p>
+     *  返回{@code CharSequence}的给定索引处的代码点如果{@code CharSequence}中给定索引处的{@code char}值在高代理范围内,则以下索引小于长度的{@code CharSequence}
+     * ,并且在以下索引处的{@code char}值在低代理范围中,则返回对应于该代理对的补充代码点否则,{@code char}值返回给定的索引。
+     * 
+     * 
      * @param seq a sequence of {@code char} values (Unicode code
      * units)
      * @param index the index to the {@code char} values (Unicode
@@ -4884,6 +6586,11 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * corresponding to this surrogate pair is returned. Otherwise,
      * the {@code char} value at the given index is returned.
      *
+     * <p>
+     * 返回{@code char}数组的给定索引处的代码点如果{@code char}数组中给定索引处的{@code char}值在高代理范围内,则以下索引小于{@code char}数组的长度和下面索引处的
+     * {@code char}值在低代理范围内,则返回对应于该代理对的补充代码点否则,{@code char }返回给定索引的值。
+     * 
+     * 
      * @param a the {@code char} array
      * @param index the index to the {@code char} values (Unicode
      * code units) in the {@code char} array to be converted
@@ -4910,6 +6617,13 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * corresponding to this surrogate pair is returned. Otherwise,
      * the {@code char} value at the given index is returned.
      *
+     * <p>
+     * 返回{@code char}数组的给定索引处的代码点,其中只能使用{@code index}小于{@code limit}的数组元素。
+     * 如果给定索引处的{@code char} {@code char}数组处于高代理范围,以下索引小于{@code limit},并且下面索引处的{@code char}值在低代理范围内,则返回对应于该代理
+     * 对的补充代码点。
+     * 返回{@code char}数组的给定索引处的代码点,其中只能使用{@code index}小于{@code limit}的数组元素。否则,返回给定索引处的{@code char}值。
+     * 
+     * 
      * @param a the {@code char} array
      * @param index the index to the {@code char} values (Unicode
      * code units) in the {@code char} array to be converted
@@ -4954,6 +6668,12 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * the {@code char} value at {@code (index - 1)} is
      * returned.
      *
+     * <p>
+     * 返回{@code CharSequence}的给定索引之前的代码点如果{@code CharSequence}中{@code(index-1)}处的{@code char}值处于低代理范围,{@代码(索引-2)}
+     * 不为负,并且{@code CharSequence}中的{@code(index-2)}处的{@code char}值在高代理范围内,到该代理对被返回否则,返回{@code(index-1)}处的{@code char}
+     * 值。
+     * 
+     * 
      * @param seq the {@code CharSequence} instance
      * @param index the index following the code point that should be returned
      * @return the Unicode code point value before the given index.
@@ -4986,6 +6706,12 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * the {@code char} value at {@code (index - 1)} is
      * returned.
      *
+     * <p>
+     * 返回{@code char}数组的给定索引之前的代码点如果{@code char}数组中{@code(index-1)}的{@code char}值在低代理范围内, {@code(index  -  2)}
+     * 不为负数,且{@code char}数组中{@code(index  -  2)}处的{@code char}值位于高代理范围,返回对应于该代理对的代码点否则,返回{@code(index-1)}处的{@code char}
+     * 值。
+     * 
+     * 
      * @param a the {@code char} array
      * @param index the index following the code point that should be returned
      * @return the Unicode code point value before the given index.
@@ -5013,6 +6739,12 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * the {@code char} value at {@code (index - 1)} is
      * returned.
      *
+     * <p>
+     * 返回在{@code char}数组的给定索引之前的代码点,其中只有{@code index}大于或等于{@code start}的数组元素可以被使用如果{@code char} {@code char}
+     * 数组中的@code(index-1)}在低代理范围内,{@code(index-2)}不小于{@code start},{@code char} {@code char}数组中的{@code(index-2)}
+     * 处的值在高代理范围内,则返回对应于该代理对的补充代码点否则,{@code char} @code(index  -  1)}。
+     * 
+     * 
      * @param a the {@code char} array
      * @param index the index following the code point that should be returned
      * @param start the index of the first array element in the
@@ -5064,6 +6796,19 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * {@link #toCodePoint toCodePoint}{@code (highSurrogate(x), }{@link #lowSurrogate lowSurrogate}{@code (x)) == x}
      * are also always {@code true}.
      *
+     * <p>
+     *  返回前导代理(a
+     * <a href="http://www.unicode.org/glossary/#high_surrogate_code_unit">
+     *  高代理代码单元</a>)
+     * <a href="http://www.unicode.org/glossary/#surrogate_pair">
+     * 代理对</a>,表示UTF-16编码中指定的补充字符(Unicode代码点)如果指定的字符不是<a href=\"Characterhtml#supplementary\">补充字符</a>,未指定的{@代码char}
+     * 。
+     * 
+     *  <p>如果{@link #isSupplementaryCodePoint isSupplementaryCodePoint(x)}为{@code true},则{@link #isHighSurrogate isHighSurrogate}
+     *  {@ code(highSurrogate(x))}和{@link #toCodePoint toCodePoint} {@ code (highSurrogate(x),} {@ link #lowSurrogate lowSurrogate}
+     *  {@ code(x))== x}也总是{@code true}。
+     * 
+     * 
      * @param   codePoint a supplementary character (Unicode code point)
      * @return  the leading surrogate code unit used to represent the
      *          character in the UTF-16 encoding
@@ -5093,6 +6838,19 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * {@link #toCodePoint toCodePoint}{@code (}{@link #highSurrogate highSurrogate}{@code (x), lowSurrogate(x)) == x}
      * are also always {@code true}.
      *
+     * <p>
+     *  返回尾随代理(a
+     * <a href="http://www.unicode.org/glossary/#low_surrogate_code_unit">
+     *  低代理码单元</a>)
+     * <a href="http://www.unicode.org/glossary/#surrogate_pair">
+     * 代理对</a>,表示UTF-16编码中指定的补充字符(Unicode代码点)如果指定的字符不是<a href=\"Characterhtml#supplementary\">补充字符</a>,未指定的{@代码char}
+     * 。
+     * 
+     *  <p>如果{@link #isSupplementaryCodePoint isSupplementaryCodePoint(x)}为{@code true},则{@link #isLowSurrogate isLowSurrogate}
+     *  {@ code(lowSurrogate(x))}和{@link #toCodePoint toCodePoint} {@ code (} {@ link #highSurrogate highSurrogate}
+     *  {@ code(x),lowSurrogate(x))== x}也总是{@code true}。
+     * 
+     * 
      * @param   codePoint a supplementary character (Unicode code point)
      * @return  the trailing surrogate code unit used to represent the
      *          character in the UTF-16 encoding
@@ -5112,6 +6870,11 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * (high-surrogate) and {@code dst[dstIndex+1]}
      * (low-surrogate), and 2 is returned.
      *
+     * <p>
+     * 将指定的字符(Unicode代码点)转换为其UTF-16表示如果指定的代码点是BMP(基本多语言平面或平面0)值,则相同的值存储在{@code dst [dstIndex]}中,返回如果指定的代码点是一
+     * 个补充字符,其代理值存储在{@code dst [dstIndex]}(高代理)和{@code dst [dstIndex + 1]}(低代理)返回。
+     * 
+     * 
      * @param  codePoint the character (Unicode code point) to be converted.
      * @param  dst an array of {@code char} in which the
      * {@code codePoint}'s UTF-16 value is stored.
@@ -5154,6 +6917,11 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * point is a supplementary code point, the resulting
      * {@code char} array has the corresponding surrogate pair.
      *
+     * <p>
+     * 将指定字符(Unicode代码点)转换为存储在{@code char}数组中的UTF-16表示如果指定的代码点是BMP(基本多语言平面或平面0)值,则生成的{@code char}数组具有与{@code codePoint}
+     * 相同的值如果指定的代码点是补充代码点,则生成的{@code char}数组具有相应的代理对。
+     * 
+     * 
      * @param  codePoint a Unicode code point
      * @return a {@code char} array having
      *         {@code codePoint}'s UTF-16 representation.
@@ -5188,6 +6956,12 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * {@code endIndex-beginIndex}. Unpaired surrogates within
      * the text range count as one code point each.
      *
+     * <p>
+     *  返回指定char序列的文本范围内的Unicode代码点的数量文本范围从指定的{@code beginIndex}开始,并延伸到索引处的{@code char} {@code endIndex  -  1}
+     * 。
+     * 因此,长度在{@code char}中的文本范围是{@code endIndex-beginIndex}文本范围内的未配对代理计为每个一个代码点。
+     * 
+     * 
      * @param seq the char sequence
      * @param beginIndex the index to the first {@code char} of
      * the text range.
@@ -5226,6 +7000,11 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * length of the subarray in {@code char}s. Unpaired
      * surrogates within the subarray count as one code point each.
      *
+     * <p>
+     * 返回{@code char}数组参数的子数组中的Unicode代码点的数量{@code offset}参数是子数组的第一个{@code char}的索引,{@code count}参数指定子阵列在{@code char}
+     * 中的长度在子阵列计数内的未配对代理每个一个代码点。
+     * 
+     * 
      * @param a the {@code char} array
      * @param offset the index of the first {@code char} in the
      * given {@code char} array
@@ -5264,6 +7043,11 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * {@code index} and {@code codePointOffset} count as
      * one code point each.
      *
+     * <p>
+     *  返回给定char序列内的索引,该索引与给定的{@code index}偏移{@code codePointOffset}代码点由{@code index}和{@code codePointOffset}
+     * 计数为一个代码的文本范围内的未配对代理点各。
+     * 
+     * 
      * @param seq the char sequence
      * @param index the index to be offset
      * @param codePointOffset the offset in code points
@@ -5322,6 +7106,11 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * within the text range given by {@code index} and
      * {@code codePointOffset} count as one code point each.
      *
+     * <p>
+     * 返回给定{@code char}子阵列中与{@code index}由{@code codePointOffset}代码点偏移的索引{@code start}和{@code count}参数指定{ @code char}
+     *  array由{@code index}和{@code codePointOffset}给出的文本范围内的未配对代理计为每个代码点。
+     * 
+     * 
      * @param a the {@code char} array
      * @param start the index of the first {@code char} of the
      * subarray
@@ -5408,6 +7197,22 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * all Unicode characters, including supplementary characters, use
      * the {@link #isLowerCase(int)} method.
      *
+     * <p>
+     *  确定指定的字符是否为小写字符
+     * <p>
+     *  如果{@code CharactergetType(ch)}提供的一般类别类型为{@code LOWERCASE_LETTER},或者具有由Unicode标准定义的Contribution属性Othe
+     * r_Lowercase,则字符为小写。
+     * <p>
+     * 以下是小写字符的示例：<blockquote> <pre> abcdefghijklmnopqrstu vwxyz'\\ u00DF''\\ u00E0''\\ u00E1''\\ u00E2''\\ 
+     * u00E3''\\ u00E4''\\ u00E5''\\ u00E6' u00E7''\\ u00E8''\\ u00E9''\\ u00EA''\\ u00EB''\\ u00EC''\\ u00E
+     * D''\\ u00EE''\\ u00EF''\\ u00F0''\\ u00F1''\\ u00F2''\\ u00F3' '\\ u00F4''\\ u00F5''\\ u00F6''\\ u00F
+     * 8''\\ u00F9''\\ u00FA''\\ u00FB''\\ u00FC''\\ u00FD''\\ u00FE''\\ u00FF'</pre> blockquote> <p>许多其他Uni
+     * code字符也是小写的。
+     * 
+     * <p> <b>注意：</b>此方法无法处理<a href=\"#supplementary\">补充字符</a>要支持所有Unicode字符(包括补充字符),请使用{@link #isLowerCase )}
+     *  方法。
+     * 
+     * 
      * @param   ch   the character to be tested.
      * @return  {@code true} if the character is lowercase;
      *          {@code false} otherwise.
@@ -5439,6 +7244,19 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * </pre></blockquote>
      * <p> Many other Unicode characters are lowercase too.
      *
+     * <p>
+     *  确定指定的字符(Unicode代码点)是否为小写字符
+     * <p>
+     *  如果由{@link Character#getType getType(codePoint)}提供的一般类别类型为{@code LOWERCASE_LETTER},或者具有由Unicode标准定义的C
+     * ontribution属性Other_Lowercase,则字符为小写。
+     * <p>
+     * 以下是小写字符的示例：<blockquote> <pre> abcdefghijklmnopqrstu vwxyz'\\ u00DF''\\ u00E0''\\ u00E1''\\ u00E2''\\ 
+     * u00E3''\\ u00E4''\\ u00E5''\\ u00E6' u00E7''\\ u00E8''\\ u00E9''\\ u00EA''\\ u00EB''\\ u00EC''\\ u00E
+     * D''\\ u00EE''\\ u00EF''\\ u00F0''\\ u00F1''\\ u00F2''\\ u00F3' '\\ u00F4''\\ u00F5''\\ u00F6''\\ u00F
+     * 8''\\ u00F9''\\ u00FA''\\ u00FB''\\ u00FC''\\ u00FD''\\ u00FE''\\ u00FF'</pre> blockquote> <p>许多其他Uni
+     * code字符也是小写的。
+     * 
+     * 
      * @param   codePoint the character (Unicode code point) to be tested.
      * @return  {@code true} if the character is lowercase;
      *          {@code false} otherwise.
@@ -5475,6 +7293,21 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * all Unicode characters, including supplementary characters, use
      * the {@link #isUpperCase(int)} method.
      *
+     * <p>
+     *  确定指定的字符是否为大写字符
+     * <p>
+     * 如果{@code CharactergetType(ch)}提供的一般类别类型为{@code UPPERCASE_LETTER}或具有由Unicode标准定义的Contribution属性Other_U
+     * ppercase,则字符为大写。
+     * <p>
+     *  以下是大写字符的示例：<blockquote> <pre> ABCDEFGHIJKLMNOPQRSTU VWXYZ'\\ u00C0''\\ u00C1''\\ u00C2''\\ u00C3''\\
+     *  u00C4''\\ u00C5''\\ u00C6''\\ u00C7' u00C8''\\ u00C9''\\ u00CA''\\ u00CB''\\ u00CC''\\ u00CD''\\ u00
+     * CE''\\ u00CF''\\ u00D0''\\ u00D1''\\ u00D2''\\ u00D3''\\ u00D4' '\\ u00D5''\\ u00D6''\\ u00D8''\\ u00
+     * D9''\\ u00DA''\\ u00DB''\\ u00DC''\\ u00DD''\\ u00DE'</pre> </blockquote> <p>字符也是大写。
+     * 
+     * <p> <b>注意：</b>此方法无法处理<a href=\"#supplementary\">补充字符</a>要支持所有Unicode字符(包括补充字符),请使用{@link #isUpperCase )}
+     *  方法。
+     * 
+     * 
      * @param   ch   the character to be tested.
      * @return  {@code true} if the character is uppercase;
      *          {@code false} otherwise.
@@ -5505,6 +7338,18 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * </pre></blockquote>
      * <p> Many other Unicode characters are uppercase too.<p>
      *
+     * <p>
+     *  确定指定的字符(Unicode代码点)是否为大写字符
+     * <p>
+     *  如果由{@link Character#getType(int)getType(codePoint)}提供的一般类别类型为{@code UPPERCASE_LETTER},或者具有由Unicode标准
+     * 定义的Contribution属性Other_Uppercase,则字符为大写。
+     * <p>
+     * 以下是大写字符的示例：<blockquote> <pre> ABCDEFGHIJKLMNOPQRSTU VWXYZ'\\ u00C0''\\ u00C1''\\ u00C2''\\ u00C3''\\ 
+     * u00C4''\\ u00C5''\\ u00C6''\\ u00C7' u00C8''\\ u00C9''\\ u00CA''\\ u00CB''\\ u00CC''\\ u00CD''\\ u00C
+     * E''\\ u00CF''\\ u00D0''\\ u00D1''\\ u00D2''\\ u00D3''\\ u00D4' '\\ u00D5''\\ u00D6''\\ u00D8''\\ u00D
+     * 9''\\ u00DA''\\ u00DB''\\ u00DC''\\ u00DD''\\ u00DE'</pre> </blockquote> <p>字符也是大写的<p>。
+     * 
+     * 
      * @param   codePoint the character (Unicode code point) to be tested.
      * @return  {@code true} if the character is uppercase;
      *          {@code false} otherwise.
@@ -5547,6 +7392,26 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * all Unicode characters, including supplementary characters, use
      * the {@link #isTitleCase(int)} method.
      *
+     * <p>
+     *  确定指定的字符是否为字幕字符
+     * <p>
+     *  如果{@code CharactergetType(ch)}提供的一般类别类型是{@code TITLECASE_LETTER},则字符是字幕字符,
+     * <p>
+     * 一些字符看起来像成对的拉丁字母例如,有一个大写字母,看起来像"LJ",并有一个相应的小写字母,看起来像"lj"第三种形式,看起来像"Lj",是适当的形式在使用小写字母以初始大写形式显示单词时使用,例如书
+     * 名。
+     * <p>
+     *  这些是此方法返回的某些Unicode字符{@code true}：
+     * <ul>
+     *  <li> {@ code LATIN CAPITAL LETTER D WITH Small LETTER Z WITH CARON} <li> {@ code LATIN CAPITAL LETTER L WITH SONG LETTER J}
+     *  <li> {@ code LATIN CAPITAL LETTER N WITH SLE LATTER J} <li> {@code LTIN CAPITAL LETTER D WITH SMLE LETTER Z}
+     * 。
+     * </ul>
+     *  <p>许多其他Unicode字符也是titlecase
+     * 
+     * <p> <b>注意：</b>此方法无法处理<a href=\"#supplementary\">补充字符</a>要支持所有Unicode字符(包括补充字符),请使用{@link #isTitleCase )}
+     *  方法。
+     * 
+     * 
      * @param   ch   the character to be tested.
      * @return  {@code true} if the character is titlecase;
      *          {@code false} otherwise.
@@ -5583,6 +7448,23 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * </ul>
      * <p> Many other Unicode characters are titlecase too.<p>
      *
+     * <p>
+     *  确定指定的字符(Unicode代码点)是否为字幕字符
+     * <p>
+     *  如果由{@link Character#getType(int)getType(codePoint)}提供的一般类别类型是{@code TITLECASE_LETTER},则字符是字幕字符
+     * <p>
+     *  一些字符看起来像成对的拉丁字母例如,有一个大写字母,看起来像"LJ",并有一个相应的小写字母,看起来像"lj"第三种形式,看起来像"Lj",是适当的形式在使用小写字母以初始大写形式显示单词时使用,例如
+     * 书名。
+     * <p>
+     * 这些是此方法返回的某些Unicode字符{@code true}：
+     * <ul>
+     *  <li> {@ code LATIN CAPITAL LETTER D WITH Small LETTER Z WITH CARON} <li> {@ code LATIN CAPITAL LETTER L WITH SONG LETTER J}
+     *  <li> {@ code LATIN CAPITAL LETTER N WITH SLE LATTER J} <li> {@code LTIN CAPITAL LETTER D WITH SMLE LETTER Z}
+     * 。
+     * </ul>
+     *  <p>许多其他Unicode字符也是titlecase <p>
+     * 
+     * 
      * @param   codePoint the character (Unicode code point) to be tested.
      * @return  {@code true} if the character is titlecase;
      *          {@code false} otherwise.
@@ -5624,6 +7506,24 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * all Unicode characters, including supplementary characters, use
      * the {@link #isDigit(int)} method.
      *
+     * <p>
+     *  确定指定的字符是否为数字
+     * <p>
+     *  如果{@code CharactergetType(ch)}提供的一般类别类型为{@code DECIMAL_DIGIT_NUMBER},则字符为数字。
+     * <p>
+     *  一些包含数字的Unicode字符范围：
+     * <ul>
+     * <li> {@ code'\\ u005Cu0030'}至{@code'\\ u005Cu0039'},ISO-LATIN-1数字({@code'0'}至{@code'9'})<li> {@ code '\\ u005Cu06F''}
+     * ,阿拉伯语 - 印度数字<li> {@ code'\\ u005Cu06F0'}到{@code'\\ u005Cu06F9'},扩展的阿拉伯数字<li> {@ code'\\ u005Cu0966'}到
+     * {@code'\\ u005Cu096F'},梵文数字<li> {@ code'\\ u005CuFF10'}到{@code'\\ u005CuFF19'},。
+     * </ul>
+     * 
+     *  许多其他字符范围也包含数字
+     * 
+     *  <p> <b>注意：</b>此方法无法处理<a href=\"#supplementary\">补充字符</a>要支持所有Unicode字符(包括补充字符),请使用{@link #isDigit(int )}
+     *  方法。
+     * 
+     * 
      * @param   ch   the character to be tested.
      * @return  {@code true} if the character is a digit;
      *          {@code false} otherwise.
@@ -5658,6 +7558,21 @@ class Character implements java.io.Serializable, Comparable<Character> {
      *
      * Many other character ranges contain digits as well.
      *
+     * <p>
+     *  确定指定的字符(Unicode代码点)是否为数字
+     * <p>
+     * 如果{@link Character#getType(int)getType(codePoint)}提供的一般类别类型为{@code DECIMAL_DIGIT_NUMBER},则字符是一个数字
+     * <p>
+     *  一些包含数字的Unicode字符范围：
+     * <ul>
+     *  <li> {@ code'\\ u005Cu0030'}至{@code'\\ u005Cu0039'},ISO-LATIN-1数字({@code'0'}至{@code'9'})<li> {@ code '\\ u005Cu06F''}
+     * ,阿拉伯语 - 印度数字<li> {@ code'\\ u005Cu06F0'}到{@code'\\ u005Cu06F9'},扩展的阿拉伯数字<li> {@ code'\\ u005Cu0966'}到
+     * {@code'\\ u005Cu096F'},梵文数字<li> {@ code'\\ u005CuFF10'}到{@code'\\ u005CuFF19'},。
+     * </ul>
+     * 
+     *  许多其他字符范围也包含数字
+     * 
+     * 
      * @param   codePoint the character (Unicode code point) to be tested.
      * @return  {@code true} if the character is a digit;
      *          {@code false} otherwise.
@@ -5683,6 +7598,18 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * all Unicode characters, including supplementary characters, use
      * the {@link #isDefined(int)} method.
      *
+     * <p>
+     *  确定字符是否以Unicode定义
+     * <p>
+     *  如果以下至少一项为真,则定义字符：
+     * <ul>
+     * <li>在UnicodeData文件中有一个条目<li>它在UnicodeData文件定义的范围内有一个值
+     * </ul>
+     * 
+     *  <p> <b>注意：</b>此方法无法处理<a href=\"#supplementary\">补充字符</a>要支持所有Unicode字符(包括补充字符),请使用{@link #isDefined(int )}
+     *  方法。
+     * 
+     * 
      * @param   ch   the character to be tested
      * @return  {@code true} if the character has a defined meaning
      *          in Unicode; {@code false} otherwise.
@@ -5707,6 +7634,15 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * <li>It has a value in a range defined by the UnicodeData file.
      * </ul>
      *
+     * <p>
+     *  确定是否在Unicode中定义了字符(Unicode代码点)
+     * <p>
+     *  如果以下至少一项为真,则定义字符：
+     * <ul>
+     *  <li>在UnicodeData文件中有一个条目<li>它在UnicodeData文件定义的范围内有一个值
+     * </ul>
+     * 
+     * 
      * @param   codePoint the character (Unicode code point) to be tested.
      * @return  {@code true} if the character has a defined meaning
      *          in Unicode; {@code false} otherwise.
@@ -5744,6 +7680,21 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * all Unicode characters, including supplementary characters, use
      * the {@link #isLetter(int)} method.
      *
+     * <p>
+     *  确定指定的字符是否为字母
+     * <p>
+     *  如果一个字符由{@code CharactergetType(ch)}提供的一般类别类型为以下任何一种,则该字符被认为是一个字母：
+     * <ul>
+     * <li> {@code UPPERCASE_LETTER} <li> {@code LOWERCASE_LETTER} <li> {@code TITLECASE_LETTER} <li> {@code MODIFIER_LETTER}
+     *  <li> {@code OTHER_LETTER}。
+     * </ul>
+     * 
+     *  不是所有的字母都有案例许多字符是字母,但既不是大写也不是小写,也不是titlecase
+     * 
+     *  <p> <b>注意：</b>此方法无法处理<a href=\"#supplementary\">补充字符</a>要支持所有Unicode字符(包括补充字符),请使用{@link #isLetter )}
+     *  方法。
+     * 
+     * 
      * @param   ch   the character to be tested.
      * @return  {@code true} if the character is a letter;
      *          {@code false} otherwise.
@@ -5778,6 +7729,18 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * Not all letters have case. Many characters are
      * letters but are neither uppercase nor lowercase nor titlecase.
      *
+     * <p>
+     *  确定指定的字符(Unicode代码点)是否为字母
+     * <p>
+     *  如果由{@link Character#getType(int)getType(codePoint)}提供的一般类别类型为以下任何一种,则字符将被视为字母：
+     * <ul>
+     * <li> {@code UPPERCASE_LETTER} <li> {@code LOWERCASE_LETTER} <li> {@code TITLECASE_LETTER} <li> {@code MODIFIER_LETTER}
+     *  <li> {@code OTHER_LETTER}。
+     * </ul>
+     * 
+     *  不是所有的字母都有案例许多字符是字母,但既不是大写也不是小写,也不是titlecase
+     * 
+     * 
      * @param   codePoint the character (Unicode code point) to be tested.
      * @return  {@code true} if the character is a letter;
      *          {@code false} otherwise.
@@ -5812,6 +7775,16 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * all Unicode characters, including supplementary characters, use
      * the {@link #isLetterOrDigit(int)} method.
      *
+     * <p>
+     *  确定指定的字符是字母还是数字
+     * <p>
+     *  如果{@code CharacterisLetter(char ch)}或{@code CharacterisDigit(char ch)}为字符返回{@code true},则字符被认为是字母或数字
+     * 。
+     * 
+     *  <p> <b>注意：</b>此方法无法处理<a href=\"#supplementary\">补充字符</a>要支持所有Unicode字符(包括补充字符),请使用{@link #isLetterOrDigit(int )}
+     *  方法。
+     * 
+     * 
      * @param   ch   the character to be tested.
      * @return  {@code true} if the character is a letter or digit;
      *          {@code false} otherwise.
@@ -5835,6 +7808,13 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * {@link #isDigit(int) isDigit(codePoint)} returns
      * {@code true} for the character.
      *
+     * <p>
+     *  确定指定的字符(Unicode代码点)是字母还是数字
+     * <p>
+     * 如果{@link #isLetter(int)isLetter(codePoint)}或{@link #isDigit(int)isDigit(codePoint)}为字符返回{@code true},
+     * 则字符被认为是字母或数字。
+     * 
+     * 
      * @param   codePoint the character (Unicode code point) to be tested.
      * @return  {@code true} if the character is a letter or digit;
      *          {@code false} otherwise.
@@ -5867,6 +7847,16 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * <li> {@code ch} is a connecting punctuation character (such as {@code '_'}).
      * </ul>
      *
+     * <p>
+     *  确定指定的字符是否可以作为Java标识符中的第一个字符
+     * <p>
+     *  当且仅当以下之一为真时,字符才可以启动Java标识符：
+     * <ul>
+     *  <li> {@link #isLetter(char)isLetter(ch)}返回{@code true} <li> {@link #getType(char)getType(ch)}返回{@code LETTER_NUMBER}
+     *  <li> {@code ch}是一个货币符号(例如{@code'$'})<li> {@code ch}是连接标点符号(例如{@code'_'})。
+     * </ul>
+     * 
+     * 
      * @param   ch the character to be tested.
      * @return  {@code true} if the character may start a Java
      *          identifier; {@code false} otherwise.
@@ -5902,6 +7892,16 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * {@code true} for the character.
      * </ul>
      *
+     * <p>
+     *  确定指定的字符是否可能是Java标识符的一部分,而不是第一个字符
+     * <p>
+     * 当且仅当下列任何一项为真时,字符可以是Java标识符的一部分：
+     * <ul>
+     *  <li>它是一个字母<li>它是一个货币符号(例如{@code'$'})<li>它是连接标点符号(例如{@code'_'})<li>是一个数字<li>它是一个数字字母(例如罗马数字字符)<li>它是一
+     * 个组合标记<li>它是一个非间距标记<li> {@code isIdentifierIgnorable}返回{@code true }为字符。
+     * </ul>
+     * 
+     * 
      * @param   ch the character to be tested.
      * @return  {@code true} if the character may be part of a
      *          Java identifier; {@code false} otherwise.
@@ -5937,6 +7937,17 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * or it has contributory property Other_Alphabetic as defined by the
      * Unicode Standard.
      *
+     * <p>
+     *  确定指定的字符(Unicode代码点)是否为字母表
+     * <p>
+     *  如果由{@link Character#getType(int)getType(codePoint)}提供的一般类别类型为以下任何一种,则字符被认为是字母字符：
+     * <ul>
+     * <li> <code> UPnPERCASE_LETTER </code> <li> <code> </code> OTHER_LETTER </code> <li> <code> LETTER_NUM
+     * BER </code>。
+     * </ul>
+     *  或具有Contribution属性Other_按Unicode标准定义的字母
+     * 
+     * 
      * @param   codePoint the character (Unicode code point) to be tested.
      * @return  <code>true</code> if the character is a Unicode alphabet
      *          character, <code>false</code> otherwise.
@@ -5957,6 +7968,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * (Chinese, Japanese, Korean and Vietnamese) ideograph, as defined by
      * the Unicode Standard.
      *
+     * <p>
+     *  确定指定的字符(Unicode代码点)是否是CJKV(中文,日语,韩语和越南语)表意文字,由Unicode标准定义
+     * 
+     * 
      * @param   codePoint the character (Unicode code point) to be tested.
      * @return  <code>true</code> if the character is a Unicode ideograph
      *          character, <code>false</code> otherwise.
@@ -5984,6 +7999,19 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * all Unicode characters, including supplementary characters, use
      * the {@link #isJavaIdentifierStart(int)} method.
      *
+     * <p>
+     *  确定指定的字符是否可以作为Java标识符中的第一个字符
+     * <p>
+     *  当且仅当以下条件之一为真时,字符才可以启动Java标识符：
+     * <ul>
+     * <li> {@link #isLetter(char)isLetter(ch)}返回{@code true} <li> {@link #getType(char)getType(ch)}返回{@code LETTER_NUMBER}
+     *  <li> {@code ch}是一个货币符号(例如{@code'$'})<li> {@code ch}是连接标点符号(例如{@code'_'})。
+     * </ul>
+     * 
+     *  <p> <b>注意：</b>此方法无法处理<a href=\"#supplementary\">补充字符</a>要支持所有Unicode字符(包括补充字符),请使用{@link #isJavaIdentifierStart(int )}
+     *  方法。
+     * 
+     * 
      * @param   ch the character to be tested.
      * @return  {@code true} if the character may start a Java identifier;
      *          {@code false} otherwise.
@@ -6013,6 +8041,16 @@ class Character implements java.io.Serializable, Comparable<Character> {
      *      (such as {@code '_'}).
      * </ul>
      *
+     * <p>
+     *  确定是否允许字符(Unicode代码点)作为Java标识符中的第一个字符
+     * <p>
+     *  当且仅当以下条件之一为真时,字符才可以启动Java标识符：
+     * <ul>
+     * <li> {@link #isLetter(int)isLetter(codePoint)}返回{@code true} <li> {@link #getType(int)getType(codePoint)}
+     * 返回{@code LETTER_NUMBER}是货币符号(例如{@code'$'})<li>引用字符是连接标点符号(例如{@code'_'})。
+     * </ul>
+     * 
+     * 
      * @param   codePoint the character (Unicode code point) to be tested.
      * @return  {@code true} if the character may start a Java identifier;
      *          {@code false} otherwise.
@@ -6049,6 +8087,19 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * all Unicode characters, including supplementary characters, use
      * the {@link #isJavaIdentifierPart(int)} method.
      *
+     * <p>
+     *  确定指定的字符是否可能是Java标识符的一部分,而不是第一个字符
+     * <p>
+     *  如果以下任一项为真,则字符可以是Java标识符的一部分：
+     * <ul>
+     * <li>它是一个字母<li>它是一个货币符号(例如{@code'$'})<li>它是连接标点符号(例如{@code'_'})<li>是一个数字<li>它是一个数字字母(例如罗马数字字符)<li>它是一个
+     * 组合标记<li>它是一个非间距标记<li> {@code isIdentifierIgnorable}返回{@code true }为字符。
+     * </ul>
+     * 
+     *  <p> <b>注意：</b>此方法无法处理<a href=\"#supplementary\">补充字符</a>要支持所有Unicode字符(包括补充字符),请使用{@link #isJavaIdentifierPart(int )}
+     *  方法。
+     * 
+     * 
      * @param   ch      the character to be tested.
      * @return {@code true} if the character may be part of a
      *          Java identifier; {@code false} otherwise.
@@ -6082,6 +8133,17 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * the character
      * </ul>
      *
+     * <p>
+     *  确定字符(Unicode代码点)是否可能是除了第一个字符之外的Java标识符的一部分
+     * <p>
+     *  如果以下任一项为真,则字符可以是Java标识符的一部分：
+     * <ul>
+     * <li>它是一个字母<li>它是一个货币符号(例如{@code'$'})<li>它是连接标点符号(例如{@code'_'})<li>是一个数字<li>它是一个数字字母(例如罗马数字字符)<li>它是一个
+     * 组合标记<li>它是一个非间距标记<li> {@link #isIdentifierIgnorable(int)isIdentifierIgnorable codePoint)}返回{@code true}
+     * 的字符。
+     * </ul>
+     * 
+     * 
      * @param   codePoint the character (Unicode code point) to be tested.
      * @return {@code true} if the character may be part of a
      *          Java identifier; {@code false} otherwise.
@@ -6113,6 +8175,19 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * all Unicode characters, including supplementary characters, use
      * the {@link #isUnicodeIdentifierStart(int)} method.
      *
+     * <p>
+     *  确定指定的字符是否可以作为Unicode标识符中的第一个字符
+     * <p>
+     *  当且仅当以下条件之一为真时,字符才可以启动Unicode标识符：
+     * <ul>
+     *  <li> {@link #isLetter(char)isLetter(ch)}返回{@code true} <li> {@link #getType(char)getType(ch)}返回{@code LETTER_NUMBER}
+     * 。
+     * </ul>
+     * 
+     * <p> <b>注意：</b>此方法无法处理<a href=\"#supplementary\">补充字符</a>要支持所有Unicode字符(包括补充字符),请使用{@link #isUnicodeIdentifierStart(int )}
+     *  方法。
+     * 
+     * 
      * @param   ch      the character to be tested.
      * @return  {@code true} if the character may start a Unicode
      *          identifier; {@code false} otherwise.
@@ -6137,6 +8212,15 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * <li> {@link #getType(int) getType(codePoint)}
      *      returns {@code LETTER_NUMBER}.
      * </ul>
+     * <p>
+     *  确定指定的字符(Unicode代码点)是否可以作为Unicode标识符中的第一个字符
+     * <p>
+     *  当且仅当以下条件之一为真时,字符才可以启动Unicode标识符：
+     * <ul>
+     *  <li> {@link #isLetter(int)isLetter(codePoint)}返回{@code true} <li> {@link #getType(int)getType(codePoint)}
+     * 返回{@code LETTER_NUMBER}。
+     * </ul>
+     * 
      * @param   codePoint the character (Unicode code point) to be tested.
      * @return  {@code true} if the character may start a Unicode
      *          identifier; {@code false} otherwise.
@@ -6171,6 +8255,19 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * all Unicode characters, including supplementary characters, use
      * the {@link #isUnicodeIdentifierPart(int)} method.
      *
+     * <p>
+     *  确定指定的字符是否可能是Unicode标识符的一部分,而不是第一个字符
+     * <p>
+     * 当且仅当以下语句之一为真时,字符可以是Unicode标识符的一部分：
+     * <ul>
+     *  <li>它是一个字母<li>它是一个连接标点字符(例如{@code'_'})<li>它是一个数字<li>它是一个数字字母(如罗马数字字符) <li>它是一个组合标记<li>它是一个非间距标记<li> 
+     * {@code isIdentifierIgnorable}为此字符返回{@code true}。
+     * </ul>
+     * 
+     *  <p> <b>注意：</b>此方法无法处理<a href=\"#supplementary\">补充字符</a>要支持所有Unicode字符(包括补充字符),请使用{@link #isUnicodeIdentifierPart(int )}
+     *  方法。
+     * 
+     * 
      * @param   ch      the character to be tested.
      * @return  {@code true} if the character may be part of a
      *          Unicode identifier; {@code false} otherwise.
@@ -6200,6 +8297,15 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * <li> {@code isIdentifierIgnorable} returns
      * {@code true} for this character.
      * </ul>
+     * <p>
+     *  确定指定的字符(Unicode代码点)是否可能是Unicode标识符的一部分,而不是第一个字符
+     * <p>
+     * 当且仅当以下语句之一为真时,字符可以是Unicode标识符的一部分：
+     * <ul>
+     *  <li>它是一个字母<li>它是一个连接标点字符(例如{@code'_'})<li>它是一个数字<li>它是一个数字字母(如罗马数字字符) <li>它是一个组合标记<li>它是一个非间距标记<li> 
+     * {@code isIdentifierIgnorable}为此字符返回{@code true}。
+     * </ul>
+     * 
      * @param   codePoint the character (Unicode code point) to be tested.
      * @return  {@code true} if the character may be part of a
      *          Unicode identifier; {@code false} otherwise.
@@ -6236,6 +8342,24 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * all Unicode characters, including supplementary characters, use
      * the {@link #isIdentifierIgnorable(int)} method.
      *
+     * <p>
+     *  确定指定的字符是否应被视为Java标识符或Unicode标识符中的可忽略字符
+     * <p>
+     *  以下Unicode字符在Java标识符或Unicode标识符中可忽略：
+     * <ul>
+     *  <li>不是空格的ISO控制字符
+     * <ul>
+     * <li> {@ code'\\ u005Cu0008'} <li> {@ code'\\ u005Cu000E'}到{@code'\\ u005Cu001B'} <li> {@ code'\\ u005Cu007F' }
+     * 到{@code'\\ u005Cu009F'}。
+     * </ul>
+     * 
+     *  <li>所有包含{@code FORMAT}一般类别值的字符
+     * </ul>
+     * 
+     *  <p> <b>注意：</b>此方法无法处理<a href=\"#supplementary\">补充字符</a>要支持所有Unicode字符(包括补充字符),请使用{@link #isIdentifierIgnorable )}
+     *  方法。
+     * 
+     * 
      * @param   ch      the character to be tested.
      * @return  {@code true} if the character is an ignorable control
      *          character that may be part of a Java or Unicode identifier;
@@ -6266,6 +8390,21 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * category value
      * </ul>
      *
+     * <p>
+     *  确定指定的字符(Unicode代码点)是否应被视为Java标识符或Unicode标识符中的可忽略字符
+     * <p>
+     *  以下Unicode字符在Java标识符或Unicode标识符中可忽略：
+     * <ul>
+     *  <li>不是空格的ISO控制字符
+     * <ul>
+     * <li> {@ code'\\ u005Cu0008'} <li> {@ code'\\ u005Cu000E'}到{@code'\\ u005Cu001B'} <li> {@ code'\\ u005Cu007F' }
+     * 到{@code'\\ u005Cu009F'}。
+     * </ul>
+     * 
+     *  <li>所有包含{@code FORMAT}一般类别值的字符
+     * </ul>
+     * 
+     * 
      * @param   codePoint the character (Unicode code point) to be tested.
      * @return  {@code true} if the character is an ignorable control
      *          character that may be part of a Java or Unicode identifier;
@@ -6299,6 +8438,18 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * all Unicode characters, including supplementary characters, use
      * the {@link #toLowerCase(int)} method.
      *
+     * <p>
+     *  使用来自UnicodeData文件的大小写映射信息将字符参数转换为小写
+     * <p>
+     *  请注意,{@code CharacterisLowerCase(CharactertoLowerCase(ch))}并不总是返回{@code true}一些字符​​范围,特别是那些符号或表意文字
+     * 
+     * <p>一般来说,{@link String#toLowerCase()}应用于将字符映射为小写{@code String}案例映射方法比{@code Character}案例映射方法{@code String}
+     * 案例映射方法可以执行区域设置敏感映射,上下文相关映射和1：M字符映射,而{@code Character}情况映射方法不能。
+     * 
+     *  <p> <b>注意：</b>此方法无法处理<a href=\"#supplementary\">补充字符</a>要支持所有Unicode字符(包括补充字符),请使用{@link #toLowerCase )}
+     *  方法。
+     * 
+     * 
      * @param   ch   the character to be converted.
      * @return  the lowercase equivalent of the character, if any;
      *          otherwise, the character itself.
@@ -6326,6 +8477,16 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * mappings, context-sensitive mappings, and 1:M character mappings, whereas
      * the {@code Character} case mapping methods cannot.
      *
+     * <p>
+     *  使用来自UnicodeData文件的大小写映射信息将字符(Unicode代码点)参数转换为小写
+     * 
+     * <p>请注意,{@code CharacterisLowerCase(CharactertoLowerCase(codePoint))}并不总是返回{@code true}某些字符范围,特别是那些符号或
+     * 表意文字。
+     * 
+     *  <p>一般来说,{@link String#toLowerCase()}应用于将字符映射为小写{@code String}案例映射方法比{@code Character}案例映射方法{@code String}
+     * 案例映射方法可以执行区域设置敏感映射,上下文相关映射和1：M字符映射,而{@code Character}情况映射方法不能。
+     * 
+     * 
      * @param   codePoint   the character (Unicode code point) to be converted.
      * @return  the lowercase equivalent of the character (Unicode code
      *          point), if any; otherwise, the character itself.
@@ -6359,6 +8520,18 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * all Unicode characters, including supplementary characters, use
      * the {@link #toUpperCase(int)} method.
      *
+     * <p>
+     *  使用来自UnicodeData文件的大小写映射信息将字符参数转换为大写
+     * <p>
+     * 请注意,{@code CharacterisUpperCase(CharactertoUpperCase(ch))}并不总是返回{@code true}一些字符​​范围,特别是那些符号或表意文字
+     * 
+     *  <p>一般来说,{@link String#toUpperCase()}应该用于将字符映射到大写{@code String}案例映射方法比{@code Character}案例映射方法{@code String}
+     * 案例映射方法可以执行区域设置敏感映射,上下文相关映射和1：M字符映射,而{@code Character}情况映射方法不能。
+     * 
+     *  <p> <b>注意：</b>此方法无法处理<a href=\"#supplementary\">补充字符</a>要支持所有Unicode字符(包括补充字符),请使用{@link #toUpperCase )}
+     *  方法。
+     * 
+     * 
      * @param   ch   the character to be converted.
      * @return  the uppercase equivalent of the character, if any;
      *          otherwise, the character itself.
@@ -6386,6 +8559,16 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * mappings, context-sensitive mappings, and 1:M character mappings, whereas
      * the {@code Character} case mapping methods cannot.
      *
+     * <p>
+     * 使用来自UnicodeData文件的大小写映射信息将字符(Unicode代码点)参数转换为大写
+     * 
+     *  <p>请注意,{@code CharacterisUpperCase(CharactertoUpperCase(codePoint))}并不总是返回{@code true}某些字符范围,特别是那些符号
+     * 或表意文字。
+     * 
+     *  <p>一般来说,{@link String#toUpperCase()}应该用于将字符映射到大写{@code String}案例映射方法比{@code Character}案例映射方法{@code String}
+     * 案例映射方法可以执行区域设置敏感映射,上下文相关映射和1：M字符映射,而{@code Character}情况映射方法不能。
+     * 
+     * 
      * @param   codePoint   the character (Unicode code point) to be converted.
      * @return  the uppercase equivalent of the character, if any;
      *          otherwise, the character itself.
@@ -6418,6 +8601,16 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * all Unicode characters, including supplementary characters, use
      * the {@link #toTitleCase(int)} method.
      *
+     * <p>
+     * 使用来自UnicodeData文件的大小写映射信息将字符参数转换为titlecase如果一个字符没有显式的titlecase映射,并且根据UnicodeData它本身不是一个titlecase字符,那么
+     * 大写映射将作为等效titlecase映射返回如果{@code char }参数已经是一个标题{@code char},将返回相同的{@code char}值。
+     * <p>
+     *  请注意,对于某些字符范围,{@code CharacterisTitleCase(CharactertoTitleCase(ch))}并不总是返回{@code true}
+     * 
+     *  <p> <b>注意：</b>此方法无法处理<a href=\"#supplementary\">补充字符</a>要支持所有Unicode字符(包括补充字符),请使用{@link #toTitleCase )}
+     *  方法。
+     * 
+     * 
      * @param   ch   the character to be converted.
      * @return  the titlecase equivalent of the character, if any;
      *          otherwise, the character itself.
@@ -6445,6 +8638,14 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * does not always return {@code true} for some ranges of
      * characters.
      *
+     * <p>
+     * 使用来自UnicodeData文件的大小写映射信息将字符(Unicode代码点)参数转换为titlecase如果一个字符没有显式的titlecase映射,并且根据UnicodeData本身不是一个字节字
+     * 符,那么大写映射将作为等效节点映射返回。
+     * 字符参数已经是一个标题字符,将返回相同的字符值。
+     * 
+     *  <p>请注意,对于某些字符范围,{@code CharacterisTitleCase(CharactertoTitleCase(codePoint))}并不总是返回{@code true}
+     * 
+     * 
      * @param   codePoint   the character (Unicode code point) to be converted.
      * @return  the titlecase equivalent of the character, if any;
      *          otherwise, the character itself.
@@ -6500,6 +8701,26 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * all Unicode characters, including supplementary characters, use
      * the {@link #digit(int, int)} method.
      *
+     * <p>
+     *  返回指定基数中的字符{@code ch}的数字值
+     * <p>
+     * 如果基数不在范围{@code MIN_RADIX}&le; {@code radix}&le; {@code MAX_RADIX}或如果{@code ch}的值不是指定基数中的有效数字,则返回{@code -1}
+     * 如果以下至少一个为真,则字符是有效数字：。
+     * <ul>
+     * <li>方法{@code isDigit}是字符的{@code true},字符的Unicode十进制数字值(或其单字符分解)小于指定的基数。
+     * 在这种情况下,十进制数字值为返回<li>字符是大写拉丁字母{@code'A'}到{@code'Z'}之一,其代码小于{@code radix +'A' -  10}在这种情况下,{ @code ch  - 'A'+ 10}
+     *  <li>字符是小写的拉丁字母{@code'a'}到{@code'z'}之一,其代码小于{@code radix + 'a' -  10}在这种情况下,返回{@code ch  - 'a'+ 10}<li>
+     * 字符是全带大写拉丁字母A({@code'\\ u005CuFF21'})到Z({@code'\\ u005CuFF3A'})之一,其代码小于{@code radix +'\\ u005CuFF21 ' -  10}
+     * 在这种情况下,返回{@code ch  - '\\ u005CuFF21'+ 10} <li>字符是全宽度小写拉丁字母a({@code'\\ u005CuFF41'})到z @code'\\ u005C
+     * uFF5A'})并且其代码小于{@code radix +'\\ u005CuFF41' -  10}。
+     * <li>方法{@code isDigit}是字符的{@code true},字符的Unicode十进制数字值(或其单字符分解)小于指定的基数。
+     * 在这种情况下,返回{@code ch  - '\\ u005CuFF41'+ 10}。
+     * </ul>
+     * 
+     * <p> <b>注意：</b>此方法无法处理<a href=\"#supplementary\">补充字符</a>要支持所有Unicode字符(包括补充字符),请使用{@link #digit ,int)}
+     * 方法。
+     * 
+     * 
      * @param   ch      the character to be converted.
      * @param   radix   the radix.
      * @return  the numeric value represented by the character in the
@@ -6551,6 +8772,22 @@ class Character implements java.io.Serializable, Comparable<Character> {
      *     is returned.
      * </ul>
      *
+     * <p>
+     *  返回指定基数中指定字符(Unicode代码点)的数值
+     * 
+     *  <p>如果基数不在{@code MIN_RADIX}&le; {@code radix}&le; {@code MAX_RADIX}或如果该字符不是指定基数中的有效数字,则返回{@code -1}如果
+     * 以下至少一项为真,则字符是有效数字：。
+     * <ul>
+     * <li>方法{@link #isDigit(int)isDigit(codePoint)}是字符的{@code true},字符的Unicode十进制数字值(或其单字符分解)小于指定的基数在这种情况下返
+     * 回十进制数字<li>字符是大写拉丁字母{@code'A'}到{@code'Z'}之一,其代码小于{@code radix +'A' -  10}在这种情况下,返回{@code codePoint  - 'A'+ 10}
+     *  <li>字符是小写的拉丁字母{@code'a'}到{@code'z'}之一,小于{@code radix +'a' -  10}在这种情况下,返回{@code codePoint  - 'a'+ 10}
+     * <li>字符是全带大写拉丁字母A({@code'\\ u005CuFF21'})到Z({@code'\\ u005CuFF3A'})之一,其代码小于{@code radix +'\\ u005CuFF21 ' -  10}
+     * 在这种情况下,返回{@code codePoint  - '\\ u005CuFF21'+ 10} <li>字符是全带小写拉丁字母a({@code'\\ u005CuFF41'})到z @code'\\
+     *  u005CuFF5A'}),其代码小于{@code radix +'\\ u005CuFF41'- 10}。
+     * 在这种情况下,返回{@code codePoint  - '\\ u005CuFF41'+ 10}。
+     * </ul>
+     * 
+     * 
      * @param   codePoint the character (Unicode code point) to be converted.
      * @param   radix   the radix.
      * @return  the numeric value represented by the character in the
@@ -6589,6 +8826,19 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * all Unicode characters, including supplementary characters, use
      * the {@link #getNumericValue(int)} method.
      *
+     * <p>
+     * 返回指定的Unicode字符表示的{@code int}值例如,字符{@code'\\ u005Cu216C'}(罗马数字50)将返回值为50的int
+     * <p>
+     *  大写字母({@code'\\ u005Cu0041'}到{@code'\\ u005Cu005A'}),小写字母({@code'\\ u005Cu0061'}到{@code'\\ u005Cu007A'}
+     * )和全宽变体({@code'\\ u005CuFF21'}到{@code'\\ u005CuFF3A'}和{@code'\\ u005CuFF41'}到{@code'\\ u005CuFF5A'})表单
+     * 具有从10到35的数值, Unicode规范,它不会为这些{@code char}值分配数值。
+     * <p>
+     * 如果字符没有数字值,则返回-1。如果字符具有无法表示为非负整数(例如,小数值)的数值,则返回-2
+     * 
+     *  <p> <b>注意：</b>此方法无法处理<a href=\"#supplementary\">补充字符</a>要支持所有Unicode字符(包括补充字符),请使用{@link #getNumericValue )}
+     *  方法。
+     * 
+     * 
      * @param   ch      the character to be converted.
      * @return  the numeric value of the character, as a nonnegative {@code int}
      *           value; -2 if the character has a numeric value that is not a
@@ -6622,6 +8872,16 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * nonnegative integer (for example, a fractional value), then -2
      * is returned.
      *
+     * <p>
+     *  返回指定字符(Unicode代码点)表示的{@code int}值例如,字符{@code'\\ u005Cu216C'}(罗马数字五十)将返回值为50的{@code int}
+     * <p>
+     * 大写字母({@code'\\ u005Cu0041'}到{@code'\\ u005Cu005A'}),小写字母({@code'\\ u005Cu0061'}到{@code'\\ u005Cu007A'}
+     * )和全宽变体({@code'\\ u005CuFF21'}到{@code'\\ u005CuFF3A'}和{@code'\\ u005CuFF41'}到{@code'\\ u005CuFF5A'})表单
+     * 具有从10到35的数值, Unicode规范,它不会为这些{@code char}值分配数值。
+     * <p>
+     *  如果字符没有数字值,则返回-1。如果字符具有无法表示为非负整数(例如,小数值)的数值,则返回-2
+     * 
+     * 
      * @param   codePoint the character (Unicode code point) to be converted.
      * @return  the numeric value of the character, as a nonnegative {@code int}
      *          value; -2 if the character has a numeric value that is not a
@@ -6651,6 +8911,17 @@ class Character implements java.io.Serializable, Comparable<Character> {
      *     <td>{@code SPACE}</td></tr>
      * </table>
      *
+     * <p>
+     * 确定指定的字符是否为ISO-LATIN-1空格此方法仅返回以下五个字符的{@code true}：
+     * <table summary="truechars">
+     *  <tr> <td> {@ code'\\ t'} </td> <td> {@ code U + 0009} </td> <td> {@ code HORIZONTAL TABULATION} </td>
+     *  </tr> <td> {@ code'\n'} </td> <td> {@ code U + 000A} </td> <td> {@ code NEW LINE} </td> </tr> <td> {@ code'\\ f'}
+     *  </td> <td> {@ code U + 000C} </td> <td> {@ code FORM FEED} </td> </tr> <tr > <td> {@ code'\\ r'} </td>
+     *  <td> {@ code U + 000D} </td> <td> {@ code CARRIAGE RETURN} </td> <td> {@ code'&nbsp;'} </td> <td> {@ code U + 0020}
+     *  </td> <td> {@ code SPACE} </td> </tr>。
+     * </table>
+     * 
+     * 
      * @param      ch   the character to be tested.
      * @return     {@code true} if the character is ISO-LATIN-1 white
      *             space; {@code false} otherwise.
@@ -6686,6 +8957,16 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * all Unicode characters, including supplementary characters, use
      * the {@link #isSpaceChar(int)} method.
      *
+     * <p>
+     * 确定指定的字符是否为Unicode空格字符如果且仅当Unicode字符串被指定为空格字符时,该字符被认为是空格字符如果字符的一般类别类型是以下任何一种,则此方法返回true ：
+     * <ul>
+     *  <li> {@code SPACE_SEPARATOR} <li> {@code LINE_SEPARATOR} <li> {@code PARAGRAPH_SEPARATOR}
+     * </ul>
+     * 
+     *  <p> <b>注意：</b>此方法无法处理<a href=\"#supplementary\">补充字符</a>要支持所有Unicode字符(包括补充字符),请使用{@link #isSpaceChar )}
+     *  方法。
+     * 
+     * 
      * @param   ch      the character to be tested.
      * @return  {@code true} if the character is a space character;
      *          {@code false} otherwise.
@@ -6709,6 +8990,14 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * <li> {@link #PARAGRAPH_SEPARATOR}
      * </ul>
      *
+     * <p>
+     * 确定指定的字符(Unicode代码点)是否是Unicode空格字符如果且仅当Unicode字符被指定为空格字符,则该字符被认为是空格字符如果字符的一般类别类型是以下任何一种：
+     * 
+     * <ul>
+     *  <li> {@link #SPACE_SEPARATOR} <li> {@link #LINE_SEPARATOR} <li> {@link #PARAGRAPH_SEPARATOR}
+     * </ul>
+     * 
+     * 
      * @param   codePoint the character (Unicode code point) to be tested.
      * @return  {@code true} if the character is a space character;
      *          {@code false} otherwise.
@@ -6747,6 +9036,21 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * all Unicode characters, including supplementary characters, use
      * the {@link #isWhitespace(int)} method.
      *
+     * <p>
+     *  根据Java确定指定的字符是否为空格当且仅当满足以下条件之一时,字符才是Java空格字符：
+     * <ul>
+     * <li>这是一个Unicode空格字符({@code SPACE_SEPARATOR},{@code LINE_SEPARATOR}或{@code PARAGRAPH_SEPARATOR}),但不是一个
+     * 不间断的空格({@code'\\ u005Cu00A0'},{@ <li>它是{@code'\\ u005Ct'},U + 0009水平统计<li>它是{@code'\\ u005Cn'},U + 00
+     * 0A LINE FEED <li>它是{@code'\\ u005Cu000B'},U + 000B垂直表格<li>它是{@code'\\ u005Cf'},U + 000C FORM FEED <li>
+     *  '\\ u005Cr'},U + 000D CARRIAGE RETURN <li>它是{@code'\\ u005Cu001C'},U + 001C文件分隔符<li>是{@code'\\ u005Cu001D'}
+     * ,U + 001D GROUP SEPARATOR < li>是{@code'\\ u005Cu001E'},U + 001E记录分隔符<li>是{@code'\\ u005Cu001F'},U + 0
+     * 01F单位分隔符。
+     * </ul>
+     * 
+     * <p> <b>注意：</b>此方法无法处理<a href=\"#supplementary\">补充字符</a>要支持所有Unicode字符(包括补充字符),请使用{@link #isWhitespace )}
+     *  方法。
+     * 
+     * 
      * @param   ch the character to be tested.
      * @return  {@code true} if the character is a Java whitespace
      *          character; {@code false} otherwise.
@@ -6779,6 +9083,19 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * </ul>
      * <p>
      *
+     * <p>
+     *  根据Java确定指定的字符(Unicode代码点)是否为空格当且仅当满足以下条件之一时,字符才是Java空白字符：
+     * <ul>
+     * <li>这是一个Unicode空格字符({@link #SPACE_SEPARATOR},{@link #LINE_SEPARATOR}或{@link #PARAGRAPH_SEPARATOR}),但不
+     * 是一个不间断的空格({@code'\\ u005Cu00A0'} ,{@code'\\ u005Cu2007'},{@code'\\ u005Cu202F'})<li>是{@code'\\ u005Ct'}
+     * ,U + 0009水平统计<li>是{@code'\\ u005Cn' },U + 000A线路输入<li>它是{@code'\\ u005Cu000B'},U + 000B垂直统计<li>是{@code'\\ u005Cf'}
+     * ,U + 000C FORM FEED <li> {@code'\\ u005Cr'},U + 000D CARRIAGE RETURN <li>是{@code'\\ u005Cu001C'},U + 
+     * 001C文件分隔符<li>是{@code'\\ u005Cu001D'},U + 001D GROUP SEPARATOR <li>它是{@code'\\ u005Cu001E'},U + 001E记录
+     * 分隔符<li>是{@code'\\ u005Cu001F'},U + 001F单位分隔符。
+     * </ul>
+     * <p>
+     * 
+     * 
      * @param   codePoint the character (Unicode code point) to be tested.
      * @return  {@code true} if the character is a Java whitespace
      *          character; {@code false} otherwise.
@@ -6801,6 +9118,14 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * all Unicode characters, including supplementary characters, use
      * the {@link #isISOControl(int)} method.
      *
+     * <p>
+     * 确定指定的字符是否为ISO控制字符如果某个字符的代码在{@code'\\ u005Cu0000'}到{@code'\\ u005Cu001F'}的范围内,或在{@code'代码'\\ u005Cu007F'}
+     * 到{@code'\\ u005Cu009F'}。
+     * 
+     *  <p> <b>注意：</b>此方法无法处理<a href=\"#supplementary\">补充字符</a>要支持所有Unicode字符(包括补充字符),请使用{@link #isISOControl )}
+     *  方法。
+     * 
+     * 
      * @param   ch      the character to be tested.
      * @return  {@code true} if the character is an ISO control character;
      *          {@code false} otherwise.
@@ -6820,6 +9145,11 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * through {@code '\u005Cu001F'} or in the range
      * {@code '\u005Cu007F'} through {@code '\u005Cu009F'}.
      *
+     * <p>
+     *  确定引用字符(Unicode代码点)是否为ISO控制字符如果某个字符的代码在{@code'\\ u005Cu0000'}到{@code'\\ u005Cu001F'}的范围内,则认为该字符是ISO控制
+     * 字符,或者在范围{@code'\\ u005Cu007F'}到{@code'\\ u005Cu009F'}中。
+     * 
+     * 
      * @param   codePoint the character (Unicode code point) to be tested.
      * @return  {@code true} if the character is an ISO control character;
      *          {@code false} otherwise.
@@ -6843,6 +9173,13 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * all Unicode characters, including supplementary characters, use
      * the {@link #getType(int)} method.
      *
+     * <p>
+     * 返回指示字符的一般类别的值
+     * 
+     *  <p> <b>注意：</b>此方法无法处理<a href=\"#supplementary\">补充字符</a>要支持所有Unicode字符(包括补充字符),请使用{@link #getType(int )}
+     *  方法。
+     * 
+     * 
      * @param   ch      the character to be tested.
      * @return  a value of type {@code int} representing the
      *          character's general category.
@@ -6885,6 +9222,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
     /**
      * Returns a value indicating a character's general category.
      *
+     * <p>
+     *  返回指示字符的一般类别的值
+     * 
+     * 
      * @param   codePoint the character (Unicode code point) to be tested.
      * @return  a value of type {@code int} representing the
      *          character's general category.
@@ -6940,6 +9281,15 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * {@code '0' + digit} is returned. Otherwise, the value
      * {@code 'a' + digit - 10} is returned.
      *
+     * <p>
+     *  确定指定基数中特定数字的字符表示如果{@code radix}的值不是有效的基数,或者{@code digit}的值不是指定基数中的有效数字,则空字符{@code'\\ u005Cu0000'})
+     * <p>
+     *  如果{@code radix}参数大于或等于{@code MIN_RADIX}且小于或等于{@code MAX_RADIX},则{@code radix}参数有效。
+     * {@code digit}参数在{@code 0 <= digit <radix}。
+     * <p>
+     * 如果数字小于10,则返回{@code'0'+ digit}。否则返回值{@code'a'+ digit -10}
+     * 
+     * 
      * @param   digit   the number to convert to a character.
      * @param   radix   the radix.
      * @return  the {@code char} representation of the specified digit
@@ -6972,6 +9322,13 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * all Unicode characters, including supplementary characters, use
      * the {@link #getDirectionality(int)} method.
      *
+     * <p>
+     *  返回给定字符的Unicode方向性属性字符方向性用于计算文本的视觉顺序未定义的{@code char}值的方向性值为{@code DIRECTIONALITY_UNDEFINED}
+     * 
+     *  <p> <b>注意：</b>此方法无法处理<a href=\"#supplementary\">补充字符</a>要支持所有Unicode字符(包括补充字符),请使用{@link #getDirectionality )}
+     *  方法。
+     * 
+     * 
      * @param  ch {@code char} for which the directionality property
      *            is requested.
      * @return the directionality property of the {@code char} value.
@@ -7009,6 +9366,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * directionality value of undefined character is {@link
      * #DIRECTIONALITY_UNDEFINED}.
      *
+     * <p>
+     * 返回给定字符(Unicode代码点)的Unicode方向性属性字符方向性用于计算文本的视觉顺序未定义字符的方向性值为{@link #DIRECTIONALITY_UNDEFINED}
+     * 
+     * 
      * @param   codePoint the character (Unicode code point) for which
      *          the directionality property is requested.
      * @return the directionality property of the character.
@@ -7053,6 +9414,14 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * all Unicode characters, including supplementary characters, use
      * the {@link #isMirrored(int)} method.
      *
+     * <p>
+     *  确定字符是否根据Unicode规范进行镜像当以从右到左的文本显示时,镜像字符应使其字形水平镜像例如,{@code'\\ u005Cu0028'} LEFT PARENTHESIS语义定义为< i>开始
+     * 括号</i>在从右到左的文本中,它将显示为"("在从左到右的文本中,但作为")"。
+     * 
+     * <p> <b>注意：</b>此方法无法处理<a href=\"#supplementary\">补充字符</a>要支持所有Unicode字符(包括补充字符),请使用{@link #isMirrored )}
+     *  方法。
+     * 
+     * 
      * @param  ch {@code char} for which the mirrored property is requested
      * @return {@code true} if the char is mirrored, {@code false}
      *         if the {@code char} is not mirrored or is not defined.
@@ -7072,6 +9441,11 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * as a "(" in text that is left-to-right but as a ")" in text
      * that is right-to-left.
      *
+     * <p>
+     *  确定指定的字符(Unicode代码点)是否根据Unicode规范进行镜像当在从右到左的文本中显示时,镜像字符应使其字形水平镜像例如,{@code'\\ u005Cu0028'} LEFT PARENT
+     * HESIS是语义定义为<i>开始括号</i>在从右到左的文本中,它将显示为"("在从左到右的文本中,但作为")"。
+     * 
+     * 
      * @param   codePoint the character (Unicode code point) to be tested.
      * @return  {@code true} if the character is mirrored, {@code false}
      *          if the character is not mirrored or is not defined.
@@ -7084,6 +9458,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
     /**
      * Compares two {@code Character} objects numerically.
      *
+     * <p>
+     *  以数字方式比较两个{@code Character}对象
+     * 
+     * 
      * @param   anotherCharacter   the {@code Character} to be compared.
 
      * @return  the value {@code 0} if the argument {@code Character}
@@ -7107,6 +9485,13 @@ class Character implements java.io.Serializable, Comparable<Character> {
      *    Character.valueOf(x).compareTo(Character.valueOf(y))
      * </pre>
      *
+     * <p>
+     * 以数字方式比较两个{@code char}值返回的值与以下内容返回的值相同：
+     * <pre>
+     *  CharactervalueOf(x)compareTo(CharactervalueOf(y))
+     * </pre>
+     * 
+     * 
      * @param  x the first {@code char} to compare
      * @param  y the second {@code char} to compare
      * @return the value {@code 0} if {@code x == y};
@@ -7123,6 +9508,11 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * information from the UnicodeData file.
      * <p>
      *
+     * <p>
+     *  使用UnicodeData文件中的信息将字符(Unicode代码点)参数转换为大写
+     * <p>
+     * 
+     * 
      * @param   codePoint   the character (Unicode code point) to be converted.
      * @return  either the uppercase equivalent of the character, if
      *          any, or an error flag ({@code Character.ERROR})
@@ -7145,6 +9535,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * mapping, then the {@code char} itself is returned in the
      * {@code char[]}.
      *
+     * <p>
+     *  如果一个字符没有明确的大写映射,那么{@code char}本身将在{@code char []中返回。 }}
+     * 
+     * 
      * @param   codePoint   the character (Unicode code point) to be converted.
      * @return a {@code char[]} with the uppercased character.
      * @since 1.4
@@ -7159,6 +9553,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * The number of bits used to represent a <tt>char</tt> value in unsigned
      * binary form, constant {@code 16}.
      *
+     * <p>
+     *  用于以无符号二进制形式表示<tt> char </tt>值的位数,常量{@code 16}
+     * 
+     * 
      * @since 1.5
      */
     public static final int SIZE = 16;
@@ -7167,6 +9565,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * The number of bytes used to represent a {@code char} value in unsigned
      * binary form.
      *
+     * <p>
+     *  用于以无符号二进制形式表示{@code char}值的字节数
+     * 
+     * 
      * @since 1.8
      */
     public static final int BYTES = SIZE / Byte.SIZE;
@@ -7175,6 +9577,10 @@ class Character implements java.io.Serializable, Comparable<Character> {
      * Returns the value obtained by reversing the order of the bytes in the
      * specified <tt>char</tt> value.
      *
+     * <p>
+     * 返回通过逆转指定的<tt> char </tt>值中的字节顺序获得的值
+     * 
+     * 
      * @param ch The {@code char} of which to reverse the byte order.
      * @return the value obtained by reversing (or, equivalently, swapping)
      *     the bytes in the specified <tt>char</tt> value.
@@ -7201,6 +9607,12 @@ class Character implements java.io.Serializable, Comparable<Character> {
      *
      * }</blockquote>
      *
+     * <p>
+     *  返回指定字符{@code codePoint}的Unicode名称,如果代码点为{@link #UNASSIGNED unassigned},则返回null
+     * <p>
+     *  注意：如果指定的字符未通过<i> UnicodeData </i>文件(由Unicode Consortium维护的Unicode字符数据库的一部分)分配名称,则返回的名称与表达式的结果相同
+     * 
+     * 
      * @param  codePoint the character (Unicode code point)
      *
      * @return the Unicode name of the specified character, or null if

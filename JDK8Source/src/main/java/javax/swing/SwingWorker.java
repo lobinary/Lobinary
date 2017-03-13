@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -213,6 +214,103 @@ import sun.swing.AccumulativeRunnable;
  * {@code SwingWorker} can be submitted to an
  * {@link java.util.concurrent.Executor} for execution.
  *
+ * <p>
+ *  在后台线程中执行冗长的GUI交互任务的抽象类可以使用几个后台线程来执行这样的任务然而,为任何特定{@code SwingWorker}选择线程的确切策略是未指定的,不应依赖
+ * <p>
+ *  当使用Swing编写多线程应用程序时,需要记住两个约束：(参考
+ * <a href="https://docs.oracle.com/javase/tutorial/uiswing/concurrency/index.html">
+ *  更多细节的并发性)：
+ * <ul>
+ *  <li>耗时的任务不应在<i>事件分派主题上运行</i>否则应用程序变得无响应
+ * </li>
+ *  <li>只能在<i>事件分派主题</i>上访问Swing组件
+ * </li>
+ * </ul>
+ * 
+ * <p>
+ * 这些约束意味着具有时间密集型计算的GUI应用需要至少两个线程：1)执行冗长任务的线程和2)用于所有GUI相关活动的事件分派线程(EDT)涉及可能难以实现的线程间通信
+ * 
+ * <p>
+ *  {@code SwingWorker}设计用于需要在后台线程中运行长时间运行的任务,并在完成时或在处理{@code SwingWorker}的子类时必须实现{@link# doInBackground}
+ * 方法来执行后台计算。
+ * 
+ * <p>
+ *  <b>工作流程</b>
+ * <p>
+ *  {@code SwingWorker}的生命周期中涉及三个线程：
+ * <ul>
+ * <li>
+ * <p>
+ * <i>当前</i>线程：在此线程上调用{@link #execute}方法它调度{@code SwingWorker}在<i> worker </i>线程上执行,并立即返回。
+ *  {@code SwingWorker}使用{@link #get get}方法完成。
+ * <li>
+ * <p>
+ *  <i> Worker </i>线程：在此线程上调用{@link #doInBackground}方法这是所有后台活动应该发生的事情要通知{@code PropertyChangeListeners}关
+ * 于绑定属性更改,请使用{@link #firePropertyChange firePropertyChange }和{@link #getPropertyChangeSupport}方法默认情况下有两
+ * 个绑定的属性可用：{@code state}和{@code progress}。
+ * <li>
+ * <p>
+ * <i>事件分派主题</i>：所有Swing相关活动发生在此主题{@code SwingWorker}调用{@link #process process}和{@link #done}方法,并通知任何{@code PropertyChangeListeners}
+ * 这个线程。
+ * </ul>
+ * 
+ * <p>
+ *  通常,<i>当前</i>线程是<i>事件分派线程</i>
+ * 
+ * <p>
+ *  在<i> worker </i>线程上调用{@code doInBackground}方法之前,{@code SwingWorker}会通知任何{@code PropertyChangeListeners}
+ * 关于{@code state}属性更改为{@code StateValueSTARTED} {@code doNackground}方法完成{@code done}方法执行然后{@code SwingWorker}
+ * 通知任何{@code PropertyChangeListeners}关于{@code state}属性更改为{@code StateValueDONE}。
+ * 
+ * <p>
+ * {@code SwingWorker}只设计为一次执行一次{@code SwingWorker}多次不会导致调用{@code doInBackground}方法两次
+ * 
+ * <p>
+ *  <b>示例用法</b>
+ * <p>
+ *  以下示例说明了最简单的用例某些处理在后台完成,完成后更新Swing组件
+ * 
+ * <p>
+ *  假设我们想要找到"生命的意义",并将结果显示在{@code JLabel}
+ * 
+ * <pre>
+ *  最终JLabel标签; class MeaningOfLifeFinder扩展SwingWorker&lt; String,Object&gt; {{@code @Override} public S
+ * tring doInBackground(){return findTheMeaningOfLife(); }}。
+ * 
+ *  {@code @Override} protected void done(){try {labelsetText(get()); } catch(Exception ignore){}}}
+ * 
+ *  (new MeaningOfLifeFinder())execute();
+ * </pre>
+ * 
+ * <p>
+ * 下一个示例在您希望在<i>事件分派主题</i>上准备就绪时处理数据的情况下很有用。
+ * 
+ * <p>
+ *  现在我们要找到前N个素数,并在{@code JTextArea}中显示结果。虽然这是计算,我们想更新我们在{@code JProgressBar}中的进度。
+ * 最后,我们还要打印素数{@code Systemout}。
+ * <pre>
+ *  类PrimeNumbersTask扩展SwingWorker&lt; List&lt; Integer&gt;,Integer&gt; {PrimeNumbersTask(JTextArea textArea,int numbersToFind){// initialize}
+ * 。
+ * 
+ *  {@code @Override} public List&lt; Integer&gt; doInBackground(){while(！足够&amp;&amp;！isCancelled()){number = nextPrimeNumber();发布(数); setProgress(100 * numberssize()/ numbersToFind); }
+ * } return numbers; }}。
+ * 
+ * {@code @Override} protected void process(List&lt; Integer&gt; chunks){for(int number：chunks){textAreaappend(number +"\n }
+ * }}。
+ * 
+ *  JTextArea textArea = new JTextArea(); final JProgressBar progressBar = new JProgressBar(0,100); Prim
+ * eNumbersTask task = new PrimeNumbersTask(textArea,N); taskaddPropertyChangeListener(new PropertyChang
+ * eListener(){public void propertyChange(PropertyChangeEvent evt){if("progress"equals(evtgetPropertyName())){progressBarsetValue((Integer)evtgetNewValue());}
+ * }});。
+ * 
+ *  taskexecute(); Systemoutprintln(taskget()); //打印所有的素数
+ * </pre>
+ * 
+ * <p>
+ *  因为{@code SwingWorker}实现了{@code Runnable},所以{@code SwingWorker}可以提交到{@link javautilconcurrentExecutor}
+ * 执行。
+ * 
+ * 
  * @author Igor Kushnirskiy
  *
  * @param <T> the result type returned by this {@code SwingWorker's}
@@ -225,37 +323,58 @@ import sun.swing.AccumulativeRunnable;
 public abstract class SwingWorker<T, V> implements RunnableFuture<T> {
     /**
      * number of worker threads.
+     * <p>
+     * 工作线程数
+     * 
      */
     private static final int MAX_WORKER_THREADS = 10;
 
     /**
      * current progress.
+     * <p>
+     *  当前进展
+     * 
      */
     private volatile int progress;
 
     /**
      * current state.
+     * <p>
+     *  当前状态
+     * 
      */
     private volatile StateValue state;
 
     /**
      * everything is run inside this FutureTask. Also it is used as
      * a delegatee for the Future API.
+     * <p>
+     *  一切都在这FutureTask里面运行它也被用作Future API的委托
+     * 
      */
     private final FutureTask<T> future;
 
     /**
      * all propertyChangeSupport goes through this.
+     * <p>
+     *  所有propertyChangeSupport通过这个
+     * 
      */
     private final PropertyChangeSupport propertyChangeSupport;
 
     /**
      * handler for {@code process} mehtod.
+     * <p>
+     *  {@code process} mehtod的处理程序
+     * 
      */
     private AccumulativeRunnable<V> doProcess;
 
     /**
      * handler for progress property change notifications.
+     * <p>
+     *  进度属性更改通知的处理程序
+     * 
      */
     private AccumulativeRunnable<Integer> doNotifyProgressChange;
 
@@ -263,16 +382,26 @@ public abstract class SwingWorker<T, V> implements RunnableFuture<T> {
 
     /**
      * Values for the {@code state} bound property.
+     * <p>
+     *  {@code state} bound属性的值
+     * 
+     * 
      * @since 1.6
      */
     public enum StateValue {
         /**
          * Initial {@code SwingWorker} state.
+         * <p>
+         *  初始{@code SwingWorker}状态
+         * 
          */
         PENDING,
         /**
          * {@code SwingWorker} is {@code STARTED}
          * before invoking {@code doInBackground}.
+         * <p>
+         *  {@code SwingWorker}是{@code STARTED},然后调用{@code doInBackground}
+         * 
          */
         STARTED,
 
@@ -280,12 +409,18 @@ public abstract class SwingWorker<T, V> implements RunnableFuture<T> {
          * {@code SwingWorker} is {@code DONE}
          * after {@code doInBackground} method
          * is finished.
+         * <p>
+         *  在{@code doInBackground}方法完成后,{@code SwingWorker}是{@code DONE}
+         * 
          */
         DONE
     }
 
     /**
      * Constructs this {@code SwingWorker}.
+     * <p>
+     *  构造此{@code SwingWorker}
+     * 
      */
     public SwingWorker() {
         Callable<T> callable =
@@ -320,6 +455,16 @@ public abstract class SwingWorker<T, V> implements RunnableFuture<T> {
      * Note: this method is executed in a background thread.
      *
      *
+     * <p>
+     *  计算结果,或者如果无法这样做,则抛出异常
+     * 
+     * <p>
+     *  请注意,此方法只执行一次
+     * 
+     * <p>
+     *  注意：这个方法是在后台线程中执行的
+     * 
+     * 
      * @return the computed result
      * @throws Exception if unable to compute a result
      *
@@ -329,6 +474,9 @@ public abstract class SwingWorker<T, V> implements RunnableFuture<T> {
     /**
      * Sets this {@code Future} to the result of computation unless
      * it has been cancelled.
+     * <p>
+     * 将此{@code Future}设置为计算结果,除非它已取消
+     * 
      */
     public final void run() {
         future.run();
@@ -398,6 +546,44 @@ public abstract class SwingWorker<T, V> implements RunnableFuture<T> {
      * }
      * </pre>
      *
+     * <p>
+     *  将数据块发送到{@link #process}方法此方法将在{@code doInBackground}方法内部使用,以便在{@code doInBackground}方法中的<i>事件分派线程</i>
+     * 进程}方法。
+     * 
+     * <p>
+     *  由于{@code process}方法在<i>事件分派线程上异步调用</i>在{@code process}方法执行之前可能会多次调用{@code publish}方法为了性能目的,调用通过连接的参数
+     * 被合并为一个调用。
+     * 
+     * <p>
+     *  例如：
+     * 
+     * <pre>
+     *  publish("1");发布("2","3");发布("4","5","6");
+     * </pre>
+     * 
+     *  可能会导致：
+     * 
+     * <pre>
+     * 过程("1","2","3","4","5","6")
+     * </pre>
+     * 
+     * <p>
+     *  <b>示例用法</b>此代码片段加载了一些表格数据和更新{@code DefaultTableModel}注意,它可以安全地从{@code process}方法内部改变tableModel,因为它在<i >
+     * 事件分派主题</i>。
+     * 
+     * <pre>
+     *  class TableSwingWorker extends SwingWorker&lt; DefaultTableModel,Object []&gt; {private final DefaultTableModel tableModel;。
+     * 
+     *  public TableSwingWorker(DefaultTableModel tableModel){thistableModel = tableModel; }}
+     * 
+     *  {@code @Override} protected DefaultTableModel doInBackground()throws Exception {for(Object [] row = loadData();！isCancelled()&amp;&amp; &&; row！= null; row = loadData() ])row); }
+     *  return tableModel; }}。
+     * 
+     * {@code @Override} protected void process(List&lt; Object []&gt; chunks){for(Object [] row：chunks){tableModeladdRow(row); }
+     * }}。
+     * </pre>
+     * 
+     * 
      * @param chunks intermediate results to process
      *
      * @see #process
@@ -430,6 +616,13 @@ public abstract class SwingWorker<T, V> implements RunnableFuture<T> {
      * <p>
      * Please refer to the {@link #publish} method for more details.
      *
+     * <p>
+     *  在<i>事件分派主题</i>上异步地从{@code publish}方法接收数据块
+     * 
+     * <p>
+     *  有关详情,请参阅{@link #publish}方法
+     * 
+     * 
      * @param chunks intermediate results to process
      *
      * @see #publish
@@ -446,6 +639,11 @@ public abstract class SwingWorker<T, V> implements RunnableFuture<T> {
      * that you can query status inside the implementation of this method to
      * determine the result of this task or whether this task has been cancelled.
      *
+     * <p>
+     *  在{@code doInBackground}方法完成后在<i>事件分派线程</i>上执行默认实现不执行任何子类可以覆盖此方法以在<i>事件分派线程上执行完成操作</i>即可以在该方法的执行过程中查询
+     * 状态来确定此任务的结果或该任务是否已被取消。
+     * 
+     * 
      * @see #doInBackground
      * @see #isCancelled()
      * @see #get
@@ -477,6 +675,23 @@ public abstract class SwingWorker<T, V> implements RunnableFuture<T> {
      * might result in a single {@code PropertyChangeListener} notification with
      * the value {@code 3}.
      *
+     * <p>
+     *  设置{@code progress} bound属性值应该为0到100
+     * 
+     * <p>
+     * 因为{@code PropertyChangeListener}在<i>事件分派线程上异步通知</i>对{@code setProgress}方法的多次调用可能在调用任何{@code PropertyChangeListeners}
+     * 之前发生为了性能目的,所有这些调用仅与最后一个调用参数合并为一个调用。
+     * 
+     * <p>
+     *  例如,以下调用：
+     * 
+     * <pre>
+     *  setProgress(1); setProgress(2); setProgress(3);
+     * </pre>
+     * 
+     *  可能会导致一个{@code PropertyChangeListener}通知的值为{@code 3}
+     * 
+     * 
      * @param progress the progress value to set
      * @throws IllegalArgumentException is value not from 0 to 100
      */
@@ -515,6 +730,10 @@ public abstract class SwingWorker<T, V> implements RunnableFuture<T> {
     /**
      * Returns the {@code progress} bound property.
      *
+     * <p>
+     *  返回{@code progress} bound属性
+     * 
+     * 
      * @return the progress bound property.
      */
     public final int getProgress() {
@@ -533,6 +752,13 @@ public abstract class SwingWorker<T, V> implements RunnableFuture<T> {
      * {@code SwingWorker} is only designed to be executed once.  Executing a
      * {@code SwingWorker} more than once will not result in invoking the
      * {@code doInBackground} method twice.
+     * <p>
+     * 调度此{@code SwingWorker}以便在<i> worker </i>线程上执行有多个<i> worker </i>线程可用在事件中所有<i> worker </i>线程正忙处理其他{@code SwingWorkers}
+     * 这个{@code SwingWorker}被放置在等待队列中。
+     * 
+     * <p>
+     *  注意：{@code SwingWorker}只设计为一次执行一次{@code SwingWorker}多次不会导致调用{@code doInBackground}方法两次
+     * 
      */
     public final void execute() {
         getWorkersExecutorService().execute(this);
@@ -541,6 +767,9 @@ public abstract class SwingWorker<T, V> implements RunnableFuture<T> {
     // Future methods START
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public final boolean cancel(boolean mayInterruptIfRunning) {
         return future.cancel(mayInterruptIfRunning);
@@ -548,6 +777,9 @@ public abstract class SwingWorker<T, V> implements RunnableFuture<T> {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public final boolean isCancelled() {
         return future.isCancelled();
@@ -555,6 +787,9 @@ public abstract class SwingWorker<T, V> implements RunnableFuture<T> {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public final boolean isDone() {
         return future.isDone();
@@ -597,6 +832,26 @@ public abstract class SwingWorker<T, V> implements RunnableFuture<T> {
      * //the dialog will be visible until the SwingWorker is done
      * dialog.setVisible(true);
      * </pre>
+     * <p>
+     *  {@inheritDoc}
+     * <p>
+     *  请注意：在<i>事件分派主题</i>上调用{@code get}会阻止所有</i>事件(包括重绘),直到此{@code SwingWorker}
+     * 
+     * <p>
+     * 当您希望{@code SwingWorker}在<i>事件分派主题</i>上屏蔽时,我们建议您使用<i>模式对话框</i>
+     * 
+     * <p>
+     *  例如：
+     * 
+     * <pre>
+     *  类SwingWorkerCompletionWaiter扩展PropertyChangeListener {private JDialog dialog;
+     * 
+     *  public SwingWorkerCompletionWaiter(JDialog dialog){thisdialog = dialog; }}
+     * 
+     *  public void propertyChange(PropertyChangeEvent event){if("state"等于(eventgetPropertyName())&amp;&amp;&amp; SwingWorkerStateValueDONE == eventgetNewValue()){dialogsetVisible(false); dialogdispose(); }
+     * }} JDialog dialog = new JDialog(owner,true); swingWorkeraddPropertyChangeListener(new SwingWorkerComp
+     * letionWaiter(dialog)); swingWorkerexecute(); //对话框将可见,直到SwingWorker完成dialogsetVisible(true);。
+     * </pre>
      */
     public final T get() throws InterruptedException, ExecutionException {
         return future.get();
@@ -606,6 +861,11 @@ public abstract class SwingWorker<T, V> implements RunnableFuture<T> {
      * {@inheritDoc}
      * <p>
      * Please refer to {@link #get} for more details.
+     * <p>
+     *  {@inheritDoc}
+     * <p>
+     * 有关详情,请参阅{@link #get}
+     * 
      */
     public final T get(long timeout, TimeUnit unit) throws InterruptedException,
             ExecutionException, TimeoutException {
@@ -625,6 +885,14 @@ public abstract class SwingWorker<T, V> implements RunnableFuture<T> {
      * Note: This is merely a convenience wrapper. All work is delegated to
      * {@code PropertyChangeSupport} from {@link #getPropertyChangeSupport}.
      *
+     * <p>
+     *  向侦听器列表中添加一个{@code PropertyChangeListener}为所有属性注册侦听器同一个侦听器对象可以多次添加,并且将被调用所添加的次数如果{@code listener}是{@code null}
+     * ,没有异常被抛出,并且不采取任何行动。
+     * 
+     * <p>
+     *  注意：这只是一个方便的包装器所有的工作委托给{@code PropertyChangeSupport}从{@link #getPropertyChangeSupport}
+     * 
+     * 
      * @param listener the {@code PropertyChangeListener} to be added
      */
     public final void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -643,6 +911,14 @@ public abstract class SwingWorker<T, V> implements RunnableFuture<T> {
      * Note: This is merely a convenience wrapper. All work is delegated to
      * {@code PropertyChangeSupport} from {@link #getPropertyChangeSupport}.
      *
+     * <p>
+     * 从侦听器列表中删除{@code PropertyChangeListener}这将删除为所有属性注册的{@code PropertyChangeListener}如果{@code listener}被多
+     * 次添加到同一个事件源,它将在一个更少的时间后被通知被删除如果{@code listener}是{@code null}或从未添加,则不会抛出任何异常,并且不会执行任何操作。
+     * 
+     * <p>
+     *  注意：这只是一个方便的包装器所有的工作委托给{@code PropertyChangeSupport}从{@link #getPropertyChangeSupport}
+     * 
+     * 
      * @param listener the {@code PropertyChangeListener} to be removed
      */
     public final void removePropertyChangeListener(PropertyChangeListener listener) {
@@ -666,6 +942,18 @@ public abstract class SwingWorker<T, V> implements RunnableFuture<T> {
      * {@code PropertyChangeSupport} from {@link #getPropertyChangeSupport}.
      *
      *
+     * <p>
+     *  向任何已注册的侦听器报告绑定属性更新如果{@code old}和{@code new}相等且非空
+     * 
+     * <p>
+     *  此{@code SwingWorker}将是任何生成的事件的源
+     * 
+     * <p>
+     * 当调用<i>事件分派主题</i> {@code PropertyChangeListeners}时,会在<i>事件分派主题</i>上异步通知<i>
+     * <p>
+     *  注意：这只是一个方便的包装器所有的工作委托给{@code PropertyChangeSupport}从{@link #getPropertyChangeSupport}
+     * 
+     * 
      * @param propertyName the programmatic name of the property that was
      *        changed
      * @param oldValue the old value of the property
@@ -692,6 +980,16 @@ public abstract class SwingWorker<T, V> implements RunnableFuture<T> {
      * {@code fireIndexedPropertyChange} are called off the <i>Event Dispatch
      * Thread</i>.
      *
+     * <p>
+     *  返回此{@code SwingWorker}的{@code PropertyChangeSupport}此方法用于需要对绑定属性支持的灵活访问时
+     * <p>
+     *  此{@code SwingWorker}将是任何生成的事件的源
+     * 
+     * <p>
+     *  注意：如果{@code firePropertyChange}或{@code fireIndexedPropertyChange}被调用时,{@code PropertyChangeSupport}会
+     * 在<i>事件分派主题</i>上异步通知任何{@code PropertyChangeListener} i>事件分派主题</i>。
+     * 
+     * 
      * @return {@code PropertyChangeSupport} for this {@code SwingWorker}
      */
     public final PropertyChangeSupport getPropertyChangeSupport() {
@@ -703,12 +1001,19 @@ public abstract class SwingWorker<T, V> implements RunnableFuture<T> {
     /**
      * Returns the {@code SwingWorker} state bound property.
      *
+     * <p>
+     * 返回{@code SwingWorker}状态bound属性
+     * 
+     * 
      * @return the current state
      */
     public final StateValue getState() {
         /*
          * DONE is a speacial case
          * to keep getState and isDone is sync
+         * <p>
+         *  DONE是一个保持getState和isDone是同步的一个特殊情况
+         * 
          */
         if (isDone()) {
             return StateValue.DONE;
@@ -719,6 +1024,10 @@ public abstract class SwingWorker<T, V> implements RunnableFuture<T> {
 
     /**
      * Sets this {@code SwingWorker} state bound property.
+     * <p>
+     *  设置此{@code SwingWorker}状态bound属性
+     * 
+     * 
      * @param state the state to set
      */
     private void setState(StateValue state) {
@@ -729,6 +1038,9 @@ public abstract class SwingWorker<T, V> implements RunnableFuture<T> {
 
     /**
      * Invokes {@code done} on the EDT.
+     * <p>
+     *  在EDT上调用{@code done}
+     * 
      */
     private void doneEDT() {
         Runnable doDone =
@@ -751,6 +1063,10 @@ public abstract class SwingWorker<T, V> implements RunnableFuture<T> {
      * returns the service stored in the appContext or creates it if
      * necessary.
      *
+     * <p>
+     *  返回workersExecutorService
+     * 
+     * 
      * @return ExecutorService for the {@code SwingWorkers}
      */
     private static synchronized ExecutorService getWorkersExecutorService() {

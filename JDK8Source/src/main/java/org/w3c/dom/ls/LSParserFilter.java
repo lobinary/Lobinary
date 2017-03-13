@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -37,6 +38,13 @@
  * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * [1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+ * <p>
+ *  版权所有(c)2004万维网联盟,
+ * 
+ *  (马萨诸塞理工学院,欧洲研究信息学和数学联合会,庆应大学)保留所有权利本作品根据W3C(r)软件许可证[1]分发,希望它有用,但没有任何保证;甚至没有对适销性或适用于特定用途的隐含保证
+ * 
+ *  [1] http：// wwww3org / Consortium / Legal / 2002 / copyright-software-20021231
+ * 
  */
 
 package org.w3c.dom.ls;
@@ -73,24 +81,47 @@ import org.w3c.dom.Element;
  * throwing exceptions from a filter is DOM implementation dependent.
  * <p>See also the <a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-LS-20040407'>Document Object Model (DOM) Level 3 Load
 and Save Specification</a>.
+ * <p>
+ * <code> LSParserFilter </code>在解析时为应用程序提供检查节点的能力随着每个节点被检查,它可以被修改或删除,或者整个解析可以早期终止<p>任何过滤器方法由解析器调用,所有者Do
+ * cument和DOMImplementation对象存在并且可访问文档元素从不传递到<code> LSParserFilter </code>方法,即不可能过滤出文档元素<code>文档</code>,
+ * <code> DocumentType </code>,<code>记法</code>,<code> Entity </code>和<code> Attr </code>过滤器上的<code> acce
+ * ptNode </code>方法如果参数"<a href ='http：// wwww3org / TR / DOM-Level-3-Core / corehtml#parameter-entities",则将<code>
+ *  EntityReference </code>节点的子节点传递给过滤器, > entity </a>"设置为<code> false </code>请注意,如参数"<a href ='http：// wwww3org / TR / DOM-Level-3-Core / corehtml#参数实体'>
+ * 实体</a>",未展开的实体引用节点从不被丢弃并且总是被传递给过滤器。
+ * 当解析文档时,在源文档上出现所有有效性检查,因为它出现在输入流上,而不是在DOM文档上,因为它被内置在内存中使用过滤器,内存中的文档可能是流上文档的一个子集,其有效性可能已受到过滤的影响<p>当元素传递
+ * 给过滤器方法时,所有默认属性必须存在于元素上所有其他默认内容必须传递给过滤器方法<p> DOM应用程序不能在过滤器中引发异常从一个过滤器抛出异常的效果过滤器是DOM实现相关的<p>另请参见<a href='http://wwww3org/TR/2004/REC-DOM-Level-3-LS-20040407'>
+ * 文档对象模型(DOM)3级加载和保存规格</a>。
+ * 
  */
 public interface LSParserFilter {
     // Constants returned by startElement and acceptNode
     /**
      * Accept the node.
+     * <p>
+     * 接受节点
+     * 
      */
     public static final short FILTER_ACCEPT             = 1;
     /**
      * Reject the node and its children.
+     * <p>
+     *  拒绝节点及其子节点
+     * 
      */
     public static final short FILTER_REJECT             = 2;
     /**
      * Skip this single node. The children of this node will still be
      * considered.
+     * <p>
+     *  跳过此单个节点此节点的子节点仍将被考虑
+     * 
      */
     public static final short FILTER_SKIP               = 3;
     /**
      *  Interrupt the normal processing of the document.
+     * <p>
+     *  中断文档的正常处理
+     * 
      */
     public static final short FILTER_INTERRUPT          = 4;
 
@@ -112,6 +143,14 @@ public interface LSParserFilter {
      * the same one as is actually placed in the tree if the node is
      * accepted. And the actual node (node object identity) may be reused
      * during the process of reading in and filtering a document.
+     * <p>
+     * 解析器将在扫描每个<code> Element </code>开始标记之后,但在处理<code> Element </code>的剩余部分之前调用此方法意图是允许元素要有效地跳过注意只有元素节点被传递到
+     * <code> startElement </code>函数<br>传递给<code> startElement </code>的元素节点将包括所有Element的属性,的子节点元素可能尚未在正在构造的文
+     * 档中(它可能没有父节点)。
+     * <br> A <code> startElement </code>过滤器函数可以访问或更改元素的属性更改命名空间声明对解析器的命名空间解析没有影响<br>为了效率,传递给过滤器的Element节点可能
+     * 与实际放置在树中的节点不同(如果节点被接受),并且实际节点(节点对象标识)可能在读取过程中被重用,过滤文档。
+     * 
+     * 
      * @param elementArg The newly encountered element. At the time this
      *   method is called, the element is incomplete - it will have its
      *   attributes, but no children.
@@ -155,6 +194,16 @@ public interface LSParserFilter {
      * are made on any document modifications made by the filter.
      * <br>If this new node is rejected, the parser might reuse the new node
      * and any of its descendants.
+     * <p>
+     * 此方法将在解析每个节点时由解析器调用。
+     * 节点及其所有后代将存在并完成父节点也将存在,虽然它可能不完整,即它可能有额外的子节点尚未解析的属性节点永远不会传递到此函数<br>从此方法中,可以自由修改新节点 - 可以添加或删除子节点,修改文本节点等
+     * 等。
+     * 此方法将在解析每个节点时由解析器调用。
+     * 文档外其余部分的状态节点未定义,并且任何尝试导航到或修改文档的任何其他部分的影响未定义<br>为了验证解析器,在过滤器进行任何修改之前对原始文档进行检查对过滤器进行的任何文档修改都不进行有效性检查<br>
+     * 如果此新节点被拒绝,则解析器可能会重新使用新节点及其任何后代。
+     * 此方法将在解析每个节点时由解析器调用。
+     * 
+     * 
      * @param nodeArg The newly constructed element. At the time this method
      *   is called, the element is complete - it has all of its children
      *   (and their children, recursively) and attributes, and is attached
@@ -195,6 +244,7 @@ public interface LSParserFilter {
      * will never be passed to <code>LSParserFilter.acceptNode</code>.
      * <br> The constants used here are defined in [<a href='http://www.w3.org/TR/2000/REC-DOM-Level-2-Traversal-Range-20001113'>DOM Level 2 Traversal and      Range</a>]
      * .
+     * <p>
      */
     public int getWhatToShow();
 

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会
+ * 
+ *  根据Apache许可证第20版("许可证")授权;您不得使用此文件,除非符合许可证您可以在获取许可证的副本
+ * 
+ *  http：// wwwapacheorg / licenses / LICENSE-20
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件将按"原样"基础分发,无任何明示或暗示的保证或条件。请参阅许可证管理权限和限制许可证
+ * 
  */
 /*
  * $Id: ToXMLStream.java,v 1.2.4.2 2005/09/15 12:01:25 suresh_emailid Exp $
+ * <p>
+ *  $ Id：ToXMLStreamjava,v 1242 2005/09/15 12:01:25 suresh_emailid Exp $
+ * 
  */
  package com.sun.org.apache.xml.internal.serializer;
 
@@ -42,12 +55,22 @@ import org.xml.sax.SAXException;
  * be viewed as internal or package private, this is not an API.
  *
  * @xsl.usage internal
+ * <p>
+ * 此类将SAX或类SAX调用转换为序列化的xml文档xsl：output方法是"xml"
+ * 
+ *  这个类在XSLTC生成的代码中显式使用,因此它是"public",但它应该被视为内部或包私有,这不是一个API
+ * 
+ *  @xslusage内部
+ * 
  */
 public final class ToXMLStream extends ToStream
 {
 
     /**
      * remembers if we need to write out "]]>" to close the CDATA
+     * <p>
+     *  记住如果我们需要写出"]]>"来关闭CDATA
+     * 
      */
     boolean m_cdataTagOpen = false;
 
@@ -55,6 +78,9 @@ public final class ToXMLStream extends ToStream
     /**
      * Map that tells which XML characters should have special treatment, and it
      *  provides character to entity name lookup.
+     * <p>
+     *  指示哪些XML字符应该有特殊处理的地图,并且它提供字符到实体名称查找
+     * 
      */
     private static CharInfo m_xmlcharInfo =
 //      new CharInfo(CharInfo.XML_ENTITIES_RESOURCE);
@@ -62,6 +88,9 @@ public final class ToXMLStream extends ToStream
 
     /**
      * Default constructor.
+     * <p>
+     *  默认构造函数
+     * 
      */
     public ToXMLStream()
     {
@@ -76,6 +105,10 @@ public final class ToXMLStream extends ToStream
     /**
      * Copy properties from another SerializerToXML.
      *
+     * <p>
+     *  从另一个SerializerToXML复制属性
+     * 
+     * 
      * @param xmlListener non-null reference to a SerializerToXML object.
      */
     public void CopyFrom(ToXMLStream xmlListener)
@@ -111,6 +144,10 @@ public final class ToXMLStream extends ToStream
     /**
      * Receive notification of the beginning of a document.
      *
+     * <p>
+     *  接收文档开头的通知
+     * 
+     * 
      * @throws org.xml.sax.SAXException Any SAX exception, possibly
      *            wrapping another exception.
      *
@@ -132,6 +169,9 @@ public final class ToXMLStream extends ToStream
             /* The call to getXMLVersion() might emit an error message
              * and we should emit this message regardless of if we are
              * writing out an XML header or not.
+             * <p>
+             *  并且我们应该发出这个消息,而不管我们是否写出一个XML头
+             * 
              */
             if (getOmitXMLDeclaration() == false)
             {
@@ -190,6 +230,10 @@ public final class ToXMLStream extends ToStream
     /**
      * Receive notification of the end of a document.
      *
+     * <p>
+     *  接收文档结束的通知
+     * 
+     * 
      * @throws org.xml.sax.SAXException Any SAX exception, possibly
      *            wrapping another exception.
      *
@@ -226,6 +270,13 @@ public final class ToXMLStream extends ToStream
      * The contents of the whitespace preserving section will be delivered
      * through the regular <tt>characters</tt> event.
      *
+     * <p>
+     * 启动空白保留部分在保留部分中打印的所有字符都不缩进地打印,并且不合并多个空格这等同于<tt> xml：space =&quot; preserve&quot; </tt>属性只有XML和HTML序列化程
+     * 序需要支持这个方法。
+     * <p>
+     *  空格保留部分的内容将通过常规<tt>字符</tt>事件传递
+     * 
+     * 
      * @throws org.xml.sax.SAXException
      */
     public void startPreserving() throws org.xml.sax.SAXException
@@ -240,6 +291,10 @@ public final class ToXMLStream extends ToStream
     /**
      * Ends a whitespace preserving section.
      *
+     * <p>
+     *  结束空白保留部分
+     * 
+     * 
      * @see #startPreserving
      *
      * @throws org.xml.sax.SAXException
@@ -254,6 +309,10 @@ public final class ToXMLStream extends ToStream
     /**
      * Receive notification of a processing instruction.
      *
+     * <p>
+     *  接收处理指令的通知
+     * 
+     * 
      * @param target The processing instruction target.
      * @param data The processing instruction data, or null if
      *        none was supplied.
@@ -330,6 +389,9 @@ public final class ToXMLStream extends ToStream
                 /**
                  * Before Xalan 1497, a newline char was printed out if not inside of an
                  * element. The whitespace is not significant is the output is standalone
+                 * <p>
+                 *  在Xalan 1497之前,如果不在元素内部,则打印换行符。空格不重要的是输出是独立的
+                 * 
                 */
                 if (m_elemContext.m_currentElemDepth <= 0 && m_isStandalone)
                     writer.write(m_lineSep, 0, m_lineSepLen);
@@ -343,6 +405,11 @@ public final class ToXMLStream extends ToStream
                  * to indent that we should
                  * add a newline on the end of the current line before
                  * the indentation at the start of the next line.
+                 * <p>
+                 *  现在不要写出任何缩进空格,因为这之后可能有非空格文本
+                 * 
+                 * 只要标记在这一点,如果我们决定缩进,我们应该在当前行的结尾添加一个换行之前的下一行开始的缩进
+                 * 
                  */
                 m_startNewLine = true;
             }
@@ -359,6 +426,10 @@ public final class ToXMLStream extends ToStream
     /**
      * Receive notivication of a entityReference.
      *
+     * <p>
+     *  接收entityReference的通知
+     * 
+     * 
      * @param name The name of the entity.
      *
      * @throws org.xml.sax.SAXException
@@ -395,6 +466,10 @@ public final class ToXMLStream extends ToStream
      * The caller has guaranted that this attribute is unique, which means that it
      * not been seen before and will not be seen again.
      *
+     * <p>
+     *  此方法用于向当前打开的元素添加属性调用者已保证此属性是唯一的,这意味着它之前未被看到,并且不会再被看到
+     * 
+     * 
      * @param name the qualified name of the attribute
      * @param value the value of the attribute which can contain only
      * ASCII printable characters characters in the range 32 to 127 inclusive.
@@ -440,6 +515,10 @@ public final class ToXMLStream extends ToStream
 
     /**
      * Add an attribute to the current element.
+     * <p>
+     *  向当前元素添加属性
+     * 
+     * 
      * @param uri the URI associated with the element name
      * @param localName local part of the attribute name
      * @param rawName   prefix:localName
@@ -469,6 +548,10 @@ public final class ToXMLStream extends ToStream
              * 2. The attribute is from an xsl:attribute element (that is handled
              *    in the addAttributeAlways() call just above.
              * 3. The name starts with "xmlns", i.e. it is a namespace declaration.
+             * <p>
+             *  我们不运行这个代码块,如果：1属性值只被替换(was_added为false)2属性来自xsl：attribute元素(在上面的addAttributeAlways()调用中处理3) "xmlns",
+             * 即它是一个命名空间声明。
+             * 
              */
             if (was_added && !xslAttribute && !rawName.startsWith("xmlns"))
             {
@@ -501,6 +584,13 @@ public final class ToXMLStream extends ToStream
              * makes sense to have the same treatment.
              *
              * We choose to ignore the attribute which is added too late.
+             * <p>
+             *  startTag已关闭,但是我们要添加一个属性吗?
+             * 
+             * 部分：713创建属性在添加了PI(例如)之后将一个属性添加到元素是一个错误属性可以被忽略规范没有明确表示这是不允许的,因为它对子元素,但是有同样的治疗是有道理的
+             * 
+             *  我们选择忽略添加得太晚的属性
+             * 
              */
             // Generate a warning of the ignored attributes
 
@@ -525,6 +615,8 @@ public final class ToXMLStream extends ToStream
     }
 
     /**
+    /* <p>
+    /* 
      * @see ExtendedContentHandler#endElement(String)
      */
     public void endElement(String elemName) throws SAXException
@@ -538,6 +630,10 @@ public final class ToXMLStream extends ToStream
      * The official SAX startPrefixMapping(prefix,uri) is to define a mapping for a child
      * element that is soon to be seen with a startElement() call. The official SAX call
      * does not apply to the current element, hence the reason for this method.
+     * <p>
+     *  此方法用于通知序列化器命名空间映射(或节点),其适用于已经看到其startElement()调用的当前元素官方SAX startPrefixMapping(prefix,uri)是为子元素定义映射很快
+     * 就会看到一个startElement()调用官方的SAX调用不适用于当前元素,因此这种方法的原因。
+     * 
      */
     public void namespaceAfterStartElement(
         final String prefix,
@@ -567,6 +663,9 @@ public final class ToXMLStream extends ToStream
      * From XSLTC
      * Declare a prefix to point to a namespace URI. Inform SAX handler
      * if this is a new prefix mapping.
+     * <p>
+     * 从XSLTC声明一个前缀以指向一个命名空间URI通知SAX处理程序,如果这是一个新的前缀映射
+     * 
      */
     protected boolean pushNamespace(String prefix, String uri)
     {
@@ -590,6 +689,10 @@ public final class ToXMLStream extends ToStream
      * re-use, so that you don't need to create a new serializer
      * (mostly for performance reasons).
      *
+     * <p>
+     *  尝试重置超类并重置此类以供重用,以便您不需要创建新的序列化程序(主要是出于性能原因)
+     * 
+     * 
      * @return true if the class was successfuly reset.
      */
     public boolean reset()
@@ -606,6 +709,9 @@ public final class ToXMLStream extends ToStream
     /**
      * Reset all of the fields owned by ToStream class
      *
+     * <p>
+     *  重置ToStream类拥有的所有字段
+     * 
      */
     private void resetToXMLStream()
     {
@@ -620,6 +726,10 @@ public final class ToXMLStream extends ToStream
      * If XML version of output doucment is specified, but it is not either
      * XML 1.0 or XML 1.1, a warning message is generated, the XML Version of
      * output document is set to XML 1.0 and processing continues.
+     * <p>
+     *  此方法检查输出文档的XML版本如果未指定输出文档的XML版本,则输出文档为版本XML 10如果指定了输出文档的XML版本,但不是XML 10或XML 11,则警告消息,则输出文档的XML版本设置为XM
+     * L 10,并且处理继续。
+     * 
      * @return string (XML version)
      */
     private String getXMLVersion()

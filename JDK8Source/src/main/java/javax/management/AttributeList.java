@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -45,6 +46,17 @@ import java.util.Map;
  * IllegalArgumentException}.  An {@code AttributeList} becomes type-safe
  * when the method {@link #asList()} is called on it.</p>
  *
+ * <p>
+ *  <p>表示MBean的属性值列表请参阅{@link MBeanServer}和{@link MBeanServerConnection} </p>的{@link MBeanServerConnection#getAttributes getAttributes}
+ * 和{@link MBeanServerConnection#setAttributes setAttributes}。
+ * 
+ * <p id ="type-safe">出于兼容性原因,尽管非常不鼓励,可以向{@code AttributeList}添加不是{@code Attribute}实例的对象。
+ * 但是,{@code AttributeList}可以设为<em>类型安全</em>,这意味着尝试添加不是{@code Attribute}的对象将产生{@code IllegalArgumentException}
+ * 。
+ * <p id ="type-safe">出于兼容性原因,尽管非常不鼓励,可以向{@code AttributeList}添加不是{@code Attribute}实例的对象。
+ * {@code AttributeList}变为类型安全当方法{@link #asList()}被调用时</p>。
+ * 
+ * 
  * @since 1.5
  */
 /* We cannot extend ArrayList<Attribute> because our legacy
@@ -61,6 +73,12 @@ import java.util.Map;
    implement two versions of a generic interface.  Instead we provide
    the asList() method so you can write
        for (Attribute a : attributeList.asList())
+/* <p>
+/* add(Attribute)方法将覆盖ArrayList <E>中的add(E),我们的返回值为void,而ArrayListadd(E)的值为boolean同样对于set(int,Attribute)
+/* Grrr我们不能使用协方差来覆盖最多重要的方法,并让它们返回Attribute,因为这将打破依次覆盖这些方法的子类(使用Object的原始返回类型)最后,我们不能实现Iterable <Attribute>
+/* ,所以你可以写(Attribute a：attributeList)因为ArrayList <>实现Iterable <>,并且同一个类不能实现通用接口的两个版本。
+/* 我们提供asList()方法,所以你可以写(Attribute a：attributeListasList())。
+/* 
 */
 public class AttributeList extends ArrayList<Object> {
 
@@ -72,6 +90,9 @@ public class AttributeList extends ArrayList<Object> {
 
     /**
      * Constructs an empty <CODE>AttributeList</CODE>.
+     * <p>
+     *  构造一个空的<CODE> AttributeList </CODE>
+     * 
      */
     public AttributeList() {
         super();
@@ -81,6 +102,10 @@ public class AttributeList extends ArrayList<Object> {
      * Constructs an empty <CODE>AttributeList</CODE> with
      * the initial capacity specified.
      *
+     * <p>
+     * 构造具有指定初始容量的空的<CODE> AttributeList </CODE>
+     * 
+     * 
      * @param initialCapacity the initial capacity of the
      * <code>AttributeList</code>, as specified by {@link
      * ArrayList#ArrayList(int)}.
@@ -97,6 +122,11 @@ public class AttributeList extends ArrayList<Object> {
      * <CODE>AttributeList</CODE> instance has an initial capacity of
      * 110% of the size of the <CODE>AttributeList</CODE> specified.
      *
+     * <p>
+     *  构造包含<CODE> AttributeList </CODE>的元素的<CODE> AttributeList </CODE>,它们按<CODE> AttributeList </CODE>的迭代器
+     * 返回的顺序<CODE> AttributeList </CODE>实例具有指定的<CODE> AttributeList </CODE>大小的110％的初始容量。
+     * 
+     * 
      * @param list the <code>AttributeList</code> that defines the initial
      * contents of the new <code>AttributeList</code>.
      *
@@ -111,6 +141,10 @@ public class AttributeList extends ArrayList<Object> {
      * {@code List} specified, in the order in which they are returned by
      * the {@code List}'s iterator.
      *
+     * <p>
+     *  构造包含{@code List}的元素的{@code AttributeList},它们按照{@code List}的迭代器返回的顺序
+     * 
+     * 
      * @param list the {@code List} that defines the initial contents of
      * the new {@code AttributeList}.
      *
@@ -142,6 +176,10 @@ public class AttributeList extends ArrayList<Object> {
      * Changes to the returned value are reflected by changes
      * to the original {@code AttributeList} and vice versa.
      *
+     * <p>
+     *  以{@code List <Attribute>}形式返回此列表的视图对原始{@code AttributeList}的更改反映了对返回值的更改,反之亦然
+     * 
+     * 
      * @return a {@code List<Attribute>} whose contents
      * reflect the contents of this {@code AttributeList}.
      *
@@ -169,6 +207,10 @@ public class AttributeList extends ArrayList<Object> {
     /**
      * Adds the {@code Attribute} specified as the last element of the list.
      *
+     * <p>
+     * 添加指定为列表的最后一个元素的{@code Attribute}
+     * 
+     * 
      * @param object  The attribute to be added.
      */
     public void add(Attribute object)  {
@@ -182,6 +224,11 @@ public class AttributeList extends ArrayList<Object> {
      * size())} a RuntimeOperationsException should be raised, wrapping the
      * java.lang.IndexOutOfBoundsException thrown.
      *
+     * <p>
+     *  插入在指定位置指定为元素的属性向上移动索引大于或等于当前位置的元素如果索引超出范围{@literal(index <0 || index> size())} a RuntimeOperationsEx
+     * ception应该引发,包装javalangIndexOutOfBoundsException抛出。
+     * 
+     * 
      * @param object  The <CODE>Attribute</CODE> object to be inserted.
      * @param index The position in the list where the new {@code Attribute}
      * object is to be inserted.
@@ -202,6 +249,11 @@ public class AttributeList extends ArrayList<Object> {
      * out of range {@literal (index < 0 || index > size())} a RuntimeOperationsException
      * should be raised, wrapping the java.lang.IndexOutOfBoundsException thrown.
      *
+     * <p>
+     *  设置指定位置处的元素为指定的属性该位置上的前一个元素被丢弃如果索引超出范围{@literal(index <0 || index> size())},应引发RuntimeOperationsExcep
+     * tion,抛出javalangIndexOutOfBoundsException。
+     * 
+     * 
      * @param object  The value to which the attribute element should be set.
      * @param index  The position specified.
      */
@@ -220,6 +272,10 @@ public class AttributeList extends ArrayList<Object> {
      * the end of the list, in the order in which they are returned by the
      * Iterator of the <CODE>AttributeList</CODE> specified.
      *
+     * <p>
+     * 将指定的<CODE> AttributeList </CODE>中的所有元素按照它们由<CODE> AttributeList </CODE>指定的迭代器返回的顺序追加到列表的末尾
+     * 
+     * 
      * @param list  Elements to be inserted into the list.
      *
      * @return true if this list changed as a result of the call.
@@ -238,6 +294,12 @@ public class AttributeList extends ArrayList<Object> {
      * RuntimeOperationsException should be raised, wrapping the
      * java.lang.IndexOutOfBoundsException thrown.
      *
+     * <p>
+     *  将指定的<CODE> AttributeList </CODE>中的所有元素插入到此列表中,从指定的位置开始,按照它们由{@code AttributeList}指定的迭代器返回的顺序如果索引退出的范
+     * 围{@literal(index <0 || index> size())}应该引发一个RuntimeOperationsException,包装javalangIndexOutOfBoundsExce
+     * ption抛出。
+     * 
+     * 
      * @param list  Elements to be inserted into the list.
      * @param index  Position at which to insert the first element from the
      * <CODE>AttributeList</CODE> specified.
@@ -259,10 +321,17 @@ public class AttributeList extends ArrayList<Object> {
      * Override all of the methods from ArrayList<Object> that might add
      * a non-Attribute to the List, and disallow that if asList has ever
      * been called on this instance.
+     * <p>
+     *  覆盖ArrayList <Object>中可能向列表中添加非属性的所有方法,并禁止在此实例上调用asList
+     * 
      */
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws IllegalArgumentException if this {@code AttributeList} is
      * <a href="#type-safe">type-safe</a> and {@code element} is not an
      * {@code Attribute}.
@@ -275,6 +344,10 @@ public class AttributeList extends ArrayList<Object> {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws IllegalArgumentException if this {@code AttributeList} is
      * <a href="#type-safe">type-safe</a> and {@code element} is not an
      * {@code Attribute}.
@@ -287,6 +360,10 @@ public class AttributeList extends ArrayList<Object> {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws IllegalArgumentException if this {@code AttributeList} is
      * <a href="#type-safe">type-safe</a> and {@code c} contains an
      * element that is not an {@code Attribute}.
@@ -299,6 +376,10 @@ public class AttributeList extends ArrayList<Object> {
 
     /**
      * {@inheritDoc}
+     * <p>
+     * {@inheritDoc}
+     * 
+     * 
      * @throws IllegalArgumentException if this {@code AttributeList} is
      * <a href="#type-safe">type-safe</a> and {@code c} contains an
      * element that is not an {@code Attribute}.
@@ -311,6 +392,9 @@ public class AttributeList extends ArrayList<Object> {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      * @throws IllegalArgumentException if this {@code AttributeList} is
      * <a href="#type-safe">type-safe</a> and {@code element} is not an
      * {@code Attribute}.

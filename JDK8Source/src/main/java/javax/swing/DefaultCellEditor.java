@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -47,6 +48,13 @@ import java.io.Serializable;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  表和树单元格的默认编辑器
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将不与未来的Swing版本兼容当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ * 支持长期存储所有JavaBeans&trade;已添加到<code> javabeans </code>包中请参见{@link javabeansXMLEncoder}。
+ * 
+ * 
  * @author Alan Chung
  * @author Philip Milne
  */
@@ -63,12 +71,18 @@ public class DefaultCellEditor extends AbstractCellEditor
     /**
      * The delegate class which handles all methods sent from the
      * <code>CellEditor</code>.
+     * <p>
+     *  代理类,处理从<code> CellEditor </code>发送的所有方法
+     * 
      */
     protected EditorDelegate delegate;
     /**
      * An integer specifying the number of clicks needed to start editing.
      * Even if <code>clickCountToStart</code> is defined as zero, it
      * will not initiate until a click occurs.
+     * <p>
+     * 指定开始编辑所需的点击次数的整数即使<code> clickCountToStart </code>被定义为零,它也不会启动,直到发生点击
+     * 
      */
     protected int clickCountToStart = 1;
 
@@ -79,6 +93,10 @@ public class DefaultCellEditor extends AbstractCellEditor
     /**
      * Constructs a <code>DefaultCellEditor</code> that uses a text field.
      *
+     * <p>
+     *  构造使用文本字段的<code> DefaultCellEditor </code>
+     * 
+     * 
      * @param textField  a <code>JTextField</code> object
      */
     @ConstructorProperties({"component"})
@@ -100,6 +118,10 @@ public class DefaultCellEditor extends AbstractCellEditor
     /**
      * Constructs a <code>DefaultCellEditor</code> object that uses a check box.
      *
+     * <p>
+     *  构造使用复选框的<code> DefaultCellEditor </code>对象
+     * 
+     * 
      * @param checkBox  a <code>JCheckBox</code> object
      */
     public DefaultCellEditor(final JCheckBox checkBox) {
@@ -128,6 +150,10 @@ public class DefaultCellEditor extends AbstractCellEditor
      * Constructs a <code>DefaultCellEditor</code> object that uses a
      * combo box.
      *
+     * <p>
+     *  构造使用组合框的<code> DefaultCellEditor </code>对象
+     * 
+     * 
      * @param comboBox  a <code>JComboBox</code> object
      */
     public DefaultCellEditor(final JComboBox comboBox) {
@@ -164,6 +190,10 @@ public class DefaultCellEditor extends AbstractCellEditor
     /**
      * Returns a reference to the editor component.
      *
+     * <p>
+     *  返回对编辑器组件的引用
+     * 
+     * 
      * @return the editor <code>Component</code>
      */
     public Component getComponent() {
@@ -177,6 +207,10 @@ public class DefaultCellEditor extends AbstractCellEditor
     /**
      * Specifies the number of clicks needed to start editing.
      *
+     * <p>
+     *  指定开始编辑所需的点击次数
+     * 
+     * 
      * @param count  an int specifying the number of clicks needed to start editing
      * @see #getClickCountToStart
      */
@@ -186,6 +220,10 @@ public class DefaultCellEditor extends AbstractCellEditor
 
     /**
      * Returns the number of clicks needed to start editing.
+     * <p>
+     *  返回开始编辑所需的点击次数
+     * 
+     * 
      * @return the number of clicks needed to start editing
      */
     public int getClickCountToStart() {
@@ -200,6 +238,10 @@ public class DefaultCellEditor extends AbstractCellEditor
     /**
      * Forwards the message from the <code>CellEditor</code> to
      * the <code>delegate</code>.
+     * <p>
+     *  将消息从<code> CellEditor </code>转发到<code>委托</code>
+     * 
+     * 
      * @see EditorDelegate#getCellEditorValue
      */
     public Object getCellEditorValue() {
@@ -209,6 +251,10 @@ public class DefaultCellEditor extends AbstractCellEditor
     /**
      * Forwards the message from the <code>CellEditor</code> to
      * the <code>delegate</code>.
+     * <p>
+     *  将消息从<code> CellEditor </code>转发到<code>委托</code>
+     * 
+     * 
      * @see EditorDelegate#isCellEditable(EventObject)
      */
     public boolean isCellEditable(EventObject anEvent) {
@@ -218,6 +264,10 @@ public class DefaultCellEditor extends AbstractCellEditor
     /**
      * Forwards the message from the <code>CellEditor</code> to
      * the <code>delegate</code>.
+     * <p>
+     * 将消息从<code> CellEditor </code>转发到<code>委托</code>
+     * 
+     * 
      * @see EditorDelegate#shouldSelectCell(EventObject)
      */
     public boolean shouldSelectCell(EventObject anEvent) {
@@ -227,6 +277,10 @@ public class DefaultCellEditor extends AbstractCellEditor
     /**
      * Forwards the message from the <code>CellEditor</code> to
      * the <code>delegate</code>.
+     * <p>
+     *  将消息从<code> CellEditor </code>转发到<code>委托</code>
+     * 
+     * 
      * @see EditorDelegate#stopCellEditing
      */
     public boolean stopCellEditing() {
@@ -236,6 +290,10 @@ public class DefaultCellEditor extends AbstractCellEditor
     /**
      * Forwards the message from the <code>CellEditor</code> to
      * the <code>delegate</code>.
+     * <p>
+     *  将消息从<code> CellEditor </code>转发到<code>委托</code>
+     * 
+     * 
      * @see EditorDelegate#cancelCellEditing
      */
     public void cancelCellEditing() {
@@ -296,6 +354,9 @@ public class DefaultCellEditor extends AbstractCellEditor
 
     /**
      * The protected <code>EditorDelegate</code> class.
+     * <p>
+     *  受保护的<code> EditorDelegate </code>类
+     * 
      */
     protected class EditorDelegate implements ActionListener, ItemListener, Serializable {
 
@@ -304,6 +365,10 @@ public class DefaultCellEditor extends AbstractCellEditor
 
        /**
         * Returns the value of this cell.
+        * <p>
+        *  返回此单元格的值
+        * 
+        * 
         * @return the value of this cell
         */
         public Object getCellEditorValue() {
@@ -312,6 +377,10 @@ public class DefaultCellEditor extends AbstractCellEditor
 
        /**
         * Sets the value of this cell.
+        * <p>
+        *  设置此单元格的值
+        * 
+        * 
         * @param value the new value of this cell
         */
         public void setValue(Object value) {
@@ -324,6 +393,10 @@ public class DefaultCellEditor extends AbstractCellEditor
         * if the necessary number of clicks have occurred, and
         * returns false otherwise.
         *
+        * <p>
+        *  如果<code> anEvent </code> <b>不是</b>,则返回true;否则,如果发生了必要的点击次数,则返回true,否则返回false
+        * 
+        * 
         * @param   anEvent         the event
         * @return  true  if cell is ready for editing, false otherwise
         * @see #setClickCountToStart
@@ -340,6 +413,10 @@ public class DefaultCellEditor extends AbstractCellEditor
         * Returns true to indicate that the editing cell may
         * be selected.
         *
+        * <p>
+        *  返回true表示可以选择编辑单元格
+        * 
+        * 
         * @param   anEvent         the event
         * @return  true
         * @see #isCellEditable
@@ -351,6 +428,10 @@ public class DefaultCellEditor extends AbstractCellEditor
        /**
         * Returns true to indicate that editing has begun.
         *
+        * <p>
+        *  返回true表示编辑已开始
+        * 
+        * 
         * @param anEvent          the event
         */
         public boolean startCellEditing(EventObject anEvent) {
@@ -362,6 +443,10 @@ public class DefaultCellEditor extends AbstractCellEditor
         * returns true to indicate that editing has stopped.
         * This method calls <code>fireEditingStopped</code>.
         *
+        * <p>
+        *  停止编辑并返回true以指示编辑已停止此方法调用<code> fireEditingStopped </code>
+        * 
+        * 
         * @return  true
         */
         public boolean stopCellEditing() {
@@ -371,6 +456,9 @@ public class DefaultCellEditor extends AbstractCellEditor
 
        /**
         * Cancels editing.  This method calls <code>fireEditingCanceled</code>.
+        * <p>
+        * 取消编辑此方法调用<code> fireEditingCanceled </code>
+        * 
         */
        public void cancelCellEditing() {
            fireEditingCanceled();
@@ -378,6 +466,10 @@ public class DefaultCellEditor extends AbstractCellEditor
 
        /**
         * When an action is performed, editing is ended.
+        * <p>
+        *  当执行动作时,编辑结束
+        * 
+        * 
         * @param e the action event
         * @see #stopCellEditing
         */
@@ -387,6 +479,9 @@ public class DefaultCellEditor extends AbstractCellEditor
 
        /**
         * When an item's state changes, editing is ended.
+        * <p>
+        *  当项目的状态改变时,编辑结束
+        * 
         * @param e the action event
         * @see #stopCellEditing
         */

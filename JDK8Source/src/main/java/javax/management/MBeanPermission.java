@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -158,6 +159,83 @@ import java.security.Permission;
  * <p>In a comma-separated list of actions, spaces are allowed before
  * and after each action.</p>
  *
+ * <p>
+ *  <p>对MBeanServer操作的权限控制访问如果已使用{@link System#setSecurityManager}设置安全管理器,则MBean Server上的大多数操作都要求调用者的权限意
+ * 味着适用于操作的MBeanPermission。
+ * 这将在{@link MBeanServer}接口的文档</p>。
+ * 
+ * <p>与其他{@link权限}对象一样,MBeanPermission可表示您<em>具有</em>的权限或您需要的权限</em>。
+ * 当检查敏感操作时对于权限,构造一个MBeanPermission表示您需要的权限只有在您拥有的权限{@linkplain #implies暗示}您需要的权限时,才允许该操作</p>。
+ * 
+ *  <p> MBeanPermission包含四项信息：</p>
+ * 
+ * <ul>
+ * 
+ *  <li> <p> <em> <em> </em>对于您需要的权限,这是列表中的一个操作<a href=\"#action-list\">以下</a>对于权限have,这是这些操作的逗号分隔列表,或<code>
+ *  * </code>,表示所有操作</p>。
+ * 
+ *  <p>操作由{@link #getActions()} </p>返回
+ * 
+ * <li> <p> <em>类名</em> </p>
+ * 
+ *  <p>对于您需要的权限,这是您正在访问的MBean的类名,由{@link MBeanServer#getMBeanInfo(ObjectName)MBeanServergetMBeanInfo(name)}
+ * 返回{@ link MBeanInfo#getClassName()getClassName某些操作不引用类名,在这种情况下类名为null </p>。
+ * 
+ * <p>对于您具有的权限,此字段为空或类名模式</em>。类名模式是遵循Java公约的点分隔类名的字符串。
+ * 它可以以"<code> * </code>"表示该权限授予对以"<code> * </code>"之前的字符串开头的任何类的访问权限。
+ * 例如,"<code> javaxmanagement * </> javaxmanagementMBeanServerDelegate </code>和<code> javaxmanagementtim
+ * erTimer </code>以及其他类</p>。
+ * 它可以以"<code> * </code>"表示该权限授予对以"<code> * </code>"之前的字符串开头的任何类的访问权限。
+ * 
+ *  <p>类名模式也可以为空或单个字符"<code> * </code>",两者都授予对任何类的访问权限</p>
+ * 
+ *  <li> <p> <em>成员</em> </p>
+ * 
+ * <p>对于所需的权限,这是您正在访问的属性或操作的名称对于不引用属性或操作的操作,成员为null </p>
+ * 
+ *  <p>对于您拥有的权限,这是您可以访问的属性或操作的名称,或者它为空或单个字符"<code> * </code>",这两个都授予对任何成员的访问权限</p>
+ * 
+ *  <li id ="MBeanName"> <p> <em>对象名称</em> </p>
+ * 
+ *  <p>对于您需要的权限,这是您正在访问的MBean的{@link ObjectName}对于不引用单个MBean的操作,它为null它从不是对象名模式</p>
+ * 
+ * <p>对于您拥有的权限,这是您可以访问的MBean或MBean的{@link ObjectName}它可能是一个对象名称模式,以授予对名称与模式匹配的所有MBean的访问权限它也可能为空,授予对所有MB
+ * ean的任何名称的访问权限</p>。
+ * 
+ * </ul>
+ * 
+ *  <p>如果您有MBeanPermission,则只有在所有四个项目都匹配</p>时才允许操作
+ * 
+ *  <p>类名,成员和对象名可以一起写为单个字符串,即此权限的<em> name </em>。
+ * 权限的名称是{@link Permission# getName()getName()}字符串的格式是：</p>。
+ * 
+ * <blockquote>
+ *  <code> className#member [objectName] </code>
+ * </blockquote>
+ * 
+ * <p>对象名称使用{@link ObjectName}的通常语法编写。它可能包含任何合法字符,包括<code>] </code>它由<code>] </code>字符字符串中的最后一个字符</p>
+ * 
+ *  <p> <code> className </code>,<code>成员</code>或<code> objectName </code>中的一个或多个可以省略。
+ * 如果省略<code> member </code> ,<code>#</code>也可以(但不一定是)如果省略<code> objectName </code>,<code> [] </code>不必是
+ * )省略所有三个项目是不合法的,即具有<em>名称</em>是空字符串</p>。
+ *  <p> <code> className </code>,<code>成员</code>或<code> objectName </code>中的一个或多个可以省略。
+ * 
+ * <p> <code> className </code>,<code>成员</code>或<code> objectName </code>中的一个或多个可以是字符"<code>  -  </code>
+ * ","<p>One or more of the <code>className</code>, <code>member</code>, or <code>objectName</code> may 
+ * be the character \"<code>-</code>\它等价于一个空值空值由任何值(包括另一个空值)隐含,但不暗示任何其他值</p>。
+ * 
+ *  <p> <a name=\"action-list\">可能的操作包括：</a> </p>
+ * 
+ * <ul>
+ *  <li> addNotificationListener </li> <li> getAtribute </li> <li> getClassLoader </li> <li> getClassLoa
+ * der </li> <li> getClassLoaderRepository </li> <li> getDomains < > getMBeanInfo </li> <li> getObjectIn
+ * stance </li> <li>实例化</li> <li>调用</li> <li> isInstanceOf </li> </li> <li> registerMBean </li> <li> rem
+ * oveNotificationListener </li> <li> setAttribute </li> <li> unregisterMBean </li>。
+ * </ul>
+ * 
+ * <p>在逗号分隔的操作列表中,每个操作之前和之后允许使用空格</p>
+ * 
+ * 
  * @since 1.5
  */
 public class MBeanPermission extends Permission {
@@ -166,6 +244,9 @@ public class MBeanPermission extends Permission {
 
     /**
      * Actions list.
+     * <p>
+     *  操作列表
+     * 
      */
     private static final int AddNotificationListener    = 0x00001;
     private static final int GetAttribute               = 0x00002;
@@ -187,11 +268,17 @@ public class MBeanPermission extends Permission {
 
     /**
      * No actions.
+     * <p>
+     *  无操作
+     * 
      */
     private static final int NONE = 0x00000;
 
     /**
      * All actions.
+     * <p>
+     *  所有操作
+     * 
      */
     private static final int ALL =
         AddNotificationListener    |
@@ -214,40 +301,61 @@ public class MBeanPermission extends Permission {
 
     /**
      * The actions string.
+     * <p>
+     *  操作字符串
+     * 
      */
     private String actions;
 
     /**
      * The actions mask.
+     * <p>
+     *  动作掩码
+     * 
      */
     private transient int mask;
 
     /**
      * The classname prefix that must match.  If null, is implied by any
      * classNamePrefix but does not imply any non-null classNamePrefix.
+     * <p>
+     *  必须匹配的类名前缀如果为null,则由任何classNamePrefix隐含,但不表示任何非null classNamePrefix
+     * 
      */
     private transient String classNamePrefix;
 
     /**
      * True if classNamePrefix must match exactly.  Otherwise, the
      * className being matched must start with classNamePrefix.
+     * <p>
+     *  如果classNamePrefix必须完全匹配,则为true否则,匹配的className必须以classNamePrefix开头
+     * 
      */
     private transient boolean classNameExactMatch;
 
     /**
      * The member that must match.  If null, is implied by any member
      * but does not imply any non-null member.
+     * <p>
+     *  必须匹配的成员如果为null,则由任何成员隐含,但不表示任何非null成员
+     * 
      */
     private transient String member;
 
     /**
      * The objectName that must match.  If null, is implied by any
      * objectName but does not imply any non-null objectName.
+     * <p>
+     *  必须匹配的objectName如果为null,则由任何objectName隐含,但不表示任何非空的objectName
+     * 
      */
     private transient ObjectName objectName;
 
     /**
      * Parse <code>actions</code> parameter.
+     * <p>
+     *  解析<code> actions </code>参数
+     * 
      */
     private void parseActions() {
 
@@ -271,6 +379,9 @@ public class MBeanPermission extends Permission {
 
     /**
      * Parse <code>name</code> parameter.
+     * <p>
+     *  解析<code> name </code>参数
+     * 
      */
     private void parseName() {
         String name = getName();
@@ -286,6 +397,10 @@ public class MBeanPermission extends Permission {
         /* The name looks like "class#member[objectname]".  We subtract
            elements from the right as we parse, so after parsing the
            objectname we have "class#member" and after parsing the
+        /* <p>
+        /* 元素从右边解析,所以在解析对象名称后,我们有"类#成员"和解析后
+        /* 
+        /* 
            member we have "class".  Each element is optional.  */
 
         // Parse ObjectName
@@ -347,6 +462,9 @@ public class MBeanPermission extends Permission {
     /**
      * Assign fields based on className, member, and objectName
      * parameters.
+     * <p>
+     *  基于className,member和objectName参数分配字段
+     * 
      */
     private void initName(String className, String member,
                           ObjectName objectName) {
@@ -393,6 +511,14 @@ public class MBeanPermission extends Permission {
      * desired actions granted on the target name.  It must not be
      * empty or null.</p>
      *
+     * <p>
+     *  <p>使用指定的目标名称和操作创建新的MBeanPermission对象</p>
+     * 
+     *  <p>目标名称的格式为"<code> className#member [objectName] </code>"其中每个部分是可选的它不能为空或为空</p>
+     * 
+     *  <p> actions参数包含以目标名称授予的所需操作的逗号分隔列表。它不能为空或为空</p>
+     * 
+     * 
      * @param name the triplet "className#member[objectName]".
      * @param actions the action string.
      *
@@ -422,6 +548,15 @@ public class MBeanPermission extends Permission {
      * desired actions granted on the target name.  It must not be
      * empty or null.</p>
      *
+     * <p>
+     *  <p>使用指定的目标名称(类名称,成员,对象名称)和操作创建新的MBeanPermission对象</p>
+     * 
+     * <p>类名,成员和对象名参数定义一个形式为"<code> className#member [objectName] </code>"的目标名称,其中每个部分是可选的这将是{@link #getName ()}
+     * 在生成的MBeanPermission </p>。
+     * 
+     *  <p> actions参数包含以目标名称授予的所需操作的逗号分隔列表。它不能为空或为空</p>
+     * 
+     * 
      * @param className the class name to which this permission applies.
      * May be null or <code>"-"</code>, which represents a class name
      * that is implied by any class name but does not imply any other
@@ -462,6 +597,8 @@ public class MBeanPermission extends Permission {
             name.append("[").append(objectName.getCanonicalName()).append("]");
 
         /* In the interests of legibility for Permission.toString(), we
+        /* <p>
+        /* 
            transform the empty string into "*".  */
         if (name.length() == 0)
             return "*";
@@ -473,6 +610,10 @@ public class MBeanPermission extends Permission {
      * Returns the "canonical string representation" of the actions. That is,
      * this method always returns present actions in alphabetical order.
      *
+     * <p>
+     *  返回动作的"规范字符串表示"即,此方法总是按字母顺序返回当前动作
+     * 
+     * 
      * @return the canonical string representation of the actions.
      */
     public String getActions() {
@@ -486,6 +627,9 @@ public class MBeanPermission extends Permission {
     /**
      * Returns the "canonical string representation"
      * of the actions from the mask.
+     * <p>
+     *  从掩码返回操作的"规范字符串表示"
+     * 
      */
     private static String getActions(int mask) {
         final StringBuilder sb = new StringBuilder();
@@ -598,6 +742,10 @@ public class MBeanPermission extends Permission {
     /**
      * Returns the hash code value for this object.
      *
+     * <p>
+     *  返回此对象的哈希码值
+     * 
+     * 
      * @return a hash code value for this object.
      */
     public int hashCode() {
@@ -607,6 +755,10 @@ public class MBeanPermission extends Permission {
     /**
      * Converts an action String to an integer action mask.
      *
+     * <p>
+     *  将操作字符串转换为整数操作掩码
+     * 
+     * 
      * @param action the action string.
      * @return the action mask.
      */
@@ -622,6 +774,14 @@ public class MBeanPermission extends Permission {
          * performed after the "registerMBean" string length test the algorithm
          * considers the 'unregisterMBean' action as being the 'registerMBean'
          * action and a parsing error is returned.
+         * <p>
+         *  请谨慎！分析订单在本算法中是重要的
+         * 
+         * 必须首先对最长的字符串执行"字符串长度"测试
+         * 
+         *  在此权限中,如果在"registerMBean"字符串长度测试之后执行"unregisterMBean"字符串长度测试,则算法将"unregisterMBean"操作视为"registerMBean"
+         * 操作,并返回解析错误。
+         * 
          */
 
         int mask = NONE;
@@ -1019,6 +1179,28 @@ public class MBeanPermission extends Permission {
      * <p>A permission that includes the <code>queryMBeans</code> action
      * is considered to include <code>queryNames</code> as well.</p>
      *
+     * <p>
+     *  <p>检查此MBeanPermission对象是否"暗示"指定的权限</p>
+     * 
+     *  <p>更具体地说,如果：</p>,则此方法返回true
+     * 
+     * <ul>
+     * 
+     *  <li> <i> p </i>是MBeanPermission的实例;和</li>
+     * 
+     *  <li> <i> p </i>有一个null className或<i> p </i>的className与此物件的className相符;和</li>
+     * 
+     *  <li> <i> p </i>有一个空成员或<i> p </i>的成员与此物件的成员相符;和</li>
+     * 
+     * <li> <i> p </i>具有空对象名称或<i> p </i>的对象名称与此对象的对象名称匹配;和</li>
+     * 
+     *  <li> <i> p </i>的操作是此对象操作的子集</li>
+     * 
+     * </ul>
+     * 
+     *  <p>如果此对象的className为"<code> * </code>",则</p> </p>的className总是匹配。
+     * 如果是"<code> a * </code> > p </i>的className如果以"<code> a </code>"开头,则匹配</p>。
+     * 
      * @param p the permission to check against.
      * @return true if the specified permission is implied by this object,
      * false if not.
@@ -1074,6 +1256,16 @@ public class MBeanPermission extends Permission {
            If that.classNamePrefix is empty that means the className is
            irrelevant for this permission check.  Otherwise, we do not
            expect that "that" contains a wildcard, since it is a
+        /* <p>
+        /* 
+        /*  <p>如果此对象的成员是"<code> * </code>",则</p> </p>的成员总是匹配</p>
+        /* 
+        /*  <p>如果此对象的objectName <i> n1 </i>是对象名称模式,则<i> p </i>的objectName <n> i> n1 </i>等于(<i> n2 </i>)}或者如果{@link ObjectName#apply <i> n1 </i> apply(<i> n2 </i>)}
+        /*  </p >。
+        /* 
+        /* <p>包含<code> queryMBeans </code>操作的权限也包括<code> queryNames </code>以及</p>
+        /* 
+        /* 
            needed permission.  So we assume that.classNameExactMatch.  */
 
         if (that.classNamePrefix == null) {
@@ -1117,6 +1309,10 @@ public class MBeanPermission extends Permission {
             /* ObjectName.apply returns false if that.objectName is a
                wildcard so we also allow equals for that case.  This
                never happens during real permission checks, but means
+            /* <p>
+            /*  如果thatclassNamePrefix为空,表示className与此权限检查无关。否则,我们不希望"that"包含通配符,因为它是一个
+            /* 
+            /* 
                the implies relation is reflexive.  */
             if (!this.objectName.equals(that.objectName))
                 return false;
@@ -1130,6 +1326,10 @@ public class MBeanPermission extends Permission {
      * that <i>obj</i> is an MBeanPermission, and has the same
      * name and actions as this object.
      * <P>
+     * <p>
+     *  通配符,所以我们也允许等于那种情况这从来没有发生在真正的权限检查,但意味着
+     * 
+     * 
      * @param obj the object we are testing for equality with this object.
      * @return true if obj is an MBeanPermission, and has the
      * same name and actions as this MBeanPermission object.
@@ -1149,6 +1349,9 @@ public class MBeanPermission extends Permission {
 
     /**
      * Deserialize this object based on its name and actions.
+     * <p>
+     *  检查两个MBeanPermission对象是否相等检查<i> obj </i>是否为MBeanPermission,并且具有与此对象相同的名称和操作
+     * <P>
      */
     private void readObject(ObjectInputStream in)
             throws IOException, ClassNotFoundException {

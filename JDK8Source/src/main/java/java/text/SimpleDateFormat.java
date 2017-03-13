@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,12 @@
  * patents. This notice and attribution to Taligent may not be removed.
  *   Taligent is a registered trademark of Taligent, Inc.
  *
+ * <p>
+ *  (C)版权所有Taligent,Inc 1996  - 保留所有权利(C)版权所有IBM Corp 1996-1998  - 保留所有权利
+ * 
+ *  此源代码和文档的原始版本由IBM的全资子公司Taligent,Inc拥有版权和所有权。
+ * 这些资料根据Taligent和Sun之间的许可协议的条款提供此技术受多个美国和国际专利保护Taligent是Taligent的注册商标。Taligent是Taligent的注册商标。
+ * 
  */
 
 package java.text;
@@ -411,6 +418,176 @@ import sun.util.locale.provider.LocaleProviderAdapter;
  * If multiple threads access a format concurrently, it must be synchronized
  * externally.
  *
+ * <p>
+ * <code> SimpleDateFormat </code>是一个以区域设置敏感的方式格式化和解析日期的具体类。它允许格式化(日期和文本),解析(文本&rarr;日期)
+ * 
+ * <p>
+ *  <code> SimpleDateFormat </code>允许您从选择任何用户定义的日期时间格式化模式开始。
+ * 但是,建议您使用<code> getTimeInstance </code>,<code>这些类方法中的每一个都可以返回使用默认格式模式初始化的日期/时间格式化程序。
+ * 您可以使用默认格式模式修改格式模式。 <code> applyPattern </code>方法有关使用这些方法的更多信息,请参阅{@link DateFormat}。
+ * 
+ * <h3>日期和时间模式</h3>
+ * <p>
+ *  日期和时间格式由<em>日期和时间模式</em>字符串指定日期和时间模式字符串中,从<code>'A'</code>到<code>'Z'</从<code>'a'</code>到<code>'z'</code>
+ * 被解释为表示日期或时间字符串组成部分的模式字母文本可以使用单引号引起来(<code>'< / code>)以避免解释<code>"''"</code>表示单引号所有其他字符不解释;它们只是在格式化期间复
+ * 制到输出字符串或在解析期间与输入字符串匹配。
+ * <p>
+ *  定义了以下模式字母(从<code>'A'</code>到<code>'Z'</code>和从<code>'a'</code>到<code>'z '</code>保留)：
+ * <blockquote>
+ * <table border=0 cellspacing=3 cellpadding=0 summary="Chart shows pattern letters, date/time component, presentation, and examples.">
+ * <tr style="background-color: rgb(204, 204, 255);">
+ * <th align = left>字母<th align = left>日期或时间组件<th align = left>演示<th align = left>示例
+ * <tr>
+ *  <td> <code> G </code> <td>时代指示符<td> <a href=\"#text\">文字</a> <td> <code> AD </code>
+ * <tr style="background-color: rgb(238, 238, 255);">
+ *  <td> <code> y </code> <td>年<td> <a href=\"#year\">年</a> <td> <code> 1996 </code>; <code> 96 </code>。
+ * <tr>
+ *  <td> <code> Y </code> <td>周年<td> <a href=\"#year\">年</a> <td> <code> 2009 </code> <code> 09 </code>。
+ * <tr style="background-color: rgb(238, 238, 255);">
+ *  <td> <code> M </code> <td>年份中的月份(与上下文相关)<td> <a href=\"#month\">月</a> <td> <code> July </code>; <code>
+ *  Jul </code>; <code> 07 </code>。
+ * <tr>
+ *  <td> <code> L </code> <td>每年的月份(独立表格)<td> <a href=\"#month\">月</a> <td> <code> July </code>; <code> 
+ * Jul </code>; <code> 07 </code>。
+ * <tr style="background-color: rgb(238, 238, 255);">
+ *  <td> <code> w </code> <td>年份周<td> <a href=\"#number\">数字</a> <td> <code> 27 </code>
+ * <tr>
+ * <td> <code> W </code> <td>每月一周<td> <a href=\"#number\">数字</a> <td> <code> 2 </code>
+ * <tr style="background-color: rgb(238, 238, 255);">
+ *  <td> <code> D </code> <td>一年中的某一天<td> <a href=\"#number\"> Number </a> <td> <code> 189 </code>
+ * <tr>
+ *  <td> <code> d </code> <td>每月的某一天<td> <a href=\"#number\">数字</a> <td> <code> 10 </code>
+ * <tr style="background-color: rgb(238, 238, 255);">
+ *  <td> <code> F </code> <td>每月的星期几<td> <a href=\"#number\">数字</a> <td> <code> 2 </code>
+ * <tr>
+ *  <td> <code> E </code> <td>星期名称<td> <a href=\"#text\">短讯</a> <td> <code>星期二</code>; <code> Tue </code>
+ * 。
+ * <tr style="background-color: rgb(238, 238, 255);">
+ *  <td> <code> u </code> <td>星期几(1 =星期一,7 =星期日)<td> <a href=\"#number\">号码</a> <td> <code > 1 </code>
+ * <tr>
+ *  <td> <code> a </code> <td> Am / pm marker <td> <a href=\"#text\"> Text </a> <td> <code> PM </code>
+ * <tr style="background-color: rgb(238, 238, 255);">
+ *  <td> <code> H </code> <td>一天中的时间(0-23)<td> <a href=\"#number\">号码</a> <td> <code> 0 </code>
+ * <tr>
+ * <td> <code> k </code> <td>一天中的时间(1-24)<td> <a href=\"#number\">号码</a> <td> <code> 24 </code>
+ * <tr style="background-color: rgb(238, 238, 255);">
+ *  <td> <code> K </code> <td>小时am / pm(0-11)<td> <a href=\"#number\"> Number </a> <td> <code> 0 <代码>
+ * <tr>
+ *  <td> <code> h </code> <td>小时at am / pm(1-12)<td> <a href=\"#number\"> Number </a> <td> <code>代码>
+ * <tr style="background-color: rgb(238, 238, 255);">
+ *  <td> <code> m </code> <td>每小时分钟<td> <a href=\"#number\">数字</a> <td> <code> 30 </code>
+ * <tr>
+ *  <td> <code> </code> <td>秒钟<td> <a href=\"#number\">数字</a> <td> <code> 55 </code>
+ * <tr style="background-color: rgb(238, 238, 255);">
+ *  <td> <code> S </code> <td>毫秒<td> <a href=\"#number\">数字</a> <td> <code> 978 </code>
+ * <tr>
+ *  <td> <code> z </code> <td>时区<td> <a href=\"#timezone\">一般时区</a> <td> <code>太平洋标准时间</code>; <code> PS
+ * T </code>; <code> GMT-08：00 </code>。
+ * <tr style="background-color: rgb(238, 238, 255);">
+ * <td> <code> Z </code> <td>时区<td> <a href=\"#rfc822timezone\"> RFC 822时区</a> <td> <code> -0800 </code>
+ * 。
+ * <tr>
+ *  <td> <code> X </code> <td>时区<td> <a href=\"#iso8601timezone\"> ISO 8601时区</a> <td> <code> -08 </code>
+ * ; <code> -0800 </code>; <code> -08：00 </code>。
+ * </table>
+ * </blockquote>
+ *  模式字母通常重复,因为它们的数字决定了精确的演示：
+ * <ul>
+ * <li> <strong> <a name=\"text\">文字：</a> </strong>对于格式化,如果图案字母数量为4或更多,则使用完整表单;如果可用,则使用缩写形式。
+ * 对于解析,两种形式都被接受,与模式字母数无关<br> <br> </li> <li> <strong> <a name=\"number\"> Number ：</a> </strong>对于格式化,花
+ * 样字母数是最小的数字数,而较短的数字是零填充到这个数量。
+ * <li> <strong> <a name=\"text\">文字：</a> </strong>对于格式化,如果图案字母数量为4或更多,则使用完整表单;如果可用,则使用缩写形式。
+ * 对于解析,花样字母的数目被忽略,除非需要分开两个<br> <br> </li> <li> <strong> <a name=\"year\">年份：</a> </strong>如果格式化程序的{@link #getCalendar()Calendar}
+ * 格里历日历,应用以下规则<br>。
+ * <li> <strong> <a name=\"text\">文字：</a> </strong>对于格式化,如果图案字母数量为4或更多,则使用完整表单;如果可用,则使用缩写形式。
+ * <ul>
+ * 例如,使用在1997年1月1日创建的"MM / dd / yy"和<code> SimpleDateFormat </code>实例的模式,字符串"01/11/12"将被解释为2012年1月11日字符串
+ * "05/04/64"将被解释为1964年5月4日在解析期间,只有由{@link Character#isDigit(char)}定义的仅由两位数字组成的字符串将被解析为默认世纪Any其他数字字符串,例如
+ * 一个数字字符串,三个或更多个数字字符串或不是所有数字(例如,"-1")的两个数字字符串被解释为"01/02/3"或"01/02/003"被解析,使用与Jan 2,3 AD相同的模式。
+ * 同样,"01/02 / -3"被解析为Jan 2,4 BC。
+ * </ul>
+ * 否则,将应用日历系统特定的表单对于格式化和解析,如果模式字母数为4或更多,则使用特定于日历的{@linkplain Calendar#LONG长形式}否则,特定日历{@linkplain Calendar#SHORT短或缩写形式}
+ * 被使用<br>。
+ * <br>
+ * 如果指定了周年{@code'Y'}且{@linkplain #getCalendar()日历}不支持任何<a href=\"/util/GregorianCalendarhtml#week_year\">
+ * 周年</a>,则日历使用{@link DateFormat#getCalendar()getCalendar()} {@ link javautilCalendar#isWeekDateSupported()isWeekDateSupported()}
+ *  </br> <br> </li> <li> <strong> <a name=\"month\">月份：</a> </strong>如果图案字母数量为3个或更多,则将月份解释为< a href ="#text">
+ *  text </a>;否则,系统会将其解释为<a href=\"#number\">号码</a> <br>。
+ * <ul>
+ * <li>信件<em> M </em>会产生上下文相关的月份名称,例如名称的嵌入形式如果{@code DateFormatSymbols}已使用建构函式{@link #SimpleDateFormat(String,DateFormatSymbols)或方法{@link #setDateFormatSymbols(DateFormatSymbols)}
+ * 时,使用{@code DateFormatSymbols}提供的月份名称</li> <li>信件</em>产生月份名称的独立形式< li>。
+ * </ul>
+ *  <br> </li> <li> <strong> <a name=\"timezone\">一般时区：</a> </strong>时区被解释为<a href=\"#text\"> text </strong>
+ *  a>如果它们具有名称对于表示GMT偏移值的时区,使用以下语法：。
+ * <pre>
+ * <a name=\"GMTOffsetTimeZone\"> <i> GMTOffsetTimeZone：</i> </a> <code> GMT </code> <i>签署</i> <i>小时</i>
+ *  <code>：< / code> <i>分钟</i> <i>签名：</i> <code> +  -  </code> <i>小时之一：</i> <i> >数字</i> <i> </i> <i> </i>
+ *  <i> </i> <code> 0 1 2 3 4 5 6 7 8 9 </code> </p> <i>小时</i>必须介于0和23之间,而<i>分钟</i> 59格式与区域设置无关,数字必须取自Un
+ * icode标准的基本拉丁语区块<p>对于解析,还接受<a href=\"#rfc822timezone\"> RFC 822时区</a> <br> < br> </li> <li> <strong> <a name=\"rfc822timezone\">
+ *  RFC 822时区：</a> </strong>对于格式化,使用RFC 822 4位时区格式：。
+ * 
+ * <pre>
+ * <i> RFC822TimeZone：</i> <i> </i> <i> TwoDigitHours </i> <i>分钟</i> <i> TwoDigitHours：</i> <i> > </pre>
+ *  <i> TwoDigitHours </i>必须介于00和23之间其他定义与<a href=\"#timezone\">一般时区</a>。
+ * 
+ *  <p>为了解析,还接受<a href=\"#timezone\">一般时区</a> <li> <strong> <a name=\"iso8601timezone\"> ISO 8601时区：</a>
+ *  < strong>模式字母数指定格式化和解析的格式如下：。
+ * <pre>
+ * <i> ISO8601TimeZone：</i> <i> OneLetterISO8601TimeZone </i> <i> TwoLetterISO8601TimeZone </i> <i> Thre
+ * eLetterISO8601TimeZone </i> <i> OneLetterISO8601TimeZone：</i> <i> <i> TwoDigitHours </i> {@code Z} <i>
+ *  TwoLetterISO8601TimeZone：</i> <i>签署</i> <i> TwoDigitHours </i> <i> } <i> ThreeLetterISO8601TimeZone：
+ * </i> <i>签名</i> <i> TwoDigitHours </i> {@code：} <i>分钟</i> {@code Z} </与<a href=\"#timezone\">一般时区</a>或
+ * <a href=\"#rfc822timezone\"> RFC 822时区</a>相同。
+ * 
+ *  <p>对于格式化,如果GMT的偏移值为0,则生成{@code"Z"}如果模式字母数为1,则忽略小时的任何小数部分例如,如果模式为{@code "X"},时区为{@code"GMT + 05：30"},
+ * 则产生{@code"+05"}。
+ * 
+ * <p>对于解析,{@code"Z"}被解析为UTC时区指示符<a href=\"#timezone\">一般时区</a>未接受</em>
+ * 
+ *  <p>如果模式字母数量为4或更多,则在构造{@code SimpleDateFormat}或{@linkplain #applyPattern(String)应用模式}时抛出{@link IllegalArgumentException}
+ * 。
+ * </ul>
+ *  <code> SimpleDateFormat </code>也支持<em>本地化日期和时间模式</em>字符串在这些字符串中,上面描述的模式字母可以用其他的,依赖于locale的模式字母替换<code>
+ *  SimpleDateFormat </code >不处理除了模式字母以外的文本的本地化;这取决于类的客户端。
+ * 
+ *  <h4>示例</h4>
+ * 
+ * 以下示例显示在美国地区如何解释日期和时间模式给定的日期和时间为2001-07-04 12:08:56美国太平洋时间当地时间时区
+ * <blockquote>
+ * <table border=0 cellspacing=3 cellpadding=0 summary="Examples of date and time patterns interpreted in the U.S. locale">
+ * <tr style="background-color: rgb(204, 204, 255);">
+ *  <th align = left>日期和时间模式<th align = left>结果
+ * <tr>
+ *  <td> <code>"yyyyMMdd G'at'HH：mm：ss z"</code> <td> <code> 20010704 AD at 12:08:56 PDT </code>
+ * <tr style="background-color: rgb(238, 238, 255);">
+ *  <td> <code>"EEE,MMM d,''yy"</code> <td> <code> Wed,Jul 4,
+ * <tr>
+ *  <td> <code>"h：mm a"</code> <td> <code> 12:08 PM </code>
+ * <tr style="background-color: rgb(238, 238, 255);">
+ *  <td> <code>"hh'o''clock'a,zzzz"</code> <td> <code>太平洋夏令时间下午12点</code>
+ * <tr>
+ *  <td> <code>"K：mm a,z"</code> <td> <code> 0:08 PM,PDT </code>
+ * <tr style="background-color: rgb(238, 238, 255);">
+ *  <td> <code>"yyyyyMMMMMdd GGG hh：mm aaa"</code> <td> <code> 02001July04 AD 12:08 PM </code>
+ * <tr>
+ * <td> <code>"EEE,d MMM yyyy HH：mm：ss Z"</code> <td> <code> Wed,4 Jul 2001 12:08:56 -0700 </code>
+ * <tr style="background-color: rgb(238, 238, 255);">
+ *  <td> <code>"yyMMddHHmmssZ"</code> <td> <code> 010704120856-0700 </code>
+ * <tr>
+ *  <td> <code>"yyyy-MM-dd'T'HH：mm：ssSSSZ"</code> <td> <code> 2001-07-04T12：08：56235-0700 </code>
+ * <tr style="background-color: rgb(238, 238, 255);">
+ *  <td> <code>"yyyy-MM-dd'T'HH：mm：ssSSSXXX"</code> <td> <code> 2001-07-04T12：08：56235-07：00 </code>
+ * <tr>
+ *  <td> <code>"YYYY-'W'ww-u"</code> <td> <code> 2001-W27-3 </code>
+ * </table>
+ * </blockquote>
+ * 
+ *  <h4> <a name=\"synchronization\">同步</a> </h4>
+ * 
+ * <p>
+ *  日期格式不同步建议为每个线程创建单独的格式实例如果多个线程并发访问格式,则必须在外部同步
+ * 
+ * 
  * @see          <a href="https://docs.oracle.com/javase/tutorial/i18n/format/simpleDateFormat.html">Java Tutorial</a>
  * @see          java.util.Calendar
  * @see          java.util.TimeZone
@@ -440,6 +617,15 @@ public class SimpleDateFormat extends DateFormat {
      * When streaming out this class, the most recent format
      * and the highest allowable <code>serialVersionOnStream</code>
      * is written.
+     * <p>
+     *  流上的序列化数据的版本可能的值：
+     * <ul>
+     * <li> <b> 0 </b>或不在流中：JDK 113此版本在流上没有<code> defaultCenturyStart </code> <li> <b> 1 </b> JDK 114或更高版本此版
+     * 本添加<code> defaultCenturyStart </code>。
+     * </ul>
+     *  当流出这个类时,写入最近的格式和最高允许的<code> serialVersionOnStream </code>
+     * 
+     * 
      * @serial
      * @since JDK1.1.4
      */
@@ -448,12 +634,20 @@ public class SimpleDateFormat extends DateFormat {
     /**
      * The pattern string of this formatter.  This is always a non-localized
      * pattern.  May not be null.  See class documentation for details.
+     * <p>
+     *  此格式化程序的模式字符串这始终是非本地化模式可能不是null有关详细信息,请参阅类文档
+     * 
+     * 
      * @serial
      */
     private String pattern;
 
     /**
      * Saved numberFormat and pattern.
+     * <p>
+     *  保存的numberFormat和pattern
+     * 
+     * 
      * @see SimpleDateFormat#checkNegativeNumberExpression
      */
     transient private NumberFormat originalNumberFormat;
@@ -461,33 +655,52 @@ public class SimpleDateFormat extends DateFormat {
 
     /**
      * The minus sign to be used with format and parse.
+     * <p>
+     *  用于格式和解析的减号
+     * 
      */
     transient private char minusSign = '-';
 
     /**
      * True when a negative sign follows a number.
      * (True as default in Arabic.)
+     * <p>
+     *  当数字后面带负号时为真(阿拉伯语为默认值为True)
+     * 
      */
     transient private boolean hasFollowingMinusSign = false;
 
     /**
      * True if standalone form needs to be used.
+     * <p>
+     *  如果需要使用独立表单,则为true
+     * 
      */
     transient private boolean forceStandaloneForm = false;
 
     /**
      * The compiled pattern.
+     * <p>
+     *  编译模式
+     * 
      */
     transient private char[] compiledPattern;
 
     /**
      * Tags for the compiled pattern.
+     * <p>
+     *  编译模式的标签
+     * 
      */
     private final static int TAG_QUOTE_ASCII_CHAR       = 100;
     private final static int TAG_QUOTE_CHARS            = 101;
 
     /**
      * Locale dependent digit zero.
+     * <p>
+     *  区域相关数字零
+     * 
+     * 
      * @see #zeroPaddingNumber
      * @see java.text.DecimalFormatSymbols#getZeroDigit
      */
@@ -496,6 +709,10 @@ public class SimpleDateFormat extends DateFormat {
     /**
      * The symbols used by this formatter for week names, month names,
      * etc.  May not be null.
+     * <p>
+     * 此格式化程序用于星期名称,月份名称等的符号可能不为空
+     * 
+     * 
      * @serial
      * @see java.text.DateFormatSymbols
      */
@@ -505,6 +722,10 @@ public class SimpleDateFormat extends DateFormat {
      * We map dates with two-digit years into the century starting at
      * <code>defaultCenturyStart</code>, which may be any date.  May
      * not be null.
+     * <p>
+     *  我们将两位数字的日期映射到从<code> defaultCenturyStart </code>开始的世纪,这可能是任何日期可能不是null
+     * 
+     * 
      * @serial
      * @since JDK1.1.4
      */
@@ -520,6 +741,9 @@ public class SimpleDateFormat extends DateFormat {
 
     /**
      * Cache NumberFormat instances with Locale key.
+     * <p>
+     *  使用Locale键缓存NumberFormat实例
+     * 
      */
     private static final ConcurrentMap<Locale, NumberFormat> cachedNumberFormatData
         = new ConcurrentHashMap<>(3);
@@ -530,6 +754,10 @@ public class SimpleDateFormat extends DateFormat {
      * has been created by an older <code>SimpleDateFormat</code> and
      * deserialized.
      *
+     * <p>
+     *  Locale用于实例化此<code> SimpleDateFormat </code>如果此对象由较旧的<code> SimpleDateFormat </code>创建并且反序列化
+     * 
+     * 
      * @serial
      * @since 1.6
      */
@@ -541,6 +769,10 @@ public class SimpleDateFormat extends DateFormat {
      * use the DateFormatSymbols values. If false, the format and
      * parse methods call Calendar.getDisplayName or
      * Calendar.getDisplayNames.
+     * <p>
+     *  指示此<代码> SimpleDateFormat </code>是否应使用DateFormatSymbols如果为true,格式和解析方法使用DateFormatSymbols值如果为false,格式
+     * 和解析方法将调用CalendargetDisplayName或CalendargetDisplayNames。
+     * 
      */
     transient boolean useDateFormatSymbols;
 
@@ -551,6 +783,10 @@ public class SimpleDateFormat extends DateFormat {
      * <b>Note:</b> This constructor may not support all locales.
      * For full coverage, use the factory methods in the {@link DateFormat}
      * class.
+     * <p>
+     * 使用默认{@link javautilLocaleCategory#FORMAT FORMAT}语言环境的默认模式和日期格式符号构造<code> SimpleDateFormat </>> <b>注意：
+     * </b>此构造函数可能不支持所有语言环境对于完全覆盖,请在{@link DateFormat}类中使用工厂方法。
+     * 
      */
     public SimpleDateFormat() {
         this("", Locale.getDefault(Locale.Category.FORMAT));
@@ -569,6 +805,12 @@ public class SimpleDateFormat extends DateFormat {
      * {@link #SimpleDateFormat(String, Locale)
      *     SimpleDateFormat(pattern, Locale.getDefault(Locale.Category.FORMAT))}.
      *
+     * <p>
+     *  使用默认{@link javautilLocaleCategory#FORMAT FORMAT}语言环境的给定模式和默认日期格式符号构造<code> SimpleDateFormat </>> <b>
+     * 注意：</b>此构造函数可能不支持所有语言环境覆盖,在{@link DateFormat}类中使用工厂方法<p>这等效于调用{@link #SimpleDateFormat(String,Locale)SimpleDateFormat(pattern,LocalegetDefault(LocaleCategoryFORMAT))}
+     * 。
+     * 
+     * 
      * @see java.util.Locale#getDefault(java.util.Locale.Category)
      * @see java.util.Locale.Category#FORMAT
      * @param pattern the pattern describing the date and time format
@@ -587,6 +829,11 @@ public class SimpleDateFormat extends DateFormat {
      * For full coverage, use the factory methods in the {@link DateFormat}
      * class.
      *
+     * <p>
+     * 使用给定模式和给定语言环境的默认日期格式符号构造<code> SimpleDateFormat </b> <b>注意：</b>此构造函数可能不支持所有语言环境对于完全覆盖,请使用{@link DateFormat}
+     * 类。
+     * 
+     * 
      * @param pattern the pattern describing the date and time format
      * @param locale the locale whose date format symbols should be used
      * @exception NullPointerException if the given pattern or locale is null
@@ -609,6 +856,10 @@ public class SimpleDateFormat extends DateFormat {
      * Constructs a <code>SimpleDateFormat</code> using the given pattern and
      * date format symbols.
      *
+     * <p>
+     *  使用给定的模式和日期格式符号构造一个<code> SimpleDateFormat </code>
+     * 
+     * 
      * @param pattern the pattern describing the date and time format
      * @param formatSymbols the date format symbols to be used for formatting
      * @exception NullPointerException if the given pattern or formatSymbols is null
@@ -719,6 +970,38 @@ public class SimpleDateFormat extends DateFormat {
      * is "'o'", the TaggedData entry is
      * <code>((TAG_QUOTE_ASCII_CHAR&nbs;<<&nbs;8)&nbs;|&nbs;'o')</code>.
      *
+     * <p>
+     *  返回给定模式的编译形式编译模式的语法是：
+     * <blockquote>
+     *  CompiledPattern：EntryList EntryList：Entry EntryList Entry Entry：TagField TagField data TagField：Tag 
+     * Length TaggedData Tag：pattern_char_index TAG_QUOTE_CHARS Length：short_length long_length TaggedData：T
+     * AG_QUOTE_ASCII_CHAR ascii_char。
+     * 
+     * </blockquote>
+     * 
+     * 其中`short_length'是0和254之间的8位无符号整数`long_length'是8位整数255和32位有符号整数值的序列,它被分成两个char的高16位和低16位字段`pattern_cha
+     * r_index'是0和18之间的8位整数`ascii_char'是一个7位ASCII字符值`data'取决于它的标签值。
+     * <p>
+     *  如果Length是short_length,则Tag和short_length被打包在单个char中,如下所示
+     * <blockquote>
+     *  char [0] =(Tag << 8)| short_length;
+     * </blockquote>
+     * 
+     *  如果Length是long_length,则标签和255被打包在第一个char和32位整数中,如下所示
+     * <blockquote>
+     *  char [0] =(Tag << 8)| 255; char [1] =(char)(long_length >>> 16); char [2] =(char)(long_length&0xffff
+     * );。
+     * </blockquote>
+     * <p>
+     * 如果Tag是pattern_char_index,则其长度是模式字符的数量。例如,如果给定模式是"yyyy",则Tag为1,Length为4,后面没有数据
+     * <p>
+     *  如果Tag是TAG_QUOTE_CHARS,它的长度是跟在TagField之后的char的数量。
+     * 例如,如果给定模式是"'o''clock'",Length为7,后面跟着一个char序列<code> o&nbs;'&nbs; c& ; l&nbs; o&nbs; c&nbs; k </code>。
+     * <p>
+     *  TAG_QUOTE_ASCII_CHAR是一个特殊的标记,并且具有ASCII字符代替长度。
+     * 例如,如果给定模式是"o",TaggedData条目是<code>((TAG_QUOTE_ASCII_CHAR&nbs; <<&nbs; 8)&nbs; |& 'o')</code>。
+     * 
+     * 
      * @exception NullPointerException if the given pattern is null
      * @exception IllegalArgumentException if the given pattern is invalid
      */
@@ -859,6 +1142,9 @@ public class SimpleDateFormat extends DateFormat {
 
     /**
      * Encodes the given tag and length and puts encoded char(s) into buffer.
+     * <p>
+     *  对给定的标签和长度进行编码,并将编码的字符放入缓冲区
+     * 
      */
     private static void encode(int tag, int length, StringBuilder buffer) {
         if (tag == PATTERN_ISO_ZONE && length >= 4) {
@@ -875,6 +1161,9 @@ public class SimpleDateFormat extends DateFormat {
 
     /* Initialize the fields we use to disambiguate ambiguous years. Separate
      * so we can call it from readObject().
+     * <p>
+     *  所以我们可以从readObject()
+     * 
      */
     private void initializeDefaultCentury() {
         calendar.setTimeInMillis(System.currentTimeMillis());
@@ -884,6 +1173,9 @@ public class SimpleDateFormat extends DateFormat {
 
     /* Define one-century window into which to disambiguate dates using
      * two-digit years.
+     * <p>
+     *  两位数年
+     * 
      */
     private void parseAmbiguousDatesAsAfter(Date startDate) {
         defaultCenturyStart = startDate;
@@ -895,6 +1187,10 @@ public class SimpleDateFormat extends DateFormat {
      * Sets the 100-year period 2-digit years will be interpreted as being in
      * to begin on the date the user specifies.
      *
+     * <p>
+     * 设置100年期间2位数年份将被解释为从用户指定的日期开始
+     * 
+     * 
      * @param startDate During parsing, two digit years will be placed in the range
      * <code>startDate</code> to <code>startDate + 100 years</code>.
      * @see #get2DigitYearStart
@@ -908,6 +1204,10 @@ public class SimpleDateFormat extends DateFormat {
      * Returns the beginning date of the 100-year period 2-digit years are interpreted
      * as being within.
      *
+     * <p>
+     *  返回100年期间的开始日期,2位数年份被解释为在内
+     * 
+     * 
      * @return the start of the 100-year period into which two digit years are
      * parsed
      * @see #set2DigitYearStart
@@ -921,6 +1221,10 @@ public class SimpleDateFormat extends DateFormat {
      * Formats the given <code>Date</code> into a date/time string and appends
      * the result to the given <code>StringBuffer</code>.
      *
+     * <p>
+     *  将给定的<code> Date </code>格式化为日期/时间字符串,并将结果追加到给定的<code> StringBuffer </code>
+     * 
+     * 
      * @param date the date-time value to be formatted into a date-time string.
      * @param toAppendTo where the new date-time text is to be appended.
      * @param pos the formatting position. On input: an alignment field,
@@ -980,6 +1284,13 @@ public class SimpleDateFormat extends DateFormat {
      * <code>DateFormat.Field</code>, with the corresponding attribute value
      * being the same as the attribute key.
      *
+     * <p>
+     *  格式化产生<code> AttributedCharacterIterator </code>的对象您可以使用返回的<code> AttributedCharacterIterator </code>
+     * 构建生成的String,以及确定有关生成的String的信息。
+     * <p>
+     *  AttributedCharacterIterator的每个属性键的类型为<code> DateFormatField </code>,对应的属性值与属性键相同
+     * 
+     * 
      * @exception NullPointerException if obj is null.
      * @exception IllegalArgumentException if the Format cannot format the
      *            given object, or if the Format's pattern string is invalid.
@@ -1093,6 +1404,9 @@ public class SimpleDateFormat extends DateFormat {
 
     /**
      * Private member function that does the real date/time formatting.
+     * <p>
+     * 执行真正的日期/时间格式化的私人成员函数
+     * 
      */
     private void subFormat(int patternCharIndex, int count,
                            FieldDelegate delegate, StringBuffer buffer,
@@ -1346,6 +1660,9 @@ public class SimpleDateFormat extends DateFormat {
 
     /**
      * Formats a number with the specified minimum and maximum number of digits.
+     * <p>
+     *  格式化具有指定的最小和最大位数的数字
+     * 
      */
     private void zeroPaddingNumber(int value, int minDigits, int maxDigits, StringBuffer buffer)
     {
@@ -1422,6 +1739,19 @@ public class SimpleDateFormat extends DateFormat {
      * {@link #setTimeZone(java.util.TimeZone) setTimeZone} may need
      * to be restored for further operations.
      *
+     * <p>
+     *  从字符串解析文本以生成<code> Date </code>
+     * <p>
+     * 该方法尝试解析从<code> pos </code>给出的索引开始的文本如果解析成功,则将<code> pos </code>的索引更新为使用最后一个字符后的索引(解析不会必须使用所有字符直到字符串的结
+     * 尾),并返回分析的日期更新的<code> pos </code>可用于指示下一次调用此方法的起点如果发生错误,不改变<code> pos </code>的索引,将<code> pos </code>的错
+     * 误索引设置为发生错误的字符的索引,并返回null。
+     * 
+     * <p>此解析操作使用{@link DateFormat#calendar calendar}生成{@code Date}所有{@code calendar}的日期时间字段均为{@linkplain Calendar#clear()cleared}
+     * 解析,并且日期时间字段的{@code calendar}的默认值用于任何缺少的日期时间信息例如,解析的{@code Date}的年份值是1970年{@link GregorianCalendar}如果解
+     * 析操作没有给出年份值{@code TimeZone}值可能会被覆盖,具体取决于给定的模式和{@code text}中的时区值任何{@code TimeZone}值以前设置的可能需要恢复对{@link #setTimeZone(javautilTimeZone)setTimeZone}
+     * 的调用以进行进一步操作。
+     * 
+     * 
      * @param text  A <code>String</code>, part of which should be parsed.
      * @param pos   A <code>ParsePosition</code> object with index and error
      *              index information as described above.
@@ -1551,6 +1881,10 @@ public class SimpleDateFormat extends DateFormat {
 
     /**
      * Private code-size reduction function used by subParse.
+     * <p>
+     * subParse使用的私有代码大小缩减函数
+     * 
+     * 
      * @param text the time text being parsed.
      * @param start where to start parsing.
      * @param field the date field being parsed.
@@ -1596,6 +1930,9 @@ public class SimpleDateFormat extends DateFormat {
      * Performs the same thing as matchString(String, int, int,
      * String[]). This method takes a Map<String, Integer> instead of
      * String[].
+     * <p>
+     *  执行与matchString相同的事情(String,int,int,String [])此方法使用Map <String,Integer>而不是String []
+     * 
      */
     private int matchString(String text, int start, int field,
                             Map<String,Integer> data, CalendarBuilder calb) {
@@ -1657,6 +1994,9 @@ public class SimpleDateFormat extends DateFormat {
     /**
      * find time zone 'text' matched zoneStrings and set to internal
      * calendar.
+     * <p>
+     *  查找时区"文本"匹配的zoneStrings并设置为内部日历
+     * 
      */
     private int subParseZoneString(String text, int start, CalendarBuilder calb) {
         boolean useSameName = false; // true if standard and daylight time use the same abbreviation.
@@ -1729,6 +2069,10 @@ public class SimpleDateFormat extends DateFormat {
      * Parses numeric forms of time zone offset, such as "hh:mm", and
      * sets calb to the parsed value.
      *
+     * <p>
+     *  解析时区偏移的数值形式,例如"hh：mm",并将calb设置为解析的值
+     * 
+     * 
      * @param text  the text to be parsed
      * @param start the character position to start parsing
      * @param sign  1: positive; -1: negative
@@ -1803,6 +2147,10 @@ public class SimpleDateFormat extends DateFormat {
     /**
      * Private member function that converts the parsed date strings into
      * timeFields. Returns -start (for ParsePosition) if failed.
+     * <p>
+     *  将解析的日期字符串转换为timeFields的私有成员函数如果失败,返回-start(对于ParsePosition)
+     * 
+     * 
      * @param text the time text to be parsed.
      * @param start where to start parsing.
      * @param patternCharIndex the index of the pattern character.
@@ -2188,6 +2536,9 @@ public class SimpleDateFormat extends DateFormat {
     /**
      * Returns true if the DateFormatSymbols has been set explicitly or locale
      * is null.
+     * <p>
+     *  如果DateFormatSymbols已显式设置或locale为null,则返回true
+     * 
      */
     private boolean useDateFormatSymbols() {
         return useDateFormatSymbols || locale == null;
@@ -2197,6 +2548,10 @@ public class SimpleDateFormat extends DateFormat {
      * Translates a pattern, mapping each character in the from string to the
      * corresponding character in the to string.
      *
+     * <p>
+     *  翻译模式,将from字符串中的每个字符映射到to字符串中的相应字符
+     * 
+     * 
      * @exception IllegalArgumentException if the given pattern is invalid
      */
     private String translatePattern(String pattern, String from, String to) {
@@ -2239,6 +2594,10 @@ public class SimpleDateFormat extends DateFormat {
     /**
      * Returns a pattern string describing this date format.
      *
+     * <p>
+     *  返回描述此日期格式的模式字符串
+     * 
+     * 
      * @return a pattern string describing this date format.
      */
     public String toPattern() {
@@ -2248,6 +2607,10 @@ public class SimpleDateFormat extends DateFormat {
     /**
      * Returns a localized pattern string describing this date format.
      *
+     * <p>
+     *  返回描述此日期格式的本地化模式字符串
+     * 
+     * 
      * @return a localized pattern string describing this date format.
      */
     public String toLocalizedPattern() {
@@ -2259,6 +2622,10 @@ public class SimpleDateFormat extends DateFormat {
     /**
      * Applies the given pattern string to this date format.
      *
+     * <p>
+     * 将给定的模式字符串应用于此日期格式
+     * 
+     * 
      * @param pattern the new date and time pattern for this date format
      * @exception NullPointerException if the given pattern is null
      * @exception IllegalArgumentException if the given pattern is invalid
@@ -2276,6 +2643,10 @@ public class SimpleDateFormat extends DateFormat {
     /**
      * Applies the given localized pattern string to this date format.
      *
+     * <p>
+     *  将给定的本地化模式字符串应用于此日期格式
+     * 
+     * 
      * @param pattern a String to be mapped to the new date and time format
      *        pattern for this format
      * @exception NullPointerException if the given pattern is null
@@ -2292,6 +2663,10 @@ public class SimpleDateFormat extends DateFormat {
     /**
      * Gets a copy of the date and time format symbols of this date format.
      *
+     * <p>
+     *  获取此日期格式的日期和时间格式符号的副本
+     * 
+     * 
      * @return the date and time format symbols of this date format
      * @see #setDateFormatSymbols
      */
@@ -2303,6 +2678,10 @@ public class SimpleDateFormat extends DateFormat {
     /**
      * Sets the date and time format symbols of this date format.
      *
+     * <p>
+     *  设置此日期格式的日期和时间格式符号
+     * 
+     * 
      * @param newFormatSymbols the new date and time format symbols
      * @exception NullPointerException if the given newFormatSymbols is null
      * @see #getDateFormatSymbols
@@ -2317,6 +2696,10 @@ public class SimpleDateFormat extends DateFormat {
      * Creates a copy of this <code>SimpleDateFormat</code>. This also
      * clones the format's date format symbols.
      *
+     * <p>
+     *  创建此<code> SimpleDateFormat </code>的副本这也克隆格式的日期格式符号
+     * 
+     * 
      * @return a clone of this <code>SimpleDateFormat</code>
      */
     @Override
@@ -2329,6 +2712,10 @@ public class SimpleDateFormat extends DateFormat {
     /**
      * Returns the hash code value for this <code>SimpleDateFormat</code> object.
      *
+     * <p>
+     *  返回此<> SimpleDateFormat </code>对象的哈希码值
+     * 
+     * 
      * @return the hash code value for this <code>SimpleDateFormat</code> object.
      */
     @Override
@@ -2342,6 +2729,10 @@ public class SimpleDateFormat extends DateFormat {
      * Compares the given object with this <code>SimpleDateFormat</code> for
      * equality.
      *
+     * <p>
+     *  将给定对象与此<code> SimpleDateFormat </code>进行比较以实现相等
+     * 
+     * 
      * @return true if the given object is equal to this
      * <code>SimpleDateFormat</code>
      */
@@ -2375,6 +2766,10 @@ public class SimpleDateFormat extends DateFormat {
      * After reading an object from the input stream, the format
      * pattern in the object is verified.
      * <p>
+     * <p>
+     *  在从输入流读取对象之后,验证对象中的格式模式
+     * <p>
+     * 
      * @exception InvalidObjectException if the pattern is invalid
      */
     private void readObject(ObjectInputStream stream)
@@ -2414,6 +2809,8 @@ public class SimpleDateFormat extends DateFormat {
     /**
      * Analyze the negative subpattern of DecimalFormat and set/update values
      * as necessary.
+     * <p>
+     *  分析DecimalFormat的负子模式,并根据需要设置/更新值
      */
     private void checkNegativeNumberExpression() {
         if ((numberFormat instanceof DecimalFormat) &&

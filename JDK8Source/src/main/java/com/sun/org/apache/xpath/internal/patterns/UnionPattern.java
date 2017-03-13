@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会
+ * 
+ *  根据Apache许可证第20版("许可证")授权;您不得使用此文件,除非符合许可证您可以在获取许可证的副本
+ * 
+ *  http：// wwwapacheorg / licenses / LICENSE-20
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件将按"原样"基础分发,无任何明示或暗示的保证或条件。请参阅许可证管理权限和限制许可证
+ * 
  */
 /*
  * $Id: UnionPattern.java,v 1.2.4.1 2005/09/15 00:21:15 jeffsuttor Exp $
+ * <p>
+ *  $ Id：UnionPatternjava,v 1241 2005/09/15 00:21:15 jeffsuttor Exp $
+ * 
  */
 package com.sun.org.apache.xpath.internal.patterns;
 
@@ -32,17 +45,25 @@ import com.sun.org.apache.xpath.internal.objects.XObject;
  * This class represents a union pattern, which can have multiple individual
  * StepPattern patterns.
  * @xsl.usage advanced
+ * <p>
+ * 这个类表示一个联合模式,它可以有多个单独的StepPattern模式@xslusage高级
+ * 
  */
 public class UnionPattern extends Expression
 {
     static final long serialVersionUID = -6670449967116905820L;
 
   /** Array of the contained step patterns to be tested.
+  /* <p>
+  /* 
    *  @serial  */
   private StepPattern[] m_patterns;
 
   /**
    * No arguments to process, so this does nothing.
+   * <p>
+   *  没有要处理的参数,因此这什么也不做
+   * 
    */
   public void fixupVariables(java.util.Vector vars, int globalsSize)
   {
@@ -57,6 +78,10 @@ public class UnionPattern extends Expression
    * Tell if this expression or it's subexpressions can traverse outside
    * the current subtree.
    *
+   * <p>
+   *  告诉这个表达式或它的子表达式是否可以遍历当前子树
+   * 
+   * 
    * @return true if traversal outside the context node's subtree can occur.
    */
    public boolean canTraverseOutsideSubtree()
@@ -77,6 +102,10 @@ public class UnionPattern extends Expression
    * Set the contained step patterns to be tested.
    *
    *
+   * <p>
+   *  设置要测试的包含的步骤模式
+   * 
+   * 
    * @param patterns the contained step patterns to be tested.
    */
   public void setPatterns(StepPattern[] patterns)
@@ -96,6 +125,10 @@ public class UnionPattern extends Expression
    * Get the contained step patterns to be tested.
    *
    *
+   * <p>
+   *  获取要测试的包含的步骤模式
+   * 
+   * 
    * @return an array of the contained step patterns to be tested.
    */
   public StepPattern[] getPatterns()
@@ -106,6 +139,10 @@ public class UnionPattern extends Expression
   /**
    * Test a node to see if it matches any of the patterns in the union.
    *
+   * <p>
+   *  测试节点以查看它是否匹配联合中的任何模式
+   * 
+   * 
    * @param xctxt XPath runtime context.
    *
    * @return {@link com.sun.org.apache.xpath.internal.patterns.NodeTest#SCORE_NODETEST},
@@ -153,6 +190,8 @@ public class UnionPattern extends Expression
         }
 
     /**
+    /* <p>
+    /* 
      * @see ExpressionOwner#getExpression()
      */
     public Expression getExpression()
@@ -162,6 +201,8 @@ public class UnionPattern extends Expression
 
 
     /**
+    /* <p>
+    /* 
      * @see ExpressionOwner#setExpression(Expression)
      */
     public void setExpression(Expression exp)
@@ -172,6 +213,8 @@ public class UnionPattern extends Expression
   }
 
   /**
+  /* <p>
+  /* 
    * @see com.sun.org.apache.xpath.internal.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
    */
   public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
@@ -188,6 +231,8 @@ public class UnionPattern extends Expression
   }
 
   /**
+  /* <p>
+  /* 
    * @see Expression#deepEquals(Expression)
    */
   public boolean deepEquals(Expression expr)

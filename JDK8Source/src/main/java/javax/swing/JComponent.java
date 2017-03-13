@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -169,6 +170,45 @@ import sun.swing.UIClientPropertyKey;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ * 除顶层容器之外的所有Swing组件的基类要使用继承自<code> JComponent </code>的组件,必须将组件放置在包含层次结构中,该层次结构的根是顶层Swing容器顶级Swing容器 - 例
+ * 如<code> JFrame </code>,<code> JDialog </code>和<code> JApplet </code>是为其他Swing组件提供一个地方来绘制自己的专用组件。
+ * 说明包含层次结构,请参阅<a href=\"https://docsoraclecom/javase/tutorial/uiswing/components/toplevelhtml\"> Swing组
+ * 件和遏制层次结构</a>,<em> Java教程</em> em>。
+ * 
+ * <p>
+ *  <code> JComponent </code>类提供：
+ * <ul>
+ * <li>使用Swing架构的标准和自定义组件的基类<li>可由程序员指定或(可选)由用户在运行时选择的"可插拔外观和感觉"(L&amp; F)每个组件的外观和感觉都由一个</em> UI委托提供。
+ * </em>是一个从{@link javaxswingplafComponentUI}派生的对象。
+ * 请参见<a href ="https：// docsoraclecom / javase / tutorial / uiswing / lookandfeel / plafhtml">如何设置外观和感觉
+ * </a> </em>了解更多信息<li>全面的击键处理请参阅文档<a href ="https：// docsoraclecom / javase / tutorial / uiswing / misc / keybindinghtml">
+ * 如何使用键绑定</a>,<em> Java教程</em>中的一篇文章,了解更多信息<li>支持工具提示 - 当光标停留在组件上时弹出的简短说明请参见<a href=\"https://docsoraclecom/javase/tutorial/uiswing/components/tooltiphtml\">
+ * 如何使用工具提示< / a>中获取更多信息<li> <li> <li>支持辅助功能<code> JComponent </code>包含<code> Accessible </code>接口中的所有方法
+ * ,实际上并不实现接口这是扩展<code>的每个类的责任</code> </li> <li>支持组件特定的属性使用{@link #putClientProperty}和{@link #getClientProperty}
+ * 方法,您可以将名称 - 对象对与从<code> JComponent </code>继承的任何对象相关联<li>用于绘画的基础架构,包括双缓冲和边框支持有关详细信息,请参见<a href=\"http://wwworaclecom/technetwork/java/painting-140037html#swing\">
+ * 绘画</a>和<a href ="https：// docsoraclecom / javase / tutorial / uiswing / components / borderhtmll">如何使
+ * 用边框</a>,两者都是<em> Java教程</em>。
+ * </em>是一个从{@link javaxswingplafComponentUI}派生的对象。
+ * </ul>
+ * 有关这些主题的详情,请参阅<a href=\"package-summaryhtml#package_description\"> Swing包描述</a>和<em> Java教程</em>部分<a href ="https：// docsoraclecom / javase / tutorial / uiswing / components / jcomponenthtml">
+ *  JComponent类</a>。
+ * <p>
+ * <code> JComponent </code>及其子类文档默认值为某些属性例如,<code> JTable </code>将默认行高度记录为16每个<code> JComponent </code>
+ * 子类, > ComponentUI </code>将创建<code> ComponentUI </code>作为其构造函数的一部分为了提供特定的外观和感觉每个<code> ComponentUI </code>
+ * 可以设置属性回到<code> JComponent </code>创建它例如,自定义的外观和感觉可能需要<code> JTable </code> s的行高度为24所描述的默认值是<code> Comp
+ * onentUI </code>代码>已经安装如果你需要一个特定的属性值,你应该明确地设置它。
+ * <p>
+ * 在版本14中,重新构建了焦点子系统有关详细信息,请参阅
+ * <a href="https://docs.oracle.com/javase/tutorial/uiswing/misc/focus.html">
+ *  如何使用焦点子系统</a>,<em> Java教程</em>中的一个部分
+ * <p>
+ *  <strong>警告：</strong> Swing不是线程安全的更多信息,请参见<a href=\"package-summaryhtml#threading\"> Swing的线程策略</a>
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将不与未来的Swing版本兼容当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ * 支持长期存储所有JavaBeans&trade;已添加到<code> javabeans </code>包中请参见{@link javabeansXMLEncoder}。
+ * 
+ * 
  * @see KeyStroke
  * @see Action
  * @see #setBorder
@@ -185,12 +225,16 @@ public abstract class JComponent extends Container implements Serializable,
                                               TransferHandler.HasGetTransferHandler
 {
     /**
+    /* <p>
+    /* 
      * @see #getUIClassID
      * @see #writeObject
      */
     private static final String uiClassID = "ComponentUI";
 
     /**
+    /* <p>
+    /* 
      * @see #readObject
      */
     private static final Hashtable<ObjectInputStream, ReadObjectCallback> readObjectCallbacks =
@@ -199,12 +243,18 @@ public abstract class JComponent extends Container implements Serializable,
     /**
      * Keys to use for forward focus traversal when the JComponent is
      * managing focus.
+     * <p>
+     *  当JComponent正在管理焦点时,用于正向聚焦遍历的键
+     * 
      */
     private static Set<KeyStroke> managingFocusForwardTraversalKeys;
 
     /**
      * Keys to use for backward focus traversal when the JComponent is
      * managing focus.
+     * <p>
+     * 当JComponent正在管理焦点时,用于向后焦点遍历的键
+     * 
      */
     private static Set<KeyStroke> managingFocusBackwardTraversalKeys;
 
@@ -215,6 +265,9 @@ public abstract class JComponent extends Container implements Serializable,
 
     /**
      * Set to true when DebugGraphics has been loaded.
+     * <p>
+     *  当DebugGraphics已加载时设置为true
+     * 
      */
     static boolean DEBUG_GRAPHICS_LOADED;
 
@@ -224,12 +277,19 @@ public abstract class JComponent extends Container implements Serializable,
      * AppContext.get(INPUT_VERIFIER_SOURCE_KEY) returns non-null, it
      * indicates the EDT is calling into the InputVerifier from the
      * returned component.
+     * <p>
+     *  用于从AppContext中查找值以确定InputVerifier正在运行的JComponent的键。
+     * 即,如果AppContextget(INPUT_VERIFIER_SOURCE_KEY)返回非空,则表示EDT正在从返回的组件调用InputVerifier。
+     * 
      */
     private static final Object INPUT_VERIFIER_SOURCE_KEY =
             new StringBuilder("InputVerifierSourceKey");
 
     /* The following fields support set methods for the corresponding
      * java.awt.Component properties.
+     * <p>
+     *  javaawtComponent属性
+     * 
      */
     private boolean isAlignmentXSet;
     private float alignmentX;
@@ -238,6 +298,9 @@ public abstract class JComponent extends Container implements Serializable,
 
     /**
      * Backing store for JComponent properties and listeners
+     * <p>
+     *  备份JComponent属性和侦听器的存储
+     * 
      */
 
     /** The look and feel delegate for this component. */
@@ -249,6 +312,9 @@ public abstract class JComponent extends Container implements Serializable,
     private VetoableChangeSupport vetoableChangeSupport;
     /**
      * Whether or not autoscroll has been enabled.
+     * <p>
+     *  是否已启用自动滚动
+     * 
      */
     private boolean autoscrolls;
     private Border border;
@@ -265,6 +331,10 @@ public abstract class JComponent extends Container implements Serializable,
      * If <code>paintingChild</code> is opaque, no need to paint
      * any child components after <code>paintingChild</code>.
      * Test used in <code>paintChildren</code>.
+     * <p>
+     *  设置在<code> _paintImmediately </code>将指示启动绘画操作的子项如果<code> paintingChild </code>是不透明的,则不需要在<code> paint
+     * ingChild </code> <code> paintChildren </code>。
+     * 
      */
     transient Component         paintingChild;
 
@@ -272,6 +342,9 @@ public abstract class JComponent extends Container implements Serializable,
      * Constant used for <code>registerKeyboardAction</code> that
      * means that the command should be invoked when
      * the component has the focus.
+     * <p>
+     * 用于<code> registerKeyboardAction </code>的常量意味着当组件具有焦点时应调用命令
+     * 
      */
     public static final int WHEN_FOCUSED = 0;
 
@@ -280,6 +353,9 @@ public abstract class JComponent extends Container implements Serializable,
      * means that the command should be invoked when the receiving
      * component is an ancestor of the focused component or is
      * itself the focused component.
+     * <p>
+     *  用于<code> registerKeyboardAction </code>的常量意味着,当接收组件是聚焦组件的祖先时,或者本身是关注的组件时,应调用该命令
+     * 
      */
     public static final int WHEN_ANCESTOR_OF_FOCUSED_COMPONENT = 1;
 
@@ -288,16 +364,25 @@ public abstract class JComponent extends Container implements Serializable,
      * means that the command should be invoked when
      * the receiving component is in the window that has the focus
      * or is itself the focused component.
+     * <p>
+     *  用于<code> registerKeyboardAction </code>的常量意味着,当接收组件在具有焦点的窗口中或者本身是焦点组件时,应调用该命令
+     * 
      */
     public static final int WHEN_IN_FOCUSED_WINDOW = 2;
 
     /**
      * Constant used by some of the APIs to mean that no condition is defined.
+     * <p>
+     *  一些API使用的常量意味着没有定义任何条件
+     * 
      */
     public static final int UNDEFINED_CONDITION = -1;
 
     /**
      * The key used by <code>JComponent</code> to access keyboard bindings.
+     * <p>
+     *  <code> JComponent </code>用于访问键盘绑定的键
+     * 
      */
     private static final String KEYBOARD_BINDINGS_KEY = "_KeyboardBindings";
 
@@ -305,12 +390,18 @@ public abstract class JComponent extends Container implements Serializable,
      * An array of <code>KeyStroke</code>s used for
      * <code>WHEN_IN_FOCUSED_WINDOW</code> are stashed
      * in the client properties under this string.
+     * <p>
+     * 用于<code> WHEN_IN_FOCUSED_WINDOW </code>的<code> KeyStroke </code>数组被隐藏在此字符串下的客户端属性中
+     * 
      */
     private static final String WHEN_IN_FOCUSED_WINDOW_BINDINGS = "_WhenInFocusedWindow";
 
     /**
      * The comment to display when the cursor is over the component,
      * also known as a "value tip", "flyover help", or "flyover label".
+     * <p>
+     *  当光标在组件上方时显示的注释,也称为"值提示","悬浮式帮助"或"飞越标签"
+     * 
      */
     public static final String TOOL_TIP_TEXT_KEY = "ToolTipText";
 
@@ -319,6 +410,9 @@ public abstract class JComponent extends Container implements Serializable,
     /**
      * <code>JPopupMenu</code> assigned to this component
      * and all of its children
+     * <p>
+     *  <code> JPopupMenu </code>分配给此组件及其所有子组件
+     * 
      */
     private JPopupMenu popupMenu;
 
@@ -358,6 +452,9 @@ public abstract class JComponent extends Container implements Serializable,
 
     /**
      * Temporary rectangles.
+     * <p>
+     *  临时矩形
+     * 
      */
     private static java.util.List<Rectangle> tempRectangles = new java.util.ArrayList<Rectangle>(11);
 
@@ -380,6 +477,9 @@ public abstract class JComponent extends Container implements Serializable,
 
     /**
      * AA text hints.
+     * <p>
+     *  AA文本提示
+     * 
      */
     transient private Object aaTextInfo;
 
@@ -409,6 +509,9 @@ public abstract class JComponent extends Container implements Serializable,
     /**
      * Returns true if {@code c} is the component the graphics is being
      * requested of. This is intended for use when getGraphics is invoked.
+     * <p>
+     *  返回true如果{@code c}是图形被请求的组件这是打算在getGraphics被调用时使用
+     * 
      */
     private static boolean isComponentObtainingGraphicsFrom(Component c) {
         synchronized(componentObtainingGraphicsFromLock) {
@@ -419,6 +522,9 @@ public abstract class JComponent extends Container implements Serializable,
     /**
      * Returns the Set of <code>KeyStroke</code>s to use if the component
      * is managing focus for forward focus traversal.
+     * <p>
+     *  返回如果组件正在管理焦点以进行前向聚焦遍历时要使用的<code> KeyStroke </code>集合
+     * 
      */
     static Set<KeyStroke> getManagingFocusForwardTraversalKeys() {
         synchronized(JComponent.class) {
@@ -435,6 +541,9 @@ public abstract class JComponent extends Container implements Serializable,
     /**
      * Returns the Set of <code>KeyStroke</code>s to use if the component
      * is managing focus for backward focus traversal.
+     * <p>
+     *  返回如果组件正在管理焦点以进行向后焦点遍历时要使用的<code> KeyStroke </code>集合
+     * 
      */
     static Set<KeyStroke> getManagingFocusBackwardTraversalKeys() {
         synchronized(JComponent.class) {
@@ -480,6 +589,14 @@ public abstract class JComponent extends Container implements Serializable,
      * <p>
      * This is a bound property.
      *
+     * <p>
+     * 设置是否<code> getComponentPopupMenu </code>应该委托给父组件,如果此组件没有分配给它的<code> JPopupMenu </code>
+     * <p>
+     *  这个的默认值是false,但是作为一些<code> JComponent </code>实现的一些<code> JComponent </code>子类可以设置为true
+     * <p>
+     *  这是一个bound属性
+     * 
+     * 
      * @param value whether or not the JPopupMenu is inherited
      * @see #setComponentPopupMenu
      * @beaninfo
@@ -496,6 +613,10 @@ public abstract class JComponent extends Container implements Serializable,
     /**
      * Returns true if the JPopupMenu should be inherited from the parent.
      *
+     * <p>
+     *  如果JPopupMenu应该从父级继承,则返回true
+     * 
+     * 
      * @see #setComponentPopupMenu
      * @since 1.5
      */
@@ -518,6 +639,16 @@ public abstract class JComponent extends Container implements Serializable,
      * <p>
      * This is a bound property.
      *
+     * <p>
+     *  为此<code> JComponent </code>设置<code> JPopupMenu </code> UI负责注册绑定和添加必要的侦听器,以便在适当的时间显示<code> JPopupMenu
+     *  </code>当显示<code> JPopupMenu </code>取决于外观和感觉：一些可能会显示在鼠标事件,一些可能启用键绑定。
+     * <p>
+     * 如果<code> popup </code>为null,并且<code> getInheritsPopupMenu </code>返回true,那么<code> getComponentPopupMen
+     * u </code>会被委托给父类这提供了一种使所有子组件继承父窗口的弹出菜单。
+     * <p>
+     *  这是一个bound属性
+     * 
+     * 
      * @param popup - the popup that will be assigned to this component
      *                may be null
      * @see #getComponentPopupMenu
@@ -543,6 +674,11 @@ public abstract class JComponent extends Container implements Serializable,
      * will return <code>getParent().getComponentPopupMenu()</code> (assuming
      * the parent is valid.)
      *
+     * <p>
+     *  返回为此组件分配的<code> JPopupMenu </code>如果此组件没有分配<code> JPopupMenu </code>并且<code> getInheritsPopupMenu </code>
+     * 为true, getParent()getComponentPopupMenu()</code>(假设父级有效)。
+     * 
+     * 
      * @return <code>JPopupMenu</code> assigned for this component
      *         or <code>null</code> if no popup assigned
      * @see #setComponentPopupMenu
@@ -582,6 +718,11 @@ public abstract class JComponent extends Container implements Serializable,
      * property to the value returned by
      * <code>JComponent.getDefaultLocale</code>.
      *
+     * <p>
+     * 默认<code> JComponent </code>构造函数除了调用<code> Container </code>构造函数之外,这个构造函数只做了很少的初始化。
+     * 例如,初始布局管理器是<code> null </code>组件的locale属性设置为<code> JComponentgetDefaultLocale </code>返回的值。
+     * 
+     * 
      * @see #getDefaultLocale
      */
     public JComponent() {
@@ -613,6 +754,13 @@ public abstract class JComponent extends Container implements Serializable,
      *   }
      *  </pre>
      *
+     * <p>
+     *  将UI属性重置为当前外观的一个值<code> JComponent </code>子类必须覆盖此方法,如下所示：
+     * <pre>
+     *  public void updateUI(){setUI((SliderUI)UIManagergetUI(this);}
+     * </pre>
+     * 
+     * 
      * @see #setUI
      * @see UIManager#getLookAndFeel
      * @see UIManager#getUI
@@ -638,6 +786,18 @@ public abstract class JComponent extends Container implements Serializable,
      * }
      * </pre>
      *
+     * <p>
+     *  设置此组件的外观和委托代理<code> JComponent </code>子类通常覆盖此方法以缩小参数类型例如,在<code> JSlider </code>中：
+     * <pre>
+     *  public void setUI(SliderUI newUI){supersetUI(newUI); }}
+     * </pre>
+     * <p>
+     * 另外<code> JComponent </code>子类必须提供一个返回正确类型的<code> getUI </code>方法例如：
+     * <pre>
+     *  public SliderUI getUI(){return(SliderUI)ui; }}
+     * </pre>
+     * 
+     * 
      * @param newUI the new UI delegate
      * @see #updateUI
      * @see UIManager#getLookAndFeel
@@ -653,6 +813,9 @@ public abstract class JComponent extends Container implements Serializable,
          * before allowing the switch in order to enable the
          * same UI instance *with different default settings*
          * to be installed.
+         * <p>
+         *  在允许切换之前,为了能够安装具有不同默认设置*的相同UI实例*
+         * 
          */
 
         uninstallUIAndProperties();
@@ -675,6 +838,9 @@ public abstract class JComponent extends Container implements Serializable,
      * Uninstalls the UI, if any, and any client properties designated
      * as being specific to the installed UI - instances of
      * {@code UIClientPropertyKey}.
+     * <p>
+     *  卸载UI(如果有)以及指定为特定于安装的UI的任何客户端属性 -  {@code UIClientPropertyKey}实例
+     * 
      */
     private void uninstallUIAndProperties() {
         if (ui != null) {
@@ -706,6 +872,12 @@ public abstract class JComponent extends Container implements Serializable,
      * return a <code>UIDefaults</code> key that maps to the
      * <code>ComponentUI</code> subclass that defines their look and feel.
      *
+     * <p>
+     * 返回<code> UIDefaults </code>键,用于查找定义该组件外观的<code> swingplafComponentUI </code>类的名称大多数应用程序永远不需要调用此方法<code>
+     *  > JComponent </code>支持可插拔的外观,应重写此方法以返回一个<code> UIDefaults </code>键,映射到定义它们的外观和感觉的<code> ComponentUI 
+     * </code>。
+     * 
+     * 
      * @return the <code>UIDefaults</code> key for a
      *          <code>ComponentUI</code> subclass
      * @see UIDefaults#getUI
@@ -725,6 +897,11 @@ public abstract class JComponent extends Container implements Serializable,
      * Otherwise we just configure the
      * specified graphics object's foreground and font.
      *
+     * <p>
+     *  返回用于绘制此组件的图形对象如果<code> DebugGraphics </code>打开,我们创建一个新的<code> DebugGraphics </code>对象如果必要的话,否则我们只需配置
+     * 指定的图形对象的前景和字体。
+     * 
+     * 
      * @param g the original <code>Graphics</code> object
      * @return a <code>Graphics</code> object configured for this component
      */
@@ -769,6 +946,18 @@ public abstract class JComponent extends Container implements Serializable,
      * unexpected results if you cumulatively apply
      * another transform.
      *
+     * <p>
+     * 调用UI委托的paint方法,如果UI委托是非<code> null </code>我们传递代理的<code> Graphics </code>对象的副本,以保护其余的油漆代码不可撤消的更改(例如,<code>
+     *  Graphicstranslate </code>)。
+     * <p>
+     * 如果你在子类中重写这个,你不应该对<code> Graphics </code>中的传递进行永久的修改。
+     * 例如,你不应该修改<code> Rectangle </code>做这些操作你可能会发现更容易从传递的<code> Graphics </code>创建一个新的<code> Graphics </code>
+     * 并操作它进一步,如果你不调用super的实现,你必须遵守opaque属性,也就是说,如果这个组件是不透明的,你必须在一个非透明的颜色完全填充背景如果你不尊重opaque属性,你可能会看到视觉工件。
+     * 如果你在子类中重写这个,你不应该对<code> Graphics </code>中的传递进行永久的修改。
+     * <p>
+     * 在<code> Graphics </code>对象中传递的可能有一个转换,而不是在其上安装的识别转换。在这种情况下,如果您累积应用另一个转换
+     * 
+     * 
      * @param g the <code>Graphics</code> object to protect
      * @see #paint
      * @see ComponentUI
@@ -792,6 +981,11 @@ public abstract class JComponent extends Container implements Serializable,
      * the component children can use a buffer if they have one.
      * Otherwise, one ancestor has a buffer currently in use and children
      * should not use a buffer to paint.
+     * <p>
+     *  描述这个组件的孩子如果<code> shouldUseBuffer </code>为true,没有组件祖先有一个缓冲区,组件子级可以使用一个缓冲区,如果他们有一个否则,一个祖先有一个当前正在使用的缓冲
+     * 区,缓冲区进行绘制。
+     * 
+     * 
      * @param g  the <code>Graphics</code> context in which to paint
      * @see #paint
      * @see java.awt.Container#paint
@@ -938,6 +1132,15 @@ public abstract class JComponent extends Container implements Serializable,
      * easier to create a new <code>Graphics</code> from the passed in
      * <code>Graphics</code> and manipulate it.
      *
+     * <p>
+     *  绘制组件的边框
+     * <p>
+     * 如果你在子类中重写这个,你不应该对<code> Graphics </code>中的传递进行永久的修改。
+     * 例如,你不应该修改<code> Rectangle </code>或修改转换如果你需要做这些操作你可能会发现更容易从传递的<code> Graphics </code>创建一个新的<code> Grap
+     * hics </code>并操作它。
+     * 如果你在子类中重写这个,你不应该对<code> Graphics </code>中的传递进行永久的修改。
+     * 
+     * 
      * @param g  the <code>Graphics</code> context in which to paint
      *
      * @see #paint
@@ -956,6 +1159,10 @@ public abstract class JComponent extends Container implements Serializable,
      * <code>ComponentUI.update</code>, which is called by
      * <code>paintComponent</code>.
      *
+     * <p>
+     *  调用<code> paint </code>不清除背景,但看到<code> ComponentUIupdate </code>,它由<code> paintComponent </code>
+     * 
+     * 
      * @param g the <code>Graphics</code> context in which to paint
      * @see #paint
      * @see #paintComponent
@@ -984,6 +1191,14 @@ public abstract class JComponent extends Container implements Serializable,
      * <code>paint</code> method should just override
      * <code>paintComponent</code>.
      *
+     * <p>
+     *  由Swing调用绘制组件应用程序不应直接调用<code> paint </code>,而应使用<code> repaint </code>方法来调度组件重绘
+     * <p>
+     * 这个方法实际上将绘画的工作委托给三个受保护的方法：<code> paintComponent </code>,<code> paintBorder </code>和<code> paintChildre
+     * n </code>子元素出现在组件本身的顶部一般来说,组件及其子元素不应该在分配给边框的insets区域中绘制子类可以覆盖此方法,像总是一样只是想要专门化UI(外观和感觉)委托的<code> paint
+     *  </code>方法应该覆盖<code> paintComponent </code>。
+     * 
+     * 
      * @param g  the <code>Graphics</code> context in which to paint
      * @see #paintComponent
      * @see #paintBorder
@@ -1099,6 +1314,9 @@ public abstract class JComponent extends Container implements Serializable,
     /**
      * Returns true if this component, or any of its ancestors, are in
      * the processing of painting.
+     * <p>
+     *  如果此组件或其任何祖先在绘画处理中,则返回true
+     * 
      */
     boolean isPainting() {
         Container component = this;
@@ -1136,6 +1354,10 @@ public abstract class JComponent extends Container implements Serializable,
      * Invoke this method to print the component. This method invokes
      * <code>print</code> on the component.
      *
+     * <p>
+     *  调用此方法以打印组件此方法调用组件上的<code> print </code>
+     * 
+     * 
      * @param g the <code>Graphics</code> context in which to paint
      * @see #print
      * @see #printComponent
@@ -1189,6 +1411,24 @@ public abstract class JComponent extends Container implements Serializable,
      * will not be used: painting will be done directly on the passed in
      * <code>Graphics</code>.
      *
+     * <p>
+     * 调用此方法将组件打印到指定的<code> Graphics </code>此方法将导致调用<code> printComponent </code>,<code> printBorder </code>
+     * 和<code> printChildren </code >建议您重写前面提到的方法之一,而不是这个方法,如果你打算自定义打印的样子。
+     * 但是,如果你想在调用超类行为之前准备状态,可以重写这个方法。例如,如果您想在打印之前更改组件的背景颜色,可以执行以下操作：。
+     * <pre>
+     *  public void print(Graphics g){Color orig = getBackground(); setBackground(ColorWHITE);
+     * 
+     * // wrap in try / finally,以便我们总是恢复状态try {superprint(g); } finally {setBackground(orig); }}
+     * </pre>
+     * <p>
+     *  或者,对于将绘画委托给其他对象的组件,您可以在绘制期间查询组件是否处于打印操作的中间。
+     * <code> isPaintingForPrint </code>方法提供此功能,并且其返回值将更改通过此方法：紧接在渲染之前到<code> true </code>,在紧接着渲染之前到<code> f
+     * alse </code>在每次更改之后,使用名称<code>"paintingForPrint" / code>。
+     *  或者,对于将绘画委托给其他对象的组件,您可以在绘制期间查询组件是否处于打印操作的中间。
+     * <p>
+     *  这个方法设置组件的状态,使得不使用双缓冲区：绘制将直接在传递的<code> Graphics </code>
+     * 
+     * 
      * @param g the <code>Graphics</code> context in which to paint
      * @see #printComponent
      * @see #printBorder
@@ -1212,6 +1452,10 @@ public abstract class JComponent extends Container implements Serializable,
      * invoke <code>paintComponent</code> on the component. Override this
      * if you wish to add special painting behavior when printing.
      *
+     * <p>
+     * 这是在打印操作期间调用这是实现来调用组件上的<code> paintComponent </code>覆盖此如果您希望在打印时添加特殊的绘画行为
+     * 
+     * 
      * @param g the <code>Graphics</code> context in which to paint
      * @see #print
      * @since 1.3
@@ -1225,6 +1469,10 @@ public abstract class JComponent extends Container implements Serializable,
      * <code>paintChildren</code> on the component. Override this if you
      * wish to print the children differently than painting.
      *
+     * <p>
+     *  打印这个组件的孩子这是实现来调用<code> paintChildren </code>在组件覆盖这个如果你希望打印的孩子不同于绘画
+     * 
+     * 
      * @param g the <code>Graphics</code> context in which to paint
      * @see #print
      * @since 1.3
@@ -1238,6 +1486,10 @@ public abstract class JComponent extends Container implements Serializable,
      * <code>paintBorder</code> on the component. Override this if you
      * wish to print the border differently that it is painted.
      *
+     * <p>
+     *  打印组件的边框这被实现为调用组件上的<code> paintBorder </code>如果您希望以不同的方式打印它被绘制的边框,
+     * 
+     * 
      * @param g the <code>Graphics</code> context in which to paint
      * @see #print
      * @since 1.3
@@ -1253,6 +1505,10 @@ public abstract class JComponent extends Container implements Serializable,
      *  if the last tile is painted.
      *  Use this method to keep some state you might need between tiles.
      *
+     * <p>
+     * 如果组件当前正在绘制图块,则返回true如果此方法返回true,则将为另一个图块再次调用绘图如果不绘制图块或最后一个图块已绘制,此方法将返回false使用此方法保持一些状态可能需要在瓷砖之间
+     * 
+     * 
      *  @return  true if the component is currently painting a tile,
      *          false otherwise
      */
@@ -1281,6 +1537,16 @@ public abstract class JComponent extends Container implements Serializable,
      * case, the return value of this method is <code>true</code> when, and only
      * when, the table is being painted as part of the printing process.
      *
+     * <p>
+     *  如果此组件上的当前绘画操作是<code> print </code>操作的一部分,则返回<code> true </code>此方法在您要自定义打印对象与屏幕上显示的内容时非常有用
+     * <p>
+     *  您可以通过侦听此组件上具有名称<code>"paintingForPrint"的属性更改事件来检测此属性值的更改</code>
+     * <p>
+     * 注意：此方法为其他高级Swing打印API提供了补充功能。但是,它严格地处理绘画,不应该被混淆为提供更高级别打印流程的信息。
+     * 例如,{@link javaxswingJTable#print()}操作不一定导致完整组件的连续呈现,并且该方法的返回值在该操作期间可以多次改变。甚至可以在打印过程进行的同时将组件绘制到屏幕上。
+     * 在这样的一个case,这个方法的返回值是<code> true </code>当且仅当表被绘制为打印过程的一部分时。
+     * 
+     * 
      * @return true if the current painting operation on this component
      *         is part of a print operation
      * @see #print
@@ -1302,6 +1568,15 @@ public abstract class JComponent extends Container implements Serializable,
      * <code>SortingFocusTraversalPolicy</code> from considering descendants
      * of this JComponent when computing a focus traversal cycle.
      *
+     * <p>
+     *  在版本14中,重新构建了焦点子系统有关详细信息,请参阅
+     * <a href="https://docs.oracle.com/javase/tutorial/uiswing/misc/focus.html">
+     * 如何使用焦点子系统</a>,<em> Java教程</em>中的一个部分
+     * <p>
+     *  将此<code> JComponent </code>的焦点遍历键更改为CTRL + TAB和CTRL + SHIFT + TAB同时防止<code> SortingFocusTraversalPol
+     * icy </code>在计算焦点遍历周期时考虑此JComponent的后代。
+     * 
+     * 
      * @see java.awt.Component#setFocusTraversalKeys
      * @see SortingFocusTraversalPolicy
      * @deprecated As of 1.4, replaced by
@@ -1366,6 +1641,16 @@ public abstract class JComponent extends Container implements Serializable,
      * as the specified <code>Component</code>'s previous
      * <code>Component</code> in the cycle.
      *
+     * <p>
+     *  在版本14中,重新构建了焦点子系统有关详细信息,请参阅
+     * <a href="https://docs.oracle.com/javase/tutorial/uiswing/misc/focus.html">
+     *  如何使用焦点子系统</a>,<em> Java教程</em>中的一个部分
+     * <p>
+     * 通过无条件地将指定的<code> Component </code>设置为下一个<code> Component </code>来重写此<<code> JComponent </code>焦点遍历循环的
+     * 默认<code> FocusTraversalPolicy </code>在该循环中,并且这个<code> JComponent </code>作为周期中指定的<code> Component </code>
+     * 的<code> Component </code>。
+     * 
+     * 
      * @param aComponent the <code>Component</code> that should follow this
      *        <code>JComponent</code> in the focus traversal cycle
      *
@@ -1396,6 +1681,15 @@ public abstract class JComponent extends Container implements Serializable,
      * <code>setNextFocusableComponent(Component)</code> on this
      * <code>JComponent</code>.
      *
+     * <p>
+     *  在版本14中,重新构建了焦点子系统有关详细信息,请参阅
+     * <a href="https://docs.oracle.com/javase/tutorial/uiswing/misc/focus.html">
+     *  如何使用焦点子系统</a>,<em> Java教程</em>中的一个部分
+     * <p>
+     *  通过对此<code> JComponent </code>上的<code> setNextFocusableComponent(Component)</code>的先前调用,返回设置的<code> C
+     * omponent </code>。
+     * 
+     * 
      * @return the <code>Component</code> that will follow this
      *        <code>JComponent</code> in the focus traversal cycle, or
      *        <code>null</code> if none has been explicitly specified
@@ -1426,6 +1720,16 @@ public abstract class JComponent extends Container implements Serializable,
      * a section in <em>The Java Tutorial</em>,
      * for more information.
      *
+     * <p>
+     * 提供关于这个<code> JComponent </code>是否应该获得焦点的提示这只是一个提示,是由请求焦点的消费者尊重这个属性这通常被授予鼠标操作,但不是键盘操作例如,在鼠标操作期间请求焦点之前,
+     * look和feel可以验证此属性是否为true如果您不想在<code> JComponent </code>上进行鼠标按下以窃取焦点,确实希望<code> JComponent </code>可以通过键
+     * 盘进行遍历如果你不想让这个<code> JComponent </code>可聚焦,那么使用<code> setFocusable </code>。
+     * <p>
+     *  请参见
+     * <a href="https://docs.oracle.com/javase/tutorial/uiswing/misc/focus.html">
+     *  如何使用聚焦子系统</a>,<em> Java教程</em>中的一节,了解更多信息
+     * 
+     * 
      * @param requestFocusEnabled indicates whether you want this
      *        <code>JComponent</code> to be focusable or not
      * @see <a href="../../java/awt/doc-files/FocusSpec.html">Focus Specification</a>
@@ -1445,6 +1749,14 @@ public abstract class JComponent extends Container implements Serializable,
      * a section in <em>The Java Tutorial</em>,
      * for more information.
      *
+     * <p>
+     * 返回<code> true </code>如果此<code> JComponent </code>应该获得焦点;否则返回<code> false </code>
+     * <p>
+     *  请参见
+     * <a href="https://docs.oracle.com/javase/tutorial/uiswing/misc/focus.html">
+     *  如何使用聚焦子系统</a>,<em> Java教程</em>中的一节,了解更多信息
+     * 
+     * 
      * @return <code>true</code> if this component should get focus,
      *     otherwise returns <code>false</code>
      * @see #setRequestFocusEnabled
@@ -1470,6 +1782,16 @@ public abstract class JComponent extends Container implements Serializable,
      * How to Use the Focus Subsystem</a>,
      * a section in <em>The Java Tutorial</em>.
      *
+     * <p>
+     *  请求此<code> Component </code>获取输入焦点有关此方法的完整说明,请参阅{@link javaawtComponent#requestFocus()ComponentrequestFocus()}
+     * 。
+     * <p>
+     *  请注意,不建议使用此方法,因为它的行为是平台相关的。
+     * 我们建议使用{@link #requestFocusInWindow()requestFocusInWindow()}如果您想要更多关于焦点的信息,请参阅。
+     * <a href="https://docs.oracle.com/javase/tutorial/uiswing/misc/focus.html">
+     *  如何使用焦点子系统</a>,<em> Java教程</em>中的一个部分
+     * 
+     * 
      * @see java.awt.Component#requestFocusInWindow()
      * @see java.awt.Component#requestFocusInWindow(boolean)
      * @since 1.4
@@ -1493,6 +1815,16 @@ public abstract class JComponent extends Container implements Serializable,
      * How to Use the Focus Subsystem</a>,
      * a section in <em>The Java Tutorial</em>.
      *
+     * <p>
+     * 请求此<code> Component </code>获取输入焦点有关此方法的完整说明,请参阅{@link javaawtComponent#requestFocus(boolean)ComponentrequestFocus(boolean)}
+     * 。
+     * <p>
+     *  请注意,不建议使用此方法,因为它的行为是平台相关的而不是我们建议使用{@link #requestFocusInWindow(boolean)requestFocusInWindow(boolean)}
+     * 如果您想要更多关于焦点的信息,请参阅。
+     * <a href="https://docs.oracle.com/javase/tutorial/uiswing/misc/focus.html">
+     *  如何使用焦点子系统</a>,<em> Java教程</em>中的一个部分
+     * 
+     * 
      * @param temporary boolean indicating if the focus change is temporary
      * @return <code>false</code> if the focus change request is guaranteed to
      *         fail; <code>true</code> if it is likely to succeed
@@ -1515,6 +1847,15 @@ public abstract class JComponent extends Container implements Serializable,
      * How to Use the Focus Subsystem</a>,
      * a section in <em>The Java Tutorial</em>.
      *
+     * <p>
+     *  请求此<code> Component </code>获取输入焦点有关此方法的完整说明,请参阅{@link javaawtComponent#requestFocusInWindow()ComponentrequestFocusInWindow()}
+     * 。
+     * <p>
+     *  如果您想要更多关于焦点的信息,请参阅
+     * <a href="https://docs.oracle.com/javase/tutorial/uiswing/misc/focus.html">
+     * 如何使用焦点子系统</a>,<em> Java教程</em>中的一个部分
+     * 
+     * 
      * @return <code>false</code> if the focus change request is guaranteed to
      *         fail; <code>true</code> if it is likely to succeed
      * @see java.awt.Component#requestFocusInWindow()
@@ -1536,6 +1877,15 @@ public abstract class JComponent extends Container implements Serializable,
      * How to Use the Focus Subsystem</a>,
      * a section in <em>The Java Tutorial</em>.
      *
+     * <p>
+     *  请求此<code> Component </code>获取输入焦点有关此方法的完整说明,请参阅{@link javaawtComponent#requestFocusInWindow(boolean)ComponentrequestFocusInWindow(boolean)}
+     * 。
+     * <p>
+     *  如果您想要更多关于焦点的信息,请参阅
+     * <a href="https://docs.oracle.com/javase/tutorial/uiswing/misc/focus.html">
+     *  如何使用焦点子系统</a>,<em> Java教程</em>中的一个部分
+     * 
+     * 
      * @param temporary boolean indicating if the focus change is temporary
      * @return <code>false</code> if the focus change request is guaranteed to
      *         fail; <code>true</code> if it is likely to succeed
@@ -1557,6 +1907,12 @@ public abstract class JComponent extends Container implements Serializable,
      * should not use this method; instead, it should use
      * <code>requestFocusInWindow()</code>.
      *
+     * <p>
+     *  请求此组件获取输入焦点,并且此组件的顶级祖先变为关注窗口此组件必须是可显示的,可见的和可聚焦的,以便授予请求
+     * <p>
+     *  此方法旨在供焦点实现使用客户端代码不应使用此方法;而应该使用<code> requestFocusInWindow()</code>
+     * 
+     * 
      * @see #requestFocusInWindow()
      */
     public void grabFocus() {
@@ -1571,6 +1927,10 @@ public abstract class JComponent extends Container implements Serializable,
      * input in the current focus owner is not "passed" by the input
      * verifier for that component.
      *
+     * <p>
+     * 设置值以指示在此组件请求焦点之前是否调用当前焦点所有者的输入验证器默认值为true在诸如取消按钮或滚动条之类的组件上设置为false,即使当前焦点中的输入也应该激活所有者不由该组件的输入验证器"传递"。
+     * 
+     * 
      * @param verifyInputWhenFocusTarget value for the
      *        <code>verifyInputWhenFocusTarget</code> property
      * @see InputVerifier
@@ -1599,6 +1959,10 @@ public abstract class JComponent extends Container implements Serializable,
      * current focus owner will be called before this component requests
      * focus.
      *
+     * <p>
+     *  返回指示在此组件请求焦点之前是否调用当前焦点所有者的输入验证器的值
+     * 
+     * 
      * @return value of the <code>verifyInputWhenFocusTarget</code> property
      *
      * @see InputVerifier
@@ -1616,6 +1980,10 @@ public abstract class JComponent extends Container implements Serializable,
     /**
      * Gets the <code>FontMetrics</code> for the specified <code>Font</code>.
      *
+     * <p>
+     *  获取指定的<code> Font </code>的<code> FontMetrics </code>
+     * 
+     * 
      * @param font the font for which font metrics is to be
      *          obtained
      * @return the font metrics for <code>font</code>
@@ -1635,6 +2003,10 @@ public abstract class JComponent extends Container implements Serializable,
      *   preferred: true
      *       bound: true
      * description: The preferred size of the component.
+     * <p>
+     *  设置此组件的首选大小如果<code> preferredSize </code>为<code> null </code>,则会要求UI显示首选大小@beaninfo preferred：true bo
+     * und：true description：零件。
+     * 
      */
     public void setPreferredSize(Dimension preferredSize) {
         super.setPreferredSize(preferredSize);
@@ -1648,6 +2020,11 @@ public abstract class JComponent extends Container implements Serializable,
      * method returns a non <code>null</code> value then return that;
      * otherwise defer to the component's layout manager.
      *
+     * <p>
+     * 如果<code> preferredSize </code>已设置为非<code> null </code>值,则只返回它。
+     * 如果UI代理的<code> getPreferredSize </code>方法返回非<code> / code> value然后返回;否则推迟到组件的布局管理器。
+     * 
+     * 
      * @return the value of the <code>preferredSize</code> property
      * @see #setPreferredSize
      * @see ComponentUI
@@ -1672,6 +2049,11 @@ public abstract class JComponent extends Container implements Serializable,
      * to compute it.  Setting the maximum size to <code>null</code>
      * restores the default behavior.
      *
+     * <p>
+     *  将此组件的最大大小设置为常量值后续调用<code> getMaximumSize </code>将始终返回此值;该组件的UI不会被要求计算它将最大大小设置为<code> null </code>恢复默
+     * 认行为。
+     * 
+     * 
      * @param maximumSize a <code>Dimension</code> containing the
      *          desired maximum allowable size
      * @see #getMaximumSize
@@ -1690,6 +2072,11 @@ public abstract class JComponent extends Container implements Serializable,
      * method returns a non-<code>null</code> value then return that;
      * otherwise defer to the component's layout manager.
      *
+     * <p>
+     *  如果最大大小已设置为非<code> null </code>值,则返回它如果UI委托的<code> getMaximumSize </code>方法返回非<code> null </code>返回否则
+     * 推迟到组件的布局管理器。
+     * 
+     * 
      * @return the value of the <code>maximumSize</code> property
      * @see #setMaximumSize
      * @see ComponentUI
@@ -1714,6 +2101,11 @@ public abstract class JComponent extends Container implements Serializable,
      * to compute it.  Setting the minimum size to <code>null</code>
      * restores the default behavior.
      *
+     * <p>
+     * 将此组件的最小大小设置为常量值后续调用<code> getMinimumSize </code>将始终返回此值;该组件的UI不会被要求计算它将最小大小设置为<code> null </code>恢复默认
+     * 行为。
+     * 
+     * 
      * @param minimumSize the new minimum size of this component
      * @see #getMinimumSize
      * @beaninfo
@@ -1730,6 +2122,11 @@ public abstract class JComponent extends Container implements Serializable,
      * method returns a non-<code>null</code> value then return that; otherwise
      * defer to the component's layout manager.
      *
+     * <p>
+     *  如果最小大小已设置为非<code> null </code>值,则只返回它。
+     * 如果UI代理的<code> getMinimumSize </code>方法返回非<code> null </code>返回否则推迟到组件的布局管理器。
+     * 
+     * 
      * @return the value of the <code>minimumSize</code> property
      * @see #setMinimumSize
      * @see ComponentUI
@@ -1750,6 +2147,10 @@ public abstract class JComponent extends Container implements Serializable,
      * Gives the UI delegate an opportunity to define the precise
      * shape of this component for the sake of mouse processing.
      *
+     * <p>
+     *  使UI委托有机会为鼠标处理定义此组件的精确形状
+     * 
+     * 
      * @return true if this component logically contains x,y
      * @see java.awt.Component#contains(int, int)
      * @see ComponentUI
@@ -1780,6 +2181,17 @@ public abstract class JComponent extends Container implements Serializable,
      * <p>
      * This is a bound property.
      *
+     * <p>
+     * 设置此组件的边框<code> Border </code>对象负责定义组件的插入(覆盖直接放置在组件上的任何插图集),并可选地在这些插页的边界内渲染任何边框装饰。
+     * 边框应该(而不是插图)用于为挥杆组件创建装饰和非装饰(例如边距和填充)区域复合边框可用于在单个组件内嵌套多个边框。
+     * <p>
+     * 虽然技术上你可以设置任何继承自<code> JComponent </code>的对象的边框,许多标准Swing组件的外观和感觉实现不能很好地与用户设置边框一起工作一般来说,当你想设置除了<code> 
+     * JPanel </code>或<code> JLabel </code>之外的标准Swing组件上的边框,我们建议您将组件放在<code> JPanel </code>中, <code> JPanel 
+     * </code>。
+     * <p>
+     *  这是一个bound属性
+     * 
+     * 
      * @param border the border to be rendered for this component
      * @see Border
      * @see CompoundBorder
@@ -1807,6 +2219,10 @@ public abstract class JComponent extends Container implements Serializable,
      * Returns the border of this component or <code>null</code> if no
      * border is currently set.
      *
+     * <p>
+     *  如果当前未设置边框,则返回此组件的边框或<code> null </code>
+     * 
+     * 
      * @return the border object for this component
      * @see #setBorder
      */
@@ -1818,6 +2234,10 @@ public abstract class JComponent extends Container implements Serializable,
      * If a border has been set on this component, returns the
      * border's insets; otherwise calls <code>super.getInsets</code>.
      *
+     * <p>
+     *  如果在此组件上设置了边框,则返回边框的内容;否则调用<code> supergetInsets </code>
+     * 
+     * 
      * @return the value of the insets property
      * @see #setBorder
      */
@@ -1836,6 +2256,11 @@ public abstract class JComponent extends Container implements Serializable,
      * however.  All existing values within this object are overwritten.
      * If <code>insets</code> is null, this will allocate a new one.
      *
+     * <p>
+     * 返回包含此组件的插入值的<code> Insets </code>对象如果可能,传递的<code> Insets </code>对象将被重用调用方法不能假定将返回相同的对象,但是所有现有值在此对象内覆盖
+     * 如果<code> insets </code>为null,这将分配一个新的。
+     * 
+     * 
      * @param insets the <code>Insets</code> object, which can be reused
      * @return the <code>Insets</code> object
      * @see #getInsets
@@ -1866,6 +2291,10 @@ public abstract class JComponent extends Container implements Serializable,
      * Overrides <code>Container.getAlignmentY</code> to return
      * the horizontal alignment.
      *
+     * <p>
+     *  覆盖<code> ContainergetAlignmentY </code>以返回水平对齐方式
+     * 
+     * 
      * @return the value of the <code>alignmentY</code> property
      * @see #setAlignmentY
      * @see java.awt.Component#getAlignmentY
@@ -1880,6 +2309,10 @@ public abstract class JComponent extends Container implements Serializable,
     /**
      * Sets the the horizontal alignment.
      *
+     * <p>
+     *  设置水平对齐方式
+     * 
+     * 
      * @param alignmentY  the new horizontal alignment
      * @see #getAlignmentY
      * @beaninfo
@@ -1895,6 +2328,10 @@ public abstract class JComponent extends Container implements Serializable,
      * Overrides <code>Container.getAlignmentX</code> to return
      * the vertical alignment.
      *
+     * <p>
+     *  覆盖<code> ContainergetAlignmentX </code>以返回垂直对齐
+     * 
+     * 
      * @return the value of the <code>alignmentX</code> property
      * @see #setAlignmentX
      * @see java.awt.Component#getAlignmentX
@@ -1909,6 +2346,10 @@ public abstract class JComponent extends Container implements Serializable,
     /**
      * Sets the the vertical alignment.
      *
+     * <p>
+     *  设置垂直对齐
+     * 
+     * 
      * @param alignmentX  the new vertical alignment
      * @see #getAlignmentX
      * @beaninfo
@@ -1922,6 +2363,10 @@ public abstract class JComponent extends Container implements Serializable,
     /**
      * Sets the input verifier for this component.
      *
+     * <p>
+     *  设置此组件的输入验证器
+     * 
+     * 
      * @param inputVerifier the new input verifier
      * @since 1.3
      * @see InputVerifier
@@ -1939,6 +2384,10 @@ public abstract class JComponent extends Container implements Serializable,
     /**
      * Returns the input verifier for this component.
      *
+     * <p>
+     *  返回此组件的输入验证器
+     * 
+     * 
      * @return the <code>inputVerifier</code> property
      * @since 1.3
      * @see InputVerifier
@@ -1951,6 +2400,10 @@ public abstract class JComponent extends Container implements Serializable,
      * Returns this component's graphics context, which lets you draw
      * on a component. Use this method to get a <code>Graphics</code> object and
      * then invoke operations on that object to draw on the component.
+     * <p>
+     * 返回此组件的图形上下文,它允许您绘制一个组件使用此方法来获取一个<code> Graphics </code>对象,然后调用该对象上的操作以绘制组件
+     * 
+     * 
      * @return this components graphics context
      */
     public Graphics getGraphics() {
@@ -1966,6 +2419,10 @@ public abstract class JComponent extends Container implements Serializable,
     /** Enables or disables diagnostic information about every graphics
       * operation performed within the component or one of its children.
       *
+      * <p>
+      *  在组件或其子项中执行的操作
+      * 
+      * 
       * @param debugOptions  determines how the component should display
       *         the information;  one of the following options:
       * <ul>
@@ -1994,6 +2451,8 @@ public abstract class JComponent extends Container implements Serializable,
 
     /** Returns the state of graphics debugging.
       *
+      * <p>
+      * 
       * @return a bitwise OR'd flag of zero or more of the following options:
       * <ul>
       * <li>DebugGraphics.LOG_OPTION - causes a text message to be printed.
@@ -2015,6 +2474,9 @@ public abstract class JComponent extends Container implements Serializable,
     /**
      * Returns true if debug information is enabled for this
      * <code>JComponent</code> or one of its parents.
+     * <p>
+     *  如果为此<code> JComponent </code>或其父类之一启用了调试信息,则返回true
+     * 
      */
     int shouldDebugGraphics() {
         return DebugGraphics.shouldComponentDebug(this);
@@ -2078,6 +2540,35 @@ public abstract class JComponent extends Container implements Serializable,
      * container, with the same charCode and the same modifiers,
      * <code>anAction</code> will replace the action.
      *
+     * <p>
+     *  此方法现在已过时,请使用<code> getActionMap()</code>和<code> getInputMap()</code>组合类似的行为例如,绑定<code> KeyStroke </code>
+     *  <代码> aKeyStroke </code>到<code> Action </code> <code> anAction </code>现在使用：。
+     * <pre>
+     *  componentgetInputMap()put(aKeyStroke,aCommand); componentgetActionMap()put(aCommmand,anAction);
+     * </pre>
+     * 以上假设您希望绑定适用于<code> WHEN_FOCUSED </code>要为其他焦点状态注册绑定,请使用接受整数的<code> getInputMap </code>方法
+     * <p>
+     *  如果匹配<code> aKeyStroke </code>的键事件发生并且<code> aCondition </code>被验证,则将调用<code> anAction </code>注册新键盘动作
+     * <code> KeyStroke </code>对象定义键盘键和一个或多个修饰符(alt,shift,ctrl,meta)的特定组合,。
+     * <p>
+     *  如果指定,<code> aCommand </code>将在传递的事件中设置
+     * <p>
+     *  <code> aCondition </code>可以是以下之一：
+     * <blockquote>
+     * <DL>
+     * <DT> WHEN_FOCUSED <DD>只有在组件具有焦点<DT>时发生击键时才会调用操作WHEN_IN_FOCUSED_WINDOW <DD>当组件具有焦点时发生击键时调用操作,在具有焦点的窗口中
+     * 注意,组件不必是窗口的立即后代 - 它可以是窗口的包含层次结构中的任何地方。
+     * 换句话说,只要窗口中的任何<em>组件具有焦点,将调用此组件注册的操作<DT> WHEN_ANCESTOR_OF_FOCUSED_COMPONENT <DD>当组件具有焦点时,如果组件是具有焦点的组件的
+     * 祖先,则触发时将调用操作。
+     * </DL>
+     * </blockquote>
+     * <p>
+     * 键击和条件的组合允许您为指定的键击+修改器组合(使用KeyStroke类)定义高级(语义)动作事件,并且直接指向具有焦点的组件的父级或子级或组件本身。
+     * 换句话说,在组件的任何分层结构中,任意键组合可以立即指向分层结构中的适当组件,并且使特定方法被调用(通常通过适配器对象)。
+     * <p>
+     *  如果已经为接收容器注册了具有相同charCode和相同修饰符的动作,则<code> anAction </code>将替换动作
+     * 
+     * 
      * @param anAction  the <code>Action</code> to be registered
      * @param aCommand  the command to be set in the delivered event
      * @param aKeyStroke the <code>KeyStroke</code> to bind to the action
@@ -2105,6 +2596,11 @@ public abstract class JComponent extends Container implements Serializable,
      * to the <code>KeyboardManager</code>;
      * otherwise all actions are pushed to the <code>KeyboardManager</code>.
      *
+     * <p>
+     * 使用<code> KeyboardManager </code>注册任何绑定<code> WHEN_IN_FOCUSED_WINDOW </code>操作如果<code> onlyIfNew </code>
+     * 为true,只有未注册的操作才会被推送到< / code>;否则所有操作都被推送到<code> KeyboardManager </code>。
+     * 
+     * 
      * @param onlyIfNew  if true, only actions that haven't been registered
      *          are pushed to the <code>KeyboardManager</code>
      */
@@ -2162,6 +2658,9 @@ public abstract class JComponent extends Container implements Serializable,
     /**
      * Unregisters all the previously registered
      * <code>WHEN_IN_FOCUSED_WINDOW</code> <code>KeyStroke</code> bindings.
+     * <p>
+     *  取消注册所有先前注册的<code> WHEN_IN_FOCUSED_WINDOW </code> <code> KeyStroke </code>绑定
+     * 
      */
     private void unregisterWithKeyboardManager() {
         Hashtable<KeyStroke, KeyStroke> registered =
@@ -2185,6 +2684,11 @@ public abstract class JComponent extends Container implements Serializable,
      * (or a parent of the window <code>InputMap</code>)
      * the <code>KeyboardManager</code> is notified of the new bindings.
      *
+     * <p>
+     *  当其绑定更改时从<code> ComponentInputMap </code>调用如果<code> inputMap </code>是当前<code> windowInputMap </code>(
+     * 或窗口的父项<code> InputMap </code>)向<code> KeyboardManager </code>通知新的绑定。
+     * 
+     * 
      * @param inputMap the map containing the new bindings
      */
     void componentInputMapChanged(ComponentInputMap inputMap) {
@@ -2211,6 +2715,9 @@ public abstract class JComponent extends Container implements Serializable,
      * This method is now obsolete, please use a combination of
      * <code>getActionMap()</code> and <code>getInputMap()</code> for
      * similar behavior.
+     * <p>
+     * 此方法现已过时,请使用<code> getActionMap()</code>和<code> getInputMap()</code>结合类似行为
+     * 
      */
     public void registerKeyboardAction(ActionListener anAction,KeyStroke aKeyStroke,int aCondition) {
         registerKeyboardAction(anAction,null,aKeyStroke,aCondition);
@@ -2229,6 +2736,12 @@ public abstract class JComponent extends Container implements Serializable,
      * Unregisters a keyboard action.
      * This will remove the binding from the <code>ActionMap</code>
      * (if it exists) as well as the <code>InputMap</code>s.
+     * <p>
+     *  此方法现在已过时要取消注册现有绑定,您可以从<code> ActionMap / InputMap </code>中删除绑定,或放置一个虚拟绑定<code> InputMap </code>从<code>
+     *  > InputMap </code>允许父<code> InputMap </code>中的绑定是活动的,而在<code> InputMap </code>中放置虚拟绑定有效地禁止绑定从未发生。
+     * <p>
+     *  注销键盘操作这将从<code> ActionMap </code>(如果存在)以及<code> InputMap </code>中删除绑定
+     * 
      */
     public void unregisterKeyboardAction(KeyStroke aKeyStroke) {
         ActionMap am = getActionMap(false);
@@ -2249,6 +2762,10 @@ public abstract class JComponent extends Container implements Serializable,
      * Returns the <code>KeyStrokes</code> that will initiate
      * registered actions.
      *
+     * <p>
+     *  返回将启动注册操作的<code> KeyStrokes </code>
+     * 
+     * 
      * @return an array of <code>KeyStroke</code> objects
      * @see #registerKeyboardAction
      */
@@ -2284,6 +2801,13 @@ public abstract class JComponent extends Container implements Serializable,
      * conditions <code>WHEN_FOCUSED</code> and
      * <code>WHEN_IN_FOCUSED_WINDOW</code> condition.
      *
+     * <p>
+     * 返回确定是否响应指定的键击而发生注册的操作的条件
+     * <p>
+     *  对于Java 2平台v13,<code> KeyStroke </code>可以与多个条件相关联例如,'a'可以绑定两个条件<code> WHEN_FOCUSED </code>和<code> WHE
+     * N_IN_FOCUSED_WINDOW < / code>条件。
+     * 
+     * 
      * @return the action-keystroke condition
      */
     public int getConditionForKeyStroke(KeyStroke aKeyStroke) {
@@ -2300,6 +2824,10 @@ public abstract class JComponent extends Container implements Serializable,
      * Returns the object that will perform the action registered for a
      * given keystroke.
      *
+     * <p>
+     *  返回将为给定按键执行操作注册的对象
+     * 
+     * 
      * @return the <code>ActionListener</code>
      *          object invoked when the keystroke occurs
      */
@@ -2332,6 +2860,10 @@ public abstract class JComponent extends Container implements Serializable,
      * local bindings, and allowing the bindings defined in parent
      * <code>InputMap/ActionMaps</code>
      * (the UI is usually defined in the second tier) to persist.
+     * <p>
+     *  注销第一层中的所有绑定<code> InputMaps </code>和<code> ActionMap </code>这样做的效果是删除任何本地绑定,并允许在parent中定义的绑定<code> I
+     * nputMap / ActionMaps <代码>(UI通常在第二层中定义)来持久化。
+     * 
      */
     public void resetKeyboardActions() {
         // Keys
@@ -2369,6 +2901,18 @@ public abstract class JComponent extends Container implements Serializable,
      * Similarly, if <code>condition</code> is not one of the values
      * listed, an <code>IllegalArgumentException</code> will be thrown.
      *
+     * <p>
+     * 设置<code> InputMap </code>在条件<code> condition </code>下使用<code> map </code> A <code> null </code>值意味着您不
+     * 需要任何绑定甚至可以从UI中使用这不会重新安装UI <code> InputMap </code>(如果有一个)<code> condition </code>具有以下值之一：。
+     * <ul>
+     *  <li> <code> WHEN_IN_FOCUSED_WINDOW </code> <li> <code> WHEN_FOCUSED </code> <li> <code> WHEN_ANCESTO
+     * R_OF_FOCUSED_COMPONENT </code>。
+     * </ul>
+     *  如果<code> condition </code>是<code> WHEN_IN_FOCUSED_WINDOW </code>和<code> map </code>不是<code> Componen
+     * tInputMap </code>,那么<code> IllegalArgumentException </code> thrown类似地,如果<code> condition </code>不是列出的
+     * 值之一,将抛出<code> IllegalArgumentException </code>。
+     * 
+     * 
      * @param condition one of the values listed above
      * @param map  the <code>InputMap</code> to use for the given condition
      * @exception IllegalArgumentException if <code>condition</code> is
@@ -2405,6 +2949,10 @@ public abstract class JComponent extends Container implements Serializable,
      * Returns the <code>InputMap</code> that is used during
      * <code>condition</code>.
      *
+     * <p>
+     * 返回在<code> condition </code>期间使用的<code> InputMap </code>
+     * 
+     * 
      * @param condition one of WHEN_IN_FOCUSED_WINDOW, WHEN_FOCUSED,
      *        WHEN_ANCESTOR_OF_FOCUSED_COMPONENT
      * @return the <code>InputMap</code> for the specified
@@ -2420,6 +2968,10 @@ public abstract class JComponent extends Container implements Serializable,
      * component has focus.
      * This is convenience method for <code>getInputMap(WHEN_FOCUSED)</code>.
      *
+     * <p>
+     *  返回当组件具有焦点时使用的<code> InputMap </code>这是<code> getInputMap(WHEN_FOCUSED)</code>的方便方法
+     * 
+     * 
      * @return the <code>InputMap</code> used when the component has focus
      * @since 1.3
      */
@@ -2432,6 +2984,11 @@ public abstract class JComponent extends Container implements Serializable,
      * the parent of the <code>am</code> to be the <code>ActionMap</code>
      * from the UI (if there was one), it is up to the caller to have done this.
      *
+     * <p>
+     *  将<code> ActionMap </code>设置为<code> am </code>这不会将<code> am </code>的父级设置为UI中的<code> ActionMap </code>
+     * 如果有一个),它是由调用者做到这一点。
+     * 
+     * 
      * @param am  the new <code>ActionMap</code>
      * @since 1.3
      */
@@ -2446,6 +3003,11 @@ public abstract class JComponent extends Container implements Serializable,
      * binding. The returned <code>ActionMap</code>, unless otherwise
      * set, will have the <code>ActionMap</code> from the UI set as the parent.
      *
+     * <p>
+     *  返回<code> ActionMap </code>用于确定<code> Action </code>为特定<code> KeyStroke </code>绑定所触发的<code> ActionMap
+     *  </code>,除非另外设置,将UI中的<code> ActionMap </code>设置为父级。
+     * 
+     * 
      * @return the <code>ActionMap</code> containing the key/action bindings
      * @since 1.3
      */
@@ -2459,6 +3021,11 @@ public abstract class JComponent extends Container implements Serializable,
      * been created, and <code>create</code> is
      * true, it will be created.
      *
+     * <p>
+     * 返回<code> InputMap </code>以用于条件<code> condition </code>如果尚未创建<code> InputMap </code>,并且<code> create </code>
+     * 它将被创建。
+     * 
+     * 
      * @param condition one of the following values:
      * <ul>
      * <li>JComponent.FOCUS_INPUTMAP_CREATED
@@ -2517,6 +3084,10 @@ public abstract class JComponent extends Container implements Serializable,
     /**
      * Finds and returns the appropriate <code>ActionMap</code>.
      *
+     * <p>
+     *  查找并返回相应的<code> ActionMap </code>
+     * 
+     * 
      * @param create if true, create the <code>ActionMap</code> if it
      *          is not already created
      * @return the <code>ActionMap</code> for this component; if the
@@ -2552,6 +3123,14 @@ public abstract class JComponent extends Container implements Serializable,
      * size &gt;= the minimum size and <code>getBaselineResizeBehavior</code>
      * can be used to determine how the baseline changes with size.
      *
+     * <p>
+     *  返回基线基线是从组件的顶部开始测量的此方法主要用于<code> LayoutManager </code>以沿着它们的基线对齐组件。
+     * 返回值小于0表示此组件没有合理的基线, <code> LayoutManager </code> s不应该在其基线上对齐此组件。
+     * <p>
+     * 此方法调用相同名称的<code> ComponentUI </code>方法如果此组件没有<code>将返回ComponentUI </code> -1如果返回值&gt; = 0,组件具有对于任何大小&
+     * gt; =最小大小的有效基线,并且<code> getBaselineResizeBehavior </code>可以用于确定基线如何随大小改变。
+     * 
+     * 
      * @throws IllegalArgumentException {@inheritDoc}
      * @see #getBaselineResizeBehavior
      * @see java.awt.FontMetrics
@@ -2584,6 +3163,15 @@ public abstract class JComponent extends Container implements Serializable,
      * value other than <code>BaselineResizeBehavior.OTHER</code> even if
      * <code>getBaseline</code> returns a value less than 0.
      *
+     * <p>
+     *  返回指示组件基线如何随着大小更改而变化的枚举此方法主要用于布局管理器和GUI构建器
+     * <p>
+     * 此方法调用相同名称的<code> ComponentUI </code>方法如果此组件没有<code> ComponentUI </code> <code>将返回BaselineResizeBehavi
+     * orOTHER </code>子类不应返回<code > null </code>;如果基线不能计算返回<code> BaselineResizeBehaviorOTHER </code>调用者应该首先
+     * 使用<code> getBaseline </code>来请求基线,如果返回值>&gt; = 0,则使用此方法。
+     * 方法返回<code> BaselineResizeBehaviorOTHER </code>以外的值,即使<code> getBaseline </code>返回的值小于0。
+     * 
+     * 
      * @see #getBaseline(int, int)
      * @since 1.6
      */
@@ -2608,6 +3196,16 @@ public abstract class JComponent extends Container implements Serializable,
      * <code>FocusTraversalPolicy</code> of this <code>JComponent</code>'s
      * focus-cycle-root ancestor is used.
      *
+     * <p>
+     *  在版本14中,重新构建了焦点子系统有关详细信息,请参阅
+     * <a href="https://docs.oracle.com/javase/tutorial/uiswing/misc/focus.html">
+     *  如何使用焦点子系统</a>,<em> Java教程</em>中的一个部分
+     * <p>
+     * 请求集中在这个<code> JComponent </code>的<code> FocusTraversalPolicy </code>的默认<code>组件</code>如果这个<code> JCom
+     * ponent </code>使用其<code> FocusTraversalPolicy </code>否否,使用此<code> JComponent </code>的焦点循环根祖先的<code> Fo
+     * cusTraversalPolicy </code>。
+     * 
+     * 
      * @see java.awt.FocusTraversalPolicy#getDefaultComponent
      * @deprecated As of 1.4, replaced by
      * <code>FocusTraversalPolicy.getDefaultComponent(Container).requestFocus()</code>
@@ -2633,6 +3231,10 @@ public abstract class JComponent extends Container implements Serializable,
      * Makes the component visible or invisible.
      * Overrides <code>Component.setVisible</code>.
      *
+     * <p>
+     *  使组件可见或不可见覆盖<code> ComponentsetVisible </code>
+     * 
+     * 
      * @param aFlag  true to make the component visible; false to
      *          make it invisible
      *
@@ -2665,6 +3267,12 @@ public abstract class JComponent extends Container implements Serializable,
      * <p>Note: Disabling a lightweight component does not prevent it from
      * receiving MouseEvents.
      *
+     * <p>
+     * 设置是否启用此组件启用的组件可能响应用户输入,而未启用的组件无法响应用户输入某些组件可能会在停用时更改其可视化表示,以便向用户提供反馈他们不能接受输入<p>注意：禁用组件不会禁用其子组
+     * 
+     *  <p>注意：禁用轻量级组件不会阻止它接收MouseEvents
+     * 
+     * 
      * @param enabled true if this component should be enabled, false otherwise
      * @see java.awt.Component#isEnabled
      * @see java.awt.Component#isLightweight
@@ -2689,6 +3297,10 @@ public abstract class JComponent extends Container implements Serializable,
      * look and feel to honor this property, some may choose to ignore
      * it.
      *
+     * <p>
+     *  设置此组件的前景颜色由外观和感觉来尊重此属性,有些人可能会选择忽略它
+     * 
+     * 
      * @param fg  the desired foreground <code>Color</code>
      * @see java.awt.Component#getForeground
      *
@@ -2718,6 +3330,13 @@ public abstract class JComponent extends Container implements Serializable,
      * It is up to the look and feel to honor this property, some may
      * choose to ignore it.
      *
+     * <p>
+     * 设置此组件的背景颜色背景颜色仅在组件不透明时使用,且仅由<code> JComponent </code>或<code> ComponentUI </code>实现的子类使用<code> JCompon
+     * ent < / code>必须重写<code> paintComponent </code>才能使用此属性。
+     * <p>
+     *  它是由外观和感觉来尊重这个属性,有些人可能会选择忽略它
+     * 
+     * 
      * @param bg the desired background <code>Color</code>
      * @see java.awt.Component#getBackground
      * @see #setOpaque
@@ -2740,6 +3359,10 @@ public abstract class JComponent extends Container implements Serializable,
     /**
      * Sets the font for this component.
      *
+     * <p>
+     *  设置此组件的字体
+     * 
+     * 
      * @param font the desired <code>Font</code> for this component
      * @see java.awt.Component#getFont
      *
@@ -2768,6 +3391,12 @@ public abstract class JComponent extends Container implements Serializable,
      * can have their own setting. An applet can safely alter its default
      * locale because it will have no affect on other applets (or the browser).
      *
+     * <p>
+     *  返回在创建时用于初始化每个JComponent的locale属性的默认语言环境
+     * 
+     * 默认语言环境具有"AppContext"作用域,以便小程序(和可能在单个VM中运行的多个轻量级应用程序)可以有自己的设置小程序可以安全地更改其默认语言环境,因为它不会影响其他小程序(或浏览器)
+     * 
+     * 
      * @return the default <code>Locale</code>.
      * @see #setDefaultLocale
      * @see java.awt.Component#getLocale
@@ -2795,6 +3424,12 @@ public abstract class JComponent extends Container implements Serializable,
      * can have their own setting. An applet can safely alter its default
      * locale because it will have no affect on other applets (or the browser).
      *
+     * <p>
+     *  设置用于在创建时初始化每个JComponent的语言环境属性的默认语言环境初始值是VM的默认语言环境
+     * 
+     *  默认语言环境具有"AppContext"作用域,以便小程序(和可能在单个VM中运行的多个轻量级应用程序)可以有自己的设置小程序可以安全地更改其默认语言环境,因为它不会影响其他小程序(或浏览器)
+     * 
+     * 
      * @param l the desired default <code>Locale</code> for new components.
      * @see #getDefaultLocale
      * @see java.awt.Component#getLocale
@@ -2819,6 +3454,11 @@ public abstract class JComponent extends Container implements Serializable,
      * normally override this method if they process some
      * key events themselves.  If the event is processed,
      * it should be consumed.
+     * <p>
+     * 处理组件本身识别的任何关键事件在焦点管理器和任何感兴趣的侦听器被给予窃取事件的机会之后调用此方法仅当事件尚未被消耗时才调用此方法此方法在键盘UI逻辑
+     * <p>
+     *  此方法被实现为不执行子类通常将覆盖此方法,如果他们自己处理一些关键事件如果事件被处理,它应该被消耗
+     * 
      */
     protected void processComponentKeyEvent(KeyEvent e) {
     }
@@ -2856,6 +3496,13 @@ public abstract class JComponent extends Container implements Serializable,
      * and then (if the action is found and the component
      * is enabled) invokes <code>notifyAction</code> to notify the action.
      *
+     * <p>
+     * 调用以处理<code> ks </code>的键绑定作为<code> KeyEvent </code> <code> e </code>的结果。
+     * 这将获得适当的<code> InputMap </code>,gets绑定,从<code> ActionMap </code>获取操作,然后(如果找到操作并且组件已启用)调用<code> notifyA
+     * ction </code>以通知操作。
+     * 调用以处理<code> ks </code>的键绑定作为<code> KeyEvent </code> <code> e </code>的结果。
+     * 
+     * 
      * @param ks  the <code>KeyStroke</code> queried
      * @param e the <code>KeyEvent</code>
      * @param condition one of the following values:
@@ -2894,6 +3541,12 @@ public abstract class JComponent extends Container implements Serializable,
      * then <code>WHEN_ANCESTOR_OF_FOCUSED_COMPONENT</code> bindings,
      * and finally <code>WHEN_IN_FOCUSED_WINDOW</code> bindings.
      *
+     * <p>
+     *  这是作为<code> KeyEvent </code>的结果调用的,它不是由<code> FocusManager </code>,<code> KeyListeners </code>或组件消耗的。
+     * 它将首先尝试<code> WHEN_FOCUSED </code>绑定,然后<code> WHEN_ANCESTOR_OF_FOCUSED_COMPONENT </code>绑定,最后<code> WH
+     * EN_IN_FOCUSED_WINDOW </code>绑定。
+     * 
+     * 
      * @param e the unconsumed <code>KeyEvent</code>
      * @param pressed true if the key is pressed
      * @return true if there is a key binding for <code>e</code>
@@ -2932,6 +3585,9 @@ public abstract class JComponent extends Container implements Serializable,
       /* We have no key binding. Let's try the path from our parent to the
        * window excluded. We store the path components so we can avoid
        * asking the same component twice.
+       * <p>
+       *  window excluded我们存储路径组件,所以我们可以避免同一组件两次
+       * 
        */
       Container parent = this;
       while (parent != null && !(parent instanceof Window) &&
@@ -2961,6 +3617,9 @@ public abstract class JComponent extends Container implements Serializable,
       /* No components between the focused component and the window is
        * actually interested by the key event. Let's try the other
        * JComponent in this window.
+       * <p>
+       * 实际上对关键事件感兴趣让我们在这个窗口中尝试其他JComponent
+       * 
        */
       if(parent != null) {
         return JComponent.processKeyBindingsForAllComponents(e,parent,pressed);
@@ -2992,6 +3651,13 @@ public abstract class JComponent extends Container implements Serializable,
      * in <em>The Java Tutorial</em>
      * for further documentation.
      *
+     * <p>
+     *  注册要显示在工具提示中的文本当光标停留在组件上时,文本显示
+     * <p>
+     *  有关更多文档,请参见<em> Java教程</em>中的<a href=\"https://docsoraclecom/javase/tutorial/uiswing/components/tooltiphtml\">
+     * 如何使用工具提示</a>。
+     * 
+     * 
      * @param text  the string to display; if the text is <code>null</code>,
      *              the tool tip is turned off for this component
      * @see #TOOL_TIP_TEXT_KEY
@@ -3016,6 +3682,10 @@ public abstract class JComponent extends Container implements Serializable,
      * Returns the tooltip string that has been set with
      * <code>setToolTipText</code>.
      *
+     * <p>
+     *  返回使用<code> setToolTipText </code>设置的工具提示字符串
+     * 
+     * 
      * @return the text of the tool tip
      * @see #TOOL_TIP_TEXT_KEY
      */
@@ -3030,6 +3700,10 @@ public abstract class JComponent extends Container implements Serializable,
      * <code>setToolTipText</code>.  If a component provides
      * more extensive API to support differing tooltips at different locations,
      * this method should be overridden.
+     * <p>
+     *  返回要用作<i> event </i>的工具提示的字符串。默认情况下,这会返回使用<code> setToolTipText </code>设置的任何字符串。
+     * 如果组件提供更广泛的API以支持不同位置的不同工具提示方法应该被覆盖。
+     * 
      */
     public String getToolTipText(MouseEvent event) {
         return getToolTipText();
@@ -3040,6 +3714,10 @@ public abstract class JComponent extends Container implements Serializable,
      * If <code>null</code> is returned, Swing will choose a location.
      * The default implementation returns <code>null</code>.
      *
+     * <p>
+     * 返回此组件坐标系中的工具提示位置如果返回<code> null </code>,Swing将选择一个位置默认实现返回<code> null </code>
+     * 
+     * 
      * @param event  the <code>MouseEvent</code> that caused the
      *          <code>ToolTipManager</code> to show the tooltip
      * @return always returns <code>null</code>
@@ -3054,6 +3732,10 @@ public abstract class JComponent extends Container implements Serializable,
      * honor this property, some may choose to ignore it.
      * If {@code null}, the look and feel will choose a suitable location.
      *
+     * <p>
+     *  返回在此组件的坐标系中显示弹出菜单的首选位置由外观和感觉来尊重此属性,有些可能会选择忽略它。如果{@code null},外观和感觉将选择一个合适的位置
+     * 
+     * 
      * @param event the {@code MouseEvent} that triggered the popup to be
      *        shown, or {@code null} if the popup is not being shown as the
      *        result of a mouse event
@@ -3072,6 +3754,10 @@ public abstract class JComponent extends Container implements Serializable,
      * but it can be used to
      * cause different tooltips to be displayed differently.
      *
+     * <p>
+     *  返回应该用于显示tooltip的<code> JToolTip </code>的实例。组件通常不会覆盖此方法,但它可以用于导致不同的工具提示显示不同
+     * 
+     * 
      * @return the <code>JToolTip</code> used to display this toolTip
      */
     public JToolTip createToolTip() {
@@ -3086,6 +3772,11 @@ public abstract class JComponent extends Container implements Serializable,
      * the request, such as <code>JViewport</code>,
      * override this method and perform the scrolling.
      *
+     * <p>
+     * 转发<code> scrollRectToVisible()</code>消息到<code> JComponent </code>的可以为请求提供服务的父组件,例如<code> JViewport </code>
+     * ,覆盖此方法并执行滚动。
+     * 
+     * 
      * @param aRect the visible <code>Rectangle</code>
      * @see JViewport
      */
@@ -3146,6 +3837,20 @@ public abstract class JComponent extends Container implements Serializable,
      * The default value of the <code>autoScrolls</code>
      * property is <code>false</code>.
      *
+     * <p>
+     * 设置<code> autoscrolls </code>属性如果<code> true </code>鼠标拖动事件将被合成生成,当鼠标拖动到组件的边界之外,鼠标移动已暂停(当按钮继续保持下拉)合成事件使
+     * 得看起来拖动手势已经在组件的边界被穿过时建立的方向恢复了支持自动滚动的组件必须通过调用<code> scrollRectToVisible </code>来处理<code> mouseDragged </code>
+     * 包含鼠标事件位置的矩形所有支持项选择的Swing组件,通常显示在<code> JScrollPane </code>(<code> JTable </code>,<code> JList </code>
+     * ,<code> JTree </code> ,<code> JTextArea </code>和<code> JEditorPane </code>)已经以这种方式处理鼠标拖动事件要启用在任何其他组件中
+     * 的自动滚动,请添加鼠标移动侦听器调用<code> scrollRectToVisible </code >例如,给定一个<code> JPanel </code>,<code> myPanel </code>
+     * ：。
+     * <pre>
+     * MouseMotionListener doScrollRectToVisible = new MouseMotionAdapter(){public void mouseDragged(MouseEvent e){Rectangle r = new Rectangle(egetX(),egetY(),1,1); ((JPanel)egetSource())scrollRectToVisible(r); }
+     * }; myPaneladdMouseMotionListener(doScrollRectToVisible);。
+     * </pre>
+     *  属性<code> autoScrolls </code>的默认值为<code> false </code>
+     * 
+     * 
      * @param autoscrolls if true, synthetic mouse dragged events
      *   are generated when the mouse is dragged outside of a component's
      *   bounds and the mouse button continues to be held down; otherwise
@@ -3175,6 +3880,10 @@ public abstract class JComponent extends Container implements Serializable,
     /**
      * Gets the <code>autoscrolls</code> property.
      *
+     * <p>
+     *  获取<code> autoscrolls </code>属性
+     * 
+     * 
      * @return the value of the <code>autoscrolls</code> property
      * @see JViewport
      * @see #setAutoscrolls
@@ -3212,6 +3921,23 @@ public abstract class JComponent extends Container implements Serializable,
      * How to Use Drag and Drop and Data Transfer</a>,
      * a section in <em>The Java Tutorial</em>, for more information.
      *
+     * <p>
+     *  设置{@code TransferHandler},它支持通过剪切/复制/粘贴和拖放将数据传入和传出这个组件。如果组件不支持数据传输操作,这可能是{@code null}
+     * <p>
+     * 如果新的{@code TransferHandler}不是{@code null},此方法还会在组件上安装<b>新</b> {@code DropTarget},以通过{@code TransferHandler}
+     * 激活drop处理,并激活任何内置支持(例如计算和显示潜在丢弃位置)如果您不希望此组件以任何方式响应丢弃,您可以通过删除丢弃目标({@code setDropTarget(null )})或通过取消激活它
+     * ({@code getDropTaget()setActive(false)})。
+     * <p>
+     *  如果新的{@code TransferHandler}是{@code null},此方法将删除放置目标
+     * <p>
+     * 在两种情况下,此方法不修改放置目标：首先,如果此组件上的现有放置目标由开发人员显式设置为{@code非null}值。
+     * 第二,如果系统属性{@code suppressSwingDropSupport}是{@code true}系统属性的默认值为{@code false}。
+     * <p>
+     *  请参见
+     * <a href="https://docs.oracle.com/javase/tutorial/uiswing/dnd/index.html">
+     *  如何使用拖放和数据传输</a>,有关更多信息,请参阅<em> Java教程</em>中的一节
+     * 
+     * 
      * @param newHandler the new {@code TransferHandler}
      *
      * @see TransferHandler
@@ -3234,6 +3960,10 @@ public abstract class JComponent extends Container implements Serializable,
     /**
      * Gets the <code>transferHandler</code> property.
      *
+     * <p>
+     *  获取<code> transferHandler </code>属性
+     * 
+     * 
      * @return  the value of the <code>transferHandler</code> property
      *
      * @see TransferHandler
@@ -3252,6 +3982,11 @@ public abstract class JComponent extends Container implements Serializable,
      * will provide a default <code>DropLocation</code> containing just
      * the point.
      *
+     * <p>
+     * 计算此类型组件的自定义放置位置,表示给定点应该插入数据的位置</em> </code>如果此组件不计算自定义放置位置,则在此情况下,<code> TransferHandler </code>会提供一个
+     * 只包含点的默认<code> DropLocation </code>。
+     * 
+     * 
      * @param p the point to calculate a drop location for
      * @return the drop location, or <code>null</code>
      */
@@ -3283,6 +4018,15 @@ public abstract class JComponent extends Container implements Serializable,
      * said state, and of course return <code>null</code> since there's
      * no longer anything to store.
      *
+     * <p>
+     * 在DnD操作期间调用设置或清除丢弃位置在某些情况下,组件可能需要临时使用其内部选择以指示丢弃位置为了帮助实现此,此方法返回并接受作为参数状态对象此状态对象可以用来存储,以后恢复,选择状态这个方法返回的任
+     * 何方法都会在未来的调用中传递回来,作为状态参数如果它想让DnD系统继续存储相同的状态,它必须将每个time这是如何使用：。
+     * <p>
+     * 让我们说,在第一次调用这个方法时,组件决定保存一些状态(因为它将使用选择来显示一个drop索引)它可以返回一个状态对象给调用者封装任何保存的选择状态在第二次调用,让我们说下降位置被改变为别的东西组件不需
+     * 要恢复任何东西,所以它简单地传回相同的状态对象,让DnD系统继续存储它最后,让我们说这个方法是消息与< code> null </code>这意味着DnD现在完成了这个组件,这意味着它应该恢复状态在这一
+     * 点上,它可以使用状态参数来恢复所述状态,当然返回<code> null </code>因为没有什么可以存储。
+     * 
+     * 
      * @param location the drop location (as calculated by
      *        <code>dropLocationForPoint</code>) or <code>null</code>
      *        if there's no longer a valid drop location
@@ -3302,6 +4046,9 @@ public abstract class JComponent extends Container implements Serializable,
     /**
      * Called to indicate to this component that DnD is done.
      * Needed by <code>JTree</code>.
+     * <p>
+     * 调用以指示此组件DnD完成<code> JTree </code>需要
+     * 
      */
     void dndDone() {
     }
@@ -3313,6 +4060,11 @@ public abstract class JComponent extends Container implements Serializable,
      * {@link java.awt.Component#processMouseEvent(MouseEvent)}
      * for a complete description of this method.
      *
+     * <p>
+     *  通过将它们分发到任何已注册的<code> MouseListener </code>对象来处理在此组件上发生的鼠标事件,请参阅{@link javaawtComponent#processMouseEvent(MouseEvent)}
+     * ,了解此方法的完整说明。
+     * 
+     * 
      * @param       e the mouse event
      * @see         java.awt.Component#processMouseEvent
      * @since       1.5
@@ -3327,6 +4079,10 @@ public abstract class JComponent extends Container implements Serializable,
     /**
      * Processes mouse motion events, such as MouseEvent.MOUSE_DRAGGED.
      *
+     * <p>
+     *  处理鼠标运动事件,例如MouseEventMOUSE_DRAGGED
+     * 
+     * 
      * @param e the <code>MouseEvent</code>
      * @see MouseEvent
      */
@@ -3352,6 +4108,10 @@ public abstract class JComponent extends Container implements Serializable,
      * This is invoked by the <code>RepaintManager</code> if
      * <code>createImage</code> is called on the component.
      *
+     * <p>
+     *  这由<code> RepaintManager </code>调用,如果在组件上调用<code> createImage </code>
+     * 
+     * 
      * @param newValue true if the double buffer image was created from this component
      */
     void setCreatedDoubleBuffer(boolean newValue) {
@@ -3362,6 +4122,10 @@ public abstract class JComponent extends Container implements Serializable,
      * Returns true if the <code>RepaintManager</code>
      * created the double buffer image from the component.
      *
+     * <p>
+     *  如果<code> RepaintManager </code>从组件创建了双缓冲图像,则返回true
+     * 
+     * 
      * @return true if this component had a double buffer image, false otherwise
      */
     boolean getCreatedDoubleBuffer() {
@@ -3372,6 +4136,10 @@ public abstract class JComponent extends Container implements Serializable,
      * <code>ActionStandin</code> is used as a standin for
      * <code>ActionListeners</code> that are
      * added via <code>registerKeyboardAction</code>.
+     * <p>
+     *  <code> ActionStandin </code>用作通过<code> registerKeyboardAction </code>添加的<code> ActionListeners </code>
+     * 。
+     * 
      */
     final class ActionStandin implements Action {
         private final ActionListener actionListener;
@@ -3528,6 +4296,9 @@ public abstract class JComponent extends Container implements Serializable,
         /**
          * Updates internal state of the KeyboardState and returns true
          * if the event should be processed further.
+         * <p>
+         * 更新KeyboardState的内部状态,如果事件应进一步处理,则返回true
+         * 
          */
         static boolean shouldProcess(KeyEvent e) {
             switch (e.getID()) {
@@ -3611,9 +4382,14 @@ public abstract class JComponent extends Container implements Serializable,
 
     /*
      * --- Accessibility Support ---
+     * <p>
+     *  ---辅助功能
+     * 
      */
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by <code>java.awt.Component.setEnabled(boolean)</code>.
      */
@@ -3630,6 +4406,8 @@ public abstract class JComponent extends Container implements Serializable,
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by <code>java.awt.Component.setEnabled(boolean)</code>.
      */
@@ -3659,6 +4437,12 @@ public abstract class JComponent extends Container implements Serializable,
      * of all JavaBeans&trade;
      * has been added to the <code>java.beans</code> package.
      * Please see {@link java.beans.XMLEncoder}.
+     * <p>
+     *  JComponent的内部类用于提供对可访问性的默认支持此类不是意在由应用程序开发人员直接使用,而是仅意味着由组件开发人员
+     * <p>
+     *  <strong>警告：</strong>此类的序列化对象将不与未来的Swing版本兼容当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+     * 支持长期存储所有JavaBeans&trade;已添加到<code> javabeans </code>包中请参见{@link javabeansXMLEncoder}。
+     * 
      */
     public abstract class AccessibleJComponent extends AccessibleAWTContainer
        implements AccessibleExtendedComponent
@@ -3666,6 +4450,9 @@ public abstract class JComponent extends Container implements Serializable,
         /**
          * Though the class is abstract, this should be called by
          * all sub-classes.
+         * <p>
+         * 虽然类是抽象的,但是这应该被所有子类调用
+         * 
          */
         protected AccessibleJComponent() {
             super();
@@ -3675,12 +4462,18 @@ public abstract class JComponent extends Container implements Serializable,
          * Number of PropertyChangeListener objects registered. It's used
          * to add/remove ContainerListener and FocusListener to track
          * target JComponent's state
+         * <p>
+         *  注册的PropertyChangeListener对象的数量它用于添加/删除ContainerListener和FocusListener以跟踪目标JComponent的状态
+         * 
          */
         private volatile transient int propertyListenersCount = 0;
 
         /**
          * This field duplicates the function of the accessibleAWTFocusHandler field
          * in java.awt.Component.AccessibleAWTComponent, so it has been deprecated.
+         * <p>
+         *  此字段重复javaawtComponentAccessibleAWTComponent中的accessibleAWTFocusHandler字段的函数,因此已被弃用
+         * 
          */
         @Deprecated
         protected FocusListener accessibleFocusHandler = null;
@@ -3688,6 +4481,9 @@ public abstract class JComponent extends Container implements Serializable,
         /**
          * Fire PropertyChange listener, if one is registered,
          * when children added/removed.
+         * <p>
+         *  Fire PropertyChange侦听器(如果有)注册时,子项添加/删除
+         * 
          */
         protected class AccessibleContainerHandler
             implements ContainerListener {
@@ -3712,6 +4508,10 @@ public abstract class JComponent extends Container implements Serializable,
         /**
          * Fire PropertyChange listener, if one is registered,
          * when focus events happen
+         * <p>
+         *  Fire PropertyChange侦听器(如果已注册),当焦点事件发生时
+         * 
+         * 
          * @since 1.3
          */
         protected class AccessibleFocusHandler implements FocusListener {
@@ -3735,6 +4535,10 @@ public abstract class JComponent extends Container implements Serializable,
         /**
          * Adds a PropertyChangeListener to the listener list.
          *
+         * <p>
+         *  将PropertyChangeListener添加到侦听器列表
+         * 
+         * 
          * @param listener  the PropertyChangeListener to be added
          */
         public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -3752,6 +4556,10 @@ public abstract class JComponent extends Container implements Serializable,
          * This removes a PropertyChangeListener that was registered
          * for all properties.
          *
+         * <p>
+         *  从侦听器列表中删除PropertyChangeListener这将删除为所有属性注册的PropertyChangeListener
+         * 
+         * 
          * @param listener  the PropertyChangeListener to be removed
          */
         public void removePropertyChangeListener(PropertyChangeListener listener) {
@@ -3771,6 +4579,10 @@ public abstract class JComponent extends Container implements Serializable,
          * but not very pretty outside borders in compound border situations.
          * It's rather arbitrary, but hopefully decent UI programmers will
          * not create multiple titled borders for the same component.
+         * <p>
+         * 递归搜索一个具有非空标题的TitledBorder的边界层次结构(如果存在)。
+         * 这首先在内部边界,然后是外部边界进行深度优先搜索假设标题在边界内部非常漂亮,但不是非常漂亮复合边界的边界这是任意的,但希望可喜的UI程序员不会为同一组件创建多个标题边框。
+         * 
          */
         protected String getBorderTitle(Border b) {
             String s;
@@ -3799,6 +4611,11 @@ public abstract class JComponent extends Container implements Serializable,
          * If the object has a tooltip, the tooltip text may also be an
          * appropriate String to return.
          *
+         * <p>
+         * 获取此对象的可访问名称这应该几乎不会返回javaawtComponentgetName(),因为它通常不是本地化的名称,并且没有用户的意义如果对象基本上是一个文本对象(例如菜单项) ,可访问的名称应该是
+         * 对象的文本(例如,"save")如果对象有一个工具提示,工具提示文本也可能是一个合适的String返回。
+         * 
+         * 
          * @return the localized name of the object -- can be null if this
          *         object does not have a name
          * @see AccessibleContext#setAccessibleName
@@ -3843,6 +4660,11 @@ public abstract class JComponent extends Container implements Serializable,
          * text as the description, but something like "Saves the current
          * text document" instead).
          *
+         * <p>
+         * 获取此对象的可访问描述这应该是对该对象是什么 - 其对用户的含义的简明的本地化描述如果对象具有工具提示,则工具提示文本可以是要返回的适当字符串,假设它包含对象的简洁描述(而不仅仅是对象的名称 - 例如工
+         * 具栏上具有"保存"作为工具提示文本的"保存"图标不应返回工具提示文本作为描述,而是像"保存当前文本文档")。
+         * 
+         * 
          * @return the localized description of the object -- can be null if
          * this object does not have a description
          * @see AccessibleContext#setAccessibleDescription
@@ -3892,6 +4714,10 @@ public abstract class JComponent extends Container implements Serializable,
         /**
          * Gets the role of this object.
          *
+         * <p>
+         *  获取该对象的作用
+         * 
+         * 
          * @return an instance of AccessibleRole describing the role of the
          * object
          * @see AccessibleRole
@@ -3903,6 +4729,10 @@ public abstract class JComponent extends Container implements Serializable,
         /**
          * Gets the state of this object.
          *
+         * <p>
+         *  获取此对象的状态
+         * 
+         * 
          * @return an instance of AccessibleStateSet containing the current
          * state set of the object
          * @see AccessibleState
@@ -3920,6 +4750,10 @@ public abstract class JComponent extends Container implements Serializable,
          * of the children of this object implement Accessible, than this
          * method should return the number of children of this object.
          *
+         * <p>
+         *  返回对象中可访问的子对象的数量如果此对象的所有子对象实现Accessible,则此方法应返回此对象的子对象数
+         * 
+         * 
          * @return the number of accessible children in the object.
          */
         public int getAccessibleChildrenCount() {
@@ -3929,6 +4763,10 @@ public abstract class JComponent extends Container implements Serializable,
         /**
          * Returns the nth Accessible child of the object.
          *
+         * <p>
+         * 返回对象的第n个Accessible子项
+         * 
+         * 
          * @param i zero-based index of child
          * @return the nth Accessible child of the object
          */
@@ -3941,6 +4779,10 @@ public abstract class JComponent extends Container implements Serializable,
         /**
          * Returns the AccessibleExtendedComponent
          *
+         * <p>
+         *  返回AccessibleExtendedComponent
+         * 
+         * 
          * @return the AccessibleExtendedComponent
          */
         AccessibleExtendedComponent getAccessibleExtendedComponent() {
@@ -3950,6 +4792,10 @@ public abstract class JComponent extends Container implements Serializable,
         /**
          * Returns the tool tip text
          *
+         * <p>
+         *  返回工具提示文本
+         * 
+         * 
          * @return the tool tip text, if supported, of the object;
          * otherwise, null
          * @since 1.4
@@ -3961,6 +4807,10 @@ public abstract class JComponent extends Container implements Serializable,
         /**
          * Returns the titled border text
          *
+         * <p>
+         *  返回标题边框文本
+         * 
+         * 
          * @return the titled border text, if supported, of the object;
          * otherwise, null
          * @since 1.4
@@ -3977,6 +4827,10 @@ public abstract class JComponent extends Container implements Serializable,
         /**
          * Returns key bindings associated with this object
          *
+         * <p>
+         *  返回与此对象关联的键绑定
+         * 
+         * 
          * @return the key bindings, if supported, of the object;
          * otherwise, null
          * @see AccessibleKeyBinding
@@ -4005,6 +4859,10 @@ public abstract class JComponent extends Container implements Serializable,
      * <code>clientProperties</code> table doesn't exist, an empty one
      * will be created.
      *
+     * <p>
+     *  返回用于此组件的键/值"客户端属性"的<code> ArrayTable </code>如果<code> clientProperties </code>表不存在,将创建一个空的
+     * 
+     * 
      * @return an ArrayTable
      * @see #putClientProperty
      * @see #getClientProperty
@@ -4022,6 +4880,10 @@ public abstract class JComponent extends Container implements Serializable,
      * properties added with <code>putClientProperty</code> will return
      * a non-<code>null</code> value.
      *
+     * <p>
+     *  返回具有指定键的属性的值只有添加了<code> putClientProperty </code>的属性将返回非<code> null </code>值
+     * 
+     * 
      * @param key the being queried
      * @return the value of this property or <code>null</code>
      * @see #putClientProperty
@@ -4063,6 +4925,21 @@ public abstract class JComponent extends Container implements Serializable,
      * scale extensions to JComponent nor should be it considered an
      * alternative to subclassing when designing a new component.
      *
+     * <p>
+     *  向此组件添加任意键/值"客户端属性"
+     * <p>
+     * <code> get / putClientProperty </code>方法提供对一个小的每实例hashtable的访问调用者可以使用get / putClientProperty来注释由另一个模块
+     * 创建的组件例如,布局管理器可能以这种方式存储每个子约束。
+     * 例：。
+     * <pre>
+     *  componentAputClientProperty(""的左侧,componentB);
+     * </pre>
+     *  如果值是<code> null </code>,此方法将删除属性。
+     * 更改客户端属性与<code> PropertyChange </code>事件报告属性的名称(为了PropertyChange事件) keytoString()</code>。
+     * <p>
+     *  <code> clientProperty </code>字典不用于支持JComponent的大规模扩展,也不应该被视为设计新组件时子类化的替代方法
+     * 
+     * 
      * @param key the new client property key
      * @param value the new client property value; if <code>null</code>
      *          this method will remove the property
@@ -4109,6 +4986,10 @@ public abstract class JComponent extends Container implements Serializable,
      * This method is used primarily to set UI defaults for properties
      * with primitive types, where the values cannot be marked with
      * UIResource.
+     * <p>
+     * 如果属性尚未由客户端程序设置,则将具有指定名称的属性设置为指定的值此方法主要用于设置具有基本类型的属性的UI默认值,其中值不能用UIResource
+     * 
+     * 
      * @see LookAndFeel#installProperty
      * @param propertyName String containing the name of the property
      * @param value Object containing the property value
@@ -4153,6 +5034,12 @@ public abstract class JComponent extends Container implements Serializable,
      * This method may throw a {@code ClassCastException} if any {@code Object}
      * in {@code keystrokes} is not an {@code AWTKeyStroke}.
      *
+     * <p>
+     *  设置此组件的给定遍历操作的焦点遍历键有关此方法的完整说明,请参阅{@link javaawtComponent#setFocusTraversalKeys}
+     * <p>
+     *  如果{@code keystrokes}中的任何{@code Object}不是{@code AWTKeyStroke},此方法可能会抛出{@code ClassCastException}
+     * 
+     * 
      * @param id one of KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS,
      *        KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, or
      *        KeyboardFocusManager.UP_CYCLE_TRAVERSAL_KEYS
@@ -4185,12 +5072,19 @@ public abstract class JComponent extends Container implements Serializable,
     /* --- Transitional java.awt.Component Support ---
      * The methods and fields in this section will migrate to
      * java.awt.Component in the next JDK release.
+     * <p>
+     *  本节中的方法和字段将在下一个JDK版本中迁移到javaawtComponent
+     * 
      */
 
     /**
      * Returns true if this component is lightweight, that is, if it doesn't
      * have a native window system peer.
      *
+     * <p>
+     *  如果此组件是轻量级的,即如果它没有本地窗口系统对等体,则返回true
+     * 
+     * 
      * @return true if this component is lightweight
      */
     @SuppressWarnings("deprecation")
@@ -4200,6 +5094,8 @@ public abstract class JComponent extends Container implements Serializable,
 
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK 5,
      * replaced by <code>Component.setBounds(int, int, int, int)</code>.
      * <p>
@@ -4225,6 +5121,11 @@ public abstract class JComponent extends Container implements Serializable,
      * if the caller wants to avoid allocating a new <code>Rectangle</code>
      * object on the heap.
      *
+     * <p>
+     * 将此组件的边界存储在"返回值"<code> rv </code>中并返回<code> rv </code>如果<code> rv </code>代码> Rectangle </code>如果调用者想要避
+     * 免在堆上分配一个新的<code> Rectangle </code>对象,这个版本的<code> getBounds </code>。
+     * 
+     * 
      * @param rv the return value, modified to the component's bounds
      * @return <code>rv</code>; if <code>rv</code> is <code>null</code>
      *          return a newly created <code>Rectangle</code> with this
@@ -4249,6 +5150,12 @@ public abstract class JComponent extends Container implements Serializable,
      * is useful if the caller wants to avoid allocating a new
      * <code>Dimension</code> object on the heap.
      *
+     * <p>
+     *  将此组件的宽度/高度存储到"返回值"<code> rv </code>中并返回<code> rv </code>如果<code> rv </code>是<code> null </code> a ne
+     * w <code> Dimension </code>对象被分配如果调用者想要避免在堆上分配一个新的<code> Dimension </code>对象,这个版本的<code> getSize </code>
+     * 。
+     * 
+     * 
      * @param rv the return value, modified to the component's size
      * @return <code>rv</code>
      */
@@ -4271,6 +5178,11 @@ public abstract class JComponent extends Container implements Serializable,
      * if the caller wants to avoid allocating a new <code>Point</code>
      * object on the heap.
      *
+     * <p>
+     * 将此组件的x,y原点存储到"返回值"<code> rv </code>中并返回<code> rv </code> If <code> rv </code> is <code> null </code>如
+     * 果调用者想要避免在堆上分配新的<code> Point </code>对象,则这个版本的<code> getLocation </code>。
+     * 
+     * 
      * @param rv the return value, modified to the component's location
      * @return <code>rv</code>
      */
@@ -4292,6 +5204,11 @@ public abstract class JComponent extends Container implements Serializable,
      * <code>component.getLocation().x</code> because it doesn't cause any
      * heap allocations.
      *
+     * <p>
+     *  返回组件源的当前x坐标此方法比编写<code> componentgetBounds()x </code>或<code> componentgetLocation()x </code>更好,因为它不会
+     * 导致任何堆分配。
+     * 
+     * 
      * @return the current x coordinate of the component's origin
      */
     public int getX() { return super.getX(); }
@@ -4304,6 +5221,11 @@ public abstract class JComponent extends Container implements Serializable,
      * <code>component.getLocation().y</code> because it doesn't cause any
      * heap allocations.
      *
+     * <p>
+     *  返回组件源的当前y坐标此方法比编写<code> componentgetBounds()y </code>或<code> componentgetLocation()y </code>更好,因为它不会
+     * 导致任何堆分配。
+     * 
+     * 
      * @return the current y coordinate of the component's origin
      */
     public int getY() { return super.getY(); }
@@ -4316,6 +5238,11 @@ public abstract class JComponent extends Container implements Serializable,
      * <code>component.getSize().width</code> because it doesn't cause any
      * heap allocations.
      *
+     * <p>
+     * 返回此组件的当前宽度此方法优于编写<code> componentgetBounds()width </code>或<code> componentgetSize()width </code>,因为它不
+     * 会导致任何堆分配。
+     * 
+     * 
      * @return the current width of this component
      */
     public int getWidth() { return super.getWidth(); }
@@ -4328,6 +5255,11 @@ public abstract class JComponent extends Container implements Serializable,
      * <code>component.getSize().height</code> because it doesn't cause any
      * heap allocations.
      *
+     * <p>
+     *  返回此组件的当前高度此方法优于编写<code> componentgetBounds()height </code>或<code> componentgetSize()height </code>,因
+     * 为它不会导致任何堆分配。
+     * 
+     * 
      * @return the current height of this component
      */
     public int getHeight() { return super.getHeight(); }
@@ -4344,6 +5276,14 @@ public abstract class JComponent extends Container implements Serializable,
      * Subclasses that guarantee to always completely paint their contents
      * should override this method and return true.
      *
+     * <p>
+     *  如果此组件完全不透明,则返回true
+     * <p>
+     *  不透明组件描绘其矩形边界内的每个像素非透明组件仅绘制其像素的一个子集或根本不绘制,从而允许其下面的像素"透过"。因此,未完全绘制其像素的组件提供了透明度
+     * <p>
+     * 保证始终完全绘制其内容的子类应该覆盖此方法并返回true
+     * 
+     * 
      * @return true if this component is completely opaque
      * @see #setOpaque
      */
@@ -4361,6 +5301,13 @@ public abstract class JComponent extends Container implements Serializable,
      * <code>JComponent</code> subclasses (such as <code>JButton</code> and
      * <code>JTree</code>) is look-and-feel dependent.
      *
+     * <p>
+     *  如果为true,则组件绘制其边界内的每个像素。否则,组件可能不会绘制其某些或全部像素,从而允许底层像素显示
+     * <p>
+     *  这个属性的默认值为<code> JComponent </code>但是,这个属性在大多数标准的<code> JComponent </code>子类(如<code> JButton </code>代
+     * 码> JTree </code>)是外观和感觉依赖。
+     * 
+     * 
      * @param isOpaque  true if this component should be opaque
      * @see #isOpaque
      * @beaninfo
@@ -4385,6 +5332,11 @@ public abstract class JComponent extends Container implements Serializable,
      * components are always considered transparent, and heavyweight components
      * are always considered opaque.
      *
+     * <p>
+     * 如果指定的矩形被这个组件的不透明子元素完全隐藏,那么返回true只有直接子节点被考虑,更远的后代被忽略。
+     * 如果<code> JComponentisOpaque()</code>返回true,其他轻量级组件始终被认为是透明的,重量级组件总是被认为是不透明的。
+     * 
+     * 
      * @param x  x value of specified rectangle
      * @param y  y value of specified rectangle
      * @param width  width of specified rectangle
@@ -4415,6 +5367,9 @@ public abstract class JComponent extends Container implements Serializable,
                 } else {
                     /** Sometimes a heavy weight can have a bound larger than its peer size
                      *  so we should always draw under heavy weights
+                     * <p>
+                     *  所以我们应该总是在重量下绘制
+                     * 
                      */
                     return false;
                 }
@@ -4431,6 +5386,11 @@ public abstract class JComponent extends Container implements Serializable,
      * and all of its ancestors.  The return value is stored in
      * <code>visibleRect</code>.
      *
+     * <p>
+     *  返回<code> Component </code>的"可见矩形" - 组件<code> c </code>的可见矩形的交集及其所有祖先返回值存储在<code> visibleRect </code>
+     * 。
+     * 
+     * 
      * @param c  the component
      * @param visibleRect  a <code>Rectangle</code> computed as the
      *          intersection of all visible rectangles for the component
@@ -4459,6 +5419,10 @@ public abstract class JComponent extends Container implements Serializable,
      * and all of its ancestors.  The return value is stored in
      * <code>visibleRect</code>.
      *
+     * <p>
+     * 返回<code> Component </code>的"可见矩形矩形" - 这个组件的可见矩形和它的所有祖先的交集返回值存储在<code> visibleRect </code>
+     * 
+     * 
      * @param visibleRect a <code>Rectangle</code> computed as the
      *          intersection of all visible rectangles for this
      *          component and all of its ancestors -- this is the return
@@ -4476,6 +5440,11 @@ public abstract class JComponent extends Container implements Serializable,
      * <code>new Rectangle(0, 0, getWidth(), getHeight())</code>,
      * and all of its ancestors' visible rectangles.
      *
+     * <p>
+     *  返回<code> Component </code>的"visible rectangle" - 此组件的可见矩形,<code> new Rectangle(0,0,getWidth(),getHei
+     * ght())</code>的祖先的可见矩形。
+     * 
+     * 
      * @return the visible rectangle
      */
     public Rectangle getVisibleRect() {
@@ -4491,6 +5460,10 @@ public abstract class JComponent extends Container implements Serializable,
      * send the appropriate PropertyChangeEvent to any registered
      * PropertyChangeListeners.
      *
+     * <p>
+     *  支持报告布尔属性的绑定属性更改当绑定属性更改时,可以调用此方法,并且它将向任何已注册的PropertyChangeListeners发送适当的PropertyChangeEvent
+     * 
+     * 
      * @param propertyName the property whose value has changed
      * @param oldValue the property's previous value
      * @param newValue the property's new value
@@ -4507,6 +5480,10 @@ public abstract class JComponent extends Container implements Serializable,
      * send the appropriate PropertyChangeEvent to any registered
      * PropertyChangeListeners.
      *
+     * <p>
+     * 支持为整数属性报告绑定的属性更改当绑定属性更改时,可以调用此方法,并且它将向任何已注册的PropertyChangeListeners发送适当的PropertyChangeEvent
+     * 
+     * 
      * @param propertyName the property whose value has changed
      * @param oldValue the property's previous value
      * @param newValue the property's new value
@@ -4528,6 +5505,11 @@ public abstract class JComponent extends Container implements Serializable,
      * and it will send the appropriate <code>PropertyChangeEvent</code>
      * to any registered <code>VetoableChangeListeners</code>.
      *
+     * <p>
+     *  支持报告约束属性更改当约束属性更改时,可以调用此方法,并且它将向任何已注册的<code> VetoableChangeListeners </code>发送适当的<code> PropertyChan
+     * geEvent </code>。
+     * 
+     * 
      * @param propertyName  the name of the property that was listened on
      * @param oldValue  the old value of the property
      * @param newValue  the new value of the property
@@ -4548,6 +5530,10 @@ public abstract class JComponent extends Container implements Serializable,
      * Adds a <code>VetoableChangeListener</code> to the listener list.
      * The listener is registered for all properties.
      *
+     * <p>
+     *  向侦听器列表中添加<code> VetoableChangeListener </code>为所有属性注册侦听器
+     * 
+     * 
      * @param listener  the <code>VetoableChangeListener</code> to be added
      */
     public synchronized void addVetoableChangeListener(VetoableChangeListener listener) {
@@ -4563,6 +5549,10 @@ public abstract class JComponent extends Container implements Serializable,
      * This removes a <code>VetoableChangeListener</code> that was registered
      * for all properties.
      *
+     * <p>
+     *  从侦听器列表中删除<code> VetoableChangeListener </code>这会删除为所有属性注册的<code> VetoableChangeListener </code>
+     * 
+     * 
      * @param listener  the <code>VetoableChangeListener</code> to be removed
      */
     public synchronized void removeVetoableChangeListener(VetoableChangeListener listener) {
@@ -4577,6 +5567,10 @@ public abstract class JComponent extends Container implements Serializable,
      * Returns an array of all the vetoable change listeners
      * registered on this component.
      *
+     * <p>
+     * 返回在此组件上注册的所有vetoable更改侦听器的数组
+     * 
+     * 
      * @return all of the component's <code>VetoableChangeListener</code>s
      *         or an empty
      *         array if no vetoable change listeners are currently registered
@@ -4600,6 +5594,10 @@ public abstract class JComponent extends Container implements Serializable,
      * or <code>null</code> if this component has not
      * been added to any container.
      *
+     * <p>
+     *  如果此组件尚未添加到任何组件,则返回此组件的顶级祖先(包含<code> Window </code>或<code> Applet </code>)或<code> null </code>容器
+     * 
+     * 
      * @return the top-level <code>Container</code> that this component is in,
      *          or <code>null</code> if not in any container
      */
@@ -4624,6 +5622,11 @@ public abstract class JComponent extends Container implements Serializable,
      * Events are also sent when the component or its ancestors are added
      * or removed from the containment hierarchy.
      *
+     * <p>
+     *  寄存器<code> listener </code>,当它或它的任何祖先移动或变为可见或不可见时,它将接收<code> AncestorEvents </code>当组件或其祖先被添加或删除时从包含层
+     * 次结构。
+     * 
+     * 
      * @param listener  the <code>AncestorListener</code> to register
      * @see AncestorEvent
      */
@@ -4641,6 +5644,10 @@ public abstract class JComponent extends Container implements Serializable,
      * Unregisters <code>listener</code> so that it will no longer receive
      * <code>AncestorEvents</code>.
      *
+     * <p>
+     *  取消注册<code>侦听器</code>,以便它不再接收<code> AncestorEvents </code>
+     * 
+     * 
      * @param listener  the <code>AncestorListener</code> to be removed
      * @see #addAncestorListener
      */
@@ -4660,6 +5667,10 @@ public abstract class JComponent extends Container implements Serializable,
      * Returns an array of all the ancestor listeners
      * registered on this component.
      *
+     * <p>
+     *  返回在此组件上注册的所有祖代侦听器的数组
+     * 
+     * 
      * @return all of the component's <code>AncestorListener</code>s
      *         or an empty
      *         array if no ancestor listeners are currently registered
@@ -4696,6 +5707,17 @@ public abstract class JComponent extends Container implements Serializable,
      * <pre>MouseListener[] mls = (MouseListener[])(c.getListeners(MouseListener.class));</pre>
      * If no such listeners exist, this method returns an empty array.
      *
+     * <p>
+     * 返回当前在此<code> JComponent </code> <code> <em> </em>侦听器</code>上注册为<code> <em> Foo </em> / code>使用<code> 
+     * add <em> </em>侦听器</code>方法注册。
+     * 
+     * <p>
+     * 
+     *  您可以使用类文字指定<code> listenerType </code>参数,例如<code> <em> Foo </em> Listenerclass </code>例如,可以查询<code> J
+     * Component </code > <code> c </code>代表鼠标监听器：<pre> MouseListener [] mls =(MouseListener [])(cgetListene
+     * rs(MouseListenerclass)); </pre>返回一个空数组。
+     * 
+     * 
      * @param listenerType the type of listeners requested; this parameter
      *          should specify an interface that descends from
      *          <code>java.util.EventListener</code>
@@ -4743,6 +5765,10 @@ public abstract class JComponent extends Container implements Serializable,
      * This method is called by the toolkit internally and should
      * not be called directly by programs.
      *
+     * <p>
+     * 通知此组件它现在有一个父组件当调用此方法时,父组件链使用<code> KeyboardAction </code>事件监听器设置此方法由工具箱在内部调用,不应直接调用程式
+     * 
+     * 
      * @see #registerKeyboardAction
      */
     public void addNotify() {
@@ -4761,6 +5787,10 @@ public abstract class JComponent extends Container implements Serializable,
      * This method is called by the toolkit internally and should
      * not be called directly by programs.
      *
+     * <p>
+     *  通知此组件它不再有父组件调用此方法时,删除父组件链中设置的任何<code> KeyboardAction </code>此方法由内部工具包调用,不应该程序直接调用
+     * 
+     * 
      * @see #registerKeyboardAction
      */
     public void removeNotify() {
@@ -4788,6 +5818,10 @@ public abstract class JComponent extends Container implements Serializable,
      * is showing.  The component will be repainted after all of the
      * currently pending events have been dispatched.
      *
+     * <p>
+     *  如果组件正在显示,则将指定区域添加到脏区列表。在分派所有当前挂起的事件之后,将重新绘制组件
+     * 
+     * 
      * @param tm  this parameter is not used
      * @param x  the x value of the dirty region
      * @param y  the y value of the dirty region
@@ -4808,6 +5842,10 @@ public abstract class JComponent extends Container implements Serializable,
      * is showing.  The component will be repainted after all of the
      * currently pending events have been dispatched.
      *
+     * <p>
+     * 如果组件正在显示,则将指定区域添加到脏区列表。在分派所有当前挂起的事件之后,将重新绘制组件
+     * 
+     * 
      * @param  r a <code>Rectangle</code> containing the dirty region
      * @see #isPaintingOrigin()
      * @see java.awt.Component#isShowing
@@ -4838,6 +5876,17 @@ public abstract class JComponent extends Container implements Serializable,
      * longer need to invoke <code>validate</code> to get the contents of the
      * GUI to update.
      *
+     * <p>
+     *  支持延迟自动布局
+     * <p>
+     *  调用<code> invalidate </code>,然后将此组件的<code> validateRoot </code>添加到需要验证的组件列表。
+     * 验证将在所有当前挂起的事件被分派后发生换句话说,此方法之后被调用,当向上走这个组件的包含层次结构时,第一个validateRoot(如果有)被验证默认情况下,<code> JRootPane </code>
+     * ,<code> JScrollPane </code>和<code> JTextField < code>从<code> isValidateRoot </code>返回true。
+     *  调用<code> invalidate </code>,然后将此组件的<code> validateRoot </code>添加到需要验证的组件列表。
+     * <p>
+     * 当属性值发生更改,使得此组件的大小,位置或内部布局受到影响时,此方法将自动在此组件上调用此自动更新与AWT不同,因为程序通常不再需要调用<code> validate <代码>获取GUI的内容进行更新。
+     * 
+     * 
      * @see java.awt.Component#invalidate
      * @see java.awt.Container#validate
      * @see #isValidateRoot
@@ -4878,6 +5927,11 @@ public abstract class JComponent extends Container implements Serializable,
      * Returns false by default.  <code>JScrollPane</code> overrides
      * this method and returns true.
      *
+     * <p>
+     *  如果此方法返回true,则此组件的后代的<code> revalidate </code>调用将导致从此根开始的整个树被验证返回false默认情况下<code> JScrollPane </code>
+     * 覆盖此方法并返回true。
+     * 
+     * 
      * @return always returns false
      * @see #revalidate
      * @see java.awt.Component#invalidate
@@ -4898,6 +5952,13 @@ public abstract class JComponent extends Container implements Serializable,
      * guarantee, such as <code>JLayeredPane</code>,
      * should override this method to return false.
      *
+     * <p>
+     * 返回true如果这个组件tile它的孩子 - 也就是说,如果它可以保证孩子不会重叠。
+     * 在这种常见的情况下,repaintting系统是非常有效的<code> JComponent </code>子类,不能做出这个保证,例如<code> JLayeredPane </code>,应该覆盖此
+     * 方法以返回false。
+     * 返回true如果这个组件tile它的孩子 - 也就是说,如果它可以保证孩子不会重叠。
+     * 
+     * 
      * @return always returns true
      */
     public boolean isOptimizedDrawingEnabled() {
@@ -4916,6 +5977,15 @@ public abstract class JComponent extends Container implements Serializable,
      * {@code JComponent} subclasses that need to be painted when any of their
      * children are repainted should override this method to return {@code true}.
      *
+     * <p>
+     *  返回{@code true}如果在子组件上触发的绘画应该导致绘画来自此组件或其祖先之一
+     * <p>
+     *  在Swing组件上调用{@link #repaint}或{@link #paintImmediately(int,int,int,int)}将导致调用{@link JComponent#paintImmediately(int,int,int,int) {@code isPaintingOrigin()}
+     * 返回{@code true}的第一个祖先,如果有任何。
+     * <p>
+     * {@code JComponent}子类,当他们的任何子被重绘时需要被绘制,应该覆盖此方法返回{@code true}
+     * 
+     * 
      * @return always returns {@code false}
      *
      * @see #paintImmediately(int, int, int, int)
@@ -4937,6 +6007,14 @@ public abstract class JComponent extends Container implements Serializable,
      * This method is to be overridden when the dirty region needs to be changed
      * for components that are painting origins.
      *
+     * <p>
+     *  立即在此组件及其与该区域重叠的所有后代中绘制指定的区域
+     * <p>
+     *  很少需要调用此方法在大多数情况下,调用重绘更有效率,这会延迟实际绘画,并且可以将多余的请求折叠到单个绘图调用中此方法在调度当前事件时需要更新显示时非常有用
+     * <p>
+     *  当需要为绘制源的组件更改脏区时,将覆盖此方法
+     * 
+     * 
      * @param x  the x value of the region to be painted
      * @param y  the y value of the region to be painted
      * @param w  the width of the region to be painted
@@ -4984,6 +6062,10 @@ public abstract class JComponent extends Container implements Serializable,
     /**
      * Paints the specified region now.
      *
+     * <p>
+     *  现在绘制指定的区域
+     * 
+     * 
      * @param r a <code>Rectangle</code> containing the region to be painted
      */
     public void paintImmediately(Rectangle r) {
@@ -4996,6 +6078,10 @@ public abstract class JComponent extends Container implements Serializable,
      * under another component, so they would always return true.
      * Most components will want to return false, hence that is the default.
      *
+     * <p>
+     * 返回这个组件是否应该保证在顶部例如,对于<code> Menu </code>在另一个组件下弹出是没有意义的,所以他们总是返回true大多数组件将返回false,因此这是默认值
+     * 
+     * 
      * @return always returns false
      */
     // package private
@@ -5205,6 +6291,9 @@ public abstract class JComponent extends Container implements Serializable,
      * This method is package-private for RepaintManager.PaintManager and
      * its subclasses to call, it is NOT intended for general use outside
      * of that.
+     * <p>
+     *  绘制到指定的图形这不设置剪辑,它不调整图形,呼叫者必须首先这个方法是包专用的RepaintManagerPaintManager及其子类调用,它不是一般用于外面
+     * 
      */
     void paintToOffscreen(Graphics g, int x, int y, int w, int h, int maxX,
                           int maxY) {
@@ -5235,6 +6324,10 @@ public abstract class JComponent extends Container implements Serializable,
      * Returns whether or not the region of the specified component is
      * obscured by a sibling.
      *
+     * <p>
+     *  返回指定组件的区域是否被同级对象隐藏
+     * 
+     * 
      * @return NOT_OBSCURED if non of the siblings above the Component obscure
      *         it, COMPLETELY_OBSCURED if one of the siblings completely
      *         obscures the Component or PARTIALLY_OBSCURED if the Component is
@@ -5289,6 +6382,10 @@ public abstract class JComponent extends Container implements Serializable,
      * sibling. This is only checked if <code>isOptimizedDrawingEnabled</code>
      * returns false.
      *
+     * <p>
+     * 返回true,这意味着在检查一个孩子是否应该被绘之前,首先检查孩子是否不被另一个兄弟姐妹遮蔽。这只有在<code> isOptimizedDrawingEnabled </code>返回false
+     * 
+     * 
      * @return always returns true
      */
     boolean checkIfChildObscuredBySibling() {
@@ -5328,6 +6425,11 @@ public abstract class JComponent extends Container implements Serializable,
      *  If a <code>Component</code> is buffered and one of its ancestor
      *  is also buffered, the ancestor buffer will be used.
      *
+     * <p>
+     *  设置此组件是否应使用缓冲区来绘制如果设置为true,则此组件中的所有绘图都将在离屏绘画缓冲区中完成。
+     * 离屏绘制缓冲区将被复制到屏幕上如果一个<code> Component </code>是缓冲的,并且其祖先之一也被缓冲,则将使用祖先缓冲器。
+     * 
+     * 
      *  @param aFlag if true, set this component to be double buffered
      */
     public void setDoubleBuffered(boolean aFlag) {
@@ -5337,6 +6439,10 @@ public abstract class JComponent extends Container implements Serializable,
     /**
      * Returns whether this component should use a buffer to paint.
      *
+     * <p>
+     *  返回此组件是否应使用缓冲区来绘制
+     * 
+     * 
      * @return true if this component is double buffered, otherwise false
      */
     public boolean isDoubleBuffered() {
@@ -5346,6 +6452,10 @@ public abstract class JComponent extends Container implements Serializable,
     /**
      * Returns the <code>JRootPane</code> ancestor for this component.
      *
+     * <p>
+     *  返回此组件的<code> JRootPane </code>祖先
+     * 
+     * 
      * @return the <code>JRootPane</code> that contains this component,
      *          or <code>null</code> if no <code>JRootPane</code> is found
      */
@@ -5359,6 +6469,9 @@ public abstract class JComponent extends Container implements Serializable,
     /**
      * This is called from Component by way of reflection. Do NOT change
      * the name unless you change the code in Component as well.
+     * <p>
+     * 这通过反射从组件调用不要更改名称,除非您更改组件中的代码
+     * 
      */
     void compWriteObjectNotify() {
         byte count = JComponent.getWriteObjCounter(this);
@@ -5375,6 +6488,9 @@ public abstract class JComponent extends Container implements Serializable,
          * because it would introduce public-api for a less-than-desirable
          * serialization scheme, so we compromise with this 'instanceof' hack
          * for now.
+         * <p>
+         *  能够覆盖这个包私有方法其他组件的方式我们不想让这个方法保护,因为它会引入public-api为一个不太理想的序列化方案,所以我们妥协这个'instanceof' hack现在
+         * 
          */
         if (getToolTipText() != null ||
             this instanceof javax.swing.table.JTableHeader) {
@@ -5395,6 +6511,14 @@ public abstract class JComponent extends Container implements Serializable,
      * they're stored in the static <code>readObjectCallbacks</code>
      * hashtable.
      *
+     * <p>
+     *  这个对象是在对象的完整图(包括至少一个<code> JComponent </code>)被读取之后调用的<code> ObjectInputStream </code>回调它设置读取的每个Swing
+     * 组件的UI属性到当前默认值,使用<code> updateUI </code>。
+     * <p>
+     * 当读取每个组件时,我们在这里记录根组件的当前集合,在根向量中注意,每个<code> ObjectInputStream </code>只有一个<code> ReadObjectCallback </code>
+     * 静态<code> readObjectCallbacks </code>散列表。
+     * 
+     * 
      * @see java.io.ObjectInputStream#registerValidation
      * @see SwingUtilities#updateComponentTreeUI
      */
@@ -5413,6 +6537,9 @@ public abstract class JComponent extends Container implements Serializable,
          * of objects has been read in.  It initializes
          * the UI property of all of the copmonents with
          * <code>SwingUtilities.updateComponentTreeUI</code>.
+         * <p>
+         *  这是在读取对象的整个图之后调用的方法。使用<code> SwingUtilitiesupdateComponentTreeUI </code>初始化所有的copmonents的UI属性。
+         * 
          */
         public void validateObject() throws InvalidObjectException {
             try {
@@ -5429,12 +6556,19 @@ public abstract class JComponent extends Container implements Serializable,
          * If <code>c</code> isn't a descendant of a component we've already
          * seen, then add it to the roots <code>Vector</code>.
          *
+         * <p>
+         *  如果<code> c </code>不是我们已经看到的组件的后代,那么将它添加到根<code> Vector </code>
+         * 
+         * 
          * @param c the <code>JComponent</code> to add
          */
         private void registerComponent(JComponent c)
         {
             /* If the Component c is a descendant of one of the
              * existing roots (or it IS an existing root), we're done.
+             * <p>
+             *  现有根(或它是现有的根),我们完成了
+             * 
              */
             for (JComponent root : roots) {
                 for(Component p = c; p != null; p = p.getParent()) {
@@ -5447,6 +6581,9 @@ public abstract class JComponent extends Container implements Serializable,
             /* Otherwise: if Component c is an ancestor of any of the
              * existing roots then remove them and add c (the "new root")
              * to the roots vector.
+             * <p>
+             *  现有根然后删除它们,并将c("新根")添加到根向量
+             * 
              */
             for(int i = 0; i < roots.size(); i++) {
                 JComponent root = roots.elementAt(i);
@@ -5468,6 +6605,10 @@ public abstract class JComponent extends Container implements Serializable,
      * callback to update the UI for the entire tree of components
      * after they've all been read in.
      *
+     * <p>
+     * 我们使用<code> ObjectInputStream </code>"registerValidation"回调来更新组件的整个树的UI,因为它们都已读入
+     * 
+     * 
      * @param s  the <code>ObjectInputStream</code> from which to read
      */
     private void readObject(ObjectInputStream s)
@@ -5480,6 +6621,10 @@ public abstract class JComponent extends Container implements Serializable,
          * graph of objects, then create a callback and stash it
          * in the readObjectCallbacks table.  Note that the ReadObjectCallback
          * constructor takes care of calling s.registerValidation().
+         * <p>
+         *  这是对这个对象图的第一次调用JComponentreadObject(),然后在readObjectCallbacks表中创建一个回调并存储它。
+         * 注意ReadObjectCallback构造函数负责调用sregisterValidation()。
+         * 
          */
         ReadObjectCallback cb = readObjectCallbacks.get(s);
         if (cb == null) {
@@ -5518,6 +6663,11 @@ public abstract class JComponent extends Container implements Serializable,
      * and we don't want to restore the UI until the most derived
      * <code>JComponent</code> subclass has been been stored.
      *
+     * <p>
+     *  在将<code> JComponent </code>写入<code> ObjectOutputStream </code>之前,我们暂时卸载其UI这是很棘手的,因为我们要在任何<code> JCom
+     * ponent </code>的子类(或其<code> LayoutManager </code>等),并且我们不想恢复UI,直到最终派生的<code> JComponent </code>子类已经存储。
+     * 
+     * 
      * @param s the <code>ObjectOutputStream</code> in which to write
      */
     private void writeObject(ObjectOutputStream s) throws IOException {
@@ -5541,6 +6691,11 @@ public abstract class JComponent extends Container implements Serializable,
      * implementations. The returned string may be empty but may not
      * be <code>null</code>.
      *
+     * <p>
+     * 返回此<code> JComponent </code>的字符串表示形式此方法仅用于调试目的,返回的字符串的内容和格式可能因实现而异。
+     * 返回的字符串可能为空,但可能不是< code> null </code>。
+     * 
+     * 
      * @return  a string representation of this <code>JComponent</code>
      */
     protected String paramString() {
@@ -5565,6 +6720,7 @@ public abstract class JComponent extends Container implements Serializable,
 
     /**
      * {@inheritDoc}
+     * <p>
      */
     @Override
     @Deprecated

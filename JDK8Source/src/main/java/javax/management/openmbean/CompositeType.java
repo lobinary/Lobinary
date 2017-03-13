@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,10 @@ import java.util.Iterator;
  * whose instances describe the types of {@link CompositeData CompositeData} values.
  *
  *
+ * <p>
+ *  <code> CompositeType </code>类是<i> open type </i>类,其实例描述{@link CompositeData CompositeData}值的类型
+ * 
+ * 
  * @since 1.5
  */
 public class CompositeType extends OpenType<CompositeData> {
@@ -51,16 +56,22 @@ public class CompositeType extends OpenType<CompositeData> {
     static final long serialVersionUID = -5366242454346948798L;
 
     /**
+    /* <p>
+    /* 
      * @serial Sorted mapping of the item names to their descriptions
      */
     private TreeMap<String,String> nameToDescription;
 
     /**
+    /* <p>
+    /* 
      * @serial Sorted mapping of the item names to their open types
      */
     private TreeMap<String,OpenType<?>> nameToType;
 
     /* As this instance is immutable, following three values need only
+    /* <p>
+    /* 
      * be calculated once.  */
     private transient Integer myHashCode = null;
     private transient String  myToString = null;
@@ -82,6 +93,16 @@ public class CompositeType extends OpenType<CompositeData> {
      * (ie the class name returned by the {@link OpenType#getClassName() getClassName} method)
      * is set to the string value returned by <code>CompositeData.class.getName()</code>.
      * <p>
+     * <p>
+     *  构造一个<code> CompositeType </code>实例,检查给定参数的有效性下面描述了每个参数的有效性约束
+     * <p>
+     *  请注意,内部复制了三个数组参数<var> itemNames </var>,<var> itemDescriptions </var>和<var> itemTypes </var>的内容,以便调用者对
+     * 这些数组进行任何后续修改这个构造函数对构造的<code> CompositeType </code>实例没有影响。
+     * <p>
+     * 该复合类型表示的复合数据值的Ja​​va类名称(即{@link OpenType#getClassName()getClassName}方法返回的类名称)设置为<code> CompositeDatac
+     * lassgetName()</code>。
+     * <p>
+     * 
      * @param  typeName  The name given to the composite type this instance represents; cannot be a null or empty string.
      * <br>&nbsp;
      * @param  description  The human readable description of the composite type this instance represents;
@@ -183,6 +204,10 @@ public class CompositeType extends OpenType<CompositeData> {
      * Returns <code>true</code> if this <code>CompositeType</code> instance defines an item
      * whose name is <var>itemName</var>.
      *
+     * <p>
+     *  如果<code> CompositeType </code>实例定义名称为<var> itemName </var>的项目,则返回<code> true </code>
+     * 
+     * 
      * @param itemName the name of the item.
      *
      * @return true if an item of this name is present.
@@ -200,6 +225,11 @@ public class CompositeType extends OpenType<CompositeData> {
      * or <code>null</code> if this <code>CompositeType</code> instance does not define any item
      * whose name is <var>itemName</var>.
      *
+     * <p>
+     *  如果此<> CompositeType </code>实例未定义任何名称为<var> itemName的项目,则返回名称为<var> itemName </var>或<code> null </code>
+     *  </var>。
+     * 
+     * 
      * @param itemName the name of the item.
      *
      * @return the description.
@@ -217,6 +247,11 @@ public class CompositeType extends OpenType<CompositeData> {
      * or <code>null</code> if this <code>CompositeType</code> instance does not define any item
      * whose name is <var>itemName</var>.
      *
+     * <p>
+     *  返回名称为<var> itemName </var>或<code> null </code>的项目的<i>打开类型</i>,如果此<> CompositeType </code>实例未定义任何名称为<var>
+     *  itemName </var>的项目。
+     * 
+     * 
      * @param itemName the name of the time.
      *
      * @return the type.
@@ -233,6 +268,10 @@ public class CompositeType extends OpenType<CompositeData> {
      * Returns an unmodifiable Set view of all the item names defined by this <code>CompositeType</code> instance.
      * The set's iterator will return the item names in ascending order.
      *
+     * <p>
+     * 返回由此<code> CompositeType </code>实例定义的所有项目名称的不可修改的Set视图集合的迭代器将按升序返回项目名称
+     * 
+     * 
      * @return a {@link Set} of {@link String}.
      */
     public Set<String> keySet() {
@@ -292,6 +331,34 @@ public class CompositeType extends OpenType<CompositeData> {
      * CompositeData} without making it invalid for a {@code CompositeType}
      * that does not have those items.</p>
      *
+     * <p>
+     *  测试<var> obj </var>是否是可由此<code> CompositeType </code>实例描述的值
+     * 
+     *  <p>如果<var> obj </var>为null或不是<code> javaxmanagementopenmbeanCompositeData </code>的实例,<code> isValue 
+     * </code>返回<code> false </code>。
+     * 
+     *  <p>如果<var> obj </var>是<code> javaxmanagementopenmbeanCompositeData </code>的实例,则让{@code ct}成为{@link CompositeData#getCompositeType }
+     * 如果{@code this}可以从</em> {@code ct}分配,结果为true。
+     * </p>。
+     * 
+     * <ul>
+     * <li> {@ link #getTypeName()thisgetTypeName()} equals {@code ctgetTypeName()},并且<li>在{@code this}中没有出现
+     * 在{@code ct}中的项目名称和<li>对{@code this}中的每个项目,其类型可以从{@code ct}中相应项目的类型分配。
+     * </ul>
+     * 
+     *  <p>如果{@code TabularType}具有相同的{@linkplain TabularType#getTypeName()typeName}和{@linkplain TabularType#getIndexNames()索引名称列表}
+     * ,{@code TabularType}可以从另一个{@code TabularType} @linkplain TabularType#getRowType()row type}的第一个是可从第二个行
+     * 的类型中赋值的。
+     * 
+     * <p>如果{@code ArrayType}具有相同的{@linkplain ArrayType#getDimension()dimension},则可以从另一个{@code ArrayType}赋值;
+     * 并且都是{@linkplain ArrayType#isPrimitiveArray()原始数组}或两者都不是;并且第一个的{@linkplain ArrayType#getElementOpenType()元素类型}
+     * 可以从第二个的元素类型。
+     * 
+     *  <p>在其他任何情况下,{@code OpenType}只能在其他{@code OpenType}相等时分配。</p>
+     * 
+     *  <p>这些规则意味着,对于没有这些项目的{@code CompositeType},可以将额外的项目添加到{@code CompositeData},而不使其无效。</p>
+     * 
+     * 
      * @param  obj  the value whose open type is to be tested for compatibility
      * with this <code>CompositeType</code> instance.
      *
@@ -324,6 +391,11 @@ public class CompositeType extends OpenType<CompositeData> {
      * the same name and assignable type.  There can be additional
      * items in the given type, which are ignored.
      *
+     * <p>
+     * 测试给定类型的值是否可以分配给此开放类型如果给定类型也是具有相同名称({@link #getTypeName()})的CompositeType,则结果为true,并且此类型中的每个项目也存在在给定类型
+     * 中具有相同的名称和可分配类型在给定类型中可以有其他项目,它们被忽略。
+     * 
+     * 
      * @param ot the type to be tested.
      *
      * @return true if {@code ot} is assignable to this open type.
@@ -357,6 +429,16 @@ public class CompositeType extends OpenType<CompositeData> {
      * <li>their items' names and types are equal</li>
      * </ul>
      * <br>&nbsp;
+     * <p>
+     *  将指定的<code> obj </code>参数与此<code> CompositeType </code>实例进行比较以确保相等
+     * <p>
+     *  当且仅当所有以下语句都为真时,两个<code> CompositeType </code>实例才相等：
+     * <ul>
+     *  <li>其类型名称相等</li> <li>其项目的名称和类型相等</li>
+     * </ul>
+     *  <br>&nbsp;
+     * 
+     * 
      * @param  obj  the object to be compared for equality with this <code>CompositeType</code> instance;
      *              if <var>obj</var> is <code>null</code>, <code>equals</code> returns <code>false</code>.
      *
@@ -411,6 +493,16 @@ public class CompositeType extends OpenType<CompositeData> {
      * As <code>CompositeType</code> instances are immutable, the hash code for this instance is calculated once,
      * on the first call to <code>hashCode</code>, and then the same value is returned for subsequent calls.
      *
+     * <p>
+     *  返回此<> CompositeType </code>实例的哈希码值
+     * <p>
+     * <code> CompositeType </code>实例的哈希码是在<code> equals </code>比较中使用的所有信息元素的哈希码的总和(即：名称,项目名称,项目类型)。
+     * 这确保对于任何两个<code> CompositeType </code>实例<code> t1 </code>,<code> t1equals(t2)</code>意味着<code> t1hashCo
+     * de()== t2hashCode()</code> <code> t2 </code>,根据方法的一般合同{@link Object#hashCode()ObjecthashCode()}。
+     * <code> CompositeType </code>实例的哈希码是在<code> equals </code>比较中使用的所有信息元素的哈希码的总和(即：名称,项目名称,项目类型)。
+     * <p>
+     *  由于<code> CompositeType </code>实例是不可变的,所以在第一次调用<code> hashCode </code>时计算一次该实例的哈希码,然后为后续调用返回相同的值
+     * 
      * @return  the hash code value for this <code>CompositeType</code> instance
      */
     public int hashCode() {
@@ -442,6 +534,9 @@ public class CompositeType extends OpenType<CompositeData> {
      * As <code>CompositeType</code> instances are immutable, the string representation for this instance is calculated once,
      * on the first call to <code>toString</code>, and then the same value is returned for subsequent calls.
      *
+     * <p>
+     * 
+     * 
      * @return  a string representation of this <code>CompositeType</code> instance
      */
     public String toString() {

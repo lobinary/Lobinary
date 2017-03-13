@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2005, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -52,6 +53,22 @@ package org.xml.sax;
  * <p>Since this exception is a subclass of {@link org.xml.sax.SAXException
  * SAXException}, it inherits the ability to wrap another exception.</p>
  *
+ * <p>
+ *  封装XML解析错误或警告
+ * 
+ * <blockquote>
+ *  <em>此模块(源代码和文档)位于公共域中,并且随附<strong>无保证</strong> </em>请参阅<a href='http://wwwsaxprojectorg'> http： / ww
+ * wsaxprojectorg </a>了解更多信息。
+ * </blockquote>
+ * 
+ * <p>此异常可能包括在原始XML文档中查找错误的信息,如同它来自{@link Locator}对象。
+ * 请注意,虽然应用程序将接收到一个SAXParseException作为{@link中的处理程序的参数orgxmlsaxErrorHandler ErrorHandler}接口,应用程序实际上并不需要抛出
+ * 异常;相反,它可以简单地读取其中的信息,并采取不同的操作</p>。
+ * <p>此异常可能包括在原始XML文档中查找错误的信息,如同它来自{@link Locator}对象。
+ * 
+ *  <p>由于此异常是{@link orgxmlsaxSAXException SAXException}的子类,它会继承包装另一个异常的能力</p>
+ * 
+ * 
  * @since SAX 1.0
  * @author David Megginson
  * @version 2.0.1 (sax2r2)
@@ -74,6 +91,12 @@ public class SAXParseException extends SAXException {
      * creating its own exception from within a {@link org.xml.sax.ContentHandler
      * ContentHandler} callback.</p>
      *
+     * <p>
+     *  从消息和定位器创建新的SAXParseException
+     * 
+     * <p>当应用程序在{@link orgxmlsaxContentHandler ContentHandler}回调中创建自己的异常时,此构造函数尤其有用</p>
+     * 
+     * 
      * @param message The error or warning message.
      * @param locator The locator object for the error or warning (may be
      *        null).
@@ -98,6 +121,13 @@ public class SAXParseException extends SAXException {
      * ContentHandler} callback, and needs to wrap an existing exception that is not a
      * subclass of {@link org.xml.sax.SAXException SAXException}.</p>
      *
+     * <p>
+     *  在SAXParseException中包含现有异常
+     * 
+     *  <p>当应用程序在{@link orgxmlsaxContentHandler ContentHandler}回调中创建自己的异常,并且需要包装不是{@link orgxmlsaxSAXException SAXException}
+     * 的子类的现有异常时,此构造函数尤其有用</p>。
+     * 
+     * 
      * @param message The error or warning message, or null to
      *                use the message from the embedded exception.
      * @param locator The locator object for the error or warning (may be
@@ -128,6 +158,14 @@ public class SAXParseException extends SAXException {
      * caller must resolve it fully before creating the exception.</p>
      *
      *
+     * <p>
+     *  创建一个新的SAXParseException
+     * 
+     *  <p>此构造函数对解析器写入程序最有用</p>
+     * 
+     * <p>除了消息之外的所有参数都好像是由{@link Locator}提供的。例如,如果系统标识符是一个URL(包括相对的文件名),调用者必须在创建异常之前完全解决它</p >
+     * 
+     * 
      * @param message The error or warning message.
      * @param publicId The public identifier of the entity that generated
      *                 the error or warning.
@@ -158,6 +196,14 @@ public class SAXParseException extends SAXException {
      * system identifier is a URL (including relative filename), the
      * caller must resolve it fully before creating the exception.</p>
      *
+     * <p>
+     *  创建具有嵌入式异常的新SAXParseException
+     * 
+     *  <p>此构造函数对于需要包装不是{@link orgxmlsaxSAXException SAXException}的子类的异常的解析器写入程序非常有用</p>
+     * 
+     *  <p>除了消息和异常之外的所有参数都好像是由{@link Locator}提供的。例如,如果系统标识符是一个URL(包括相对文件名),调用者必须在创建异常之前完全解决它< / p>
+     * 
+     * 
      * @param message The error or warning message, or null to use
      *                the message from the embedded exception.
      * @param publicId The public identifier of the entity that generated
@@ -181,6 +227,10 @@ public class SAXParseException extends SAXException {
     /**
      * Internal initialization method.
      *
+     * <p>
+     *  内部初始化方法
+     * 
+     * 
      * @param publicId The public identifier of the entity which generated the exception,
      *        or null.
      * @param systemId The system identifier of the entity which generated the exception,
@@ -201,6 +251,10 @@ public class SAXParseException extends SAXException {
     /**
      * Get the public identifier of the entity where the exception occurred.
      *
+     * <p>
+     * 获取发生异常的实体的公共标识符
+     * 
+     * 
      * @return A string containing the public identifier, or null
      *         if none is available.
      * @see org.xml.sax.Locator#getPublicId
@@ -217,6 +271,12 @@ public class SAXParseException extends SAXException {
      * <p>If the system identifier is a URL, it will have been resolved
      * fully.</p>
      *
+     * <p>
+     *  获取发生异常的实体的系统标识符
+     * 
+     *  <p>如果系统标识符是网址,则会完全解析</p>
+     * 
+     * 
      * @return A string containing the system identifier, or null
      *         if none is available.
      * @see org.xml.sax.Locator#getSystemId
@@ -232,6 +292,12 @@ public class SAXParseException extends SAXException {
      *
      * <p>The first line is line 1.</p>
      *
+     * <p>
+     *  发生异常的文本结束的行号
+     * 
+     *  <p>第一行是第1行</p>
+     * 
+     * 
      * @return An integer representing the line number, or -1
      *         if none is available.
      * @see org.xml.sax.Locator#getLineNumber
@@ -247,6 +313,12 @@ public class SAXParseException extends SAXException {
      *
      * <p>The first column in a line is position 1.</p>
      *
+     * <p>
+     *  发生异常的文本结尾的列号
+     * 
+     *  <p>一行中的第一列为位置1 </p>
+     * 
+     * 
      * @return An integer representing the column number, or -1
      *         if none is available.
      * @see org.xml.sax.Locator#getColumnNumber
@@ -259,6 +331,10 @@ public class SAXParseException extends SAXException {
     /**
      * Override toString to provide more detailed error message.
      *
+     * <p>
+     *  覆盖toString以提供更详细的错误消息
+     * 
+     * 
      * @return A string representation of this exception.
      */
     public String toString() {
@@ -280,6 +356,8 @@ public class SAXParseException extends SAXException {
 
 
     /**
+    /* <p>
+    /* 
      * @serial The public identifier, or null.
      * @see #getPublicId
      */
@@ -287,6 +365,8 @@ public class SAXParseException extends SAXException {
 
 
     /**
+    /* <p>
+    /* 
      * @serial The system identifier, or null.
      * @see #getSystemId
      */
@@ -294,6 +374,8 @@ public class SAXParseException extends SAXException {
 
 
     /**
+    /* <p>
+    /* 
      * @serial The line number, or -1.
      * @see #getLineNumber
      */
@@ -301,6 +383,8 @@ public class SAXParseException extends SAXException {
 
 
     /**
+    /* <p>
+    /* 
      * @serial The column number, or -1.
      * @see #getColumnNumber
      */

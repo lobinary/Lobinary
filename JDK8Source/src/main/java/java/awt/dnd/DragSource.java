@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -111,6 +112,31 @@ import sun.security.action.GetIntegerAction;
  * duration of the operation with respect to the
  * <code>DragSource</code>.
  *
+ * <p>
+ *  <code> DragSource </code>是负责启动拖放操作的实体,可以在多种情况下使用：
+ * <UL>
+ *  <LI>每个JVM的1个默认实例对于该JVM的生存期<LI> 1每个潜在的类的实例Drag Initiator对象(例如TextField)[实现相关] <LI>每个特定<code>组件</> >或与
+ * GUI中的<code> Component </code>实例相关联的应用程序特定对象[取决于实现] <LI>某些其他任意关联[取决于实现]。
+ * /UL>
+ * 
+ * 一旦获得<code> DragSource </code>,还应当获得<code> DragGestureRecognizer </code>以将<code> DragSource </code>与特定
+ * <code> Component </code>。
+ * <P>
+ *  对用户手势的初始解释以及随后启动拖动操作是实现<code> Component </code>的责任,其通常由<code> DragGestureRecognizer </code>
+ * P>
+ * 当拖动手势发生时,将调用<code> DragSource </code>的startDrag()方法,以便引起用户的导航手势的处理和拖放协议通知的传递</code> DragSource </code >
+ * 只允许单个拖放操作在任何一个时间是当前的,并且将通过抛出一个<code> IllegalDnDOperationException </code>来拒绝任何进一步的startDrag()请求,直到现存操
+ * 作完成。
+ * <P>
+ *  startDrag()方法调用createDragSourceContext()方法来实例化一个适当的<code> DragSourceContext </code>,并将<code> DragSou
+ * rceContextPeer </code>。
+ * <P>
+ * 如果拖放系统由于某种原因无法启动拖动操作,则startDrag()方法会抛出一个<code> javaawtdndInvalidDnDOperationException </code>来表示这种情况。
+ * 通常,当底层平台系统不是在启动拖动的状态下,或指定的参数无效。
+ * <P>
+ *  注意,在拖动期间,在拖动操作开始时由源公开的操作集合可以不改变,直到操作完成。操作在关于<code> DragSource的操作期间是恒定的</code>
+ * 
+ * 
  * @since 1.2
  */
 
@@ -120,6 +146,9 @@ public class DragSource implements Serializable {
 
     /*
      * load a system default cursor
+     * <p>
+     *  加载系统默认游标
+     * 
      */
 
     private static Cursor load(String name) {
@@ -142,6 +171,11 @@ public class DragSource implements Serializable {
      * that a drop is currently allowed. <code>null</code> if
      * <code>GraphicsEnvironment.isHeadless()</code> returns <code>true</code>.
      *
+     * <p>
+     * 如果<code> GraphicsEnvironmentisHeadless()</code>返回<code> true </code>,则</code>用于指示当前允许删除的复制操作的默认<code>
+     *  Cursor </code> >。
+     * 
+     * 
      * @see java.awt.GraphicsEnvironment#isHeadless
      */
     public static final Cursor DefaultCopyDrop =
@@ -152,6 +186,11 @@ public class DragSource implements Serializable {
      * that a drop is currently allowed. <code>null</code> if
      * <code>GraphicsEnvironment.isHeadless()</code> returns <code>true</code>.
      *
+     * <p>
+     *  如果<code> GraphicsEnvironmentisHeadless()</code>返回<code> true </code>,则</code>用于指示当前允许删除的移动操作的默认<code>
+     *  Cursor </code> >。
+     * 
+     * 
      * @see java.awt.GraphicsEnvironment#isHeadless
      */
     public static final Cursor DefaultMoveDrop =
@@ -162,6 +201,11 @@ public class DragSource implements Serializable {
      * that a drop is currently allowed. <code>null</code> if
      * <code>GraphicsEnvironment.isHeadless()</code> returns <code>true</code>.
      *
+     * <p>
+     *  默认<code> Cursor </code>用于链接操作,指示当前允许删除<code> null </code>如果<code> GraphicsEnvironmentisHeadless()</code>
+     * 返回<code> true </code >。
+     * 
+     * 
      * @see java.awt.GraphicsEnvironment#isHeadless
      */
     public static final Cursor DefaultLinkDrop =
@@ -172,6 +216,11 @@ public class DragSource implements Serializable {
      * that a drop is currently not allowed. <code>null</code> if
      * <code>GraphicsEnvironment.isHeadless()</code> returns <code>true</code>.
      *
+     * <p>
+     * 如果<code> GraphicsEnvironmentisHeadless()</code>返回<code> true </code>,则默认<code> Cursor </code>用于指示当前不允
+     * 许删除的复制操作<代码>。
+     * 
+     * 
      * @see java.awt.GraphicsEnvironment#isHeadless
      */
     public static final Cursor DefaultCopyNoDrop =
@@ -182,6 +231,11 @@ public class DragSource implements Serializable {
      * that a drop is currently not allowed. <code>null</code> if
      * <code>GraphicsEnvironment.isHeadless()</code> returns <code>true</code>.
      *
+     * <p>
+     *  如果<code> GraphicsEnvironmentisHeadless()</code>返回<code> true </code>,则默认<code> Cursor </code>用于指示当前不
+     * 允许删除的移动操作<代码>。
+     * 
+     * 
      * @see java.awt.GraphicsEnvironment#isHeadless
      */
     public static final Cursor DefaultMoveNoDrop =
@@ -192,6 +246,11 @@ public class DragSource implements Serializable {
      * that a drop is currently not allowed. <code>null</code> if
      * <code>GraphicsEnvironment.isHeadless()</code> returns <code>true</code>.
      *
+     * <p>
+     *  默认<code> Cursor </code>用于链接操作,指示当前不允许删除<code> null </code>如果<code> GraphicsEnvironmentisHeadless()</code>
+     * 返回<code> true <代码>。
+     * 
+     * 
      * @see java.awt.GraphicsEnvironment#isHeadless
      */
     public static final Cursor DefaultLinkNoDrop =
@@ -202,6 +261,9 @@ public class DragSource implements Serializable {
 
     /**
      * Internal constants for serialization.
+     * <p>
+     *  序列化的内部常量
+     * 
      */
     static final String dragSourceListenerK = "dragSourceL";
     static final String dragSourceMotionListenerK = "dragSourceMotionL";
@@ -210,6 +272,10 @@ public class DragSource implements Serializable {
      * Gets the <code>DragSource</code> object associated with
      * the underlying platform.
      *
+     * <p>
+     *  获取与底层平台相关联的<code> DragSource </code>对象
+     * 
+     * 
      * @return the platform DragSource
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
      *            returns true
@@ -229,6 +295,10 @@ public class DragSource implements Serializable {
      * <code>Image</code> support
      * is available on the underlying platform.
      * <P>
+     * <p>
+     * 报告是否在底层平台上拖动<code> Image </code>支持
+     * <P>
+     * 
      * @return if the Drag Image support is available on this platform
      */
 
@@ -249,6 +319,10 @@ public class DragSource implements Serializable {
     /**
      * Creates a new <code>DragSource</code>.
      *
+     * <p>
+     *  创建新的<code> DragSource </code>
+     * 
+     * 
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
      *            returns true
      * @see java.awt.GraphicsEnvironment#isHeadless
@@ -271,6 +345,12 @@ public class DragSource implements Serializable {
      * of the drag, the <code>DragSourceListener</code>,
      * and the <code>FlavorMap</code>.
      * <P>
+     * <p>
+     *  开始拖动,给定启动拖动的<code> DragGestureEvent </code>,使用初始<code> Cursor </code>,<code> Image </code>拖动<code> >
+     *  </code>主体数据</code>拖动的<code>主体数据</code>中的<code> DragSourceListener </code> >和<code> FlavorMap </code>
+     * 。
+     * <P>
+     * 
      * @param trigger        the <code>DragGestureEvent</code> that initiated the drag
      * @param dragCursor     the initial {@code Cursor} for this drag operation
      *                       or {@code null} for the default cursor handling;
@@ -333,6 +413,11 @@ public class DragSource implements Serializable {
      * of the drag, the <code>DragSourceListener</code>,
      * and the <code>FlavorMap</code>.
      * <P>
+     * <p>
+     *  开始拖动,给出启动拖动的<code> DragGestureEvent </code>,使用的初始<code> Cursor </code>,拖动的<code>可转移</code>主题数据,<code >
+     *  DragSourceListener </code>和<code> FlavorMap </code>。
+     * <P>
+     * 
      * @param trigger        the <code>DragGestureEvent</code> that
      * initiated the drag
      * @param dragCursor     the initial {@code Cursor} for this drag operation
@@ -369,6 +454,11 @@ public class DragSource implements Serializable {
      * the subject data of the drag, and
      * the <code>DragSourceListener</code>.
      * <P>
+     * <p>
+     * 开始拖动,给定启动拖动的<code> DragGestureEvent </code>,使用初始<code> Cursor </code>,<code> Image </code>拖动<code> >图
+     * 像</code>源于触发时刻的<code> Cursor </code>的热点,拖动的主题数据和<code> DragSourceListener </code>。
+     * <P>
+     * 
      * @param trigger           the <code>DragGestureEvent</code> that initiated the drag
      * @param dragCursor     the initial {@code Cursor} for this drag operation
      *                       or {@code null} for the default cursor handling;
@@ -404,6 +494,11 @@ public class DragSource implements Serializable {
      * the <code>Transferable</code> subject data
      * of the drag, and the <code>DragSourceListener</code>.
      * <P>
+     * <p>
+     *  开始拖动,给定启动拖动的<code> DragGestureEvent </code>,使用的初始<code> Cursor </code>,拖动的<code>可转移</code>主题数据,代码> D
+     * ragSourceListener </code>。
+     * <P>
+     * 
      * @param trigger           the <code>DragGestureEvent</code> that initiated the drag
      * @param dragCursor     the initial {@code Cursor} for this drag operation
      *                       or {@code null} for the default cursor handling;
@@ -442,6 +537,18 @@ public class DragSource implements Serializable {
      * is registered with the created <code>DragSourceContext</code>,
      * but <code>NullPointerException</code> is not thrown.
      *
+     * <p>
+     *  创建{@code DragSourceContext}以处理当前的拖动操作
+     * <p>
+     *  要合并一个新的<code> DragSourceContext </code>子类,子类<code> DragSource </code>并覆盖此方法
+     * <p>
+     * 如果<code> dragImage </code>是<code> null </code>,则不使用图像来表示对此拖动操作的反馈的拖动,但不会抛出<code> NullPointerException
+     *  </code>。
+     * <p>
+     *  如果<code> dsl </code>是<code> null </code>,则不会向创建的<code> DragSourceContext </code>注册拖放源侦听器,但不会抛出<code>
+     *  NullPointerException </code>。
+     * 
+     * 
      * @param dscp          The <code>DragSourceContextPeer</code> for this drag
      * @param dgl           The <code>DragGestureEvent</code> that triggered the
      *                      drag
@@ -481,6 +588,10 @@ public class DragSource implements Serializable {
      * This method returns the
      * <code>FlavorMap</code> for this <code>DragSource</code>.
      * <P>
+     * <p>
+     *  此方法为此<code> DragSource </code>返回<code> FlavorMap </code>
+     * <P>
+     * 
      * @return the <code>FlavorMap</code> for this <code>DragSource</code>
      */
 
@@ -495,6 +606,11 @@ public class DragSource implements Serializable {
      * and <code>DragGestureListener</code> on
      * the newly created object.
      * <P>
+     * <p>
+     *  创建一个实现<code> DragGestureRecognizer </code>的指定抽象子类的新的<code> DragGestureRecognizer </code>,并设置指定的<code>
+     *  Component </code>和<code> DragGestureListener </code>新创建的对象。
+     * <P>
+     * 
      * @param recognizerAbstractClass the requested abstract type
      * @param actions                 the permitted source drag actions
      * @param c                       the <code>Component</code> target
@@ -528,6 +644,13 @@ public class DragSource implements Serializable {
      * For this <code>DragSource</code>
      * the default is <code>MouseDragGestureRecognizer</code>.
      * <P>
+     * <p>
+     * 为此<code> DragSource </code>创建实现<code> DragGestureRecognizer </code>的默认抽象子类的新的<code> DragGestureRecogn
+     * izer </code>,并设置指定的<code> Component </code> <code> DragGestureListener </code>对新创建的对象。
+     * 
+     *  对于这个<code> DragSource </code>,默认是<code> MouseDragGestureRecognizer </code>
+     * <P>
+     * 
      * @param c       the <code>Component</code> target for the recognizer
      * @param actions the permitted source actions
      * @param dgl     the <code>DragGestureListener</code> to notify
@@ -550,6 +673,11 @@ public class DragSource implements Serializable {
      * If a <code>null</code> listener is specified, no action is taken and no
      * exception is thrown.
      *
+     * <p>
+     *  在拖动操作期间,如果<code> DragSource </code>,则向<code> DragSource </code>添加指定的<code> DragSourceListener </code>
+     * 监听器被指定,不采取任何行动,并且不抛出异常。
+     * 
+     * 
      * @param dsl the <code>DragSourceListener</code> to add
      *
      * @see      #removeDragSourceListener
@@ -573,6 +701,11 @@ public class DragSource implements Serializable {
      * this <code>DragSource</code>, no action is taken and no exception
      * is thrown.
      *
+     * <p>
+     * 从此<code> DragSource </code>中删除指定的<code> DragSourceListener </code>如果指定了<code> null </code>侦听器,则不会执行任何
+     * 操作,也不会抛出异常如果由参数先前未添加到此<code> DragSource </code>,不会执行任何操作,也不会抛出异常。
+     * 
+     * 
      * @param dsl the <code>DragSourceListener</code> to remove
      *
      * @see      #addDragSourceListener
@@ -591,6 +724,10 @@ public class DragSource implements Serializable {
      * Gets all the <code>DragSourceListener</code>s
      * registered with this <code>DragSource</code>.
      *
+     * <p>
+     *  获取向此<code> DragSource </code>注册的所有<code> DragSourceListener </code>
+     * 
+     * 
      * @return all of this <code>DragSource</code>'s
      *         <code>DragSourceListener</code>s or an empty array if no
      *         such listeners are currently registered
@@ -610,6 +747,11 @@ public class DragSource implements Serializable {
      * If a <code>null</code> listener is specified, no action is taken and no
      * exception is thrown.
      *
+     * <p>
+     *  在拖动操作期间,为此<code> DragSource </code>添加指定的<code> DragSourceMotionListener </code>,以接收拖动事件如果<code> null
+     *  </code>监听器被指定,不采取任何行动,并且不抛出异常。
+     * 
+     * 
      * @param dsml the <code>DragSourceMotionListener</code> to add
      *
      * @see      #removeDragSourceMotionListener
@@ -633,6 +775,11 @@ public class DragSource implements Serializable {
      * this <code>DragSource</code>, no action is taken and no exception
      * is thrown.
      *
+     * <p>
+     * 从此<code> DragSource </code>中删除指定的<code> DragSourceMotionListener </code>如果指定了<code> null </code>侦听器,则
+     * 不会执行任何操作,也不会抛出异常如果由参数先前未添加到此<code> DragSource </code>,不会执行任何操作,也不会抛出异常。
+     * 
+     * 
      * @param dsml the <code>DragSourceMotionListener</code> to remove
      *
      * @see      #addDragSourceMotionListener
@@ -651,6 +798,10 @@ public class DragSource implements Serializable {
      * Gets all of the  <code>DragSourceMotionListener</code>s
      * registered with this <code>DragSource</code>.
      *
+     * <p>
+     *  获取向此<code> DragSource </code>注册的所有<code> DragSourceMotionListener </code>
+     * 
+     * 
      * @return all of this <code>DragSource</code>'s
      *         <code>DragSourceMotionListener</code>s or an empty array if no
      *         such listeners are currently registered
@@ -669,6 +820,11 @@ public class DragSource implements Serializable {
      * <code><em>Foo</em>Listener</code>s are registered using the
      * <code>add<em>Foo</em>Listener</code> method.
      *
+     * <p>
+     *  获取当前在此<code> DragSource </code> <code> <em> Foo </em>侦听器</code>上注册为<code> <em> Foo </em>侦听器</code> s
+     * 使用<code> add <em> </em>侦听器</code>方法注册。
+     * 
+     * 
      * @param listenerType the type of listeners requested; this parameter
      *          should specify an interface that descends from
      *          <code>java.util.EventListener</code>
@@ -700,6 +856,11 @@ public class DragSource implements Serializable {
      * <code>DragSource</code>, and passes them the specified
      * <code>DragSourceDragEvent</code>.
      *
+     * <p>
+     * 这个方法在<code> DragSource </code>注册的<code> DragSourceListener </code>上调用<code> dragEnter </code>,并传递指定的<code>
+     *  DragSourceDragEvent </code>。
+     * 
+     * 
      * @param dsde the <code>DragSourceDragEvent</code>
      */
     void processDragEnter(DragSourceDragEvent dsde) {
@@ -715,6 +876,11 @@ public class DragSource implements Serializable {
      * <code>DragSource</code>, and passes them the specified
      * <code>DragSourceDragEvent</code>.
      *
+     * <p>
+     *  此方法在<code> DragSource </code>注册的<code> DragSourceListener </code>上调用<code> dragOver </code>,并将指定的<code>
+     *  DragSourceDragEvent </code>。
+     * 
+     * 
      * @param dsde the <code>DragSourceDragEvent</code>
      */
     void processDragOver(DragSourceDragEvent dsde) {
@@ -730,6 +896,11 @@ public class DragSource implements Serializable {
      * <code>DragSource</code>, and passes them the specified
      * <code>DragSourceDragEvent</code>.
      *
+     * <p>
+     *  这个方法在<code> DragSource </code>注册的<code> DragSourceListener </code>上调用<code> dropActionChanged </code>
+     * ,并传递指定的<code> DragSourceDragEvent </code>。
+     * 
+     * 
      * @param dsde the <code>DragSourceDragEvent</code>
      */
     void processDropActionChanged(DragSourceDragEvent dsde) {
@@ -745,6 +916,11 @@ public class DragSource implements Serializable {
      * <code>DragSource</code>, and passes them the specified
      * <code>DragSourceEvent</code>.
      *
+     * <p>
+     *  此方法在<code> DragSource </code>注册的<code> DragSourceListener </code>上调用<code> dragExit </code>,并将指定的<code>
+     *  DragSourceEvent </code>。
+     * 
+     * 
      * @param dse the <code>DragSourceEvent</code>
      */
     void processDragExit(DragSourceEvent dse) {
@@ -760,6 +936,11 @@ public class DragSource implements Serializable {
      * <code>DragSource</code>, and passes them the specified
      * <code>DragSourceDropEvent</code>.
      *
+     * <p>
+     * 此方法在<code> DragSource </code>注册的<code> DragSourceListener </code>上调用<code> dragDropEnd </code>,并将指定的<code>
+     *  DragSourceDropEvent </code>。
+     * 
+     * 
      * @param dsde the <code>DragSourceEvent</code>
      */
     void processDragDropEnd(DragSourceDropEvent dsde) {
@@ -775,6 +956,11 @@ public class DragSource implements Serializable {
      * <code>DragSource</code>, and passes them the specified
      * <code>DragSourceDragEvent</code>.
      *
+     * <p>
+     *  此方法在<code> DragSource </code>注册的<code> DragSourceMotionListener </code>上调用<code> dragMouseMoved </code>
+     * ,并将指定的<code> DragSourceDragEvent </code>。
+     * 
+     * 
      * @param dsde the <code>DragSourceEvent</code>
      */
     void processDragMouseMoved(DragSourceDragEvent dsde) {
@@ -801,6 +987,17 @@ public class DragSource implements Serializable {
      *     <code>DragSourceMotionListener</code> object.
      * </ul>
      *
+     * <p>
+     * 序列化这个<code> DragSource </code>这个方法首先执行默认序列化接下来,它写出这个对象的&lt; code&gt; FlavorMap </code>当且仅当它可以被序列化如果不是
+     * ,<code> null </code>接下来,它写出<code>可序列化</code>在此对象中注册的侦听器侦听器写在一个<code> null </code>终止的0或更多对的序列中。
+     * 对由<code> String </code>和<code> Object </code>; <code> String </code>表示<code> Object </code>的类型,并且是以下之
+     * 一：。
+     * <ul>
+     *  <li> <code> dragSourceListenerK </code>表示<code> DragSourceListener </code>对象; <li> <code> dragSource
+     * MotionListenerK </code>表示<code> DragSourceMotionListener </code>物件。
+     * </ul>
+     * 
+     * 
      * @serialData Either a <code>FlavorMap</code> instance, or
      *      <code>null</code>, followed by a <code>null</code>-terminated
      *      sequence of 0 or more pairs; the pair consists of a
@@ -847,6 +1044,19 @@ public class DragSource implements Serializable {
      * <li>Otherwise, the key/value pair is skipped.
      * </ul>
      *
+     * <p>
+     * 反序列化<code> DragSource </code>此方法首先执行默认反序列化。
+     * 接下来,通过使用流中的下一个对象,反序列化此对象的<code> FlavorMap </code>如果生成的<code> FlavorMap </code> <code> null </code>,此对
+     * 象的<code> FlavorMap </code>被设置为此线程的<code> ClassLoader </code>的默认FlavorMap。
+     * 反序列化<code> DragSource </code>此方法首先执行默认反序列化。接下来,通过读取一个<code> null </code>  - 从流中终止的0个或多个键/值对的序列：。
+     * <ul>
+     * <li>如果键对象是<code> String </code>等于<code> dragSourceListenerK </code>,则会使用相应的值对象对<code> DragSourceListe
+     * ner </code>进行反序列化, > DragSource </code> <li>如果键对象是<code> String </code>等于<code> dragSourceMotionListe
+     * nerK </code>,则使用相应的值对象反序列化<code> DragSourceMotionListener </code>并添加到此<code> DragSource </code> <li>否
+     * 则,将跳过键/值对。
+     * </ul>
+     * 
+     * 
      * @see java.awt.datatransfer.SystemFlavorMap#getDefaultFlavorMap
      * @since 1.4
      */
@@ -890,6 +1100,8 @@ public class DragSource implements Serializable {
      * The pertinent desktop property can be queried using
      * <code>java.awt.Toolkit.getDesktopProperty("DnD.gestureMotionThreshold")</code>.
      *
+     * <p>
+     * 
      * @return the drag gesture motion threshold
      * @see MouseDragGestureRecognizer
      * @since 1.5
@@ -911,6 +1123,12 @@ public class DragSource implements Serializable {
 
     /*
      * fields
+     * <p>
+     *  返回拖动手势运动阈值拖动手势运动阈值定义{@link MouseDragGestureRecognizer}的推荐行为
+     * <p>
+     * 如果系统属性<code> awtdnddragthreshold </code>设置为正整数,则此方法返回system属性的值;否则如果相关的桌面属性可用并且由Java平台的实现支持,则此方法返回该属性
+     * 的值;否则此方法返回一些默认值相关的桌面属性可以使用<code> javaawtToolkitgetDesktopProperty("DnDgestureMotionThreshold")</code>
+     * 。
      */
 
     private transient FlavorMap flavorMap = SystemFlavorMap.getDefaultFlavorMap();

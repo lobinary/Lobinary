@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,12 @@
  * patents. This notice and attribution to Taligent may not be removed.
  *   Taligent is a registered trademark of Taligent, Inc.
  *
+ * <p>
+ *  (C)版权所有Taligent,Inc 1996,1997  - 保留所有权利(C)版权所有IBM Corp 1996  -  1998  - 保留所有权利
+ * 
+ *  此源代码和文档的原始版本由IBM的全资子公司Taligent,Inc拥有版权和所有权。
+ * 这些资料根据Taligent和Sun之间的许可协议的条款提供此技术受多个美国和国际专利保护Taligent是Taligent的注册商标。Taligent是Taligent的注册商标。
+ * 
  */
 
 package java.text;
@@ -329,6 +336,179 @@ import java.util.Locale;
  * If multiple threads access a format concurrently, it must be synchronized
  * externally.
  *
+ * <p>
+ * <code> MessageFormat </code>提供了一种以语言中立的方式生成连接消息的方法使用此方法构造为最终用户显示的消息
+ * 
+ * <p>
+ *  <code> MessageFormat </code>获取一组对象,格式化它们,然后将格式化的字符串插入到适当位置的模式中
+ * 
+ * <p>
+ * <strong>注意：</strong> <code> MessageFormat </code>与其他<code> Format </code>类别不同之处在于,您可以使用其中一个构造函数创建<code>
+ *  MessageFormat </code>不带有<code> getInstance </code> style工厂方法)工厂方法不是必需的,因为<code> MessageFormat </code>
+ * 本身不实现特定于语言环境的行为任何特定于语言环境的行为都由模式提供以及用于插入参数的子格式。
+ * 
+ *  <h3> <a name=\"patterns\">模式及其解释</a> </h3>
+ * 
+ *  <code> MessageFormat </code>使用以下格式的模式：<blockquote> <pre> <i> MessageFormatPattern：</i> <i> String </i>
+ *  <i> MessageFormatPattern </i> <i> FormatElement </i> <i>字符串</i>。
+ * 
+ * <i> FormatElement：</i> {<i> ArgumentIndex </i>} {<i> ArgumentIndex </i>,<i> FormatType </i> > FormatType </i>,<i> FormatStyle </i>}
+ * 。
+ * 
+ *  <i> FormatType：</i>号码日期时间选择之一
+ * 
+ *  <i> FormatStyle：</i> short medium long整数货币百分比<i> SubformatPattern </i> </pre> </blockquote>
+ * 
+ * <p>在<i> String </i>中,可以使用一对单引号来引用除单引号之外的任何任意字符。
+ * 例如,pattern string <code>"'{0}'"</code>在<i> String </i>中,单引号本身必须由双重单引号{@code''}表示。
+ * </i> >例如,模式字符串<code>"'{''}'"</code>被解释为<code>'{</code>(引用开始和左大括号) '</code>(单引号)和<code>}'</code>(右大括号和
+ * 引号结尾),<em>不是</em> <code>'{'</code >和<code>'}'</code>(引用左右花括号)：代表字符串<code>"{'}"</code>,<em> "</code>。
+ * 例如,pattern string <code>"'{0}'"</code>在<i> String </i>中,单引号本身必须由双重单引号{@code''}表示。
+ * 
+ * <p> A <i> SubformatPattern </i>由其对应的子格式解释,并且与子格式相关的模式规则适用例如,模式字符串<code>"{1,number,<u> $'#',## </code> </code>(<i> SubformatPattern </i>下划线)将产生带有井号符号的数字格式,结果如：{@code"$#31,45" }
+ * 有关详细信息,请参阅每个{@code Format}子类文档。
+ * 
+ *  <p>任何不匹配的引用在给定模式末尾被视为关闭例如,模式字符串{@code""{0}"}被视为模式{@code""{0}""
+ * 
+ *  <p>无引号模式中的任何花括号必须是平衡的例如,<code>"ab {0} de"</code>和<code>"ab'}"de"</code> <code>"ab {0'}"de"</code>,<code>
+ * "ab} de"</code>和<code>"''{''"</code>。
+ * 
+ * <dl> <dt> <b>警告：</b> <dd>不幸的是,在消息格式模式中使用引号的规则显示有些混乱。
+ * 特别地,对于本地化者来说,单引号是否需要是否双重确保通知本地化程序有关规则,并告诉他们(例如,通过使用资源包源文件中的注释)哪些字符串将由{@code MessageFormat}处理请注意,本地化可能
+ * 需要使用单引号翻译的字符串,其中原始版本没有它们。
+ * <dl> <dt> <b>警告：</b> <dd>不幸的是,在消息格式模式中使用引号的规则显示有些混乱。
+ * </dl>
+ * <p>
+ * <i> ArgumentIndex </i>值是使用数字{@code'0'}至{@code'9'}写入的非负整数,表示传递到{@code arguments} {@code format}方法或{@code parse}
+ * 方法返回的结果数组。
+ * <p>
+ *  <i> FormatType </i>和<i> FormatStyle </i>值用于为格式元素创建{@code Format}实例下表显示值如何映射到{@code Format}实例组合表中未显示的
+ * 字符串非法A <i> SubformatPattern </i>必须是所使用的{@code Format}子类的有效模式字符串。
+ * 
+ * <table border=1 summary="Shows how FormatType and FormatStyle values map to Format instances">
+ * <tr>
+ *  <th id ="ft"class ="TableHeadingColor"> FormatType <th id ="fs"class ="TableHeadingColor"> FormatSty
+ * le <th id ="sc"class ="TableHeadingColor"> Subformat Created。
+ * <tr>
+ * <td headers ="ft"> <i>(none)</i> <td headers ="fs"> <i>(none)</i> <td headers ="sc"> <code> null <代码>
+ * 。
+ * <tr>
+ *  <td header ="ft"rowspan = 5> <code> number </code> <td headers ="fs"> <i>(none)</i> <td headers ="sc">
+ *  {@ link NumberFormat# getInstance(Locale)NumberFormatgetInstance} {@ code(getLocale())}。
+ * <tr>
+ *  <td headers ="fs"> <code> integer </code> <td headers ="sc"> {@ link NumberFormat#getIntegerInstance(Locale)NumberFormatgetIntegerInstance}
+ *  {@ code(getLocale())}。
+ * <tr>
+ *  <td headers ="fs"> <code> currency </code> <td header ="sc"> {@ link NumberFormat#getCurrencyInstance(Locale)NumberFormatgetCurrencyInstance}
+ *  {@ code(getLocale())}。
+ * <tr>
+ *  <td headers ="fs"> <code> percent </code> <td headers ="sc"> {@ link NumberFormat#getPercentInstance(Locale)NumberFormatgetPercentInstance}
+ *  {@ code(getLocale())}。
+ * <tr>
+ * <td headers ="fs"> <i> SubformatPattern </i> <td headers ="sc"> {@ code new} {@link DecimalFormat#DecimalFormat(String,DecimalFormatSymbols)DecimalFormat}
+ *  {@ code(subformatPattern, @link DecimalFormatSymbols#getInstance(Locale)DecimalFormatSymbolsgetInstance}
+ *  {@ code(getLocale()))}。
+ * <tr>
+ *  <td headers ="ft"rowspan = 6> <code> date </code> <td headers ="fs"> <i>(none)</i> <td headers ="sc">
+ *  {@ link DateFormat# getDateInstance(int,Locale)DateFormatgetDateInstance} {@ code(} {@ link DateFormat#DEFAULT}
+ *  {@ code,getLocale())}。
+ * <tr>
+ *  <td headers ="fs"> <code> short </code> <td headers ="sc"> {@ link DateFormat#getDateInstance(int,Locale)DateFormatgetDateInstance}
+ *  {@ code(} {@ link DateFormat#SHORT} { @code,getLocale())}。
+ * <tr>
+ * <td headers ="fs"> <code> </code> <td header ="sc"> {@ link DateFormat#getDateInstance(int,Locale)DateFormatgetDateInstance}
+ *  {@ code(} {@ link DateFormat#DEFAULT} @code,getLocale())}。
+ * <tr>
+ *  <td headers ="fs"> <code> long </code> <td headers ="sc"> {@ link DateFormat#getDateInstance(int,Locale)DateFormatgetDateInstance}
+ *  {@ code(} {@ link DateFormat#LONG} { @code,getLocale())}。
+ * <tr>
+ *  <td header ="fs"> <code> full </code> <td headers ="sc"> {@ link DateFormat#getDateInstance(int,Locale)DateFormatgetDateInstance}
+ *  {@ code(} {@ link DateFormat#FULL} { @code,getLocale())}。
+ * <tr>
+ *  <td headers ="fs"> <i> SubformatPattern </i> <td headers ="sc"> {@ code new} {@link SimpleDateFormat#SimpleDateFormat(String,Locale)SimpleDateFormat}
+ *  {@ code(subformatPattern,getLocale ))}。
+ * <tr>
+ * <td headers ="ft"rowspan = 6> <code> time </code> <td headers ="fs"> <i>(none)</i> <td headers ="sc">
+ *  {@ link DateFormat# getTimeInstance(int,Locale)DateFormatgetTimeInstance} {@ code(} {@ link DateFormat#DEFAULT}
+ *  {@ code,getLocale())}。
+ * <tr>
+ *  <td headers ="fs"> <code> short </code> <td headers ="sc"> {@ link DateFormat#getTimeInstance(int,Locale)DateFormatgetTimeInstance}
+ *  {@ code(} {@ link DateFormat#SHORT} { @code,getLocale())}。
+ * <tr>
+ *  <td headers ="fs"> <code> medium </code> <td headers ="sc"> {@ link DateFormat#getTimeInstance(int,Locale)DateFormatgetTimeInstance}
+ *  {@ code(} {@ link DateFormat#DEFAULT} @code,getLocale())}。
+ * <tr>
+ *  <td header ="fs"> <code> long </code> <td header ="sc"> {@ link DateFormat#getTimeInstance(int,Locale)DateFormatgetTimeInstance}
+ *  {@ code(} {@ link DateFormat#LONG} { @code,getLocale())}。
+ * <tr>
+ * <td header ="fs"> <code> full </code> <td headers ="sc"> {@ link DateFormat#getTimeInstance(int,Locale)DateFormatgetTimeInstance}
+ *  {@ code(} {@ link DateFormat#FULL} { @code,getLocale())}。
+ * <tr>
+ *  <td headers ="fs"> <i> SubformatPattern </i> <td headers ="sc"> {@ code new} {@link SimpleDateFormat#SimpleDateFormat(String,Locale)SimpleDateFormat}
+ *  {@ code(subformatPattern,getLocale ))}。
+ * <tr>
+ *  <td headers ="ft"> <code> choice </code> <td headers ="fs"> <i> SubformatPattern </i> <td headers ="sc">
+ *  {@ code Choice} ChoiceFormat(String)ChoiceFormat} {@ code(subformatPattern)}。
+ * </table>
+ * 
+ *  <h4>使用信息</h4>
+ * 
+ * <p>
+ * 下面是一些使用示例在真实的国际化程序中,消息格式模式和其他静态字符串当然将从资源束中获取其他参数将在运行时动态确定
+ * <p>
+ *  第一个例子使用静态方法<code> MessageFormatformat </code>,它在内部创建一次性使用的<code> MessageFormat </code>：<blockquote> 
+ * <pre> int planet = 7;字符串事件="一个扰乱的力量";。
+ * 
+ *  String result = MessageFormatformat("{1,time}在{1,date}上,{0},{}},行星,新Date(),事件)。
+ *  </pre> </blockquote>输出是：<blockquote> <pre>在2053年7月3日下午12:30,地球7上的力有一个扰动</pre> </blockquote>。
+ * 
+ * <p>
+ * 以下示例创建一个可以重复使用的<code> MessageFormat </code>实例：<blockquote> <pre> int fileCount = 1273; String diskNam
+ * e ="MyDisk"; Object [] testArgs = {new Long(fileCount),diskName};。
+ * 
+ *  MessageFormat form = new MessageFormat("磁盘"{1}"包含{0}文件");
+ * 
+ *  Systemoutprintln(formformat(testArgs)); </pre> </blockquote> <code> fileCount </code>不同值的输出：<blockquote>
+ *  <pre>磁盘"MyDisk"包含0个文件磁盘"MyDisk"包含1个文件)磁盘"MyDisk"包含1,273个文件</pre> </blockquote>。
+ * 
+ * <p>
+ * 对于更复杂的模式,您可以使用<code> ChoiceFormat </code>生成正确的单数和复数形式：<blockquote> <pre> MessageFormat form = new Mes
+ * sageFormat("磁盘"{1} 0}"); double [] filelimits = {0,1,2}; String [] filepart = {"no files","one file","{0,number}
+ *  files"}; ChoiceFormat fileform = new ChoiceFormat(filelimits,filepart); formsetFormatByArgumentIndex
+ * (0,fileform);。
+ * 
+ *  int fileCount = 1273; String diskName ="MyDisk"; Object [] testArgs = {new Long(fileCount),diskName}
+ * ;。
+ * 
+ *  Systemoutprintln(formformat(testArgs)); </> </blockquote> <code> fileCount </code>不同的值的输出：<blockquote>
+ *  <pre>磁盘"MyDisk"不包含任何文件磁盘"MyDisk"包含一个文件磁盘"MyDisk"包含1,273个文件</pre> </blockquote>。
+ * 
+ * <p>
+ * 您可以通过编程方式创建<code> ChoiceFormat </code>,如上面的示例所示,或者使用模式。
+ * 有关详细信息,请参阅{@link ChoiceFormat} <blockquote> <pre> {@ code formapplyPattern("There {选择,0#没有文件| 1#是一个文件| 1 <are {0,number,integer}文件}"); } </pre>
+ *  </blockquote>。
+ * 您可以通过编程方式创建<code> ChoiceFormat </code>,如上面的示例所示,或者使用模式。
+ * 
+ * <p>
+ *  <strong>注意：</strong>如上所述,<code> MessageFormat </code>中的<code> ChoiceFormat </code>生成的字符串被视为特殊字符串;出现的
+ * '{'用于指示子格式,并导致递归如果您以编程方式(而不是使用字符串模式)创建<code> MessageFormat </code>和<code> ChoiceFormat </code>产生一个自身递归的格式,这将导致一个无限循环。
+ * <p>
+ * 当单个参数在字符串中被解析多次时,最后一个匹配将是解析的最终结果例如,<blockquote> <pre> MessageFormat mf = new MessageFormat("{0,number,###}
+ *  {0,number,##}"); Object [] objs = {new Double(31415)}; String result = mfformat(objs); // result now
+ *  equals"314,31"objs = null; objs = mfparse(result,new ParsePosition(0)); // objs now equals {new Double(31)}
+ *  </pre> </blockquote>。
+ * 
+ * <p>
+ * 同样,使用{@code MessageFormat}对象使用包含多个出现的相同参数的模式解析将返回最后一个匹配例如,<blockquote> <pre> MessageFormat mf = new M
+ * essageFormat("{0},{0} 0}"); String forParsing ="x,y,z"; Object [] objs = mfparse(forParsing,new Parse
+ * Position(0)); // result now equals {new String("z")} </pre> </blockquote>。
+ * 
+ *  <h4> <a name=\"synchronization\">同步</a> </h4>
+ * 
+ * <p>
+ *  消息格式不同步建议为每个线程创建单独的格式实例如果多个线程并发访问格式,则必须在外部同步
+ * 
+ * 
  * @see          java.util.Locale
  * @see          Format
  * @see          NumberFormat
@@ -354,6 +534,11 @@ public class MessageFormat extends Format {
      * Patterns and their interpretation are specified in the
      * <a href="#patterns">class description</a>.
      *
+     * <p>
+     * 构造默认{@link javautilLocaleCategory#FORMAT FORMAT}语言环境和指定模式的MessageFormat构造函数首先设置语言环境,然后解析模式并为其中包含的格式元素
+     * 创建一个子格式的列表模式及其解释在<a href=\"#patterns\">课程描述</a>。
+     * 
+     * 
      * @param pattern the pattern for this message format
      * @exception IllegalArgumentException if the pattern is invalid
      */
@@ -370,6 +555,11 @@ public class MessageFormat extends Format {
      * Patterns and their interpretation are specified in the
      * <a href="#patterns">class description</a>.
      *
+     * <p>
+     *  为指定的语言环境和模式构造MessageFormat构造函数首先设置语言环境,然后解析模式,并为其中包含的格式元素创建一个子格式的列表,并且它们的解释在<a href=\"#patterns\">中指
+     * 定类描述</a>。
+     * 
+     * 
      * @param pattern the pattern for this message format
      * @param locale the locale for this message format
      * @exception IllegalArgumentException if the pattern is invalid
@@ -395,6 +585,16 @@ public class MessageFormat extends Format {
      * </ul>
      * Subformats that have already been created are not affected.
      *
+     * <p>
+     *  设置在创建或比较子格式时使用的区域设置这会影响后续调用
+     * <ul>
+     * <li>到{@link #applyPattern applyPattern}和{@link #toPattern toPattern}方法,如果格式元素指定格式类型,因此具有在<code> apply
+     * Pattern </code>方法中创建的子格式,如果格式元素没有指定格式类型,并且因此具有以格式化方法创建的子格式,则<li>到<code>格式</code>和{@link #formatToCharacterIterator formatToCharacterIterator}
+     * 。
+     * </ul>
+     *  已创建的子格式不受影响
+     * 
+     * 
      * @param locale the locale to be used when creating or comparing subformats
      */
     public void setLocale(Locale locale) {
@@ -404,6 +604,10 @@ public class MessageFormat extends Format {
     /**
      * Gets the locale that's used when creating or comparing subformats.
      *
+     * <p>
+     *  获取在创建或比较子格式时使用的区域设置
+     * 
+     * 
      * @return the locale used when creating or comparing subformats
      */
     public Locale getLocale() {
@@ -418,6 +622,10 @@ public class MessageFormat extends Format {
      * Patterns and their interpretation are specified in the
      * <a href="#patterns">class description</a>.
      *
+     * <p>
+     * 设置此消息格式使用的模式方法解析模式并为其中包含的格式元素创建一个子格式的列表模式及其解释在<a href=\"#patterns\">类描述</a>中指定
+     * 
+     * 
      * @param pattern the pattern for this message format
      * @exception IllegalArgumentException if the pattern is invalid
      */
@@ -516,6 +724,10 @@ public class MessageFormat extends Format {
      * The string is constructed from internal information and therefore
      * does not necessarily equal the previously applied pattern.
      *
+     * <p>
+     *  返回表示消息格式的当前状态的模式该字符串由内部信息构造,因此不一定等于先前应用的模式
+     * 
+     * 
      * @return a pattern representing the current state of the message format
      */
     public String toPattern() {
@@ -600,6 +812,15 @@ public class MessageFormat extends Format {
      * than needed, then only the formats for argument indices less
      * than <code>newFormats.length</code> are replaced.
      *
+     * <p>
+     * 设置传递到<code> format </code>方法或从<code> parse </code>方法返回的值的格式<code> newFormats </code>中的元素索引对应于所使用的参数索引
+     * 在<code> newFormats </code>中的格式顺序对应于传递给<code> format </code>方法的<code> arguments </code>数组中的元素顺序,由<code>
+     *  parse </code>方法返回的结果数组。
+     * <p>
+     * 如果参数索引用于模式字符串中的多于一个格式元素,则对应的新格式用于所有这样的格式元素。
+     * 如果参数索引不用于模式字符串中的任何格式元素,则相应的新格式被忽略如果提供比所需要的格式更少的格式,则仅替换小于<code> newFormatslength </code>的变元索引的格式被替换。
+     * 
+     * 
      * @param newFormats the new formats to use
      * @exception NullPointerException if <code>newFormats</code> is null
      * @since 1.4
@@ -632,6 +853,15 @@ public class MessageFormat extends Format {
      * the <code>format</code> methods or the result array returned by
      * the <code>parse</code> methods.
      *
+     * <p>
+     *  设置要用于先前设置的模式字符串中的格式元素的格式<code> newFormats </code>中格式的顺序对应于模式字符串中格式元素的顺序
+     * <p>
+     * 如果提供的模式字符串所需的格式多于模式字符串所需的格式,则忽略剩余的格式。如果提供比所需更少的格式,则只替换第一个<code> newFormatslength </code>格式
+     * <p>
+     *  由于模式字符串中的格式元素的顺序在本地化过程中经常发生变化,因此通常最好使用{@link #setFormatsByArgumentIndex setFormatsByArgumentIndex}方法
+     * ,该方法假定格式顺序对应于<code> / code>数组传递给<code> format </code>方法或由<code> parse </code>方法返回的结果数组。
+     * 
+     * 
      * @param newFormats the new formats to use
      * @exception NullPointerException if <code>newFormats</code> is null
      */
@@ -659,6 +889,13 @@ public class MessageFormat extends Format {
      * format elements. If the argument index is not used for any format
      * element in the pattern string, then the new format is ignored.
      *
+     * <p>
+     * 设置用于先前设置的模式字符串中使用给定参数的格式元素的格式索引参数索引是格式元素定义的一部分,并且表示到传递到< code> format </code>方法或由<code> parse </code>
+     * 方法返回的结果数组。
+     * <p>
+     *  如果参数索引用于模式字符串中的多个格式元素,则新格式用于所有这样的格式元素如果参数索引不用于模式字符串中的任何格式元素,则新格式被忽略
+     * 
+     * 
      * @param argumentIndex the argument index for which to use the new format
      * @param newFormat the new format to use
      * @since 1.4
@@ -683,6 +920,13 @@ public class MessageFormat extends Format {
      * method, which accesses format elements based on the argument
      * index they specify.
      *
+     * <p>
+     * 设置用于具有给定格式元素索引的格式元素的格式,该格式元素索引在先前设置的模式字符串内。格式元素索引是格式元素的从零开始的数字,从模式字符串的开始计数
+     * <p>
+     *  由于模式字符串中的格式元素的顺序在本地化过程中经常发生变化,因此通常最好使用{@link #setFormatByArgumentIndex setFormatByArgumentIndex}方法,该
+     * 方法根据指定的参数索引访问格式元素。
+     * 
+     * 
      * @param formatElementIndex the index of a format element within the pattern
      * @param newFormat the format to use for the specified format element
      * @exception ArrayIndexOutOfBoundsException if {@code formatElementIndex} is equal to or
@@ -709,6 +953,13 @@ public class MessageFormat extends Format {
      * is not used for any format element in the pattern string, then
      * null is returned in the array.
      *
+     * <p>
+     * 获取传递到<code> format </code>方法或从<code> parse </code>方法返回的值的格式返回数组中的元素的索引对应于先前设置的模式字符串中使用的参数索引因此,返回数组中的格
+     * 式顺序对应于传递给<code> format </code>方法的<code> arguments </code>数组中元素的顺序或由<code> parse <// code>方法。
+     * <p>
+     *  如果参数索引用于模式字符串中的多个格式元素,则在数组中返回用于最后一个这样的格式元素的格式。如果参数索引不用于模式字符串中的任何格式元素,则null在数组中返回
+     * 
+     * 
      * @return the formats used for the arguments within the pattern
      * @since 1.4
      */
@@ -740,6 +991,13 @@ public class MessageFormat extends Format {
      * the <code>format</code> methods or the result array returned by
      * the <code>parse</code> methods.
      *
+     * <p>
+     * 获取用于先前设置的模式字符串中的格式元素的格式返回的数组中的格式的顺序对应于模式字符串中格式元素的顺序
+     * <p>
+     *  由于模式字符串中的格式元素的顺序在本地化过程中经常发生变化,因此通常最好使用{@link #getFormatsByArgumentIndex getFormatsByArgumentIndex}方法
+     * ,该方法假定格式顺序对应于<code> arguments </>代码>数组传递给<code> format </code>方法或由<code> parse </code>方法返回的结果数组。
+     * 
+     * 
      * @return the formats used for the format elements in the pattern
      */
     public Format[] getFormats() {
@@ -805,6 +1063,39 @@ public class MessageFormat extends Format {
      * <code>Field.ARGUMENT</code>, the location of the first formatted
      * string will be returned.
      *
+     * <p>
+     *  格式化对象数组,并将<code> MessageFormat </code>的模式附加到提供的<code> StringBuffer </code>
+     * <p>
+     * 替换单个格式元素的文本从格式元素的当前子格式和格式元素的参数索引处的<code> arguments </code>元素派生,如下表的第一个匹配行所示：参数是< i>不可用</i>如果<code>参数</code>
+     * 是<code> null </code>或少于argumentIndex + 1个元素。
+     * 
+     * <table border=1 summary="Examples of subformat,argument,and formatted text">
+     * <tr>
+     *  <th>子格式<th>参数<th>格式化文本
+     * <tr>
+     *  <td> <i>任何</i> <td> <i>不可用</i> <td> <code>"{"+ argumentIndex +"}"</code>
+     * <tr>
+     *  <td> <i>任何</i> <td> <code> null </code> <td> <code>"null"</code>
+     * <tr>
+     * <td> <code> instanceof ChoiceFormat </code> <td> <i>任何</i> <td> <code> subformatformat(argument)index
+     * Of('{')&gt; = 0?<br>(new MessageFormat (subformatformat(argument),getLocale()))format(argument)：subformatformat(argument)</code>。
+     * <tr>
+     *  <td> <code>！= null </code> <td> <i> any </i> <td> <code> subformatformat(argument)</code>
+     * <tr>
+     *  <td> <code> null </code> <td> <code> instanceof Number </code> <td> <code> NumberFormatgetInstance(g
+     * etLocale())format。
+     * <tr>
+     *  <td> <code> null </code> <td> <code> instanceof Date </code> <td> <code> DateFormatgetDateTimeInstan
+     * ce(DateFormatSHORT,DateFormatSHORT,getLocale。
+     * <tr>
+     *  <td> <code> null </code> <td> <code> instanceof String </code> <td> <code>
+     * <tr>
+     *  <td> <code> null </code> <td> <i> any </i> <td> <code> argumenttoString()</code>
+     * </table>
+     * <p>
+     * 如果<code> pos </code>为非空,并且引用<code> FieldARGUMENT </code>,则将返回第一个格式化字符串的位置
+     * 
+     * 
      * @param arguments an array of objects to be formatted and substituted.
      * @param result where text is appended.
      * @param pos On input: an alignment field, if desired.
@@ -828,6 +1119,14 @@ public class MessageFormat extends Format {
      *     <code>(new {@link #MessageFormat(String) MessageFormat}(pattern)).{@link #format(java.lang.Object[], java.lang.StringBuffer, java.text.FieldPosition) format}(arguments, new StringBuffer(), null).toString()</code>
      * </blockquote>
      *
+     * <p>
+     *  创建一个MessageFormat与给定的模式,并使用它格式化给定的参数这是等价的
+     * <blockquote>
+     *  <code>(new {@link #MessageFormat(String)MessageFormat}(pattern)){@ link #format(javalangObject [],javalangStringBuffer,javatextFieldPosition)format}
+     * (arguments,new StringBuffer(),null)toString代码>。
+     * </blockquote>
+     * 
+     * 
      * @param pattern   the pattern string
      * @param arguments object(s) to format
      * @return the formatted string
@@ -851,6 +1150,14 @@ public class MessageFormat extends Format {
      *     <code>{@link #format(java.lang.Object[], java.lang.StringBuffer, java.text.FieldPosition) format}((Object[]) arguments, result, pos)</code>
      * </blockquote>
      *
+     * <p>
+     *  格式化对象数组,并将<code> MessageFormat </code>的模式附加到提供的<code> StringBuffer </code>中,格式元素由格式化的对象替换。
+     * <blockquote>
+     * <code> {@ link #format(javalangObject [],javalangStringBuffer,javatextFieldPosition)format}((Object [
+     * ])arguments,result,pos)</code>。
+     * </blockquote>
+     * 
+     * 
      * @param arguments an array of objects to be formatted and substituted.
      * @param result where text is appended.
      * @param pos On input: an alignment field, if desired.
@@ -892,6 +1199,26 @@ public class MessageFormat extends Format {
      * This allows you to not only find where an argument is placed in the
      * resulting String, but also which fields it contains in turn.
      *
+     * <p>
+     *  格式化对象数组并将它们插入到<code> MessageFormat </code>的模式中,产生一个<code> AttributedCharacterIterator </code>你可以使用返回
+     * 的<code> AttributedCharacterIterator </code> ,以及确定关于结果String的信息。
+     * <p>
+     *  返回的<code> AttributedCharacterIterator </code>文本与返回的文本相同
+     * <blockquote>
+     *  <code> {@ link #format(javalangObject [],javalangStringBuffer,javatextFieldPosition)format}(argument
+     * s,new StringBuffer(),null)toString()</code>。
+     * </blockquote>
+     * <p>
+     * 此外,<code> AttributedCharacterIterator </code>至少包含指示从<code> arguments </code>数组中的参数生成文本的属性。
+     * 这些属性的键类型为<code> MessageFormatField </code >,它们的值是<code> Integer </code>对象,指示生成文本的参数的<code> arguments 
+     * </code>数组中的索引。
+     * 此外,<code> AttributedCharacterIterator </code>至少包含指示从<code> arguments </code>数组中的参数生成文本的属性。
+     * <p>
+     *  来自<code> MessageFormat </code>使用的底层<code> Format </code>实例的属性/值也将放置在结果<code> AttributedCharacterIter
+     * ator </code>中。
+     * 这允许您不仅可以找到参数放在生成的String中,而且依次包含它包含的字段。
+     * 
+     * 
      * @param arguments an array of objects to be formatted and substituted.
      * @return AttributedCharacterIterator describing the formatted value.
      * @exception NullPointerException if <code>arguments</code> is null.
@@ -944,6 +1271,20 @@ public class MessageFormat extends Format {
      * 0. When an error occurs, the call to this method will return null.
      * If the source is null, return an empty array.
      *
+     * <p>
+     *  解析字符串
+     * 
+     * <p>注意：解析在多种情况下可能会失败例如：
+     * <ul>
+     *  <li>如果模式中没有出现参数之一<li>如果参数的格式丢失信息,例如使用选择格式,其中大数字格式为"many"<li>尚未处理递归其中替换字符串包含{n}个引用)<li>如果解析的某些部分不明确,则
+     * 不总是找到匹配(或正确匹配)。
+     * 例如,如果使用模式"{1},{2}"使用字符串参数{"a,b","c"},它将格式化为"a,b,c"当结果被解析时,它将返回{"a","b,c"} <li>如果单个参数在字符串中被多次解析,则稍后的解析
+     * 将胜利。
+     * </ul>
+     * 当解析失败时,使用ParsePositiongetErrorIndex()来查找字符串中解析失败的位置。返回的错误索引是字符串正在比较的子模式的起始偏移。
+     * 例如,如果解析字符串"AAA {0} BBB"与模式"AAD {0} BBB"进行比较,错误索引为0当发生错误时,对此方法的调用将返回null如果源为null,则返回一个空数组。
+     * 
+     * 
      * @param source the string to parse
      * @param pos    the parse position
      * @return an array of parsed objects
@@ -1032,6 +1373,12 @@ public class MessageFormat extends Format {
      * See the {@link #parse(String, ParsePosition)} method for more information
      * on message parsing.
      *
+     * <p>
+     *  从给定字符串的开头解析文本以产生对象数组该方法可能不使用给定字符串的整个文本
+     * <p>
+     *  有关消息解析的更多信息,请参阅{@link #parse(String,ParsePosition)}方法
+     * 
+     * 
      * @param source A <code>String</code> whose beginning should be parsed.
      * @return An <code>Object</code> array parsed from the string.
      * @exception ParseException if the beginning of the specified string
@@ -1063,6 +1410,16 @@ public class MessageFormat extends Format {
      * See the {@link #parse(String, ParsePosition)} method for more information
      * on message parsing.
      *
+     * <p>
+     *  从字符串解析文本以生成对象数组
+     * <p>
+     * 该方法尝试解析从<code> pos </code>给出的索引开始的文本如果解析成功,则将<code> pos </code>的索引更新为使用最后一个字符后的索引(解析不会必须使用直到字符串结尾的所有字
+     * 符),并返回已解析的对象数组更新的<code> pos </code>可用于指示下一次调用此方法的起点如果发生错误,那么<code> pos </code>的索引不改变,将<code> pos </code>
+     * 的错误索引设置为发生错误的字符的索引,并返回null。
+     * <p>
+     *  有关消息解析的更多信息,请参阅{@link #parse(String,ParsePosition)}方法
+     * 
+     * 
      * @param source A <code>String</code>, part of which should be parsed.
      * @param pos A <code>ParsePosition</code> object with index and error
      *            index information as described above.
@@ -1077,6 +1434,10 @@ public class MessageFormat extends Format {
     /**
      * Creates and returns a copy of this object.
      *
+     * <p>
+     *  创建并返回此对象的副本
+     * 
+     * 
      * @return a clone of this instance.
      */
     public Object clone() {
@@ -1097,6 +1458,9 @@ public class MessageFormat extends Format {
 
     /**
      * Equality comparison between two message format objects
+     * <p>
+     * 两个消息格式对象之间的平等比较
+     * 
      */
     public boolean equals(Object obj) {
         if (this == obj)                      // quick check
@@ -1115,6 +1479,9 @@ public class MessageFormat extends Format {
 
     /**
      * Generates a hash code for the message format object.
+     * <p>
+     *  为消息格式对象生成哈希码
+     * 
      */
     public int hashCode() {
         return pattern.hashCode(); // enough for reasonable distribution
@@ -1126,6 +1493,11 @@ public class MessageFormat extends Format {
      * <code>AttributedCharacterIterator</code> returned
      * from <code>MessageFormat.formatToCharacterIterator</code>.
      *
+     * <p>
+     *  定义从<code> MessageFormatformatToCharacterIterator </code>返回的<code> AttributedCharacterIterator </code>
+     * 中用作属性键的常量。
+     * 
+     * 
      * @since 1.4
      */
     public static class Field extends Format.Field {
@@ -1136,6 +1508,10 @@ public class MessageFormat extends Format {
         /**
          * Creates a Field with the specified name.
          *
+         * <p>
+         *  创建具有指定名称的字段
+         * 
+         * 
          * @param name Name of the attribute
          */
         protected Field(String name) {
@@ -1145,6 +1521,10 @@ public class MessageFormat extends Format {
         /**
          * Resolves instances being deserialized to the predefined constants.
          *
+         * <p>
+         *  解析反序列化为预定义常量的实例
+         * 
+         * 
          * @throws InvalidObjectException if the constant could not be
          *         resolved.
          * @return resolved MessageFormat.Field constant
@@ -1167,6 +1547,10 @@ public class MessageFormat extends Format {
          * The value associated with the key will be an <code>Integer</code>
          * indicating the index in the <code>arguments</code> array of the
          * argument from which the text was generated.
+         * <p>
+         *  常量标识从传递到<code> formatToCharacterIterator中的参数生成的消息的一部分</code>与键相关联的值将是<code> Integer </code>,表示<code>
+         *  / code>生成文本的参数的数组。
+         * 
          */
         public final static Field ARGUMENT =
                            new Field("message argument field");
@@ -1176,6 +1560,10 @@ public class MessageFormat extends Format {
 
     /**
      * The locale to use for formatting numbers and dates.
+     * <p>
+     *  用于格式化数字和日期的区域设置
+     * 
+     * 
      * @serial
      */
     private Locale locale;
@@ -1183,6 +1571,10 @@ public class MessageFormat extends Format {
     /**
      * The string that the formatted values are to be plugged into.  In other words, this
      * is the pattern supplied on construction with all of the {} expressions taken out.
+     * <p>
+     * 要插入格式化值的字符串换句话说,这是在构造时提供的所有{}表达式取出的模式
+     * 
+     * 
      * @serial
      */
     private String pattern = "";
@@ -1192,6 +1584,10 @@ public class MessageFormat extends Format {
 
     /**
      * An array of formatters, which are used to format the arguments.
+     * <p>
+     *  格式化程序数组,用于格式化参数
+     * 
+     * 
      * @serial
      */
     private Format[] formats = new Format[INITIAL_FORMATS];
@@ -1199,6 +1595,10 @@ public class MessageFormat extends Format {
     /**
      * The positions where the results of formatting each argument are to be inserted
      * into the pattern.
+     * <p>
+     *  将每个参数的格式化结果插入到模式中的位置
+     * 
+     * 
      * @serial
      */
     private int[] offsets = new int[INITIAL_FORMATS];
@@ -1207,6 +1607,10 @@ public class MessageFormat extends Format {
      * The argument numbers corresponding to each formatter.  (The formatters are stored
      * in the order they occur in the pattern, not in the order in which the arguments
      * are specified.)
+     * <p>
+     *  与每个格式化程序相对应的参数号(格式化程序按照它们在模式中出现的顺序存储,而不是按指定参数的顺序存储)
+     * 
+     * 
      * @serial
      */
     private int[] argumentNumbers = new int[INITIAL_FORMATS];
@@ -1216,6 +1620,11 @@ public class MessageFormat extends Format {
      * as the index of the highest-numbered element in <code>offsets</code> that is being used.
      * All of these arrays should have the same number of elements being used as <code>offsets</code>
      * does, and so this variable suffices to tell us how many entries are in all of them.
+     * <p>
+     * 一个小于<code> offsets </code>中的条目数也可以被认为是正在使用的<code> offsets </code>中编号最大的元素的索引所有这些数组应该具有相同数量的元素被用作<code>
+     *  offsets </code>,因此这个变量足以告诉我们在它们中有多少条目。
+     * 
+     * 
      * @serial
      */
     private int maxOffset = -1;
@@ -1228,6 +1637,12 @@ public class MessageFormat extends Format {
      * <code>Field.MESSAGE_ARGUMENT</code>, the location of
      * the first replaced argument will be set in it.
      *
+     * <p>
+     *  格式使用的内部例程如果<code> characterIterators </code>是非空的,则将根据需要从子格式创建AttributedCharacterIterator如果<code> cha
+     * racterIterators </code>为null,<code> fp </code> -null并标识<code> FieldMESSAGE_ARGUMENT </code>,则将在其中设置第一
+     * 个替换的参数的位置。
+     * 
+     * 
      * @exception IllegalArgumentException if an argument in the
      *            <code>arguments</code> array is not of the type
      *            expected by the format element(s) that use it.
@@ -1343,6 +1758,9 @@ public class MessageFormat extends Format {
     /**
      * Convenience method to append all the characters in
      * <code>iterator</code> to the StringBuffer <code>result</code>.
+     * <p>
+     * 方便方法将<code> iterator </code>中的所有字符附加到StringBuffer <code> result </code>
+     * 
      */
     private void append(StringBuffer result, CharacterIterator iterator) {
         if (iterator.first() != CharacterIterator.DONE) {
@@ -1577,6 +1995,9 @@ public class MessageFormat extends Format {
     /**
      * After reading an object from the input stream, do a simple verification
      * to maintain class invariants.
+     * <p>
+     *  从输入流读取对象后,进行简单的验证以维护类不变量
+     * 
      * @throws InvalidObjectException if the objects read from the stream is invalid.
      */
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {

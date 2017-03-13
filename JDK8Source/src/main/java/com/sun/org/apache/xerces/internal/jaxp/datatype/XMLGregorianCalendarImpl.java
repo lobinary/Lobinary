@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -183,6 +184,103 @@ import com.sun.org.apache.xerces.internal.utils.SecuritySupport;
  * </ul>
  * </p>
  *
+ * <p>
+ * <p> W3C XML Schema 10表示形式日期/时间数据类型具体来说,这些日期/时间数据类型为{@link DatatypeConstants#DATETIME dateTime},{@link DatatypeConstants#TIME time}
+ * ,{@link DatatypeConstants#DATE date}在XML命名空间中定义的链接数据类型常量#GYEARMONTH gYearMonth},{@link DatatypeConstants#GMONTHDAY gMonthDay}
+ * ,{@link Datatype#GYEAR gYear},{@link DatatypeConstants#GMONTH gMonth}和{@link DatatypeConstants#GDAY gDay}
+ *  "http：// wwww3org / 2001 / XMLSchema"</code>这些数据类型在<a href=\"http://wwww3org/TR/xmlschema-2/#dateTime\">
+ *  W3C XML模式10第2部分327-14 </a> </p>。
+ * 
+ * <p>下表定义了XML Schema 10日期/时间数据类型字段与此类的字段之间的映射。
+ * 它还总结了<a href ="http：// wwww3org / TR / xmlschema-2 /#isoformats"> W3C XML Schema 10第2部分,附录D,<ISO 8601日期和时间格式</i>
+ *  </a> </p>。
+ * <p>下表定义了XML Schema 10日期/时间数据类型字段与此类的字段之间的映射。
+ * 
+ * <a name="datetimefieldsmapping"/>
+ * <table border="2" rules="all" cellpadding="2">
+ * <thead>
+ * <tr>
+ * <th align="center" colspan="3">
+ *  日期/时间数据类型XML Schema 10和Java表示之间的映射
+ * </th>
+ * </tr>
+ * </thead>
+ * <tbody>
+ * <tr>
+ *  <th> XML架构10 <br/>,11数据类型<br/>栏</th> <th>相关<br/>范围</th> <th>相关范围XMLGregorianCalendarept Accessor </th>
+ *  <th>。
+ * </tr>
+ * <a name="datetimefield-year"/>
+ * <tr>
+ *  <td>年</td> <td> {@link #getYear()} + {@link #getEon()}或者{@link #getEonAndYear}
+ * </td>
+ * <td> <code> getYear()</code>是 - (10 ^ 9-1)到(10 ^ 9)-1或{@link DatatypeConstants#FIELD_UNDEFINED}之间的值{bold ()}
+ * 是十亿年中的高阶年份值<code> getEon()</code>具有大于或等于(10 ^ 9)或小于或等于 - (10 ^ 9)值为null表示字段未定义</br>由于<a href=\"http://wwww3org/2001/05/xmlschema-errata#e2-63\">
+ *  XML模式10勘误</a>说明年份零将在XML模式的未来版本中是有效的词法值,此类允许将年份字段设置为零。
+ * 否则,年份字段值将按照勘误表和[ISO-8601-1988]中所述进行处理。请注意, W3C XML Schema 10验证不允许年份字段的值为零。
+ * </td>
+ * </tr>
+ * <a name="datetimefield-month"/>
+ * <tr>
+ * <td> month </td> <td> {@link #getMonth()} </td> <td> 1到12或{@link DatatypeConstants#FIELD_UNDEFINED} </td>
+ * 。
+ * </tr>
+ * <a name="datetimefield-day"/>
+ * <tr>
+ *  <td> day </td> <td> {@link #getDay()} </td> <td>独立于月份,最大范围为1到31或{@link Datatype#FIELD_UNDEFINED}值相对于
+ * 月字段值的约束位于<a href=\"http://wwww3org/TR/xmlschema-2/#isoformats\"> W3C XML模式10第2部分,附录D </a>中。
+ * </td>
+ * </tr>
+ * <a name="datetimefield-hour"/>
+ * <tr>
+ *  <td>小时</td> <td> {@link #getHour()} </td>
+ * <td>
+ * 0到23或{@link DatatypeConstants#FIELD_UNDEFINED}允许在词汇空间中设置小时值24,前提是分钟和秒字段值为零但是,在值空间中不允许小时值为24,转换以表示第二天的
+ * 第一个实例的值。
+ * <a href="http://www.w3.org/TR/xmlschema-2/#built-in-primitive-datatypes">
+ *  XML模式第2部分：数据类型第2版,32原始数据类型</a>
+ * </td>
+ * </tr>
+ * <a name="datetimefield-minute"/>
+ * <tr>
+ *  <td>分钟</td> <td> {@link #getMinute()} </td> <td> 0至59或{@link DatatypeConstants#FIELD_UNDEFINED} </td>
+ * 。
+ * </tr>
+ * <a name="datetimefield-second"/>
+ * <tr>
+ *  <td>秒</td>
+ * <td>
+ *  {@link #getSecond()} + {@link #getMillisecond()} / 1000或<br/> {@link #getSecond()} + {@link #getFractionalSecond()}
+ * 。
+ * </td>
+ * <td>
+ * {@link #getSecond()}从0到60或{@link DatatypeConstants#FIELD_UNDEFINED} <br/> <i>(注意：闰秒只允许使用60)</i> <br/>
+ *  {@link #getFractionalSecond ()}允许在{@link #getSecond()}定义的范围内从00到10的无限精度<br /> <code> FractionalSecon
+ * d </code>是可选的,值为<code> null < / code>当它未定义时<br /> {@link #getMillisecond()}是{@link #getFractionalSecond()}
+ * 的毫秒毫秒精度值。
+ * </td>
+ * </tr>
+ * <tr id="datetimefield-timezone">
+ *  <td> timezone </td> <td> {@link #getTimezone()} </td> <td>分钟数或{@link DatatypeConstants#FIELD_UNDEFINED}
+ * 值范围为-14小时(-14 * 60分钟)至14小时(14 * 60分钟)。
+ * </td>
+ * </tr>
+ * </tbody>
+ * </table>
+ * 
+ * <p>上表中字段所列的所有最大值空间约束都是通过工厂方法,setter方法和此类<code> IllegalArgumentException </code>的解析方法进行检查的,当参数的值超出最大值约
+ * 束时字段验证检查,例如,月中的天是否应限制为29,30或31天,这取决于其他字段的值不会通过这些方法检查。
+ * </p>
+ * 
+ *  <p>为此类定义了以下操作：
+ * <ul>
+ * <li>用于创建实例的工厂方法</li> <li>独立日期/时间字段的访问器/变异器</li> <li>此类和W3C XML模式之间的转换</li> <li>部分顺序关系比较器方法{@link #compare(XMLGregorianCalendar)}
+ *  </li> <li> {@ link #equals(Object)}使用<a href ="http：// wwww3org / TR / xmlschema-2 /#adding中定义的{@link javaxxmldatatypeDuration}实例定义相对于{@link #compare(XMLGregorianCalendar)} </li>
+ *  <li> -durations-to-dateTimes"> W3C XML模式10第2部分,附录E,<i>向dateTimes添加持续时间</i> </a> </li>。
+ * </ul>
+ * </p>
+ * 
+ * 
  * @author <a href="mailto:Kohsuke.Kawaguchi@Sun.com">Kohsuke Kawaguchi</a>
  * @author <a href="mailto:Joseph.Fialli@Sun.com">Joseph Fialli</a>
  * @author <a href="mailto:Sunitha.Reddy@Sun.com">Sunitha Reddy</a>
@@ -197,104 +295,164 @@ public class XMLGregorianCalendarImpl
 
     /**
      * <p>Eon of this <code>XMLGregorianCalendar</code>.</p>
+     * <p>
+     *  <p>此<code> XMLGregorianCalendar </code> </p>的Eon
+     * 
      */
     private BigInteger eon = null;
 
     /**
      * <p>Year of this <code>XMLGregorianCalendar</code>.</p>
+     * <p>
+     * <p>这个<code> XMLGregorianCalendar </code>年度</p>
+     * 
      */
     private int year = DatatypeConstants.FIELD_UNDEFINED;
 
     /**
      * <p>Month of this <code>XMLGregorianCalendar</code>.</p>
+     * <p>
+     *  <p>这个<code> XMLGregorianCalendar </code> </p>的月份
+     * 
      */
     private int month = DatatypeConstants.FIELD_UNDEFINED;
 
     /**
      * <p>Day of this <code>XMLGregorianCalendar</code>.</p>
+     * <p>
+     *  <p>此<code> XMLGregorianCalendar </code> </p>的日期
+     * 
      */
     private int day = DatatypeConstants.FIELD_UNDEFINED;
 
     /**
      * <p>Timezone of this <code>XMLGregorianCalendar</code> in minutes.</p>
+     * <p>
+     *  <p>此分页<code> XMLGregorianCalendar </code>的时区</p>
+     * 
      */
     private int timezone = DatatypeConstants.FIELD_UNDEFINED;
 
     /**
      * <p>Hour of this <code>XMLGregorianCalendar</code>.</p>
+     * <p>
+     *  <p>小时<code> XMLGregorianCalendar </code> </p>
+     * 
      */
     private int hour = DatatypeConstants.FIELD_UNDEFINED;
 
     /**
      * <p>Minute of this <code>XMLGregorianCalendar</code>.</p>
+     * <p>
+     *  <p>此<code> XMLGregorianCalendar </code> </p>的分钟
+     * 
      */
     private int minute = DatatypeConstants.FIELD_UNDEFINED;
 
     /**
      * <p>Second of this <code>XMLGregorianCalendar</code>.</p>
+     * <p>
+     *  <p>此<code> XMLGregorianCalendar </code> </p>的第二个
+     * 
      */
     private int second = DatatypeConstants.FIELD_UNDEFINED ;
 
     /**
      * <p>Fractional second of this <code>XMLGregorianCalendar</code>.</p>
+     * <p>
+     *  <p>此<code> XMLGregorianCalendar </code> </p>的小数秒
+     * 
      */
     private BigDecimal fractionalSecond = null;
 
     /**
      * <p>Constant to represent a billion.</p>
+     * <p>
+     *  <p>代表10亿的常数</p>
+     * 
      */
     private static final BigInteger BILLION = new BigInteger("1000000000");
 
     /**
      *   <p>Obtain a pure Gregorian Calendar by calling
      *   GregorianCalendar.setChange(PURE_GREGORIAN_CHANGE). </p>
+     * <p>
+     *  <p>通过调用GregorianCalendarsetChange(PURE_GREGORIAN_CHANGE)获取纯Gregorian日历</p>
+     * 
      */
     private static final Date PURE_GREGORIAN_CHANGE =
         new Date(Long.MIN_VALUE);
 
     /**
      * Year index for MIN_ and MAX_FIELD_VALUES.
+     * <p>
+     *  年度指数为MIN_和MAX_FIELD_VALUES
+     * 
      */
     private static final int YEAR   = 0;
 
     /**
      * Month index for MIN_ and MAX_FIELD_VALUES.
+     * <p>
+     *  MIN_和MAX_FIELD_VALUES的月份索引
+     * 
      */
     private static final int MONTH  = 1;
 
     /**
      * Day index for MIN_ and MAX_FIELD_VALUES.
+     * <p>
+     *  MIN_和MAX_FIELD_VALUES的日期索引
+     * 
      */
     private static final int DAY    = 2;
 
     /**
      * Hour index for MIN_ and MAX_FIELD_VALUES.
+     * <p>
+     *  MIN_和MAX_FIELD_VALUES的小时索引
+     * 
      */
     private static final int HOUR   = 3;
 
     /**
      * Minute index for MIN_ and MAX_FIELD_VALUES.
+     * <p>
+     * MIN_和MAX_FIELD_VALUES的分钟索引
+     * 
      */
     private static final int MINUTE = 4;
 
     /**
      * Second index for MIN_ and MAX_FIELD_VALUES.
+     * <p>
+     *  MIN_和MAX_FIELD_VALUES的第二个索引
+     * 
      */
     private static final int SECOND = 5;
 
     /**
      * Second index for MIN_ and MAX_FIELD_VALUES.
+     * <p>
+     *  MIN_和MAX_FIELD_VALUES的第二个索引
+     * 
      */
     private static final int MILLISECOND = 6;
 
     /**
      * Timezone index for MIN_ and MAX_FIELD_VALUES
+     * <p>
+     *  MIN_和MAX_FIELD_VALUES的时区索引
+     * 
      */
     private static final int TIMEZONE = 7;
 
 
     /**
      * field names indexed by YEAR..TIMEZONE.
+     * <p>
+     *  由YEARTIMEZONE索引的字段名称
+     * 
      */
     private static final String FIELD_NAME[] = {
         "Year",
@@ -312,6 +470,11 @@ public class XMLGregorianCalendarImpl
      *
      * <p>TODO: Serialization should use the XML string representation as
      * the serialization format to ensure future compatibility.</p>
+     * <p>
+     *  <p>流唯一标识符</p>
+     * 
+     *  <p> TODO：序列化应使用XML字符串表示作为序列化格式,以确保未来的兼容性</p>
+     * 
      */
     private static final long serialVersionUID = 1L;
 
@@ -325,6 +488,14 @@ public class XMLGregorianCalendarImpl
      * that the field is not set, {@link DatatypeConstants#FIELD_UNDEFINED} for millisecond and timezone
      * and <code>null</code> for fractional second.</p>
      *
+     * <p>
+     *  <p>在转换为{@link GregorianCalendar}时将默认字段值用作模板,将闰年设置为0400年1月1日午夜</p>
+     * 
+     * <p> <code> xsd：dateTime </code>实例的可选字段默认为未设置为任何值<code> XMLGregorianCalendar </code>字段millisecond,frac
+     * tional second和timezone返回值,字段未设置,{@link DatatypeConstants#FIELD_UNDEFINED}为毫秒和时区,<code> null </code>为小
+     * 数秒</p>。
+     * 
+     * 
      * @see #toGregorianCalendar(TimeZone, Locale, XMLGregorianCalendar)
      */
     public static final XMLGregorianCalendar LEAP_YEAR_DEFAULT =
@@ -349,6 +520,14 @@ public class XMLGregorianCalendarImpl
      * Returns a non-null valid XMLGregorianCalendar object that holds the
      * value indicated by the lexicalRepresentation parameter.
      *
+     * <p>
+     *  构造新的XMLGregorianCalendar对象
+     * 
+     *  {@link #parse(String)}记录的字符串解析
+     * 
+     *  返回非空的有效XMLGregorianCalendar对象,该对象保存由lexicalRepresentation参数指示的值
+     * 
+     * 
      * @param lexicalRepresentation
      *      Lexical representation of one the eight
      *      XML Schema date/time datatypes.
@@ -446,6 +625,9 @@ public class XMLGregorianCalendarImpl
     /**
      * <p>Create an instance with all date/time datatype fields set to
      * {@link DatatypeConstants#FIELD_UNDEFINED} or null respectively.</p>
+     * <p>
+     *  <p>创建一个所有日期/时间数据类型字段设置为{@link DatatypeConstants#FIELD_UNDEFINED}或null的实例</p>
+     * 
      */
     public XMLGregorianCalendarImpl() {
 
@@ -459,6 +641,11 @@ public class XMLGregorianCalendarImpl
      * arbitrarily large numbers and fractionalSecond has infinite
      * precision.</p>
      *
+     * <p>
+     * <p>私有构造函数允许W3C XML模式10允许的完整值空间xsd：dateTime和相关的内置数据类型的建议请注意,<code> year </code>参数支持任意大的数字,fractionalSe
+     * cond具有无限精度</p>。
+     * 
+     * 
      * @param year of <code>XMLGregorianCalendar</code> to be created.
      * @param month of <code>XMLGregorianCalendar</code> to be created.
      * @param day of <code>XMLGregorianCalendar</code> to be created.
@@ -517,6 +704,14 @@ public class XMLGregorianCalendarImpl
                     + ", timezone = " + timezone
                     + ", is not a valid representation of an XML Gregorian Calendar value."
                 );
+                        /* <p>
+                        /*  String yearString ="null"; if(year！= null){yearString = yeartoString(); } String fractionalSecondStr
+                        /* ing ="null"; if(fractionalSecond！= null){fractionalSecondString = fractionalSecondtoString(); }}。
+                        /* 
+                        /* throw new IllegalArgumentException("year ="+ yearString +",month ="+ month +",day ="+ day +",hour ="+
+                        /*  hour +",minute ="+ minute +",second ="+ second +",fractionalSecond ="+ fractionalSecondString +",tim
+                        /* ezone ="+ timezone +",不是XML格雷戈里日历值的有效表示形式");。
+                        /* 
                 */
 
                 }
@@ -531,6 +726,14 @@ public class XMLGregorianCalendarImpl
      * <p><code>XMLGregorianCalendar eon</code> and
      * <code>fractionalSecond</code> are set to <code>null</code></p>
      *
+     * <p>
+     *  <p> <code> javautilGregorianCalendar </code>实例需要转换为<code> XMLGregorianCalendar </code>实例的值空间的私有构造函数</p>
+     * 。
+     * 
+     *  <p> <code> XMLGregorianCalendar eon </code>和<code> fractionalSecond </code>设置为<code> null </code> </p>
+     * 。
+     * 
+     * 
      * @param year of <code>XMLGregorianCalendar</code> to be created.
      * @param month of <code>XMLGregorianCalendar</code> to be created.
      * @param day of <code>XMLGregorianCalendar</code> to be created.
@@ -578,6 +781,11 @@ public class XMLGregorianCalendarImpl
                     + ", timezone = " + timezone
                     + ", is not a valid representation of an XML Gregorian Calendar value."
                     );
+                /* <p>
+                /* throw new IllegalArgumentException("year ="+ year +",month ="+ month +",day ="+ day +",hour ="+ hour 
+                /* +",minute ="+ minute +",second ="+ second +",millisecond ="+ millisecond +",timezone ="+ timezone +",
+                /* 不是XML格雷戈里日历值的有效表示形式。
+                /* 
                  */
 
                 }
@@ -638,6 +846,51 @@ public class XMLGregorianCalendarImpl
          * for the host is defined as specified by
          * <code>java.util.TimeZone.getDefault()</code>.</li></p>
          *
+         * <p>
+         *  <p>将<code> javautilGregorianCalendar </code>转换为XML Schema 10表示</p>
+         * 
+         * <table border="2" rules="all" cellpadding="2">
+         * <thead>
+         * <tr>
+         * <th align="center" colspan="2">
+         *  字段从<code> javautilGregorianCalendar </code>转换为此类
+         * </th>
+         * </tr>
+         * </thead>
+         * <tbody>
+         * <tr>
+         *  <th> <code> javaxxmldatatypeXMLGregorianCalendar </code>字段</th> <th> <code> javautilGregorianCalenda
+         * r </code>。
+         * </tr>
+         * <tr>
+         *  <th> {@ link #setYear(int)} </th> <th> <code> ERA == GregorianCalendarBC? -YEAR：YEAR </code> </th>
+         * </tr>
+         * <tr>
+         *  <th> {@ link #setMonth(int)} </th> <th> <code> MONTH + 1 </code> </th>
+         * </tr>
+         * <tr>
+         * <th> {@ link #setDay(int)} </th> <th> <code> DAY_OF_MONTH </code> </th>
+         * </tr>
+         * <tr>
+         *  <th> {@ link #setTime(int,int,int,BigDecimal)} </th> <th> <code> HOUR_OF_DAY,MINUTE,SECOND,MILLISECO
+         * ND </code>。
+         * </tr>
+         * <tr>
+         *  <th> {@ link #setTimezone(int)} <i> * </i> </th> <th> <code>(ZONE_OFFSET + DST_OFFSET)/(60 * 1000)</code>
+         *  i>(分钟)</i>。
+         * </th>
+         * </tr>
+         * </tbody>
+         * </table>
+         *  <p> <i> * </i>信息的转换丢失不可能在XML Schema 10日期/时间数据类型表示中表示<code> javautilGregorianCalendar </code>夏令时id </p>
+         * 。
+         * 
+         *  <p>要计算返回值的<code> TimeZone </code>字段,
+         * <ul>
+         * <code> thisgetTimezone()</code> </code>使用自定义时区id创建<code> javautilTimeZone </code> li> else use <code>
+         *  GregorianCalendar </code>主机的默认时区值是由<code> javautilTimeZonegetDefault()</code> </。
+         * 
+         * 
          * @param cal <code>java.util.GregorianCalendar</code> used to create <code>XMLGregorianCalendar</code>
          */
     public XMLGregorianCalendarImpl(GregorianCalendar cal) {
@@ -669,6 +922,10 @@ public class XMLGregorianCalendarImpl
      * <p>Create a Java representation of XML Schema builtin datatype <code>dateTime</code>.
      * All possible fields are specified for this factory method.</p>
      *
+     * <p>
+     *  <p>创建XML模式的Java表示形式内置数据类型<code> dateTime </code>为此工厂方法指定了所有可能的字段</p>
+     * 
+     * 
      * @param year represents both high-order eons and low-order year.
      * @param month of <code>dateTime</code>
      * @param day of <code>dateTime</code>
@@ -710,6 +967,10 @@ public class XMLGregorianCalendarImpl
     /**
      * <p>Create a Java instance of XML Schema builtin datatype dateTime.</p>
      *
+     * <p>
+     *  <p>创建XML Schema内置数据类型dateTime </p>的Java实例
+     * 
+     * 
      * @param year represents both high-order eons and low-order year.
      * @param month of <code>dateTime</code>
      * @param day of <code>dateTime</code>
@@ -748,6 +1009,10 @@ public class XMLGregorianCalendarImpl
      * <p>Create a Java representation of XML Schema builtin datatype <code>dateTime</code>.
      * All possible fields are specified for this factory method.</p>
      *
+     * <p>
+     *  <p>创建XML模式的Java表示形式内置数据类型<code> dateTime </code>为此工厂方法指定了所有可能的字段</p>
+     * 
+     * 
      * @param year represents low-order year.
      * @param month of <code>dateTime</code>
      * @param day of <code>dateTime</code>
@@ -792,6 +1057,13 @@ public class XMLGregorianCalendarImpl
      * with <code>month</code> and <code>day</code> parameters set to
      * {@link DatatypeConstants#FIELD_UNDEFINED}.</p>
      *
+     * <p>
+     * <p>创建XML模式的内部数据类型<code> date </code>或<code> g * </code> </p>
+     * 
+     *  <p>例如,可以创建<code> gYear </code>的实例来调用此工厂,将<code> month </code>和<code> day </code>参数设置为{@link DatatypeConstants#FIELD_UNDEFINED }
+     *  </p>。
+     * 
+     * 
      * @param year of <code>XMLGregorianCalendar</code> to be created.
      * @param month of <code>XMLGregorianCalendar</code> to be created.
      * @param day of <code>XMLGregorianCalendar</code> to be created.
@@ -824,6 +1096,10 @@ public class XMLGregorianCalendarImpl
 
     /**
      * Create a Java instance of XML Schema builtin datatype <code>time</code>.
+     * <p>
+     *  创建XML Schema内置数据类型<code> time </code>的Java实例
+     * 
+     * 
      * @param hours number of hours
      * @param minutes number of minutes
      * @param seconds number of seconds
@@ -857,6 +1133,10 @@ public class XMLGregorianCalendarImpl
     /**
      * <p>Create a Java instance of XML Schema builtin datatype time.</p>
      *
+     * <p>
+     *  <p>创建XML模式内置数据类型时间的Java实例</p>
+     * 
+     * 
      * @param hours number of hours
      * @param minutes number of minutes
      * @param seconds number of seconds
@@ -892,6 +1172,10 @@ public class XMLGregorianCalendarImpl
     /**
      * <p>Create a Java instance of XML Schema builtin datatype time.</p>
      *
+     * <p>
+     *  <p>创建XML模式内置数据类型时间的Java实例</p>
+     * 
+     * 
      * @param hours number of hours
      * @param minutes number of minutes
      * @param seconds number of seconds
@@ -933,6 +1217,12 @@ public class XMLGregorianCalendarImpl
      *
      * <p>Value constraints for this value are summarized in
      * <a href="#datetimefield-year">year field of date/time field mapping table</a>.</p>
+     * <p>
+     *  <p>返回XML模式的高阶组件10如果未定义年份字段的可选部分,则<code> year </code> <code> null </code>的dateTime数据类型字段</p>
+     * 
+     * <p>此值的值约束在<a href=\"#datetimefield-year\">日期/时间字段映射表</a>的年份字段中汇总</p>
+     * 
+     * 
      * @return eon of this <code>XMLGregorianCalendar</code>. The value
      * returned is an integer multiple of 10^9.
      *
@@ -950,6 +1240,12 @@ public class XMLGregorianCalendarImpl
      * <p>Value constraints for this value are summarized in
      * <a href="#datetimefield-year">year field of date/time field mapping table</a>.</p>
      *
+     * <p>
+     *  <p>返回XML模式的低阶组件10 <code> year </code>或{@link DatatypeConstants#FIELD_UNDEFINED}的dateTime数据类型字段</p>
+     * 
+     *  <p>此值的值约束在<a href=\"#datetimefield-year\">日期/时间字段映射表</a>的年份字段中汇总</p>
+     * 
+     * 
      * @return year  of this <code>XMLGregorianCalendar</code>.
      *
      * @see #getEon()
@@ -966,6 +1262,12 @@ public class XMLGregorianCalendarImpl
      * <p>Value constraints for this value are summarized in
      * <a href="#datetimefield-year">year field of date/time field mapping table</a>.</p>
      *
+     * <p>
+     *  <p>返回XML模式10 <code> year </code> </p>的dateTime数据类型字段
+     * 
+     *  <p>此值的值约束在<a href=\"#datetimefield-year\">日期/时间字段映射表</a>的年份字段中汇总</p>
+     * 
+     * 
      * @return sum of <code>eon</code> and <code>BigInteger.valueOf(year)</code>
      * when both fields are defined. When only <code>year</code> is defined,
      * return it. When both <code>eon</code> and <code>year</code> are not
@@ -1001,6 +1303,12 @@ public class XMLGregorianCalendarImpl
      * <p>Value constraints for this value are summarized in
      * <a href="#datetimefield-month">month field of date/time field mapping table</a>.</p>
      *
+     * <p>
+     *  <p>返回月数或{@link DatatypeConstants#FIELD_UNDEFINED} </p>
+     * 
+     * <p>此值的值约束在<a href=\"#datetimefield-month\">日期/时间字段映射表</a>的月字段中汇总</p>
+     * 
+     * 
      * @return year  of this <code>XMLGregorianCalendar</code>.
      *
      */
@@ -1014,6 +1322,12 @@ public class XMLGregorianCalendarImpl
      * <p>Value constraints for this value are summarized in
      * <a href="#datetimefield-day">day field of date/time field mapping table</a>.</p>
      *
+     * <p>
+     *  返回月份日期或{@link DatatypeConstants#FIELD_UNDEFINED} </p>
+     * 
+     *  <p>此值的值约束在<a href=\"#datetimefield-day\">日期/时间字段映射表</a>的日字段中汇总</p>
+     * 
+     * 
      * @see #setDay(int)
      */
     public int getDay() {
@@ -1027,6 +1341,12 @@ public class XMLGregorianCalendarImpl
      * <p>Value constraints for this value are summarized in
      * <a href="#datetimefield-timezone">timezone field of date/time field mapping table</a>.</p>
      *
+     * <p>
+     *  如果未定义此可选字段,则返回以分钟为单位的时区偏移量或{@link DatatypeConstants#FIELD_UNDEFINED}
+     * 
+     *  <p>此值的值约束在<a href=\"#datetimefield-timezone\">日期/时间字段映射表</a>的时区字段中汇总</a> </p>
+     * 
+     * 
      * @see #setTimezone(int)
      */
     public int getTimezone() {
@@ -1039,6 +1359,13 @@ public class XMLGregorianCalendarImpl
      *
      * <p>Value constraints for this value are summarized in
      * <a href="#datetimefield-hour">hour field of date/time field mapping table</a>.</p>
+     * <p>
+     *  返回营业时间或{@link DatatypeConstants#FIELD_UNDEFINED}如果未定义此字段,则返回{@link DatatypeConstants#FIELD_UNDEFINED}
+     * 。
+     * 
+     * <p>此值的值约束在<a href=\"#datetimefield-hour\">日期/时间字段映射表</a>的小时字段中进行了总结</p>
+     * 
+     * 
      * @see #setTime(int, int, int)
      */
     public int getHour() {
@@ -1051,6 +1378,13 @@ public class XMLGregorianCalendarImpl
      *
      * <p>Value constraints for this value are summarized in
      * <a href="#datetimefield-minute">minute field of date/time field mapping table</a>.</p>
+     * <p>
+     *  返回分钟数或{@link DatatypeConstants#FIELD_UNDEFINED} <\\ p>如果未定义此字段,则返回{@link DatatypeConstants#FIELD_UNDEFINED}
+     * 。
+     * 
+     *  <p>此值的值约束总结在<a href=\"#datetimefield-minute\">日期/时间字段映射表</a>的分钟字段中</p>
+     * 
+     * 
      * @see #setTime(int, int, int)
      */
     public int getMinute() {
@@ -1069,6 +1403,15 @@ public class XMLGregorianCalendarImpl
      * <p>Value constraints for this value are summarized in
      * <a href="#datetimefield-second">second field of date/time field mapping table</a>.</p>
      *
+     * <p>
+     *  <p>返回秒或{@link DatatypeConstants#FIELD_UNDEFINED} <\\ p>
+     * 
+     *  <p>如果未定义此字段,则返回{@link DatatypeConstants#FIELD_UNDEFINED}当未定义此字段时,将显示可选的xs：dateTime小数秒字段,由{@link #getFractionalSecond()}
+     * 和{@link #getMillisecond )},不得定义</p>。
+     * 
+     * <p>此值的值约束在<a href=\"#datetimefield-second\">日期/时间字段映射表</a>的第二个字段中进行了总结</p>
+     * 
+     * 
      * @return Second  of this <code>XMLGregorianCalendar</code>.
      *
      * @see #getFractionalSecond()
@@ -1080,6 +1423,8 @@ public class XMLGregorianCalendarImpl
     }
 
     /**
+    /* <p>
+    /* 
      * @return result of adding second and fractional second field
      */
     private BigDecimal getSeconds() {
@@ -1109,6 +1454,15 @@ public class XMLGregorianCalendarImpl
      * <p>Value constraints for this value are summarized in
      * <a href="#datetimefield-second">second field of date/time field mapping table</a>.</p>
      *
+     * <p>
+     *  <p>返回{@link #getFractionalSecond()} <\\ p>的毫秒精度
+     * 
+     *  <p>此方法表示{@link #getFractionalSecond()}返回的无限精度小数秒值的便利访问器返回值是{@link #getFractionalSecond()}的四舍五入到毫秒值当{@link #getFractionalSecond ()}
+     * 返回<code> null </code>,此方法必须返回{@link DatatypeConstants#FIELD_UNDEFINED} </p>。
+     * 
+     *  <p>此值的值约束在<a href=\"#datetimefield-second\">日期/时间字段映射表</a>的第二个字段中进行了总结</p>
+     * 
+     * 
      * @return Millisecond  of this <code>XMLGregorianCalendar</code>.
      *
      * @see #getFractionalSecond()
@@ -1137,6 +1491,18 @@ public class XMLGregorianCalendarImpl
      * xs:dateTime second field, represented by ({@link #getSecond()},
      * does not return {@link DatatypeConstants#FIELD_UNDEFINED}).</p>
      *
+     * <p>
+     *  <p>返回小数秒</p>
+     * 
+     * <p> <code> null </code>在此可选字段未定义时返回</p>
+     * 
+     *  <p>值约束在<a href=\"#datetimefield-second\">日期/时间字段映射表</a>的第二个字段中有详细说明</p>
+     * 
+     *  <p>当({@link #getSecond()}表示的xs：dateTime第二个字段未返回{@link DatatypeConstants#FIELD_UNDEFINED})时,此可选字段只能有一
+     * 个定义的值。
+     * </p>。
+     * 
+     * 
      * @return fractional seconds  of this <code>XMLGregorianCalendar</code>.
      *
      * @see #getSecond()
@@ -1153,6 +1519,12 @@ public class XMLGregorianCalendarImpl
      *
      * <p>Unset this field by invoking the setter with a parameter value of <code>null</code>.</p>
      *
+     * <p>
+     *  <p>设置XSD <code> dateTime </code>年份字段</p>的低阶和高阶分量
+     * 
+     *  <p>通过调用参数值为<code> null </pt>的setter来取消设置此字段</p>
+     * 
+     * 
      * @param year value constraints summarized in <a href="#datetimefield-year">year field of date/time field mapping table</a>.
      *
      * @throws IllegalArgumentException if <code>year</code> parameter is
@@ -1180,6 +1552,14 @@ public class XMLGregorianCalendarImpl
      * is less than 10^9, the eon component of the XSD year field is set to
      * <code>null</code> by this method.</p>
      *
+     * <p>
+     *  <p>设置XSD <code> dateTime </code>年份字段</p>的年份
+     * 
+     *  <p>通过调用参数值为{@link DatatypeConstants#FIELD_UNDEFINED}的setter取消设置此字段</p>
+     * 
+     * <p>注意：如果<code> year </code>参数的绝对值小于10 ^ 9,则通过此方法将XSD年份字段的eon组件设置为<code> null </code> / p>
+     * 
+     * 
      * @param year value constraints are summarized in <a href="#datetimefield-year">year field of date/time field mapping table</a>.
      *   If year is {@link DatatypeConstants#FIELD_UNDEFINED}, then eon is set to <code>null</code>.
      */
@@ -1204,6 +1584,12 @@ public class XMLGregorianCalendarImpl
      * <p>Unset this field by invoking the setter with a parameter value of
      * <code>null</code>.</p>
      *
+     * <p>
+     *  <p>设置XSD <code> dateTime </code>年份字段</p>的高阶部分
+     * 
+     *  <p>通过调用参数值为<code> null </pt>的setter来取消设置此字段</p>
+     * 
+     * 
      * @param eon value constraints summarized in <a href="#datetimefield-year">year field of date/time field mapping table</a>.
      */
     private void setEon(BigInteger eon) {
@@ -1220,6 +1606,12 @@ public class XMLGregorianCalendarImpl
      *
      * <p>Unset this field by invoking the setter with a parameter value of {@link DatatypeConstants#FIELD_UNDEFINED}.</p>
      *
+     * <p>
+     *  <p>设置月份</p>
+     * 
+     *  <p>通过调用参数值为{@link DatatypeConstants#FIELD_UNDEFINED}的setter取消设置此字段</p>
+     * 
+     * 
      * @param month value constraints summarized in <a href="#datetimefield-month">month field of date/time field mapping table</a>.
      *
      * @throws IllegalArgumentException if <code>month</code> parameter is
@@ -1238,6 +1630,12 @@ public class XMLGregorianCalendarImpl
      *
      * <p>Unset this field by invoking the setter with a parameter value of {@link DatatypeConstants#FIELD_UNDEFINED}.</p>
      *
+     * <p>
+     *  <p>设置每月的天数</p>
+     * 
+     *  <p>通过调用参数值为{@link DatatypeConstants#FIELD_UNDEFINED}的setter取消设置此字段</p>
+     * 
+     * 
      * @param day value constraints summarized in <a href="#datetimefield-day">day field of date/time field mapping table</a>.
      *
      * @throws IllegalArgumentException if <code>day</code> parameter is
@@ -1256,6 +1654,12 @@ public class XMLGregorianCalendarImpl
      *
      * <p>Unset this field by invoking the setter with a parameter value of {@link DatatypeConstants#FIELD_UNDEFINED}.</p>
      *
+     * <p>
+     *  <p>设置时区偏移中的分钟数</p>
+     * 
+     *  <p>通过调用参数值为{@link DatatypeConstants#FIELD_UNDEFINED}的setter取消设置此字段</p>
+     * 
+     * 
      * @param offset value constraints summarized in <a href="#datetimefield-timezone">
      *   timezone field of date/time field mapping table</a>.
      *
@@ -1273,6 +1677,10 @@ public class XMLGregorianCalendarImpl
     /**
      * <p>Set time as one unit.</p>
      *
+     * <p>
+     * <p>将时间设为一个单位</p>
+     * 
+     * 
      * @param hour value constraints are summarized in
      * <a href="#datetimefield-hour">hour field of date/time field mapping table</a>.
      * @param minute value constraints are summarized in
@@ -1350,6 +1758,10 @@ public class XMLGregorianCalendarImpl
      * <p>Set time as one unit, including the optional infinite precison
      * fractional seconds.</p>
      *
+     * <p>
+     *  <p>将时间设置为一个单位,包括可选的无限精度小数秒</p>
+     * 
+     * 
      * @param hour value constraints are summarized in
      * <a href="#datetimefield-hour">hour field of date/time field mapping table</a>.
      * @param minute value constraints are summarized in
@@ -1390,6 +1802,10 @@ public class XMLGregorianCalendarImpl
     /**
      * <p>Set time as one unit, including optional milliseconds.</p>
      *
+     * <p>
+     *  <p>将时间设置为一个单位,包括可选的毫秒数</p>
+     * 
+     * 
      * @param hour value constraints are summarized in
      * <a href="#datetimefield-hour">hour field of date/time field mapping table</a>.
      * @param minute value constraints are summarized in
@@ -1432,6 +1848,14 @@ public class XMLGregorianCalendarImpl
      * this class are defined in
      * <a href="#datetimefieldmapping">date/time field mapping table</a>.</p>
      *
+     * <p>
+     *  <p>根据<a href=\"http://wwww3org/TR/xmlschema-2/#dateTime-order\"> W3C XML模式10部分中定义的部分顺序关系,比较两个W3C XML
+     * 模式10日期/时间数据类型的实例2,第3273节,<i>订单关系dateTime </i> </a> </p>。
+     * 
+     *  在<a href=\"#datetimefieldmapping\">日期/时间字段映射表</a>中定义<p> <code> xsd：dateTime </code>数据类型字段映射到此类的访问器</p>
+     * 。
+     * 
+     * 
      * @param rhs instance of <code>XMLGregorianCalendar</code> to compare
      *
      * @return the relationship between <code>lhs</code> and <code>rhs</code> as
@@ -1518,6 +1942,11 @@ public class XMLGregorianCalendarImpl
      *
      * <p>2000-03-04T23:00:00+03:00 normalizes to 2000-03-04T20:00:00Z</p>
      * <p>Implements W3C XML Schema Part 2, Section 3.2.7.3 (A).</p>
+     * <p>
+     *  <p>将此实例标准化为UTC </p>
+     * 
+     *  <p> 2000-03-04T23：00：00 + 03：00正规化为2000-03-04T20：00：00Z </p> <p>实施W3C XML模式第2部分,
+     * 
      */
     public XMLGregorianCalendar normalize() {
 
@@ -1541,6 +1970,11 @@ public class XMLGregorianCalendarImpl
          *
          * <p>2000-03-04T23:00:00+03:00 normalizes to 2000-03-04T20:00:00Z</p>
          * <p>Implements W3C XML Schema Part 2, Section 3.2.7.3 (A).</p>
+         * <p>
+         * <p>将此实例标准化为UTC </p>
+         * 
+         *  <p> 2000-03-04T23：00：00 + 03：00正规化为2000-03-04T20：00：00Z </p> <p>实施W3C XML模式第2部分,
+         * 
          */
     private XMLGregorianCalendar normalizeToTimezone(int timezone) {
 
@@ -1568,6 +2002,10 @@ public class XMLGregorianCalendarImpl
     /**
      *
      *  <p>Implements Step B from http://www.w3.org/TR/xmlschema-2/#dateTime-order </p>
+     * <p>
+     *  <p>从http：// wwww3org / TR / xmlschema-2 /#dateTime-order实施步骤B </p>
+     * 
+     * 
      * @param P calendar instance with normalized timezone offset or
      *          having same timezone as Q
      * @param Q calendar instance with normalized timezone offset or
@@ -1631,6 +2069,9 @@ public class XMLGregorianCalendarImpl
     /**
      * <p>Implement Step B from
      * http://www.w3.org/TR/xmlschema-2/#dateTime-order.</p>
+     * <p>
+     *  <p>从http：// wwww3org / TR / xmlschema-2 /#dateTime-order </p>实施步骤B
+     * 
      */
     private static int compareField(int Pfield, int Qfield) {
         if (Pfield == Qfield) {
@@ -1679,6 +2120,10 @@ public class XMLGregorianCalendarImpl
     /**
      * <p>Indicates whether parameter <code>obj</code> is "equal to" this one.</p>
      *
+     * <p>
+     *  <p>指示参数<code> obj </code>是否等于"this"</p>
+     * 
+     * 
      * @param obj to compare.
      *
      * @return <code>true</code> when <code>compare(this,(XMLGregorianCalendar)obj) == EQUAL.</code>.
@@ -1694,6 +2139,10 @@ public class XMLGregorianCalendarImpl
     /**
      * <p>Returns a hash code consistent with the definition of the equals method.</p>
      *
+     * <p>
+     *  <p>返回与equals方法</p>的定义一致的哈希代码
+     * 
+     * 
      * @return hash code of this object.
      */
     public int hashCode() {
@@ -1736,6 +2185,21 @@ public class XMLGregorianCalendarImpl
      * <p>Returns a non-null valid XMLGregorianCalendar object that holds the value
      * indicated by the lexicalRepresentation parameter.</p>
      *
+     * <p>
+     *  <p>通过解析其在<a href=\"http://wwww3org/TR/xmlschema-2/#dateTime-order\"> XML模式10第2部分第32节[7]中定义的词法字符串表示形式
+     * 构造新的XMLGregorianCalendar对象-14] 1,<i>词汇表示</i> </a> </p>。
+     * 
+     * <p>字符串表示不能有任何前导和尾随空格。</p>
+     * 
+     *  <p>解析是逐字段完成的,因此对于任何词法正确的字符串x：</p>,以下条件成立
+     * <pre>
+     *  new XMLGregorianCalendar(x)toXMLFormat()equals(x)
+     * </pre>
+     *  除了<a href=\"http://wwww3org/2001/05/xmlschema-errata#e2-45\"> XML模式10勘误表,第3272节</a>中列出的注意词汇/规范表示不匹配。
+     * 
+     *  <p>返回非空有效的XMLGregorianCalendar对象,该对象包含由lexicalRepresentation参数指示的值</p>
+     * 
+     * 
      * @param lexicalRepresentation Lexical representation of one the 8 XML Schema calendar datatypes.
      *
      * @return <code>XMLGregorianCalendar</code> created from parsing <code>lexicalRepresentation</code> parameter.
@@ -1760,6 +2224,13 @@ public class XMLGregorianCalendarImpl
      * <p>Specific target lexical representation format is determined by
      * {@link #getXMLSchemaType()}.</p>
      *
+     * <p>
+     *  <p>返回<code>此</code>实例的词法表示格式在<a href=\"http://wwww3org/TR/xmlschema-2/#dateTime-order\"> XML模式10第2部分
+     * 中指定,Section 32 [7-14] 1,<i> Lexical Representation </i>"</a> </p>。
+     * 
+     * <p>具体的目标词汇表示格式由{@link #getXMLSchemaType()}确定</p>
+     * 
+     * 
      * @return XML, as <code>String</code>, representation of this <code>XMLGregorianCalendar</code>
      *
      * @throws java.lang.IllegalStateException if the combination of set fields
@@ -1890,6 +2361,56 @@ public class XMLGregorianCalendarImpl
      *   </tbody>
      * </table>
      *
+     * <p>
+     *  <p>返回此实例映射到"类型"的XML模式日期/时间类型的名称是基于设置的字段计算的</p>
+     * 
+     * <table border="2" rules="all" cellpadding="2">
+     * <thead>
+     * <tr>
+     * <th align="center" colspan="7">
+     *  XML模式的必填字段10日期/时间数据类型<br/> <i>(所有日期/时间数据类型的时区是可选的)</i>
+     * </th>
+     * </tr>
+     * </thead>
+     * <tbody>
+     * <tr>
+     *  <td>数据类型</td> <td>年份</td> <td>月份</td> <td>日期</td> <td>小时</td> <td> >第二</td>
+     * </tr>
+     * <tr>
+     *  <td> {@ link DatatypeConstants#DATETIME} </td> <td> X </td> <td> X </td> <td> X </td> <td> X </td> </td>
+     *  <td> X </td>。
+     * </tr>
+     * <tr>
+     *  <td> {@ link DatatypeConstants#DATE} </td> <td> X </td> <td> X </td> <td> X </td> <td> </td> td> <td>
+     *  </td>。
+     * </tr>
+     * <tr>
+     *  <td> {@ link DatatypeConstants#TIME} </td> <td> </td> <td> </td> <td> </td> <td> X </td> <td> X </td >
+     *  <td> X </td>。
+     * </tr>
+     * <tr>
+     * <td> {@ link DatatypeConstants#GYEARMONTH} </td> <td> X </td> <td> X </td> <td> </td> <td> </td> <td>
+     *  </td > <td> </td>。
+     * </tr>
+     * <tr>
+     *  <td> {@ link DatatypeConstants#GMONTHDAY} </td> <td> </td> <td> X </td> <td> X </td> <td> </td> <td>
+     *  </td > <td> </td>。
+     * </tr>
+     * <tr>
+     *  <td> {@ link DatatypeConstants#GYEAR} </td> <td> X </td> <td> </td> <td> </td> <td> </td> <td> </td>
+     * 。
+     * </tr>
+     * <tr>
+     *  <td> {@ link DatatypeConstants#GMONTH} </td> <td> </td> <td> X </td> <td> </td> <td> </td> <td> </td>
+     *  <td> </td>。
+     * </tr>
+     * <tr>
+     *  <td> {@ link DatatypeConstants#GDAY} </td> <td> </td> <td> </td> <td> X </td> <td> </td> <td> </td>。
+     * </tr>
+     * </tbody>
+     * </table>
+     * 
+     * 
      * @throws java.lang.IllegalStateException if the combination of set fields
      *    does not match one of the eight defined XML Schema builtin
      *    date/time datatypes.
@@ -1942,6 +2463,10 @@ public class XMLGregorianCalendarImpl
 
     /**
      * Validate instance by <code>getXMLSchemaType()</code> constraints.
+     * <p>
+     *  通过<code> getXMLSchemaType()</code>约束验证实例
+     * 
+     * 
      * @return true if data values are valid.
      */
     public boolean isValid() {
@@ -2009,6 +2534,14 @@ public class XMLGregorianCalendarImpl
      * defines the mapping from XML Schema 1.0 <code>dateTime</code> fields
      * to this class' representation of those fields.</p>
      *
+     * <p>
+     *  <p>将<code> duration </code>添加到此实例<\\ p>
+     * 
+     * <p>计算在<a href=\"http://wwww3org/TR/xmlschema-2/#adding-durations-to-dateTimes\"> XML模式10第2部分,附录E,<i>添
+     * 加持续时间dateTimes </i >> </a> <a href=\"#datetimefieldsmapping\">日期/时间字段映射表</a>定义了从XML Schema 10 <code> 
+     * dateTime </code>字段到此类的表示的映射的这些字段</p>。
+     * 
+     * 
      * @param duration Duration to add to this <code>XMLGregorianCalendar</code>.
      *
      * @throws NullPointerException  when <code>duration</code> parameter is <code>null</code>.
@@ -2037,6 +2570,16 @@ public class XMLGregorianCalendarImpl
                *  temp := S[month] + D[month]
                *  E[month] := modulo(temp, 1, 13)
                *  carry := fQuotient(temp, 1, 13)
+               * <p>
+               *  从http：// wwww3org / TR / xmlschema-2 / #include-durations-to-dateTimes中提取,以确保正确实现查看算法中使用的方法的定义规范
+               * 
+               *  给定日期时间S和持续时间D,指定如何计算日期时间E,其中E是具有开始S和持续时间D的时间段的结束,即E = S + D
+               * 
+               * 以下是精确规范这些步骤必须以相同的顺序执行如果未指定D中的字段,则将其视为为零。
+               * 如果未指定S中的字段,则在计算中将其视为处理是该字段中的最小允许值,但是,在计算结束后,E中的相应字段将被删除(设置为未指定)。
+               * 
+               *  月(可以在下面另外修改)temp：= S [month] + D [month] E [month]：= modulo(temp,1,13)
+               * 
            */
 
         boolean fieldUndefined[] = {
@@ -2064,6 +2607,9 @@ public class XMLGregorianCalendarImpl
 
         /* Years (may be modified additionally below)
             *  E[year] := S[year] + D[year] + carry
+            * <p>
+            *  E [年]：= S [年] + D [年] +进位
+            * 
             */
         BigInteger startYear = getEonAndYear();
         if (startYear == null) {
@@ -2078,12 +2624,20 @@ public class XMLGregorianCalendarImpl
                *  E[zone] := S[zone]
            *
            * no-op since adding to this, not to a new end point.
+           * <p>
+           *  E [zone]：= S [zone]
+           * 
+           *  无操作,因为增加了这一点,不是到了一个新的终点
+           * 
            */
 
         /* Seconds
             *  temp := S[second] + D[second]
             *  E[second] := modulo(temp, 60)
             *  carry := fQuotient(temp, 60)
+            * <p>
+            *  temp：= S [second] + D [second] E [second]：= modulo(temp,60)
+            * 
             */
         BigDecimal startSeconds;
         if (getSecond() == DatatypeConstants.FIELD_UNDEFINED) {
@@ -2120,6 +2674,9 @@ public class XMLGregorianCalendarImpl
                *  temp := S[minute] + D[minute] + carry
                *  E[minute] := modulo(temp, 60)
                *  carry := fQuotient(temp, 60)
+               * <p>
+               * 温度：= S [分钟] + D [分钟] +进位E [分钟]：=模数(温度,60)
+               * 
            */
         int startMinutes = getMinute();
         if (startMinutes == DatatypeConstants.FIELD_UNDEFINED) {
@@ -2136,6 +2693,9 @@ public class XMLGregorianCalendarImpl
                *  temp := S[hour] + D[hour] + carry
                *  E[hour] := modulo(temp, 24)
                *  carry := fQuotient(temp, 24)
+               * <p>
+               *  温度：= S [小时] + D [小时] +进位E [小时]：=模数(温度,24)
+               * 
            */
         int startHours = getHour();
         if (startHours == DatatypeConstants.FIELD_UNDEFINED) {
@@ -2170,6 +2730,12 @@ public class XMLGregorianCalendarImpl
            *       + E[month] := modulo(temp, 1, 13)
            *       + E[year] := E[year] + fQuotient(temp, 1, 13)
            *       + GOTO START LOOP
+           * <p>
+           *  如果S [day]> maximumDayInMonthFor(E [year],E [month])+ tempDays：= maximumDayInMonthFor(E [year],E [mon
+           * th])else if S [day] <1 + tempDays：= 1 else + ：= S [day] E [day]：= tempDays + D [day] + carry START LOOP + IF E [day] <1#E [day]：= E [day] + maximumDayInMonthFor [月]  -  1)#进位：= -1 + ELSE如果E [day]>
+           *  maximumDayInMonthFor(E [year],E [month])#E [day]：= E [day]  -  maximumDayInMonthFor ,E [月])#进位：= 1 +
+           *  ELSE EXIT LOOP +温度：= E [月] +进位+ E [月]：=模] + fQuotient(temp,1,13)+ GOTO START LOOP。
+           * 
            */
         BigInteger tempDays;
         int startDay = getDay();
@@ -2387,6 +2953,76 @@ public class XMLGregorianCalendarImpl
      * </ul>
      * </p>
      *
+     * <p>
+     * <p>将<code>此</code>转换为<code> javautilGregorianCalendar </code> </p>
+     * 
+     *  <p>当<code>此</code>实例具有未定义字段时,此转换依赖于对应字段的<code> javautilGregorianCalendar </code>默认值XML模式10日期/时间数据类型与
+     * <code > javautilGregorianCalendar </code>是时区值对于日期/时间数据类型是可选的,它是<code> javautilGregorianCalendar </code>
+     * 的必填字段</code>有关如何使用默认值,请参阅javadoc中的<code> javautilTimeZonegetDefault确定要显式指定<code> TimeZone </code>实例,请
+     * 参阅{@link #toGregorianCalendar(TimeZone,Locale,XMLGregorianCalendar)} </p>。
+     * 
+     * <table border="2" rules="all" cellpadding="2">
+     * <thead>
+     * <tr>
+     * <th align="center" colspan="2">
+     * 字段从此类转换为<code> javautilGregorianCalendar </code>
+     * </th>
+     * </tr>
+     * </thead>
+     * <tbody>
+     * <tr>
+     *  <th> <code> javautilGregorianCalendar </code>字段</th> <th> <code> javaxxmldatatypeXMLGregorianCalenda
+     * r </code>。
+     * </tr>
+     * <tr>
+     *  <th> <code> ERA </code> </th> <th> {@ link #getEonAndYear()} <code> signum()<0? GregorianCalendarBC：GregorianCalendarAD </code>
+     *  </th>。
+     * </tr>
+     * <tr>
+     *  <th> <code> YEAR </code> </th> <th> {@ link #getEonAndYear()} <code> abs()intValue()</code> <i> * </i>
+     *  </th >。
+     * </tr>
+     * <tr>
+     *  <th> <code> MONTH </code> </th> <th> {@ link #getMonth()} <code>  -  1 </code> </th>
+     * </tr>
+     * <tr>
+     *  <th> <code> DAY_OF_MONTH </code> </th> <th> {@ link #getDay()} </th>
+     * </tr>
+     * <tr>
+     *  <th> <code> AM_PM </code> </th> <th> {@ link #getHour()} <12：CalendarAM：CalendarPM </th>
+     * </tr>
+     * <tr>
+     *  <th> <code> HOUR_OF_DAY </code> </th> <th> {@ link #getHour()} </th>
+     * </tr>
+     * <tr>
+     *  <th> <code> MINUTE </code> </th> <th> {@ link #getMinute()} </th>
+     * </tr>
+     * <tr>
+     * <th> <code> SECOND </code> </th> <th> {@ link #getSecond()} </th>
+     * </tr>
+     * <tr>
+     *  <th> <code> MILLISECOND </code> </th> <th>从{@link #getFractionalSecond()}获取毫秒顺序</i> </th>
+     * </tr>
+     * <tr>
+     *  <th> <code> GregorianCalendarsetTimeZone(TimeZone)</code> </th> <th> {@ link #getTimezone()}格式化为自定义时
+     * 区id </th>。
+     * </tr>
+     * </tbody>
+     * </table>
+     *  <i> * </i>表示由于源数据类型具有比目标数据类型更高精度的转换期间可能的精度损失
+     * 
+     *  <p>为了确保转换实现的一致性,新的<code> GregorianCalendar </code>应该按照以下方式实例化
+     * <ul>
+     *  <li>使用上面定义的<code> timeZone </code>值创建一个新的<code> javautilGregorianCalendar(timeZone,LocalegetDefault(
+     * ))</code>。
+     * </li>
+     * <li>通过调用{代码} GregorianCalendarsetGregorianChange(新日期(LongMIN_VALUE))</code> </li>获得一个纯的Gregorian日历。
+     *  li> <li>其字段ERA,YEAR,MONTH,DAY_OF_MONTH,HOUR_OF_DAY,MINUTE,SECOND和MILLISECOND使用方法<code> Calendarset(i
+     * nt,int)</code>。
+     * <li>通过调用{代码} GregorianCalendarsetGregorianChange(新日期(LongMIN_VALUE))</code> </li>获得一个纯的Gregorian日历。
+     * </ul>
+     * </p>
+     * 
      * @see #toGregorianCalendar(java.util.TimeZone, java.util.Locale, XMLGregorianCalendar)
      */
     public java.util.GregorianCalendar toGregorianCalendar() {
@@ -2396,6 +3032,8 @@ public class XMLGregorianCalendarImpl
         TimeZone tz = getTimeZone(DEFAULT_TIMEZONE_OFFSET);
         /** Use the following instead for JDK7 only:
          * Locale locale = Locale.getDefault(Locale.Category.FORMAT);
+         * <p>
+         * 
          */
         Locale locale = getDefaultLocale();
 
@@ -2446,6 +3084,10 @@ public class XMLGregorianCalendarImpl
 
     /**
      *
+     * <p>
+     *  Locale locale = LocalegetDefault(LocaleCategoryFORMAT);
+     * 
+     * 
      * @return default locale
      */
     private Locale getDefaultLocale() {
@@ -2511,6 +3153,8 @@ public class XMLGregorianCalendarImpl
      *       <code>Calendar.set(int,int)</code></li>
      * </ul>
      *
+     * <p>
+     * 
      * @param timezone provide Timezone. <code>null</code> is a legal value.
      * @param aLocale  provide explicit Locale. Use default GregorianCalendar locale if
      *                 value is <code>null</code>.
@@ -2638,6 +3282,28 @@ public class XMLGregorianCalendarImpl
      * default timezone for this host.
      * (Same default as java.util.GregorianCalendar).</p>
      *
+     * <p>
+     *  <p>将<code>此</code>以及提供的参数转换为<code> javautilGregorianCalendar </code>实例</p>
+     * 
+     *  <p>由于XML Schema 10日期/时间数据类型没有时区id或夏令时id的概念,因此该转换操作允许用户使用<code> timezone </code>参数</p>
+     * 
+     * <p>要计算返回值的<code> TimeZone </code>字段,
+     * <ul>
+     *  </li> <li>当<code> thisgetTimezone()！= DatatypeConstantsFIELD_UNDEFINED </code>,创建一个<code> > = dataty
+     * peConstantsFIELD_UNDEFINED </code>,创建一个<code> thisgetTimezone()</code> </li> <li> > </code> </code> </code>
+     * 默认的时区值是通过<code> defaultsgetTimezone()</code> <code> javautilTimeZonegetDefault()</code> </li> </p>。
+     * 
+     * <p>为了确保转换实现的一致性,新的<code> GregorianCalendar </code>应该按照以下方式实例化
+     * <ul>
+     *  <li>使用上面指定的TimeZone设置和<code> Locale </code>参数创建新的<code> javautilGregorianCalendar(TimeZone,Locale)</code>
+     * 。
+     * </li>
+     *  <li>通过调用{代码} GregorianCalendarsetGregorianChange(新日期(LongMIN_VALUE))</code> </li>获得一个纯的Gregorian日历。
+     *  li> <li>其字段ERA,YEAR,MONTH,DAY_OF_MONTH,HOUR_OF_DAY,MINUTE,SECOND和MILLISECOND使用方法<code> Calendarset(i
+     * nt,int)</code>。
+     * </ul>
+     * 
+     * 
      * @param defaultZoneoffset default zoneoffset if this zoneoffset is
      * {@link DatatypeConstants#FIELD_UNDEFINED}.
      *
@@ -2681,6 +3347,13 @@ public class XMLGregorianCalendarImpl
     /**
      * <p>Creates and returns a copy of this object.</p>
      *
+     * <p>
+     *  <p>返回此类</p>的<code> javautilTimeZone </code>
+     * 
+     * <p>如果为此实例定义时区字段,则返回使用zoneoffset的自定义时区ID初始化的TimeZone如果timezone字段未定义,请尝试传递的defaultZoneoffset如果defaultZo
+     * neoffset为DatatypeConstantsFIELD_UNDEFINED,则返回此主机的默认时区(与默认时间为javautilGregorianCalendar )</p>。
+     * 
+     * 
      * @return copy of this <code>Object</code>
      */
    public Object clone() {
@@ -2698,6 +3371,9 @@ public class XMLGregorianCalendarImpl
      *
      * <p>Set all int fields to {@link DatatypeConstants#FIELD_UNDEFINED} and reference fields
      * to null.</p>
+     * <p>
+     *  <p>创建并返回此对象的副本</p>
+     * 
      */
     public void clear() {
         eon = null;
@@ -2756,6 +3432,12 @@ public class XMLGregorianCalendarImpl
          * <p>If <code>String</code> is not formated as a legal <code>XMLGregorianCalendar</code> value,
          * an <code>IllegalArgumentException</code> is thrown.</p>
          *
+         * <p>
+         *  <p>将所有字段取消设置为undefined </p>
+         * 
+         *  <p>将所有int字段设置为{@link DatatypeConstants#FIELD_UNDEFINED},并将引用字段设置为null </p>
+         * 
+         * 
          * @throws IllegalArgumentException If <code>String</code> is not formated as a legal <code>XMLGregorianCalendar</code> value.
          */
         public void parse() throws IllegalArgumentException {
@@ -2930,6 +3612,12 @@ public class XMLGregorianCalendarImpl
      * StringBuffer -> StringBuilder change had a very visible impact.
      * It almost cut the execution time to half, but unfortunately we can't use it
      * because we need to run on JDK 1.3
+     * <p>
+     *  <p>将格式化的<code> String </code>解析为<code> XMLGregorianCalendar </code> </p>
+     * 
+     *  <p>如果<code> String </code>未形成为合法的<code> XMLGregorianCalendar </code>值,则会抛出<code> IllegalArgumentExce
+     * ption </code> </p>。
+     * 
      */
     private String format( String format ) {
         char[] buf = new char[32];
@@ -3042,6 +3730,16 @@ public class XMLGregorianCalendarImpl
     /**
      * Prints an int as two digits into the buffer.
      *
+     * <p>
+     * 根据格式规范打印此对象
+     * 
+     * <p>
+     *  我为一个特定的格式字符串写了一个自定义格式化方法,看看它是否提高了性能,但它不是所以这种解释方法不是太糟糕
+     * 
+     * <p>
+     *  StringBuffer  - > StringBuilder更改有一个非常明显的影响它几乎将执行时间减少一半,但不幸的是我们不能使用它,因为我们需要运行在JDK 13
+     * 
+     * 
      * @param number
      *      Number to be printed. Must be positive.
      */
@@ -3054,6 +3752,10 @@ public class XMLGregorianCalendarImpl
     /**
      * Prints an int as four digits into the buffer.
      *
+     * <p>
+     *  将两个数字的int打印到缓冲区中
+     * 
+     * 
      * @param number
      *      Number to be printed. Must be positive.
      */
@@ -3071,6 +3773,10 @@ public class XMLGregorianCalendarImpl
     /**
      * Compute <code>value*signum</code> where value==null is treated as
      * value==0.
+     * <p>
+     *  将四位数的int打印到缓冲区中
+     * 
+     * 
      * @return non-null {@link BigInteger}.
      */
     static BigInteger sanitize(Number value, int signum) {
@@ -3083,6 +3789,9 @@ public class XMLGregorianCalendarImpl
     /** <p><code>reset()</code> is designed to allow the reuse of existing
      * <code>XMLGregorianCalendar</code>s thus saving resources associated
      *  with the creation of new <code>XMLGregorianCalendar</code>s.</p>
+     * <p>
+     *  计算<code> value * signum </code>其中value == null被视为value == 0
+     * 
      */
     public void reset() {
         //PENDING : Implementation of reset method

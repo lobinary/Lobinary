@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会
+ * 
+ *  根据Apache许可证第20版("许可证")授权;您不得使用此文件,除非符合许可证您可以在获取许可证的副本
+ * 
+ *  http：// wwwapacheorg / licenses / LICENSE-20
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件将按"原样"基础分发,无任何明示或暗示的保证或条件。请参阅许可证管理权限和限制许可证
+ * 
  */
 /*
  * $Id: DOM2DTMdefaultNamespaceDeclarationNode.java,v 1.2.4.1 2005/09/15 08:15:11 suresh_emailid Exp $
+ * <p>
+ * $ Id：DOM2DTMdefaultNamespaceDeclarationNodejava,v 1241 2005/09/15 08:15:11 suresh_emailid Exp $
+ * 
  */
 
 package com.sun.org.apache.xml.internal.dtm.ref.dom2dtm;
@@ -51,6 +64,16 @@ import org.w3c.dom.DOMException;
  * %REVIEW% An alternative solution would be to create the node _only_
  * in DTM space, but given how DOM2DTM is currently written I think
  * this is simplest.
+ * <p>
+ *  DOM2DTM模型基本上,它在DOM空间中创建一个代理节点来承载附加信息这是_NOT_一个完整的DOM实现,不应该是一个,因为它位于DOM旁边,而不是成为DOM模型的一部分
+ * 
+ *  (这曾经是DOM2DTM内的一个内部类,因为我需要对它执行一个instanceof操作来支持DTMManagerDefault中的临时解决方法)
+ * 
+ *  ％REVIEW％如果DOM2DTM是围绕DocumentFragment构建的,并且没有单个根元素怎么办?我认为这不符合这种情况
+ * 
+ * ％REVIEW％一个替代解决方案是在DTM空间中创建节点_only_,但考虑到如何DOM2DTM当前写的我认为这是最简单的
+ * 
+ * 
  * */
 public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
 {
@@ -103,6 +126,9 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
      * %REVIEW% This would be a pruning problem, but since it will always be
      * added to the root element and we prune on elements, we shouldn't have
      * to worry.
+     * <p>
+     *  ％REVIEW％这将是一个修剪问题,但由于它将总是添加到根元素,我们修剪元素,我们不应该担心
+     * 
      */
     public int getHandleOfNode()
     {
@@ -112,16 +138,22 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
     //RAMESH: PENDING=> Add proper implementation for the below DOM L3 additions
 
     /**
+    /* <p>
+    /* 
      * @see org.w3c.dom.TypeInfo#getTypeName()
      */
     public String getTypeName() {return null; }
 
     /**
+    /* <p>
+    /* 
      * @see org.w3c.dom.TypeInfo#getTypeNamespace()
      */
     public String getTypeNamespace() { return null;}
 
     /**
+    /* <p>
+    /* 
      * @see or.gw3c.dom.TypeInfo#isDerivedFrom(String,String,int)
      */
     public boolean isDerivedFrom( String ns, String localName, int derivationMethod ) {
@@ -136,6 +168,10 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
      * Associate an object to a key on this node. The object can later be
      * retrieved from this node by calling <code>getUserData</code> with the
      * same key.
+     * <p>
+     *  将对象与此节点上的键相关联稍后可以通过使用相同的键调用<code> getUserData </code>从此节点检索对象
+     * 
+     * 
      * @param key The key to associate the object to.
      * @param data The object to associate to the given key, or
      *   <code>null</code> to remove any existing association to that key.
@@ -155,6 +191,10 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
      * Retrieves the object associated to a key on a this node. The object
      * must first have been set to this node by calling
      * <code>setUserData</code> with the same key.
+     * <p>
+     *  检索与此节点上的键相关联的对象必须首先通过使用相同的键调用<code> setUserData </code>将该对象设置为此节点
+     * 
+     * 
      * @param key The key the object is associated to.
      * @return Returns the <code>DOMObject</code> associated to the given key
      *   on this node, or <code>null</code> if there was none.
@@ -169,6 +209,10 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
      * specialized APIs of the specified feature and version. The
      * specialized object may also be obtained by using binding-specific
      * casting methods but is not necessarily expected to, as discussed in Mixed DOM implementations.
+     * <p>
+     * 此方法返回实现指定的特征和版本的专用API的专用对象。专用对象也可以通过使用特定于绑定的转换方法来获得,但不一定预期到,如在混合DOM实现中所讨论的
+     * 
+     * 
      * @param feature The name of the feature requested (case-insensitive).
      * @param version  This is the version number of the feature to test. If
      *   the version is <code>null</code> or the empty string, supporting
@@ -224,6 +268,22 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
      * <code>isWhitespaceInElementContent</code> attribute for
      * <code>Text</code> nodes, as well as any user data or event listeners
      * registered on the nodes.
+     * <p>
+     * 测试两个节点是否相等<br>此方法测试节点的相等性,而不是同一性(即,两个节点是否是对同一对象的引用),可以使用<code> NodeisSameNode </code>测试所有节点相同也将是相等的,虽
+     * 然相反可能不是真实的<br>当且仅当满足以下条件时,两个节点是相等的：两个节点是相同类型以下字符串属性是相等的：<code> nodeName < / code>,<code> localName </code>
+     * ,<code> namespaceURI </code>,<code>前缀</code>,<code> nodeValue </code> ：它们都是<code> null </code>,或者它们具有
+     * 相同的长度,并且是字符相同的字符</code> </code> </code> <NamedNodeMaps </code>这是：它们都是<code> null </code>,或者它们具有相同的长度,
+     * 并且对于存在于一个映射中的每个节点,存在存在于另一个映射中并且相等的节点,但是不一定是相同的index </code> </Node> </Node> <Node> <Node> </code>是相等的
+     * 。
+     * 它们都是<code> null </code>,或者它们具有相同的长度,对于<code> Attr </code>节点,与任何其他类型的节点一样。
+     * 注意,规范化可以影响等式;为避免这种情况,应在比较之前对节点进行归一化<br>为使两个<code> DocumentType </code>节点相等,还必须满足以下条件：以下字符串属性相等：<code>
+     *  publicId < code>,<code> systemId </code>,<code> internalSubset </code><code> entities </code> <code>
+     *  NamedNodeMaps </code>是相等的<code>符号</code> <code> NamedNodeMaps </code>是相等的<br>另一方面,平等：<code> ownerDoc
+     * ument </code>属性,<code> Attr </code>节点的<code>指定</code>属性,<code> isWhitespaceInElementContent </code> /
+     *  code>节点,以及在节点上注册的任何用户数据或事件侦听器。
+     * 它们都是<code> null </code>,或者它们具有相同的长度,对于<code> Attr </code>节点,与任何其他类型的节点一样。
+     * 
+     * 
      * @param arg The node to compare equality with.
      * @param deep If <code>true</code>, recursively compare the subtrees; if
      *   <code>false</code>, compare only the nodes themselves (and its
@@ -294,6 +354,10 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
         else if (!getBaseURI().equals(((NodeImpl) arg).getBaseURI())) {
             return false;
         }
+    /* <p>
+    /* if(getBaseURI()== null){if(((NodeImpl)arg)getBaseURI()！ }} else if(！getBaseURI()equals((NodeImpl)arg)
+    /* getBaseURI())){return false; }}。
+    /* 
 */
 
              return true;
@@ -304,6 +368,10 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
      * Look up the namespace URI associated to the given prefix, starting from this node.
      * Use lookupNamespaceURI(null) to lookup the default namespace
      *
+     * <p>
+     *  DOM级别3  - 实验：查找与给定前缀关联的命名空间URI,从此节点开始使用lookupNamespaceURI(null)查找默认命名空间
+     * 
+     * 
      * @param namespaceURI
      * @return th URI for the namespace
      * @since DOM Level 3
@@ -353,6 +421,10 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
                 if (ancestor != null) {
                     return ancestor.lookupNamespaceURI(specifiedPrefix);
                 }
+                /* <p>
+                /*  NodeImpl ancestor =(NodeImpl)getElementAncestor(this); if(ancestor！= null){return ancestorlookupNamespaceURI(specifiedPrefix); }
+                /* }。
+                /* 
                 */
 
                 return null;
@@ -363,6 +435,10 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
         case Node.DOCUMENT_NODE : {
                 return((NodeImpl)((Document)this).getDocumentElement()).lookupNamespaceURI(specifiedPrefix) ;
             }
+/* <p>
+/*  case NodeDOCUMENT_NODE：{return((NodeImpl)((Document)this)getDocumentElement())lookupNamespaceURI(specifiedPrefix); }
+/* }。
+/* 
 */
         case Node.ENTITY_NODE :
         case Node.NOTATION_NODE:
@@ -383,6 +459,10 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
                 if (ancestor != null) {
                     return ancestor.lookupNamespaceURI(specifiedPrefix);
                 }
+           /* <p>
+           /*  NodeImpl ancestor =(NodeImpl)getElementAncestor(this); if(ancestor！= null){return ancestorlookupNamespaceURI(specifiedPrefix); }
+           /* }。
+           /* 
              */
                 return null;
             }
@@ -394,6 +474,10 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
      *  DOM Level 3: Experimental
      *  This method checks if the specified <code>namespaceURI</code> is the
      *  default namespace or not.
+     * <p>
+     * DOM Level 3：Experimental此方法检查指定的<code> namespaceURI </code>是否是默认命名空间
+     * 
+     * 
      *  @param namespaceURI The namespace URI to look for.
      *  @return  <code>true</code> if the specified <code>namespaceURI</code>
      *   is the default namespace, <code>false</code> otherwise.
@@ -459,6 +543,25 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
             }
 
         }
+       /* <p>
+       /*  // REVISIT：当DOM L3成为REC short时删除casts type = thisgetNodeType(); switch(type){case NodeELEMENT_NODE：{String namespace = thisgetNamespaceURI(); String prefix = thisgetPrefix();。
+       /* 
+       /* // REVISIT：可能的前缀是空字符串? if(prefix == null || prefixlength()== 0){if(namespaceURI == null){return(namespace == namespaceURI); }
+       /*  return namespaceURIequals(namespace); } if(thishasAttributes()){ElementImpl elem =(ElementImpl)this; NodeImpl attr =(NodeImpl)elemgetAttributeNodeNS("http：// wwww3org / 2000 / xmlns /","xmlns"); if(attr！= null){String value = attrgetNodeValue(); if(namespaceURI == null){return(namespace == value); }
+       /*  return namespaceURIequals(value); }}。
+       /* 
+       /*  NodeImpl ancestor =(NodeImpl)getElementAncestor(this); if(ancestor！= null){return ancestorisDefaultNamespace(namespaceURI); }
+       /*  return false; } case NodeDOCUMENT_NODE：{return((NodeImpl)((Document)this)getDocumentElement())isDefaultNamespace(namespaceURI); }
+       /* }。
+       /* 
+       /* case NodeENTITY_NODE：case NodeNOTATION_NODE：case NodeDOCUMENT_FRAGMENT_NODE：case NodeDOCUMENT_TYPE_NO
+       /* DE：// type is unknown return false; case NodeATTRIBUTE_NODE：{if(thisownerNodegetNodeType()== NodeELEMENT_NODE){return ownerNodeisDefaultNamespace(namespaceURI);。
+       /* 
+       /*  } return false; } default：{NodeImpl ancestor =(NodeImpl)getElementAncestor(this); if(ancestor！= null){return ancestorisDefaultNamespace(namespaceURI); }
+       /*  return false; }}。
+       /* 
+       /*  }}
+       /* 
 */
         return false;
 
@@ -470,6 +573,10 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
      * DOM Level 3 - Experimental:
      * Look up the prefix associated to the given namespace URI, starting from this node.
      *
+     * <p>
+     *  DOM Level 3  - 实验性：查找与给定命名空间URI相关联的前缀,从此节点开始
+     * 
+     * 
      * @param namespaceURI
      * @return the prefix for the namespace
      */
@@ -494,6 +601,15 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
         case Node.DOCUMENT_NODE:{
                 return((NodeImpl)((Document)this).getDocumentElement()).lookupPrefix(namespaceURI);
             }
+/* <p>
+/*  case NodeELEMENT_NODE：{
+/* 
+/*  String namespace = thisgetNamespaceURI(); // to flip out children return lookupNamespacePrefix(names
+/* paceURI,(ElementImpl)this); }}。
+/* 
+/* case NodeDOCUMENT_NODE：{return((NodeImpl)((Document)this)getDocumentElement())lookupPrefix(namespaceURI); }
+/* }。
+/* 
 */
         case Node.ENTITY_NODE :
         case Node.NOTATION_NODE:
@@ -514,6 +630,10 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
                 if (ancestor != null) {
                     return ancestor.lookupPrefix(namespaceURI);
                 }
+/* <p>
+/*  NodeImpl ancestor =(NodeImpl)getElementAncestor(this); if(ancestor！= null){return ancestorlookupPrefix(namespaceURI); }
+/* }。
+/* 
 */
                 return null;
             }
@@ -529,6 +649,11 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
      * used completely interchangably, such that all attributes have the
      * same values and calling the same DOM method on either reference
      * always has exactly the same effect.
+     * <p>
+     *  返回此节点是否与给定的节点相同的节点<br>此方法提供了一种方法来确定实现引用的两个<code> Node </code>引用是否引用相同的对象当两个<code> Node </code >引用是对同
+     * 一对象的引用,即使通过代理,引用可以完全互换使用,使得所有属性具有相同的值,并且对任一引用调用相同的DOM方法总是具有完全相同的效果。
+     * 
+     * 
      * @param other The node to test against.
      * @return Returns <code>true</code> if the nodes are the same,
      *   <code>false</code> otherwise.
@@ -576,6 +701,32 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
      * null</td>
      * </tr>
      * </table>
+     * <p>
+     * 此属性返回此节点及其后代的文本内容当定义为null时,设置它无效果设置时,此节点可能具有的任何可能的子项都将被单个<code> Text </code>包含字符串的节点此属性设置为On获取,不执行序列化
+     * ,返回的字符串不包含任何标记不执行空白标准化,返回的字符串不包含元素内容whitespaces类似地,在设置时,不执行解析则输入字符串将被视为纯文本内容<br>返回的字符串取决于此节点的文本内容,具体取
+     * 决于其类型,如下所述：。
+     * <table border='1'>
+     * <tr>
+     *  <th>节点类型</th> <th>内容</th>
+     * </tr>
+     * <tr>
+     * <td valign='top' rowspan='1' colspan='1'>
+     * 每个子节点的<code> textContent </code>属性值的连接,不包括COMMENT_NODE和("COMMENT_NODE")。
+     *  PROCESSING_INSTRUCTION_NODE个节点</td>。
+     * </tr>
+     * <tr>
+     *  <td valign ='top'rowspan ='1'colspan ='1'> ATTRIBUTE_NODE,TEXT_NODE,CDATA_SECTION_NODE,COMMENT_NODE,
+     * PROCESSING_INSTRUCTION_NODE </td>。
+     * <td valign='top' rowspan='1' colspan='1'>
+     *  <code> nodeValue </code> </td>
+     * </tr>
+     * <tr>
+     *  <td valign ='top'rowspan ='1'colspan ='1'> DOCUMENT_NODE,DOCUMENT_TYPE_NODE,NOTATION_NODE </td>
+     * <td valign='top' rowspan='1' colspan='1'>
+     *  null </td>
+     * </tr>
+     * </table>
+     * 
      * @exception DOMException
      *   NO_MODIFICATION_ALLOWED_ERR: Raised when the node is readonly.
      * @exception DOMException
@@ -626,6 +777,26 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
      * null</td>
      * </tr>
      * </table>
+     * <p>
+     * 此属性返回此节点及其后代的文本内容当定义为null时,设置它无效果设置时,此节点可能具有的任何可能的子项都将被单个<code> Text </code>包含字符串的节点此属性设置为On获取,不执行序列化
+     * ,返回的字符串不包含任何标记不执行空白标准化,返回的字符串不包含元素内容whitespaces类似地,在设置时,不执行解析则输入字符串将被视为纯文本内容<br>返回的字符串取决于此节点的文本内容,具体取
+     * 决于其类型,如下所述：。
+     * <table border='1'>
+     * <tr>
+     *  <th>节点类型</th> <th>内容</th>
+     * </tr>
+     * <tr>
+     * <td valign='top' rowspan='1' colspan='1'>
+     * 每个子节点的<code> textContent </code>属性值的连接,不包括COMMENT_NODE和("COMMENT_NODE")。
+     *  PROCESSING_INSTRUCTION_NODE个节点</td>。
+     * </tr>
+     * <tr>
+     *  <td valign ='top'rowspan ='1'colspan ='1'> ATTRIBUTE_NODE,TEXT_NODE,CDATA_SECTION_NODE,COMMENT_NODE,
+     * PROCESSING_INSTRUCTION_NODE </td>。
+     * <td valign='top' rowspan='1' colspan='1'>
+     *  <code> nodeValue </code> </td>
+     * </tr>
+     * 
      * @exception DOMException
      *   NO_MODIFICATION_ALLOWED_ERR: Raised when the node is readonly.
      * @exception DOMException
@@ -641,6 +812,14 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
     /**
      * Compares a node with this node with regard to their position in the
      * document.
+     * <p>
+     * <tr>
+     *  <td valign ='top'rowspan ='1'colspan ='1'> DOCUMENT_NODE,DOCUMENT_TYPE_NODE,NOTATION_NODE </td>
+     * <td valign='top' rowspan='1' colspan='1'>
+     *  null </td>
+     * </tr>
+     * </table>
+     * 
      * @param other The node to compare against this node.
      * @return Returns how the given node is positioned relatively to this
      *   node.
@@ -672,6 +851,10 @@ public class DOM2DTMdefaultNamespaceDeclarationNode implements Attr,TypeInfo
      * teleconference 30 May 2001).If the base HTML element is not yet
      * attached to a document, does the insert change the Document.baseURI?
      * Yes. (F2F 26 Sep 2001)
+     * <p>
+     *  将节点与此节点在文档中的位置进行比较
+     * 
+     * 
      * @since DOM Level 3
      */
     public String getBaseURI() {

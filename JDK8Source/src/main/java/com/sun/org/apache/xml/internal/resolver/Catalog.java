@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会或其许可方(如适用)
+ * 
+ *  根据Apache许可证第20版("许可证")授权;您不得使用此文件,除非符合许可证您可以在获取许可证的副本
+ * 
+ *  http：// wwwapacheorg / licenses / LICENSE-20
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件将按"原样"基础分发,无任何明示或暗示的保证或条件。请参阅许可证管理权限和限制许可证
+ * 
  */
 
 package com.sun.org.apache.xml.internal.resolver;
@@ -184,6 +194,63 @@ import com.sun.org.apache.xml.internal.resolver.helpers.FileURL;
  * </dd>
  * </dl>
  *
+ * <p>
+ *  表示OASIS打开目录文件
+ * 
+ * <p>此类实现OASIS打开目录文件的语义(由<a href=\"http://wwwoasis-openorg/html/a401htm\"> OASIS技术决议9401：1997(TR 9401修正
+ * 案2)</a >)</p>。
+ * 
+ *  <p>目录的主要目的是将文档中的资源与本地系统标识符相关联某些实体(文档类型,XML实体和符号)具有名称,所有实体都可以具有公共或系统标识或两者(在XML中,只有符号可以具有公共标识符而没有系统标识符
+ * ,但是在该类中实现的方法在系统标识符是可选时在SGML天遵守目录语义)</p>。
+ * 
+ * <p>此类中的解析方法返回的系统标识符是有效的,即可由<tt> javanetURL </tt>类使用,但实际上由<tt>构造。
+ * 不幸的是,此类似乎以某种非标准方式并且返回的系统标识符可能不能在浏览器或文件系统上下文中直接使用。
+ * 
+ *  <p>此类别可识别TR9401：1997中定义的所有商品：</p>
+ * 
+ * <ul>
+ * <li> <b> BASE </b>更改用于解析相对系统标识符的基本URI初始基本URI是目录位置的URI(依次是相对于当前工作目录的位置</li> </b>处理其他目录文件所包含的目录在逻辑上包含在包
+ * 含目录的末尾</b> li> <li> <b> DELEGATE_PUBLIC </b>指定某些公共标识符的替代目录委托目录只有在需要时才会加载,但一旦加载就会被缓存</li> <li> <b> DEL
+ * EGATE_SYSTEM < b>为某些系统标识符指定替代目录委托目录只有在需要时才会加载,但是一旦加载就会被缓存</li> <li> <b> DELEGATE_URI </b>指定某些URI的替代目录
+ * 委托目录只有在需要时才会加载,但一旦加载就会进行缓存</li> <li> <b> REWRITE_SYSTEM < / b>指定系统标识符的替代前缀</li> <li> <b> REWRITE_URI 
+ * </b>指定URI的替代前缀</li> <li> <b> SYSTEM_SUFFIX </b>以</li> <li> <b> URI_SUFFIX </b>将以特定后缀结尾的任何URI映射到另一个URI
+ *  </li> <li> <b> DOCTYPE < b>将根元素的名称与URI相关联(换句话说,XML处理器可能通过在目录中查找与文档根元素的名称匹配的DOCTYPE条目来推断不包括doctype声明的
+ * XML文档的doctype)</li> <li > <b> DOCUMENT </b>提供默认文档</li> <li> <b> DTDDECL </b>已识别并默认忽略与XML无关</li> <li> 
+ * <b> ENTITY </b >将实体名称与URI关联</li> <li> <li> <b> LINKTYPE </b>已识别并默认忽略与XML无关</li> <li> <b> / li> <li> <b>
+ *  OVERRIDE </b>更改覆盖行为初始行为由系统属性<tt> xmlcatalogoverride </tt>默认的初始行为是"YES",即目录中的条目覆盖文档</li> <li> <b> PUB
+ * LIC </b>中指定的系统标识符将公共标识符映射到系统标识符</li> <li> </b>已识别并默认忽略与XML无关</li> <li> <b>系统</b>将系统标识符映射到另一个系统标识符</li>
+ *  <li> b> URI </b>将URI映射到另一个URI </li>。
+ * </ul>
+ * 
+ * <p>请注意,BASE条目按照RFC2396的描述来处理。
+ * 特别地,这具有反直觉属性,即在识别"http：// examplecom / a / b / c"作为基本URI的BASE条目之后,相对URI "foo"被解析为绝对URI"http：// exampl
+ * ecom / a / b / foo"如果您不希望将路径的最后一个组件作为文件名放在URI中,则必须提供尾部斜杠资源："http：// examplecom / a / b / c /"。
+ * <p>请注意,BASE条目按照RFC2396的描述来处理。
+ * </p>
+ * 
+ *  <p>请注意,只有在需要时才加载下级目录(除第一个之外的所有目录,包括CATALOG和DELEGATE *目录)</p>
+ * 
+ * <p>此类依赖于实现CatalogReader接口的类来实际加载目录文件这允许为TR9401基于文本的目录,XML目录或任何数量的其他存储格式实现目录语义。</p>
+ * 
+ *  <p>其他目录也可以使用{@link #parseCatalog}方法加载</p>
+ * </dd>
+ * </dl>
+ * 
+ *  <p> <b>更改日志：</b> </p>
+ * <dl>
+ *  <dt> 20 </t> <dd> <p>重写以使用CatalogReaders </p> </dd> <dt> 11 </dt> <dd> <p>允许<tt> xmlcatalogfiles < tt>
+ * ,以便在Unix上使用包含冒号的网址传递给<tt> xmlcatalogfiles </tt>的字符串现在可以采用以下格式：</p>。
+ * <pre>
+ *  unquoted-path-with-no-sep-chars："带或不带sep字符的双引号路径"：'带有或不带有sep字符的单引号路径'
+ * </pre>
+ * <p>(其中"："是此示例中的分隔符字符)</p> <p>如果非引号路径包含嵌入的双引号或单引号字符,则不会对该字符执行特殊的processig任何路径都可以包含分隔符,双引号和单引号</p> <p>修
+ * 复BASE条目计算中的错误：如果目录包含多个BASE条目,每个都相对于上一个基础,而不是目录的默认基本URI </p>。
+ * </dd>
+ *  <dt> 101 </dt> <dd> <p>修复了下级目录列表计算中的错误此错误导致了无限循环,其中解析会无限期地处理两个目录</p>
+ * </dd>
+ * </dl>
+ * 
+ * 
  * @see CatalogReader
  * @see CatalogEntry
  *
@@ -257,6 +324,9 @@ public class Catalog {
   /**
    * The base URI for relative system identifiers in the catalog.
    * This may be changed by BASE entries in the catalog.
+   * <p>
+   *  目录中相对系统标识符的基本URI此目录中的BASE条目可能会更改此URI
+   * 
    */
   protected URL base;
 
@@ -280,6 +350,12 @@ public class Catalog {
    * it parses the system catalog list, but CATALOG entries may
    * contribute to it during the course of parsing.</p>
    *
+   * <p>
+   * 要加载的目录文件的矢量
+   * 
+   *  <p>此列表最初由<code> loadSystemCatalogs </code>在解析系统目录列表时建立,但CATALOG条目可能在解析过程中对其有贡献</p>
+   * 
+   * 
    * @see #loadSystemCatalogs
    * @see #localCatalogFiles
    */
@@ -300,6 +376,16 @@ public class Catalog {
    * elements on this vector are added to the front of the
    * <code>catalogFiles</code> vector.</p>
    *
+   * <p>
+   *  在当前目录中CATALOG条目处理期间构建的目录文件的向量
+   * 
+   *  <p>这两级系统实际上是正确实现CATALOG条目的语义所必需的。
+   * 如果一个目录文件包含另一个目录文件,并且包含CATALOG条目,则包含目录在逻辑上出现在包含目录的结尾<i> </i> ,并且在任何前面的CATALOG条目之后。
+   * 换句话说,CATALOG条目不能在目录文件的中间插入任何内容</p>。
+   * 
+   * <p>当处理到达每个目录文件的末尾时,此向量上的任何元素都会添加到<code> catalogFiles </code>向量</p>
+   * 
+   * 
    * @see #catalogFiles
    */
   protected Vector localCatalogFiles = new Vector();
@@ -320,6 +406,15 @@ public class Catalog {
    * processing, one of these catalogs has to be loaded, the resulting
    * Catalog object is placed in the vector, effectively caching it
    * for the next query.</p>
+   * <p>
+   *  矢量的目录
+   * 
+   *  <p>目录解析的语义是每个目录实际上是目录列表(换句话说,目录实例的递归列表)</p>
+   * 
+   *  <p>作为CATALOG或DELEGATE *条目的结果处理的目录从属于包含它们的目录,但它们可能具有从属目录</p>
+   * 
+   * <p>仅在需要时加载目录,因此此向量最初包含目录文件名(URL)的列表。如果在处理期间必须加载其中一个目录,则将生成的目录对象放置在向量中,有效将其缓存为下一个查询</p>
+   * 
    */
   protected Vector catalogs = new Vector();
 
@@ -337,6 +432,14 @@ public class Catalog {
    * elements on this vector are added to the end of the
    * <code>catalogEntries</code> vector. This assures that matching
    * PUBLIC keywords are encountered before DELEGATE* entries.</p>
+   * <p>
+   *  向量DELEGATE *在处理目录期间构建的目录条目
+   * 
+   *  <p>这个两层系统有两个目的：首先,它允许我们按照部分公开标识符的长度对DELEGATE *条目进行排序,以便线性搜索以正确的顺序遇到它们,其次,它们全部放在目录</p>
+   * 
+   * <p>当处理到达每个目录文件结束时,此向量上的任何元素都会添加到<code> catalogEntries </code>向量的末尾。
+   * 这确保在DELEGATE *条目之前遇到匹配的PUBLIC关键字</p>。
+   * 
    */
   protected Vector localDelegate = new Vector();
 
@@ -346,6 +449,11 @@ public class Catalog {
    * <p>This hash maps MIME types to elements in the readerArr
    * vector. This allows the Catalog to quickly locate the reader
    * for a particular MIME type.</p>
+   * <p>
+   *  CatalogReader的散列
+   * 
+   *  <p>此哈希将MIME类型映射到readerArr向量中的元素这允许目录快速查找特定MIME类型的读取器</p>
+   * 
    */
   protected Hashtable readerMap = new Hashtable();
 
@@ -356,6 +464,11 @@ public class Catalog {
    * were added. In the event that a catalog is read from a file, where
    * the MIME type is unknown, each reader is attempted in turn until
    * one succeeds.</p>
+   * <p>
+   *  CatalogReader的向量
+   * 
+   *  <p>此向量包含添加顺序中的所有读者。如果从文件中读取目录,其中MIME类型未知,则依次尝试每个读取器,直到成功为止</p>
+   * 
    */
   protected Vector readerArr = new Vector();
 
@@ -365,6 +478,11 @@ public class Catalog {
    * <p>The constructor interrogates the relevant system properties
    * using the default (static) CatalogManager
    * and initializes the catalog data structures.</p>
+   * <p>
+   *  构造一个空目录
+   * 
+   * <p>构造函数使用默认(静态)CatalogManager查询相关系统属性,并初始化目录数据结构</p>
+   * 
    */
   public Catalog() {
     // nop;
@@ -376,6 +494,11 @@ public class Catalog {
    * <p>The constructor interrogates the relevant system properties
    * using the specified Catalog Manager
    * and initializes the catalog data structures.</p>
+   * <p>
+   *  使用特定CatalogManager构造空目录
+   * 
+   *  <p>构造函数使用指定的目录管理器查询相关系统属性,并初始化目录数据结构</p>
+   * 
    */
   public Catalog(CatalogManager manager) {
     catalogManager = manager;
@@ -384,6 +507,9 @@ public class Catalog {
   /**
    * Return the CatalogManager used by this catalog.
    *
+   * <p>
+   *  返回此目录使用的CatalogManager
+   * 
    */
   public CatalogManager getCatalogManager() {
     return catalogManager;
@@ -392,6 +518,9 @@ public class Catalog {
   /**
    * Establish the CatalogManager used by this catalog.
    *
+   * <p>
+   *  建立此目录使用的CatalogManager
+   * 
    */
   public void setCatalogManager(CatalogManager manager) {
     catalogManager = manager;
@@ -399,6 +528,9 @@ public class Catalog {
 
   /**
    * Setup readers.
+   * <p>
+   *  设置读卡器
+   * 
    */
   public void setupReaders() {
     SAXParserFactory spf = catalogManager.useServicesMechanism() ?
@@ -438,6 +570,16 @@ public class Catalog {
    * will not be available. For this reason, it is best to add all
    * of the readers before the first call to parse a catalog.</p>
    *
+   * <p>
+   *  向Catalog中添加新的CatalogReader
+   * 
+   *  <p>此方法允许您向目录中添加新的CatalogReader阅读器将与指定的mimeType关联您每个mimeType只能有一个阅读器</p>
+   * 
+   * <p>在没有mimeType(例如,直接从本地系统上的文件读取目录)时,将按照您将其添加到目录</p>中的顺序尝试读者,
+   * 
+   *  <p>请注意,从属目录(由CATALOG或DELEGATE *条目创建)会在创建主目录中存在的一组读者的副本后续添加的读取器将不可用因此,最好添加所有的读者在首次调用解析目录之前</p>
+   * 
+   * 
    * @param mimeType The MIME type associated with this reader.
    * @param reader The CatalogReader to use.
    */
@@ -459,6 +601,13 @@ public class Catalog {
    * It copies the current reader associations over to the new catalog.
    * </p>
    *
+   * <p>
+   *  将读者列表从当前目录复制到新目录
+   * 
+   *  <p>此方法在构建新目录时在内部使用它将当前阅读器关联复制到新目录
+   * </p>
+   * 
+   * 
    * @param newCatalog The new Catalog.
    */
   protected void copyReaders(Catalog newCatalog) {
@@ -497,6 +646,15 @@ public class Catalog {
    * <p>N.B. All Catalog subtypes should call newCatalog() to construct
    * a new Catalog. Do not simply use "new Subclass()" since that will
    * confuse future subclasses.</p>
+   * <p>
+   *  创建一个新的Catalog对象
+   * 
+   * <p>此方法构建正在运行的Catalog类的一个新实例(可能是comsunorgapachexmlinternalresolverCatalog的子类型)所有新目录由同一CatalogManager管理
+   * 。
+   * </p>
+   * 
+   *  <p> NB所有目录子类型应调用newCatalog()构造一个新目录不要简单地使用"new Subclass()",因为这会混淆未来的子类</p>
+   * 
    */
   protected Catalog newCatalog() {
     String catalogClass = this.getClass().getName();
@@ -526,6 +684,9 @@ public class Catalog {
 
   /**
    * Returns the current base URI.
+   * <p>
+   *  返回当前基本URI
+   * 
    */
   public String getCurrentBase() {
     return base.toString();
@@ -537,6 +698,11 @@ public class Catalog {
    *
    * <p>All catalog files loaded by this catalog will have the
    * initial override setting specified by this default.</p>
+   * <p>
+   *  返回与此目录关联的默认覆盖设置
+   * 
+   *  <p>此目录加载的所有目录文件都将具有此默认</p>指定的初始覆盖设置
+   * 
    */
   public String getDefaultOverride() {
     if (default_override) {
@@ -553,6 +719,12 @@ public class Catalog {
    * catalogs specified in the <tt>xml.catalog.files</tt> property
    * to the Catalog list.</p>
    *
+   * <p>
+   *  加载系统目录文件
+   * 
+   *  <p>此方法将<tt> xmlcatalogfiles </tt>属性中指定的所有目录添加到目录列表</p>
+   * 
+   * 
    * @throws MalformedURLException  One of the system catalogs is
    * identified with a filename that is not a valid URL.
    * @throws IOException One of the system catalogs cannot be read.
@@ -589,6 +761,10 @@ public class Catalog {
   /**
    * Parse a catalog file, augmenting internal data structures.
    *
+   * <p>
+   *  解析目录文件,扩充内部数据结构
+   * 
+   * 
    * @param fileName The filename of the catalog file to process
    *
    * @throws MalformedURLException The fileName cannot be turned into
@@ -616,6 +792,12 @@ public class Catalog {
    * <p>Catalogs retrieved over the net may have an associated MIME type.
    * The MIME type can be used to select an appropriate reader.</p>
    *
+   * <p>
+   * 解析目录文件,扩充内部数据结构
+   * 
+   *  <p>通过网络检索的目录可能具有关联的MIME类型MIME类型可用于选择适当的阅读器</p>
+   * 
+   * 
    * @param mimeType The MIME type of the catalog file.
    * @param is The InputStream from which the catalog should be read
    *
@@ -659,6 +841,15 @@ public class Catalog {
    *
    * <p>Written by Stefan Wachter (2002-09-26)</p>
    *
+   * <p>
+   *  解析目录文档,扩充内部数据结构
+   * 
+   *  <p>此方法支持存储在jar文件中的目录文件：例如,jar：file：/// path / to / filenamejar！/ path / to / catalogxml"该URI不能通过URI处
+   * 理保持透明化,即parseCatalog String)执行并传递它作为输入流未正确设置基本URI </p>。
+   * 
+   *  <p>撰写者：Stefan Wachter(2002-09-26)</p>
+   * 
+   * 
    * @param aUrl The URL of the catalog document to process
    *
    * @throws IOException Error reading catalog file.
@@ -710,6 +901,11 @@ public class Catalog {
    *
    * <p>Catalogs may refer to other catalogs, this method parses
    * all of the currently pending catalog files.</p>
+   * <p>
+   *  解析所有待处理的目录
+   * 
+   *  <p>目录可能引用其他目录,此方法解析所有当前正在等待的目录文件</p>
+   * 
    */
   protected synchronized void parsePendingCatalogs()
     throws MalformedURLException, IOException {
@@ -804,6 +1000,10 @@ public class Catalog {
   /**
    * Parse a single catalog file, augmenting internal data structures.
    *
+   * <p>
+   * 解析单个目录文件,扩充内部数据结构
+   * 
+   * 
    * @param fileName The filename of the catalog file to process
    *
    * @throws MalformedURLException The fileName cannot be turned into
@@ -898,6 +1098,12 @@ public class Catalog {
    * base URI), and maintaining other information about the current
    * catalog.</p>
    *
+   * <p>
+   *  清理和处理目录条目
+   * 
+   *  <p>此方法处理每个目录条目,将映射的相关系统标识符更改为绝对值(基于当前基本URI),并维护有关当前目录的其他信息</p>
+   * 
+   * 
    * @param entry The CatalogEntry to process.
    */
   public void addEntry(CatalogEntry entry) {
@@ -1103,6 +1309,11 @@ public class Catalog {
    *
    * <p>This method exists to allow subclasses to deal with unknown
    * entry types.</p>
+   * <p>
+   *  处理未知的CatalogEntry类型
+   * 
+   *  <p>此方法允许子类处理未知的输入类型</p>
+   * 
    */
   public void unknownEntry(Vector strings) {
     if (strings != null && strings.size() > 0) {
@@ -1135,6 +1346,20 @@ public class Catalog {
    * successfully parse documents without having to load all possible
    * catalogs.</p>
    *
+   * <p>
+   *  解析所有下级目录
+   * 
+   *  <p>此方法递归解析所有下级目录如果此方法不抛出异常,您可以确信没有任何后续调用任何解析*()方法,有两种可能的异常：</p>
+   * 
+   * <ol>
+   * <li> <p>每次需要时,都会重新解析委托目录(因为在每种情况下都需要使用它们的变量列表,具体取决于匹配的部分公开标识符的长度)</p> <p>但是它们会被此方法解析,因此只要程序正在运行时它们不会改
+   * 变或消失,那么如果它们现在不会生成错误,它们以后不应生成错误</p> <li> <p> If您可以使用<code> parseCatalog </code>添加新目录,它们将不会加载,直到需要或直到再次
+   * 调用<code> parseAllCatalogs </code>。
+   * </ol>
+   * 
+   *  <p>另一方面,如果您不调用此方法,则可以成功解析文档,而无需加载所有可能的目录</p>
+   * 
+   * 
    * @throws MalformedURLException The filename (URL) for a
    * subordinate or delegated catalog is not a valid URL.
    * @throws IOException Error reading some subordinate or delegated
@@ -1176,6 +1401,10 @@ public class Catalog {
   /**
    * Return the applicable DOCTYPE system identifier.
    *
+   * <p>
+   *  返回适用的DOCTYPE系统标识符
+   * 
+   * 
    * @param entityName The name of the entity (element) for which
    * a doctype is required.
    * @param publicId The nominal public identifier for the doctype
@@ -1262,6 +1491,10 @@ public class Catalog {
   /**
    * Return the applicable DOCUMENT entry.
    *
+   * <p>
+   *  返回适用的DOCUMENT条目
+   * 
+   * 
    * @return The system identifier to use for the doctype.
    *
    * @throws MalformedURLException The formal system identifier of a
@@ -1289,6 +1522,10 @@ public class Catalog {
   /**
    * Return the applicable ENTITY system identifier.
    *
+   * <p>
+   * 返回适用的ENTITY系统标识符
+   * 
+   * 
    * @param entityName The name of the entity for which
    * a system identifier is required.
    * @param publicId The nominal public identifier for the entity
@@ -1375,6 +1612,10 @@ public class Catalog {
   /**
    * Return the applicable NOTATION system identifier.
    *
+   * <p>
+   *  返回适用的注释系统标识符
+   * 
+   * 
    * @param notationName The name of the notation for which
    * a doctype is required.
    * @param publicId The nominal public identifier for the notation
@@ -1467,6 +1708,12 @@ public class Catalog {
    * no appropriate PUBLIC or SYSTEM entry is found in the Catalog,
    * null is returned.</p>
    *
+   * <p>
+   *  返回适用的PUBLIC或SYSTEM标识符
+   * 
+   *  <p>此方法搜索Catalog并返回为给定系统或公共标识符指定的系统标识符如果在Catalog中找不到合适的PUBLIC或SYSTEM条目,则返回null </p>
+   * 
+   * 
    * @param publicId The public identifier to locate in the catalog.
    * Public identifiers are normalized before comparison.
    * @param systemId The nominal system identifier for the entity
@@ -1557,6 +1804,23 @@ public class Catalog {
    * </li>
    * </ul>
    *
+   * <p>
+   *  返回适用的PUBLIC或SYSTEM标识符
+   * 
+   *  <p>此方法搜索Catalog并返回为给定系统或公共标识符指定的系统标识符如果在目录中找不到合适的PUBLIC或SYSTEM条目,则会询问委托目录</p>
+   * 
+   *  <p>有四种可能的情况：</p>
+   * 
+   * <ul>
+   * <li>如果提供的系统标识符与当前目录中的SYSTEM条目匹配,则会返回SYSTEM条目<li>如果系统标识符不为空,则会询问在OVERRIDE YES生效时遇到的PUBLIC条目,匹配条目返回</li>
+   *  <li>如果系统标识符为空,那么将询问所有PUBLIC条目,并返回第一个匹配条目。
+   * 如果遇到一些PUBLIC条目,这可能与前一种情况不同当OVERRIDE NO有效时在XML中,只有在没有系统标识符的情况下可能发生公共标识符的地方是符号声明</li> <li>最后,如果公共标识符匹配目
+   * 录中DELEGATE *条目中指定的部分公有标识符之一,则会询问委托目录。
+   * 第一次需要委托目录时,将检索它, parsed它随后被缓存。
+   * </li>
+   * </ul>
+   * 
+   * 
    * @param entityType The CatalogEntry type for which this query is
    * being conducted. This is necessary in order to do the approprate
    * query on a delegated catalog.
@@ -1669,6 +1933,14 @@ public class Catalog {
    * the system identifier provided and the SYSTEM entries in the
    * Catalog is case-insensitive.</p>
    *
+   * <p>
+   * 返回适用的SYSTEM系统标识符
+   * 
+   *  <p>如果在指定的系统ID的目录中存在SYSTEM条目,请返回映射值</p>
+   * 
+   *  <p>在基于Windows的操作系统上,所提供的系统标识符与目录中的SYSTEM条目之间的比较不区分大小写。</p>
+   * 
+   * 
    * @param systemId The system ID to locate in the catalog.
    *
    * @return The resolved system identifier.
@@ -1711,6 +1983,12 @@ public class Catalog {
    * <p>If a SYSTEM entry exists in the catalog file
    * for the system ID specified, return the mapped value.</p>
    *
+   * <p>
+   *  返回此目录中适用的SYSTEM系统标识符
+   * 
+   *  <p>如果目录文件中存在指定系统ID的SYSTEM条目,请返回映射值</p>
+   * 
+   * 
    * @param systemId The system ID to locate in the catalog
    *
    * @return The mapped system identifier or null
@@ -1833,6 +2111,14 @@ public class Catalog {
    *
    * <p>URI comparison is case sensitive.</p>
    *
+   * <p>
+   *  返回适用的URI
+   * 
+   *  <p>如果URI指定的目录中存在URI条目,请返回映射值</p>
+   * 
+   *  <p> URI比较区分大小写。</p>
+   * 
+   * 
    * @param uri The URI to locate in the catalog.
    *
    * @return The resolved URI.
@@ -1874,6 +2160,12 @@ public class Catalog {
    * <p>If a URI entry exists in the catalog file
    * for the URI specified, return the mapped value.</p>
    *
+   * <p>
+   *  返回此目录中的适用URI
+   * 
+   *  <p>如果指定URI的目录文件中存在URI条目,请返回映射值</p>
+   * 
+   * 
    * @param uri The URI to locate in the catalog
    *
    * @return The mapped URI or null
@@ -1991,6 +2283,12 @@ public class Catalog {
    * name, public, and system identifiers. In some contexts, these
    * may be null.</p>
    *
+   * <p>
+   * 搜索从属目录,按顺序,寻找匹配
+   * 
+   *  <p>此方法搜索Catalog并返回为给定实体类型指定的系统标识符,其中包含给定的名称,公共和系统标识符。在某些上下文中,这些可能为null </p>
+   * 
+   * 
    * @param entityType The CatalogEntry type for which this query is
    * being conducted. This is necessary in order to do the approprate
    * query on a subordinate catalog.
@@ -2079,6 +2377,10 @@ public class Catalog {
    * Replace backslashes with forward slashes. (URLs always use
    * forward slashes.)
    *
+   * <p>
+   *  将正斜杠替换为反斜线(网址始终使用正斜杠)
+   * 
+   * 
    * @param sysid The input system identifier.
    * @return The same system identifier with backslashes turned into
    * forward slashes.
@@ -2091,6 +2393,10 @@ public class Catalog {
    * Construct an absolute URI from a relative one, using the current
    * base URI.
    *
+   * <p>
+   *  使用当前基本URI从相对的URI构造绝对URI
+   * 
+   * 
    * @param sysid The (possibly relative) system identifier
    * @return The system identifier made absolute with respect to the
    * current {@link #base}.
@@ -2116,6 +2422,10 @@ public class Catalog {
   /**
    * Perform character normalization on a URI reference.
    *
+   * <p>
+   *  对URI引用执行字符规范化
+   * 
+   * 
    * @param uriref The URI reference
    * @return The normalized URI reference.
    */
@@ -2161,6 +2471,10 @@ public class Catalog {
   /**
    * Perform %-encoding on a single byte.
    *
+   * <p>
+   *  对单个字节执行％编码
+   * 
+   * 
    * @param b The 8-bit integer that represents th byte. (Bytes are signed
               but encoding needs to look at the bytes unsigned.)
    * @return The %-encoded string for the byte in question.
@@ -2183,6 +2497,10 @@ public class Catalog {
    * vector so that it is ordered by length of partial
    * public identifier.</p>
    *
+   * <p>
+   *  添加到委派目录的当前列表
+   * 
+   * 
    * @param entry The DELEGATE catalog entry
    */
   protected void addDelegate(CatalogEntry entry) {

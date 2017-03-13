@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2002,2004 Apache软件基金会
+ * 
+ *  根据Apache许可证第20版("许可证")授权;您不得使用此文件,除非符合许可证您可以在获取许可证的副本
+ * 
+ *  http：// wwwapacheorg / licenses / LICENSE-20
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件将按"原样"基础分发,无任何明示或暗示的保证或条件。请参阅许可证管理权限和限制许可证
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.dom;
@@ -76,6 +86,26 @@ import org.w3c.dom.events.EventTarget;
  *
  * @xerces.internal
  *
+ * <p>
+ * NodeImpl提供了一个DOM树的基本结构它从不直接使用,而是被子类化以添加类型和数据信息,以及适用于树的每个节点的附加方法只有它的子类应该被实例化 - 异常Document本身,只能通过具体的Doc
+ * ument的工厂方法。
+ * <P>
+ *  Node接口提供共享行为,例如兄弟和孩子,这两者都是为了一致性,并且可以执行最常见的树操作而不必不断地向下转换到特定节点类型。
+ * 当对于这些查询之一没有明显的映射时,它将响应with null注意,默认行为是禁止子代。为了允许它们,子类ParentNode覆盖几个方法。
+ * <P>
+ * NodeImpl也实现了NodeList,所以它可以响应getChildNodes()查询返回自己。这消除了对一个单独的ChildNodeList对象的需要。
+ * 注意这是一个IMPLEMENTATION DETAIL;应用程序应该_never_假定此标识存在。
+ * <P>
+ *  单个文档中的所有节点都必须源自该文档(请注意,这比"必须是相同的实现"要严格得多)节点都知道它们的ownerDocument,并且尝试不匹配会抛出WRONG_DOCUMENT_ERR
+ * <P>
+ * 但是,为了节省内存,并非​​所有节点都直接引用它们的ownerDocument当一个节点由另一个节点拥有时,它依赖其所有者来存储它的ownerDocument父节点总是存储它,所以永远不会有多个间接级别
+ * 当节点没有所有者时,ownerNode引用其ownerDocument。
+ * <p>
+ *  这个类不直接支持变异事件,但是它仍然实现了EventTarget接口并将所有相关的调用转发给文档,以便文档类这样做
+ * 
+ *  @xercesinternal
+ * 
+ * 
  * @author Arnaud  Le Hors, IBM
  * @author Joe Kesselman, IBM
  * @since  PR-DOM-Level-1-19980818.
@@ -92,34 +122,55 @@ public abstract class NodeImpl
     // Taken from DOM L3 Node interface.
     /**
      * The node precedes the reference node.
+     * <p>
+     *  节点在参考节点之前
+     * 
      */
     public static final short TREE_POSITION_PRECEDING   = 0x01;
     /**
      * The node follows the reference node.
+     * <p>
+     *  节点跟随参考节点
+     * 
      */
     public static final short TREE_POSITION_FOLLOWING   = 0x02;
     /**
      * The node is an ancestor of the reference node.
+     * <p>
+     *  节点是参考节点的祖先
+     * 
      */
     public static final short TREE_POSITION_ANCESTOR    = 0x04;
     /**
      * The node is a descendant of the reference node.
+     * <p>
+     *  节点是参考节点的后代
+     * 
      */
     public static final short TREE_POSITION_DESCENDANT  = 0x08;
     /**
      * The two nodes have an equivalent position. This is the case of two
      * attributes that have the same <code>ownerElement</code>, and two
      * nodes that are the same.
+     * <p>
+     * 两个节点具有等效位置这是具有相同<code> ownerElement </code>的两个属性的情况,以及两个相同的节点
+     * 
      */
     public static final short TREE_POSITION_EQUIVALENT  = 0x10;
     /**
      * The two nodes are the same. Two nodes that are the same have an
      * equivalent position, though the reverse may not be true.
+     * <p>
+     *  两个节点是相同的两个相同的节点具有等效位置,尽管相反可能不是真的
+     * 
      */
     public static final short TREE_POSITION_SAME_NODE   = 0x20;
     /**
      * The two nodes are disconnected, they do not have any common ancestor.
      * This is the case of two nodes that are not in the same document.
+     * <p>
+     *  两个节点断开连接,它们没有任何共同的祖先。这是不在同一文档中的两个节点的情况
+     * 
      */
     public static final short TREE_POSITION_DISCONNECTED = 0x00;
 
@@ -172,6 +223,11 @@ public abstract class NodeImpl
      * instantiated, and those normally via a Document's factory methods
      * <p>
      * Every Node knows what Document it belongs to.
+     * <p>
+     *  没有公共构造函数;只有Node的子类应该被实例化,并且那些通常通过Document的工厂方法
+     * <p>
+     *  每个节点知道它属于什么文档
+     * 
      */
     protected NodeImpl(CoreDocumentImpl ownerDocument) {
         // as long as we do not have any owner, ownerNode is our ownerDocument
@@ -188,16 +244,26 @@ public abstract class NodeImpl
     /**
      * A short integer indicating what type of node this is. The named
      * constants for this value are defined in the org.w3c.dom.Node interface.
+     * <p>
+     *  指示此节点类型的短整数此值的命名常量在orgw3cdomNode接口中定义
+     * 
      */
     public abstract short getNodeType();
 
     /**
      * the name of this node.
+     * <p>
+     *  此节点的名称
+     * 
      */
     public abstract String getNodeName();
 
     /**
      * Returns the node value.
+     * <p>
+     *  返回节点值
+     * 
+     * 
      * @throws DOMException(DOMSTRING_SIZE_ERR)
      */
     public String getNodeValue()
@@ -207,6 +273,10 @@ public abstract class NodeImpl
 
     /**
      * Sets the node value.
+     * <p>
+     *  设置节点值
+     * 
+     * 
      * @throws DOMException(NO_MODIFICATION_ALLOWED_ERR)
      */
     public void setNodeValue(String x)
@@ -217,6 +287,10 @@ public abstract class NodeImpl
     /**
      * Adds a child node to the end of the list of children for this node.
      * Convenience shorthand for insertBefore(newChild,null).
+     * <p>
+     * 将子节点添加到此节点的子节点列表的末尾insertBefore的方便速记(newChild,null)
+     * 
+     * 
      * @see #insertBefore(Node, Node)
      * <P>
      * By default we do not accept any children, ParentNode overrides this.
@@ -246,6 +320,12 @@ public abstract class NodeImpl
      * <P>
      * Note: since we never have any children deep is meaningless here,
      * ParentNode overrides this behavior.
+     * <p>
+     *  返回给定节点的副本您可以将此视为节点的通用"复制构造函数"新返回的对象应完全独立于源对象的子树,因此在克隆后进行的更改不会影响其他对象
+     * <P>
+     *  注意：因为我们从来没有任何孩子deep在这里没有意义,ParentNode重写这个行为
+     * 
+     * 
      * @see ParentNode
      *
      * <p>
@@ -296,6 +376,9 @@ public abstract class NodeImpl
      * Find the Document that this Node belongs to (the document in
      * whose context the Node was created). The Node may or may not
      * currently be part of that Document's actual contents.
+     * <p>
+     *  查找此节点所属的文档(在其上下文中创建节点的文档)节点可能或可能不当前是该文档的实际内容的一部分
+     * 
      */
     public Document getOwnerDocument() {
         // if we have an owner simply forward the request
@@ -310,6 +393,9 @@ public abstract class NodeImpl
     /**
      * same as above but returns internal type and this one is not overridden
      * by CoreDocumentImpl to return null
+     * <p>
+     *  与上述相同,但返回内部类型,并且这一个不被CoreDocumentImpl覆盖以返回null
+     * 
      */
     CoreDocumentImpl ownerDocument() {
         // if we have an owner simply forward the request
@@ -324,6 +410,9 @@ public abstract class NodeImpl
     /**
      * NON-DOM
      * set the ownerDocument of this node
+     * <p>
+     * NON-DOM设置此节点的ownerDocument
+     * 
      */
     void setOwnerDocument(CoreDocumentImpl doc) {
         if (needsSyncData()) {
@@ -338,6 +427,9 @@ public abstract class NodeImpl
 
     /**
      * Returns the node number
+     * <p>
+     *  返回节点编号
+     * 
      */
     protected int getNodeNumber() {
         int nodeNumber;
@@ -351,6 +443,9 @@ public abstract class NodeImpl
      * currently active in the DOM tree (perhaps because it has just been
      * created or removed). Note that Document, DocumentFragment, and
      * Attribute will never have parents.
+     * <p>
+     *  获取此节点的DOM树父,如果它在DOM树中不是活动的(可能是因为它刚刚被创建或删除),则为null注意,Document,DocumentFragment和Attribute永远不会有父
+     * 
      */
     public Node getParentNode() {
         return null;            // overriden by ChildNode
@@ -358,6 +453,9 @@ public abstract class NodeImpl
 
     /*
      * same as above but returns internal type
+     * <p>
+     *  同上,但返回内部类型
+     * 
      */
     NodeImpl parentNode() {
         return null;
@@ -382,6 +480,10 @@ public abstract class NodeImpl
      * or null if none. At this writing, Element is the only type of node
      * which will ever have attributes.
      *
+     * <p>
+     *  返回与此节点相关联的属性集合,如果没有则返回null在此写入时,Element是唯一具有属性的节点类型
+     * 
+     * 
      * @see ElementImpl
      */
     public NamedNodeMap getAttributes() {
@@ -390,6 +492,10 @@ public abstract class NodeImpl
 
     /**
      *  Returns whether this node (if it is an element) has any attributes.
+     * <p>
+     *  返回此节点(如果它是一个元素)是否有任何属性
+     * 
+     * 
      * @return <code>true</code> if this node has any attributes,
      *   <code>false</code> otherwise.
      * @since DOM Level 2
@@ -404,6 +510,12 @@ public abstract class NodeImpl
      * for (Node.getFirstChild()!=null)
      * <P>
      * By default we do not have any children, ParentNode overrides this.
+     * <p>
+     *  测试这个节点是否有任何子节点方便快捷(NodegetFirstChild()！= null)
+     * <P>
+     *  默认情况下,我们没有任何孩子,ParentNode覆盖这个
+     * 
+     * 
      * @see ParentNode
      */
     public boolean hasChildNodes() {
@@ -422,6 +534,14 @@ public abstract class NodeImpl
      * In this implementation, Nodes implement the NodeList interface and
      * provide their own getChildNodes() support. Other DOMs may solve this
      * differently.
+     * <p>
+     * 获取枚举此节点的所有子节点的NodeList如果没有,则返回一个(最初)空的NodeList
+     * <p>
+     *  NodeList是"live";当添加/删除子节点时,NodeList将立即反映这些更改。
+     * 此外,NodeList引用实际节点,因此通过DOM树进行的那些节点的更改将反映在NodeList中,反之亦然。
+     * <p>
+     *  在这个实现中,Nodes实现NodeList接口并提供自己的getChildNodes()支持其他DOM可以不同的解决方案
+     * 
      */
     public NodeList getChildNodes() {
         return this;
@@ -430,6 +550,11 @@ public abstract class NodeImpl
     /** The first child of this Node, or null if none.
      * <P>
      * By default we do not have any children, ParentNode overrides this.
+     * <p>
+     * <P>
+     *  默认情况下,我们没有任何孩子,ParentNode覆盖这个
+     * 
+     * 
      * @see ParentNode
      */
     public Node getFirstChild() {
@@ -439,6 +564,11 @@ public abstract class NodeImpl
     /** The first child of this Node, or null if none.
      * <P>
      * By default we do not have any children, ParentNode overrides this.
+     * <p>
+     * <P>
+     *  默认情况下,我们没有任何孩子,ParentNode覆盖这个
+     * 
+     * 
      * @see ParentNode
      */
     public Node getLastChild() {
@@ -450,6 +580,12 @@ public abstract class NodeImpl
      * implicitly removes them from their previous parent.
      * <P>
      * By default we do not accept any children, ParentNode overrides this.
+     * <p>
+     *  将一个或多个节点移动到我们的孩子列表请注意,这会隐式地从他们以前的父级中删除它们
+     * <P>
+     * 默认情况下,我们不接受任何孩子,ParentNode覆盖这个
+     * 
+     * 
      * @see ParentNode
      *
      * @param newChild The Node to be moved to our subtree. As a
@@ -488,6 +624,12 @@ public abstract class NodeImpl
      * remains intact so it may be re-inserted elsewhere.
      * <P>
      * By default we do not have any children, ParentNode overrides this.
+     * <p>
+     *  从此节点删除子项已删除的子项的子树保持不变,因此可以重新插入其他位置
+     * <P>
+     *  默认情况下,我们没有任何孩子,ParentNode覆盖这个
+     * 
+     * 
      * @see ParentNode
      *
      * @return oldChild, in its new state (removed).
@@ -512,6 +654,12 @@ public abstract class NodeImpl
      * then removing oldChild.
      * <P>
      * By default we do not have any children, ParentNode overrides this.
+     * <p>
+     *  使newChild占据oldChild曾经存在的位置请注意,newChild将首先从其上一个父对象中删除(如果有的话)相当于在oldChild之前插入newChild,然后删除oldChild
+     * <P>
+     *  默认情况下,我们没有任何孩子,ParentNode覆盖这个
+     * 
+     * 
      * @see ParentNode
      *
      * @return oldChild, in its new state (removed).
@@ -544,6 +692,12 @@ public abstract class NodeImpl
      * NodeList method: Count the immediate children of this node
      * <P>
      * By default we do not have any children, ParentNode overrides this.
+     * <p>
+     *  NodeList方法：计算此节点的直接子节点
+     * <P>
+     *  默认情况下,我们没有任何孩子,ParentNode覆盖这个
+     * 
+     * 
      * @see ParentNode
      *
      * @return int
@@ -557,6 +711,12 @@ public abstract class NodeImpl
      * null if the index is out of bounds.
      * <P>
      * By default we do not have any children, ParentNode overrides this.
+     * <p>
+     *  NodeList方法：返回此节点的第N个直接子节点,如果索引超出边界则返回null
+     * <P>
+     * 默认情况下,我们没有任何孩子,ParentNode覆盖这个
+     * 
+     * 
      * @see ParentNode
      *
      * @return org.w3c.dom.Node
@@ -587,9 +747,19 @@ public abstract class NodeImpl
      * Note that this implementation simply calls normalize() on this Node's
      * children. It is up to implementors or Node to override normalize()
      * to take action.
+     * <p>
+     * 将所有<code>节点</code>下的子树的所有<code> Text </code>节点包括在"正常"形式中,其中只有标记,处理指令,CDATA段和实体引用)分离<code> Text </code>
+     * 节点,即没有相邻的<code> Text </code>节点。
+     * 这可以用于确保文档的DOM视图与保存和重新加载时相同,并且在要使用依赖于特定文档树结构的操作(例如XPointer查找)时非常有用在文档包含<code> CDATASections </code>的情况
+     * 下,归一化操作可能不够,因为XPointer不区分<code> Text </code>节点和<code> CDATASection </code>节点。
+     * <p>
+     * 注意,这个实现只是在这个Node的孩子上调用normalize()。这是由实现者或Node来覆盖normalize()来执行
+     * 
      */
     public void normalize() {
         /* by default we do not have any children,
+        /* <p>
+        /* 
            ParentNode overrides this behavior */
     }
 
@@ -597,6 +767,10 @@ public abstract class NodeImpl
      * Introduced in DOM Level 2. <p>
      * Tests whether the DOM implementation implements a specific feature and
      * that feature is supported by this node.
+     * <p>
+     *  在DOM级别2中引入<p>测试DOM实现是否实现特定功能,并且此节点支持该功能
+     * 
+     * 
      * @param feature The package name of the feature to test. This is the same
      * name as what can be passed to the method hasFeature on
      * DOMImplementation.
@@ -627,6 +801,16 @@ public abstract class NodeImpl
      *
      * For nodes created with a DOM Level 1 method, such as createElement
      * from the Document interface, this is null.
+     * <p>
+     *  在DOM级别2中引入<p>
+     * 
+     *  此节点的命名空间URI,如果未指定则为null如果此节点是除ELEMENT_NODE和ATTRIBUTE_NODE之外的任何类型,则始终为空,并且将其设置为无效<p>
+     * 
+     *  这不是一个计算值,它是基于对范围中的命名空间声明的检查的命名空间查找的结果它只是在创建时提供的命名空间URI <p>
+     * 
+     * 对于使用DOM Level 1方法创建的节点(如Document接口中的createElement),此值为null
+     * 
+     * 
      * @since WD-DOM-Level-2-19990923
      * @see AttrNSImpl
      * @see ElementNSImpl
@@ -646,6 +830,14 @@ public abstract class NodeImpl
      * For nodes created with a DOM Level 1 method, such as createElement
      * from the Document interface, this is null. <p>
      *
+     * <p>
+     *  在DOM级别2中引入<p>
+     * 
+     *  此节点的命名空间前缀,如果未指定则为null如果此节点是除ELEMENT_NODE和ATTRIBUTE_NODE之外的任何类型,则此节点始终为空,并且将其设置为无效<p>
+     * 
+     *  对于使用DOM Level 1方法创建的节点(例如Document接口中的createElement),则为null <p>
+     * 
+     * 
      * @since WD-DOM-Level-2-19990923
      * @see AttrNSImpl
      * @see ElementNSImpl
@@ -669,6 +861,16 @@ public abstract class NodeImpl
      *  holds the qualified name, as well as the tagName and name attributes of
      *  the Element and Attr interfaces, when applicable.<p>
      *
+     * <p>
+     *  在DOM级别2中引入<p>
+     * 
+     *  此节点的命名空间前缀,如果未指定则为null如果此节点是除ELEMENT_NODE和ATTRIBUTE_NODE之外的任何类型,则此节点始终为空,并且将其设置为无效<p>
+     * 
+     *  对于使用DOM Level 1方法创建的节点(例如Document接口中的createElement),则为null <p>
+     * 
+     * 请注意,设置此属性会更改nodeName属性,该属性包含限定名称,以及Element和Attr接口的tagName和name属性(如果适用)<p>
+     * 
+     * 
      * @throws INVALID_CHARACTER_ERR Raised if the specified
      *  prefix contains an invalid character.
      *
@@ -692,6 +894,13 @@ public abstract class NodeImpl
      * from the Document interface, and for nodes of any type other than
      * ELEMENT_NODE and ATTRIBUTE_NODE this is the same as the nodeName
      * attribute.
+     * <p>
+     *  在DOM级别2中引入<p>
+     * 
+     *  返回此节点的限定名称的局部部分对于使用DOM 1级方法创建的节点(例如Document接口中的createElement),对于除ELEMENT_NODE和ATTRIBUTE_NODE之外的任何类型的
+     * 节点,这与nodeName属性相同。
+     * 
+     * 
      * @since WD-DOM-Level-2-19990923
      * @see AttrNSImpl
      * @see ElementNSImpl
@@ -748,6 +957,15 @@ public abstract class NodeImpl
      * teleconference 30 May 2001).If the base HTML element is not yet
      * attached to a document, does the insert change the Document.baseURI?
      * Yes. (F2F 26 Sep 2001)
+     * <p>
+     * 该节点的绝对基本URI或<code> null </code>如果未定义此值是根据以下方式计算的：然而,当<code> Document </code>支持特征"HTML"时,基本URI使用first 
+     * HTML BASE元素的href属性的值(如果有)和来自<code> Document </code>接口的<code> documentURI </code>属性的值<br>当节点为<code >元素
+     * </code>,<code> Document </code>或aa <code> ProcessingInstruction </code>,此属性表示当节点是<code>记号</code时定义的属性[base URI] >
+     * ,<code> Entity </code>或<code> EntityReference </code>,此属性表示属性[声明基URI]相对命名空间URI问题的解决会如何影响?根据信息集,它不是只有在
+     * 文档,元素,ProcessingInstruction,实体和符号节点上?如果不是,在其他节点上它是什么?空值?空字符串?我认为它应该是父的soshould这是只读和计算或实际的读写属性?只读和计算(F
+     * 2F 2000年6月19日和电话会议2001年5月30日)如果基本HTML元素尚未附加一个文档,插入更改DocumentbaseURI?是(F2F 26 Sep 2001)。
+     * 
+     * 
      * @since DOM Level 3
      */
     public String getBaseURI() {
@@ -758,6 +976,10 @@ public abstract class NodeImpl
      * Compares a node with this node with regard to their position in the
      * tree and according to the document order. This order can be extended
      * by module that define additional types of nodes.
+     * <p>
+     * 将节点与此节点在树中的位置和根据文档顺序进行比较此顺序可以通过定义其他类型的节点的模块进行扩展
+     * 
+     * 
      * @param other The node to compare against this node.
      * @return Returns how the given node is positioned relatively to this
      *   node.
@@ -964,6 +1186,10 @@ public abstract class NodeImpl
     /**
      * Compares a node with this node with regard to their position in the
      * document.
+     * <p>
+     *  将节点与此节点在文档中的位置进行比较
+     * 
+     * 
      * @param other The node to compare against this node.
      * @return Returns how the given node is positioned relatively to this
      *   node.
@@ -1290,6 +1516,40 @@ public abstract class NodeImpl
      * null</td>
      * </tr>
      * </table>
+     * <p>
+     * 此属性返回此节点及其后代的文本内容当定义为null时,设置它无效果设置时,此节点可能具有的任何可能的子项都将被单个<code> Text </code>包含字符串的节点此属性设置为On获取,不执行序列化
+     * ,返回的字符串不包含任何标记不执行空白标准化,返回的字符串不包含元素内容whitespaces类似地,在设置时,不执行解析则输入字符串将被视为纯文本内容<br>返回的字符串取决于此节点的文本内容,具体取
+     * 决于其类型,如下所述：。
+     * <table border='1'>
+     * <tr>
+     *  <th>节点类型</th> <th>内容</th>
+     * </tr>
+     * 
+     * / **此属​​性返回此节点及其后代的文本内容当定义为null时,设置它无效果设置时,此节点可能具有的任何可能的子项都将被删除并替换为单个<code> Text < / code>包含字符串的节点此属性
+     * 设置为On获取,不执行序列化,返回的字符串不包含任何标记不执行空白标准化,返回的字符串不包含元素内容whitespaces同样,在设置时,无执行解析时,输入字符串将作为纯文本内容<br>返回的字符串取决
+     * 于此节点的文本内容,具体取决于其类型,如下所述：。
+     * <table border='1'>
+     * <tr>
+     *  <th>节点类型</th> <th>内容</th>
+     * </tr>
+     * <tr>
+     * <td valign='top' rowspan='1' colspan='1'>
+     * 每个子节点的<code> textContent </code>属性值的连接,不包括COMMENT_NODE和("COMMENT_NODE")。
+     *  PROCESSING_INSTRUCTION_NODE个节点</td>。
+     * </tr>
+     * <tr>
+     *  <td valign ='top'rowspan ='1'colspan ='1'> ATTRIBUTE_NODE,TEXT_NODE,CDATA_SECTION_NODE,COMMENT_NODE,
+     * PROCESSING_INSTRUCTION_NODE </td>。
+     * <td valign='top' rowspan='1' colspan='1'>
+     *  <code> nodeValue </code> </td>
+     * </tr>
+     * <tr>
+     *  <td valign ='top'rowspan ='1'colspan ='1'> DOCUMENT_NODE,DOCUMENT_TYPE_NODE,NOTATION_NODE </td>
+     * <td valign='top' rowspan='1' colspan='1'>
+     *  null </td>
+     * </tr>
+     * </table>
+     * 
      * @exception DOMException
      *   NO_MODIFICATION_ALLOWED_ERR: Raised when the node is readonly.
      * @exception DOMException
@@ -1347,6 +1607,32 @@ public abstract class NodeImpl
      * null</td>
      * </tr>
      * </table>
+     * <p>
+     * 此属性返回此节点及其后代的文本内容当定义为null时,设置它无效果设置时,此节点可能具有的任何可能的子项都将被单个<code> Text </code>包含字符串的节点此属性设置为On获取,不执行序列化
+     * ,返回的字符串不包含任何标记不执行空白标准化,返回的字符串不包含元素内容whitespaces类似地,在设置时,不执行解析则输入字符串将被视为纯文本内容<br>返回的字符串取决于此节点的文本内容,具体取
+     * 决于其类型,如下所述：。
+     * <table border='1'>
+     * <tr>
+     *  <th>节点类型</th> <th>内容</th>
+     * </tr>
+     * <tr>
+     * <td valign='top' rowspan='1' colspan='1'>
+     * 每个子节点的<code> textContent </code>属性值的连接,不包括COMMENT_NODE和("COMMENT_NODE")。
+     *  PROCESSING_INSTRUCTION_NODE个节点</td>。
+     * </tr>
+     * <tr>
+     *  <td valign ='top'rowspan ='1'colspan ='1'> ATTRIBUTE_NODE,TEXT_NODE,CDATA_SECTION_NODE,COMMENT_NODE,
+     * PROCESSING_INSTRUCTION_NODE </td>。
+     * <td valign='top' rowspan='1' colspan='1'>
+     *  <code> nodeValue </code> </td>
+     * </tr>
+     * <tr>
+     *  <td valign ='top'rowspan ='1'colspan ='1'> DOCUMENT_NODE,DOCUMENT_TYPE_NODE,NOTATION_NODE </td>
+     * <td valign='top' rowspan='1' colspan='1'>
+     *  null </td>
+     * </tr>
+     * </table>
+     * 
      * @exception DOMException
      *   NO_MODIFICATION_ALLOWED_ERR: Raised when the node is readonly.
      * @exception DOMException
@@ -1369,6 +1655,11 @@ public abstract class NodeImpl
      * used completely interchangably, such that all attributes have the
      * same values and calling the same DOM method on either reference
      * always has exactly the same effect.
+     * <p>
+     * 返回此节点是否与给定的节点相同的节点<br>此方法提供了一种方法来确定实现引用的两个<code> Node </code>引用是否引用相同的对象当两个<code> Node </code >引用是对同一
+     * 对象的引用,即使通过代理,引用可以完全互换使用,使得所有属性具有相同的值,并且对任一引用调用相同的DOM方法总是具有完全相同的效果。
+     * 
+     * 
      * @param other The node to test against.
      * @return Returns <code>true</code> if the nodes are the same,
      *   <code>false</code> otherwise.
@@ -1386,6 +1677,10 @@ public abstract class NodeImpl
      *  DOM Level 3: Experimental
      *  This method checks if the specified <code>namespaceURI</code> is the
      *  default namespace or not.
+     * <p>
+     *  DOM Level 3：Experimental此方法检查指定的<code> namespaceURI </code>是否是默认命名空间
+     * 
+     * 
      *  @param namespaceURI The namespace URI to look for.
      *  @return  <code>true</code> if the specified <code>namespaceURI</code>
      *   is the default namespace, <code>false</code> otherwise.
@@ -1460,6 +1755,10 @@ public abstract class NodeImpl
      * DOM Level 3 - Experimental:
      * Look up the prefix associated to the given namespace URI, starting from this node.
      *
+     * <p>
+     *  DOM Level 3  - 实验性：查找与给定命名空间URI相关联的前缀,从此节点开始
+     * 
+     * 
      * @param namespaceURI
      * @return the prefix for the namespace
      */
@@ -1511,6 +1810,10 @@ public abstract class NodeImpl
      * Look up the namespace URI associated to the given prefix, starting from this node.
      * Use lookupNamespaceURI(null) to lookup the default namespace
      *
+     * <p>
+     * DOM级别3  - 实验：查找与给定前缀关联的命名空间URI,从此节点开始使用lookupNamespaceURI(null)查找默认命名空间
+     * 
+     * 
      * @param namespaceURI
      * @return th URI for the namespace
      * @since DOM Level 3
@@ -1686,6 +1989,22 @@ public abstract class NodeImpl
      * <code>isWhitespaceInElementContent</code> attribute for
      * <code>Text</code> nodes, as well as any user data or event listeners
      * registered on the nodes.
+     * <p>
+     * 测试两个节点是否相等<br>此方法测试节点的相等性,而不是同一性(即,两个节点是否是对同一对象的引用),可以使用<code> NodeisSameNode </code>测试所有节点相同也将是相等的,虽
+     * 然相反可能不是真实的<br>当且仅当满足以下条件时,两个节点是相等的：两个节点是相同类型以下字符串属性是相等的：<code> nodeName < / code>,<code> localName </code>
+     * ,<code> namespaceURI </code>,<code>前缀</code>,<code> nodeValue </code> ：它们都是<code> null </code>,或者它们具有
+     * 相同的长度,并且是字符相同的字符</code> </code> </code> <NamedNodeMaps </code>这是：它们都是<code> null </code>,或者它们具有相同的长度,
+     * 并且对于存在于一个映射中的每个节点,存在存在于另一个映射中并且相等的节点,但是不一定是相同的index </code> </Node> </Node> <Node> <Node> </code>是相等的
+     * 。
+     * 它们都是<code> null </code>,或者它们具有相同的长度,对于<code> Attr </code>节点,与任何其他类型的节点一样。
+     * 注意,规范化可以影响等式;为避免这种情况,应在比较之前对节点进行归一化<br>为使两个<code> DocumentType </code>节点相等,还必须满足以下条件：以下字符串属性相等：<code>
+     *  publicId < code>,<code> systemId </code>,<code> internalSubset </code><code> entities </code> <code>
+     *  NamedNodeMaps </code>是相等的<code>符号</code> <code> NamedNodeMaps </code>是相等的<br>另一方面,平等：<code> ownerDoc
+     * ument </code>属性,<code> Attr </code>节点的<code>指定</code>属性,<code> isWhitespaceInElementContent </code> /
+     *  code>节点,以及在节点上注册的任何用户数据或事件侦听器。
+     * 它们都是<code> null </code>,或者它们具有相同的长度,对于<code> Attr </code>节点,与任何其他类型的节点一样。
+     * 
+     * 
      * @param arg The node to compare equality with.
      * @param deep If <code>true</code>, recursively compare the subtrees; if
      *   <code>false</code>, compare only the nodes themselves (and its
@@ -1753,6 +2072,8 @@ public abstract class NodeImpl
     }
 
     /**
+    /* <p>
+    /* 
      * @since DOM Level 3
      */
     public Object getFeature(String feature, String version) {
@@ -1765,6 +2086,10 @@ public abstract class NodeImpl
      * Associate an object to a key on this node. The object can later be
      * retrieved from this node by calling <code>getUserData</code> with the
      * same key.
+     * <p>
+     * 将对象与此节点上的键相关联稍后可以通过使用相同的键调用<code> getUserData </code>从此节点检索对象
+     * 
+     * 
      * @param key The key to associate the object to.
      * @param data The object to associate to the given key, or
      *   <code>null</code> to remove any existing association to that key.
@@ -1784,6 +2109,10 @@ public abstract class NodeImpl
      * Retrieves the object associated to a key on a this node. The object
      * must first have been set to this node by calling
      * <code>setUserData</code> with the same key.
+     * <p>
+     *  检索与此节点上的键相关联的对象必须首先通过使用相同的键调用<code> setUserData </code>将该对象设置为此节点
+     * 
+     * 
      * @param key The key the object is associated to.
      * @return Returns the <code>DOMObject</code> associated to the given key
      *   on this node, or <code>null</code> if there was none.
@@ -1812,6 +2141,14 @@ public abstract class NodeImpl
      * <P>
      * Note: since we never have any children deep is meaningless here,
      * ParentNode overrides this behavior.
+     * <p>
+     *  NON-DOM：PR-DOM-Level-1-19980818提到只读节点与实体,但没有提供API来支持这个
+     * <P>
+     *  大多数DOM用户不应该触摸这个方法它的反对使用是在构造EntityRefernces期间,它将用于锁定从实体复制的内容,所以他们不能随便改变它_could_发布为DOM扩展,如果需要
+     * <P>
+     * 注意：因为我们从来没有任何孩子deep在这里没有意义,ParentNode重写这个行为
+     * 
+     * 
      * @see ParentNode
      *
      * @param readOnly True or false as desired.
@@ -1831,6 +2168,9 @@ public abstract class NodeImpl
     /**
      * NON-DOM: Returns true if this node is read-only. This is a
      * shallow check.
+     * <p>
+     *  NON-DOM：如果此节点为只读,则返回true这是一个浅检查
+     * 
      */
     public boolean getReadOnly() {
 
@@ -1851,6 +2191,11 @@ public abstract class NodeImpl
      * prevent the nodes, your data is attached to, to be garbage collected
      * until the whole document is.
      *
+     * <p>
+     *  NON-DOM：作为子类化DOM的替代方法,这个实现已经扩展,能够将对象附加到每个节点(如果你需要多个对象,你可以附加一个集合,如矢量或哈希表,然后附加你的应用程序信息)<p> <b>重要说明：</b>
+     * 您负责删除对不再使用的节点上的数据的引用如果不这样做,将阻止您的数据附加到的节点垃圾收集,直到整个文件。
+     * 
+     * 
      * @param data the object to store or null to remove any existing reference
      */
     public void setUserData(Object data) {
@@ -1860,6 +2205,9 @@ public abstract class NodeImpl
     /**
      * NON-DOM:
      * Returns the user data associated to this node.
+     * <p>
+     *  NON-DOM：返回与此节点关联的用户数据
+     * 
      */
     public Object getUserData() {
         return ownerDocument().getUserData(this);
@@ -1871,6 +2219,9 @@ public abstract class NodeImpl
 
     /**
      * Denotes that this node has changed.
+     * <p>
+     *  表示此节点已更改
+     * 
      */
     protected void changed() {
         // we do not actually store this information on every node, we only
@@ -1881,6 +2232,9 @@ public abstract class NodeImpl
 
     /**
      * Returns the number of changes to this node.
+     * <p>
+     * 返回此节点的更改数
+     * 
      */
     protected int changes() {
         // we do not actually store this information on every node, we only
@@ -1892,6 +2246,9 @@ public abstract class NodeImpl
     /**
      * Override this method in subclass to hook in efficient
      * internal data structure.
+     * <p>
+     *  在子类中覆盖此方法以挂钩有效的内部数据结构
+     * 
      */
     protected void synchronizeData() {
         // By default just change the flag to avoid calling this method again
@@ -1901,6 +2258,9 @@ public abstract class NodeImpl
     /**
      * For non-child nodes, the node which "points" to this node.
      * For example, the owning element for an attribute
+     * <p>
+     *  对于非子节点,"指向"此节点的节点例如,属性的拥有元素
+     * 
      */
     protected Node getContainer() {
        return null;
@@ -1909,6 +2269,8 @@ public abstract class NodeImpl
 
     /*
      * Flags setters and getters
+     * <p>
+     *  标志setters和getters
      */
 
     final boolean isReadOnly() {

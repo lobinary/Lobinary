@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -23,6 +24,8 @@
  *
  */
 /*
+/* <p>
+/* 
  * @author    IBM Corp.
  *
  * Copyright IBM Corp. 1999-2000.  All rights reserved.
@@ -82,6 +85,28 @@ import javax.management.RuntimeOperationsException;
  *
  * <p>The <b>serialVersionUID</b> of this class is <code>3862947819818064362L</code>.
  *
+ * <p>
+ *  <p> ModelMBeanConstructorInfo对象描述了ModelMBean的构造函数。
+ * 它是MBeanConstructorInfo的子类,添加了相关的描述符和DescriptorAccess接口的实现</p>。
+ * 
+ * <P id="descriptor">
+ *  描述符中的字段被定义,但不限于,以下注意,当该表中的类型是Number时,也可以使用作为Long的十进制表示的String </P>
+ * 
+ * <table border="1" cellpadding="5" summary="ModelMBeanConstructorInfo Fields">
+ * <tr> <th>名称</th> <th>类型</th> <th>含义</th> </tr> <tr> <td>名称</td> <td>字符串</td> <td>构造函数名称</td> </tr> <tr>
+ *  <td> descriptorType </td> <td>字符串</td> <td>必须是"operation"</td> </tr> <tr > <td> role </td> <td>字符串</td>
+ *  <td>必须是"构造函数"</td> </tr> <tr> <td> displayName </td> td> <td>构造函数的可读名称</td> </tr> <tr> <td>可见性</td> 
+ * <td>数字</td> <td>很少可见</td> </tr> <tr> <td> presentationString </td> <td>字符串</td> <td> XML格式的字符串来描述如何呈现
+ * 操作</td>。
+ * </table>
+ * 
+ *  <p> {@code persistPolicy}和{@code currencyTimeLimit}字段对于构造函数无意义,但不被视为无效</p>
+ * 
+ * <p>默认描述符具有{@code name},{@code descriptorType},{@code displayName}和{@code role}字段
+ * 
+ *  <p>此类别的<b> serialVersionUID </b>是<code> 3862947819818064362L </code>
+ * 
+ * 
  * @since 1.5
  */
 
@@ -118,6 +143,8 @@ public class ModelMBeanConstructorInfo
     // Actual serial version and serial form
     private static final long serialVersionUID;
     /**
+    /* <p>
+    /* 
      * @serialField consDescriptor Descriptor The {@link Descriptor} containing the metadata for this instance
      */
     private static final ObjectStreamField[] serialPersistentFields;
@@ -142,6 +169,8 @@ public class ModelMBeanConstructorInfo
     // END Serialization compatibility stuff
 
         /**
+        /* <p>
+        /* 
          * @serial The {@link Descriptor} containing the metadata for this instance
          */
         private Descriptor consDescriptor = validDescriptor(null);
@@ -156,6 +185,11 @@ public class ModelMBeanConstructorInfo
         * the {@code Constructor} object that contain the {@link
         * DescriptorKey} meta-annotation.
         *
+        * <p>
+        *  使用默认描述符构造ModelMBeanConstructorInfo对象构造对象的{@link Descriptor}将包含由{@code Constructor}对象上的任何注释贡献的字段,该对象包
+        * 含{@link DescriptorKey}元注释。
+        * 
+        * 
         * @param description A human readable description of the constructor.
         * @param constructorMethod The java.lang.reflect.Constructor object
         * describing the MBean constructor.
@@ -184,6 +218,11 @@ public class ModelMBeanConstructorInfo
         * object that contain the {@link DescriptorKey}
         * meta-annotation.
         *
+        * <p>
+        *  构造ModelMBeanConstructorInfo对象构造的对象的{@link Descriptor}将包含由{@code Constructor}对象上的任何注释贡献的字段,该对象包含{@link DescriptorKey}
+        * 元注释。
+        * 
+        * 
         * @param description A human readable description of the constructor.
         * @param constructorMethod The java.lang.reflect.Constructor object
         * describing the ModelMBean constructor.
@@ -220,6 +259,10 @@ public class ModelMBeanConstructorInfo
         /**
         * Constructs a ModelMBeanConstructorInfo object with a default descriptor.
         *
+        * <p>
+        *  构造具有默认描述符的ModelMBeanConstructorInfo对象
+        * 
+        * 
         * @param name The name of the constructor.
         * @param description A human readable description of the constructor.
         * @param signature MBeanParameterInfo object array describing the parameters(arguments) of the constructor.
@@ -243,6 +286,10 @@ public class ModelMBeanConstructorInfo
         /**
         * Constructs a ModelMBeanConstructorInfo object.
         *
+        * <p>
+        * 构造ModelMBeanConstructorInfo对象
+        * 
+        * 
         * @param name The name of the constructor.
         * @param description A human readable description of the constructor.
         * @param signature MBeanParameterInfo objects describing the parameters(arguments) of the constructor.
@@ -278,6 +325,10 @@ public class ModelMBeanConstructorInfo
         /**
          * Constructs a new ModelMBeanConstructorInfo object from this ModelMBeanConstructor Object.
          *
+         * <p>
+         *  从此ModelMBeanConstructor对象构造一个新的ModelMBeanConstructorInfo对象
+         * 
+         * 
          * @param old the ModelMBeanConstructorInfo to be duplicated
          *
          */
@@ -296,6 +347,9 @@ public class ModelMBeanConstructorInfo
         /**
         * Creates and returns a new ModelMBeanConstructorInfo which is a duplicate of this ModelMBeanConstructorInfo.
         *
+        * <p>
+        *  创建并返回一个新的ModelMBeanConstructorInfo,它是此ModelMBeanConstructorInfo的副本
+        * 
         */
         @Override
         public Object clone ()
@@ -311,6 +365,10 @@ public class ModelMBeanConstructorInfo
         /**
          * Returns a copy of the associated Descriptor.
          *
+         * <p>
+         *  返回关联的描述符的副本
+         * 
+         * 
          * @return Descriptor associated with the
          * ModelMBeanConstructorInfo object.
          *
@@ -340,6 +398,11 @@ public class ModelMBeanConstructorInfo
         * RuntimeOperationsException wrapping an
         * IllegalArgumentException is thrown.
         *
+        * <p>
+        *  设置相关联的描述符(完全替换)ModelMBeanConstructorInfo如果新的描述符为空,则相关的描述符将恢复为默认描述符描述符在分配之前被验证如果新的描述符无效,则抛出包含IllegalA
+        * rgumentException的RuntimeOperationsException。
+        * 
+        * 
         * @param inDescriptor replaces the Descriptor associated with
         * the ModelMBeanConstructor. If the descriptor does not
         * contain all the following fields, the missing ones are added with
@@ -366,6 +429,9 @@ public class ModelMBeanConstructorInfo
 
         /**
         * Returns a string containing the entire contents of the ModelMBeanConstructorInfo in human readable form.
+        * <p>
+        *  返回一个包含人类可读形式的ModelMBeanConstructorInfo的全部内容的字符串
+        * 
         */
         @Override
         public String toString()
@@ -399,6 +465,13 @@ public class ModelMBeanConstructorInfo
          * role="constructor"
          *
          *
+         * <p>
+         * 克隆传递的描述符,设置默认值,并检查有效性如果描述符无效(例如有错误的"名称"),这表示编程错误和一个RuntimeOperationsException将抛出
+         * 
+         *  如果尚未设置以下字段,则将默认为：displayName = thisgetName(),name = thisgetName(),descriptorType ="operation",role =
+         * "constructor"。
+         * 
+         * 
          * @param in Descriptor to be checked, or null which is equivalent to
          * an empty Descriptor.
          * @exception RuntimeOperationsException if Descriptor is invalid
@@ -458,6 +531,9 @@ public class ModelMBeanConstructorInfo
 
     /**
      * Deserializes a {@link ModelMBeanConstructorInfo} from an {@link ObjectInputStream}.
+     * <p>
+     *  从{@link ObjectInputStream}反序列化{@link ModelMBeanConstructorInfo}
+     * 
      */
     private void readObject(ObjectInputStream in)
             throws IOException, ClassNotFoundException {
@@ -468,6 +544,8 @@ public class ModelMBeanConstructorInfo
 
     /**
      * Serializes a {@link ModelMBeanConstructorInfo} to an {@link ObjectOutputStream}.
+     * <p>
+     *  将{@link ModelMBeanConstructorInfo}序列化为{@link ObjectOutputStream}
      */
     private void writeObject(ObjectOutputStream out)
             throws IOException {

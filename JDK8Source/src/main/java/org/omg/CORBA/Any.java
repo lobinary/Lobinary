@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2004, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -91,6 +92,40 @@ import org.omg.CORBA.portable.IDLEntity;
  * and for reading an <code>Any</code> object from a stream or
  * writing it to a stream.
  * <BR>
+ * <p>
+ *  作为可以在IDL或任何IDL原语类型中描述的任何数据的容器<code>任何</code>对象用作<code> NamedValue </code>对象的组件,在请求中的参数或返回值,并且用于在<code>
+ *  Context </code>对象中定义名称/值对。
+ * <p>
+ * 
+ *  <code> Any </code>对象由两部分组成：
+ * <OL>
+ * <li> </li> </li> </li> <li> <li> <li> <li> <li> <li> <li> <li>数组的对象包含数组长度的字段和数组中元素类型的字段(请注意,在这种情况下,<code>
+ *  TypeCode </code>对象的第二个字段本身是<code > TypeCode </code> object)。
+ * </OL>
+ * 
+ * <P>
+ *  <a name=\"anyOps\"</a> <code> Any </code>类的很大一部分由用于将值插入到<code> Any </code>对象中并从中提取值的一对方法组成
+ * <P>
+ *  对于给定的基本类型X,这些方法是：
+ * <dl>
+ * <dt>此插入方法允许插入一个实例<code> x </code>的原始类型<code> X <X> <// code>插入<code>任何</code>对象的<code> value </code>字
+ * 段注意,<code> insert_X </code>方法还会重置<code> Any </code>如果需要,可以提供<code> type </code>字段<dt> <code> <bold> X
+ *  extract_X()</bold> </code> <dd>代码>从<code> Any </code>对象。
+ * <BR>
+ * <P>
+ *  此方法在两种情况下会抛出异常<code> BAD_OPERATION </code>：
+ * <OL>
+ * 在<code> Any </code>对象中包含的元素的类型不是<code> X </code> <LI>,<code>方法<code> extract_X </code>已经设置了<code> Any
+ *  </code>对象的值</code>字段。
+ * </OL>
+ * </dl>
+ * <P>
+ *  每个基本IDL数据类型(<code> insert_long </code>和<code> extract_long </code>,<code> insert_string </code>和<code>
+ *  extract_string </code>)有不同的方法对on)<BR>。
+ * <P>
+ *  类<code> Any </code>还具有获取和设置类型代码的方法,用于测试两个<code>任何</code>对象的相等性,以及读取<code> Any </code>流或将其写入流
+ * <BR>
+ * 
  * @since   JDK1.2
  */
 abstract public class Any implements IDLEntity {
@@ -100,6 +135,10 @@ abstract public class Any implements IDLEntity {
      * given <code>Any</code> object.  Two <code>Any</code> objects are
      * equal if both their values and type codes are equal.
      *
+     * <p>
+     * 检查这个<code> Any </code>对象和给定的<code> Any </code>对象之间的相等性两个<code> Any </code>对象都是相等的,如果它们的值和类型代码相等
+     * 
+     * 
      * @param a the <code>Any</code> object to test for equality
      * @return  <code>true</code> if the <code>Any</code> objects are equal;
      * <code>false</code> otherwise
@@ -112,6 +151,10 @@ abstract public class Any implements IDLEntity {
      * Returns type information for the element contained in this
      * <code>Any</code> object.
      *
+     * <p>
+     *  返回此<code> Any </code>对象中包含的元素的类型信息
+     * 
+     * 
      * @return          the <code>TypeCode</code> object containing type information
      *                about the value contained in this <code>Any</code> object
      */
@@ -128,6 +171,13 @@ abstract public class Any implements IDLEntity {
      * is done by the <code>insert_X</code> methods, which will set the type
      * to X if it is not already set to X.
      *
+     * <p>
+     *  将<code>任何</code>对象的<code>类型</code>字段设置为给定的<code> TypeCode </code>对象并清除其值
+     * <P>
+     *  注意,使用此方法设置类型代码会擦除值,如果有一个方法主要提供的类型可以正确设置IDL <code> out </code>参数一般来说,设置类型是通过<code> insert_X </code>方法
+     * ,如果尚未设置为X,则会将类型设置为X.。
+     * 
+     * 
      * @param t       the <code>TypeCode</code> object giving
      *                information for the value in
      *                this <code>Any</code> object
@@ -141,6 +191,10 @@ abstract public class Any implements IDLEntity {
      * Reads off (unmarshals) the value of an <code>Any</code> object from
      * the given input stream using the given typecode.
      *
+     * <p>
+     * 使用给定的类型代码从给定的输入流读取(解组)<code> Any </code>对象的值
+     * 
+     * 
      * @param is the <code>org.omg.CORBA.portable.InputStream</code>
      *                object from which to read
      *                the value contained in this <code>Any</code> object
@@ -166,6 +220,14 @@ abstract public class Any implements IDLEntity {
      * had a value inserted into its <code>value</code> field, it will throw
      * the exception <code>java.lang.NullPointerException</code>.
      *
+     * <p>
+     *  将<code> Any </code>对象的值写入给定输出流如果需要写入<code> typecode </code>和<code> value </code>,请使用<code> create_ou
+     * tput_stream )</code>创建一个<code> OutputStream </code>,然后使用<code> write_any </code>。
+     * <P>
+     *  如果这个方法在一个<code> Any </code>对象上调用,该对象没有插入到它的<code> value </code>字段,它会抛出异常<code> javalangNullPointerEx
+     * ception </code>。
+     * 
+     * 
      * @param os        the <code>org.omg.CORBA.portable.OutputStream</code>
      *                object into which to marshal the value
      *                of this <code>Any</code> object
@@ -177,6 +239,10 @@ abstract public class Any implements IDLEntity {
      * Creates an output stream into which this <code>Any</code> object's
      * value can be marshalled.
      *
+     * <p>
+     *  创建一个输出流,其中<code> Any </code>对象的值可以编组
+     * 
+     * 
      * @return          the newly-created <code>OutputStream</code>
      */
     abstract public OutputStream  create_output_stream();
@@ -185,6 +251,10 @@ abstract public class Any implements IDLEntity {
      * Creates an input stream from which this <code>Any</code> object's value
      * can be unmarshalled.
      *
+     * <p>
+     * 创建一个输入流,从这个<code> Any </code>对象的值可以解组
+     * 
+     * 
      * @return          the newly-created <code>InputStream</code>
      */
     abstract public InputStream  create_input_stream();
@@ -196,6 +266,10 @@ abstract public class Any implements IDLEntity {
      * Extracts the <code>short</code> in this
      * <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     *  提取<code>任何</code>对象的<code>值</code>字段中的<code> short </code>
+     * 
+     * 
      * @return the <code>short</code> stored in this <code>Any</code> object
      * @exception BAD_OPERATION if this  <code>Any</code> object
      *              contains something other than a <code>short</code> or the
@@ -207,6 +281,10 @@ abstract public class Any implements IDLEntity {
      * Inserts the given <code>short</code>
      * into this <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     *  将给定的<code> short </code>插入到此<code>任何</code>对象的<code>值</code>字段
+     * 
+     * 
      * @param s         the <code>short</code> to insert into this
      *                <code>Any</code> object
      */
@@ -216,6 +294,10 @@ abstract public class Any implements IDLEntity {
      * Extracts the <code>int</code> in this
      * <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     *  提取<code>任何</code>对象的<code>值</code>字段中的<code> int </code>
+     * 
+     * 
      * @return the <code>int</code> stored in this <code>Any</code> object
      * @exception BAD_OPERATION if this  <code>Any</code> object
      *              contains something other than an <code>int</code> or the
@@ -227,6 +309,10 @@ abstract public class Any implements IDLEntity {
      * Inserts the given <code>int</code>
      * into this <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     *  将给定的<code> int </code>插入到此<code>任何</code>对象的<code>值</code>字段
+     * 
+     * 
      * @param l         the <code>int</code> to insert into this
      *                <code>Any</code> object
      */
@@ -237,6 +323,10 @@ abstract public class Any implements IDLEntity {
      * Extracts the <code>long</code> in this
      * <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     *  提取<code>任何</code>对象的<code>值</code>字段中的<code> long </code>
+     * 
+     * 
      * @return the <code>long</code> stored in this <code>Any</code> object
      * @exception BAD_OPERATION if this  <code>Any</code> object
      *              contains something other than a <code>long</code> or the
@@ -248,6 +338,10 @@ abstract public class Any implements IDLEntity {
      * Inserts the given <code>long</code>
      * into this <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     *  将给定的<code> long </code>插入此<code>任何</code>对象的<code>值</code>字段
+     * 
+     * 
      * @param l         the <code>long</code> to insert into this
      *                <code>Any</code> object
      */
@@ -257,6 +351,10 @@ abstract public class Any implements IDLEntity {
      * Extracts the <code>short</code> in this
      * <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     *  提取<code>任何</code>对象的<code>值</code>字段中的<code> short </code>
+     * 
+     * 
      * @return the <code>short</code> stored in this <code>Any</code> object
      * @exception BAD_OPERATION if this  <code>Any</code> object
      *              contains something other than a <code>short</code> or the
@@ -268,6 +366,10 @@ abstract public class Any implements IDLEntity {
      * Inserts the given <code>short</code>
      * into this <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     * 将给定的<code> short </code>插入到此<code>任何</code>对象的<code>值</code>字段
+     * 
+     * 
      * @param s         the <code>short</code> to insert into this
      *                <code>Any</code> object
      */
@@ -277,6 +379,10 @@ abstract public class Any implements IDLEntity {
      * Extracts the <code>int</code> in this
      * <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     *  提取<code>任何</code>对象的<code>值</code>字段中的<code> int </code>
+     * 
+     * 
      * @return the <code>int</code> stored in this <code>Any</code> object
      * @exception BAD_OPERATION if this  <code>Any</code> object
      *              contains something other than an <code>int</code> or the
@@ -288,6 +394,10 @@ abstract public class Any implements IDLEntity {
      * Inserts the given <code>int</code>
      * into this <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     *  将给定的<code> int </code>插入到此<code>任何</code>对象的<code>值</code>字段
+     * 
+     * 
      * @param l         the <code>int</code> to insert into this
      *                <code>Any</code> object
      */
@@ -297,6 +407,10 @@ abstract public class Any implements IDLEntity {
      * Extracts the <code>long</code> in this
      * <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     *  提取<code>任何</code>对象的<code>值</code>字段中的<code> long </code>
+     * 
+     * 
      * @return the <code>long</code> stored in this <code>Any</code> object
      * @exception BAD_OPERATION if this  <code>Any</code> object
      *              contains something other than a <code>long</code> or the
@@ -308,6 +422,10 @@ abstract public class Any implements IDLEntity {
      * Inserts the given <code>long</code>
      * into this <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     *  将给定的<code> long </code>插入此<code>任何</code>对象的<code>值</code>字段
+     * 
+     * 
      * @param l         the <code>long</code> to insert into this
      *                <code>Any</code> object
      */
@@ -317,6 +435,10 @@ abstract public class Any implements IDLEntity {
      * Extracts the <code>float</code> in this
      * <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     *  提取<code>任何</code>对象的<code>值</code>字段中的<code> float </code>
+     * 
+     * 
      * @return the <code>float</code> stored in this <code>Any</code> object
      * @exception BAD_OPERATION if this  <code>Any</code> object
      *              contains something other than a <code>float</code> or the
@@ -328,6 +450,10 @@ abstract public class Any implements IDLEntity {
      * Inserts the given <code>float</code>
      * into this <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     *  将给定的<code> float </code>插入到此<code>任何</code>对象的<code>值</code>字段
+     * 
+     * 
      * @param f         the <code>float</code> to insert into this
      *                <code>Any</code> object
      */
@@ -337,6 +463,10 @@ abstract public class Any implements IDLEntity {
      * Extracts the <code>double</code> in this
      * <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     *  在<code>任何</code>对象的<code>值</code>字段中提取<code> double </code>
+     * 
+     * 
      * @return the <code>double</code> stored in this <code>Any</code> object
      * @exception BAD_OPERATION if this  <code>Any</code> object
      *              contains something other than a <code>double</code> or the
@@ -348,6 +478,10 @@ abstract public class Any implements IDLEntity {
      * Inserts the given <code>double</code>
      * into this <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     * 将给定的<code> double </code>插入到此<code>任何</code>对象的<code>值</code>字段
+     * 
+     * 
      * @param d         the <code>double</code> to insert into this
      *                <code>Any</code> object
      */
@@ -357,6 +491,10 @@ abstract public class Any implements IDLEntity {
      * Extracts the <code>boolean</code> in this
      * <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     *  提取<code>任何</code>对象的<code>值</code>字段中的<code> boolean </code>
+     * 
+     * 
      * @return the <code>boolean</code> stored in this <code>Any</code> object
      * @exception BAD_OPERATION if this  <code>Any</code> object
      *              contains something other than a <code>boolean</code> or the
@@ -368,6 +506,10 @@ abstract public class Any implements IDLEntity {
      * Inserts the given <code>boolean</code>
      * into this <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     *  将给定的<code> boolean </code>插入到此<code>任何</code>对象的<code>值</code>字段
+     * 
+     * 
      * @param b         the <code>boolean</code> to insert into this
      *                <code>Any</code> object
      */
@@ -377,6 +519,10 @@ abstract public class Any implements IDLEntity {
      * Extracts the <code>char</code> in this
      * <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     *  提取<code>任何</code>对象的<code>值</code>字段中的<code> char </code>
+     * 
+     * 
      * @return the <code>char</code> stored in this <code>Any</code> object
      * @exception BAD_OPERATION if this  <code>Any</code> object
      *              contains something other than a <code>char</code> or the
@@ -388,6 +534,10 @@ abstract public class Any implements IDLEntity {
      * Inserts the given <code>char</code>
      * into this <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     *  将给定的<code> char </code>插入到此<code>任何</code>对象的<code>值</code>字段
+     * 
+     * 
      * @param c         the <code>char</code> to insert into this
      *                <code>Any</code> object
      * @exception DATA_CONVERSION if there is a data conversion
@@ -399,6 +549,10 @@ abstract public class Any implements IDLEntity {
      * Extracts the <code>char</code> in this
      * <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     *  提取<code>任何</code>对象的<code>值</code>字段中的<code> char </code>
+     * 
+     * 
      * @return the <code>char</code> stored in this <code>Any</code> object
      * @exception BAD_OPERATION if this  <code>Any</code> object
      *              contains something other than a <code>char</code> or the
@@ -410,6 +564,10 @@ abstract public class Any implements IDLEntity {
      * Inserts the given <code>char</code>
      * into this <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     *  将给定的<code> char </code>插入到此<code>任何</code>对象的<code>值</code>字段
+     * 
+     * 
      * @param c         the <code>char</code> to insert into this
      *                <code>Any</code> object
      */
@@ -419,6 +577,10 @@ abstract public class Any implements IDLEntity {
      * Extracts the <code>byte</code> in this
      * <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     *  提取此<code>任何</code>对象的<code>值</code>字段中的<code> byte </code>
+     * 
+     * 
      * @return the <code>byte</code> stored in this <code>Any</code> object
      * @exception BAD_OPERATION if this  <code>Any</code> object
      *              contains something other than a <code>byte</code> or the
@@ -430,6 +592,10 @@ abstract public class Any implements IDLEntity {
      * Inserts the given <code>byte</code>
      * into this <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     * 将给定的<code>字节</code>插入到此<code>任何</code>对象的<code>值</code>字段
+     * 
+     * 
      * @param b         the <code>byte</code> to insert into this
      *                <code>Any</code> object
      */
@@ -439,6 +605,10 @@ abstract public class Any implements IDLEntity {
      * Extracts the <code>Any</code> object in this
      * <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     *  提取<code>任何</code>对象的<code>值</code>字段中的<code> Any </code>
+     * 
+     * 
      * @return the <code>Any</code> object stored in this <code>Any</code> object
      * @exception BAD_OPERATION if this <code>Any</code> object
      *              contains something other than an <code>Any</code> object or the
@@ -450,6 +620,10 @@ abstract public class Any implements IDLEntity {
      * Inserts the given <code>Any</code> object
      * into this <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     *  将给定的<code> Any </code>对象插入到此<code>任何</code>对象的<code>值</code>字段
+     * 
+     * 
      * @param a         the <code>Any</code> object to insert into this
      *                <code>Any</code> object
      */
@@ -459,6 +633,10 @@ abstract public class Any implements IDLEntity {
      * Extracts the <code>org.omg.CORBA.Object</code> in this
      * <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     *  提取<code>任何</code>对象的<code>值</code>字段中的<code> orgomgCORBAObject </code>
+     * 
+     * 
      * @return the <code>org.omg.CORBA.Object</code> stored in
      *         this <code>Any</code> object
      * @exception BAD_OPERATION if this  <code>Any</code> object
@@ -472,6 +650,10 @@ abstract public class Any implements IDLEntity {
      * Inserts the given <code>org.omg.CORBA.Object</code> object
      * into this <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     *  将给定的<code> orgomgCORBAObject </code>对象插入到此<code> Any </code>对象的<code> value </code>字段
+     * 
+     * 
      * @param o         the <code>org.omg.CORBA.Object</code> object to insert into this
      *                <code>Any</code> object
      */
@@ -481,6 +663,10 @@ abstract public class Any implements IDLEntity {
      * Extracts the <code>java.io.Serializable</code> object in this
      * <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     *  在此<code>任何</code>对象的<code>值</code>字段中提取<code> javaioSerializable </code>对象
+     * 
+     * 
      * @return the <code>java.io.Serializable</code> object stored in
      *         this <code>Any</code> object
      * @exception BAD_OPERATION if this  <code>Any</code> object
@@ -494,6 +680,10 @@ abstract public class Any implements IDLEntity {
      * Inserts the given <code>java.io.Serializable</code> object
      * into this <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     *  将给定的<code> javaioSerializable </code>对象插入到此<code>任何</code>对象的<code>值</code>字段
+     * 
+     * 
      * @param v         the <code>java.io.Serializable</code> object to insert into this
      *                <code>Any</code> object
      */
@@ -503,6 +693,10 @@ abstract public class Any implements IDLEntity {
      * Inserts the given <code>java.io.Serializable</code> object
      * into this <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     * 将给定的<code> javaioSerializable </code>对象插入到此<code>任何</code>对象的<code>值</code>字段
+     * 
+     * 
      * @param v         the <code>java.io.Serializable</code> object to insert into this
      *                <code>Any</code> object
      * @param t     the <code>TypeCode</code> object that is to be inserted into
@@ -518,6 +712,10 @@ abstract public class Any implements IDLEntity {
      * Inserts the given <code>org.omg.CORBA.Object</code> object
      * into this <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     *  将给定的<code> orgomgCORBAObject </code>对象插入到此<code> Any </code>对象的<code> value </code>字段
+     * 
+     * 
      * @param o         the <code>org.omg.CORBA.Object</code> instance to insert into this
      *                <code>Any</code> object
      * @param t     the <code>TypeCode</code> object that is to be inserted into
@@ -534,6 +732,10 @@ abstract public class Any implements IDLEntity {
      * Extracts the <code>String</code> object in this
      * <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     *  提取<code>任何</code>对象的<code>值</code>字段中的<code> String </code>
+     * 
+     * 
      * @return the <code>String</code> object stored in this <code>Any</code> object
      * @exception BAD_OPERATION if this  <code>Any</code> object
      *              contains something other than a <code>String</code> object or the
@@ -545,6 +747,10 @@ abstract public class Any implements IDLEntity {
      * Inserts the given <code>String</code> object
      * into this <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     *  将给定的<code> String </code>对象插入到此<code>任何</code>对象的<code> value </code>字段
+     * 
+     * 
      * @param s         the <code>String</code> object to insert into this
      *                <code>Any</code> object
      * @exception DATA_CONVERSION if there is a data conversion error
@@ -557,6 +763,10 @@ abstract public class Any implements IDLEntity {
      * Extracts the <code>String</code> object in this
      * <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     *  提取<code>任何</code>对象的<code>值</code>字段中的<code> String </code>
+     * 
+     * 
      * @return the <code>String</code> object stored in this <code>Any</code> object
      * @exception BAD_OPERATION if this  <code>Any</code> object
      *              contains something other than a <code>String</code> object or the
@@ -568,6 +778,10 @@ abstract public class Any implements IDLEntity {
      * Inserts the given <code>String</code> object
      * into this <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     *  将给定的<code> String </code>对象插入到此<code>任何</code>对象的<code> value </code>字段
+     * 
+     * 
      * @param s         the <code>String</code> object to insert into this
      *                <code>Any</code> object
      * @exception MARSHAL if the ORB has a problem marshalling or
@@ -579,6 +793,10 @@ abstract public class Any implements IDLEntity {
      * Extracts the <code>TypeCode</code> object in this
      * <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     *  在此<code>任何</code>对象的<code>值</code>字段中提取<code> TypeCode </code>
+     * 
+     * 
      * @return the <code>TypeCode</code> object stored in this <code>Any</code> object
      * @exception BAD_OPERATION if this  <code>Any</code> object
      *              contains something other than a <code>TypeCode</code> object or the
@@ -590,6 +808,10 @@ abstract public class Any implements IDLEntity {
      * Inserts the given <code>TypeCode</code> object
      * into this <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     * 将给定的<code> TypeCode </code>对象插入到此<code>任何</code>对象的<code>值</code>字段
+     * 
+     * 
      * @param t         the <code>TypeCode</code> object to insert into this
      *                <code>Any</code> object
      */
@@ -600,6 +822,10 @@ abstract public class Any implements IDLEntity {
      * <code>Any</code> object's <code>value</code> field.
      * Note that the class <code>Principal</code> has been deprecated.
      *
+     * <p>
+     *  提取<code>任何</code>对象的<code>值</code>字段中的<code> Principal </code>对象请注意,<code> Principal </code>类已被弃用
+     * 
+     * 
      * @return the <code>Principal</code> object stored in this <code>Any</code> object
      * @exception BAD_OPERATION if this  <code>Any</code> object
      *              contains something other than a
@@ -619,6 +845,11 @@ abstract public class Any implements IDLEntity {
      * into this <code>Any</code> object's <code>value</code> field.
      * Note that the class <code>Principal</code> has been deprecated.
      *
+     * <p>
+     *  将给定的<code> Principal </code>对象插入到<code> Any </code>对象的<code> value </code>字段中注意,<code> Principal </code>
+     * 。
+     * 
+     * 
      * @param p         the <code>Principal</code> object to insert into this
      *                <code>Any</code> object
      * @see <a href="package-summary.html#unimpl"><code>CORBA</code> package
@@ -638,6 +869,10 @@ abstract public class Any implements IDLEntity {
      * <code>value</code> field.  This method allows the extraction of
      * non-primitive IDL types.
      *
+     * <p>
+     *  从此<code>任何</code>对象的<code>值</code>字段中提取<code> Streamable </code>此方法允许提取非原始IDL类型
+     * 
+     * 
      * @return the <code>Streamable</code> stored in the <code>Any</code> object.
      * @throws BAD_INV_ORDER if the caller has invoked operations in the wrong order
      * @see <a href="package-summary.html#unimpl"><code>CORBA</code> package
@@ -653,6 +888,10 @@ abstract public class Any implements IDLEntity {
      * into this <code>Any</code> object's <code>value</code> field.
      * This method allows the insertion of non-primitive IDL types.
      *
+     * <p>
+     *  将给定的<code> Streamable </code>对象插入到此<code>任何</code>对象的<code> value </code>字段中此方法允许插入非原始IDL类型
+     * 
+     * 
      * @param s         the <code>Streamable</code> object to insert into this
      *                <code>Any</code> object; may be a non-primitive
      *                IDL type
@@ -667,6 +906,10 @@ abstract public class Any implements IDLEntity {
      * Extracts the <code>java.math.BigDecimal</code> object in this
      * <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     * 在此<code>任何</code>对象的<code>值</code>字段中提取<code> javamathBigDecimal </code>
+     * 
+     * 
      * @return the <code>java.math.BigDecimal</code> object
      *         stored in this <code>Any</code> object
      * @exception BAD_OPERATION if this  <code>Any</code> object
@@ -687,6 +930,12 @@ abstract public class Any implements IDLEntity {
      * Inserts the given <code>java.math.BigDecimal</code> object
      * into this <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     *  引发<a href=\"package-summaryhtml#NO_IMPLEMENT\"> <code> orgomgCORBANO_IMPLEMENT </code> </a>例外
+     * <P>
+     *  将给定的<code> javamathBigDecimal </code>对象插入到此<code> Any </code>对象的<code> value </code>字段
+     * 
+     * 
      * @param value             the <code>java.math.BigDecimal</code> object
      *                  to insert into this <code>Any</code> object
      * @see <a href="package-summary.html#unimpl"><code>CORBA</code> package
@@ -703,6 +952,10 @@ abstract public class Any implements IDLEntity {
      * Inserts the given <code>java.math.BigDecimal</code> object
      * into this <code>Any</code> object's <code>value</code> field.
      *
+     * <p>
+     *  引发<a href=\"package-summaryhtml#NO_IMPLEMENT\"> <code> orgomgCORBANO_IMPLEMENT </code> </a>例外
+     * <P>
+     * 
      * @param value             the <code>java.math.BigDecimal</code> object
      *                  to insert into this <code>Any</code> object
      * @param type     the <code>TypeCode</code> object that is to be inserted into

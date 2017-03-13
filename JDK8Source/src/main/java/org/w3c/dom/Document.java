@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -37,6 +38,13 @@
  * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * [1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+ * <p>
+ *  版权所有(c)2004万维网联盟,
+ * 
+ *  (马萨诸塞理工学院,欧洲研究信息学和数学联合会,庆应大学)保留所有权利本作品根据W3C(r)软件许可证[1]分发,希望它有用,但没有任何保证;甚至没有对适销性或适用于特定用途的隐含保证
+ * 
+ *  [1] http：// wwww3org / Consortium / Legal / 2002 / copyright-software-20021231
+ * 
  */
 
 package org.w3c.dom;
@@ -52,6 +60,12 @@ package org.w3c.dom;
  * <code>ownerDocument</code> attribute which associates them with the
  * <code>Document</code> within whose context they were created.
  * <p>See also the <a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407'>Document Object Model (DOM) Level 3 Core Specification</a>.
+ * <p>
+ * <code> Document </code>接口表示整个HTML或XML文档概念上,它是文档树的根,并提供对文档数据的主访问<p>由于元素,文本节点,注释,处理指令,etc不能存在于<code> Do
+ * cument </code>的上下文之外,<code> Document </code>接口也包含创建这些对象所需的工厂方法。
+ * 创建的<code> Node </code>一个<code> ownerDocument </code>属性,它将它们与<code> Document </code>中的<code>文档相关联<p>另请
+ * 参阅<a href ='http：// wwww3org / TR / REC-DOM-Level-3-Core-20040407'>文档对象模型(DOM)3级核心规范</a>。
+ * 
  */
 public interface Document extends Node {
     /**
@@ -73,6 +87,14 @@ public interface Document extends Node {
      * changing it afterwards is very unlikely to result in a change of the
      * features supported.
      *
+     * <p>
+     * 与此文档关联的文档类型声明(参见<code> DocumentType </code>)对于没有文档类型声明的XML文档,返回<code> null </code>对于HTML文档,<code> Doc
+     * umentType </code>对象可以返回,而与HTML文档中存在或不存在文档类型声明无关<br>这提供对<code> DocumentType </code>节点,该<code>文档</code>
+     * 子节点的直接访问,该节点可以在文档创建时设置,并且随后通过使用子节点处理方法(例如<code> NodeinsertBefore </code>或<code> NodereplaceChild </code>
+     * 然而,注意,尽管一些实现可以实例化支持除了"Core"之外的附加特征的不同类型的<code> Document </code>对象,例如"HTML"[<a href ='http：// wwww3org / TR / 2003 / REC-DOM-Level-2-HTML-20030109'>
+     *  DOM Level 2 HTML </a>],基于在创建时指定的<code> DocumentType </code>,以后更改它不太可能导致支持的功能的更改。
+     * 
+     * 
      * @since DOM Level 3
      */
     public DocumentType getDoctype();
@@ -80,12 +102,18 @@ public interface Document extends Node {
     /**
      * The <code>DOMImplementation</code> object that handles this document. A
      * DOM application may use objects from multiple implementations.
+     * <p>
+     * 处理此文档的<code> DOMImplementation </code>对象DOM应用程序可以使用多个实现中的对象
+     * 
      */
     public DOMImplementation getImplementation();
 
     /**
      * This is a convenience attribute that allows direct access to the child
      * node that is the document element of the document.
+     * <p>
+     *  这是一个方便的属性,允许直接访问作为文档的文档元素的子节点
+     * 
      */
     public Element getDocumentElement();
 
@@ -98,6 +126,11 @@ public interface Document extends Node {
      * and attached to the element.
      * <br>To create an element with a qualified name and namespace URI, use
      * the <code>createElementNS</code> method.
+     * <p>
+     *  创建指定类型的元素注意,返回的实例实现了<code> Element </code>接口,因此可以直接在返回的对象上指定属性<br>此外,如果存在具有默认值的已知属性,代码> Attr </code>
+     * 代表的节点将自动创建并附加到元素<br>要创建具有限定名称和命名空间URI的元素,请使用<code> createElementNS </code>方法。
+     * 
+     * 
      * @param tagName The name of the element type to instantiate. For XML,
      *   this is case-sensitive, otherwise it depends on the
      *   case-sensitivity of the markup language in use. In that case, the
@@ -117,12 +150,20 @@ public interface Document extends Node {
 
     /**
      * Creates an empty <code>DocumentFragment</code> object.
+     * <p>
+     *  创建一个空的<code> DocumentFragment </code>对象
+     * 
+     * 
      * @return A new <code>DocumentFragment</code>.
      */
     public DocumentFragment createDocumentFragment();
 
     /**
      * Creates a <code>Text</code> node given the specified string.
+     * <p>
+     * 给定指定的字符串,创建一个<code> Text </code>节点
+     * 
+     * 
      * @param data The data for the node.
      * @return The new <code>Text</code> object.
      */
@@ -130,6 +171,10 @@ public interface Document extends Node {
 
     /**
      * Creates a <code>Comment</code> node given the specified string.
+     * <p>
+     *  给定指定的字符串,创建一个<code> Comment </code>节点
+     * 
+     * 
      * @param data The data for the node.
      * @return The new <code>Comment</code> object.
      */
@@ -138,6 +183,10 @@ public interface Document extends Node {
     /**
      * Creates a <code>CDATASection</code> node whose value is the specified
      * string.
+     * <p>
+     *  创建其值为指定字符串的<code> CDATASection </code>节点
+     * 
+     * 
      * @param data The data for the <code>CDATASection</code> contents.
      * @return The new <code>CDATASection</code> object.
      * @exception DOMException
@@ -149,6 +198,10 @@ public interface Document extends Node {
     /**
      * Creates a <code>ProcessingInstruction</code> node given the specified
      * name and data strings.
+     * <p>
+     *  给定指定的名称和数据字符串,创建一个<code> ProcessingInstruction </code>节点
+     * 
+     * 
      * @param target The target part of the processing instruction.Unlike
      *   <code>Document.createElementNS</code> or
      *   <code>Document.createAttributeNS</code>, no namespace well-formed
@@ -174,6 +227,11 @@ public interface Document extends Node {
      * using the <code>setAttributeNode</code> method.
      * <br>To create an attribute with a qualified name and namespace URI, use
      * the <code>createAttributeNS</code> method.
+     * <p>
+     *  创建给定名称的<code> Attr </code>请注意,然后可以使用<code> setAttributeNode </code>在<code> Element </code>方法<br>要创建具
+     * 有限定名称和命名空间URI的属性,请使用<code> createAttributeNS </code>方法。
+     * 
+     * 
      * @param name The name of the attribute.
      * @return A new <code>Attr</code> object with the <code>nodeName</code>
      *   attribute set to <code>name</code>, and <code>localName</code>,
@@ -198,6 +256,12 @@ public interface Document extends Node {
      * <code>namespaceURI</code> is <code>null</code>). The DOM Level 2 and
      * 3 do not support any mechanism to resolve namespace prefixes in this
      * case.
+     * <p>
+     * 创建<code> EntityReference </code>对象此外,如果引用的实体是已知的,则使<code> EntityReference </code>节点的子列表与相应的<code> Ent
+     * ity <注意：</b>如果<code> Entity </code>节点的任何后代有一个未绑定的命名空间前缀,则创建的<code> EntityReference </code>节点也不绑定; (它的
+     * <code> namespaceURI </code>是<code> null </code>)DOM Level 2和3不支持在这种情况下解析命名空间前缀的任何机制。
+     * 
+     * 
      * @param name The name of the entity to reference.Unlike
      *   <code>Document.createElementNS</code> or
      *   <code>Document.createAttributeNS</code>, no namespace well-formed
@@ -219,6 +283,10 @@ public interface Document extends Node {
      * Returns a <code>NodeList</code> of all the <code>Elements</code> in
      * document order with a given tag name and are contained in the
      * document.
+     * <p>
+     *  返回具有给定标记名称的文档顺序中所有<code> Elements </code>的<code> NodeList </code>,并包含在文档中
+     * 
+     * 
      * @param tagname  The name of the tag to match on. The special value "*"
      *   matches all tags. For XML, the <code>tagname</code> parameter is
      *   case-sensitive, otherwise it depends on the case-sensitivity of the
@@ -322,6 +390,41 @@ public interface Document extends Node {
      * that the <code>deep</code> parameter has no effect on these types of
      * nodes since they cannot have any children.</dd>
      * </dl>
+     * <p>
+     * 将节点从另一个文档导入到此文档,而不会从原始文档中更改或删除源节点;此方法创建源节点的新副本返回的节点没有父节点; (<code> parentNode </code> <code> null </code>
+     * )<br>对于所有节点,导入节点将创建一个由导入文档拥有的节点对象,属性值与源节点的<code> nodeName </code>和<code> nodeType </code>,以及与命名空间相关的属
+     * 性(<code> prefix </code>,<code> localName </code>和<code> namespaceURI </code>)如在<code> cloneNode </code>
+     * 操作中,源节点不被改变与导入的节点相关联的用户数据不被转移但是,如果已经与相关数据一起指定了任何<code> UserDataHandlers </code>,则在此方法返回之前,将使用适当的参数调用这
+     * 些处理程序<br>将附加信息适当复制到<code> nodeType <代码>,尝试镜像将XML或HTML源代码片段从一个文档复制到另一个文档时所期望的行为,认识到这两个文档在XML案例中可能具有不同的
+     * DTD以下列表描述了每种类型的节点。
+     * <dl>
+     * <dt> ATTRIBUTE_NODE </dt> <dd> <code> ownerElement </code>属性设置为<code> null </code>,并且<code>指定</code>标
+     * 志设置为<code> true <code> Attr </code>的后代被递归导入,并且所得到的节点被重新组装以形成相应的子树。
+     * 注意<code> deep </code> code>参数对<code> Attr </code>节点没有影响;它们在导入时总是携带子元素</dd> </span> </span>如果<code> de
+     * ep </code>选项设置为<code> true </code>,则后代源</code> DocumentFragment </code>被递归导入,并且在导入的<code> DocumentFra
+     * gment </code>下重新组合生成的节点以形成相应的子树否则,这只会​​生成一个空的<code> DocumentFragment </code> </dd> <dt> DOCUMENT_NODE
+     *  </dt> <dd> <code> Document </code>节点。
+     * </dd> <dt> DOCUMENT_TYPE_NODE </dt> <dd> </em>属性节点不能导入</dt> <dd> </dt> <dd> ,并且生成的<code> Attr </code>
+     * 节点附加到所生成的<code> Element </code> Default属性,但不是</em>被复制,虽然如果要导入的文档定义了默认属性这个元素名称,那些被分配如果<code> importNod
+     * e </code> <code> deep </code>参数设置为<code> true </code>,则会递归导入源元素的后代,并重新组合生成的节点以形成相应的子树可以导入</dd> <dt> E
+     * NTITY_NODE </dt> <dd>实体</code>节点,但是在当前版本的DOM中,<code> DocumentType </code>这些导入到<code> DocumentType </code>
+     * 的节点将被考虑用于添加到未来版本的DOMOn导入,<code> publicId </code>,<code> systemId </code>和<code> notationName </code>属
+     * 性被复制如果请求了<code> deep </code> import,则递归地导入源<code> Entity </code>的后代,并重新组合生成的节点以形成相应的子树</dd>。
+     * <dt>
+     * ENTITY_REFERENCE_NODE </dt> <dd>仅复制<code> EntityReference </code>本身,即使请求了<code> deep </code> import,因
+     * 为源文档和目标文档可能定义了不同的实体。
+     * 被导入的文档提供了该实体名称的定义,其值被赋值</dd> <dt> NOTATION_NODE </dt>。
+     * <dd>
+     * <code>符号</code>节点可以导入,但是在当前版本的DOM中,<code> DocumentType </code>是只读的能够将这些导入的节点添加到<code> DocumentType </code>
+     * 考虑添加到未来的DOMOn导入版本中,复制<code> publicId </code>和<code> systemId </code>属性注意,<code> deep </code>参数对此没有影响节
+     * 点类型,因为它们不能有任何子</dd>。
+     * <dt>
+     * PROCESSING_INSTRUCTION_NODE </dt> <dd>导入的节点将其<code>目标</code>和<code>数据</code>值与源节点的值进行复制注意<code> deep 
+     * </code>对这类节点的影响,因为它们不能有任何子</dd> <dt> TEXT_NODE,CDATA_SECTION_NODE,COMMENT_NODE </dt> <dd>这三种类型的节点继承自<code>
+     *  CharacterData </code> > data </code>和源代码节点的<code> length </code>属性注意<code> deep </code>参数对这些类型的节点没有影
+     * 响,因为它们不能有任何子</dd >。
+     * </dl>
+     * 
      * @param importedNode The node to import.
      * @param deep If <code>true</code>, recursively import the subtree under
      *   the specified node; if <code>false</code>, import only the node
@@ -348,6 +451,11 @@ public interface Document extends Node {
      * <br>Per [<a href='http://www.w3.org/TR/1999/REC-xml-names-19990114/'>XML Namespaces</a>]
      * , applications must use the value <code>null</code> as the
      * namespaceURI parameter for methods if they wish to have no namespace.
+     * <p>
+     * 创建给定限定名称和命名空间URI的元素<br>按[<a href='http://wwww3org/TR/1999/REC-xml-names-19990114/'> XML命名空间</a>],应用程序
+     * 必须使用值<code> null </code>作为方法的namespaceURI参数,如果他们希望没有命名空间。
+     * 
+     * 
      * @param namespaceURI The namespace URI of the element to create.
      * @param qualifiedName The qualified name of the element type to
      *   instantiate.
@@ -413,6 +521,11 @@ public interface Document extends Node {
      * , applications must use the value <code>null</code> as the
      * <code>namespaceURI</code> parameter for methods if they wish to have
      * no namespace.
+     * <p>
+     *  创建给定限定名称和命名空间URI的属性<br>根据[<a href='http://wwww3org/TR/1999/REC-xml-names-19990114/'> XML命名空间</a>],应用
+     * 程序必须使用值<code> null </code>作为方法的<code> namespaceURI </code>参数,如果他们希望没有命名空间。
+     * 
+     * 
      * @param namespaceURI The namespace URI of the attribute to create.
      * @param qualifiedName The qualified name of the attribute to
      *   instantiate.
@@ -479,6 +592,10 @@ public interface Document extends Node {
     /**
      * Returns a <code>NodeList</code> of all the <code>Elements</code> with a
      * given local name and namespace URI in document order.
+     * <p>
+     *  以文档顺序返回给定本地名称和命名空间URI的所有<code> Elements </code>中的<code> NodeList </code>
+     * 
+     * 
      * @param namespaceURI The namespace URI of the elements to match on. The
      *   special value <code>"*"</code> matches all namespaces.
      * @param localName The local name of the elements to match on. The
@@ -499,6 +616,11 @@ public interface Document extends Node {
      * <code>Attr.isId</code> to determine if an attribute is of type ID.
      * <p ><b>Note:</b> Attributes with the name "ID" or "id" are not of type
      * ID unless so defined.
+     * <p>
+     * 返回具有给定值的ID属性的<code> Element </code>如果没有这样的元素存在,则返回<code> null </code>如果有多个元素具有该属性的ID,返回未定义<br> DOM实现应
+     * 使用属性<code> AttrisId </code>来确定属性是否属于ID <p> <b>注意：</b>名称为"ID"的属性"或"id"不是类型ID,除非这样定义。
+     * 
+     * 
      * @param elementId The unique <code>id</code> value for an element.
      * @return The matching element or <code>null</code> if there is none.
      * @since DOM Level 2
@@ -509,6 +631,10 @@ public interface Document extends Node {
      * An attribute specifying the encoding used for this document at the time
      * of the parsing. This is <code>null</code> when it is not known, such
      * as when the <code>Document</code> was created in memory.
+     * <p>
+     *  指定在解析时用于此文档的编码的属性当不知道时,这是<code> null </code>,例如当<code> Document </code>在内存中创建时
+     * 
+     * 
      * @since DOM Level 3
      */
     public String getInputEncoding();
@@ -517,6 +643,11 @@ public interface Document extends Node {
      * An attribute specifying, as part of the <a href='http://www.w3.org/TR/2004/REC-xml-20040204#NT-XMLDecl'>XML declaration</a>, the encoding of this document. This is <code>null</code> when
      * unspecified or when it is not known, such as when the
      * <code>Document</code> was created in memory.
+     * <p>
+     * 作为<a href='http://wwww3org/TR/2004/REC-xml-20040204#NT-XMLDecl'> XML声明</a>一部分的属性,指定此文档的编码这是<code > nu
+     * ll </code>当未指定或不知道时,例如当<code> Document </code>在内存中创建时。
+     * 
+     * 
      * @since DOM Level 3
      */
     public String getXmlEncoding();
@@ -529,6 +660,12 @@ public interface Document extends Node {
      * <code>Document.normalizeDocument()</code> with the "validate"
      * parameter to verify if the value matches the <a href='http://www.w3.org/TR/2004/REC-xml-20040204#sec-rmd'>validity
      * constraint for standalone document declaration</a> as defined in [<a href='http://www.w3.org/TR/2004/REC-xml-20040204'>XML 1.0</a>].
+     * <p>
+     * 作为<a href='http://wwww3org/TR/2004/REC-xml-20040204#NT-XMLDecl'> XML声明</a>一部分的属性,说明此文档是独立的这是<code > f
+     * alse </code>当未指定<p> <b>注意：</b>设置此属性时不对值进行验证应用程序应使用<code> DocumentnormalizeDocument()</code>以验证该值是否与<a href='http://wwww3org/TR/2004/REC-xml-20040204#sec-rmd'>
+     * 独立文档声明的有效性约束</a>匹配,如[<a href ='http：// wwww3org / TR / 2004 / REC-xml-20040204'> XML 10 </a>]。
+     * 
+     * 
      * @since DOM Level 3
      */
     public boolean getXmlStandalone();
@@ -540,6 +677,12 @@ public interface Document extends Node {
      * <code>Document.normalizeDocument()</code> with the "validate"
      * parameter to verify if the value matches the <a href='http://www.w3.org/TR/2004/REC-xml-20040204#sec-rmd'>validity
      * constraint for standalone document declaration</a> as defined in [<a href='http://www.w3.org/TR/2004/REC-xml-20040204'>XML 1.0</a>].
+     * <p>
+     * 作为<a href='http://wwww3org/TR/2004/REC-xml-20040204#NT-XMLDecl'> XML声明</a>一部分的属性,说明此文档是独立的这是<code > f
+     * alse </code>当未指定<p> <b>注意：</b>设置此属性时不对值进行验证应用程序应使用<code> DocumentnormalizeDocument()</code>以验证该值是否与<a href='http://wwww3org/TR/2004/REC-xml-20040204#sec-rmd'>
+     * 独立文档声明的有效性约束</a>匹配,如[<a href ='http：// wwww3org / TR / 2004 / REC-xml-20040204'> XML 10 </a>]。
+     * 
+     * 
      * @exception DOMException
      *    NOT_SUPPORTED_ERR: Raised if this document does not support the
      *   "XML" feature.
@@ -570,6 +713,19 @@ public interface Document extends Node {
      *  objects supporting a version of the "XMLVersion" feature must not
      * raise a <code>NOT_SUPPORTED_ERR</code> exception for the same version
      * number when using <code>Document.xmlVersion</code>.
+     * <p>
+     * 作为<a href='http://wwww3org/TR/2004/REC-xml-20040204#NT-XMLDecl'> XML声明</a>一部分的属性,指定此文档的版本号如果存在没有声明,如果
+     * 此文档支持"XML"功能,则值为<code>"10"</code>如果此文档不支持"XML"功能,则该值始终为<code> null </code>更改此属性将影响在XML名称中检查无效字符的方法应用程
+     * 序应调用<code> DocumentnormalizeDocument()</code>以检查已经作为一部分的<code> Node </code>中的无效字符此<code>文档</code> <br>
+     *  DOM应用程序可以使用参数值为"XMLVersion"和"1"的<code> DOMImplementationhasFeature(feature,version)</0"(分别),以确定实现是否支持[<a href='http://wwww3org/TR/2004/REC-xml-20040204'>
+     *  XML 10 </a>] DOM应用程序可以使用与参数相同的方法值"XMLVersion"和"11"(分别),以确定实施是否支持[<a href='http://wwww3org/TR/2004/REC-xml11-20040204/'>
+     *  XML 11 </a>]。
+     * 情况下,为了支持XML,实现还必须支持本规范中定义的"XML"特性。
+     * <code> Document </code>对象支持一个版本的"XMLVersion"特性不能引发一个<code> NOT_SUPPORTED_ERR <代码>使用<code> Documentxml
+     * Version </code>时,同一版本号的异常。
+     * 情况下,为了支持XML,实现还必须支持本规范中定义的"XML"特性。
+     * 
+     * 
      * @since DOM Level 3
      */
     public String getXmlVersion();
@@ -595,6 +751,19 @@ public interface Document extends Node {
      *  objects supporting a version of the "XMLVersion" feature must not
      * raise a <code>NOT_SUPPORTED_ERR</code> exception for the same version
      * number when using <code>Document.xmlVersion</code>.
+     * <p>
+     * 作为<a href='http://wwww3org/TR/2004/REC-xml-20040204#NT-XMLDecl'> XML声明</a>一部分的属性,指定此文档的版本号如果存在没有声明,如果
+     * 此文档支持"XML"功能,则值为<code>"10"</code>如果此文档不支持"XML"功能,则该值始终为<code> null </code>更改此属性将影响在XML名称中检查无效字符的方法应用程
+     * 序应调用<code> DocumentnormalizeDocument()</code>以检查已经作为一部分的<code> Node </code>中的无效字符此<code>文档</code> <br>
+     *  DOM应用程序可以使用参数值为"XMLVersion"和"1"的<code> DOMImplementationhasFeature(feature,version)</0"(分别),以确定实现是否支持[<a href='http://wwww3org/TR/2004/REC-xml-20040204'>
+     *  XML 10 </a>] DOM应用程序可以使用与参数相同的方法值"XMLVersion"和"11"(分别),以确定实施是否支持[<a href='http://wwww3org/TR/2004/REC-xml11-20040204/'>
+     *  XML 11 </a>]。
+     * 情况下,为了支持XML,实现还必须支持本规范中定义的"XML"特性。
+     * <code> Document </code>对象支持一个版本的"XMLVersion"特性不能引发一个<code> NOT_SUPPORTED_ERR <代码>使用<code> Documentxml
+     * Version </code>时,同一版本号的异常。
+     * 情况下,为了支持XML,实现还必须支持本规范中定义的"XML"特性。
+     * 
+     * 
      * @exception DOMException
      *    NOT_SUPPORTED_ERR: Raised if the version is set to a value that is
      *   not supported by this <code>Document</code> or if this document
@@ -612,6 +781,11 @@ public interface Document extends Node {
      * errors while using <code>Document.normalizeDocument()</code>. In case
      * of error, the behavior is undefined. This attribute is
      * <code>true</code> by default.
+     * <p>
+     * 指定是否强制执行错误检查的属性设置为<code> false </code>时,实现可以自由测试通常在DOM操作上定义的每个可能的错误情况,而不会引发任何<code> DOMException </code >
+     * 在DOM操作或报告错误时使用<code> DocumentnormalizeDocument()</code>在错误的情况下,行为是未定义的此属性默认为<code> true </code>。
+     * 
+     * 
      * @since DOM Level 3
      */
     public boolean getStrictErrorChecking();
@@ -623,6 +797,11 @@ public interface Document extends Node {
      * errors while using <code>Document.normalizeDocument()</code>. In case
      * of error, the behavior is undefined. This attribute is
      * <code>true</code> by default.
+     * <p>
+     * 指定是否强制执行错误检查的属性设置为<code> false </code>时,实现可以自由测试通常在DOM操作上定义的每个可能的错误情况,而不会引发任何<code> DOMException </code >
+     * 在DOM操作或报告错误时使用<code> DocumentnormalizeDocument()</code>在错误的情况下,行为是未定义的此属性默认为<code> true </code>。
+     * 
+     * 
      * @since DOM Level 3
      */
     public void setStrictErrorChecking(boolean strictErrorChecking);
@@ -638,6 +817,13 @@ public interface Document extends Node {
      * "HTML" [<a href='http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109'>DOM Level 2 HTML</a>]
      * , the href attribute of the HTML BASE element takes precedence over
      * this attribute when computing <code>Node.baseURI</code>.
+     * <p>
+     * 文档的位置或<code> null </code>如果未定义或如果<code> Document </code>是使用<code> DOMImplementationcreateDocument </code>
+     * 创建的,则在设置此属性时不执行词法检查;这可能会导致使用<code> NodebaseURI </code>时返回的<code> null </code>值<br>注意<code> Document </code>
+     * 支持特性"HTML" ='http：// wwww3org / TR / 2003 / REC-DOM-Level-2-HTML-20030109'> DOM Level 2 HTML </a>],HT
+     * ML BASE元素的href属性优先于此属性<code> NodebaseURI </code>。
+     * 
+     * 
      * @since DOM Level 3
      */
     public String getDocumentURI();
@@ -652,6 +838,13 @@ public interface Document extends Node {
      * "HTML" [<a href='http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109'>DOM Level 2 HTML</a>]
      * , the href attribute of the HTML BASE element takes precedence over
      * this attribute when computing <code>Node.baseURI</code>.
+     * <p>
+     * 文档的位置或<code> null </code>如果未定义或如果<code> Document </code>是使用<code> DOMImplementationcreateDocument </code>
+     * 创建的,则在设置此属性时不执行词法检查;这可能会导致使用<code> NodebaseURI </code>时返回的<code> null </code>值<br>注意<code> Document </code>
+     * 支持特性"HTML" ='http：// wwww3org / TR / 2003 / REC-DOM-Level-2-HTML-20030109'> DOM Level 2 HTML </a>],HT
+     * ML BASE元素的href属性优先于此属性<code> NodebaseURI </code>。
+     * 
+     * 
      * @since DOM Level 3
      */
     public void setDocumentURI(String documentURI);
@@ -714,6 +907,30 @@ public interface Document extends Node {
      * should use the <code>Document.normalizeDocument()</code> method to
      * check if an imported name is not an XML name according to the XML
      * version in use.
+     * <p>
+     * 尝试采用从另一个文档到本文档的节点如果支持,它会更改源节点及其子节点的<code> ownerDocument </code>以及附加的属性节点(如果有)如果源节点有父代它首先从其父代的子代列表中删除这
+     * 有效地允许将一个子文件从一个文档移动到另一个(不像<code> importNode()</code>,它创建源节点的副本而不是移动它)应用程序应该使用<code> DocumentimportNode
+     * ()</code>。
+     * 注意,如果采用的节点已经是本文档的一部分(即源文档和目标文档相同),则此方法仍然具有删除源节点从其父节点的子节点列表(如果有)以下列表描述了每种类型节点的详细信息。
+     * <dl>
+     * <dt> ATTRIBUTE_NODE </dt> <dd> <code> ownerElement </code>属性设置为<code> null </code>,并且<code>指定</code>标
+     * 志设置为<code> true </code> </code> </code>在<code> Attr </code>的后代被递归地采用</>> </>> DOCUMENT_FRAGMENT_NODE 
+     * </dt>源节点被递归采用</dd> <dt> DOCUMENT_NODE </dt>。
+     * <dd>
+     *  <code>无法采用文档</code>节点</dd> </span> </b> </b> DOCUMENT_TYPE_NODE </dt>
+     * <dd>
+     * <code>无法采用DocumentType </code>节点</em> </em> </em>源元素的指定</em>属性节点默认属性被丢弃,被采用的文档定义了该元素名称的默认属性,那些被分配。
+     * 源元素的后代被递归地采用</dd> <dt> ENTITY_NODE </dt>。
+     * <dd>
+     * <code>实体</code>节点不被采用</dd> <dt> ENTITY_REFERENCE_NODE </dt> <dd>只有<code> EntityReference </code>节点本身被
+     * 采用,后代被丢弃,和目标文档可能已定义了不同的实体。
+     * 如果要导入的文档提供此实体名称的定义,则其值将分配</dd> <dt> NOTATION_NODE </dt> <dd> <code>记法</code>节点不能采用</dd> <dt> PROCESSI
+     * NG_INSTRUCTION_NODE,TEXT_NODE,CDATA_SECTION_NODE,COMMENT_NODE </dt> <dd>这些节点都可以采用无细节</dd>。
+     * </dl>
+     * <p> <b>注意：</b>由于与<code> DocumentimportNode()</code>方法不同,它不会创建新节点,因此此方法不会引发<code> INVALID_CHARACTER_ER
+     * R </code>异常,应用程序应使用<code> DocumentnormalizeDocument()</code>方法来检查导入的名称是否不是根据所使用的XML版本的XML名称。
+     * 
+     * 
      * @param source The node to move into this document.
      * @return The adopted node, or <code>null</code> if this operation
      *   fails, such as when the source node comes from a different
@@ -731,6 +948,10 @@ public interface Document extends Node {
     /**
      *  The configuration used when <code>Document.normalizeDocument()</code>
      * is invoked.
+     * <p>
+     *  调用<code> DocumentnormalizeDocument()</code>时使用的配置
+     * 
+     * 
      * @since DOM Level 3
      */
     public DOMConfiguration getDomConfig();
@@ -765,6 +986,23 @@ public interface Document extends Node {
      * " parameter. Note this method might also report fatal errors (
      * <code>DOMError.SEVERITY_FATAL_ERROR</code>) if an implementation
      * cannot recover from an error.
+     * <p>
+     * 此方法的作用就像文档正在经历保存和加载循环,将文档置于"正常"形式。
+     * 因此,此方法更新<code> EntityReference </code>节点的替换树,并规范化<code> <code> Nodenormalize()</code>中定义的</code>节点</code>
+     *  <br>否则,实际结果取决于在<code> DocumentdomConfig </code>对象上设置的功能,操作实际上发生。
+     * 此方法的作用就像文档正在经历保存和加载循环,将文档置于"正常"形式。
+     * 明显地,该方法还可以使文档命名空间根据描述的算法良好地形成,检查字符规范化,去除<code> CDATASection </code>节点等等。
+     * 参见<code> DOMConfiguration </code>详情<pre> //在文档中保留在XML信息集中定义的信息(Java示例)DOMConfiguration docConfig = my
+     * DocumentgetDomConfig(); docConfigsetParameter("infoset",BooleanTRUE); myDocumentnormalizeDocument(); 
+     * </pre>。
+     * 明显地,该方法还可以使文档命名空间根据描述的算法良好地形成,检查字符规范化,去除<code> CDATASection </code>节点等等。
+     * 
+     * <br>生成支持的突变事件以反映文档上发生的更改<br>如果在调用此方法期间发生错误,例如尝试更新只读节点或<code> NodenodeName < / code>包含根据正在使用的XML版本的无效字
+     * 符,将使用<code> DOMErrorHandler </code>报告错误或警告(<code> DOMErrorSEVERITY_ERROR </code>或<code> DOMErrorSEVER
+     * ITY_WARNING </code>与"错误处理程序"参数相关联的对象注意,如果实现无法从错误中恢复,则此方法也可能报告致命错误(<code> DOMErrorSEVERITY_FATAL_ERROR
+     *  </code>)。
+     * 
+     * 
      * @since DOM Level 3
      */
     public void normalizeDocument();
@@ -810,6 +1048,8 @@ public interface Document extends Node {
      * <code>DOMAttributeNameChanged</code>} is fired.
      * </li>
      * </ul>
+     * <p>
+     * 
      * @param n The node to rename.
      * @param namespaceURI The new namespace URI.
      * @param qualifiedName The new qualified name.

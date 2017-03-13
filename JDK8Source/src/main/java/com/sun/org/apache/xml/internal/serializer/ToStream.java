@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会
+ * 
+ *  根据Apache许可证第20版("许可证")授权;您不得使用此文件,除非符合许可证您可以在获取许可证的副本
+ * 
+ *  http：// wwwapacheorg / licenses / LICENSE-20
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件将按"原样"基础分发,无任何明示或暗示的保证或条件。请参阅许可证管理权限和限制许可证
+ * 
  */
 /*
  * $Id: ToStream.java,v 1.4 2005/11/10 06:43:26 suresh_emailid Exp $
+ * <p>
+ *  $ Id：ToStreamjava,v 14 2005/11/10 06:43:26 suresh_emailid Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.serializer;
 
@@ -51,6 +64,11 @@ import org.xml.sax.SAXException;
  * serializers (xml, html, text ...) that write output to a stream.
  *
  * @xsl.usage internal
+ * <p>
+ * 这个抽象类是将输出写入流的其他流序列化器(xml,html,text)的基类
+ * 
+ *  @xslusage内部
+ * 
  */
 abstract public class ToStream extends SerializerBase
 {
@@ -72,12 +90,19 @@ abstract public class ToStream extends SerializerBase
      * will have an encoding, and will worry about whether
      * single chars or surrogate pairs of high/low chars form
      * characters in the output encoding.
+     * <p>
+     *  与此序列化相关联的编码信息虽然最初没有编码,但是有一个伪EncodingInfo对象,它将说明每个字符在编码中这对于处于临时输出状态并且没有关联编码的序列化程序是有用的。
+     * 最终输出状态将具有编码,并且将担心单个字符或高/低字符的替代对是否在输出编码中形成字符。
+     * 
      */
     EncodingInfo m_encodingInfo = new EncodingInfo(null,null);
 
     /**
      * Method reference to the sun.io.CharToByteConverter#canConvert method
      * for this encoding.  Invalid if m_charToByteConverter is null.
+     * <p>
+     *  方法引用sunioCharToByteConverter#canConvert方法用于此编码如果m_charToByteConverter为null,则无效
+     * 
      */
     java.lang.reflect.Method m_canConvertMeth;
 
@@ -85,6 +110,9 @@ abstract public class ToStream extends SerializerBase
 
     /**
      * Boolean that tells if we already tried to get the converter.
+     * <p>
+     *  布尔值,告诉我们是否已经尝试获取转换器
+     * 
      */
     boolean m_triedToGetConverter = false;
 
@@ -92,6 +120,9 @@ abstract public class ToStream extends SerializerBase
     /**
      * Opaque reference to the sun.io.CharToByteConverter for this
      * encoding.
+     * <p>
+     * 对此编码的sunioCharToByteConverter的不透明参考
+     * 
      */
     Object m_charToByteConverter = null;
 
@@ -104,6 +135,11 @@ abstract public class ToStream extends SerializerBase
      * m_ispreserve is only relevant if m_doIndent is true.
      * If m_doIndent is false this field has no impact.
      *
+     * <p>
+     *  堆栈来跟踪是否需要保留空格
+     * 
+     *  用于用于字段m_ispreserve的push / pop值,但m_ispreserve仅与m_doIndent为true相关如果m_doIndent为false,则此字段没有影响
+     * 
      */
     protected BoolStack m_preserves = new BoolStack();
 
@@ -114,6 +150,11 @@ abstract public class ToStream extends SerializerBase
      * Used only in shouldIndent() but only if m_doIndent is true.
      * If m_doIndent is false this flag has no impact.
      *
+     * <p>
+     *  状态标志来判断是否保留空格是很重要的
+     * 
+     *  仅用于shouldIndent(),但仅当m_doIndent为true时如果m_doIndent为false,则此标志没有影响
+     * 
      */
     protected boolean m_ispreserve = false;
 
@@ -124,12 +165,20 @@ abstract public class ToStream extends SerializerBase
      * Used in endDocument() and shouldIndent() but
      * only if m_doIndent is true.
      * If m_doIndent is false this flag has no impact.
+     * <p>
+     *  状态标志,告诉上一个处理的节点是否是文本,所以我们可以知道是否应该保留空格
+     * 
+     *  用于endDocument()和shouldIndent()但仅当m_doIndent为true时如果m_doIndent为false,则此标志没有影响
+     * 
      */
     protected boolean m_isprevtext = false;
 
     /**
      * The maximum character size before we have to resort
      * to escaping.
+     * <p>
+     *  最大字符大小之前,我们必须诉诸逃脱
+     * 
      */
     protected int m_maxCharacter = Encodings.getLastPrintable();
 
@@ -139,24 +188,36 @@ abstract public class ToStream extends SerializerBase
      * The default value is from the system property,
      * but this value can be set through the xsl:output
      * extension attribute xalan:line-separator.
+     * <p>
+     * 用于写出换行符的系统行分隔符默认值来自系统属性,但是此值可以通过xsl：output扩展属性xalan：line-separator设置
+     * 
      */
     protected char[] m_lineSep =
         SecuritySupport.getSystemProperty("line.separator").toCharArray();
 
     /**
      * True if the the system line separator is to be used.
+     * <p>
+     *  如果要使用系统行分隔符,则为true
+     * 
      */
     protected boolean m_lineSepUse = true;
 
     /**
      * The length of the line seperator, since the write is done
      * one character at a time.
+     * <p>
+     *  行分隔符的长度,因为写入一次完成一个字符
+     * 
      */
     protected int m_lineSepLen = m_lineSep.length;
 
     /**
      * Map that tells which characters should have special treatment, and it
      *  provides character to entity name lookup.
+     * <p>
+     *  映射,告诉哪些字符应该有特殊的处理,它提供字符到实体名称查找
+     * 
      */
     protected CharInfo m_charInfo;
 
@@ -165,6 +226,9 @@ abstract public class ToStream extends SerializerBase
 
     /**
      * Add space before '/>' for XHTML.
+     * <p>
+     *  在'/>'之前添加XHTML空格
+     * 
      */
     protected boolean m_spaceBeforeClose = false;
 
@@ -173,16 +237,27 @@ abstract public class ToStream extends SerializerBase
      *
      * Used only in indent() which is called only if m_doIndent is true.
      * If m_doIndent is false this flag has no impact.
+     * <p>
+     *  表示应添加换行符的标志
+     * 
+     *  仅用于indent(),仅当m_doIndent为true时才调用如果m_doIndent为false,则此标志没有影响
+     * 
      */
     boolean m_startNewLine;
 
     /**
      * Tells if we're in an internal document type subset.
+     * <p>
+     *  告诉我们是否在内部文档类型子集中
+     * 
      */
     protected boolean m_inDoctype = false;
 
     /**
        * Flag to quickly tell if the encoding is UTF8.
+       * <p>
+       *  标志快速判断编码是否为UTF8
+       * 
        */
     boolean m_isUTF8 = false;
 
@@ -191,18 +266,27 @@ abstract public class ToStream extends SerializerBase
 
     /**
      * remembers if we are in between the startCDATA() and endCDATA() callbacks
+     * <p>
+     * 记住我们是否在startCDATA()和endCDATA()回调之间
+     * 
      */
     protected boolean m_cdataStartCalled = false;
 
     /**
      * If this flag is true DTD entity references are not left as-is,
      * which is exiting older behavior.
+     * <p>
+     *  如果此标志为true,则DTD实体引用不保持原样,这是退出较旧的行为
+     * 
      */
     private boolean m_expandDTDEntities = true;
 
 
     /**
      * Default constructor
+     * <p>
+     *  默认构造函数
+     * 
      */
     public ToStream()
     {
@@ -211,6 +295,10 @@ abstract public class ToStream extends SerializerBase
     /**
      * This helper method to writes out "]]>" when closing a CDATA section.
      *
+     * <p>
+     *  这个帮助方法在关闭CDATA节时写出"]]>"
+     * 
+     * 
      * @throws org.xml.sax.SAXException
      */
     protected void closeCDATA() throws org.xml.sax.SAXException
@@ -231,6 +319,10 @@ abstract public class ToStream extends SerializerBase
      * Serializes the DOM node. Throws an exception only if an I/O
      * exception occured while serializing.
      *
+     * <p>
+     *  序列化DOM节点仅当序列化时发生I / O异常时才抛出异常
+     * 
+     * 
      * @param node Node to serialize.
      * @throws IOException An I/O exception occured while serializing
      */
@@ -253,6 +345,10 @@ abstract public class ToStream extends SerializerBase
     /**
      * Return true if the character is the high member of a surrogate pair.
      *
+     * <p>
+     *  如果字符是代理对的高成员,则返回true
+     * 
+     * 
      * NEEDSDOC @param c
      *
      * NEEDSDOC ($objectName$) @return
@@ -264,12 +360,19 @@ abstract public class ToStream extends SerializerBase
 
     /**
      * Taken from XSLTC
+     * <p>
+     *  摘自XSLTC
+     * 
      */
     private boolean m_escaping = true;
 
     /**
      * Flush the formatter's result stream.
      *
+     * <p>
+     *  刷新格式化程序的结果流
+     * 
+     * 
      * @throws org.xml.sax.SAXException
      */
     protected final void flushWriter() throws org.xml.sax.SAXException
@@ -309,6 +412,10 @@ abstract public class ToStream extends SerializerBase
     /**
      * Get the output stream where the events will be serialized to.
      *
+     * <p>
+     *  获取事件将序列化到的输出流
+     * 
+     * 
      * @return reference to the result stream, or null of only a writer was
      * set.
      */
@@ -334,6 +441,12 @@ abstract public class ToStream extends SerializerBase
      *   that all whitespace is removed,and will include the enclosing
      *   parentheses.</p>
      *
+     * <p>
+     *  报告元素类型声明
+     * 
+     * <p>内容模型将包含字符串"EMPTY",字符串"ANY"或括号组,可选地后跟一个事件指示符。模型将被规范化,以便删除所有空格,并包括括号括号</p>
+     * 
+     * 
      *   @param name The element type name.
      *   @param model The content model as a normalized string.
      *   @exception SAXException The application may raise an exception.
@@ -368,6 +481,12 @@ abstract public class ToStream extends SerializerBase
      * <p>Only the effective (first) declaration for each entity
      * will be reported.</p>
      *
+     * <p>
+     *  报告内部实体声明
+     * 
+     *  <p>只会报告每个实体的有效(第一个)声明</p>
+     * 
+     * 
      * @param name The name of the entity.  If it is a parameter
      *        entity, the name will begin with '%'.
      * @param value The replacement text of the entity.
@@ -396,6 +515,10 @@ abstract public class ToStream extends SerializerBase
     /**
      * Output the doc type declaration.
      *
+     * <p>
+     *  输出doc类型声明
+     * 
+     * 
      * @param name non-null reference to document type name.
      * NEEDSDOC @param value
      *
@@ -415,6 +538,10 @@ abstract public class ToStream extends SerializerBase
     /**
      * Output a system-dependent line break.
      *
+     * <p>
+     *  输出系统相关的换行符
+     * 
+     * 
      * @throws org.xml.sax.SAXException
      */
     protected final void outputLineSep() throws IOException
@@ -430,6 +557,10 @@ abstract public class ToStream extends SerializerBase
      * called while the serializer is in the process of serializing
      * a document.
      *
+     * <p>
+     *  指定此序列化程序的输出格式它序列化程序已与输出格式相关联,它将切换到新格式此序列化程序正在序列化文档的过程中,不应调用此方法
+     * 
+     * 
      * @param format The output format to use
      */
     public void setOutputFormat(Properties format)
@@ -448,6 +579,10 @@ abstract public class ToStream extends SerializerBase
      * This method can be called multiple times and the xsl:output properties
      * passed in the 'format' parameter are accumulated across calls.
      *
+     * <p>
+     * 使用指定的writer和输出格式初始化序列化器在调用任何serialize方法之前必须调用此方法可以多次调用,并且在'format'参数中传递的xsl：output属性在调用之间累积
+     * 
+     * 
      * @param writer The writer to use
      * @param format The output format
      * @param shouldFlush True if the writer should be flushed at EndDocument.
@@ -523,6 +658,9 @@ abstract public class ToStream extends SerializerBase
 
         /*
          * This code is added for XML 1.1 Version output.
+         * <p>
+         *  此代码是为XML 11版本输出添加的
+         * 
          */
         String version = getVersion();
         if (null == version)
@@ -563,6 +701,10 @@ abstract public class ToStream extends SerializerBase
      * Initialize the serializer with the specified writer and output format.
      * Must be called before calling any of the serialize methods.
      *
+     * <p>
+     *  使用指定的writer和输出格式初始化序列化器在调用任何serialize方法之前必须调用
+     * 
+     * 
      * @param writer The writer to use
      * @param format The output format
      */
@@ -574,6 +716,10 @@ abstract public class ToStream extends SerializerBase
      * Initialize the serializer with the specified output stream and output
      * format. Must be called before calling any of the serialize methods.
      *
+     * <p>
+     *  使用指定的输出流和输出格式初始化序列化器在调用任何serialize方法之前必须调用
+     * 
+     * 
      * @param output The output stream to use
      * @param format The output format
      * @param defaultProperties true if the properties are the default
@@ -663,6 +809,10 @@ abstract public class ToStream extends SerializerBase
     /**
      * Returns the output format for this serializer.
      *
+     * <p>
+     *  返回此序列化程序的输出格式
+     * 
+     * 
      * @return The output format in use
      */
     public Properties getOutputFormat()
@@ -675,6 +825,10 @@ abstract public class ToStream extends SerializerBase
      * This method should not be called while the serializer is in
      * the process of serializing a document.
      *
+     * <p>
+     *  指定文档应该序列化到的写入器当序列化器正在序列化文档的过程中时,不应该调用此方法
+     * 
+     * 
      * @param writer The output writer stream
      */
     public void setWriter(Writer writer)
@@ -696,6 +850,11 @@ abstract public class ToStream extends SerializerBase
      * NL, while on Windows it is two characters, CR NL, where CR is the
      * carriage-return (decimal 13).
      *
+     * <p>
+     * 设置是否应该在序列化时使用操作系统行尾行分隔符如果设置为false,NL字符(十进制10)将被单独使用,否则新行将在输出中被替换为系统行分隔符例如在UNIX上是NL,而在Windows上它是两个字符CR
+     *  NL,其中CR是回车(十进制13)。
+     * 
+     * 
      * @param use_sytem_line_break True if an input NL is replaced with the
      * operating systems end-of-line separator.
      * @return The previously set value of the serializer.
@@ -716,6 +875,12 @@ abstract public class ToStream extends SerializerBase
      * if no encoding was specified, the default for the selected
      * output method.
      *
+     * <p>
+     *  指定文档应该序列化到的输出流。当序列化器在序列化文档的过程中时,不应该调用此方法
+     * <p>
+     *  使用输出属性中指定的编码,或者如果未指定编码,则为所选输出方法的默认值
+     * 
+     * 
      * @param output The output stream
      */
     public void setOutputStream(OutputStream output)
@@ -740,6 +905,8 @@ abstract public class ToStream extends SerializerBase
     }
 
     /**
+    /* <p>
+    /* 
      * @see SerializationHandler#setEscaping(boolean)
      */
     public boolean setEscaping(boolean escape)
@@ -755,6 +922,10 @@ abstract public class ToStream extends SerializerBase
      * Might print a newline character and the indentation amount
      * of the given depth.
      *
+     * <p>
+     *  可能打印换行字符和给定深度的缩进量
+     * 
+     * 
      * @param depth the indentation depth (element nesting depth)
      *
      * @throws org.xml.sax.SAXException if an error occurs during writing.
@@ -767,6 +938,9 @@ abstract public class ToStream extends SerializerBase
         /* For m_indentAmount > 0 this extra test might be slower
          * but Xalan's default value is 0, so this extra test
          * will run faster in that situation.
+         * <p>
+         * 但Xalan的默认值为0,因此这种额外的测试将在这种情况下运行得更快
+         * 
          */
         if (m_indentAmount > 0)
             printSpace(depth * m_indentAmount);
@@ -775,6 +949,10 @@ abstract public class ToStream extends SerializerBase
 
     /**
      * Indent at the current element nesting depth.
+     * <p>
+     *  缩进当前元素嵌套深度
+     * 
+     * 
      * @throws IOException
      */
     protected void indent() throws IOException
@@ -783,6 +961,10 @@ abstract public class ToStream extends SerializerBase
     }
     /**
      * Prints <var>n</var> spaces.
+     * <p>
+     *  打印<var> n </var>空格
+     * 
+     * 
      * @param n         Number of spaces to print.
      *
      * @throws org.xml.sax.SAXException if an error occurs when writing.
@@ -806,6 +988,15 @@ abstract public class ToStream extends SerializerBase
      * "ENTITIES", or "NOTATION", or a parenthesized token group with
      * the separator "|" and all whitespace removed.</p>
      *
+     * <p>
+     *  报告属性类型声明
+     * 
+     *  <p>只会报告属性的有效(第一)声明。
+     * 类型将是字符串"CDATA","ID","IDREF","IDREFS","NMTOKEN","NMTOKENS","ENTITY ","ENTITIES"或"注释",或带分隔符"|"的括号标记组和所有
+     * 删除的空白字符</p>。
+     *  <p>只会报告属性的有效(第一)声明。
+     * 
+     * 
      * @param eName The name of the associated element.
      * @param aName The name of the attribute.
      * @param type A string representing the attribute type.
@@ -859,6 +1050,10 @@ abstract public class ToStream extends SerializerBase
     /**
      * Get the character stream where the events will be serialized to.
      *
+     * <p>
+     *  获取字符流,其中事件将被序列化到
+     * 
+     * 
      * @return Reference to the result Writer, or null.
      */
     public Writer getWriter()
@@ -872,6 +1067,12 @@ abstract public class ToStream extends SerializerBase
      * <p>Only the effective (first) declaration for each entity
      * will be reported.</p>
      *
+     * <p>
+     *  报告解析的外部实体声明
+     * 
+     *  <p>只会报告每个实体的有效(第一个)声明</p>
+     * 
+     * 
      * @param name The name of the entity.  If it is a parameter
      *        entity, the name will begin with '%'.
      * @param publicId The declared public identifier of the entity, or
@@ -912,6 +1113,9 @@ abstract public class ToStream extends SerializerBase
 
     /**
      * Tell if this character can be written without escaping.
+     * <p>
+     *  告诉这个字符是否可以不转义
+     * 
      */
     protected boolean escapingNotNeeded(char ch)
     {
@@ -942,6 +1146,12 @@ abstract public class ToStream extends SerializerBase
      * because the array ends unexpectely, or if the low char is there
      * but its value is such that it is not a low surrogate.
      *
+     * <p>
+     * 一旦检测到代理,写出该对字符,如果它在编码中,或者如果没有编码,否则写出由高/低表示的字符的unicode代码点的值的实体引用代理对
+     * <p>
+     *  如果在对中没有低代理,则抛出异常,因为数组不期望地结束,或者如果低的char存在,但其值是这样的,它不是低代理
+     * 
+     * 
      * @param c the first (high) part of the surrogate, which
      * must be confirmed before calling this method.
      * @param ch Character array.
@@ -995,6 +1205,9 @@ abstract public class ToStream extends SerializerBase
             if (encoding != null) {
                 /* The output encoding is known,
                  * so somthing is wrong.
+                 * <p>
+                 *  所以一切都是错误的
+                 * 
                   */
                 codePoint = Encodings.toCodePoint(high, low);
                 // not in the encoding, so write out a character reference
@@ -1005,6 +1218,9 @@ abstract public class ToStream extends SerializerBase
             } else {
                 /* The output encoding is not known,
                  * so just write it out as-is.
+                 * <p>
+                 *  所以只是写出来
+                 * 
                  */
                 writer.write(ch, i, 2);
             }
@@ -1017,6 +1233,10 @@ abstract public class ToStream extends SerializerBase
      * Handle one of the default entities, return false if it
      * is not a default entity.
      *
+     * <p>
+     *  处理一个默认实体,如果它不是默认实体,则返回false
+     * 
+     * 
      * @param ch character to be escaped.
      * @param i index into character array.
      * @param chars non-null reference to character array.
@@ -1069,6 +1289,10 @@ abstract public class ToStream extends SerializerBase
     /**
      * Normalize the characters, but don't escape.
      *
+     * <p>
+     *  规范化字符,但不逃逸
+     * 
+     * 
      * @param ch The characters from the XML document.
      * @param start The start position in the array.
      * @param length The number of characters to read from the array.
@@ -1177,6 +1401,10 @@ abstract public class ToStream extends SerializerBase
     /**
      * Ends an un-escaping section.
      *
+     * <p>
+     *  结束退出部分
+     * 
+     * 
      * @see #startNonEscaping
      *
      * @throws org.xml.sax.SAXException
@@ -1194,6 +1422,10 @@ abstract public class ToStream extends SerializerBase
      * <p> The contents of the un-escaping section will be delivered through the
      * regular <tt>characters</tt> event.
      *
+     * <p>
+     * 启动非转义部分在转义部分中打印的所有字符都按原样打印,而不将特殊字符转义为实体引用只有XML和HTML序列化程序需要支持此方法<p>取消转义部分的内容将是通过常规<tt>字符</tt>事件传递
+     * 
+     * 
      * @throws org.xml.sax.SAXException
      */
     public void startNonEscaping() throws org.xml.sax.SAXException
@@ -1218,6 +1450,17 @@ abstract public class ToStream extends SerializerBase
      * ignorableWhitespace() method rather than this one (validating
      * parsers must do so).</p>
      *
+     * <p>
+     *  接收cdata的通知
+     * 
+     *  <p>解析器将调用此方法来报告每个字符数据块,SAX解析器可能会返回单个块中的所有连续字符数据,或者它们可能将其拆分为几个块;但是,任何单个事件中的所有字符必须来自同一外部实体,以便定位器提供有用的信
+     * 息</p>。
+     * 
+     *  <p>应用程序不得尝试从指定范围之外的数组中读取</p>
+     * 
+     * <p>请注意,一些解析器将使用ignorableWhitespace()方法而不是这一个(验证解析器必须这样做)报告空格。</p>
+     * 
+     * 
      * @param ch The characters from the XML document.
      * @param start The start position in the array.
      * @param length The number of characters to read from the array.
@@ -1251,6 +1494,9 @@ abstract public class ToStream extends SerializerBase
             /* Write out the CDATA opening delimiter only if
              * we are supposed to, and if we are not already in
              * the middle of a CDATA section
+             * <p>
+             *  我们应该,并且如果我们还没有在CDATA部分的中间
+             * 
              */
             if (writeCDataBrackets && !m_cdataTagOpen)
             {
@@ -1269,12 +1515,18 @@ abstract public class ToStream extends SerializerBase
             /* used to always write out CDATA closing delimiter here,
              * but now we delay, so that we can merge CDATA sections on output.
              * need to write closing delimiter later
+             * <p>
+             *  但是现在我们延迟,这样我们可以合并CDATA节的输出需要稍后写关闭分隔符
+             * 
              */
             if (writeCDataBrackets)
             {
                 /* if the CDATA section ends with ] don't leave it open
                  * as there is a chance that an adjacent CDATA sections
                  * starts with ]>.
+                 * We don't want to merge ]] with > , or ] with ]>
+                 * <p>
+                 *  因为有一个相邻的CDATA段以">>开头的机会
                  * We don't want to merge ]] with > , or ] with ]>
                  */
                 if (ch[start + length - 1] == ']')
@@ -1299,6 +1551,10 @@ abstract public class ToStream extends SerializerBase
     /**
      * Tell if the character escaping should be disabled for the current state.
      *
+     * <p>
+     *  告诉是否应该为当前状态禁用字符转义
+     * 
+     * 
      * @return true if the character escaping should be disabled.
      */
     private boolean isEscapingDisabled()
@@ -1310,6 +1566,10 @@ abstract public class ToStream extends SerializerBase
      * If available, when the disable-output-escaping attribute is used,
      * output raw text without escaping.
      *
+     * <p>
+     *  如果可用,当使用disable-output-escaping属性时,输出原始文本而不转义
+     * 
+     * 
      * @param ch The characters from the XML document.
      * @param start The start position in the array.
      * @param length The number of characters to read from the array.
@@ -1358,6 +1618,17 @@ abstract public class ToStream extends SerializerBase
      * ignorableWhitespace() method rather than this one (validating
      * parsers must do so).</p>
      *
+     * <p>
+     *  接收字符数据的通知
+     * 
+     * <p>解析器将调用此方法来报告每个字符数据块,SAX解析器可能会返回单个块中的所有连续字符数据,或者它们可能将其拆分为几个块;但是,任何单个事件中的所有字符必须来自同一外部实体,以便定位器提供有用的信息
+     * </p>。
+     * 
+     *  <p>应用程序不得尝试从指定范围之外的数组中读取</p>
+     * 
+     *  <p>请注意,一些解析器将使用ignorableWhitespace()方法而不是这一个(验证解析器必须这样做)报告空格。</p>
+     * 
+     * 
      * @param chars The characters from the XML document.
      * @param start The start position in the array.
      * @param length The number of characters to read from the array.
@@ -1391,6 +1662,9 @@ abstract public class ToStream extends SerializerBase
         {
             /* either due to startCDATA() being called or due to
              * cdata-section-elements atribute, we need this as cdata
+             * <p>
+             *  cdata-section-elements属性,我们需要这个为cdata
+             * 
              */
             cdata(chars, start, length);
 
@@ -1442,6 +1716,9 @@ abstract public class ToStream extends SerializerBase
                  * We are processing leading whitespace, but are doing the same
                  * processing for dirty characters here as for non-whitespace.
                  *
+                 * <p>
+                 *  我们正在处理领先的空格,但是对于非字符在这里对非空格执行相同的处理
+                 * 
                  */
                 if (!m_charInfo.isTextASCIIClean(ch1))
                 {
@@ -1451,6 +1728,9 @@ abstract public class ToStream extends SerializerBase
             }
             /* If there is some non-whitespace, mark that we may need
              * to preserve this. This is only important if we have indentation on.
+             * <p>
+             * 保留这只有重要的,如果我们有缩进
+             * 
              */
             if (i < end)
                 m_ispreserve = true;
@@ -1480,6 +1760,9 @@ abstract public class ToStream extends SerializerBase
                 /*  The check for isCharacterInC0orC1Ranger and
                  *  isNELorLSEPCharacter has been added
                  *  to support Control Characters in XML 1.1
+                 * <p>
+                 *  isNELorLSEPCharacter已添加为支持XML 11中的控制字符
+                 * 
                  */
                 if (!isCharacterInC0orC1Range(ch) &&
                     (isXML10 || !isNELorLSEPCharacter(ch)) &&
@@ -1523,6 +1806,11 @@ abstract public class ToStream extends SerializerBase
      * If a given character is TAB (0x09), LF (0x0A) or CR (0x0D), this method
      * return false. Since they are whitespace characters, no special processing is needed.
      *
+     * <p>
+     *  此方法检查给定字符是否在控制字符的C0或C1范围之间此方法被添加以支持XML 11的控制字符如果给定字符是TAB(0x09),LF(0x0A)或CR(0x0D),此方法返回false由于它们是空格字符
+     * ,因此不需要特殊处理。
+     * 
+     * 
      * @param ch
      * @return boolean
      */
@@ -1538,6 +1826,10 @@ abstract public class ToStream extends SerializerBase
      * These are new end of line charcters added in XML 1.1.  These characters must be
      * written as Numeric Character References (NCR) in XML 1.1 output document.
      *
+     * <p>
+     *  此方法检查给定字符NEL(0x85)或LSEP(0x2028)这些是在XML 11中添加的新的行尾字符11这些字符必须在XML 11输出文档中作为数字字符引用(NCR)写入
+     * 
+     * 
      * @param ch
      * @return boolean
      */
@@ -1548,6 +1840,10 @@ abstract public class ToStream extends SerializerBase
     /**
      * Process a dirty character and any preeceding clean characters
      * that were not yet processed.
+     * <p>
+     *  处理脏字符和任何尚未处理的预处理的干净字符
+     * 
+     * 
      * @param chars array of characters being processed
      * @param end one (1) beyond the last character
      * in chars to be processed
@@ -1601,6 +1897,10 @@ abstract public class ToStream extends SerializerBase
     /**
      * Receive notification of character data.
      *
+     * <p>
+     * 接收字符数据的通知
+     * 
+     * 
      * @param s The string of characters to process.
      *
      * @throws org.xml.sax.SAXException
@@ -1621,6 +1921,10 @@ abstract public class ToStream extends SerializerBase
     /**
      * Escape and writer.write a character.
      *
+     * <p>
+     *  逃脱和writerwrite一个字符
+     * 
+     * 
      * @param ch character to be escaped.
      * @param i index into character array.
      * @param chars non-null reference to character array.
@@ -1698,6 +2002,9 @@ abstract public class ToStream extends SerializerBase
                  *  If a character is a Control Character within C0 and C1 range, it is desirable
                  *  to write it out as Numeric Character Reference(NCR) regardless of XML Version
                  *  being used for output document.
+                 * <p>
+                 *  如果字符是C0和C1范围内的控制字符,则最好将其作为数字字符引用(NCR)写出,而不管用于输出文档的XML版本
+                 * 
                  */
                 if (isCharacterInC0orC1Range(ch) ||
                         (XMLVERSION11.equals(getVersion()) && isNELorLSEPCharacter(ch)))
@@ -1732,6 +2039,10 @@ abstract public class ToStream extends SerializerBase
      * or after this call, that is associated with this element.
      *
      *
+     * <p>
+     *  接收元素开头的通知,虽然这是一个SAX方法,但是在此调用之前或之后可能会发生附加的命名空间或属性信息,与此元素相关联
+     * 
+     * 
      * @param namespaceURI The Namespace URI, or the empty string if the
      *        element has no Namespace URI or if Namespace
      *        processing is not being performed.
@@ -1777,6 +2088,9 @@ abstract public class ToStream extends SerializerBase
 
             /* before we over-write the current elementLocalName etc.
              * lets close out the old one (if we still need to)
+             * <p>
+             *  让我们关闭旧的(如果我们还需要)
+             * 
              */
             if (m_elemContext.m_startTagOpen)
             {
@@ -1824,6 +2138,10 @@ abstract public class ToStream extends SerializerBase
       * that is associated with this element.
       *
       *
+      * <p>
+      *  在此调用之前或之后,与此元素相关联的元素,附加命名空间或属性信息的开始的接收通知
+      * 
+      * 
       * @param elementNamespaceURI The Namespace URI, or the empty string if the
       *        element has no Namespace URI or if Namespace
       *        processing is not being performed.
@@ -1856,6 +2174,10 @@ abstract public class ToStream extends SerializerBase
     /**
      * Output the doc type declaration.
      *
+     * <p>
+     *  输出doc类型声明
+     * 
+     * 
      * @param name non-null reference to document type name.
      * NEEDSDOC @param closeDecl
      *
@@ -1921,6 +2243,10 @@ abstract public class ToStream extends SerializerBase
      * collected attributes to the writer. The attributes are not
      * cleared by this method
      *
+     * <p>
+     * 处理属性,这意味着将当前收集的属性写入到写入器此属性不会被此方法清除
+     * 
+     * 
      * @param writer the writer to write processed attributes to.
      * @param nAttrs the number of attributes in m_attributes
      * to be processed
@@ -1934,6 +2260,9 @@ abstract public class ToStream extends SerializerBase
              * attributes that were collected after the startElement call.
              * _attribVector is a "cheap" list for Stream serializer output
              * accumulated over a series of calls to attribute(name,value)
+             * <p>
+             *  在startElement调用之后收集的属性_attribVector是Stream序列化器输出的"便宜"列表,通过对属性(名称,值)的一系列调用进行累积,
+             * 
              */
             String encoding = getEncoding();
             for (int i = 0; i < nAttrs; i++)
@@ -1953,6 +2282,11 @@ abstract public class ToStream extends SerializerBase
      * Returns the specified <var>string</var> after substituting <VAR>specials</VAR>,
      * and UTF-16 surrogates for chracter references <CODE>&amp;#xnn</CODE>.
      *
+     * <p>
+     *  在替换<VAR> specials </VAR>之后返回指定的<var> string </var>,并且替换为chracter references <CODE>&amp; #xnn </CODE>
+     * 。
+     * 
+     * 
      * @param   string      String to convert to XML format.
      * @param   encoding    CURRENTLY NOT IMPLEMENTED.
      *
@@ -2000,6 +2334,10 @@ abstract public class ToStream extends SerializerBase
      * Receive notification of the end of an element.
      *
      *
+     * <p>
+     *  接收元素结束的通知
+     * 
+     * 
      * @param namespaceURI The Namespace URI, or the empty string if the
      *        element has no Namespace URI or if Namespace
      *        processing is not being performed.
@@ -2044,6 +2382,9 @@ abstract public class ToStream extends SerializerBase
                 /* don't need to pop cdataSectionState because
                  * this element ended so quickly that we didn't get
                  * to push the state.
+                 * <p>
+                 *  这个元素结束这么快,我们没有推动的状态
+                 * 
                  */
 
             }
@@ -2080,6 +2421,10 @@ abstract public class ToStream extends SerializerBase
 
     /**
      * Receive notification of the end of an element.
+     * <p>
+     *  接收元素结束的通知
+     * 
+     * 
      * @param name The element type name
      * @throws org.xml.sax.SAXException Any SAX exception, possibly
      *     wrapping another exception.
@@ -2095,6 +2440,10 @@ abstract public class ToStream extends SerializerBase
      * This call will close any open tags so that the prefix mapping
      * will not apply to the current element, but the up comming child.
      *
+     * <p>
+     * 开始一个prefix-URI命名空间映射的作用域,在另一个元素即将开始之前此调用将关闭任何打开的标签,以便前缀映射不会应用于当前元素,但是上一个孩子
+     * 
+     * 
      * @see org.xml.sax.ContentHandler#startPrefixMapping
      *
      * @param prefix The Namespace prefix being declared.
@@ -2116,6 +2465,10 @@ abstract public class ToStream extends SerializerBase
      * that is soon to follow. Need to close any open start tag to make
      * sure than any name space attributes due to this event are associated wih
      * the up comming element, not the current one.
+     * <p>
+     *  处理与将要很快跟踪的startElement()相关联的前缀/ uri映射需要关闭任何打开的开始标记,以确保由于此事件而导致的任何名称空间属性都与up comming元素相关联,而不是当前一
+     * 
+     * 
      * @see ExtendedContentHandler#startPrefixMapping
      *
      * @param prefix The Namespace prefix being declared.
@@ -2143,6 +2496,9 @@ abstract public class ToStream extends SerializerBase
          * This is one greater than the current depth because these
          * mappings will apply to the next depth. This is in
          * consideration that startElement() will soon be called
+         * <p>
+         *  这是比当前深度大一个,因为这些映射将应用于下一个深度这是考虑到startElement()很快将被调用
+         * 
          */
 
         boolean pushed;
@@ -2166,6 +2522,9 @@ abstract public class ToStream extends SerializerBase
              * callers of this object should have injected both
              * startPrefixMapping and the attributes.  We are
              * just covering our butt here.
+             * <p>
+             *  这个对象的调用者应该注入startPrefixMapping和属性我们只是覆盖我们的对接
+             * 
              */
             String name;
             if (EMPTYSTRING.equals(prefix))
@@ -2183,6 +2542,9 @@ abstract public class ToStream extends SerializerBase
                     /* for something like xmlns:abc="w3.pretend.org"
                      *  the      uri is the value, that is why we pass it in the
                      * value, or 5th slot of addAttributeAlways()
+                     * <p>
+                     * uri是值,这就是为什么我们在值中传递它,或第五个插槽的addAttributeAlways()
+                     * 
                      */
                     addAttributeAlways(XMLNS_URI, prefix, name, "CDATA", uri, false);
                 }
@@ -2195,6 +2557,10 @@ abstract public class ToStream extends SerializerBase
      * Receive notification of an XML comment anywhere in the document. This
      * callback will be used for comments inside or outside the document
      * element, including comments in the external DTD subset (if read).
+     * <p>
+     *  在文档中的任何位置接收XML注释的通知此回调将用于文档元素内部或外部的注释,包括外部DTD子集中的注释(如果读取)
+     * 
+     * 
      * @param ch An array holding the characters in the comment.
      * @param start The starting position in the array.
      * @param length The number of characters to use from the array.
@@ -2271,6 +2637,11 @@ abstract public class ToStream extends SerializerBase
          * to indent that we should
          * add a newline on the end of the current line before
          * the indentation at the start of the next line.
+         * <p>
+         *  现在不要写出任何缩进空格,因为这之后可能有非空格文本
+         * 
+         *  只要标记在这一点,如果我们决定缩进,我们应该在当前行的结尾添加一个换行之前的下一行开始的缩进
+         * 
          */
         m_startNewLine = true;
         // time to generate comment event
@@ -2280,6 +2651,10 @@ abstract public class ToStream extends SerializerBase
 
     /**
      * Report the end of a CDATA section.
+     * <p>
+     *  报告CDATA部分的结尾
+     * 
+     * 
      * @throws org.xml.sax.SAXException The application may raise an exception.
      *
      *  @see  #startCDATA
@@ -2293,6 +2668,10 @@ abstract public class ToStream extends SerializerBase
 
     /**
      * Report the end of DTD declarations.
+     * <p>
+     *  报告DTD声明的结束
+     * 
+     * 
      * @throws org.xml.sax.SAXException The application may raise an exception.
      * @see #startDTD
      */
@@ -2330,6 +2709,10 @@ abstract public class ToStream extends SerializerBase
 
     /**
      * End the scope of a prefix-URI Namespace mapping.
+     * <p>
+     *  结束prefix-URI命名空间映射的作用域
+     * 
+     * 
      * @see org.xml.sax.ContentHandler#endPrefixMapping
      *
      * @param prefix The prefix that was being mapping.
@@ -2345,6 +2728,12 @@ abstract public class ToStream extends SerializerBase
      *
      * Not sure how to get this invoked quite yet.
      *
+     * <p>
+     *  在元素内容中接收可忽略的空格的通知
+     * 
+     * 不知道如何得到这个调用了很多
+     * 
+     * 
      * @param ch The characters from the XML document.
      * @param start The start position in the array.
      * @param length The number of characters to read from the array.
@@ -2365,6 +2754,10 @@ abstract public class ToStream extends SerializerBase
 
     /**
      * Receive notification of a skipped entity.
+     * <p>
+     *  接收跳过的实体的通知
+     * 
+     * 
      * @see org.xml.sax.ContentHandler#skippedEntity
      *
      * @param name The name of the skipped entity.  If it is a
@@ -2381,6 +2774,10 @@ abstract public class ToStream extends SerializerBase
     /**
      * Report the start of a CDATA section.
      *
+     * <p>
+     *  报告CDATA部分的开始
+     * 
+     * 
      * @throws org.xml.sax.SAXException The application may raise an exception.
      * @see #endCDATA
      */
@@ -2397,6 +2794,12 @@ abstract public class ToStream extends SerializerBase
      * using the pseudo-name "[dtd]".  All other events must be
      * properly nested within start/end entity events.
      *
+     * <p>
+     *  报告实体的开始
+     * 
+     *  不报告文档实体的开始和结束使用伪名称"[dtd]"报告外部DTD子集的开始和结束所有其他事件必须正确嵌套在开始/结束实体事件中
+     * 
+     * 
      * @param name The name of the entity.  If it is a parameter
      *        entity, the name will begin with '%'.
      * @throws org.xml.sax.SAXException The application may raise an exception.
@@ -2413,6 +2816,9 @@ abstract public class ToStream extends SerializerBase
             /* Only leave the entity as-is if
              * we've been told not to expand them
              * and this is not the magic [dtd] name.
+             * <p>
+             *  我们被告知不扩大他们,这不是神奇的[dtd]名字
+             * 
              */
             startNonEscaping();
             characters("&" + name + ';');
@@ -2426,6 +2832,10 @@ abstract public class ToStream extends SerializerBase
      * For the enclosing elements starting tag write out
      * out any attributes followed by ">"
      *
+     * <p>
+     *  对于包围元素,起始标签写出任何属性后跟">"
+     * 
+     * 
      * @throws org.xml.sax.SAXException
      */
     protected void closeStartTag() throws SAXException
@@ -2454,6 +2864,9 @@ abstract public class ToStream extends SerializerBase
             /* whether Xalan or XSLTC, we have the prefix mappings now, so
              * lets determine if the current element is specified in the cdata-
              * section-elements list.
+             * <p>
+             *  允许确定是否在cdata-节 - 元素列表中指定当前元素
+             * 
              */
             if (m_cdataSectionElements != null)
                 m_elemContext.m_isCdataSection = isCdataSection();
@@ -2473,6 +2886,12 @@ abstract public class ToStream extends SerializerBase
      * Any declarations are assumed to be in the internal subset unless
      * otherwise indicated.
      *
+     * <p>
+     *  报告DTD声明的开始(如果有)
+     * 
+     *  除非另有说明,否则假定任何声明都在内部子集中
+     * 
+     * 
      * @param name The document type name.
      * @param publicId The declared public identifier for the
      *        external DTD subset, or null if none was declared.
@@ -2495,6 +2914,10 @@ abstract public class ToStream extends SerializerBase
 
     /**
      * Returns the m_indentAmount.
+     * <p>
+     *  返回m_indentAmount
+     * 
+     * 
      * @return int
      */
     public int getIndentAmount()
@@ -2505,6 +2928,10 @@ abstract public class ToStream extends SerializerBase
     /**
      * Sets the m_indentAmount.
      *
+     * <p>
+     * 设置m_indentAmount
+     * 
+     * 
      * @param m_indentAmount The m_indentAmount to set
      */
     public void setIndentAmount(int m_indentAmount)
@@ -2516,6 +2943,10 @@ abstract public class ToStream extends SerializerBase
      * Tell if, based on space preservation constraints and the doIndent property,
      * if an indent should occur.
      *
+     * <p>
+     *  根据空间保存约束和doIndent属性,判断是否应该发生缩进
+     * 
+     * 
      * @return True if an indent should occur.
      */
     protected boolean shouldIndent()
@@ -2529,6 +2960,10 @@ abstract public class ToStream extends SerializerBase
      * property list, and its defaults, recursively, are then checked. The
      * method returns <code>null</code> if the property is not found.
      *
+     * <p>
+     *  在属性列表中使用指定的键搜索qname属性列表如果在此属性列表中找不到键,则递归地检查默认属性列表及其默认值。方法返回<code> null </code >如果找不到属性
+     * 
+     * 
      * @param   key   the property key.
      * @param props the list of properties to search in.
      *
@@ -2593,6 +3028,10 @@ abstract public class ToStream extends SerializerBase
     /**
      * Adds a URI/LocalName pair of strings to the list.
      *
+     * <p>
+     *  向列表中添加一个URI / LocalName字符串对
+     * 
+     * 
      * @param URI_and_localName String of the form "{uri}local" or "local"
      *
      * @return a QName object
@@ -2624,6 +3063,10 @@ abstract public class ToStream extends SerializerBase
      * The "official way to set URI and localName pairs.
      * This method should be used by both Xalan and XSLTC.
      *
+     * <p>
+     *  记住在cdata-section-elements中指定的cdata节"官方设置URI和localName对的方法这个方法应该被Xalan和XSLTC使用
+     * 
+     * 
      * @param URI_and_localNames a vector of pairs of Strings (URI/local)
      */
     public void setCdataSectionElements(Vector URI_and_localNames)
@@ -2634,6 +3077,10 @@ abstract public class ToStream extends SerializerBase
     /**
      * Makes sure that the namespace URI for the given qualified attribute name
      * is declared.
+     * <p>
+     *  确保声明了给定限定属性名称的命名空间URI
+     * 
+     * 
      * @param ns the namespace URI
      * @param rawName the qualified name
      * @return returns null if no action is taken, otherwise it returns the
@@ -2744,6 +3191,9 @@ abstract public class ToStream extends SerializerBase
     /**
      * This method flushes any pending events, which can be startDocument()
      * closing the opening tag of an element, or closing an open CDATA section.
+     * <p>
+     * 此方法刷新任何挂起的事件,可以是startDocument()关闭元素的开始标签,或关闭打开的CDATA段
+     * 
      */
     public void flushPending() throws SAXException
     {
@@ -2781,6 +3231,12 @@ abstract public class ToStream extends SerializerBase
      * tracing of events is done.  This is so the tracing is only done for
      * stream serializers, not for SAX ones.
      *
+     * <p>
+     *  将给定的属性添加到属性集,即使没有当前打开的元素这是有用的,如果SAX startPrefixMapping()应该需要在元素名称被看到之前添加一个属性
+     * 
+     *  这个方法是它的超类方法的副本,除了一些事件的跟踪完成这是因为跟踪只是为流序列化,而不是为SAX的
+     * 
+     * 
      * @param uri the URI of the attribute
      * @param localName the local name of the attribute
      * @param rawName   the qualified name of the attribute
@@ -2806,6 +3262,10 @@ abstract public class ToStream extends SerializerBase
         // Don't use 'localName' as it gives incorrect value, rely only on 'rawName'
         /*else {
             index = m_attributes.getIndex(uri, localName);
+        /* <p>
+        /*  index = m_attributesgetIndex(uri,localName);
+        /* 
+        /* 
         }*/
         if (index >= 0)
         {
@@ -2820,6 +3280,9 @@ abstract public class ToStream extends SerializerBase
             /* We've seen the attribute before.
              * We may have a null uri or localName, but all we really
              * want to re-set is the value anyway.
+             * <p>
+             *  我们可能有一个空uri或localName,但我们真正想重新设置的是值
+             * 
              */
             m_attributes.setValue(index, value);
             was_added = false;
@@ -2843,6 +3306,14 @@ abstract public class ToStream extends SerializerBase
                  * We are adding attr1 and attr2 both as attributes of elem1,
                  * and this code is adding attr2 (the xsl:attribute ).
                  * We could have a collision with the prefix like in the example above.
+                 * <p>
+                 *  此属性来自xsl：attribute元素,因此我们在添加它时会小心,例如
+                 * <elem1  foo:attr1="1" xmlns:foo="uri1">
+                 * <xsl：attribute name ="foo：attr2"> 2 </xsl：attribute>
+                 * </elem1>
+                 * 
+                 *  我们添加attr1和attr2作为elem1的属性,这段代码添加了attr2(xsl：attribute)我们可以像前面的例子一样碰到前缀
+                 * 
                  */
 
                 // In the example above, is there a prefix like foo ?
@@ -2854,6 +3325,9 @@ abstract public class ToStream extends SerializerBase
 
                     /* Before adding this attribute (foo:attr2),
                      * is the prefix for it (foo) already mapped at the current depth?
+                     * <p>
+                     *  是它的前缀(foo)已经映射在当前的深度?
+                     * 
                      */
                     if (existing_mapping != null
                     && existing_mapping.m_declarationDepth == m_elemContext.m_currentElemDepth
@@ -2864,10 +3338,16 @@ abstract public class ToStream extends SerializerBase
                          * it differs from the one we need,
                          * and unfortunately it is at the current depth so we
                          * can not over-ride it.
+                         * <p>
+                         *  有一个这个前缀的映射,它不同于我们需要的映射,不幸的是它是在当前的深度,所以我们不能克服它
+                         * 
                          */
 
                         /*
                          * Are we lucky enough that an existing other prefix maps to this URI ?
+                         * <p>
+                         *  我们足够幸运,现有的其他前缀映射到此URI吗?
+                         * 
                          */
                         prefix = m_prefixMap.lookupPrefix(uri);
                         if (prefix == null)
@@ -2880,6 +3360,10 @@ abstract public class ToStream extends SerializerBase
                              * and at this point in serialization the body of the
                              * xsl:attribute, if any, is just a String. Right?
                              *   . . . I sure hope so - Brian M.
+                             * <p>
+                             * 所以为了避免前缀冲突,我们必须生成一个新的前缀使用这是好的,因为在xsl：属性中定义的前缀URI映射的范围很短,只是xsl：attribute元素本身,并且在这一点上序列化的主体xsl：属性,如果有的话
+                             * ,只是一个字符串右?我肯定希望如此 - 布莱恩M。
+                             * 
                              */
                             prefix = m_prefixMap.generateNextPrefix();
                         }
@@ -2894,6 +3378,9 @@ abstract public class ToStream extends SerializerBase
                      * attribute is declared, especially if we just generated an alternate
                      * prefix to avoid a collision (the new prefix/rawName will go out of scope
                      * soon and be lost ...  last chance here.
+                     * <p>
+                     *  属性被声明,特别是如果我们只是生成一个备用的前缀,以避免冲突(新的前缀/ rawName将很快就超出范围,并且最后失去最后机会
+                     * 
                      */
                     String prefixUsed =
                         ensureAttributesNamespaceIsDeclared(
@@ -2920,6 +3407,9 @@ abstract public class ToStream extends SerializerBase
      * To fire off the pseudo characters of attributes, as they currently
      * exist. This method should be called everytime an attribute is added,
      * or when an attribute value is changed, or an element is created.
+     * <p>
+     *  要触发属性的伪字符,因为它们当前存在此方法应该在每次添加属性时调用,或者当属性值更改或创建元素时调用
+     * 
      */
 
     protected void firePseudoAttributes()
@@ -2973,11 +3463,16 @@ abstract public class ToStream extends SerializerBase
      * written by the method writeAttrString() into a string buffer.
      * In this manner trace events, and the real writing of attributes will use
      * the same code.
+     * <p>
+     * 这个内部类只用于收集由方法writeAttrString()写入字符串缓冲区的属性值。以这种方式跟踪事件,并且属性的真正写入将使用相同的代码
+     * 
      */
     private class WritertoStringBuffer extends java.io.Writer
     {
         final private StringBuffer m_stringbuf;
         /**
+        /* <p>
+        /* 
          * @see java.io.Writer#write(char[], int, int)
          */
         WritertoStringBuffer(StringBuffer sb)
@@ -2990,12 +3485,16 @@ abstract public class ToStream extends SerializerBase
             m_stringbuf.append(arg0, arg1, arg2);
         }
         /**
+        /* <p>
+        /* 
          * @see java.io.Writer#flush()
          */
         public void flush() throws IOException
         {
         }
         /**
+        /* <p>
+        /* 
          * @see java.io.Writer#close()
          */
         public void close() throws IOException
@@ -3014,6 +3513,8 @@ abstract public class ToStream extends SerializerBase
     }
 
     /**
+    /* <p>
+    /* 
      * @see SerializationHandler#setTransformer(Transformer)
      */
     public void setTransformer(Transformer transformer) {
@@ -3029,6 +3530,10 @@ abstract public class ToStream extends SerializerBase
      * re-use, so that you don't need to create a new serializer
      * (mostly for performance reasons).
      *
+     * <p>
+     *  尝试重置超类并重置此类以供重用,以便您不需要创建新的序列化程序(主要是出于性能原因)
+     * 
+     * 
      * @return true if the class was successfuly reset.
      */
     public boolean reset()
@@ -3045,6 +3550,9 @@ abstract public class ToStream extends SerializerBase
     /**
      * Reset all of the fields owned by ToStream class
      *
+     * <p>
+     *  重置ToStream类拥有的所有字段
+     * 
      */
     private void resetToStream()
     {
@@ -3054,6 +3562,9 @@ abstract public class ToStream extends SerializerBase
           * so neither should m_charInfo which is associated with the
           * type of Stream. Just leave m_charInfo as-is for the next re-use.
           *
+          * <p>
+          *  ToXMLStream,ToHTMLStream和这种类型不能被改变,所以也不应该m_charInfo与流的类型相关只是留下m_charInfo原样为下一次重用
+          * 
           */
          // this.m_charInfo = null; // don't set to null
 
@@ -3080,6 +3591,10 @@ abstract public class ToStream extends SerializerBase
 
     /**
       * Sets the character encoding coming from the xsl:output encoding stylesheet attribute.
+      * <p>
+      *  设置来自xsl：output编码样式表属性的字符编码
+      * 
+      * 
       * @param encoding the character encoding
       */
      public void setEncoding(String encoding)
@@ -3126,6 +3641,13 @@ abstract public class ToStream extends SerializerBase
      * doesn't implement Clonable
      *
      * @xsl.usage internal
+     * <p>
+     *  布尔值的简单堆栈
+     * 
+     * 这个类是comsunorgapachexmlinternalutils中的一个的副本它存在以削减该包的序列化程序依赖性该包的一些小改动是：不实现Clonable
+     * 
+     *  @xslusage内部
+     * 
      */
     static final class BoolStack
     {
@@ -3142,6 +3664,9 @@ abstract public class ToStream extends SerializerBase
       /**
        * Default constructor.  Note that the default
        * block size is very small, for small lists.
+       * <p>
+       *  默认构造函数请注意,对于小列表,默认块大小非常小
+       * 
        */
       public BoolStack()
       {
@@ -3151,6 +3676,10 @@ abstract public class ToStream extends SerializerBase
       /**
        * Construct a IntVector, using the given block size.
        *
+       * <p>
+       *  使用给定的块大小构造IntVector
+       * 
+       * 
        * @param size array size to allocate
        */
       public BoolStack(int size)
@@ -3164,6 +3693,10 @@ abstract public class ToStream extends SerializerBase
       /**
        * Get the length of the list.
        *
+       * <p>
+       *  获取列表的长度
+       * 
+       * 
        * @return Current length of the list
        */
       public final int size()
@@ -3174,6 +3707,9 @@ abstract public class ToStream extends SerializerBase
       /**
        * Clears the stack.
        *
+       * <p>
+       *  清除堆栈
+       * 
        */
       public final void clear()
       {
@@ -3184,6 +3720,10 @@ abstract public class ToStream extends SerializerBase
        * Pushes an item onto the top of this stack.
        *
        *
+       * <p>
+       *  将项目推到此堆栈的顶部
+       * 
+       * 
        * @param val the boolean to be pushed onto this stack.
        * @return  the <code>item</code> argument.
        */
@@ -3200,6 +3740,10 @@ abstract public class ToStream extends SerializerBase
        * Removes the object at the top of this stack and returns that
        * object as the value of this function.
        *
+       * <p>
+       *  删除该堆栈顶部的对象,并返回该对象作为此函数的值
+       * 
+       * 
        * @return     The object at the top of this stack.
        * @throws  EmptyStackException  if this stack is empty.
        */
@@ -3213,6 +3757,10 @@ abstract public class ToStream extends SerializerBase
        * next object at the top as the value of this function.
        *
        *
+       * <p>
+       *  删除该堆栈顶部的对象,并返回顶部的下一个对象作为此函数的值
+       * 
+       * 
        * @return Next object to the top or false if none there
        */
       public final boolean popAndTop()
@@ -3227,6 +3775,10 @@ abstract public class ToStream extends SerializerBase
        * Set the item at the top of this stack
        *
        *
+       * <p>
+       *  设置此堆栈顶部的项目
+       * 
+       * 
        * @param b Object to set at the top of this stack
        */
       public final void setTop(boolean b)
@@ -3238,6 +3790,10 @@ abstract public class ToStream extends SerializerBase
        * Looks at the object at the top of this stack without removing it
        * from the stack.
        *
+       * <p>
+       *  查看该堆栈顶部的对象,而不从堆栈中删除它
+       * 
+       * 
        * @return     the object at the top of this stack.
        * @throws  EmptyStackException  if this stack is empty.
        */
@@ -3250,6 +3806,10 @@ abstract public class ToStream extends SerializerBase
        * Looks at the object at the top of this stack without removing it
        * from the stack.  If the stack is empty, it returns false.
        *
+       * <p>
+       * 查看该堆栈顶部的对象,而不从堆栈中删除它如果堆栈为空,则返回false
+       * 
+       * 
        * @return     the object at the top of this stack.
        */
       public final boolean peekOrFalse()
@@ -3261,6 +3821,10 @@ abstract public class ToStream extends SerializerBase
        * Looks at the object at the top of this stack without removing it
        * from the stack.  If the stack is empty, it returns true.
        *
+       * <p>
+       *  查看该堆栈顶部的对象,而不将其从堆栈中删除如果堆栈为空,则返回true
+       * 
+       * 
        * @return     the object at the top of this stack.
        */
       public final boolean peekOrTrue()
@@ -3271,6 +3835,10 @@ abstract public class ToStream extends SerializerBase
       /**
        * Tests if this stack is empty.
        *
+       * <p>
+       *  测试此堆栈是否为空
+       * 
+       * 
        * @return  <code>true</code> if this stack is empty;
        *          <code>false</code> otherwise.
        */
@@ -3282,6 +3850,9 @@ abstract public class ToStream extends SerializerBase
       /**
        * Grows the size of the stack
        *
+       * <p>
+       *  增大堆栈的大小
+       * 
        */
       private void grow()
       {
@@ -3301,6 +3872,10 @@ abstract public class ToStream extends SerializerBase
      * If this method is called, the serializer is used as a
      * DTDHandler, which changes behavior how the serializer
      * handles document entities.
+     * <p>
+     *  如果调用此方法,则序列化程序用作DTDHandler,这会更改序列化程序处理文档实体的行为
+     * 
+     * 
      * @see org.xml.sax.DTDHandler#notationDecl(java.lang.String, java.lang.String, java.lang.String)
      */
     public void notationDecl(String name, String pubID, String sysID) throws SAXException {
@@ -3331,6 +3906,10 @@ abstract public class ToStream extends SerializerBase
      * If this method is called, the serializer is used as a
      * DTDHandler, which changes behavior how the serializer
      * handles document entities.
+     * <p>
+     *  如果调用此方法,则序列化程序用作DTDHandler,这会更改序列化程序处理文档实体的行为
+     * 
+     * 
      * @see org.xml.sax.DTDHandler#unparsedEntityDecl(java.lang.String, java.lang.String, java.lang.String, java.lang.String)
      */
     public void unparsedEntityDecl(String name, String pubID, String sysID, String notationName) throws SAXException {
@@ -3361,6 +3940,10 @@ abstract public class ToStream extends SerializerBase
 
     /**
      * A private helper method to output the
+     * <p>
+     *  一个私人帮助方法输出
+     * 
+     * 
      * @throws SAXException
      * @throws IOException
      */
@@ -3382,6 +3965,8 @@ abstract public class ToStream extends SerializerBase
     /**
      * If set to false the serializer does not expand DTD entities,
      * but leaves them as is, the default value is true;
+     * <p>
+     *  如果设置为false,则序列化器不会展开DTD实体,但保持原样,默认值为true;
      */
     public void setDTDEntityExpansion(boolean expand) {
         m_expandDTDEntities = expand;

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -70,6 +71,18 @@ import static java.lang.annotation.RetentionPolicy.*;
  * <li>If the method throws an unchecked exception the class MUST NOT be put into
  * service except in the case of EJBs where the EJB can handle exceptions and
  * even recover from them.</li></ul>
+ * <p>
+ *  PostConstruct注解用于需要在依赖注入完成后执行任何初始化时执行的方法。此方法必须在类被放入服务之前调用此注释必须在支持依赖注入的所有类上支持。
+ *  PostConstruct必须被调用,即使类不请求任何资源被注入只有一个方法可以用这个注释注释应用PostConstruct注解的方法必须满足所有以下标准：。
+ * <p>
+ * <ul>
+ * <li>该方法不能有任何参数,除非在拦截器的情况下,它需要一个InvocationContext对象由拦截器规范定义</li> <li>在拦截器类上定义的方法必须具有以下之一签名：
+ * <p>
+ *  void <METHOD>(InvocationContext)
+ * <p>
+ *  对象<METHOD>(InvocationContext)抛出异常
+ * <p>
+ * 
  * @since Common Annotations 1.0
  * @see javax.annotation.PreDestroy
  * @see javax.annotation.Resource

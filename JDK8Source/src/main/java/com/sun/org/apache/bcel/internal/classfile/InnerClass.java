@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,6 +57,31 @@ package com.sun.org.apache.bcel.internal.classfile;
  * individuals on behalf of the Apache Software Foundation.  For more
  * information on the Apache Software Foundation, please see
  * <http://www.apache.org/>.
+ * <p>
+ *  Apache软件许可证,版本11
+ * 
+ *  版权所有(c)2001 Apache软件基金会保留所有权利
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  1源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明
+ * 
+ *  2二进制形式的再分发必须在随分发版提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明
+ * 
+ * 3包含在重新分发中的最终用户文档(如果有的话)必须包括以下声明："本产品包括Apache Software Foundation(http：// wwwapacheorg /)开发的软件。
+ * 或者,此确认可能出现在软件本身,如果和第三方承诺通常出现的地方。
+ * 
+ *  4未经事先书面许可,不得使用"Apache"和"Apache Software Foundation"和"Apache BCEL"这些名称来认可或推广从本软件衍生的产品对于书面许可,请联系apache
+ *  @ apacheorg。
+ * 
+ *  5未经Apache软件基金会事先书面许可,不得将本软件衍生的产品称为"Apache","Apache BCEL"或"Apache"名称。
+ * 
+ * 本软件按"原样"提供,任何明示或暗示的保证,包括但不限于适销性和针对特定用途的适用性的默示担保,在任何情况下均不得免责,APACHE软件基金会或其参与人应负赔偿责任对于任何直接,间接,偶发,特殊,惩罚性
+ * 或后果性损害(包括但不限于替代商品或服务的采购;使用,数据或利润损失;或业务中断)责任,无论是在合同,严格责任或侵权(包括疏忽或其他方式),以任何方式使用本软件,即使已被告知此类损害的可能性======
+ * ==============================================================。
+ * 
+ * 此软件包括许多个人代表Apache软件基金会所做的自愿捐款有关Apache软件基金会的更多信息,请参阅<http：// wwwapacheorg />
+ * 
  */
 
 import  com.sun.org.apache.bcel.internal.Constants;
@@ -66,6 +92,10 @@ import  java.io.*;
  * indices of the inner and outer classes, the name and the attributes
  * of the inner class.
  *
+ * <p>
+ *  此类表示内部类属性,即内部类和外部类的类索引,内部类的名称和属性
+ * 
+ * 
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
  * @see InnerClasses
  */
@@ -77,6 +107,9 @@ public final class InnerClass implements Cloneable, Node {
 
   /**
    * Initialize from another object.
+   * <p>
+   *  从另一个对象初始化
+   * 
    */
   public InnerClass(InnerClass c) {
     this(c.getInnerClassIndex(), c.getOuterClassIndex(), c.getInnerNameIndex(),
@@ -85,6 +118,10 @@ public final class InnerClass implements Cloneable, Node {
 
   /**
    * Construct object from file stream.
+   * <p>
+   *  从文件流构造对象
+   * 
+   * 
    * @param file Input stream
    * @throws IOException
    */
@@ -95,6 +132,8 @@ public final class InnerClass implements Cloneable, Node {
   }
 
   /**
+  /* <p>
+  /* 
    * @param inner_class_index Class index in constant pool of inner class
    * @param outer_class_index Class index in constant pool of outer class
    * @param inner_name_index  Name index in constant pool of inner class
@@ -114,6 +153,10 @@ public final class InnerClass implements Cloneable, Node {
    * defined by the contents of a Java class. I.e., the hierarchy of methods,
    * fields, attributes, etc. spawns a tree of objects.
    *
+   * <p>
+   *  由遍历由Java类Ie的内容隐含地定义的树的节点的对象调用,方法,字段,属性等的层次结构产生对象的树
+   * 
+   * 
    * @param v Visitor object
    */
   public void accept(Visitor v) {
@@ -122,6 +165,10 @@ public final class InnerClass implements Cloneable, Node {
   /**
    * Dump inner class attribute to file stream in binary format.
    *
+   * <p>
+   *  以二进制格式将内部类属性转储为文件流
+   * 
+   * 
    * @param file Output file stream
    * @throws IOException
    */
@@ -133,46 +180,64 @@ public final class InnerClass implements Cloneable, Node {
     file.writeShort(inner_access_flags);
   }
   /**
+  /* <p>
+  /* 
    * @return access flags of inner class.
    */
   public final int getInnerAccessFlags() { return inner_access_flags; }
   /**
+  /* <p>
+  /* 
    * @return class index of inner class.
    */
   public final int getInnerClassIndex() { return inner_class_index; }
   /**
+  /* <p>
+  /* 
    * @return name index of inner class.
    */
   public final int getInnerNameIndex() { return inner_name_index; }
   /**
+  /* <p>
+  /* 
    * @return class index of outer class.
    */
   public final int getOuterClassIndex() { return outer_class_index; }
   /**
+  /* <p>
+  /* 
    * @param inner_access_flags.
    */
   public final void setInnerAccessFlags(int inner_access_flags) {
     this.inner_access_flags = inner_access_flags;
   }
   /**
+  /* <p>
+  /* 
    * @param inner_class_index.
    */
   public final void setInnerClassIndex(int inner_class_index) {
     this.inner_class_index = inner_class_index;
   }
   /**
+  /* <p>
+  /* 
    * @param inner_name_index.
    */
   public final void setInnerNameIndex(int inner_name_index) {
     this.inner_name_index = inner_name_index;
   }
   /**
+  /* <p>
+  /* 
    * @param outer_class_index.
    */
   public final void setOuterClassIndex(int outer_class_index) {
     this.outer_class_index = outer_class_index;
   }
   /**
+  /* <p>
+  /* 
    * @return String representation.
    */
   public final String toString() {
@@ -181,6 +246,8 @@ public final class InnerClass implements Cloneable, Node {
   }
 
   /**
+  /* <p>
+  /* 
    * @return Resolved string representation
    */
   public final String toString(ConstantPool constant_pool) {
@@ -212,6 +279,8 @@ public final class InnerClass implements Cloneable, Node {
   }
 
   /**
+  /* <p>
+  /* 
    * @return deep copy of this object
    */
   public InnerClass copy() {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -139,6 +140,65 @@ import sun.awt.AWTAccessor;
  * of any particular {@code KeyEvent} instance is not
  * in the range from {@code KEY_FIRST} to {@code KEY_LAST}.
  *
+ * <p>
+ *  指示组件中发生击键的事件
+ * <p>
+ *  当按下,释放或键入一个键时,该低级事件由组件对象(例如文本字段)生成。
+ * 事件被传递到每个<code> KeyListener </code>或<code> KeyAdapter </code >对象使用组件的<code> addKeyListener </code>方法(<code>
+ *  KeyAdapter </code>对象实现<code> KeyListener </code>接口)注册接收这样的事件每个这样的监听器对象获得这< > KeyEvent </code>。
+ *  当按下,释放或键入一个键时,该低级事件由组件对象(例如文本字段)生成。
+ * <p>
+ * <em>"键入的"事件</em>是更高级别的,通常不依赖于平台或键盘布局它们是在输入Unicode字符时生成的,并且是查找字符输入的首选方式。
+ * 最简单的情况是,通过单个按键(例如,"a")产生键类型事件。
+ * 然而,通常,通过一系列键按压(例如,'shift'+'a')产生字符,按键事件到键类型事件可以是多对一或多对多键发布通常不是生成键类型事件所必需的,但是在某些情况下,键类型事件直到键释放才会生成(例如,
+ * 在Windows中通过Alt-Numpad方法输入ASCII序列)对于不生成Unicode字符的键,不生成键类型事件(例如,动作键,修饰键等)。
+ * 最简单的情况是,通过单个按键(例如,"a")产生键类型事件。
+ * <p>
+ * getKeyChar方法总是返回一个有效的Unicode字符或CHAR_UNDEFINED KEY_TYPED事件报告的字符输入：KEY_PRESSED和KEY_RELEASED事件不一定与字符输入相关
+ * 联因此,getKeyChar方法的结果保证仅对KEY_TYPED事件有意义。
+ * <p>
+ *  对于按键和键释放的事件,getKeyCode方法返回事件的keyCode对于键入类型的事件,getKeyCode方法总是返回{@code VK_UNDEFINED} {@code getExtendedKeyCode}
+ * 方法也可用于许多国际键盘布局。
+ * 
+ * <p>
+ * <em>"按键按下"和"按键释放"事件是较低级别的,取决于平台和键盘布局它们是在按下或释放按键时生成的,并且是查找按键的唯一方法不会生成字符输入(例如,动作键,修饰键等)被按下或释放的键由{@code getKeyCode}
+ * 和{@code getExtendedKeyCode}方法指示,它们返回虚拟键代码。
+ * 
+ * <p>
+ *  <em>虚拟键代码</em>用于报告已按下的键盘琴键,而不是由一个或多个击键(例如"A",来自shift和"a")的组合生成的字符
+ * 
+ * <p>
+ * 例如,按Shift键将导致带有VK_SHIFT keyCode的KEY_PRESSED事件,而按'a'键将导致VK_A keyCode在释放"a"键后,将使用VK_A单独触发KEY_RELEASED事件
+ * 生成keyChar值为'A'的KEY_TYPED事件。
+ * 
+ * <p>
+ *  按下和释放键盘上的键将导致生成以下键事件(按顺序)：
+ * <PRE>
+ *  {@code KEY_PRESSED} {@code KEY_TYPED}(仅在生成有效的Unicode字符时生成){@code KEY_RELEASED}
+ * </PRE>
+ * 
+ *  但在某些情况下(例如自动重复或输入法被激活),顺序可以是不同的(并且取决于平台)
+ * 
+ * <p>
+ *  笔记：
+ * <ul>
+ * <li>不会导致Unicode字符的组合键(例如F1和帮助键等操作键)不会生成KEY_TYPED事件<li>并非所有键盘或系统都能生成所有虚拟键代码。
+ *  Java人工生成这些键<li>虚拟键代码不识别物理键：它们取决于平台和键盘布局例如,使用美式键盘布局时生成VK_Q的键将在使用法语键盘布局时生成VK_A <li>使用美式键盘布局时生成{@code VK_Q}
+ * 的键还会为俄语或希伯来语布局生成唯一代码对于这些和许多其他代码,在各种布局中没有{@code VK_}常量这些代码可以通过使用{@code getExtendedKeyCode}获得,并且在使用{@code VK_}
+ * 常数时被使用<li>并非所有字符都具有与其相关联的键码。
+ * <li>不会导致Unicode字符的组合键(例如F1和帮助键等操作键)不会生成KEY_TYPED事件<li>并非所有键盘或系统都能生成所有虚拟键代码。
+ * 例如,没有用于问号的键码,因为是不出现在主层上的键盘<li>为了支持与操作键的平台无关的处理,Java平台为函数使用一些额外的虚拟键常量,否则必须通过解释虚拟键来识别代码和修饰符例如,对于日语Windo
+ * ws键盘,返回VK_ALL_CANDIDATES,而不是带有ALT修饰符的VK_CONVERT <li>如<a href=\"/doc-files/FocusSpechtml\">焦点规范</a>中所指
+ * 定的,到焦点所有者。
+ * <li>不会导致Unicode字符的组合键(例如F1和帮助键等操作键)不会生成KEY_TYPED事件<li>并非所有键盘或系统都能生成所有虚拟键代码。
+ * </ul>
+ * 
+ * <p>
+ * 警告：除了由Java语言(VK_ENTER,VK_BACK_SPACE和VK_TAB)定义的那些键之外,不要依赖于VK_常量的值。Sun保留根据需要更改这些值的权利,以适应更宽范围的键盘未来
+ * <p>
+ *  如果任何特定{@code KeyEvent}实例的{@code id}参数不在{@code KEY_FIRST}到{@code KEY_LAST}的范围内,则会导致未指定的行为。
+ * 
+ * 
  * @author Carl Quinn
  * @author Amy Fowler
  * @author Norbert Lindenberg
@@ -158,16 +218,26 @@ public class KeyEvent extends InputEvent {
      * - false, if it was inactive
      * Used in Component.dispatchEventImpl to correctly dispatch
      * events when proxy is active
+     * <p>
+     *  存储本机事件分派系统的状态 - 如果事件已创建事件代理机制处于活动状态,则为true  - 如果处于非活动状态,则为false  - 在ComponentdispatchEventImpl中用于在代理
+     * 处于活动状态时正确分派事件。
+     * 
      */
     private boolean isProxyActive = false;
 
     /**
      * The first number in the range of ids used for key events.
+     * <p>
+     *  用于键事件的ids范围中的第一个数字
+     * 
      */
     public static final int KEY_FIRST = 400;
 
     /**
      * The last number in the range of ids used for key events.
+     * <p>
+     * 用于键事件的ids范围中的最后一个数字
+     * 
      */
     public static final int KEY_LAST  = 402;
 
@@ -177,18 +247,27 @@ public class KeyEvent extends InputEvent {
      * Often, however, characters are produced by series of key presses, and
      * the mapping from key pressed events to key typed events may be
      * many-to-one or many-to-many.
+     * <p>
+     *  "键入类型"事件当输入字符时产生该事件在最简单的情况下,它是由单个键按压产生的。然而,通常,通过一系列按键产生字符,并且从按键事件到键的映射类型事件可以是多对一或多对多
+     * 
      */
     public static final int KEY_TYPED = KEY_FIRST;
 
     /**
      * The "key pressed" event. This event is generated when a key
      * is pushed down.
+     * <p>
+     *  "按键"事件当按下键时产生此事件
+     * 
      */
     public static final int KEY_PRESSED = 1 + KEY_FIRST; //Event.KEY_PRESS
 
     /**
      * The "key released" event. This event is generated when a key
      * is let up.
+     * <p>
+     *  "释放键"事件当一个键被释放时,产生此事件
+     * 
      */
     public static final int KEY_RELEASED = 2 + KEY_FIRST; //Event.KEY_RELEASE
 
@@ -213,46 +292,75 @@ public class KeyEvent extends InputEvent {
 
     /**
      * Constant for the non-numpad <b>left</b> arrow key.
+     * <p>
+     *  非数字键盘<b>左</b>箭头键的常数
+     * 
+     * 
      * @see #VK_KP_LEFT
      */
     public static final int VK_LEFT           = 0x25;
 
     /**
      * Constant for the non-numpad <b>up</b> arrow key.
+     * <p>
+     *  非数字键盘<b>向上</b>箭头键的常数
+     * 
+     * 
      * @see #VK_KP_UP
      */
     public static final int VK_UP             = 0x26;
 
     /**
      * Constant for the non-numpad <b>right</b> arrow key.
+     * <p>
+     *  非数字键盘<b>右</b>箭头键的常数
+     * 
+     * 
      * @see #VK_KP_RIGHT
      */
     public static final int VK_RIGHT          = 0x27;
 
     /**
      * Constant for the non-numpad <b>down</b> arrow key.
+     * <p>
+     *  非数字键<b>向下</b>箭头键的常数
+     * 
+     * 
      * @see #VK_KP_DOWN
      */
     public static final int VK_DOWN           = 0x28;
 
     /**
      * Constant for the comma key, ","
+     * <p>
+     *  逗号键的常量,","
+     * 
      */
     public static final int VK_COMMA          = 0x2C;
 
     /**
      * Constant for the minus key, "-"
+     * <p>
+     *  减号键的常数," - "
+     * 
+     * 
      * @since 1.2
      */
     public static final int VK_MINUS          = 0x2D;
 
     /**
      * Constant for the period key, "."
+     * <p>
+     * 周期键的常数,""
+     * 
      */
     public static final int VK_PERIOD         = 0x2E;
 
     /**
      * Constant for the forward slash key, "/"
+     * <p>
+     *  正斜杠键的常数,"/"
+     * 
      */
     public static final int VK_SLASH          = 0x2F;
 
@@ -270,11 +378,17 @@ public class KeyEvent extends InputEvent {
 
     /**
      * Constant for the semicolon key, ";"
+     * <p>
+     *  常量为分号键,";"
+     * 
      */
     public static final int VK_SEMICOLON      = 0x3B;
 
     /**
      * Constant for the equals key, "="
+     * <p>
+     *  等于键的常量,"="
+     * 
      */
     public static final int VK_EQUALS         = 0x3D;
 
@@ -308,16 +422,25 @@ public class KeyEvent extends InputEvent {
 
     /**
      * Constant for the open bracket key, "["
+     * <p>
+     *  开括号键的常数,"["
+     * 
      */
     public static final int VK_OPEN_BRACKET   = 0x5B;
 
     /**
      * Constant for the back slash key, "\"
+     * <p>
+     *  反斜杠键的常量,"\\"
+     * 
      */
     public static final int VK_BACK_SLASH     = 0x5C;
 
     /**
      * Constant for the close bracket key, "]"
+     * <p>
+     *  右括号键的常数,"]"
+     * 
      */
     public static final int VK_CLOSE_BRACKET  = 0x5D;
 
@@ -337,12 +460,20 @@ public class KeyEvent extends InputEvent {
     /**
      * This constant is obsolete, and is included only for backwards
      * compatibility.
+     * <p>
+     *  此常量已过时,仅用于向后兼容性
+     * 
+     * 
      * @see #VK_SEPARATOR
      */
     public static final int VK_SEPARATER      = 0x6C;
 
     /**
      * Constant for the Numpad Separator key.
+     * <p>
+     *  Numpad分隔符键的常量
+     * 
+     * 
      * @since 1.4
      */
     public static final int VK_SEPARATOR      = VK_SEPARATER;
@@ -392,6 +523,10 @@ public class KeyEvent extends InputEvent {
 
     /**
      * Constant for the F13 function key.
+     * <p>
+     *  F13功能键的常数
+     * 
+     * 
      * @since 1.2
      */
     /* F13 - F24 are used on IBM 3270 keyboard; use random range for constants. */
@@ -399,66 +534,110 @@ public class KeyEvent extends InputEvent {
 
     /**
      * Constant for the F14 function key.
+     * <p>
+     *  F14功能键的常量
+     * 
+     * 
      * @since 1.2
      */
     public static final int VK_F14            = 0xF001;
 
     /**
      * Constant for the F15 function key.
+     * <p>
+     *  F15功能键的常量
+     * 
+     * 
      * @since 1.2
      */
     public static final int VK_F15            = 0xF002;
 
     /**
      * Constant for the F16 function key.
+     * <p>
+     *  F16功能键的常量
+     * 
+     * 
      * @since 1.2
      */
     public static final int VK_F16            = 0xF003;
 
     /**
      * Constant for the F17 function key.
+     * <p>
+     *  F17功能键的常量
+     * 
+     * 
      * @since 1.2
      */
     public static final int VK_F17            = 0xF004;
 
     /**
      * Constant for the F18 function key.
+     * <p>
+     *  F18功能键的常量
+     * 
+     * 
      * @since 1.2
      */
     public static final int VK_F18            = 0xF005;
 
     /**
      * Constant for the F19 function key.
+     * <p>
+     *  F19功能键的常量
+     * 
+     * 
      * @since 1.2
      */
     public static final int VK_F19            = 0xF006;
 
     /**
      * Constant for the F20 function key.
+     * <p>
+     *  F20功能键的常量
+     * 
+     * 
      * @since 1.2
      */
     public static final int VK_F20            = 0xF007;
 
     /**
      * Constant for the F21 function key.
+     * <p>
+     *  F21功能键的常量
+     * 
+     * 
      * @since 1.2
      */
     public static final int VK_F21            = 0xF008;
 
     /**
      * Constant for the F22 function key.
+     * <p>
+     *  F22功能键的常量
+     * 
+     * 
      * @since 1.2
      */
     public static final int VK_F22            = 0xF009;
 
     /**
      * Constant for the F23 function key.
+     * <p>
+     *  F23功能键的常数
+     * 
+     * 
      * @since 1.2
      */
     public static final int VK_F23            = 0xF00A;
 
     /**
      * Constant for the F24 function key.
+     * <p>
+     * F24功能键的常数
+     * 
+     * 
      * @since 1.2
      */
     public static final int VK_F24            = 0xF00B;
@@ -473,6 +652,10 @@ public class KeyEvent extends InputEvent {
 
     /**
      * Constant for the numeric keypad <b>up</b> arrow key.
+     * <p>
+     *  数字键盘的常数<b>向上</b>箭头键
+     * 
+     * 
      * @see #VK_UP
      * @since 1.2
      */
@@ -480,6 +663,10 @@ public class KeyEvent extends InputEvent {
 
     /**
      * Constant for the numeric keypad <b>down</b> arrow key.
+     * <p>
+     *  数字键盘的常数<b>向下</b>箭头键
+     * 
+     * 
      * @see #VK_DOWN
      * @since 1.2
      */
@@ -487,6 +674,10 @@ public class KeyEvent extends InputEvent {
 
     /**
      * Constant for the numeric keypad <b>left</b> arrow key.
+     * <p>
+     *  数字键盘的常数<b>左</b>箭头键
+     * 
+     * 
      * @see #VK_LEFT
      * @since 1.2
      */
@@ -494,6 +685,10 @@ public class KeyEvent extends InputEvent {
 
     /**
      * Constant for the numeric keypad <b>right</b> arrow key.
+     * <p>
+     *  数字键盘的常数<b>向右</b>箭头键
+     * 
+     * 
      * @see #VK_RIGHT
      * @since 1.2
      */
@@ -551,72 +746,120 @@ public class KeyEvent extends InputEvent {
 
     /**
      * Constant for the "@" key.
+     * <p>
+     *  "@"键的常量
+     * 
+     * 
      * @since 1.2
      */
     public static final int VK_AT                       = 0x0200;
 
     /**
      * Constant for the ":" key.
+     * <p>
+     *  "："键的常量
+     * 
+     * 
      * @since 1.2
      */
     public static final int VK_COLON                    = 0x0201;
 
     /**
      * Constant for the "^" key.
+     * <p>
+     *  "^"键的常数
+     * 
+     * 
      * @since 1.2
      */
     public static final int VK_CIRCUMFLEX               = 0x0202;
 
     /**
      * Constant for the "$" key.
+     * <p>
+     *  "$"键的常量
+     * 
+     * 
      * @since 1.2
      */
     public static final int VK_DOLLAR                   = 0x0203;
 
     /**
      * Constant for the Euro currency sign key.
+     * <p>
+     *  欧元货币符号键的常数
+     * 
+     * 
      * @since 1.2
      */
     public static final int VK_EURO_SIGN                = 0x0204;
 
     /**
      * Constant for the "!" key.
+     * <p>
+     *  常数为"！"键
+     * 
+     * 
      * @since 1.2
      */
     public static final int VK_EXCLAMATION_MARK         = 0x0205;
 
     /**
      * Constant for the inverted exclamation mark key.
+     * <p>
+     *  反转感叹号键的常数
+     * 
+     * 
      * @since 1.2
      */
     public static final int VK_INVERTED_EXCLAMATION_MARK = 0x0206;
 
     /**
      * Constant for the "(" key.
+     * <p>
+     *  常量为"("键
+     * 
+     * 
      * @since 1.2
      */
     public static final int VK_LEFT_PARENTHESIS         = 0x0207;
 
     /**
      * Constant for the "#" key.
+     * <p>
+     *  "#"键的常数
+     * 
+     * 
      * @since 1.2
      */
     public static final int VK_NUMBER_SIGN              = 0x0208;
 
     /**
      * Constant for the "+" key.
+     * <p>
+     *  "+"键的常数
+     * 
+     * 
      * @since 1.2
      */
     public static final int VK_PLUS                     = 0x0209;
 
     /**
      * Constant for the ")" key.
+     * <p>
+     *  ")"键的常数
+     * 
+     * 
      * @since 1.2
      */
     public static final int VK_RIGHT_PARENTHESIS        = 0x020A;
 
     /**
      * Constant for the "_" key.
+     * <p>
+     *  "_"键的常数
+     * 
+     * 
      * @since 1.2
      */
     public static final int VK_UNDERSCORE               = 0x020B;
@@ -624,6 +867,10 @@ public class KeyEvent extends InputEvent {
     /**
      * Constant for the Microsoft Windows "Windows" key.
      * It is used for both the left and right version of the key.
+     * <p>
+     *  Microsoft Windows"Windows"键的常量它用于左和右版本的键
+     * 
+     * 
      * @see #getKeyLocation()
      * @since 1.5
      */
@@ -631,6 +878,10 @@ public class KeyEvent extends InputEvent {
 
     /**
      * Constant for the Microsoft Windows Context Menu key.
+     * <p>
+     *  Microsoft Windows上下文菜单键的常量
+     * 
+     * 
      * @since 1.5
      */
     public static final int VK_CONTEXT_MENU             = 0x020D;
@@ -656,15 +907,23 @@ public class KeyEvent extends InputEvent {
     public static final int VK_MODECHANGE               = 0x001F;
 
     /* replaced by VK_KANA_LOCK for Microsoft Windows and Solaris;
+    /* <p>
+    /* 
        might still be used on other platforms */
     public static final int VK_KANA                     = 0x0015;
 
     /* replaced by VK_INPUT_METHOD_ON_OFF for Microsoft Windows and Solaris;
+    /* <p>
+    /* 
        might still be used for other platforms */
     public static final int VK_KANJI                    = 0x0019;
 
     /**
      * Constant for the Alphanumeric function key.
+     * <p>
+     * 字母数字功能键的常数
+     * 
+     * 
      * @since 1.2
      */
     /* Japanese PC 106 keyboard: eisuu */
@@ -672,6 +931,10 @@ public class KeyEvent extends InputEvent {
 
     /**
      * Constant for the Katakana function key.
+     * <p>
+     *  片假名功能键的常量
+     * 
+     * 
      * @since 1.2
      */
     /* Japanese PC 106 keyboard: katakana */
@@ -679,6 +942,10 @@ public class KeyEvent extends InputEvent {
 
     /**
      * Constant for the Hiragana function key.
+     * <p>
+     *  平假名功能键的常量
+     * 
+     * 
      * @since 1.2
      */
     /* Japanese PC 106 keyboard: hiragana */
@@ -686,6 +953,10 @@ public class KeyEvent extends InputEvent {
 
     /**
      * Constant for the Full-Width Characters function key.
+     * <p>
+     *  全角字符功能键的常量
+     * 
+     * 
      * @since 1.2
      */
     /* Japanese PC 106 keyboard: zenkaku */
@@ -693,6 +964,10 @@ public class KeyEvent extends InputEvent {
 
     /**
      * Constant for the Half-Width Characters function key.
+     * <p>
+     *  半角字符功能键的常量
+     * 
+     * 
      * @since 1.2
      */
     /* Japanese PC 106 keyboard: hankaku */
@@ -700,6 +975,10 @@ public class KeyEvent extends InputEvent {
 
     /**
      * Constant for the Roman Characters function key.
+     * <p>
+     *  罗马字符功能键的常量
+     * 
+     * 
      * @since 1.2
      */
     /* Japanese PC 106 keyboard: roumaji */
@@ -707,6 +986,10 @@ public class KeyEvent extends InputEvent {
 
     /**
      * Constant for the All Candidates function key.
+     * <p>
+     *  All Candidates功能键的常数
+     * 
+     * 
      * @since 1.2
      */
     /* Japanese PC 106 keyboard - VK_CONVERT + ALT: zenkouho */
@@ -714,6 +997,10 @@ public class KeyEvent extends InputEvent {
 
     /**
      * Constant for the Previous Candidate function key.
+     * <p>
+     *  上一个候选功能键的常数
+     * 
+     * 
      * @since 1.2
      */
     /* Japanese PC 106 keyboard - VK_CONVERT + SHIFT: maekouho */
@@ -721,6 +1008,10 @@ public class KeyEvent extends InputEvent {
 
     /**
      * Constant for the Code Input function key.
+     * <p>
+     *  代码输入功能键的常数
+     * 
+     * 
      * @since 1.2
      */
     /* Japanese PC 106 keyboard - VK_ALPHANUMERIC + ALT: kanji bangou */
@@ -729,6 +1020,10 @@ public class KeyEvent extends InputEvent {
     /**
      * Constant for the Japanese-Katakana function key.
      * This key switches to a Japanese input method and selects its Katakana input mode.
+     * <p>
+     *  日语片假名功能键的常数此键切换到日语输入法,并选择其片假名输入模式
+     * 
+     * 
      * @since 1.2
      */
     /* Japanese Macintosh keyboard - VK_JAPANESE_HIRAGANA + SHIFT */
@@ -737,6 +1032,10 @@ public class KeyEvent extends InputEvent {
     /**
      * Constant for the Japanese-Hiragana function key.
      * This key switches to a Japanese input method and selects its Hiragana input mode.
+     * <p>
+     *  日语 - 平假名功能键的常数此键切换到日语输入法,并选择其平假名输入模式
+     * 
+     * 
      * @since 1.2
      */
     /* Japanese Macintosh keyboard */
@@ -745,6 +1044,10 @@ public class KeyEvent extends InputEvent {
     /**
      * Constant for the Japanese-Roman function key.
      * This key switches to a Japanese input method and selects its Roman-Direct input mode.
+     * <p>
+     * 日语 - 罗马功能键的常数此键切换到日语输入法,并选择其Roman-Direct输入模式
+     * 
+     * 
      * @since 1.2
      */
     /* Japanese Macintosh keyboard */
@@ -753,6 +1056,10 @@ public class KeyEvent extends InputEvent {
     /**
      * Constant for the locking Kana function key.
      * This key locks the keyboard into a Kana layout.
+     * <p>
+     *  锁定Kana功能键的常数此键将键盘锁定为Kana布局
+     * 
+     * 
      * @since 1.3
      */
     /* Japanese PC 106 keyboard with special Windows driver - eisuu + Control; Japanese Solaris keyboard: kana */
@@ -760,6 +1067,10 @@ public class KeyEvent extends InputEvent {
 
     /**
      * Constant for the input method on/off key.
+     * <p>
+     *  输入法开/关键的常数
+     * 
+     * 
      * @since 1.3
      */
     /* Japanese PC 106 keyboard: kanji. Japanese Solaris keyboard: nihongo */
@@ -785,18 +1096,30 @@ public class KeyEvent extends InputEvent {
 
     /**
      * Constant for the Compose function key.
+     * <p>
+     *  Compose功能键的常量
+     * 
+     * 
      * @since 1.2
      */
     public static final int VK_COMPOSE                  = 0xFF20;
 
     /**
      * Constant for the AltGraph function key.
+     * <p>
+     *  AltGraph功能键的常量
+     * 
+     * 
      * @since 1.2
      */
     public static final int VK_ALT_GRAPH                = 0xFF7E;
 
     /**
      * Constant for the Begin key.
+     * <p>
+     *  开始键的常量
+     * 
+     * 
      * @since 1.5
      */
     public static final int VK_BEGIN                    = 0xFF58;
@@ -805,12 +1128,18 @@ public class KeyEvent extends InputEvent {
      * This value is used to indicate that the keyCode is unknown.
      * KEY_TYPED events do not have a keyCode value; this value
      * is used instead.
+     * <p>
+     *  此值用于指示keyCode未知,KEY_TYPED事件没有keyCode值;将使用此值
+     * 
      */
     public static final int VK_UNDEFINED      = 0x0;
 
     /**
      * KEY_PRESSED and KEY_RELEASED events which do not map to a
      * valid Unicode character use this for the keyChar value.
+     * <p>
+     *  未映射到有效Unicode字符的KEY_PRESSED和KEY_RELEASED事件使用此keyChar值
+     * 
      */
     public static final char CHAR_UNDEFINED   = 0xFFFF;
 
@@ -819,6 +1148,10 @@ public class KeyEvent extends InputEvent {
      * or not relevant.
      * <code>KEY_TYPED</code> events do not have a keyLocation; this value
      * is used instead.
+     * <p>
+     *  一个常数,指示keyLocation是不确定的或不相关的<code> KEY_TYPED </code>事件没有keyLocation;将使用此值
+     * 
+     * 
      * @since 1.4
      */
     public static final int KEY_LOCATION_UNKNOWN  = 0;
@@ -829,6 +1162,10 @@ public class KeyEvent extends InputEvent {
      * and did not originate on the numeric keypad (or did not
      * originate with a virtual key corresponding to the numeric
      * keypad).
+     * <p>
+     * 指示按下或释放的键不被区分为键的左或右版本,并且不是在数字键盘上发起(或者不是利用与数字键盘相对应的虚拟键)的常数,
+     * 
+     * 
      * @since 1.4
      */
     public static final int KEY_LOCATION_STANDARD = 1;
@@ -837,6 +1174,10 @@ public class KeyEvent extends InputEvent {
      * A constant indicating that the key pressed or released is in
      * the left key location (there is more than one possible location
      * for this key).  Example: the left shift key.
+     * <p>
+     *  指示按下或释放键的常数在左键位置(该键有多个可能的位置)示例：左移键
+     * 
+     * 
      * @since 1.4
      */
     public static final int KEY_LOCATION_LEFT     = 2;
@@ -845,6 +1186,10 @@ public class KeyEvent extends InputEvent {
      * A constant indicating that the key pressed or released is in
      * the right key location (there is more than one possible location
      * for this key).  Example: the right shift key.
+     * <p>
+     *  指示按下或释放的键位于右键位置的常数(此键有多个可能的位置)示例：右移键
+     * 
+     * 
      * @since 1.4
      */
     public static final int KEY_LOCATION_RIGHT    = 3;
@@ -853,6 +1198,10 @@ public class KeyEvent extends InputEvent {
      * A constant indicating that the key event originated on the
      * numeric keypad or with a virtual key corresponding to the
      * numeric keypad.
+     * <p>
+     *  指示键事件源于数字键盘或与数字键盘相对应的虚拟键的常数
+     * 
+     * 
      * @since 1.4
      */
     public static final int KEY_LOCATION_NUMPAD   = 4;
@@ -864,6 +1213,10 @@ public class KeyEvent extends InputEvent {
      * The symbolic name for a key code should be used rather
      * than the code value itself.
      *
+     * <p>
+     * 分配给键盘上每个键的唯一值有大多数键盘可以触发的一组常用键代码应该使用键代码的符号名称,而不是代码值本身
+     * 
+     * 
      * @serial
      * @see #getKeyCode()
      * @see #setKeyCode(int)
@@ -875,6 +1228,10 @@ public class KeyEvent extends InputEvent {
      * that is fired by a key or a key combination on
      * a keyboard.
      *
+     * <p>
+     *  <code> keyChar </code>是由键盘或键盘上的组合键触发的有效Unicode字符
+     * 
+     * 
      * @serial
      * @see #getKeyChar()
      * @see #setKeyChar(char)
@@ -892,6 +1249,15 @@ public class KeyEvent extends InputEvent {
      * <code>KEY_LOCATION_STANDARD</code>, <code>KEY_LOCATION_LEFT</code>,
      * <code>KEY_LOCATION_RIGHT</code>, and <code>KEY_LOCATION_NUMPAD</code>.
      *
+     * <p>
+     *  键盘上键的位置
+     * 
+     *  一些键在键盘上出现多次,例如,左和右Shift键。此外,一些键出现在数字键盘上此变量用于区分这些键
+     * 
+     *  唯一的合法值是<code> KEY_LOCATION_UNKNOWN </code>,<code> KEY_LOCATION_STANDARD </code>,<code> KEY_LOCATION_
+     * LEFT </code>,<code> KEY_LOCATION_RIGHT </code>和<code> KEY_LOCATION_NUMPAD </code>。
+     * 
+     * 
      * @serial
      * @see #getKeyLocation()
      */
@@ -905,6 +1271,9 @@ public class KeyEvent extends InputEvent {
 
     /*
      * JDK 1.1 serialVersionUID
+     * <p>
+     *  JDK 11 serialVersionUID
+     * 
      */
     private static final long serialVersionUID = -2352130953028126954L;
 
@@ -940,6 +1309,9 @@ public class KeyEvent extends InputEvent {
     /**
      * Initialize JNI field and method IDs for fields that may be
      * accessed from C.
+     * <p>
+     * 初始化可从C访问的字段的JNI字段和方法ID
+     * 
      */
     private static native void initIDs();
 
@@ -948,6 +1320,11 @@ public class KeyEvent extends InputEvent {
      *
      * Event source can be changed during processing, but in some cases
      * we need to be able to obtain original source.
+     * <p>
+     *  原始事件源
+     * 
+     *  事件源可以在处理期间更改,但在某些情况下,我们需要能够获取原始源
+     * 
      */
     private Component originalSource;
 
@@ -963,6 +1340,11 @@ public class KeyEvent extends InputEvent {
      * <code>IllegalArgumentException</code> if <code>source</code>
      * is <code>null</code>.
      *
+     * <p>
+     *  构造<code> KeyEvent </code>对象<p>如果<code>源</code>是<code> null </code>,此方法会抛出<code> IllegalArgumentExcep
+     * tion </code>。
+     * 
+     * 
      * @param source    The <code>Component</code> that originated the event
      * @param id              An integer indicating the type of event.
      *                  For information on allowable values, see
@@ -1044,6 +1426,11 @@ public class KeyEvent extends InputEvent {
      * <code>IllegalArgumentException</code> if <code>source</code>
      * is <code>null</code>.
      *
+     * <p>
+     *  构造<code> KeyEvent </code>对象<p>如果<code>源</code>是<code> null </code>,此方法会抛出<code> IllegalArgumentExcep
+     * tion </code>。
+     * 
+     * 
      * @param source    The <code>Component</code> that originated the event
      * @param id              An integer indicating the type of event.
      *                  For information on allowable values, see
@@ -1085,6 +1472,8 @@ public class KeyEvent extends InputEvent {
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated as of JDK1.1
      */
     @Deprecated
@@ -1096,6 +1485,10 @@ public class KeyEvent extends InputEvent {
     /**
      * Returns the integer keyCode associated with the key in this event.
      *
+     * <p>
+     *  返回与此事件中的键相关联的整数keyCode
+     * 
+     * 
      * @return the integer code for an actual key on the keyboard.
      *         (For <code>KEY_TYPED</code> events, the keyCode is
      *         <code>VK_UNDEFINED</code>.)
@@ -1107,6 +1500,10 @@ public class KeyEvent extends InputEvent {
     /**
      * Set the keyCode value to indicate a physical key.
      *
+     * <p>
+     *  设置keyCode值以指示物理键
+     * 
+     * 
      * @param keyCode an integer corresponding to an actual key on the keyboard.
      */
     public void setKeyCode(int keyCode) {
@@ -1123,6 +1520,13 @@ public class KeyEvent extends InputEvent {
      * the values returned by this method are guaranteed to be
      * meaningful only for <code>KEY_TYPED</code> events.
      *
+     * <p>
+     *  返回与此事件中的键相关联的字符例如,shift +"a"的<code> KEY_TYPED </code>事件返回"A"
+     * <p>
+     * <code> KEY_PRESSED </code>和<code> KEY_RELEASED </code>事件不适用于报告字符输入因此,此方法返回的值仅在<code> KEY_TYPED </code>
+     * 事件。
+     * 
+     * 
      * @return the Unicode character defined for this key event.
      *         If no valid Unicode character exists for this key event,
      *         <code>CHAR_UNDEFINED</code> is returned.
@@ -1134,6 +1538,10 @@ public class KeyEvent extends InputEvent {
     /**
      * Set the keyChar value to indicate a logical character.
      *
+     * <p>
+     *  设置keyChar值以指示逻辑字符
+     * 
+     * 
      * @param keyChar a char corresponding to to the combination of keystrokes
      *                that make up this event.
      */
@@ -1150,6 +1558,12 @@ public class KeyEvent extends InputEvent {
      * especially true for <code>KEY_TYPED</code> events where the shift
      * modifier is changed.
      *
+     * <p>
+     *  设置修饰符以指示按住的附加键(例如shift,ctrl,alt,meta),定义为InputEvent的一部分
+     * <p>
+     *  注意：不建议使用此方法,因为许多AWT实现不识别修饰符更改这对于更改了shift修饰符的<code> KEY_TYPED </code>事件尤其如此
+     * 
+     * 
      * @param modifiers an integer combination of the modifier constants.
      * @see InputEvent
      * @deprecated as of JDK1.1.4
@@ -1171,6 +1585,12 @@ public class KeyEvent extends InputEvent {
      * right shift keys.  Additionally, some keys occur on the numeric
      * keypad.  This provides a way of distinguishing such keys.
      *
+     * <p>
+     *  返回发生此键事件的键的位置
+     * 
+     * 一些键在键盘上出现多次,例如左和右Shift键。此外,一些键出现在数字键盘上这提供了区分这些键的方式
+     * 
+     * 
      * @return the location of the key that was pressed or released.
      *         Always returns <code>KEY_LOCATION_UNKNOWN</code> for
      *         <code>KEY_TYPED</code> events.
@@ -1184,6 +1604,10 @@ public class KeyEvent extends InputEvent {
      * Returns a String describing the keyCode, such as "HOME", "F1" or "A".
      * These strings can be localized by changing the awt.properties file.
      *
+     * <p>
+     *  返回描述keyCode的字符串,例如"HOME","F1"或"A"这些字符串可以通过更改awtproperties文件
+     * 
+     * 
      * @return a string containing a text description for a physical key,
      *         identified by its keyCode
      */
@@ -1376,6 +1800,13 @@ public class KeyEvent extends InputEvent {
      * <code>InputEvent.BUTTON3_MASK</code> have the same value,
      * so the string "Meta" is returned for both modifiers.
      *
+     * <p>
+     *  返回描述修饰符键(例如"Shift"或"Ctrl + Shift")的<code> String </code>这些字符串可以通过更改<code> awtproperties </code>文件
+     * <p>
+     * 请注意,<code> InputEventALT_MASK </code>和<code> InputEventBUTTON2_MASK </code>具有相同的值,因此为两个修饰符返回字符串"Alt"同
+     * 样,<code> InputEventMETA_MASK </code>和<code> InputEventBUTTON3_MASK </code>具有相同的值,因此为两个修饰符返回字符串"Meta"。
+     * 
+     * 
      * @return string a text description of the combination of modifier
      *                keys that were held down during the event
      * @see InputEvent#getModifiersExText(int)
@@ -1418,6 +1849,10 @@ public class KeyEvent extends InputEvent {
      * Typically an action key does not fire a unicode character and is
      * not a modifier key.
      *
+     * <p>
+     *  返回此事件中的键是否为"action"键通常,操作键不会触发unicode字符,而不是修饰键
+     * 
+     * 
      * @return <code>true</code> if the key is an "action" key,
      *         <code>false</code> otherwise
      */
@@ -1512,6 +1947,10 @@ public class KeyEvent extends InputEvent {
      * Returns a parameter string identifying this event.
      * This method is useful for event logging and for debugging.
      *
+     * <p>
+     *  返回标识此事件的参数字符串此方法对于事件日志记录和调试非常有用
+     * 
+     * 
      * @return a string identifying the event and its attributes
      */
     public String paramString() {
@@ -1538,6 +1977,9 @@ public class KeyEvent extends InputEvent {
         /* Some keychars don't print well, e.g. escape, backspace,
          * tab, return, delete, cancel.  Get keyText for the keyCode
          * instead of the keyChar.
+         * <p>
+         *  tab,return,delete,cancel获取keyCode的keyText,而不是keyChar
+         * 
          */
         str.append(",keyChar=");
         switch (keyChar) {
@@ -1612,6 +2054,11 @@ public class KeyEvent extends InputEvent {
      * Pressing the same key in a regular Russian layout gives another code, unique for the
      * letter "Cyrillic I short".
      *
+     * <p>
+     * 返回事件的扩展键代码扩展键代码是一个分配给键盘上的键的唯一id,就像{@code keyCode}但是,与{@code keyCode}不同,这个值取决于当前的键盘布局例如,在普通英语布局中按左最高字母
+     * 键产生与{@code keyCode}相同的值,{@code VK_Q}在普通的俄语布局中按相同的键给出另一个代码,对于字母"Cyrillic I short"是唯一的,。
+     * 
+     * 
      * @since 1.7
      *
      */
@@ -1621,6 +2068,10 @@ public class KeyEvent extends InputEvent {
     /**
      * Returns an extended key code for a unicode character.
      *
+     * <p>
+     *  返回unicode字符的扩展键代码
+     * 
+     * 
      * @return for a unicode character with a corresponding {@code VK_} constant -- this
      *   {@code VK_} constant; for a character appearing on the primary
      *   level of a known keyboard layout -- a unique integer.
@@ -1638,6 +2089,9 @@ public class KeyEvent extends InputEvent {
     /**
      * Sets new modifiers by the old ones. The key modifiers
      * override overlaping mouse modifiers.
+     * <p>
+     *  使用旧的修饰符设置新的修饰符键修饰符覆盖重叠的鼠标修饰符
+     * 
      */
     private void setNewModifiers() {
         if ((modifiers & SHIFT_MASK) != 0) {
@@ -1662,6 +2116,9 @@ public class KeyEvent extends InputEvent {
 
     /**
      * Sets old modifiers by the new ones.
+     * <p>
+     *  通过新的修饰符设置旧的修饰符
+     * 
      */
     private void setOldModifiers() {
         if ((modifiers & SHIFT_DOWN_MASK) != 0) {
@@ -1687,6 +2144,9 @@ public class KeyEvent extends InputEvent {
     /**
      * Sets new modifiers by the old ones. The key modifiers
      * override overlaping mouse modifiers.
+     * <p>
+     *  使用旧的修饰符设置新的修饰符键修饰符覆盖重叠的鼠标修饰符
+     * 
      * @serial
      */
     private void readObject(ObjectInputStream s)

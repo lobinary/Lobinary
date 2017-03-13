@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -171,6 +172,61 @@ import sun.awt.AWTAccessor;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  {@code UIManager}管理当前外观和感觉,当外观和感觉变化时通知的可用外观和感觉集合{@code PropertyChangeListeners},外观和感觉默认值,以及用于获取各种默认值
+ * 的便利方法。
+ * 
+ *  <h3>指定外观和感觉</h3>
+ * 
+ *  可以通过两种不同的方式指定外观和感觉：通过为外观和感觉指定类的完全限定名称,或者创建{@code LookAndFeel}的实例并将其传递给{@code setLookAndFeel}。
+ * 下面的示例说明了设置外观和感觉到系统的外观和感觉：。
+ * <pre>
+ * UIManagersetLookAndFeel(UIManagergetSystemLookAndFeelClassName());
+ * </pre>
+ *  以下示例说明了基于类名设置外观和感觉：
+ * <pre>
+ *  UIManagersetLookAndFeel("javaxswingplafmetalMetalLookAndFeel");
+ * </pre>
+ *  一旦外观和感觉已经改变,就必须在所有{@code JComponents}上调用{@code updateUI}。
+ * {@link SwingUtilities#updateComponentTreeUI}方法可以很容易地将{@code updateUI}应用到包含层次结构。
+ * 参考它的详细信息更改外观和感觉后不调用{@code updateUI}的确切行为是未指定的非常有可能接收意外的异常,绘画问题,或更糟。
+ * 
+ *  <h3>默认外观</h3>
+ * 
+ *  用于默认外观的类以下列方式选择：
+ * <ol>
+ * <li>如果系统属性<code> swingdefaultlaf </code>为{@code non-null},请使用其值作为默认外观类名称<li>如果{@link javautilProperties}
+ * 文件<code> swingproperties </code>存在并包含键<code> swingdefaultlaf </code>,将其值用作默认外观和感觉类名称检查<code> swingpro
+ * perties </code>的位置可能会根据实施Java平台通常,<code> swingproperties </code>文件位于Java安装目录的<code> lib </code>子目录中。
+ * 参考要用于进一步详细信息的实现的发行说明<li>否则使用跨平台的外观和感觉。
+ * </ol>
+ * 
+ *  <h3>默认</h3>
+ * 
+ * {@code UIManager}管理三组{@code UIDefaults},它们是：
+ * <ol>
+ *  <li>开发人员默认值除了少数例外,Swing不会更改开发人员默认值;这些是开发者修改和使用<li>外观和默认默认值外观和感觉默认值由安装时的外观和感觉作为当前的外观({@code setLookAndFeel()}
+ * 被调用)外观和感觉默认值可以使用{@code getLookAndFeelDefaults()}方法获得<li>系统默认值系统默认值由Swing提供。
+ * </ol>
+ * 调用各种{@code get}方法会导致按顺序检查每个默认值,返回第一个{@code non-null}值。
+ * 例如,调用{@code UIManagergetString("Tableforeground")}检查开发人员默认值如果开发人员默认值包含{@code"Tableforeground"}的值,则返回它
+ * ,否则将检查外观和默认值,然后检查系统默认值。
+ * 调用各种{@code get}方法会导致按顺序检查每个默认值,返回第一个{@code non-null}值。
+ * <p>
+ * 重要的是要注意,{@code getDefaults}返回一个内置了这个分辨率逻辑的{@code UIDefaults}的自定义实例例如,{@code UIManagergetDefaults()getString("Tableforeground")}
+ * 等价于{@code UIManagergetString ("Tableforeground")}两者都使用刚刚描述的算法解析在许多地方,文档使用单词defaults来引用{@code UIDefaults}
+ * 的自定义实例,具有如前所述的解析逻辑。
+ * <p>
+ *  当外观和感觉改变时,{@code UIManager}只改变外观和感觉的默认值;开发人员和系统默认值不会被{@code UIManager}以任何方式改变
+ * <p>
+ * 此外,每种外观和感觉(或者由外观和感觉提供的{@code ComponentUI})可以在其生命中的不同时间访问默认值循环一些外观和感觉可能积极地查找默认值,以便更改默认值可能在安装外观和感觉后没有影响
+ * 其他外观和感觉可能会延迟访问默认值,以便更改默认值可能影响现有的外观和感觉最后,其他外观和感觉可能不会以任何方式从默认表中配置自己无论如何,通常情况下,外观和感觉期望某些默认值,所以一般来说,{@code ComponentUI}
+ * 提供的一种外观和感觉不会工作与另一种外观和感觉。
+ * <p>
+ * <strong>警告：</strong>此类的序列化对象将不与未来的Swing版本兼容当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ * 支持长期存储所有JavaBeans&trade;已添加到<code> javabeans </code>包中请参见{@link javabeansXMLEncoder}。
+ * 
+ * 
  * @author Thomas Ball
  * @author Hans Muller
  */
@@ -185,6 +241,12 @@ public class UIManager implements Serializable
      * applications running in a single VM) have their own state. For example,
      * an applet can alter its look and feel, see <code>setLookAndFeel</code>.
      * Doing so has no affect on other applets (or the browser).
+     * <p>
+     * 这个类定义了由<code> UIManager </code>管理的状态。
+     * 对于Swing应用程序,这个类中的字段也可以是<code> UIManager </code>的静态成员,但是我们给它们"AppContext" applet(以及可能在单个VM中运行的多个轻量级应用程
+     * 序)有自己的状态例如,一个applet可以改变它的外观和感觉,参见<code> setLookAndFeel </code>这样做对其他applet浏览器)。
+     * 这个类定义了由<code> UIManager </code>管理的状态。
+     * 
      */
     private static class LAFState
     {
@@ -213,6 +275,10 @@ public class UIManager implements Serializable
          * <code>SwingPropertyChangeSupport</code> will be returned, if
          * <code>create</code> is false and this has not been invoked
          * with true, null will be returned.
+         * <p>
+         *  返回当前AppContext的SwingPropertyChangeSupport如果<code> create </code>为true,则会返回非null <code> SwingProperty
+         * ChangeSupport </code>,如果<code> create </code>未使用true调用,将返回null。
+         * 
          */
         public synchronized SwingPropertyChangeSupport
                                  getPropertyChangeSupport(boolean create) {
@@ -228,6 +294,7 @@ public class UIManager implements Serializable
 
 
     /* Lock object used in place of class object for synchronization. (4187686)
+    /* <p>
      */
     private static final Object classLock = new Object();
 
@@ -237,6 +304,11 @@ public class UIManager implements Serializable
      * for example:
      * <pre>
      *     getLAFState().initialized = true;
+     * </pre>
+     * <p>
+     * 返回<code> LAFState </code>对象,如果需要,可以懒惰地创建所有访问<code> LAFState </code>字段是通过此方法完成的,例如：
+     * <pre>
+     *  getLAFState()initialized = true;
      * </pre>
      */
     private static LAFState getLAFState() {
@@ -259,6 +331,9 @@ public class UIManager implements Serializable
 
     /* Keys used in the <code>swing.properties</code> properties file.
      * See loadUserProperties(), initialize().
+     * <p>
+     *  请参阅loadUserProperties(),initialize()
+     * 
      */
 
     private static final String defaultLAFKey = "swing.defaultlaf";
@@ -271,6 +346,9 @@ public class UIManager implements Serializable
      * Return a <code>swing.properties</code> file key for the attribute of specified
      * look and feel.  The attr is either "name" or "class", a typical
      * key would be: "swing.installedlaf.windows.name"
+     * <p>
+     *  为指定外观的属性返回<code> swingproperties </code>文件键attr是"name"或"class",典型的键是："swinginstalledlafwindowsname"。
+     * 
      */
     private static String makeInstalledLAFKey(String laf, String attr) {
         return "swing.installedlaf." + laf + "." + attr;
@@ -282,6 +360,10 @@ public class UIManager implements Serializable
      * It is typically located in the <code>lib</code> subdirectory of the Java
      * installation directory. This method returns a bogus filename
      * if <code>java.home</code> isn't defined.
+     * <p>
+     *  <code> swingproperties </code>属性文件的位置是特定于实现的它通常位于Java安装目录的<code> lib </code>子目录中此方法返回一个伪造的文件名如果<code>
+     *  javahome < / code>未定义。
+     * 
      */
     private static String makeSwingPropertiesFilename() {
         String sep = File.separator;
@@ -300,6 +382,10 @@ public class UIManager implements Serializable
      * <code>LookAndFeel</code> for the sake of configuring a menu or
      * for initial application set up.
      *
+     * <p>
+     * 提供有关安装的<code> LookAndFeel </code>的一些信息,以便配置菜单或初始应用程序设置
+     * 
+     * 
      * @see UIManager#getInstalledLookAndFeels
      * @see LookAndFeel
      */
@@ -311,6 +397,10 @@ public class UIManager implements Serializable
          * Constructs a <code>UIManager</code>s
          * <code>LookAndFeelInfo</code> object.
          *
+         * <p>
+         *  构造一个<code> UIManager </code> s <code> LookAndFeelInfo </code>对象
+         * 
+         * 
          * @param name      a <code>String</code> specifying the name of
          *                      the look and feel
          * @param className a <code>String</code> specifying the name of
@@ -324,6 +414,10 @@ public class UIManager implements Serializable
         /**
          * Returns the name of the look and feel in a form suitable
          * for a menu or other presentation
+         * <p>
+         *  返回适合菜单或其他演示文稿的形式的外观和感觉的名称
+         * 
+         * 
          * @return a <code>String</code> containing the name
          * @see LookAndFeel#getName
          */
@@ -333,6 +427,10 @@ public class UIManager implements Serializable
 
         /**
          * Returns the name of the class that implements this look and feel.
+         * <p>
+         *  返回实现此外观的类的名称
+         * 
+         * 
          * @return the name of the class that implements this
          *              <code>LookAndFeel</code>
          * @see LookAndFeel
@@ -345,6 +443,10 @@ public class UIManager implements Serializable
          * Returns a string that displays and identifies this
          * object's properties.
          *
+         * <p>
+         *  返回显示和标识此对象属性的字符串
+         * 
+         * 
          * @return a <code>String</code> representation of this object
          */
         public String toString() {
@@ -359,6 +461,11 @@ public class UIManager implements Serializable
      * file is available or if the file doesn't contain a "swing.installedlafs"
      * property.
      *
+     * <p>
+     *  当没有<code> swingproperties </code>文件可用或者文件不包含"swinginstalledlafs"属性时,使用<code> installedLAFS </code>的默
+     * 认值。
+     * 
+     * 
      * @see #initializeInstalledLAFs
      */
     private static LookAndFeelInfo[] installedLAFs;
@@ -412,6 +519,17 @@ public class UIManager implements Serializable
      *   UIManager.setLookAndFeel(info.getClassName());
      * </pre>
      *
+     * <p>
+     * 返回表示当前可用的{@code LookAndFeel}实现的{@code LookAndFeelInfo}的数组可以由应用程序使用<code> LookAndFeelInfo </code>对象来构造
+     * 用户的外观和感觉选项菜单,以确定在启动时设置的外观和感觉为了避免创建大量{@code LookAndFeel}对象的代价,{@code LookAndFeelInfo}维护{@code LookAndFeel}
+     * 类的类名,而不是实际的{@code LookAndFeel} }实例。
+     * <p>
+     *  以下示例说明如何从{@code LookAndFeelInfo}的实例设置当前外观：
+     * <pre>
+     *  UIManagersetLookAndFeel(infogetClassName());
+     * </pre>
+     * 
+     * 
      * @return an array of <code>LookAndFeelInfo</code> objects
      * @see #setLookAndFeel
      */
@@ -433,6 +551,10 @@ public class UIManager implements Serializable
      * {@code non-null}, it is strongly recommended that only {@code non-null}
      * values are supplied in the {@code infos} array.
      *
+     * <p>
+     * 设置可用的外观和感觉的集合虽然此方法不检查以确保所有{@code LookAndFeelInfos}是{@code非空},强烈建议只提供{@code非null}值{@code infos}数组
+     * 
+     * 
      * @param infos set of <code>LookAndFeelInfo</code> objects specifying
      *        the available look and feels
      *
@@ -454,6 +576,10 @@ public class UIManager implements Serializable
      * and feels. While this method allows a {@code null} {@code info},
      * it is strongly recommended that a {@code non-null} value be used.
      *
+     * <p>
+     *  将指定的外观和感觉添加到可用的外观和感觉集合虽然此方法允许{@code null} {@code info},但强烈建议使用{@code非null}值
+     * 
+     * 
      * @param info a <code>LookAndFeelInfo</code> object that names the
      *          look and feel and identifies the class that implements it
      * @see #setInstalledLookAndFeels
@@ -473,6 +599,10 @@ public class UIManager implements Serializable
      * arguments in any way, it is strongly recommended that {@code
      * non-null} values be supplied.
      *
+     * <p>
+     *  将指定的外观和感觉添加到可用的外观和感觉集合虽然此方法不以任何方式检查参数,但强烈建议提供{@code non-null}值
+     * 
+     * 
      * @param name descriptive name of the look and feel
      * @param className name of the class that implements the look and feel
      * @see #setInstalledLookAndFeels
@@ -485,6 +615,10 @@ public class UIManager implements Serializable
     /**
      * Returns the current look and feel or <code>null</code>.
      *
+     * <p>
+     *  返回当前的外观和感觉或<code> null </code>
+     * 
+     * 
      * @return current look and feel, or <code>null</code>
      * @see #setLookAndFeel
      */
@@ -511,6 +645,17 @@ public class UIManager implements Serializable
      * <p>
      * This is a JavaBeans bound property.
      *
+     * <p>
+     * 将当前外观设置为{@code newLookAndFeel}如果当前外观是{@code非空} {@code uninitialize}被调用,如果{@code newLookAndFeel}是{@code non-null}
+     * 调用{@code initialize},然后调用{@code getDefaults}从{@code newLookAndFeelgetDefaults()}返回的默认值会替换那些来自之前外观的默认值
+     * 如果{@code newLookAndFeel}是{@code null },外观和默认设置为{@code null}。
+     * <p>
+     *  {@code null}可以用来设置外观和感觉{@code null}因为Swing的大部分功能需要{@code LookAndFeel},所以将{@code LookAndFeel}设置为{@code null}
+     * 。
+     * <p>
+     *  这是一个JavaBeans绑定属性
+     * 
+     * 
      * @param newLookAndFeel {@code LookAndFeel} to install
      * @throws UnsupportedLookAndFeelException if
      *          {@code newLookAndFeel} is {@code non-null} and
@@ -556,6 +701,10 @@ public class UIManager implements Serializable
      * name, using the current thread's context class loader, and
      * passes it to {@code setLookAndFeel(LookAndFeel)}.
      *
+     * <p>
+     * 加载由给定类名指定的{@code LookAndFeel},使用当前线程的上下文类加载器,并将其传递给{@code setLookAndFeel(LookAndFeel)}
+     * 
+     * 
      * @param className  a string specifying the name of the class that implements
      *        the look and feel
      * @exception ClassNotFoundException if the <code>LookAndFeel</code>
@@ -591,6 +740,11 @@ public class UIManager implements Serializable
      * class. This value can be overriden by setting the
      * <code>swing.systemlaf</code> system property.
      *
+     * <p>
+     *  返回实现原生系统外观的<code> LookAndFeel </code>类的名称,否则为默认跨平台的名称<code> LookAndFeel </code> class此值可以被覆盖设置<code>
+     *  swingsystemlaf </code>系统属性。
+     * 
+     * 
      * @return the <code>String</code> of the <code>LookAndFeel</code>
      *          class
      *
@@ -635,6 +789,11 @@ public class UIManager implements Serializable
      * Look and Feel (JLF).  This value can be overriden by setting the
      * <code>swing.crossplatformlaf</code> system property.
      *
+     * <p>
+     *  返回实现默认跨平台外观的<code> LookAndFeel </code>类的名称 -  Java Look and Feel(JLF)该值可以通过设置<code> swingcrossplatfo
+     * rmlaf </code>系统属性。
+     * 
+     * 
      * @return  a string with the JLF implementation-class
      * @see #setLookAndFeel
      * @see #getSystemLookAndFeelClassName
@@ -653,6 +812,10 @@ public class UIManager implements Serializable
      * Returns the defaults. The returned defaults resolve using the
      * logic specified in the class documentation.
      *
+     * <p>
+     * 返回默认值返回的默认值使用类文档中指定的逻辑进行解析
+     * 
+     * 
      * @return a <code>UIDefaults</code> object containing the default values
      */
     public static UIDefaults getDefaults() {
@@ -664,6 +827,10 @@ public class UIManager implements Serializable
      * Returns a font from the defaults. If the value for {@code key} is
      * not a {@code Font}, {@code null} is returned.
      *
+     * <p>
+     *  从默认值返回字体如果{@code key}的值不是{@code Font},则返回{@code null}
+     * 
+     * 
      * @param key  an <code>Object</code> specifying the font
      * @return the <code>Font</code> object
      * @throws NullPointerException if {@code key} is {@code null}
@@ -677,6 +844,10 @@ public class UIManager implements Serializable
      * for the given locale. If the value for {@code key} is
      * not a {@code Font}, {@code null} is returned.
      *
+     * <p>
+     *  从适合于给定语言环境的默认值返回字体如果{@code key}的值不是{@code Font},则返回{@code null}
+     * 
+     * 
      * @param key  an <code>Object</code> specifying the font
      * @param l the <code>Locale</code> for which the font is desired; refer
      *        to {@code UIDefaults} for details on how a {@code null}
@@ -693,6 +864,10 @@ public class UIManager implements Serializable
      * Returns a color from the defaults. If the value for {@code key} is
      * not a {@code Color}, {@code null} is returned.
      *
+     * <p>
+     *  从默认值返回颜色如果{@code key}的值不是{@code Color},则返回{@code null}
+     * 
+     * 
      * @param key  an <code>Object</code> specifying the color
      * @return the <code>Color</code> object
      * @throws NullPointerException if {@code key} is {@code null}
@@ -706,6 +881,10 @@ public class UIManager implements Serializable
      * for the given locale. If the value for {@code key} is
      * not a {@code Color}, {@code null} is returned.
      *
+     * <p>
+     *  返回适合于给定语言环境的默认值的颜色如果{@code key}的值不是{@code Color},则返回{@code null}
+     * 
+     * 
      * @param key  an <code>Object</code> specifying the color
      * @param l the <code>Locale</code> for which the color is desired; refer
      *        to {@code UIDefaults} for details on how a {@code null}
@@ -722,6 +901,10 @@ public class UIManager implements Serializable
      * Returns an <code>Icon</code> from the defaults. If the value for
      * {@code key} is not an {@code Icon}, {@code null} is returned.
      *
+     * <p>
+     *  从默认值中返回<code> Icon </code>如果{@code key}的值不是{@code Icon},则返回{@code null}
+     * 
+     * 
      * @param key  an <code>Object</code> specifying the icon
      * @return the <code>Icon</code> object
      * @throws NullPointerException if {@code key} is {@code null}
@@ -735,6 +918,10 @@ public class UIManager implements Serializable
      * for the given locale. If the value for
      * {@code key} is not an {@code Icon}, {@code null} is returned.
      *
+     * <p>
+     * 从适用于给定语言环境的默认值返回<code> Icon </code>如果{@code key}的值不是{@code Icon},则返回{@code null}
+     * 
+     * 
      * @param key  an <code>Object</code> specifying the icon
      * @param l the <code>Locale</code> for which the icon is desired; refer
      *        to {@code UIDefaults} for details on how a {@code null}
@@ -751,6 +938,10 @@ public class UIManager implements Serializable
      * Returns a border from the defaults. If the value for
      * {@code key} is not a {@code Border}, {@code null} is returned.
      *
+     * <p>
+     *  从默认值返回边框如果{@code key}的值不是{@code Border},则返回{@code null}
+     * 
+     * 
      * @param key  an <code>Object</code> specifying the border
      * @return the <code>Border</code> object
      * @throws NullPointerException if {@code key} is {@code null}
@@ -764,6 +955,10 @@ public class UIManager implements Serializable
      * for the given locale.  If the value for
      * {@code key} is not a {@code Border}, {@code null} is returned.
      *
+     * <p>
+     *  从适合给定语言环境的默认值返回边框如果{@code key}的值不是{@code Border},则返回{@code null}
+     * 
+     * 
      * @param key  an <code>Object</code> specifying the border
      * @param l the <code>Locale</code> for which the border is desired; refer
      *        to {@code UIDefaults} for details on how a {@code null}
@@ -780,6 +975,10 @@ public class UIManager implements Serializable
      * Returns a string from the defaults. If the value for
      * {@code key} is not a {@code String}, {@code null} is returned.
      *
+     * <p>
+     *  从默认值返回一个字符串如果{@code key}的值不是{@code String},则返回{@code null}
+     * 
+     * 
      * @param key  an <code>Object</code> specifying the string
      * @return the <code>String</code>
      * @throws NullPointerException if {@code key} is {@code null}
@@ -793,6 +992,10 @@ public class UIManager implements Serializable
      * given locale.  If the value for
      * {@code key} is not a {@code String}, {@code null} is returned.
      *
+     * <p>
+     *  返回适用于给定语言环境的默认值的字符串如果{@code key}的值不是{@code String},则返回{@code null}
+     * 
+     * 
      * @param key  an <code>Object</code> specifying the string
      * @param l the <code>Locale</code> for which the string is desired; refer
      *        to {@code UIDefaults} for details on how a {@code null}
@@ -810,6 +1013,10 @@ public class UIManager implements Serializable
      * given locale.  If the value for
      * {@code key} is not a {@code String}, {@code null} is returned.
      *
+     * <p>
+     * 返回适用于给定语言环境的默认值的字符串如果{@code key}的值不是{@code String},则返回{@code null}
+     * 
+     * 
      * @param key  an <code>Object</code> specifying the string
      * @param c {@code Component} used to determine the locale;
      *          {@code null} implies the default locale as
@@ -827,6 +1034,10 @@ public class UIManager implements Serializable
      * {@code key} is not an {@code Integer}, or does not exist,
      * {@code 0} is returned.
      *
+     * <p>
+     *  从默认值返回一个整数如果{@code key}的值不是{@code Integer}或不存在,则返回{@code 0}
+     * 
+     * 
      * @param key  an <code>Object</code> specifying the int
      * @return the int
      * @throws NullPointerException if {@code key} is {@code null}
@@ -841,6 +1052,10 @@ public class UIManager implements Serializable
      * {@code key} is not an {@code Integer}, or does not exist,
      * {@code 0} is returned.
      *
+     * <p>
+     *  返回适合于给定语言环境的默认值的整数如果{@code key}的值不是{@code Integer}或不存在,则返回{@code 0}
+     * 
+     * 
      * @param key  an <code>Object</code> specifying the int
      * @param l the <code>Locale</code> for which the int is desired; refer
      *        to {@code UIDefaults} for details on how a {@code null}
@@ -858,6 +1073,10 @@ public class UIManager implements Serializable
      * the key value. If the key is not found or the key doesn't represent
      * a boolean value then {@code false} is returned.
      *
+     * <p>
+     *  从与键值相关联的默认值返回布尔值如果未找到键或键不表示布尔值,则返回{@code false}
+     * 
+     * 
      * @param key  an <code>Object</code> specifying the key for the desired boolean value
      * @return the boolean value corresponding to the key
      * @throws NullPointerException if {@code key} is {@code null}
@@ -873,6 +1092,10 @@ public class UIManager implements Serializable
      * found or the key doesn't represent
      * a boolean value then {@code false} will be returned.
      *
+     * <p>
+     * 从与键值和给定的<code> Locale </code>相关联的默认值返回布尔值。如果未找到键或键未表示布尔值,则将返回{@code false}
+     * 
+     * 
      * @param key  an <code>Object</code> specifying the key for the desired
      *             boolean value
      * @param l the <code>Locale</code> for which the boolean is desired; refer
@@ -890,6 +1113,10 @@ public class UIManager implements Serializable
      * Returns an <code>Insets</code> object from the defaults. If the value
      * for {@code key} is not an {@code Insets}, {@code null} is returned.
      *
+     * <p>
+     *  从默认值返回<code> Insets </code>对象如果{@code key}的值不是{@code Insets},则返回{@code null}
+     * 
+     * 
      * @param key  an <code>Object</code> specifying the <code>Insets</code> object
      * @return the <code>Insets</code> object
      * @throws NullPointerException if {@code key} is {@code null}
@@ -903,6 +1130,10 @@ public class UIManager implements Serializable
      * appropriate for the given locale. If the value
      * for {@code key} is not an {@code Insets}, {@code null} is returned.
      *
+     * <p>
+     *  从适用于给定语言环境的默认值返回<code> Insets </code>对象如果{@code key}的值不是{@code Insets},则返回{@code null}
+     * 
+     * 
      * @param key  an <code>Object</code> specifying the <code>Insets</code> object
      * @param l the <code>Locale</code> for which the object is desired; refer
      *        to {@code UIDefaults} for details on how a {@code null}
@@ -919,6 +1150,10 @@ public class UIManager implements Serializable
      * Returns a dimension from the defaults. If the value
      * for {@code key} is not a {@code Dimension}, {@code null} is returned.
      *
+     * <p>
+     *  从默认值返回一个维度如果{@code key}的值不是{@code Dimension},则返回{@code null}
+     * 
+     * 
      * @param key  an <code>Object</code> specifying the dimension object
      * @return the <code>Dimension</code> object
      * @throws NullPointerException if {@code key} is {@code null}
@@ -932,6 +1167,10 @@ public class UIManager implements Serializable
      * for the given locale. If the value
      * for {@code key} is not a {@code Dimension}, {@code null} is returned.
      *
+     * <p>
+     * 从适合给定语言环境的默认值返回一个维度如果{@code key}的值不是{@code维度},则返回{@code null}
+     * 
+     * 
      * @param key  an <code>Object</code> specifying the dimension object
      * @param l the <code>Locale</code> for which the object is desired; refer
      *        to {@code UIDefaults} for details on how a {@code null}
@@ -947,6 +1186,10 @@ public class UIManager implements Serializable
     /**
      * Returns an object from the defaults.
      *
+     * <p>
+     *  从默认值返回对象
+     * 
+     * 
      * @param key  an <code>Object</code> specifying the desired object
      * @return the <code>Object</code>
      * @throws NullPointerException if {@code key} is {@code null}
@@ -959,6 +1202,10 @@ public class UIManager implements Serializable
      * Returns an object from the defaults that is appropriate for
      * the given locale.
      *
+     * <p>
+     *  从适合于给定语言环境的默认值返回对象
+     * 
+     * 
      * @param key  an <code>Object</code> specifying the desired object
      * @param l the <code>Locale</code> for which the object is desired; refer
      *        to {@code UIDefaults} for details on how a {@code null}
@@ -976,6 +1223,10 @@ public class UIManager implements Serializable
      * for {@code getDefaults().put(key, value)}. This only effects the
      * developer defaults, not the system or look and feel defaults.
      *
+     * <p>
+     *  在开发人员默认值中存储对象这是{@code getDefaults()put(key,value)}的覆盖方法这只影响开发人员的默认值,而不影响系统或外观和默认值
+     * 
+     * 
      * @param key    an <code>Object</code> specifying the retrieval key
      * @param value  the <code>Object</code> to store; refer to
      *               {@code UIDefaults} for details on how {@code null} is
@@ -996,6 +1247,11 @@ public class UIManager implements Serializable
      * {@code getUI(target)} on the multiplexing look and feel's
      * defaults, and returns that value if it is {@code non-null}.
      *
+     * <p>
+     * 为{@code target}返回适当的{@code ComponentUI}实现通常,这是{@code getDefaults()getUI(target)}的封面。
+     * 但是,如果已经安装了辅助外观,代码getUI(target)}对复用的外观和感觉的默认值,并返回该值,如果它是{@code非null}。
+     * 
+     * 
      * @param target the <code>JComponent</code> to return the
      *        {@code ComponentUI} for
      * @return the <code>ComponentUI</code> object for {@code target}
@@ -1028,6 +1284,13 @@ public class UIManager implements Serializable
      * certain values to exist, altering the {@code UIDefaults} returned
      * from this method could have unexpected results.
      *
+     * <p>
+     *  从当前的外观和感觉返回{@code UIDefaults},这是在外观和感觉安装时获得的
+     * <p>
+     *  一般来说,开发人员应该使用从{@code getDefaults()}返回的{@code UIDefaults}由于当前的外观和感觉可能存在某些值,改变从此方法返回的{@code UIDefaults}
+     * 可能会有意想不到的结果。
+     * 
+     * 
      * @return <code>UIDefaults</code> from the current look and feel
      * @see #getDefaults
      * @see #setLookAndFeel(LookAndFeel)
@@ -1040,6 +1303,9 @@ public class UIManager implements Serializable
 
     /**
      * Finds the Multiplexing <code>LookAndFeel</code>.
+     * <p>
+     *  找到Multiplexing <code> LookAndFeel </code>
+     * 
      */
     private static LookAndFeel getMultiLookAndFeel() {
         LookAndFeel multiLookAndFeel = getLAFState().multiLookAndFeel;
@@ -1066,6 +1332,11 @@ public class UIManager implements Serializable
      * on a component instance.
      * <p>Note these are not the same as the installed look and feels.
      *
+     * <p>
+     * 在辅助外观和感觉列表中添加一个<code> LookAndFeel </code>辅助外观和感觉告诉复用外观和感觉组件实例的其他<code>类LookAndFeel </code>创建多重UI时,默认的
+     * <code> LookAndFeel </code>类更改将仅在创建新UI类或在组件实例上更改默认外观时生效<p>注意这些不是与安装的外观和感觉相同。
+     * 
+     * 
      * @param laf the <code>LookAndFeel</code> object
      * @see #removeAuxiliaryLookAndFeel
      * @see #setLookAndFeel
@@ -1105,6 +1376,11 @@ public class UIManager implements Serializable
      * UI class is created or when the default look and feel is changed
      * on a component instance.
      * <p>Note these are not the same as the installed look and feels.
+     * <p>
+     * 从辅助外观和感觉的列表中删除<code> LookAndFeel </code>辅助外观和感觉告诉多路复用外观和感觉组件实例的其他<code> LookAndFeel </code>类要另外使用创建多重
+     * UI时,默认的<code> LookAndFeel </code>类更改将仅在创建新UI类或在组件实例上更改默认外观时生效<p>注意这些不是与安装的外观和感觉相同。
+     * 
+     * 
      * @return true if the <code>LookAndFeel</code> was removed from the list
      * @see #removeAuxiliaryLookAndFeel
      * @see #getAuxiliaryLookAndFeels
@@ -1143,6 +1419,11 @@ public class UIManager implements Serializable
      * multiplexing UI.
      * <p>Note these are not the same as the installed look and feels.
      *
+     * <p>
+     * 返回辅助外观和感觉的列表(可以<code> null </code>)辅助外观和感觉告诉复用外观和感觉什么其他<code> LookAndFeel </code>类用于组件实例要使用除了默认的LookA
+     * ndFeel类,当创建一个多路复用UI <p>注意这些不是与安装的外观和感觉相同。
+     * 
+     * 
      * @return list of auxiliary <code>LookAndFeel</code>s or <code>null</code>
      * @see #addAuxiliaryLookAndFeel
      * @see #removeAuxiliaryLookAndFeel
@@ -1170,6 +1451,10 @@ public class UIManager implements Serializable
      * Adds a <code>PropertyChangeListener</code> to the listener list.
      * The listener is registered for all properties.
      *
+     * <p>
+     *  向侦听器列表中添加<code> PropertyChangeListener </code>为所有属性注册侦听器
+     * 
+     * 
      * @param listener  the <code>PropertyChangeListener</code> to be added
      * @see java.beans.PropertyChangeSupport
      */
@@ -1187,6 +1472,10 @@ public class UIManager implements Serializable
      * This removes a <code>PropertyChangeListener</code> that was registered
      * for all properties.
      *
+     * <p>
+     *  从侦听器列表中删除<code> PropertyChangeListener </code>这会删除为所有属性注册的<code> PropertyChangeListener </code>
+     * 
+     * 
      * @param listener  the <code>PropertyChangeListener</code> to be removed
      * @see java.beans.PropertyChangeSupport
      */
@@ -1203,6 +1492,10 @@ public class UIManager implements Serializable
      * Returns an array of all the <code>PropertyChangeListener</code>s added
      * to this UIManager with addPropertyChangeListener().
      *
+     * <p>
+     *  返回添加到此UIManager的所有<code> PropertyChangeListener </code>数组,其中包含addPropertyChangeListener()
+     * 
+     * 
      * @return all of the <code>PropertyChangeListener</code>s added or an empty
      *         array if no listeners have been added
      * @since 1.4
@@ -1218,6 +1511,9 @@ public class UIManager implements Serializable
     {
         /* Don't bother checking for Swing properties if untrusted, as
          * there's no way to look them up without triggering SecurityExceptions.
+         * <p>
+         * 没有办法查找它们而不触发SecurityExceptions
+         * 
          */
         if (UIManager.class.getClassLoader() != null) {
             return new Properties();
@@ -1278,6 +1574,11 @@ public class UIManager implements Serializable
      * <code>swing.installedlafs</code> property
      * then initialize the <code>installedLAFs</code> field.
      *
+     * <p>
+     *  如果存在<code> swingproperties </code>文件并且它有一个<code> swinginstalledlafs </code>属性,然后初始化<code> installedL
+     * AFs </code>字段。
+     * 
+     * 
      * @see #getInstalledLookAndFeels
      */
     private static void initializeInstalledLAFs(Properties swingProps)
@@ -1290,6 +1591,9 @@ public class UIManager implements Serializable
         /* Create a vector that contains the value of the swing.installedlafs
          * property.  For example given "swing.installedlafs=motif,windows"
          * lafs = {"motif", "windows"}.
+         * <p>
+         *  属性例如给定"swinginstalledlafs = motif,windows"lafs = {"motif","windows"}
+         * 
          */
         Vector<String> lafs = new Vector<String>();
         StringTokenizer st = new StringTokenizer(ilafsString, ",", false);
@@ -1300,6 +1604,9 @@ public class UIManager implements Serializable
         /* Look up the name and class for each name in the "swing.installedlafs"
          * list.  If they both exist then add a LookAndFeelInfo to
          * the installedLafs array.
+         * <p>
+         *  list如果它们都存在,那么添加一个LookAndFeelInfo到installedLafs数组
+         * 
          */
         Vector<LookAndFeelInfo> ilafs = new Vector<LookAndFeelInfo>(lafs.size());
         for (String laf : lafs) {
@@ -1324,6 +1631,10 @@ public class UIManager implements Serializable
      * If this code is called after the application has explicitly
      * set it's look and feel, do nothing.
      *
+     * <p>
+     *  如果用户指定了默认外观,请使用否则使用本平台本地的外观。如果在应用程序明确设置它的外观之后调用此代码,则不执行任何操作
+     * 
+     * 
      * @see #maybeInitialize
      */
     private static void initializeDefaultLAF(Properties swingProps)
@@ -1373,6 +1684,7 @@ public class UIManager implements Serializable
         String factoryName;
 
         /* Try to load each LookAndFeel subclass in the list.
+        /* <p>
          */
 
         while (p.hasMoreTokens()) {
@@ -1392,6 +1704,9 @@ public class UIManager implements Serializable
          * loaded, make sure we reset auxLookAndFeels to null.
          * Otherwise, we are going to use the MultiLookAndFeel to get
          * all component UI's, so we need to load it now.
+         * <p>
+         *  加载,确保我们将auxLookAndFeels重置为null否则,我们将使用MultiLookAndFeel来获取所有组件UI,所以我们需要立即加载它
+         * 
          */
         if (auxLookAndFeels.size() == 0) {
             auxLookAndFeels = null;
@@ -1418,6 +1733,10 @@ public class UIManager implements Serializable
      * corresponds to a set of applets it's possible for this method
      * to be re-entered, which is why we grab a lock before calling
      * initialize().
+     * <p>
+     * 这个方法在依赖于<code> AppContext </code>特定LAFState对象的任何代码之前被调用当AppContext对应于一组小程序时,可以重新输入这个方法,这就是为什么我们抓住一个锁之
+     * 前调用initialize()。
+     * 
      */
     private static void maybeInitialize() {
         synchronized (classLock) {
@@ -1430,6 +1749,9 @@ public class UIManager implements Serializable
 
     /*
      * Sets default swing focus traversal policy.
+     * <p>
+     *  设置默认摇摆焦点遍历策略
+     * 
      */
     private static void maybeInitializeFocusPolicy(JComponent comp) {
         // Check for JRootPane which indicates that a swing toplevel
@@ -1452,6 +1774,8 @@ public class UIManager implements Serializable
 
     /*
      * Only called by maybeInitialize().
+     * <p>
+     *  只有通过maybeInitialize()
      */
     private static void initialize() {
         Properties swingProps = loadSwingProperties();

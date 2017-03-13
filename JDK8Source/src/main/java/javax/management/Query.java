@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -51,6 +52,23 @@ package javax.management;
  *               Query.eq(Query.attr("Owner"), Query.value("Duke")));
  * </pre>
  *
+ * <p>
+ *  <p>构造查询对象约束</p>
+ * 
+ * <p>可以使用其{@link MBeanServer#queryNames queryNames}或{@link MBeanServer#queryMBeans queryMBeans}方法查询满足特定
+ * 条件的MBean的MBean服务器。
+ * 该方法的{@link QueryExp}参数可以是任何实现接口{@code QueryExp},但通常最好通过调用此类中的静态方法来获得{@code QueryExp}值这在查询远程MBean Serv
+ * er时尤其如此：{@代码QueryExp}接口可能不存在于远程MBean服务器中,但此类中的方法仅返回作为JMX实现的一部分的标准类</p>。
+ * 
+ * <p>例如,假设您想要找到{@code Enabled}属性为{@code true}且{@code Owner}属性为{@code"Duke"}的所有MBean。
+ * 下面是您可以如何构建通过将方法调用链接在一起的适当{@code QueryExp}：</p>。
+ * 
+ * <pre>
+ *  QueryExp query = Queryand(Queryeq(Queryattr("Enabled"),Queryvalue(true)),Queryeq(Queryattr("Owner"),
+ * Queryvalue("Duke")));。
+ * </pre>
+ * 
+ * 
  * @since 1.5
  */
  public class Query extends Object   {
@@ -59,30 +77,45 @@ package javax.management;
      /**
       * A code representing the {@link Query#gt} query.  This is chiefly
       * of interest for the serialized form of queries.
+      * <p>
+      *  代表{@link Query#gt}查询的代码这是查询的序列化形式的主要关注点
+      * 
       */
      public static final int GT  = 0;
 
      /**
       * A code representing the {@link Query#lt} query.  This is chiefly
       * of interest for the serialized form of queries.
+      * <p>
+      *  代表{@link Query#lt}查询的代码这是查询序列化形式的主要关注点
+      * 
       */
      public static final int LT  = 1;
 
      /**
       * A code representing the {@link Query#geq} query.  This is chiefly
       * of interest for the serialized form of queries.
+      * <p>
+      *  代表{@link Query#geq}查询的代码这是查询的序列化形式的主要关注点
+      * 
       */
      public static final int GE  = 2;
 
      /**
       * A code representing the {@link Query#leq} query.  This is chiefly
       * of interest for the serialized form of queries.
+      * <p>
+      * 代表{@link Query#leq}查询的代码这是查询的序列化形式的主要关注点
+      * 
       */
      public static final int LE  = 3;
 
      /**
       * A code representing the {@link Query#eq} query.  This is chiefly
       * of interest for the serialized form of queries.
+      * <p>
+      *  代表{@link Query#eq}查询的代码这是查询序列化形式的主要关注点
+      * 
       */
      public static final int EQ  = 4;
 
@@ -90,30 +123,45 @@ package javax.management;
      /**
       * A code representing the {@link Query#plus} expression.  This
       * is chiefly of interest for the serialized form of queries.
+      * <p>
+      *  代表{@link Query#plus}表达式的代码这是查询的序列化形式的主要关注点
+      * 
       */
      public static final int PLUS  = 0;
 
      /**
       * A code representing the {@link Query#minus} expression.  This
       * is chiefly of interest for the serialized form of queries.
+      * <p>
+      *  代表{@link Query#minus}表达式的代码这是查询序列化形式的主要关注点
+      * 
       */
      public static final int MINUS = 1;
 
      /**
       * A code representing the {@link Query#times} expression.  This
       * is chiefly of interest for the serialized form of queries.
+      * <p>
+      *  代表{@link Query#times}表达式的代码这是查询的序列化形式的主要关注点
+      * 
       */
      public static final int TIMES = 2;
 
      /**
       * A code representing the {@link Query#div} expression.  This is
       * chiefly of interest for the serialized form of queries.
+      * <p>
+      *  代表{@link Query#div}表达式的代码这是查询的序列化形式的主要关注点
+      * 
       */
      public static final int DIV   = 3;
 
 
      /**
       * Basic constructor.
+      * <p>
+      *  基本构造函数
+      * 
       */
      public Query() {
      }
@@ -123,6 +171,10 @@ package javax.management;
       * Returns a query expression that is the conjunction of two other query
       * expressions.
       *
+      * <p>
+      * 返回一个查询表达式,它是两个其他查询表达式的联合
+      * 
+      * 
       * @param q1 A query expression.
       * @param q2 Another query expression.
       *
@@ -139,6 +191,10 @@ package javax.management;
       * Returns a query expression that is the disjunction of two other query
       * expressions.
       *
+      * <p>
+      *  返回一个查询表达式,它是两个其他查询表达式的离散点
+      * 
+      * 
       * @param q1 A query expression.
       * @param q2 Another query expression.
       *
@@ -155,6 +211,10 @@ package javax.management;
       * Returns a query expression that represents a "greater than" constraint on
       * two values.
       *
+      * <p>
+      *  返回对两个值表示"大于"约束的查询表达式
+      * 
+      * 
       * @param v1 A value expression.
       * @param v2 Another value expression.
       *
@@ -173,6 +233,10 @@ package javax.management;
       * Returns a query expression that represents a "greater than or equal
       * to" constraint on two values.
       *
+      * <p>
+      *  返回对两个值表示"大于或等于"约束的查询表达式
+      * 
+      * 
       * @param v1 A value expression.
       * @param v2 Another value expression.
       *
@@ -191,6 +255,10 @@ package javax.management;
       * Returns a query expression that represents a "less than or equal to"
       * constraint on two values.
       *
+      * <p>
+      *  返回在两个值上表示"小于或等于"约束的查询表达式
+      * 
+      * 
       * @param v1 A value expression.
       * @param v2 Another value expression.
       *
@@ -209,6 +277,10 @@ package javax.management;
       * Returns a query expression that represents a "less than" constraint on
       * two values.
       *
+      * <p>
+      *  返回一个查询表达式,该表达式对两个值表示"小于"的约束
+      * 
+      * 
       * @param v1 A value expression.
       * @param v2 Another value expression.
       *
@@ -227,6 +299,10 @@ package javax.management;
       * Returns a query expression that represents an equality constraint on
       * two values.
       *
+      * <p>
+      *  返回表示两个值上的等式约束的查询表达式
+      * 
+      * 
       * @param v1 A value expression.
       * @param v2 Another value expression.
       *
@@ -245,6 +321,10 @@ package javax.management;
       * Returns a query expression that represents the constraint that one
       * value is between two other values.
       *
+      * <p>
+      *  返回一个查询表达式,表示一个值在两个其他值之间的约束
+      * 
+      * 
       * @param v1 A value expression that is "between" v2 and v3.
       * @param v2 Value expression that represents a boundary of the constraint.
       * @param v3 Value expression that represents a boundary of the constraint.
@@ -274,6 +354,13 @@ package javax.management;
       * by any number of characters, followed by a <code>b</code>,
       * any single character, and a <code>c</code>.
       *
+      * <p>
+      * 返回一个查询表达式,表示匹配的字符串参数的约束匹配的语法与文件globbing一致：支持"<code>?</code>","<code> * </code>","<code> </code>",每个都可
+      * 以用"<code> \\ </code>"转义;字符类可以对于任何字符序列使用"<code>！</code>"作为否定和使用"<code>  -  </code>"(<code> * </code> >
+      * 用于单个任意字符,<code> [] </code>用于字符序列)例如：<code> a * b?c </code>将匹配以字符开头的字符<代码>,后跟任意数量的字符,后跟一个<code> b </code>
+      * ,任何单个字符和<code> c </code>。
+      * 
+      * 
       * @param a An attribute expression
       * @param s A string value expression representing a matching constraint
       *
@@ -296,6 +383,13 @@ package javax.management;
       * MBeanServer#getAttribute MBeanServer.getAttribute(objectName,
       * name)}.</p>
       *
+      * <p>
+      * <p>返回新的属性表达式有关表达式语义的详细说明,请参阅{@link AttributeValueExp}。</p>
+      * 
+      *  <p>为给定的<code> objectName </code>评估此表达式包括执行{@link MBeanServer#getAttribute MBeanServergetAttribute(objectName,name)}
+      *  </p>。
+      * 
+      * 
       * @param name The name of the attribute.
       *
       * @return An attribute expression for the attribute named {@code name}.
@@ -314,6 +408,13 @@ package javax.management;
       * MBeanServer#getAttribute MBeanServer.getAttribute(objectName,
       * name)}.</p>
       *
+      * <p>
+      *  <p>返回新的限定属性表达式</p>
+      * 
+      *  <p>为给定的<code> objectName </code>评估此表达式包括执行{@link MBeanServer#getObjectInstance MBeanServergetObjectInstance(objectName)}
+      * 和{@link MBeanServer#getAttribute MBeanServergetAttribute(objectName,name)} </p>。
+      * 
+      * 
       * @param className The name of the class possessing the attribute.
       * @param name The name of the attribute.
       *
@@ -336,6 +437,13 @@ package javax.management;
       * MBeanServer#getObjectInstance
       * MBeanServer.getObjectInstance(objectName)}.</p>
       *
+      * <p>
+      *  <p>返回一个新的类属性表达式,可以在任何期望ValueExp的查询调用中使用</p>
+      * 
+      * <p>为给定的<code> objectName </code>评估此表达式包括执行{@link MBeanServer#getObjectInstance MBeanServergetObjectInstance(objectName)}
+      *  </p>。
+      * 
+      * 
       * @return A class attribute expression.  The returned object
       * will be serialized as an instance of the non-public class
       * <a href="../../serialized-form.html#javax.management.ClassAttributeValueExp">
@@ -348,6 +456,10 @@ package javax.management;
      /**
       * Returns a constraint that is the negation of its argument.
       *
+      * <p>
+      *  返回一个约束,该约束是其参数的否定
+      * 
+      * 
       * @param queryExp The constraint to negate.
       *
       * @return A negated constraint.  The returned object will be
@@ -362,6 +474,10 @@ package javax.management;
      /**
       * Returns an expression constraining a value to be one of an explicit list.
       *
+      * <p>
+      *  返回一个将值限制为显式列表之一的表达式
+      * 
+      * 
       * @param val A value to be constrained.
       * @param valueList An array of ValueExps.
       *
@@ -378,6 +494,10 @@ package javax.management;
      /**
       * Returns a new string expression.
       *
+      * <p>
+      *  返回一个新的字符串表达式
+      * 
+      * 
       * @param val The string value.
       *
       * @return  A ValueExp object containing the string argument.
@@ -390,6 +510,10 @@ package javax.management;
       * Returns a numeric value expression that can be used in any Query call
       * that expects a ValueExp.
       *
+      * <p>
+      *  返回一个数值表达式,可以在任何期望ValueExp的Query调用中使用
+      * 
+      * 
       * @param val An instance of Number.
       *
       * @return A ValueExp object containing the argument.  The
@@ -406,6 +530,10 @@ package javax.management;
       * Returns a numeric value expression that can be used in any Query call
       * that expects a ValueExp.
       *
+      * <p>
+      *  返回一个数值表达式,可以在任何期望ValueExp的Query调用中使用
+      * 
+      * 
       * @param val An int value.
       *
       * @return A ValueExp object containing the argument.  The
@@ -422,6 +550,10 @@ package javax.management;
       * Returns a numeric value expression that can be used in any Query call
       * that expects a ValueExp.
       *
+      * <p>
+      *  返回一个数值表达式,可以在任何期望ValueExp的Query调用中使用
+      * 
+      * 
       * @param val A long value.
       *
       * @return A ValueExp object containing the argument.  The
@@ -438,6 +570,10 @@ package javax.management;
       * Returns a numeric value expression that can be used in any Query call
       * that expects a ValueExp.
       *
+      * <p>
+      *  返回一个数值表达式,可以在任何期望ValueExp的Query调用中使用
+      * 
+      * 
       * @param val A float value.
       *
       * @return A ValueExp object containing the argument.  The
@@ -454,6 +590,10 @@ package javax.management;
       * Returns a numeric value expression that can be used in any Query call
       * that expects a ValueExp.
       *
+      * <p>
+      * 返回一个数值表达式,可以在任何期望ValueExp的Query调用中使用
+      * 
+      * 
       * @param val A double value.
       *
       * @return  A ValueExp object containing the argument.  The
@@ -470,6 +610,10 @@ package javax.management;
       * Returns a boolean value expression that can be used in any Query call
       * that expects a ValueExp.
       *
+      * <p>
+      *  返回一个布尔值表达式,可以在任何期望ValueExp的Query调用中使用
+      * 
+      * 
       * @param val A boolean value.
       *
       * @return A ValueExp object containing the argument.  The
@@ -486,6 +630,10 @@ package javax.management;
       * Returns a binary expression representing the sum of two numeric values,
       * or the concatenation of two string values.
       *
+      * <p>
+      *  返回表示两个数字值之和的二进制表达式,或两个字符串值的并置
+      * 
+      * 
       * @param value1 The first '+' operand.
       * @param value2 The second '+' operand.
       *
@@ -504,6 +652,10 @@ package javax.management;
       * Returns a binary expression representing the product of two numeric values.
       *
       *
+      * <p>
+      *  返回表示两个数值的乘积的二进制表达式
+      * 
+      * 
       * @param value1 The first '*' operand.
       * @param value2 The second '*' operand.
       *
@@ -522,6 +674,10 @@ package javax.management;
       * Returns a binary expression representing the difference between two numeric
       * values.
       *
+      * <p>
+      *  返回表示两个数值之间的差值的二进制表达式
+      * 
+      * 
       * @param value1 The first '-' operand.
       * @param value2 The second '-' operand.
       *
@@ -540,6 +696,10 @@ package javax.management;
       * Returns a binary expression representing the quotient of two numeric
       * values.
       *
+      * <p>
+      *  返回表示两个数值的商的二进制表达式
+      * 
+      * 
       * @param value1 The first '/' operand.
       * @param value2 The second '/' operand.
       *
@@ -559,6 +719,10 @@ package javax.management;
       * a string argument. The value must start with the given literal string
       * value.
       *
+      * <p>
+      *  返回表示对字符串参数的匹配约束的查询表达式该值必须以给定的字符串值开头
+      * 
+      * 
       * @param a An attribute expression.
       * @param s A string value expression representing the beginning of the
       * string value.
@@ -579,6 +743,10 @@ package javax.management;
       * a string argument. The value must contain the given literal string
       * value.
       *
+      * <p>
+      * 返回表示对字符串参数的匹配约束的查询表达式该值必须包含给定的文字字符串值
+      * 
+      * 
       * @param a An attribute expression.
       * @param s A string value expression representing the substring.
       *
@@ -598,6 +766,10 @@ package javax.management;
       * a string argument. The value must end with the given literal string
       * value.
       *
+      * <p>
+      *  返回表示对字符串参数的匹配约束的查询表达式该值必须以给定的字符串值结尾
+      * 
+      * 
       * @param a An attribute expression.
       * @param s A string value expression representing the end of the string
       * value.
@@ -625,6 +797,13 @@ package javax.management;
       * MBeanServer#isInstanceOf MBeanServer.isInstanceOf(objectName,
       * ((StringValueExp)classNameValue.apply(objectName)).getValue()}.</p>
       *
+      * <p>
+      *  返回一个表示MBean类继承约束的查询表达式示例：要查找作为{@link NotificationBroadcaster}实例的MBean,请使用{@code QueryisInstanceOf(Queryvalue(NotificationBroadcasterclassgetName()))}
+      * }。
+      * </p>
+      *  <p>为给定的<code> objectName </code>评估此表达式包括执行{@link MBeanServer#isInstanceOf MBeanServerisInstanceOf(objectName,((StringValueExp)classNameValueapply(objectName))getValue()}
+      *  </p>。
+      * 
       * @param classNameValue The {@link StringValueExp} returning the name
       *        of the class of which selected MBeans should be instances.
       * @return a query expression that represents an inheritance
@@ -641,6 +820,8 @@ package javax.management;
      /**
       * Utility method to escape strings used with
       * Query.{initial|any|final}SubString() methods.
+      * <p>
+      * 
       */
      private static String escapeString(String s) {
          if (s == null)

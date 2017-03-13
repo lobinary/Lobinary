@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会
+ * 
+ *  根据Apache许可证第20版("许可证")授权;您不得使用此文件,除非符合许可证您可以在获取许可证的副本
+ * 
+ *  http：// wwwapacheorg / licenses / LICENSE-20
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件将按"原样"基础分发,无任何明示或暗示的保证或条件。请参阅许可证管理权限和限制许可证
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.parsers;
@@ -83,6 +93,31 @@ import com.sun.org.apache.xerces.internal.xni.parser.XMLPullParserConfiguration;
  *  </ul>
  * </ul>
  *
+ * <p>
+ * 这是仅限DTD的解析器配置它使用一组标准的解析器组件扩展了基本配置,适用于以DTD为中心的验证由于Xerces2参考实现文档和DTD扫描器实现能够充当拉脱机解析器,因此该配置实现了<code > XML
+ * PullParserConfiguration </code>接口。
+ * <p>
+ *  除了基本解析器配置识别的功能和属性之外,此类还识别这些附加的功能和属性：
+ * <ul>
+ *  <li>功能
+ * <ul>
+ * <li> http：// apacheorg / xml / features / validation / warn-on-duplicate-attdef </li> <li> http：// ap
+ * acheorg / xml / features / validation / warn-on-undeclared-elemdef < li> <li> http：// apacheorg / xml
+ *  / features / allow-java-encodings </li> <li> http：// apacheorg / xml / features / continue-after-fat
+ * al-error </li> <li > http：// apacheorg / xml / features / load-external-dtd </li>。
+ * </ul>
+ *  <li>属性
+ * <ul>
+ * <li> http：// apacheorg / xml / properties / internal / error-reporter </li> <li> http：// apacheorg / 
+ * xml / properties / internal / entity-manager </li> / apacheorg / xml / properties / internal / docume
+ * nt-scanner </li> <li> http：// apacheorg / xml / properties / internal / dtd-scanner </li> <li> http：/
+ * / apacheorg / xml / properties / internal / grammar-pool </li> <li> http：// apacheorg / xml / propert
+ * ies / internal / validator / dtd </li> <li> http：// apacheorg / xml / properties / internal / datatyp
+ * e- -factory </li>。
+ * </ul>
+ * </ul>
+ * 
+ * 
  * @author Arnaud  Le Hors, IBM
  * @author Andy Clark, IBM
  * @author Neil Graham, IBM
@@ -245,6 +280,9 @@ public class DTDConfiguration
      * True if a parse is in progress. This state is needed because
      * some features/properties cannot be set while parsing (e.g.
      * validation and namespaces).
+     * <p>
+     *  如果解析正在进行,则为true此状态是必需的,因为某些功能/属性无法在解析时设置(例如验证和命名空间)
+     * 
      */
     protected boolean fParseInProgress = false;
 
@@ -260,6 +298,10 @@ public class DTDConfiguration
     /**
      * Constructs a parser configuration using the specified symbol table.
      *
+     * <p>
+     *  使用指定的符号表构造解析器配置
+     * 
+     * 
      * @param symbolTable The symbol table to use.
      */
     public DTDConfiguration(SymbolTable symbolTable) {
@@ -274,6 +316,12 @@ public class DTDConfiguration
      * Grammar pool will be updated when the new validation engine is
      * implemented.
      *
+     * <p>
+     *  使用指定的符号表和语法池构造解析器配置
+     * <p>
+     * <strong> REVISIT：</strong>当实施新的验​​证引擎时,语法池将更新
+     * 
+     * 
      * @param symbolTable The symbol table to use.
      * @param grammarPool The grammar pool to use.
      */
@@ -290,6 +338,12 @@ public class DTDConfiguration
      * Grammar pool will be updated when the new validation engine is
      * implemented.
      *
+     * <p>
+     *  使用指定的符号表,语法池和父设置构造一个解析器配置
+     * <p>
+     *  <strong> REVISIT：</strong>当实施新的验​​证引擎时,语法池将更新
+     * 
+     * 
      * @param symbolTable    The symbol table to use.
      * @param grammarPool    The grammar pool to use.
      * @param parentSettings The parent settings.
@@ -442,6 +496,10 @@ public class DTDConfiguration
     /**
      * Set the locale to use for messages.
      *
+     * <p>
+     *  设置要用于消息的区域设置
+     * 
+     * 
      * @param locale The locale object to use for localization of messages.
      *
      * @exception XNIException Thrown if the parser does not support the
@@ -461,6 +519,10 @@ public class DTDConfiguration
     /**
      * Sets the input source for the document to parse.
      *
+     * <p>
+     *  设置文档解析的输入源
+     * 
+     * 
      * @param inputSource The document's input source.
      *
      * @exception XMLConfigurationException Thrown if there is a
@@ -485,6 +547,10 @@ public class DTDConfiguration
     /**
      * Parses the document in a pull parsing fashion.
      *
+     * <p>
+     *  以拉解析方式解析文档
+     * 
+     * 
      * @param complete True if the pull parser should parse the
      *                 remaining document completely.
      *
@@ -560,6 +626,9 @@ public class DTDConfiguration
      * If the application decides to terminate parsing before the xml document
      * is fully parsed, the application should call this method to free any
      * resource allocated during parsing. For example, close all opened streams.
+     * <p>
+     *  如果应用程序决定在xml文档完全解析之前终止解析,应用程序应调用此方法释放解析期间分配的任何资源例如,关闭所有打开的流
+     * 
      */
     public void cleanup() {
         fEntityManager.closeReaders();
@@ -572,6 +641,10 @@ public class DTDConfiguration
     /**
      * Parses the specified input source.
      *
+     * <p>
+     *  解析指定的输入源
+     * 
+     * 
      * @param source The input source.
      *
      * @exception XNIException Throws exception on XNI error.
@@ -624,6 +697,10 @@ public class DTDConfiguration
     /**
      * Reset all components before parsing.
      *
+     * <p>
+     *  在解析之前重置所有组件
+     * 
+     * 
      * @throws XNIException Thrown if an error occurs during initialization.
      */
     protected void reset() throws XNIException {
@@ -721,6 +798,10 @@ public class DTDConfiguration
      * Check a feature. If feature is know and supported, this method simply
      * returns. Otherwise, the appropriate exception is thrown.
      *
+     * <p>
+     * 检查功能如果功能是知道和支持的,这个方法简单地返回否则,抛出适当的异常
+     * 
+     * 
      * @param featureId The unique identifier (URI) of the feature.
      *
      * @throws XMLConfigurationException Thrown for configuration error.
@@ -802,6 +883,9 @@ public class DTDConfiguration
      * Check a property. If the property is know and supported, this method
      * simply returns. Otherwise, the appropriate exception is thrown.
      *
+     * <p>
+     *  检查属性如果属性是知道和支持,此方法简单地返回否则,抛出相应的异常
+     * 
      * @param propertyId The unique identifier (URI) of the property
      *                   being set.
      *

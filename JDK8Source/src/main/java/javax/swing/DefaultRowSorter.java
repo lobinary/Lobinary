@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -102,6 +103,44 @@ import javax.swing.SortOrder;
  * <code>RowFilter</code>.  Refer to <code>TableRowSorter</code> and
  * <code>RowFilter</code> for more details on the type parameters.
  *
+ * <p>
+ *  提供围绕基于网格的数据模型进行排序和过滤的<code> RowSorter </code>实现除了创建和安装<code> RowSorter </code>,您很少需要直接与一个交互。
+ * 链接javaxswingtableTableRowSorter TableRowSorter},用于<code> JTable </code>的<code> RowSorter </code>。
+ * <p>
+ * 如果两个对象相等(列的<code> Comparator </code>返回0),下一个<code> SortKey </code>,则基于当前<code> SortKey </code>如果没有<code>
+ *  SortKey </code>,或者顺序是<code> UNSORTED </code>,则使用模型中的行的顺序。
+ * <p>
+ * 每个列的排序通过可以使用<code> setComparator </code>方法指定的<code> Comparator </code>完成。
+ * 如果未指定<code> Comparator </code>代码> <code>返回的比较器</code> Collat​​orgetInstance()</code>用于对底层对象调用<code> t
+ * oString </code>的结果<code> Comparator </code> <code> null </code> <code> null </code>值被视为在非<code> null 
+ * </code>值之前发生,并且两个<code> null </code>。
+ * 每个列的排序通过可以使用<code> setComparator </code>方法指定的<code> Comparator </code>完成。
+ * <p>
+ *  如果你指定一个<code> Comparator </code>,将它的参数强制转换为模型提供的类型以外的类型,当数据被排序时,会抛出一个<code> ClassCastException </code>
+ * 。
+ * <p>
+ * 除了排序,<code> DefaultRowSorter </code>提供过滤行的能力过滤是通过使用<code> setRowFilter </code>方法指定的<code> RowFilter </code>
+ *  filter已指定所有行都包括在内。
+ * <p>
+ *  默认情况下,行以未排序的顺序(与模型相同),每个列都是可排序的默认<code> Comparator </code>在子类中记录(例如{@link javaxswingtableTableRowSorter TableRowSorter}
+ * )。
+ * <p>
+ * 如果底层模型结构发生变化(调用<code> modelStructureChanged </code>方法),以下内容将重置为其默认值：<code>按列的比较器</code>,当前排序顺序, sorta
+ * ble要找到默认的<code> Comparator </code>,请参见具体实现(例如,{@link javaxswingtableTableRowSorter TableRowSorter})。
+ * 默认排序顺序是未排序的(与模型相同),列可以按默认值进行排序。
+ * <p>
+ *  如果底层模型结构发生变化(调用<code> modelStructureChanged </code>方法),以下内容将重置为其默认值：<code>按列,比较器</code>,当前排序顺序以及列是否可
+ * 排序。
+ * <p>
+ * <code> DefaultRowSorter </code>是一个抽象类Concrete子类必须通过调用{@code setModelWrapper}提供对底层数据的访问。
+ * {@code setModelWrapper}方法<b>必须</b>在构造函数调用,理想的是从子类的构造函数中如果使用{@code DefaultRowSorter}而不指定{@code ModelWrapper}
+ * 。
+ * <code> DefaultRowSorter </code>是一个抽象类Concrete子类必须通过调用{@code setModelWrapper}提供对底层数据的访问。
+ * <p>
+ *  <code> DefaultRowSorter </code>有两个形式类型参数第一个类型参数对应于模型的类,例如<code> DefaultTableModel </code>第二个类型参数对应于传
+ * 递给<代码> RowFilter </code>有关类型参数的更多详细信息,请参阅<code> TableRowSorter </code>和<code> RowFilter </code>。
+ * 
+ * 
  * @param <M> the type of the model
  * @param <I> the type of the identifier passed to the <code>RowFilter</code>
  * @see javax.swing.table.TableRowSorter
@@ -112,85 +151,133 @@ import javax.swing.SortOrder;
 public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
     /**
      * Whether or not we resort on TableModelEvent.UPDATEs.
+     * <p>
+     * 是否我们使用TableModelEventUPDATEs
+     * 
      */
     private boolean sortsOnUpdates;
 
     /**
      * View (JTable) -> model.
+     * <p>
+     *  视图(JTable) - >模型
+     * 
      */
     private Row[] viewToModel;
 
     /**
      * model -> view (JTable)
+     * <p>
+     *  模型 - >视图(JTable)
+     * 
      */
     private int[] modelToView;
 
     /**
      * Comparators specified by column.
+     * <p>
+     *  由列指定的比较器
+     * 
      */
     private Comparator[] comparators;
 
     /**
      * Whether or not the specified column is sortable, by column.
+     * <p>
+     *  指定的列是否可按列排序
+     * 
      */
     private boolean[] isSortable;
 
     /**
      * Cached SortKeys for the current sort.
+     * <p>
+     *  缓存SortKeys用于当前排序
+     * 
      */
     private SortKey[] cachedSortKeys;
 
     /**
      * Cached comparators for the current sort
+     * <p>
+     *  用于当前排序的缓存比较器
+     * 
      */
     private Comparator[] sortComparators;
 
     /**
      * Developer supplied Filter.
+     * <p>
+     *  开发商提供过滤器
+     * 
      */
     private RowFilter<? super M,? super I> filter;
 
     /**
      * Value passed to the filter.  The same instance is passed to the
      * filter for different rows.
+     * <p>
+     *  传递给过滤器的值同一个实例传递给不同行的过滤器
+     * 
      */
     private FilterEntry filterEntry;
 
     /**
      * The sort keys.
+     * <p>
+     *  排序键
+     * 
      */
     private List<SortKey> sortKeys;
 
     /**
      * Whether or not to use getStringValueAt.  This is indexed by column.
+     * <p>
+     *  是否使用getStringValueAt这是通过列索引的
+     * 
      */
     private boolean[] useToString;
 
     /**
      * Indicates the contents are sorted.  This is used if
      * getSortsOnUpdates is false and an update event is received.
+     * <p>
+     *  表示内容排序如果getSortsOnUpdates为false并且接收到更新事件,则使用此内容
+     * 
      */
     private boolean sorted;
 
     /**
      * Maximum number of sort keys.
+     * <p>
+     *  排序键的最大数量
+     * 
      */
     private int maxSortKeys;
 
     /**
      * Provides access to the data we're sorting/filtering.
+     * <p>
+     *  提供对正在排序/过滤的数据的访问
+     * 
      */
     private ModelWrapper<M,I> modelWrapper;
 
     /**
      * Size of the model. This is used to enforce error checking within
      * the table changed notification methods (such as rowsInserted).
+     * <p>
+     * 模型的大小这用于在表更改的通知方法(例如rowsInserted)中强制执行错误检查,
+     * 
      */
     private int modelRowCount;
 
 
     /**
      * Creates an empty <code>DefaultRowSorter</code>.
+     * <p>
+     *  创建一个空的<code> DefaultRowSorter </code>
+     * 
      */
     public DefaultRowSorter() {
         sortKeys = Collections.emptyList();
@@ -201,6 +288,10 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
      * Sets the model wrapper providing the data that is being sorted and
      * filtered.
      *
+     * <p>
+     *  设置提供正在排序和过滤的数据的模型包装器
+     * 
+     * 
      * @param modelWrapper the model wrapper responsible for providing the
      *         data that gets sorted and filtered
      * @throws IllegalArgumentException if {@code modelWrapper} is
@@ -226,6 +317,10 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
      * Returns the model wrapper providing the data that is being sorted and
      * filtered.
      *
+     * <p>
+     *  返回提供正在排序和过滤的数据的模型包装器
+     * 
+     * 
      * @return the model wrapper responsible for providing the data that
      *         gets sorted and filtered
      */
@@ -236,6 +331,10 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
     /**
      * Returns the underlying model.
      *
+     * <p>
+     *  返回底层模型
+     * 
+     * 
      * @return the underlying model
      */
     public final M getModel() {
@@ -249,6 +348,10 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
      * unsortable by directly setting the sort keys.  The default is
      * true.
      *
+     * <p>
+     *  设置指定的列是否可排序仅当调用<code> toggleSortOrder </code>时检查指定的值仍然可以通过直接设置排序键对已标记为不可排序的列进行排序默认为真正
+     * 
+     * 
      * @param column the column to enable or disable sorting on, in terms
      *        of the underlying model
      * @param sortable whether or not the specified column is sortable
@@ -271,6 +374,10 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
     /**
      * Returns true if the specified column is sortable; otherwise, false.
      *
+     * <p>
+     *  如果指定的列可排序,则返回true;否则为false
+     * 
+     * 
      * @param column the column to check sorting for, in terms of the
      *        underlying model
      * @return true if the column is sortable
@@ -288,6 +395,10 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
      * {@code List} do not effect this {@code DefaultRowSorter}.
      * If the sort keys have changed this triggers a sort.
      *
+     * <p>
+     * 设置排序键这将创建提供的{@code List}的副本;对提供的{@code List}的后续更改不会影响此{@code DefaultRowSorter}如果排序键已更改,将触发排序
+     * 
+     * 
      * @param sortKeys the new <code>SortKeys</code>; <code>null</code>
      *        is a shorthand for specifying an empty list,
      *        indicating that the view should be unsorted
@@ -329,6 +440,10 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
      * make a copy of the returned {@code List}, mutate the copy
      * and invoke {@code setSortKeys} with the new list.
      *
+     * <p>
+     *  返回当前排序键返回不可修改的{@code非空List}如果您需要更改排序键,请创建一个返回的{@code List}的副本,改变副本并调用{@code setSortKeys}新列表
+     * 
+     * 
      * @return the current sort order
      */
     public List<? extends SortKey> getSortKeys() {
@@ -360,6 +475,16 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
      * invoked the maximum number of sort keys will be enforced.
      * The default value is 3.
      *
+     * <p>
+     * 设置排序键的最大数排序键的数量决定排序时如何解析相等值例如,假设创建了表行排序器,并且调用了<code> setMaxSortKeys(2)</code>。
+     * 用户单击列1的表头,导致基于列1中的项对表行进行排序接下来,用户点击列2的表头,使得基于列2中的项目对表进行排序;如果列2中的任何项目相等,那么基于列1中的项对这些特定行进行排序。
+     * 在这种情况下,我们假定行主要在列2上排序,并且其次在列1上排序。
+     * 如果用户然后点击标题对于列3,则项目主要在列3上排序并在列2上排序因为排序键的最大数目已通过<code> setMaxSortKeys </code>设置为2,所以列1不再影响顺序。
+     * <p>
+     * 排序键的最大数量由<code> toggleSortOrder </code>强制执行。您可以通过直接调用<code> setSortKeys </code>来指定更多的排序键,并且它们都将被执行。
+     * 但是如果<code> toggleSortOrder </code>随后调用将强制执行最大数量的排序键默认值为3。
+     * 
+     * 
      * @param max the maximum number of sort keys
      * @throws IllegalArgumentException if <code>max</code> &lt; 1
      */
@@ -373,6 +498,10 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
     /**
      * Returns the maximum number of sort keys.
      *
+     * <p>
+     *  返回排序键的最大数量
+     * 
+     * 
      * @return the maximum number of sort keys
      */
     public int getMaxSortKeys() {
@@ -386,6 +515,10 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
      * location of that item in the view may change.  The default is
      * false.
      *
+     * <p>
+     *  如果为true,则指定在更新基础模型时应发生排序(<code> rowsUpdated </code>)例如,如果这是true,并且用户编辑了条目,则该项在视图中的位置可能会更改默认值为false
+     * 
+     * 
      * @param sortsOnUpdates whether or not to sort on update events
      */
     public void setSortsOnUpdates(boolean sortsOnUpdates) {
@@ -396,6 +529,10 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
      * Returns true if  a sort should happen when the underlying
      * model is updated; otherwise, returns false.
      *
+     * <p>
+     *  如果在基础模型更新时发生排序,则返回true;否则返回false
+     * 
+     * 
      * @return whether or not to sort when the model is updated
      */
     public boolean getSortsOnUpdates() {
@@ -416,6 +553,15 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
      * <p>
      * This method triggers a sort.
      *
+     * <p>
+     * 设置过滤器,确定哪些行(如果有)应从视图中隐藏过滤器在排序之前应用<code> null </code>的值表示应包括模型中的所有值
+     * <p>
+     *  <code> RowFilter </code>的<code> include </code>方法传递了一个包含底层模型的<code> Entry </code>。
+     * <code> Entry </code>到<code> ModelWrapper </code>中的列数。标识符也来自<code> ModelWrapper </code>。
+     * <p>
+     *  此方法触发排序
+     * 
+     * 
      * @param filter the filter used to determine what entries should be
      *        included
      */
@@ -428,6 +574,10 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
      * Returns the filter that determines which rows, if any, should
      * be hidden from view.
      *
+     * <p>
+     *  返回用于确定哪些行(如果有)应从视图中隐藏的过滤器
+     * 
+     * 
      * @return the filter
      */
     public RowFilter<? super M,? super I> getRowFilter() {
@@ -442,6 +592,10 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
      * the specified column is not sortable, this method has no
      * effect.
      *
+     * <p>
+     * 如果指定的列已经是主要排序列,则将排序顺序从升序转换为降序(或降序升序);否则,使指定的列成为主排序列,使用升序排序顺序如果指定的列不可排序,则此方法不起作用
+     * 
+     * 
      * @param column index of the column to make the primary sorted column,
      *        in terms of the underlying model
      * @throws IndexOutOfBoundsException {@inheritDoc}
@@ -491,6 +645,10 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
     /**
      * {@inheritDoc}
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
     public int convertRowIndexToView(int index) {
@@ -506,6 +664,10 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
     /**
      * {@inheritDoc}
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
     public int convertRowIndexToModel(int index) {
@@ -528,6 +690,9 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
     /**
      * Sorts the existing filtered data.  This should only be used if
      * the filter hasn't changed.
+     * <p>
+     *  对现有过滤数据进行排序只有在过滤器未更改时才应使用此选项
+     * 
      */
     private void sortExistingData() {
         int[] lastViewToModel = getViewToModelAsInts(viewToModel);
@@ -564,6 +729,10 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
      * associated with this sorter.  An empty <code>sortKeys</code> list
      * indicates that the view should unsorted, the same as the model.
      *
+     * <p>
+     *  根据当前排序的列的排序键和与此排序器关联的过滤器(如果有)排序和过滤视图中的行。空的<code> sortKeys </code>列表表示视图应未排序,作为模型
+     * 
+     * 
      * @see #setRowFilter
      * @see #setSortKeys
      */
@@ -614,6 +783,9 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
 
     /**
      * Updates the useToString mapping before a sort.
+     * <p>
+     *  在排序之前更新useToString映射
+     * 
      */
     private void updateUseToString() {
         int i = getModelWrapper().getColumnCount();
@@ -628,6 +800,9 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
     /**
      * Resets the viewToModel and modelToView mappings based on
      * the current Filter.
+     * <p>
+     * 基于当前过滤器重置viewToModel和modelToView映射
+     * 
      */
     private void initializeFilteredMapping() {
         int rowCount = getModelWrapper().getRowCount();
@@ -657,6 +832,9 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
 
     /**
      * Makes sure the modelToView array is of size rowCount.
+     * <p>
+     *  确保modelToView数组的大小为rowCount
+     * 
      */
     private void createModelToView(int rowCount) {
         if (modelToView == null || modelToView.length != rowCount) {
@@ -666,6 +844,9 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
 
     /**
      * Resets the viewToModel array to be of size rowCount.
+     * <p>
+     *  将viewToModel数组重置为大小为rowCount的值
+     * 
      */
     private void createViewToModel(int rowCount) {
         int recreateFrom = 0;
@@ -692,6 +873,9 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
 
     /**
      * Caches the sort keys before a sort.
+     * <p>
+     *  在排序之前缓存排序键
+     * 
      */
     private void cacheSortKeys(List<? extends SortKey> keys) {
         int keySize = keys.size();
@@ -710,6 +894,11 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
      * subclasses, such as <code>TableRowSorter</code>, to honor this value
      * in their <code>ModelWrapper</code> implementation.
      *
+     * <p>
+     *  返回在进行排序之前进行比较之前是否将值转换为字符如果使用true <code> ModelWrappergetStringValueAt </code>,否则将使用<code> ModelWrappe
+     * rgetValueAt </code>这是由子类, <code> TableRowSorter </code>,以在其<code> ModelWrapper </code>实现中支持此值。
+     * 
+     * 
      * @param column the index of the column to test, in terms of the
      *        underlying model
      * @throws IndexOutOfBoundsException if <code>column</code> is not valid
@@ -722,6 +911,9 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
      * Refreshes the modelToView mapping from that of viewToModel.
      * If <code>unsetFirst</code> is true, all indices in modelToView are
      * first set to -1.
+     * <p>
+     *  从viewToModel中刷新modelToView映射如果<code> unsetFirst </code>为true,则modelToView中的所有索引首先设置为-1
+     * 
      */
     private void setModelToViewFromViewToModel(boolean unsetFirst) {
         int i;
@@ -751,6 +943,10 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
      * column.  This does not trigger a sort.  If you want to sort after
      * setting the comparator you need to explicitly invoke <code>sort</code>.
      *
+     * <p>
+     * 设置在排序指定列时使用的<code> Comparator </code>这不会触发排序如果要在设置比较器之后排序,则需要显式调用<code> sort </code>
+     * 
+     * 
      * @param column the index of the column the <code>Comparator</code> is
      *        to be used for, in terms of the underlying model
      * @param comparator the <code>Comparator</code> to use
@@ -770,6 +966,10 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
      * column.  This will return <code>null</code> if a <code>Comparator</code>
      * has not been specified for the column.
      *
+     * <p>
+     *  返回指定列的<code> Comparator </code>如果未为列指定<code> Comparator </code>,则将返回<code> null </code>
+     * 
+     * 
      * @param column the column to fetch the <code>Comparator</code> for, in
      *        terms of the underlying model
      * @return the <code>Comparator</code> for the specified column
@@ -806,6 +1006,9 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public int getViewRowCount() {
         if (viewToModel != null) {
@@ -817,6 +1020,9 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public int getModelRowCount() {
         return getModelWrapper().getRowCount();
@@ -838,6 +1044,9 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public void modelStructureChanged() {
         allChanged();
@@ -846,6 +1055,9 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public void allRowsChanged() {
         modelRowCount = getModelWrapper().getRowCount();
@@ -855,6 +1067,10 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
     /**
      * {@inheritDoc}
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
     public void rowsInserted(int firstRow, int endRow) {
@@ -872,6 +1088,10 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
     /**
      * {@inheritDoc}
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
     public void rowsDeleted(int firstRow, int endRow) {
@@ -888,6 +1108,10 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
     /**
      * {@inheritDoc}
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
     public void rowsUpdated(int firstRow, int endRow) {
@@ -908,6 +1132,10 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
     /**
      * {@inheritDoc}
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
     public void rowsUpdated(int firstRow, int endRow, int column) {
@@ -924,6 +1152,9 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
 
     /**
      * Returns true if the specified row should be included.
+     * <p>
+     *  如果应包含指定的行,则返回true
+     * 
      */
     private boolean include(int row) {
         RowFilter<? super M, ? super I> filter = getRowFilter();
@@ -981,6 +1212,9 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
 
     /**
      * Whether not we are filtering/sorting.
+     * <p>
+     *  不管我们是不是过滤/排序
+     * 
      */
     private boolean isTransformed() {
         return (viewToModel != null);
@@ -989,6 +1223,10 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
     /**
      * Insets new set of entries.
      *
+     * <p>
+     *  插入新的条目集
+     * 
+     * 
      * @param toAdd the Rows to add, sorted
      * @param current the array to insert the items into
      */
@@ -1014,6 +1252,9 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
      * Returns true if we should try and optimize the processing of the
      * <code>TableModelEvent</code>.  If this returns false, assume the
      * event was dealt with and no further processing needs to happen.
+     * <p>
+     * 如果我们应该尝试并优化<code> TableModelEvent </code>的处理,则返回true如果这返回false,假设事件被处理,并且不需要进一步处理
+     * 
      */
     private boolean shouldOptimizeChange(int firstRow, int lastRow) {
         if (!isTransformed()) {
@@ -1238,6 +1479,16 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
      * converter to be used instead of invoking <code>toString</code> on the
      * object.
      *
+     * <p>
+     *  <code> DefaultRowSorterModelWrapper </code>负责提供按<code> DefaultRowSorter </code>排序的数据。
+     * 通常不与<code> ModelWrapper </code>直接交互</code> <code> DefaultRowSorter </code >提供包含另一个模型的<code> ModelWrap
+     * per </code>的实现例如,<code> TableRowSorter </code>提供了一个包装<code> TableModel </code>。
+     *  <code> DefaultRowSorterModelWrapper </code>负责提供按<code> DefaultRowSorter </code>排序的数据。
+     * <p>
+     * <code> ModelWrapper </code>区分了<code> Object </code>和<code> String </code>之间的值。
+     * 这允许实现提供一个自定义字符串转换器来代替调用<code > toString </code>。
+     * 
+     * 
      * @param <M> the type of the underlying model
      * @param <I> the identifier supplied to the filter
      * @since 1.6
@@ -1247,6 +1498,9 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
     protected abstract static class ModelWrapper<M,I> {
         /**
          * Creates a new <code>ModelWrapper</code>.
+         * <p>
+         *  创建一个新的<code> ModelWrapper </code>
+         * 
          */
         protected ModelWrapper() {
         }
@@ -1255,6 +1509,10 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
          * Returns the underlying model that this <code>Model</code> is
          * wrapping.
          *
+         * <p>
+         *  返回这个<code> Model </code>包装的底层模型
+         * 
+         * 
          * @return the underlying model
          */
         public abstract M getModel();
@@ -1262,6 +1520,10 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
         /**
          * Returns the number of columns in the model.
          *
+         * <p>
+         *  返回模型中的列数
+         * 
+         * 
          * @return the number of columns in the model
          */
         public abstract int getColumnCount();
@@ -1269,6 +1531,10 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
         /**
          * Returns the number of rows in the model.
          *
+         * <p>
+         *  返回模型中的行数
+         * 
+         * 
          * @return the number of rows in the model
          */
         public abstract int getRowCount();
@@ -1276,6 +1542,10 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
         /**
          * Returns the value at the specified index.
          *
+         * <p>
+         *  返回指定索引处的值
+         * 
+         * 
          * @param row the row index
          * @param column the column index
          * @return the value at the specified index
@@ -1291,6 +1561,11 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
          * to return an empty string for null values).  Subclasses that
          * override this method should never return null.
          *
+         * <p>
+         *  在指定索引处以<code> String </code>返回值此实现在<code> getValueAt </code>的结果中使用<code> toString </code>(确保返回空字符串为n
+         * ull值)重写此方法的子类不应返回null。
+         * 
+         * 
          * @param row the row index
          * @param column the column index
          * @return the value at the specified index as a <code>String</code>
@@ -1315,6 +1590,10 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
          * <code>RowFilter.Entry</code> that is passed to the
          * <code>RowFilter</code>.
          *
+         * <p>
+         * 返回指定行的标识符它的返回值用作传递给<code> RowFilter </code>的<code> RowFilterEntry </code>
+         * 
+         * 
          * @param row the row to return the identifier for, in terms of
          *            the underlying model
          * @return the identifier
@@ -1329,10 +1608,16 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
      * getFilterEntry(int) creates the single instance of this that is
      * passed to the Filter.  Only call getFilterEntry(int) to get
      * the instance.
+     * <p>
+     *  委派给ModelWrapper的RowFilterEntry实现getFilterEntry(int)创建传递给Filter Only的单个实例,调用getFilterEntry(int)来获取实例。
+     * 
      */
     private class FilterEntry extends RowFilter.Entry<M,I> {
         /**
          * The index into the model, set in getFilterEntry
+         * <p>
+         *  进入模型的索引,在getFilterEntry中设置
+         * 
          */
         int modelIndex;
 
@@ -1361,6 +1646,8 @@ public abstract class DefaultRowSorter<M, I> extends RowSorter<M> {
     /**
      * Row is used to handle the actual sorting by way of Comparable.  It
      * will use the sortKeys to do the actual comparison.
+     * <p>
+     *  Row用于通过Comparable来处理实际排序它将使用sortKeys来进行实际比较
      */
     // NOTE: this class is static so that it can be placed in an array
     private static class Row implements Comparable<Row> {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -96,6 +97,32 @@ import java.util.EventListener;
  * {@link javax.swing.event.EventListenerList EventListenerList} for
  * similar logic. Refer to it for details.
  *
+ * <p>
+ *  {@code AWTEventMulticaster}为{@code javaawtevent}包中定义的AWT事件实施高效且线程安全的多播事件分派
+ * <p>
+ *  以下示例说明如何使用此类：
+ * 
+ *  <pre> <code> public myComponent extends Component {ActionListener actionListener = null;
+ * 
+ * public synchronized void addActionListener(ActionListener l){actionListener = AWTEventMulticasteradd(actionListener,l); }
+ *  public synchronized void removeActionListener(ActionListener l){actionListener = AWTEventMulticasterremove(actionListener,l); }
+ *  public void processEvent(AWTEvent e){//当事件发生时导致"动作"语义ActionListener listener = actionListener; if(listener！= null){listeneractionPerformed(new ActionEvent());需要注意的重要一点是{@code add}
+ * 和{@code remove}方法的第一个参数是保持侦听器的字段此外,您必须将{ @code add}和{@code remove}方法保留侦听器。
+ * <p>
+ * {@code AWTEventMulticaster}被实现为在构造时设置的一对{@code EventListeners}是不可变的{@code add}和{@code remove}方法不会改变{@code AWTEventMulticaster}
+ * 无论如何如果需要,创建一个新的{@code AWTEventMulticaster}这样,在事件分派过程中添加和删除侦听器是安全的但是,在事件分派操作过程中添加的事件侦听器不会被通知事件。
+ * <p>
+ * 所有{@code add}方法允许{@code null}参数如果第一个参数是{@code null},则返回第二个参数如果第一个参数不是{@code null},第二个参数是{@代码null},返回第
+ * 一个参数如果两个参数都是{@code non-null},则使用这两个参数创建一个新的{@code AWTEventMulticaster}并返回。
+ * <p>
+ *  对于接受两个参数的{@code remove}方法,返回以下内容：
+ * <ul>
+ * <li> {@ code null},如果第一个参数是{@code null}或参数相等,则通过{@code ==} <li>第一个参数,如果第一个参数不是实例of {@code AWTEventMulticaster}
+ *  <li>对第一个参数调用{@code remove(EventListener)}的结果,将第二个参数提供给{@code remove(EventListener)}方法。
+ * </ul>
+ *  <p> Swing使用{@link javaxswingeventEventListenerList EventListenerList}获得类似的逻辑详情请参考
+ * 
+ * 
  * @see javax.swing.event.EventListenerList
  *
  * @author      John Rose
@@ -118,6 +145,11 @@ public class AWTEventMulticaster implements
      * should not be <code>null</code>, though implementations may vary in
      * choosing whether or not to throw <code>NullPointerException</code>
      * in that case.
+     * <p>
+     *  创建将listener-a与listener-b链接的事件multicaster实例输入参数<code> a </code>和<code> b </code>不应为<code> null </code>
+     * 选择是否在这种情况下抛出<code> NullPointerException </code>。
+     * 
+     * 
      * @param a listener-a
      * @param b listener-b
      */
@@ -136,6 +168,15 @@ public class AWTEventMulticaster implements
      * <p>
      * No exception is thrown if {@code oldl} is {@code null}.
      *
+     * <p>
+     * 从此多任务器中删除侦听器
+     * <p>
+     *  返回的多任务器包含此多任务器中的所有侦听器,但所有出现的{@code oldl}除外。如果生成的多任务器只包含一个常规侦听器,则可能返回常规侦听器。
+     * 如果生成的多任务器为空,则{@code null}可能会返回。
+     * <p>
+     *  如果{@code oldl}是{@code null},则不会抛出异常
+     * 
+     * 
      * @param oldl the listener to be removed
      * @return resulting listener
      */
@@ -153,6 +194,10 @@ public class AWTEventMulticaster implements
     /**
      * Handles the componentResized event by invoking the
      * componentResized methods on listener-a and listener-b.
+     * <p>
+     *  通过调用listener-a和listener-b上的componentResized方法处理componentResized事件
+     * 
+     * 
      * @param e the component event
      */
     public void componentResized(ComponentEvent e) {
@@ -163,6 +208,10 @@ public class AWTEventMulticaster implements
     /**
      * Handles the componentMoved event by invoking the
      * componentMoved methods on listener-a and listener-b.
+     * <p>
+     *  通过调用侦听器a和侦听器b上的componentMoved方法处理componentMoved事件
+     * 
+     * 
      * @param e the component event
      */
     public void componentMoved(ComponentEvent e) {
@@ -173,6 +222,10 @@ public class AWTEventMulticaster implements
     /**
      * Handles the componentShown event by invoking the
      * componentShown methods on listener-a and listener-b.
+     * <p>
+     *  通过调用侦听器a和侦听器b上的componentShown方法处理componentShown事件
+     * 
+     * 
      * @param e the component event
      */
     public void componentShown(ComponentEvent e) {
@@ -183,6 +236,10 @@ public class AWTEventMulticaster implements
     /**
      * Handles the componentHidden event by invoking the
      * componentHidden methods on listener-a and listener-b.
+     * <p>
+     * 通过调用listener-a和listener-b上的componentHidden方法处理componentHidden事件
+     * 
+     * 
      * @param e the component event
      */
     public void componentHidden(ComponentEvent e) {
@@ -193,6 +250,10 @@ public class AWTEventMulticaster implements
     /**
      * Handles the componentAdded container event by invoking the
      * componentAdded methods on listener-a and listener-b.
+     * <p>
+     *  通过调用侦听器a和侦听器b上的componentAdded方法处理componentAdded容器事件
+     * 
+     * 
      * @param e the component event
      */
     public void componentAdded(ContainerEvent e) {
@@ -203,6 +264,10 @@ public class AWTEventMulticaster implements
     /**
      * Handles the componentRemoved container event by invoking the
      * componentRemoved methods on listener-a and listener-b.
+     * <p>
+     *  通过调用listener-a和listener-b上的componentRemoved方法处理componentRemoved容器事件
+     * 
+     * 
      * @param e the component event
      */
     public void componentRemoved(ContainerEvent e) {
@@ -213,6 +278,10 @@ public class AWTEventMulticaster implements
     /**
      * Handles the focusGained event by invoking the
      * focusGained methods on listener-a and listener-b.
+     * <p>
+     *  通过调用listener-a和listener-b上的focusGained方法处理focusGained事件
+     * 
+     * 
      * @param e the focus event
      */
     public void focusGained(FocusEvent e) {
@@ -223,6 +292,10 @@ public class AWTEventMulticaster implements
     /**
      * Handles the focusLost event by invoking the
      * focusLost methods on listener-a and listener-b.
+     * <p>
+     *  通过调用listener-a和listener-b上的focusLost方法处理focusLost事件
+     * 
+     * 
      * @param e the focus event
      */
     public void focusLost(FocusEvent e) {
@@ -233,6 +306,10 @@ public class AWTEventMulticaster implements
     /**
      * Handles the keyTyped event by invoking the
      * keyTyped methods on listener-a and listener-b.
+     * <p>
+     *  通过调用侦听器a和侦听器b上的keyTyped方法处理keyTyped事件
+     * 
+     * 
      * @param e the key event
      */
     public void keyTyped(KeyEvent e) {
@@ -243,6 +320,10 @@ public class AWTEventMulticaster implements
     /**
      * Handles the keyPressed event by invoking the
      * keyPressed methods on listener-a and listener-b.
+     * <p>
+     *  通过调用侦听器a和侦听器b上的keyPressed方法处理keyPressed事件
+     * 
+     * 
      * @param e the key event
      */
     public void keyPressed(KeyEvent e) {
@@ -253,6 +334,10 @@ public class AWTEventMulticaster implements
     /**
      * Handles the keyReleased event by invoking the
      * keyReleased methods on listener-a and listener-b.
+     * <p>
+     * 通过调用listener-a和listener-b上的keyReleased方法处理keyReleased事件
+     * 
+     * 
      * @param e the key event
      */
     public void keyReleased(KeyEvent e) {
@@ -263,6 +348,10 @@ public class AWTEventMulticaster implements
     /**
      * Handles the mouseClicked event by invoking the
      * mouseClicked methods on listener-a and listener-b.
+     * <p>
+     *  通过调用listener-a和listener-b上的mouseClicked方法处理mouseClicked事件
+     * 
+     * 
      * @param e the mouse event
      */
     public void mouseClicked(MouseEvent e) {
@@ -273,6 +362,10 @@ public class AWTEventMulticaster implements
     /**
      * Handles the mousePressed event by invoking the
      * mousePressed methods on listener-a and listener-b.
+     * <p>
+     *  通过调用侦听器a和侦听器b上的mousePressed方法处理mousePressed事件
+     * 
+     * 
      * @param e the mouse event
      */
     public void mousePressed(MouseEvent e) {
@@ -283,6 +376,10 @@ public class AWTEventMulticaster implements
     /**
      * Handles the mouseReleased event by invoking the
      * mouseReleased methods on listener-a and listener-b.
+     * <p>
+     *  通过调用监听器a和监听器b上的mouseReleased方法处理mouseReleased事件
+     * 
+     * 
      * @param e the mouse event
      */
     public void mouseReleased(MouseEvent e) {
@@ -293,6 +390,10 @@ public class AWTEventMulticaster implements
     /**
      * Handles the mouseEntered event by invoking the
      * mouseEntered methods on listener-a and listener-b.
+     * <p>
+     *  通过调用listener-a和listener-b上的mouseEntered方法处理mouseEntered事件
+     * 
+     * 
      * @param e the mouse event
      */
     public void mouseEntered(MouseEvent e) {
@@ -303,6 +404,10 @@ public class AWTEventMulticaster implements
     /**
      * Handles the mouseExited event by invoking the
      * mouseExited methods on listener-a and listener-b.
+     * <p>
+     *  通过调用listener-a和listener-b上的mouseExited方法处理mouseExited事件
+     * 
+     * 
      * @param e the mouse event
      */
     public void mouseExited(MouseEvent e) {
@@ -313,6 +418,10 @@ public class AWTEventMulticaster implements
     /**
      * Handles the mouseDragged event by invoking the
      * mouseDragged methods on listener-a and listener-b.
+     * <p>
+     *  通过调用listener-a和listener-b上的mouseDragged方法处理mouseDragged事件
+     * 
+     * 
      * @param e the mouse event
      */
     public void mouseDragged(MouseEvent e) {
@@ -323,6 +432,10 @@ public class AWTEventMulticaster implements
     /**
      * Handles the mouseMoved event by invoking the
      * mouseMoved methods on listener-a and listener-b.
+     * <p>
+     *  通过调用监听器a和监听器b上的mouseMoved方法处理mouseMoved事件
+     * 
+     * 
      * @param e the mouse event
      */
     public void mouseMoved(MouseEvent e) {
@@ -333,6 +446,10 @@ public class AWTEventMulticaster implements
     /**
      * Handles the windowOpened event by invoking the
      * windowOpened methods on listener-a and listener-b.
+     * <p>
+     * 通过调用侦听器a和侦听器b上的windowOpened方法处理windowOpened事件
+     * 
+     * 
      * @param e the window event
      */
     public void windowOpened(WindowEvent e) {
@@ -343,6 +460,10 @@ public class AWTEventMulticaster implements
     /**
      * Handles the windowClosing event by invoking the
      * windowClosing methods on listener-a and listener-b.
+     * <p>
+     *  通过调用侦听器a和侦听器b上的windowClosing方法处理windowClosing事件
+     * 
+     * 
      * @param e the window event
      */
     public void windowClosing(WindowEvent e) {
@@ -353,6 +474,10 @@ public class AWTEventMulticaster implements
     /**
      * Handles the windowClosed event by invoking the
      * windowClosed methods on listener-a and listener-b.
+     * <p>
+     *  通过调用侦听器a和侦听器b上的windowClosed方法处理windowClosed事件
+     * 
+     * 
      * @param e the window event
      */
     public void windowClosed(WindowEvent e) {
@@ -363,6 +488,10 @@ public class AWTEventMulticaster implements
     /**
      * Handles the windowIconified event by invoking the
      * windowIconified methods on listener-a and listener-b.
+     * <p>
+     *  通过调用侦听器a和侦听器b上的windowIconified方法处理windowIconified事件
+     * 
+     * 
      * @param e the window event
      */
     public void windowIconified(WindowEvent e) {
@@ -373,6 +502,10 @@ public class AWTEventMulticaster implements
     /**
      * Handles the windowDeiconfied event by invoking the
      * windowDeiconified methods on listener-a and listener-b.
+     * <p>
+     *  通过调用侦听器a和侦听器b上的windowDeiconified方法处理windowDeiconfied事件
+     * 
+     * 
      * @param e the window event
      */
     public void windowDeiconified(WindowEvent e) {
@@ -383,6 +516,10 @@ public class AWTEventMulticaster implements
     /**
      * Handles the windowActivated event by invoking the
      * windowActivated methods on listener-a and listener-b.
+     * <p>
+     *  通过调用listener-a和listener-b上的windowActivated方法处理windowActivated事件
+     * 
+     * 
      * @param e the window event
      */
     public void windowActivated(WindowEvent e) {
@@ -393,6 +530,10 @@ public class AWTEventMulticaster implements
     /**
      * Handles the windowDeactivated event by invoking the
      * windowDeactivated methods on listener-a and listener-b.
+     * <p>
+     *  通过调用侦听器a和侦听器b上的windowDeactivated方法处理windowDeactivated事件
+     * 
+     * 
      * @param e the window event
      */
     public void windowDeactivated(WindowEvent e) {
@@ -403,6 +544,10 @@ public class AWTEventMulticaster implements
     /**
      * Handles the windowStateChanged event by invoking the
      * windowStateChanged methods on listener-a and listener-b.
+     * <p>
+     * 通过调用listener-a和listener-b上的windowStateChanged方法处理windowStateChanged事件
+     * 
+     * 
      * @param e the window event
      * @since 1.4
      */
@@ -415,6 +560,10 @@ public class AWTEventMulticaster implements
     /**
      * Handles the windowGainedFocus event by invoking the windowGainedFocus
      * methods on listener-a and listener-b.
+     * <p>
+     *  通过调用侦听器a和侦听器b上的windowGainedFocus方法处理windowGainedFocus事件
+     * 
+     * 
      * @param e the window event
      * @since 1.4
      */
@@ -426,6 +575,10 @@ public class AWTEventMulticaster implements
     /**
      * Handles the windowLostFocus event by invoking the windowLostFocus
      * methods on listener-a and listener-b.
+     * <p>
+     *  通过调用侦听器a和侦听器b上的windowLostFocus方法处理windowLostFocus事件
+     * 
+     * 
      * @param e the window event
      * @since 1.4
      */
@@ -437,6 +590,10 @@ public class AWTEventMulticaster implements
     /**
      * Handles the actionPerformed event by invoking the
      * actionPerformed methods on listener-a and listener-b.
+     * <p>
+     *  通过调用侦听器a和侦听器b上的actionPerformed方法处理actionPerformed事件
+     * 
+     * 
      * @param e the action event
      */
     public void actionPerformed(ActionEvent e) {
@@ -447,6 +604,10 @@ public class AWTEventMulticaster implements
     /**
      * Handles the itemStateChanged event by invoking the
      * itemStateChanged methods on listener-a and listener-b.
+     * <p>
+     *  通过调用listener-a和listener-b上的itemStateChanged方法处理itemStateChanged事件
+     * 
+     * 
      * @param e the item event
      */
     public void itemStateChanged(ItemEvent e) {
@@ -457,6 +618,10 @@ public class AWTEventMulticaster implements
     /**
      * Handles the adjustmentValueChanged event by invoking the
      * adjustmentValueChanged methods on listener-a and listener-b.
+     * <p>
+     *  通过调用侦听器a和侦听器b上的adjustValueChanged方法处理adjustValueChanged事件
+     * 
+     * 
      * @param e the adjustment event
      */
     public void adjustmentValueChanged(AdjustmentEvent e) {
@@ -471,6 +636,10 @@ public class AWTEventMulticaster implements
     /**
      * Handles the inputMethodTextChanged event by invoking the
      * inputMethodTextChanged methods on listener-a and listener-b.
+     * <p>
+     *  通过调用listener-a和listener-b上的inputMethodTextChanged方法处理inputMethodTextChanged事件
+     * 
+     * 
      * @param e the item event
      */
     public void inputMethodTextChanged(InputMethodEvent e) {
@@ -481,6 +650,10 @@ public class AWTEventMulticaster implements
     /**
      * Handles the caretPositionChanged event by invoking the
      * caretPositionChanged methods on listener-a and listener-b.
+     * <p>
+     * 通过调用listener-a和listener-b上的caretPositionChanged方法处理caretPositionChanged事件
+     * 
+     * 
      * @param e the item event
      */
     public void caretPositionChanged(InputMethodEvent e) {
@@ -491,6 +664,10 @@ public class AWTEventMulticaster implements
     /**
      * Handles the hierarchyChanged event by invoking the
      * hierarchyChanged methods on listener-a and listener-b.
+     * <p>
+     *  通过调用侦听器a和侦听器b上的hierarchyChanged方法处理hierarchyChanged事件
+     * 
+     * 
      * @param e the item event
      * @since 1.3
      */
@@ -502,6 +679,10 @@ public class AWTEventMulticaster implements
     /**
      * Handles the ancestorMoved event by invoking the
      * ancestorMoved methods on listener-a and listener-b.
+     * <p>
+     *  通过调用listener-a和listener-b上的ancestorMoved方法处理ancestorMoved事件
+     * 
+     * 
      * @param e the item event
      * @since 1.3
      */
@@ -513,6 +694,10 @@ public class AWTEventMulticaster implements
     /**
      * Handles the ancestorResized event by invoking the
      * ancestorResized methods on listener-a and listener-b.
+     * <p>
+     *  通过调用listener-a和listener-b上的ancestorResized方法处理ancestorResized事件
+     * 
+     * 
      * @param e the item event
      * @since 1.3
      */
@@ -524,6 +709,10 @@ public class AWTEventMulticaster implements
     /**
      * Handles the mouseWheelMoved event by invoking the
      * mouseWheelMoved methods on listener-a and listener-b.
+     * <p>
+     *  通过调用侦听器a和侦听器b上的mouseWheelMoved方法处理mouseWheelMoved事件
+     * 
+     * 
      * @param e the mouse event
      * @since 1.4
      */
@@ -535,6 +724,10 @@ public class AWTEventMulticaster implements
     /**
      * Adds component-listener-a with component-listener-b and
      * returns the resulting multicast listener.
+     * <p>
+     *  将component-listener-a添加到component-listener-b,并返回最终的组播侦听器
+     * 
+     * 
      * @param a component-listener-a
      * @param b component-listener-b
      */
@@ -545,6 +738,10 @@ public class AWTEventMulticaster implements
     /**
      * Adds container-listener-a with container-listener-b and
      * returns the resulting multicast listener.
+     * <p>
+     *  将container-listener-a添加到container-listener-b,并返回最终的组播侦听器
+     * 
+     * 
      * @param a container-listener-a
      * @param b container-listener-b
      */
@@ -555,6 +752,10 @@ public class AWTEventMulticaster implements
     /**
      * Adds focus-listener-a with focus-listener-b and
      * returns the resulting multicast listener.
+     * <p>
+     * 将focus-listener-a添加到focus-listener-b并返回最终的组播侦听器
+     * 
+     * 
      * @param a focus-listener-a
      * @param b focus-listener-b
      */
@@ -565,6 +766,10 @@ public class AWTEventMulticaster implements
     /**
      * Adds key-listener-a with key-listener-b and
      * returns the resulting multicast listener.
+     * <p>
+     *  将key-listener-a与key-listener-b相加,并返回最终的组播侦听器
+     * 
+     * 
      * @param a key-listener-a
      * @param b key-listener-b
      */
@@ -575,6 +780,10 @@ public class AWTEventMulticaster implements
     /**
      * Adds mouse-listener-a with mouse-listener-b and
      * returns the resulting multicast listener.
+     * <p>
+     *  将鼠标监听器a添加到鼠标监听器b并返回最终的组播监听器
+     * 
+     * 
      * @param a mouse-listener-a
      * @param b mouse-listener-b
      */
@@ -585,6 +794,10 @@ public class AWTEventMulticaster implements
     /**
      * Adds mouse-motion-listener-a with mouse-motion-listener-b and
      * returns the resulting multicast listener.
+     * <p>
+     *  添加鼠标运动监听器a与鼠标运动监听器b并返回结果组播侦听器
+     * 
+     * 
      * @param a mouse-motion-listener-a
      * @param b mouse-motion-listener-b
      */
@@ -595,6 +808,10 @@ public class AWTEventMulticaster implements
     /**
      * Adds window-listener-a with window-listener-b and
      * returns the resulting multicast listener.
+     * <p>
+     *  使用window-listener-b添加window-listener-a并返回最终的组播侦听器
+     * 
+     * 
      * @param a window-listener-a
      * @param b window-listener-b
      */
@@ -605,6 +822,10 @@ public class AWTEventMulticaster implements
     /**
      * Adds window-state-listener-a with window-state-listener-b
      * and returns the resulting multicast listener.
+     * <p>
+     *  使用window-state-listener-b添加window-state-listener-a并返回最终的组播侦听器
+     * 
+     * 
      * @param a window-state-listener-a
      * @param b window-state-listener-b
      * @since 1.4
@@ -617,6 +838,10 @@ public class AWTEventMulticaster implements
     /**
      * Adds window-focus-listener-a with window-focus-listener-b
      * and returns the resulting multicast listener.
+     * <p>
+     *  使用window-focus-listener-b添加window-focus-listener-a并返回最终的组播侦听器
+     * 
+     * 
      * @param a window-focus-listener-a
      * @param b window-focus-listener-b
      * @since 1.4
@@ -629,6 +854,10 @@ public class AWTEventMulticaster implements
     /**
      * Adds action-listener-a with action-listener-b and
      * returns the resulting multicast listener.
+     * <p>
+     *  将action-listener-a添加到action-listener-b,并返回最终的组播侦听器
+     * 
+     * 
      * @param a action-listener-a
      * @param b action-listener-b
      */
@@ -639,6 +868,10 @@ public class AWTEventMulticaster implements
     /**
      * Adds item-listener-a with item-listener-b and
      * returns the resulting multicast listener.
+     * <p>
+     * 将item-listener-a添加到item-listener-b,并返回最终的组播侦听器
+     * 
+     * 
      * @param a item-listener-a
      * @param b item-listener-b
      */
@@ -649,6 +882,10 @@ public class AWTEventMulticaster implements
     /**
      * Adds adjustment-listener-a with adjustment-listener-b and
      * returns the resulting multicast listener.
+     * <p>
+     *  使用adjust-listener-b添加adjust-listener-a,并返回最终的组播侦听器
+     * 
+     * 
      * @param a adjustment-listener-a
      * @param b adjustment-listener-b
      */
@@ -662,6 +899,10 @@ public class AWTEventMulticaster implements
     /**
      * Adds input-method-listener-a with input-method-listener-b and
      * returns the resulting multicast listener.
+     * <p>
+     *  将input-method-listener-a添加到input-method-listener-b,并返回最终的组播侦听器
+     * 
+     * 
      * @param a input-method-listener-a
      * @param b input-method-listener-b
      */
@@ -672,6 +913,10 @@ public class AWTEventMulticaster implements
     /**
      * Adds hierarchy-listener-a with hierarchy-listener-b and
      * returns the resulting multicast listener.
+     * <p>
+     *  将hierarchy-listener-a添加到hierarchy-listener-b,并返回最终的组播侦听器
+     * 
+     * 
      * @param a hierarchy-listener-a
      * @param b hierarchy-listener-b
      * @since 1.3
@@ -683,6 +928,10 @@ public class AWTEventMulticaster implements
     /**
      * Adds hierarchy-bounds-listener-a with hierarchy-bounds-listener-b and
      * returns the resulting multicast listener.
+     * <p>
+     *  将hierarchy-bounds-listener-a添加到hierarchy-bounds-listener-b,并返回最终的组播侦听器
+     * 
+     * 
      * @param a hierarchy-bounds-listener-a
      * @param b hierarchy-bounds-listener-b
      * @since 1.3
@@ -694,6 +943,10 @@ public class AWTEventMulticaster implements
     /**
      * Adds mouse-wheel-listener-a with mouse-wheel-listener-b and
      * returns the resulting multicast listener.
+     * <p>
+     *  用鼠标滚轮监听器b添加鼠标滚轮监听器a并返回结果组播监听器
+     * 
+     * 
      * @param a mouse-wheel-listener-a
      * @param b mouse-wheel-listener-b
      * @since 1.4
@@ -706,6 +959,10 @@ public class AWTEventMulticaster implements
     /**
      * Removes the old component-listener from component-listener-l and
      * returns the resulting multicast listener.
+     * <p>
+     *  从component-listener-l中删除旧的组件侦听器,并返回最终的组播侦听器
+     * 
+     * 
      * @param l component-listener-l
      * @param oldl the component-listener being removed
      */
@@ -716,6 +973,10 @@ public class AWTEventMulticaster implements
     /**
      * Removes the old container-listener from container-listener-l and
      * returns the resulting multicast listener.
+     * <p>
+     * 从container-listener-l中删除旧的容器侦听器,并返回最终的组播侦听器
+     * 
+     * 
      * @param l container-listener-l
      * @param oldl the container-listener being removed
      */
@@ -726,6 +987,10 @@ public class AWTEventMulticaster implements
     /**
      * Removes the old focus-listener from focus-listener-l and
      * returns the resulting multicast listener.
+     * <p>
+     *  从focus-listener-l中删除旧的焦点监听器并返回结果组播监听器
+     * 
+     * 
      * @param l focus-listener-l
      * @param oldl the focus-listener being removed
      */
@@ -736,6 +1001,10 @@ public class AWTEventMulticaster implements
     /**
      * Removes the old key-listener from key-listener-l and
      * returns the resulting multicast listener.
+     * <p>
+     *  从key-listener-l删除旧的密钥侦听器并返回最终的组播侦听器
+     * 
+     * 
      * @param l key-listener-l
      * @param oldl the key-listener being removed
      */
@@ -746,6 +1015,10 @@ public class AWTEventMulticaster implements
     /**
      * Removes the old mouse-listener from mouse-listener-l and
      * returns the resulting multicast listener.
+     * <p>
+     *  从mouse-listener-l中删除旧的鼠标监听器,并返回最终的组播监听器
+     * 
+     * 
      * @param l mouse-listener-l
      * @param oldl the mouse-listener being removed
      */
@@ -756,6 +1029,10 @@ public class AWTEventMulticaster implements
     /**
      * Removes the old mouse-motion-listener from mouse-motion-listener-l
      * and returns the resulting multicast listener.
+     * <p>
+     *  从mouse-motion-listener-l中删除旧的鼠标移动侦听器,并返回最终的组播侦听器
+     * 
+     * 
      * @param l mouse-motion-listener-l
      * @param oldl the mouse-motion-listener being removed
      */
@@ -766,6 +1043,10 @@ public class AWTEventMulticaster implements
     /**
      * Removes the old window-listener from window-listener-l and
      * returns the resulting multicast listener.
+     * <p>
+     *  从window-listener-l删除旧的窗口侦听器并返回结果组播侦听器
+     * 
+     * 
      * @param l window-listener-l
      * @param oldl the window-listener being removed
      */
@@ -776,6 +1057,10 @@ public class AWTEventMulticaster implements
     /**
      * Removes the old window-state-listener from window-state-listener-l
      * and returns the resulting multicast listener.
+     * <p>
+     *  从window-state-listener-l删除旧的窗口状态侦听器并返回结果组播侦听器
+     * 
+     * 
      * @param l window-state-listener-l
      * @param oldl the window-state-listener being removed
      * @since 1.4
@@ -788,6 +1073,10 @@ public class AWTEventMulticaster implements
     /**
      * Removes the old window-focus-listener from window-focus-listener-l
      * and returns the resulting multicast listener.
+     * <p>
+     * 从window-focus-listener-l中删除旧的window-focus-listener,并返回最终的组播侦听器
+     * 
+     * 
      * @param l window-focus-listener-l
      * @param oldl the window-focus-listener being removed
      * @since 1.4
@@ -800,6 +1089,10 @@ public class AWTEventMulticaster implements
     /**
      * Removes the old action-listener from action-listener-l and
      * returns the resulting multicast listener.
+     * <p>
+     *  从action-listener-l中删除旧的动作监听器,并返回最终的组播监听器
+     * 
+     * 
      * @param l action-listener-l
      * @param oldl the action-listener being removed
      */
@@ -810,6 +1103,10 @@ public class AWTEventMulticaster implements
     /**
      * Removes the old item-listener from item-listener-l and
      * returns the resulting multicast listener.
+     * <p>
+     *  从item-listener-l中删除旧的项目监听器,并返回结果组播侦听器
+     * 
+     * 
      * @param l item-listener-l
      * @param oldl the item-listener being removed
      */
@@ -820,6 +1117,10 @@ public class AWTEventMulticaster implements
     /**
      * Removes the old adjustment-listener from adjustment-listener-l and
      * returns the resulting multicast listener.
+     * <p>
+     *  从adjust-listener-l中删除旧的调整监听器并返回结果组播侦听器
+     * 
+     * 
      * @param l adjustment-listener-l
      * @param oldl the adjustment-listener being removed
      */
@@ -833,6 +1134,10 @@ public class AWTEventMulticaster implements
     /**
      * Removes the old input-method-listener from input-method-listener-l and
      * returns the resulting multicast listener.
+     * <p>
+     *  从input-method-listener-l中删除旧的输入方法侦听器,并返回最终的组播侦听器
+     * 
+     * 
      * @param l input-method-listener-l
      * @param oldl the input-method-listener being removed
      */
@@ -843,6 +1148,10 @@ public class AWTEventMulticaster implements
     /**
      * Removes the old hierarchy-listener from hierarchy-listener-l and
      * returns the resulting multicast listener.
+     * <p>
+     *  从hierarchy-listener-l删除旧的层次结构侦听器并返回结果多播侦听器
+     * 
+     * 
      * @param l hierarchy-listener-l
      * @param oldl the hierarchy-listener being removed
      * @since 1.3
@@ -855,6 +1164,10 @@ public class AWTEventMulticaster implements
      * Removes the old hierarchy-bounds-listener from
      * hierarchy-bounds-listener-l and returns the resulting multicast
      * listener.
+     * <p>
+     *  从hierarchy-bounds-listener-l中删除旧的hierarchy-bounds-listener,并返回最终的组播侦听器
+     * 
+     * 
      * @param l hierarchy-bounds-listener-l
      * @param oldl the hierarchy-bounds-listener being removed
      * @since 1.3
@@ -866,6 +1179,10 @@ public class AWTEventMulticaster implements
     /**
      * Removes the old mouse-wheel-listener from mouse-wheel-listener-l
      * and returns the resulting multicast listener.
+     * <p>
+     * 从mouse-wheel-listener-l中删除旧的鼠标滚轮监听器,并返回最终的组播侦听器
+     * 
+     * 
      * @param l mouse-wheel-listener-l
      * @param oldl the mouse-wheel-listener being removed
      * @since 1.4
@@ -882,6 +1199,11 @@ public class AWTEventMulticaster implements
      * If listener-b is null, it returns listener-a
      * If neither are null, then it creates and returns
      * a new AWTEventMulticaster instance which chains a with b.
+     * <p>
+     *  返回结果多播侦听器从添加listener-a和listener-b一起如果listener-a为null,它返回listener-b;如果listener-b为null,它返回listener-a如果
+     * 两者都不为null,则它创建并返回一个新的AWTEventMulticaster实例,它将a与a。
+     * 
+     * 
      * @param a event listener-a
      * @param b event listener-b
      */
@@ -899,6 +1221,11 @@ public class AWTEventMulticaster implements
      * Else if listener-l is an instance of AWTEventMulticaster,
      * then it removes the old listener from it.
      * Else, returns listener l.
+     * <p>
+     *  从listener-l中删除旧侦听器后返回结果多播侦听器如果listener-l等于旧侦听器或listener-l为null,则返回null Else如果listener-l是AWTEventMult
+     * icaster的实例,则它将从其中删除旧的侦听器否则,返回侦听器l。
+     * 
+     * 
      * @param l the listener being removed from
      * @param oldl the listener being removed
      */
@@ -914,6 +1241,7 @@ public class AWTEventMulticaster implements
 
 
     /* Serialization support.
+    /* <p>
      */
 
     protected void saveInternal(ObjectOutputStream s, String k) throws IOException {
@@ -952,6 +1280,10 @@ public class AWTEventMulticaster implements
      * EventListener, handling the (common) case of l actually being an
      * AWTEventMulticaster.  Additionally, only listeners of type listenerType
      * are counted.  Method modified to fix bug 4513402.  -bchristi
+     * <p>
+     * 递归方法返回EventListener中监听器数量的计数,处理(通用)情况l实际上是AWTEventMulticaster此外,只有listenerType类型的监听器被计数修改为修复错误4513402
+     *  -bchristi。
+     * 
      */
     private static int getListenerCount(EventListener l, Class<?> listenerType) {
         if (l instanceof AWTEventMulticaster) {
@@ -971,6 +1303,10 @@ public class AWTEventMulticaster implements
      * if l differed in type from the element type of a, an ArrayStoreException
      * would occur.  Now l is only inserted into a if it's of the appropriate
      * type.  -bchristi
+     * <p>
+     *  Recusion方法,它填充EventListener数组与EventListeners从l l通常是一个AWTEventMulticaster Bug 4513402揭示如果l不同的类型从a的元素类
+     * 型,一个ArrayStoreException将会发生现在l只插入到一个如果它是相应的类型-bchristi。
+     * 
      */
     private static int populateListenerArray(EventListener[] a, EventListener l, int index) {
         if (l instanceof AWTEventMulticaster) {
@@ -1001,6 +1337,11 @@ public class AWTEventMulticaster implements
      * contains only the specified listener. If no such listeners are chained,
      * this method returns an empty array.
      *
+     * <p>
+     * 通过指定的<code> javautilEventListener </code> <code> <em> </em>侦听器</em>返回所有链接为<code> <em> </em> / code>通过
+     * <code> AWTEventMulticaster </code>使用<code> add <em> Foo </em> Listener </code>方法链接</code>如果指定了<code> 
+     * null </code>此方法返回一个空数组如果指定的监听器不是<code> AWTEventMulticaster </code>的实例,此方法将返回一个只包含指定监听器的数组。
+     * 
      * @param l the specified <code>java.util.EventListener</code>
      * @param listenerType the type of listeners requested; this parameter
      *          should specify an interface that descends from

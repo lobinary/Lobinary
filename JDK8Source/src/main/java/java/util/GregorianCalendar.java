@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,12 @@
  * patents. This notice and attribution to Taligent may not be removed.
  *   Taligent is a registered trademark of Taligent, Inc.
  *
+ * <p>
+ *  (C)版权Taligent,Inc 1996-1998  - 保留所有权利(C)版权所有IBM Corp 1996-1998  - 保留所有权利
+ * 
+ *  此源代码和文档的原始版本由IBM的全资子公司Taligent,Inc拥有版权和所有权。
+ * 这些资料根据Taligent和Sun之间的许可协议的条款提供此技术受多个美国和国际专利保护Taligent是Taligent的注册商标。Taligent是Taligent的注册商标。
+ * 
  */
 
 package java.util;
@@ -323,6 +330,187 @@ import sun.util.calendar.ZoneInfo;
  * </pre>
  * </blockquote>
  *
+ * <p>
+ * <code> GregorianCalendar </code>是<code> Calendar </code>的一个具体子类,提供了大多数世界使用的标准日历系统
+ * 
+ *  <p> <code> GregorianCalendar </code>是一个混合日历,支持Julian和Gregorian日历系统,并支持单个不连续,默认情况下对应于公历日历的公历日期(2010年1
+ * 0月15日) 1582在一些国家,后来在其他)割接日期可能会改变由调用者通过调用{@link #setGregorianChange(Date)setGregorianChange()}。
+ * 
+ * <p>
+ * 历史上,在那些采用公历日历的国家中,1582年10月4日(朱利安)之后是1582年10月15日(Gregorian)。
+ * 这个日历模型正确在Gregorian切换之前,<code> GregorianCalendar </code>朱利安日历格里高利历和儒略历的唯一区别是闰年规则朱利安历法规定闰年每四年,而公历日历省略不能
+ * 被400整除的世纪年代。
+ * 历史上,在那些采用公历日历的国家中,1582年10月4日(朱利安)之后是1582年10月15日(Gregorian)。
+ * 
+ * <p>
+ * <code> GregorianCalendar </code>实现<em> proleptian </em> Gregorian和Julian日历也就是说,通过无限远地向后和向前推断当前规则来计算日期
+ * 结果,<code> GregorianCalendar </code >可以用于所有年份以产生有意义的和一致的结果然而,使用<code> GregorianCalendar </code>获得的日期历史
+ * 上仅从公元4年3月1日起,当采用现代儒略历日历规则时准确在此日期之前,年规则被不规则地应用,在公元前45年,儒略历甚至不存在。
+ * 
+ * <p>
+ * 在制定公历之前,元旦是3月25日为了避免混淆,这个日历总是使用1月1日。如果需要,可以在公历切换之前的日期,并且在1月1日和3月之间的日期进行手动调整24
+ * 
+ *  <h3> <a name=\"week_and_year\">年周年周</a> </h3>
+ * 
+ * <p>为{@link日历#WEEK_OF_YEAR WEEK_OF_YEAR}字段计算的值范围从1到53一个日历年的第一周是从{@link Calendar#getFirstDayOfWeek()getFirstDayOfWeek()}
+ * 开始的最早的七天,其中包含至少{@link Calendar#getMinimalDaysInFirstWeek()getMinimalDaysInFirstWeek()}从那一年起它因此取决于{@code getMinimalDaysInFirstWeek()}
+ * ,{@code getFirstDayOfWeek()}的值和1月1日的星期几一年的第1周和下一年的第1周(不包括)之间的周数从2到52或53(从朱利安 - 格里高利转变中涉及的年份除外)。
+ * 
+ * <p>构建{@code GregorianCalendar} <a name=\"iso8601_compatible_setting\">星期确定是兼容的时,使用与区域设置相关的资源来初始化{@code getFirstDayOfWeek()}
+ * 和{@code getMinimalDaysInFirstWeek当{@code getFirstDayOfWeek()}为{@code MONDAY}且{@code getMinimalDaysInFirstWeek()}
+ * 为4时,使用ISO 8601标准,其中的值在标准为首选的区域设置中使用这些值可以显式地通过调用{@link Calendar#setFirstDayOfWeek(int)setFirstDayOfWeek()}
+ * 和{@link Calendar#setMinimalDaysInFirstWeek(int)setMinimalDaysInFirstWeek()}。
+ * 
+ * <p> <a name=\"week_year\"> <em>周年</em> </a>与{@code WEEK_OF_YEAR}周期同步第一周和最后一周之间的所有周都包含相同的<em>周年</em>值因
+ * 此,一周年的第一天和最后几天可能有不同的日历年值。
+ * 
+ * <p>例如,1998年1月1日是星期四如果{@code getFirstDayOfWeek()}为{@code MONDAY},{@code getMinimalDaysInFirstWeek()}为4
+ * (ISO 8601标准兼容设置),则1998年第1周从1997年12月29日开始,到1998年1月4日结束1997年的最后三天的周年是1998年然而,{@code getFirstDayOfWeek()}
+ * 是{@code SUNDAY},那么第1周1998年1月4日开始,1998年1月10日结束; 1998年头三天是1997年第53周的一部分,其周年是1997年。
+ * 
+ *  <h4>每周几周</h4>
+ * 
+ * <p>为<code> WEEK_OF_MONTH </code>字段计算的值范围为0到6个月的第1周(具有<code> WEEK_OF_MONTH = 1 </code>的天)是最早的一组,至少<code >
+ *  getMinimalDaysInFirstWeek()</code>该月中的连续日期,结束于<code> getFirstDayOfWeek()</code>与一年中的第1周不同,一个月的第1周可能会
+ * 少于7天,从<code> getFirstDayOfWeek()</code>开始,并且不包括上一个月的天数。
+ * 第1周之前的某个月的天数有<code> WEEK_OF_MONTH </code>为0。
+ * 
+ * <p>例如,如果<code> getFirstDayOfWeek()</code>是<code> SUNDAY </code>和<code> getMinimalDaysInFirstWeek()</code>
+ * 为4,那么1998年1月的第一周是星期天, 1月4日至1月10日星期六这些日子有<code> WEEK_OF_MONTH </code> 1月1日星期四至1月3日星期六的<code> WEEK_OF_M
+ * ONTH </code>为0如果<code> getMinimalDaysInFirstWeek / code>更改为3,则1月1日到1月3日的<code> WEEK_OF_MONTH </code>为
+ * 1。
+ * 
+ *  <h4>默认字段值</h4>
+ * 
+ *  <p> <code> clear </code>方法设置日历字段未定义<code> GregorianCalendar </code>如果每个日历字段的值未定义,则会对其使用以下默认值
+ * 
+ * <table cellpadding ="0"cellspacing ="3"border ="0"summary ="GregorianCalendar default field values"
+ * style="text-align: left; width: 66%;">
+ * <tbody>
+ * <tr>
+ *  <th style ="vertical-align：top; background-color：rgb(204,204,255); text-align：center;">字段<br>
+ * </th>
+ *  <th style ="vertical-align：top; background-color：rgb(204,204,255); text-align：center;">默认值<br>
+ * </th>
+ * </tr>
+ * <tr>
+ * <td style="vertical-align: middle;">
+ *  <code> ERA <br> </code>
+ * </td>
+ * <td style="vertical-align: middle;">
+ *  <code> AD <br> </code>
+ * </td>
+ * </tr>
+ * <tr>
+ * <td style="vertical-align: middle; background-color: rgb(238, 238, 255);">
+ *  <code> YEAR <br> </code>
+ * </td>
+ * <td style="vertical-align: middle; background-color: rgb(238, 238, 255);">
+ *  <code> 1970 <br> </code>
+ * </td>
+ * </tr>
+ * <tr>
+ * <td style="vertical-align: middle;">
+ *  <code> MONTH <br> </code>
+ * </td>
+ * <td style="vertical-align: middle;">
+ *  <code> JANUARY <br> </code>
+ * </td>
+ * </tr>
+ * <tr>
+ * <td style="vertical-align: top; background-color: rgb(238, 238, 255);">
+ *  <code> DAY_OF_MONTH <br> </code>
+ * </td>
+ * <td style="vertical-align: top; background-color: rgb(238, 238, 255);">
+ *  <code> 1 <br> </code>
+ * </td>
+ * </tr>
+ * <tr>
+ * <td style="vertical-align: middle;">
+ *  <code> DAY_OF_WEEK <br> </code>
+ * </td>
+ * <td style="vertical-align: middle;">
+ *  <code>周的第一天<br> </code>
+ * </td>
+ * </tr>
+ * <tr>
+ * <td style="vertical-align: top; background-color: rgb(238, 238, 255);">
+ *  <code> WEEK_OF_MONTH <br> </code>
+ * </td>
+ * <td style="vertical-align: top; background-color: rgb(238, 238, 255);">
+ *  <code> 0 <br> </code>
+ * </td>
+ * </tr>
+ * <tr>
+ * <td style="vertical-align: top;">
+ *  <code> DAY_OF_WEEK_IN_MONTH <br> </code>
+ * </td>
+ * <td style="vertical-align: top;">
+ *  <code> 1 <br> </code>
+ * </td>
+ * </tr>
+ * <tr>
+ * <td style="vertical-align: middle; background-color: rgb(238, 238, 255);">
+ *  <code> AM_PM <br> </code>
+ * </td>
+ * <td style="vertical-align: middle; background-color: rgb(238, 238, 255);">
+ *  <code> AM <br> </code>
+ * </td>
+ * </tr>
+ * <tr>
+ * <td style="vertical-align: middle;">
+ *  <code> HOUR,HOUR_OF_DAY,MINUTE,SECOND,MILLISECOND <br> </code>
+ * </td>
+ * <td style="vertical-align: middle;">
+ * <code> 0 <br> </code>
+ * </td>
+ * </tr>
+ * </tbody>
+ * </table>
+ *  <br>默认值不适用于上面未列出的字段
+ * 
+ * <p>
+ *  <strong>示例：</strong>
+ * <blockquote>
+ * <pre>
+ *  //获取GMT-08：00(太平洋标准时间)的支持的ID。
+ * String [] ids = TimeZonegetAvailableIDs(-8 * 60 * 60 * 1000); //如果没有返回ids,则会出错if(idslength == 0)Syste
+ * mexit(0);。
+ *  //获取GMT-08：00(太平洋标准时间)的支持的ID。
+ * 
+ *  // begin output Systemoutprintln("Current Time");
+ * 
+ *  //创建太平洋标准时间时区SimpleTimeZone pdt = new SimpleTimeZone(-8 * 60 * 60 * 1000,ids [0]);
+ * 
+ *  //为夏令时设置规则pdtsetStartRule(CalendarAPRIL,1,CalendarSUNDAY,2 * 60 * 60 * 1000); pdtsetEndRule(Calendar
+ * OCTOBER,-1,CalendarSUNDAY,2 * 60 * 60 * 1000);。
+ * 
+ * //创建一个带太平洋夏令时区域的GregorianCalendar //和当前日期和时间Calendar calendar = new GregorianCalendar(pdt); Date tria
+ * lTime = new Date(); calendarsetTime(trialTime);。
+ * 
+ * println("HOUR："+ calendarget(CalendarHOUR)); Systemoutprintln("HOUR_OF_DAY："+ calendarget(CalendarHOU
+ * R_OF_DAY)); Systemoutprintln("MINUTE："+ calendarget(CalendarMINUTE)); Systemoutprintln("SECOND："+ cal
+ * endarget(CalendarSECOND)); Systemoutprintln("MILLISECOND："+ calendarget(CalendarMILLISECOND)); System
+ * outprintln("ZONE_OFFSET："+(calendarget(CalendarZONE_OFFSET)/(60 * 60 * 1000))); Systemoutprintln("DST
+ * _OFFSET："+(calendarget(CalendarDST_OFFSET)/(60 * 60 * 1000)));。
+ * 
+ * Systemoutprintln("当前时间,小时重置为3"); calendarclear(CalendarHOUR_OF_DAY); //所以不重写日历(CalendarHOUR,3); Syste
+ * moutprintln("ERA："+ calendarget(CalendarERA)); Systemoutprintln("YEAR："+ calendarget(CalendarYEAR)); 
+ * Systemoutprintln("MONTH："+ calendarget(CalendarMONTH)); Systemoutprintln("WEEK_OF_YEAR："+ calendarget
+ * (CalendarWEEK_OF_YEAR)); Systemoutprintln("WEEK_OF_MONTH："+ calendarget(CalendarWEEK_OF_MONTH)); Syst
+ * emoutprintln("DATE："+ calendarget(CalendarDATE)); Systemoutprintln("DAY_OF_MONTH："+ calendarget(Calen
+ * darDAY_OF_MONTH)); Systemoutprintln("DAY_OF_YEAR："+ calendarget(CalendarDAY_OF_YEAR)); Systemoutprint
+ * ln("DAY_OF_WEEK："+ calendarget(CalendarDAY_OF_WEEK)); Systemoutprintln("DAY_OF_WEEK_IN_MONTH："+ calen
+ * darget(CalendarDAY_OF_WEEK_IN_MONTH)); Systemoutprintln("AM_PM："+ calendarget(CalendarAM_PM)); System
+ * outprintln("HOUR："+ calendarget(CalendarHOUR)); Systemoutprintln("HOUR_OF_DAY："+ calendarget(Calendar
+ * HOUR_OF_DAY)); Systemoutprintln("MINUTE："+ calendarget(CalendarMINUTE)); Systemoutprintln("SECOND："+ 
+ * calendarget(CalendarSECOND)); Systemoutprintln("MILLISECOND："+ calendarget(CalendarMILLISECOND)); Sys
+ * temoutprintln("ZONE_OFFSET："+(calendarget(CalendarZONE_OFFSET)/(60 * 60 * 1000))); //以小时为单位Systemoutp
+ * rintln("DST_OFFSET："+(calendarget(CalendarDST_OFFSET)/(60 * 60 * 1000))); //以小时为单位。
+ * </pre>
+ * </blockquote>
+ * 
+ * 
  * @see          TimeZone
  * @author David Goldsmith, Mark Davis, Chen-Lieh Huang, Alan Liu
  * @since JDK1.1
@@ -352,6 +540,18 @@ public class GregorianCalendar extends Calendar {
      * leap years in-between.  Thus date computations and functions
      * such as isLeapYear() are not intended to be historically
      * accurate.
+     * <p>
+     * 实现注释
+     * 
+     *  时代是从某个定义的起始点开始的天数或毫秒数此处使用javautilDate的时期;即从1970年1月1日(格雷戈里安)到午夜UTC的毫秒数。
+     * 使用的其他时期是1月1日,第1年(格里高利亚),这是公历日历的第1天和12月30日,第0年(格里高利亚)是儒略历的第1天。
+     * 
+     *  我们实现proleptian朱利安和格里高利历日历这意味着我们实现日历的现代定义,即使历史使用不同例如,如果格雷戈里亚改变设置为新的日期(LongMIN_VALUE),我们有一个纯粹的公历日历标记日期
+     * 之前在1582年的公历日历的发明,好像日历存在了。
+     * 
+     * 同样,对于朱利安日历,我们假设一个连续的4年闰年规则,即使闰年的历史模式是不规则的,每3年从公元前45年至公元前9年,然后每4年从公元前8年,没有闰年之间因此日期计算和函数,如isLeapYear()不
+     * 打算历史上准确。
+     * 
      */
 
 //////////////////
@@ -364,6 +564,11 @@ public class GregorianCalendar extends Calendar {
      * The sequence of years at the transition from <code>BC</code> to <code>AD</code> is
      * ..., 2 BC, 1 BC, 1 AD, 2 AD,...
      *
+     * <p>
+     *  <code> ERA </code>字段的值指示在公共时代之前(在基督之前)的时期,也称为BCE从<code> BC </code>到<code> AD < / code>是,2 BC,1 BC,1 
+     * AD,2 AD,。
+     * 
+     * 
      * @see #ERA
      */
     public static final int BC = 0;
@@ -372,6 +577,10 @@ public class GregorianCalendar extends Calendar {
      * Value of the {@link #ERA} field indicating
      * the period before the common era, the same value as {@link #BC}.
      *
+     * <p>
+     *  指示通用时代前的时间段的{@link #ERA}字段的值,与{@link #BC}
+     * 
+     * 
      * @see #CE
      */
     static final int BCE = 0;
@@ -382,6 +591,11 @@ public class GregorianCalendar extends Calendar {
      * The sequence of years at the transition from <code>BC</code> to <code>AD</code> is
      * ..., 2 BC, 1 BC, 1 AD, 2 AD,...
      *
+     * <p>
+     * 表示公共时代(Anno Domini)的<code> ERA </code>字段的值,也称为CE在从<code> BC </code>到<code> AD </code>是,2 BC,1 BC,1 AD
+     * ,2 AD,。
+     * 
+     * 
      * @see #ERA
      */
     public static final int AD = 1;
@@ -390,6 +604,10 @@ public class GregorianCalendar extends Calendar {
      * Value of the {@link #ERA} field indicating
      * the common era, the same value as {@link #AD}.
      *
+     * <p>
+     *  指示公共年龄的{@link #ERA}字段的值,与{@link #AD}的值相同
+     * 
+     * 
      * @see #BCE
      */
     static final int CE = 1;
@@ -435,6 +653,16 @@ public class GregorianCalendar extends Calendar {
      * DST_OFFSET           0:00      0:00        0:20        2:00
      * </pre>
      * *: depends on the Gregorian change date
+     * <p>
+     * <pre>
+     * 最大最小字段名称最小最小最大最大---------- ------- ------- ------- ------- ERA 0 0 1 1年1 1 292269054 292278994 MONTH 
+     * 0 0 11 11 WEEK_OF_YEAR 1 1 52 * 53 WEEK_OF_MONTH 0 0 4 * 6 DAY_OF_MONTH 1 1 28 * 31 DAY_OF_YEAR 1 1 3
+     * 65 * 366 DAY_OF_WEEK 1 1 7 7 DAY_OF_WEEK_IN_MONTH -1 -1 4 * 6 AM_PM 0 0 1 1 HOUR 0 0 11 11 HOUR_OF_DA
+     * Y 0 0 23 23 MINUTE 0 0 59 59 SECOND 0 0 59 59 MILLISECOND 0 0 999 999 ZONE_OFFSET -13：00 -13：00 14:00
+     *  14:00 DST_OFFSET 0:00 0:00 0:20 2:00。
+     * </pre>
+     * *：取决于公历变更日期
+     * 
      */
     static final int MIN_VALUES[] = {
         BCE,            // ERA
@@ -522,12 +750,20 @@ public class GregorianCalendar extends Calendar {
      * (Gregorian) 00:00:00 UTC or -12219292800000L.  For this value, October 4,
      * 1582 (Julian) is followed by October 15, 1582 (Gregorian).  This
      * corresponds to Julian day number 2299161.
+     * <p>
+     *  使用公历日历规则的点,以毫秒为单位从标准时期测量默认为1582年10月15日(格里高利亚)00:00:00 UTC或-12219292800000L对于此值,1582年10月4日(朱利安) 1582年
+     * 10月15日(格里高利亚)这对应于儒略日数2299161。
+     * 
+     * 
      * @serial
      */
     private long gregorianCutover = DEFAULT_GREGORIAN_CUTOVER;
 
     /**
      * The fixed date of the gregorianCutover.
+     * <p>
+     *  gregorianCutover的固定日期
+     * 
      */
     private transient long gregorianCutoverDate =
         (((DEFAULT_GREGORIAN_CUTOVER + 1)/ONE_DAY) - 1) + EPOCH_OFFSET; // == 577736
@@ -535,12 +771,18 @@ public class GregorianCalendar extends Calendar {
     /**
      * The normalized year of the gregorianCutover in Gregorian, with
      * 0 representing 1 BCE, -1 representing 2 BCE, etc.
+     * <p>
+     *  格雷戈里亚的gregorianCutover的归一化年份,0代表1 BCE,-1代表2 BCE等
+     * 
      */
     private transient int gregorianCutoverYear = 1582;
 
     /**
      * The normalized year of the gregorianCutover in Julian, with 0
      * representing 1 BCE, -1 representing 2 BCE, etc.
+     * <p>
+     *  Julian中gregorianCutover的归一化年份,0代表1 BCE,-1代表2 BCE等
+     * 
      */
     private transient int gregorianCutoverYearJulian = 1582;
 
@@ -548,6 +790,9 @@ public class GregorianCalendar extends Calendar {
      * gdate always has a sun.util.calendar.Gregorian.Date instance to
      * avoid overhead of creating it. The assumption is that most
      * applications will need only Gregorian calendar calculations.
+     * <p>
+     * gdate总是有一个sunutilcalendarGregorianDate实例,以避免创建它的开销假设是大多数应用程序只需要Gregorian日历计算
+     * 
      */
     private transient BaseCalendar.Date gdate;
 
@@ -555,6 +800,9 @@ public class GregorianCalendar extends Calendar {
      * Reference to either gdate or a JulianCalendar.Date
      * instance. After calling complete(), this value is guaranteed to
      * be set.
+     * <p>
+     *  引用gdate或JulianCalendarDate实例调用complete()后,将保证设置此值
+     * 
      */
     private transient BaseCalendar.Date cdate;
 
@@ -562,6 +810,9 @@ public class GregorianCalendar extends Calendar {
      * The CalendarSystem used to calculate the date in cdate. After
      * calling complete(), this value is guaranteed to be set and
      * consistent with the cdate value.
+     * <p>
+     *  用于在cdate中计算日期的CalendarSystem在调用complete()之后,此值将保证设置并与cdate值一致
+     * 
      */
     private transient BaseCalendar calsys;
 
@@ -569,12 +820,18 @@ public class GregorianCalendar extends Calendar {
      * Temporary int[2] to get time zone offsets. zoneOffsets[0] gets
      * the GMT offset value and zoneOffsets[1] gets the DST saving
      * value.
+     * <p>
+     *  临时int [2]获取时区偏移zoneOffsets [0]获取GMT偏移值,zoneOffsets [1]获取DST保存值
+     * 
      */
     private transient int[] zoneOffsets;
 
     /**
      * Temporary storage for saving original fields[] values in
      * non-lenient mode.
+     * <p>
+     *  用于在非宽松模式下保存原始字段[]值的临时存储
+     * 
      */
     private transient int[] originalFields;
 
@@ -586,6 +843,9 @@ public class GregorianCalendar extends Calendar {
      * Constructs a default <code>GregorianCalendar</code> using the current time
      * in the default time zone with the default
      * {@link Locale.Category#FORMAT FORMAT} locale.
+     * <p>
+     * 使用默认时区中的当前时间使用默认的{@link LocaleCategory#FORMAT FORMAT}语言环境构造默认<code> GregorianCalendar </code>
+     * 
      */
     public GregorianCalendar() {
         this(TimeZone.getDefaultRef(), Locale.getDefault(Locale.Category.FORMAT));
@@ -597,6 +857,10 @@ public class GregorianCalendar extends Calendar {
      * in the given time zone with the default
      * {@link Locale.Category#FORMAT FORMAT} locale.
      *
+     * <p>
+     *  根据指定时区中的当前时间使用默认{@link LocaleCategory#FORMAT FORMAT}语言环境构造<code> GregorianCalendar </code>
+     * 
+     * 
      * @param zone the given time zone.
      */
     public GregorianCalendar(TimeZone zone) {
@@ -607,6 +871,10 @@ public class GregorianCalendar extends Calendar {
      * Constructs a <code>GregorianCalendar</code> based on the current time
      * in the default time zone with the given locale.
      *
+     * <p>
+     *  根据具有给定语言环境的默认时区中的当前时间构造<code> GregorianCalendar </code>
+     * 
+     * 
      * @param aLocale the given locale.
      */
     public GregorianCalendar(Locale aLocale) {
@@ -618,6 +886,10 @@ public class GregorianCalendar extends Calendar {
      * Constructs a <code>GregorianCalendar</code> based on the current time
      * in the given time zone with the given locale.
      *
+     * <p>
+     *  根据给定时区中具有给定语言环境的当前时间构造一个<code> GregorianCalendar </code>
+     * 
+     * 
      * @param zone the given time zone.
      * @param aLocale the given locale.
      */
@@ -631,6 +903,10 @@ public class GregorianCalendar extends Calendar {
      * Constructs a <code>GregorianCalendar</code> with the given date set
      * in the default time zone with the default locale.
      *
+     * <p>
+     *  构造一个<code> GregorianCalendar </code>,其中默认时区中使用默认语言环境设置给定日期
+     * 
+     * 
      * @param year the value used to set the <code>YEAR</code> calendar field in the calendar.
      * @param month the value used to set the <code>MONTH</code> calendar field in the calendar.
      * Month value is 0-based. e.g., 0 for January.
@@ -644,6 +920,10 @@ public class GregorianCalendar extends Calendar {
      * Constructs a <code>GregorianCalendar</code> with the given date
      * and time set for the default time zone with the default locale.
      *
+     * <p>
+     * 构造具有为默认时区设置的给定日期和时间的<code> GregorianCalendar </code>,默认时区使用默认语言环境
+     * 
+     * 
      * @param year the value used to set the <code>YEAR</code> calendar field in the calendar.
      * @param month the value used to set the <code>MONTH</code> calendar field in the calendar.
      * Month value is 0-based. e.g., 0 for January.
@@ -662,6 +942,10 @@ public class GregorianCalendar extends Calendar {
      * Constructs a GregorianCalendar with the given date
      * and time set for the default time zone with the default locale.
      *
+     * <p>
+     *  构造GregorianCalendar,使用默认语言环境为默认时区设置的给定日期和时间
+     * 
+     * 
      * @param year the value used to set the <code>YEAR</code> calendar field in the calendar.
      * @param month the value used to set the <code>MONTH</code> calendar field in the calendar.
      * Month value is 0-based. e.g., 0 for January.
@@ -682,6 +966,10 @@ public class GregorianCalendar extends Calendar {
      * Constructs a <code>GregorianCalendar</code> with the given date
      * and time set for the default time zone with the default locale.
      *
+     * <p>
+     *  构造具有为默认时区设置的给定日期和时间的<code> GregorianCalendar </code>,默认时区使用默认语言环境
+     * 
+     * 
      * @param year the value used to set the <code>YEAR</code> calendar field in the calendar.
      * @param month the value used to set the <code>MONTH</code> calendar field in the calendar.
      * Month value is 0-based. e.g., 0 for January.
@@ -729,6 +1017,10 @@ public class GregorianCalendar extends Calendar {
     /**
      * Constructs an empty GregorianCalendar.
      *
+     * <p>
+     *  构造一个空的GregorianCalendar
+     * 
+     * 
      * @param zone    the given time zone
      * @param aLocale the given locale
      * @param flag    the flag requesting an empty instance
@@ -751,6 +1043,14 @@ public class GregorianCalendar extends Calendar {
      * <code>Date(Long.MAX_VALUE)</code>.  To obtain a pure Gregorian calendar,
      * set the change date to <code>Date(Long.MIN_VALUE)</code>.
      *
+     * <p>
+     *  设置<code> GregorianCalendar </code>更改日期这是从Julian日期切换到Gregorian日期的时间点默认值是1582年10月15日(Gregorian)在此之前,日期
+     * 将在儒略历。
+     * <p>
+     * 要获取纯朱利安日历,请将更改日期设置为<code> Date(LongMAX_VALUE)</code>要获取纯Gregorian日历,请将更改日期设置为<code> Date(LongMIN_VALU
+     * E)</code>。
+     * 
+     * 
      * @param date the given Gregorian cutover date.
      */
     public void setGregorianChange(Date date) {
@@ -801,6 +1101,10 @@ public class GregorianCalendar extends Calendar {
      * October 15, 1582 (Gregorian). Previous to this, dates will be in the Julian
      * calendar.
      *
+     * <p>
+     *  获取Gregorian日历更改日期这是从Julian日期切换到Gregorian日期的时间点缺省为1582年10月15日(Gregorian)在此之前,日期将在儒略历
+     * 
+     * 
      * @return the Gregorian cutover date for this <code>GregorianCalendar</code> object.
      */
     public final Date getGregorianChange() {
@@ -813,6 +1117,10 @@ public class GregorianCalendar extends Calendar {
      * <code>1 - year number</code> must be given. For example, year BC 4 is
      * specified as -3.
      *
+     * <p>
+     *  确定给定年份是否为闰年如果给定年份是闰年,则返回<code> true </code>若要指定BC年份数字,必须给定<code> 1年数字</code>例如,年BC 4被指定为-3
+     * 
+     * 
      * @param year the given year.
      * @return <code>true</code> if the given year is a leap year; <code>false</code> otherwise.
      */
@@ -842,6 +1150,10 @@ public class GregorianCalendar extends Calendar {
     /**
      * Returns {@code "gregory"} as the calendar type.
      *
+     * <p>
+     *  返回{@code"gregory"}作为日历类型
+     * 
+     * 
      * @return {@code "gregory"}
      * @since 1.8
      */
@@ -859,6 +1171,13 @@ public class GregorianCalendar extends Calendar {
      * <code>Calendar</code> parameters and Gregorian change date as
      * this object.
      *
+     * <p>
+     * 将<code> GregorianCalendar </code>与指定的<code> Object </code>进行比较。
+     * 如果且仅当参数是<code> GregorianCalendar </code>对象时,结果是<code> true </code>表示与此对象相同的<code>日历</code>参数和公历变更日期下的
+     * 相同时间值(与<a href=\"Calendarhtml#Epoch\">时代</a>的毫秒偏移量)。
+     * 将<code> GregorianCalendar </code>与指定的<code> Object </code>进行比较。
+     * 
+     * 
      * @param obj the object to compare with.
      * @return <code>true</code> if this object is equal to <code>obj</code>;
      * <code>false</code> otherwise.
@@ -873,6 +1192,9 @@ public class GregorianCalendar extends Calendar {
 
     /**
      * Generates the hash code for this <code>GregorianCalendar</code> object.
+     * <p>
+     *  为此<code> GregorianCalendar </code>对象生成哈希码
+     * 
      */
     @Override
     public int hashCode() {
@@ -900,6 +1222,16 @@ public class GregorianCalendar extends Calendar {
      * that are not expected to be invariant. The calendar system
      * determines what fields are expected to be invariant.</p>
      *
+     * <p>
+     *  根据日历规则,将指定的(已签名)时间量添加到给定日历字段
+     * 
+     * <p> <em>添加规则1 </em>调用之后<code>字段</code>的值减去调用之前<code>字段</code>的值<code> amount </code >,对在<code>字段中发生的任
+     * 何溢出进行取模</code>当字段值超过其范围时发生溢出,结果是下一个较大字段递增或递减,并且将字段值调回其范围</p>。
+     * 
+     * <p> <em>添加规则2 </em>如果一个较小的字段预期是不变的,但是它不可能等于其之前的值,因为它的最小值或最大值之后的变化< / code>被改变,则其值被调整为尽可能接近其期望值较小的字段表示
+     * 较小的时间单位<code> HOUR </code>是比<code> DAY_OF_MONTH </code >不对预​​期不变的较小字段进行调整日历系统确定哪些字段预期是不变的</p>。
+     * 
+     * 
      * @param field the calendar field.
      * @param amount the amount of date or time to be added to the field.
      * @exception IllegalArgumentException if <code>field</code> is
@@ -1097,6 +1429,15 @@ public class GregorianCalendar extends Calendar {
      * sets the calendar to January 31, 1999.  The <code>YEAR</code> field is unchanged
      * because it is a larger field than <code>MONTH</code>.</p>
      *
+     * <p>
+     *  在给定时间字段上添加或减少(上/下)单个时间单位,而不更改较大字段
+     * <p>
+     * <em>示例</em>：考虑最初设置为1999年12月31日的<code> GregorianCalendar </code>。
+     * 调用{@link #roll(int,boolean)roll(CalendarMONTH,true)}将日历设置为1月31日,1999 <code> YEAR </code>字段未更改,因为它是一个比
+     * <code> MONTH </code> </p>。
+     * <em>示例</em>：考虑最初设置为1999年12月31日的<code> GregorianCalendar </code>。
+     * 
+     * 
      * @param up indicates if the value of the specified calendar field is to be
      * rolled up or rolled down. Use <code>true</code> if rolling up, <code>false</code> otherwise.
      * @exception IllegalArgumentException if <code>field</code> is
@@ -1144,6 +1485,29 @@ public class GregorianCalendar extends Calendar {
      * closest possible value to Sunday (where Sunday is the first day of the
      * week).</p>
      *
+     * <p>
+     *  将带符号的金额添加到指定的日历字段而不更改较大的字段负的滚动量意味着从字段中减去而不更改较大的字段如果指定的金额为0,则此方法不执行任何操作
+     * 
+     *  <p>此方法在添加金额之前调用{@link #complete()},以便所有日历字段均正常化如果在非宽松模式下有任何日历字段具有超出范围值,则<code > IllegalArgumentExcep
+     * tion </code>。
+     * 
+     * <p>
+     * <em>示例</em>：考虑一个最初设置为1999年8月31日的<code> GregorianCalendar </code>。
+     * <call> <code> roll(CalendarMONTH,8)</code> 1999 </strong>使用<code> GregorianCalendar </code>,<code> DA
+     * Y_OF_MONTH </code>字段在四月中不能为31日<code> DAY_OF_MONTH </code>设置为尽可能接近的值30 <code> YEAR </code>字段保持1999的值,因
+     * 为它是一个比<code> MONTH </code>。
+     * <em>示例</em>：考虑一个最初设置为1999年8月31日的<code> GregorianCalendar </code>。
+     * <p>
+     * <em> </em>：考虑原来设置为1999年6月6日星期日的<code> GregorianCalendar </code>。
+     * 调用<code> roll(CalendarWEEK_OF_MONTH,-1)</code> 1999,而调用<code> add(CalendarWEEK_OF_MONTH,-1)</code>将日历
+     * 设置为1999年5月30日星期五这是因为滚动规则强加了一个附加约束：<code> MONTH </code>当<code> WEEK_OF_MONTH </code>滚动时与添加规则1一起,结果日期必须
+     * 在6月1日星期六至6月5日星期六之间。
+     * <em> </em>：考虑原来设置为1999年6月6日星期日的<code> GregorianCalendar </code>。
+     * 根据添加规则2,<code> DAY_OF_WEEK </code>当更改<code> WEEK_OF_MONTH </code>时,设置为星期二,最接近星期日的可能值(星期日是星期日的第一天)</p>
+     * 。
+     * <em> </em>：考虑原来设置为1999年6月6日星期日的<code> GregorianCalendar </code>。
+     * 
+     * 
      * @param field the calendar field.
      * @param amount the signed amount to add to <code>field</code>.
      * @exception IllegalArgumentException if <code>field</code> is
@@ -1523,6 +1887,12 @@ public class GregorianCalendar extends Calendar {
      * {@link #getGregorianChange() getGregorianChange} and
      * {@link Calendar#getTimeZone() getTimeZone} methods.
      *
+     * <p>
+     * 返回此<code> GregorianCalendar </code>实例的给定日历字段的最小值最小值被定义为{@link Calendar#get(int)get}方法为任何可能的时间值返回的最小值,
+     * 考虑{@link Calendar#getFirstDayOfWeek()getFirstDayOfWeek},{@link Calendar#getMinimalDaysInFirstWeek()getMinimalDaysInFirstWeek}
+     * ,{@link #getGregorianChange()getGregorianChange}和{@link Calendar#getTimeZone()getTimeZone}方法。
+     * 
+     * 
      * @param field the calendar field.
      * @return the minimum value for the given calendar field.
      * @see #getMaximum(int)
@@ -1547,6 +1917,12 @@ public class GregorianCalendar extends Calendar {
      * {@link #getGregorianChange() getGregorianChange} and
      * {@link Calendar#getTimeZone() getTimeZone} methods.
      *
+     * <p>
+     * 返回此<code> GregorianCalendar </code>实例的给定日历字段的最大值最大值定义为对于任何可能的时间值,由{@link Calendar#get(int)get}方法返回的最大
+     * 值,考虑到{@link Calendar#getFirstDayOfWeek()getFirstDayOfWeek},{@link Calendar#getMinimalDaysInFirstWeek()getMinimalDaysInFirstWeek}
+     * ,{@link #getGregorianChange()getGregorianChange}和{@link Calendar#getTimeZone()getTimeZone}方法。
+     * 
+     * 
      * @param field the calendar field.
      * @return the maximum value for the given calendar field.
      * @see #getMinimum(int)
@@ -1596,6 +1972,14 @@ public class GregorianCalendar extends Calendar {
      * {@link #getGregorianChange() getGregorianChange} and
      * {@link Calendar#getTimeZone() getTimeZone} methods.
      *
+     * <p>
+     * 返回此<code> GregorianCalendar </code>实例的给定日历字段的最大最小值。
+     * 最大最小值被定义为对于任何可能的时间值,由{@link #getActualMinimum(int)}返回的最大值,考虑{@link Calendar#getFirstDayOfWeek()getFirstDayOfWeek}
+     * ,{@link Calendar#getMinimalDaysInFirstWeek()getMinimalDaysInFirstWeek},{@link #getGregorianChange()getGregorianChange}
+     * 和{@link Calendar#getTimeZone()getTimeZone}方法的当前值。
+     * 返回此<code> GregorianCalendar </code>实例的给定日历字段的最大最小值。
+     * 
+     * 
      * @param field the calendar field.
      * @return the highest minimum value for the given calendar field.
      * @see #getMinimum(int)
@@ -1626,6 +2010,12 @@ public class GregorianCalendar extends Calendar {
      * {@link #getGregorianChange() getGregorianChange} and
      * {@link Calendar#getTimeZone() getTimeZone} methods.
      *
+     * <p>
+     * 返回此<code> GregorianCalendar </code>实例的给定日历字段的最小最大值最小的最大值定义为对于任何可能的时间值,由{@link #getActualMaximum(int)}
+     * 返回的最小值,考虑{@link Calendar#getFirstDayOfWeek()getFirstDayOfWeek},{@link Calendar#getMinimalDaysInFirstWeek()getMinimalDaysInFirstWeek}
+     * ,{@link #getGregorianChange()getGregorianChange}和{@link Calendar#getTimeZone()getTimeZone}方法的当前值。
+     * 
+     * 
      * @param field the calendar field
      * @return the lowest maximum value for the given calendar field.
      * @see #getMinimum(int)
@@ -1674,6 +2064,14 @@ public class GregorianCalendar extends Calendar {
      * calendar). Therefore, December 28, 1969 to January 9, 1970
      * don't exist.
      *
+     * <p>
+     * 考虑到给定时间值和{@link Calendar#getFirstDayOfWeek()getFirstDayOfWeek}的给定时间值和当前值,返回此日历字段可能具有的最小值,{@link Calendar#getMinimalDaysInFirstWeek()getMinimalDaysInFirstWeek}
+     * ,{@link# getGregorianChange()getGregorianChange}和{@link Calendar#getTimeZone()getTimeZone}方法。
+     * 
+     *  <p>例如,如果格雷戈里改变日期是1970年1月10日,并且<code> GregorianCalendar </code>的日期是1970年1月20日,则<code> DAY_OF_MONTH </code>
+     * 字段的实际最小值是10,因为1970年1月10日的前日是1996年12月27日(儒略历)因此,1969年12月28日到1970年1月9日不存在。
+     * 
+     * 
      * @param field the calendar field
      * @return the minimum of the given field for the time value of
      * this <code>GregorianCalendar</code>
@@ -1718,6 +2116,12 @@ public class GregorianCalendar extends Calendar {
      * #getWeeksInWeekYear()} to get the maximum value of {@code
      * WEEK_OF_YEAR} in the week year of this {@code GregorianCalendar}.
      *
+     * <p>
+     * 
+     * <p>此方法根据{@link Calendar#YEAR YEAR}(日历年)值而不是<a href=\"#week_year\">周年</b>计算{@link日历#WEEK_OF_YEAR WEEK_OF_YEAR}
+     * 的最大值, a>调用{@link #getWeeksInWeekYear()}可获得此{@code GregorianCalendar}周年的{@code WEEK_OF_YEAR}最大值。
+     * 
+     * 
      * @param field the calendar field
      * @return the maximum of the given field for the time value of
      * this <code>GregorianCalendar</code>
@@ -1933,6 +2337,17 @@ public class GregorianCalendar extends Calendar {
              * sufficient to detect an invalid year setting.  NOTE: If code is
              * added to check the month and date in the future for some reason,
              * Feb 29 must be allowed to shift to Mar 1 when setting the year.
+             * <p>
+             *  其他,然而,可能的最大值的范围是大此外,我们知道我们已经超过范围的方式是不同的由于这些原因,我们使用下面的特殊情况代码来处理这个字段
+             * 
+             *  YEAR的实际最大值取决于日历类型：
+             * 
+             *  Gregorian = May 17,292275056 BCE  -  Aug 17,292278994 CE Julian = Dec 2,292269055 BCE  -  Jan 3,2922
+             * 72993 CE Hybrid = Dec 2,292269055 BCE  -  Aug 17,292278994 CE。
+             * 
+             * 我们知道当月,日期,时间或时代因为设置年份而发生变化时,我们已经超出了最大值。
+             * 我们在这里不检查月份,日期和时间,因为年份和时代足以检测到无效年设置注意：如果由于某种原因添加代码以检查未来的月份和日期,则在设置年份时,必须允许2月29日更改为3月1日。
+             * 
              */
             {
                 if (gc == this) {
@@ -1984,6 +2399,9 @@ public class GregorianCalendar extends Calendar {
     /**
      * Returns the millisecond offset from the beginning of this
      * year. This Calendar object must have been normalized.
+     * <p>
+     *  返回从今年开始的毫秒偏移量此Calendar对象必须已经过规范化
+     * 
      */
     private long getYearOffsetInMillis() {
         long t = (internalGet(DAY_OF_YEAR) - 1) * 24;
@@ -2040,6 +2458,10 @@ public class GregorianCalendar extends Calendar {
      * Returns {@code true} indicating this {@code GregorianCalendar}
      * supports week dates.
      *
+     * <p>
+     *  返回{@code true}表示此{@code GregorianCalendar}支持星期日期
+     * 
+     * 
      * @return {@code true} (always)
      * @see #getWeekYear()
      * @see #setWeekDate(int,int,int)
@@ -2061,6 +2483,13 @@ public class GregorianCalendar extends Calendar {
      * <p>This method calls {@link Calendar#complete()} before
      * calculating the week year.
      *
+     * <p>
+     * 返回由此{@code GregorianCalendar}表示的<a href=\"#week_year\">周年</a> 1周与周年的最大周数之间的周数具有相同的周年值,可能是在{@link日历#YEAR YEAR}
+     * (日历年)值之前或之后的一年。
+     * 
+     *  <p>此方法在计算周年之前调用{@link Calendar#complete()}
+     * 
+     * 
      * @return the week year represented by this {@code GregorianCalendar}.
      *         If the {@link Calendar#ERA ERA} value is {@link #BC}, the year is
      *         represented by 0 or a negative number: BC 1 is 0, BC 2
@@ -2179,6 +2608,20 @@ public class GregorianCalendar extends Calendar {
      * mode, or an {@code IllegalArgumentException} is thrown in
      * non-lenient mode.
      *
+     * <p>
+     * 将此{@code GregorianCalendar}设置为日期说明符所指定的日期 -  <a href=\"#week_year\"> {@code weekYear} </a>,{@code weekOfYear}
+     * 和{@code dayOfWeek} {@code weekOfYear}遵循<a href=\"#week_and_year\"> {@code WEEK_OF_YEAR}编号</a> {@code dayOfWeek}
+     * 值必须是{@link日历#DAY_OF_WEEK DAY_OF_WEEK}值之一：{@link Calendar# SUNDAY SUNDAY}到{@link日历#SATURDAY SATURDAY}。
+     * 
+     *  <p>请注意,星期几的表示与ISO 8601标准不同,{@code getFirstDayOfWeek()}为{@code MONDAY}时,{@code weekOfYear}编号与标准兼容, @c
+     * ode getMinimalDaysInFirstWeek()}是4。
+     * 
+     * <p>与{@code set}方法不同,所有日历字段和时间值都会在返回时计算
+     * 
+     *  <p>如果{@code weekOfYear}在{@code weekYear}的有效星期范围之外,{@code weekYear}和{@code weekOfYear}值会在宽松模式下调整,或者{@code weekYear}
+     * 代码IllegalArgumentException}在非宽松模式中抛出。
+     * 
+     * 
      * @param weekYear    the week year
      * @param weekOfYear  the week number based on {@code weekYear}
      * @param dayOfWeek   the day of week value: one of the constants
@@ -2251,6 +2694,14 @@ public class GregorianCalendar extends Calendar {
      * #getActualMaximum(int) getActualMaximum(WEEK_OF_YEAR)} will return
      * 52 for the period: December 31, 2007 to December 28, 2008.
      *
+     * <p>
+     *  返回由此{@code GregorianCalendar}表示的<a href=\"#week_year\">周年</a>中的周数
+     * 
+     * <p>例如,如果{@code GregorianCalendar}的日期为2008年12月31日并且使用<a href=\"#iso8601_compatible_setting\"> ISO 8601
+     * 兼容设置</a>,则此方法将在以下期间返回53： 2008年12月29日至2010年1月3日,而{@ link #getActualMaximum(int)getActualMaximum(WEEK_OF_YEAR)}
+     * 将在此期间返回52：2007年12月31日至2008年12月28日。
+     * 
+     * 
      * @return the number of weeks in the week year.
      * @see Calendar#WEEK_OF_YEAR
      * @see #getWeekYear()
@@ -2281,6 +2732,9 @@ public class GregorianCalendar extends Calendar {
      * The fixed date corresponding to gdate. If the value is
      * Long.MIN_VALUE, the fixed date value is unknown. Currently,
      * Julian calendar dates are not cached.
+     * <p>
+     *  与gdate对应的固定日期如果值为LongMIN_VALUE,则固定日期值为unknown目前,不对Julian日历日期进行缓存
+     * 
      */
     transient private long cachedFixedDate = Long.MIN_VALUE;
 
@@ -2291,6 +2745,11 @@ public class GregorianCalendar extends Calendar {
      * recomputed first; to recompute the time, then the fields, call the
      * <code>complete</code> method.
      *
+     * <p>
+     *  将时间值(与<a href=\"Calendarhtml#Epoch\">时代</a>的毫秒偏移量)转换为日历字段值首先重新计算时间<em> </em>;重新计算时间,然后是字段,调用<code> c
+     * omplete </code>方法。
+     * 
+     * 
      * @see Calendar#complete
      */
     @Override
@@ -2322,6 +2781,11 @@ public class GregorianCalendar extends Calendar {
      * setting state to COMPUTED, although all fields are set to
      * the correct values. This is required to fix 4685354.
      *
+     * <p>
+     * 此computeFields实现从UTC(从Epoch的毫秒偏移)到日历字段值的转换fieldMask指定哪些字段将设置状态更改为COMPUTED,虽然所有字段都设置为正确的值这是需要修复的468535
+     * 4。
+     * 
+     * 
      * @param fieldMask a bit mask to specify which fields to change
      * the setting state.
      * @param tzMask a bit mask to specify which time zone offset
@@ -2603,6 +3067,10 @@ public class GregorianCalendar extends Calendar {
      * fixedDate. The getFirstDayOfWeek-getMinimalDaysInFirstWeek rule
      * is applied to calculate the number of weeks.
      *
+     * <p>
+     *  返回在fixedDay1和fixedDate之间的周期内的周数getFirstDayOfWeek-getMinimalDaysInFirstWeek规则用于计算周数
+     * 
+     * 
      * @param fixedDay1 the fixed date of the first day of the period
      * @param fixedDate the fixed date of the last day of the period
      * @return the number of weeks of the given period
@@ -2628,6 +3096,10 @@ public class GregorianCalendar extends Calendar {
      * Converts calendar field values to the time value (millisecond
      * offset from the <a href="Calendar.html#Epoch">Epoch</a>).
      *
+     * <p>
+     *  将日历字段值转换为时间值(距离<a href=\"Calendarhtml#Epoch\">时代的毫秒偏移量</a>)
+     * 
+     * 
      * @exception IllegalArgumentException if any calendar fields are invalid.
      */
     @Override
@@ -2837,6 +3309,10 @@ public class GregorianCalendar extends Calendar {
      * Computes the fixed date under either the Gregorian or the
      * Julian calendar, using the given year and the specified calendar fields.
      *
+     * <p>
+     *  使用给定年份和指定的日历字段计算格里高利历史或儒略历日历下的固定日期
+     * 
+     * 
      * @param cal the CalendarSystem to be used for the date calculation
      * @param year the normalized year number, with 0 indicating the
      * year 1 BCE, -1 indicating 2 BCE, etc.
@@ -2967,6 +3443,9 @@ public class GregorianCalendar extends Calendar {
      * Returns this object if it's normalized (all fields and time are
      * in sync). Otherwise, a cloned object is returned after calling
      * complete() in lenient mode.
+     * <p>
+     * 如果它被规范化(所有字段和时间都是同步的),则返回此对象。否则,在宽松模式下调用complete()后将返回一个克隆对象
+     * 
      */
     private GregorianCalendar getNormalizedCalendar() {
         GregorianCalendar gc;
@@ -2984,6 +3463,9 @@ public class GregorianCalendar extends Calendar {
     /**
      * Returns the Julian calendar system instance (singleton). 'jcal'
      * and 'jeras' are set upon the return.
+     * <p>
+     *  返回Julian日历系统实例(单例)'jcal'和'jeras'在返回时设置
+     * 
      */
     private static synchronized BaseCalendar getJulianCalendarSystem() {
         if (jcal == null) {
@@ -2997,6 +3479,9 @@ public class GregorianCalendar extends Calendar {
      * Returns the calendar system for dates before the cutover date
      * in the cutover year. If the cutover date is January 1, the
      * method returns Gregorian. Otherwise, Julian.
+     * <p>
+     *  返回割接年份中割接日期之前的日历系统如果割接日期为1月1日,则该方法返回Gregorian否则,Julian
+     * 
      */
     private BaseCalendar getCutoverCalendarSystem() {
         if (gregorianCutoverYearJulian < gregorianCutoverYear) {
@@ -3008,6 +3493,9 @@ public class GregorianCalendar extends Calendar {
     /**
      * Determines if the specified year (normalized) is the Gregorian
      * cutover year. This object must have been normalized.
+     * <p>
+     *  确定指定年份(标准化)是否为格雷戈里切割年份此对象必须已经过规范化
+     * 
      */
     private boolean isCutoverYear(int normalizedYear) {
         int cutoverYear = (calsys == gcal) ? gregorianCutoverYear : gregorianCutoverYearJulian;
@@ -3018,6 +3506,10 @@ public class GregorianCalendar extends Calendar {
      * Returns the fixed date of the first day of the year (usually
      * January 1) before the specified date.
      *
+     * <p>
+     *  返回指定日期之前一年中第一天(通常为1月1日)的固定日期
+     * 
+     * 
      * @param date the date for which the first day of the year is
      * calculated. The date has to be in the cut-over year (Gregorian
      * or Julian).
@@ -3044,6 +3536,10 @@ public class GregorianCalendar extends Calendar {
      * Returns the fixed date of the first date of the month (usually
      * the 1st of the month) before the specified date.
      *
+     * <p>
+     *  返回指定日期之前的月份的第一个日期(通常为月份的第一天)的固定日期
+     * 
+     * 
      * @param date the date for which the first day of the month is
      * calculated. The date has to be in the cut-over year (Gregorian
      * or Julian).
@@ -3086,6 +3582,10 @@ public class GregorianCalendar extends Calendar {
     /**
      * Returns a CalendarDate produced from the specified fixed date.
      *
+     * <p>
+     * 返回从指定的固定日期生成的CalendarDate
+     * 
+     * 
      * @param fd the fixed date
      */
     private BaseCalendar.Date getCalendarDate(long fd) {
@@ -3098,6 +3598,9 @@ public class GregorianCalendar extends Calendar {
     /**
      * Returns the Gregorian cutover date as a BaseCalendar.Date. The
      * date is a Gregorian date.
+     * <p>
+     *  将Gregorian割接日期作为BaseCalendarDate返回日期是公历日期
+     * 
      */
     private BaseCalendar.Date getGregorianCutoverDate() {
         return getCalendarDate(gregorianCutoverDate);
@@ -3106,6 +3609,9 @@ public class GregorianCalendar extends Calendar {
     /**
      * Returns the day before the Gregorian cutover date as a
      * BaseCalendar.Date. The date is a Julian date.
+     * <p>
+     *  将Gregorian割接日期前一天作为BaseCalendarDate返回日期是Julian日期
+     * 
      */
     private BaseCalendar.Date getLastJulianDate() {
         return getCalendarDate(gregorianCutoverDate - 1);
@@ -3115,6 +3621,10 @@ public class GregorianCalendar extends Calendar {
      * Returns the length of the specified month in the specified
      * year. The year number must be normalized.
      *
+     * <p>
+     *  返回指定年份中指定月份的长度必须对年份数进行归一化
+     * 
+     * 
      * @see #isLeapYear(int)
      */
     private int monthLength(int month, int year) {
@@ -3125,6 +3635,10 @@ public class GregorianCalendar extends Calendar {
      * Returns the length of the specified month in the year provided
      * by internalGet(YEAR).
      *
+     * <p>
+     *  返回由internalGet(YEAR)提供的年份中指定月份的长度
+     * 
+     * 
      * @see #isLeapYear(int)
      */
     private int monthLength(int month) {
@@ -3158,6 +3672,9 @@ public class GregorianCalendar extends Calendar {
     /**
      * Returns the length (in days) of the specified year. The year
      * must be normalized.
+     * <p>
+     *  返回指定年份的长度(以天为单位)年份必须标准化
+     * 
      */
     private int yearLength(int year) {
         return isLeapYear(year) ? 366 : 365;
@@ -3166,6 +3683,9 @@ public class GregorianCalendar extends Calendar {
     /**
      * Returns the length (in days) of the year provided by
      * internalGet(YEAR).
+     * <p>
+     *  返回由internalGet(YEAR)提供的年份(以天为单位)
+     * 
      */
     private int yearLength() {
         int year = internalGet(YEAR);
@@ -3180,6 +3700,9 @@ public class GregorianCalendar extends Calendar {
      * month to jump around.  E.g., we don't want Jan 31 + 1 month to go to Mar
      * 3, we want it to go to Feb 28.  Adjustments which might run into this
      * problem call this method to retain the proper month.
+     * <p>
+     * 调整后,如添加(MONTH),添加(YEAR),我们不想让月份跳到Eg,我们不想要1月31 + 1个月去3月3日,我们想要去2月28日可能会遇到此问题的调整将调用此方法以保留正确的月份
+     * 
      */
     private void pinDayOfMonth() {
         int year = internalGet(YEAR);
@@ -3199,6 +3722,9 @@ public class GregorianCalendar extends Calendar {
     /**
      * Returns the fixed date value of this object. The time value and
      * calendar fields must be in synch.
+     * <p>
+     *  返回此对象的固定日期值时间值和日历字段必须同步
+     * 
      */
     private long getCurrentFixedDate() {
         return (calsys == gcal) ? cachedFixedDate : calsys.getFixedDate(cdate);
@@ -3206,6 +3732,9 @@ public class GregorianCalendar extends Calendar {
 
     /**
      * Returns the new value after 'roll'ing the specified value and amount.
+     * <p>
+     *  在滚动指定的值和数量后返回新值
+     * 
      */
     private static int getRolledValue(int value, int amount, int min, int max) {
         assert value >= min && value <= max;
@@ -3224,6 +3753,9 @@ public class GregorianCalendar extends Calendar {
     /**
      * Returns the ERA.  We need a special method for this because the
      * default ERA is CE, but a zero (unset) ERA is BCE.
+     * <p>
+     *  返回ERA我们需要一个特殊的方法,因为默认ERA是CE,但零(未设置)ERA是BCE
+     * 
      */
     private int internalGetEra() {
         return isSet(ERA) ? internalGet(ERA) : CE;
@@ -3231,6 +3763,9 @@ public class GregorianCalendar extends Calendar {
 
     /**
      * Updates internal state.
+     * <p>
+     *  更新内部状态
+     * 
      */
     private void readObject(ObjectInputStream stream)
             throws IOException, ClassNotFoundException {
@@ -3252,6 +3787,13 @@ public class GregorianCalendar extends Calendar {
      * correct date in the ISO calendar system, which will also be the same value
      * for Modified Julian Days.
      *
+     * <p>
+     *  将此对象转换为{@code ZonedDateTime},表示与此{@code GregorianCalendar}时间轴上的相同点
+     * <p>
+     * 由于此对象支持Julian-Gregorian割接日期,{@code ZonedDateTime}不支持,因此生成的年,月和日可能具有不同的值。
+     * 结果将表示ISO日历系统中的正确日期,这也将修改儒略日的值相同。
+     * 
+     * 
      * @return a zoned date-time representing the same point on the time-line
      *  as this gregorian calendar
      * @since 1.8
@@ -3277,6 +3819,13 @@ public class GregorianCalendar extends Calendar {
      * scenario, this method will throw an {@code IllegalArgumentException}
      * exception.
      *
+     * <p>
+     *  使用{@code ZonedDateTime}对象的默认语言区域获取{@code GregorianCalendar}的实例
+     * <p>
+     * 由于{@code ZonedDateTime}不支持Julian-Gregorian切换日期并使用ISO日历系统,因此返回GregorianCalendar是一个纯粹的公历,对于星期定义使用ISO 86
+     * 01标准,{@code MONDAY}作为{@link日历#getFirstDayOfWeek()FirstDayOfWeek}和{@code 4}作为{@link Calendar#getMinimalDaysInFirstWeek()MinimalDaysInFirstWeek}
+     * 的值。
+     * 
      * @param zdt  the zoned date-time object to convert
      * @return  the gregorian calendar representing the same point on the
      *  time-line as the zoned date-time provided

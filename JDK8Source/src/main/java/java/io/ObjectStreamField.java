@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,10 @@ import sun.reflect.misc.ReflectUtil;
  * A description of a Serializable field from a Serializable class.  An array
  * of ObjectStreamFields is used to declare the Serializable fields of a class.
  *
+ * <p>
+ *  来自Serializable类的可序列化字段的描述ObjectStreamFields的数组用于声明类的可序列化字段
+ * 
+ * 
  * @author      Mike Warres
  * @author      Roger Riggs
  * @see ObjectStreamClass
@@ -60,6 +65,10 @@ public class ObjectStreamField
      * Create a Serializable field with the specified type.  This field should
      * be documented with a <code>serialField</code> tag.
      *
+     * <p>
+     *  创建具有指定类型的可序列化字段此字段应使用<code> serialField </code>标记进行记录
+     * 
+     * 
      * @param   name the name of the serializable field
      * @param   type the <code>Class</code> object of the serializable field
      */
@@ -77,6 +86,12 @@ public class ObjectStreamField
      * serialized and deserialized as if they had been written and read by
      * calls to writeUnshared and readUnshared.
      *
+     * <p>
+     * 创建一个表示具有给定名称和类型的可序列化字段的ObjectStreamField如果unshared为false,则以默认方式对所表示的字段的值进行序列化和反序列化 - 如果字段是非原始的,则对象值被序
+     * 列化和反序列化,已经通过对writeObject和readObject的调用来写入和读取。
+     * 如果unshared为true,则表示的字段的值被序列化和反序列化,就好像它们已经通过对writeUnshared和readUnshared的调用来写入和读取。
+     * 
+     * 
      * @param   name field name
      * @param   type field type
      * @param   unshared if false, write/read field values in the same manner
@@ -98,6 +113,9 @@ public class ObjectStreamField
     /**
      * Creates an ObjectStreamField representing a field with the given name,
      * signature and unshared setting.
+     * <p>
+     *  创建一个表示具有给定名称,签名和非共享设置的字段的ObjectStreamField
+     * 
      */
     ObjectStreamField(String name, String signature, boolean unshared) {
         if (name == null) {
@@ -130,6 +148,10 @@ public class ObjectStreamField
      * necessary to govern whether or not a getType() call on this
      * ObjectStreamField (if non-primitive) will return Object.class (as
      * opposed to a more specific reference type).
+     * <p>
+     * 创建表示具有指定的非共享设置的给定字段的ObjectStreamField为了与早期序列化实现的行为兼容,需要"showType"参数来管理对此ObjectStreamField(如果非基元)上的get
+     * Type()调用是否将返回Objectclass(与更具体的引用类型相对)。
+     * 
      */
     ObjectStreamField(Field field, boolean unshared, boolean showType) {
         this.field = field;
@@ -143,6 +165,10 @@ public class ObjectStreamField
     /**
      * Get the name of this field.
      *
+     * <p>
+     *  获取此字段的名称
+     * 
+     * 
      * @return  a <code>String</code> representing the name of the serializable
      *          field
      */
@@ -157,6 +183,11 @@ public class ObjectStreamField
      * Otherwise, the <code>Class</code> object for the type of the field is
      * returned.
      *
+     * <p>
+     *  获取字段的类型如果类型是非原语,并且这个<code> ObjectStreamField </code>是从反序列化的{@link ObjectStreamClass}实例获得的,则返回<code> 
+     * Objectclass </code>否则,代码>类</code>对象返回该字段的类型。
+     * 
+     * 
      * @return  a <code>Class</code> object representing the type of the
      *          serializable field
      */
@@ -186,6 +217,11 @@ public class ObjectStreamField
      * [            array
      * </pre></blockquote>
      *
+     * <p>
+     * 返回字段类型的字符编码编码如下：<blockquote> <pre> B字节C char D double F float I int J long L类或接口S short Z boolean [ar
+     * ray </pre> </blockquote>。
+     * 
+     * 
      * @return  the typecode of the serializable field
      */
     // REMIND: deprecate?
@@ -196,6 +232,10 @@ public class ObjectStreamField
     /**
      * Return the JVM type signature.
      *
+     * <p>
+     *  返回JVM类型签名
+     * 
+     * 
      * @return  null if this field has a primitive type.
      */
     // REMIND: deprecate?
@@ -206,6 +246,10 @@ public class ObjectStreamField
     /**
      * Offset of field within instance data.
      *
+     * <p>
+     *  实例数据中的字段偏移量
+     * 
+     * 
      * @return  the offset of this field
      * @see #setOffset
      */
@@ -217,6 +261,10 @@ public class ObjectStreamField
     /**
      * Offset within instance data.
      *
+     * <p>
+     *  实例数据中的偏移量
+     * 
+     * 
      * @param   offset the offset of the field
      * @see #getOffset
      */
@@ -228,6 +276,10 @@ public class ObjectStreamField
     /**
      * Return true if this field has a primitive type.
      *
+     * <p>
+     *  如果此字段具有原始类型,则返回true
+     * 
+     * 
      * @return  true if and only if this field corresponds to a primitive type
      */
     // REMIND: deprecate?
@@ -240,6 +292,10 @@ public class ObjectStreamField
      * Returns boolean value indicating whether or not the serializable field
      * represented by this ObjectStreamField instance is unshared.
      *
+     * <p>
+     *  返回布尔值,指示此ObjectStreamField实例表示的可序列化字段是否未共享
+     * 
+     * 
      * @return {@code true} if this field is unshared
      *
      * @since 1.4
@@ -253,6 +309,9 @@ public class ObjectStreamField
      * -1 if this is smaller, 0 if equal, 1 if greater.  Types that are
      * primitives are "smaller" than object types.  If equal, the field names
      * are compared.
+     * <p>
+     * 将此字段与另一个<code> ObjectStreamField </code>比较返回-1如果更小,则返回-1,如果更大则返回0如果更大则返回1如果更大的原始类型比对象类型"更小"如果相等,
+     * 
      */
     // REMIND: deprecate?
     public int compareTo(Object obj) {
@@ -266,6 +325,9 @@ public class ObjectStreamField
 
     /**
      * Return a string that describes this field.
+     * <p>
+     *  返回描述此字段的字符串
+     * 
      */
     public String toString() {
         return signature + ' ' + name;
@@ -274,6 +336,9 @@ public class ObjectStreamField
     /**
      * Returns field represented by this ObjectStreamField, or null if
      * ObjectStreamField is not associated with an actual field.
+     * <p>
+     *  返回此ObjectStreamField表示的字段,如果ObjectStreamField未与实际字段相关联,则返回null
+     * 
      */
     Field getField() {
         return field;
@@ -282,6 +347,9 @@ public class ObjectStreamField
     /**
      * Returns JVM type signature of field (similar to getTypeString, except
      * that signature strings are returned for primitive fields as well).
+     * <p>
+     *  返回字段的JVM类型签名(类似于getTypeString,除了为原始字段返回签名字符串)
+     * 
      */
     String getSignature() {
         return signature;
@@ -289,6 +357,8 @@ public class ObjectStreamField
 
     /**
      * Returns JVM type signature for given class.
+     * <p>
+     *  返回给定类的JVM类型签名
      */
     private static String getClassSignature(Class<?> cl) {
         StringBuilder sbuf = new StringBuilder();

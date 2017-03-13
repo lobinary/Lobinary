@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,22 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * <p>
+ *  版权所有(c)2008-2012,Stephen Colebourne和Michael Nascimento Santos
+ * 
+ *  版权所有
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  *源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明
+ * 
+ *  *二进制形式的再分发必须在随分发版提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明
+ * 
+ * *未经特定事先书面许可,JSR-310的名称及其贡献者的名称不得用于支持或宣传衍生自此软件的产品
+ * 
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或暗示的担保,包括但不限于适销性和针对特定用途的适用性的默示担保,在任何情况下均不得免版权所有者或贡献者对任何直接,间接,偶发,特殊,惩罚性或后果性损害
+ * (包括但不限于替代商品或服务的采购,使用,数据或利润损失;或业务中断)有责任的理论,无论是在合同,严格责任或侵权(包括疏忽或其他方式)以任何方式使用本软件,即使已被告知此类损害的可能性。
+ * 
  */
 package java.time.format;
 
@@ -148,12 +165,33 @@ import sun.util.locale.provider.TimeZoneNameUtility;
  * @implSpec
  * This class is a mutable builder intended for use from a single thread.
  *
+ * <p>
+ *  Builder创建日期时间格式化程序
+ * <p>
+ * 这允许创建{@code DateTimeFormatter}最终使用此构建器创建所有日期时间格式化程序
+ * <p>
+ *  日期时间的基本元素都可以添加：
+ * <ul>
+ * <li>值 - 数字值</li> <li>分数 - 包括小数位数的小数值在输出分数时始终使用此分数以确保分数正确解析</li> <li>文字 - </li> <li>区域标识 -  {@linkplain ZoneId时区}
+ * 标识</li> <li>区域标记 -  </li>时区名称</li> <li>时间顺序名称</li> <li>文字文字</li> <li>其他 - 打印机和解析器界面可用于添加用户提供的格式</li>。
+ * </ul>
+ * 另外,任何元素可以通过填充,空白或任何其他字符来装饰
+ * <p>
+ *  最后,可以使用大致与{@code javatextSimpleDateFormat SimpleDateFormat}兼容的简写模式,参见{@link #appendPattern(String)}在
+ * 实践中,这只是解析模式并调用构建器上的其他方法。
+ * 
+ *  @implSpec此类是一个可变的构建器,用于从单个线程使用
+ * 
+ * 
  * @since 1.8
  */
 public final class DateTimeFormatterBuilder {
 
     /**
      * Query for a time-zone that is region-only.
+     * <p>
+     *  查询仅区域的时区
+     * 
      */
     private static final TemporalQuery<ZoneId> QUERY_REGION_ONLY = (temporal) -> {
         ZoneId zone = temporal.query(TemporalQueries.zoneId());
@@ -162,30 +200,51 @@ public final class DateTimeFormatterBuilder {
 
     /**
      * The currently active builder, used by the outermost builder.
+     * <p>
+     *  当前活动的构建器,由最外面的构建器使用
+     * 
      */
     private DateTimeFormatterBuilder active = this;
     /**
      * The parent builder, null for the outermost builder.
+     * <p>
+     *  父构建器,对于最外层构建器为null
+     * 
      */
     private final DateTimeFormatterBuilder parent;
     /**
      * The list of printers that will be used.
+     * <p>
+     *  将使用的打印机列表
+     * 
      */
     private final List<DateTimePrinterParser> printerParsers = new ArrayList<>();
     /**
      * Whether this builder produces an optional formatter.
+     * <p>
+     *  此构建器是否生成可选的格式化程序
+     * 
      */
     private final boolean optional;
     /**
      * The width to pad the next field to.
+     * <p>
+     *  填充下一个字段的宽度
+     * 
      */
     private int padNextWidth;
     /**
      * The character to pad the next field with.
+     * <p>
+     *  用于填充下一个字段的字符
+     * 
      */
     private char padNextChar;
     /**
      * The index of the last variable width value parser.
+     * <p>
+     * 最后一个变量宽度值解析器的索引
+     * 
      */
     private int valueParserIndex = -1;
 
@@ -194,6 +253,10 @@ public final class DateTimeFormatterBuilder {
      * The locale and chronology are used to lookup the locale specific format
      * for the requested dateStyle and/or timeStyle.
      *
+     * <p>
+     *  获取语​​言环境和年表的日期和时间样式的格式化模式语言环境和年表用于查找所请求的dateStyle和/或timeStyle的语言环境特定格式
+     * 
+     * 
      * @param dateStyle  the FormatStyle for the date
      * @param timeStyle  the FormatStyle for the time
      * @param chrono  the Chronology, non-null
@@ -217,6 +280,10 @@ public final class DateTimeFormatterBuilder {
     /**
      * Converts the given FormatStyle to the java.text.DateFormat style.
      *
+     * <p>
+     *  将给定的FormatStyle转换为javatextDateFormat样式
+     * 
+     * 
      * @param style  the FormatStyle style
      * @return the int style, or -1 if style is null, indicating un-required
      */
@@ -229,6 +296,9 @@ public final class DateTimeFormatterBuilder {
 
     /**
      * Constructs a new instance of the builder.
+     * <p>
+     *  构造构建器的新实例
+     * 
      */
     public DateTimeFormatterBuilder() {
         super();
@@ -239,6 +309,10 @@ public final class DateTimeFormatterBuilder {
     /**
      * Constructs a new instance of the builder.
      *
+     * <p>
+     *  构造构建器的新实例
+     * 
+     * 
      * @param parent  the parent builder, not null
      * @param optional  whether the formatter is optional, not null
      */
@@ -265,6 +339,17 @@ public final class DateTimeFormatterBuilder {
      * Since the default is case sensitive, this method should only be used after
      * a previous call to {@code #parseCaseInsensitive}.
      *
+     * <p>
+     *  将格式化程序的其余部分的分析样式更改为区分大小写
+     * <p>
+     *  解析可以区分大小写或不区分大小写 - 默认情况下区分大小写此方法允许更改解析的区分大小写设置
+     * <p>
+     * 调用此方法将更改构建器的状态,以便所有后续构建器方法调用都将以区分大小写的模式解析文本。对于相反的设置,请参见{@link #parseCaseInsensitive}。
+     * 可以在构建器中的任何点调用区分大小写/不区分大小写的方法,因此解析器可以在解析期间多次在大小写解析模式之间交换。
+     * <p>
+     *  由于默认是区分大小写的,所以这个方法应该只在先前调用{@code #parseCaseInsensitive}
+     * 
+     * 
      * @return this, for chaining, not null
      */
     public DateTimeFormatterBuilder parseCaseSensitive() {
@@ -285,6 +370,15 @@ public final class DateTimeFormatterBuilder {
      * in the builder, thus the parser can swap between case parsing modes
      * multiple times during the parse.
      *
+     * <p>
+     *  将解析样式更改为格式化程序的其余部分不区分大小写
+     * <p>
+     *  解析可以区分大小写或不区分大小写 - 默认情况下区分大小写此方法允许更改解析的区分大小写设置
+     * <p>
+     * 调用此方法将更改构建器的状态,以便所有后续构建器方法调用将以不区分大小写的方式解析文本。
+     * 对于相反的设置,请参见{@link #parseCaseSensitive()}解析区分大小写/不区分大小写的方法可以在构建器,因此解析器可以在解析期间多次在大小写解析模式之间交换。
+     * 
+     * 
      * @return this, for chaining, not null
      */
     public DateTimeFormatterBuilder parseCaseInsensitive() {
@@ -304,6 +398,15 @@ public final class DateTimeFormatterBuilder {
      * The change will remain in force until the end of the formatter that is eventually
      * constructed or until {@code parseLenient} is called.
      *
+     * <p>
+     *  将格式化程序的其余部分的解析样式更改为严格
+     * <p>
+     *  解析可以是严格的或宽松的 - 默认情况下它的strict它控制匹配文本和标志样式的灵活程度
+     * <p>
+     * 当使用时,此方法从这一点开始将解析更改为严格。由于strict是默认值,因此通常只有在调用{@link #parseLenient()}后才需要。
+     * 更改将保持有效,直到格式化程序结束最终构造或直到{@code parseLenient}被调用。
+     * 
+     * 
      * @return this, for chaining, not null
      */
     public DateTimeFormatterBuilder parseStrict() {
@@ -323,6 +426,14 @@ public final class DateTimeFormatterBuilder {
      * The change will remain in force until the end of the formatter that is eventually
      * constructed or until {@code parseStrict} is called.
      *
+     * <p>
+     *  将格式化程序的其余部分的解析样式更改为宽松请注意,区分大小写与此方法分开设置
+     * <p>
+     *  解析可以是严格的或宽松的 - 默认情况下它的strict这控制匹配文本和符号样式的灵活程度调用此方法的应用程序通常也应调用{@link #parseCaseInsensitive()}
+     * <p>
+     * 使用时,此方法从这一点开始将分析更改为放宽更改将保持有效,直到最终构造的格式化程序结束或调用{@code parseStrict}
+     * 
+     * 
      * @return this, for chaining, not null
      */
     public DateTimeFormatterBuilder parseLenient() {
@@ -354,6 +465,20 @@ public final class DateTimeFormatterBuilder {
      * will be visible to any subsequent elements in the formatter.
      * As such, this method is normally called at the end of the builder.
      *
+     * <p>
+     *  将字段的默认值附加到格式化程序以用于解析
+     * <p>
+     *  这将一个指令附加到构建器以将默认值注入到解析的结果中这与格式器的可选部分一起使用是特别有用的
+     * <p>
+     * 例如,考虑一个格式化程序,它解析年份,然后是可选月份,以及可选的月份日期使用这样的格式化程序将需要调用代码来检查完整日期,年月或只是一年已被解析此方法可用于将月份和月份默认为一个敏感的值,例如月份的第一
+     * 天,允许调用代码总是获取日期。
+     * <p>
+     *  在格式化期间,此方法无效
+     * <p>
+     * 在解析期间,将检查解析的当前状态如果指定的字段没有关联值,因为它尚未在该点成功解析,则将指定的值注入解析结果Injection中,因此字段值对将对格式器中的任何后续元素可见。
+     * 因此,此方法通常在构建器结尾处调用。
+     * 
+     * 
      * @param field  the field to default the value of, not null
      * @param value  the value to default the field to
      * @return this, for chaining, not null
@@ -380,6 +505,17 @@ public final class DateTimeFormatterBuilder {
      * This behavior can be affected by 'adjacent value parsing'.
      * See {@link #appendValue(java.time.temporal.TemporalField, int)} for full details.
      *
+     * <p>
+     *  使用正常的输出样式将日期时间字段的值附加到格式化程序
+     * <p>
+     *  字段的值将在格式期间输出如果无法获取该值,则会抛出异常
+     * <p>
+     *  该值将按照整数值的正常格式打印。只有负数将被签名。将添加填充
+     * <p>
+     * 这种可变宽度值的解析器通常表现为贪婪,需要一个数字,但接受尽可能多的数字这种行为可能受到"相邻值解析"的影响。
+     * 参见{@link #appendValue(javatimetemporalTemporalField,int)}完整细节。
+     * 
+     * 
      * @param field  the field to append, not null
      * @return this, for chaining, not null
      */
@@ -432,6 +568,29 @@ public final class DateTimeFormatterBuilder {
      * number of digits in both strict and lenient modes.
      * In addition, no positive or negative sign is permitted.
      *
+     * <p>
+     *  使用固定宽度,零填充方法将日期时间字段的值附加到格式化程序
+     * <p>
+     *  字段的值将在格式期间输出如果无法获取该值,则会抛出异常
+     * <p>
+     *  该值将在左边填零如果值的大小意味着它不能在宽度内打印,则抛出异常如果字段的值为负,则在格式化期间抛出异常
+     * <p>
+     * 这种方法支持一种称为"相邻值解析"的特殊解析技术。这种技术解决了一个值,变量或固定宽度后面跟有一个或多个固定长度值的问题。
+     * 标准解析器是贪婪的,因此它通常会被窃取固定宽度值解析器所需的数字,跟随变量width。
+     * <p>
+     *  启动"相邻值解析"不需要任何操作当对{@code appendValue}进行调用时,构建器进入相邻值解析设置模式如果同一构建器上紧接着的后续方法调用或调用是固定宽度值,那么解析器将保留空间,以便可以
+     * 解析固定宽度值。
+     * <p>
+     * 例如,考虑{@code builderappendValue(YEAR)appendValue(MONTH_OF_YEAR,2);}年份是1到19位数字之间的可变宽度解析。
+     * 月份是2位数的固定宽度解析因为这些被附加到同一个构建器紧接着,年分析器将保留两个数字用于要解析的月份。
+     * 因此,文本'201106'将正确解析为2011年的一个月和6个月没有相邻值解析,年将贪婪地解析所有六个数字并为本月不留任何东西。
+     * <p>
+     * 相邻值解析适用于解析器中紧跟任何类型的值,变量或固定宽度的每组固定宽度非负值调用任何其他append方法将结束相邻值解析的设置因此,在不太可能发生的情况下需要避免相邻值解析行为,只需将{@code appendValue}
+     * 添加到另一个{@code DateTimeFormatterBuilder},并将其添加到此构建器。
+     * <p>
+     *  如果相邻解析处于活动状态,则解析必须在严格和宽松模式下精确匹配指定的位数。此外,不允许使用正号或负号
+     * 
+     * 
      * @param field  the field to append, not null
      * @param width  the width of the printed field, from 1 to 19
      * @return this, for chaining, not null
@@ -471,6 +630,22 @@ public final class DateTimeFormatterBuilder {
      * {@code NOT_NEGATIVE} then it delegates to {@code appendValue(TemporalField,int)}.
      * In this scenario, the formatting and parsing behavior described there occur.
      *
+     * <p>
+     *  将日期时间字段的值附加到格式化程序,提供对格式化的完全控制
+     * <p>
+     * 字段的值将在格式期间输出如果无法获取该值,则会抛出异常
+     * <p>
+     *  此方法提供对数字格式的完全控制,包括零填充和正/负号
+     * <p>
+     *  对于这样的可变宽度值的解析器通常表现为贪婪,接受尽可能多的数字这种行为可以受到"邻接值解析"的影响参见{@link #appendValue(javatimetemporalTemporalField,int)}
+     * 完整的详细信息。
+     * <p>
+     *  在严格解析模式下,解析数字的最小数目为{@code minWidth},最大值为{@code maxWidth}在宽松解析模式下,解析数字的最小数目为1,最大为19(除非由相邻值解析)
+     * <p>
+     * 如果调用此方法具有相等的最小和最大宽度以及{@code NOT_NEGATIVE}的符号样式,那么它将委派给{@code appendValue(TemporalField,int)}在这种情况下,出现
+     * 的格式化和解析行为。
+     * 
+     * 
      * @param field  the field to append, not null
      * @param minWidth  the minimum field width of the printed field, from 1 to 19
      * @param maxWidth  the maximum field width of the printed field, from 1 to 19
@@ -532,6 +707,23 @@ public final class DateTimeFormatterBuilder {
      * is the value within the range where the last two characters are "12".
      * By contrast, parsing the text {@code "1915"} will result in the value {@code 1915}.
      *
+     * <p>
+     *  将日期时间字段的减小的值附加到格式化程序
+     * <p>
+     *  由于诸如年份的字段根据年表而不同,因此建议在大多数情况下使用此方法的{@link #appendValueReduced(TemporalField,int,int,ChronoLocalDate)}
+     *  date}变体此变体适用于简单字段或仅使用ISO年表。
+     * <p>
+     * 对于格式化,{@code width}和{@code maxWidth}用于确定要格式化的字符数如果它们相等,则格式为fixed width如果字段的值在{@code baseValue}使用{@code width}
+     * 字符,然后减小的值被格式化,否则该值被截断以适合{@code maxWidth}最右边的字符被输出以匹配宽度,左边填充为零。
+     * <p>
+     * 对于严格解析,将解析{@code width}到{@code maxWidth}允许的字符数对于宽松解析,字符数必须至少为1且小于10如果解析的位数等于{ @code width},并且值为正,则该字段
+     * 的值计算为大于或等于{@code baseValue}的具有相同最低有效字符的第一个数字,否则值为parsed是字段值这允许可以为baseValue范围内的值输入减小的值,并且可以为该范围之外的值输入宽
+     * 度和绝对值。
+     * <p>
+     * 例如,基本值{@code 1980}和宽度{@code 2}将具有从{@code 1980}到{@code 2079}的有效值。
+     * 在解析期间,文本{@code"12"}将导致值{@code 2012},因为它是在最后两个字符为"12"的范围内的值。相比之下,解析文本{@code"1915"}将导致值{@code 1915}。
+     * 
+     * 
      * @param field  the field to append, not null
      * @param width  the field width of the printed and parsed field, from 1 to 10
      * @param maxWidth  the maximum field width of the printed field, from 1 to 10
@@ -591,6 +783,27 @@ public final class DateTimeFormatterBuilder {
      * is the value within the range where the last two characters are "12".
      * By contrast, parsing the text {@code "1915"} will result in the value {@code 1915}.
      *
+     * <p>
+     *  将日期时间字段的减小的值附加到格式化程序
+     * <p>
+     *  这通常用于格式化和解析两位数年份
+     * <p>
+     * 基本日期用于在解析期间计算完整值例如,如果基准日期为1950-01-01,则两位数年份解析的解析值将在1950-01-01到2049-12-31之间仅从该日期提取年份,因此基准日期1950-08-25也
+     * 将解析为1950-01-01至2049-12-31这个行为是必要的,以支持字段,如基于周的,年或其他日历系统,其中解析值与标准ISO年不一致。
+     * <p>
+     * 确切的行为如下解析全部字段,并且如果出现多次,使用最后一个年表确定有效年表。然后将基本日期转换为有效年表。然后从年表特定基准日期提取指定字段,并使用它确定下面使用的{@code baseValue}
+     * <p>
+     *  对于格式化,{@code width}和{@code maxWidth}用于确定要格式化的字符数如果它们相等,则格式为fixed width如果字段的值在{@code baseValue}使用{@code width}
+     * 字符,然后减小的值被格式化,否则该值被截断以适合{@code maxWidth}最右边的字符被输出以匹配宽度,左边填充为零。
+     * <p>
+     * 对于严格解析,将解析{@code width}到{@code maxWidth}允许的字符数对于宽松解析,字符数必须至少为1且小于10如果解析的位数等于{ @code width},并且值为正,则该字段
+     * 的值计算为大于或等于{@code baseValue}的具有相同最低有效字符的第一个数字,否则值为parsed是字段值这允许可以为baseValue范围内的值输入减小的值,并且可以为该范围之外的值输入宽
+     * 度和绝对值。
+     * <p>
+     * 例如,基本值{@code 1980}和宽度{@code 2}将具有从{@code 1980}到{@code 2079}的有效值。
+     * 在解析期间,文本{@code"12"}将导致值{@code 2012},因为它是在最后两个字符为"12"的范围内的值。相比之下,解析文本{@code"1915"}将导致值{@code 1915}。
+     * 
+     * 
      * @param field  the field to append, not null
      * @param width  the field width of the printed and parsed field, from 1 to 10
      * @param maxWidth  the maximum field width of the printed field, from 1 to 10
@@ -619,6 +832,13 @@ public final class DateTimeFormatterBuilder {
      * If the new PrinterParser is variable width, the active PrinterParser is changed
      * to be fixed width and the new PrinterParser becomes the active PP.
      *
+     * <p>
+     * 附加固定或可变宽度打印机解析器处理相邻值模式如果PrinterParser未处于活动状态,则新的PrinterParser将变为活动的PrinterParser否则,将根据新的PrinterParser
+     * 修改活动的PrinterParser如果新的PrinterParser是固定宽度并且具有符号样式{@code NOT_NEGATIVE},则其宽度被添加到活动PP,并且新的PrinterParser被强
+     * 制为固定宽度。
+     * 如果新的PrinterParser是可变宽度,则活动的PrinterParser被改变为固定宽度,并且新的PrinterParser变为活动PP。
+     * 
+     * 
      * @param pp  the printer-parser, not null
      * @return this, for chaining, not null
      */
@@ -675,6 +895,18 @@ public final class DateTimeFormatterBuilder {
      * If the field value in the date-time to be printed is invalid it
      * cannot be printed and an exception will be thrown.
      *
+     * <p>
+     *  将日期时间字段的小数值附加到格式化程序
+     * <p>
+     * 将输出包含前面小数点的字段的小数值不输出前面的值例如,第二分钟值15将输出为{@code 25}
+     * <p>
+     *  可以控制打印分数的宽度将最小宽度设置为零将导致不产生输出打印分数将具有最小宽度和最大宽度之间所需的最小宽度 - 省略尾随零不会由于最大宽度 - 数字被简单地丢弃
+     * <p>
+     *  在严格模式下解析时,解析数字的数量必须在最小和最大宽度之间。在宽松模式下解析时,最小宽度被认为是零,最大为9
+     * <p>
+     * 如果无法获取值,那么将抛出异常如果值为负,将抛出异常如果字段没有固定的有效值,那么将抛出异常如果日期时间中的字段值为被打印是无效的,它不能被打印,并且将抛出异常
+     * 
+     * 
      * @param field  the field to append, not null
      * @param minWidth  the minimum width of the field excluding the decimal point, from 0 to 9
      * @param maxWidth  the maximum width of the field excluding the decimal point, from 1 to 9
@@ -702,6 +934,14 @@ public final class DateTimeFormatterBuilder {
      * The value will be printed as per the normal format of an integer value.
      * Only negative numbers will be signed. No padding will be added.
      *
+     * <p>
+     *  使用全文样式将日期时间字段的文本附加到格式化程序
+     * <p>
+     *  字段的文本将在格式期间输出该值必须在字段的有效范围内如果无法获取该值,则将抛出异常如果字段没有文本表示,则将使用数值
+     * <p>
+     * 该值将按照整数值的正常格式打印。只有负数将被签名。将添加填充
+     * 
+     * 
      * @param field  the field to append, not null
      * @return this, for chaining, not null
      */
@@ -720,6 +960,14 @@ public final class DateTimeFormatterBuilder {
      * The value will be printed as per the normal format of an integer value.
      * Only negative numbers will be signed. No padding will be added.
      *
+     * <p>
+     *  将日期时间字段的文本附加到格式化程序
+     * <p>
+     *  字段的文本将在格式期间输出该值必须在字段的有效范围内如果无法获取该值,则将抛出异常如果字段没有文本表示,则将使用数值
+     * <p>
+     *  该值将按照整数值的正常格式打印。只有负数将被签名。将添加填充
+     * 
+     * 
      * @param field  the field to append, not null
      * @param textStyle  the text style to use, not null
      * @return this, for chaining, not null
@@ -761,6 +1009,23 @@ public final class DateTimeFormatterBuilder {
      * If text is not available for the value then it is output as a number.
      * During parsing, the parser will match against the map of text and numeric values.
      *
+     * <p>
+     *  使用指定的地图将日期时间字段的文本附加到格式化程序以提供文本
+     * <p>
+     * 标准文本输出方法使用JDK中的本地化文本此方法允许直接指定文本提供的映射不会被构建器验证,以确保格式化或解析是可能的,因此无效映射可能在以后使用期间抛出错误
+     * <p>
+     *  提供文本地图在格式化和解析方面提供了相当大的灵活性例如,遗留应用程序可能需要或提供"JNY","FBY","MCH"等一年中的月份。
+     * 这些不匹配标准的文本集本地化月份名称使用此方法,可以创建一个定义每个值和文本之间的连接的地图：。
+     * <pre>
+     * 地图&lt; Long,String&gt; map = new HashMap&lt;&gt;(); mapput(1,"JNY"); mapput(2,"FBY"); mapput(3,"MCH")
+     * ; builderappendText(MONTH_OF_YEAR,map);。
+     * </pre>
+     * <p>
+     *  其他用途可能是输出具有后缀的值,例如"1st","2nd","3rd"或作为罗马数字"I","II","III","IV"
+     * <p>
+     *  在格式化期间,获取该值并检查它是否在有效范围内如果文本不可用于该值,那么它将作为数字输出在解析期间,解析器将匹配文本和数值的映射
+     * 
+     * 
      * @param field  the field to append, not null
      * @param textLookup  the map from the value to the text
      * @return this, for chaining, not null
@@ -809,6 +1074,20 @@ public final class DateTimeFormatterBuilder {
      * An alternative to this method is to format/parse the instant as a single
      * epoch-seconds value. That is achieved using {@code appendValue(INSTANT_SECONDS)}.
      *
+     * <p>
+     *  使用ISO-8601附加立即到格式化程序,格式化小数三位数
+     * <p>
+     * 实例具有固定的输出格式将它们转换为带UTC区域偏移的日期时间,并使用标准ISO-8601格式进行格式化使用此方法,格式化纳秒输出零,三,六或九位数字根据需要不使用本地化的十进制样式
+     * <p>
+     *  该时刻是使用{@link ChronoField#INSTANT_SECONDS INSTANT_SECONDS}和可选的(@code NANO_OF_SECOND)获得的。
+     * {@code INSTANT_SECONDS}的值可能超出{@code LocalDateTime}的最大范围,。
+     * <p>
+     * {@linkplain ResolverStyle解析器样式}对即时解析没有影响'24：00'的日终时间被处理为第二天开始时的午夜闰秒时间'23：59：59 '在一定程度上处理,请参阅{@link DateTimeFormatter#parsedLeapSecond()}
+     * 了解完整详细信息。
+     * <p>
+     *  这种方法的一个替代方法是将时间格式化/解析为单个纪元秒值。使用{@code appendValue(INSTANT_SECONDS)}
+     * 
+     * 
      * @return this, for chaining, not null
      */
     public DateTimeFormatterBuilder appendInstant() {
@@ -847,6 +1126,24 @@ public final class DateTimeFormatterBuilder {
      * An alternative to this method is to format/parse the instant as a single
      * epoch-seconds value. That is achieved using {@code appendValue(INSTANT_SECONDS)}.
      *
+     * <p>
+     *  使用ISO-8601附加一个即时到格式化程序,控制小数位数
+     * <p>
+     * 实例具有固定的输出格式,尽管此方法提供对小数位数的一些控制。它们被转换为具有UTC的区域偏移的日期时间,并使用标准ISO-8601格式打印。不使用本地化的小数格式
+     * <p>
+     *  {@code fractionalDigits}参数允许控制小数秒的输出指定零将导致不输出小数位从1到9将输出递增的数字,如果必要使用零右填充特殊值 - 1用于输出所需的数字,以避免任何尾随零
+     * <p>
+     *  在严格模式下解析时,解析数字的数量必须与小数数字匹配。在宽松模式下解析时,接受从0到9的任意数量的小数位数
+     * <p>
+     * 该时刻是使用{@link ChronoField#INSTANT_SECONDS INSTANT_SECONDS}和可选的(@code NANO_OF_SECOND)获得的。
+     * {@code INSTANT_SECONDS}的值可能超出{@code LocalDateTime}的最大范围,。
+     * <p>
+     *  {@linkplain ResolverStyle解析器样式}对即时解析没有影响'24：00'的日终时间被处理为第二天开始时的午夜闰秒时间'23：59：59 '在一定程度上处理,请参阅{@link DateTimeFormatter#parsedLeapSecond()}
+     * 了解完整详细信息。
+     * <p>
+     *  这种方法的一个替代方法是将时间格式化/解析为单个纪元秒值。使用{@code appendValue(INSTANT_SECONDS)}
+     * 
+     * 
      * @param fractionalDigits  the number of fractional second digits to format with,
      *  from 0 to 9, or -1 to use as many digits as necessary
      * @return this, for chaining, not null
@@ -866,6 +1163,12 @@ public final class DateTimeFormatterBuilder {
      * This appends an instruction to format/parse the offset ID to the builder.
      * This is equivalent to calling {@code appendOffset("HH:MM:ss", "Z")}.
      *
+     * <p>
+     *  将区域偏移量(例如"+01：00")附加到格式化程序
+     * <p>
+     * 这附加了一个指令来将偏移ID格式化/解析到构建器这等效于调用{@code appendOffset("HH：MM：ss","Z")}
+     * 
+     * 
      * @return this, for chaining, not null
      */
     public DateTimeFormatterBuilder appendOffsetId() {
@@ -907,6 +1210,26 @@ public final class DateTimeFormatterBuilder {
      * Three formats are accepted for parsing UTC - the "no offset" text, and the
      * plus and minus versions of zero defined by the pattern.
      *
+     * <p>
+     *  将区域偏移量(例如"+01：00")附加到格式化程序
+     * <p>
+     *  这将附加一条指令来将偏移ID格式化/解析到构建器
+     * <p>
+     *  在格式化期间,使用等同于使用{@link TemporalQueries#offset()}查询时间的机制来获得偏移量。将使用下面定义的格式打印偏移量。
+     * 如果不能获得偏移量,则抛出异常,除非格式化程序是可选的。
+     * <p>
+     *  在解析期间,使用以下定义的格式解析偏移量如果无法解析偏移量,则抛出异常,除非格式化程序的部分是可选的
+     * <p>
+     * 偏移的格式由一个模式控制,该模式必须是以下之一：
+     * <ul>
+     *  <li> {@ code + HH}  - 小时,忽略分钟和秒<li> {@ code + HHmm}  - 小时,如果非零, mm}  - 小时,如果非零则为分钟,忽略第二个,使用冒号<@> {@ code + HHMM}
+     *   - 小时和分钟,忽略第二个,不含冒号<@> {@ code + HH：MM}分钟,忽略秒,使用冒号<@> {@ code + HHMMss}  - 小时和分钟,第二个(非零),不含冒号<@> {@ code + HH：MM：ss}
+     *   - 小时和分钟如果非零,带有冒号<@> {@ code + HHMMSS}  - 小时,分钟和秒,无冒号<@> {@ code + HH：MM：SS}  - 小时,分钟和秒,。
+     * </ul>
+     * 当要输出的偏移字段的总量为零时,"无偏移"文本控制打印什么文本示例值将是'Z','+ 00：00','UTC'或'GMT'三种格式被接受用于解析UTC  - "无偏移"文本,以及由模式定义的零的正负版本
+     * 。
+     * 
+     * 
      * @param pattern  the pattern to use, not null
      * @param noOffsetText  the text to use when the offset is zero, not null
      * @return this, for chaining, not null
@@ -940,6 +1263,20 @@ public final class DateTimeFormatterBuilder {
      * If the offset cannot be parsed then an exception is thrown unless the
      * section of the formatter is optional.
      * <p>
+     * <p>
+     *  将本地化区域偏移(例如"GMT + 01：00")附加到格式化程序
+     * <p>
+     *  这会将一个本地化区域偏移附加到构建器,本地化偏移的格式由此方法的指定{@link FormatStyle style}控制：
+     * <ul>
+     * <li> {@ link TextStyle#FULL full}  - 采用本地化偏移文字的格式,例如'GMT,2位小时和分钟字段,非零时可选的第二个字段和冒号<li> {@ link TextStyle#SHORT short}
+     *   - 带有本地偏移文本的格式,例如'GMT,无前导零的小时,可选的2位数分钟,如果非零则为秒,以及冒号。
+     * </ul>
+     * <p>
+     *  在格式化期间,使用等同于使用{@link TemporalQueries#offset()}查询时间的机制来获得偏移。如果不能获得偏移,则抛出异常,除非格式化器的部分是可选的
+     * <p>
+     *  在解析期间,使用上面定义的格式解析偏移量如果不能解析偏移,则抛出异常,除非格式化器的部分是可选的
+     * <p>
+     * 
      * @param style  the format style to use, not null
      * @return this, for chaining, not null
      * @throws IllegalArgumentException if style is neither {@link TextStyle#FULL
@@ -998,6 +1335,30 @@ public final class DateTimeFormatterBuilder {
      *   "GMT+01:30"               -- ZoneOffset.of("+01:30")
      * </pre>
      *
+     * <p>
+     * 将时区ID(例如"Europe / Paris"或"+02：00")附加到格式化程序
+     * <p>
+     *  这将追加用于将区域ID格式化/解析到构建器的指令。区ID是以适合于{@code ZonedDateTime}的严格方式获得的。
+     * 相反,{@code OffsetDateTime}没有适合于该方法使用的区ID ,请参阅{@link #appendZoneOrOffsetId()}。
+     * <p>
+     *  在格式化期间,使用等同于使用{@link TemporalQueries#zoneId()}查询时间的机制获得区域。将使用{@link ZoneId#getId()}的结果打印该区域。
+     * 如果不能获得区域,则抛出异常,除非格式化程序的部分是可选的。
+     * <p>
+     * 在解析期间,文本必须匹配已知区域或偏移量有两种类型的区域ID,基于偏移量(例如"+01：30")和基于区域(例如"Europe / London")。
+     * 解析器以'+',' - ','UT','UTC'或'GMT'开始,则解析器期望基于偏移的区域,并且不匹配基于区域的区域偏移ID, 30',可以在解析的开始,或前缀'UT','UTC'或'GMT'偏移ID
+     * 解析等效于使用{@link #appendOffset(String,String)}使用参数'HH ：MM：ss'和无偏移字符串'0'如果解析以"UT","UTC"或"GMT"开始,并且解析器不能匹配
+     * 后面的偏移ID,则选择{@link ZoneOffset#UTC}在所有其他情况下,已知基于区域的区域的列表用于查找最长可用匹配如果未找到匹配,并且解析以"Z"开头,则选择{@code ZoneOffsetUTC}
+     * 解析器使用{@ linkplain #parseCaseInsensitive()区分大小写}设置。
+     * 在解析期间,文本必须匹配已知区域或偏移量有两种类型的区域ID,基于偏移量(例如"+01：30")和基于区域(例如"Europe / London")。
+     * <p>
+     * 例如,下面将解析：
+     * <pre>
+     *  "Europe / London" -  ZoneIdof("Europe / London")"Z" -  ZoneOffsetUTC"UT" -  ZoneIdof("UT")"UTC" -  Z
+     * oneIdof("UTC")"GMT" -  ZoneIdof "+ 01：30" -  ZoneOffsetof("+ 01:30")"UTC + 01：30" -  ZoneOffsetof "+0
+     * 1：30")"GMT + 01：30" -  ZoneOffsetof("+ 01:30")。
+     * </pre>
+     * 
+     * 
      * @return this, for chaining, not null
      * @see #appendZoneRegionId()
      */
@@ -1054,6 +1415,31 @@ public final class DateTimeFormatterBuilder {
      * Note also that parsing accepts offsets, whereas formatting will never
      * produce one.
      *
+     * <p>
+     *  将时区区域ID(如"Europe / Paris")附加到格式化程序,如果它是{@code ZoneOffset},则拒绝区域ID
+     * <p>
+     *  如果它是基于区域的ID,则此附加指令来将区域ID格式化/解析到构建器
+     * <p>
+     * 在格式化期间,使用等同于使用{@link TemporalQueries#zoneId()}查询时间的机制获得区域。
+     * 如果区域是{@code ZoneOffset}或者无法获得,则抛出异常,除非格式化程序是可选的如果区域不是偏移量,则将使用{@link ZoneId#getId()}中的区域ID打印区域。
+     * <p>
+     * 在解析期间,文本必须匹配已知区域或偏移量有两种类型的区域ID,基于偏移量(例如"+01：30")和基于区域(例如"Europe / London")。
+     * 解析器以'+',' - ','UT','UTC'或'GMT'开始,则解析器期望基于偏移的区域,并且不匹配基于区域的区域偏移ID, 30',可以在解析的开始,或前缀'UT','UTC'或'GMT'偏移ID
+     * 解析等效于使用{@link #appendOffset(String,String)}使用参数'HH ：MM：ss'和无偏移字符串'0'如果解析以"UT","UTC"或"GMT"开始,并且解析器不能匹配
+     * 后面的偏移ID,则选择{@link ZoneOffset#UTC}在所有其他情况下,已知基于区域的区域的列表用于查找最长可用匹配如果未找到匹配,并且解析以"Z"开头,则选择{@code ZoneOffsetUTC}
+     * 解析器使用{@ linkplain #parseCaseInsensitive()区分大小写}设置。
+     * 在解析期间,文本必须匹配已知区域或偏移量有两种类型的区域ID,基于偏移量(例如"+01：30")和基于区域(例如"Europe / London")。
+     * <p>
+     * 例如,下面将解析：
+     * <pre>
+     *  "Europe / London" -  ZoneIdof("Europe / London")"Z" -  ZoneOffsetUTC"UT" -  ZoneIdof("UT")"UTC" -  Z
+     * oneIdof("UTC")"GMT" -  ZoneIdof "+ 01：30" -  ZoneOffsetof("+ 01:30")"UTC + 01：30" -  ZoneOffsetof "+0
+     * 1：30")"GMT + 01：30" -  ZoneOffsetof("+ 01:30")。
+     * </pre>
+     * <p>
+     *  注意这个方法和{@code appendZoneId()}是一样的,除了用于获取区域的机制注意,解析接受偏移,而格式化永远不会产生一个
+     * 
+     * 
      * @return this, for chaining, not null
      * @see #appendZoneId()
      */
@@ -1110,6 +1496,32 @@ public final class DateTimeFormatterBuilder {
      * Note that this method is is identical to {@code appendZoneId()} except
      * in the mechanism used to obtain the zone.
      *
+     * <p>
+     * 使用最佳可用区域ID将时区ID(例如"Europe / Paris"或"+02：00")附加到格式化程序
+     * <p>
+     *  这将附加指令来将最佳可用区域或偏移ID格式化/解析到构建器。
+     * 区域ID以宽松的方式获得,首先尝试找到真正的区域ID,例如{@code ZonedDateTime}上的ID,然后尝试找到偏移量,例如{@code OffsetDateTime}。
+     * <p>
+     *  在格式化期间,使用等同于使用{@link TemporalQueries#zone()}查询时间的机制获得区域。将使用{@link ZoneId#getId()}的结果打印该区域。
+     * 如果不能获得区域,则抛出异常,除非格式化程序的部分是可选的。
+     * <p>
+     * 在解析期间,文本必须匹配已知区域或偏移量有两种类型的区域ID,基于偏移量(例如"+01：30")和基于区域(例如"Europe / London")。
+     * 解析器以'+',' - ','UT','UTC'或'GMT'开始,则解析器期望基于偏移的区域,并且不匹配基于区域的区域偏移ID, 30',可以在解析的开始,或前缀'UT','UTC'或'GMT'偏移ID
+     * 解析等效于使用{@link #appendOffset(String,String)}使用参数'HH ：MM：ss'和无偏移字符串'0'如果解析以"UT","UTC"或"GMT"开始,并且解析器不能匹配
+     * 后面的偏移ID,则选择{@link ZoneOffset#UTC}在所有其他情况下,已知基于区域的区域的列表用于查找最长可用匹配如果未找到匹配,并且解析以"Z"开头,则选择{@code ZoneOffsetUTC}
+     * 解析器使用{@ linkplain #parseCaseInsensitive()区分大小写}设置。
+     * 在解析期间,文本必须匹配已知区域或偏移量有两种类型的区域ID,基于偏移量(例如"+01：30")和基于区域(例如"Europe / London")。
+     * <p>
+     * 例如,下面将解析：
+     * <pre>
+     *  "Europe / London" -  ZoneIdof("Europe / London")"Z" -  ZoneOffsetUTC"UT" -  ZoneIdof("UT")"UTC" -  Z
+     * oneIdof("UTC")"GMT" -  ZoneIdof "ZoneOffsetof("UT + 01：30")"UTC + 01：30" -  ZoneOffsetof("+ 01：30")" 
+     * ("UTC + 01：30")"GMT + 01：30" -  ZoneOffsetof("GMT + 01：30")。
+     * </pre>
+     * <p>
+     *  注意这个方法与{@code appendZoneId()}是相同的,除了用于获得区域的机制
+     * 
+     * 
      * @return this, for chaining, not null
      * @see #appendZoneId()
      */
@@ -1146,6 +1558,24 @@ public final class DateTimeFormatterBuilder {
      * zone. The {@link #appendZoneText(TextStyle, Set)} may be used
      * to specify a set of preferred {@link ZoneId} in this situation.
      *
+     * <p>
+     *  将时区名称(例如"英国夏令时")附加到格式化程序
+     * <p>
+     *  这将向编译器附加用于格式化/解析区域的文本名称的指令
+     * <p>
+     * 在格式化期间,使用等同于使用{@link TemporalQueries#zoneId()}查询时间的机制获得区域。
+     * 如果区域是{@code ZoneOffset},则将使用{@link ZoneOffset#getId )}如果区域不是偏移量,则将查找文本名称以查找在{@link DateTimeFormatter}
+     * 中设置的语言环境。
+     * 在格式化期间,使用等同于使用{@link TemporalQueries#zoneId()}查询时间的机制获得区域。
+     * 如果正在打印的时态对象表示一个时刻,则文本将是夏季或冬季时间文本适当如果对文本的查找没有找到任何合适的reuslt,则将打印{@link ZoneId#getId()ID}如果无法获取区域,则会抛出异常
+     * ,除非格式化程序的部分是可选的。
+     * 在格式化期间,使用等同于使用{@link TemporalQueries#zoneId()}查询时间的机制获得区域。
+     * <p>
+     * 在解析期间,接受文本区名称,区域ID或偏移量许多文本区名称不是唯一的,例如CST可以用于"中央标准时间"和"中国标准时间"在这种情况下,区域ID将由格式化器的{@link DateTimeFormatter#getLocale()locale}
+     * 和该区域的标准区域ID的区域信息确定,例如美国东部区域的America / New_York {@link #appendZoneText(TextStyle,Set) }可以用于在这种情况下指定一组优
+     * 选的{@link ZoneId}。
+     * 
+     * 
      * @param textStyle  the text style to use, not null
      * @return this, for chaining, not null
      */
@@ -1186,6 +1616,25 @@ public final class DateTimeFormatterBuilder {
      * If the zone cannot be parsed then an exception is thrown unless the
      * section of the formatter is optional.
      *
+     * <p>
+     *  将时区名称(例如"英国夏令时")附加到格式化程序
+     * <p>
+     *  这将向编译器附加用于格式化/解析区域的文本名称的指令
+     * <p>
+     * 在格式化期间,使用等同于使用{@link TemporalQueries#zoneId()}查询时间的机制获得区域。
+     * 如果区域是{@code ZoneOffset},则将使用{@link ZoneOffset#getId )}如果区域不是偏移量,则将查找文本名称以查找在{@link DateTimeFormatter}
+     * 中设置的语言环境。
+     * 在格式化期间,使用等同于使用{@link TemporalQueries#zoneId()}查询时间的机制获得区域。
+     * 如果正在打印的时态对象表示一个时刻,则文本将是夏季或冬季时间文本适当如果对文本的查找没有找到任何合适的reuslt,则将打印{@link ZoneId#getId()ID}如果无法获取区域,则会抛出异常
+     * ,除非格式化程序的部分是可选的。
+     * 在格式化期间,使用等同于使用{@link TemporalQueries#zoneId()}查询时间的机制获得区域。
+     * <p>
+     * 在解析期间,接受文本区名称,区域ID或偏移量许多文本区名称不是唯一的,例如CST可以用于"中央标准时间"和"中国标准时间"在这种情况下,区域ID将由格式化器的{@link DateTimeFormatter#getLocale()locale}
+     * 的区域信息和该区域的标准区域ID确定,例如America / New_York用于美国东部区域此方法还允许一组首选{@link ZoneId}如果要解析的纹理区域名称不唯一,将使用匹配的首选区域ID。
+     * 
+     *  如果无法解析区域,则抛出异常,除非格式化程序的部分是可选的
+     * 
+     * 
      * @param textStyle  the text style to use, not null
      * @param preferredZones  the set of preferred zone ids, not null
      * @return this, for chaining, not null
@@ -1215,6 +1664,18 @@ public final class DateTimeFormatterBuilder {
      * section of the formatter is optional.
      * The parser uses the {@linkplain #parseCaseInsensitive() case sensitive} setting.
      *
+     * <p>
+     * 将年表ID(如"ISO"或"ThaiBuddhist")附加到格式化程序
+     * <p>
+     *  这将附加一条指令来将编年表ID格式化/解析到构建器
+     * <p>
+     *  在格式化期间,使用等同于使用{@link TemporalQueries#chronology()}查询时间的机制来获得年表。将使用{@link Chronology#getId()}的结果打印。
+     * 如果不能获得年表,抛出异常,除非格式化程序的部分是可选的。
+     * <p>
+     * 在解析期间,解析时间顺序并且必须匹配{@link Chronology#getAvailableChronologies()}中的一个时间表。
+     * 如果无法解析年表,则抛出异常,除非格式化程序的部分是可选的。解析器使用{@linkplain #parseCaseInsensitive()区分大小写}设置。
+     * 
+     * 
      * @return this, for chaining, not null
      */
     public DateTimeFormatterBuilder appendChronologyId() {
@@ -1229,6 +1690,12 @@ public final class DateTimeFormatterBuilder {
      * If the chronology cannot be obtained then an exception will be thrown.
      * The calendar system name is obtained from the Chronology.
      *
+     * <p>
+     *  将年表名称附加到格式化程序
+     * <p>
+     *  日历系统名称将在格式期间输出如果无法获取年表,则将抛出异常日历系统名称从年表中获取
+     * 
+     * 
      * @param textStyle  the text style to use, not null
      * @return this, for chaining, not null
      */
@@ -1262,6 +1729,22 @@ public final class DateTimeFormatterBuilder {
      * Note that this method provides similar functionality to methods on
      * {@code DateFormat} such as {@link java.text.DateFormat#getDateTimeInstance(int, int)}.
      *
+     * <p>
+     *  将本地化日期时间模式附加到格式化程序
+     * <p>
+     * 这会将一个本地化部分附加到构建器,适合输出日期,时间或日期时间组合本地化部分的格式基于四个项目进行延迟查找：
+     * <ul>
+     *  <li>指定给此方法的{@code dateStyle} <li>指定给此方法的{@code timeStyle} <li> {@code DateTimeFormatter}的{@code Locale}
+     *  <li> {@code Chronology },选择最佳可用。
+     * </ul>
+     *  在格式化期间,时间顺序是从正在格式化的时间对象获得的,其可能已被{@link DateTimeFormatter#with Chronology(Chronology)}覆盖
+     * <p>
+     *  在解析期间,如果已经解析了年表,则使用它。
+     * 否则,使用{@code DateTimeFormatterwithChronology(Chronology)}的默认值,使用{@code IsoChronology}作为后备。
+     * <p>
+     * 请注意,此方法提供与{@code DateFormat}上的方法类似的功能,例如{@link javatextDateFormat#getDateTimeInstance(int,int)}
+     * 
+     * 
      * @param dateStyle  the date style to use, null means no date required
      * @param timeStyle  the time style to use, null means no time required
      * @return this, for chaining, not null
@@ -1281,6 +1764,12 @@ public final class DateTimeFormatterBuilder {
      * <p>
      * This character will be output during a format.
      *
+     * <p>
+     *  将字符文字附加到格式化程序
+     * <p>
+     *  此字符将在格式期间输出
+     * 
+     * 
      * @param literal  the literal to append, not null
      * @return this, for chaining, not null
      */
@@ -1296,6 +1785,14 @@ public final class DateTimeFormatterBuilder {
      * <p>
      * If the literal is empty, nothing is added to the formatter.
      *
+     * <p>
+     *  将字符串文字附加到格式化程序
+     * <p>
+     *  此字符串将在格式期间输出
+     * <p>
+     *  如果文字为空,则不会将任何内容添加到格式化程序
+     * 
+     * 
      * @param literal  the literal to append, not null
      * @return this, for chaining, not null
      */
@@ -1318,6 +1815,12 @@ public final class DateTimeFormatterBuilder {
      * This method has the same effect as appending each of the constituent
      * parts of the formatter directly to this builder.
      *
+     * <p>
+     *  将格式化程序的所有元素附加到构建器
+     * <p>
+     *  该方法具有将格式化器的每个组成部分直接附加到该构建器的相同效果
+     * 
+     * 
      * @param formatter  the formatter to add, not null
      * @return this, for chaining, not null
      */
@@ -1337,6 +1840,14 @@ public final class DateTimeFormatterBuilder {
      * The formatter will format if data is available for all the fields contained within it.
      * The formatter will parse if the string matches, otherwise no error is returned.
      *
+     * <p>
+     *  将格式化程序附加到构建器,可以选择格式化/解析
+     * <p>
+     * 此方法具有将每个组成部分直接附加到此构建器的相同效果,其由{@link #optionalStart()}和{@link #optionalEnd()}
+     * <p>
+     *  如果数据对其中包含的所有字段可用,格式化程序将格式化格式化程序将解析如果字符串匹配,否则不返回错误
+     * 
+     * 
      * @param formatter  the formatter to add, not null
      * @return this, for chaining, not null
      */
@@ -1563,6 +2074,125 @@ public final class DateTimeFormatterBuilder {
      * Pattern letters 'n', 'A', 'N', and 'p' are added.
      * Number types will reject large numbers.
      *
+     * <p>
+     *  将由指定模式定义的元素附加到构建器
+     * <p>
+     *  所有字母'A'到'Z'和'a'到'z'被保留为模式字母'#','{'和'}'被保留以备将来使用字符'['可选模式定义了以下模式字母：
+     * <pre>
+     * 符号含义表示示例------ ------- ------------ ------- G时代文本AD;公元; 2004年; 2004年04年; 04 D年份数189 M / L年份数字/文本7; 07
+     * ; Jul;七月; J d每月第10天。
+     * 
+     * Q / q四分之一数字/文本3; 03; Q3;第三季度Y每周年度1996年; 96 w基于星期的年份数27 W星期几数字4 E星期几文本星期;星期二; T e / c本地化星期数/文本2; 02;星期
+     * 二星期二; T F月份第3周。
+     * 
+     *  am-pm-of-day文本PM h clock-hour-of-am-pm(1-12)number 12 K hour-of-am-pm(0-11)number 0 k clock-of-am -p
+     * m(1-24)数字0。
+     * 
+     * H小时(0-23)数0分钟小时数30秒秒数55 S第二分数部分978 A毫日数1234 n纳米 - 第二个数字987654321 N纳天数1234000000
+     * 
+     * V时区ID zone-id America / Los_Angeles; Z; -08：30 z时区名称区域名太平洋标准时间; PST O本地化区域偏移偏移-O GMT + 8; GMT + 08：00
+     * ; UTC-08：00; X区偏移"Z"用于零偏移-X Z; -08; -0830; -08：30; -083015; -08：30：15; x zone-offset offset-x +0000; 
+     * -08; -0830; -08：30; -083015; -08：30：15; Z zone-offset offset-Z +0000; -0800; -08：00;。
+     * 
+     *  p垫下一垫修改器1
+     * 
+     * '文本分隔符的转义''单引号文字'[可选部分开始]可选部分结束#保留供将来使用{保留供未来使用}保留供将来使用
+     * </pre>
+     * <p>
+     *  模式字母计数确定格式有关模式的以用户为中心的说明,请参见<a href=\"DateTimeFormatterhtml#patterns\"> DateTimeFormatter </a>以下表格定义
+     * 模式字母如何映射到构建器。
+     * <p>
+     *  <b>日期字段</b>：用于输出日期的花样字母
+     * <pre>
+     * 模式计数等效构建器方法------- ----- -------------------------- G 1 appendText(ChronoFieldERA,TextStyleSHORT )GG 
+     * 2 appendText(ChronoFieldERA,TextStyleSHORT)GGG 3 appendText(ChronoFieldERA,TextStyleSHORT)GGGG 4 appe
+     * ndText(ChronoFieldERA,TextStyleFULL)GGGGG 5 appendText(ChronoFieldERA,TextStyleNARROW)。
+     * 
+     * u 1 appendValue(ChronoFieldYEAR,1,19,SignStyleNORMAL); uu 2 appendValueReduced(ChronoFieldYEAR,2,2000
+     * ); uuu 3 appendValue(ChronoFieldYEAR,3,19,SignStyleNORMAL); uu 4n appendValue(ChronoFieldYEAR,n,19,Si
+     * gnStyleEXCEEDS_PAD); y 1 appendValue(ChronoFieldYEAR_OF_ERA,1,19,SignStyleNORMAL); yy 2 appendValueRe
+     * duced(ChronoFieldYEAR_OF_ERA,2,2000); yyy 3 appendValue(ChronoFieldYEAR_OF_ERA,3,19,SignStyleNORMAL);
+     *  yy 4n appendValue(ChronoFieldYEAR_OF_ERA,n,19,SignStyleEXCEEDS_PAD); Y 1为基于数字周的年份YY附加特殊的本地化WeekField
+     * s元素附加特殊的本地化WeekFields元素用于减少的基于数字周的年份2位数字; YYY 3为基于数字周的年(3,19,SignStyleNORMAL)附加特殊的本地化WeekFields元素; YY
+     *  4n为数字基于周的年(n,19,SignStyleEXCEEDS_PAD)附加特殊的本地化WeekFields元素;。
+     * 
+     * Q 1 appendValue(IsoFieldsQUARTER_OF_YEAR); QQ 2 appendValue(IsoFieldsQUARTER_OF_YEAR,2); QQQ 3 append
+     * Text(IsoFieldsQUARTER_OF_YEAR,TextStyleSHORT)QQQQ 4 appendText(IsoFieldsQUARTER_OF_YEAR,TextStyleFULL
+     * )QQQQQ 5 appendText(IsoFieldsQUARTER_OF_YEAR,TextStyleNARROW)q 1 appendValue(IsoFieldsQUARTER_OF_YEAR
+     * ); qq 2 appendValue(IsoFieldsQUARTER_OF_YEAR,2); qqq 3 appendText(IsoFieldsQUARTER_OF_YEAR,TextStyleS
+     * HORT_STANDALONE)qqqq 4 appendText(IsoFieldsQUARTER_OF_YEAR,TextStyleFULL_STANDALONE)qqqqq 5 appendTex
+     * t(IsoFieldsQUARTER_OF_YEAR,TextStyleNARROW_STANDALONE)。
+     * 
+     * M 1 appendValue(ChronoFieldMONTH_OF_YEAR); MM 2 appendValue(ChronoFieldMONTH_OF_YEAR,2); MMM 3 append
+     * Text(ChronoFieldMONTH_OF_YEAR,TextStyleSHORT)MMMM 4 appendText(ChronoFieldMONTH_OF_YEAR,TextStyleFULL
+     * )MMMMM 5 appendText(ChronoFieldMONTH_OF_YEAR,TextStyleNARROW)L 1 appendValue(ChronoFieldMONTH_OF_YEAR
+     * ); LL 2 appendValue(ChronoFieldMONTH_OF_YEAR,2); LLL 3 appendText(ChronoFieldMONTH_OF_YEAR,TextStyleS
+     * HORT_STANDALONE)LLLL 4 appendText(ChronoFieldMONTH_OF_YEAR,TextStyleFULL_STANDALONE)LLLLL 5 appendTex
+     * t(ChronoFieldMONTH_OF_YEAR,TextStyleNARROW_STANDALONE)。
+     * 
+     * w 1为数字周年ww附加特别的本地化WeekFields元素1为数字周年,零填充W 1附加特别的本地化WeekFields元素附加特定的本地化WeekFields元素用于数字周的月d 1 appendV
+     * alue ChronoFieldDAY_OF_MONTH)DD 2 appendValue(ChronoFieldDAY_OF_MONTH,2)D 1 appendValue(ChronoFieldDA
+     * Y_OF_YEAR)DD 2 appendValue(ChronoFieldDAY_OF_YEAR,2)DDD 3 appendValue(ChronoFieldDAY_OF_YEAR,3)的F 1 a
+     * ppendValue(ChronoFieldALIGNED_DAY_OF_WEEK_IN_MONTH)电子1 AppendText通过(ChronoFieldDAY_OF_WEEK,TextStyleS
+     * HORT)EE 2 AppendText通过( ChronoFieldDAY_OF_WEEK,TextStyleSHORT)EEE 3 appendText(ChronoFieldDAY_OF_WEEK
+     * ,TextStyleSHORT)EEEE 4 appendText(ChronoFieldDAY_OF_WEEK,TextStyleFULL)EEEEE 5 appendText(ChronoField
+     * DAY_OF_WEEK,TextStyleNARROW)e 1为数字day-of-week ee追加特别的本地化WeekFields元素2为数字day-of-week, EEE 3 AppendText
+     * 通过(ChronoFieldDAY_OF_WEEK,TextStyleSHORT)EEEE 4 AppendText通过(ChronoFieldDAY_OF_WEEK,TextStyleFULL)EEE
+     * EE 5 AppendText通过(ChronoFieldDAY_OF_WEEK,TextStyleNARROW)对于C 1追加特殊的本地化WeekFields元数值一天的一周CCC 3 AppendT
+     * ext通过(ChronoFieldDAY_OF_WEEK,TextStyleSHORT_STANDALONE)CCCC 4 AppendText通过( ChronoFieldDAY_OF_WEEK,Te
+     * xtStyleFULL_STANDALONE)ccccc 5 appendText(ChronoFieldDAY_OF_WEEK,TextStyleNARROW_STANDALONE)。
+     * </pre>
+     * <p>
+     * <b>时间字段</b>：输出时间的花样字母
+     * <pre>
+     * 模式计数等效构建器方法------- ----- -------------------------- 1 appendText(ChronoFieldAMPM_OF_DAY,TextStyleSHOR
+     * T )H 1 appendValue(ChronoFieldCLOCK_HOUR_OF_AMPM)HH 2 appendValue(ChronoFieldCLOCK_HOUR_OF_AMPM,2)H 1
+     *  appendValue(ChronoFieldHOUR_OF_DAY)HH 2 appendValue(ChronoFieldHOUR_OF_DAY,2)K 1 appendValue(ChronoF
+     * ieldCLOCK_HOUR_OF_DAY)KK 2 appendValue(ChronoFieldCLOCK_HOUR_OF_DAY,2)K 1 appendValue(ChronoFieldHOUR
+     * _OF_AMPM)KK 2 appendValue(ChronoFieldHOUR_OF_AMPM,2)m 1 appendValue(ChronoFieldMINUTE_OF_HOUR)mm 2 ap
+     * pendValue(ChronoFieldMINUTE_OF_HOUR,2)s 1 appendValue(ChronoFieldSECOND_OF_MINUTE)ss 2 appendValue(Ch
+     * ronoFieldSECOND_OF_MINUTE,2)。
+     * 
+     * SS 1N appendFraction(ChronoFieldNANO_OF_SECOND,N,N,假)1 appendValue(ChronoFieldMILLI_OF_DAY)AA 2N appe
+     * ndValue(ChronoFieldMILLI_OF_DAY,N)N 1 appendValue(ChronoFieldNANO_OF_SECOND)NN 2N appendValue(ChronoF
+     * ieldNANO_OF_SECOND,N)N 1 appendValue(ChronoFieldNANO_OF_DAY)NN 2N appendValue( ChronoFieldNANO_OF_DAY
+     * ,n)。
+     * </pre>
+     * <p>
+     *  <b>区域ID </b>：输出样式字母{@code ZoneId}
+     * <pre>
+     *  模式计数等效构建器方法------- ----- -------------------------- VV 2 appendZoneId()z 1 appendZoneText(TextStyleS
+     * HORT)zz 2 appendZoneText(TextStyleSHORT)zzz 3 appendZoneText(TextStyleSHORT)zzzz 4 appendZoneText(Tex
+     * tStyleFULL)。
+     * </pre>
+     * <p>
+     * <b>区域偏移</b>：输出图案字母{@code ZoneOffset}
+     * <pre>
+     * 模式计数等效构建器方法------- ----- -------------------------- O 1 appendLocalizedOffsetPrefixed(TextStyleSHORT)
+     * ; OOOO 4 appendLocalizedOffsetPrefixed(TextStyle充分); X 1 appendOffset("+ HHmm","Z")XX 2 appendOffset(
+     * "+ HHMM","Z")XXX 3 appendOffset("+ HH：MM","Z")XXXX 4 appendOffset("+ HHMMss" ","X       1      append
+     * Offset(\"+HHmm\",\"Z\") XX      2      appendOffset(\"+HHMM\",\"Z\") XXX     3      appendOffset(\"+H
+     * H:MM\",\"Z\") XXXX    4      appendOffset(\"+HHMMss\"Z")XXXXX 5 appendOffset("+ HH：MM：ss","Z")x 1 app
+     * endOffset("+ HHmm","+ 00")xx 2 appendOffset("+ HHMM","+ 0000")xxx 3 appendOffset("+ HH：MM","+ 00:00")
+     * xxxx 4 appendOffset("+ HHMMss","+ 0000")xxxxx 5 appendOffset("+ HH：MM：ss","+ 00:00" )Z 1 appendOffset
+     * ("+ HHMM","+ 0000")ZZ 2 appendOffset("+ HHMM","+ 0000")ZZZ 3 appendOffset("+ HHMM","+ 0000")ZZZZ 4 ap
+     * pendLocalizedOffset(TextStyleFULL); ZZZZZ 5 appendOffset("+ HH：MM：ss","Z")。
+     * </pre>
+     * <p>
+     * <b>修饰符</b>：修改模式其余部分的模式字母：
+     * <pre>
+     *  模式计数等效构建器方法------- ----- -------------------------- [1 optionalStart()] 1 optionalEnd()pp 1n padNext
+     * (n)。
+     * </pre>
+     * <p>
+     *  上面未指定的任何字母序列,未识别的字母或保留字符将抛出异常未来版本可能会添加到模式集合中。建议在要直接输出的所有字符周围使用单引号,以确保未来的更改不会中断你的申请
+     * <p>
+     * 请注意,模式字符串与{@link javatextSimpleDateFormat SimpleDateFormat}类似,但不完全相同。
+     * 模式字符串与Unicode通用区域设置数据存储库(CLDR / LDML)模式字母'X'定义的类似,但不完全相同,和'u'与Unicode CLDR / LDML对齐。
+     * 相比之下,{@code SimpleDateFormat}对星期的数字使用'u'模式字母'y'和'Y'解析两位数字和多于4个数字的年份模式字母'n','A','N'和'p'被添加。
+     * 数字类型将拒绝大数字。
+     * 
+     * 
      * @param pattern  the pattern to add, not null
      * @return this, for chaining, not null
      * @throws IllegalArgumentException if the pattern is invalid
@@ -1884,6 +2514,16 @@ public final class DateTimeFormatterBuilder {
      * The padding is parsed greedily. Thus, if the decorated element starts with
      * the pad character, it will not be parsed.
      *
+     * <p>
+     *  使下一个添加的打印机/解析器使用空格填充固定宽度
+     * <p>
+     *  此填充将使用空格填充到固定宽度
+     * <p>
+     * 在格式化期间,装饰元素将被输出,然后被填充到指定的宽度如果超过焊盘宽度,格式化期间将抛出异常
+     * <p>
+     *  在解析期间,解析填充和修饰元素如果解析宽松,则填充宽度被视为最大值如果解析是不区分大小写,则填充字符匹配忽略大小写填充解析贪婪因此,如果装饰元素开始用pad字符,它不会被解析
+     * 
+     * 
      * @param padWidth  the pad width, 1 or greater
      * @return this, for chaining, not null
      * @throws IllegalArgumentException if pad width is too small
@@ -1908,6 +2548,16 @@ public final class DateTimeFormatterBuilder {
      * The padding is parsed greedily. Thus, if the decorated element starts with
      * the pad character, it will not be parsed.
      *
+     * <p>
+     *  使下一个添加的打印机/解析器以固定宽度进行打印
+     * <p>
+     *  这个填充用于填充而不是填零填零填充应该使用appendValue方法实现
+     * <p>
+     * 在格式化期间,装饰元素将被输出,然后被填充到指定的宽度如果超过焊盘宽度,格式化期间将抛出异常
+     * <p>
+     *  在解析期间,解析填充和修饰元素如果解析宽松,则填充宽度被视为最大值如果解析是不区分大小写,则填充字符匹配忽略大小写填充解析贪婪因此,如果装饰元素开始用pad字符,它不会被解析
+     * 
+     * 
      * @param padWidth  the pad width, 1 or greater
      * @param padChar  the pad character
      * @return this, for chaining, not null
@@ -1942,6 +2592,17 @@ public final class DateTimeFormatterBuilder {
      * During formatting, the minute will only be output if its value can be obtained from the date-time.
      * During parsing, the input will be successfully parsed whether the minute is present or not.
      *
+     * <p>
+     *  标记可选部分的开始
+     * <p>
+     *  格式化的输出可以包括可选的节,可以嵌套可选节通过调用此方法启动,并通过调用{@link #optionalEnd()}或结束构建过程结束
+     * <p>
+     * 可选部分中的所有元素都被视为可选在格式化期间,只有在{@code TemporalAccessor}中的所有元素的数据可用时,才会输出该部分。在解析期间,解析字符串中可能缺少整个部分
+     * <p>
+     *  例如,将构建器设置视为{@code builderappendValue(HOUR_OF_DAY,2)optionalStart()appendValue(MINUTE_OF_HOUR,2)}可选部分
+     * 在构建器结束时自动结束在格式化期间,仅当其值可以从日期时间获得在解析期间,输入将成功解析是否存在分钟。
+     * 
+     * 
      * @return this, for chaining, not null
      */
     public DateTimeFormatterBuilder optionalStart() {
@@ -1972,6 +2633,19 @@ public final class DateTimeFormatterBuilder {
      * During formatting, the minute will only be output if its value can be obtained from the date-time.
      * During parsing, the input will be successfully parsed whether the minute is present or not.
      *
+     * <p>
+     *  结束可选部分
+     * <p>
+     * 格式化的输出可以包括可以嵌套的可选部分可选部分通过调用{@link #optionalStart()}启动,并使用此方法结束(或在构建器的结尾)
+     * <p>
+     *  在没有事先调用{@code optionalStart}的情况下调用此方法将抛出异常在调用{@code optionalStart}之后立即调用此方法对格式化程序没有影响,而是结束(空)可选部分
+     * <p>
+     *  可选部分中的所有元素都被视为可选在格式化期间,只有在{@code TemporalAccessor}中的所有元素的数据可用时,才会输出该部分。在解析期间,解析字符串中可能缺少整个部分
+     * <p>
+     * 例如,将构建器设置视为{@code builderappendValue(HOUR_OF_DAY,2)optionalStart()appendValue(MINUTE_OF_HOUR,2)optionalEnd()}
+     * 在格式化期间,只有当其值可以从日期时间在解析期间,无论分钟是否存在,输入都将成功解析。
+     * 
+     * 
      * @return this, for chaining, not null
      * @throws IllegalStateException if there was no previous call to {@code optionalStart}
      */
@@ -1993,6 +2667,10 @@ public final class DateTimeFormatterBuilder {
     /**
      * Appends a printer and/or parser to the internal list handling padding.
      *
+     * <p>
+     *  将打印机和/或解析器附加到内部列表处理填充
+     * 
+     * 
      * @param pp  the printer-parser to add, not null
      * @return the index into the active parsers list
      */
@@ -2025,6 +2703,17 @@ public final class DateTimeFormatterBuilder {
      * This builder can still be used after creating the formatter if desired,
      * although the state may have been changed by calls to {@code optionalEnd}.
      *
+     * <p>
+     *  通过使用默认语言环境创建{@code DateTimeFormatter}来完成此构建器
+     * <p>
+     *  这将创建一个带有{@linkplain Locale#getDefault(LocaleCategory)默认FORMAT语言环境}的格式化器。
+     * 将使用标准DecimalStyle打印和解析数字解析器样式将是{@link ResolverStyle#SMART SMART}。
+     * <p>
+     * 调用此方法将在创建格式化程序之前重复调用{@link #optionalEnd()},从而结束任何打开的可选部分
+     * <p>
+     *  如果需要,此构建器仍然可以在创建格式化程序后使用,但状态可能已通过调用{@code optionalEnd}
+     * 
+     * 
      * @return the created formatter, not null
      */
     public DateTimeFormatter toFormatter() {
@@ -2045,6 +2734,16 @@ public final class DateTimeFormatterBuilder {
      * This builder can still be used after creating the formatter if desired,
      * although the state may have been changed by calls to {@code optionalEnd}.
      *
+     * <p>
+     *  通过使用指定的区域设置创建{@code DateTimeFormatter}来完成此构建器
+     * <p>
+     *  这将创建一个具有指定区域设置的格式化程序将使用标准DecimalStyle打印和解析数字解析器样式将是{@link ResolverStyle#SMART SMART}
+     * <p>
+     *  调用此方法将在创建格式化程序之前重复调用{@link #optionalEnd()},从而结束任何打开的可选部分
+     * <p>
+     * 如果需要,此构建器仍然可以在创建格式化程序后使用,但状态可能已通过调用{@code optionalEnd}
+     * 
+     * 
      * @param locale  the locale to use for formatting, not null
      * @return the created formatter, not null
      */
@@ -2056,6 +2755,10 @@ public final class DateTimeFormatterBuilder {
      * Completes this builder by creating the formatter.
      * This uses the default locale.
      *
+     * <p>
+     *  通过创建格式化程序来完成此构建器这将使用缺省区域设置
+     * 
+     * 
      * @param resolverStyle  the resolver style to use, not null
      * @return the created formatter, not null
      */
@@ -2066,6 +2769,10 @@ public final class DateTimeFormatterBuilder {
     /**
      * Completes this builder by creating the formatter.
      *
+     * <p>
+     *  通过创建格式化程序完成此构建器
+     * 
+     * 
      * @param locale  the locale to use for formatting, not null
      * @param chrono  the chronology to use, may be null
      * @return the created formatter, not null
@@ -2106,6 +2813,20 @@ public final class DateTimeFormatterBuilder {
      * The context is not a thread-safe object and a new instance will be created
      * for each format that occurs. The context must not be stored in an instance
      * variable or shared with any other threads.
+     * <p>
+     *  格式/解析日期时间信息的策略
+     * <p>
+     *  打印机可以格式化输入日期时间对象的任何部分或整体。通常,完整格式由多个较小单元构成,每个单元输出单个字段
+     * <p>
+     * 解析器可以解析来自输入的任何文本块,将结果存储在上下文中。通常,每个单独的解析器将仅解析一个字段,例如一个月,将该值存储在上下文中。
+     * 一旦解析完成,调用者将解析解析的值以创建所需的对象,例如{@code LocalDate}。
+     * <p>
+     *  解析位置将在解析期间更新,解析将从指定索引开始,返回值指定下一个解析器的新解析位置。如果发生错误,返回的索引将为负,并使用补码运算符
+     * 
+     * @implSpec此接口必须小心地实现,以确保其他类正常运行所有可实例化的实现必须是final,immutable和线程安全
+     * <p>
+     *  上下文不是线程安全的对象,并且将为每个发生的格式创建一个新的实例。上下文不能存储在实例变量中,也不能与任何其他线程共享
+     * 
      */
     interface DateTimePrinterParser {
 
@@ -2117,6 +2838,14 @@ public final class DateTimeFormatterBuilder {
          * <p>
          * The buffer must not be mutated beyond the content controlled by the implementation.
          *
+         * <p>
+         *  将日期时间对象打印到缓冲区
+         * <p>
+         *  上下文保存要在格式期间使用的信息。它还包含要打印的日期时间信息
+         * <p>
+         *  缓冲区不能超出实现控制的内容
+         * 
+         * 
          * @param context  the context to format using, not null
          * @param buf  the buffer to append to, not null
          * @return false if unable to query the value from the date-time, true otherwise
@@ -2130,6 +2859,12 @@ public final class DateTimeFormatterBuilder {
          * The context holds information to use during the parse.
          * It is also used to store the parsed date-time information.
          *
+         * <p>
+         *  将文本解析为日期时间信息
+         * <p>
+         *  上下文保存要在解析期间使用的信息。它还用于存储解析的日期时间信息
+         * 
+         * 
          * @param context  the context to use and parse into, not null
          * @param text  the input text to parse, not null
          * @param position  the position to start parsing at, from 0 to the text length
@@ -2144,6 +2879,9 @@ public final class DateTimeFormatterBuilder {
     //-----------------------------------------------------------------------
     /**
      * Composite printer and parser.
+     * <p>
+     * 复合打印机和解析器
+     * 
      */
     static final class CompositePrinterParser implements DateTimePrinterParser {
         private final DateTimePrinterParser[] printerParsers;
@@ -2161,6 +2899,10 @@ public final class DateTimeFormatterBuilder {
         /**
          * Returns a copy of this printer-parser with the optional flag changed.
          *
+         * <p>
+         *  返回此打印机解析器的副本,其中可选标志已更改
+         * 
+         * 
          * @param optional  the optional flag to set in the copy
          * @return the new printer-parser, not null
          */
@@ -2234,6 +2976,9 @@ public final class DateTimeFormatterBuilder {
     //-----------------------------------------------------------------------
     /**
      * Pads the output to a fixed width.
+     * <p>
+     *  将输出填充到固定宽度
+     * 
      */
     static final class PadPrinterParserDecorator implements DateTimePrinterParser {
         private final DateTimePrinterParser printerParser;
@@ -2243,6 +2988,10 @@ public final class DateTimeFormatterBuilder {
         /**
          * Constructor.
          *
+         * <p>
+         *  构造函数
+         * 
+         * 
          * @param printerParser  the printer, not null
          * @param padWidth  the width to pad to, 1 or greater
          * @param padChar  the pad character
@@ -2310,6 +3059,9 @@ public final class DateTimeFormatterBuilder {
     //-----------------------------------------------------------------------
     /**
      * Enumeration to apply simple parse settings.
+     * <p>
+     *  枚举应用简单的解析设置
+     * 
      */
     static enum SettingsParser implements DateTimePrinterParser {
         SENSITIVE,
@@ -2350,6 +3102,9 @@ public final class DateTimeFormatterBuilder {
     //-----------------------------------------------------------------------
     /**
      * Defaults a value into the parse if not currently present.
+     * <p>
+     *  将一个值默认为解析(如果当前不存在)
+     * 
      */
     static class DefaultValueParser implements DateTimePrinterParser {
         private final TemporalField field;
@@ -2375,6 +3130,9 @@ public final class DateTimeFormatterBuilder {
     //-----------------------------------------------------------------------
     /**
      * Prints or parses a character literal.
+     * <p>
+     *  打印或解析字符文字
+     * 
      */
     static final class CharLiteralPrinterParser implements DateTimePrinterParser {
         private final char literal;
@@ -2418,6 +3176,9 @@ public final class DateTimeFormatterBuilder {
     //-----------------------------------------------------------------------
     /**
      * Prints or parses a string literal.
+     * <p>
+     *  打印或解析字符串文字
+     * 
      */
     static final class StringLiteralPrinterParser implements DateTimePrinterParser {
         private final String literal;
@@ -2454,11 +3215,17 @@ public final class DateTimeFormatterBuilder {
     //-----------------------------------------------------------------------
     /**
      * Prints and parses a numeric date-time field with optional padding.
+     * <p>
+     *  打印并解析具有可选填充的数字日期时间字段
+     * 
      */
     static class NumberPrinterParser implements DateTimePrinterParser {
 
         /**
          * Array of 10 to the power of n.
+         * <p>
+         *  数组10的幂的n
+         * 
          */
         static final long[] EXCEED_POINTS = new long[] {
             0L,
@@ -2483,6 +3250,10 @@ public final class DateTimeFormatterBuilder {
         /**
          * Constructor.
          *
+         * <p>
+         *  构造函数
+         * 
+         * 
          * @param field  the field to format, not null
          * @param minWidth  the minimum field width, from 1 to 19
          * @param maxWidth  the maximum field width, from minWidth to 19
@@ -2500,6 +3271,10 @@ public final class DateTimeFormatterBuilder {
         /**
          * Constructor.
          *
+         * <p>
+         *  构造函数
+         * 
+         * 
          * @param field  the field to format, not null
          * @param minWidth  the minimum field width, from 1 to 19
          * @param maxWidth  the maximum field width, from minWidth to 19
@@ -2519,6 +3294,10 @@ public final class DateTimeFormatterBuilder {
         /**
          * Returns a new instance with fixed width flag set.
          *
+         * <p>
+         *  返回设置了固定宽度标志的新实例
+         * 
+         * 
          * @return a new updated printer-parser, not null
          */
         NumberPrinterParser withFixedWidth() {
@@ -2531,6 +3310,10 @@ public final class DateTimeFormatterBuilder {
         /**
          * Returns a new instance with an updated subsequent width.
          *
+         * <p>
+         *  返回具有更新的后续宽度的新实例
+         * 
+         * 
          * @param subsequentWidth  the width of subsequent non-negative numbers, 0 or greater
          * @return a new updated printer-parser, not null
          */
@@ -2588,6 +3371,10 @@ public final class DateTimeFormatterBuilder {
         /**
          * Gets the value to output.
          *
+         * <p>
+         *  获取要输出的值
+         * 
+         * 
          * @param context  the context
          * @param value  the value of the field, not null
          * @return the value
@@ -2599,6 +3386,10 @@ public final class DateTimeFormatterBuilder {
         /**
          * For NumberPrinterParser, the width is fixed depending on the
          * minWidth, maxWidth, signStyle and whether subsequent fields are fixed.
+         * <p>
+         *  对于NumberPrinterParser,宽度是固定的,具体取决于minWidth,maxWidth,signStyle以及后续字段是否固定
+         * 
+         * 
          * @param context the context
          * @return true if the field is fixed width
          * @see DateTimeFormatterBuilder#appendValue(java.time.temporal.TemporalField, int)
@@ -2713,6 +3504,10 @@ public final class DateTimeFormatterBuilder {
         /**
          * Stores the value.
          *
+         * <p>
+         *  存储值
+         * 
+         * 
          * @param context  the context to store into, not null
          * @param value  the value
          * @param errorPos  the position of the field being parsed
@@ -2738,10 +3533,16 @@ public final class DateTimeFormatterBuilder {
     //-----------------------------------------------------------------------
     /**
      * Prints and parses a reduced numeric date-time field.
+     * <p>
+     *  打印和解析缩小的数字日期时间字段
+     * 
      */
     static final class ReducedPrinterParser extends NumberPrinterParser {
         /**
          * The base date for reduced value parsing.
+         * <p>
+         * 减值解析的基准日期
+         * 
          */
         static final LocalDate BASE_DATE = LocalDate.of(2000, 1, 1);
 
@@ -2751,6 +3552,10 @@ public final class DateTimeFormatterBuilder {
         /**
          * Constructor.
          *
+         * <p>
+         *  构造函数
+         * 
+         * 
          * @param field  the field to format, validated not null
          * @param minWidth  the minimum field width, from 1 to 10
          * @param maxWidth  the maximum field width, from 1 to 10
@@ -2784,6 +3589,10 @@ public final class DateTimeFormatterBuilder {
          * Constructor.
          * The arguments have already been checked.
          *
+         * <p>
+         *  构造函数参数已经被检查
+         * 
+         * 
          * @param field  the field to format, validated not null
          * @param minWidth  the minimum field width, from 1 to 10
          * @param maxWidth  the maximum field width, from 1 to 10
@@ -2828,6 +3637,9 @@ public final class DateTimeFormatterBuilder {
                             /* Repeat the set of the field using the current Chronology
                              * The success/error position is ignored because the value is
                              * intentionally being overwritten.
+                             * <p>
+                             *  成功/错误位置被忽略,因为该值被有意地覆盖
+                             * 
                              */
                             setValue(context, initialValue, errorPos, successPos);
                         });
@@ -2852,6 +3664,10 @@ public final class DateTimeFormatterBuilder {
         /**
          * Returns a new instance with fixed width flag set.
          *
+         * <p>
+         *  返回设置了固定宽度标志的新实例
+         * 
+         * 
          * @return a new updated printer-parser, not null
          */
         @Override
@@ -2865,6 +3681,10 @@ public final class DateTimeFormatterBuilder {
         /**
          * Returns a new instance with an updated subsequent width.
          *
+         * <p>
+         *  返回具有更新的后续宽度的新实例
+         * 
+         * 
          * @param subsequentWidth  the width of subsequent non-negative numbers, 0 or greater
          * @return a new updated printer-parser, not null
          */
@@ -2877,6 +3697,10 @@ public final class DateTimeFormatterBuilder {
         /**
          * For a ReducedPrinterParser, fixed width is false if the mode is strict,
          * otherwise it is set as for NumberPrinterParser.
+         * <p>
+         *  对于ReducedPrinterParser,如果模式是strict,固定宽度为false,否则设置为NumberPrinterParser
+         * 
+         * 
          * @param context the context
          * @return if the field is fixed width
          * @see DateTimeFormatterBuilder#appendValueReduced(java.time.temporal.TemporalField, int, int, int)
@@ -2898,6 +3722,9 @@ public final class DateTimeFormatterBuilder {
     //-----------------------------------------------------------------------
     /**
      * Prints and parses a numeric date-time field with optional padding.
+     * <p>
+     *  打印并解析具有可选填充的数字日期时间字段
+     * 
      */
     static final class FractionPrinterParser implements DateTimePrinterParser {
         private final TemporalField field;
@@ -2908,6 +3735,10 @@ public final class DateTimeFormatterBuilder {
         /**
          * Constructor.
          *
+         * <p>
+         *  构造函数
+         * 
+         * 
          * @param field  the field to output, not null
          * @param minWidth  the minimum width to output, from 0 to 9
          * @param maxWidth  the maximum width to output, from 0 to 9
@@ -3016,6 +3847,15 @@ public final class DateTimeFormatterBuilder {
          * For example, the second-of-minute value of 15 would be returned as 0.25,
          * assuming the standard definition of 60 seconds in a minute.
          *
+         * <p>
+         *  将此字段的值转换为0到1之间的分数
+         * <p>
+         * 分数值在0(包含)和1(不包含)之间。只有当{@link javatimetemporalTemporalField#range()value range}固定时,才能返回分数值。
+         * 通过使用9个小数位的字段范围计算获得分数, {@link RoundingMode#FLOOR FLOOR}的舍入模式如果值不从最小到最大连续运行,计算是不准确的。
+         * <p>
+         *  例如,假设在一分钟内标准定义为60秒,第二分钟值15将返回为025
+         * 
+         * 
          * @param value  the value to convert, must be valid for this rule
          * @return the value as a fraction within the range, from 0 to 1, not null
          * @throws DateTimeException if the value cannot be converted to a fraction
@@ -3043,6 +3883,15 @@ public final class DateTimeFormatterBuilder {
          * For example, the fractional second-of-minute of 0.25 would be converted to 15,
          * assuming the standard definition of 60 seconds in a minute.
          *
+         * <p>
+         *  将此字段的分数从0转换为1为一个值
+         * <p>
+         * 分数值必须在0(包含)和1(不包含)之间。只有当{@link javatimetemporalTemporalField#range()value range}固定时,才能返回该值。
+         * 通过从字段范围计算获得该值, {@link RoundingMode#FLOOR FLOOR}如果值不从最小到最大连续运行,计算是不准确的。
+         * <p>
+         *  例如,025的分数秒数将被转换为15,假设在一分钟内标准定义为60秒
+         * 
+         * 
          * @param fraction  the fraction to convert, not null
          * @return the value of the field, valid for this rule
          * @throws DateTimeException if the value cannot be converted
@@ -3065,6 +3914,9 @@ public final class DateTimeFormatterBuilder {
     //-----------------------------------------------------------------------
     /**
      * Prints or parses field text.
+     * <p>
+     *  打印或解析字段文本
+     * 
      */
     static final class TextPrinterParser implements DateTimePrinterParser {
         private final TemporalField field;
@@ -3073,12 +3925,19 @@ public final class DateTimeFormatterBuilder {
         /**
          * The cached number printer parser.
          * Immutable and volatile, so no synchronization needed.
+         * <p>
+         *  缓存编号打印机解析器不可变和易失性,因此不需要同步
+         * 
          */
         private volatile NumberPrinterParser numberPrinterParser;
 
         /**
          * Constructor.
          *
+         * <p>
+         *  构造函数
+         * 
+         * 
          * @param field  the field to output, not null
          * @param textStyle  the text style, not null
          * @param provider  the text provider, not null
@@ -3141,6 +4000,10 @@ public final class DateTimeFormatterBuilder {
 
         /**
          * Create and cache a number printer parser.
+         * <p>
+         *  创建并缓存数字打印机解析器
+         * 
+         * 
          * @return the number printer parser for this field, not null
          */
         private NumberPrinterParser numberPrinterParser() {
@@ -3162,6 +4025,9 @@ public final class DateTimeFormatterBuilder {
     //-----------------------------------------------------------------------
     /**
      * Prints or parses an ISO-8601 instant.
+     * <p>
+     *  打印或解析ISO-8601即时
+     * 
      */
     static final class InstantPrinterParser implements DateTimePrinterParser {
         // days in a 400 year cycle = 146097
@@ -3300,6 +4166,9 @@ public final class DateTimeFormatterBuilder {
     //-----------------------------------------------------------------------
     /**
      * Prints or parses an offset ID.
+     * <p>
+     *  打印或解析偏移ID
+     * 
      */
     static final class OffsetIdPrinterParser implements DateTimePrinterParser {
         static final String[] PATTERNS = new String[] {
@@ -3314,6 +4183,10 @@ public final class DateTimeFormatterBuilder {
         /**
          * Constructor.
          *
+         * <p>
+         *  构造函数
+         * 
+         * 
          * @param pattern  the pattern
          * @param noOffsetText  the text to use for UTC, not null
          */
@@ -3410,6 +4283,10 @@ public final class DateTimeFormatterBuilder {
         /**
          * Parse a two digit zero-prefixed number.
          *
+         * <p>
+         * 解析两位数的零前缀数字
+         * 
+         * 
          * @param array  the array of parsed data, 0=pos,1=hours,2=mins,3=secs, not null
          * @param arrayIndex  the index to parse the value into
          * @param parseText  the offset ID, not null
@@ -3454,6 +4331,9 @@ public final class DateTimeFormatterBuilder {
     //-----------------------------------------------------------------------
     /**
      * Prints or parses an offset ID.
+     * <p>
+     *  打印或解析偏移ID
+     * 
      */
     static final class LocalizedOffsetIdPrinterParser implements DateTimePrinterParser {
         private final TextStyle style;
@@ -3461,6 +4341,10 @@ public final class DateTimeFormatterBuilder {
         /**
          * Constructor.
          *
+         * <p>
+         *  构造函数
+         * 
+         * 
          * @param style  the style, not null
          */
         LocalizedOffsetIdPrinterParser(TextStyle style) {
@@ -3615,6 +4499,9 @@ public final class DateTimeFormatterBuilder {
     //-----------------------------------------------------------------------
     /**
      * Prints or parses a zone ID.
+     * <p>
+     *  打印或解析区域ID
+     * 
      */
     static final class ZoneTextPrinterParser extends ZoneIdPrinterParser {
 
@@ -3764,6 +4651,9 @@ public final class DateTimeFormatterBuilder {
     //-----------------------------------------------------------------------
     /**
      * Prints or parses a zone ID.
+     * <p>
+     *  打印或解析区域ID
+     * 
      */
     static class ZoneIdPrinterParser implements DateTimePrinterParser {
         private final TemporalQuery<ZoneId> query;
@@ -3786,6 +4676,9 @@ public final class DateTimeFormatterBuilder {
 
         /**
          * The cached tree to speed up parsing.
+         * <p>
+         *  缓存的树加速解析
+         * 
          */
         private static volatile Entry<Integer, PrefixTree> cachedPrefixTree;
         private static volatile Entry<Integer, PrefixTree> cachedPrefixTreeCI;
@@ -3816,6 +4709,9 @@ public final class DateTimeFormatterBuilder {
          * This implementation looks for the longest matching string.
          * For example, parsing Etc/GMT-2 will return Etc/GMC-2 rather than just
          * Etc/GMC although both are valid.
+         * <p>
+         *  这个实现查找最长匹配的字符串例如,解析Etc / GMT-2将返回Etc / GMC-2,而不是仅仅Etc / GMC,尽管两者都有效
+         * 
          */
         @Override
         public int parse(DateTimeParseContext context, CharSequence text, int position) {
@@ -3864,6 +4760,10 @@ public final class DateTimeFormatterBuilder {
          * To matching the parsing of ZoneId.of the values are not normalized
          * to ZoneOffsets.
          *
+         * <p>
+         *  解析前缀之后的偏移量,并设置ZoneId,如果它是有效的匹配分析的ZoneIdof值不归一化为ZoneOffsets
+         * 
+         * 
          * @param context the parse context
          * @param text the input text
          * @param prefixPos start of the prefix
@@ -3913,6 +4813,9 @@ public final class DateTimeFormatterBuilder {
     //-----------------------------------------------------------------------
     /**
      * A String based prefix tree for parsing time-zone names.
+     * <p>
+     *  用于解析时区名称的基于字符串的前缀树
+     * 
      */
     static class PrefixTree {
         protected String key;
@@ -3936,6 +4839,10 @@ public final class DateTimeFormatterBuilder {
         /**
          * Creates a new prefix parsing tree based on parse context.
          *
+         * <p>
+         *  基于解析上下文创建新的前缀解析树
+         * 
+         * 
          * @param context  the parse context
          * @return the tree, not null
          */
@@ -3952,6 +4859,10 @@ public final class DateTimeFormatterBuilder {
         /**
          * Creates a new prefix parsing tree.
          *
+         * <p>
+         *  创建一个新的前缀解析树
+         * 
+         * 
          * @param keys  a set of strings to build the prefix parsing tree, not null
          * @param context  the parse context
          * @return the tree, not null
@@ -3966,6 +4877,9 @@ public final class DateTimeFormatterBuilder {
 
         /**
          * Clone a copy of this tree
+         * <p>
+         *  克隆此树的副本
+         * 
          */
         public PrefixTree copyTree() {
             PrefixTree copy = new PrefixTree(key, value, null);
@@ -3982,6 +4896,10 @@ public final class DateTimeFormatterBuilder {
         /**
          * Adds a pair of {key, value} into the prefix tree.
          *
+         * <p>
+         *  在前缀树中添加一对{key,value}
+         * 
+         * 
          * @param k  the key, not null
          * @param v  the value, not null
          * @return  true if the pair is added successfully
@@ -4033,6 +4951,10 @@ public final class DateTimeFormatterBuilder {
         /**
          * Match text with the prefix tree.
          *
+         * <p>
+         *  使文本与前缀树匹配
+         * 
+         * 
          * @param text  the input text to parse, not null
          * @param off  the offset position to start parsing at
          * @param end  the end position to stop parsing
@@ -4061,6 +4983,10 @@ public final class DateTimeFormatterBuilder {
         /**
          * Match text with the prefix tree.
          *
+         * <p>
+         *  使文本与前缀树匹配
+         * 
+         * 
          * @param text  the input text to parse, not null
          * @param pos  the position to start parsing at, from 0 to the text
          *  length. Upon return, position will be updated to the new parse
@@ -4134,6 +5060,9 @@ public final class DateTimeFormatterBuilder {
 
         /**
          * Case Insensitive prefix tree.
+         * <p>
+         * 不区分大小写的前缀树
+         * 
          */
         private static class CI extends PrefixTree {
 
@@ -4170,6 +5099,9 @@ public final class DateTimeFormatterBuilder {
         /**
          * Lenient prefix tree. Case insensitive and ignores characters
          * like space, underscore and slash.
+         * <p>
+         *  Lenient前缀树不区分大小写,忽略空格,下划线和斜杠等字符
+         * 
          */
         private static class LENIENT extends CI {
 
@@ -4251,6 +5183,9 @@ public final class DateTimeFormatterBuilder {
     //-----------------------------------------------------------------------
     /**
      * Prints or parses a chronology.
+     * <p>
+     *  打印或解析年表
+     * 
      */
     static final class ChronoPrinterParser implements DateTimePrinterParser {
         /** The text style to output, null means the ID. */
@@ -4309,6 +5244,10 @@ public final class DateTimeFormatterBuilder {
          * if available, or the chronology Id otherwise. The regular ResourceBundle
          * search path is used for looking up the chronology name.
          *
+         * <p>
+         *  返回给定语言环境(如果可用)中给定计时器的年表名称,否则返回年表ID常规ResourceBundle搜索路径用于查找年表名称
+         * 
+         * 
          * @param chrono  the chronology, not null
          * @param locale  the locale, not null
          * @return the chronology name of chrono in locale, or the id if no name is available
@@ -4324,6 +5263,9 @@ public final class DateTimeFormatterBuilder {
     //-----------------------------------------------------------------------
     /**
      * Prints or parses a localized pattern.
+     * <p>
+     *  打印或解析本地化模式
+     * 
      */
     static final class LocalizedPrinterParser implements DateTimePrinterParser {
         /** Cache of formatters. */
@@ -4335,6 +5277,10 @@ public final class DateTimeFormatterBuilder {
         /**
          * Constructor.
          *
+         * <p>
+         *  构造函数
+         * 
+         * 
          * @param dateStyle  the date style to use, may be null
          * @param timeStyle  the time style to use, may be null
          */
@@ -4362,6 +5308,12 @@ public final class DateTimeFormatterBuilder {
          * The formatter will be the most appropriate to use for the date and time style in the locale.
          * For example, some locales will use the month name while others will use the number.
          *
+         * <p>
+         *  获取要使用的格式化程序
+         * <p>
+         *  格式化程序将最适合用于语言环境中的日期和时间样式例如,某些语言环境将使用月份名称,而其他语言环境将使用该数字
+         * 
+         * 
          * @param locale  the locale to use, not null
          * @param chrono  the chronology to use, not null
          * @return the formatter, not null
@@ -4395,6 +5347,9 @@ public final class DateTimeFormatterBuilder {
      * the field is to be printed or parsed.
      * The locale is needed to select the proper WeekFields from which
      * the field for day-of-week, week-of-month, or week-of-year is selected.
+     * <p>
+     * 从本地化字段打印或解析本地化模式在打印或解析字段之前,不会选择特定格式化程序和参数。需要使用语言环境来选择正确的WeekField,从中选择星期,星期,月,或星期
+     * 
      */
     static final class WeekBasedFieldPrinterParser implements DateTimePrinterParser {
         private char chr;
@@ -4403,6 +5358,10 @@ public final class DateTimeFormatterBuilder {
         /**
          * Constructor.
          *
+         * <p>
+         *  构造函数
+         * 
+         * 
          * @param chr the pattern format letter that added this PrinterParser.
          * @param count the repeat count of the format letter
          */
@@ -4424,6 +5383,10 @@ public final class DateTimeFormatterBuilder {
         /**
          * Gets the printerParser to use based on the field and the locale.
          *
+         * <p>
+         *  获取要根据字段和区域设置使用的printerParser
+         * 
+         * 
          * @param locale  the locale to use, not null
          * @return the formatter, not null
          * @throws IllegalArgumentException if the formatter cannot be found
@@ -4496,6 +5459,8 @@ public final class DateTimeFormatterBuilder {
     //-------------------------------------------------------------------------
     /**
      * Length comparator.
+     * <p>
+     *  长度比较器
      */
     static final Comparator<String> LENGTH_SORT = new Comparator<String>() {
         @Override

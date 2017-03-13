@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -57,6 +58,31 @@
  * Business Machines, Inc., http://www.apache.org.  For more
  * information on the Apache Software Foundation, please see
  * <http://www.apache.org/>.
+ * <p>
+ *  Apache软件许可证,版本11
+ * 
+ *  版权所有(c)1999-2004 Apache软件基金会保留所有权利
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  1源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明
+ * 
+ *  2二进制形式的再分发必须在随分发版提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明
+ * 
+ * 3包含在重新分发中的最终用户文档(如果有的话)必须包括以下声明："本产品包括Apache Software Foundation(http：// wwwapacheorg /)开发的软件。
+ * 或者,此确认可能出现在软件本身,如果和第三方承诺通常出现的地方。
+ * 
+ *  4未经事先书面许可,不得使用名称"Xerces"和"Apache Software Foundation"来支持或推广从本软件衍生的产品。如需书面许可,请联系apache @ apacheorg
+ * 
+ *  5未经Apache软件基金会事先书面许可,不得将本软件衍生的产品称为"Apache",也不得在其名称中出现"Apache"
+ * 
+ * 本软件按"原样"提供,任何明示或暗示的保证,包括但不限于适销性和针对特定用途的适用性的默示担保,在任何情况下均不得免责,APACHE软件基金会或其参与人应负赔偿责任对于任何直接,间接,偶发,特殊,惩罚性
+ * 或后果性损害(包括但不限于替代商品或服务的采购;使用,数据或利润损失;或业务中断)责任,无论是在合同,严格责任或侵权(包括疏忽或其他方式),以任何方式使用本软件,即使已被告知此类损害的可能性======
+ * ==============================================================。
+ * 
+ * 这个软件包括许多个人代表Apache软件基金会的自愿捐款,最初是基于软件版权(c)1999年国际商业机器公司,http：// wwwapacheorg有关Apache软件基金会的更多信息,请参见<http：// wwwapacheorg />
+ * 。
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl;
@@ -91,6 +117,23 @@ import com.sun.org.apache.xerces.internal.xni.XNIException;
  *
  * @xerces.internal
  *
+ * <p>
+ *  此类负责扫描XML文档结构和内容扫描器充当传送到文档处理程序的文档信息的源
+ * <p>
+ *  此组件需要使用它的组件管理器中的以下功能和属性：
+ * <ul>
+ * <li> http：// xmlorg / sax / features / namespaces </li> <li> http：// xmlorg / sax / features / valida
+ * tion </li> <li> http：// apacheorg / xml / features / nonvalidating / load-external-dtd </li> <li> htt
+ * p：// apacheorg / xml / features / scanner / notify-char-refs </li> <li> http：// apacheorg / xml / fea
+ * tures / scanner / notify -builtin-refs </li> <li> http：// apacheorg / xml / properties / internal / s
+ * ymbol-table </li> <li> http：// apacheorg / xml / properties / internal / error-reporter < li> <li> ht
+ * tp：// apacheorg / xml / properties / internal / entity-manager </li> <li> http：// apacheorg / xml / p
+ * roperties / internal / dtd-。
+ * </ul>
+ * 
+ *  @xercesinternal
+ * 
+ * 
  * @author Glenn Marcy, IBM
  * @author Andy Clark, IBM
  * @author Arnaud  Le Hors, IBM
@@ -123,6 +166,10 @@ public class XML11DocumentScannerImpl
     /**
      * Scans element content.
      *
+     * <p>
+     *  扫描元素内容
+     * 
+     * 
      * @return Returns the next character on the stream.
      */
     protected int scanContent(XMLStringBuffer content) throws IOException, XNIException {
@@ -141,6 +188,10 @@ public class XML11DocumentScannerImpl
         }
         /*if (fDocumentHandler != null && content.length > 0) {
             fDocumentHandler.characters(content, null);
+        /* <p>
+        /*  fDocumentHandlercharacters(content,null);
+        /* 
+        /* 
         } */
 
         if (c == ']') {
@@ -164,6 +215,10 @@ public class XML11DocumentScannerImpl
             }
             /*if (fDocumentHandler != null && fStringBuffer.length != 0) {
                 fDocumentHandler.characters(fStringBuffer, null);
+            /* <p>
+            /*  fDocumentHandlercharacters(fStringBuffer,null);
+            /* 
+            /* 
             }*/
             fInScanContent = false;
             c = -1;
@@ -178,6 +233,12 @@ public class XML11DocumentScannerImpl
      *
      * [10] AttValue ::= '"' ([^<&"] | Reference)* '"' | "'" ([^<&'] | Reference)* "'"
      *
+     * <p>
+     * 扫描属性值并规范化空格将所有空格字符转换为空格字符
+     * 
+     *  [10] AttValue :: ='''([^ <&"] | Reference)*'"'|"
+     * 
+     * 
      * @param value The XMLString to fill in with the value.
      * @param nonNormalizedValue The XMLString to fill in with the
      *                           non-normalized value.
@@ -431,6 +492,17 @@ public class XML11DocumentScannerImpl
      * identifier must be normalized to single space characters (#x20), and
      * leading and trailing white space must be removed.
      *
+     * <p>
+     *  扫描公共ID文字
+     * 
+     *  [12] PubidLiteral :: ='"'PubidChar *'"'| "'"(PubidChar  - "'")*"'"[13] PubidChar :: =#x20 | #xD | #x
+     * A | [a-zA-Z0-9] | [ - '()+,/：=?;！*#@ $ _％]。
+     * 
+     *  返回的字符串根据以下规则进行规范化,来自http：// wwww3org / TR / REC-xml#dt-pubid：
+     * 
+     *  在尝试匹配之前,必须将公共标识符中的所有空白字符串归一化为单个空格字符(#x20),并且必须删除前导和尾部空格
+     * 
+     * 
      * @param literal The string to fill in with the public ID literal.
      * @return True on success.
      *
@@ -488,6 +560,7 @@ public class XML11DocumentScannerImpl
     /**
      * Normalize whitespace in an XMLString converting all whitespace
      * characters to space characters.
+     * <p>
      */
     protected void normalizeWhitespace(XMLString value) {
         int end = value.offset + value.length;
@@ -502,6 +575,9 @@ public class XML11DocumentScannerImpl
     /**
      * Normalize whitespace in an XMLString converting all whitespace
      * characters to space characters.
+     * <p>
+     *  规范化XMLString中的空格,将所有空格字符转换为空格字符
+     * 
      */
     protected void normalizeWhitespace(XMLString value, int fromIndex) {
         int end = value.offset + value.length;
@@ -516,6 +592,10 @@ public class XML11DocumentScannerImpl
     /**
      * Checks whether this string would be unchanged by normalization.
      *
+     * <p>
+     * 规范化XMLString中的空格,将所有空格字符转换为空格字符
+     * 
+     * 
      * @return -1 if the value would be unchanged by normalization,
      * otherwise the index of the first whitespace character which
      * would be transformed.

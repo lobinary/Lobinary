@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1994, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -97,6 +98,30 @@ import sun.misc.DoubleConsts;
  * a specific minimum or maximum value and should be checked against
  * the minimum or maximum as appropriate.
  *
+ * <p>
+ *  类{@code Math}包含用于执行基本数值操作的方法,例如基本指数,对数,平方根和三角函数
+ * 
+ *  <p>与类{@code StrictMath}的某些数值方法不同,{@code Math}类的等效函数的所有实现未定义为返回逐位的相同结果。这种放松允许更好的执行其中不需要严格的再现性
+ * 
+ * <p>默认情况下,许多{@code Math}方法只是调用{@code StrictMath}中的等效方法来实现代码生成器鼓励使用平台特定的本机库或微处理器指令(如果可用) {@code Math}方法
+ * 的性能实现这种更高性能的实现仍然必须符合{@code Math}的规范,。
+ * 
+ * <p>实现规范的质量涉及两个属性,返回结果的准确性和方法的单调性浮点{@code Math}方法的准确度以<i> ulps </i>为单位,单位为最后一个对于给定的浮点格式,特定实数值的{@linkplain #ulp(double)ulp}
+ * 是包含该数值的两个浮点值之间的距离。
+ * 当讨论方法的精度时一个整体而不是一个特定的参数,引用的ulps数是任何参数的最坏情况下的错误如果一个方法总是有一个小于05 ulps的错误,该方法总是返回最接近精确结果的浮点数;这样的方法被正确地舍入</i>
+ * 正确舍入方法通常是最好的浮点近似;然而,对于许多浮点方法来说是不切实际的舍入。
+ * 相反,对于{@code Math}类,对于某些方法允许1或2个ulps的较大误差界限,非正式地,1 ulp误差界限,当精确的结果是一个可表示的数字,精确的结果应该作为计算结果返回;否则,可以返回支持精确
+ * 结果的两个浮点值中的任一个可以返回对于大小大的精确结果,括号的一个端点可以是无穷除了在单个参数的精度之外,保持不同参数的方法之间的适当关系也很重要因此,大多数方法与大于05 ulp误差需要为半单调的：每
+ * 当数学函数不减少时,浮点近似也是同样,只要数学函数不增加,浮点数点近似不是所有具有1 ulp精度的近似将自动满足单调性要求。
+ * 
+ * <p>
+ * 平台使用带有int和长原语类型的带符号二进制补码整数算法开发人员应该选择原语类型,以确保算术运算一致地产生正确的结果,在某些情况下意味着操作不会溢出计算值的范围。
+ * 实践是选择原始类型和算法以避免溢出在大小为{@code int}或{@code long}且需要检测溢出错误的情况下,方法{@code addExact},{@code subtractExact} ,
+ * {@code multiplyExact}和{@code toIntExact}在结果溢出时抛出{@code ArithmeticException}对于除法,绝对值,增量,减量和取反溢出等其他算术运算
+ * ,只发生在特定的最小值或最大值,并应根据最小值或最大值进行检查。
+ * 平台使用带有int和长原语类型的带符号二进制补码整数算法开发人员应该选择原语类型,以确保算术运算一致地产生正确的结果,在某些情况下意味着操作不会溢出计算值的范围。
+ * 
+ * 
  * @author  unascribed
  * @author  Joseph D. Darcy
  * @since   JDK1.0
@@ -106,12 +131,18 @@ public final class Math {
 
     /**
      * Don't let anyone instantiate this class.
+     * <p>
+     * 不要让任何人实例化这个类
+     * 
      */
     private Math() {}
 
     /**
      * The {@code double} value that is closer than any other to
      * <i>e</i>, the base of the natural logarithms.
+     * <p>
+     *  {@code double}值比任何其他值更接近<i> e </i>,即自然对数的底数
+     * 
      */
     public static final double E = 2.7182818284590452354;
 
@@ -119,6 +150,9 @@ public final class Math {
      * The {@code double} value that is closer than any other to
      * <i>pi</i>, the ratio of the circumference of a circle to its
      * diameter.
+     * <p>
+     *  {@code double}值比任何其他值更接近<i> pi </i>,圆的圆周与其直径的比值
+     * 
      */
     public static final double PI = 3.14159265358979323846;
 
@@ -132,6 +166,12 @@ public final class Math {
      * <p>The computed result must be within 1 ulp of the exact result.
      * Results must be semi-monotonic.
      *
+     * <p>
+     *  返回角度的三角正弦特殊情况：<ul> <li>如果参数为NaN或无穷大,则结果为NaN <li>如果参数为零,则结果为具有相同符号的零参数</ul>
+     * 
+     *  <p>计算结果必须在精确结果的1 ulp之内结果必须是半单调的
+     * 
+     * 
      * @param   a   an angle, in radians.
      * @return  the sine of the argument.
      */
@@ -147,6 +187,12 @@ public final class Math {
      * <p>The computed result must be within 1 ulp of the exact result.
      * Results must be semi-monotonic.
      *
+     * <p>
+     *  返回角度的三角形余弦特殊情况：<ul> <li>如果参数为NaN或无穷大,则结果为NaN </ul>
+     * 
+     * <p>计算结果必须在精确结果的1 ulp之内结果必须是半单调的
+     * 
+     * 
      * @param   a   an angle, in radians.
      * @return  the cosine of the argument.
      */
@@ -164,6 +210,12 @@ public final class Math {
      * <p>The computed result must be within 1 ulp of the exact result.
      * Results must be semi-monotonic.
      *
+     * <p>
+     *  返回角度的三角正切特殊情况：<ul> <li>如果参数为NaN或无穷大,则结果为NaN <li>如果参数为零,则结果为具有相同符号的零参数</ul>
+     * 
+     *  <p>计算结果必须在精确结果的1 ulp之内结果必须是半单调的
+     * 
+     * 
      * @param   a   an angle, in radians.
      * @return  the tangent of the argument.
      */
@@ -182,6 +234,13 @@ public final class Math {
      * <p>The computed result must be within 1 ulp of the exact result.
      * Results must be semi-monotonic.
      *
+     * <p>
+     *  返回值的反正弦值;返回的角度在-π/ 2到π/ 2范围内。
+     * 特殊情况：<ul> <li>如果参数是NaN或其绝对值大于1,则结果为NaN <li>如果参数为零,则结果为具有与参数相同符号的零</ul>。
+     * 
+     * <p>计算结果必须在精确结果的1 ulp之内结果必须是半单调的
+     * 
+     * 
      * @param   a   the value whose arc sine is to be returned.
      * @return  the arc sine of the argument.
      */
@@ -198,6 +257,12 @@ public final class Math {
      * <p>The computed result must be within 1 ulp of the exact result.
      * Results must be semi-monotonic.
      *
+     * <p>
+     *  返回值的反余弦值;返回的角度在范围00到特殊情况：<ul> <li>如果参数是NaN或其绝对值大于1,则结果是NaN </ul>
+     * 
+     *  <p>计算结果必须在精确结果的1 ulp之内结果必须是半单调的
+     * 
+     * 
      * @param   a   the value whose arc cosine is to be returned.
      * @return  the arc cosine of the argument.
      */
@@ -215,6 +280,12 @@ public final class Math {
      * <p>The computed result must be within 1 ulp of the exact result.
      * Results must be semi-monotonic.
      *
+     * <p>
+     *  返回值的反正切值;返回的角度在-π/ 2到π/ 2范围内。特殊情况：<ul> <li>如果参数是NaN,则结果是NaN < li>如果参数为零,则结果为与参数</ul>具有相同符号的零
+     * 
+     *  <p>计算结果必须在精确结果的1 ulp之内结果必须是半单调的
+     * 
+     * 
      * @param   a   the value whose arc tangent is to be returned.
      * @return  the arc tangent of the argument.
      */
@@ -227,6 +298,10 @@ public final class Math {
      * equivalent angle measured in radians.  The conversion from
      * degrees to radians is generally inexact.
      *
+     * <p>
+     * 将以度为单位测量的角度转换为以弧度为单位的近似等效角度。从度到弧度的转换通常不准确
+     * 
+     * 
      * @param   angdeg   an angle, in degrees
      * @return  the measurement of the angle {@code angdeg}
      *          in radians.
@@ -243,6 +318,10 @@ public final class Math {
      * <i>not</i> expect {@code cos(toRadians(90.0))} to exactly
      * equal {@code 0.0}.
      *
+     * <p>
+     *  将以弧度测量的角度转换为以度为单位测量的近似等效角度。从弧度到度的转换通常不精确;用户应该</i>不要{@code cos(toRadians(900))}到{@code 00}
+     * 
+     * 
      * @param   angrad   an angle, in radians
      * @return  the measurement of the angle {@code angrad}
      *          in degrees.
@@ -264,6 +343,13 @@ public final class Math {
      * <p>The computed result must be within 1 ulp of the exact result.
      * Results must be semi-monotonic.
      *
+     * <p>
+     *  返回欧拉数</i>升至{@code double}值的大小特殊情况：<ul> <li>如果参数为NaN,则结果为NaN <li>如果参数为正无穷大,则结果为正无穷大<li>如果参数为负无穷大,则结果为
+     * 正零</ul>。
+     * 
+     * <p>计算结果必须在精确结果的1 ulp之内结果必须是半单调的
+     * 
+     * 
      * @param   a   the exponent to raise <i>e</i> to.
      * @return  the value <i>e</i><sup>{@code a}</sup>,
      *          where <i>e</i> is the base of the natural logarithms.
@@ -285,6 +371,13 @@ public final class Math {
      * <p>The computed result must be within 1 ulp of the exact result.
      * Results must be semi-monotonic.
      *
+     * <p>
+     *  返回{@code double}值的自然对数(base e e)特殊情况：<ul> <li>如果参数为NaN或小于零,则结果为NaN <li>如果参数是正无穷大,则结果是正无穷大<li>如果参数是正零
+     * 或负零,则结果是负无穷大</ul>。
+     * 
+     *  <p>计算结果必须在精确结果的1 ulp之内结果必须是半单调的
+     * 
+     * 
      * @param   a   a value
      * @return  the value ln&nbsp;{@code a}, the natural logarithm of
      *          {@code a}.
@@ -310,6 +403,16 @@ public final class Math {
      * <p>The computed result must be within 1 ulp of the exact result.
      * Results must be semi-monotonic.
      *
+     * <p>
+     *  返回{@code double}值的十进制对数特殊情况：
+     * 
+     * <ul> <li>如果参数为NaN或小于零,则结果为NaN <li>如果参数为正无穷大,则结果为正无穷大<li>如果参数为正零或负零,那么结果是负无穷大<li>如果自变量等于整数<n> n </i>的1
+     * 0 <sup> n </sup>,则结果是<n> </i>。
+     * </ul>
+     * 
+     *  <p>计算结果必须在精确结果的1 ulp之内结果必须是半单调的
+     * 
+     * 
      * @param   a   a value
      * @return  the base 10 logarithm of  {@code a}.
      * @since 1.5
@@ -331,6 +434,12 @@ public final class Math {
      * Otherwise, the result is the {@code double} value closest to
      * the true mathematical square root of the argument value.
      *
+     * <p>
+     * 返回{@code double}值的正确舍入的正平方根特殊情况：<ul> <li>如果参数为NaN或小于零,则结果为NaN <li>如果参数为正无穷大,结果为正无穷大<li>如果参数为正零或负零,则结果
+     * 与参数</ul>相同。
+     * 否则,结果是最接近真实数学平方根的{@code double}值的参数值。
+     * 
+     * 
      * @param   a   a value.
      * @return  the positive square root of {@code a}.
      *          If the argument is NaN or less than zero, the result is NaN.
@@ -366,6 +475,24 @@ public final class Math {
      *
      * <p>The computed result must be within 1 ulp of the exact result.
      *
+     * <p>
+     *  返回{@code double}值的立方根。对于正有限{@code x},{@code cbrt(-x)== -cbrt(x)};也就是说,负值的立方根是该值大小的立方根的负数
+     * 
+     *  特殊情况：
+     * 
+     * <ul>
+     * 
+     *  <li>如果参数为NaN,则结果为NaN
+     * 
+     * <li>如果参数是无限的,则结果是与参数具有相同符号的无穷大
+     * 
+     *  <li>如果参数为零,则结果是与参数具有相同符号的零
+     * 
+     * </ul>
+     * 
+     *  <p>计算结果必须在精确结果的1 ulp内
+     * 
+     * 
      * @param   a   a value.
      * @return  the cube root of {@code a}.
      * @since 1.5
@@ -391,6 +518,13 @@ public final class Math {
      * <li>If the first argument is finite and the second argument is
      * infinite, then the result is the same as the first argument.</ul>
      *
+     * <p>
+     * 根据IEEE 754标准规定的两个参数计算余数运算余数值在数学上等于<code> f1&nbsp;  - &nbsp; f2 </code>&times;&nbsp; <i> n </i>,其中<i> 
+     * n </i>是最接近商{@code f1 / f2}的精确数学值的数学整数,如果两个数学整数同等接近{@code f1 / f2},则<i> n </i>是偶数的整数如果余数为零,其符号与第一个参数的符
+     * 号相同特殊情况：<ul> <li>如果任一参数为NaN,或第一个参数为无穷大,或者第二个参数是正零或负零,则结果是NaN <li>如果第一个参数是有限的,第二个参数是无穷大,则结果与第一个参数相同</ul>
+     * 。
+     * 
+     * 
      * @param   f1   the dividend.
      * @param   f2   the divisor.
      * @return  the remainder when {@code f1} is divided by
@@ -414,6 +548,13 @@ public final class Math {
      * value of {@code -Math.floor(-x)}.
      *
      *
+     * <p>
+     * 返回大于或等于参数的最小(最接近负无穷大)的{@code double}值,等于数学整数特殊情况：<ul> <li>如果参数值已等于数学整数,则结果与参数<li>相同。
+     * 如果参数为NaN或无穷大或正零或负零,则结果与参数<li>相同如果参数值小于零,但大于-10,则结果为负零</ul>请注意,{@code Mathceil(x)}的值正是{@code -Mathfloor(-x)}
+     * 的值。
+     * 返回大于或等于参数的最小(最接近负无穷大)的{@code double}值,等于数学整数特殊情况：<ul> <li>如果参数值已等于数学整数,则结果与参数<li>相同。
+     * 
+     * 
      * @param   a   a value.
      * @return  the smallest (closest to negative infinity)
      *          floating-point value that is greater than or equal to
@@ -433,6 +574,11 @@ public final class Math {
      * positive zero or negative zero, then the result is the same as
      * the argument.</ul>
      *
+     * <p>
+     * 返回最小(最接近正无穷大){@code double}值,小于或等于参数,等于数学整数特殊情况：<ul> <li>如果参数值已等于数学整数,则结果与参数<li>相同。
+     * 如果参数为NaN或无穷大或正零或负零,则结果与参数</ul>相同。
+     * 
+     * 
      * @param   a   a value.
      * @return  the largest (closest to positive infinity)
      *          floating-point value that less than or equal to the argument
@@ -453,6 +599,12 @@ public final class Math {
      * <li>If the argument is NaN or an infinity or positive zero or negative
      * zero, then the result is the same as the argument.</ul>
      *
+     * <p>
+     * 返回值最接近参数并等于数学整数的{@code double}值如果两个{@code double}值是数学整数,它们是相等的,结果是整数值,即使是特殊情况：<ul> <li>如果参数值已经等于数学整数,
+     * 则结果与参数<li>相同。
+     * 如果参数为NaN或无穷大或正零或负零,则结果为与参数</ul>相同。
+     * 
+     * 
      * @param   a   a {@code double} value.
      * @return  the closest floating-point value to {@code a} that is
      *          equal to a mathematical integer.
@@ -506,6 +658,21 @@ public final class Math {
      * <p>The computed result must be within 2 ulps of the exact result.
      * Results must be semi-monotonic.
      *
+     * <p>
+     * 返回从直角坐标({@code x},{@ code y})到极坐标(r,&lt; theta&lt; / i&gt;)的转换的角度θ方法通过计算在-πpi到p i -i范围内的{@code y / x}
+     * 的反正切来计算相位θ。
+     * 特殊情况： <ul> <li>如果任一参数是NaN,则结果是NaN <li>如果第一个参数是正零,第二个参数是正的,或者第一个参数是正数和有限,第二个参数是正无穷大,则结果为正零<li>如果第一个参数为
+     * 负零,第二个参数为正,或者第一个参数为负数和有限,第二个参数为正无穷大,则结果为负零<li>如果第一个参数是正零,第二个参数是负数,或者第一个参数是正数和有限,第二个参数是负无穷大,则结果是最接近<i>
+     *  pi的{@code double} </i> <li>如果第一个参数为负零,第二个参数为负,或者第一个参数为负和有限,第二个参数为负无穷大,则结果是最接近的{@code double} -  <i> 
+     * pi </i> <li>如果第一个参数为正,第二个参数为正零或负零,或第一个参数为正无穷大,第二个参数为有限,则结果为{码二}值最接近<i> pi </i> / 2<li>如果第一个参数为负,第二个参数
+     * 为正零或负零,或第一个参数为负无穷大,第二个参数为有限,则结果为最接近 -  <i的{@code double}值> pi </i> / 2 <li>如果两个参数都是正无穷大,则结果是最接近<i> pi
+     * 的{@code double}值</i>如果第一个参数为正无穷大,第二个参数是负无穷大,则结果是最接近3 * pi </i> / 4 <li>的{@code double}值。
+     * 如果第一个参数是负无穷大,无穷大,则结果是最接近 -  <i> pi </i> / 4 <li>的{@code double}值。
+     * 如果两个参数都是负无穷大,则结果是最接近 - 3 * pi / 4 </ul>。
+     * 
+     * <p>计算结果必须在精确结果的2 ulps内结果必须是半单调的
+     * 
+     * 
      * @param   y   the ordinate coordinate
      * @param   x   the abscissa coordinate
      * @return  the <i>theta</i> component of the point
@@ -636,6 +803,79 @@ public final class Math {
      * <p>The computed result must be within 1 ulp of the exact result.
      * Results must be semi-monotonic.
      *
+     * <p>
+     *  返回第一个参数的值增加到第二个参数的权力特殊情况：
+     * 
+     *  <ul> <li>如果第二个参数为正或负的零,则结果为10 <li>如果第二个参数为10,则结果与第一个参数相同<li>如果第二个参数为NaN ,那么结果是NaN <li>如果第一个参数是NaN,第二
+     * 个参数是非零,那么结果是NaN。
+     * 
+     *  <li>如果
+     * <ul>
+     *  <li>第一个参数的绝对值大于1,第二个参数为正无穷大,或<li>第一个参数的绝对值小于1,第二个参数为负无穷大,
+     * </ul>
+     *  那么结果是正无穷
+     * 
+     *  <li>如果
+     * <ul>
+     * <li>第一个参数的绝对值大于1,第二个参数为负无穷大,或<li>第一个参数的绝对值小于1,第二个参数为正无穷大,
+     * </ul>
+     *  那么结果是正零
+     * 
+     *  <li>如果第一个参数的绝对值等于1,第二个参数为无穷大,则结果为NaN
+     * 
+     *  <li>如果
+     * <ul>
+     *  <li>第一个参数是正零,第二个参数大于零,或<li>第一个参数是正无穷大,第二个参数小于零,
+     * </ul>
+     *  那么结果是正零
+     * 
+     *  <li>如果
+     * <ul>
+     *  <li>第一个参数是正零,第二个参数小于零,或<li>第一个参数是正无穷大,第二个参数大于零,
+     * </ul>
+     * 那么结果是正无穷
+     * 
+     *  <li>如果
+     * <ul>
+     *  <li>第一个参数为负零,第二个参数大于零,但不是有限奇整数,或<li>第一个参数为负无穷大,第二个参数小于零,但不是有限奇整数,
+     * </ul>
+     *  那么结果是正零
+     * 
+     *  <li>如果
+     * <ul>
+     *  <li>第一个参数是负零,第二个参数是正有限奇整数,或<li>第一个参数是负无穷大,第二个参数是负有限奇整数,
+     * </ul>
+     *  那么结果是负零
+     * 
+     *  <li>如果
+     * <ul>
+     * <li>第一个参数为负零,第二个参数小于零,但不是有限奇整数,或<li>第一个参数为负无穷大,第二个参数大于零,但不是有限奇整数,
+     * </ul>
+     *  那么结果是正无穷
+     * 
+     *  <li>如果
+     * <ul>
+     *  <li>第一个参数为负零,第二个参数为负有限奇整数,或<li>第一个参数为负无穷大,第二个参数为正有限奇整数,
+     * </ul>
+     *  那么结果是负无穷大
+     * 
+     *  <li>如果第一个参数是有限的并且小于零
+     * <ul>
+     *  <li>如果第二个参数是有限偶整数,则结果等于将第一个参数的绝对值提高到第二个参数的幂的结果
+     * 
+     * <li>如果第二个参数是有限奇整数,则结果等于将第一个参数的绝对值提高到第二个参数的幂的结果的负数
+     * 
+     *  <li>如果第二个参数是有限的而不是整数,则结果为NaN
+     * </ul>
+     * 
+     *  <li>如果两个参数都是整数,则结果完全等于将第一个参数提升为第二个参数的幂的数学结果,如果该结果实际上可以完全表示为{@code double} value < ul>
+     * 
+     * <p>(在前面的描述中,当且仅当浮点值是有限的并且方法的固定点{@link#ceil ceil}或等效地,固定点的浮点值被认为是整数方法{@link #floor floor}当且仅当将方法应用于值的结
+     * 果等于该值时,值是单参数方法的固定点)。
+     * 
+     *  <p>计算结果必须在精确结果的1 ulp之内结果必须是半单调的
+     * 
+     * 
      * @param   a   the base.
      * @param   b   the exponent.
      * @return  the value {@code a}<sup>{@code b}</sup>.
@@ -658,6 +898,14 @@ public final class Math {
      * equal to the value of {@code Integer.MAX_VALUE}, the result is
      * equal to the value of {@code Integer.MAX_VALUE}.</ul>
      *
+     * <p>
+     *  返回最接近参数的{@code int},连接四舍五入到正无穷大
+     * 
+     * <p>
+     * 特殊情况：<ul> <li>如果参数为NaN,则结果为0 <li>如果参数为负无穷大或小于或等于{@code IntegerMIN_VALUE}的值的任何值, {@code IntegerMIN_VALUE}
+     * 的值<li>如果参数为正无穷大或大于或等于{@code IntegerMAX_VALUE}的值的任何值,则结果等于{@code IntegerMAX_VALUE}的值</ul >。
+     * 
+     * 
      * @param   a   a floating-point value to be rounded to an integer.
      * @return  the value of the argument rounded to the nearest
      *          {@code int} value.
@@ -706,6 +954,13 @@ public final class Math {
      * equal to the value of {@code Long.MAX_VALUE}, the result is
      * equal to the value of {@code Long.MAX_VALUE}.</ul>
      *
+     * <p>
+     *  返回最接近参数的{@code long},其中连接四舍五入到正无穷大
+     * 
+     * <p>特殊情况：<ul> <li>如果参数是NaN,则结果为0 <li>如果参数为负无穷大或小于或等于{@code LongMIN_VALUE}的值的任何值,等于{@code LongMIN_VALUE}
+     * 的值<li>如果参数是正无穷大或大于或等于{@code LongMAX_VALUE}的值的任何值,则结果等于{@code LongMAX_VALUE}的值</ul>。
+     * 
+     * 
      * @param   a   a floating-point value to be rounded to a
      *          {@code long}.
      * @return  the value of the argument rounded to the nearest
@@ -765,6 +1020,18 @@ public final class Math {
      * pseudorandom numbers at a great rate, it may reduce contention
      * for each thread to have its own pseudorandom-number generator.
      *
+     * <p>
+     *  返回带有正号,大于或等于{@code 00}且小于{@code 10}的{@code double}值返回值是从该范围(大约)均匀分布的伪随机选择的
+     * 
+     *  <p>当这个方法被第一次调用时,它创建一个新的伪随机数生成器,就像通过表达式
+     * 
+     * <blockquote> {@ code new javautilRandom()} </blockquote>
+     * 
+     *  这个新的伪随机数发生器此后用于对该方法的所有调用,并且在任何其他地方不使用
+     * 
+     *  <p>此方法已正确同步以允许由多个线程正确使用。但是,如果许多线程需要以较高的速率生成伪随机数,则可以减少每个线程的争用以具有其自己的伪随机数生成器
+     * 
+     * 
      * @return  a pseudorandom {@code double} greater than or equal
      * to {@code 0.0} and less than {@code 1.0}.
      * @see Random#nextDouble()
@@ -777,6 +1044,10 @@ public final class Math {
      * Returns the sum of its arguments,
      * throwing an exception if the result overflows an {@code int}.
      *
+     * <p>
+     *  返回其参数的总和,如果结果溢出{@code int}则抛出异常,
+     * 
+     * 
      * @param x the first value
      * @param y the second value
      * @return the result
@@ -796,6 +1067,10 @@ public final class Math {
      * Returns the sum of its arguments,
      * throwing an exception if the result overflows a {@code long}.
      *
+     * <p>
+     *  返回其参数的总和,如果结果溢出{@code long}则抛出异常,
+     * 
+     * 
      * @param x the first value
      * @param y the second value
      * @return the result
@@ -815,6 +1090,10 @@ public final class Math {
      * Returns the difference of the arguments,
      * throwing an exception if the result overflows an {@code int}.
      *
+     * <p>
+     *  返回参数的差异,如果结果溢出{@code int}则抛出异常,
+     * 
+     * 
      * @param x the first value
      * @param y the second value to subtract from the first
      * @return the result
@@ -835,6 +1114,10 @@ public final class Math {
      * Returns the difference of the arguments,
      * throwing an exception if the result overflows a {@code long}.
      *
+     * <p>
+     * 返回参数的差异,如果结果溢出{@code long}则抛出异常,
+     * 
+     * 
      * @param x the first value
      * @param y the second value to subtract from the first
      * @return the result
@@ -855,6 +1138,10 @@ public final class Math {
      * Returns the product of the arguments,
      * throwing an exception if the result overflows an {@code int}.
      *
+     * <p>
+     *  返回参数的乘积,如果结果溢出{@code int}则抛出异常,
+     * 
+     * 
      * @param x the first value
      * @param y the second value
      * @return the result
@@ -873,6 +1160,10 @@ public final class Math {
      * Returns the product of the arguments,
      * throwing an exception if the result overflows a {@code long}.
      *
+     * <p>
+     *  返回参数的乘积,如果结果溢出{@code long}则抛出异常,
+     * 
+     * 
      * @param x the first value
      * @param y the second value
      * @return the result
@@ -899,6 +1190,10 @@ public final class Math {
      * Returns the argument incremented by one, throwing an exception if the
      * result overflows an {@code int}.
      *
+     * <p>
+     *  返回参数加1,如果结果溢出{@code int}则抛出异常,
+     * 
+     * 
      * @param a the value to increment
      * @return the result
      * @throws ArithmeticException if the result overflows an int
@@ -916,6 +1211,10 @@ public final class Math {
      * Returns the argument incremented by one, throwing an exception if the
      * result overflows a {@code long}.
      *
+     * <p>
+     *  返回参数加1,如果结果溢出{@code long}则抛出异常,
+     * 
+     * 
      * @param a the value to increment
      * @return the result
      * @throws ArithmeticException if the result overflows a long
@@ -933,6 +1232,10 @@ public final class Math {
      * Returns the argument decremented by one, throwing an exception if the
      * result overflows an {@code int}.
      *
+     * <p>
+     *  返回参数递减1,抛出一个异常,如果结果溢出{@code int}
+     * 
+     * 
      * @param a the value to decrement
      * @return the result
      * @throws ArithmeticException if the result overflows an int
@@ -950,6 +1253,10 @@ public final class Math {
      * Returns the argument decremented by one, throwing an exception if the
      * result overflows a {@code long}.
      *
+     * <p>
+     *  返回参数递减1,如果结果溢出{@code long}则抛出异常,
+     * 
+     * 
      * @param a the value to decrement
      * @return the result
      * @throws ArithmeticException if the result overflows a long
@@ -967,6 +1274,10 @@ public final class Math {
      * Returns the negation of the argument, throwing an exception if the
      * result overflows an {@code int}.
      *
+     * <p>
+     * 返回参数的否定,如果结果溢出{@code int}则抛出异常,
+     * 
+     * 
      * @param a the value to negate
      * @return the result
      * @throws ArithmeticException if the result overflows an int
@@ -984,6 +1295,10 @@ public final class Math {
      * Returns the negation of the argument, throwing an exception if the
      * result overflows a {@code long}.
      *
+     * <p>
+     *  返回参数的否定,如果结果溢出{@code long}则抛出异常,
+     * 
+     * 
      * @param a the value to negate
      * @return the result
      * @throws ArithmeticException if the result overflows a long
@@ -1001,6 +1316,10 @@ public final class Math {
      * Returns the value of the {@code long} argument;
      * throwing an exception if the value overflows an {@code int}.
      *
+     * <p>
+     *  返回{@code long}参数的值;如果值溢出{@code int}则抛出异常,
+     * 
+     * 
      * @param value the long value
      * @return the argument as an int
      * @throws ArithmeticException if the {@code argument} overflows an int
@@ -1039,6 +1358,20 @@ public final class Math {
      * </ul>
      * <p>
      *
+     * <p>
+     *  返回小于或等于代数商的最大(最接近正无穷大)的{@code int}值有一种特殊情况,如果被除数是{@linkplain Integer#MIN_VALUE IntegerMIN_VALUE},除数是
+     * {@代码-1},则发生整数溢出,结果等于{@code IntegerMIN_VALUE}。
+     * <p>
+     * 正整数除法在舍入到零舍入模式(截断)下操作此操作相反在向无穷大(底部)舍入模式的舍入操作下。当精确结果为负时,底舍入模式给出与截断不同的结果
+     * <ul>
+     *  <li>如果参数的符号相同,则{@code floorDiv}和{@code /}运算符的结果相同<br>例如,{@code floorDiv(4,3)== 1 }和{@code(4/3)== 1} 
+     * </li> <li>如果参数的符号不同,商为负,{@code floorDiv}返回小于或等于商和{@code /}运算符返回最接近零的整数<br>例如,{@code floorDiv(-4,3)== -2}
+     * ,而{@code(-4 / 3)== -1 }}。
+     * </li>
+     * </ul>
+     * <p>
+     * 
+     * 
      * @param x the dividend
      * @param y the divisor
      * @return the largest (closest to positive infinity)
@@ -1073,6 +1406,15 @@ public final class Math {
      * <p>
      * For examples, see {@link #floorDiv(int, int)}.
      *
+     * <p>
+     * 返回小于或等于代数商的最大(最接近正无穷大){@code long}值有一种特殊情况,如果被除数是{@linkplain Long#MIN_VALUE LongMIN_VALUE},除数是{@代码-1}
+     * ,则发生整数溢出,结果等于{@code LongMIN_VALUE}。
+     * <p>
+     *  正整数除法在舍入到零舍入模式(截断)下操作此操作相反在向无穷大(底部)舍入模式的舍入操作下。当精确结果为负时,底舍入模式给出与截断不同的结果
+     * <p>
+     *  例如,参见{@link #floorDiv(int,int)}
+     * 
+     * 
      * @param x the dividend
      * @param y the divisor
      * @return the largest (closest to positive infinity)
@@ -1128,6 +1470,37 @@ public final class Math {
      * If the signs of arguments are unknown and a positive modulus
      * is needed it can be computed as {@code (floorMod(x, y) + abs(y)) % abs(y)}.
      *
+     * <p>
+     *  返回{@code int}参数的floor模数
+     * <p>
+     * 底模数是{@code x-(floorDiv(x,y)* y)},与除数{@code y}具有相同的符号,并且在{@code -abs(y)<r <+ abs(y)}
+     * 
+     * <p>
+     *  {@code floorDiv}和{@code floorMod}之间的关系是这样的：
+     * <ul>
+     *  <li> {@ code floorDiv(x,y)* y + floorMod(x,y)== x}
+     * </ul>
+     * <p>
+     *  {@code floorMod}和{@code％}运算符之间的值的差异是由于返回小于或等于商的整数的{@code floorDiv}和返回的{@code /}运算符之间的差异最接近零的整数
+     * <p>
+     *  例子：
+     * <ul>
+     *  <li>如果参数的符号相同,则{@code floorMod}和{@code％}运算符的结果相同<br>
+     * <ul>
+     *  <li> {@ code floorMod(4,3)== 1}; &nbsp;和{@code(4％3)== 1} </li>
+     * </ul>
+     * <li>如果参数的符号不同,则结果与{@code％}运算符<br>不同
+     * <ul>
+     *  <li> {@ code floorMod(+4,-3)== -2}; &nbsp;和{@code(+4％-3)== +1} </li> <li> {@ code floorMod(-4,+3)== +2}
+     * ; &nbsp;和{@code(-4％+3)== -1} </li> <li> {@ code floorMod(-4,-3)== -1}; &nbsp;和{@code(-4％-3)== -1} </li>
+     * 。
+     * </ul>
+     * </li>
+     * </ul>
+     * <p>
+     *  如果参数的符号是​​未知的并且需要正模数,则其可以被计算为{@code(floorMod(x,y)+ abs(y))％abs(y)}
+     * 
+     * 
      * @param x the dividend
      * @param y the divisor
      * @return the floor modulus {@code x - (floorDiv(x, y) * y)}
@@ -1155,6 +1528,20 @@ public final class Math {
      * <p>
      * For examples, see {@link #floorMod(int, int)}.
      *
+     * <p>
+     *  返回{@code long}参数的floor模数
+     * <p>
+     *  底模数是{@code x-(floorDiv(x,y)* y)},与除数{@code y}具有相同的符号,并且在{@code -abs(y)<r <+ abs(y)}
+     * 
+     * <p>
+     *  {@code floorDiv}和{@code floorMod}之间的关系是这样的：
+     * <ul>
+     * <li> {@ code floorDiv(x,y)* y + floorMod(x,y)== x}
+     * </ul>
+     * <p>
+     *  例如,参见{@link #floorMod(int,int)}
+     * 
+     * 
      * @param x the dividend
      * @param y the divisor
      * @return the floor modulus {@code x - (floorDiv(x, y) * y)}
@@ -1176,6 +1563,12 @@ public final class Math {
      * {@code int} value, the result is that same value, which is
      * negative.
      *
+     * <p>
+     *  返回{@code int}值的绝对值如果参数不是负数,则返回参数如果参数为负,则返回参数的否定
+     * 
+     *  <p>请注意,如果参数等于{@link Integer#MIN_VALUE}的值,即最可负的可表示{@code int}值,则结果是相同的值,即负数
+     * 
+     * 
      * @param   a   the argument whose absolute value is to be determined
      * @return  the absolute value of the argument.
      */
@@ -1193,6 +1586,12 @@ public final class Math {
      * {@code long} value, the result is that same value, which
      * is negative.
      *
+     * <p>
+     *  返回{@code long}值的绝对值如果参数不为负,则返回参数如果参数为负,则返回参数的否定
+     * 
+     * <p>请注意,如果参数等于{@link Long#MIN_VALUE}的值,即最可负的可表示{@code long}值,则结果是相同的值,即负数
+     * 
+     * 
      * @param   a   the argument whose absolute value is to be determined
      * @return  the absolute value of the argument.
      */
@@ -1212,6 +1611,12 @@ public final class Math {
      * In other words, the result is the same as the value of the expression:
      * <p>{@code Float.intBitsToFloat(0x7fffffff & Float.floatToIntBits(a))}
      *
+     * <p>
+     *  返回{@code float}值的绝对值如果参数不为负,则返回参数如果参数为负,则返回参数的否定特殊情况：<ul> <li>如果参数为正零或负零,结果为正零<li>如果参数是无穷大,结果是正无穷大<li>
+     * 如果参数是NaN,结果是NaN </ul>换句话说,结果是相同的作为表达式的值：<p> {@ code FloatintBitsToFloat(0x7fffffff&FloatfloatToIntBits(a))}
+     * 。
+     * 
+     * 
      * @param   a   the argument whose absolute value is to be determined
      * @return  the absolute value of the argument.
      */
@@ -1231,6 +1636,12 @@ public final class Math {
      * In other words, the result is the same as the value of the expression:
      * <p>{@code Double.longBitsToDouble((Double.doubleToLongBits(a)<<1)>>>1)}
      *
+     * <p>
+     * 返回{@code double}值的绝对值如果参数不为负,则返回参数如果参数为负,则返回参数的否定特殊情况：<ul> <li>如果参数为正零或负零,结果为正零<li>如果参数是无穷大,结果是正无穷大<li>
+     * 如果参数是NaN,结果是NaN </ul>换句话说,结果是相同的作为表达式的值：<p> {@ code DoublelongBitsToDouble((DoubledoubleToLongBits(a)<< 1)>>> 1)}
+     * 。
+     * 
+     * 
      * @param   a   the argument whose absolute value is to be determined
      * @return  the absolute value of the argument.
      */
@@ -1244,6 +1655,10 @@ public final class Math {
      * {@link Integer#MAX_VALUE}. If the arguments have the same value,
      * the result is that same value.
      *
+     * <p>
+     *  返回两个{@code int}值中较大的值。也就是说,结果是更接近{@link Integer#MAX_VALUE}的值的参数。如果参数具有相同的值,结果是相同的值
+     * 
+     * 
      * @param   a   an argument.
      * @param   b   another argument.
      * @return  the larger of {@code a} and {@code b}.
@@ -1258,6 +1673,10 @@ public final class Math {
      * {@link Long#MAX_VALUE}. If the arguments have the same value,
      * the result is that same value.
      *
+     * <p>
+     * 返回两个{@code long}值中较大的值。也就是说,结果是更接近{@link Long#MAX_VALUE}的值的参数。如果参数具有相同的值,结果是相同的值
+     * 
+     * 
      * @param   a   an argument.
      * @param   b   another argument.
      * @return  the larger of {@code a} and {@code b}.
@@ -1280,6 +1699,11 @@ public final class Math {
      * argument is positive zero and the other negative zero, the
      * result is positive zero.
      *
+     * <p>
+     *  返回两个{@code float}值中较大的值。也就是说,结果是更接近正无穷大的参数。如果参数具有相同的值,结果是相同的值。如果任一值为NaN,则结果为NaN。
+     * 与数值比较运算符,该方法认为负零严格小于正零如果一个参数是正零,另一个负零,结果是正零。
+     * 
+     * 
      * @param   a   an argument.
      * @param   b   another argument.
      * @return  the larger of {@code a} and {@code b}.
@@ -1306,6 +1730,11 @@ public final class Math {
      * argument is positive zero and the other negative zero, the
      * result is positive zero.
      *
+     * <p>
+     * 返回两个{@code double}值中的较大值。也就是说,结果是接近正无穷大的参数。如果参数具有相同的值,则结果是相同的值。如果任一值为NaN,则结果为NaN。
+     * 与数值比较运算符,该方法认为负零严格小于正零如果一个参数是正零,另一个负零,结果是正零。
+     * 
+     * 
      * @param   a   an argument.
      * @param   b   another argument.
      * @return  the larger of {@code a} and {@code b}.
@@ -1328,6 +1757,10 @@ public final class Math {
      * {@link Integer#MIN_VALUE}.  If the arguments have the same
      * value, the result is that same value.
      *
+     * <p>
+     *  返回两个{@code int}值中较小的值,即,参数值接近{@link Integer#MIN_VALUE}的值如果参数具有相同的值,结果是相同的值
+     * 
+     * 
      * @param   a   an argument.
      * @param   b   another argument.
      * @return  the smaller of {@code a} and {@code b}.
@@ -1342,6 +1775,10 @@ public final class Math {
      * {@link Long#MIN_VALUE}. If the arguments have the same
      * value, the result is that same value.
      *
+     * <p>
+     * 返回两个{@code long}值中较小的值。也就是说,结果是更接近{@link Long#MIN_VALUE}的值的参数。如果参数具有相同的值,结果是相同的值
+     * 
+     * 
      * @param   a   an argument.
      * @param   b   another argument.
      * @return  the smaller of {@code a} and {@code b}.
@@ -1360,6 +1797,11 @@ public final class Math {
      * one argument is positive zero and the other is negative zero,
      * the result is negative zero.
      *
+     * <p>
+     *  返回两个{@code float}值中较小的值。也就是说,结果是更接近负无穷大的值。如果参数具有相同的值,则结果是相同的值。如果任一值为NaN,则结果为NaN。
+     * 与数值比较运算符,该方法认为负零严格小于正零如果一个参数为正零,另一个为负零,则结果为负零。
+     * 
+     * 
      * @param   a   an argument.
      * @param   b   another argument.
      * @return  the smaller of {@code a} and {@code b}.
@@ -1386,6 +1828,11 @@ public final class Math {
      * argument is positive zero and the other is negative zero, the
      * result is negative zero.
      *
+     * <p>
+     * 返回两个{@code double}值中较小的值。也就是说,结果是更接近负无穷大的值。如果参数具有相同的值,则结果是相同的值。如果任一值为NaN,则结果为NaN。
+     * 与数值比较运算符,该方法认为负零严格小于正零如果一个参数为正零,另一个为负零,则结果为负零。
+     * 
+     * 
      * @param   a   an argument.
      * @param   b   another argument.
      * @return  the smaller of {@code a} and {@code b}.
@@ -1420,6 +1867,19 @@ public final class Math {
      * the result is equal to 2<sup>971</sup>.
      * </ul>
      *
+     * <p>
+     *  返回参数的ulp的大小。
+     * {@code double}值的最后一位的ulp单位是浮点值和下一个更大的{@code double}值之间的正距离注意,对于非NaNx x,<code> ulp( -  x </i>)== ulp(<x>
+     *  x </i>)</code>。
+     *  返回参数的ulp的大小。
+     * 
+     *  <p>特殊情况：
+     * <ul>
+     * <li>如果参数是NaN,那么结果是NaN <li>如果参数是正或负无穷大,则结果是正无穷大<li>如果参数为正或负零,则结果为{代码DoubleMIN_VALUE} <li>如果参数为&plusmn;
+     *  {@ code DoubleMAX_VALUE},则结果等于2 <sup> 971 </sup>。
+     * </ul>
+     * 
+     * 
      * @param d the floating-point value whose ulp is to be returned
      * @return the size of an ulp of the argument
      * @author Joseph D. Darcy
@@ -1471,6 +1931,17 @@ public final class Math {
      * the result is equal to 2<sup>104</sup>.
      * </ul>
      *
+     * <p>
+     *  返回参数ulp的大小。{@code float}值的最后一位的ulp单位是该浮点值和下一个较大的{@code float}值之间的正距离。
+     * 注意：对于非NaNx x,<code> ulp( -  x </i>)== ulp(<x> x </i>)</code>。
+     * 
+     *  <p>特殊情况：
+     * <ul>
+     * <li>如果参数是NaN,那么结果是NaN <li>如果参数是正或负无穷大,则结果是正无穷大<li>如果参数为正或负零,则结果为{代码FloatMIN_VALUE} <li>如果参数为&plusmn; 
+     * {@ code FloatMAX_VALUE},则结果等于2 <sup> 104 </sup>。
+     * </ul>
+     * 
+     * 
      * @param f the floating-point value whose ulp is to be returned
      * @return the size of an ulp of the argument
      * @author Joseph D. Darcy
@@ -1516,6 +1987,15 @@ public final class Math {
      *      result is the same as the argument.
      * </ul>
      *
+     * <p>
+     *  返回参数的signum函数;如果参数为零,则为零,如果参数大于零,则为10,如果参数小于零,则为-10
+     * 
+     *  <p>特殊情况：
+     * <ul>
+     *  <li>如果参数为NaN,则结果为NaN <li>如果参数为正零或负零,则结果与参数相同
+     * </ul>
+     * 
+     * 
      * @param d the floating-point value whose signum is to be returned
      * @return the signum function of the argument
      * @author Joseph D. Darcy
@@ -1537,6 +2017,15 @@ public final class Math {
      *      result is the same as the argument.
      * </ul>
      *
+     * <p>
+     * 返回参数的signum函数;如果参数为零,则为零,如果参数大于零,则为10f,如果参数小于零,则为-10f
+     * 
+     *  <p>特殊情况：
+     * <ul>
+     *  <li>如果参数为NaN,则结果为NaN <li>如果参数为正零或负零,则结果与参数相同
+     * </ul>
+     * 
+     * 
      * @param f the floating-point value whose signum is to be returned
      * @return the signum function of the argument
      * @author Joseph D. Darcy
@@ -1567,6 +2056,24 @@ public final class Math {
      *
      * <p>The computed result must be within 2.5 ulps of the exact result.
      *
+     * <p>
+     *  返回{@code double}值的双曲正弦值</x>的双曲正弦定义为(<e> x </sup>&lt; sup&gt; -x </sup> </i>)/ 2其中<i> e </i>是{@linkplain Math#E Euler's number}
+     * 。
+     * 
+     *  <p>特殊情况：
+     * <ul>
+     * 
+     *  <li>如果参数为NaN,则结果为NaN
+     * 
+     *  <li>如果参数是无限的,则结果是与参数具有相同符号的无穷大
+     * 
+     * <li>如果参数为零,则结果是与参数具有相同符号的零
+     * 
+     * </ul>
+     * 
+     *  <p>计算结果必须在精确结果的25 ulps内
+     * 
+     * 
      * @param   x The number whose hyperbolic sine is to be returned.
      * @return  The hyperbolic sine of {@code x}.
      * @since 1.5
@@ -1595,6 +2102,24 @@ public final class Math {
      *
      * <p>The computed result must be within 2.5 ulps of the exact result.
      *
+     * <p>
+     *  返回{@code double}值的双曲余弦值</x>的双曲余弦定义为(e <sup> x </sup>&nbsp; e <sup> -x </sup> </i>)/ 2其中<i> e </i>是{@linkplain Math#E Euler's number}
+     * 。
+     * 
+     *  <p>特殊情况：
+     * <ul>
+     * 
+     *  <li>如果参数为NaN,则结果为NaN
+     * 
+     *  <li>如果参数是无穷大,则结果是正无穷大
+     * 
+     *  <li>如果参数为零,则结果为{@code 10}
+     * 
+     * </ul>
+     * 
+     *  <p>计算结果必须在精确结果的25 ulps内
+     * 
+     * 
      * @param   x The number whose hyperbolic cosine is to be returned.
      * @return  The hyperbolic cosine of {@code x}.
      * @since 1.5
@@ -1635,6 +2160,30 @@ public final class Math {
      * of &plusmn;1, correctly signed &plusmn;{@code 1.0} should
      * be returned.
      *
+     * <p>
+     * 返回{@code double}值的双曲正切。
+     * <x>的双曲正切被定义为(<e> x </sup>&lt; sup&gt; -x </sup> </i>)/(<i> e <sup> x </sup>&nbsp; +&nbsp; e <sup> -x 
+     * </sup> </i>),换句话说, {@linkplain Math#sinh sinh(<i> x </i>)} / {@ linkplain Math#cosh cosh(<i> x </i>)}
+     * 注意,精确tanh的绝对值总是小于1。
+     * 返回{@code double}值的双曲正切。
+     * 
+     *  <p>特殊情况：
+     * <ul>
+     * 
+     *  <li>如果参数为NaN,则结果为NaN
+     * 
+     *  <li>如果参数为零,则结果是与参数具有相同符号的零
+     * 
+     *  <li>如果参数为正无穷大,则结果为{@code +10}
+     * 
+     *  <li>如果参数为负无穷大,则结果为{@code -10}
+     * 
+     * </ul>
+     * 
+     * <p>计算结果必须在精确结果的25 ulps之内。对于任何有限输入,{@code tanh}的结果必须具有小于或等于1的绝对值。
+     * 请注意,一旦tanh的精确结果在1 / 2的ulp限制值&plusmn; 1,正确签署&plusmn; {@ code 10}应该返回。
+     * 
+     * 
      * @param   x The number whose hyperbolic tangent is to be returned.
      * @return  The hyperbolic tangent of {@code x}.
      * @since 1.5
@@ -1662,6 +2211,21 @@ public final class Math {
      * result.  If one parameter is held constant, the results must be
      * semi-monotonic in the other parameter.
      *
+     * <p>
+     *  返回无中间溢出或下溢的sqrt(<i> x </i> <sup> 2 </sup>&nbsp; + <i> y </i> <sup>
+     * 
+     *  <p>特殊情况：
+     * <ul>
+     * 
+     *  <li>如果任一参数为无穷大,则结果为正无穷
+     * 
+     *  <li>如果任一参数是NaN,而且两个参数都是无限的,则结果是NaN
+     * 
+     * </ul>
+     * 
+     *  <p>计算结果必须在精确结果的1 ulp内。如果一个参数保持不变,则结果在其他参数中必须是半单调的
+     * 
+     * 
      * @param x a value
      * @param y a value
      * @return sqrt(<i>x</i><sup>2</sup>&nbsp;+<i>y</i><sup>2</sup>)
@@ -1701,6 +2265,26 @@ public final class Math {
      * ulp of the limit value -1, {@code -1.0} should be
      * returned.
      *
+     * <p>
+     * 返回<i> e </i> <sup> x </sup>&nbsp; -1请注意,对于<i> x </i>接近0的值,{@code expm1(x)}& ; + 1更接近<i> e </i> <sup> 
+     * x </sup>的真实结果比{@code exp(x)}。
+     * 
+     *  <p>特殊情况：
+     * <ul>
+     *  <li>如果参数为NaN,则结果为NaN
+     * 
+     *  <li>如果参数为正无穷大,则结果为正无穷
+     * 
+     *  <li>如果参数为负无穷大,则结果为-10
+     * 
+     *  <li>如果参数为零,则结果是与参数具有相同符号的零
+     * 
+     * </ul>
+     * 
+     * <p>计算结果必须在精确结果的1 ulp内结果必须是半单调的任何有限输入的{@code expm1}的结果必须大于或等于{@code -10}请注意,一旦1的精确结果在限制值-1的1/2 ulp范围内,
+     * {@code -10}应该为<i> </i> </sup>回。
+     * 
+     * 
      * @param   x   the exponent to raise <i>e</i> to in the computation of
      *              <i>e</i><sup>{@code x}</sup>&nbsp;-1.
      * @return  the value <i>e</i><sup>{@code x}</sup>&nbsp;-&nbsp;1.
@@ -1738,6 +2322,26 @@ public final class Math {
      * <p>The computed result must be within 1 ulp of the exact result.
      * Results must be semi-monotonic.
      *
+     * <p>
+     *  返回参数和的和的自然对数1注意,对于小值{@code x},{@code log1p(x)}的结果更接近ln(1 + {@code x })比{@code log(10 + x)}的浮点计算
+     * 
+     *  <p>特殊情况：
+     * 
+     * <ul>
+     * 
+     *  <li>如果参数为NaN或小于-1,则结果为NaN
+     * 
+     *  <li>如果参数为正无穷大,则结果为正无穷
+     * 
+     * <li>如果参数为负数,则结果为负无穷大
+     * 
+     *  <li>如果参数为零,则结果是与参数具有相同符号的零
+     * 
+     * </ul>
+     * 
+     *  <p>计算结果必须在精确结果的1 ulp之内结果必须是半单调的
+     * 
+     * 
      * @param   x   a value
      * @return the value ln({@code x}&nbsp;+&nbsp;1), the natural
      * log of {@code x}&nbsp;+&nbsp;1
@@ -1756,6 +2360,11 @@ public final class Math {
      * permitted to treat some NaN arguments as positive and other NaN
      * arguments as negative to allow greater performance.
      *
+     * <p>
+     *  返回带有第二个浮点数参数的符号的第一个浮点参数请注意,与{@link StrictMath#copySign(double,double)StrictMathcopySign}方法不同,此方法不需要N
+     * aN {@code sign}参数处理为正值;实现允许将一些NaN参数视为正和其他NaN参数视为负以允许更高的性能。
+     * 
+     * 
      * @param magnitude  the parameter providing the magnitude of the result
      * @param sign   the parameter providing the sign of the result
      * @return a value with the magnitude of {@code magnitude}
@@ -1779,6 +2388,11 @@ public final class Math {
      * permitted to treat some NaN arguments as positive and other NaN
      * arguments as negative to allow greater performance.
      *
+     * <p>
+     * 返回带有第二个浮点数参数的符号的第一个浮点数参数请注意,与{@link StrictMath#copySign(float,float)StrictMathcopySign}方法不同,此方法不需要NaN
+     *  {@code sign}参数处理为正值;实现允许将一些NaN参数视为正和其他NaN参数视为负以允许更高的性能。
+     * 
+     * 
      * @param magnitude  the parameter providing the magnitude of the result
      * @param sign   the parameter providing the sign of the result
      * @return a value with the magnitude of {@code magnitude}
@@ -1803,6 +2417,13 @@ public final class Math {
      * <li>If the argument is zero or subnormal, then the result is
      * {@link Float#MIN_EXPONENT} -1.
      * </ul>
+     * <p>
+     *  返回在{@code float}表示中使用的无偏指数特殊情况：
+     * 
+     * <ul>
+     *  <li>如果参数为NaN或无限,则结果为{@link Float#MAX_EXPONENT} + 1 <li>如果参数为零或子正常,则结果为{@link Float#MIN_EXPONENT} -1。
+     * </ul>
+     * 
      * @param f a {@code float} value
      * @return the unbiased exponent of the argument
      * @since 1.6
@@ -1812,6 +2433,9 @@ public final class Math {
          * Bitwise convert f to integer, mask out exponent bits, shift
          * to the right and then subtract out float's bias adjust to
          * get true exponent value
+         * <p>
+         * 按位将f转换为整数,屏蔽掉指数位,向右移位,然后减去float的偏移调整以获得真正的指数值
+         * 
          */
         return ((Float.floatToRawIntBits(f) & FloatConsts.EXP_BIT_MASK) >>
                 (FloatConsts.SIGNIFICAND_WIDTH - 1)) - FloatConsts.EXP_BIAS;
@@ -1827,6 +2451,14 @@ public final class Math {
      * <li>If the argument is zero or subnormal, then the result is
      * {@link Double#MIN_EXPONENT} -1.
      * </ul>
+     * <p>
+     *  返回在{@code double}特殊情况下的表示中使用的无偏指数：
+     * 
+     * <ul>
+     *  <li>如果参数为NaN或无限,则结果为{@link Double#MAX_EXPONENT} + 1 <li>如果参数为零或次正常,则结果为{@link Double#MIN_EXPONENT} -
+     * 1。
+     * </ul>
+     * 
      * @param d a {@code double} value
      * @return the unbiased exponent of the argument
      * @since 1.6
@@ -1836,6 +2468,9 @@ public final class Math {
          * Bitwise convert d to long, mask out exponent bits, shift
          * to the right and then subtract out double's bias adjust to
          * get true exponent value.
+         * <p>
+         *  按位将d转换为long,屏蔽掉指数位,向右移位,然后减去double的偏置调整以获得真正的指数值
+         * 
          */
         return (int)(((Double.doubleToRawLongBits(d) & DoubleConsts.EXP_BIT_MASK) >>
                       (DoubleConsts.SIGNIFICAND_WIDTH - 1)) - DoubleConsts.EXP_BIAS);
@@ -1873,6 +2508,27 @@ public final class Math {
      * infinity with same sign as {@code start} is returned.
      * </ul>
      *
+     * <p>
+     *  返回第二个参数方向上与第一个参数相邻的浮点数。如果两个参数都相等,则返回第二个参数
+     * 
+     * <p>
+     *  特殊情况：
+     * <ul>
+     * <li>如果任一参数是NaN,则返回NaN
+     * 
+     *  <li>如果两个参数都是带符号的零,{@code direction}会不变地返回(如果参数比较为相等则返回第二个参数的要求)
+     * 
+     *  <li>如果{@code start}是&plusmn; {@ link Double#MIN_VALUE}和{@code direction}有一个值,结果应该有一个较小的幅度,然后一个零与{@code start }
+     * 返回。
+     * 
+     *  <li>如果{@code start}是无限的,而且{@code direction}有一个值,以使结果的幅度较小,则返回与{@code start}相同符号的{@link Double#MAX_VALUE}
+     * 。
+     * 
+     * <li>如果{@code start}等于&plusmn; {@link Double#MAX_VALUE}和{@code direction}具有一个值,以便结果应具有较大的幅度,返回与{@code start}
+     * 相同符号的无穷大。
+     * </ul>
+     * 
+     * 
      * @param start  starting floating-point value
      * @param direction value indicating which of
      * {@code start}'s neighbors or {@code start} should
@@ -1891,6 +2547,14 @@ public final class Math {
          * nextAfter(-infinity, -infinity)  == -infinity
          *
          * are naturally handled without any additional testing
+         * <p>
+         *  案例：
+         * 
+         *  nextAfter(+ infinity,0)== MAX_VALUE nextAfter(+ infinity,+ infinity)== + infinity nextAfter(-infinit
+         * y,0)== -MAX_VALUE nextAfter(-infinity,-infinity)== -infinity。
+         * 
+         *  自然处理而没有任何额外的测试
+         * 
          */
 
         // First check for NaN values
@@ -1915,6 +2579,10 @@ public final class Math {
              * is less than zero, the adjustment to the representation
              * is in the opposite direction than would be expected at
              * first .
+             * <p>
+             * IEEE 754浮点数按照字典顺序排列,如果作为有符号的整数处理由于Java的整数是二的补码,增加"逻辑负浮点值的二进制补码表示*递减*有符号的幅度表示因此,当整数浮点值的表示小于零,对表示的调整与首先
+             * 预期的方向相反。
+             * 
              */
             if (direction > start) { // Calculate next greater value
                 transducer = transducer + (transducer >= 0L ? 1L:-1L);
@@ -1932,6 +2600,11 @@ public final class Math {
                      * positive) to the smallest negative
                      * signed magnitude value must be done
                      * explicitly.
+                     * <p>
+                     *  transducer == 0,结果为-MIN_VALUE
+                     * 
+                     *  必须明确地完成从零(隐含正)到最小负符号幅度值的转换
+                     * 
                      */
                     else
                         transducer = DoubleConsts.SIGN_BIT_MASK | 1L;
@@ -1972,6 +2645,27 @@ public final class Math {
      * infinity with same sign as {@code start} is returned.
      * </ul>
      *
+     * <p>
+     * 返回在第二个参数方向上与第一个参数相邻的浮点数如果两个参数都相等,则返回等于第二个参数的值
+     * 
+     * <p>
+     *  特殊情况：
+     * <ul>
+     *  <li>如果任一参数是NaN,则返回NaN
+     * 
+     *  <li>如果两个参数都是带符号的零,则会返回等效于{@code direction}的值
+     * 
+     *  <li>如果{@code start}是&plusmn; {@ link Float#MIN_VALUE}和{@code direction}有一个值,结果应该有一个较小的幅度,然后一个零与{@code start }
+     * 返回。
+     * 
+     *  <li>如果{@code start}是无限的,而且{@code direction}有一个值,以使结果的幅度较小,则返回与{@code start}相同符号的{@link Float#MAX_VALUE}
+     * 。
+     * 
+     * <li>如果{@code start}等于&plusmn; {@link Float#MAX_VALUE}和{@code direction}具有一个值,使得结果应具有更大的幅度,返回与{@code start}
+     * 具有相同符号的无穷大。
+     * </ul>
+     * 
+     * 
      * @param start  starting floating-point value
      * @param direction value indicating which of
      * {@code start}'s neighbors or {@code start} should
@@ -1990,6 +2684,14 @@ public final class Math {
          * nextAfter(-infinity, -infinity)  == -infinity
          *
          * are naturally handled without any additional testing
+         * <p>
+         *  案例：
+         * 
+         *  nextAfter(+ infinity,0)== MAX_VALUE nextAfter(+ infinity,+ infinity)== + infinity nextAfter(-infinit
+         * y,0)== -MAX_VALUE nextAfter(-infinity,-infinity)== -infinity。
+         * 
+         *  自然处理而没有任何额外的测试
+         * 
          */
 
         // First check for NaN values
@@ -2014,6 +2716,10 @@ public final class Math {
              * is less than zero, the adjustment to the representation
              * is in the opposite direction than would be expected at
              * first.
+             * <p>
+             * IEEE 754浮点数按照字典顺序排列,如果作为有符号的整数处理由于Java的整数是二的补码,增加"逻辑负浮点值的二进制补码表示*递减*有符号的幅度表示因此,当整数浮点值的表示小于零,对表示的调整与首先
+             * 预期的方向相反。
+             * 
              */
             if (direction > start) {// Calculate next greater value
                 transducer = transducer + (transducer >= 0 ? 1:-1);
@@ -2031,6 +2737,11 @@ public final class Math {
                      * positive) to the smallest negative
                      * signed magnitude value must be done
                      * explicitly.
+                     * <p>
+                     *  transducer == 0,结果为-MIN_VALUE
+                     * 
+                     *  必须明确地完成从零(隐含正)到最小负符号幅度值的转换
+                     * 
                      */
                     else
                         transducer = FloatConsts.SIGN_BIT_MASK | 1;
@@ -2060,6 +2771,21 @@ public final class Math {
      *
      * </ul>
      *
+     * <p>
+     * 返回与正无穷大方向相邻的{@code d}的浮点值此方法在语义上等同于{@code nextAfter(d,DoublePOSITIVE_INFINITY)};但是,{@code nextUp}实施的运
+     * 行速度可能比其等效的{@code nextAfter}调用快。
+     * 
+     *  <p>特殊情况：
+     * <ul>
+     *  <li>如果参数为NaN,则结果为NaN
+     * 
+     *  <li>如果参数为正无穷大,则结果为正无穷
+     * 
+     *  <li>如果参数为零,则结果为{@link Double#MIN_VALUE}
+     * 
+     * </ul>
+     * 
+     * 
      * @param d starting floating-point value
      * @return The adjacent floating-point value closer to positive
      * infinity.
@@ -2095,6 +2821,21 @@ public final class Math {
      *
      * </ul>
      *
+     * <p>
+     *  返回在正无穷大方向上与{@code f}相邻的浮点值此方法在语义上等同于{@code nextAfter(f,FloatPOSITIVE_INFINITY)};但是,{@code nextUp}实施的
+     * 运行速度可能比其等效的{@code nextAfter}调用快。
+     * 
+     * <p>特殊情况：
+     * <ul>
+     *  <li>如果参数为NaN,则结果为NaN
+     * 
+     *  <li>如果参数为正无穷大,则结果为正无穷
+     * 
+     *  <li>如果参数为零,则结果为{@link Float#MIN_VALUE}
+     * 
+     * </ul>
+     * 
+     * 
      * @param f starting floating-point value
      * @return The adjacent floating-point value closer to positive
      * infinity.
@@ -2130,6 +2871,21 @@ public final class Math {
      *
      * </ul>
      *
+     * <p>
+     *  返回在负无穷大的方向上与{@code d}相邻的浮点值此方法在语义上等同于{@code nextAfter(d,DoubleNEGATIVE_INFINITY)};但是,{@code nextDown}
+     * 实现的运行速度可能比其等效的{@code nextAfter}调用更快。
+     * 
+     *  <p>特殊情况：
+     * <ul>
+     *  <li>如果参数为NaN,则结果为NaN
+     * 
+     *  <li>如果参数为负无穷大,则结果为负无穷大
+     * 
+     *  <li>如果参数为零,则结果为{@code -DoubleMIN_VALUE}
+     * 
+     * </ul>
+     * 
+     * 
      * @param d  starting floating-point value
      * @return The adjacent floating-point value closer to negative
      * infinity.
@@ -2167,6 +2923,21 @@ public final class Math {
      *
      * </ul>
      *
+     * <p>
+     * 返回在负无穷大的方向上与{@code f}相邻的浮点值此方法在语义上等同于{@code nextAfter(f,FloatNEGATIVE_INFINITY)};但是,{@code nextDown}实
+     * 现的运行速度可能比其等效的{@code nextAfter}调用更快。
+     * 
+     *  <p>特殊情况：
+     * <ul>
+     *  <li>如果参数为NaN,则结果为NaN
+     * 
+     *  <li>如果参数为负无穷大,则结果为负无穷大
+     * 
+     *  <li>如果参数为零,则结果为{@code -FloatMIN_VALUE}
+     * 
+     * </ul>
+     * 
+     * 
      * @param f  starting floating-point value
      * @return The adjacent floating-point value closer to negative
      * infinity.
@@ -2209,6 +2980,18 @@ public final class Math {
      * sign is returned.
      * </ul>
      *
+     * <p>
+     * 返回{@code d}&times; 2 <sup> {@ code scaleFactor} </sup>四舍五入,如同由单个正确舍入的浮点数执行乘以双值集合的成员有关浮点值集合的讨论,请参阅Java
+     * 语言规范如果结果的指数在{@link Double#MIN_EXPONENT}和{@link Double#MAX_EXPONENT}之间,则精确计算答案如果结果的指数大于{@code DoubleMAX_EXPONENT}
+     * ,则返回无穷大注意,如果结果是次正常,精度可能会丢失;当{@code scalb(x,n)}是非正规的时,{@code scalb(scalb(x,n), -  n)}可能不等于x </i> NaN,结
+     * 果的符号与{@code d}。
+     * 
+     *  <p>特殊情况：
+     * <ul>
+     * <li>如果第一个参数是NaN,则返回NaN <li>如果第一个参数是无穷大,则返回相同符号的无穷大<li>如果第一个参数为零,则相同符号的零回
+     * </ul>
+     * 
+     * 
      * @param d number to be scaled by a power of two.
      * @param scaleFactor power of 2 used to scale {@code d}
      * @return {@code d} &times; 2<sup>{@code scaleFactor}</sup>
@@ -2251,6 +3034,18 @@ public final class Math {
          * without any undue performance burden, there is no
          * compelling reason to allow double rounding on underflow in
          * scalb.
+         * <p>
+         *  这种方法不需要声明strictfp在所有平台上计算相同的正确结果当扩展时,乘法存储操作的顺序无关紧要;无论操作顺序如何,结果都是有限的或溢出的。但是,为了在缩小时获得正确的结果,必须使用特定的顺序
+         * 
+         * 当按比例缩小时,乘法存储操作被排序,使得两个连续乘法存储不可能返回子标准结果。如果一个乘法存储结果是低于正常的,则下一个乘法将其舍入为零。
+         * 乘以2 ^(scaleFactor％n),然后根据需要乘以2 ^ n,其中n是2的协调幂的数的指数。这样,​​最多发生一个实际舍入误差。
+         * 如果双值集合被独占地使用,舍入将在乘法上发生如果使用双扩展的指数值集合,则乘积将(或许)精确,但是d的存储被保证舍入到双值集合。
+         * 
+         * 它是_not_一个有效的实现,先乘以2 ^ MIN_EXPONENT然后乘以2 ^(scaleFactor％MIN_EXPONENT),因为即使在strictfp程序双舍入下溢也可能发生;例如,如果sc
+         * aleFactor参数是(MIN_EXPONENT  -  n),并且d的指数略小于 - (MIN_EXPONENT  -  n),意味着最终结果将是低于正常。
+         * 
+         *  由于可以实现该方法的精确再现性而没有任何不适当的性能负担,所以没有令人信服的理由允许在scalb下溢时进行双舍入
+         * 
          */
 
         // magnitude of a power of two so large that scaling a finite
@@ -2316,6 +3111,18 @@ public final class Math {
      * sign is returned.
      * </ul>
      *
+     * <p>
+     * 返回{@code f}&times; 2 <sup> {@ code scaleFactor} </sup>四舍五入,如同由单个正确舍入的浮点数执行乘以浮点值集合的成员有关浮点值集合的讨论,请参阅Jav
+     * a语言规范如果结果的指数在{@link Float#MIN_EXPONENT}和{@link Float#MAX_EXPONENT}之间,则精确计算答案如果结果的指数大于{@code FloatMAX_EXPONENT}
+     * ,则返回无穷大注意,如果结果是次正常,精度可能会丢失;当{@code scalb(x,n)}是非正规的时,{@code scalb(scalb(x,n), -  n)}可能不等于x </i> NaN,结
+     * 果的符号与{@code f}。
+     * 
+     *  <p>特殊情况：
+     * <ul>
+     * <li>如果第一个参数是NaN,则返回NaN <li>如果第一个参数是无穷大,则返回相同符号的无穷大<li>如果第一个参数为零,则相同符号的零回
+     * </ul>
+     * 
+     * 
      * @param f number to be scaled by a power of two.
      * @param scaleFactor power of 2 used to scale {@code f}
      * @return {@code f} &times; 2<sup>{@code scaleFactor}</sup>
@@ -2340,6 +3147,11 @@ public final class Math {
          * float will be the correctly rounded float result.  Since
          * all operations other than the final multiply will be exact,
          * it is not necessary to declare this method strictfp.
+         * <p>
+         *  因为浮点的+ MAX_SCALE适合在双指数范围内,并且+ float  - > double转换是精确的,所以下面的乘法将是精确的因此,当double乘积转换为float时发生的舍入将是正确舍入的浮
+         * 点结果。
+         * 非最终乘法的操作将是精确的,没有必要声明此方法strictfp。
+         * 
          */
         return (float)((double)f*powerOfTwoD(scaleFactor));
     }
@@ -2350,6 +3162,9 @@ public final class Math {
 
     /**
      * Returns a floating-point power of two in the normal range.
+     * <p>
+     *  在正常范围内返回2的浮点数
+     * 
      */
     static double powerOfTwoD(int n) {
         assert(n >= DoubleConsts.MIN_EXPONENT && n <= DoubleConsts.MAX_EXPONENT);
@@ -2360,6 +3175,8 @@ public final class Math {
 
     /**
      * Returns a floating-point power of two in the normal range.
+     * <p>
+     *  在正常范围内返回2的浮点数
      */
     static float powerOfTwoF(int n) {
         assert(n >= FloatConsts.MIN_EXPONENT && n <= FloatConsts.MAX_EXPONENT);

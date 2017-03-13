@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,6 +57,31 @@ package com.sun.org.apache.bcel.internal.generic;
  * individuals on behalf of the Apache Software Foundation.  For more
  * information on the Apache Software Foundation, please see
  * <http://www.apache.org/>.
+ * <p>
+ *  Apache软件许可证,版本11
+ * 
+ *  版权所有(c)2001 Apache软件基金会保留所有权利
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  1源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明
+ * 
+ *  2二进制形式的再分发必须在随分发版提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明
+ * 
+ * 3包含在重新分发中的最终用户文档(如果有的话)必须包括以下声明："本产品包括Apache Software Foundation(http：// wwwapacheorg /)开发的软件。
+ * 或者,此确认可能出现在软件本身,如果和第三方承诺通常出现的地方。
+ * 
+ *  4未经事先书面许可,不得使用"Apache"和"Apache Software Foundation"和"Apache BCEL"这些名称来认可或推广从本软件衍生的产品对于书面许可,请联系apache
+ *  @ apacheorg。
+ * 
+ *  5未经Apache软件基金会事先书面许可,不得将本软件衍生的产品称为"Apache","Apache BCEL"或"Apache"名称。
+ * 
+ * 本软件按"原样"提供,任何明示或暗示的保证,包括但不限于适销性和针对特定用途的适用性的默示担保,在任何情况下均不得免责,APACHE软件基金会或其参与人应负赔偿责任对于任何直接,间接,偶发,特殊,惩罚性
+ * 或后果性损害(包括但不限于替代商品或服务的采购;使用,数据或利润损失;或业务中断)责任,无论是在合同,严格责任或侵权(包括疏忽或其他方式),以任何方式使用本软件,即使已被告知此类损害的可能性======
+ * ==============================================================。
+ * 
+ * 此软件包括许多个人代表Apache软件基金会所做的自愿捐款有关Apache软件基金会的更多信息,请参阅<http：// wwwapacheorg />
+ * 
  */
 
 import com.sun.org.apache.bcel.internal.Constants;
@@ -66,6 +92,8 @@ import java.util.ArrayList;
  * Abstract super class for all possible java types, namely basic types
  * such as int, object types like String and array types, e.g. int[]
  *
+ * <p>
+ * 
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
  */
 public abstract class Type implements java.io.Serializable {
@@ -73,6 +101,9 @@ public abstract class Type implements java.io.Serializable {
   protected String signature; // signature for the type
 
   /** Predefined constants
+  /* <p>
+  /*  对所有可能的java类型的抽象超类,即基本类型,如int,对象类型,如String和数组类型,例如int []
+  /* 
    */
   public static final BasicType     VOID         = new BasicType(Constants.T_VOID);
   public static final BasicType     BOOLEAN      = new BasicType(Constants.T_BOOLEAN);
@@ -98,16 +129,22 @@ public abstract class Type implements java.io.Serializable {
   }
 
   /**
+  /* <p>
+  /* 
    * @return signature for given type.
    */
   public String getSignature() { return signature; }
 
   /**
+  /* <p>
+  /* 
    * @return type as defined in Constants
    */
   public byte getType() { return type; }
 
   /**
+  /* <p>
+  /* 
    * @return stack size of this type (2 for long and double, 0 for void, 1 otherwise)
    */
   public int getSize() {
@@ -120,6 +157,8 @@ public abstract class Type implements java.io.Serializable {
   }
 
   /**
+  /* <p>
+  /* 
    * @return Type string, e.g. `int[]'
    */
   public String toString() {
@@ -131,6 +170,8 @@ public abstract class Type implements java.io.Serializable {
    * Convert type to Java method signature, e.g. int[] f(java.lang.String x)
    * becomes (Ljava/lang/String;)[I
    *
+   * <p>
+   * 
    * @param return_type what the method returns
    * @param arg_types what are the argument types
    * @return method signature for given type(s).
@@ -152,6 +193,10 @@ public abstract class Type implements java.io.Serializable {
 
   /**
    * Convert signature to a Type object.
+   * <p>
+   *  将类型转换为Java方法签名,例如int [] f(javalangString x)变成(Ljava / lang / String;)[I
+   * 
+   * 
    * @param signature signature string such as Ljava/lang/String;
    * @return type object
    */
@@ -190,6 +235,10 @@ public abstract class Type implements java.io.Serializable {
   /**
    * Convert return value of a method (signature) to a Type object.
    *
+   * <p>
+   *  将签名转换为Type对象
+   * 
+   * 
    * @param signature signature string such as (Ljava/lang/String;)V
    * @return return type
    */
@@ -205,6 +254,10 @@ public abstract class Type implements java.io.Serializable {
 
   /**
    * Convert arguments of a method (signature) to an array of Type objects.
+   * <p>
+   *  将方法(签名)的返回值转换为Type对象
+   * 
+   * 
    * @param signature signature string such as (Ljava/lang/String;)V
    * @return array of argument types
    */
@@ -233,6 +286,10 @@ public abstract class Type implements java.io.Serializable {
   }
 
   /** Convert runtime java.lang.Class to BCEL Type object.
+  /* <p>
+  /*  将方法(签名)的参数转换为Type对象的数组
+  /* 
+  /* 
    * @param cl Java class
    * @return corresponding Type object
    */
@@ -243,6 +300,7 @@ public abstract class Type implements java.io.Serializable {
 
     /* That's an amzingly easy case, because getName() returns
      * the signature. That's what we would have liked anyway.
+     * <p>
      */
     if(cl.isArray()) {
       return getType(cl.getName());

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1994, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -120,6 +121,39 @@ import sun.util.calendar.ZoneInfo;
  * not fall within the indicated ranges; for example, a date may be
  * specified as January 32 and is interpreted as meaning February 1.
  *
+ * <p>
+ *  类<code> Date </code>表示时间上的特定时刻,具有毫秒精度
+ * <p>
+ * 在JDK 11之前,类<code> Date </code>有两个附加函数它允许将日期解释为年,月,日,小时,分钟和秒值它还允许格式化和解析日期字符串不幸的是,这些函数的API不适合国际化从JDK 11
+ * 开始,<code> Calendar </code>类应该用于在日期和时间字段之间转换,而<code> DateFormat </code>用于格式化和解析日期字符串<code> Date </code>
+ * 中的相应方法已弃用。
+ * <p>
+ * 虽然<code> Date </code>类旨在反映协调的世界时间(UTC),但它可能不会完全这样做,这取决于Java虚拟机的主机环境。
+ * 几乎所有现代操作系统都假设1& = 24&nbsp;&times;&nbsp; 60&nbsp;&times;&nbsp; 60&nbsp; = 86400秒在所有情况下在UTC中,然而,大约每年或每两
+ * 年有一个额外的秒,称为"闰秒"作为一天的最后一秒,总是在12月31日或6月30日例如,1995年的最后一分钟是61秒长,由于增加闰秒大多数电脑时钟不够准确,能够反映闰秒区分。
+ * 虽然<code> Date </code>类旨在反映协调的世界时间(UTC),但它可能不会完全这样做,这取决于Java虚拟机的主机环境。
+ * <p>
+ * 一些计算机标准是根据格林威治平均时间(GMT)定义的,相当于通用时间(UT)GMT是标准的"民事"名称; UT是同一标准的"科学"名称UTC和UT之间的区别是UTC是基于原子钟,UT是基于天文观测,这对
+ * 于所有实际目的是一个不可见的细毛发分裂因为地球的旋转是不均匀的(它减慢并且以复杂的方式加速),UT不总是均匀地流动。
+ * 闰秒根据需要被引入到UTC中,以便将UTC保持在UT1的09秒内,UT1是具有某些校正的UT的版本还有其他时间和日期系统;例如,基于卫星的全球定位系统(GPS)使用的时间标度被同步到UTC,但是不针对闰
+ * 秒进行调整。
+ * 进一步信息的有趣来源是美国海军天文台,特别是时间董事会：<blockquote> <pre> <a href=http://tychousnonavymil> http：// tychousnonavy
+ * mil </a> </pre> </blockquote>。
+ * <p>
+ * 及其对"时间系统"的定义：<blockquote> <pre> <a href=http://tychousnonavymil/systimehtml> http：// tychousnonavymil
+ *  / systimehtml </a> </pre> </blockquote>。
+ * <p>
+ *  在接受或返回年,月,日,小时,分钟和秒值的<code> Date </code>类的所有方法中,使用以下表示法：
+ * <ul>
+ * <li>年<i> y </i>以整数表示<i> y </i>&nbsp; <code>  - &nbsp; 1900 </code> <li> 0〜11; 0是1月,1是2月,等等;因此11是十二月<li>
+ * 日期(月中)以通常的方式由1到31的整数表示<li>小时由从0到23的整数表示。
+ * 因此,从午夜到上午1点的小时是小时0,并且从中午到下午1点的小时是小时12 <li>以通常的方式用从0到59的整数表示分钟<li>第二个由从0到61的整数表示;值60和61仅出现闰秒,甚至只有在实际正确
+ * 跟踪闰秒的Java实现中才会出现由于当前引入闰秒的方式,极不可能在同一分钟内出现两个闰秒,但本规范遵循ISO C的日期和时间惯例。
+ * </ul>
+ * <p>
+ * 在所有情况下,给予用于这些目的的方法的论证不需要落在所指示的范围内;例如,日期可以被指定为1月32日,并且被解释为意味着2月1日
+ * 
+ * 
  * @author  James Gosling
  * @author  Arthur van Hoff
  * @author  Alan Liu
@@ -142,6 +176,10 @@ public class Date
      * If cdate.isNormalized() is true, then fastTime and cdate are in
      * synch. Otherwise, fastTime is ignored, and cdate indicates the
      * time.
+     * <p>
+     *  如果cdate为null,则fastTime指示以毫为单位的时间。如果cdateisNormalized()为true,则fastTime和cdate处于同步状态。
+     * 否则,fastTime被忽略,cdate指示时间。
+     * 
      */
     private transient BaseCalendar.Date cdate;
 
@@ -151,6 +189,9 @@ public class Date
     /* use serialVersionUID from modified java.util.Date for
      * interoperability with JDK1.1. The Date was modified to write
      * and read only the UTC time.
+     * <p>
+     *  与JDK11的互操作性修改日期以写入和读取UTC时间
+     * 
      */
     private static final long serialVersionUID = 7523967970034938905L;
 
@@ -159,6 +200,10 @@ public class Date
      * it represents the time at which it was allocated, measured to the
      * nearest millisecond.
      *
+     * <p>
+     *  分配<code> Date </code>对象并对其进行初始化,以便表示分配时间,以最近的毫秒为单位
+     * 
+     * 
      * @see     java.lang.System#currentTimeMillis()
      */
     public Date() {
@@ -171,6 +216,10 @@ public class Date
      * standard base time known as "the epoch", namely January 1,
      * 1970, 00:00:00 GMT.
      *
+     * <p>
+     * 分配<code> Date </code>对象并将其初始化以表示自称为"时代"的标准基准时间以来的指定毫秒数,即1970年1月1日,00:00:00 GMT
+     * 
+     * 
      * @param   date   the milliseconds since January 1, 1970, 00:00:00 GMT.
      * @see     java.lang.System#currentTimeMillis()
      */
@@ -184,6 +233,11 @@ public class Date
      * specified by the <code>year</code>, <code>month</code>, and
      * <code>date</code> arguments.
      *
+     * <p>
+     *  分配<code> Date </code>对象并将其初始化,以便它表示由<code> year </code>,<code> month </code>指定的日期开始的午夜,和<code> date 
+     * </code>参数。
+     * 
+     * 
      * @param   year    the year minus 1900.
      * @param   month   the month between 0-11.
      * @param   date    the day of the month between 1-31.
@@ -204,6 +258,11 @@ public class Date
      * <code>hrs</code>, and <code>min</code> arguments, in the local
      * time zone.
      *
+     * <p>
+     *  分配<code> Date </code>对象并初始化它,以便它表示<code> year </code>,<code> month </code>,<code>日期</code>,<code> hr
+     * s </code>和<code> min </code>。
+     * 
+     * 
      * @param   year    the year minus 1900.
      * @param   month   the month between 0-11.
      * @param   date    the day of the month between 1-31.
@@ -227,6 +286,11 @@ public class Date
      * <code>hrs</code>, <code>min</code>, and <code>sec</code> arguments,
      * in the local time zone.
      *
+     * <p>
+     * 分配<code> Date </code>对象并初始化它,以便它表示<code> year </code>,<code> month </code>,<code>日期</code>,<code> hrs
+     *  </code>,<code> min </code>和<code> sec <。
+     * 
+     * 
      * @param   year    the year minus 1900.
      * @param   month   the month between 0-11.
      * @param   date    the day of the month between 1-31.
@@ -263,6 +327,10 @@ public class Date
      * <code>s</code>, which is interpreted as if by the
      * {@link Date#parse} method.
      *
+     * <p>
+     *  分配<code> Date </code>对象并对其进行初始化,以便表示由字符串<code> s </code>指示的日期和时间,这被解释为{@link Date#parse}方法
+     * 
+     * 
      * @param   s   a string representation of the date.
      * @see     java.text.DateFormat
      * @see     java.util.Date#parse(java.lang.String)
@@ -276,6 +344,9 @@ public class Date
 
     /**
      * Return a copy of this object.
+     * <p>
+     *  返回此对象的副本
+     * 
      */
     public Object clone() {
         Date d = null;
@@ -298,6 +369,11 @@ public class Date
      * returned represented as the distance, measured in milliseconds,
      * of that time from the epoch (00:00:00 GMT on January 1, 1970).
      *
+     * <p>
+     * 根据参数确定日期和时间参数解释为年,月,日,时,分,分,秒,与<tt>日期</tt>构造函数有六个参数,除了参数被解释为相对于UTC而不是本地时区所指示的时间被表示为从时代开始的那段时间的距离(以毫秒计
+     * )(00:00:00 GMT 1970年1月1日)。
+     * 
+     * 
      * @param   year    the year minus 1900.
      * @param   month   the month between 0-11.
      * @param   date    the day of the month between 1-31.
@@ -443,6 +519,39 @@ public class Date
      * applied. Otherwise, the year, month, day of month, hour, minute, and
      * second are interpreted in the local time zone.
      *
+     * <p>
+     * 尝试将<tt> s </tt>解释为日期和时间的表示如果尝试成功,则返回的时间表示为从时间(00：00：00：00： 00:00 GMT on January 1,1970)如果尝试失败,则会抛出<tt>
+     *  IllegalArgumentException </tt>。
+     * <p>
+     *  它接受许多语法;特别是它承认IETF标准日期语法："Sat,12 Aug 1995 13:30:00 GMT"它还理解美国大陆的时区缩写,但是对于一般使用,应该使用时区偏移： Sat,12 Aug 1
+     * 995 13:30:00 GMT + 0430"(4小时,格林威治子午线以西30分钟)如果没有指定时区,则假定本地时区为GMT和UTC,。
+     * <p>
+     * 从左到右处理字符串<tt> s </tt>,寻找感兴趣的数据<tt> s </tt>中的任何材料,它在ASCII括号字符<tt>(</tt> tt>)</tt>允许的字符包括以下ASCII字符：<blockquote>
+     *  <pre> abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789,+  - ：/ </pre > </blockquote>
+     * 和空格字符<p>连续的十进制数字序列被视为十进制数字：<ul> <li>如果数字前面有<tt> + </tt>或<tt>  -  < / tt>,并且一年已经被识别,则该数字是时区偏移量如果该数量小于2
+     * 4,则它是以小时为单位测量的偏移量否则,它被认为是以分钟为单位的偏移,以没有标点的24小时时间格式表示。
+     * 在<tt>  -  </tt>之前的表示向西偏移时区偏移总是相对于UTC(格林威治)在字符串中出现的<tt> -5 </tt>意味着"格林威治以西五小时",而<tt> +0430 </tt>将意味着"格
+     * 林威治以东四小时三十分钟"以冗余方式指定<tt> GMT </tt>,<tt> UT </tt>或<tt> UTC </tt>(例如,<tt> GMT-5 </tt>或<tt> utc + 0430 </tt>
+     *  <li>如果满足以下条件之一,则该数字被视为年份数：。
+     * <ul>
+     * <li>数字等于或大于70,后跟空格,逗号,斜杠或字符串结尾<li>数字小于70,且月份和月份都已被识别</li>
+     * </ul>
+     * 如果识别的年份数小于100,则将其解释为相对于一个世纪的缩写年份,其中日期在Date类初始化之前的80年之前和19年之后在调整年份之后,减去1900例如,如果当年是1999年,那么19到99年的年份假定
+     * 为1919年到1999年,而0到18年的年份假定为2000年到2018年。
+     * 注意,这与解释在{@link javatextSimpleDateFormat}中使用的小于100的年数<li>如果数字后面跟有冒号,则将其视为一小时,除非已经识别了一小时,在这种情况下,它被视为一分钟
+     * <li>如果数字后面跟着斜杠,则视为一个月(将其减小1以产生<tt> 0 </tt>至<tt> 11 </tt>的数字)除非已经识别了一个月,在这种情况下,它被视为一个月中的一天<li>如果数字后面跟有
+     * 空格,逗号,连字符或字符串结尾,则如果一小时已被识别,不是一分钟,它被认为是一分钟;否则,如果已经识别出分钟但不是秒,则将其视为秒;否则,它被认为是一个月的一天</ul> <p>连续的字母序列被视为一个
+     * 字,并按以下方式处理：<ul> <li>忽略与忽略大小写的<tt> AM </tt>匹配的字词如果一小时未被识别或小于<tt> 1 </tt>或大于<tt> 12 </tt>则失败)<li>与<tt> 
+     * PM </tt>匹配的单词,则向小时添加<tt> 12 </tt>(但如果一小时未被识别或小于<tt> 1 </tt>或大于<tt> 12 </tt> li>忽略与<tt>任何前缀<SUNDAY,MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY </tt>
+     * 或<tt> SATURDAY </tt>(忽略大小写)相符的任何字词例如,<tt> sat ,Friday,TUE </tt>和<tt> Thursday </tt>将被忽略<li>否则,任何与<tt>
+     * 任何前缀</tt>或<tt>十二月</tt>匹配的字词</tt> ,忽略大小写,并且按照此处给出的顺序考虑它们被识别为指定一个月份并转换为一个数字(<tt> 0 </tt>至<tt> 11 </tt>)
+     * 例如,<tt> aug,9月,april </tt>和<tt> NOV </tt>被识别为月份,因此是<tt> Ma </tt>,被识别为<tt> MARCH </tt>,而不是<tt > MAY </tt>
+     *  <li>任何符合<tt> GMT,UT </tt>或<tt> UTC </tt>且忽略大小写的字词,<li>任何与<tt> EST,CST,MST </tt>或<tt> PST </tt>(忽略大小写
+     * )相符的字词,都会被视为指北美时区为五,六,分别在格林威治以西七,八或八小时内任何符合<tt> EDT,CDT,MDT </tt>或<tt> PDT </tt>且忽略大小写的字词被视为指同一时区,分别在
+     * 夏令时期间</ul> <p>一旦整个字符串已被扫描,它将被转换为两种方式之一的时间结果如果已识别时区或时区偏移,则年,月,日,时,分和秒以UTC解释,然后应用时区偏移量。
+     * 否则,将按当地时区解释年,月,日,时,分和秒。
+     * 
+     * 
      * @param   s   a string to be parsed as a date.
      * @return  the number of milliseconds since January 1, 1970, 00:00:00 GMT
      *          represented by the string argument.
@@ -641,6 +750,10 @@ public class Date
      * by this <code>Date</code> object, as interpreted in the local
      * time zone.
      *
+     * <p>
+     * 返回一个值,该值是从包含或开始于由此<code> Date </code>对象表示的时间的年份减去1900的结果,如在本地时区中解释的
+     * 
+     * 
      * @return  the year represented by this date, minus 1900.
      * @see     java.util.Calendar
      * @deprecated As of JDK version 1.1,
@@ -661,6 +774,11 @@ public class Date
      * non-leap year, then the new date will be treated as if it were
      * on March 1.)
      *
+     * <p>
+     *  将<tt> Date </tt>对象的年份设置为指定值加1900此修改<code> Date </code>对象,以便它表示指定年份内的时间点,日期,小时,分钟和秒,如同当地时区中所解释的(当然,如果
+     * 日期是2月29日,例如,年份设置为非闰年,则新日期将被视为是在3月1日)。
+     * 
+     * 
      * @param   year    the year value.
      * @see     java.util.Calendar
      * @deprecated As of JDK version 1.1,
@@ -677,6 +795,11 @@ public class Date
      * The value returned is between <code>0</code> and <code>11</code>,
      * with the value <code>0</code> representing January.
      *
+     * <p>
+     * 返回一个数字,表示包含或以此<tt> Date </tt>对象表示的时间开始的月份。
+     * 返回的值在<code> 0 </code>和<code> 11 </code>其中<code> 0 </code>表示一月。
+     * 
+     * 
      * @return  the month represented by this date.
      * @see     java.util.Calendar
      * @deprecated As of JDK version 1.1,
@@ -696,6 +819,13 @@ public class Date
      * the month is set to June, then the new date will be treated as
      * if it were on July 1, because June has only 30 days.
      *
+     * <p>
+     *  将此日期的月份设置为指定值。
+     * 修改此<tt>日期</tt>对象,使其表示指定月份内的时间点,年,日,小时,分钟和秒与之前,如当地时区解释如果日期是例如10月31日,并且月份被设置为6月,则新的日期将被视为是在7月1日,因为6月只有3
+     * 0天。
+     *  将此日期的月份设置为指定值。
+     * 
+     * 
      * @param   month   the month value between 0-11.
      * @see     java.util.Calendar
      * @deprecated As of JDK version 1.1,
@@ -725,6 +855,11 @@ public class Date
      * instant in time represented by this <tt>Date</tt> object, as
      * interpreted in the local time zone.
      *
+     * <p>
+     * 返回此<tt>日期</tt>对象所表示的月份中的日期返回的值介于代表包含或开始的月份日期的<code> 1 </code>和<code> 31 </code>之间其中该时间由此<tt>日期</tt>对象
+     * 表示,如在本地时区中解释的。
+     * 
+     * 
      * @return  the day of the month represented by this date.
      * @see     java.util.Calendar
      * @deprecated As of JDK version 1.1,
@@ -746,6 +881,12 @@ public class Date
      * will be treated as if it were on May 1, because April has only
      * 30 days.
      *
+     * <p>
+     *  将此<tt>日期</tt>对象的月份日期设置为指定的值。
+     * 修改此<tt>日期</tt>对象,以表示该月的指定日期内的时间点,与本地时区中解释的年,月,小时,分钟和秒相同如果日期例如是4月30日,并且日期设置为31,则它将被视为是在5月1日,因为四月只有30天。
+     *  将此<tt>日期</tt>对象的月份日期设置为指定的值。
+     * 
+     * 
      * @param   date   the day of the month value between 1-31.
      * @see     java.util.Calendar
      * @deprecated As of JDK version 1.1,
@@ -765,6 +906,11 @@ public class Date
      * the instant in time represented by this <tt>Date</tt> object,
      * as interpreted in the local time zone.
      *
+     * <p>
+     * 返回此日期表示的星期返回的值(<tt> 0 </tt> = Sunday,<tt> 1 </tt> = Monday,<tt> 2 </tt> = Tuesday,<tt> 3 </tt> =星期三,<tt>
+     *  4 </tt> =星期四,<tt> 5 </tt> =星期五,<tt> 6 </tt> =星期六)以由此<tt>日期</tt>对象表示的时间开始,如在本地时区中解释的。
+     * 
+     * 
      * @return  the day of the week represented by this date.
      * @see     java.util.Calendar
      * @deprecated As of JDK version 1.1,
@@ -782,6 +928,11 @@ public class Date
      * with the instant in time represented by this <tt>Date</tt>
      * object, as interpreted in the local time zone.
      *
+     * <p>
+     *  返回由此<tt>日期</tt>对象表示的小时返回的值是表示包含或开始的一天内的小时的数字(<tt> 0 </tt>到<tt> 23 </tt>)其中该时间由此<tt>日期</tt>对象表示,如在本地时
+     * 区中解释的。
+     * 
+     * 
      * @return  the hour represented by this date.
      * @see     java.util.Calendar
      * @deprecated As of JDK version 1.1,
@@ -799,6 +950,10 @@ public class Date
      * date, minute, and second the same as before, as interpreted in the
      * local time zone.
      *
+     * <p>
+     * 将<tt> Date </tt>对象的小时设置为指定的值。修改此<tt>日期</tt>对象,以便它表示一天中指定小时内的时间点,月,日,分和秒与之前相同,如在本地时区中解释的
+     * 
+     * 
      * @param   hours   the hour value.
      * @see     java.util.Calendar
      * @deprecated As of JDK version 1.1,
@@ -814,6 +969,10 @@ public class Date
      * as interpreted in the local time zone.
      * The value returned is between <code>0</code> and <code>59</code>.
      *
+     * <p>
+     *  返回此日期表示的小时之前的分钟数,以本地时区解释返回的值在<code> 0 </code>和<code> 59 </code>
+     * 
+     * 
      * @return  the number of minutes past the hour represented by this date.
      * @see     java.util.Calendar
      * @deprecated As of JDK version 1.1,
@@ -831,6 +990,10 @@ public class Date
      * date, hour, and second the same as before, as interpreted in the
      * local time zone.
      *
+     * <p>
+     *  将此<tt>日期</tt>对象的分钟设置为指定值。修改此<tt>日期</tt>对象,以便它表示小时的指定分钟内的时间点,月,日,小时和秒相同,如在本地时区中解释的
+     * 
+     * 
      * @param   minutes   the value of the minutes.
      * @see     java.util.Calendar
      * @deprecated As of JDK version 1.1,
@@ -847,6 +1010,11 @@ public class Date
      * values <code>60</code> and <code>61</code> can only occur on those
      * Java Virtual Machines that take leap seconds into account.
      *
+     * <p>
+     * 返回此日期表示的分钟数秒返回的值在<code> 0 </code>和<code> 61之间</code>值<code> 60 </code>和<code> / code>只能出现在考虑闰秒的Java虚拟
+     * 机上。
+     * 
+     * 
      * @return  the number of seconds past the minute represented by this date.
      * @see     java.util.Calendar
      * @deprecated As of JDK version 1.1,
@@ -864,6 +1032,10 @@ public class Date
      * the year, month, date, hour, and minute the same as before, as
      * interpreted in the local time zone.
      *
+     * <p>
+     *  将此<tt>日期</tt>的秒设置为指定的值。此<tt>日期</tt>对象被修改,以表示在指定的分钟秒内的时间点, ,日期,小时和分钟,如在本地时区中解释的
+     * 
+     * 
      * @param   seconds   the seconds value.
      * @see     java.util.Calendar
      * @deprecated As of JDK version 1.1,
@@ -878,6 +1050,10 @@ public class Date
      * Returns the number of milliseconds since January 1, 1970, 00:00:00 GMT
      * represented by this <tt>Date</tt> object.
      *
+     * <p>
+     *  返回自此<tt>日期</tt>对象所表示的1970年1月1日,00:00:00 GMT以来的毫秒数
+     * 
+     * 
      * @return  the number of milliseconds since January 1, 1970, 00:00:00 GMT
      *          represented by this date.
      */
@@ -896,6 +1072,10 @@ public class Date
      * Sets this <code>Date</code> object to represent a point in time that is
      * <code>time</code> milliseconds after January 1, 1970 00:00:00 GMT.
      *
+     * <p>
+     * 设置此<code> Date </code>对象以表示1970年1月1日之后<code>时间</code>毫秒的时间点00:00:00 GMT
+     * 
+     * 
      * @param   time   the number of milliseconds.
      */
     public void setTime(long time) {
@@ -906,6 +1086,10 @@ public class Date
     /**
      * Tests if this date is before the specified date.
      *
+     * <p>
+     *  测试此日期是否在指定日期之前
+     * 
+     * 
      * @param   when   a date.
      * @return  <code>true</code> if and only if the instant of time
      *            represented by this <tt>Date</tt> object is strictly
@@ -920,6 +1104,10 @@ public class Date
     /**
      * Tests if this date is after the specified date.
      *
+     * <p>
+     *  测试此日期是否在指定日期之后
+     * 
+     * 
      * @param   when   a date.
      * @return  <code>true</code> if and only if the instant represented
      *          by this <tt>Date</tt> object is strictly later than the
@@ -941,6 +1129,13 @@ public class Date
      * <code>getTime</code> method returns the same <code>long</code>
      * value for both.
      *
+     * <p>
+     *  比较两个日期的相等性结果是<code> true </code>当且仅当参数不是<code> null </code>且是代表同一点的<code> Date </code>时间,到毫秒,作为这个对象。
+     * <p>
+     *  因此,当且仅当<code> getTime </code>方法对于两个<code> getTime </code>方法返回相同的<code> long </code>值时,两个<code> Date 
+     * </code>。
+     * 
+     * 
      * @param   obj   the object to compare with.
      * @return  <code>true</code> if the objects are the same;
      *          <code>false</code> otherwise.
@@ -953,6 +1148,9 @@ public class Date
     /**
      * Returns the millisecond value of this <code>Date</code> object
      * without affecting its internal state.
+     * <p>
+     *  返回此<code> Date </code>对象的毫秒值,而不影响其内部状态
+     * 
      */
     static final long getMillisOf(Date date) {
         if (date.cdate == null || date.cdate.isNormalized()) {
@@ -965,6 +1163,10 @@ public class Date
     /**
      * Compares two Dates for ordering.
      *
+     * <p>
+     *  比较两个日期进行订购
+     * 
+     * 
      * @param   anotherDate   the <code>Date</code> to be compared.
      * @return  the value <code>0</code> if the argument Date is equal to
      *          this Date; a value less than <code>0</code> if this Date
@@ -988,6 +1190,13 @@ public class Date
      * (int)(this.getTime()^(this.getTime() >>> 32))
      * }</pre></blockquote>
      *
+     * <p>
+     * 返回此对象的哈希码值结果是由{@link Date#getTime}方法返回的原始<tt> long </tt>值的两半的异或。
+     * 即,哈希码是值的表达式：<blockquote> <pre> {@ code(int)(thisgetTime()^(thisgetTime()>>> 32))} </pre> </blockquote>
+     * 。
+     * 返回此对象的哈希码值结果是由{@link Date#getTime}方法返回的原始<tt> long </tt>值的两半的异或。
+     * 
+     * 
      * @return  a hash code value for this object.
      */
     public int hashCode() {
@@ -1021,6 +1230,17 @@ public class Date
      * <li><tt>yyyy</tt> is the year, as four decimal digits.
      * </ul>
      *
+     * <p>
+     * 将此<code> Date </code>对象转换为以下形式的<code> String </code>：<blockquote> <pre> dow mon dd hh：mm：ss zzz yyyy 
+     * </pre> </blockquote> ：<ul> <li> <tt> dow </tt>是星期几(<tt> Sun,Mon,Tue,Wed,Thu,Fri,Sat </tt>)<li> <tt> m
+     * on </tt>是月份(<tt> Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec </tt>)<li> <tt> dd </tt>是一个月中的某一天(<tt>
+     *  01 </tt>到<tt> 31 </tt>),因为两个小数位<li> <tt> hh </tt> > <tt> 00 </tt>到<tt>的两个小数位<li> <tt> mm </tt> > 59 
+     * </tt>),因为两个十进制数字<li> <tt> ss </tt>是分钟内的第二个(<tt> 00 </tt>到<tt> 61 </tt>十进制数字<li> <tt> zzz </tt>是时区(可能反
+     * 映夏令时)标准时区缩写包括通过方法识别的时区<tt> parse </tt>如果时区信息不可用, <tt> zzz </tt>是空的 - 也就是说,它根本没有字符<li> <tt> yyyy </tt>
+     * 是年份,。
+     * </ul>
+     * 
+     * 
      * @return  a string representation of this date.
      * @see     java.util.Date#toLocaleString()
      * @see     java.util.Date#toGMTString()
@@ -1054,6 +1274,9 @@ public class Date
      * Converts the given name to its 3-letter abbreviation (e.g.,
      * "monday" -> "Mon") and stored the abbreviation in the given
      * <code>StringBuilder</code>.
+     * <p>
+     * 将给定名称转换为其3个字母的缩写(例如,"monday" - >"Mon"),并将缩写存储在给定的<code> StringBuilder </code>
+     * 
      */
     private static final StringBuilder convertToAbbr(StringBuilder sb, String name) {
         sb.append(Character.toUpperCase(name.charAt(0)));
@@ -1069,6 +1292,11 @@ public class Date
      * "<code>%c</code>" format supported by the <code>strftime()</code>
      * function of ISO&nbsp;C.
      *
+     * <p>
+     *  以与实现相关的形式创建此<tt> Date </tt>对象的字符串表示形式意图是,表单应该是Java应用程序的用户熟悉的,无论它可能发生在哪里运行该意图是可比的ISO&nbsp; C的<code> s
+     * trftime()</code>函数支持的"<code>％c </code>。
+     * 
+     * 
      * @return  a string representation of this date, using the locale
      *          conventions.
      * @see     java.text.DateFormat
@@ -1105,6 +1333,14 @@ public class Date
      * </ul><p>
      * The result does not depend on the local time zone.
      *
+     * <p>
+     * 创建此<tt>日期</tt>对象的字符串表示形式：<blockquote> <pre> d mon yyyy hh：mm：ss GMT </pre> </blockquote>其中：<ul> <li> 
+     * <i> d </i>是一个月中的某一天(<tt> 1 </tt>到<tt> 31 </tt>),为一个或两个十进制数字<li> <i> mon </i >是月份(<tt> Jan,Feb,Mar,Apr
+     * ,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec </tt>)<li> <i> yyyy </i> ,因为四个十进制数字<li> <i> hh </i>是一天中的小时(<tt> 00 </tt>
+     * 到<tt> 23 </tt>), i> mm </i>是小时内的分钟(<tt> 00 </tt>到<tt> 59 </tt>),因为两个小数位<li> <i> ss </i>分钟内<second> <i>
+     *  GMT </i>的两个十进制数字正好是ASCII字母"<tt> GMT </tt> / tt>"表示格林威治标准时间</ul> <p>结果不依赖于本地时区。
+     * 
+     * 
      * @return  a string representation of this date, using the Internet GMT
      *          conventions.
      * @see     java.text.DateFormat
@@ -1156,6 +1392,16 @@ public class Date
      *                       this.getSeconds())) / (60 * 1000)
      * </pre></blockquote>
      *
+     * <p>
+     * 返回本地时区相对于UTC的偏移量(以分钟为单位),该偏移量适用于此<code> Date </code>对象所表示的时间
+     * <p>
+     * 例如,在马萨诸塞州,格林威治以西的五个时区：<blockquote> <pre> new Date(96,1,14)getTimezoneOffset()返回300 </pre> </blockquote>
+     * ,因为1996年2月14日, (东部标准时间)正在使用,这偏离UTC五个小时;但是：<blockquote> <pre> new Date(96,5,1)getTimezoneOffset()返回240
+     *  </pre> </blockquote>,因为1996年6月1日,夏令时(Eastern Daylight Time)是从UTC UTC偏移只有四个小时<p>这个方法产生相同的结果,如果它计算：<blockquote>
+     *  <pre>(thisgetTime() -  UTC(thisgetYear(),thisgetMonth(),thisgetDate(),thisgetHours thisgetMinutes(),
+     * thisgetSeconds()))/(60 * 1000)</pre> </blockquote>。
+     * 
+     * 
      * @return  the time-zone offset, in minutes, for the current time zone.
      * @see     java.util.Calendar#ZONE_OFFSET
      * @see     java.util.Calendar#DST_OFFSET
@@ -1271,6 +1517,10 @@ public class Date
      * Returns the Gregorian or Julian calendar system to use with the
      * given date. Use Gregorian from October 15, 1582.
      *
+     * <p>
+     * 返回要在给定日期使用的公历或儒略历日历系统。使用从1582年10月15日起的格里高利
+     * 
+     * 
      * @param year normalized calendar year (not -1900)
      * @return the CalendarSystem to use for the specified date
      */
@@ -1313,6 +1563,10 @@ public class Date
     /**
      * Save the state of this object to a stream (i.e., serialize it).
      *
+     * <p>
+     *  将此对象的状态保存到流(即,序列化它)
+     * 
+     * 
      * @serialData The value returned by <code>getTime()</code>
      *             is emitted (long).  This represents the offset from
      *             January 1, 1970, 00:00:00 GMT in milliseconds.
@@ -1325,6 +1579,9 @@ public class Date
 
     /**
      * Reconstitute this object from a stream (i.e., deserialize it).
+     * <p>
+     *  从流重构此对象(即,反序列化它)
+     * 
      */
     private void readObject(ObjectInputStream s)
          throws IOException, ClassNotFoundException
@@ -1344,6 +1601,14 @@ public class Date
      * and further in the past than {@code Date}. In this scenario, this method
      * will throw an exception.
      *
+     * <p>
+     *  从{@code Instant}对象获取{@code Date}的实例
+     * <p>
+     *  {@code Instant}使用纳秒的精度,而{@code Date}使用毫秒的精度。转换将传递任何超额精度信息,就好像以纳秒为单位的量受到整数除以一百万
+     * <p>
+     *  {@code Instant}可以在未来进一步在时间线上存储点,并且在过去比{@code Date}更长。在这种情况下,此方法将抛出异常
+     * 
+     * 
      * @param instant  the instant to convert
      * @return a {@code Date} representing the same point on the time-line as
      *  the provided instant
@@ -1366,6 +1631,8 @@ public class Date
      * The conversion creates an {@code Instant} that represents the same
      * point on the time-line as this {@code Date}.
      *
+     * <p>
+     * 
      * @return an instant representing the same point on the time-line as
      *  this {@code Date} object
      * @since 1.8

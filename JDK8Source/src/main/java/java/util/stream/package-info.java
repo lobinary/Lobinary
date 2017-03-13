@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -732,6 +733,157 @@
  * <a href="package-summary.html#NonInterference">Non-Interference</a>
  * for more details.
  *
+ * <p>
+ *  用于支持对元素流进行函数式操作的类,例如对集合的映射缩减转换例如：
+ * 
+ *  <pre> {@ code int sum = widgetsstream()filter(b  - > bgetColor()== RED)mapToInt(b  - > bgetWeight())sum }
+ *  </pre>。
+ * 
+ *  <p>在这里,我们使用{@code widgets}(一个{@code Collection <Widget>})作为流的源,然后在流上执行filter-map-reduce以获取红色小部件(Summ
+ * ation是<a href=\"package-summaryhtml#Reduction\">缩小</a>操作的示例)。
+ * 
+ * <p>此套件中引入的关键抽象是<em> </em>类{@link javautilstreamStream},{@link javautilstreamIntStream},{@link javautilstreamLongStream}
+ * 和{@link javautilstreamDoubleStream} Stream {@code int},{@code long}和{@code double}类型与集合有以下几种不同：。
+ * 
+ * <ul>
+ * <li>无存储流流不是存储元素的数据结构; </li> </li> <li>实际上是一个对流进行的操作产生一个数据结构,一个数组,一个生成函数或一个I / O通道,一个结果,但不修改其源例如,过滤从集合
+ * 获得的{@code Stream}会生成一个新的{@code Stream}而不包含过滤的元素,而不是从源集合中删除元素</li> <li > Laziness-seek许多流操作,如过滤,映射或重复删
+ * 除,可以延迟实现,暴露优化机会例如,"找到具有三个连续元音的第一个{@code String}"不需要检查所有输入字符串。
+ * 流操作分为中间({@code Stream}  - 生产)操作和终端(值或副作用 - </li> <li>可能无界在集合具有有限大小的情况下,流不需要诸如{@code limit(n)}或{@code findFirst()}
+ * 之类的短路操作。
+ * 允许无限流上的计算在有限时间内完成</li> <li>可消耗流的元素在流的生命期间只被访问一次像{@link javautilIterator},必须生成一个新流来重访问相同的元素的源。
+ * </li>
+ * </ul>
+ * 
+ * 流可以通过多种方式获得一些示例包括：
+ * <ul>
+ * <li>通过{@code stream()}和{@code parallelStream()}方法从{@link javautilCollection}; </li> <li>通过{@link javautilArrays#stream )}
+ * ; </li> <li>从流类上的静态工厂方法,例如{@link javautilstreamStream#of(Object [])},{@link javautilstreamIntStream#range(int,int)}
+ * 或{@link javumeilstreamStream#iterate(Object,UnaryOperator)}; </li> <li>文件的行可以从{@link javaioBufferedReader#lines()}
+ * 获取; </li> <li> {@link javaniofileFiles}中的方法; </li> <li>随机数字流可以从{@link javautilRandom#ints()}; </li> <li>
+ *  JDK中的众多其他流方法,包括{@link javautilBitSet#stream()},{@link javautilregex模式#splitAsStream(javalangCharSequence)}
+ * 和{@link javautiljarJarFile#stream()} </li>。
+ * </ul>
+ * 
+ * <p>其他流源可以使用<a href=\"package-summaryhtml#StreamSources\">这些技术</a>由第三方库提供。
+ * 
+ *  <h2> <a name=\"StreamOps\">流操作和管道</a> </h2>
+ * 
+ *  <p>流操作被分为<em>中间</em>和<em>终端</em>操作,并且被组合以形成流管线</em>流管道包括源作为{@code Collection},数组,生成函数或I / O通道);之后是零个
+ * 或多个中间操作,例如{@code Streamfilter}或{@code Streammap};和诸如{@code StreamforEach}或{@code Streamreduce}的终端操作,。
+ * 
+ * <p>中间操作返回一个新流它们总是<l>延迟</em>;执行诸如{@code filter()}之类的中间操作实际上不执行任何过滤,而是创建一个新流,当遍历时,它包含与给定谓词匹配的初始流的元素。
+ * 流水线源的遍历不会开始直到执行流水线的终端操作。
+ * 
+ * <p>终端操作,例如{@code StreamforEach}或{@code IntStreamsum}可能会遍历流以产生结果或副作用。
+ * 执行终端操作后,流管道被视为已消耗,并且不能更长时间使用;如果需要再次遍历相同的数据源,则必须返回到数据源以获得新流。
+ * 在几乎所有情况下,终端操作都是<em> eager </em>,完成它们对数据源的遍历和处理返回的流水线只有终端操作{@code iterator()}和{@code spliterator()}不是;
+ * 这些被提供作为"逃逸舱口"以在现有操作不足以满足任务的情况下实现任意客户机控制的流水线遍历。
+ * 执行终端操作后,流管道被视为已消耗,并且不能更长时间使用;如果需要再次遍历相同的数据源,则必须返回到数据源以获得新流。
+ * 
+ * <p>处理流延迟允许显着的效率;在诸如上面的filter-map-sum示例的管线中,过滤,映射和求和可以被融合到具有最小中间状态的数据上的单次通过中,也允许避免在不必要时检查所有数据;对于诸如"找到长
+ * 度超过1000个字符的第一个字符串"这样的操作,只需要检查足够多的字符串以找到具有所需特性的字符串,而不必检查源中的所有可用字符串(此行为在以下情况下变得更加重要：输入流是无限的,而不仅仅是大的)。
+ * 
+ * <p>中间操作进一步划分为无状态操作和有状态操作等无状态操作,例如{@code filter}和{@code map},保留了以前看不到的状态元素 - 每个元素可以独立于其他元素上的操作进行处理有状态操
+ * 作(例如{@code distinct}和{@code sorted})可以合并来自先前看到的元素的状态,当处理新元素时。
+ * 
+ * <p>状态操作可能需要在产生结果之前处理整个输入。例如,在已经看到流的所有元素之前,不能产生来自对流进行排序的任何结果。
+ * 作为结果,在并行计算下,包含状态中间体操作可能需要对数据进行多次传递,或者可能需要缓冲有效数据。仅包含无状态中间操作的流水线可以在单次传递中处理,无论是顺序传输还是并行传输,只需最少的数据缓冲。
+ * 
+ * <p>此外,一些操作被认为是短路操作中间操作是短路的,如果当呈现无限输入时,其可以产生有限流作为结果A终端操作是短暂的,如果当呈现无限输入时,它可以在有限时间内终止。
+ * 在流水线中具有短路操作是用于处理无限流以在有限时间内正常终止的必要但不充分的条件。
+ * 
+ *  <h3>并行性</h3>
+ * 
+ * 具有显式{@code for-}循环的处理元素本质上是串行流通过将计算重构为聚合操作的管道而不是作为每个单独元素上的命令操作来促进并行执行。
+ * 所有流操作可以以串行或并行除非显式请求并行性,否则JDK中的流实现创建串行流例如,{@code Collection}具有{@link javautilCollection#stream}和{@link javautilCollection#parallelStream}
+ * 方法,它们分别产生顺序流和并行流;其他流方法如{@link javautilstreamIntStream#range(int,int)}产生顺序流,但是这些流可以通过调用它们的{@link javautilstreamBaseStream#parallel()}
+ * 方法要并行执行先前的"小部件的权重和"查询,我们将：。
+ * 具有显式{@code for-}循环的处理元素本质上是串行流通过将计算重构为聚合操作的管道而不是作为每个单独元素上的命令操作来促进并行执行。
+ * 
+ * <pre> {@ code int sumOfWeights = widgets} <code> <b> parallelStream()</b> </code> {@ code filter(b  - > bgetColor()== RED)mapToInt(b  - > bgetWeight ))sum(); }
+ *  </pre>。
+ * 
+ * <p>此示例的串行和并行版本之间的唯一区别是使用"{@code parallelStream()}"而不是"{@code stream()}"创建初始流。
+ * 当终端操作启动时,流管线根据其被调用的流的方向顺序地或并行地执行。
+ * 流是否将以串行或并行方式执行可以用{@code isParallel()}方法来确定,并且a可以使用{@link javautilstreamBaseStream#sequential()}和{@link javautilstreamBaseStream#parallel()}
+ * 操作修改流。
+ * 当终端操作启动时,流管线根据其被调用的流的方向顺序地或并行地执行。当终端操作被启动时,流管道根据流的模式被顺序地或并行地执行它被调用。
+ * 
+ * <p>除了标识为显式非确定性的操作(如{@code findAny()}),流是顺序执行还是并行执行不应改变计算结果
+ * 
+ *  <p>大多数流操作接受描述用户指定行为(通常是lambda表达式)的参数。为了保持正确的行为,这些行为参数必须是<em>无干扰的<em> </em>大多数情况下必须是<em>无状态的</em>。
+ * 此类参数始终是<a href=\"/function/package-summaryhtml\">功能界面</a>的实例,例如{@link javautilfunctionFunction},通常是la
+ * mbda表达式或方法引用。
+ *  <p>大多数流操作接受描述用户指定行为(通常是lambda表达式)的参数。为了保持正确的行为,这些行为参数必须是<em>无干扰的<em> </em>大多数情况下必须是<em>无状态的</em>。
+ * 
+ *  <h3> <a name=\"NonInterference\">无干扰</a> </h3>
+ * 
+ * Streams使您能够在各种数据源上执行可能并行的聚合操作,甚至包括非线程安全的收集,例如{@code ArrayList}。
+ * 这是可能的,只有当我们可以防止<em>干扰</em>数据源在执行流流水线期间除了escape-hatch操作{@code iterator()}和{@code spliterator()},执行在终端操
+ * 作被调用时开始,并在终端操作完成时结束。
+ * Streams使您能够在各种数据源上执行可能并行的聚合操作,甚至包括非线程安全的收集,例如{@code ArrayList}。对于大多数数据源,防止干扰意味着确保在流管线的执行期间数据源根本不被修改。
+ * 值得注意的异常是其源是并发收集的流,其被专门设计为处理并发修改并发流源是{@code Spliterator}报告{@code CONCURRENT}特性的流。
+ * 
+ * 因此,源流可能不并发的流管线中的行为参数应该永不修改流的数据源。
+ * 如果行为参数修改或导致非并发数据源干扰,则该行为参数被称为干扰</em>待修改,流的数据源对非干扰的需要适用于所有流水线,而不仅仅是并行流。
+ * 除非流源是并发的,否则在流流水线的执行期间修改流的数据源可能导致异常,不正确的答案或不一致行为。
+ * 
+ *  对于行为良好的流源,可以在终端操作开始之前修改源,并且这些修改将反映在覆盖的元素中例如,考虑以下代码：
+ * 
+ * <pre> {@ code List <String> l = new ArrayList(ArraysasList("one","two")); Stream <String> sl = lstream(); ladd("three"); String s = slcollect(join("")); }
+ *  </pre>。
+ * 
+ * 首先创建一个由两个字符串组成的列表："one";和"two"然后从该列表创建流接下来,通过添加第三个字符串修改列表："three"最后,流的元素被收集并连接在一起因为列表在终端之前被修改{@code collect}
+ * 操作开始的结果将是一个字符串"一二三"所有从JDK集合返回的流和大多数其他JDK类,以这种方式表现良好;对于由其他库生成的流,请参阅<a href=\"package-summaryhtml#StreamSources\">
+ * 低级流构造</a>了解构建良性流的要求。
+ * 
+ *  <h3> <a name=\"Statelessness\">无状态行为</a> </h3>
+ * 
+ * 如果流操作的行为参数是有状态的,则流管道结果可能是非确定性的或不正确的。
+ * 有状态的lambda(或实现适当的功能接口的其他对象)是其结果取决于可能在任何状态流管道的执行有状态lambda的一个例子是{@code map()}中的参数：。
+ * 
+ *  <pre> {@ code Set <Integer> seen = CollectionssynchronizedSet(new HashSet <>()); streamparallel()map(e  - > {if(seenadd(e))return 0; else return e;}
+ * )} </pre>。
+ * 
+ * 这里,如果并行执行映射操作,则由于线程调度差异,相同输入的结果可能随运行而变化,而对于无状态lambda表达式,结果将总是相同的
+ * 
+ *  <p>请注意,尝试从行为参数访问可变状态在安全性和性能方面给您带来不好的选择;如果你不同步访问该状态,你有一个数据竞争,因此你的代码被打破了,但如果你同步访问该状态,你有冒险争夺破坏你想要受益的并行性
+ * 最好的方法是避免状态行为参数完全流化操作;通常有一种方法来重构流管道以避免状态。
+ * 
+ * <h3>副作用</h3>
+ * 
+ *  通常,不鼓励流操作的行为参数的副作用,因为它们通常会导致无意识地违反无状态要求以及其他线程安全危害
+ * 
+ * <p>如果行为参数有副作用,除非明确说明,否则不能保证<a href=\"/concurrent/package-summaryhtml#MemoryVisibility\"> <i>公开程度</i> 
+ * </a >那些副作用到其他线程,也没有任何保证在同一流水线内的"相同"元素上的不同操作在同一线程中执行。
+ * 另外,这些效果的排序可能是令人惊讶的即使当管道是约束以产生与流源的遭遇顺序一致的<em>结果</em>(例如,{@code IntStreamrange(0,5)parallel()map(x→x * 2)toArray()}
+ * 必须产生{@code [0,2,4,6,8]}),不保证映射器函数应用于单个元素的顺序,或在什么线程中任何行为参数对给定元素执行。
+ * 
+ * <p>许多计算可能会更倾向于使用副作用,而不会产生副作用,例如使用<a href=\"package-summaryhtml#Reduction\">缩减</a>,而不是可变累加器但是,使用{@code println()}
+ * 进行调试的副作用通常是无害的。
+ * 少量的流操作,例如{@code forEach()}和{@code peek()}只能通过副作用;这些应该小心使用。
+ * 
+ *  <p>作为如何将不适当使用副作用的流管道转换为不具有副作用的流管道的示例,以下代码搜索字符串流以查找与给定正则表达式匹配的字符串,并将匹配项放在列表中
+ * 
+ * <pre> {@ code ArrayList <String> results = new ArrayList <>(); streamfilter(s  - > patternmatcher(s)matches())forEach(s  - > resultsadd(s)); //不必要的使用副作用！ }
+ *  </pre>。
+ * 
+ *  此代码不必要地使用副作用如果并行执行,{@code ArrayList}的非线程安全性将导致不正确的结果,并且添加所需的同步会导致争用,破坏并行性的好处此外,使用副作用这里是完全不必要{@code forEach()}
+ * 可以简单地替换为更安全,更高效,更适合并行化的简化操作：。
+ * 
+ *  <pre> {@ code List <String> results = streamfilter(s  - > patternmatcher(s)matches())collect(CollectorstoList()); // 无副作用！ }
+ *  </pre>。
+ * 
+ * <h3> <a name=\"Ordering\">订购</a> </h3>
+ * 
+ *  <p>流可能有也可能没有定义的<em>遭遇顺序</em>流是否有遭遇顺序取决于源和中间操作某些流源(例如{@code List}或数组)是固有排序的,而其他的(例如{@code HashSet})不是
+ * 某些中间操作,例如{@code sorted()},可以在其他未排序的流上施加遇到命令,而其他可以渲染有序流无序的,例如{@link javautilstreamBaseStream#unordered()}
+ * 此外,一些终端操作可以忽略遇到顺序,例如{@code forEach()}。
+ * 
+ * <p>如果流是有序的,大多数操作都被限制为对它们遇到顺序中的元素进行操作;如果流的源是包含{@code [1,2,3]}的{@code List},则执行{@code map(x-> x * 2)}的结
+ * 果必须是{@code [ 2,4,6]}但是,如果源没有定义的遭遇顺序,那么值{@code [2,4,6]}的任何置换都将是有效的结果。
+ * 
  * @since 1.8
  */
 package java.util.stream;

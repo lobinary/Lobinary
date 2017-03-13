@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -27,6 +28,9 @@
  * RMI-IIOP v1.0
  * Copyright IBM Corp. 1998 1999  All Rights Reserved
  *
+ * <p>
+ *  许可的材料 -  IBM RMI-IIOP v10的属性版权所有IBM Corp 1998 1999保留所有权利
+ * 
  */
 
 package com.sun.corba.se.impl.orbutil;
@@ -72,6 +76,11 @@ import com.sun.corba.se.impl.io.ObjectStreamClass;
  * We have to duplicate it since we aren't allowed to modify the
  * com.sun.corba.se.impl.io version further, and can't make it
  * public outside of its package for security reasons.
+ * <p>
+ *  这里重复这里,以保留JDK 131FCS行为,当使用serialPersistentFields时计算OMG哈希代码不正确,但是一些字段不再存在于类本身中
+ * 
+ *  我们必须复制它,因为我们不允许进一步修改comsuncorbaseimplio版本,并且由于安全原因不能将其公开在其包之外
+ * 
  */
 /**
  * A ObjectStreamClass_1_3_1 describes a class that can be serialized to a stream
@@ -81,6 +90,12 @@ import com.sun.corba.se.impl.io.ObjectStreamClass;
  * The ObjectStreamClass_1_3_1 for a specific class loaded in this Java VM can
  * be found using the lookup method.
  *
+ * <p>
+ * ObjectStreamClass_1_3_1描述了一个可以序列化到流或被序列化到流的类的类。它包含类的名称和serialVersionUID
+ * <br>
+ *  可以使用lookup方法找到在此Java VM中加载的特定类的ObjectStreamClass_1_3_1
+ * 
+ * 
  * @author  Roger Riggs
  * @since   JDK1.1
  */
@@ -96,6 +111,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
     /** Find the descriptor for a class that can be serialized.  Null
      * is returned if the specified class does not implement
      * java.io.Serializable or java.io.Externalizable.
+     * <p>
+     *  如果指定的类不实现javaioSerializable或javaioExternalizable,则返回
+     * 
      */
     static final ObjectStreamClass_1_3_1 lookup(Class<?> cl)
     {
@@ -108,11 +126,17 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
     /*
      * Find the class descriptor for the specified class.
      * Package access only so it can be called from ObjectIn/OutStream.
+     * <p>
+     *  找到指定类的类描述符,只有包访问,所以它可以从ObjectIn / OutStream中调用
+     * 
      */
     static ObjectStreamClass_1_3_1 lookupInternal(Class<?> cl)
     {
         /* Synchronize on the hashtable so no two threads will do
          * this at the same time.
+         * <p>
+         *  这个在同一时间
+         * 
          */
         ObjectStreamClass_1_3_1 desc = null;
         synchronized (descriptorFor) {
@@ -126,6 +150,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
                 boolean serializable = Serializable.class.isAssignableFrom(cl);
                 /* If the class is only Serializable,
                  * lookup the descriptor for the superclass.
+                 * <p>
+                 *  查找超类的描述符
+                 * 
                  */
                 ObjectStreamClass_1_3_1 superdesc = null;
                 if (serializable) {
@@ -137,6 +164,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
                 /* Check if its' externalizable.
                  * If it's Externalizable, clear the serializable flag.
                  * Only one or the other may be set in the protocol.
+                 * <p>
+                 *  如果它是Externalizable,清除serializable标志在协议中只能设置一个或另一个
+                 * 
                  */
                 boolean externalizable = false;
                 if (serializable) {
@@ -150,6 +180,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
 
             /* Create a new version descriptor,
              * it put itself in the known table.
+             * <p>
+             *  它把自己放在已知的表中
+             * 
              */
             desc = new ObjectStreamClass_1_3_1(cl, superdesc,
                                          serializable, externalizable);
@@ -160,6 +193,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
 
     /**
      * The name of the class described by this descriptor.
+     * <p>
+     *  此描述符描述的类的名称
+     * 
      */
     public final String getName() {
         return name;
@@ -170,6 +206,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
      * The serialVersionUID defines a set of classes all with the same name
      * that have evolved from a common root class and agree to be serialized
      * and deserialized using a common format.
+     * <p>
+     * 返回此类的serialVersionUID serialVersionUID定义了一组类,它们都具有相同的名称,这些类从公共根类演化而来,并且同意使用公共格式进行序列化和反序列化
+     * 
      */
     public static final long getSerialVersionUID( java.lang.Class<?> clazz) {
         ObjectStreamClass_1_3_1 theosc = ObjectStreamClass_1_3_1.lookup( clazz );
@@ -185,6 +224,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
      * The serialVersionUID defines a set of classes all with the same name
      * that have evolved from a common root class and agree to be serialized
      * and deserialized using a common format.
+     * <p>
+     *  返回此类的serialVersionUID serialVersionUID定义了一组类,它们都具有相同的名称,这些类从公共根类演化而来,并且同意使用公共格式进行序列化和反序列化
+     * 
      */
     public final long getSerialVersionUID() {
         return suid;
@@ -195,6 +237,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
      * The serialVersionUID defines a set of classes all with the same name
      * that have evolved from a common root class and agree to be serialized
      * and deserialized using a common format.
+     * <p>
+     *  返回此类的serialVersionUID字符串serialVersionUID定义了一组类,它们具有相同的名称,这些类从公共根类演化而来,并且同意使用公共格式进行序列化和反序列化
+     * 
      */
     public final String getSerialVersionUIDStr() {
         if (suidStr == null)
@@ -204,6 +249,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
 
     /**
      * Return the actual (computed) serialVersionUID for this class.
+     * <p>
+     *  返回此类的实际(计算)serialVersionUID
+     * 
      */
     public static final long getActualSerialVersionUID( java.lang.Class<?> clazz )
     {
@@ -217,6 +265,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
 
     /**
      * Return the actual (computed) serialVersionUID for this class.
+     * <p>
+     * 返回此类的实际(计算)serialVersionUID
+     * 
      */
     public final long getActualSerialVersionUID() {
         return actualSuid;
@@ -224,6 +275,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
 
     /**
      * Return the actual (computed) serialVersionUID for this class.
+     * <p>
+     *  返回此类的实际(计算)serialVersionUID
+     * 
      */
     public final String getActualSerialVersionUIDStr() {
         if (actualSuidStr == null)
@@ -234,6 +288,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
     /**
      * Return the class in the local VM that this version is mapped to.
      * Null is returned if there is no corresponding local class.
+     * <p>
+     *  如果没有相应的本地类,则返回本版本映射到Null的本地VM中的类
+     * 
      */
     public final Class<?> forClass() {
         return ofClass;
@@ -241,6 +298,10 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
 
     /**
      * Return an array of the fields of this serializable class.
+     * <p>
+     *  返回此可序列化类的字段的数组
+     * 
+     * 
      * @return an array containing an element for each persistent
      * field of this class. Returns an array of length zero if
      * there are no fields.
@@ -279,11 +340,16 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
 
     /**
      * Get the field of this class by name.
+     * <p>
+     *  按名称获取此类的字段
+     * 
+     * 
      * @return The ObjectStreamField object of the named field or null if there
      * is no such named field.
      */
     public final ObjectStreamField getField(String name) {
         /* Binary search of fields by name.
+        /* <p>
          */
         for (int i = fields.length-1; i >= 0; i--) {
             if (name.equals(fields[i].getName())) {
@@ -319,6 +385,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
 
     /**
      * Return a string describing this ObjectStreamClass_1_3_1.
+     * <p>
+     *  返回一个描述此ObjectStreamClass_1_3_1的字符串
+     * 
      */
     public final String toString() {
         StringBuffer sb = new StringBuffer();
@@ -333,6 +402,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
     /*
      * Create a new ObjectStreamClass_1_3_1 from a loaded class.
      * Don't call this directly, call lookup instead.
+     * <p>
+     *  从加载的类创建一个新的ObjectStreamClass_1_3_1不要直接调用它,而是调用查找
+     * 
      */
     private ObjectStreamClass_1_3_1(java.lang.Class<?> cl, ObjectStreamClass_1_3_1 superdesc,
                               boolean serial, boolean extern)
@@ -355,6 +427,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
          * Enter this class in the table of known descriptors.
          * Otherwise, when the fields are read it may recurse
          * trying to find the descriptor for itself.
+         * <p>
+         *  在已知描述符的表中输入此类否则,当字段被读取时,它可能递归尝试找到它自己的描述符
+         * 
          */
         insertDescriptorFor(this);
 
@@ -362,6 +437,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
          * The remainder of initialization occurs in init(), which is called
          * after the lock on the global class descriptor table has been
          * released.
+         * <p>
+         *  初始化的剩余部分发生在init()中,init()在全局类描述符表上的锁释放之后调用
+         * 
          */
     }
 
@@ -371,6 +449,10 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
      * separate from the ObjectStreamClass_1_3_1 constructor so that lookupInternal
      * does not have to hold onto a global class descriptor table lock while the
      * class descriptor is being initialized (see bug 4165204).
+     * <p>
+     * 初始化类描述符此方法仅在通过调用lookupInternal()创建的类描述符上调用此方法与ObjectStreamClass_1_3_1构造函数保持分离,以便lookupInternal不必在初始化类
+     * 描述符时保持全局类描述符表锁定见错误4165204)。
+     * 
      */
 
 
@@ -391,12 +473,16 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
         } else if (serializable) {
 
             /* Ask for permission to override field access checks.
+            /* <p>
              */
             AccessController.doPrivileged(new PrivilegedAction() {
                 public Object run() {
                 /* Fill in the list of persistent fields.
                  * If it is declared, use the declared serialPersistentFields.
                  * Otherwise, extract the fields from the class itself.
+                 * <p>
+                 *  如果它被声明,使用声明的serialPersistentFields否则,从类本身提取字段
+                 * 
                  */
                 try {
                     Field pf = cl.getDeclaredField("serialPersistentFields");
@@ -423,6 +509,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
                 } catch (ClassCastException e) {
                     /* Thrown if a field serialPersistentField exists
                      * but it is not of type ObjectStreamField.
+                     * <p>
+                     *  但它不是ObjectStreamField类型
+                     * 
                      */
                     fields = null;
                 }
@@ -436,6 +525,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
                      * non-static, non-transient field. Then copy the
                      * temporary array into an array of the correct
                      * size once the number of fields is known.
+                     * <p>
+                     *  类setAccessible在所有字段上,以便以后可以访问它们创建一个临时ObjectStreamField数组来保存每个非静态,非瞬态字段然后,一旦字段数量已知,将临时数组复制到正确大小的数组中
+                     * 
                      */
                     Field[] actualfields = cl.getDeclaredFields();
 
@@ -485,6 +577,11 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
          * the field objects is only used here.
          *
          * NonSerializable classes have a serialVerisonUID of 0L.
+         * <p>
+         * 它使用访问覆盖机制,因此请确保字段对象仅在此处使用
+         * 
+         *  NonSerializable类的serialVerisonUID为0L
+         * 
          */
          if (isNonSerializable()) {
              suid = 0L;
@@ -550,6 +647,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
                 /* Cache lookup of writeObject and readObject for
                  * Serializable classes. (Do not lookup for
                  * Externalizable)
+                 * <p>
+                 *  可序列化类(不要查找Externalizable)
+                 * 
                  */
 
                 if (serializable && !forProxyClass) {
@@ -557,6 +657,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
                     /* Look for the writeObject method
                      * Set the accessible flag on it here. ObjectOutputStream
                      * will call it as necessary.
+                     * <p>
+                     *  设置其上的可访问标志,ObjectOutputStream将根据需要调用它
+                     * 
                      */
                     try {
                       Class<?>[] args = {java.io.ObjectOutputStream.class};
@@ -577,6 +680,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
                     /* Look for the readObject method
                      * set the access override and save the reference for
                      * ObjectInputStream so it can all the method directly.
+                     * <p>
+                     *  设置访问重写并保存ObjectInputStream的引用,所以它可以直接的所有方法
+                     * 
                      */
                     try {
                       Class<?>[] args = {java.io.ObjectInputStream.class};
@@ -609,6 +715,10 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
      * This is separate from read so ObjectInputStream can assign the
      * wire handle early, before any nested ObjectStreamClass_1_3_1 might
      * be read.
+     * <p>
+     *  为要读取的类创建一个空ObjectStreamClass_1_3_1这是与读取分开的,因此ObjectInputStream可以在任何嵌套的ObjectStreamClass_1_3_1可能被读取之前
+     * 提前分配wire句柄。
+     * 
      */
     ObjectStreamClass_1_3_1(String n, long s) {
         name = n;
@@ -655,6 +765,8 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
 
     /* Compare the base class names of streamName and localName.
      *
+     * <p>
+     * 
      * @return  Return true iff the base class name compare.
      * @parameter streamName    Fully qualified class name.
      * @parameter localName     Fully qualified class name.
@@ -682,6 +794,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
     /*
      * Compare the types of two class descriptors.
      * They match if they have the same class name and suid
+     * <p>
+     *  比较两个类描述符的类型如果它们具有相同的类名和suid,则它们匹配
+     * 
      */
     final boolean typeEquals(ObjectStreamClass_1_3_1 other) {
         return (suid == other.suid) &&
@@ -690,6 +805,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
 
     /*
      * Return the superclass descriptor of this descriptor.
+     * <p>
+     *  返回此描述符的超类描述符
+     * 
      */
     final void setSuperclass(ObjectStreamClass_1_3_1 s) {
         superclass = s;
@@ -697,6 +815,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
 
     /*
      * Return the superclass descriptor of this descriptor.
+     * <p>
+     * 返回此描述符的超类描述符
+     * 
      */
     final ObjectStreamClass_1_3_1 getSuperclass() {
         return superclass;
@@ -704,6 +825,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
 
     /*
      * Return whether the class has a writeObject method
+     * <p>
+     *  返回类是否有writeObject方法
+     * 
      */
     final boolean hasWriteObject() {
         return hasWriteObjectMethod;
@@ -733,6 +857,16 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
      *   disabled. This is enforced by not allowing the PROTOCOL_VERSION
      *   of a stream to he changed after any objects have been written.
      *
+     * <p>
+     *  如果'this'的所有实例都以块数据模式从从"<p>"读取的流中写入,则返回true;
+     * 
+     *  在JDK 11中,所有Externalizable实例都不是以块数据模式写入的在JDK 12中,默认情况下,所有Externalizable实例都以块数据模式写入,而Externalizable实例以
+     * 标签TC_ENDBLOCKDATA终止。
+     * Change允许跳过Externalizable实例。
+     * 
+     * 实现注意：这应该是每个流保持的模式;然而,出于兼容性原因,只能够记录每个类的更改所有可外部化类在给定流中应该启用或禁用此模式这是通过不允许流的PROTOCOL_VERSION在任何对象书面
+     * 
+     * 
      * @see ObjectOutputStream#useProtocolVersion
      * @see ObjectStreamConstants#PROTOCOL_VERSION_1
      * @see ObjectStreamConstants#PROTOCOL_VERSION_2
@@ -745,6 +879,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
 
     /*
      * Return the ObjectStreamClass_1_3_1 of the local class this one is based on.
+     * <p>
+     *  返回此对象所基于的本地类的ObjectStreamClass_1_3_1
+     * 
      */
     final ObjectStreamClass_1_3_1 localClassDescriptor() {
         return localClassDesc;
@@ -752,6 +889,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
 
     /*
      * Get the Serializability of the class.
+     * <p>
+     *  获取类的可串行化
+     * 
      */
     boolean isSerializable() {
         return serializable;
@@ -759,6 +899,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
 
     /*
      * Get the externalizability of the class.
+     * <p>
+     *  获得类的外向性
+     * 
      */
     boolean isExternalizable() {
         return externalizable;
@@ -772,6 +915,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
      * Calculate the size of the array needed to store primitive data and the
      * number of object references to read when reading from the input
      * stream.
+     * <p>
+     *  计算从输入流读取时存储基本数据所需的数组大小和要读取的对象引用数
+     * 
      */
     private void computeFieldInfo() {
         primBytes = 0;
@@ -869,6 +1015,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
 
                                 /* Include in the hash all fields except those that are
                                  * transient
+                                 * <p>
+                                 *  短暂的
+                                 * 
                                  */
                 int m = f.getModifiers();
                 //Serial 6
@@ -890,6 +1039,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
 
             /* Compute the hash value for this class.
              * Use only the first 64 bits of the hash.
+             * <p>
+             *  只使用散列的前64位
+             * 
              */
             data.flush();
             byte hasharray[] = md.digest();
@@ -910,6 +1062,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
 
     /**
      * Compute the JVM signature for the class.
+     * <p>
+     *  计算类的JVM签名
+     * 
      */
     static String getSignature(Class<?> clazz) {
         String type = null;
@@ -954,6 +1109,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
 
     /*
      * Compute the JVM method descriptor for the method.
+     * <p>
+     * 计算方法的JVM方法描述符
+     * 
      */
     static String getSignature(Method meth) {
         StringBuffer sb = new StringBuffer();
@@ -971,6 +1129,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
 
     /*
      * Compute the JVM constructor descriptor for the constructor.
+     * <p>
+     *  计算构造函数的JVM构造函数描述符
+     * 
      */
     static String getSignature(Constructor cons) {
         StringBuffer sb = new StringBuffer();
@@ -987,6 +1148,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
 
     /*
      * Cache of Class -> ClassDescriptor Mappings.
+     * <p>
+     *  类的缓存 - > ClassDescriptor映射
+     * 
      */
     static private ObjectStreamClassEntry[] descriptorFor = new ObjectStreamClassEntry[61];
 
@@ -996,6 +1160,10 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
      * of the Class is used for the lookup since the Class is the key.
      * The entries are extended from java.lang.ref.SoftReference so the
      * gc will be able to free them if needed.
+     * <p>
+     *  findDescriptorFor一个类在缓存中查找Class  - > ObjectStreamClass映射的映射Class的hashCode用于查找,因为类是关键字这些条目从javalangre
+     * fSoftReference扩展,因此gc将能够释放它们,如果需要的话。
+     * 
      */
     private static ObjectStreamClass_1_3_1 findDescriptorFor(Class<?> cl) {
 
@@ -1011,6 +1179,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
 
         /* Traverse the chain looking for a descriptor with ofClass == cl.
          * unlink entries that are unresolved.
+         * <p>
+         *  取消链接未解析的条目
+         * 
          */
         prev = e;
         while (e != null ) {
@@ -1030,6 +1201,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
 
     /*
      * insertDescriptorFor a Class -> ObjectStreamClass_1_3_1 mapping.
+     * <p>
+     *  insertDescriptorFor一个Class  - > ObjectStreamClass_1_3_1映射
+     * 
      */
     private static void insertDescriptorFor(ObjectStreamClass_1_3_1 desc) {
         // Make sure not already present
@@ -1055,16 +1229,25 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
 
     /*
      * The name of this descriptor
+     * <p>
+     *  此描述符的名称
+     * 
      */
     private String name;
 
     /*
      * The descriptor of the supertype.
+     * <p>
+     *  超类型的描述符
+     * 
      */
     private ObjectStreamClass_1_3_1 superclass;
 
     /*
      * Flags for Serializable and Externalizable.
+     * <p>
+     *  可序列化和可外部化的标志
+     * 
      */
     private boolean serializable;
     private boolean externalizable;
@@ -1072,28 +1255,43 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
     /*
      * Array of persistent fields of this class, sorted by
      * type and name.
+     * <p>
+     *  该类的持久字段数组,按类型和名称排序
+     * 
      */
     private ObjectStreamField[] fields;
 
     /*
      * Class that is a descriptor for in this virtual machine.
+     * <p>
+     *  作为此虚拟机中的描述符的类
+     * 
      */
     private Class<?> ofClass;
 
     /*
      * True if descriptor for a proxy class.
+     * <p>
+     * 如果代理类的描述符为True
+     * 
      */
     boolean forProxyClass;
 
 
     /*
      * SerialVersionUID for this class.
+     * <p>
+     *  此类的SerialVersionUID
+     * 
      */
     private long suid = kDefaultUID;
     private String suidStr = null;
 
     /*
      * Actual (computed) SerialVersionUID for this class.
+     * <p>
+     *  此类的实际(计算)SerialVersionUID
+     * 
      */
     private long actualSuid = kDefaultUID;
     private String actualSuidStr = null;
@@ -1101,6 +1299,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
     /*
      * The total number of bytes of primitive fields.
      * The total number of object fields.
+     * <p>
+     *  基本字段的字节总数对象字段的总数
+     * 
      */
     int primBytes;
     int objFields;
@@ -1115,6 +1316,10 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
      * As of JDK 1.2, external data is written in block data mode. This
      * flag enables JDK 1.2 to be able to read JDK 1.1 written external data.
      *
+     * <p>
+     *  从JDK 12开始,外部数据以块数据模式写入此标志使JDK 12能够读取JDK 11写入的外部数据
+     * 
+     * 
      * @since JDK 1.2
      */
     private boolean hasExternalizableBlockData;
@@ -1125,6 +1330,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
 
     /*
      * ObjectStreamClass_1_3_1 that this one was built from.
+     * <p>
+     *  ObjectStreamClass_1_3_1这个是从中构建的
+     * 
      */
     private ObjectStreamClass_1_3_1 localClassDesc;
 
@@ -1137,6 +1345,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
     /**
      * Set serialPersistentFields of a Serializable class to this value to
      * denote that the class has no Serializable fields.
+     * <p>
+     *  将Serializable类的serialPersistentFields设置为此值,以表示该类没有可序列化字段
+     * 
      */
     public static final ObjectStreamField[] NO_FIELDS =
         new ObjectStreamField[0];
@@ -1144,6 +1355,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
     /*
      * Entries held in the Cache of known ObjectStreamClass_1_3_1 objects.
      * Entries are chained together with the same hash value (modulo array size).
+     * <p>
+     *  保存在已知ObjectStreamClass_1_3_1对象的Cache中的条目条目与相同的哈希值(模数组大小)
+     * 
      */
     private static class ObjectStreamClassEntry // extends java.lang.ref.SoftReference
     {
@@ -1162,6 +1376,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
 
     /*
      * Comparator object for Classes and Interfaces
+     * <p>
+     *  类和接口的比较器对象
+     * 
      */
     private static Comparator compareClassByName =
         new CompareClassByName();
@@ -1176,6 +1393,9 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
 
     /*
      * Comparator object for Members, Fields, and Methods
+     * <p>
+     *  成员,字段和方法的比较器对象
+     * 
      */
     private static Comparator compareMemberByName =
         new CompareMemberByName();
@@ -1197,14 +1417,20 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
     }
 
     /* It is expensive to recompute a method or constructor signature
+    /* <p>
+    /* 
        many times, so compute it only once using this data structure. */
     private static class MethodSignature implements Comparator {
         Member member;
         String signature;      // cached parameter signature
 
         /* Given an array of Method or Constructor members,
+        /* <p>
+        /* 
            return a sorted array of the non-private members.*/
         /* A better implementation would be to implement the returned data
+        /* <p>
+        /* 
            structure as an insertion sorted link list.*/
         static MethodSignature[] removePrivateAndSort(Member[] m) {
             int numNonPrivate = 0;
@@ -1227,6 +1453,8 @@ public class ObjectStreamClass_1_3_1 implements java.io.Serializable {
         }
 
         /* Assumes that o1 and o2 are either both methods
+        /* <p>
+        /* 
            or both constructors.*/
         public int compare(Object o1, Object o2) {
             /* Arrays.sort calls compare when o1 and o2 are equal.*/

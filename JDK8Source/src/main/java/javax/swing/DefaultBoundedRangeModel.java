@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -41,6 +42,13 @@ import java.util.EventListener;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  BoundedRangeModel的通用实现
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将不与未来的Swing版本兼容当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ * 支持长期存储所有JavaBeans&trade;已添加到<code> javabeans </code>包中请参见{@link javabeansXMLEncoder}。
+ * 
+ * 
  * @author David Kloba
  * @author Hans Muller
  * @see BoundedRangeModel
@@ -51,6 +59,9 @@ public class DefaultBoundedRangeModel implements BoundedRangeModel, Serializable
      * Only one <code>ChangeEvent</code> is needed per model instance since the
      * event's only (read-only) state is the source property.  The source
      * of events generated here is always "this".
+     * <p>
+     *  由于事件的唯一(只读)状态是源属性,因此每个模型实例只需要一个<code> ChangeEvent </code>。此处生成的事件源始终为"this"
+     * 
      */
     protected transient ChangeEvent changeEvent = null;
 
@@ -74,6 +85,12 @@ public class DefaultBoundedRangeModel implements BoundedRangeModel, Serializable
      * <li><code>maximum</code> = 100
      * <li><code>adjusting</code> = false
      * </ul>
+     * <p>
+     * 使用默认值初始化所有属性这些值为：
+     * <ul>
+     *  <li> <code> value </code> = 0 <li> <code> extent </code> = 0 <li> <code> = 100 <li> <code>调整</code> 
+     * = false。
+     * </ul>
      */
     public DefaultBoundedRangeModel() {
     }
@@ -85,6 +102,11 @@ public class DefaultBoundedRangeModel implements BoundedRangeModel, Serializable
      * constraints aren't satisfied:
      * <pre>
      * min &lt;= value &lt;= value+extent &lt;= max
+     * </pre>
+     * <p>
+     *  初始化值,范围,最小值和最大值调整为false如果不满足以下约束,则抛出<code> IllegalArgumentException </code>：
+     * <pre>
+     *  min <= value <= value + extent <= max
      * </pre>
      */
     public DefaultBoundedRangeModel(int value, int extent, int min, int max)
@@ -106,6 +128,10 @@ public class DefaultBoundedRangeModel implements BoundedRangeModel, Serializable
 
     /**
      * Returns the model's current value.
+     * <p>
+     *  返回模型的当前值
+     * 
+     * 
      * @return the model's current value
      * @see #setValue
      * @see BoundedRangeModel#getValue
@@ -117,6 +143,10 @@ public class DefaultBoundedRangeModel implements BoundedRangeModel, Serializable
 
     /**
      * Returns the model's extent.
+     * <p>
+     *  返回模型的范围
+     * 
+     * 
      * @return the model's extent
      * @see #setExtent
      * @see BoundedRangeModel#getExtent
@@ -128,6 +158,10 @@ public class DefaultBoundedRangeModel implements BoundedRangeModel, Serializable
 
     /**
      * Returns the model's minimum.
+     * <p>
+     *  返回模型的最小值
+     * 
+     * 
      * @return the model's minimum
      * @see #setMinimum
      * @see BoundedRangeModel#getMinimum
@@ -139,6 +173,10 @@ public class DefaultBoundedRangeModel implements BoundedRangeModel, Serializable
 
     /**
      * Returns the model's maximum.
+     * <p>
+     *  返回模型的最大值
+     * 
+     * 
      * @return  the model's maximum
      * @see #setMaximum
      * @see BoundedRangeModel#getMaximum
@@ -156,6 +194,13 @@ public class DefaultBoundedRangeModel implements BoundedRangeModel, Serializable
      *     minimum &lt;= value &lt;= value+extent &lt;= maximum
      * </pre>
      *
+     * <p>
+     *  设置模型的当前值对于确定旋钮显示位置的滑块,确保新值<I> n </I>落在模型的约束内：
+     * <pre>
+     *  最小<=值<=值+范围<=最大
+     * </pre>
+     * 
+     * 
      * @see BoundedRangeModel#setValue
      */
     public void setValue(int n) {
@@ -176,6 +221,12 @@ public class DefaultBoundedRangeModel implements BoundedRangeModel, Serializable
      * <pre>
      *     minimum &lt;= value &lt;= value+extent &lt;= maximum
      * </pre>
+     * <p>
+     * 在确保<I> n </I>大于或等于零并落入模型的约束条件后,将范围设置为<I> n </I>
+     * <pre>
+     *  最小<=值<=值+范围<=最大
+     * </pre>
+     * 
      * @see BoundedRangeModel#setExtent
      */
     public void setExtent(int n) {
@@ -193,6 +244,12 @@ public class DefaultBoundedRangeModel implements BoundedRangeModel, Serializable
      * <pre>
      *     minimum &lt;= value &lt;= value+extent &lt;= maximum
      * </pre>
+     * <p>
+     *  确保<I> n </I>之后,其他三个属性遵守模型的约束,将最小值设置为<I> n </I>
+     * <pre>
+     *  最小<=值<=值+范围<=最大
+     * </pre>
+     * 
      * @see #getMinimum
      * @see BoundedRangeModel#setMinimum
      */
@@ -210,6 +267,12 @@ public class DefaultBoundedRangeModel implements BoundedRangeModel, Serializable
      * <pre>
      *     minimum &lt;= value &lt;= value+extent &lt;= maximum
      * </pre>
+     * <p>
+     *  在确保<I> n </I>之后,其他三个属性遵守模型的约束,将最大值设置为<I> n </I>
+     * <pre>
+     *  最小<=值<=值+范围<=最大
+     * </pre>
+     * 
      * @see BoundedRangeModel#setMaximum
      */
     public void setMaximum(int n) {
@@ -223,6 +286,10 @@ public class DefaultBoundedRangeModel implements BoundedRangeModel, Serializable
     /**
      * Sets the <code>valueIsAdjusting</code> property.
      *
+     * <p>
+     *  设置<code> valueIsAdjusting </code>属性
+     * 
+     * 
      * @see #getValueIsAdjusting
      * @see #setValue
      * @see BoundedRangeModel#setValueIsAdjusting
@@ -236,6 +303,10 @@ public class DefaultBoundedRangeModel implements BoundedRangeModel, Serializable
      * Returns true if the value is in the process of changing
      * as a result of actions being taken by the user.
      *
+     * <p>
+     *  如果值处于由用户执行的操作的结果而发生更改的过程中,则返回true
+     * 
+     * 
      * @return the value of the <code>valueIsAdjusting</code> property
      * @see #setValue
      * @see BoundedRangeModel#getValueIsAdjusting
@@ -254,6 +325,15 @@ public class DefaultBoundedRangeModel implements BoundedRangeModel, Serializable
      * <p>
      * At most, one <code>ChangeEvent</code> is generated.
      *
+     * <p>
+     * 在强制参数遵守通常的约束后,设置所有<code> BoundedRangeModel </code>属性：
+     * <pre>
+     *  最小<=值<=值+范围<=最大
+     * </pre>
+     * <p>
+     *  最多会生成一个<code> ChangeEvent </code>
+     * 
+     * 
      * @see BoundedRangeModel#setRangeProperties
      * @see #setValue
      * @see #setExtent
@@ -276,6 +356,9 @@ public class DefaultBoundedRangeModel implements BoundedRangeModel, Serializable
         /* Convert the addends to long so that extent can be
          * Integer.MAX_VALUE without rolling over the sum.
          * A JCK test covers this, see bug 4097718.
+         * <p>
+         *  IntegerMAX_VALUE无需滚动总和JCK测试涵盖了这一点,请参见错误4097718
+         * 
          */
         if (((long)newExtent + (long)newValue) > newMax) {
             newExtent = newMax - newValue;
@@ -308,6 +391,10 @@ public class DefaultBoundedRangeModel implements BoundedRangeModel, Serializable
      * Adds a <code>ChangeListener</code>.  The change listeners are run each
      * time any one of the Bounded Range model properties changes.
      *
+     * <p>
+     *  添加一个<code> ChangeListener </code>每次有边界范围模型属性更改时,都会运行更改侦听器
+     * 
+     * 
      * @param l the ChangeListener to add
      * @see #removeChangeListener
      * @see BoundedRangeModel#addChangeListener
@@ -320,6 +407,10 @@ public class DefaultBoundedRangeModel implements BoundedRangeModel, Serializable
     /**
      * Removes a <code>ChangeListener</code>.
      *
+     * <p>
+     *  删除<code> ChangeListener </code>
+     * 
+     * 
      * @param l the <code>ChangeListener</code> to remove
      * @see #addChangeListener
      * @see BoundedRangeModel#removeChangeListener
@@ -333,6 +424,10 @@ public class DefaultBoundedRangeModel implements BoundedRangeModel, Serializable
      * Returns an array of all the change listeners
      * registered on this <code>DefaultBoundedRangeModel</code>.
      *
+     * <p>
+     *  返回在此<code> DefaultBoundedRangeModel </code>上注册的所有更改侦听器的数组
+     * 
+     * 
      * @return all of this model's <code>ChangeListener</code>s
      *         or an empty
      *         array if no change listeners are currently registered
@@ -350,6 +445,10 @@ public class DefaultBoundedRangeModel implements BoundedRangeModel, Serializable
     /**
      * Runs each <code>ChangeListener</code>'s <code>stateChanged</code> method.
      *
+     * <p>
+     *  运行每个<code> ChangeListener </code>的<code> stateChanged </code>方法
+     * 
+     * 
      * @see #setRangeProperties
      * @see EventListenerList
      */
@@ -370,6 +469,9 @@ public class DefaultBoundedRangeModel implements BoundedRangeModel, Serializable
     /**
      * Returns a string that displays all of the
      * <code>BoundedRangeModel</code> properties.
+     * <p>
+     *  返回显示所有<code> BoundedRangeModel </code>属性的字符串
+     * 
      */
     public String toString()  {
         String modelString =
@@ -401,6 +503,13 @@ public class DefaultBoundedRangeModel implements BoundedRangeModel, Serializable
      * If no such listeners exist,
      * this method returns an empty array.
      *
+     * <p>
+     * 返回当前注册为<code> <em> Foo </em>侦听器</code>的所有对象的数组</code>在此模型<code> <em> </em> <code>添加<em> </em>侦听器</code>
+     * 方法。
+     * <p>
+     *  您可以使用类文字指定<code> listenerType </code>参数,例如<code> <em> Foo </em> Listenerclass </code>例如,可以查询<code> D
+     * efaultBoundedRangeModel </code > instance <code> m </code>为其更改监听器使用以下代码：。
+     * 
      * @param listenerType  the type of listeners requested;
      *          this parameter should specify an interface
      *          that descends from <code>java.util.EventListener</code>

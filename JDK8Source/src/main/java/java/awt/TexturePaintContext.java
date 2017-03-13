@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -193,6 +194,9 @@ abstract class TexturePaintContext implements PaintContext {
 
     /**
      * Release the resources allocated for the operation.
+     * <p>
+     *  释放为操作分配的资源
+     * 
      */
     public void dispose() {
         dropRaster(colorModel, outRas);
@@ -200,6 +204,9 @@ abstract class TexturePaintContext implements PaintContext {
 
     /**
      * Return the ColorModel of the output.
+     * <p>
+     *  返回输出的ColorModel
+     * 
      */
     public ColorModel getColorModel() {
         return colorModel;
@@ -208,6 +215,10 @@ abstract class TexturePaintContext implements PaintContext {
     /**
      * Return a Raster containing the colors generated for the graphics
      * operation.
+     * <p>
+     *  返回包含为图形操作生成的颜色的栅格
+     * 
+     * 
      * @param x,y,w,h The area in device space for which colors are
      * generated.
      */
@@ -334,6 +345,11 @@ abstract class TexturePaintContext implements PaintContext {
      * logically less than 1.0.  This makes sense because while choosing
      * pixels to blend, when the error values reach 1.0 we move to the
      * next pixel and reset them to 0.0.
+     * <p>
+     *  使用由xmul和ymul描述的因子以下列比例将rgbs数组中的四个ARGB值进行混合：
+     * 
+     *  rgbs [0] *(1-xmul)*(1-ymul)+ rgbs [1] *(xmul)*(1-ymul)+ rgbs [2] *(1-xmul)* ] *(xmul)*(ymul)
+     * 
      */
     public static int blend(int rgbs[], int xmul, int ymul) {
         // xmul/ymul are 31 bits wide, (0 => 2^31-1)

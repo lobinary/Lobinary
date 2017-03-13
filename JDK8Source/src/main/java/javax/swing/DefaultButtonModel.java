@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -43,6 +44,13 @@ import javax.swing.event.*;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  组件的数据模型中默认实现了一个<code> Button </code>
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将不与未来的Swing版本兼容当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ * 支持长期存储所有JavaBeans&trade;已添加到<code> javabeans </code>包中请参见{@link javabeansXMLEncoder}。
+ * 
+ * 
  * @author Jeff Dinkins
  */
 public class DefaultButtonModel implements ButtonModel, Serializable {
@@ -63,6 +71,9 @@ public class DefaultButtonModel implements ButtonModel, Serializable {
      * Only one <code>ChangeEvent</code> is needed per button model
      * instance since the event's only state is the source property.
      * The source of events generated is always "this".
+     * <p>
+     * 因为事件的唯一状态是源属性,所以每个按钮模型实例只需要一个<code> ChangeEvent </code>。生成的事件源始终是"this"
+     * 
      */
     protected transient ChangeEvent changeEvent = null;
 
@@ -76,6 +87,9 @@ public class DefaultButtonModel implements ButtonModel, Serializable {
     /**
      * Constructs a <code>DefaultButtonModel</code>.
      *
+     * <p>
+     *  构造一个<code> DefaultButtonModel </code>
+     * 
      */
     public DefaultButtonModel() {
         stateMask = 0;
@@ -86,6 +100,9 @@ public class DefaultButtonModel implements ButtonModel, Serializable {
      * Identifies the "armed" bit in the bitmask, which
      * indicates partial commitment towards choosing/triggering
      * the button.
+     * <p>
+     *  标识位掩码中的"已设置"位,表示部分承诺选择/触发按钮
+     * 
      */
     public final static int ARMED = 1 << 0;
 
@@ -93,12 +110,18 @@ public class DefaultButtonModel implements ButtonModel, Serializable {
      * Identifies the "selected" bit in the bitmask, which
      * indicates that the button has been selected. Only needed for
      * certain types of buttons - such as radio button or check box.
+     * <p>
+     *  标识位掩码中的"选定"位,表示已选择按钮仅某些类型的按钮需要 - 例如单选按钮或复选框
+     * 
      */
     public final static int SELECTED = 1 << 1;
 
     /**
      * Identifies the "pressed" bit in the bitmask, which
      * indicates that the button is pressed.
+     * <p>
+     *  标识位掩码中的"按下"位,表示按下按钮
+     * 
      */
     public final static int PRESSED = 1 << 2;
 
@@ -106,17 +129,26 @@ public class DefaultButtonModel implements ButtonModel, Serializable {
      * Identifies the "enabled" bit in the bitmask, which
      * indicates that the button can be selected by
      * an input device (such as a mouse pointer).
+     * <p>
+     *  标识位掩码中的"启用"位,表示该按钮可以由输入设备(例如鼠标指针)选择,
+     * 
      */
     public final static int ENABLED = 1 << 3;
 
     /**
      * Identifies the "rollover" bit in the bitmask, which
      * indicates that the mouse is over the button.
+     * <p>
+     * 标识位掩码中的"翻转"位,表示鼠标在按钮上方
+     * 
      */
     public final static int ROLLOVER = 1 << 4;
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public void setActionCommand(String actionCommand) {
         this.actionCommand = actionCommand;
@@ -124,6 +156,9 @@ public class DefaultButtonModel implements ButtonModel, Serializable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public String getActionCommand() {
         return actionCommand;
@@ -131,6 +166,9 @@ public class DefaultButtonModel implements ButtonModel, Serializable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public boolean isArmed() {
         return (stateMask & ARMED) != 0;
@@ -138,6 +176,9 @@ public class DefaultButtonModel implements ButtonModel, Serializable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public boolean isSelected() {
         return (stateMask & SELECTED) != 0;
@@ -145,6 +186,9 @@ public class DefaultButtonModel implements ButtonModel, Serializable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public boolean isEnabled() {
         return (stateMask & ENABLED) != 0;
@@ -152,6 +196,9 @@ public class DefaultButtonModel implements ButtonModel, Serializable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public boolean isPressed() {
         return (stateMask & PRESSED) != 0;
@@ -159,6 +206,9 @@ public class DefaultButtonModel implements ButtonModel, Serializable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public boolean isRollover() {
         return (stateMask & ROLLOVER) != 0;
@@ -166,6 +216,9 @@ public class DefaultButtonModel implements ButtonModel, Serializable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public void setArmed(boolean b) {
         if(isMenuItem() &&
@@ -190,6 +243,9 @@ public class DefaultButtonModel implements ButtonModel, Serializable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public void setEnabled(boolean b) {
         if(isEnabled() == b) {
@@ -211,6 +267,9 @@ public class DefaultButtonModel implements ButtonModel, Serializable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public void setSelected(boolean b) {
         if (this.isSelected() == b) {
@@ -236,6 +295,9 @@ public class DefaultButtonModel implements ButtonModel, Serializable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public void setPressed(boolean b) {
         if((isPressed() == b) || !isEnabled()) {
@@ -268,6 +330,9 @@ public class DefaultButtonModel implements ButtonModel, Serializable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public void setRollover(boolean b) {
         if((isRollover() == b) || !isEnabled()) {
@@ -285,6 +350,9 @@ public class DefaultButtonModel implements ButtonModel, Serializable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public void setMnemonic(int key) {
         mnemonic = key;
@@ -293,6 +361,9 @@ public class DefaultButtonModel implements ButtonModel, Serializable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public int getMnemonic() {
         return mnemonic;
@@ -300,6 +371,9 @@ public class DefaultButtonModel implements ButtonModel, Serializable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public void addChangeListener(ChangeListener l) {
         listenerList.add(ChangeListener.class, l);
@@ -307,6 +381,9 @@ public class DefaultButtonModel implements ButtonModel, Serializable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public void removeChangeListener(ChangeListener l) {
         listenerList.remove(ChangeListener.class, l);
@@ -316,6 +393,10 @@ public class DefaultButtonModel implements ButtonModel, Serializable {
      * Returns an array of all the change listeners
      * registered on this <code>DefaultButtonModel</code>.
      *
+     * <p>
+     *  返回在此<code> DefaultButtonModel </code>上注册的所有更改侦听器的数组
+     * 
+     * 
      * @return all of this model's <code>ChangeListener</code>s
      *         or an empty
      *         array if no change listeners are currently registered
@@ -334,6 +415,10 @@ public class DefaultButtonModel implements ButtonModel, Serializable {
      * notification on this event type.  The event instance
      * is created lazily.
      *
+     * <p>
+     *  通知所有对此事件类型的通知感兴趣的所有侦听器事件实例是延迟创建的
+     * 
+     * 
      * @see EventListenerList
      */
     protected void fireStateChanged() {
@@ -353,6 +438,9 @@ public class DefaultButtonModel implements ButtonModel, Serializable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public void addActionListener(ActionListener l) {
         listenerList.add(ActionListener.class, l);
@@ -360,6 +448,9 @@ public class DefaultButtonModel implements ButtonModel, Serializable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public void removeActionListener(ActionListener l) {
         listenerList.remove(ActionListener.class, l);
@@ -369,6 +460,10 @@ public class DefaultButtonModel implements ButtonModel, Serializable {
      * Returns an array of all the action listeners
      * registered on this <code>DefaultButtonModel</code>.
      *
+     * <p>
+     *  返回在此<code> DefaultButtonModel </code>上注册的所有操作侦听器的数组
+     * 
+     * 
      * @return all of this model's <code>ActionListener</code>s
      *         or an empty
      *         array if no action listeners are currently registered
@@ -386,6 +481,10 @@ public class DefaultButtonModel implements ButtonModel, Serializable {
      * Notifies all listeners that have registered interest for
      * notification on this event type.
      *
+     * <p>
+     *  通知所有已注册有关此事件类型的通知的收件人
+     * 
+     * 
      * @param e the <code>ActionEvent</code> to deliver to listeners
      * @see EventListenerList
      */
@@ -406,6 +505,9 @@ public class DefaultButtonModel implements ButtonModel, Serializable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public void addItemListener(ItemListener l) {
         listenerList.add(ItemListener.class, l);
@@ -413,6 +515,9 @@ public class DefaultButtonModel implements ButtonModel, Serializable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     * {@inheritDoc}
+     * 
      */
     public void removeItemListener(ItemListener l) {
         listenerList.remove(ItemListener.class, l);
@@ -422,6 +527,10 @@ public class DefaultButtonModel implements ButtonModel, Serializable {
      * Returns an array of all the item listeners
      * registered on this <code>DefaultButtonModel</code>.
      *
+     * <p>
+     *  返回在此<code> DefaultButtonModel </code>上注册的所有项目监听器的数组
+     * 
+     * 
      * @return all of this model's <code>ItemListener</code>s
      *         or an empty
      *         array if no item listeners are currently registered
@@ -439,6 +548,10 @@ public class DefaultButtonModel implements ButtonModel, Serializable {
      * Notifies all listeners that have registered interest for
      * notification on this event type.
      *
+     * <p>
+     *  通知所有已注册有关此事件类型的通知的收件人
+     * 
+     * 
      * @param e the <code>ItemEvent</code> to deliver to listeners
      * @see EventListenerList
      */
@@ -476,6 +589,16 @@ public class DefaultButtonModel implements ButtonModel, Serializable {
      * If no such listeners exist,
      * this method returns an empty array.
      *
+     * <p>
+     *  返回当前注册为<code> <em> Foo </em>侦听器</code>的所有对象的数组</code>在此模型<code> <em> </em> <code>添加<em> </em>侦听器</code>
+     * 方法。
+     * <p>
+     *  您可以使用类文字指定<code> listenerType </code>参数,例如<code> <em> Foo </em> Listenerclass </code>例如,可以查询<code> D
+     * efaultButtonModel </code > instance <code> m </code>为它的动作监听器使用以下代码：。
+     * 
+     *  <pre> ActionListener [] als =(ActionListener [])(mgetListeners(ActionListenerclass)); </pre>
+     * 
+     * 
      * @param listenerType  the type of listeners requested;
      *          this parameter should specify an interface
      *          that descends from <code>java.util.EventListener</code>
@@ -505,6 +628,9 @@ public class DefaultButtonModel implements ButtonModel, Serializable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     * 如果不存在此类侦听器,则此方法将返回一个空数组
+     * 
      */
     public void setGroup(ButtonGroup group) {
         this.group = group;
@@ -515,6 +641,10 @@ public class DefaultButtonModel implements ButtonModel, Serializable {
      * Normally used with radio buttons, which are mutually
      * exclusive within their group.
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @return the <code>ButtonGroup</code> that the button belongs to
      *
      * @since 1.3

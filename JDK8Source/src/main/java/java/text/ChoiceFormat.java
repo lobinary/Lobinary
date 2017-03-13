@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -34,6 +35,12 @@
  * patents. This notice and attribution to Taligent may not be removed.
  *   Taligent is a registered trademark of Taligent, Inc.
  *
+ * <p>
+ *  (C)版权所有Taligent,Inc 1996,1997  - 保留所有权利(C)版权所有IBM Corp 1996  -  1998  - 保留所有权利
+ * 
+ *  此源代码和文档的原始版本由IBM的全资子公司Taligent,Inc拥有版权和所有权。
+ * 这些资料根据Taligent和Sun之间的许可协议的条款提供此技术受多个美国和国际专利保护Taligent是Taligent的注册商标。Taligent是Taligent的注册商标。
+ * 
  */
 
 package java.text;
@@ -160,6 +167,71 @@ import java.util.Arrays;
  * externally.
  *
  *
+ * <p>
+ * 一个<code> ChoiceFormat </code>允许你将一个格式附加到一个数字范围一般用在<code> MessageFormat </code>中用于处理复数。
+ * 选择是用双精度的升序列表指定的,其中每个项目指定直到下一个项目的半开间隔：。
+ * <blockquote>
+ * <pre>
+ *  X匹配j当且仅当limit [j]&le; X&lt; limit [j + 1]
+ * </pre>
+ * </blockquote>
+ *  如果没有匹配,则使用第一个或最后一个索引,取决于数字(X)是太低还是太高如果limit数组不是升序,格式化的结果将是不正确的ChoiceFormat也接受<code> \\ u221E </code>
+ * 等同于无穷大(INF)。
+ * 
+ * <p>
+ * <strong>注意：</strong> <code> ChoiceFormat </code>与其他<code>格式</code>不同之处在于,您使用构造函数创建了一个<code> ChoiceFor
+ * mat </code>对象一个<code> getInstance </code> style工厂方法)工厂方法不是必需的,因为<code> ChoiceFormat </code>不需要任何复杂的设置
+ * 为给定的区域设置事实上,<code> ChoiceFormat </code >不实现任何特定于语言环境的行为。
+ * 
+ * <p>
+ *  创建<code> ChoiceFormat </code>时,必须指定格式数组和限制数组这些数组的长度必须相同例如,
+ * <ul>
+ * <li>
+ *  <em> </em>限制</em> = {1,2,3,4,5,6,7} <br> <em>格式</em> = {"Sun","Mon","Tue"星期三","星期四","星期五","星期六"}
+ * <li>
+ * <em>限制</em> = {0,1,ChoiceFormatnextDouble(1)} <br> <em>格式</em> = {"无文件","一个文件" (<code> nextDouble </code>可用于获得下一个更高的double,以使半开区间)。
+ * </ul>
+ * 
+ * <p>
+ *  这里是一个简单的例子,显示格式化和解析：
+ * <blockquote>
+ *  <pre> {@ code double [] limits = {1,2,3,4,5,6,7}; String [] dayOfWeekNames = {"Sun","Mon","Tue","Wed","Thur","Fri","Sat"}
+ * ; ChoiceFormat form = new ChoiceFormat(limits,dayOfWeekNames); ParsePosition status = new ParsePositi
+ * on(0); for(double i = 00; i <= 80; ++ i){statussetIndex(0); Systemitprintln(i +"→"+ formformat(i)+"→"+ formparse(formformat(i),status) }} </pre>
+ * 。
+ * </blockquote>
+ *  这里是一个更复杂的例子,具有模式格式：
+ * <blockquote>
+ * <pre> {@ code double [] filelimits = {0,1,2}; String [] filepart = {"are no files","is one file","are {2}
+ *  files"}; ChoiceFormat fileform = new ChoiceFormat(filelimits,filepart);格式[] testFormats = {fileform,null,NumberFormatgetInstance()}
+ * ; MessageFormat pattform = new MessageFormat("{1} {0}在{1}"); pattformsetFormats(testFormats); Object 
+ * [] testArgs = {null,"ADisk",null}; for(int i = 0; i <4; ++ i){testArgs [0] = new Integer(i); testArgs [2] = testArgs [0]; Systemoutprintln(pattformformat(testArgs)); }} </pre>
+ * 。
+ * </blockquote>
+ * <p>
+ *  为ChoiceFormat对象指定模式是相当简单的例如：
+ * <blockquote>
+ * <pre> {@ code ChoiceFormat fmt = new ChoiceFormat("-1#is negative | 0#is zero or fraction | 1#is one | 10 <is 1+ | 2#is two | 2 <is more than 2") ; Systemoutprintln("Formatter Pattern："+ fmttoPattern());。
+ * 
+ * Systemoutprintln("Format with -INF："+ fmtformat(DoubleNEGATIVE_INFINITY)); Systemoutprintln("Format w
+ * ith -10："+ fmtformat(-10)); Systemoutprintln("Format with 0："+ fmtformat(0)); Systemoutprintln("Forma
+ * t with 09："+ fmtformat(09)); Systemoutprintln("Format with 10："+ fmtformat(1)); Systemoutprintln("For
+ * mat with 15："+ fmtformat(15)); Systemoutprintln("Format with 2："+ fmtformat(2)); Systemoutprintln("Fo
+ * rmat with 21："+ fmtformat(21)); Systemoutprintln("Format with NaN："+ fmtformat(DoubleNaN)); Systemout
+ * println("Format with + INF："+ fmtformat(DoublePOSITIVE_INFINITY)); } </pre>。
+ * </blockquote>
+ *  输出结果如下：
+ * <blockquote>
+ * <pre> {@ code格式为-INF：为负格式为-10：为负格式为0：为零或分数格式为09：为零或分数格式为10：是一格式为15：是1+格式与2：是二格式与21：是超过2格式与NaN：是负格式与+ INF：大于2}
+ *  </pre>。
+ * </blockquote>
+ * 
+ *  <h3> <a name=\"synchronization\">同步</a> </h3>
+ * 
+ * <p>
+ *  选择格式不同步建议为每个线程创建单独的格式实例如果多个线程并发访问格式,则必须在外部同步
+ * 
+ * 
  * @see          DecimalFormat
  * @see          MessageFormat
  * @author       Mark Davis
@@ -171,6 +243,10 @@ public class ChoiceFormat extends NumberFormat {
 
     /**
      * Sets the pattern.
+     * <p>
+     *  设置模式
+     * 
+     * 
      * @param newPattern See the class description.
      */
     public void applyPattern(String newPattern) {
@@ -256,6 +332,10 @@ public class ChoiceFormat extends NumberFormat {
     /**
      * Gets the pattern.
      *
+     * <p>
+     *  获取模式
+     * 
+     * 
      * @return the pattern string
      */
     public String toPattern() {
@@ -308,6 +388,10 @@ public class ChoiceFormat extends NumberFormat {
     /**
      * Constructs with limits and corresponding formats based on the pattern.
      *
+     * <p>
+     *  根据模式构造限制和相应的格式
+     * 
+     * 
      * @param newPattern the new pattern string
      * @see #applyPattern
      */
@@ -318,6 +402,10 @@ public class ChoiceFormat extends NumberFormat {
     /**
      * Constructs with the limits and the corresponding formats.
      *
+     * <p>
+     *  构造具有限制和相应的格式
+     * 
+     * 
      * @param limits limits in ascending order
      * @param formats corresponding format strings
      * @see #setChoices
@@ -328,6 +416,10 @@ public class ChoiceFormat extends NumberFormat {
 
     /**
      * Set the choices to be used in formatting.
+     * <p>
+     *  设置要在格式化中使用的选项
+     * 
+     * 
      * @param limits contains the top value that you want
      * parsed with that format, and should be in ascending sorted order. When
      * formatting X, the choice will be the i, where
@@ -351,6 +443,10 @@ public class ChoiceFormat extends NumberFormat {
 
     /**
      * Get the limits passed in the constructor.
+     * <p>
+     * 获取在构造函数中传递的限制
+     * 
+     * 
      * @return the limits.
      */
     public double[] getLimits() {
@@ -360,6 +456,10 @@ public class ChoiceFormat extends NumberFormat {
 
     /**
      * Get the formats passed in the constructor.
+     * <p>
+     *  获取在构造函数中传递的格式
+     * 
+     * 
      * @return the formats.
      */
     public Object[] getFormats() {
@@ -375,6 +475,10 @@ public class ChoiceFormat extends NumberFormat {
      * thus the range of longs that are supported is only equal to
      * the range that can be stored by double. This will never be
      * a practical limitation.
+     * <p>
+     *  格式的专门化这种方法真的调用<code> format(double,StringBuffer,FieldPosition)</code>,因此支持的longs的范围只等于double可以存储的范围这
+     * 不会是一个实际的限制。
+     * 
      */
     public StringBuffer format(long number, StringBuffer toAppendTo,
                                FieldPosition status) {
@@ -383,6 +487,10 @@ public class ChoiceFormat extends NumberFormat {
 
     /**
      * Returns pattern with formatted double.
+     * <p>
+     *  返回格式化为double的模式
+     * 
+     * 
      * @param number number to be formatted and substituted.
      * @param toAppendTo where text is appended.
      * @param status ignore no useful status is returned.
@@ -405,6 +513,10 @@ public class ChoiceFormat extends NumberFormat {
 
     /**
      * Parses a Number from the input text.
+     * <p>
+     *  从输入文本中解析一个数字
+     * 
+     * 
      * @param text the source text.
      * @param status an input-output parameter.  On input, the
      * status.index field indicates the first character of the
@@ -445,6 +557,10 @@ public class ChoiceFormat extends NumberFormat {
      * If {@code NaN}, returns same value.
      * <p>Used to make half-open intervals.
      *
+     * <p>
+     *  找到最小的双倍{@code d}如果{@code NaN},返回相同的值<p>用于做半开间隔
+     * 
+     * 
      * @param d the reference value
      * @return the least double value greather than {@code d}
      * @see #previousDouble
@@ -457,6 +573,10 @@ public class ChoiceFormat extends NumberFormat {
      * Finds the greatest double less than {@code d}.
      * If {@code NaN}, returns same value.
      *
+     * <p>
+     *  找到最大的double小于{@code d}如果{@code NaN},返回相同的值
+     * 
+     * 
      * @param d the reference value
      * @return the greatest double value less than {@code d}
      * @see #nextDouble
@@ -467,6 +587,9 @@ public class ChoiceFormat extends NumberFormat {
 
     /**
      * Overrides Cloneable
+     * <p>
+     *  覆盖可克隆
+     * 
      */
     public Object clone()
     {
@@ -479,6 +602,9 @@ public class ChoiceFormat extends NumberFormat {
 
     /**
      * Generates a hash code for the message format object.
+     * <p>
+     *  为消息格式对象生成哈希码
+     * 
      */
     public int hashCode() {
         int result = choiceLimits.length;
@@ -491,6 +617,9 @@ public class ChoiceFormat extends NumberFormat {
 
     /**
      * Equality comparision between two
+     * <p>
+     *  两者之间的平等比较
+     * 
      */
     public boolean equals(Object obj) {
         if (obj == null) return false;
@@ -506,6 +635,10 @@ public class ChoiceFormat extends NumberFormat {
     /**
      * After reading an object from the input stream, do a simple verification
      * to maintain class invariants.
+     * <p>
+     * 从输入流读取对象后,进行简单的验证以维护类不变量
+     * 
+     * 
      * @throws InvalidObjectException if the objects read from the stream is invalid.
      */
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
@@ -522,6 +655,11 @@ public class ChoiceFormat extends NumberFormat {
      * A list of lower bounds for the choices.  The formatter will return
      * <code>choiceFormats[i]</code> if the number being formatted is greater than or equal to
      * <code>choiceLimits[i]</code> and less than <code>choiceLimits[i+1]</code>.
+     * <p>
+     *  选择的下限列表如果正在格式化的数字大于或等于<code> choiceLimits [i] </code>且小于<code,则格式化程序将返回<code> choiceFormats [i] </code>
+     *  > choiceLimits [i + 1] </code>。
+     * 
+     * 
      * @serial
      */
     private double[] choiceLimits;
@@ -530,6 +668,11 @@ public class ChoiceFormat extends NumberFormat {
      * A list of choice strings.  The formatter will return
      * <code>choiceFormats[i]</code> if the number being formatted is greater than or equal to
      * <code>choiceLimits[i]</code> and less than <code>choiceLimits[i+1]</code>.
+     * <p>
+     *  选择字符串列表如果要格式化的数字大于或等于<code> choiceLimits [i] </code>且小于<code> choiceLimits,则格式化程序将返回<code> choiceFor
+     * mats [i] </i + 1] </code>。
+     * 
+     * 
      * @serial
      */
     private String[] choiceFormats;
@@ -559,6 +702,13 @@ public class ChoiceFormat extends NumberFormat {
         bits = exponent | (significand & ~EXPONENT);
         return Double.longBitsToDouble(bits);
     }
+    /* <p>
+    /*  static final long SIGN = 0x8000000000000000L; static final long EXPONENT = 0x7FF0000000000000L; stat
+    /* ic final long SIGNIFICAND = 0x000FFFFFFFFFFFFFL;。
+    /* 
+    /* private double doubleDouble(double d,boolean positive){if(DoubleisNaN(d)|| DoubleisInfinite(d)){return d; }
+    /*  long bits = DoubledoubleToLongBits(d);长有效位=位&SIGNIFICAND; if(bits <0){significand | =(SIGN | EXPONENT); } long exponent = bits&EXPONENT; if(positive){significanceand + = 1; // FIXME fix overflow&underflow} else {有效位数 -  = 1; // FIXME fix overflow&underflow} bits = exponent | (有效位〜〜EXPONENT); return DoublelongBitsToDouble(bits); }}。
+    /* 
     */
 
     static final long SIGN                = 0x8000000000000000L;
@@ -577,6 +727,8 @@ public class ChoiceFormat extends NumberFormat {
      *          Double.doubleToLongBits(double)
      *          Double.isNaN(double)
      *
+     * <p>
+     * 
      * @param d        the reference value
      * @param positive {@code true} if the least double is desired;
      *                 {@code false} otherwise

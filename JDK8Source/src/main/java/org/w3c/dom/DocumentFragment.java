@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -37,6 +38,13 @@
  * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * [1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+ * <p>
+ *  版权所有(c)2004万维网联盟,
+ * 
+ *  (马萨诸塞理工学院,欧洲研究信息学和数学联合会,庆应大学)保留所有权利本作品根据W3C(r)软件许可证[1]分发,希望它有用,但没有任何保证;甚至没有对适销性或适用于特定用途的隐含保证
+ * 
+ *  [1] http：// wwww3org / Consortium / Legal / 2002 / copyright-software-20021231
+ * 
  */
 
 package org.w3c.dom;
@@ -77,6 +85,15 @@ package org.w3c.dom;
  * interface, such as <code>Node.insertBefore</code> and
  * <code>Node.appendChild</code>.
  * <p>See also the <a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407'>Document Object Model (DOM) Level 3 Core Specification</a>.
+ * <p>
+ * <code> DocumentFragment </code>是一个"轻量的"或"最小的"<code> Document </code>对象很常见的想要能够提取文档树的一部分或创建一个新的片段一个文档想
+ * 象一下,实现一个用户命令,比如剪切或者通过移动片段来重新排列文档。
+ * 希望有一个可以容纳这样的片段的对象,并且为此目的使用一个节点是非常自然的。
+ * 虽然一个<code>文档</code>对象可以实现这个角色,一个<code> Document </code>对象可能是一个重量级的对象,这取决于底层实现真正需要的是一个非常轻量级的对象<code> D
+ * ocumentFragment <代码>是这样的对象此外,各种操作(例如,将节点作为另一<code> Node </code>的子节点插入)可以将<code> DocumentFragment </code>
+ * 对象作为参数;这导致<code> DocumentFragment </code>的所有子节点被移动到该节点的子列表<p> <code> DocumentFragment </code>节点的子节点是零
+ * 个或多个节点,定义文档结构的任何子树<code> DocumentFragment </code>节点不需要是格式良好的XML文档(尽管它们需要遵循强加在格式良好的XML解析实体上的规则,这可以具有多个
+ * 顶节点)例如,<code> DocumentFragment </code>可能只有一个子节点,该子节点可以是<code> Text </code>节点这样的结构模型既不表示HTML文档也不表示格式良好
  */
 public interface DocumentFragment extends Node {
 }

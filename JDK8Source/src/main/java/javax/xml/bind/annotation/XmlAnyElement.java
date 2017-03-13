@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -242,6 +243,91 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * assert foo.others[1] instanceof Foo;
  * </pre>
  *
+ * <p>
+ *  将JavaBean属性映射到XML信息集表示和/或JAXB元素
+ * 
+ * <p>
+ *  此注释用作"全部"属性,同时将xml内容解组成JAXB注释类的实例它通常注释多值JavaBean属性,但它可以发生在单值JavaBean属性在解组合期间,每个xml元素不匹配对类的其他JavaBean
+ * 属性的静态@XmlElement或@XmlElementRef注释,被添加到此"catch-all"属性。
+ * 
+ * <p>
+ *  <h2>用法：</h2>
+ * <pre>
+ *  @XmlAnyElement public {@link Element} [] others;
+ * 
+ * // {@link Element}或JAXB元素的集合@XmlAnyElement(lax ="true")public {@link Object} [] others;
+ * 
+ *  @XmlAnyElement private List&lt; {@ link Element}>节点;
+ * 
+ *  @XmlAnyElement private {@link Element} node;
+ * </pre>
+ * 
+ *  <h2>限制使用限制</h2>
+ * <p>
+ *  此注释与{@link XmlElement},{@link XmlAttribute},{@link XmlValue},{@link XmlElements},{@link XmlID}和{@link XmlIDREF}
+ * 互斥。
+ * 
+ * <p>
+ *  在类中只能有一个{@link XmlAnyElement}注释的JavaBean属性及其超类
+ * 
+ *  <h2>与其他注释的关系</h2>
+ * <p>
+ *  此注释可以与{@link XmlJavaTypeAdapter}一起使用,以便用户可以将自己的数据结构映射到DOM,而DOM又可以组成XML
+ * 
+ * <p>
+ *  此注释可以与{@link XmlMixed}一起使用,如下所示：
+ * <pre>
+ * // javalangString或DOM节点的列表@XmlAnyElement @XmlMixed List&lt; Object> others;
+ * </pre>
+ * 
+ *  <h2>模式到Java示例</h2>
+ * 
+ *  以下模式将生成以下Java类：
+ * <pre>
+ * &lt;xs:complexType name="foo">
+ * &lt;xs:sequence>
+ * &lt;xs:element name="a" type="xs:int" />
+ * &lt;xs:element name="b" type="xs:int" />
+ * &lt;xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded" />
+ * &lt;/xs:sequence>
+ * &lt;/xs:complexType>
+ * </pre>
+ * 
+ * <pre>
+ *  class Foo {int a; int b; @ {@ link XmlAnyElement} List&lt; Element> any; }}
+ * </pre>
+ * 
+ *  它可以解组实例
+ * 
+ * <pre>
+ * &lt;foo xmlns:e="extra">
+ *  &lt; a> 1 </a>&lt; e：other /> //这将绑定到DOM,因为取消编组是无序的&lt; b> 3 </b>
+ * &lt;e:other />
+ *  &lt; c> 5 </c> //这将绑定到DOM,因为注释不记住命名空间
+ * &lt;/foo>
+ * </pre>
+ * 
+ *  以下模式将生成以下Java类：
+ * <pre>
+ * &lt;xs:complexType name="bar">
+ * &lt;xs:complexContent>
+ * &lt;xs:extension base="foo">
+ * &lt;xs:sequence>
+ * &lt;xs:element name="c" type="xs:int" />
+ * &lt;xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded" />
+ * &lt;/xs:sequence>
+ * &lt;/xs:extension>
+ * &lt;/xs:complexType>
+ * </pre>
+ * 
+ * <pre>
+ *  class Bar extends Foo {int c; // FoogetAny()也代表类型定义bar的通配符内容}
+ * </pre>
+ * 
+ *  它可以解组实例
+ * 
+ * <pre>
+ * 
  * @author Kohsuke Kawaguchi
  * @since JAXB2.0
  */
@@ -277,12 +363,74 @@ public @interface XmlAnyElement {
      *
      * <p>
      * This can be used to emulate the "lax" wildcard semantics of the W3C XML Schema.
+     * <p>
+     * &lt;bar xmlns:e="extra">
+     * &lt; a> 1 </a>&lt; e：other /> //这将绑定到DOM,因为取消编组是无序的&lt; b> 3 </b>
+     * &lt;e:other />
+     *  &lt; c> 5 </c> //现在转到Barc&lt; e：other /> //这将转到Fooany
+     * &lt;/bar>
+     * </pre>
+     * 
+     *  <h2>使用{@link XmlAnyElement}与{@link XmlElementRef} </h2>
+     * <p>
+     *  {@link XmlAnyElement}注释可以与{@link XmlElementRef}一起使用,以指定可以参与内容树的其他元素
+     * 
+     * <p>
+     *  以下模式将生成以下Java类：
+     * <pre>
+     * &lt;xs:complexType name="foo">
+     * &lt;xs:choice maxOccurs="unbounded" minOccurs="0">
+     * &lt;xs:element name="a" type="xs:int" />
+     * &lt;xs:element name="b" type="xs:int" />
+     * &lt;xs:any namespace="##other" processContents="lax" />
+     * &lt;/xs:choice>
+     * &lt;/xs:complexType>
+     * </pre>
+     * 
+     * <pre>
+     *  class Foo {@ {@ link XmlAnyElement}(lax ="true")@ {@ link XmlElementRefs}({@ link XmlElementRef}(nam
+     * e ="a",type ="JAXBElementclass")@ {@ link XmlElementRef} name ="b",type ="JAXBElementclass")}){@link List}
+     * &lt; {@ link Object}>其他; }}。
+     * 
+     * @XmlRegistry class ObjectFactory {@XmlElementDecl(name ="a",namespace ="",scope = Fooclass){@link JAXBElement}
+     * &lt; Integer> createFooA(Integer i){}。
+     * 
+     *  @XmlElementDecl(name ="b",namespace ="",scope = Fooclass){@link JAXBElement}&lt; Integer> createFooB
+     * (Integer i){}。
+     * </pre>
+     * 
+     *  它可以解组实例
+     * 
+     * <pre>
+     * &lt;foo xmlns:e="extra">
+     *  &lt; a> 1 </a> //这将解封到值为1的{@link JAXBElement}实例&lt; e：other /> //这将解封到DOM {@link Element}&lt; b> 3 </b>
+     *  //这将解封到值为1的{@link JAXBElement}实例。
      */
     boolean lax() default false;
 
     /**
      * Specifies the {@link DomHandler} which is responsible for actually
      * converting XML from/to a DOM-like data structure.
+     * <p>
+     * &lt;/foo>
+     * </pre>
+     * 
+     *  <h2> W3C XML模式"lax"通配符模拟</h2>注释的lax元素启用"lax"通配符语义的仿真例如,当Java源代码注释如下：
+     * <pre>
+     * @ {@ link XmlRootElement} class Foo {@XmlAnyElement(lax = true)public {@link Object} [] others; }}
+     * </pre>
+     *  那么下面的文档将会这样解组：
+     * <pre>
+     * &lt;foo>
+     * &lt;unknown />
+     * &lt;foo />
+     * &lt;/foo>
+     * 
+     *  Foo foo = unmarshal(); // 1为"未知",另一个为"foo"assert foootherslength == 2; //'unknown'unmarshals to a DO
+     * M element assert fooothers [0] instanceof Element; //因为lax = true,'foo'元素热切地// unmarshals到一个Foo对象asse
+     * rt fooothers [1] instanceof Foo;。
+     * </pre>
+     * 
      */
     Class<? extends DomHandler> value() default W3CDomHandler.class;
 }

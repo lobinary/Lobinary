@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -37,6 +38,13 @@
  * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * [1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+ * <p>
+ *  版权所有(c)2004万维网联盟,
+ * 
+ *  (马萨诸塞理工学院,欧洲研究信息学和数学联合会,庆应大学)保留所有权利本作品根据W3C(r)软件许可证[1]分发,希望它有用,但没有任何保证;甚至没有对适销性或适用于特定用途的隐含保证
+ * 
+ *  [1] http：// wwww3org / Consortium / Legal / 2002 / copyright-software-20021231
+ * 
  */
 
 package org.w3c.dom;
@@ -46,11 +54,20 @@ package org.w3c.dom;
  * for performing operations that are independent of any particular instance
  * of the document object model.
  * <p>See also the <a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407'>Document Object Model (DOM) Level 3 Core Specification</a>.
+ * <p>
+ * <code> DOMImplementation </code>接口提供了许多用于执行独立于文档对象模型的任何特定实例的操作的方法<p>另请参见<a href ='http：// wwww3org / TR / 2004 / REC-DOM-Level-3-Core-20040407'>
+ * 文档对象模型(DOM)3级核心规范</a>。
+ * 
  */
 public interface DOMImplementation {
     /**
      * Test if the DOM implementation implements a specific feature and
      * version, as specified in <a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#DOMFeatures">DOM Features</a>.
+     * <p>
+     *  测试DOM实施是否实现了特定功能和版本,如<a href=\"http://wwww3org/TR/2004/REC-DOM-Level-3-Core-20040407/corehtml#DOMFeatures\">
+     *  DOM功能< / a>。
+     * 
+     * 
      * @param feature  The name of the feature to test.
      * @param version  This is the version number of the feature to test.
      * @return <code>true</code> if the feature is implemented in the
@@ -63,6 +80,10 @@ public interface DOMImplementation {
      * Creates an empty <code>DocumentType</code> node. Entity declarations
      * and notations are not made available. Entity reference expansions and
      * default attribute additions do not occur..
+     * <p>
+     *  创建空的<code> DocumentType </code>节点实体声明和符号不可用实体引用扩展和默认属性添加不会发生
+     * 
+     * 
      * @param qualifiedName The qualified name of the document type to be
      *   created.
      * @param publicId The external subset public identifier.
@@ -97,6 +118,13 @@ public interface DOMImplementation {
      * such as <code>createHTMLDocument</code> [<a href='http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109'>DOM Level 2 HTML</a>]
      * , can be used to obtain specific types of <code>Document</code>
      * objects.
+     * <p>
+     * 使用其文档元素创建指定类型的DOM文档对象<br>请注意,根据给定创建文档的<code> DocumentType </code>,实现可以实例化专门的<code> Document </code>对象
+     * 支持比"Core"更多的功能,例如"HTML"[<a href='http://wwww3org/TR/2003/REC-DOM-Level-2-HTML-20030109'> DOM Level 2 
+     * HTML </a >]另一方面,在文档创建之后设置<code> DocumentType </code>使得这种情况不太可能发生。
+     * 或者,专门的<code> Document </code>创建方法,例如<code> createHTMLDocument <代码> [<a href='http://wwww3org/TR/2003/REC-DOM-Level-2-HTML-20030109'>
+     *  DOM Level 2 HTML </a>],可用于获取特定类型的<代码>文档</code>对象。
+     * 
      * @param namespaceURI The namespace URI of the document element to
      *   create or <code>null</code>.
      * @param qualifiedName The qualified name of the document element to be
@@ -144,6 +172,9 @@ public interface DOMImplementation {
      * as discussed in . This method also allow the implementation to
      * provide specialized objects which do not support the
      * <code>DOMImplementation</code> interface.
+     * <p>
+     * 
+     * 
      * @param feature  The name of the feature requested. Note that any plus
      *   sign "+" prepended to the name of the feature will be ignored since
      *   it is not significant in the context of this method.

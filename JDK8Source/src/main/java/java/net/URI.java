@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -447,6 +448,247 @@ import java.lang.NullPointerException;  // for javadoc
  * opening a connection to the specified resource.
  *
  *
+ * <p>
+ *  表示统一资源标识符(URI)引用
+ * 
+ * <p>除了下面提到的一些小错误之外,此类别的实例表示由<a href=\"http://wwwietforg/rfc/rfc2396txt\"> <i> RFC&nbsp; 2396：统一资源标识符( 
+ * URI"：通用语法</i> </a>,由<a href=\"http://wwwietforg/rfc/rfc2732txt\"> <i> RFC 2732修订的URL：URL中的字面IPv6地址格式</i>
+ *  </a>字面IPv6地址格式还支持scope_ids描述了scope_ids的语法和用法<a href=\"Inet6Addresshtml#scoped\">此类提供了用于从其组件创建URI实例或通
+ * 过解析它们的构造函数字符串形式,访问实例的各种组件的方法,以及用于标准化,解析和相关化URI实例的方法此类的实例是不可变的。
+ * 
+ * <h3> URI语法和组件</h3>
+ * 
+ *  在最高级别,以字符串形式的URI引用(以下简称为"URI")具有语法
+ * 
+ * <blockquote>
+ *  [<i> scheme </i> <b> {@ code：} </b>] <i> scheme-specific-part </i> [<b> {@ code#} </b> fragment]
+ * </blockquote>
+ * 
+ *  其中方括号[]描述可选组件,字符<b> {@ code：} </b>和<b> {@ code#} </b>代表自己
+ * 
+ *  <p> <i>绝对</i> URI指定方案;不是绝对的URI被称为<i>相对</i> URI也根据它们是<i>不透明</i>还是<i>分级</i>
+ * 
+ *  <p> <i>不透明</i> URI是一个绝对URI,其方案特定部分不以斜杠字符开头({@code'/'})不透明URI不需要进一步解析不透明URI是：
+ * 
+ * <blockquote> <table cellpadding = 0 cellspacing = 0 summary ="layout"> <tr> <td> {@ code mailto：java-net @ javasuncom}
+ *  <td> </tr> <tr> <td> {@ code news：complangjava} <td> </tr> <tr> <td> {@ code urn：isbn：096139210x} </td>
+ *  </tr> </table> </blockquote>。
+ * 
+ *  <p>分层</i> URI是一个绝对URI,其方案特定部分以斜杠字符开头,或者是相对URI,即不指定方案的URI。分层URI的一些示例是：
+ * 
+ * <blockquote>
+ *  {@code http：// javasuncom / j2se / 13 /} <br> {@code docs / guide / collections / designfaqhtml#28} 
+ * <br> {@code /// demo / jfc / SwingSet2 / src / SwingSet2java} < br> {@code file：///〜/ calendar}。
+ * </blockquote>
+ * 
+ *  <p>分层URI需要根据语法进行进一步解析
+ * 
+ * <blockquote>
+ * [<i>方案</i> <b> {@ code：} </b>] [<b> {@ code //} </b> </i>] [<b> {@ code#} </b> <i> </i>
+ * </blockquote>
+ * 
+ *  其中字符<b> {@ code：} </b>,<b> {@ code /} </b>,<b> {@ code?} </b>和<b> {@ code# } </b>代表自己层次结构URI的特定于方案的部
+ * 分由方案和片段组件之间的字符组成。
+ * 
+ *  <p>如果指定了分层URI的授权组件,则基于<i>基于服务器</i>或<i>注册表</i>。基于服务器的权限根据熟悉的语法进行解析
+ * 
+ * <blockquote>
+ *  [<i> user-info </i> <b> {@ code @} </b>] <i> host </i> [<b> {@ code：} </b> / i>]
+ * </blockquote>
+ * 
+ * 其中字符<b> {@ code @} </b>和<b> {@ code：} </b>代表自己几乎所有当前使用的URI方案都是基于服务器的。不会解析的权限组件这种方式被认为是基于注册表的
+ * 
+ *  <p>如果以斜杠字符({@code'/'})开头,则层次化URI的路径组件本身称为绝对路径;否则为relative相对分层URI的绝对路径或指定权限的路径始终为绝对路径
+ * 
+ *  <p>然后,一个URI实例具有以下九个组件：
+ * 
+ * <blockquote> <table summary ="描述URI的组件：scheme,scheme-specific-part,authority,user-info,host,port,path,query,fragment">
+ *  <tr> <th> <i> </i> </t> </td>方案</td> <td> {@ code String} </td> </tr> <tr> <td> scheme-specific-part
+ * &nbsp;&nbsp;&nbsp;&nbsp; </td> <td> {@ code String} </td> </tr> <tr> <td> / td> <td> {@ code String} 
+ * </td> {@ code String} </td> </tr> <tr> <td> user-info </td> > <td> host </td> <td> host </td> <td> {@ code String}
+ *  </td> </tr> <tr> tr> <tr> <td>路径</td> <td> {@ code String} </td> </tr> <tr> <td> td> </tr> <tr> <td>
+ *  fragment </td> <td> {@ code String} </td> </tr> </table> </blockquote>。
+ * 
+ * 在给定的实例中,任何特定的组件是<i>未定义</i>或<i>定义</i>与不同的值未定义的字符串组件由{@code null}表示,而未定义的整数组件由{ @code -1}字符串组件可以被定义为具有空
+ * 字符串作为其值;这不等于该组件未定义。
+ * 
+ * <p>特定组件是否在实例中定义取决于要表示的URI的类型绝对URI具有方案组件。
+ * 不透明URI具有方案,特定于方案的部分和可能的片段,但是没有其他组件一个分层URI总是有一个路径(虽然它可能是空的)和一个方案特定部分(至少包含路径),并且可以有任何其他组件如果权限组件存在,并且基于服
+ * 务器,则将定义主机组件,并且可以定义用户信息和端口组件。
+ * <p>特定组件是否在实例中定义取决于要表示的URI的类型绝对URI具有方案组件。
+ * 
+ *  <h4>对URI实例的操作</h4>
+ * 
+ *  该类支持的关键操作是<i>标准化</i>,<i>分辨率</i>和<i>相对化</i>
+ * 
+ * <p> <i>标准化</i>是从分层URI的路径组件中删除不必要的{@code""}和{@code""}段的过程每个{@code""}段都被删除仅当{@code""}段之前有非 -  {@ code""}
+ * 段时,才会删除{@code""}段。
+ * 规范化对不透明URI没有影响。
+ * 
+ *  <p> <i>分辨率</i>是将一个URI解析为另一个URI的过程,<i> base </i> URI生成的URI是以RFC 2396指定的方式从两个URI的组件构建的,组件从基本URI中为未在原始的
+ * For层次化URI中指定的那些,原始的路径被解析为基本的路径,然后归一化例如结果的解析。
+ * 
+ * <blockquote>
+ * {@code docs / guide / collections / designfaqhtml#28}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;(1)。
+ * </blockquote>
+ * 
+ *  对基本URI {@code http：// javasuncom / j2se / 13 /}是结果URI
+ * 
+ * <blockquote>
+ *  {@code https：// docsoraclecom / javase / 13 / docs / guide / collections / designfaqhtml#28}
+ * </blockquote>
+ * 
+ *  解析相对URI
+ * 
+ * <blockquote>
+ *  {@code /// demo / jfc / SwingSet2 / src / SwingSet2java}&nbsp;&nbsp;&nbsp;&nbsp;(2)
+ * </blockquote>
+ * 
+ *  对此结果,
+ * 
+ * <blockquote>
+ *  {@code http：// javasuncom / j2se / 13 / demo / jfc / SwingSet2 / src / SwingSet2java}
+ * </blockquote>
+ * 
+ * 支持绝对和相对URI的分辨率,以及在分层URI的情况下绝对路径和相对路径的分辨率。
+ * 针对任何其他URI解析URI {@code file：///〜calendar}只是产生原始URI,因为它是绝对的相对于相对基本URI(1)解析相对URI(2)产生了标准化但仍然相对的URI。
+ * 
+ * <blockquote>
+ *  {@ code demo / jfc / SwingSet2 / src / SwingSet2java}
+ * </blockquote>
+ * 
+ *  最后,相关性是分辨率的倒数：对于任何两个归一化的URI u u和v i,
+ * 
+ * <blockquote>
+ *  <i> u </i> {@ code relativize(} <i> u </i> {@ code resolve(} <i> v </i> {@ code))equals(} i> {@ code)}
+ * &nbsp;&nbsp;和<br> <i> u </i> {@ code resolve(} <i> u </i> {@ code relativize(} <i> v </i > {@ code))equals(}
+ *  <i> v </i> {@ code}}&nbsp;&nbsp; <br>。
+ * </blockquote>
+ * 
+ * 当构建包含必须相对于文档的基本URI的URI的文档时,此操作通常是有用的。例如,相对URI
+ * 
+ * <blockquote>
+ *  {@code https：// docsoraclecom / javase / 13 / docs / guide / indexhtml}
+ * </blockquote>
+ * 
+ *  对基本URI
+ * 
+ * <blockquote>
+ *  {@code http：// javasuncom / j2se / 13}
+ * </blockquote>
+ * 
+ *  产生相对URI {@code docs / guide / indexhtml}
+ * 
+ *  <h4>字符类别</h4>
+ * 
+ *  RFC&nbsp; 2396准确指定在URI引用的各个组件中允许哪些字符以下类别(大多数取自该规范)在下面用于描述这些约束：
+ * 
+ * <blockquote> <table cellspacing = 2 summary ="描述类别alpha,digit,alphanum,unreserved,punct,reserved,escaped and other">
+ *  <tr> <th valign = top> <i> alpha </i> th> <td> US-ASCII字母字符{@code'A'}到{@ code'Z'}和{@code'a'}到&nbsp; 
+ * {@ code'z'} < / td> </tr> <tr> <th valign = top> <i>数字</i> </th> <td>美国ASCII ASCII十进制数字字符{@code'0'}& 
+ * {@code'9'} </td> </tr> <tr> <th valign = top> <i> alphanum </i> </th> <td> i> </i> </i> </i> </b> </t>
+ *  i> alphanum </i>字符以及字符串中的那些{@code"_-！〜'()*"} </td> </tr> <tr> <th valign = top> <i> punct </i> </th>
+ *  <td> ：$&+ ="} </td> </tr> <tr> <th valign = top> <i>保留</i> </th> <td>与字符串中的字符串{@code"?/ [] @"} </td>
+ *  </tr> <tr> <th valign = top> <i>转义</i> </th> <td> ,即由百分数字符({@code'％'})和两个十六进制数字({@code'0'}  -  {@ code'9'}
+ * ,{@code'A'}  - @code'F'}和{@code'a'}  -  {@ code'f'})。
+ * </td> </tr> <tr> <th valign = top> <i> / th> <td>不在US-ASCII字符集中的Unicode字符不是控制字符(根据{@link javalangCharacter#isISOControl(char)CharacterisISOControl}
+ * 方法),并且不是空格字符{@link javalang字符#isSpaceChar(char)CharacterisSpaceChar} method)&nbsp;&nbsp; <i>(<b>与RFC 
+ * 2396 </b>的偏差,限于US-ASCII)</i> </td> </</table> </blockquote>。
+ * 
+ * <p> <a name=\"legal-chars\"> </a>所有法定URI字符集由<i>未预约</i>,<i>保留</i>,<i>转义</i> / i>和<i>其他</i>字符
+ * 
+ *  <h4>转义的字节,引号,编码和解码</h4>
+ * 
+ *  RFC 2396允许转义的字节出现在用户信息,路径,查询和片段组件中。转义在URI中有两个用途：
+ * 
+ * <ul>
+ * 
+ *  </li> </i> </i> <i> </i> </i>要对URI进行<i>编码</i> </li>
+ * 
+ *  </li> </li> </i> </i>在组件中非法的字符</p>用户信息,路径,查询和片段组件在哪些字符被认为是合法和非法方面略有不同。</p > </li>
+ * 
+ * </ul>
+ * 
+ * 这些目的通过三个相关操作在这个类中提供：
+ * 
+ * <ul>
+ * 
+ *  <li> <p> <a name=\"encode\"> </a>通过将字符替换为表示UTF-8字符集中的该字符的转义字节序列,来对其进行<i>编码</i>例如,欧洲货币符号({@code'\\ u005Cu20AC'}
+ * )编码为{@code"％E2％82％AC"} <i>(与RFC 2396 </b>的偏差未指定任何特定字符集)</i> </p> </li>。
+ * 
+ *  <li> <p> <a name=\"quote\"> </a>只需对非法字符进行编码即可</i> </i>。
+ * 例如,通过将空格字符替换为{@code "％20"} UTF-8包含US-ASCII,因此对于US-ASCII字符,此转换具有RFC 2396所要求的效果</p> </li>。
+ * 
+ * <li> <p> <a name=\"decode\"> </a>转义的八位字节序列通过将其替换为它在UTF-8字符集中表示的字符序列来进行解码</i> UTF-8包含US-ASCII,因此解码具有取消
+ * 引用任何引用的US-ASCII字符以及解码任何编码的非US-ASCII字符的效果。
+ * 如果<a href ="/ nio / charset / CharsetDecoderhtml #ce">解码错误</a>,则错误的八位字节被替换为{@code'\\ u005CuFFFD'},即Un
+ * icode替换字符</p> </li>。
+ * 
+ * </ul>
+ * 
+ *  这些操作在此类的构造函数和方法中公开如下：
+ * 
+ * <ul>
+ * 
+ * <li> <p> {@linkplain #URI(javalangString)单参数构造函数}要求其参数中的任何非法字符被引用,并保留任何转义的八位字节和<i>其他</i>字符< p> </li>。
+ * 
+ *  <li> <p> {@linkplain #URI(javalangString,javalangString,javalangString,int,javalangString,javalangString,javalangString)多参数构造函数}
+ * 引用出现的组件所需的非法字符百分比字符代码'％'}总是由这些构造函数引用任何<i>其他</i>字符被保留</p> </li>。
+ * 
+ * <li> <p> {@link #getRawUserInfo()getRawUserInfo},{@link #getRawPath()getRawPath},{@link #getRawQuery()getRawQuery}
+ * ,{@link #getRawFragment()getRawFragment},{@link #getRawAuthority()getRawAuthority}和{@link #getRawSchemeSpecificPart()getRawSchemeSpecificPart}
+ * 方法以原始形式返回其对应组件的值,而不解释任何转义的八位字节。
+ * 这些方法返回的字符串可能包含转义的八位字节和<i>其他</i>字符,并且不会包含任何非法字符</p> </li>。
+ * 
+ * <li> <p> {@link #getUserInfo()getUserInfo},{@link #getPath()getPath},{@link #getQuery()getQuery},{@link #getFragment()getFragment}
+ * ,{@link #getAuthority()getAuthority}和{@link #getSchemeSpecificPart()getSchemeSpecificPart}方法解码对应组件中的任
+ * 何转义字节。
+ * 这些方法返回的字符串可能包含<i>其他</i>字符和非法字符,不包含任何转义字节</p> </li>。
+ * 
+ *  <li> <p> {@link #toString()toString}方法会传回含有所有必要引用但可能包含<i>其他</i>字元的URI字串</p> </li>
+ * 
+ *  <li> <p> {@link #toASCIIString()toASCIIString}方法会传回不含任何<i>其他</i>字元的完全带引号且经过编码的URI字串</p> </li>
+ * 
+ * </ul>
+ * 
+ * <h4>身份</h4>
+ * 
+ *  对于任何URI <u> u </i>,总是这种情况
+ * 
+ * <blockquote>
+ *  {@code new URI(} <i> u </i> {@ code toString())equals(} <i> u </i> {@ code)}&nbsp;
+ * </blockquote>
+ * 
+ *  对于不包含冗余语法的任何URI <i> u </i>,例如空权限之前的两个斜杠(如{@code file：/// tmp /}&nbsp;)或主机名后面的冒号,没有端口(如{@code http：// javasuncom：}
+ * &nbsp;),并且不会对字符进行编码,但必须引用的字符除外,以下标识也包含：。
+ * <pre>
+ *  新的URI(<u> getScheme(),</i> getSchemeSpecificPart(),</i> getFragment())equals(<u> </pre>在所有情况下,
+ * <pre>
+ * 新的URI(<u> getScheme(),<u> getUserInfo(),<u> getAuthority(),</u> getPath ,<i> u </i> </i>是如果<i> u </i>
+ * 是<i> </i>,则</i> getQuery(),<i> u </i> getFragment分层和。
+ * <pre>
+ *  新的URI(<u> getScheme(),<u> getUserInfo(),<u> getHost(),</u> getPort ,<i> u </i> getPath(),<u> getQuer
+ * y(),<u> getFragment())equals(<u>如果<i> u </i>是分级的,并且没有权限或基于服务器的权限。
+ * 
+ *  <h4> URI,URL和URN </h4>
+ * 
+ * URI是统一资源<i>标识符</i>,而URL是统一资源定位符</i>因此,每个URL抽象地是URI,但不是每个URI都是URL。
+ * 是URI的另一个子类别,统一资源<i>名称</i>(URN),它命名资源,但不指定如何定位它们{@code mailto},{@code news}和{@code isbn}上面显示的URI是URN的示
+ * 例。
+ * URI是统一资源<i>标识符</i>,而URL是统一资源定位符</i>因此,每个URL抽象地是URI,但不是每个URI都是URL。
+ * 
+ *  <p> URI和网址之间的概念区别反映在此类和{@link URL}类之间的差异
+ * 
+ * <p>此类的实例表示由RFC&amp; 2396定义的句法意义上的URI引用URI可以是绝对的也可以是相对的根据通用语法解析URI字符串,而不考虑方案(如果有)指定不执行主机的查找(如果有),并且没有构
+ * 造依赖于方案的流处理程序构造均等,散列和比较严格根据实例的字符内容定义。
+ * 换句话说,URI实例稍微多一些比支持比较,规范化,分辨率和相对性的语法,方案无关操作的结构化字符串。
+ * 
+ * <p>相比之下,{@link URL}类的实例表示URL的语法组件以及访问其描述的资源所需的一些信息。
+ * URL必须是绝对的,也就是说,它必须始终指定方案根据其方案解析URL字符串对于URL始终建立流处理程序,实际上不可能为没有处理程序的方案创建URL实例。
+ * 均衡和散列取决于方案和主机的因特网地址(如果有的话);比较未定义换句话说,URL是一个结构化字符串,支持分辨率的语法操作以及查找主机和打开与指定资源的连接的网络I / O操作。
+ * 
+ * 
  * @author Mark Reinhold
  * @since 1.4
  *
@@ -505,6 +747,10 @@ public final class URI
     /**
      * The string form of this URI.
      *
+     * <p>
+     * 此URI的字符串形式
+     * 
+     * 
      * @serial
      */
     private volatile String string;             // The only serializable field
@@ -575,6 +821,36 @@ public final class URI
      *
      * </ul>
      *
+     * <p>
+     *  通过解析给定的字符串构造一个URI
+     * 
+     *  <p>此构造函数完全按照<a href=\"http://wwwietforg/rfc/rfc2396txt\"> RFC 2396 </a>附录A,<b> <i>中的语法所指定的字符串解析给定字符串
+     * ,但以下偏差除外：</i> </b> </p>。
+     * 
+     * <ul>
+     * 
+     *  <li> <p>允许一个空的权限组件,只要它后面有一个非空路径,一个查询组件或一个fragment组件。
+     * 这允许解析URI,如{@code"file：/// foo / bar"},这似乎是RFC的意图2396虽然语法不允许它如果权限组件是空的,那么用户信息,主机和端口组件未定义</p> </li>。
+     * 
+     * <li> <p>允许空相对路径;这似乎是RFC&nbsp; 2396的意图,尽管语法不允许它。
+     * 这种偏离的主要后果是一个独立的片段,例如{@code"#foo"}解析为一个具有空路径的相对URI,给定片段,并且可以对基本URI进行<a href=\"#resolve-frag\">解析</a>。
+     * 
+     *  <li> <p>主机组件中的IPv4地址会严格解析,如<a href=\"http://wwwietforg/rfc/rfc2732txt\"> RFC 2732 </a>所指定：点分四元组地址的每个
+     * 元素必须包含不超过三个十进制数每个元素进一步约束为不大于255 </p> </li>。
+     * 
+     * <li> <p>主机组件中仅包含单个域标签的主机名允许以<i>字母</i>字符开头这似乎是<a href ="http：// wwwietforg / rfc / rfc2396txt"> RFC&nb
+     * sp; 2396 </a>节&nbsp; 322虽然语法不允许它这种偏差的后果是层次结构URI的权限组件,如{@code s：// 123},将解析作为基于服务器的权限</p> </li>。
+     * 
+     * <li> <p>主机组件允许IPv6地址IPv6地址必须用方括号({@code'['}和{@code']'}括起来),由<a href ="http： // wwwietforg / rfc / rfc2732txt">
+     *  RFC&nbsp; 2732 </a> IPv6地址本身必须根据<a href=\"http://wwwietforg/rfc/rfc2373txt\"> RFC 2373 </a>解析IPv6地址进
+     * 一步约束描述不超过十六字节的地址信息,RFC&nbsp; 2373中隐含的约束,但不能在语法</p>中表示</li>。
+     * 
+     * <li> <p>只要RFC&nbsp; 2396允许<i>转义</i>八位字节,即在用户信息,路径,查询和片段中,允许<i>其他</i>类别中的字符组件,以及权限组件(如果权限是基于注册表的)这允许UR
+     * I包含除US-ASCII字符集之外的Unicode字符</p> </li>。
+     * 
+     * </ul>
+     * 
+     * 
      * @param  str   The string to be parsed into a URI
      *
      * @throws  NullPointerException
@@ -647,6 +923,44 @@ public final class URI
      * #parseServerAuthority()} method upon the result; this may cause a {@link
      * URISyntaxException} to be thrown.  </p>
      *
+     * <p>
+     *  构造来自给定组件的分层URI
+     * 
+     *  <p>如果给出了一个方案,那么如果给定的路径必须是空的或者以斜杠字符开头({@code'/'})。
+     * 否则,新URI的组件可能未定义,通过传递{@代码null}用于相应的参数,或者在{@code port}参数的情况下,通过传递{@code -1}。
+     * 
+     * <p>此构造函数首先根据<a href=\"http://wwwietforg/rfc/rfc2396txt\"> RFC 2396 </a>,第52节,步骤&nbsp;中指定的规则,从给定的组件构建U
+     * RI字符串。
+     *  7：</p>。
+     * 
+     * <ol>
+     * 
+     *  <li> <p>最初,结果字符串为空</p> </li>
+     * 
+     *  <li> <p>如果给定方案,则会将其附加到结果后面,后跟冒号字符({@code'：'})</p> </li>
+     * 
+     *  <li> <p>如果给出用户信息,主机或端口,则会附加字符串{@code"//"} </p> </li>
+     * 
+     *  <li> <p>如果提供用户信息,则会附加商品字符({@code'@'})。
+     * <i>未保留</i>,<i> </i>或<i>其他</i>类别<a href=\"#quote\">引用</a> </p> </li>。
+     * 
+     * <li> <p>如果给出了主机,则会附加它。如果主机是文字IPv6地址,但未包含在方括号({@code'['}和{@code']'}括号</p> </li>
+     * 
+     *  <li> <p>如果给出了端口号,则会附加冒号字符({@code'：'}),后跟小数中的端口号</p> </li>
+     * 
+     *  <li> <p>如果给定路径,则会附加任何不在<i>未预约</i>,<i>标点</i>,<i>转义</i>或<i >其他</i>类别,且不等于斜杠字符({@code'/'})或商用字符({@code'@'}
+     * ),</p>。
+     * 
+     * <li> <p>如果给出了查询,则会附加一个问号字符({@code'?'}),后跟查询任何不是<a href=\"#legal-chars\">的字符引用了法律URI字符</a> </p> </li>。
+     * 
+     *  <li> <p>最后,如果给出了一个片段,则附加一个散列字符({@code'#'}),后跟片段任何不是合法URI字符的字符都被引用</p> li>
+     * 
+     * </ol>
+     * 
+     *  <p>然后,通过调用{@link #URI(String)}构造函数,然后根据结果调用{@link #parseServerAuthority()}方法,解析生成的URI字符串;这可能会导致{@link URISyntaxException}
+     * 被抛出</p>。
+     * 
+     * 
      * @param   scheme    Scheme name
      * @param   userInfo  User name and authorization information
      * @param   host      Host name
@@ -722,6 +1036,37 @@ public final class URI
      * #parseServerAuthority()} method upon the result; this may cause a {@link
      * URISyntaxException} to be thrown.  </p>
      *
+     * <p>
+     *  构造来自给定组件的分层URI
+     * 
+     * <p>如果给出了一个方案,那么如果给定的路径必须是空的或者以斜杠字符开头({@code'/'})。否则,新URI的组件可能未定义,通过传递{@代码null}为相应的参数
+     * 
+     *  <p>此构造函数首先根据<a href=\"http://wwwietforg/rfc/rfc2396txt\"> RFC 2396 </a>,第52节,步骤&nbsp;中指定的规则,从给定的组件构建
+     * URI字符串。
+     *  7：</p>。
+     * 
+     * <ol>
+     * 
+     *  <li> <p>最初,结果字符串为空</p> </li>
+     * 
+     *  <li> <p>如果给定方案,则会将其附加到结果后面,后跟冒号字符({@code'：'})</p> </li>
+     * 
+     * <li> <p>如果授予权限,则附加字符串{@code"//"},然后是权限如果权限包含文字IPv6地址,那么地址必须用方括号括起来({@code '['}和{@code']'})不在<i>未预约</i>
+     * ,<i>戳状</i>,<i>转义</i>或<i> </i> </li> </li> </li> </li>。
+     * 
+     *  <li> <p>如果给定路径,则会附加任何不在<i>未预约</i>,<i>标点</i>,<i>转义</i>或<i >其他</i>类别,且不等于斜杠字符({@code'/'})或商用字符({@code'@'}
+     * ),</p>。
+     * 
+     * <li> <p>如果给出了查询,则会附加一个问号字符({@code'?'}),后跟查询任何不是<a href=\"#legal-chars\">的字符引用了法律URI字符</a> </p> </li>。
+     * 
+     *  <li> <p>最后,如果给出了一个片段,则附加一个散列字符({@code'#'}),后跟片段任何不是合法URI字符的字符都被引用</p> li>
+     * 
+     * </ol>
+     * 
+     *  <p>然后,通过调用{@link #URI(String)}构造函数,然后根据结果调用{@link #parseServerAuthority()}方法,解析生成的URI字符串;这可能会导致{@link URISyntaxException}
+     * 被抛出</p>。
+     * 
+     * 
      * @param   scheme     Scheme name
      * @param   authority  Authority
      * @param   path       Path
@@ -759,6 +1104,18 @@ public final class URI
      * URI}{@code (scheme, null, host, -1, path, null, fragment);}
      * </blockquote>
      *
+     * <p>
+     *  构造来自给定组件的分层URI
+     * 
+     *  <p>组件可能未定义,传递{@code null}
+     * 
+     * <p>这个方便的构造函数通过调用如下的七参数构造函数来工作：
+     * 
+     * <blockquote>
+     *  {@code new} {@link #URI(String,String,String,int,String,String,String)URI} {@ code(scheme,null,host,-1,path,null,fragment)。
+     * </blockquote>
+     * 
+     * 
      * @param   scheme    Scheme name
      * @param   host      Host name
      * @param   path      Path
@@ -803,6 +1160,29 @@ public final class URI
      * URI instance as if by invoking the {@link #URI(String)} constructor;
      * this may cause a {@link URISyntaxException} to be thrown.  </p>
      *
+     * <p>
+     *  构造来自给定组件的URI
+     * 
+     *  <p>组件可能未定义,传递{@code null}
+     * 
+     *  <p>此构造函数首先使用给定的组件以字符串形式构建URI,如下所示：</p>
+     * 
+     * <ol>
+     * 
+     *  <li> <p>最初,结果字符串为空</p> </li>
+     * 
+     *  <li> <p>如果给定方案,则会将其附加到结果后面,后跟冒号字符({@code'：'})</p> </li>
+     * 
+     * <li> <p>如果提供了特定于方案的部分,则会附加任何不是<a href=\"#legal-chars\">法定URI字符</a>的字符为<a href ="#quote ">引用</a> </p> 
+     * </li>。
+     * 
+     *  <li> <p>最后,如果给出了一个片段,那么将向字符串附加一个散列字符({@code'#'}),然后是片段。任何不是合法URI字符的字符都被引用</p > </li>
+     * 
+     * </ol>
+     * 
+     *  <p>然后解析生成的URI字符串,以便创建新的URI实例,如同通过调用{@link #URI(String)}构造函数;这可能会导致{@link URISyntaxException}被抛出</p>。
+     * 
+     * 
      * @param   scheme    Scheme name
      * @param   ssp       Scheme-specific part
      * @param   fragment  Fragment
@@ -836,6 +1216,17 @@ public final class URI
      * URI is being constructed from user input or from some other source that
      * may be prone to errors.  </p>
      *
+     * <p>
+     *  通过解析给定的字符串来创建URI
+     * 
+     * <p>这种方便的工厂方法好像是通过调用{@link #URI(String)}构造函数;任何由构造函数抛出的{@link URISyntaxException}被捕获并包装在一个新的{@link IllegalArgumentException}
+     * 对象中,然后抛出它。
+     * 
+     *  <p>提供此方法用于已知给定字符串是合法URI的情况,例如对于在程序中声明的URI常量,因此将被认为是字符串不能解析的编程错误因此,应该使用直接抛出{@link URISyntaxException}
+     * 的构造函数,其中URI是从用户输入或可能容易出错的其他来源构造的。
+     * </p>。
+     * 
+     * 
      * @param  str   The string to be parsed into a URI
      * @return The new URI
      *
@@ -895,6 +1286,27 @@ public final class URI
      * appropriate diagnostic message can be issued based upon the exception
      * that is thrown. </p>
      *
+     * <p>
+     * 尝试将此URI的权限组件(如果已定义)解析为用户信息,主机和端口组件
+     * 
+     *  <p>如果此URI的授权组件已被识别为基于服务器,则它已经被解析为用户信息,主机和端口组件在这种情况下,或者如果此URI没有授权组件,则此方法简单返回此URI
+     * 
+     *  <p>否则,此方法再次尝试将授权组件解析为用户信息,主机和端口组件,并抛出一个异常,描述为什么授权组件无法以此方式解析
+     * 
+     * <p>提供此方法是因为<a href=\"http://wwwietforg/rfc/rfc2396txt\"> RFC 2396 </a>中指定的通用URI语法无法始终将基于服务器的授权与合法的注册表
+     * 区分开来基于权限它必须将前者的一些实例视为后者的实例。
+     * 例如,URI字符串{@code"// foo：bar"}中的权限组件不是一个合法的基于服务器的权限,但它是作为一个注册机构的权威。
+     * 
+     *  <p>在许多常见情况下,例如,当工作URI是已知是URN或URL时,使用的分层URI将始终是基于服务器的。因此,它们必须被解析或作为错误处理在这些情况下一个语句如
+     * 
+     * <blockquote>
+     * {@code URI} <i> u </i> {@ code = new URI(str)parseServerAuthority();}
+     * </blockquote>
+     * 
+     *  <p>可用于确保<i> </i>总是指一个URI,如果它具有权限组件,则具有基于服务器的权限,具有正确的用户信息,主机和端口组件。
+     * 调用此方法还确保如果不能以该方式解析权限,则可以基于抛出的异常发出适当的诊断消息</p>。
+     * 
+     * 
      * @return  A URI whose authority field has been parsed
      *          as a server-based authority
      *
@@ -950,6 +1362,32 @@ public final class URI
      * segment if one was inserted by step 3 above.  Otherwise, a normalized
      * path will not contain any {@code "."} or {@code ".."} segments. </p>
      *
+     * <p>
+     *  规范化此URI的路径
+     * 
+     * <p>如果此URI是不透明的,或者其路径已经是正常形式,则返回此URI。
+     * 否则,将构造一个与此URI相同的新URI,除非其路径通过以某种方式规范化此URI的路径来计算与<a href=\"http://wwwietforg/rfc/rfc2396txt\"> RFC 2396
+     *  </a>,第52节,第6步,子步骤&nbsp; c到&nbsp;那是：。
+     * <p>如果此URI是不透明的,或者其路径已经是正常形式,则返回此URI。
+     * </p>
+     * 
+     * <ol>
+     * 
+     *  <li> <p>所有{@code""}段已删除</p> </li>
+     * 
+     *  <li> <p>如果{@code""}段之前有非 -  {@ code""}段,则会删除这两个段。此步骤重复,直到不再适用</p> < / li>
+     * 
+     * <li> <p>如果路径是相对路径,并且其第一个段包含冒号字符({@code'：'}),则会添加一个{@code""}段。
+     * 例如{@code"a：b / c / d"}从稍后被重新解析为具有{@code"a"}的方案和{@code} b / c的方案特定部分的不透明URI / d"} <b> <i>(与RFC的偏差2396)
+     * </i> </b> </p> </li>。
+     * <li> <p>如果路径是相对路径,并且其第一个段包含冒号字符({@code'：'}),则会添加一个{@code""}段。
+     * 
+     * </ol>
+     * 
+     *  <p>标准化路径将以一个或多个{@code""}段开头,如果前面没有足够的非 -  {@ code""}段以允许删除它们。归一化路径将以{@code""} }段(如果通过上述步骤3插入)。
+     * 否则,归一化路径将不包含任何{@code""}或{@code""}段</p>。
+     * 
+     * 
      * @return  A URI equivalent to this URI,
      *          but whose path is in normal form
      */
@@ -1005,6 +1443,40 @@ public final class URI
      * <p> The result of this method is absolute if, and only if, either this
      * URI is absolute or the given URI is absolute.  </p>
      *
+     * <p>
+     *  针对此URI解析给定的URI
+     * 
+     * <p>如果给定的URI已经是绝对的,或者此URI是不透明的,则返回给定的URI
+     * 
+     *  <p> <a name=\"resolve-frag\"> </a>如果定义了给定的URI的片段组件,则其路径组件为空,并且其方案,权限和查询组件未定义,则具有给定URI的URI片段,但所有其他组件等
+     * 于此URI的那些组件。
+     * 这允许表示独立片段引用(例如{@code"#foo"})的URI有效地针对基本URI。
+     * 
+     *  <p>否则,此方法将以与<a href=\"http://wwwietforg/rfc/rfc2396txt\"> RFC 2396 </a>(第52节)一致的方式构造新的分层URI;也就是：</p>
+     * 。
+     * 
+     * <ol>
+     * 
+     * <li> <p>使用此URI的方案和给定的URI的查询和片段组件构建新的URI </p> </li>
+     * 
+     *  <li> <p>如果给定的URI具有权限组件,则新URI的权限和路径取自给定的URI </p> </li>
+     * 
+     *  <li> <p>否则,将从此URI复制新URI的权限组件,其路径计算如下：</p>
+     * 
+     * <ol>
+     * 
+     *  <li> <p>如果给定的URI的路径是绝对路径,则新URI的路径取自给定的URI </p> </li>
+     * 
+     * <li> <p>否则,给定的URI的路径是相对的,因此新URI的路径是通过将给定URI的路径与此URI的路径相关联来计算的。
+     * 这是通过连接此URI路径的最后一个段,如果有的话,使用给定的URI路径,然后将结果标准化,就像调用{@link #normalize()normalize}方法</p> </li>。
+     * 
+     *  </ol> </li>
+     * 
+     * </ol>
+     * 
+     *  <p>此方法的结果是绝对的,如果,且仅当此URI是绝对的或给定的URI是绝对的</p>
+     * 
+     * 
      * @param  uri  The URI to be resolved against this URI
      * @return The resulting URI
      *
@@ -1023,6 +1495,13 @@ public final class URI
      * evaluating the expression {@link #resolve(java.net.URI)
      * resolve}{@code (URI.}{@link #create(String) create}{@code (str))}. </p>
      *
+     * <p>
+     *  通过解析给定的字符串,然后解决它对这个URI构造一个新的URI
+     * 
+     *  <p>这种方便的方法就像调用它等同于评估表达式{@link #resolve(javanetURI)resolve} {@ code(URI){@ link #create(String)create}
+     *  {@ code(str)) } </p>。
+     * 
+     * 
      * @param  str   The string to be parsed into a URI
      * @return The resulting URI
      *
@@ -1056,6 +1535,20 @@ public final class URI
      *
      * </ol>
      *
+     * <p>
+     * 将给定的URI与此URI相关
+     * 
+     *  <p>根据此URI的给定URI的相对性计算如下：</p>
+     * 
+     * <ol>
+     * 
+     *  <li> <p>如果此URI或给定URI不透明,或者两个URI的方案和授权组件不相同,或者此URI的路径不是给定URI的路径的前缀,则返回给定的URI </p> </li>
+     * 
+     *  <li> <p>否则,将使用从给定URI获取的查询和片段组件构建新的相对分层URI,并使用通过从给定URI路径的开头除去此URI路径计算的路径组件</p> >
+     * 
+     * </ol>
+     * 
+     * 
      * @param  uri  The URI to be relativized against this URI
      * @return The resulting URI
      *
@@ -1073,6 +1566,12 @@ public final class URI
      * evaluating the expression {@code new URL(this.toString())} after
      * first checking that this URI is absolute. </p>
      *
+     * <p>
+     *  构造来自此URI的URL
+     * 
+     * <p>这种方便的方法好像调用它相当于在首次检查这个URI是绝对的之后,计算表达式{@code new URL(thistoString())}。</p>
+     * 
+     * 
      * @return  A URL constructed from this URI
      *
      * @throws  IllegalArgumentException
@@ -1101,6 +1600,14 @@ public final class URI
      * The scheme component of a URI cannot contain escaped octets, hence this
      * method does not perform any decoding.
      *
+     * <p>
+     *  返回此URI的方案组件
+     * 
+     *  <p> URI的scheme组件(如果已定义)只包含<i> alphanum </i>类别中的字符和字符串{@code}  -  +"}中的字符。方案始终以< / i>字符<p>
+     * 
+     *  URI的方案组件不能包含转义的字节,因此此方法不执行任何解码
+     * 
+     * 
      * @return  The scheme component of this URI,
      *          or {@code null} if the scheme is undefined
      */
@@ -1113,6 +1620,12 @@ public final class URI
      *
      * <p> A URI is absolute if, and only if, it has a scheme component. </p>
      *
+     * <p>
+     *  告诉这个URI是否是绝对的
+     * 
+     *  <p>一个URI是绝对的,如果,只有当它有一个方案组件</p>
+     * 
+     * 
      * @return  {@code true} if, and only if, this URI is absolute
      */
     public boolean isAbsolute() {
@@ -1127,6 +1640,12 @@ public final class URI
      * An opaque URI has a scheme, a scheme-specific part, and possibly
      * a fragment; all other components are undefined. </p>
      *
+     * <p>
+     *  指示此URI是否不透明
+     * 
+     * <p>当且仅当它是绝对的并且其方案特定部分不以斜杠字符('/')开头时,URI是不透明的。不透明的URI具有方案,特定于方案的部分,可能还有分段;所有其他组件未定义</p>
+     * 
+     * 
      * @return  {@code true} if, and only if, this URI is opaque
      */
     public boolean isOpaque() {
@@ -1140,6 +1659,12 @@ public final class URI
      * <p> The scheme-specific part of a URI only contains legal URI
      * characters. </p>
      *
+     * <p>
+     *  返回此URI的原始方案特定部分方案特定部分永远不会未定义,虽然它可能为空
+     * 
+     *  <p> URI的特定于方案的部分只包含合法的URI字符</p>
+     * 
+     * 
      * @return  The raw scheme-specific part of this URI
      *          (never {@code null})
      */
@@ -1156,6 +1681,13 @@ public final class URI
      * except that all sequences of escaped octets are <a
      * href="#decode">decoded</a>.  </p>
      *
+     * <p>
+     *  返回此URI的解码的特定于方案的部分
+     * 
+     *  <p>此方法返回的字符串等于{@link #getRawSchemeSpecificPart()getRawSchemeSpecificPart}方法返回的字符,只是所有转义的八位字节序列都为<a href=\"#decode\">
+     * 解码</a> < p>。
+     * 
+     * 
      * @return  The decoded scheme-specific part of this URI
      *          (never {@code null})
      */
@@ -1175,6 +1707,13 @@ public final class URI
      * constrained to have valid user-information, host, and port
      * components. </p>
      *
+     * <p>
+     *  返回此URI的原始授权组件
+     * 
+     * <p>如果定义了URI的授权组件,则只包含商用字符({@code'@'})和<i>未预留</i>,<i>标点</i> ,<i>转义</i>和<i>其他</i>类别如果权限是基于服务器的,则进一步被限制为
+     * 具有有效的用户信息,主机和端口组件</p>。
+     * 
+     * 
      * @return  The raw authority component of this URI,
      *          or {@code null} if the authority is undefined
      */
@@ -1189,6 +1728,13 @@ public final class URI
      * {@link #getRawAuthority() getRawAuthority} method except that all
      * sequences of escaped octets are <a href="#decode">decoded</a>.  </p>
      *
+     * <p>
+     *  返回此URI的已解码权限组件
+     * 
+     *  <p>此方法返回的字符串与{@link #getRawAuthority()getRawAuthority}方法返回的字符串相同,只是所有转义的八位字节序列都是<a href=\"#decode\">
+     * 解码</a> < p>。
+     * 
+     * 
      * @return  The decoded authority component of this URI,
      *          or {@code null} if the authority is undefined
      */
@@ -1205,6 +1751,12 @@ public final class URI
      * characters in the <i>unreserved</i>, <i>punct</i>, <i>escaped</i>, and
      * <i>other</i> categories. </p>
      *
+     * <p>
+     *  返回此URI的原始用户信息组件
+     * 
+     * <p> URI的用户信息组件(如果已定义)只包含<i>未预占</i>,<i>标点</i>,<i>转义</i>和<i >其他</i>类别</p>
+     * 
+     * 
      * @return  The raw user-information component of this URI,
      *          or {@code null} if the user information is undefined
      */
@@ -1219,6 +1771,13 @@ public final class URI
      * {@link #getRawUserInfo() getRawUserInfo} method except that all
      * sequences of escaped octets are <a href="#decode">decoded</a>.  </p>
      *
+     * <p>
+     *  返回此URI的已解码用户信息组件
+     * 
+     *  <p>此方法返回的字符串与{@link #getRawUserInfo()getRawUserInfo}方法返回的字符串相同,只是所有转义的八位字节序列都为<a href=\"#decode\"> d
+     * ecoded </a> < p>。
+     * 
+     * 
      * @return  The decoded user-information component of this URI,
      *          or {@code null} if the user information is undefined
      */
@@ -1261,6 +1820,27 @@ public final class URI
      * The host component of a URI cannot contain escaped octets, hence this
      * method does not perform any decoding.
      *
+     * <p>
+     *  返回此URI的主机组件
+     * 
+     *  <p> URI的主机组件(如果已定义)将采用以下形式之一：</p>
+     * 
+     * <ul>
+     * 
+     * <li> <p>由一个或多个由周期字符({@code''}}分隔的<i>标签</i>组成的域名,后面跟有句点字符每个标签由<i> / i>字符以及连字符字符({@code' - '}),但连字符不会作为
+     * 标签中的第一个或最后一个字符出现由两个或多个标签组成的域名的最右边的标签, i> alpha </i>字符</li>。
+     * 
+     *  <li> <p> <i>数字</i> {@ code +} <i>数字</i> {@ code +} <i> @ code +} <i> </i> {@ code +},其中没有<i>数字</i>序列
+     * 长度超过三个字符,且没有序列的值大于255 </p> >。
+     * 
+     * <li> <p>包含在方括号({@code'['}和{@code']'}中并由十六进制数字,冒号字符({@code'：'})组成的IPv6地址,嵌入式IPv4地址IPv6地址的完整语法在<a href=\"http://wwwietforg/rfc/rfc2373txt\">
+     *  <i> RFC 2373：IPv6寻址体系结构</i> </a>中指定</p > </li>。
+     * 
+     * </ul>
+     * 
+     *  URI的主机组件不能包含转义的字节,因此此方法不执行任何解码
+     * 
+     * 
      * @return  The host component of this URI,
      *          or {@code null} if the host is undefined
      */
@@ -1274,6 +1854,12 @@ public final class URI
      * <p> The port component of a URI, if defined, is a non-negative
      * integer. </p>
      *
+     * <p>
+     *  返回此URI的端口号
+     * 
+     *  <p> URI的端口组件(如果已定义)是非负整数</p>
+     * 
+     * 
      * @return  The port component of this URI,
      *          or {@code -1} if the port is undefined
      */
@@ -1289,6 +1875,13 @@ public final class URI
      * and characters in the <i>unreserved</i>, <i>punct</i>, <i>escaped</i>,
      * and <i>other</i> categories. </p>
      *
+     * <p>
+     *  返回此URI的原始路径组件
+     * 
+     * <p>如果定义了URI的路径组件,它只包含斜杠字符({@code'/'}),商业字符({@code'@'})和<i>未预约</i>,<i>戳状</i>,<i>转义</i>和<i>其他</i>类别</p>
+     * 。
+     * 
+     * 
      * @return  The path component of this URI,
      *          or {@code null} if the path is undefined
      */
@@ -1303,6 +1896,13 @@ public final class URI
      * {@link #getRawPath() getRawPath} method except that all sequences of
      * escaped octets are <a href="#decode">decoded</a>.  </p>
      *
+     * <p>
+     *  返回此URI的已解码路径组件
+     * 
+     *  <p>此方法返回的字符串与{@link #getRawPath()getRawPath}方法返回的字符串相同,只是所有转义的八位字节序列都为<a href=\"#decode\">解码</a> < p>
+     * 。
+     * 
+     * 
      * @return  The decoded path component of this URI,
      *          or {@code null} if the path is undefined
      */
@@ -1318,6 +1918,12 @@ public final class URI
      * <p> The query component of a URI, if defined, only contains legal URI
      * characters. </p>
      *
+     * <p>
+     *  返回此URI的原始查询组件
+     * 
+     *  <p> URI的查询组件(如果已定义)只包含法定URI字符</p>
+     * 
+     * 
      * @return  The raw query component of this URI,
      *          or {@code null} if the query is undefined
      */
@@ -1332,6 +1938,13 @@ public final class URI
      * {@link #getRawQuery() getRawQuery} method except that all sequences of
      * escaped octets are <a href="#decode">decoded</a>.  </p>
      *
+     * <p>
+     *  返回此URI的已解码查询组件
+     * 
+     * <p>此方法返回的字符串与{@link #getRawQuery()getRawQuery}方法返回的字符串相同,只是所有转义的八位字节序列都为<a href=\"#decode\">解码</a> < p>
+     * 。
+     * 
+     * 
      * @return  The decoded query component of this URI,
      *          or {@code null} if the query is undefined
      */
@@ -1347,6 +1960,12 @@ public final class URI
      * <p> The fragment component of a URI, if defined, only contains legal URI
      * characters. </p>
      *
+     * <p>
+     *  返回此URI的原始片段组件
+     * 
+     *  <p> URI的片段组件(如果已定义)只包含法律URI字符</p>
+     * 
+     * 
      * @return  The raw fragment component of this URI,
      *          or {@code null} if the fragment is undefined
      */
@@ -1361,6 +1980,13 @@ public final class URI
      * {@link #getRawFragment() getRawFragment} method except that all
      * sequences of escaped octets are <a href="#decode">decoded</a>.  </p>
      *
+     * <p>
+     *  返回此URI的解码片段组件
+     * 
+     *  <p>此方法返回的字符串等于{@link #getRawFragment()getRawFragment}方法返回的字符,只是所有转义的八位字节序列都为<a href=\"#decode\"> dec
+     * oded </a> < p>。
+     * 
+     * 
      * @return  The decoded fragment component of this URI,
      *          or {@code null} if the fragment is undefined
      */
@@ -1405,6 +2031,25 @@ public final class URI
      * <p> This method satisfies the general contract of the {@link
      * java.lang.Object#equals(Object) Object.equals} method. </p>
      *
+     * <p>
+     *  测试此URI以与另一个对象相等
+     * 
+     *  <p>如果给定的对象不是URI,那么此方法立即返回{@code false}
+     * 
+     * <p>对于两个被认为是相等的URI,要么两者都是不透明的,要么两者都是分层的他们的方案必须是未定义的或者是否相等,而不考虑它们的片段必须是未定义的还是相等的
+     * 
+     *  <p>对于两个不透明URI被视为相等,它们的方案特定部分必须相等
+     * 
+     * <p>对于两个等级URI,它们的路径必须相等,它们的查询必须是未定义的或者是相等的。
+     * 他们的权限必须是未定义的,或者都是基于注册表的,或者都是基于服务器的如果他们的权限被定义并且是基于注册表的,则它们必须是相等的如果他们的权限被定义并且是基于服务器的,则他们的主机必须相等,而不考虑情况,
+     * 它们的端口号必须相等,并且他们的用户信息组件必须相等。
+     * <p>对于两个等级URI,它们的路径必须相等,它们的查询必须是未定义的或者是相等的。
+     * 
+     * <p>当测试用于相等的两个URI的用户信息,路径,查询,片段,权限或方案特定部分时,比较这些组件的原始形式而不是编码形式,并且转义的八位字节的十六进制数字比较不考虑情况
+     * 
+     *  <p>此方法满足{@link javalangObject#equals(Object)Objectequals}方法的一般合同</p>
+     * 
+     * 
      * @param   ob   The object to which this object is to be compared
      *
      * @return  {@code true} if, and only if, the given object is a URI that
@@ -1450,6 +2095,10 @@ public final class URI
      * of the URI's components, and satisfies the general contract of the
      * {@link java.lang.Object#hashCode() Object.hashCode} method.
      *
+     * <p>
+     *  返回此URI的哈希码值哈希码基于所有URI的组件,并满足{@link javalangObject#hashCode()ObjecthashCode}方法的一般约定
+     * 
+     * 
      * @return  A hash-code value for this URI
      */
     public int hashCode() {
@@ -1533,6 +2182,42 @@ public final class URI
      * java.lang.Comparable#compareTo(Object) Comparable.compareTo}
      * method. </p>
      *
+     * <p>
+     *  将此URI与另一个对象(其必须是URI)进行比较
+     * 
+     * <p>当比较两个URI的相应组件时,如果一个组件未定义但另一个定义,则第一个组件被认为小于第二个。
+     * 除非另有说明,否则字符串组件根据其自然的,区分大小写的顺序排序由{@link javalangString#compareTo(Object)StringcompareTo}方法定义通过比较其原始形式而
+     * 不是其编码形式来比较受编码的字符串组件。
+     * <p>当比较两个URI的相应组件时,如果一个组件未定义但另一个定义,则第一个组件被认为小于第二个。
+     * 
+     *  <p> URI的排序定义如下：</p>
+     * 
+     * <ul>
+     * 
+     *  <li> <p>具有不同方案的两个URI根据其方案的顺序排序,而不考虑案例</p> </li>
+     * 
+     *  <li> <p>层级URI被认为小于具有相同方案的不透明URI </p> </li>
+     * 
+     * <li> <p>具有相同方案的两个不透明URI根据其方案特定部分的排序进行排序</p> </li>
+     * 
+     *  <li> <p>具有相同方案和方案特定部分的两个不透明URI根据其片段的排序排序</p> </li>
+     * 
+     *  <li> <p>具有相同方案的两个层次URI根据其权限组件的排序排序：</p>
+     * 
+     * <ul>
+     * 
+     *  <li> <p>如果两个授权组件都是基于服务器的,则URI将根据其用户信息组件进行排序;如果这些组件相同,则URI根据其主机的顺序排序,而不考虑情况;如果主机相同,则根据它们的端口的顺序对URI进行排
+     * 序</p> </li>。
+     * 
+     * <li> <p>如果一个或两个授权组件都是基于注册表的,则URI会根据其授权组件的顺序排序</p> </li>
+     * 
+     *  </ul> </li>
+     * 
+     *  <li> <p>最后,具有相同方案和权限组件的两个分级URI根据其路径的顺序排序;如果它们的路径相同,则它们根据它们的查询的顺序排序;如果查询相同,则根据它们的片段的顺序对它们进行排序</p> </li>
+     * 。
+     * 
+     * </ul>
+     * 
      * @param   that
      *          The object to which this URI is to be compared
      *
@@ -1597,6 +2282,11 @@ public final class URI
      * href="http://www.ietf.org/rfc/rfc2396.txt">RFC&nbsp;2396</a>,
      * section&nbsp;5.2, step&nbsp;7. </p>
      *
+     * <p>
+     * 
+     *  <p>此方法符合{@link javalangComparable#compareTo(Object)ComparablecompareTo}方法的一般合同</p>
+     * 
+     * 
      * @return  The string form of this URI
      */
     public String toString() {
@@ -1613,6 +2303,15 @@ public final class URI
      * this method works as if by invoking that method and then <a
      * href="#encode">encoding</a> the result.  </p>
      *
+     * <p>
+     *  以字符串形式返回此URI的内容
+     * 
+     * <p>如果此URI是通过调用此类中的一个构造函数创建的,那么将返回一个等效于原始输入字符串的字符串,或者返回适当时从原始给定的组件计算的字符串。
+     * 否则,此URI是由归一化,分辨率或相对性,因此,根据<a href=\"http://wwwietforg/rfc/rfc2396txt\"> RFC 2396 </a>第52节中指定的规则,从此URI
+     * 的组件构建字符串,步骤&nbsp; 7 </p>。
+     * <p>如果此URI是通过调用此类中的一个构造函数创建的,那么将返回一个等效于原始输入字符串的字符串,或者返回适当时从原始给定的组件计算的字符串。
+     * 
+     * 
      * @return  The string form of this URI, encoded as needed
      *          so that it only contains characters in the US-ASCII
      *          charset
@@ -1633,6 +2332,13 @@ public final class URI
      * and then the {@link java.io.ObjectOutputStream#defaultWriteObject()}
      * method of the given object-output stream is invoked. </p>
      *
+     * <p>
+     *  以US-ASCII字符串形式返回此URI的内容
+     * 
+     * <p>如果此URI在<i>其他</i>类别中不包含任何字符,那么调用此方法将返回与调用{@link #toString()toString}方法相同的值。
+     * 否则,方法好像通过调用该方法,然后<a href=\"#encode\">编码</a>结果</p>。
+     * 
+     * 
      * @param  os  The object-output stream to which this object
      *             is to be written
      */
@@ -1650,6 +2356,13 @@ public final class URI
      * invoked to read the value of the {@code string} field.  The result is
      * then parsed in the usual way.
      *
+     * <p>
+     *  将此URI的内容保存到给定的串行流
+     * 
+     *  <p> URI实例的唯一可序列化字段是它的{@code string}字段如果该字段没有已经有一个值,则该字段被赋予一个值,然后给定给定的{@link javaioObjectOutputStream#defaultWriteObject()}
+     * 方法调用对象输出流</p>。
+     * 
+     * 
      * @param  is  The object-input stream from which this object
      *             is being read
      */
@@ -1757,6 +2470,11 @@ public final class URI
             if (ch == '%') {
                 /*
                  * Process the next two encoded characters
+                 * <p>
+                 *  从给定的串行流重构URI
+                 * 
+                 * <p>调用{@link javaioObjectInputStream#defaultReadObject()}方法读取{@code string}字段的值然后以通常的方式解析结果
+                 * 
                  */
                 for (int i = index + 1; i < index + 3; i++)
                     h = 31 * h + toUpper(s.charAt(i));
@@ -1887,6 +2605,9 @@ public final class URI
         if (opaquePart != null) {
             /* check if SSP begins with an IPv6 address
              * because we must not quote a literal IPv6 address
+             * <p>
+             *  处理接下来的两个编码字符
+             * 
              */
             if (opaquePart.startsWith("//[")) {
                 int end =  opaquePart.indexOf("]");

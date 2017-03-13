@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2002,2004 Apache软件基金会
+ * 
+ *  根据Apache许可证第20版("许可证")授权;您不得使用此文件,除非符合许可证您可以在获取许可证的副本
+ * 
+ *  http：// wwwapacheorg / licenses / LICENSE-20
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件将按"原样"基础分发,无任何明示或暗示的保证或条件。请参阅许可证管理权限和限制许可证
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.dom;
@@ -46,6 +56,18 @@ import org.w3c.dom.UserDataHandler;
  *
  * @xerces.internal
  *
+ * <p>
+ * 此类表示文档本身中的文档类型<em>声明</em>,<em>不是</em>文档类型定义(DTD)XML文档可以(或可能不)具有这样的引用
+ * <P>
+ *  DocumentType是一种扩展DOM功能,用于XML文档,但不能用于HTML
+ * <P>
+ *  请注意,实体和符号不再是DocumentType的子级,而是无父节点仅挂在其适当的NamedNodeMaps
+ * <P>
+ *  这个区域在REC-DOM-Level-1-19981001中是未知的。最明显的是,绝对没有为存储和使用元素和属性信息做出规定,实体和实体引用之间的链接也没有牢固地
+ * 
+ *  @xercesinternal
+ * 
+ * 
  * @author Arnaud  Le Hors, IBM
  * @author Joe Kesselman, IBM
  * @author Andy Clark, IBM
@@ -90,6 +112,7 @@ public class DocumentTypeImpl
     protected String internalSubset;
 
     /** The following are required for compareDocumentPosition
+    /* <p>
     */
     // Doctype number.   Doc types which have no owner may be assigned
     // a number, on demand, for ordering purposes for compareDocumentPosition
@@ -131,6 +154,12 @@ public class DocumentTypeImpl
      * Introduced in DOM Level 2. <p>
      *
      * Return the public identifier of this Document type.
+     * <p>
+     *  在DOM级别2中引入<p>
+     * 
+     *  返回此Document类型的公共标识符
+     * 
+     * 
      * @since WD-DOM-Level-2-19990923
      */
     public String getPublicId() {
@@ -143,6 +172,12 @@ public class DocumentTypeImpl
      * Introduced in DOM Level 2. <p>
      *
      * Return the system identifier of this Document type.
+     * <p>
+     *  在DOM级别2中引入<p>
+     * 
+     * 返回此文档类型的系统标识符
+     * 
+     * 
      * @since WD-DOM-Level-2-19990923
      */
     public String getSystemId() {
@@ -156,6 +191,11 @@ public class DocumentTypeImpl
      * NON-DOM. <p>
      *
      * Set the internalSubset given as a string.
+     * <p>
+     *  NON-DOM <p>
+     * 
+     *  设置以字符串形式给出的internalSubset
+     * 
      */
     public void setInternalSubset(String internalSubset) {
         if (needsSyncData()) {
@@ -168,6 +208,12 @@ public class DocumentTypeImpl
      * Introduced in DOM Level 2. <p>
      *
      * Return the internalSubset given as a string.
+     * <p>
+     *  在DOM级别2中引入<p>
+     * 
+     *  返回以字符串形式给出的internalSubset
+     * 
+     * 
      * @since WD-DOM-Level-2-19990923
      */
     public String getInternalSubset() {
@@ -184,6 +230,9 @@ public class DocumentTypeImpl
     /**
      * A short integer indicating what type of node this is. The named
      * constants for this value are defined in the org.w3c.dom.Node interface.
+     * <p>
+     *  指示此节点类型的短整数此值的命名常量在orgw3cdomNode接口中定义
+     * 
      */
     public short getNodeType() {
         return Node.DOCUMENT_TYPE_NODE;
@@ -191,6 +240,9 @@ public class DocumentTypeImpl
 
     /**
      * Returns the document type name
+     * <p>
+     *  返回文档类型名称
+     * 
      */
     public String getNodeName() {
         if (needsSyncData()) {
@@ -214,6 +266,10 @@ public class DocumentTypeImpl
 
     /*
      * Get Node text content
+     * <p>
+     *  获取节点文本内容
+     * 
+     * 
      * @since DOM Level 3
      */
     public String getTextContent() throws DOMException {
@@ -222,6 +278,10 @@ public class DocumentTypeImpl
 
     /*
      * Set Node text content
+     * <p>
+     *  设置节点文本内容
+     * 
+     * 
      * @since DOM Level 3
      */
     public void setTextContent(String textContent)
@@ -232,6 +292,9 @@ public class DocumentTypeImpl
         /**
           * DOM Level 3 WD- Experimental.
           * Override inherited behavior from ParentNodeImpl to support deep equal.
+          * <p>
+          *  DOM Level 3 WD-实验覆盖从ParentNodeImpl继承的行为以支持深度相等
+          * 
           */
     public boolean isEqualNode(Node arg) {
 
@@ -323,6 +386,9 @@ public class DocumentTypeImpl
     /**
      * NON-DOM
      * set the ownerDocument of this node and its children
+     * <p>
+     *  NON-DOM设置此节点及其子节点的ownerDocument
+     * 
      */
     void setOwnerDocument(CoreDocumentImpl doc) {
         super.setOwnerDocument(doc);
@@ -333,6 +399,9 @@ public class DocumentTypeImpl
 
     /** NON-DOM
         Get the number associated with this doctype.
+    /* <p>
+    /*  获取与此doctype相关联的数字
+    /* 
     */
     protected int getNodeNumber() {
          // If the doctype has a document owner, get the node number
@@ -357,6 +426,9 @@ public class DocumentTypeImpl
     /**
      * Name of this document type. If we loaded from a DTD, this should
      * be the name immediately following the DOCTYPE keyword.
+     * <p>
+     *  此文档类型的名称如果从DTD加载,则应该是紧跟在DOCTYPE关键字后面的名称
+     * 
      */
     public String getName() {
 
@@ -388,6 +460,18 @@ public class DocumentTypeImpl
      * converted to their actual characters before being placed in the DOM's
      * contained text, and should be converted back when the DOM is rendered
      * as XML or HTML, and hence DO NOT appear here.
+     * <p>
+     * 访问DTD中定义的一般实体(外部和内部)的集合例如,在：
+     * <p>
+     * <pre>
+     *  &lt;！doctype example SYSTEM"exdtd"[&lt;！ENTITY foo"foo"&gt; &lt;！ENTITY bar"bar"&gt; &lt;！ENTITY％baz
+     * "baz"&gt; ]。
+     * </pre>
+     * <p>
+     *  实体映射包括foo和bar,但不是baz它承诺只有作为实体的节点将存在于此NamedNodeMap中
+     * <p>
+     *  对于HTML,这将始终为null
+     * <p>
      */
     public NamedNodeMap getEntities() {
         if (needsSyncChildren()) {
@@ -400,6 +484,9 @@ public class DocumentTypeImpl
      * Access the collection of Notations defined in the DTD.  A
      * notation declares, by name, the format of an XML unparsed entity
      * or is used to formally declare a Processing Instruction target.
+     * <p>
+     *  注意,"内置"实体,例如&amp;和&lt;应该在被放置在DOM的包含文本中之前转换为它们的实际字符,并且当DOM被呈现为XML或HTML时应该被转换回来,因此不会出现在这里
+     * 
      */
     public NamedNodeMap getNotations() {
         if (needsSyncChildren()) {
@@ -415,6 +502,10 @@ public class DocumentTypeImpl
     /**
      * NON-DOM: Subclassed to flip the entities' and notations' readonly switch
      * as well.
+     * <p>
+     * 访问DTD中定义的符号集合符号通过名称声明XML解析实体的格式或用于正式声明处理指令目标
+     * 
+     * 
      * @see NodeImpl#setReadOnly
      */
     public void setReadOnly(boolean readOnly, boolean deep) {
@@ -433,6 +524,10 @@ public class DocumentTypeImpl
 
     /**
      * NON-DOM: Access the collection of ElementDefinitions.
+     * <p>
+     *  NON-DOM：子类化以翻转实体和符号的readonly切换
+     * 
+     * 
      * @see ElementDefinitionImpl
      */
     public NamedNodeMap getElements() {

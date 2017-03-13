@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,6 +57,31 @@ package com.sun.org.apache.bcel.internal.classfile;
  * individuals on behalf of the Apache Software Foundation.  For more
  * information on the Apache Software Foundation, please see
  * <http://www.apache.org/>.
+ * <p>
+ *  Apache软件许可证,版本11
+ * 
+ *  版权所有(c)2001 Apache软件基金会保留所有权利
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  1源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明
+ * 
+ *  2二进制形式的再分发必须在随分发版提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明
+ * 
+ * 3包含在重新分发中的最终用户文档(如果有的话)必须包括以下声明："本产品包括Apache Software Foundation(http：// wwwapacheorg /)开发的软件。
+ * 或者,此确认可能出现在软件本身,如果和第三方承诺通常出现的地方。
+ * 
+ *  4未经事先书面许可,不得使用"Apache"和"Apache Software Foundation"和"Apache BCEL"这些名称来认可或推广从本软件衍生的产品对于书面许可,请联系apache
+ *  @ apacheorg。
+ * 
+ *  5未经Apache软件基金会事先书面许可,不得将本软件衍生的产品称为"Apache","Apache BCEL"或"Apache"名称。
+ * 
+ * 本软件按"原样"提供,任何明示或暗示的保证,包括但不限于适销性和针对特定用途的适用性的默示担保,在任何情况下均不得免责,APACHE软件基金会或其参与人应负赔偿责任对于任何直接,间接,偶发,特殊,惩罚性
+ * 或后果性损害(包括但不限于替代商品或服务的采购;使用,数据或利润损失;或业务中断)责任,无论是在合同,严格责任或侵权(包括疏忽或其他方式),以任何方式使用本软件,即使已被告知此类损害的可能性======
+ * ==============================================================。
+ * 
+ * 此软件包括许多个人代表Apache软件基金会所做的自愿捐款有关Apache软件基金会的更多信息,请参阅<http：// wwwapacheorg />
+ * 
  */
 
 import  com.sun.org.apache.bcel.internal.Constants;
@@ -73,6 +99,13 @@ import  java.io.*;
  * is used for debugging purposes and <em>LocalVariableTable</em> which
  * contains information about the local variables.
  *
+ * <p>
+ *  该类表示方法中包含的Java字节代码的块。
+ * 通过<em> AttributereadAttribute()</em>方法实例化</em>方法</em>属性包含有关操作数栈,局部变量,以及在此方法中处理的异常。
+ * 
+ *  此属性本身具有属性,即用于调试目的的<Line> </em> LineNumberTable </em>和包含有关本地变量的信息的LocalVariableTable </em>
+ * 
+ * 
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
  * @see     Attribute
  * @see     CodeException
@@ -93,6 +126,9 @@ public final class Code extends Attribute {
   /**
    * Initialize from another object. Note that both objects use the same
    * references (shallow copy). Use copy() for a physical copy.
+   * <p>
+   * 从另一个对象初始化请注意,两个对象使用相同的引用(浅拷贝)对物理副本使用copy()
+   * 
    */
   public Code(Code c) {
     this(c.getNameIndex(), c.getLength(), c.getMaxStack(), c.getMaxLocals(),
@@ -101,6 +137,8 @@ public final class Code extends Attribute {
   }
 
   /**
+  /* <p>
+  /* 
    * @param name_index Index pointing to the name <em>Code</em>
    * @param length Content length in bytes
    * @param file Input stream
@@ -121,6 +159,9 @@ public final class Code extends Attribute {
 
     /* Read exception table that contains all regions where an exception
      * handler is active, i.e., a try { ... } catch() block.
+     * <p>
+     *  处理程序是活动的,即,try {} catch()块
+     * 
      */
     exception_table_length = file.readUnsignedShort();
     exception_table        = new CodeException[exception_table_length];
@@ -130,6 +171,9 @@ public final class Code extends Attribute {
 
     /* Read all attributes, currently `LineNumberTable' and
      * `LocalVariableTable'
+     * <p>
+     *  `LocalVariableTable'
+     * 
      */
     attributes_count = file.readUnsignedShort();
     attributes = new Attribute[attributes_count];
@@ -139,11 +183,16 @@ public final class Code extends Attribute {
     /* Adjust length, because of setAttributes in this(), s.b.  length
      * is incorrect, because it didn't take the internal attributes
      * into account yet! Very subtle bug, fixed in 3.1.1.
+     * <p>
+     *  是不正确的,因为它没有考虑内部属性！非常微小的bug,固定在311
+     * 
      */
     this.length = length;
   }
 
   /**
+  /* <p>
+  /* 
    * @param name_index Index pointing to the name <em>Code</em>
    * @param length Content length in bytes
    * @param max_stack Maximum size of stack
@@ -175,6 +224,10 @@ public final class Code extends Attribute {
    * defined by the contents of a Java class. I.e., the hierarchy of methods,
    * fields, attributes, etc. spawns a tree of objects.
    *
+   * <p>
+   *  由遍历由Java类Ie的内容隐含地定义的树的节点的对象调用,方法,字段,属性等的层次结构产生对象的树
+   * 
+   * 
    * @param v Visitor object
    */
   public void accept(Visitor v) {
@@ -184,6 +237,10 @@ public final class Code extends Attribute {
   /**
    * Dump code attribute to file stream in binary format.
    *
+   * <p>
+   *  以二进制格式将代码属性转储到文件流
+   * 
+   * 
    * @param file Output file stream
    * @throws IOException
    */
@@ -206,12 +263,16 @@ public final class Code extends Attribute {
   }
 
   /**
+  /* <p>
+  /* 
    * @return Collection of code attributes.
    * @see Attribute
    */
   public final Attribute[] getAttributes()         { return attributes; }
 
   /**
+  /* <p>
+  /* 
    * @return LineNumberTable of Code, if it has one
    */
   public LineNumberTable getLineNumberTable() {
@@ -223,6 +284,8 @@ public final class Code extends Attribute {
   }
 
   /**
+  /* <p>
+  /* 
    * @return LocalVariableTable of Code, if it has one
    */
   public LocalVariableTable getLocalVariableTable() {
@@ -234,28 +297,38 @@ public final class Code extends Attribute {
   }
 
   /**
+  /* <p>
+  /* 
    * @return Actual byte code of the method.
    */
   public final byte[] getCode()      { return code; }
 
   /**
+  /* <p>
+  /* 
    * @return Table of handled exceptions.
    * @see CodeException
    */
   public final CodeException[] getExceptionTable() { return exception_table; }
 
   /**
+  /* <p>
+  /* 
    * @return Number of local variables.
    */
   public final int  getMaxLocals() { return max_locals; }
 
   /**
+  /* <p>
+  /* 
    * @return Maximum size of stack used by this method.
    */
 
   public final int  getMaxStack()  { return max_stack; }
 
   /**
+  /* <p>
+  /* 
    * @return the internal length of this code attribute (minus the first 6 bytes)
    * and excluding all its attributes
    */
@@ -268,6 +341,12 @@ public final class Code extends Attribute {
   }
 
   /**
+  /* <p>
+  /*  }}
+  /* 
+  /*  / **
+  /* 
+  /* 
    * @return the full size of this code attribute, minus its first 6 bytes,
    * including the size of all its contained attributes
    */
@@ -281,6 +360,12 @@ public final class Code extends Attribute {
   }
 
   /**
+  /* <p>
+  /*  return len + getInternalLength(); }}
+  /* 
+  /*  / **
+  /* 
+  /* 
    * @param attributes.
    */
   public final void setAttributes(Attribute[] attributes) {
@@ -290,6 +375,8 @@ public final class Code extends Attribute {
   }
 
   /**
+  /* <p>
+  /* 
    * @param code byte code
    */
   public final void setCode(byte[] code) {
@@ -298,6 +385,8 @@ public final class Code extends Attribute {
   }
 
   /**
+  /* <p>
+  /* 
    * @param exception_table exception table
    */
   public final void setExceptionTable(CodeException[] exception_table) {
@@ -307,6 +396,8 @@ public final class Code extends Attribute {
   }
 
   /**
+  /* <p>
+  /* 
    * @param max_locals maximum number of local variables
    */
   public final void setMaxLocals(int max_locals) {
@@ -314,6 +405,8 @@ public final class Code extends Attribute {
   }
 
   /**
+  /* <p>
+  /* 
    * @param max_stack maximum stack size
    */
   public final void setMaxStack(int max_stack) {
@@ -321,6 +414,8 @@ public final class Code extends Attribute {
   }
 
   /**
+  /* <p>
+  /* 
    * @return String representation of code chunk.
    */
   public final String toString(boolean verbose) {
@@ -349,6 +444,8 @@ public final class Code extends Attribute {
   }
 
   /**
+  /* <p>
+  /* 
    * @return String representation of code chunk.
    */
   public final String toString() {
@@ -356,6 +453,8 @@ public final class Code extends Attribute {
   }
 
   /**
+  /* <p>
+  /* 
    * @return deep copy of this attribute
    */
   public Attribute copy(ConstantPool constant_pool) {

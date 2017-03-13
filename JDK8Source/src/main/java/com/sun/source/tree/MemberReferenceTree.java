@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2011, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,13 @@ import javax.lang.model.element.Name;
  *   <em>expression</em> # <em>[ identifier | new ]</em>
  * </pre>
  *
+ * <p>
+ *  成员引用表达式的树节点
+ * 
+ *  例如：
+ * <pre>
+ *  <em> <em> </em>#<em> [identifier |新] </em>
+ * 
  * @since 1.8
  */
 @jdk.Exported
@@ -45,6 +53,9 @@ public interface MemberReferenceTree extends ExpressionTree {
     /**
      * There are two kinds of member references: (i) method references and
      * (ii) constructor references
+     * <p>
+     * </pre>
+     * 
      */
     @jdk.Exported
     public enum ReferenceMode {

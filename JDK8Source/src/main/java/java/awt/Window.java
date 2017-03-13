@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -138,6 +139,47 @@ import sun.util.logging.PlatformLogger;
  * Windows are capable of generating the following WindowEvents:
  * WindowOpened, WindowClosed, WindowGainedFocus, WindowLostFocus.
  *
+ * <p>
+ *  {@code Window}对象是没有边框和没有菜单的顶级窗口窗口的默认布局是{@code BorderLayout}
+ * <p>
+ *  在构建窗口时,窗口必须具有框架,对话框或定义为其所有者的另一个窗口
+ * <p>
+ *  在多屏幕环境中,您可以通过使用{@link #Window(Window,GraphicsConfiguration)构造{@code Window}来在不同的屏幕设备上创建{@code Window}
+ * 。
+ * {@code GraphicsConfiguration}对象是一个的目标屏幕设备的{@code GraphicsConfiguration}对象。
+ * <p>
+ * 在虚拟设备多屏幕环境中,其中桌面区域可以跨越多个物理屏幕设备,所有配置的边界相对于虚拟设备坐标系统。虚拟坐标系统的原点在左上角主物理屏幕根据虚拟设备中主屏幕的位置,可能有负坐标,如下图所示
+ * <p>
+ *  <img src ="doc-files / MultiScreengif"alt ="图表显示包含4个物理屏幕的虚拟设备主物理屏幕显示coords(0,0),其他屏幕显示(-80,-100)
+ * style="float:center; margin: 7px 10px;">
+ * <p>
+ * 在这样的环境中,当调用{@code setLocation}时,必须向这个方法传递虚拟坐标同样,在{@code Window}上调用{@code getLocationOnScreen}返回虚拟设备坐标
+ * 调用{@code getBounds}一个{@code GraphicsConfiguration}在虚拟坐标系中找到它的原点。
+ * <p>
+ * 以下代码设置{@code Window}在(10,10)相对于相应{@code GraphicsConfiguration}的物理屏幕的原点的位置。
+ * 如果未考虑{@code GraphicsConfiguration}的边界,{@code Window}位置将被设置为相对于虚拟坐标系统的(10,10),并将出现在主物理屏幕上,这可能不同于指定的{@code GraphicsConfiguration}
+ * 的物理屏幕。
+ * 以下代码设置{@code Window}在(10,10)相对于相应{@code GraphicsConfiguration}的物理屏幕的原点的位置。
+ * 
+ * <pre>
+ *  Window w = new Window(Window owner,GraphicsConfiguration gc); Rectangle bounds = gcgetBounds(); wset
+ * Location(10 + boundsx,10 + boundsy);。
+ * </pre>
+ * 
+ * <p>
+ * 注意：顶级窗口(包括{@code Window},{@code Frame}和{@code Dialog})的位置和大小都在桌面窗口管理系统的控制下。
+ * 调用{@code setLocation},{@code setSize}和{@code setBounds}是被转发到窗口管理系统的请求(不是指令)。将尽一切努力来满足这样的请求。
+ * 然而,在一些情况下,窗口管理系统可以忽略请求或修改请求的几何体,以便以与桌面设置更紧密匹配的方式放置和设置{@code Window}。
+ * <p>
+ * 由于本机事件处理的异步性质,{@code getBounds},{@code getLocation},{@code getLocationOnScreen}和{@code getSize}返回的结果可
+ * 能不会反映屏幕上的窗口的实际几何,直到最后一个请求已经被处理在后续请求的处理期间,这些值可能在窗口管理系统满足请求时相应地改变。
+ * <p>
+ *  应用程序可以任意设置不可见{@code Window}的大小和位置,但是当{@code Window}变为可见时,窗口管理系统随后可以改变其大小和/或位置一个或多个{@code ComponentEvent}
+ * 将生成s以指示新的几何。
+ * <p>
+ * Windows能够生成以下WindowEvents：WindowOpened,WindowClosed,WindowGainedFocus,WindowLostFocus
+ * 
+ * 
  * @author      Sami Shaio
  * @author      Arthur van Hoff
  * @see WindowEvent
@@ -158,6 +200,14 @@ public class Window extends Container implements Accessible {
      * the level of support, some properties of the window type may be
      * disobeyed.
      *
+     * <p>
+     *  可用的<i>窗口类型</i>的枚举
+     * 
+     *  窗口类型定义顶级窗口的通用可视外观和行为例如,类型可能影响装饰的{@code Frame}或{@code Dialog}实例的装饰类型
+     * <p>
+     *  某些平台可能不完全支持某种窗口类型根据支持的级别,窗口类型的某些属性可能不符合
+     * 
+     * 
      * @see   #getType
      * @see   #setType
      * @since 1.7
@@ -168,6 +218,11 @@ public class Window extends Container implements Accessible {
          *
          * This is the default type for objects of the {@code Window} class or
          * its descendants. Use this type for regular top-level windows.
+         * <p>
+         *  表示<i>正常</i>窗口
+         * 
+         *  这是{@code Window}类或其后代的对象的默认类型对于常规顶级窗口使用此类型
+         * 
          */
         NORMAL,
 
@@ -178,6 +233,11 @@ public class Window extends Container implements Accessible {
          * palette. The native system may render the window with smaller
          * title-bar if the window is either a {@code Frame} or a {@code
          * Dialog} object, and if it has its decorations enabled.
+         * <p>
+         *  表示<i>实用程序</i>窗口
+         * 
+         * 实用程序窗口通常是小窗口,例如工具栏或调色板。如果窗口是{@code Frame}或{@code Dialog}对象,则原生系统可以使用较小的标题栏来呈现窗口,如果它已启用其装饰
+         * 
          */
         UTILITY,
 
@@ -188,6 +248,11 @@ public class Window extends Container implements Accessible {
          * tooltip. On some platforms, windows of that type may be forcibly
          * made undecorated even if they are instances of the {@code Frame} or
          * {@code Dialog} class, and have decorations enabled.
+         * <p>
+         *  表示<i>弹出式窗口</i>
+         * 
+         *  弹出窗口是一个临时窗口,例如下拉菜单或工具提示在某些平台上,即使该类型的窗口是{@code Frame}或{@code Dialog}类的实例,该窗口也可能被强制无序装饰,并启用装饰
+         * 
          */
         POPUP
     }
@@ -199,6 +264,11 @@ public class Window extends Container implements Accessible {
      * {@code AWTPermission("showWindowWithoutWarningBanner")}.
      * This message can be displayed anywhere in the window.
      *
+     * <p>
+     *  这表示要在非安全窗口中显示的警告消息,即：安装了安全管理器的窗口,拒绝{@code AWTPermission("showWindowWithoutWarningBanner")}此消息可以显示在窗口
+     * 中的任何位置。
+     * 
+     * 
      * @serial
      * @see #getWarningString
      */
@@ -210,6 +280,10 @@ public class Window extends Container implements Accessible {
      * {@code Window} can't display icon but it's
      * being inherited by owned {@code Dialog}s.
      *
+     * <p>
+     * {@code icons}是我们可以表示框架和对话框的图形方式{@code Window}无法显示图标,但它被所有的{@code Dialog}继承
+     * 
+     * 
      * @serial
      * @see #getIconImages
      * @see #setIconImages
@@ -219,6 +293,9 @@ public class Window extends Container implements Accessible {
     /**
      * Holds the reference to the component which last had focus in this window
      * before it lost focus.
+     * <p>
+     *  在失去焦点之前,保持对此窗口中最后焦点的组件的引用
+     * 
      */
     private transient Component temporaryLostComponent;
 
@@ -233,6 +310,10 @@ public class Window extends Container implements Accessible {
     /**
      * An Integer value representing the Window State.
      *
+     * <p>
+     *  表示窗口状态的整数值
+     * 
+     * 
      * @serial
      * @since 1.2
      * @see #show
@@ -241,6 +322,10 @@ public class Window extends Container implements Accessible {
 
     /**
      * A boolean value representing Window always-on-top state
+     * <p>
+     *  表示Window始终在顶状态的布尔值
+     * 
+     * 
      * @since 1.5
      * @serial
      * @see #setAlwaysOnTop
@@ -253,6 +338,10 @@ public class Window extends Container implements Accessible {
      * i. e. between addNotify() and removeNotify() calls. The list
      * of all Window instances can be obtained from AppContext object.
      *
+     * <p>
+     *  包含与对等对象关联的所有窗口,在addNotify()和removeNotify()调用之间。所有Window实例的列表可以从AppContext对象
+     * 
+     * 
      * @since 1.6
      */
     private static final IdentityArrayList<Window> allWindows = new IdentityArrayList<Window>();
@@ -260,6 +349,10 @@ public class Window extends Container implements Accessible {
     /**
      * A vector containing all the windows this
      * window currently owns.
+     * <p>
+     *  包含此窗口当前拥有的所有窗口的向量
+     * 
+     * 
      * @since 1.2
      * @see #getOwnedWindows
      */
@@ -270,6 +363,9 @@ public class Window extends Container implements Accessible {
      * We insert a weak reference into the Vector of all Windows in AppContext
      * instead of 'this' so that garbage collection can still take place
      * correctly.
+     * <p>
+     *  我们在AppContext中的所有窗口的Vector中插入一个弱引用,而不是"this",这样垃圾回收仍然可以正确地进行
+     * 
      */
     private transient WeakReference<Window> weakThis;
 
@@ -279,11 +375,17 @@ public class Window extends Container implements Accessible {
      * Contains the modal dialog that blocks this window, or null
      * if the window is unblocked.
      *
+     * <p>
+     * 包含阻止此窗口的模态对话框,如果窗口已解除阻止,则为null
+     * 
+     * 
      * @since 1.6
      */
     transient Dialog modalBlocker;
 
     /**
+    /* <p>
+    /* 
      * @serial
      *
      * @see java.awt.Dialog.ModalExclusionType
@@ -304,6 +406,10 @@ public class Window extends Container implements Accessible {
     /**
      * Unused. Maintained for serialization backward-compatibility.
      *
+     * <p>
+     *  未使用保持序列化向后兼容性
+     * 
+     * 
      * @serial
      * @since 1.2
      */
@@ -312,6 +418,10 @@ public class Window extends Container implements Accessible {
     /**
      * Indicates whether this Window can become the focused Window.
      *
+     * <p>
+     *  指示此窗口是否可以成为关注的窗口
+     * 
+     * 
      * @serial
      * @see #getFocusableWindowState
      * @see #setFocusableWindowState
@@ -324,6 +434,10 @@ public class Window extends Container implements Accessible {
      * subsequently being shown (with a call to {@code setVisible(true)}), or
      * being moved to the front (with a call to {@code toFront()}).
      *
+     * <p>
+     *  指示此窗口在随后显示时是否应收到焦点(调用{@code setVisible(true)}),或移到前面(调用{@code toFront()})
+     * 
+     * 
      * @serial
      * @see #setAutoRequestFocus
      * @see #isAutoRequestFocus
@@ -335,6 +449,10 @@ public class Window extends Container implements Accessible {
      * Indicates that this window is being shown. This flag is set to true at
      * the beginning of show() and to false at the end of show().
      *
+     * <p>
+     *  表示正在显示此窗口此标志在show()开头设置为true,在show()结束时设置为false,
+     * 
+     * 
      * @see #show()
      * @see Dialog#shouldBlock
      */
@@ -343,6 +461,10 @@ public class Window extends Container implements Accessible {
     /**
      * The opacity level of the window
      *
+     * <p>
+     *  窗口的不透明度级别
+     * 
+     * 
      * @serial
      * @see #setOpacity(float)
      * @see #getOpacity()
@@ -354,6 +476,10 @@ public class Window extends Container implements Accessible {
      * The shape assigned to this window. This field is set to {@code null} if
      * no shape is set (rectangular window).
      *
+     * <p>
+     *  分配给此窗口的形状如果未设置形状(矩形窗口),此字段设置为{@code null}
+     * 
+     * 
      * @serial
      * @see #getShape()
      * @see #setShape(Shape)
@@ -366,6 +492,9 @@ public class Window extends Container implements Accessible {
 
     /*
      * JDK 1.1 serialVersionUID
+     * <p>
+     *  JDK 11 serialVersionUID
+     * 
      */
     private static final long serialVersionUID = 4497834738069338734L;
 
@@ -378,6 +507,9 @@ public class Window extends Container implements Accessible {
     /**
      * These fields are initialized in the native peer code
      * or via AWTAccessor's WindowAccessor.
+     * <p>
+     *  这些字段在本地对等体代码或通过AWTAccessor的WindowAccessor初始化
+     * 
      */
     private transient volatile int securityWarningWidth = 0;
     private transient volatile int securityWarningHeight = 0;
@@ -386,6 +518,9 @@ public class Window extends Container implements Accessible {
      * These fields represent the desired location for the security
      * warning if this window is untrusted.
      * See com.sun.awt.SecurityWarning for more details.
+     * <p>
+     * 如果此窗口不可信,这些字段表示安全警告的所需位置有关详细信息,请参阅comsunawtSecurityWarning
+     * 
      */
     private transient double securityWarningPointX = 2.0;
     private transient double securityWarningPointY = 0.0;
@@ -410,6 +545,9 @@ public class Window extends Container implements Accessible {
     /**
      * Initialize JNI field and method IDs for fields that may be
        accessed from C.
+     * <p>
+     *  初始化可从C访问的字段的JNI字段和方法ID
+     * 
      */
     private static native void initIDs();
 
@@ -422,6 +560,12 @@ public class Window extends Container implements Accessible {
      * to determine whether or not the window must be displayed with
      * a warning banner.
      *
+     * <p>
+     *  构造一个新的,初始不可见的窗口的默认大小与指定的{@code GraphicsConfiguration}
+     * <p>
+     *  如果有安全管理器,则调用它来检查{@code AWTPermission("showWindowWithoutWarningBanner")}以确定窗口是否必须显示警告横幅
+     * 
+     * 
      * @param gc the {@code GraphicsConfiguration} of the target screen
      *     device. If {@code gc} is {@code null}, the system default
      *     {@code GraphicsConfiguration} is assumed
@@ -527,6 +671,13 @@ public class Window extends Container implements Accessible {
      * If that check fails with a {@code SecurityException} then a warning
      * banner is created.
      *
+     * <p>
+     *  构造一个默认大小的新的,初始不可见的窗口
+     * <p>
+     * 如果有一个安全管理器设置,它被调用检查{@code AWTPermission("showWindowWithoutWarningBanner")}如果检查失败与{@code SecurityException}
+     * ,那么警告横幅创建。
+     * 
+     * 
      * @exception HeadlessException when
      *     {@code GraphicsEnvironment.isHeadless()} returns {@code true}
      *
@@ -547,6 +698,13 @@ public class Window extends Container implements Accessible {
      * If that check fails with a {@code SecurityException} then a warning
      * banner is created.
      *
+     * <p>
+     *  构造一个以指定的{@code Frame}作为其所有者的新的,初始不可见的窗口除非窗口的所有者显示在屏幕上,否则窗口将不可被聚焦
+     * <p>
+     *  如果有一个安全管理器设置,它被调用检查{@code AWTPermission("showWindowWithoutWarningBanner")}如果检查失败与{@code SecurityException}
+     * ,那么警告横幅创建。
+     * 
+     * 
      * @param owner the {@code Frame} to act as owner or {@code null}
      *    if this window has no owner
      * @exception IllegalArgumentException if the {@code owner}'s
@@ -574,6 +732,13 @@ public class Window extends Container implements Accessible {
      * If that check fails with a {@code SecurityException} then a
      * warning banner is created.
      *
+     * <p>
+     *  构造一个以指定的{@code Window}作为其所有者的新的,初始不可见的窗口除非最近拥有的{@code Frame}或{@code Dialog}显示在屏幕上,否则此窗口将不可焦点
+     * <p>
+     * 如果有一个安全管理器设置,它被调用检查{@code AWTPermission("showWindowWithoutWarningBanner")}如果检查失败与{@code SecurityException}
+     * ,那么警告横幅创建。
+     * 
+     * 
      * @param owner the {@code Window} to act as owner or
      *     {@code null} if this window has no owner
      * @exception IllegalArgumentException if the {@code owner}'s
@@ -605,6 +770,14 @@ public class Window extends Container implements Accessible {
      * check fails with a {@code SecurityException} then a warning banner
      * is created.
      *
+     * <p>
+     *  使用指定的所有者{@code Window}和屏幕设备的{@code GraphicsConfiguration}构造一个新的,初始不可见的窗口除非显示最近拥有的{@code Frame}或{@code Dialog}
+     * 窗口,否则窗口将不可对焦屏幕上。
+     * <p>
+     *  如果有一个安全管理器设置,它被调用检查{@code AWTPermission("showWindowWithoutWarningBanner")}如果检查失败与{@code SecurityException}
+     * ,那么警告横幅创建。
+     * 
+     * 
      * @param owner the window to act as owner or {@code null}
      *     if this window has no owner
      * @param gc the {@code GraphicsConfiguration} of the target
@@ -645,6 +818,9 @@ public class Window extends Container implements Accessible {
     /**
      * Construct a name for this component.  Called by getName() when the
      * name is null.
+     * <p>
+     *  构造此组件的名称名称为null时由getName()调用
+     * 
      */
     String constructComponentName() {
         synchronized (Window.class) {
@@ -658,6 +834,12 @@ public class Window extends Container implements Accessible {
      * This method returns a copy of the internally stored list, so all operations
      * on the returned object will not affect the window's behavior.
      *
+     * <p>
+     * 返回要显示为此窗口的图标的图像序列
+     * <p>
+     *  此方法返回内部存储的列表的副本,所以对返回的对象的所有操作不会影响窗口的行为
+     * 
+     * 
      * @return    the copy of icon images' list for this window, or
      *            empty list if this window doesn't have icon images.
      * @see       #setIconImages
@@ -695,6 +877,18 @@ public class Window extends Container implements Accessible {
      * window decoration, window list, taskbar, etc.). They could also use
      * just a single image for all contexts or no image at all.
      *
+     * <p>
+     *  设置要显示为此窗口的图标的图像序列随后调用{@code getIconImages}将始终返回{@code icons}列表的副本
+     * <p>
+     *  根据平台功能,一个或多个不同尺寸的图像将被用作窗口的图标
+     * <p>
+     *  {@code icons}列表将从头开始扫描最合适尺寸的图像。如果列表包含多个相同尺寸的图像,则将使用第一个
+     * <p>
+     * 没有指定图标的无用窗口使用platfrom-default图标拥有窗口的图标可以从所有者继承,除非显式覆盖将图标设置为{@code null}或空列表恢复默认行为
+     * <p>
+     *  注意：本地窗口系统可以使用不同尺寸的不同图像来表示窗口,这取决于上下文(例如窗口装饰,窗口列表,任务栏等)。它们也可以仅使用单个图像用于所有上下文,或者根本不使用图像
+     * 
+     * 
      * @param     icons the list of icon images to be displayed.
      * @see       #getIconImages()
      * @see       #setIconImage(Image)
@@ -733,6 +927,24 @@ public class Window extends Container implements Accessible {
      * window decoration, window list, taskbar, etc.). They could also use
      * just a single image for all contexts or no image at all.
      *
+     * <p>
+     *  将要显示的图像设置为此窗口的图标
+     * <p>
+     *  可以使用此方法代替{@link #setIconImages setIconImages()},以将单个图像指定为窗口的图标
+     * <p>
+     *  下面的语句：
+     * <pre>
+     *  setIconImage(image);
+     * </pre>
+     *  等效于：
+     * <pre>
+     * ArrayList&lt; Image&gt; imageList = new ArrayList&lt; Image&gt;(); ImageListadd(image); setIconImages
+     * (imageList);。
+     * </pre>
+     * <p>
+     *  注意：本地窗口系统可以使用不同尺寸的不同图像来表示窗口,这取决于上下文(例如窗口装饰,窗口列表,任务栏等)。它们也可以仅使用单个图像用于所有上下文,或者根本不使用图像
+     * 
+     * 
      * @param     image the icon image to be displayed.
      * @see       #setIconImages
      * @see       #getIconImages()
@@ -751,6 +963,10 @@ public class Window extends Container implements Accessible {
      * native screen resource.
      * This method is called internally by the toolkit and should
      * not be called directly by programs.
+     * <p>
+     *  通过创建与其本机屏幕资源的连接,使此窗口可显示此方法由工具包在内部调用,不应由程序直接调用
+     * 
+     * 
      * @see Component#isDisplayable
      * @see Container#removeNotify
      * @since JDK1.0
@@ -773,6 +989,9 @@ public class Window extends Container implements Accessible {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
      */
     public void removeNotify() {
         synchronized (getTreeLock()) {
@@ -795,6 +1014,12 @@ public class Window extends Container implements Accessible {
      * the preferred size. The Window is validated after its
      * size is being calculated.
      *
+     * <p>
+     * 导致此窗口的大小适合其子组件的首选大小和布局。如果任一维度小于先前调用{@code setMinimumSize}时指定的最小大小,则会自动放大窗口的最终宽度和高度,方法
+     * <p>
+     *  如果窗口和/或其所有者不可显示,则在计算优选大小之前使它们都可显示。在计算窗口大小之后验证窗口
+     * 
+     * 
      * @see Component#isDisplayable
      * @see #setMinimumSize
      */
@@ -839,6 +1064,18 @@ public class Window extends Container implements Accessible {
      * to resize window below the {@code minimumSize} value.
      * This behaviour is platform-dependent.
      *
+     * <p>
+     *  将此窗口的最小大小设置为常量值后续调用{@code getMinimumSize}将始终返回此值如果当前窗口的大小小于{@code minimumSize},窗口的大小将自动放大以满足最小大小
+     * <p>
+     * 如果之后调用{@code setSize}或{@code setBounds}方法的宽度或高度小于{@code setMinimumSize}方法指定的宽度或高度,则窗口会自动放大以满足{@code minimumSize}
+     * 的值。
+     *  {@code minimumSize}值也会影响{@code pack}方法的行为。
+     * <p>
+     *  通过将minimum size参数设置为{@code null}值来恢复默认行为
+     * <p>
+     *  如果用户尝试在{@code minimumSize}值下调整窗口大小,则调整大小操作可能受到限制此行为是平台相关的
+     * 
+     * 
      * @param minimumSize the new minimum size of this window
      * @see Component#setMinimumSize
      * @see #getMinimumSize
@@ -877,6 +1114,14 @@ public class Window extends Container implements Accessible {
      * the requested data, so that the {@code Window} object is placed and sized
      * in a way that corresponds closely to the desktop settings.
      *
+     * <p>
+     *  {@inheritDoc}
+     * <p>
+     *  如果{@code dwidth}和{@code dheight}值小于先前调用{@code setMinimumSize}所指定的最小大小,则会自动放大
+     * <p>
+     * 该方法改变与几何相关的数据因此,本地窗口系统可以忽略这样的请求,或者其可以修改所请求的数据,使得{@code Window}对象以与桌面设置紧密对应的方式放置和调整大小
+     * 
+     * 
      * @see #getSize
      * @see #setBounds
      * @see #setMinimumSize
@@ -899,6 +1144,14 @@ public class Window extends Container implements Accessible {
      * the requested data, so that the {@code Window} object is placed and sized
      * in a way that corresponds closely to the desktop settings.
      *
+     * <p>
+     *  {@inheritDoc}
+     * <p>
+     *  如果{@code width}和{@code height}值小于先前调用{@code setMinimumSize}所指定的最小大小,则会自动放大
+     * <p>
+     *  该方法改变与几何相关的数据因此,本地窗口系统可以忽略这样的请求,或者其可以修改所请求的数据,使得{@code Window}对象以与桌面设置紧密对应的方式放置和调整大小
+     * 
+     * 
      * @see #getSize
      * @see #setBounds
      * @see #setMinimumSize
@@ -915,6 +1168,11 @@ public class Window extends Container implements Accessible {
      * the native windowing system may ignore such requests, or it may modify
      * the requested data, so that the {@code Window} object is placed and sized
      * in a way that corresponds closely to the desktop settings.
+     * <p>
+     *  {@inheritDoc}
+     * <p>
+     * 该方法改变与几何相关的数据因此,本地窗口系统可以忽略这样的请求,或者其可以修改所请求的数据,使得{@code Window}对象以与桌面设置紧密对应的方式放置和调整大小
+     * 
      */
     @Override
     public void setLocation(int x, int y) {
@@ -928,6 +1186,11 @@ public class Window extends Container implements Accessible {
      * the native windowing system may ignore such requests, or it may modify
      * the requested data, so that the {@code Window} object is placed and sized
      * in a way that corresponds closely to the desktop settings.
+     * <p>
+     *  {@inheritDoc}
+     * <p>
+     *  该方法改变与几何相关的数据因此,本地窗口系统可以忽略这样的请求,或者其可以修改所请求的数据,使得{@code Window}对象以与桌面设置紧密对应的方式放置和调整大小
+     * 
      */
     @Override
     public void setLocation(Point p) {
@@ -935,6 +1198,8 @@ public class Window extends Container implements Accessible {
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by {@code setBounds(int, int, int, int)}.
      */
@@ -992,6 +1257,19 @@ public class Window extends Container implements Accessible {
      * <p>
      * Developers must never assume that the window is the focused or active window
      * until it receives a WINDOW_GAINED_FOCUS or WINDOW_ACTIVATED event.
+     * <p>
+     *  根据参数{@code b}的值显示或隐藏此{@code Window}
+     * <p>
+     *  如果方法显示窗口,则窗口也在以下条件下进行聚焦：
+     * <ul>
+     * <li> {@code Window}符合{@link #isFocusableWindow}方法中列出的要求<li> {@code Window}的{@code autoRequestFocus}属性
+     * 是{@code true}值<li >本机窗口系统允许{@code Window}得到关注。
+     * </ul>
+     *  第二个条件({@code autoRequestFocus}属性的值)有一个异常。如果窗口是一个模态对话框,该属性不被考虑,该对话框阻止当前聚焦的窗口
+     * <p>
+     *  开发人员不能假定窗口是焦点或活动窗口,直到它接收到WINDOW_GAINED_FOCUS或WINDOW_ACTIVATED事件
+     * 
+     * 
      * @param b  if {@code true}, makes the {@code Window} visible,
      * otherwise hides the {@code Window}.
      * If the {@code Window} and/or its owner
@@ -1020,6 +1298,10 @@ public class Window extends Container implements Accessible {
      * Window will be validated prior to being made visible.
      * If the Window is already visible, this will bring the Window
      * to the front.
+     * <p>
+     * 使窗口可见如果窗口和/或其所有者不可显示,则两者都可显示。窗口在被显示之前将被验证如果窗口已经可见,这将使窗口前面
+     * 
+     * 
      * @see       Component#isDisplayable
      * @see       #toFront
      * @deprecated As of JDK version 1.5, replaced by
@@ -1095,6 +1377,10 @@ public class Window extends Container implements Accessible {
      * Hide this Window, its subcomponents, and all of its owned children.
      * The Window and its subcomponents can be made visible again
      * with a call to {@code show}.
+     * <p>
+     *  隐藏此窗口及其子组件及其所有的子项窗口及其子组件可以通过调用{@code show}
+     * 
+     * 
      * @see #show
      * @see #dispose
      * @deprecated As of JDK version 1.5, replaced by
@@ -1143,6 +1429,17 @@ public class Window extends Container implements Accessible {
      * within the Java virtual machine (VM) is disposed of, the VM may
      * terminate.  See <a href="doc-files/AWTThreadIssues.html#Autoshutdown">
      * AWT Threading Issues</a> for more information.
+     * <p>
+     *  释放此{@code Window},其子组件及其所有拥有的子系统使用的所有本机屏幕资源。
+     * 也就是说,这些{@code Component}的资源将被销毁,它们消耗的任何内存将被返回操作系统,并且它们将被标记为不可显示。
+     * <p>
+     * {@code Window}及其子组件可以通过随后调用{@code pack}或{@code show}重建本地资源再次显示。
+     * 重新创建的{@code Window}及其子组件的状态将是与{@code Window}处理时的这些对象的状态相同(不考虑这些动作之间的额外修改)。
+     * <p>
+     *  <b>注意</b>：当处理Java虚拟机(VM)中的最后一个可显示窗口时,虚拟机可能终止请参见<a href=\"doc-files/AWTThreadIssueshtml#Autoshutdown\">
+     *  AWT线程问题< a>获取更多信息。
+     * 
+     * 
      * @see Component#isDisplayable
      * @see #pack
      * @see #show
@@ -1156,6 +1453,10 @@ public class Window extends Container implements Accessible {
      * If dispose() is called on parent then its children have to be disposed as well
      * as reported in javadoc. So we need to implement this functionality even if a
      * child overrides dispose() in a wrong way without calling super.dispose().
+     * <p>
+     * 修复4872170如果dispose()在父上调用,那么它的孩子必须被处理,并在javadoc中报告所以我们需要实现这个功能,即使一个孩子以错误的方式覆盖dispose(),而不调用superdispo
+     * se()。
+     * 
      */
     void disposeImpl() {
         dispose();
@@ -1234,6 +1535,9 @@ public class Window extends Container implements Accessible {
      * Should only be called while holding the tree lock.
      * It's overridden here because parent == owner in Window,
      * and we shouldn't adjust counter on owner
+     * <p>
+     *  应该只有在持有树锁时才被调用它在这里被覆盖,因为parent ==所有者在Window中,我们不应该调整所有者
+     * 
      */
     void adjustListeningChildrenOnParent(long mask, int num) {
     }
@@ -1283,6 +1587,26 @@ public class Window extends Container implements Accessible {
      * If this window is blocked by modal dialog, then the blocking dialog
      * is brought to the front and remains above the blocked window.
      *
+     * <p>
+     *  如果此窗口可见,则将此窗口置于前端,并使其成为聚焦窗口
+     * <p>
+     * 将此窗口置于堆叠顺序的顶部,并在此VM中任何其他Windows的前面显示此窗口如果此窗口不可见,将不会执行任何操作某些平台不允许Windows拥有其他Windows以显示在所有Windows某些平台可能
+     * 不允许此VM将其Windows放置在本机应用程序的窗口或其他VM的Windows上此权限可能取决于此VM中的窗口是否已集中每次尝试将此窗口尽可能高在堆叠顺序中;然而,开发人员不应该假设这种方法会将此窗口
+     * 移动到所有其他窗口之上。
+     * <p>
+     * 开发人员不得假设此窗口是焦点或活动窗口,直到此窗口接收到WINDOW_GAINED_FOCUS或WINDOW_ACTIVATED事件。
+     * 在最顶层窗口是关注窗口的平台上,此方法将<b>可能</b>聚焦此窗口如果它没有被聚焦)在以下条件：。
+     * <ul>
+     *  <li>窗口符合{@link #isFocusableWindow}方法中列出的要求<li>窗口的属性{@code autoRequestFocus}是{@code true}值<li>本机窗口系统允
+     * 许窗口聚焦。
+     * </ul>
+     *  在堆叠顺序通常不会影响聚焦窗口的平台上,此方法将<b>可能</b>保持焦点和活动窗口不变
+     * <p>
+     * 如果此方法导致此窗口被聚焦,并且此窗口是框架或对话框,它也将被激活如果此窗口被聚焦,但它不是框架或对话框,则第一个框架或对话框是一个此窗口的所有者将被激活
+     * <p>
+     *  如果此窗口被模态对话框阻止,则阻止对话框将显示在前面,并保留在阻止的窗口上方
+     * 
+     * 
      * @see       #toBack
      * @see       #setAutoRequestFocus
      * @see       #isFocusableWindow
@@ -1328,6 +1652,18 @@ public class Window extends Container implements Accessible {
      * the focused window, this method will <b>probably</b> leave the focused
      * and active Windows unchanged.
      *
+     * <p>
+     *  如果此窗口可见,则将此窗口发送到后面,如果该窗口是聚焦窗口或活动窗口,则可能导致其失去焦点或激活
+     * <p>
+     * 将此窗口置于堆叠顺序的底部,并显示在此VM中任何其他Windows后面不会执行任何操作此窗口不可见某些平台不允许由其他Windows所有的Windows显示在其所有者下面每次尝试将使该窗口在堆叠顺序中尽
+     * 可能低;然而,开发人员不应该假设这种方法会将此窗口移动到所有其他窗口之下。
+     * <p>
+     * 由于本地窗口系统的变化,不能保证关注的和活动的Windows的变化。
+     * 开发人员不得假设此窗口不再是焦点或活动窗口,直到此窗口接收到WINDOW_LOST_FOCUS或WINDOW_DEACTIVATED事件在顶部这个方法将<b>可能</b>导致此窗口失去焦点在这种情况下,
+     * 此VM中的下一个最高的可聚焦窗口将接收焦点在堆叠顺序通常不会影响聚焦窗口,此方法将<b>可能</b>保持焦点和活动窗口不变。
+     * 由于本地窗口系统的变化,不能保证关注的和活动的Windows的变化。
+     * 
+     * 
      * @see       #toFront
      */
     public void toBack() {
@@ -1353,6 +1689,10 @@ public class Window extends Container implements Accessible {
 
     /**
      * Returns the toolkit of this frame.
+     * <p>
+     *  返回此框架的工具包
+     * 
+     * 
      * @return    the toolkit of this window.
      * @see       Toolkit
      * @see       Toolkit#getDefaultToolkit
@@ -1375,6 +1715,14 @@ public class Window extends Container implements Accessible {
      * method checks for the system property
      * {@code awt.appletWarning}
      * and returns the string value of that property.
+     * <p>
+     * 获取与此窗口一起显示的警告字符串如果此窗口不安全,则警告字符串显示在窗口的可见区域中的某个位置如果存在安全管理器,并且安全管理器拒绝{@code AWTPermission(" showWindowWithoutWarningBanner")}
+     * 。
+     * <p>
+     *  如果窗口是安全的,那么{@code getWarningString}返回{@code null}如果窗口不安全,此方法检查系统属性{@code awtappletWarning},并返回该属性的字符
+     * 串值。
+     * 
+     * 
      * @return    the warning string for this window.
      */
     public final String getWarningString() {
@@ -1403,6 +1751,10 @@ public class Window extends Container implements Accessible {
      * with this window, if the locale has been set.
      * If no locale has been set, then the default locale
      * is returned.
+     * <p>
+     *  获取与此窗口相关联的{@code Locale}对象(如果已设置语言环境)如果未设置语言环境,则返回默认语言环境
+     * 
+     * 
      * @return    the locale that is set for this window.
      * @see       java.util.Locale
      * @since     JDK1.1
@@ -1417,6 +1769,10 @@ public class Window extends Container implements Accessible {
     /**
      * Gets the input context for this window. A window always has an input context,
      * which is shared by subcomponents unless they create and set their own.
+     * <p>
+     * 获取此窗口的输入上下文窗口始终有一个输入上下文,由子组件共享,除非它们创建和设置自己的
+     * 
+     * 
      * @see Component#getInputContext
      * @since 1.2
      */
@@ -1435,6 +1791,12 @@ public class Window extends Container implements Accessible {
      * The method may have no visual effect if the Java platform
      * implementation and/or the native system do not support
      * changing the mouse cursor shape.
+     * <p>
+     *  将光标图像设置为指定的光标
+     * <p>
+     *  如果Java平台实现和/或本地系统不支持改变鼠标光标形状,则该方法可以没有视觉效果
+     * 
+     * 
      * @param     cursor One of the constants defined
      *            by the {@code Cursor} class. If this parameter is null
      *            then the cursor for this window will be set to the type
@@ -1452,6 +1814,10 @@ public class Window extends Container implements Accessible {
 
     /**
      * Returns the owner of this window.
+     * <p>
+     *  返回此窗口的所有者
+     * 
+     * 
      * @since 1.2
      */
     public Window getOwner() {
@@ -1464,6 +1830,10 @@ public class Window extends Container implements Accessible {
     /**
      * Return an array containing all the windows this
      * window currently owns.
+     * <p>
+     *  返回一个包含此窗口当前拥有的所有窗口的数组
+     * 
+     * 
      * @since 1.2
      */
     public Window[] getOwnedWindows() {
@@ -1522,6 +1892,10 @@ public class Window extends Container implements Accessible {
      * Returns a list of all displayable Windows, i. e. all the
      * Windows which peer is not null.
      *
+     * <p>
+     *  返回所有可显示的Windows的列表,即所有Windows的对等端不为null
+     * 
+     * 
      * @see #addNotify
      * @see #removeNotify
      */
@@ -1586,6 +1960,13 @@ public class Window extends Container implements Accessible {
      * dialogs such as component positions, {@code LayoutManager}s
      * or serialization.
      *
+     * <p>
+     *  返回由此应用程序创建的所有{@code Window}(由拥有者和无所有者创建)的数组如果从applet调用,则该数组仅包含该applet可访问的{@code Window}
+     * <p>
+     * <b>警告：</b>此方法可能会返回系统创建的窗口,例如打印对话框应用程序不应假设这些对话框的存在,应用程序也不应该假设任何关于这些对话框,如组件位置,{@code LayoutManager }或序列
+     * 化。
+     * 
+     * 
      * @see Frame#getFrames
      * @see Window#getOwnerlessWindows
      *
@@ -1608,6 +1989,14 @@ public class Window extends Container implements Accessible {
      * dialogs such as component positions, {@code LayoutManager}s
      * or serialization.
      *
+     * <p>
+     *  返回由此应用程序创建的没有所有者的所有{@code Window}的数组他们包括{@code Frame}和无拥有者{@code Dialog}和{@code Window}如果从applet调用,只
+     * 包括该applet可访问的{@code Window}。
+     * <p>
+     * <b>警告：</b>此方法可能会返回系统创建的窗口,例如打印对话框应用程序不应假设这些对话框的存在,应用程序也不应该假设任何关于这些对话框,如组件位置,{@code LayoutManager }或序列
+     * 化。
+     * 
+     * 
      * @see Frame#getFrames
      * @see Window#getWindows()
      *
@@ -1655,6 +2044,15 @@ public class Window extends Container implements Accessible {
      * Note: changing the modal exclusion type for a visible window may have no
      * effect until it is hidden and then shown again.
      *
+     * <p>
+     *  指定此窗口的模态排除类型如果窗口被排除模式,则不会被某些模态对话框阻止。
+     * 有关可能的模态排除类型,请参阅{@link javaawtDialogModalExclusionType DialogModalExclusionType}。
+     * <p>
+     *  如果不支持给定类型,则使用{@code NO_EXCLUDE}
+     * <p>
+     *  注意：更改可见窗口的模式排除类型可能会被隐藏,然后再次显示可能无效
+     * 
+     * 
      * @param exclusionType the modal exclusion type for this window; a {@code null}
      *     value is equivalent to {@link Dialog.ModalExclusionType#NO_EXCLUDE
      *     NO_EXCLUDE}
@@ -1694,12 +2092,20 @@ public class Window extends Container implements Accessible {
         }
         Dialog.checkShouldBeBlocked(this);
         updateChildrenBlocking();
+ /* <p>
+ /* if(isModalBlocked()){modalBlockerunblockWindow(this); } DialogcheckShouldBeBlocked(this); updateChild
+ /* renBlocking();。
+ /* 
  */
     }
 
     /**
      * Returns the modal exclusion type of this window.
      *
+     * <p>
+     *  返回此窗口的模态排除类型
+     * 
+     * 
      * @return the modal exclusion type of this window
      *
      * @see java.awt.Dialog.ModalExclusionType
@@ -1752,6 +2158,11 @@ public class Window extends Container implements Accessible {
      * <p>Refer to <a href="doc-files/AWTThreadIssues.html#ListenersThreads"
      * >AWT Threading Issues</a> for details on AWT's threading model.
      *
+     * <p>
+     *  添加指定的窗口侦听器以从此窗口接收窗口事件如果l为null,则不会抛出任何异常并且不执行任何操作<p>请参阅<a href=\"doc-files/AWTThreadIssueshtml#ListenersThreads\">
+     *  AWT线程问题< a>有关AWT的线程模型的详细信息。
+     * 
+     * 
      * @param   l the window listener
      * @see #removeWindowListener
      * @see #getWindowListeners
@@ -1771,6 +2182,11 @@ public class Window extends Container implements Accessible {
      * <p>Refer to <a href="doc-files/AWTThreadIssues.html#ListenersThreads"
      * >AWT Threading Issues</a> for details on AWT's threading model.
      *
+     * <p>
+     *  添加指定的窗口状态侦听器以从此窗口接收窗口事件如果{@code l}是{@code null},则不会抛出异常,并且不执行任何操作<p>请参阅<a href ="doc-files / AWTThreadIssueshtml #ListenersThreads">
+     *  AWT线程问题</a>有关AWT的线程模型的详细信息。
+     * 
+     * 
      * @param   l the window state listener
      * @see #removeWindowStateListener
      * @see #getWindowStateListeners
@@ -1791,6 +2207,11 @@ public class Window extends Container implements Accessible {
      * <p>Refer to <a href="doc-files/AWTThreadIssues.html#ListenersThreads"
      * >AWT Threading Issues</a> for details on AWT's threading model.
      *
+     * <p>
+     * 添加指定的窗口焦点侦听器以从此窗口接收窗口事件如果l为null,则不会抛出异常并且不执行任何操作<p>请参阅<a href=\"doc-files/AWTThreadIssueshtml#ListenersThreads\">
+     *  AWT线程问题< / a>有关AWT的线程模型的详细信息。
+     * 
+     * 
      * @param   l the window focus listener
      * @see #removeWindowFocusListener
      * @see #getWindowFocusListeners
@@ -1811,6 +2232,11 @@ public class Window extends Container implements Accessible {
      * <p>Refer to <a href="doc-files/AWTThreadIssues.html#ListenersThreads"
      * >AWT Threading Issues</a> for details on AWT's threading model.
      *
+     * <p>
+     *  删除指定的窗口侦听器,以使其不再从此窗口接收窗口事件如果l为null,则不抛出异常,并且不执行任何操作<p>请参阅<a href=\"doc-files/AWTThreadIssueshtml#ListenersThreads\">
+     *  AWT线程问题</a>有关AWT的线程模型的详细信息。
+     * 
+     * 
      * @param   l the window listener
      * @see #addWindowListener
      * @see #getWindowListeners
@@ -1830,6 +2256,11 @@ public class Window extends Container implements Accessible {
      * <p>Refer to <a href="doc-files/AWTThreadIssues.html#ListenersThreads"
      * >AWT Threading Issues</a> for details on AWT's threading model.
      *
+     * <p>
+     * 删除指定的窗口状态侦听器,以使其不再从此窗口接收窗口事件如果{@code l}是{@code null},则不会抛出异常并且不执行任何操作<p>请参阅<a href ="doc -files / AWTThreadIssueshtml#ListenersThreads">
+     *  AWT线程问题</a>有关AWT的线程模型的详细信息。
+     * 
+     * 
      * @param   l the window state listener
      * @see #addWindowStateListener
      * @see #getWindowStateListeners
@@ -1849,6 +2280,11 @@ public class Window extends Container implements Accessible {
      * <p>Refer to <a href="doc-files/AWTThreadIssues.html#ListenersThreads"
      * >AWT Threading Issues</a> for details on AWT's threading model.
      *
+     * <p>
+     *  删除指定的窗口焦点侦听器,以使其不再从此窗口接收窗口事件如果l为null,则不会抛出任何异常,并且不执行任何操作<p>请参阅<a href=\"doc-files/AWTThreadIssueshtml#ListenersThreads\">
+     *  AWT线程模型的详细信息。
+     * 
+     * 
      * @param   l the window focus listener
      * @see #addWindowFocusListener
      * @see #getWindowFocusListeners
@@ -1865,6 +2301,10 @@ public class Window extends Container implements Accessible {
      * Returns an array of all the window listeners
      * registered on this window.
      *
+     * <p>
+     *  返回在此窗口上注册的所有窗口侦听器的数组
+     * 
+     * 
      * @return all of this window's {@code WindowListener}s
      *         or an empty array if no window
      *         listeners are currently registered
@@ -1881,6 +2321,10 @@ public class Window extends Container implements Accessible {
      * Returns an array of all the window focus listeners
      * registered on this window.
      *
+     * <p>
+     *  返回在此窗口上注册的所有窗口焦点侦听器的数组
+     * 
+     * 
      * @return all of this window's {@code WindowFocusListener}s
      *         or an empty array if no window focus
      *         listeners are currently registered
@@ -1897,6 +2341,10 @@ public class Window extends Container implements Accessible {
      * Returns an array of all the window state listeners
      * registered on this window.
      *
+     * <p>
+     * 返回在此窗口上注册的所有窗口状态侦听器的数组
+     * 
+     * 
      * @return all of this window's {@code WindowStateListener}s
      *         or an empty array if no window state
      *         listeners are currently registered
@@ -1930,6 +2378,20 @@ public class Window extends Container implements Accessible {
      *
      * If no such listeners exist, this method returns an empty array.
      *
+     * <p>
+     *  返回当前在此{@code Window} <code> <em> Foo </em>侦听器</code>上注册为<code> <em> Foo </em> Listener </code> s使用<code>
+     *  add <em> </em>侦听器</code>方法注册。
+     * 
+     * <p>
+     * 
+     *  您可以使用类文字指定{@code listenerType}参数,例如<code> <em> Foo </em> Listenerclass </code>例如,可以查询{@code Window} 
+     * {@code w}为它的窗口侦听器使用以下代码：。
+     * 
+     *  <pre> WindowListener [] wls =(WindowListener [])(wgetListeners(WindowListenerclass)); </pre>
+     * 
+     *  如果不存在此类侦听器,则此方法将返回一个空数组
+     * 
+     * 
      * @param listenerType the type of listeners requested; this parameter
      *          should specify an interface that descends from
      *          {@code java.util.EventListener}
@@ -2002,6 +2464,11 @@ public class Window extends Container implements Accessible {
      * the behavior is unspecified and may result in an
      * exception.
      *
+     * <p>
+     * 在这个窗口上处理事件如果事件是一个{@code WindowEvent},它调用{@code processWindowEvent}方法,否则调用它的超类的{@code processEvent} <p>
+     * 注意,如果事件参数是{@code null }该行为未指定,可能会导致异常。
+     * 
+     * 
      * @param e the event
      */
     protected void processEvent(AWTEvent e) {
@@ -2044,6 +2511,14 @@ public class Window extends Container implements Accessible {
      * the behavior is unspecified and may result in an
      * exception.
      *
+     * <p>
+     *  通过将窗口事件分派到任何已注册的WindowListener对象来处理在此窗口上发生的窗口事件注：除非为此组件启用窗口事件,否则不会调用此方法;当发生以下情况之一时会发生这种情况：
+     * <ul>
+     *  <li>通过{@code addWindowListener}注册一个WindowListener对象<li>通过{@code enableEvents}启用窗口事件
+     * </ul>
+     *  <p>请注意,如果事件参数是{@code null},则此行为未指定,并可能导致异常
+     * 
+     * 
      * @param e the window event
      * @see Component#enableEvents
      */
@@ -2093,6 +2568,14 @@ public class Window extends Container implements Accessible {
      * the behavior is unspecified and may result in an
      * exception.
      *
+     * <p>
+     * 通过将它们分派到任何已注册的WindowFocusListener对象来处理在此窗口上发生的窗口焦点事件注意：除非为此窗口启用了窗口焦点事件,否则不会调用此方法发生以下情况之一时会发生：
+     * <ul>
+     *  <li>通过{@code addWindowFocusListener}注册WindowFocusListener <li>通过{@code enableEvents}启用窗口焦点事件
+     * </ul>
+     *  <p>请注意,如果事件参数是{@code null},则此行为未指定,并可能导致异常
+     * 
+     * 
      * @param e the window focus event
      * @see Component#enableEvents
      * @since 1.4
@@ -2129,6 +2612,15 @@ public class Window extends Container implements Accessible {
      * the behavior is unspecified and may result in an
      * exception.
      *
+     * <p>
+     *  通过将它们分派到任何已注册的{@code WindowStateListener}对象来处理在此窗口上发生的窗口状态事件注意：除非为此窗口启用窗口状态事件,否则不会调用此方法发生以下情况之一时会发生：
+     * 。
+     * <ul>
+     * <li>通过{@code addWindowStateListener}注册{@code WindowStateListener} <li>通过{@code enableEvents}启用窗口状态事件。
+     * </ul>
+     *  <p>请注意,如果事件参数是{@code null},则此行为未指定,并可能导致异常
+     * 
+     * 
      * @param e the window state event
      * @see java.awt.Component#enableEvents
      * @since 1.4
@@ -2150,6 +2642,10 @@ public class Window extends Container implements Accessible {
      * Implements a debugging hook -- checks to see if
      * the user has typed <i>control-shift-F1</i>.  If so,
      * the list of child windows is dumped to {@code System.out}.
+     * <p>
+     *  实现一个调试挂钩 - 检查用户是否键入<i> control-shift-F1 </i>如果是这样,子窗口列表转储到{@code Systemout}
+     * 
+     * 
      * @param e  the keyboard event
      */
     void preProcessKeyEvent(KeyEvent e) {
@@ -2211,6 +2707,28 @@ public class Window extends Container implements Accessible {
      * SecurityException, and the current value of the property will
      * be left unchanged.
      *
+     * <p>
+     *  设置此窗口是否应始终高于其他窗口如果有多个总在顶上的窗口,它们的相对顺序是未指定的,并且取决于平台
+     * <p>
+     * 如果一些其他窗口已经总是在顶部,则这些窗口之间的相对顺序是未指定的(取决于平台)没有窗口可以被带到总是在顶部窗口上,除了另一个总是在顶部窗口
+     * <p>
+     *  由始终在顶的窗口拥有的所有窗口继承此状态并自动变为始终在顶部如果窗口不再是始终在顶部,则它所拥有的窗口将不再是始终位于顶部。
+     * 始终在顶部窗口被发送{@link #toBack toBack},其始终在顶部状态被设置为{@code false}。
+     * 
+     * <p>当在值为{@code true}的窗口上调用此方法,并且窗口可见且平台支持此窗口始终在顶部时,窗口立即提前,"粘贴"在最顶部位置如果窗口目前不可见,则此方法将始终在顶部状态设置为{@code true}
+     * ,但不会使窗口向前。
+     * 当窗口稍后显示时,在上面。
+     * 
+     * <p>当在值为{@code false}的窗口上调用此方法时,始终处于顶部的状态设置为normal。
+     * 它也可能导致顶层函数的z次序中未指定的,但是其他始终在顶的窗口将保持在最高位置在具有正常状态的窗口上调用具有{@code false}的值的该方法没有效果。
+     * 
+     *  <p> <b>注意</b>：某些平台可能不支持常驻窗口要检测当前平台是否支持常驻窗口,请使用{@link Toolkit#isAlwaysOnTopSupported()} {@link Window#isAlwaysOnTopSupported()}
+     * 如果此窗口不支持always-on-top模式或此窗口的工具包不支持总在顶层窗口,调用此方法没有效果。
+     * <p>
+     * 如果安装了SecurityManager,则必须授予调用线程AWTPermission"setWindowAlwaysOnTop"以设置此属性的值如果未授予此权限,则此方法将抛出SecurityExce
+     * ption,并且属性的当前值将保留不变。
+     * 
+     * 
      * @param alwaysOnTop true if the window should always be above other
      *        windows
      * @throws SecurityException if the calling thread does not have
@@ -2275,6 +2793,10 @@ public class Window extends Container implements Accessible {
      * may support only some kinds of top-level windows; for example,
      * a platform may not support always-on-top modal dialogs.
      *
+     * <p>
+     *  返回此窗口是否支持always-on-top模式某些平台可能不支持总在顶层窗口,有些平台可能只支持某些顶级窗口;例如,平台可能不支持始终在顶模态对话
+     * 
+     * 
      * @return {@code true}, if the always-on-top mode is supported for
      *         this window and this window's toolkit supports always-on-top windows,
      *         {@code false} otherwise
@@ -2291,6 +2813,10 @@ public class Window extends Container implements Accessible {
 
     /**
      * Returns whether this window is an always-on-top window.
+     * <p>
+     *  返回此窗口是否为始终在顶的窗口
+     * 
+     * 
      * @return {@code true}, if the window is in always-on-top state,
      *         {@code false} otherwise
      * @see #setAlwaysOnTop
@@ -2305,6 +2831,10 @@ public class Window extends Container implements Accessible {
      * Returns the child Component of this Window that has focus if this Window
      * is focused; returns null otherwise.
      *
+     * <p>
+     *  返回此窗口的焦点的子组件,如果此窗口聚焦;否则返回null
+     * 
+     * 
      * @return the child Component with focus, or null if this Window is not
      *         focused
      * @see #getMostRecentFocusOwner
@@ -2327,6 +2857,11 @@ public class Window extends Container implements Accessible {
      * initial focusable Component is returned. If no child Component has ever
      * requested focus, and this is a non-focusable Window, null is returned.
      *
+     * <p>
+     * 返回此窗口的子组件将在此窗口聚焦时接收焦点如果此窗口当前焦点,此方法将返回与{@code getFocusOwner()}相同的组件。
+     * 如果此窗口不聚焦,则子组件最近请求的焦点将被返回如果没有子组件曾经请求焦点,并且这是一个可聚焦的窗口,则返回此窗口的初始可焦点组件如果没有子组件曾请求焦点,并且这是一个不可聚焦的窗口,null返回。
+     * 
+     * 
      * @return the child Component that will receive focus when this Window is
      *         focused
      * @see #getFocusOwner
@@ -2357,6 +2892,10 @@ public class Window extends Container implements Accessible {
      * active Window is always either the focused Window, or the first Frame or
      * Dialog that is an owner of the focused Window.
      *
+     * <p>
+     * 返回此窗口是否处于活动状态只有框架或对话框可能处于活动状态本地窗口系统可能表示活动窗口或其特殊装饰的子窗口,例如突出显示的标题栏。活动窗口始终是焦点窗口或第一个框架或对话框是所关注的窗口的所有者
+     * 
+     * 
      * @return whether this is the active Window.
      * @see #isFocused
      * @since 1.4
@@ -2375,6 +2914,12 @@ public class Window extends Container implements Accessible {
      * Window. Otherwise, the active Window is the first Frame or Dialog that
      * is an owner of the focused Window.
      *
+     * <p>
+     *  返回此窗口是否聚焦如果存在焦点所有者,则关注的窗口是属于或包含该焦点所有者的窗口如果没有焦点所有者,则不会聚焦窗口
+     * <p>
+     *  如果聚焦的窗口是一个框架或对话框,它也是活动窗口否则,活动窗口是第一个框架或对话框是焦点窗口的所有者
+     * 
+     * 
      * @return whether this is the focused Window.
      * @see #isActive
      * @since 1.4
@@ -2394,6 +2939,12 @@ public class Window extends Container implements Accessible {
      * ancestors, then the current KeyboardFocusManager's default traversal key
      * is returned.
      *
+     * <p>
+     * 获取此窗口的焦点遍历键(有关每个键的完整说明,请参阅{@code setFocusTraversalKeys})
+     * <p>
+     *  如果未为此窗口显式设置遍历键,则返回此窗口的父的遍历键如果遍历键未针对此窗口的祖先显式设置,则返回当前KeyboardFocusManager的默认遍历键
+     * 
+     * 
      * @param id one of KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS,
      *         KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS,
      *         KeyboardFocusManager.UP_CYCLE_TRAVERSAL_KEYS, or
@@ -2435,6 +2986,10 @@ public class Window extends Container implements Accessible {
      * Does nothing because Windows must always be roots of a focus traversal
      * cycle. The passed-in value is ignored.
      *
+     * <p>
+     *  什么都不做,因为Windows必须始终是焦点遍历循环的根。忽略传入的值
+     * 
+     * 
      * @param focusCycleRoot this value is ignored
      * @see #isFocusCycleRoot
      * @see Container#setFocusTraversalPolicy
@@ -2448,6 +3003,10 @@ public class Window extends Container implements Accessible {
      * Always returns {@code true} because all Windows must be roots of a
      * focus traversal cycle.
      *
+     * <p>
+     *  始终返回{@code true},因为所有Windows都必须是焦点遍历循环的根
+     * 
+     * 
      * @return {@code true}
      * @see #setFocusCycleRoot
      * @see Container#setFocusTraversalPolicy
@@ -2462,6 +3021,10 @@ public class Window extends Container implements Accessible {
      * Always returns {@code null} because Windows have no ancestors; they
      * represent the top of the Component hierarchy.
      *
+     * <p>
+     *  始终返回{@code null},因为Windows没有祖先;它们表示组件层次结构的顶部
+     * 
+     * 
      * @return {@code null}
      * @see Container#isFocusCycleRoot()
      * @since 1.4
@@ -2482,6 +3045,12 @@ public class Window extends Container implements Accessible {
      * neither this Window nor any of its subcomponents can become the focus
      * owner.
      *
+     * <p>
+     * 返回此窗口是否可以成为关注的窗口,即此窗口或其任何子组件是否可以成为焦点所有者对于框架或对话框是可聚焦的,其可聚焦的窗口状态必须设置为{@code true} For a窗口不是框架或对话框可聚焦,其可
+     * 聚焦窗口状态必须设置为{@code true},其最近拥有的框架或对话框必须显示在屏幕上,并且它必须包含至少一个组件在其焦点遍历循环如果不满足这些条件中的任何一个,则此窗口或其任何子组件都不能成为焦点所
+     * 有者。
+     * 
+     * 
      * @return {@code true} if this Window can be the focused Window;
      *         {@code false} otherwise
      * @see #getFocusableWindowState
@@ -2534,6 +3103,14 @@ public class Window extends Container implements Accessible {
      * By default, all Windows have a focusable Window state of
      * {@code true}.
      *
+     * <p>
+     * 返回此窗口是否可以成为焦点窗口,如果它满足{@code isFocusableWindow}中列出的其他要求如果此方法返回{@code false},则{@code isFocusableWindow}
+     * 将返回{@code false}以及如果此方法返回{@code true},则{@code isFocusableWindow}可能会返回{@code true}或{@code false},具体取决于
+     * 必须满足的其他要求才能使窗口可聚焦。
+     * <p>
+     *  默认情况下,所有Windows都具有可聚焦的窗口状态{@code true}
+     * 
+     * 
      * @return whether this Window can be the focused Window
      * @see #isFocusableWindow
      * @see #setFocusableWindowState
@@ -2567,6 +3144,17 @@ public class Window extends Container implements Accessible {
      * across platforms, set the {@code Window}'s focusable state
      * when the {@code Window} is invisible and then show it.
      *
+     * <p>
+     * 设置此窗口是否可以成为焦点窗口,如果它满足{@code isFocusableWindow}中列出的其他要求如果此窗口的可聚焦窗口状态设置为{@code false},则{@code isFocusableWindow}
+     * 将返回{@code false}如果此窗口的可聚焦窗口状态设置为{@code true},则{@code isFocusableWindow}可能返回{@code true}或{@code false}
+     * ,取决于必须满足的其他要求,可聚焦。
+     * <p>
+     *  将窗口的可聚焦性状态设置为{@code false}是应用程序向AWT标识将被用作浮动调色板或工具栏的窗口的标准机制,因此应该是不可聚焦的窗口
+     * 
+     * 在可见的{@code Window}上设置可聚焦状态可能对某些平台有延迟的影响 - 实际的变化可能只发生在{@code Window}被隐藏然后可见的情况下为了确保跨平台的一致行为,设置{ @code Window}
+     * 的可聚焦状态,当{@code Window}是不可见的,然后显示它。
+     * 
+     * 
      * @param focusableWindowState whether this Window can be the focused
      *        Window
      * @see #isFocusableWindow
@@ -2616,6 +3204,15 @@ public class Window extends Container implements Accessible {
      * <p>
      * The value of the property is not inherited by owned windows.
      *
+     * <p>
+     *  设置此窗口是否应在随后显示时调用(调用{@link #setVisible setVisible(true)})或移动到前面(调用{@link #toFront})
+     * <p>
+     * 注意,{@link #setVisible setVisible(true)}可以被间接调用(例如,当显示窗口的所有者使窗口被显示时){@link #toFront}也可以被间接调用(例如,当{@link# setVisible setVisible(true)}
+     * 在已经可见的窗口上调用)在所有这些情况下,此属性也生效。
+     * <p>
+     *  该属性的值不会被拥有的窗口继承
+     * 
+     * 
      * @param autoRequestFocus whether this window should be focused on
      *        subsequently being shown or being moved to the front
      * @see #isAutoRequestFocus
@@ -2635,6 +3232,12 @@ public class Window extends Container implements Accessible {
      * <p>
      * By default, the window has {@code autoRequestFocus} value of {@code true}.
      *
+     * <p>
+     *  返回此窗口是否应在随后显示时(调用{@link #setVisible setVisible(true)})或移至前端(调用{@link #toFront})时接收焦点
+     * <p>
+     *  默认情况下,该窗口的{@code autoRequestFocus}值为{@code true}
+     * 
+     * 
      * @return {@code autoRequestFocus} value
      * @see #setAutoRequestFocus
      * @since 1.7
@@ -2673,6 +3276,23 @@ public class Window extends Container implements Accessible {
      * <p>
      * If listener is null, no exception is thrown and no action is performed.
      *
+     * <p>
+     * 将PropertyChangeListener添加到侦听器列表为该类的所有绑定属性注册侦听器,包括以下内容：
+     * <ul>
+     * <li>此窗口的背景颜色("背景")</li> <li>此窗口的前景色("前景")</li> <li> </li> <li>此窗口的FORWARD_TRAVERSAL_KEYS("forwardFocu
+     * sTraversalKeys")集</li> <li>此窗口的焦点遍历键已启用状态("focusTraversalKeysEnabled" </li> </li> </li> </li> </li> </li>
+     *  </li> </li> </li> </li> </li>此窗口的设定为BACKWARD_TRAVERSAL_KEYS("backwardFocusTraversalKeys" li>此窗口的焦点遍历
+     * 策略("focusTraversalPolicy")。
+     * </li>
+     *  <li>此窗口的可聚焦窗口状态("focusableWindowState")
+     * </li>
+     * <li>此窗口的始终在顶状态("alwaysOnTop")</li>
+     * </ul>
+     *  注意,如果这个窗口继承了一个bound属性,那么没有事件会响应继承属性的改变而被触发
+     * <p>
+     *  如果侦听器为null,则不抛出异常,并且不执行任何操作
+     * 
+     * 
      * @param    listener  the PropertyChangeListener to be added
      *
      * @see Component#removePropertyChangeListener
@@ -2712,6 +3332,23 @@ public class Window extends Container implements Accessible {
      * <p>
      * If listener is null, no exception is thrown and no action is performed.
      *
+     * <p>
+     *  将PropertyChangeListener添加到特定属性的侦听器列表指定的属性可以是用户定义的,也可以是以下之一：
+     * <ul>
+     * <li>此窗口的背景颜色("背景")</li> <li>此窗口的前景色("前景")</li> <li> </li> <li>此窗口的FORWARD_TRAVERSAL_KEYS("forwardFocu
+     * sTraversalKeys")集</li> <li>此窗口的焦点遍历键已启用状态("focusTraversalKeysEnabled" </li> </li> </li> </li> </li> </li>
+     *  </li> </li> </li> </li> </li>此窗口的设定为BACKWARD_TRAVERSAL_KEYS("backwardFocusTraversalKeys" li>此窗口的焦点遍历
+     * 策略("focusTraversalPolicy")。
+     * </li>
+     *  <li>此窗口的可聚焦窗口状态("focusableWindowState")
+     * </li>
+     * <li>此窗口的始终在顶状态("alwaysOnTop")</li>
+     * </ul>
+     *  注意,如果这个窗口继承了一个bound属性,那么没有事件会响应继承属性的改变而被触发
+     * <p>
+     *  如果侦听器为null,则不抛出异常,并且不执行任何操作
+     * 
+     * 
      * @param propertyName one of the property names listed above
      * @param listener the PropertyChangeListener to be added
      *
@@ -2729,6 +3366,12 @@ public class Window extends Container implements Accessible {
      * {@code Window} objects are the validate roots, and, therefore, they
      * override this method to return {@code true}.
      *
+     * <p>
+     *  指示此容器是否为验证根
+     * <p>
+     *  {@code Window}对象是验证根,因此,它们覆盖此方法返回{@code true}
+     * 
+     * 
      * @return {@code true}
      * @since 1.7
      * @see java.awt.Container#isValidateRoot
@@ -2740,6 +3383,10 @@ public class Window extends Container implements Accessible {
 
     /**
      * Dispatches an event to this window or one of its sub components.
+     * <p>
+     *  将事件分派到此窗口或其子组件之一
+     * 
+     * 
      * @param e the event
      */
     void dispatchEventImpl(AWTEvent e) {
@@ -2751,6 +3398,8 @@ public class Window extends Container implements Accessible {
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1
      * replaced by {@code dispatchEvent(AWTEvent)}.
      */
@@ -2765,6 +3414,10 @@ public class Window extends Container implements Accessible {
 
     /**
      * Checks if this Window is showing on screen.
+     * <p>
+     *  检查此窗口是否显示在屏幕上
+     * 
+     * 
      * @see Component#setVisible
     */
     public boolean isShowing() {
@@ -2776,6 +3429,8 @@ public class Window extends Container implements Accessible {
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of J2SE 1.4, replaced by
      * {@link Component#applyComponentOrientation Component.applyComponentOrientation}.
      */
@@ -2785,6 +3440,8 @@ public class Window extends Container implements Accessible {
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of J2SE 1.4, replaced by
      * {@link Component#applyComponentOrientation Component.applyComponentOrientation}.
      */
@@ -2795,6 +3452,9 @@ public class Window extends Container implements Accessible {
 
    /*
     * Support for tracking all windows owned by this window
+    * <p>
+    *  支持跟踪此窗口拥有的所有窗口
+    * 
     */
     void addOwnedWindow(WeakReference<Window> weakWindow) {
         if (weakWindow != null) {
@@ -2852,6 +3512,11 @@ public class Window extends Container implements Accessible {
      * Window type.
      *
      * Synchronization: ObjectLock
+     * <p>
+     *  窗口类型
+     * 
+     *  同步：ObjectLock
+     * 
      */
     private Type type = Type.NORMAL;
 
@@ -2860,6 +3525,12 @@ public class Window extends Container implements Accessible {
      *
      * This method can only be called while the window is not displayable.
      *
+     * <p>
+     *  设置窗口的类型
+     * 
+     *  此方法只能在窗口不可显示时调用
+     * 
+     * 
      * @throws IllegalComponentStateException if the window
      *         is displayable.
      * @throws IllegalArgumentException if the type is {@code null}
@@ -2885,6 +3556,10 @@ public class Window extends Container implements Accessible {
     /**
      * Returns the type of the window.
      *
+     * <p>
+     *  返回窗口的类型
+     * 
+     * 
      * @see   #setType
      * @since 1.7
      */
@@ -2897,6 +3572,10 @@ public class Window extends Container implements Accessible {
     /**
      * The window serialized data version.
      *
+     * <p>
+     * 窗口序列化数据版本
+     * 
+     * 
      * @serial
      */
     private int windowSerializedDataVersion = 2;
@@ -2908,6 +3587,11 @@ public class Window extends Container implements Accessible {
      * Writes a list of child windows as optional data.
      * Writes a list of icon images as optional data
      *
+     * <p>
+     *  将默认可序列化字段写入流将可序列化的{@code WindowListener}和{@code WindowFocusListener}列表作为可选数据写入将子窗口列表作为可选数据写入将图标图像列表作
+     * 为可选数据。
+     * 
+     * 
      * @param s the {@code ObjectOutputStream} to write
      * @serialData {@code null} terminated sequence of
      *    0 or more pairs; the pair consists of a {@code String}
@@ -3063,6 +3747,10 @@ public class Window extends Container implements Accessible {
      * (possibly {@code null}) child windows.
      * Unrecognized keys or values will be ignored.
      *
+     * <p>
+     *  读取{@code ObjectInputStream}和一个可选的侦听器列表,以接收组件触发的各种事件;还读取(可能为{@code null})子窗口的列表将无法识别的键或值将被忽略
+     * 
+     * 
      * @param s the {@code ObjectInputStream} to read
      * @exception HeadlessException if
      *   {@code GraphicsEnvironment.isHeadless} returns
@@ -3107,6 +3795,9 @@ public class Window extends Container implements Accessible {
     /*
      * --- Accessibility Support ---
      *
+     * <p>
+     *  ---辅助功能
+     * 
      */
 
     /**
@@ -3115,6 +3806,11 @@ public class Window extends Container implements Accessible {
      * AccessibleAWTWindow.
      * A new AccessibleAWTWindow instance is created if necessary.
      *
+     * <p>
+     *  获取与此窗口相关联的AccessibleContext对于Windows,AccessibleContext采用AccessibleAWTWindow的形式如果必要,创建一个新的AccessibleA
+     * WTWindow实例。
+     * 
+     * 
      * @return an AccessibleAWTWindow that serves as the
      *         AccessibleContext of this Window
      * @since 1.3
@@ -3130,18 +3826,29 @@ public class Window extends Container implements Accessible {
      * This class implements accessibility support for the
      * {@code Window} class.  It provides an implementation of the
      * Java Accessibility API appropriate to window user-interface elements.
+     * <p>
+     * 这个类实现了对{@code Window}类的辅助支持。它提供了一个适用于窗口用户界面元素的Java辅助功能API的实现
+     * 
+     * 
      * @since 1.3
      */
     protected class AccessibleAWTWindow extends AccessibleAWTContainer
     {
         /*
          * JDK 1.3 serialVersionUID
+         * <p>
+         *  JDK 13 serialVersionUID
+         * 
          */
         private static final long serialVersionUID = 4215068635060671780L;
 
         /**
          * Get the role of this object.
          *
+         * <p>
+         *  获取此对象的作用
+         * 
+         * 
          * @return an instance of AccessibleRole describing the role of the
          * object
          * @see javax.accessibility.AccessibleRole
@@ -3153,6 +3860,10 @@ public class Window extends Container implements Accessible {
         /**
          * Get the state of this object.
          *
+         * <p>
+         *  获取此对象的状态
+         * 
+         * 
          * @return an instance of AccessibleStateSet containing the current
          * state set of the object
          * @see javax.accessibility.AccessibleState
@@ -3234,6 +3945,28 @@ public class Window extends Container implements Accessible {
      * the requested data, so that the {@code Window} object is placed and sized
      * in a way that corresponds closely to the desktop settings.
      *
+     * <p>
+     *  根据以下场景设置窗口相对于指定组件的位置
+     * <p>
+     *  下面提到的目标屏幕是在调用setLocationRelativeTo方法之后窗口应放置到的屏幕
+     * <ul>
+     * <li>如果组件是{@code null}或与此组件关联的{@code GraphicsConfiguration}是{@code null},则窗口位于屏幕的中心。
+     * 中心点可以通过{ @link GraphicsEnvironment#getCenterPoint GraphicsEnvironmentgetCenterPoint}方法<li>如果组件不是{@code null}
+     * ,但当前未显示,则窗口将放置在与{@code GraphicsConfiguration}关联的目标屏幕的中心此组件<li>如果组件不是{@code null}并显示在屏幕上,则窗口的位置使得窗口中心与
+     * 组件中心重合。
+     * <li>如果组件是{@code null}或与此组件关联的{@code GraphicsConfiguration}是{@code null},则窗口位于屏幕的中心。
+     * </ul>
+     * <p>
+     * 如果屏幕配置不允许窗口从一个屏幕移动到另一个屏幕,则该窗口仅放置在根据上述条件确定的位置,并且其{@code GraphicsConfiguration}不改变
+     * <p>
+     *  <b>注意</b>：如果窗口的下边缘超出屏幕,则窗口将放置在{@code Component}的最靠近屏幕中心的一侧。因此,如果组件在屏幕的右侧部分,窗口放置在其左侧,反之亦然
+     * <p>
+     * 如果在计算出窗口位置之后,窗口的上边缘,左边缘或右边缘在屏幕之外,则该窗口被定位成使得窗口的上边缘,左边缘或右边缘与屏幕的相应边缘如果窗口的左右边缘都在屏幕外,则窗口位于屏幕的左侧。
+     * 如果顶部和底部边缘都在屏幕外,则会发生类似的放置在这种情况下,则窗口位于屏幕的顶部。
+     * <p>
+     *  该方法改变与几何相关的数据因此,本地窗口系统可以忽略这样的请求,或者其可以修改所请求的数据,使得{@code Window}对象以与桌面设置紧密对应的方式放置和调整大小
+     * 
+     * 
      * @param c  the component in relation to which the window's location
      *           is determined
      * @see java.awt.GraphicsEnvironment#getCenterPoint
@@ -3305,11 +4038,17 @@ public class Window extends Container implements Accessible {
     /**
      * Overridden from Component.  Top-level Windows should not propagate a
      * MouseWheelEvent beyond themselves into their owning Windows.
+     * <p>
+     * 从组件顶层窗口覆盖不应该将MouseWheelEvent传播到他们自己的Windows中
+     * 
      */
     void deliverMouseWheelToAncestor(MouseWheelEvent e) {}
 
     /**
      * Overridden from Component.  Top-level Windows don't dispatch to ancestors
+     * <p>
+     *  从组件顶层窗口覆盖不会调度到祖先
+     * 
      */
     boolean dispatchMouseWheelToAncestor(MouseWheelEvent e) {return false;}
 
@@ -3325,6 +4064,14 @@ public class Window extends Container implements Accessible {
      * <p>
      * Each time this method is called,
      * the existing buffer strategy for this component is discarded.
+     * <p>
+     *  在此组件上创建多缓冲的新策略多缓冲对渲染性能很有用此方法尝试创建可用的最佳策略,并提供所提供的缓冲区数它将始终使用该缓冲区数量创建一个{@code BufferStrategy}首先尝试页面翻转策略,
+     * 然后尝试使用加速缓冲器的打乱策略。
+     * 最后,使用未加速的打乱策略。
+     * <p>
+     *  每次调用此方法时,将丢弃此组件的现有缓冲区策略
+     * 
+     * 
      * @param numBuffers number of buffers to create
      * @exception IllegalArgumentException if numBuffers is less than 1.
      * @exception IllegalStateException if the component is not displayable
@@ -3344,6 +4091,12 @@ public class Window extends Container implements Accessible {
      * <p>
      * Each time this method
      * is called, the existing buffer strategy for this component is discarded.
+     * <p>
+     * 在需要缓冲区能力的组件上创建多缓冲的新策略这是有用的,例如,如果只需要加速内存或页面翻转(由缓冲区功能指定)
+     * <p>
+     *  每次调用此方法时,将丢弃此组件的现有缓冲区策略
+     * 
+     * 
      * @param numBuffers number of buffers to create, including the front buffer
      * @param caps the required capabilities for creating the buffer strategy;
      * cannot be {@code null}
@@ -3366,6 +4119,10 @@ public class Window extends Container implements Accessible {
      * method will return null if a {@code BufferStrategy} has not yet
      * been created or has been disposed.
      *
+     * <p>
+     *  返回此组件使用的{@code BufferStrategy}此方法将返回null如果{@code BufferStrategy}尚未创建或已处置
+     * 
+     * 
      * @return the buffer strategy used by this component
      * @see #createBufferStrategy
      * @since 1.4
@@ -3392,6 +4149,10 @@ public class Window extends Container implements Accessible {
     /**
      * Checks whether this window can contain focus owner.
      * Verifies that it is focusable and as container it can container focus owner.
+     * <p>
+     *  检查此窗口是否可以包含focus owner验证其是否可聚焦,以及作为容器可以是容器焦点所有者
+     * 
+     * 
      * @since 1.5
      */
     boolean canContainFocusOwner(Component focusOwnerCandidate) {
@@ -3437,6 +4198,28 @@ public class Window extends Container implements Accessible {
      * The window will be shown at (10, 10) and {@code flag} will be
      * {@code false}.
      *
+     * <p>
+     * 设置此窗口是否应显示在本机窗口系统的默认位置,或下一次使窗口可见时显示在当前位置(由{@code getLocation}返回)此行为类似于显示的本机窗口,无需通过编程方式设置其位置窗口系统级联窗口(如
+     * 果它们的位置没有明确设置)一旦窗口显示在屏幕上,就确定实际位置。
+     * <p>
+     *  也可以通过将系统属性"javaawtWindowlocationByPlatform"设置为"true"来启用此行为,但是调用此方法的优先级
+     * <p>
+     *  调用{@code setLocationByPlatform}之后调用{@code setVisible},{@code setLocation}和{@code setBounds}清除窗口的此属性。
+     * <p>
+     * 例如,在执行以下代码之后：
+     * <pre>
+     *  setLocationByPlatform(true); setVisible(true); boolean flag = isLocationByPlatform();
+     * </pre>
+     *  该窗口将显示在平台的默认位置,{@code flag}将为{@code false}
+     * <p>
+     *  在以下示例中：
+     * <pre>
+     *  setLocationByPlatform(true); setLocation(10,10); boolean flag = isLocationByPlatform(); setVisible(t
+     * rue);。
+     * </pre>
+     *  窗口将显示在(10,10),{@code flag}将会是{@code false}
+     * 
+     * 
      * @param locationByPlatform {@code true} if this Window should appear
      *        at the default location, {@code false} if at the current location
      * @throws IllegalComponentStateException if the window
@@ -3463,6 +4246,10 @@ public class Window extends Container implements Accessible {
      * This method always returns {@code false} if the Window is showing on the
      * screen.
      *
+     * <p>
+     *  返回{@code true}如果此窗口将出现在本窗口系统的默认位置下次此窗口可见此方法总是返回{@code false}如果窗口显示在屏幕上
+     * 
+     * 
      * @return whether this Window will appear at the default location
      * @see #setLocationByPlatform
      * @see #isShowing
@@ -3487,6 +4274,14 @@ public class Window extends Container implements Accessible {
      * the requested data, so that the {@code Window} object is placed and sized
      * in a way that corresponds closely to the desktop settings.
      *
+     * <p>
+     *  {@inheritDoc}
+     * <p>
+     * 如果{@code width}或{@code height}值小于先前调用{@code setMinimumSize}所指定的最小大小,则会自动放大
+     * <p>
+     *  该方法改变与几何相关的数据因此,本地窗口系统可以忽略这样的请求,或者其可以修改所请求的数据,使得{@code Window}对象以与桌面设置紧密对应的方式放置和调整大小
+     * 
+     * 
      * @see #getBounds
      * @see #setLocation(int, int)
      * @see #setLocation(Point)
@@ -3521,6 +4316,14 @@ public class Window extends Container implements Accessible {
      * the requested data, so that the {@code Window} object is placed and sized
      * in a way that corresponds closely to the desktop settings.
      *
+     * <p>
+     *  {@inheritDoc}
+     * <p>
+     *  如果{@code rwidth}或{@code rheight}值小于先前调用{@code setMinimumSize}所指定的最小大小,则会自动放大
+     * <p>
+     * 该方法改变与几何相关的数据因此,本地窗口系统可以忽略这样的请求,或者其可以修改所请求的数据,使得{@code Window}对象以与桌面设置紧密对应的方式放置和调整大小
+     * 
+     * 
      * @see #getBounds
      * @see #setLocation(int, int)
      * @see #setLocation(Point)
@@ -3537,6 +4340,10 @@ public class Window extends Container implements Accessible {
 
     /**
      * Determines whether this component will be displayed on the screen.
+     * <p>
+     *  确定此组件是否将显示在屏幕上
+     * 
+     * 
      * @return {@code true} if the component and all of its ancestors
      *          until a toplevel window are visible, {@code false} otherwise
      */
@@ -3552,6 +4359,10 @@ public class Window extends Container implements Accessible {
     /**
      * Returns the opacity of the window.
      *
+     * <p>
+     *  返回窗口的不透明度
+     * 
+     * 
      * @return the opacity of the window
      *
      * @see Window#setOpacity(float)
@@ -3591,6 +4402,23 @@ public class Window extends Container implements Accessible {
      * alpha component of their color (see {@link Window#setBackground(Color)}) and the
      * current shape of this window (see {@link #setShape(Shape)}).
      *
+     * <p>
+     *  设置窗口的不透明度
+     * <p>
+     *  不透明度值在范围[01]中注意,将不透明度级别设置为0可以禁用或不禁用在此窗口上的鼠标事件处理这是一个平台相关的行为
+     * <p>
+     *  为了将不透明度值设置为小于{@code 10f},必须满足以下条件：
+     * <ul>
+     * <li>底层系统必须支援{@link GraphicsDeviceWindowTranslucency#TRANSLUCENT TRANSLUCENT}半透明<li>视窗必须无装饰(请参阅{@link Frame#setUndecorated}
+     * 和{@link Dialog#setUndecorated})<li>窗口不能处于全屏模式(请参阅{@link GraphicsDevice#setFullScreenWindow(Window)})。
+     * </ul>
+     * <p>
+     *  如果请求的不透明度值小于{@code 10f},并且不满足上述任何条件,则窗口不透明度将不会更改,并且将抛出{@code IllegalComponentStateException}
+     * <p>
+     *  单个像素的半透明级别也可以通过它们的颜色的alpha分量(参见{@link Window#setBackground(Color)})和该窗口的当前形状(参见{@link #setShape(Shape)}
+     * )。
+     * 
+     * 
      * @param opacity the opacity level to set to the window
      *
      * @throws IllegalArgumentException if the opacity is out of the range
@@ -3649,6 +4477,12 @@ public class Window extends Container implements Accessible {
      * previously set with {@code setShape(shape)}, but it is guaranteed
      * to represent the same shape.
      *
+     * <p>
+     *  返回窗口的形状
+     * 
+     * 此方法返回的值可能不同于先前使用{@code setShape(shape)}设置的值,但它保证表示相同的形状
+     * 
+     * 
      * @return the shape of the window or {@code null} if no
      *     shape is specified for the window
      *
@@ -3692,6 +4526,26 @@ public class Window extends Container implements Accessible {
      * opacity value (see {@link #setOpacity(float)}). See {@link
      * GraphicsDevice.WindowTranslucency} for more details.
      *
+     * <p>
+     *  设置窗口的形状
+     * <p>
+     *  设置形状会截断窗口的某些部分只有属于给定{@link Shape}的部分保持可见和可点击如果shape参数是{@code null},此方法将恢复默认形状,使窗口呈矩形大多数平台
+     * <p>
+     *  必须满足以下条件才能设置非空形状：
+     * <ul>
+     * <li>底层系统必须支援{@link GraphicsDeviceWindowTranslucency#PERPIXEL_TRANSPARENT PERPIXEL_TRANSPARENT}半透明<li>
+     * 视窗必须无装饰(请参阅{@link Frame#setUndecorated}和{@link Dialog#setUndecorated})<li>窗口不能处于全屏模式(请参阅{@link GraphicsDevice#setFullScreenWindow(Window)}
+     * )。
+     * </ul>
+     * <p>
+     *  如果请求的形状不是{@code null},并且不满足上述任何条件,则此窗口的形状不会改变,并且将抛出{@code UnsupportedOperationException}或{@code IllegalComponentStateException}
+     * 。
+     * <p>
+     * 单个像素的半透明度级别也可以通过它们颜色的alpha分量(参见{@link Window#setBackground(Color)})和不透明度值(参见{@link #setOpacity(float)}
+     * )来实现。
+     *  GraphicsDeviceWindowTranslucency}了解更多信息。
+     * 
+     * 
      * @param shape the shape to set to the window
      *
      * @throws IllegalComponentStateException if the shape is not {@code
@@ -3742,6 +4596,12 @@ public class Window extends Container implements Accessible {
      * Note that the alpha component of the returned color indicates whether
      * the window is in the non-opaque (per-pixel translucent) mode.
      *
+     * <p>
+     *  获取此窗口的背景颜色
+     * <p>
+     *  注意,返回颜色的alpha分量表示窗口是否处于非不透明(每像素半透明)模式
+     * 
+     * 
      * @return this component's background color
      *
      * @see Window#setBackground(Color)
@@ -3806,6 +4666,35 @@ public class Window extends Container implements Accessible {
      * Enabling the per-pixel translucency mode may change the graphics
      * configuration of this window due to the native platform requirements.
      *
+     * <p>
+     *  设置此窗口的背景颜色
+     * <p>
+     * 如果窗口系统支持{@link GraphicsDeviceWindowTranslucency#PERPIXEL_TRANSLUCENT PERPIXEL_TRANSLUCENT}半透明度,给定背景颜色
+     * 的alpha分量可能影响此窗口的操作模式：它指示此窗口是否必须是不透明的(alpha等于{@code 10f} )或每像素半透明(alpha小于{@code 10f})如果给定的背景颜色是{@code null}
+     * ,则窗口被认为是完全不透明的。
+     * <p>
+     *  必须满足以下所有条件才能为此窗口启用每像素透明模式：
+     * <ul>
+     * <li>此窗口所在的图形设备必须支持{@link GraphicsDeviceWindowTranslucency#PERPIXEL_TRANSLUCENT PERPIXEL_TRANSLUCENT}半
+     * 透明<li>窗口必须未装饰(请参阅{@link Frame#setUndecorated}和{@link Dialog#setUndecorated} )<li>该窗口不能处于全屏模式(请参阅{@link GraphicsDevice#setFullScreenWindow(Window)}
+     * )。
+     * </ul>
+     * <p>
+     *  如果所请求的背景颜色的alpha分量小于{@code 10f},并且不满足上述任何条件,则此窗口的背景颜色不会改变,给定背景颜色的alpha分量不会影响此窗口的操作模式,并且将抛出{@code UnsupportedOperationException}
+     * 或{@code IllegalComponentStateException}。
+     * <p>
+     * 当窗口是每像素半透明时,绘图子系统遵循每个单独像素的α值。如果像素被涂上等于零的α颜色分量,则其变为视觉上透明的。
+     * 如果像素的α等于10f ,像素是完全不透明的alpha颜色分量的中间值使像素半透明在这种模式下,窗口的背景被绘制与给定的背景颜色的alpha值如果此方法的参数的alpha值是等于{@code 0},背景
+     * 根本没有画。
+     * 当窗口是每像素半透明时,绘图子系统遵循每个单独像素的α值。如果像素被涂上等于零的α颜色分量,则其变为视觉上透明的。
+     * <p>
+     *  给定像素的实际透明度水平还取决于窗口不透明度(请参阅{@link #setOpacity(float)})以及此窗口的当前形状(请参阅{@link #setShape(Shape)})
+     * <p>
+     * 注意,使用{@code 0}的alpha值绘制像素可能会或不会禁用对此像素的鼠标事件处理这是一个与平台相关的行为要确保鼠标事件不会被分派到特定像素,像素必须从窗口的形状中排除
+     * <p>
+     *  由于本地平台要求,启用每像素半透明模式可以改变该窗口的图形配置
+     * 
+     * 
      * @param bgColor the color to become this window's background color.
      *
      * @throws IllegalComponentStateException if the alpha value of the given
@@ -3869,6 +4758,12 @@ public class Window extends Container implements Accessible {
      * is not {@code null} and the alpha component of the color is less than
      * {@code 1.0f}. The method returns {@code true} otherwise.
      *
+     * <p>
+     *  指示窗口当前是否不透明
+     * <p>
+     *  如果窗口的背景颜色不是{@code null},并且颜色的alpha分量小于{@code 10f},则该方法返回{@code false}该方法返回{@code true}否则
+     * 
+     * 
      * @return {@code true} if the window is opaque, {@code false} otherwise
      *
      * @see Window#getBackground
@@ -3893,6 +4788,10 @@ public class Window extends Container implements Accessible {
     /**
      * {@inheritDoc}
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.7
      */
     @Override
@@ -3953,6 +4852,10 @@ public class Window extends Container implements Accessible {
 
     /**
      * Applies the shape to the component
+     * <p>
+     *  将形状应用于组件
+     * 
+     * 
      * @param shape Shape to be applied to the component
      */
     @Override
@@ -3982,6 +4885,9 @@ public class Window extends Container implements Accessible {
 
     /**
      * Limit the given double value with the given range.
+     * <p>
+     *  用给定的范围限制给定的double值
+     * 
      */
     private static double limit(double value, double min, double max) {
         value = Math.max(value, min);
@@ -3999,6 +4905,14 @@ public class Window extends Container implements Accessible {
      *
      * NOTE: this method is invoked on the toolkit thread, and therefore is not
      * supposed to become public/user-overridable.
+     * <p>
+     * 计算安全警告的位置
+     * 
+     *  此方法获取本地系统报告的窗口位置/大小,因为本地缓存的值可能表示过时的数据
+     * 
+     *  该方法从本地代码或通过AWTAccessor使用
+     * 
+     *  注意：这个方法在工具包线程上被调用,因此不应该成为公共的/用户可覆盖的
      */
     private Point2D calculateSecurityWarningPosition(double x, double y,
             double w, double h)
@@ -4121,6 +5035,8 @@ public class Window extends Container implements Accessible {
 /**
  * This class is no longer used, but is maintained for Serialization
  * backward-compatibility.
+ * <p>
+ * 
  */
 class FocusManager implements java.io.Serializable {
     Container focusRoot;
@@ -4128,6 +5044,9 @@ class FocusManager implements java.io.Serializable {
 
     /*
      * JDK 1.1 serialVersionUID
+     * <p>
+     *  此类不再使用,但是为了序列化向后兼容性而维护
+     * 
      */
     static final long serialVersionUID = 2491878825643557906L;
 }

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -354,6 +355,174 @@ import java.util.Arrays;
  * }
  * </pre></blockquote><hr>
  * <p>
+ * <p>
+ *  <code> GridBagLayout </code>类是一个灵活的布局管理器,可以垂直,水平或沿着它们的基线对齐组件,而不需要组件具有相同的大小每个<code> GridBagLayout </code>
+ * 对象维护一个动态的矩形网格,其中每个组件占据一个或多个单元,称为其<em>显示区域</em>。
+ * <p>
+ * 由<code> GridBagLayout </code>管理的每个组件与{@link GridBagConstraints}的实例相关联。
+ * 约束对象指定组件的显示区域应位于网格上以及组件应如何在其显示区域中定位除了约束对象之外,<code> GridBagLayout </code>还会考虑每个组件的最小和首选大小,以确定组件的大小。
+ * <p>
+ * 网格的整体方向取决于容器的{@link ComponentOrientation}属性对于水平从左到右的方向,网格坐标(0,0)在容器的左上角,x向右增加,y增加向下对于水平从右到左的方向,网格坐标(0
+ * ,0)在容器的右上角,x向左增加,y向下增加。
+ * <p>
+ *  要有效地使用网格包布局,您必须自定义与其组件相关联的一个或多个<code> GridBagConstraints </code>对象您可以通过设置一个或多个网格包布局来自定义<code> GridBa
+ * gConstraints </code>实例变量：。
+ * 
+ * <dl>
+ * <dt> {@ link GridBagConstraints#gridy},{@link GridBagConstraints#gridy} <dd>指定包含组件显示区域前导角的单元格,其中网格原点处
+ * 的单元格具有地址<code> gridx& =&nbsp; 0 </code>,<code> gridy&nbsp; =&nbsp; 0 </code>对于水平从左到右的布局,组件的前角是左上角对于水平
+ * 从右到左布局,前导角是它的右上角使用<code> GridBagConstraintsRELATIVE </code>(默认值)来指定组件紧随其后放置(沿x轴为<code> gridx </code>或
+ * y轴为<code > gridy </code>)在添加此组件之前添加到容器的组件<dt> {@ link GridBagConstraints#gridwidth},{@link GridBagConstraints#gridheight}
+ *  <dd>指定行中的单元格数量(<code> gridwidth </code>)或列(<code> gridheight <代码>)在组件的显示区域中默认值为1使用<code> GridBagCons
+ * traintsREMAINDER </code>指定组件的显示区域将从<code> gridx </code>到行中的最后一个单元格code> gridwidth </code>)或从<code> gr
+ * idy </code>到列中的最后一个单元格(对于<code> gridheight </code>)。
+ * 
+ * 使用<code> GridBagConstraintsRELATIVE </code>来指定组件的显示区域将从<code> gridx </code>到其行中最后一个单元格的旁边(对于<code> gr
+ * idwidth </code> code> gridy </code>到其列中最后一个单元格的旁边(<code> gridheight </code>)。
+ * 
+ * <dt> {@ link GridBagConstraints#fill} <dd>当组件的显示区域大于组件的请求大小以确定是否(以及如何调整组件大小时使用。
+ * 可能的值为<code> GridBagConstraintsNONE </code>默认),<code> GridBagConstraintsHORIZONTAL </code>(使组件足够宽以水平填充
+ * 其显示区域,但不改变其高度),<code> GridBagConstraintsEVTICAL </code>(使组件足够高,显示区域,但不改变其宽度),和<code> GridBagConstrain
+ * tsBOTH </code>(使组件完全填充其显示区域)<dt> {@ link GridBagConstraints#ipadx},{@link GridBagConstraints#ipady} <dd>
+ * 指定组件在布局中的内部填充,要添加到组件的最小大小中多少组件的宽度将至少为它的最小宽度加上<code> ipadx </code> pixels类似地,组件的高度将至少为最小高度加上<code> ipa
+ * dy </code> pixels <dt> {@ link GridBagConstraints#insets}指定组件的外部填充,组件与其显示区域边缘之间的最小空间量<dt> {@ link GridBagConstraints#anchor}
+ *  <dd>指定组件在其显示区域中的位置有三种可能的值：绝对,方向相对和基线相对方向相对值相对于容器的<code> ComponentOrientation </code>属性进行解释,而绝对值不是基线相
+ * 对值是相对于基线计算的有效值为：。
+ * <dt> {@ link GridBagConstraints#fill} <dd>当组件的显示区域大于组件的请求大小以确定是否(以及如何调整组件大小时使用。
+ * 
+ * <center> <table BORDER = 0 WIDTH = 800
+ * SUMMARY="absolute, relative and baseline values as described above">
+ * <tr>
+ *  <th> <p style ="text-align：left">绝对值</th> <th> <p style ="text-align：left">方向相对值</th> <th> "text-ali
+ * gn：left">基线相对值</th>。
+ * </tr>
+ * <tr>
+ * <td>
+ * <ul style="list-style-type:none">
+ *  <li> <code> GridBagConstraintsNORTH </code> </li> <li> <code> GridBagConstraintsSOUTH </code> </li> 
+ * <li> <code> GridBagConstraintsWEST </code> </li> <li> <code > GridBagConstraintsEAST </code> </li> <li>
+ *  </li> <li> </li> <li> </li> <li> </li> > </li> </li> GridBagConstraintsSOUTHEAST </code> </li> <li> 
+ * <code> GridBagConstraintsCENTER </code>。
+ * </ul>
+ * </td>
+ * <td>
+ * <ul style="list-style-type:none">
+ * <li> <code> GridBagConstraintsPAGE_START </code> </li> <li> <code> GridBagConstraintsPAGE_END </code>
+ *  </li> <li> <code> GridBagConstraintsPAGE_START </code> > GridBagConstraintsLINK_END </code> </li> </li>
+ *  <li> </li> <li> </li> <li> > </li> <li> <code> GridBagConstraintsLAST_LINE_END </code> </li>。
+ * </ul>
+ * </td>
+ * <td>
+ * <ul style="list-style-type:none">
+ * <li> <code> GridBagConstraintsBASELINE </code> </code> </li> <li> </li> </li> </li> > GridBagConstrai
+ * ntsBOVE_BASELINE </code> </li> </li> <li> </li> </li> <li> </li> <li> </li> <li> </> </li> <li> </li>
+ *  <li> </li> <li> </li>。
+ * </ul>
+ * </td>
+ * </tr>
+ * </table> </center> <dt> {@ link GridBagConstraints#weightx},{@link GridBagConstraints#weighty} <dd>用于
+ * 确定如何分配空间,这对于指定调整大小行为很重要除非您所有的组件在它们的容器的中心聚集在一起(<code> weightx </code>)和列(<code> weighty </code>)中的至少一个
+ * 组件这是因为当权重为零默认),<code> GridBagLayout </code>对象在其单元格和容器边缘之间添加任何额外的空格。
+ * </dl>
+ * <p>
+ * 每行可以具有基线;基线由该行中具有有效基线并沿基线对齐的组件确定(组件的锚点值是{@code BASELINE},{@code BASELINE_LEADING}或{@code BASELINE_TRAILING}
+ * 之一)如果没有该行中的组件具有有效的基线,该行没有基线。
+ * <p>
+ *  如果组件跨越行,它将对齐到开始行的基线(如果基线调整行为是{@code CONSTANT_ASCENT})或结束行(如果基线调整行为是{@code CONSTANT_DESCENT})的行。
+ * 组件对齐到被称为<em>当前行</em>。
+ * <p>
+ *  下图显示了基线布局,并包括跨行的组件：<center> <table summary ="Baseline Layout">
+ * <tr ALIGN=CENTER>
+ * <td>
+ * <img src ="doc-files / GridBagLayout-baselinepng"
+ * alt="The following text describes this graphic (Figure 1)." style="float:center">
+ * </td>
+ *  </table> </center>此布局由三个组件组成：<ul> <li>从第0行开始并在第1行结束的面板此面板具有<code> CONSTANT_DESCENT </code>并且具有<code>
+ *  BASELINE </code>的锚点。
+ * 由于基线调整行为是<code> CONSTANT_DESCENT </code>,面板的主要行是第1行<li>两个按钮,每个按钮都具有基线调整行为的<code> CENTER_OFFSET </code>
+ * 和一个<code> BASELINE </code>的锚点。
+ * </ul>
+ *  因为第二按钮和面板共享相同的主行,所以它们都沿着它们的基线对准
+ * <p>
+ * 使用基线相对值之一定位的组件与使用绝对或定向相对值定位时的组件大小不同如何组件更改由主行的基线如何更改决定如果有任何基线固定在显示区域的底部具有相同主要行的组件具有<code> CONSTANT_DES
+ * CENT </code>的基线调整行为,否则基准被锚定到显示区域的顶部以下规则指示调整大小行为：。
+ * <ul>
+ * <li>定位在基线上方的可调整组件只能增长到与基线一样高例如,如果基线为100,并且锚定在顶部,则位于基线上方的可调整大小的组件永远不会增长超过100个单位<li>同样,位于基线下面的可调整大小的组件只
+ * 能增长与显示高度和基线之间的差异。
+ * <li>只有调整<code> OTHER </code>的基线调整行为时,位于基线上的可调整组件才会调整大小调整大小的大小的基线适合显示区域内。
+ * 如果基线不适合显示区域,组件不调整大小<li>定位在基线上且没有<code> OTHER </code>的基线调整行为的组件只能增长到{@code display height  -  baseline + component of component}
+ * 。
+ * <li>只有调整<code> OTHER </code>的基线调整行为时,位于基线上的可调整组件才会调整大小调整大小的大小的基线适合显示区域内。
+ * </ul>
+ * 如果沿着基线定位组件,但该组件没有有效的基线,则它将在其空间中垂直居中。类似地,如果已经相对于基线放置了一个组件,并且该行中的所有组件都没有有效的基线组件垂直居中
+ * <p>
+ *  下图显示了由网格袋布局管理的十个组件(所有按钮)。图2显示了一个水平的,从左到右的容器的布局,图3显示了一个水平的,从右到左的容器
+ * 
+ *  <center> <table WIDTH = 600 summary ="layout">
+ * <tr ALIGN=CENTER>
+ * <td>
+ * <img src="doc-files/GridBagLayout-1.gif" alt="The preceding text describes this graphic (Figure 1)." style="float:center; margin: 7px 10px;">
+ * </td>
+ * <td>
+ * <img src="doc-files/GridBagLayout-2.gif" alt="The preceding text describes this graphic (Figure 2)." style="float:center; margin: 7px 10px;">
+ * </td>
+ * <tr ALIGN=CENTER>
+ *  <td>图2：水平,从左到右</td> <td>图3：水平,从右到左</td>
+ * </tr>
+ *  </table> </center>
+ * <p>
+ * 十个组件中的每一个都具有其相关联的<code> GridBagConstraints </code>对象的<code> fill </code>字段设置为<code> GridBagConstraint
+ * sBOTH </code>。
+ * 此外,组件具有以下非缺省约束：。
+ * 
+ * <ul>
+ * <li> Button1,Button2,Button3：<code> weightx&nbsp; =&nbsp; 10 </code> <li> Button4：<code> weightx&nbsp
+ * ; =&nbsp; 10 </code>,<code> gridwidth&nbsp; = GridBagConstraintsREMAINDER </code> <li> Button5：<code>
+ *  gridwidth&nbsp; =&nbsp; GridBagConstraintsREMAINDER </code> <li> Button6：<code> gridwidth&nbsp; =&nb
+ * sp; GridBagConstraintsRELATIVE </code> <li> Button7： =&nbsp; GridBagConstraintsREMAINDER </code> <li>
+ *  Button8：<code> gridheight&nbsp; =&nbsp; 2 </code>,<code> weighty&nbsp; =&nbsp; 10 </code> <li> Butto
+ * n9,Button 10：<code > gridwidth&nbsp; =&nbsp; GridBagConstraintsREMAINDER </code>。
+ * </ul>
+ * <p>
+ *  这里是实现上面示例的代码：
+ * 
+ *  <hr> <blockquote> <pre> import javaawt *; import javautil *; import javaappletApplet;
+ * 
+ *  public class GridBagEx1 extends Applet {
+ * 
+ * protected void makebutton(String name,GridBagLayout gridbag,GridBagConstraints c){Button button = new Button(name); gridbagsetConstraints(button,c);添加(按钮); }
+ * }。
+ * 
+ *  public void init(){GridBagLayout gridbag = new GridBagLayout(); GridBagConstraints c = new GridBagConstraints();。
+ * 
+ *  setFont(new Font("SansSerif",FontPLAIN,14)); setLayout(gridbag)
+ * 
+ *  cfill = GridBagConstraintsBOTH; cweightx = 10; makebutton("Button1",gridbag,c); makebutton("Button2"
+ * ,gridbag,c); makebutton("Button3",gridbag,c);。
+ * 
+ *  cgridwidth = GridBagConstraintsREMAINDER; // end row makebutton("Button4",gridbag,c);
+ * 
+ *  cweightx = 00; // reset to the default makebutton("Button5",gridbag,c); //另一行
+ * 
+ * cgridwidth = GridBagConstraintsRELATIVE; //在行中的倒数第二行makebutton("Button6",gridbag,c);
+ * 
+ *  cgridwidth = GridBagConstraintsREMAINDER; // end row makebutton("Button7",gridbag,c);
+ * 
+ *  cgridwidth = 1; // reset to the default cgridheight = 2; cweighty = 10; makebutton("Button8",gridbag
+ * ,c);。
+ * 
+ *  cweighty = 00; // reset to the default cgridwidth = GridBagConstraintsREMAINDER; // end row cgridhei
+ * ght = 1; // reset to the default makebutton("Button9",gridbag,c); makebutton("Button10",gridbag,c);。
+ * 
+ *  setSize(300,100); }}
+ * 
+ *  public static void main(String args []){Frame f = new Frame("GridBag Layout Example"); GridBagEx1 ex1 = new GridBagEx1();。
+ * 
+ *  ex1init();
+ * 
+ * fadd("Center",ex1); fpack(); fsetSize(fgetPreferredSize()); fshow(); }} </pre> </blockquote> <hr>
+ * <p>
+ * 
  * @author Doug Stein
  * @author Bill Spitzak (orignial NeWS &amp; OLIT implementation)
  * @see       java.awt.GridBagConstraints
@@ -372,15 +541,24 @@ java.io.Serializable {
      * vertical) that could be laid out by the grid bag layout.
      * Current implementation doesn't impose any limits
      * on the size of a grid.
+     * <p>
+     *  该字段不再用于保留数组并保持向后兼容以前,这是可以由网格布局布局的最大网格位置数(水平和垂直)当前实现不会对网格的大小
+     * 
      */
     protected static final int MAXGRIDSIZE = 512;
 
     /**
      * The smallest grid that can be laid out by the grid bag layout.
+     * <p>
+     *  可以通过网格布局布局的最小网格
+     * 
      */
     protected static final int MINSIZE = 1;
     /**
      * The preferred grid size that can be laid out by the grid bag layout.
+     * <p>
+     *  可以通过网格布局布局的首选网格大小
+     * 
      */
     protected static final int PREFERREDSIZE = 2;
 
@@ -390,6 +568,10 @@ java.io.Serializable {
      * The Keys in <code>comptable</code> are the components and the
      * values are the instances of <code>GridBagConstraints</code>.
      *
+     * <p>
+     *  这个散列表保持组件和它的网格包约束之间的关联。<code> comptable </code>中的Keys是组件,值是<code> GridBagConstraints </code>
+     * 
+     * 
      * @serial
      * @see java.awt.GridBagConstraints
      */
@@ -402,6 +584,10 @@ java.io.Serializable {
      * it, then the component will be assigned a
      * copy of the <code>defaultConstraints</code>.
      *
+     * <p>
+     * 此字段包含一个包含默认值的网格包约束实例,因此如果一个组件没有与其相关的网格包约束,则该组件将被分配一个<code> defaultConstraints </code>
+     * 
+     * 
      * @serial
      * @see #getConstraints(Component)
      * @see #setConstraints(Component, GridBagConstraints)
@@ -419,6 +605,11 @@ java.io.Serializable {
      * the gridbag or if there are components, they have
      * not yet been validated.
      *
+     * <p>
+     *  此字段保存gridbag的布局信息此字段中的信息基于gridbag的最近验证如果<code> layoutInfo </code>是<code> null </code>,则表示没有组件gridbag
+     * 或者如果有组件,它们还没有被验证。
+     * 
+     * 
      * @serial
      * @see #getLayoutInfo(Container, int)
      */
@@ -433,6 +624,11 @@ java.io.Serializable {
      * columns, columns are added to the gridbag to match
      * the number of elements in columnWidth.
      *
+     * <p>
+     * 此字段包含对列最小宽度的覆盖。如果此字段为非<code> null </code>,则在计算了所有最小列宽度之后,这些值将应用于网格包。
+     * 如果columnWidths的元素数超过列,列添加到gridbag中以匹配columnWidth中的元素数。
+     * 
+     * 
      * @serial
      * @see #getLayoutDimensions()
      */
@@ -447,6 +643,11 @@ java.io.Serializable {
      * rows, rows are added to the gridbag to match
      * the number of elements in <code>rowHeights</code>.
      *
+     * <p>
+     *  此字段保存对行最小高度的覆盖如果此字段为非<code> null </code>,则在计算所有最小行高度之后将值应用于网格包如果<code> rowHeights </code>具有比行数更多的元素,
+     * 行被添加到gridbag以匹配<code> rowHeights </code>中的元素数量,。
+     * 
+     * 
      * @serial
      * @see #getLayoutDimensions()
      */
@@ -463,6 +664,12 @@ java.io.Serializable {
      * of columns, the excess elements are ignored - they do
      * not cause more columns to be created.
      *
+     * <p>
+     * 此字段保存对列权重的覆盖如果此字段为非<code> null </code>,则在计算所有列权重后,将值应用于gridbag如果<code> columnWeights [i] </code >&gt;
+     * 第i列的权重,则第i列被分配在<code> columnWeights [i] </code>中的权重。
+     * 如果<code> columnWeights </code>有多于列数的元素,则忽略多余的元素 - 不会导致创建更多的列。
+     * 
+     * 
      * @serial
      */
     public double columnWeights[];
@@ -478,6 +685,12 @@ java.io.Serializable {
      * of rows, the excess elements are ignored - they do
      * not cause more rows to be created.
      *
+     * <p>
+     * 此字段包含对行权重的覆盖如果此字段为非<code> null </code>,则在计算所有行权重后,将值应用于网格包。
+     * 如果<code> rowWeights [i] </code >&gt;第i行的权重,则第i行被分配在<code> rowWeights [i] </code>中的权重。
+     * 如果<code> rowWeights </code>有多于行数的元素,则忽略多余的元素 - 不会导致创建更多的行。
+     * 
+     * 
      * @serial
      */
     public double rowWeights[];
@@ -485,11 +698,17 @@ java.io.Serializable {
     /**
      * The component being positioned.  This is set before calling into
      * <code>adjustForGravity</code>.
+     * <p>
+     *  被定位的组件在调用<code> adjustForGravity </code>之前设置
+     * 
      */
     private Component componentAdjusting;
 
     /**
      * Creates a grid bag layout manager.
+     * <p>
+     *  创建网格包布局管理器
+     * 
      */
     public GridBagLayout () {
         comptable = new Hashtable<Component,GridBagConstraints>();
@@ -498,6 +717,10 @@ java.io.Serializable {
 
     /**
      * Sets the constraints for the specified component in this layout.
+     * <p>
+     *  在此布局中设置指定组件的约束
+     * 
+     * 
      * @param       comp the component to be modified
      * @param       constraints the constraints to be applied
      */
@@ -508,6 +731,10 @@ java.io.Serializable {
     /**
      * Gets the constraints for the specified component.  A copy of
      * the actual <code>GridBagConstraints</code> object is returned.
+     * <p>
+     *  获取指定组件的约束返回实际的<code> GridBagConstraints </code>对象的副本
+     * 
+     * 
      * @param       comp the component to be queried
      * @return      the constraint for the specified component in this
      *                  grid bag layout; a copy of the actual constraint
@@ -532,6 +759,13 @@ java.io.Serializable {
      * A <code>comp</code> value of <code>null</code> is invalid
      * and returns <code>null</code>.
      *
+     * <p>
+     * 检索指定组件的约束返回值不是副本,而是布局机制使用的实际<code> GridBagConstraints </code>对象
+     * <p>
+     *  如果<code> comp </code>不在<code> GridBagLayout </code>中,则返回一组默认<code> GridBagConstraints </code> A <code>
+     *  comp </code> null </code>无效并返回<code> null </code>。
+     * 
+     * 
      * @param       comp the component to be queried
      * @return      the constraints for the specified component
      */
@@ -546,6 +780,10 @@ java.io.Serializable {
 
     /**
      * Removes the constraints for the specified component in this layout
+     * <p>
+     *  删除此布局中指定组件的约束
+     * 
+     * 
      * @param       comp the component to be modified
      */
     private void removeConstraints(Component comp) {
@@ -559,6 +797,11 @@ java.io.Serializable {
      * the <code>ComponentOrientation</code> value of the container.  This
      * is distinct from the grid origin given by the cell coordinates (0,0).
      * Most applications do not call this method directly.
+     * <p>
+     * 确定布局区域的原点,在目标容器的图形坐标空间中此值表示布局区域的左上角的像素坐标,而不考虑容器的<code> ComponentOrientation </code>值这是不同于由单元格坐标(0,0)给
+     * 出的网格原点大多数应用程序不直接调用此方法。
+     * 
+     * 
      * @return     the graphics origin of the cell in the top-left
      *             corner of the layout grid
      * @see        java.awt.ComponentOrientation
@@ -577,6 +820,12 @@ java.io.Serializable {
      * Determines column widths and row heights for the layout grid.
      * <p>
      * Most applications do not call this method directly.
+     * <p>
+     *  确定布局网格的列宽和行高
+     * <p>
+     *  大多数应用程序不直接调用此方法
+     * 
+     * 
      * @return     an array of two arrays, containing the widths
      *                       of the layout columns and
      *                       the heights of the layout rows
@@ -603,6 +852,12 @@ java.io.Serializable {
      * room to fill.
      * <p>
      * Most applications do not call this method directly.
+     * <p>
+     *  确定布局网格的列和行的权重权重用于计算给定列或行延伸超出其首选大小的多少,如果布局有额外的空间填充
+     * <p>
+     *  大多数应用程序不直接调用此方法
+     * 
+     * 
      * @return      an array of two arrays, representing the
      *                    horizontal weights of the layout columns
      *                    and the vertical weights of the layout rows
@@ -641,6 +896,16 @@ java.io.Serializable {
      * layout, and as the number of rows if <code>y</code> lies
      * below the layout.  The orientation of a container is determined by its
      * <code>ComponentOrientation</code> property.
+     * <p>
+     * 确定布局网格中的哪个单元格包含由<code>(x,y)指定的点</code>每个单元格由其列索引(范围从0到列数减去1)及其行索引(范围从0到行数减1)
+     * <p>
+     * 如果<code>(x,&nbsp; y)</code>点在网格之外,则使用以下规则。
+     * 如果<code> x </code>位于布局的左边,列索引返回为零对于从左到右的容器,或者对于从右到左容器的布局的右边,如果<code> x </code>位于布局的右边,则列索引返回为列数从左到右容器
+     * 或在从右到左容器中的左边如果<code> y </code>位于布局上方,行索引返回为零,如果<code> y </code>位于布局下方容器的方向由<code> ComponentOrientatio
+     * n </code>属性决定。
+     * 如果<code>(x,&nbsp; y)</code>点在网格之外,则使用以下规则。
+     * 
+     * 
      * @param      x    the <i>x</i> coordinate of a point
      * @param      y    the <i>y</i> coordinate of a point
      * @return     an ordered pair of indexes that indicate which cell
@@ -686,6 +951,9 @@ java.io.Serializable {
 
     /**
      * Has no effect, since this layout manager does not use a per-component string.
+     * <p>
+     *  没有效果,因为这个布局管理器不使用每个组件的字符串
+     * 
      */
     public void addLayoutComponent(String name, Component comp) {
     }
@@ -695,6 +963,10 @@ java.io.Serializable {
      * <code>constraints</code> object.  Note that constraints
      * are mutable and are, therefore, cloned when cached.
      *
+     * <p>
+     * 使用指定的<code>约束</code>对象,将指定的组件添加到布局中注意约束是可变的,因此在缓存时进行克隆
+     * 
+     * 
      * @param      comp         the component to be added
      * @param      constraints  an object that determines how
      *                          the component is added to the layout
@@ -713,6 +985,12 @@ java.io.Serializable {
      * Removes the specified component from this layout.
      * <p>
      * Most applications do not call this method directly.
+     * <p>
+     *  从此布局中删除指定的组件
+     * <p>
+     *  大多数应用程序不直接调用此方法
+     * 
+     * 
      * @param    comp   the component to be removed.
      * @see      java.awt.Container#remove(java.awt.Component)
      * @see      java.awt.Container#removeAll()
@@ -727,6 +1005,12 @@ java.io.Serializable {
      * <p>
      * Most applications do not call this method directly.
      *
+     * <p>
+     *  使用此网格包布局确定<code>父</code>容器的首选大小
+     * <p>
+     *  大多数应用程序不直接调用此方法
+     * 
+     * 
      * @param     parent   the container in which to do the layout
      * @see       java.awt.Container#getPreferredSize
      * @return the preferred size of the <code>parent</code>
@@ -742,6 +1026,12 @@ java.io.Serializable {
      * using this grid bag layout.
      * <p>
      * Most applications do not call this method directly.
+     * <p>
+     *  使用此网格包布局确定<code> parent </code>容器的最小大小
+     * <p>
+     *  大多数应用程序不直接调用此方法
+     * 
+     * 
      * @param     parent   the container in which to do the layout
      * @see       java.awt.Container#doLayout
      * @return the minimum size of the <code>parent</code> container
@@ -754,6 +1044,10 @@ java.io.Serializable {
     /**
      * Returns the maximum dimensions for this layout given the components
      * in the specified target container.
+     * <p>
+     *  返回给定指定目标容器中的组件的此布局的最大尺寸
+     * 
+     * 
      * @param target the container which needs to be laid out
      * @see Container
      * @see #minimumLayoutSize(Container)
@@ -771,6 +1065,10 @@ java.io.Serializable {
      * where 0 represents alignment along the origin, 1 is aligned
      * the furthest away from the origin, 0.5 is centered, etc.
      * <p>
+     * <p>
+     * 返回沿x轴的对齐方式这指定了组件相对于其他组件的对齐方式。该值应为0和1之间的数字,其中0表示沿原点对齐,1对齐距离原点最远,05中心等
+     * <p>
+     * 
      * @return the value <code>0.5f</code> to indicate centered
      */
     public float getLayoutAlignmentX(Container parent) {
@@ -784,6 +1082,10 @@ java.io.Serializable {
      * where 0 represents alignment along the origin, 1 is aligned
      * the furthest away from the origin, 0.5 is centered, etc.
      * <p>
+     * <p>
+     *  返回沿y轴的对齐这指定了组件相对于其他组件的对齐方式。值应该是0和1之间的数字,其中0表示沿原点对齐,1对齐距离原点最远,05中心等
+     * <p>
+     * 
      * @return the value <code>0.5f</code> to indicate centered
      */
     public float getLayoutAlignmentY(Container parent) {
@@ -793,6 +1095,9 @@ java.io.Serializable {
     /**
      * Invalidates the layout, indicating that if the layout manager
      * has cached information it should be discarded.
+     * <p>
+     *  使布局无效,指示如果布局管理器具有缓存的信息,它应该被丢弃
+     * 
      */
     public void invalidateLayout(Container target) {
     }
@@ -804,6 +1109,12 @@ java.io.Serializable {
      * object.
      * <p>
      * Most applications do not call this method directly.
+     * <p>
+     * 使用此网格包布局放弃指定的容器此方法重新塑造指定容器中的组件,以满足此<code> GridBagLayout </code>对象的约束
+     * <p>
+     *  大多数应用程序不直接调用此方法
+     * 
+     * 
      * @param parent the container in which to do the layout
      * @see java.awt.Container
      * @see java.awt.Container#doLayout
@@ -814,6 +1125,10 @@ java.io.Serializable {
 
     /**
      * Returns a string representation of this grid bag layout's values.
+     * <p>
+     *  返回此网格包布局的值的字符串表示形式
+     * 
+     * 
      * @return     a string representation of this grid bag layout.
      */
     public String toString() {
@@ -822,6 +1137,9 @@ java.io.Serializable {
 
     /**
      * Print the layout information.  Useful for debugging.
+     * <p>
+     *  打印布局信息有用于调试
+     * 
      */
 
     /* DEBUG
@@ -842,10 +1160,18 @@ java.io.Serializable {
      *                   s.weightY[x]);
      *    }
      *  }
+     * <p>
+     *  protected void dumpLayoutInfo(GridBagLayoutInfo s){int x;
+     * 
+     *  Systemoutprintln("Col \\ tWidth \\ tWeight"); for(x = 0; x <swidth; x ++){Systemoutprintln(x +"\\ t"+ sminWidth [x] +"\\ t"+ sweightX [x]); } Systemoutprintln("Row \\ tHeight \\ tWeight"); for(x = 0; x <sheight; x ++){Systemoutprintln(x +"\\ t"+ sminHeight [x] +"\\ t"+ sweightY [x] }}。
+     * 
      */
 
     /**
      * Print the layout constraints.  Useful for debugging.
+     * <p>
+     *  打印布局约束有用于调试
+     * 
      */
 
     /* DEBUG
@@ -887,6 +1213,17 @@ java.io.Serializable {
      *                 " " +
      *                 constraints.ipady);
      *  }
+     * <p>
+     * protected void dumpConstraints(GridBagConstraints constraints){Systemoutprintln("wt"+ constraintsweightx +""+ constraintsweighty +","+。
+     * 
+     *  "box"+ constraintsgridx +""+ constraintsgridy +""+ constraintsgridwidth +""+ constraintsgridheight +
+     * ","+。
+     * 
+     *  "min"+ constraintsminWidth +""+ constraintsminHeight +","+
+     * 
+     *  "pad"+ constraintsinsetsbottom +""+ constraintsinsetsleft +""+ constraintsinsetsright +""+ constrain
+     * tsinsetstop +""+ constraintsipadx +""+ constraintsipady); }}。
+     * 
      */
 
     /**
@@ -906,6 +1243,18 @@ java.io.Serializable {
      * This method should only be used internally by
      * <code>GridBagLayout</code>.
      *
+     * <p>
+     *  在当前集合的托管子项中填充<code> GridBagLayoutInfo </code>的实例这需要三次通过子集：
+     * 
+     * <ol>
+     * <li>找出布局网格的尺寸<li>确定组件占用的单元格<li>在行/列之间分配权重和最小尺寸
+     * </ol>
+     * 
+     *  这也缓存了所有孩子的minsizes,当他们第一次遇到(因此后续循环不需要再询问)
+     * <p>
+     *  此方法应仅由<code> GridBagLayout </code>在内部使用
+     * 
+     * 
      * @param parent  the layout container
      * @param sizeflag either <code>PREFERREDSIZE</code> or
      *   <code>MINSIZE</code>
@@ -920,6 +1269,10 @@ java.io.Serializable {
      * Calculate maximum array sizes to allocate arrays without ensureCapacity
      * we may use preCalculated sizes in whole class because of upper estimation of
      * maximumArrayXIndex and maximumArrayYIndex.
+     * <p>
+     *  计算最大数组大小以分配没有ensureCapacity的数组,我们可以在整个类中使用preCalculated大小,因为上面估计的maximumArrayXIndex和maximumArrayYInd
+     * ex。
+     * 
      */
 
     private long[]  preInitMaximumArraySizes(Container parent){
@@ -971,6 +1324,9 @@ java.io.Serializable {
         // Must specify index++ to allocate well-working arrays.
         /* fix for 4623196.
          * now return long array instead of Point
+         * <p>
+         *  现在返回long数组而不是Point
+         * 
          */
         returnArray[0] = preMaximumArrayXIndex;
         returnArray[1] = preMaximumArrayYIndex;
@@ -984,6 +1340,10 @@ java.io.Serializable {
      * This method is the same as <code>getLayoutInfo</code>;
      * refer to <code>getLayoutInfo</code> for details on parameters
      * and return value.
+     * <p>
+     * 此方法已过时,仅供向后兼容;新代码应该调用{@link #getLayoutInfo(javaawtContainer,int)getLayoutInfo},而不是这个方法与<code> getLayo
+     * utInfo </code>相同;有关参数和返回值的详细信息,请参阅<code> getLayoutInfo </code>。
+     * 
      */
     protected GridBagLayoutInfo GetLayoutInfo(Container parent, int sizeflag) {
         synchronized (parent.getTreeLock()) {
@@ -1018,6 +1378,11 @@ java.io.Serializable {
              *
              * Figure out the dimensions of the layout grid (use a value of 1 for
              * zero or negative widths and heights).
+             * <p>
+             *  通过#1
+             * 
+             *  计算出布局网格的尺寸(对于零或负宽度和高度,使用值为1)
+             * 
              */
 
             layoutWidth = layoutHeight = 0;
@@ -1030,6 +1395,10 @@ java.io.Serializable {
              * overflow (EMPIRICMULTIPLIER*gridSize might be more then Integer.MAX_VALUE).
              * We need to detect this situation and try to create a
              * grid with Integer.MAX_VALUE size instead.
+             * <p>
+             *  如果用户尝试创建一个非常大的网格,我们可以得到NegativeArraySizeException因为整数值溢出(EMPIRICMULTIPLIER * gridSize可能更多然后IntegerMA
+             * X_VALUE)我们需要检测这种情况,并尝试创建一个具有IntegerMAX_VALUE大小的网格。
+             * 
              */
             maximumArrayXIndex = (EMPIRICMULTIPLIER * arraySizes[0] > Integer.MAX_VALUE )? Integer.MAX_VALUE : EMPIRICMULTIPLIER*(int)arraySizes[0];
             maximumArrayYIndex = (EMPIRICMULTIPLIER * arraySizes[1] > Integer.MAX_VALUE )? Integer.MAX_VALUE : EMPIRICMULTIPLIER*(int)arraySizes[1];
@@ -1091,6 +1460,9 @@ java.io.Serializable {
 
                 /* Adjust the grid width and height
                  *  fix for 5005945: unneccessary loops removed
+                 * <p>
+                 *  修复5005945：删除了不必要的循环
+                 * 
                  */
                 px = curX + curWidth;
                 if (layoutWidth < px) {
@@ -1122,6 +1494,8 @@ java.io.Serializable {
                 }
 
                 /* Zero width and height must mean that this is the last item (or
+                /* <p>
+                /* 
                  * else something is wrong). */
                 if (constraints.gridheight == 0 && constraints.gridwidth == 0)
                     curRow = curCol = -1;
@@ -1138,6 +1512,9 @@ java.io.Serializable {
 
             /*
              * Apply minimum row/column dimensions
+             * <p>
+             *  应用最小行/列尺寸
+             * 
              */
             if (columnWidths != null && layoutWidth < columnWidths.length)
                 layoutWidth = columnWidths.length;
@@ -1153,6 +1530,11 @@ java.io.Serializable {
              * Negative values for gridY are filled in with the current y value.
              * Negative or zero values for gridWidth and gridHeight end the current
              *  row or column, respectively.
+             * <p>
+             *  通过#2
+             * 
+             * gridX的负值用当前x值填充gridY的负值用当前y值填充gridWidth和gridHeight的负值或零值分别结束当前行或列
+             * 
              */
 
             curRow = curCol = -1;
@@ -1339,6 +1721,9 @@ java.io.Serializable {
 
             /*
              * Apply minimum row/column dimensions and weights
+             * <p>
+             *  应用最小行/列尺寸和重量
+             * 
              */
             if (columnWidths != null)
                 System.arraycopy(columnWidths, 0, r.minWidth, 0, columnWidths.length);
@@ -1353,6 +1738,11 @@ java.io.Serializable {
              * Pass #3
              *
              * Distribute the minimun widths and weights:
+             * <p>
+             *  通过#3
+             * 
+             *  分发最小宽度和权重：
+             * 
              */
 
             nextSize = Integer.MAX_VALUE;
@@ -1374,6 +1764,9 @@ java.io.Serializable {
                          * is less than the total weight spanned by the width of the cell,
                          * then discard the weight.  Otherwise split the difference
                          * according to the existing weights.
+                         * <p>
+                         *  找出我们是否应该使用这个奴隶的权重如果权重小于由单元格宽度跨越的总权重,则丢弃权重否则根据现有权重分割差异
+                         * 
                          */
 
                         weight_diff = constraints.weightx;
@@ -1400,6 +1793,9 @@ java.io.Serializable {
                          * Then, see if it will fit within the current minWidth values.
                          * If it will not fit, add the difference according to the
                          * weightX array.
+                         * <p>
+                         *  计算minWidth数组值首先,弄清楚当前从节点需要多宽,然后,看它是否适合当前的minWidth值如果它不合适,根据weightX数组添加差值
+                         * 
                          */
 
                         pixels_diff =
@@ -1435,6 +1831,9 @@ java.io.Serializable {
                          * is less than the total weight spanned by the height of the cell,
                          * then discard the weight.  Otherwise split it the difference
                          * according to the existing weights.
+                         * <p>
+                         * 找出我们是否应该使用从属的权重如果权重小于由单元格的高度跨越的总权重,则丢弃权重否则根据现有权重拆分差异
+                         * 
                          */
 
                         weight_diff = constraints.weighty;
@@ -1461,6 +1860,9 @@ java.io.Serializable {
                          * Then, see if it will fit within the current minHeight values.
                          * If it will not fit, add the difference according to the
                          * weightY array.
+                         * <p>
+                         *  计算minHeight数组值首先,弄清楚当前从节点需要多大,然后,看它是否适合当前的minHeight值如果它不合适,根据weightY数组添加差值
+                         * 
                          */
 
                         pixels_diff = -1;
@@ -1545,6 +1947,9 @@ java.io.Serializable {
      * obtained and the {@code constraints} ascent, descent and
      * baseline resize behavior are set from the component; and true is
      * returned. Otherwise false is returned.
+     * <p>
+     *  计算指定组件的基线如果{@code c}沿着其基线放置,那么将获取基线,并从组件中设置{@code constraints}上升,下降和基线调整行为;并返回true返回否则返回false
+     * 
      */
     private boolean calculateBaseline(Component c,
                                       GridBagConstraints constraints,
@@ -1601,6 +2006,10 @@ java.io.Serializable {
      * This method should only be used internally by
      * <code>GridBagLayout</code>.
      *
+     * <p>
+     * 根据约束几何和衬垫将x,y,width和height字段调整为正确的值此方法仅应由<code> GridBagLayout </code>内部使用。
+     * 
+     * 
      * @param constraints the constraints to be applied
      * @param r the <code>Rectangle</code> to be adjusted
      * @since 1.4
@@ -1618,6 +2027,10 @@ java.io.Serializable {
      * This method is the same as <code>adjustForGravity</code>;
      * refer to <code>adjustForGravity</code> for details
      * on parameters.
+     * <p>
+     *  此方法已过时,仅供向后兼容;新代码应该调用{@link #adjustForGravity(javaawtGridBagConstraints,javaawtRectangle)adjustForGravity}
+     * 而不是这个方法与<code> adjustForGravity </code>相同;有关参数的详细信息,请参阅<code> adjustForGravity </code>。
+     * 
      */
     protected void AdjustForGravity(GridBagConstraints constraints,
                                     Rectangle r) {
@@ -1773,6 +2186,10 @@ java.io.Serializable {
     /**
      * Positions on the baseline.
      *
+     * <p>
+     *  基线上的位置
+     * 
+     * 
      * @param cellY the location of the row, does not include insets
      * @param cellHeight the height of the row, does not take into account
      *        insets
@@ -1913,6 +2330,9 @@ java.io.Serializable {
      * Positions the specified component above the baseline. That is
      * the bottom edge of the component will be aligned along the baseline.
      * If the row does not have a baseline, this centers the component.
+     * <p>
+     *  将指定的组件定位在基线上方即组件的底部边缘将沿着基线对齐如果行没有基线,则将组件
+     * 
      */
     private void alignAboveBaseline(GridBagConstraints cons, Rectangle r,
                                     int cellY, int cellHeight) {
@@ -1945,6 +2365,9 @@ java.io.Serializable {
 
     /**
      * Positions below the baseline.
+     * <p>
+     *  基线以下的位置
+     * 
      */
     private void alignBelowBaseline(GridBagConstraints cons, Rectangle r,
                                     int cellY, int cellHeight) {
@@ -1981,6 +2404,10 @@ java.io.Serializable {
      * This method should only be used internally by
      * <code>GridBagLayout</code>.
      *
+     * <p>
+     * 基于来自<code> getLayoutInfo </code>的信息计算出主机的最小大小。此方法应该仅由<code> GridBagLayout </code>
+     * 
+     * 
      * @param parent the layout container
      * @param info the layout info for this parent
      * @return a <code>Dimension</code> object containing the
@@ -1998,6 +2425,10 @@ java.io.Serializable {
      * This method is the same as <code>getMinSize</code>;
      * refer to <code>getMinSize</code> for details on parameters
      * and return value.
+     * <p>
+     *  此方法已过时,仅供向后兼容;新代码应该调用{@link #getMinSize(javaawtContainer,GridBagLayoutInfo)getMinSize},而这个方法与<code> 
+     * getMinSize </code>相同;有关参数和返回值的详细信息,请参阅<code> getMinSize </code>。
+     * 
      */
     protected Dimension GetMinSize(Container parent, GridBagLayoutInfo info) {
         Dimension d = new Dimension();
@@ -2024,6 +2455,10 @@ java.io.Serializable {
      * This method should only be used internally by
      * <code>GridBagLayout</code>.
      *
+     * <p>
+     *  放出网格此方法应仅由<code> GridBagLayout </code>在内部使用
+     * 
+     * 
      * @param parent the layout container
      * @since 1.4
      */
@@ -2038,6 +2473,10 @@ java.io.Serializable {
      * This method is the same as <code>arrangeGrid</code>;
      * refer to <code>arrangeGrid</code> for details on the
      * parameter.
+     * <p>
+     * 此方法已过时,仅供向后兼容;新代码应该调用{@link #arrangeGrid(Container)arrangeGrid},而这个方法与<code> arrangeGrid </code>相同;有关
+     * 参数的详细信息,请参阅<code> arrangeGrid </code>。
+     * 
      */
     protected void ArrangeGrid(Container parent) {
         Component comp;
@@ -2056,6 +2495,9 @@ java.io.Serializable {
         /*
          * If the parent has no slaves anymore, then don't do anything
          * at all:  just leave the parent's size as-is.
+         * <p>
+         *  如果父节点没有奴隶,那么不要做任何事情：只要保留父节点的大小
+         * 
          */
         if (components.length == 0 &&
             (columnWidths == null || columnWidths.length == 0) &&
@@ -2066,6 +2508,9 @@ java.io.Serializable {
         /*
          * Pass #1: scan all the slaves to figure out the total amount
          * of space needed.
+         * <p>
+         *  通过#1：扫描所有从机,找出所需的总空间量
+         * 
          */
 
         info = getLayoutInfo(parent, PREFERREDSIZE);
@@ -2092,12 +2537,20 @@ java.io.Serializable {
          * DumpConstraints(constraints);
          * }
          * System.out.println("minSize " + r.width + " " + r.height);
+         * <p>
+         *  调试
+         * 
+         *  DumpLayoutInfo(info); for(compindex = 0; compindex <componentslength; compindex ++){comp = components [compindex]; if(！compisVisible())continue; constraints = lookupConstraints(comp); DumpConstraints(约束); } Systemoutprintln("minSize"+ rwidth +""+ rheight);。
+         * 
          */
 
         /*
          * If the current dimensions of the window don't match the desired
          * dimensions, then adjust the minWidth and minHeight arrays
          * according to the weights.
+         * <p>
+         * 如果窗口的当前尺寸与所需的尺寸不匹配,则根据权重调整minWidth和minHeight数组
+         * 
          */
 
         diffw = parent.width - r.width;
@@ -2151,11 +2604,19 @@ java.io.Serializable {
          *
          * System.out.println("Re-adjusted:");
          * DumpLayoutInfo(info);
+         * <p>
+         *  调试
+         * 
+         *  Systemoutprintln("重新调整："); DumpLayoutInfo(info);
+         * 
          */
 
         /*
          * Now do the actual layout of the slaves using the layout information
          * that has been collected.
+         * <p>
+         *  现在使用收集的布局信息做从站的实际布局
+         * 
          */
 
         info.startx = diffw/2 + insets.left;
@@ -2215,6 +2676,8 @@ java.io.Serializable {
              * If the window is too small to be interesting then
              * unmap it.  Otherwise configure it and then make sure
              * it's mapped.
+             * <p>
+             *  如果窗口太小,有趣,然后unmap它否则配置它,然后确保它映射
              */
 
             if ((r.width <= 0) || (r.height <= 0)) {

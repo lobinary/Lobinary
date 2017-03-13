@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -77,6 +78,27 @@ import sun.security.x509.*;
  * provide the necessary locking. Multiple threads each manipulating
  * separate objects need not synchronize.
  *
+ * <p>
+ *  用于选择与所有指定条件匹配的{@code X509Certificates}的{@code CertSelector}此类在从{@code CertStore}中选择证书以构建符合PKIX标准的证书路
+ * 径时特别有用。
+ * <p>
+ * 首次构建时,{@code X509CertSelector}没有启用标准,每个{@code get}方法会返回一个默认值({@code null}),或{@code -1}的{@link #getBasicConstraints getBasicConstraints }
+ * 方法)因此,{@link #match match}方法将为任何{@code X509Certificate}返回{@code true}。
+ * 通常,启用多个条件(通过调用{@link #setIssuer setIssuer}或{@link #setKeyUsage setKeyUsage}),然后将{@code X509CertSelector}
+ * 传递给{@link CertStore#getCertificates CertStoregetCertificates}或一些类似的方法。
+ * <p>
+ * 可以启用一些标准(例如,通过调用{@link #setIssuer setIssuer}和{@link #setSerialNumber setSerialNumber}),使得{@code match}
+ * 方法通常唯一匹配单个{@code X509Certificate}我们通常说,因为两个发布CA具有相同的可分辨名称并且每个发出具有相同序列号的证书是可能的。
+ * 其他唯一组合包括发布者,主题,subjectKeyIdentifier和/或subjectPublicKey标准。
+ * <p>
+ *  有关下面提到的X509证书扩展的定义,请参阅<a href=\"http://wwwietforg/rfc/rfc3280txt\"> RFC 3280：Internet X509公钥基础结构证书和C
+ * RL配置文件</a>。
+ * <p>
+ *  <b>并行访问</b>
+ * <p>
+ * 除非另有说明,否则此类中定义的方法不是线程安全的需要并发访问单个对象的多个线程应在它们之间同步并提供必要的锁定多个线程,每个操作单独的对象不需要同步
+ * 
+ * 
  * @see CertSelector
  * @see X509Certificate
  *
@@ -151,6 +173,9 @@ public class X509CertSelector implements CertSelector {
     /**
      * Creates an {@code X509CertSelector}. Initially, no criteria are set
      * so any {@code X509Certificate} will match.
+     * <p>
+     *  创建{@code X509CertSelector}最初,未设置任何条件,因此任何{@code X509Certificate}将匹配
+     * 
      */
     public X509CertSelector() {
         // empty
@@ -167,6 +192,13 @@ public class X509CertSelector implements CertSelector {
      * in conjunction with the certificateEquals criterion, it is usually not
      * practical or necessary.
      *
+     * <p>
+     *  设置certificateEquals标准指定的{@code X509Certificate}必须等于传递给{@code match}方法的{@code X509Certificate}如果{@code null}
+     * ,则不应用此检查。
+     * 
+     * <p>当需要匹配单个证书时,此方法特别有用虽然可以结合certificateEquals标准指定其他条件,但通常不实用或不必要
+     * 
+     * 
      * @param cert the {@code X509Certificate} to match (or
      * {@code null})
      * @see #getCertificate
@@ -181,6 +213,10 @@ public class X509CertSelector implements CertSelector {
      * {@code X509Certificate}. If {@code null}, any certificate
      * serial number will do.
      *
+     * <p>
+     *  设置serialNumber标准指定的序列号必须与{@code X509Certificate}中的证书序列号匹配。如果{@code null},任何证书序列号都会做
+     * 
+     * 
      * @param serial the certificate serial number to match
      *        (or {@code null})
      * @see #getSerialNumber
@@ -195,6 +231,10 @@ public class X509CertSelector implements CertSelector {
      * {@code X509Certificate}. If {@code null}, any issuer
      * distinguished name will do.
      *
+     * <p>
+     *  设置发布者标准指定的可分辨名称必须与{@code X509Certificate}中的发布者可分辨名称匹配。如果{@code null},任何发布者可分辨名称都将
+     * 
+     * 
      * @param issuer a distinguished name as X500Principal
      *                 (or {@code null})
      * @since 1.5
@@ -219,6 +259,15 @@ public class X509CertSelector implements CertSelector {
      * If {@code issuerDN} is not {@code null}, it should contain a
      * distinguished name, in RFC 2253 format.
      *
+     * <p>
+     * <strong>已拒绝</strong>,请使用{@linkplain #setIssuer(X500Principal)}或{@linkplain #setIssuer(byte [])}此方法不应依
+     * 赖,因为它可能无法匹配某些证书,因为在<a href=\"http://wwwietforg/rfc/rfc2253txt\"> RFC 2253 </a>中丢失编码信息字符串形式的某些可分辨名称。
+     * <p>
+     *  设置发布者标准指定的可分辨名称必须与{@code X509Certificate}中的发布者可分辨名称匹配。如果{@code null},任何发布者可分辨名称都将
+     * <p>
+     *  如果{@code issuerDN}不是{@code null},它应该包含一个专有名称,采用RFC 2253格式
+     * 
+     * 
      * @param issuerDN a distinguished name in RFC 2253 format
      *                 (or {@code null})
      * @throws IOException if a parsing error occurs (incorrect form for DN)
@@ -269,6 +318,26 @@ public class X509CertSelector implements CertSelector {
      * Note that the byte array specified here is cloned to protect against
      * subsequent modifications.
      *
+     * <p>
+     * 设置发布者条件指定的可分辨名称必须与{@code X509Certificate}中的发布者可分辨名称匹配。如果指定了{@code null},则禁用发布者条件,并且任何发布者可分辨名称将执行
+     * <p>
+     *  如果{@code issuerDN}不是{@code null},它应该包含单个DER编码的可分辨名称,如X501中定义。
+     * 此结构的ASN1符号如下：<pre> {@ code Name :: = CHOICE {RDNSequence }}。
+     * 
+     *  RDNSequence :: = SEQUENCE OF RelativeDistinguishedName
+     * 
+     *  RelativeDistinguishedName :: = SET SIZE(1 MAX)of AttributeTypeAndValue
+     * 
+     *  AttributeTypeAndValue :: = SEQUENCE {type AttributeType,value AttributeValue}
+     * 
+     *  AttributeType :: = OBJECT IDENTIFIER
+     * 
+     * AttributeValue :: = ANY DEFINED BY AttributeType DirectoryString :: = CHOICE {teletexString TeletexString(SIZE(1MAX)),printableString PrintableString(SIZE(1MAX)),universalString UniversalString(SIZE(1MAX)),utf8String UTF8String ,bmpString BMPString(SIZE(1MAX))}
+     * } </pre>。
+     * <p>
+     *  请注意,此处指定的字节数组被克隆以防止后续修改
+     * 
+     * 
      * @param issuerDN a byte array containing the distinguished name
      *                 in ASN.1 DER encoded form (or {@code null})
      * @throws IOException if an encoding error occurs (incorrect form for DN)
@@ -287,6 +356,10 @@ public class X509CertSelector implements CertSelector {
      * {@code X509Certificate}. If {@code null}, any subject
      * distinguished name will do.
      *
+     * <p>
+     *  设置主题标准指定的可分辨名称必须与{@code X509Certificate}中的主题可分辨名称匹配。如果{@code null},任何主题可分辨名称都将
+     * 
+     * 
      * @param subject a distinguished name as X500Principal
      *                  (or {@code null})
      * @since 1.5
@@ -310,6 +383,15 @@ public class X509CertSelector implements CertSelector {
      * If {@code subjectDN} is not {@code null}, it should contain a
      * distinguished name, in RFC 2253 format.
      *
+     * <p>
+     * <strong>已拒绝</strong>,请使用{@linkplain #setSubject(X500Principal)}或{@linkplain #setSubject(byte [])}此方法不
+     * 应依赖,因为它可能无法匹配某些证书,因为在一些可分辨名称的RFC 2253 String形式中丢失编码信息。
+     * <p>
+     *  设置主题标准指定的可分辨名称必须与{@code X509Certificate}中的主题可分辨名称匹配。如果{@code null},任何主题可分辨名称都将
+     * <p>
+     *  如果{@code subjectDN}不是{@code null},它应该包含一个专有名称,在RFC 2253格式
+     * 
+     * 
      * @param subjectDN a distinguished name in RFC 2253 format
      *                  (or {@code null})
      * @throws IOException if a parsing error occurs (incorrect form for DN)
@@ -333,6 +415,13 @@ public class X509CertSelector implements CertSelector {
      * notation for this structure, see
      * {@link #setIssuer(byte [] issuerDN) setIssuer(byte [] issuerDN)}.
      *
+     * <p>
+     *  设置主题标准指定的可分辨名称必须与{@code X509Certificate}中的主题可分辨名称匹配。如果{@code null},任何主题可分辨名称都将
+     * <p>
+     * 如果{@code subjectDN}不是{@code null},它应该包含单个DER编码的可分辨名称,如X501中定义。
+     * 对于此结构的ASN1表示法,请参阅{@link #setIssuer(byte [] issuerDN)setIssuer byte [] issuerDN)}。
+     * 
+     * 
      * @param subjectDN a byte array containing the distinguished name in
      *                  ASN.1 DER format (or {@code null})
      * @throws IOException if an encoding error occurs (incorrect form for DN)
@@ -374,6 +463,23 @@ public class X509CertSelector implements CertSelector {
      * Note that the byte array supplied here is cloned to protect against
      * subsequent modifications.
      *
+     * <p>
+     *  设置subjectKeyIdentifier标准{@code X509Certificate}必须包含SubjectKeyIdentifier扩展,扩展的内容与指定的标准值匹配如果标准值为{@code null}
+     * ,则不会执行subjectKeyIdentifier检查。
+     * <p>
+     * 如果{@code subjectKeyID}不是{@code null},它应该包含对应于SubjectKeyIdentifier扩展的扩展值(不包括对象标识符,关键性设置和封装OCTET STRING
+     * )的内容的单个DER编码值。
+     * 此结构的ASN1符号如下。
+     * 
+     *  <pre> {@ code SubjectKeyIdentifier :: = KeyIdentifier
+     * 
+     *  KeyIdentifier :: = OCTET STRING} </pre>
+     * <p>
+     *  由于主题键标识符的格式不是由任何标准强制的,因此主体键标识符不会被{@code X509CertSelector}解析。相反,将使用逐字节比较来比较这些值
+     * <p>
+     *  请注意,此处提供的字节数组被克隆以防止后续修改
+     * 
+     * 
      * @param subjectKeyID the subject key identifier (or {@code null})
      * @see #getSubjectKeyIdentifier
      */
@@ -434,6 +540,33 @@ public class X509CertSelector implements CertSelector {
      * Note also that the byte array supplied here is cloned to protect against
      * subsequent modifications.
      *
+     * <p>
+     * 设置authorityKeyIdentifier标准{@code X509Certificate}必须包含扩展值的内容与指定标准值匹配的AuthorityKeyIdentifier扩展如果标准值为{@code null}
+     * ,则不会执行authorityKeyIdentifier检查。
+     * <p>
+     *  如果{@code authorityKeyID}不是{@code null},它应该包含对应于AuthorityKeyIdentifier扩展的扩展值(不包括对象标识符,关键性设置和封装OCTET S
+     * TRING)的内容的单个DER编码值。
+     * 此结构的ASN1符号如下。
+     * 
+     * <pre> {@ code AuthorityKeyIdentifier :: = SEQUENCE {keyIdentifier [0] KeyIdentifier OPTIONAL,authorityCertIssuer [1] GeneralNames OPTIONAL,authorityCertSerialNumber [2] CertificateSerialNumber OPTIONAL}
+     * 。
+     * 
+     *  KeyIdentifier :: = OCTET STRING} </pre>
+     * <p>
+     *  权限键标识符不会被{@code X509CertSelector}解析。相反,这些值将使用逐个字节的比较进行比较
+     * <p>
+     * 当填充{@code AuthorityKeyIdentifier}的{@code keyIdentifier}字段时,该值通常取自颁发者证书的{@code SubjectKeyIdentifier}扩展
+     * 名。
+     * 但是,请注意,{@code X509CertificategeExtensionValue(<SubjectKeyIdentifier Object标识符>)}不能直接用作{@code setAuthorityKeyIdentifier}
+     * 的输入。
+     * 这是因为SubjectKeyIdentifier只包含KeyIdentifier OCTET STRING,而不包含KeyIdentifier,GeneralNames和CertificateSeria
+     * lNumber的SEQUENCE为了使用发布者证书的{@code SubjectKeyIdentifier}扩展的扩展值,需要提取嵌入的{@code KeyIdentifier} OCTET STRIN
+     * G的值,然后在序列中对此OCTET STRING进行DER编码。
+     * 有关详细信息,请参阅SubjectKeyIdentifier,请参阅{@link #setSubjectKeyIdentifier(byte [] subjectKeyID)}。
+     * <p>
+     * 还要注意,此处提供的字节数组被克隆以防止后续修改
+     * 
+     * 
      * @param authorityKeyID the authority key identifier
      *        (or {@code null})
      * @see #getAuthorityKeyIdentifier
@@ -455,6 +588,12 @@ public class X509CertSelector implements CertSelector {
      * Note that the {@code Date} supplied here is cloned to protect
      * against subsequent modifications.
      *
+     * <p>
+     *  设置certificateValid标准指定的日期必须在{@code X509Certificate}的证书有效期内,如果{@code null},将不执行certificateValid检查
+     * <p>
+     *  请注意,此处提供的{@code Date}已克隆,以防后续修改
+     * 
+     * 
      * @param certValid the {@code Date} to check (or {@code null})
      * @see #getCertificateValid
      */
@@ -475,6 +614,12 @@ public class X509CertSelector implements CertSelector {
      * Note that the {@code Date} supplied here is cloned to protect
      * against subsequent modifications.
      *
+     * <p>
+     *  设置privateKeyValid标准指定的日期必须在{@code X509Certificate}的私钥有效期内,如果{@code null},将不进行privateKeyValid检查
+     * <p>
+     *  请注意,此处提供的{@code Date}已克隆,以防后续修改
+     * 
+     * 
      * @param privateKeyValid the {@code Date} to check (or
      *                        {@code null})
      * @see #getPrivateKeyValid
@@ -493,6 +638,11 @@ public class X509CertSelector implements CertSelector {
      * with the specified algorithm. If {@code null}, no
      * subjectPublicKeyAlgID check will be done.
      *
+     * <p>
+     * 设置subjectPublicKeyAlgID标准{@code X509Certificate}必须包含具有指定算法的主体公钥。
+     * 如果{@code null},将不执行subjectPublicKeyAlgID检查。
+     * 
+     * 
      * @param oid The object identifier (OID) of the algorithm to check
      *            for (or {@code null}). An OID is represented by a
      *            set of nonnegative integers separated by periods.
@@ -515,6 +665,10 @@ public class X509CertSelector implements CertSelector {
      * {@code X509Certificate} must contain the specified subject public
      * key. If {@code null}, no subjectPublicKey check will be done.
      *
+     * <p>
+     *  设置subjectPublicKey标准{@code X509Certificate}必须包含指定的主体公钥如果{@code null},则不会执行subjectPublicKey检查
+     * 
+     * 
      * @param key the subject public key to check for (or {@code null})
      * @see #getSubjectPublicKey
      */
@@ -555,6 +709,22 @@ public class X509CertSelector implements CertSelector {
      * Note that the byte array supplied here is cloned to protect against
      * subsequent modifications.
      *
+     * <p>
+     *  设置subjectPublicKey标准{@code X509Certificate}必须包含指定的主体公钥如果{@code null},则不会执行subjectPublicKey检查
+     * <p>
+     *  因为此方法允许将公钥指定为字节数组,所以它可能用于未知的键类型
+     * <p>
+     * 如果{@code key}不是{@code null},它应该包含一个DER编码的SubjectPublicKeyInfo结构,如X509中定义。
+     * 此结构的ASN1符号如下：<pre> {@ code SubjectPublicKeyInfo :: = SEQUENCE {algorithm AlgorithmIdentifier,subjectPublicKey BIT STRING}
+     * 。
+     * 如果{@code key}不是{@code null},它应该包含一个DER编码的SubjectPublicKeyInfo结构,如X509中定义。
+     * 
+     *  AlgorithmIdentifier :: = SEQUENCE {algorithm OBJECT IDENTIFIER,parameters ANY DEFINED BY algorithm OPTIONAL}
+     *   - 包含类型的值 - 注册用于 - 算法对象标识符值} </pre>。
+     * <p>
+     *  请注意,此处提供的字节数组被克隆以防止后续修改
+     * 
+     * 
      * @param key a byte array containing the subject public key in ASN.1 DER
      *            form (or {@code null})
      * @throws IOException if an encoding error occurs (incorrect form for
@@ -580,6 +750,13 @@ public class X509CertSelector implements CertSelector {
      * Note that the boolean array supplied here is cloned to protect against
      * subsequent modifications.
      *
+     * <p>
+     * 设置keyUsage标准{@code X509Certificate}必须允许指定的keyUsage值如果{@code null},将不进行keyUsage检查注意,没有keyUsage扩展的{@code X509Certificate}
+     * 会隐式允许所有keyUsage值。
+     * <p>
+     *  注意,这里提供的布尔数组被克隆以防止后续修改
+     * 
+     * 
      * @param keyUsage a boolean array in the same format as the boolean
      *                 array returned by
      * {@link X509Certificate#getKeyUsage() X509Certificate.getKeyUsage()}.
@@ -605,6 +782,14 @@ public class X509CertSelector implements CertSelector {
      * Note that the {@code Set} is cloned to protect against
      * subsequent modifications.
      *
+     * <p>
+     *  设置extendedKeyUsage标准{@code X509Certificate}必须允许在其扩展密钥使用扩展中指定的密钥用途如果{@code keyPurposeSet}为空或{@code null}
+     * ,则不会进行extendedKeyUsage检查。
+     * 注意{@code X509Certificate }没有extendedKeyUsage扩展隐式允许所有关键用途。
+     * <p>
+     *  请注意,克隆{@code Set}以防止后续修改
+     * 
+     * 
      * @param keyPurposeSet a {@code Set} of key purpose OIDs in string
      * format (or {@code null}). Each OID is represented by a set of
      * nonnegative integers separated by periods.
@@ -639,6 +824,14 @@ public class X509CertSelector implements CertSelector {
      *
      * <p>The matchAllNames flag is {@code true} by default.
      *
+     * <p>
+     * 启用/禁用匹配{@link #setSubjectAlternativeNames setSubjectAlternativeNames}或{@link #addSubjectAlternativeName addSubjectAlternativeName}
+     * 方法中指定的所有subjectAlternativeNames如果启用,{@code X509Certificate}必须包含所有指定的主题备用名称如果禁用, @code X509Certificate
+     * }必须至少包含一个指定的主题备用名称。
+     * 
+     *  <p>默认情况下,matchAllNames标记为{@code true}
+     * 
+     * 
      * @param matchAllNames if {@code true}, the flag is enabled;
      * if {@code false}, the flag is disabled.
      * @see #getMatchAllSubjectAltNames
@@ -690,6 +883,28 @@ public class X509CertSelector implements CertSelector {
      * Note that a deep copy is performed on the {@code Collection} to
      * protect against subsequent modifications.
      *
+     * <p>
+     *  设置subjectAlternativeNames标准{@code X509Certificate}必须包含所有或至少一个指定的subjectAlternativeNames,具体取决于matchAl
+     * lNames标志的值(请参阅{@link #setMatchAllSubjectAltNames setMatchAllSubjectAltNames})。
+     * <p>
+     * 此方法允许调用者使用单个方法调用指定subjectAlternativeNames条件的完整主题备用名称集。指定的值替换subjectAlternativeNames条件的先前值
+     * <p>
+     *  {@code names}参数(如果不是{@code null})是一个{@code集合},每个名称包含一个条目要包含在主题备用名称条件中每个条目是一个{@code List},其第一个条目是一个{@code Integer}
+     * (名称类型,0-8),其第二个条目是一个{@code String}或一个字节数组(名称,字符串或ASN1 DER编码形式)可以有多个名称相同类型如果提供{@code null}作为此参数的值,则不会执
+     * 行subjectAlternativeNames检查。
+     * <p>
+     * {@code Collection}中的每个主题备用名称可以指定为{@code String}或ASN1编码的字节数组有关所使用格式的更多详细信息,请参阅{@link #addSubjectAlternativeName(int type,String name) addSubjectAlternativeName(int type,String name)}
+     * 和{@link #addSubjectAlternativeName(int type,byte [] name)addSubjectAlternativeName。
+     * <p>
+     *  <strong>注意</strong>：对于可分辨名称,请指定字节数组形式,而不是String形式。
+     * 有关详细信息,请参阅{@link #addSubjectAlternativeName(int,String)}中的注释。
+     * <p>
+     * 请注意,{@code names}参数可以包含重复的名称(相同的名称和名称类型),但可能会从{@link #getSubjectAlternativeNames getSubjectAlternativeNames}
+     * 方法返回的{@code Collection}名称中移除。
+     * <p>
+     *  请注意,在{@code集合}上执行深层复制,以防止后续修改
+     * 
+     * 
      * @param names a {@code Collection} of names (or {@code null})
      * @throws IOException if a parsing error occurs
      * @see #getSubjectAlternativeNames
@@ -745,6 +960,22 @@ public class X509CertSelector implements CertSelector {
      * certificates because of a loss of encoding information in the RFC 2253
      * String form of some distinguished names.
      *
+     * <p>
+     *  向subjectAlternativeNames标准添加名称{@code X509Certificate}必须包含所有或至少一个指定的subjectAlternativeNames,具体取决于matc
+     * hAllNames标志的值(请参阅{@link #setMatchAllSubjectAltNames setMatchAllSubjectAltNames})。
+     * <p>
+     * 此方法允许调用者为主题备用名称集添加名称指定的名称将添加到subjectAlternativeNames条件的任何先前值如果指定的名称是重复的,则可以忽略
+     * <p>
+     * 名称以字符串格式提供,<a href=\"http://wwwietforg/rfc/rfc822txt\"> RFC 822 </a>,DNS和URI名称使用这些类型的完善的字符串格式(受限制包括在R
+     * FC 3280中)IPv4地址名称使用点分四进制符号提供OID地址名称表示为以句点分隔的一系列非负整数并且以RFC 2253格式提供目录名称(可分辨名称)未为otherNames定义标准字符串格式, X
+     * 400名称,EDI方名称,IPv6地址名称或任何其他类型的名称。
+     * 它们应使用{@link #addSubjectAlternativeName(int type,byte [] name)addSubjectAlternativeName(int type,byte [] name}
+     * 。
+     * <p>
+     * <strong>注意</strong>：对于可分辨名称,请使用{@linkplain #addSubjectAlternativeName(int,byte [])}此方法不应依赖,因为它可能无法匹配某
+     * 些证书,因为编码信息丢失在RFC 2253 String形式的一些可分辨名称。
+     * 
+     * 
      * @param type the name type (0-8, as specified in
      *             RFC 3280, section 4.2.1.7)
      * @param name the name in string form (not {@code null})
@@ -790,6 +1021,20 @@ public class X509CertSelector implements CertSelector {
      * Note that the byte array supplied here is cloned to protect against
      * subsequent modifications.
      *
+     * <p>
+     *  向subjectAlternativeNames标准添加名称{@code X509Certificate}必须包含所有或至少一个指定的subjectAlternativeNames,具体取决于matc
+     * hAllNames标志的值(请参阅{@link #setMatchAllSubjectAltNames setMatchAllSubjectAltNames})。
+     * <p>
+     * 此方法允许调用者为主题备用名称集添加名称指定的名称将添加到subjectAlternativeNames条件的任何先前值如果指定的名称是重复的,则可以忽略
+     * <p>
+     * 名称作为字节数组提供此字节数组应包含DER编码的名称,因为它将出现在RFC 3280和X509中定义的GeneralName结构中。
+     * 编码的字节数组应只包含名称的编码值,并且不应包括与GeneralName结构中的名称相关联的标记此结构的ASN1定义如下所示<pre> {@ code GeneralName :: = CHOICE {otherName [0] OtherName,rfc822Name [1] IA5String,dNSName [2] IA5String,x400Address [3] ORAddress,directoryName [4] Name,ediPartyName [5] EDIPartyName,uniformResourceIdentifier [ 6] IA5String,iPAddress [7] OCTET STRING,registeredID [8] OBJECT IDENTIFIER}
+     * } </pre>。
+     * 名称作为字节数组提供此字节数组应包含DER编码的名称,因为它将出现在RFC 3280和X509中定义的GeneralName结构中。
+     * <p>
+     * 请注意,此处提供的字节数组被克隆以防止后续修改
+     * 
+     * 
      * @param type the name type (0-8, as listed above)
      * @param name a byte array containing the name in ASN.1 DER encoded form
      * @throws IOException if a parsing error occurs
@@ -805,6 +1050,10 @@ public class X509CertSelector implements CertSelector {
      * subjectAlternativeNames criterion. The {@code X509Certificate}
      * must contain the specified subjectAlternativeName.
      *
+     * <p>
+     *  向subjectAlternativeNames标准添加名称(字符串或字节数组)的私有方法{@code X509Certificate}必须包含指定的subjectAlternativeName
+     * 
+     * 
      * @param type the name type (0-8, as specified in
      *             RFC 3280, section 4.2.1.7)
      * @param name the name in string or byte array form
@@ -834,6 +1083,11 @@ public class X509CertSelector implements CertSelector {
      * Throw an IllegalArgumentException or a ClassCastException
      * if the argument is malformed.
      *
+     * <p>
+     *  解析传递给setSubjectAlternativeNames的表单的参数,返回{@code GeneralNameInterface}的{@code Collection}抛出IllegalArgu
+     * mentException或ClassCastException(如果参数格式不正确)。
+     * 
+     * 
      * @param names a Collection with one entry per name.
      *              Each entry is a {@code List} whose first entry
      *              is an Integer (the name type, 0-8) and whose second
@@ -868,6 +1122,11 @@ public class X509CertSelector implements CertSelector {
      * Throw an {@code IllegalArgumentException} or a
      * {@code ClassCastException} if one of the objects is malformed.
      *
+     * <p>
+     *  比较两个对象的形式传递给setSubjectAlternativeNames(或X509CRLSelectorsetIssuerNames)如果其中一个对象格式不正确,则抛出{@code IllegalArgumentException}
+     * 或{@code ClassCastException}。
+     * 
+     * 
      * @param object1 a Collection containing the first object to compare
      * @param object2 a Collection containing the second object to compare
      * @return true if the objects are equal, false otherwise
@@ -889,6 +1148,11 @@ public class X509CertSelector implements CertSelector {
      * with the String constructors for names other than Distinguished
      * Names.
      *
+     * <p>
+     * 从名称类型(0-8)中创建{@code GeneralNameInterface},可以是包含ASN1 DER编码名称或字符串形式的字节数组的对象除了X509可分辨名称,字符串形式name不能是对现有G
+     * eneralNameInterface实现类调用toString的结果toString的输出与用于除了可分辨名称之外的名称的String构造函数不兼容。
+     * 
+     * 
      * @param type name type (0-8)
      * @param name name as ASN.1 Der-encoded byte array or String
      * @return a GeneralNameInterface name
@@ -1027,6 +1291,27 @@ public class X509CertSelector implements CertSelector {
      * Note that the byte array supplied here is cloned to protect against
      * subsequent modifications.
      *
+     * <p>
+     *  设置名称限制条件{@code X509Certificate}必须有符合指定名称约束的主题和主题备用名称
+     * <p>
+     * 名称约束被指定为字节数组此字节数组应包含名称约束的DER编码形式,因为它们将出现在RFC 3280和X509中定义的NameConstraints结构中。此结构的ASN1定义如下所示
+     * 
+     *  <pre> {@ code NameConstraints :: = SEQUENCE {permittedSubtrees [0] GeneralSubtrees OPTIONAL,excludedSubtrees [1] GeneralSubtrees OPTIONAL}
+     * 。
+     * 
+     *  GeneralSubtrees :: =序列大小(1MAX)的GeneralSubtree
+     * 
+     *  GeneralSubtree :: = SEQUENCE {base GeneralName,minimum [0] BaseDistance DEFAULT 0,maximum [1] BaseDistance OPTIONAL}
+     * 。
+     * 
+     *  BaseDistance :: = INTEGER(0MAX)
+     * 
+     * GeneralName :: = CHOICE {otherName [0] OtherName,rfc822Name [1] IA5String,dNSName [2] IA5String,x400Address [3] ORAddress,directoryName [4] Name,ediPartyName [5] EDIPartyName,uniformResourceIdentifier [6] IA5String,iPAddress [ 7] OCTET STRING,registeredID [8] OBJECT IDENTIFIER}
+     * } </pre>。
+     * <p>
+     *  请注意,此处提供的字节数组被克隆以防止后续修改
+     * 
+     * 
      * @param bytes a byte array containing the ASN.1 DER encoding of
      *              a NameConstraints extension to be used for checking
      *              name constraints. Only the value of the extension is
@@ -1058,6 +1343,13 @@ public class X509CertSelector implements CertSelector {
      * built, any candidate certificate must have a maxPathLen value greater
      * than or equal to the number of certificates in the partial path.
      *
+     * <p>
+     * 设置基本约束约束如果值大于或等于零,{@code X509Certificates}必须包含一个具有至少此值的pathLen的basicConstraints扩展如果值为-2,则只接受终端实体证书如果值
+     * 为-1,则不进行检查。
+     * <p>
+     *  在向前构建认证路径(从目标到信任锚点)时,此约束非常有用如果已构建部分路径,则任何候选证书必须具有大于或等于部分路径中的证书数量的maxPathLen值
+     * 
+     * 
      * @param minMaxPathLen the value for the basic constraints constraint
      * @throws IllegalArgumentException if the value is less than -2
      * @see #getBasicConstraints
@@ -1080,6 +1372,13 @@ public class X509CertSelector implements CertSelector {
      * Note that the {@code Set} is cloned to protect against
      * subsequent modifications.
      *
+     * <p>
+     * 设置策略约束{@code X509Certificate}必须在其证书策略扩展中至少包含一个指定的策略如果{@code certPolicySet}为空,则{@code X509Certificate}
+     * 必须至少在其证书中包含一些指定的策略策略扩展如果{@code certPolicySet}是{@code null},则不会执行策略检查。
+     * <p>
+     *  请注意,克隆{@code Set}以防止后续修改
+     * 
+     * 
      * @param certPolicySet a {@code Set} of certificate policy OIDs in
      *                      string format (or {@code null}). Each OID is
      *                      represented by a set of nonnegative integers
@@ -1160,6 +1459,29 @@ public class X509CertSelector implements CertSelector {
      * Note that a deep copy is performed on the {@code Collection} to
      * protect against subsequent modifications.
      *
+     * <p>
+     *  设置pathToNames条件{@code X509Certificate}不能包含禁止构建指定名称的路径的名称约束
+     * <p>
+     * 此方法允许调用者使用一个方法调用指定{@code X509Certificates}的名称约束必须允许的完整名称集。指定的值替换pathToNames条件的先前值
+     * <p>
+     *  在向前构建认证路径(从目标到信任锚点)时,此约束很有用。如果已构建部分路径,则任何候选证书必须不包括将禁止构建到部分路径中任何名称的路径的名称约束
+     * <p>
+     * {@code names}参数(如果不是{@code null})是一个{@code集合},每个名称包含一个条目包含在pathToNames标准中每个条目是一个{@code List},其第一个条目是{@code Integer}
+     * (名称类型,0-8),其第二个条目是{@code String}或字节数组(名称,字符串或ASN1 DER编码形式)。
+     * 可以有多个名称相同类型如果提供{@code null}作为此参数的值,则不会执行pathToNames检查。
+     * <p>
+     * {@code Collection}中的每个名称都可以指定为{@code String}或ASN1编码的字节数组。
+     * 有关所用格式的更多详细信息,请参阅{@link #addPathToName(int type,String name)addPathToName int type,String name)}和{@link #addPathToName(int type,byte [] name)addPathToName(int type,byte [] name)。
+     * {@code Collection}中的每个名称都可以指定为{@code String}或ASN1编码的字节数组。
+     * <p>
+     *  <strong>注意</strong>：对于可分辨名称,请指定字节数组形式,而不是String形式。有关详细信息,请参阅{@link #addPathToName(int,String)}中的注释
+     * <p>
+     *  请注意,{@code names}参数可能包含重复的名称(相同的名称和名称类型),但可能会从{@link #getPathToNames getPathToNames}方法返回的{@code Collection}
+     * 名称中移除。
+     * <p>
+     * 请注意,在{@code集合}上执行深层复制,以防止后续修改
+     * 
+     * 
      * @param names a {@code Collection} with one entry per name
      *              (or {@code null})
      * @throws IOException if a parsing error occurs
@@ -1213,6 +1535,19 @@ public class X509CertSelector implements CertSelector {
      * certificates because of a loss of encoding information in the RFC 2253
      * String form of some distinguished names.
      *
+     * <p>
+     *  向pathToNames条件添加名称{@code X509Certificate}不能包含将禁止构建指定名称的路径的名称约束
+     * <p>
+     *  此方法允许调用者为{@code X509Certificates}的名称约束必须允许的名称集添加名称。将指定的名称添加到pathToNames条件的任何先前值如果名称是重复的,则可能是忽略
+     * <p>
+     * 名称以字符串格式提供RFC 822,DNS和URI名称使用这些类型的良好建立的字符串格式(遵守RFC 3280中包含的限制)IPv4地址名称使用点分四进制符号提供OID地址名称表示为以句点分隔的一系列非
+     * 负整数和以RFC 2253格式提供的目录名(专有名称)未为其他名称,X400名称,EDI方名称,IPv6地址名称或任何其他类型的名称定义标准字符串格式。
+     * 使用{@link #addPathToName(int type,byte [] name)addPathToName(int type,byte [] name}}方法指定。
+     * <p>
+     * <strong>注意</strong>：对于可分辨名称,请使用{@linkplain #addPathToName(int,byte [])}此方法不应依赖,因为它可能无法匹配某些证书,因为编码信息丢失
+     * 在RFC 2253 String形式的一些可分辨名称。
+     * 
+     * 
      * @param type the name type (0-8, as specified in
      *             RFC 3280, section 4.2.1.7)
      * @param name the name in string form
@@ -1242,6 +1577,19 @@ public class X509CertSelector implements CertSelector {
      * Note that the byte array supplied here is cloned to protect against
      * subsequent modifications.
      *
+     * <p>
+     *  向pathToNames条件添加名称{@code X509Certificate}不能包含将禁止构建指定名称的路径的名称约束
+     * <p>
+     *  此方法允许调用者为{@code X509Certificates}的名称约束必须允许的名称集添加名称。将指定的名称添加到pathToNames条件的任何先前值如果名称是重复的,则可能是忽略
+     * <p>
+     * 名称作为字节数组提供此字节数组应包含DER编码的名称,因为它将出现在RFC 3280和X509中定义的GeneralName结构中。
+     * 此结构的ASN1定义出现在{@link #addSubjectAlternativeName(int type,byte [] name)addSubjectAlternativeName(int type,byte [] name)}
+     * 。
+     * 名称作为字节数组提供此字节数组应包含DER编码的名称,因为它将出现在RFC 3280和X509中定义的GeneralName结构中。
+     * <p>
+     *  请注意,此处提供的字节数组被克隆以防止后续修改
+     * 
+     * 
      * @param type the name type (0-8, as specified in
      *             RFC 3280, section 4.2.1.7)
      * @param name a byte array containing the name in ASN.1 DER encoded form
@@ -1257,6 +1605,10 @@ public class X509CertSelector implements CertSelector {
      * pathToNames criterion. The {@code X509Certificate} must contain
      * the specified pathToName.
      *
+     * <p>
+     *  向pathToNames条件添加名称(字符串或字节数组)的私有方法{@code X509Certificate}必须包含指定的pathToName
+     * 
+     * 
      * @param type the name type (0-8, as specified in
      *             RFC 3280, section 4.2.1.7)
      * @param name the name in string or byte array form
@@ -1283,6 +1635,11 @@ public class X509CertSelector implements CertSelector {
      * {@code X509Certificate} passed to the {@code match} method.
      * If {@code null}, this check is not applied.
      *
+     * <p>
+     * 返回certificateEquals标准指定的{@code X509Certificate}必须等于传递给{@code match}方法的{@code X509Certificate}如果{@code null}
+     * ,则不应用此检查。
+     * 
+     * 
      * @return the {@code X509Certificate} to match (or {@code null})
      * @see #setCertificate
      */
@@ -1296,6 +1653,10 @@ public class X509CertSelector implements CertSelector {
      * {@code X509Certificate}. If {@code null}, any certificate
      * serial number will do.
      *
+     * <p>
+     *  返回serialNumber标准指定的序列号必须与{@code X509Certificate}中的证书序列号匹配。如果{@code null},任何证书序列号都将执行
+     * 
+     * 
      * @return the certificate serial number to match
      *                (or {@code null})
      * @see #setSerialNumber
@@ -1310,6 +1671,11 @@ public class X509CertSelector implements CertSelector {
      * {@code X509Certificate}. If {@code null}, the issuer criterion
      * is disabled and any issuer distinguished name will do.
      *
+     * <p>
+     *  以{@code X500Principal}返回发布者条件此可分辨名称必须与{@code X509Certificate}中的发布者可分辨名称匹配。
+     * 如果{@code null},发布者条件被禁用,任何发布者可分辨名称。
+     * 
+     * 
      * @return the required issuer distinguished name as X500Principal
      *         (or {@code null})
      * @since 1.5
@@ -1333,6 +1699,16 @@ public class X509CertSelector implements CertSelector {
      * If the value returned is not {@code null}, it is a
      * distinguished name, in RFC 2253 format.
      *
+     * <p>
+     * <strong>已拒绝</strong>,请改用{@linkplain #getIssuer()}或{@linkplain #getIssuerAsBytes()}此方法不应依赖,因为它可能无法匹配某些
+     * 证书,因为编码信息丢失在RFC 2253 String形式的一些可分辨名称。
+     * <p>
+     *  以{@code String}返回发布者条件此可分辨名称必须与{@code X509Certificate}中的发布者可分辨名称匹配。
+     * 如果{@code null},发布者条件被禁用,任何发布者可分辨名称将执行。
+     * <p>
+     *  如果返回的值不是{@code null},它是一个专有名称,在RFC 2253格式
+     * 
+     * 
      * @return the required issuer distinguished name in RFC 2253 format
      *         (or {@code null})
      */
@@ -1355,6 +1731,15 @@ public class X509CertSelector implements CertSelector {
      * Note that the byte array returned is cloned to protect against
      * subsequent modifications.
      *
+     * <p>
+     * 以字节数组的形式返回发布者条件该可分辨名称必须与{@code X509Certificate}中的发布者可分辨名称匹配。如果{@code null},发布者条件被禁用,任何发布者可分辨名称
+     * <p>
+     *  如果返回的值不是{@code null},它是一个包含单个DER编码的可分辨名称的字节数组,如X501中所定义。
+     * 此结构的ASN1符号在{@link #setIssuer(byte [] issuerDN)setIssuer(byte [] issuerDN)}。
+     * <p>
+     *  注意,返回的字节数组被克隆以防止后续修改
+     * 
+     * 
      * @return a byte array containing the required issuer distinguished name
      *         in ASN.1 DER format (or {@code null})
      * @throws IOException if an encoding error occurs
@@ -1369,6 +1754,11 @@ public class X509CertSelector implements CertSelector {
      * {@code X509Certificate}. If {@code null}, the subject criterion
      * is disabled and any subject distinguished name will do.
      *
+     * <p>
+     * 以{@code X500Principal}返回主题标准此可分辨名称必须与{@code X509Certificate}中的主题可分辨名称匹配。
+     * 如果{@code null},主题标准被禁用,任何主题可分辨名称将会。
+     * 
+     * 
      * @return the required subject distinguished name as X500Principal
      *         (or {@code null})
      * @since 1.5
@@ -1392,6 +1782,16 @@ public class X509CertSelector implements CertSelector {
      * If the value returned is not {@code null}, it is a
      * distinguished name, in RFC 2253 format.
      *
+     * <p>
+     *  <strong>已拒绝</strong>,请改用{@linkplain #getSubject()}或{@linkplain #getSubjectAsBytes()}此方法不应依赖,因为它可能无法匹
+     * 配某些证书,因为编码信息丢失在RFC 2253 String形式的一些可分辨名称。
+     * <p>
+     *  以{@code String}返回主题标准此可分辨名称必须与{@code X509Certificate}中的主题可分辨名称匹配。
+     * 如果{@code null},主题条件被禁用,任何主题可分辨名称将会。
+     * <p>
+     * 如果返回的值不是{@code null},它是一个专有名称,在RFC 2253格式
+     * 
+     * 
      * @return the required subject distinguished name in RFC 2253 format
      *         (or {@code null})
      */
@@ -1414,6 +1814,15 @@ public class X509CertSelector implements CertSelector {
      * Note that the byte array returned is cloned to protect against
      * subsequent modifications.
      *
+     * <p>
+     *  以字节数组返回主题标准此可分辨名称必须与{@code X509Certificate}中的主题可分辨名称匹配。如果{@code null},主题标准被禁用,任何主题可分辨名称
+     * <p>
+     *  如果返回的值不是{@code null},它是一个包含单个DER编码的可分辨名称的字节数组,如X501中所定义。
+     * 此结构的ASN1符号在{@link #setSubject(byte [] subjectDN)setSubject(byte [] subjectDN)}。
+     * <p>
+     *  注意,返回的字节数组被克隆以防止后续修改
+     * 
+     * 
      * @return a byte array containing the required subject distinguished name
      *         in ASN.1 DER format (or {@code null})
      * @throws IOException if an encoding error occurs
@@ -1431,6 +1840,13 @@ public class X509CertSelector implements CertSelector {
      * Note that the byte array returned is cloned to protect against
      * subsequent modifications.
      *
+     * <p>
+     * 返回subjectKeyIdentifier标准{@code X509Certificate}必须包含具有指定值的SubjectKeyIdentifier扩展如果{@code null},将不会执行su
+     * bjectKeyIdentifier检查。
+     * <p>
+     *  注意,返回的字节数组被克隆以防止后续修改
+     * 
+     * 
      * @return the key identifier (or {@code null})
      * @see #setSubjectKeyIdentifier
      */
@@ -1450,6 +1866,13 @@ public class X509CertSelector implements CertSelector {
      * Note that the byte array returned is cloned to protect against
      * subsequent modifications.
      *
+     * <p>
+     *  返回authorityKeyIdentifier标准{@code X509Certificate}必须包含具有指定值的AuthorityKeyIdentifier扩展如果{@code null},将不
+     * 执行authorityKeyIdentifier检查。
+     * <p>
+     *  注意,返回的字节数组被克隆以防止后续修改
+     * 
+     * 
      * @return the key identifier (or {@code null})
      * @see #setAuthorityKeyIdentifier
      */
@@ -1469,6 +1892,12 @@ public class X509CertSelector implements CertSelector {
      * Note that the {@code Date} returned is cloned to protect against
      * subsequent modifications.
      *
+     * <p>
+     *  返回certificateValid标准指定的日期必须在{@code X509Certificate}的证书有效期内。如果{@code null},将不执行certificateValid检查
+     * <p>
+     * 请注意,所返回的{@code Date}已克隆,以防止后续修改
+     * 
+     * 
      * @return the {@code Date} to check (or {@code null})
      * @see #setCertificateValid
      */
@@ -1488,6 +1917,12 @@ public class X509CertSelector implements CertSelector {
      * Note that the {@code Date} returned is cloned to protect against
      * subsequent modifications.
      *
+     * <p>
+     *  返回privateKeyValid标准指定的日期必须在{@code X509Certificate}的私钥有效期内。如果{@code null},将不进行privateKeyValid检查
+     * <p>
+     *  请注意,所返回的{@code Date}已克隆,以防止后续修改
+     * 
+     * 
      * @return the {@code Date} to check (or {@code null})
      * @see #setPrivateKeyValid
      */
@@ -1504,6 +1939,11 @@ public class X509CertSelector implements CertSelector {
      * with the specified algorithm. If {@code null}, no
      * subjectPublicKeyAlgID check will be done.
      *
+     * <p>
+     *  返回subjectPublicKeyAlgID标准{@code X509Certificate}必须包含具有指定算法的主体公钥。
+     * 如果{@code null},将不执行subjectPublicKeyAlgID检查。
+     * 
+     * 
      * @return the object identifier (OID) of the signature algorithm to check
      *         for (or {@code null}). An OID is represented by a set of
      *         nonnegative integers separated by periods.
@@ -1521,6 +1961,10 @@ public class X509CertSelector implements CertSelector {
      * {@code X509Certificate} must contain the specified subject
      * public key. If {@code null}, no subjectPublicKey check will be done.
      *
+     * <p>
+     *  返回subjectPublicKey标准{@code X509Certificate}必须包含指定的主体公钥如果{@code null},则不会执行subjectPublicKey检查
+     * 
+     * 
      * @return the subject public key to check for (or {@code null})
      * @see #setSubjectPublicKey
      */
@@ -1536,6 +1980,12 @@ public class X509CertSelector implements CertSelector {
      * Note that the boolean array returned is cloned to protect against
      * subsequent modifications.
      *
+     * <p>
+     * 返回keyUsage标准{@code X509Certificate}必须允许指定的keyUsage值如果为null,则不会执行keyUsage检查
+     * <p>
+     *  注意,返回的布尔数组被克隆以防止后续修改
+     * 
+     * 
      * @return a boolean array in the same format as the boolean
      *                 array returned by
      * {@link X509Certificate#getKeyUsage() X509Certificate.getKeyUsage()}.
@@ -1557,6 +2007,12 @@ public class X509CertSelector implements CertSelector {
      * {@code X509Certificate} that has no extendedKeyUsage extension
      * implicitly allows all key purposes.
      *
+     * <p>
+     *  返回extendedKeyUsage标准{@code X509Certificate}必须在其扩展键使用扩展中允许指定的键用途如果返回的{@code keyPurposeSet}为空或{@code null}
+     * ,则不会进行extendedKeyUsage检查。
+     * 注意,{@代码X509Certificate}没有extendedKeyUsage扩展隐式允许所有关键目的。
+     * 
+     * 
      * @return an immutable {@code Set} of key purpose OIDs in string
      * format (or {@code null})
      * @see #setExtendedKeyUsage
@@ -1576,6 +2032,12 @@ public class X509CertSelector implements CertSelector {
      * {@code X509Certificate} must contain at least one of the
      * specified subject alternative names.
      *
+     * <p>
+     * 指示{@code X509Certificate}是否必须包含{@link #setSubjectAlternativeNames setSubjectAlternativeNames}或{@link #addSubjectAlternativeName addSubjectAlternativeName}
+     * 方法中指定的所有或至少一个subjectAlternativeNames如果{@code true},{@code X509Certificate}必须包含所有指定的主题备用名称如果{@code false}
+     * ,{@code X509Certificate}必须至少包含一个指定的主题备用名称。
+     * 
+     * 
      * @return {@code true} if the flag is enabled;
      * {@code false} if the flag is disabled. The flag is
      * {@code true} by default.
@@ -1615,6 +2077,21 @@ public class X509CertSelector implements CertSelector {
      * Note that a deep copy is performed on the {@code Collection} to
      * protect against subsequent modifications.
      *
+     * <p>
+     * 返回subjectAlternativeNames标准的副本{@code X509Certificate}必须包含所有或至少一个指定的subjectAlternativeNames,具体取决于match
+     * AllNames标志的值(请参阅{@link #getMatchAllSubjectAltNames getMatchAllSubjectAltNames})如果返回的值为{@代码null},将不执行s
+     * ubjectAlternativeNames检查。
+     * <p>
+     * 如果返回的值不是{@code null},它是一个{@code集合},每个名称包含一个条目要包括在主题替代名称条件中每个条目是一个{@code List},其第一个条目是{ @code Integer}
+     * (名称类型,0-8),其第二个条目是{@code String}或字节数组(名称,字符串或ASN1 DER编码形式)可以有多个名称type请注意,返回的{@code Collection}可能包含重复的
+     * 名称(相同的名称和名称类型)。
+     * <p>
+     * {@code Collection}中的每个主题备用名称可以指定为{@code String}或ASN1编码的字节数组有关所使用格式的更多详细信息,请参阅{@link #addSubjectAlternativeName(int type,String name) addSubjectAlternativeName(int type,String name)}
+     * 和{@link #addSubjectAlternativeName(int type,byte [] name)addSubjectAlternativeName。
+     * <p>
+     *  请注意,在{@code集合}上执行深层复制,以防止后续修改
+     * 
+     * 
      * @return a {@code Collection} of names (or {@code null})
      * @see #setSubjectAlternativeNames
      */
@@ -1635,6 +2112,13 @@ public class X509CertSelector implements CertSelector {
      * method should be used when the object being
      * cloned has already been checked, so there should never be any exceptions.
      *
+     * <p>
+     *  克隆传递给setSubjectAlternativeNames和setPathToNames的表单对象如果参数格式不正确,则抛出{@code RuntimeException}
+     * <p>
+     * 此方法包装cloneAndCheckNames,将任何{@code IOException}更改为{@code RuntimeException}当已克隆的对象已被检查时,应使用此方法,因此不应有任何异
+     * 常。
+     * 
+     * 
      * @param names a {@code Collection} with one entry per name.
      *              Each entry is a {@code List} whose first entry
      *              is an Integer (the name type, 0-8) and whose second
@@ -1659,6 +2143,10 @@ public class X509CertSelector implements CertSelector {
      * setSubjectAlternativeNames and setPathToNames.
      * Throw an {@code IOException} if the argument is malformed.
      *
+     * <p>
+     *  克隆并检查传递给setSubjectAlternativeNames和setPathToNames的表单的参数如果参数格式不正确,则抛出{@code IOException}
+     * 
+     * 
      * @param names a {@code Collection} with one entry per name.
      *              Each entry is a {@code List} whose first entry
      *              is an Integer (the name type, 0-8) and whose second
@@ -1723,6 +2211,15 @@ public class X509CertSelector implements CertSelector {
      * Note that the byte array returned is cloned to protect against
      * subsequent modifications.
      *
+     * <p>
+     *  返回名称限制条件{@code X509Certificate}必须具有符合指定名称约束的主题和主题备用名称
+     * <p>
+     * 名称约束作为字节数组返回此字节数组包含名称约束的DER编码形式,因为它们将出现在RFC 3280和X509中定义的NameConstraints结构中。
+     * 此结构的ASN1符号在{@ link #setNameConstraints(byte [] bytes)setNameConstraints(byte [] bytes)}。
+     * <p>
+     *  注意,返回的字节数组被克隆以防止后续修改
+     * 
+     * 
      * @return a byte array containing the ASN.1 DER encoding of
      *         a NameConstraints extension used for checking name constraints.
      *         {@code null} if no name constraints check will be performed.
@@ -1743,6 +2240,11 @@ public class X509CertSelector implements CertSelector {
      * If the value is -2, only end-entity certificates are accepted. If
      * the value is -1, no basicConstraints check is done.
      *
+     * <p>
+     *  返回基本约束约束如果值大于或等于零,则{@code X509Certificates}必须包含一个具有至少此值的pathLen的basicConstraints扩展如果值为-2,则只接受端实体证书。
+     * 该值为-1,没有进行basicConstraints检查。
+     * 
+     * 
      * @return the value for the basic constraints constraint
      * @see #setBasicConstraints
      */
@@ -1758,6 +2260,11 @@ public class X509CertSelector implements CertSelector {
      * in its certificate policies extension. If the {@code Set} returned is
      * {@code null}, no policy check will be performed.
      *
+     * <p>
+     * 返回策略标准{@code X509Certificate}必须在其证书策略扩展中包含至少一个指定的策略如果返回的{@code Set}为空,那么{@code X509Certificate}必须至少包含
+     * 一些指定的策略其证书策略扩展如果返回的{@code Set}是{@code null},则不会执行策略检查。
+     * 
+     * 
      * @return an immutable {@code Set} of certificate policy OIDs in
      *         string format (or {@code null})
      * @see #setPolicy
@@ -1794,6 +2301,21 @@ public class X509CertSelector implements CertSelector {
      * Note that a deep copy is performed on the {@code Collection} to
      * protect against subsequent modifications.
      *
+     * <p>
+     *  返回pathToNames条件的副本{@code X509Certificate}不得包含将禁止构建指定名称的路径的名称约束如果返回的值为{@code null},则不会执行pathToNames检查
+     * 。
+     * <p>
+     * 如果返回的值不是{@code null},它是一个{@code集合},每个名称的一个条目要包括在pathToNames标准中每个条目是一个{@code List},其第一个条目是{@code Integer}
+     * (名称类型,0-8),其第二个条目是{@code String}或字节数组(名称,字符串或ASN1 DER编码形式)可以有多个相同类型的名称注返回的{@code Collection}可能包含重复的名称
+     * (相同的名称和名称类型)。
+     * <p>
+     * {@code Collection}中的每个名称都可以指定为{@code String}或ASN1编码的字节数组。
+     * 有关所用格式的更多详细信息,请参阅{@link #addPathToName(int type,String name)addPathToName int type,String name)}和{@link #addPathToName(int type,byte [] name)addPathToName(int type,byte [] name)。
+     * {@code Collection}中的每个名称都可以指定为{@code String}或ASN1编码的字节数组。
+     * <p>
+     *  请注意,在{@code集合}上执行深层复制,以防止后续修改
+     * 
+     * 
      * @return a {@code Collection} of names (or {@code null})
      * @see #setPathToNames
      */
@@ -1807,6 +2329,10 @@ public class X509CertSelector implements CertSelector {
     /**
      * Return a printable representation of the {@code CertSelector}.
      *
+     * <p>
+     *  返回{@code CertSelector}的可打印表示
+     * 
+     * 
      * @return a {@code String} describing the contents of the
      *         {@code CertSelector}
      */
@@ -1887,6 +2413,9 @@ public class X509CertSelector implements CertSelector {
     // (without calling the superclass)
     /**
      * Returns a printable representation of the KeyUsage.
+     * <p>
+     *  返回KeyUsage的可打印表示
+     * 
      */
     private static String keyUsageToString(boolean[] k) {
         String s = "KeyUsage [\n";
@@ -1930,6 +2459,10 @@ public class X509CertSelector implements CertSelector {
      * Throw an {@code IOException} if the extension byte value is
      * malformed.
      *
+     * <p>
+     *  返回给定任何X509Certificate和扩展名的扩展对象oid如果扩展字节值格式不正确,则抛出{@code IOException}
+     * 
+     * 
      * @param cert a {@code X509Certificate}
      * @param extId an {@code integer} which specifies the extension index.
      * Currently, the supported extensions are as follows:
@@ -1992,6 +2525,10 @@ public class X509CertSelector implements CertSelector {
     /**
      * Decides whether a {@code Certificate} should be selected.
      *
+     * <p>
+     *  决定是否应选择{@code Certificate}
+     * 
+     * 
      * @param cert the {@code Certificate} to be checked
      * @return {@code true} if the {@code Certificate} should be
      *         selected, {@code false} otherwise
@@ -2396,6 +2933,9 @@ public class X509CertSelector implements CertSelector {
             /*
              * Convert the Vector of PolicyInformation to a Vector
              * of CertificatePolicyIds for easier comparison.
+             * <p>
+             * 将PolicyInformation的向量转换为CertificatePolicyIds的向量以方便比较
+             * 
              */
             List<CertificatePolicyId> policyIDs = new ArrayList<CertificatePolicyId>(policies.size());
             for (PolicyInformation info : policies) {
@@ -2407,6 +2947,9 @@ public class X509CertSelector implements CertSelector {
                  * if the user passes in an empty policy Set, then
                  * we just want to make sure that the candidate certificate
                  * has some policy OID in its CertPoliciesExtension
+                 * <p>
+                 *  如果用户传递一个空策略集,那么我们只是想确保候选证书在其CertPoliciesExtension中有一些策略OID
+                 * 
                  */
                 if (policy.getCertPolicyIds().isEmpty()) {
                     if (policyIDs.isEmpty()) {
@@ -2491,6 +3034,9 @@ public class X509CertSelector implements CertSelector {
          * Enumerate through excluded and compare each entry
          * to all pathToNames. If any pathToName is within any of the
          * subtrees listed in excluded, return false.
+         * <p>
+         *  通过排除枚举并将每个条目与所有pathToNames进行比较如果任何pathToName位于excluded中列出的任何子树内,则返回false
+         * 
          */
         for (Iterator<GeneralSubtree> t = excluded.iterator(); t.hasNext(); ) {
             GeneralSubtree tree = t.next();
@@ -2523,6 +3069,9 @@ public class X509CertSelector implements CertSelector {
          * is in at least one of the subtrees listed in permitted.
          * If not, return false. However, if no subtrees of a given type
          * are listed, all names of that type are permitted.
+         * <p>
+         *  通过pathToNames枚举,检查每个pathToName是否在允许列出的子树中的至少一个中if否,return false然而,如果没有列出给定类型的子树,则允许该类型的所有名称
+         * 
          */
         Iterator<GeneralNameInterface> i = pathToGeneralNames.iterator();
         while (i.hasNext()) {
@@ -2596,6 +3145,9 @@ public class X509CertSelector implements CertSelector {
     /**
      * Returns a copy of this object.
      *
+     * <p>
+     *  返回此对象的副本
+     * 
      * @return the copy
      */
     public Object clone() {

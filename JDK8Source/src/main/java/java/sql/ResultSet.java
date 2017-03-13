@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -140,6 +141,62 @@ import java.io.InputStream;
  * object's columns are provided by the <code>ResultSetMetaData</code>
  * object returned by the <code>ResultSet.getMetaData</code> method.
  *
+ * <p>
+ *  表示数据库结果集的数据表,通常通过执行查询数据库的语句生成
+ * 
+ *  <p> <code> ResultSet </code>对象维护一个指向其当前数据行的游标初始时光标位于第一行之前<code> next </code>方法将光标移动到下一行,并且因为当<code> 
+ * ResultSet </code>对象中没有更多行时,它返回<code> false </code>,所以可以在<code> while </code>组。
+ * <P>
+ * 默认的<code> ResultSet </code>对象是不可更新的,并且只有一个向前移动的游标。因此,你只能迭代一次,只能从第一行到最后一行。
+ * 可以生成<code> ResultSet </code>可滚动和/或可更新的对象下面的代码片段,其中<code> con </code>是一个有效的<code> Connection </code>对象
+ * ,说明如何使一个可滚动的结果集并且对其他人的更新不敏感,并且可更新请参阅<code> ResultSet </code>字段以获取其他选项。
+ * 默认的<code> ResultSet </code>对象是不可更新的,并且只有一个向前移动的游标。因此,你只能迭代一次,只能从第一行到最后一行。
+ * <PRE>
+ * 
+ * 语句stmt = concreateStatement(ResultSetTYPE_SCROLL_INSENSITIVE,ResultSetCONCUR_UPDATABLE); ResultSet rs
+ *  = stmtexecuteQuery("SELECT a,b FROM TABLE2"); // rs将可滚动,不会显示其他人所做的更改,//将可更新。
+ * 
+ * </PRE>
+ *  <code> ResultSet </code>接口提供<i> getter </i>方法(<code> getBoolean </code>,<code> getLong </code>,等等)行可
+ * 以使用列的索引号或列名称检索值通常,使用列索引将更有效列为了最大可移植性,每行内的结果集列应在左侧读取右到右的顺序,每列应该只读一次。
+ * 
+ * <P>对于getter方法,JDBC驱动程序会尝试将底层数据转换为getter方法中指定的Java类型,并返回一个合适的Java值。
+ * JDBC规范有一个表,显示了从SQL类型到Java类型的可允许映射由<code> ResultSet </code> getter方法使用。
+ * 
+ * <P>用作getter方法的输入的列名不区分大小当使用列名称调用getter方法并且多个列具有相同的名称时,将返回第一个匹配列的值。
+ * 列名选项设计为用于在生成结果集的SQL查询中使用列名对于在查询中未显式命名的列,最好使用列号如果使用列名,程序员应注意确保它们唯一引用到预期的列,这可以通过SQL <i> AS </i>子句保证。
+ * <P>
+ * 在JDBC 20 API(Java&trade; 2 SDK,Standard Edition,version 12)中,一组更新器方法被添加到此接口。
+ * 关于getter方法的参数的注释也适用于updater方法的参数。
+ * P>
+ *  updater方法可以以两种方式使用：
+ * <ol>
+ *  <LI>更新当前行中的列值在可滚动的<code> ResultSet </code>对象中,光标可以向前和向后移动到绝对位置或相对于当前行的位置。
+ * 代码片段更新<code> ResultSet </code>对象<code> rs </code>第五行中的<code> NAME </code>列,然后使用方法<code> updateRow </code>
+ * 更新从其派生<code> rs </code>的数据源表。
+ *  <LI>更新当前行中的列值在可滚动的<code> ResultSet </code>对象中,光标可以向前和向后移动到绝对位置或相对于当前行的位置。
+ * <PRE>
+ * 
+ * rsabsolute(5); //将光标移动到rs的第五行rsupdateString("NAME","AINSWORTH"); //将第5行的// <code> NAME </code>列更新为<code>
+ *  AINSWORTH </code> rsupdateRow(); //更新数据源中的行。
+ * 
+ * </PRE>
+ *  <LI>在插入行中插入列值可更新的<code> ResultSet </code>对象有一个特殊的行,用作构建要插入行的暂存区域以下代码段将光标移动到插入行,构建三列行,并使用方法<code> ins
+ * ertRow </code>将其插入到<code> rs </code>。
+ * <PRE>
+ * 
+ * rsmoveToInsertRow(); //将光标移动到插入行rsupdateString(1,"AINSWORTH"); //将插入行的第一列更新为<code> AINSWORTH </code> 
+ * rsupdateInt(2,35); //将第二列更新为<code> 35 </code> rsupdateBoolean(3,true); //将第三列更新为<code> true </code> r
+ * sinsertRow(); rsmoveToCurrentRow();。
+ * 
+ * </PRE>
+ * </ol>
+ *  <P>当生成它的<code> Statement </code>对象被关闭,重新执行或用于从多个结果序列中检索下一个结果时,<code> ResultSet </code>对象会自动关闭
+ * 
+ *  <code> ResultSet </code>对象的列的数量,类型和属性由<code> ResultSetgetMetaData </code>方法返回的<code> ResultSetMetaDa
+ * ta </code>对象提供。
+ * 
+ * 
  * @see Statement#executeQuery
  * @see Statement#getResultSet
  * @see ResultSetMetaData
@@ -168,6 +225,17 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * implicitly close it. A <code>ResultSet</code> object's
      * warning chain is cleared when a new row is read.
      *
+     * <p>
+     * 将光标从当前位置向前移动一行A <code> ResultSet </code>光标最初位于第一行之前;第一次调用<code> next </code>方法使第一行成为当前行;第二个调用使第二行成为当前
+     * 行,依此类推。
+     * <p>
+     *  当调用<code> next </code>方法返回<code> false </code>时,游标位于最后一行之后任何调用需要当前行的<code> ResultSet </code>将导致抛出<code>
+     *  SQLException </code>如果结果集类型是<code> TYPE_FORWARD_ONLY </code>,则它是供应商指定他们的JDBC驱动程序实现是否将返回<code> false 
+     * </code>对<code> next </code>的后续调用的<code> SQLException </code>。
+     * 
+     * <P>如果为当前行打开了一个输入流,则调用<code> next </code>方法将隐式关闭它。当一个新行被删除时,<code> ResultSet </code>读
+     * 
+     * 
      * @return <code>true</code> if the new current row is valid;
      * <code>false</code> if there are no more rows
      * @exception SQLException if a database access error occurs or this method is
@@ -201,6 +269,21 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * object that is already closed is a no-op.
      *
      *
+     * <p>
+     *  立即释放此<code> ResultSet </code>对象的数据库和JDBC资源,而不是在自动关闭时等待此情况发生
+     * 
+     *  <p> <code> ResultSet </code>对象的关闭<strong>不</strong>关闭<code> Blob </code>,<code> Clob </code>由<code> 
+     * ResultSet </code> <code> Blob </code>,<code> Clob </code>或<code> NClob </code>对象创建的/ code>对象至少持续有效创建它
+     * 们的事务,除非调用它们的<code> free </code>方法。
+     * p>
+     * 当<code> ResultSet </code>关闭时,通过调用<code> getMetaData </code>方法创建的任何<code> ResultSetMetaData </code>实例仍
+     * 然可访问。
+     * 
+     *  <p> <b>注意</b>：<code> Statement </code>对象会自动关闭<code> Statement </code>被关闭,重新执行或用于从多个结果的序列中检索下一个结果
+     * p>
+     *  调用已经关闭的<code> ResultSet </code>对象上的<code> close </code>方法是一个无操作
+     * 
+     * 
      * @exception SQLException if a database access error occurs
      */
     void close() throws SQLException;
@@ -213,6 +296,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * the method <code>wasNull</code> to see if the value read was
      * SQL <code>NULL</code>.
      *
+     * <p>
+     * 报告最后一列的值是否为SQL <code> NULL </code>请注意,您必须首先调用列上的一个getter方法来尝试读取其值,然后调用方法<code> wasNull < code>以查看读取的值
+     * 是否为SQL <code> NULL </code>。
+     * 
+     * 
      * @return <code>true</code> if the last column value read was SQL
      *         <code>NULL</code> and <code>false</code> otherwise
      * @exception SQLException if a database access error occurs or this method is
@@ -227,6 +315,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * of this <code>ResultSet</code> object as
      * a <code>String</code> in the Java programming language.
      *
+     * <p>
+     *  将这个<code> ResultSet </code>对象的当前行中的指定列的值作为Java编程语言中的<code> String </code>
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @return the column value; if the value is SQL <code>NULL</code>, the
      * value returned is <code>null</code>
@@ -248,6 +340,14 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * and contains a "1" or has a datatype of BIT, TINYINT, SMALLINT, INTEGER or BIGINT
      * and contains  a 1, a value of <code>true</code> is returned.
      *
+     * <p>
+     *  在Java编程语言中将此<code> ResultSet </code>对象的当前行中的指定列的值检索为<code> boolean </code>
+     * 
+     * <P>如果指定列的数据类型为CHAR或VARCHAR,并且包含"0"或具有BIT,TINYINT,SMALLINT,INTEGER或BIGINT的数据类型,并且包含0,值为<code> false </code>
+     * 如果指定的列具有CHAR或VARCHAR的数据类型,并且包含"1"或具有BIT,TINYINT,SMALLINT,INTEGER或BIGINT的数据类型,并且包含1,则<code> true </code>
+     * 的值为回。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @return the column value; if the value is SQL <code>NULL</code>, the
      * value returned is <code>false</code>
@@ -262,6 +362,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * of this <code>ResultSet</code> object as
      * a <code>byte</code> in the Java programming language.
      *
+     * <p>
+     *  将这个<code> ResultSet </code>对象的当前行中的指定列的值检索为Java编程语言中的<code> byte </code>
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @return the column value; if the value is SQL <code>NULL</code>, the
      * value returned is <code>0</code>
@@ -276,6 +380,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * of this <code>ResultSet</code> object as
      * a <code>short</code> in the Java programming language.
      *
+     * <p>
+     *  将这个<code> ResultSet </code>对象的当前行中的指定列的值检索为Java编程语言中的<code> short </code>
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @return the column value; if the value is SQL <code>NULL</code>, the
      * value returned is <code>0</code>
@@ -290,6 +398,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * of this <code>ResultSet</code> object as
      * an <code>int</code> in the Java programming language.
      *
+     * <p>
+     * 将这个<code> ResultSet </code>对象的当前行中的指定列的值检索为Java编程语言中的<code> int </code>
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @return the column value; if the value is SQL <code>NULL</code>, the
      * value returned is <code>0</code>
@@ -304,6 +416,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * of this <code>ResultSet</code> object as
      * a <code>long</code> in the Java programming language.
      *
+     * <p>
+     *  将这个<code> ResultSet </code>对象的当前行中的指定列的值检索为Java编程语言中的<code> long </code>
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @return the column value; if the value is SQL <code>NULL</code>, the
      * value returned is <code>0</code>
@@ -318,6 +434,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * of this <code>ResultSet</code> object as
      * a <code>float</code> in the Java programming language.
      *
+     * <p>
+     *  将这个<code> ResultSet </code>对象的当前行中的指定列的值检索为Java编程语言中的<code> float </code>
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @return the column value; if the value is SQL <code>NULL</code>, the
      * value returned is <code>0</code>
@@ -332,6 +452,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * of this <code>ResultSet</code> object as
      * a <code>double</code> in the Java programming language.
      *
+     * <p>
+     *  将这个<code> ResultSet </code>对象的当前行中的指定列的值检索为Java编程语言中的<code> double </code>
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @return the column value; if the value is SQL <code>NULL</code>, the
      * value returned is <code>0</code>
@@ -346,6 +470,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * of this <code>ResultSet</code> object as
      * a <code>java.sql.BigDecimal</code> in the Java programming language.
      *
+     * <p>
+     * 将Java代码中的<code> ResultSet </code>对象的当前行中的指定列的值检索为Java代码中的<code> javasqlBigDecimal </code>
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param scale the number of digits to the right of the decimal point
      * @return the column value; if the value is SQL <code>NULL</code>, the
@@ -367,6 +495,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * a <code>byte</code> array in the Java programming language.
      * The bytes represent the raw values returned by the driver.
      *
+     * <p>
+     *  将此<code> ResultSet </code>对象的当前行中的指定列的值检索为Java编程语言中的<code> byte </code>数组字节表示驱动程序返回的原始值
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @return the column value; if the value is SQL <code>NULL</code>, the
      * value returned is <code>null</code>
@@ -381,6 +513,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * of this <code>ResultSet</code> object as
      * a <code>java.sql.Date</code> object in the Java programming language.
      *
+     * <p>
+     *  将这个<code> ResultSet </code>对象的当前行中的指定列的值作为Java编程语言中的<code> javasqlDate </code>对象
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @return the column value; if the value is SQL <code>NULL</code>, the
      * value returned is <code>null</code>
@@ -395,6 +531,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * of this <code>ResultSet</code> object as
      * a <code>java.sql.Time</code> object in the Java programming language.
      *
+     * <p>
+     *  将此<code> ResultSet </code>对象的当前行中的指定列的值检索为Java编程语言中的<code> javasqlTime </code>对象
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @return the column value; if the value is SQL <code>NULL</code>, the
      * value returned is <code>null</code>
@@ -409,6 +549,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * of this <code>ResultSet</code> object as
      * a <code>java.sql.Timestamp</code> object in the Java programming language.
      *
+     * <p>
+     * 将这个<code> ResultSet </code>对象的当前行中的指定列的值作为Java编程语言中的<code> javasqlTimestamp </code>对象
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @return the column value; if the value is SQL <code>NULL</code>, the
      * value returned is <code>null</code>
@@ -434,6 +578,14 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * <code>InputStream.available</code>
      * is called whether there is data available or not.
      *
+     * <p>
+     *  将此<code> ResultSet </code>对象的当前行中的指定列的值检索为ASCII字符流可以从流中读取该块的方法此方法特别适用于检索大型<code> LONGVARCHAR </code>
+     * 值JDBC驱动程序将执行从数据库格式到ASCII的任何必要的转换。
+     * 
+     * <P> <B>注意：</B>返回流中的所有数据必须在获取任何其他列的值之前读取下一个对getter方法的调用隐式关闭流另外,流可能返回<code > 0 </code>当方法<code> InputSt
+     * reamavailable </code>被调用时是否有可用的数据。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @return a Java input stream that delivers the database column value
      * as a stream of one-byte ASCII characters;
@@ -464,6 +616,15 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * <code>InputStream.available</code>
      * is called, whether there is data available or not.
      *
+     * <p>
+     *  将<code> ResultSet </code>对象的当前行中的指定列的值检索为两个字节的3个字符流第一个字节是高字节;第二个字节是低字节
+     * 
+     *  然后可以从流中读取该块的值此方法特别适合检索大的<code> LONGVARCHAR </code>值JDBC驱动程序将执行从数据库格式到Unicode的任何必要的转换
+     * 
+     * <P> <B>注意：</B>返回流中的所有数据必须在获取任何其他列的值之前读取下一个对getter方法的调用隐式关闭流另外,流可能返回<code > 0 </code>当方法<code> InputSt
+     * reamavailable </code>被调用时,是否有数据可用。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @return a Java input stream that delivers the database column value
      *         as a stream of two-byte Unicode characters;
@@ -495,6 +656,14 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * <code>InputStream.available</code>
      * is called whether there is data available or not.
      *
+     * <p>
+     *  将此<code> ResultSet </code>对象的当前行中指定列的值检索为未解释字节流然后可以从流中读取该块的方法此方法特别适用于检索大型<code> LONGVARBINARY </code>
+     * 值。
+     * 
+     * <P> <B>注意：</B>返回流中的所有数据必须在获取任何其他列的值之前读取下一个对getter方法的调用隐式关闭流另外,流可能返回<code > 0 </code>当方法<code> InputSt
+     * reamavailable </code>被调用时是否有可用的数据。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @return a Java input stream that delivers the database column value
      *         as a stream of uninterpreted bytes;
@@ -515,6 +684,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * of this <code>ResultSet</code> object as
      * a <code>String</code> in the Java programming language.
      *
+     * <p>
+     *  将这个<code> ResultSet </code>对象的当前行中的指定列的值作为Java编程语言中的<code> String </code>
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @return the column value; if the value is SQL <code>NULL</code>, the
      * value returned is <code>null</code>
@@ -536,6 +709,14 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * and contains a "1" or has a datatype of BIT, TINYINT, SMALLINT, INTEGER or BIGINT
      * and contains  a 1, a value of <code>true</code> is returned.
      *
+     * <p>
+     *  在Java编程语言中将此<code> ResultSet </code>对象的当前行中的指定列的值检索为<code> boolean </code>
+     * 
+     * <P>如果指定列的数据类型为CHAR或VARCHAR,并且包含"0"或具有BIT,TINYINT,SMALLINT,INTEGER或BIGINT的数据类型,并且包含0,值为<code> false </code>
+     * 如果指定的列具有CHAR或VARCHAR的数据类型,并且包含"1"或具有BIT,TINYINT,SMALLINT,INTEGER或BIGINT的数据类型,并且包含1,则<code> true </code>
+     * 的值为回。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @return the column value; if the value is SQL <code>NULL</code>, the
      * value returned is <code>false</code>
@@ -550,6 +731,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * of this <code>ResultSet</code> object as
      * a <code>byte</code> in the Java programming language.
      *
+     * <p>
+     *  将这个<code> ResultSet </code>对象的当前行中的指定列的值检索为Java编程语言中的<code> byte </code>
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @return the column value; if the value is SQL <code>NULL</code>, the
      * value returned is <code>0</code>
@@ -564,6 +749,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * of this <code>ResultSet</code> object as
      * a <code>short</code> in the Java programming language.
      *
+     * <p>
+     *  将这个<code> ResultSet </code>对象的当前行中的指定列的值检索为Java编程语言中的<code> short </code>
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @return the column value; if the value is SQL <code>NULL</code>, the
      * value returned is <code>0</code>
@@ -578,6 +767,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * of this <code>ResultSet</code> object as
      * an <code>int</code> in the Java programming language.
      *
+     * <p>
+     * 将这个<code> ResultSet </code>对象的当前行中的指定列的值检索为Java编程语言中的<code> int </code>
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @return the column value; if the value is SQL <code>NULL</code>, the
      * value returned is <code>0</code>
@@ -592,6 +785,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * of this <code>ResultSet</code> object as
      * a <code>long</code> in the Java programming language.
      *
+     * <p>
+     *  将这个<code> ResultSet </code>对象的当前行中的指定列的值检索为Java编程语言中的<code> long </code>
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @return the column value; if the value is SQL <code>NULL</code>, the
      * value returned is <code>0</code>
@@ -606,6 +803,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * of this <code>ResultSet</code> object as
      * a <code>float</code> in the Java programming language.
      *
+     * <p>
+     *  将这个<code> ResultSet </code>对象的当前行中的指定列的值检索为Java编程语言中的<code> float </code>
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @return the column value; if the value is SQL <code>NULL</code>, the
      * value returned is <code>0</code>
@@ -620,6 +821,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * of this <code>ResultSet</code> object as
      * a <code>double</code> in the Java programming language.
      *
+     * <p>
+     *  将这个<code> ResultSet </code>对象的当前行中的指定列的值检索为Java编程语言中的<code> double </code>
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @return the column value; if the value is SQL <code>NULL</code>, the
      * value returned is <code>0</code>
@@ -634,6 +839,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * of this <code>ResultSet</code> object as
      * a <code>java.math.BigDecimal</code> in the Java programming language.
      *
+     * <p>
+     * 将这个<code> ResultSet </code>对象的当前行中的指定列的值检索为Java编程语言中的<code> javamathBigDecimal </code>
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param scale the number of digits to the right of the decimal point
      * @return the column value; if the value is SQL <code>NULL</code>, the
@@ -655,6 +864,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * a <code>byte</code> array in the Java programming language.
      * The bytes represent the raw values returned by the driver.
      *
+     * <p>
+     *  将此<code> ResultSet </code>对象的当前行中的指定列的值检索为Java编程语言中的<code> byte </code>数组字节表示驱动程序返回的原始值
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @return the column value; if the value is SQL <code>NULL</code>, the
      * value returned is <code>null</code>
@@ -669,6 +882,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * of this <code>ResultSet</code> object as
      * a <code>java.sql.Date</code> object in the Java programming language.
      *
+     * <p>
+     *  将这个<code> ResultSet </code>对象的当前行中的指定列的值作为Java编程语言中的<code> javasqlDate </code>对象
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @return the column value; if the value is SQL <code>NULL</code>, the
      * value returned is <code>null</code>
@@ -683,6 +900,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * of this <code>ResultSet</code> object as
      * a <code>java.sql.Time</code> object in the Java programming language.
      *
+     * <p>
+     *  将此<code> ResultSet </code>对象的当前行中的指定列的值检索为Java编程语言中的<code> javasqlTime </code>对象
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @return the column value;
      * if the value is SQL <code>NULL</code>,
@@ -698,6 +919,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * of this <code>ResultSet</code> object as
      * a <code>java.sql.Timestamp</code> object in the Java programming language.
      *
+     * <p>
+     * 将这个<code> ResultSet </code>对象的当前行中的指定列的值作为Java编程语言中的<code> javasqlTimestamp </code>对象
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @return the column value; if the value is SQL <code>NULL</code>, the
      * value returned is <code>null</code>
@@ -722,6 +947,14 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * stream may return <code>0</code> when the method <code>available</code>
      * is called whether there is data available or not.
      *
+     * <p>
+     *  将此<code> ResultSet </code>对象的当前行中的指定列的值检索为ASCII字符流可以从流中读取该块的方法此方法特别适用于检索大型<code> LONGVARCHAR </code>
+     * 值JDBC驱动程序将执行从数据库格式到ASCII的任何必要的转换。
+     * 
+     * <P> <B>注意：</B>返回流中的所有数据必须在获取任何其他列的值之前读取下一个对getter方法的调用隐式关闭流另外,流可能返回<code > 0 </code>当方法<code>可用</code>
+     * 被调用时是否有可用的数据。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @return a Java input stream that delivers the database column value
      * as a stream of one-byte ASCII characters.
@@ -752,6 +985,15 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * <code>InputStream.available</code> is called, whether there
      * is data available or not.
      *
+     * <p>
+     *  将此<code> ResultSet </code>对象的当前行中的指定列的值检索为两字节Unicode字符流第一个字节是高字节;第二个字节是低字节
+     * 
+     *  然后可以从流中读取该块的值此方法特别适合检索大的<code> LONGVARCHAR </code>值JDBC技术启用的驱动程序将执行从数据库格式到Unicode的所有必要转换
+     * 
+     * <P> <B>注意：</B>返回流中的所有数据必须在获取任何其他列的值之前读取下一个对getter方法的调用隐式关闭流另外,流可能返回<code > 0 </code>当方法<code> InputSt
+     * reamavailable </code>被调用时,是否有数据可用。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @return a Java input stream that delivers the database column value
      *         as a stream of two-byte Unicode characters.
@@ -782,6 +1024,14 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * stream may return <code>0</code> when the method <code>available</code>
      * is called whether there is data available or not.
      *
+     * <p>
+     *  将此<code> ResultSet </code>对象的当前行中指定列的值检索为未解释的<code> byte </code> s值然后可以从流中读取该块的方法此方法特别适合于检索大的<code> 
+     * LONGVARBINARY </code>值。
+     * 
+     * <P> <B>注意：</B>返回流中的所有数据必须在获取任何其他列的值之前读取下一个对getter方法的调用隐式关闭流另外,流可能返回<code > 0 </code>当方法<code>可用</code>
+     * 被调用时是否有可用的数据。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @return a Java input stream that delivers the database column value
      * as a stream of uninterpreted bytes;
@@ -814,6 +1064,16 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * (such as reading OUT parameters) will be chained on the
      * <code>Statement</code> object.
      *
+     * <p>
+     *  检索此<code> ResultSet </code>对象上调用所报告的第一个警告此<code> ResultSet </code>对象上的后续警告将链接到此方法返回的<code> SQLWarnin
+     * g </code>对象。
+     * 
+     *  <P>警告链会在每次读取新行时自动清除此方法可能无法在已关闭的<code> ResultSet </code>对象上调用;这样做会导致抛出<code> SQLException </code>
+     * <P>
+     * <B>注意：</B>此警告链仅涵盖由<code> ResultSet </code>方法引起的警告由<code> Statement </code>方法引起的任何警告(例如读取OUT参数) <code>
+     *  Statement </code>对象。
+     * 
+     * 
      * @return the first <code>SQLWarning</code> object reported or
      *         <code>null</code> if there are none
      * @exception SQLException if a database access error occurs or this method is
@@ -827,6 +1087,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * returns <code>null</code> until a new warning is
      * reported for this <code>ResultSet</code> object.
      *
+     * <p>
+     *  清除此<code> ResultSet </code>对象上报告的所有警告在调用此方法后,方法<code> getWarnings </code>返回<code> null </code>,直到为此<code >
+     *  ResultSet </code>对象。
+     * 
+     * 
      * @exception SQLException if a database access error occurs or this method is
      *            called on a closed result set
      */
@@ -849,6 +1114,16 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * The current row of a <code>ResultSet</code> object
      * is also the current row of this SQL cursor.
      *
+     * <p>
+     *  检索此<code> ResultSet </code>对象使用的SQL游标的名称
+     * 
+     * <P>在SQL中,通过名为的游标检索结果表可以使用定位的引用游标名称的update / delete语句更新或删除结果集的当前行为了确保游标具有正确的隔离级别支持更新,光标的<code> SELECT 
+     * </code>语句应该是<code> SELECT FOR UPDATE </code>的形式如果省略<code> FOR UPDATE </code>,定位的更新可能会失败。
+     * 
+     *  <P> JDBC API通过提供由<code> ResultSet </code>对象使用的SQL游标的名称来支持此SQL特性<code> ResultSet </code>对象的当前行也是当前行这个
+     * SQL游标。
+     * 
+     * 
      * @return the SQL name for this <code>ResultSet</code> object's cursor
      * @exception SQLException if a database access error occurs or this method is called on a closed result set
      * @exception SQLFeatureNotSupportedException if the JDBC driver does not support
@@ -860,6 +1135,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * Retrieves the  number, types and properties of
      * this <code>ResultSet</code> object's columns.
      *
+     * <p>
+     *  检索此<code> ResultSet </code>对象的列的数量,类型和属性
+     * 
+     * 
      * @return the description of this <code>ResultSet</code> object's columns
      * @exception SQLException if a database access error occurs or this method is
      *            called on a closed result set
@@ -898,6 +1177,23 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * are mapped to the default Java class as determined by the
      * underlying SQL type of the DISTINCT type.
      *
+     * <p>
+     * <p>将此<code> ResultSet </code>对象的当前行中的指定列的值作为Java编程语言中的<code> Object </code>
+     * 
+     *  <p>此方法将返回给定列的值作为Java对象Java对象的类型将是对应于列的SQL类型的默认Java对象类型,跟在JDBC规范中指定的内置类型的映射之后如果值为SQL <code> NULL </code>
+     * ,则驱动程序返回Java <code> null </code>。
+     * 
+     *  <p>此方法也可用于读取特定于数据库的抽象数据类型
+     * 
+     *  在JDBC 20 API中,方法<code> getObject </code>的行为被扩展以实现SQL用户定义类型的数据
+     * <p>
+     * 如果<code> ConnectiongetTypeMap </code>没有抛出<code> SQLFeatureNotSupportedException </code>,那么当列包含结构化或不同的
+     * 值时,此方法的行为就像是调用：<code> getObject(columnIndex,thisgetStatement()getConnection()getTypeMap())</code>。
+     * 
+     *  如果<code> ConnectiongetTypeMap </code>确实引发了一个<code> SQLFeatureNotSupportedException </code>,则不支持结构化值,
+     * 并且不同的值映射到由DISTINCT类型的底层SQL类型确定的默认Java类。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @return a <code>java.lang.Object</code> holding the column value
      * @exception SQLException if the columnIndex is not valid;
@@ -928,6 +1224,18 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * if it were a call to: <code>getObject(columnIndex,
      * this.getStatement().getConnection().getTypeMap())</code>.
      *
+     * <p>
+     *  <p>将此<code> ResultSet </code>对象的当前行中的指定列的值作为Java编程语言中的<code> Object </code>
+     * 
+     * <p>此方法将返回给定列的值作为Java对象Java对象的类型将是对应于列的SQL类型的默认Java对象类型,跟在JDBC规范中指定的内置类型的映射之后如果值为SQL <code> NULL </code>
+     * ,则驱动程序返回Java <code> null </code>。
+     * <P>
+     *  此方法也可用于读取特定于数据库的抽象数据类型
+     * <P>
+     *  在JDBC 20 API中,方法<code> getObject </code>的行为被扩展为实现SQL用户定义类型的数据当列包含结构化或不同的值时,此方法的行为好像是调用：<code> getObj
+     * ect(columnIndex,thisgetStatement()getConnection()getTypeMap())</code>。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @return a <code>java.lang.Object</code> holding the column value
      * @exception SQLException if the columnLabel is not valid;
@@ -942,6 +1250,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * Maps the given <code>ResultSet</code> column label to its
      * <code>ResultSet</code> column index.
      *
+     * <p>
+     * 将给定的<code> ResultSet </code>列标签映射到其<code> ResultSet </code>列索引
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @return the column index of the given column name
      * @exception SQLException if the <code>ResultSet</code> object
@@ -961,6 +1273,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * Retrieves the value of the designated column in the current row
      * of this <code>ResultSet</code> object as a
      * <code>java.io.Reader</code> object.
+     * <p>
+     *  将此<code> ResultSet </code>对象的当前行中的指定列的值检索为<code> javaioReader </code>对象
+     * 
+     * 
      * @return a <code>java.io.Reader</code> object that contains the column
      * value; if the value is SQL <code>NULL</code>, the value returned is
      * <code>null</code> in the Java programming language.
@@ -977,6 +1293,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * of this <code>ResultSet</code> object as a
      * <code>java.io.Reader</code> object.
      *
+     * <p>
+     *  将此<code> ResultSet </code>对象的当前行中的指定列的值检索为<code> javaioReader </code>对象
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @return a <code>java.io.Reader</code> object that contains the column
      * value; if the value is SQL <code>NULL</code>, the value returned is
@@ -993,6 +1313,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * of this <code>ResultSet</code> object as a
      * <code>java.math.BigDecimal</code> with full precision.
      *
+     * <p>
+     *  将这个<code> ResultSet </code>对象的当前行中的指定列的值检索为具有完全精度的<code> javamathBigDecimal </code>
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @return the column value (full precision);
      * if the value is SQL <code>NULL</code>, the value returned is
@@ -1009,6 +1333,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * of this <code>ResultSet</code> object as a
      * <code>java.math.BigDecimal</code> with full precision.
      *
+     * <p>
+     *  将这个<code> ResultSet </code>对象的当前行中的指定列的值检索为具有完全精度的<code> javamathBigDecimal </code>
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @return the column value (full precision);
      * if the value is SQL <code>NULL</code>, the value returned is
@@ -1033,6 +1361,13 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * is optional for <code>ResultSet</code>s with a result
      * set type of <code>TYPE_FORWARD_ONLY</code>
      *
+     * <p>
+     * 检索游标是否在此<code> ResultSet </code>对象中的第一行之前
+     * <p>
+     *  <strong>注意</strong>：<code> isBeforeFirst </code>方法对<code> ResultSet </code>的可选属性,结果集类型为<code> TYPE_F
+     * ORWARD_ONLY </code>。
+     * 
+     * 
      * @return <code>true</code> if the cursor is before the first row;
      * <code>false</code> if the cursor is at any other position or the
      * result set contains no rows
@@ -1052,6 +1387,13 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * is optional for <code>ResultSet</code>s with a result
      * set type of <code>TYPE_FORWARD_ONLY</code>
      *
+     * <p>
+     *  检索游标是否在此<code> ResultSet </code>对象中的最后一行之后
+     * <p>
+     *  <strong>注意</strong>：<code> isAfterLast </code>方法支持<code> ResultSet </code>的可选操作,结果集类型为<code> TYPE_FO
+     * RWARD_ONLY </code>。
+     * 
+     * 
      * @return <code>true</code> if the cursor is after the last row;
      * <code>false</code> if the cursor is at any other position or the
      * result set contains no rows
@@ -1071,6 +1413,13 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * is optional for <code>ResultSet</code>s with a result
      * set type of <code>TYPE_FORWARD_ONLY</code>
      *
+     * <p>
+     *  检索游标是否在此<code> ResultSet </code>对象的第一行
+     * <p>
+     *  <strong>注意</strong>：<code> isFirst </code>方法对<code> ResultSet </code>的可选属性,结果集类型为<code> TYPE_FORWARD
+     * _ONLY </code>。
+     * 
+     * 
      * @return <code>true</code> if the cursor is on the first row;
      * <code>false</code> otherwise
      * @exception SQLException if a database access error occurs or this method is
@@ -1092,6 +1441,14 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * <strong>Note:</strong> Support for the <code>isLast</code> method
      * is optional for <code>ResultSet</code>s with a result
      * set type of <code>TYPE_FORWARD_ONLY</code>
+     * <p>
+     * 检索游标是否位于<code> ResultSet </code>对象的最后一行<strong>注意</strong>：调用<code> isLast </code>方法可能很昂贵,因为JDBC驱动程序可
+     * 能需要提前一行,以确定当前行是否是结果集中的最后一行。
+     * <p>
+     *  <strong>注意</strong>：<code> isLast </code>方法对<code> ResultSet </code>的可选属性,结果集类型为<code> TYPE_FORWARD_
+     * ONLY </code>。
+     * 
+     * 
      * @return <code>true</code> if the cursor is on the last row;
      * <code>false</code> otherwise
      * @exception SQLException if a database access error occurs or this method is
@@ -1107,6 +1464,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * this <code>ResultSet</code> object, just before the
      * first row. This method has no effect if the result set contains no rows.
      *
+     * <p>
+     *  将光标移动到此<code> ResultSet </code>对象的前面,就在第一行之前如果结果集不包含行,此方法不起作用
+     * 
+     * 
      * @exception SQLException if a database access error
      * occurs; this method is called on a closed result set or the
      * result set type is <code>TYPE_FORWARD_ONLY</code>
@@ -1120,6 +1481,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * Moves the cursor to the end of
      * this <code>ResultSet</code> object, just after the
      * last row. This method has no effect if the result set contains no rows.
+     * <p>
+     *  将光标移动到此<code> ResultSet </code>对象的末尾,紧接在最后一行之后如果结果集不包含行,此方法不起作用
+     * 
+     * 
      * @exception SQLException if a database access error
      * occurs; this method is called on a closed result set
      * or the result set type is <code>TYPE_FORWARD_ONLY</code>
@@ -1133,6 +1498,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * Moves the cursor to the first row in
      * this <code>ResultSet</code> object.
      *
+     * <p>
+     * 将光标移动到此<code> ResultSet </code>对象中的第一行
+     * 
+     * 
      * @return <code>true</code> if the cursor is on a valid row;
      * <code>false</code> if there are no rows in the result set
      * @exception SQLException if a database access error
@@ -1148,6 +1517,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * Moves the cursor to the last row in
      * this <code>ResultSet</code> object.
      *
+     * <p>
+     *  将光标移动到此<code> ResultSet </code>对象中的最后一行
+     * 
+     * 
      * @return <code>true</code> if the cursor is on a valid row;
      * <code>false</code> if there are no rows in the result set
      * @exception SQLException if a database access error
@@ -1167,6 +1540,13 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * is optional for <code>ResultSet</code>s with a result
      * set type of <code>TYPE_FORWARD_ONLY</code>
      *
+     * <p>
+     *  检索当前行号第一行是数字1,第二个数字是2,依此类推
+     * <p>
+     *  <strong>注意</strong>：<code> getRow </code>方法对<code> ResultSet </code>的可选属性,结果集类型为<code> TYPE_FORWARD_
+     * ONLY </code>。
+     * 
+     * 
      * @return the current row number; <code>0</code> if there is no current row
      * @exception SQLException if a database access error occurs
      * or this method is called on a closed result set
@@ -1203,6 +1583,21 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * as calling <code>first()</code>. Calling <code>absolute(-1)</code>
      * is the same as calling <code>last()</code>.
      *
+     * <p>
+     *  将光标移动到此<code> ResultSet </code>对象中的给定行号
+     * 
+     *  <p>如果行号为正,光标将移动到相对于结果集开头的给定行号第一行是第1行,第二行是第2行,依此类推
+     * 
+     * <p>如果给定的行号为负,光标将移动到相对于结果集结束的绝对行位置。
+     * 例如,调用方法<code> absolute(-1)</code>最后一行;调用方法<code> absolute(-2)</code>将光标移动到倒数第二行,依此类推。
+     * 
+     *  <p>如果指定的行号为零,则光标将移动到第一行之前
+     * 
+     *  <p>尝试将光标定位在结果集中的第一行/最后一行之前,将光标停留在第一行之前或最后一行之后
+     * 
+     *  </p> </b>注意：</b>调用<code> absolute(1)</code> code>与调用<code> last()</code>相同
+     * 
+     * 
      * @param row the number of the row to which the cursor should move.
      *        A value of zero indicates that the cursor will be positioned
      *        before the first row; a positive number indicates the row number
@@ -1233,6 +1628,12 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * calling the method <code>relative(-1)</code> is identical
      * to calling the method <code>previous()</code>.
      *
+     * <p>
+     * 将光标移动相对行数,正或负尝试移动超出结果集中的第一行/最后一行将光标置于第一行/最后一行之前/之后调用<code> relative(0)</code>有效,但不改变光标位置
+     * 
+     *  <p>注意：调用方法<code> relative(1)</code>与调用<code> next()</code>方法相同, >与调用方法<code> previous()</code>相同
+     * 
+     * 
      * @param rows an <code>int</code> specifying the number of rows to
      *        move from the current row; a positive number moves the cursor
      *        forward; a negative number moves the cursor backward
@@ -1261,6 +1662,16 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      *  object's warning change is cleared when a new row is read.
      *<p>
      *
+     * <p>
+     *  将光标移动到此<code> ResultSet </code>对象中的上一行
+     * p>
+     * 当调用<code> previous </code>方法返回<code> false </code>时,游标位于第一行之前。
+     * 任何调用需要当前行的<code> ResultSet </code>将导致抛出<code> SQLException </code>。
+     * p>
+     *  如果为当前行打开输入流,则对<code> previous </code>方法的调用将隐式关闭它。当读取新行时,会清除<code> ResultSet </code>对象的警告更改
+     * p>
+     * 
+     * 
      * @return <code>true</code> if the cursor is now positioned on a valid row;
      * <code>false</code> if the cursor is positioned before the first row
      * @exception SQLException if a database access error
@@ -1281,6 +1692,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * processed in a forward direction; first-to-last.
      * This constant is used by the method <code>setFetchDirection</code>
      * as a hint to the driver, which the driver may ignore.
+     * <p>
+     *  常量,指示将以正向方向处理结果集中的行; first-to-last这个常量被方法<code> setFetchDirection </code>用作驱动程序的提示,驱动程序可能忽略它
+     * 
+     * 
      * @since 1.2
      */
     int FETCH_FORWARD = 1000;
@@ -1290,6 +1705,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * processed in a reverse direction; last-to-first.
      * This constant is used by the method <code>setFetchDirection</code>
      * as a hint to the driver, which the driver may ignore.
+     * <p>
+     * 常量,指示结果集中的行将按相反方向处理; last-to-first此常量由方法<code> setFetchDirection </code>用作驱动程序的提示,驱动程序可能会忽略此提示
+     * 
+     * 
      * @since 1.2
      */
     int FETCH_REVERSE = 1001;
@@ -1299,6 +1718,9 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * result set will be processed is unknown.
      * This constant is used by the method <code>setFetchDirection</code>
      * as a hint to the driver, which the driver may ignore.
+     * <p>
+     *  指示结果集中的行将被处理的顺序的常量未知此常量由方法<code> setFetchDirection </code>用作驱动程序的提示,驱动程序可能会忽略此提示
+     * 
      */
     int FETCH_UNKNOWN = 1002;
 
@@ -1310,6 +1732,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * that produced this <code>ResultSet</code> object.
      * The fetch direction may be changed at any time.
      *
+     * <p>
+     *  提供对这个<code> ResultSet </code>对象中的行进行处理的方向的提示初始值由生成此<code> ResultSet </code>对象的<code> Statement </code>
+     *  code> object获取方向可以随时更改。
+     * 
+     * 
      * @param direction an <code>int</code> specifying the suggested
      *        fetch direction; one of <code>ResultSet.FETCH_FORWARD</code>,
      *        <code>ResultSet.FETCH_REVERSE</code>, or
@@ -1328,6 +1755,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * Retrieves the fetch direction for this
      * <code>ResultSet</code> object.
      *
+     * <p>
+     *  检索此<code> ResultSet </code>对象的提取方向
+     * 
+     * 
      * @return the current fetch direction for this <code>ResultSet</code> object
      * @exception SQLException if a database access error occurs
      * or this method is called on a closed result set
@@ -1346,6 +1777,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * <code>Statement</code> object
      * that created the result set.  The fetch size may be changed at any time.
      *
+     * <p>
+     * 为JDBC驱动程序提供有关此<code> ResultSet </code>对象需要更多行时应从数据库中提取的行数的提示如果指定的提取大小为零,JDBC驱动程序将忽略该值,可以自由地做出自己的最佳猜测,
+     * 获取大小应该是什么默认值由创建结果集的<code> Statement </code>对象设置fetch size可以随时更改。
+     * 
+     * 
      * @param rows the number of rows to fetch
      * @exception SQLException if a database access error occurs; this method
      * is called on a closed result set or the
@@ -1359,6 +1795,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * Retrieves the fetch size for this
      * <code>ResultSet</code> object.
      *
+     * <p>
+     *  检索此<code> ResultSet </code>对象的提取大小
+     * 
+     * 
      * @return the current fetch size for this <code>ResultSet</code> object
      * @exception SQLException if a database access error occurs
      * or this method is called on a closed result set
@@ -1370,6 +1810,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
     /**
      * The constant indicating the type for a <code>ResultSet</code> object
      * whose cursor may move only forward.
+     * <p>
+     *  常量,指示<code> ResultSet </code>对象的类型,其游标只能向前移动
+     * 
+     * 
      * @since 1.2
      */
     int TYPE_FORWARD_ONLY = 1003;
@@ -1378,6 +1822,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * The constant indicating the type for a <code>ResultSet</code> object
      * that is scrollable but generally not sensitive to changes to the data
      * that underlies the <code>ResultSet</code>.
+     * <p>
+     *  常量指示可滚动的<code> ResultSet </code>对象的类型,但通常对<code> ResultSet </code>下面的数据的更改不敏感
+     * 
+     * 
      * @since 1.2
      */
     int TYPE_SCROLL_INSENSITIVE = 1004;
@@ -1386,6 +1834,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * The constant indicating the type for a <code>ResultSet</code> object
      * that is scrollable and generally sensitive to changes to the data
      * that underlies the <code>ResultSet</code>.
+     * <p>
+     * 常量指示一个<code> ResultSet </code>对象的类型,该对象是可滚动的,通常对<code> ResultSet </code>下面的数据的更改敏感,
+     * 
+     * 
      * @since 1.2
      */
     int TYPE_SCROLL_SENSITIVE = 1005;
@@ -1395,6 +1847,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * The type is determined by the <code>Statement</code> object
      * that created the result set.
      *
+     * <p>
+     *  检索此<code> ResultSet </code>对象的类型该类型由创建结果集的<code> Statement </code>对象确定
+     * 
+     * 
      * @return <code>ResultSet.TYPE_FORWARD_ONLY</code>,
      *         <code>ResultSet.TYPE_SCROLL_INSENSITIVE</code>,
      *         or <code>ResultSet.TYPE_SCROLL_SENSITIVE</code>
@@ -1407,6 +1863,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
     /**
      * The constant indicating the concurrency mode for a
      * <code>ResultSet</code> object that may NOT be updated.
+     * <p>
+     *  该常数指示可能不被更新的<code> ResultSet </code>对象的并发模式
+     * 
+     * 
      * @since 1.2
      */
     int CONCUR_READ_ONLY = 1007;
@@ -1414,6 +1874,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
     /**
      * The constant indicating the concurrency mode for a
      * <code>ResultSet</code> object that may be updated.
+     * <p>
+     *  该常数指示可以更新的<code> ResultSet </code>对象的并发模式
+     * 
+     * 
      * @since 1.2
      */
     int CONCUR_UPDATABLE = 1008;
@@ -1423,6 +1887,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * The concurrency used is determined by the
      * <code>Statement</code> object that created the result set.
      *
+     * <p>
+     *  检索此<code> ResultSet </code>对象的并发模式所使用的并发性由创建结果集的<code> Statement </code>对象确定
+     * 
+     * 
      * @return the concurrency type, either
      *         <code>ResultSet.CONCUR_READ_ONLY</code>
      *         or <code>ResultSet.CONCUR_UPDATABLE</code>
@@ -1442,6 +1910,12 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * <p>
      * <strong>Note:</strong> Support for the <code>rowUpdated</code> method is optional with a result set
      * concurrency of <code>CONCUR_READ_ONLY</code>
+     * <p>
+     * 检索当前行是否已更新返回的值取决于结果集是否可以检测更新
+     * <p>
+     *  <strong>注意</strong>：<code> rowUpdated </code>方法的支持是可选的,结果集的并发性<code> CONCUR_READ_ONLY </code>
+     * 
+     * 
      * @return <code>true</code> if the current row is detected to
      * have been visibly updated by the owner or another; <code>false</code> otherwise
      * @exception SQLException if a database access error occurs
@@ -1460,6 +1934,12 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * <p>
      * <strong>Note:</strong> Support for the <code>rowInserted</code> method is optional with a result set
      * concurrency of <code>CONCUR_READ_ONLY</code>
+     * <p>
+     *  检索当前行是否有插入返回的值取决于此<code> ResultSet </code>对象是否可以检测可见插入
+     * <p>
+     *  <strong>注意</strong>：<code> rowInserted </code>方法的支持是可选的,结果集的并发性<code> CONCUR_READ_ONLY </code>
+     * 
+     * 
      * @return <code>true</code> if the current row is detected to
      * have been inserted; <code>false</code> otherwise
      * @exception SQLException if a database access error occurs
@@ -1480,6 +1960,12 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * <p>
      * <strong>Note:</strong> Support for the <code>rowDeleted</code> method is optional with a result set
      * concurrency of <code>CONCUR_READ_ONLY</code>
+     * <p>
+     * 检索行是否已删除已删除的行可能在结果集中留下可见的"空洞"此方法可用于检测结果集中的空洞返回的值取决于此<code> ResultSet </code>对象可以检测删除
+     * <p>
+     *  <strong>注意</strong>：<code> rowDeleted </code>方法的支持是可选的,结果集的并发性<code> CONCUR_READ_ONLY </code>
+     * 
+     * 
      * @return <code>true</code> if the current row is detected to
      * have been deleted by the owner or another; <code>false</code> otherwise
      * @exception SQLException if a database access error occurs
@@ -1500,6 +1986,13 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code>
      * or <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  使用<code> null </code>值更新指定的列
+     * 
+     *  updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updateRow </code>或<code> insertRow </code>方法来更新
+     * 数据库。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @exception SQLException if the columnIndex is not valid;
      * if a database access error occurs;
@@ -1518,6 +2011,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     * 使用<code> boolean </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateRow </code>
+     * 或<code> insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param x the new column value
      * @exception SQLException if the columnIndex is not valid;
@@ -1538,6 +2036,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * <code>insertRow</code> methods are called to update the database.
      *
      *
+     * <p>
+     *  使用<code> byte </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateRow </code>或
+     * <code> insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param x the new column value
      * @exception SQLException if the columnIndex is not valid;
@@ -1557,6 +2060,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     * 使用<code> short </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateRow </code>或
+     * <code> insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param x the new column value
      * @exception SQLException if the columnIndex is not valid;
@@ -1576,6 +2084,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  使用<code> int </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateRow </code>或<code>
+     *  insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param x the new column value
      * @exception SQLException if the columnIndex is not valid;
@@ -1595,6 +2108,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     * 使用<code> long </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateRow </code>或<code>
+     *  insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param x the new column value
      * @exception SQLException if the columnIndex is not valid;
@@ -1614,6 +2132,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  使用<code> float </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateRow </code>
+     * 或<code> insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param x the new column value
      * @exception SQLException if the columnIndex is not valid;
@@ -1633,6 +2156,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     * 使用<code> double </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateRow </code>
+     * 或<code> insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param x the new column value
      * @exception SQLException if the columnIndex is not valid;
@@ -1653,6 +2181,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  使用<code> javamathBigDecimal </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updat
+     * eRow </code>或<code> insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param x the new column value
      * @exception SQLException if the columnIndex is not valid;
@@ -1672,6 +2205,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     * 使用<code> String </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateRow </code>
+     * 或<code> insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param x the new column value
      * @exception SQLException if the columnIndex is not valid;
@@ -1691,6 +2229,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  使用<code> byte </code>数组值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateRow </code>
+     * 或<code> insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param x the new column value
      * @exception SQLException if the columnIndex is not valid;
@@ -1710,6 +2253,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     * 使用<code> javasqlDate </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updateRow </code>
+     * 或<code> insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param x the new column value
      * @exception SQLException if the columnIndex is not valid;
@@ -1729,6 +2277,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  使用<code> javasqlTime </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateRow </code>
+     * 或<code> insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param x the new column value
      * @exception SQLException if the columnIndex is not valid;
@@ -1749,6 +2302,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     * 使用<code> javasqlTimestamp </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateR
+     * ow </code>或<code> insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param x the new column value
      * @exception SQLException if the columnIndex is not valid;
@@ -1770,6 +2328,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  使用ascii流值更新指定的列,该值将具有指定的字节数updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateRow </code>或<code>
+     *  insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param x the new column value
      * @param length the length of the stream
@@ -1793,6 +2356,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     * 使用具有指定字节数的二进制流值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateRow </code>或<code> i
+     * nsertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param x the new column value
      * @param length the length of the stream
@@ -1816,6 +2384,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  使用具有指定字节数的字符流值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateRow </code>或<code> i
+     * nsertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param x the new column value
      * @param length the length of the stream
@@ -1845,6 +2418,18 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * by scaleOrLength. If these conditions are not true the driver will generate a
      * <code>SQLException</code> when the statement is executed.
      *
+     * <p>
+     *  使用<code> Object </code>值更新指定的列
+     * 
+     * updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updateRow </code>或<code> insertRow </code>方法来更新数
+     * 据库。
+     * p>
+     *  如果第二个参数是<code> InputStream </code>,那么流必须包含由scaleOrLength指定的字节数。
+     * 如果第二个参数是<code> Reader </code>,则读者必须包含指定的字符数by scaleOrLength如果这些条件不为真,驱动程序将在执行语句时生成<code> SQLException
+     *  </code>。
+     *  如果第二个参数是<code> InputStream </code>,那么流必须包含由scaleOrLength指定的字节数。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param x the new column value
      * @param scaleOrLength for an object of <code>java.math.BigDecimal</code> ,
@@ -1872,6 +2457,13 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  使用<code> Object </code>值更新指定的列
+     * 
+     * updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updateRow </code>或<code> insertRow </code>方法来更新数
+     * 据库。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param x the new column value
      * @exception SQLException if the columnIndex is not valid;
@@ -1891,6 +2483,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  使用<code> null </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateRow </code>或
+     * <code> insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @exception SQLException if the columnLabel is not valid;
      * if a database access error occurs;
@@ -1909,6 +2506,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     * 使用<code> boolean </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateRow </code>
+     * 或<code> insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param x the new column value
      * @exception SQLException if the columnLabel is not valid;
@@ -1928,6 +2530,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  使用<code> byte </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateRow </code>或
+     * <code> insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param x the new column value
      * @exception SQLException if the columnLabel is not valid;
@@ -1947,6 +2554,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     * 使用<code> short </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateRow </code>或
+     * <code> insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param x the new column value
      * @exception SQLException if the columnLabel is not valid;
@@ -1966,6 +2578,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  使用<code> int </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateRow </code>或<code>
+     *  insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param x the new column value
      * @exception SQLException if the columnLabel is not valid;
@@ -1985,6 +2602,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     * 使用<code> long </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateRow </code>或<code>
+     *  insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param x the new column value
      * @exception SQLException if the columnLabel is not valid;
@@ -2004,6 +2626,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  使用<code> float </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateRow </code>
+     * 或<code> insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param x the new column value
      * @exception SQLException if the columnLabel is not valid;
@@ -2023,6 +2650,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     * 使用<code> double </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateRow </code>
+     * 或<code> insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param x the new column value
      * @exception SQLException if the columnLabel is not valid;
@@ -2043,6 +2675,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  使用<code> javasqlBigDecimal </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> update
+     * Row </code>或<code> insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param x the new column value
      * @exception SQLException if the columnLabel is not valid;
@@ -2062,6 +2699,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     * 使用<code> String </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateRow </code>
+     * 或<code> insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param x the new column value
      * @exception SQLException if the columnLabel is not valid;
@@ -2082,6 +2724,13 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code>
      * or <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  使用字节数组值更新指定的列
+     * 
+     *  updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updateRow </code>或<code> insertRow </code>方法来更新
+     * 数据库。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param x the new column value
      * @exception SQLException if the columnLabel is not valid;
@@ -2101,6 +2750,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     * 使用<code> javasqlDate </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updateRow </code>
+     * 或<code> insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param x the new column value
      * @exception SQLException if the columnLabel is not valid;
@@ -2120,6 +2774,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  使用<code> javasqlTime </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateRow </code>
+     * 或<code> insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param x the new column value
      * @exception SQLException if the columnLabel is not valid;
@@ -2140,6 +2799,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     * 使用<code> javasqlTimestamp </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateR
+     * ow </code>或<code> insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param x the new column value
      * @exception SQLException if the columnLabel is not valid;
@@ -2161,6 +2825,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  使用ascii流值更新指定的列,该值将具有指定的字节数updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateRow </code>或<code>
+     *  insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param x the new column value
      * @param length the length of the stream
@@ -2184,6 +2853,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     * 使用具有指定字节数的二进制流值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateRow </code>或<code> i
+     * nsertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param x the new column value
      * @param length the length of the stream
@@ -2207,6 +2881,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  使用具有指定字节数的字符流值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateRow </code>或<code> i
+     * nsertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param reader the <code>java.io.Reader</code> object containing
      *        the new column value
@@ -2237,6 +2916,18 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * by scaleOrLength. If these conditions are not true the driver will generate a
      * <code>SQLException</code> when the statement is executed.
      *
+     * <p>
+     *  使用<code> Object </code>值更新指定的列
+     * 
+     * updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updateRow </code>或<code> insertRow </code>方法来更新数
+     * 据库。
+     * p>
+     *  如果第二个参数是<code> InputStream </code>,那么流必须包含由scaleOrLength指定的字节数。
+     * 如果第二个参数是<code> Reader </code>,则读者必须包含指定的字符数by scaleOrLength如果这些条件不为真,驱动程序将在执行语句时生成<code> SQLException
+     *  </code>。
+     *  如果第二个参数是<code> InputStream </code>,那么流必须包含由scaleOrLength指定的字节数。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param x the new column value
      * @param scaleOrLength for an object of <code>java.math.BigDecimal</code> ,
@@ -2264,6 +2955,13 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  使用<code> Object </code>值更新指定的列
+     * 
+     * updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updateRow </code>或<code> insertRow </code>方法来更新数
+     * 据库。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param x the new column value
      * @exception SQLException if the columnLabel is not valid;
@@ -2281,6 +2979,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * <code>ResultSet</code> object and into the database.
      * The cursor must be on the insert row when this method is called.
      *
+     * <p>
+     *  将插入行的内容插入到此<code> ResultSet </code>对象和数据库中当此方法被调用时,游标必须在插入行
+     * 
+     * 
      * @exception SQLException if a database access error occurs;
      * the result set concurrency is <code>CONCUR_READ_ONLY</code>,
      * this method is called on a closed result set,
@@ -2298,6 +3000,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * current row of this <code>ResultSet</code> object.
      * This method cannot be called when the cursor is on the insert row.
      *
+     * <p>
+     *  使用此<code> ResultSet </code>对象的当前行的新内容更新基础数据库此方法不能在游标位于插入行上时调用
+     * 
+     * 
      * @exception SQLException if a database access error occurs;
      * the result set concurrency is <code>CONCUR_READ_ONLY</code>;
      *  this method is called on a closed result set or
@@ -2313,6 +3019,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * and from the underlying database.  This method cannot be called when
      * the cursor is on the insert row.
      *
+     * <p>
+     *  从此<code> ResultSet </code>对象和底层数据库中删除当前行当游标在插入行上时,此方法不能被调用
+     * 
+     * 
      * @exception SQLException if a database access error occurs;
      * the result set concurrency is <code>CONCUR_READ_ONLY</code>;
      * this method is called on a closed result set
@@ -2344,6 +3054,16 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * updates made to the row are lost.  Calling the method
      * <code>refreshRow</code> frequently will likely slow performance.
      *
+     * <p>
+     * 使用数据库中的最新值刷新当前行当光标位于插入行上时,无法调用此方法
+     * 
+     *  <code> refreshRow </code>方法为应用程序提供了一种明确告诉JDBC驱动程序从数据库中提取行的方法。
+     * 应用程序可能想在调用<code> refreshRow </code>时调用缓存或预取由JDBC驱动程序来完成,以从数据库获取行的最新值。如果获取大小大于1,JDBC驱动程序可能实际上一次刷新多个行。
+     * 
+     * <P>根据事务隔离级别和游标敏感性重新获取所有值如果在调用updater方法后调用<code> refreshRow </code>时调用<code> updateRow </code>方法,对行的丢失
+     * 调用方法<code> refreshRow </code>经常可能会降低性能。
+     * 
+     * 
      * @exception SQLException if a database access error
      * occurs; this method is called on a closed result set;
      * the result set type is <code>TYPE_FORWARD_ONLY</code> or if this
@@ -2365,6 +3085,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * <code>updateRow</code> has already been called, this method has no
      * effect.
      *
+     * <p>
+     *  取消对此<code> ResultSet </code>对象中当前行所做的更新此方法可在调用updater方法之后调用方法<code> updateRow </code>以回滚更新对行进行如果没有进行
+     * 更新或已经调用<code> updateRow </code>,此方法没有效果。
+     * 
+     * 
      * @exception SQLException if a database access error
      *            occurs; this method is called on a closed result set;
      * the result set concurrency is <code>CONCUR_READ_ONLY</code>
@@ -2393,6 +3118,15 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * An updater method must be called before a
      * getter method can be called on a column value.
      *
+     * <p>
+     * 将光标移动到插入行当光标位于插入行上时,将记住当前光标位置
+     * 
+     *  插入行是与可更新结果集相关联的特殊行它实际上是一个缓冲区,其中可以通过在将行插入结果集之前调用updater方法来构造新行
+     * 
+     *  当游标位于插入行上时,只能调用updater,getter和<code> insertRow </code>方法。每次调用此方法时,必须给结果集中的所有列赋值。
+     *  > insertRow </code>在对列值调用getter方法之前,必须调用updater方法。
+     * 
+     * 
      * @exception SQLException if a database access error occurs; this
      * method is called on a closed result set
      * or the result set concurrency is <code>CONCUR_READ_ONLY</code>
@@ -2407,6 +3141,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * current row.  This method has no effect if the cursor is not on
      * the insert row.
      *
+     * <p>
+     * 将光标移动到记住的光标位置,通常是当前行如果光标不在插入行上,此方法不起作用
+     * 
+     * 
      * @exception SQLException if a database access error occurs; this
      * method is called on a closed result set
      *  or the result set concurrency is <code>CONCUR_READ_ONLY</code>
@@ -2423,6 +3161,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * <code>DatabaseMetaData</code> method, this method  may return
      * <code>null</code>.
      *
+     * <p>
+     *  检索生成此<code> ResultSet </code>对象的<code> Statement </code>对象如果结果集是以某种其他方式生成的,例如通过<code> DatabaseMetaDa
+     * ta </code> return <code> null </code>。
+     * 
+     * 
      * @return the <code>Statement</code> object that produced
      * this <code>ResultSet</code> object or <code>null</code>
      * if the result set was produced some other way
@@ -2442,6 +3185,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * for the custom mapping of the
      * SQL structured or distinct type that is being retrieved.
      *
+     * <p>
+     *  以Java编程语言中的<code> Object </code>检索此<code> ResultSet </code>对象的当前行中指定列的值如果值为SQL <code> NULL </code >,
+     * 驱动程序返回一个Java <code> null </code>此方法使用给定的<code> Map </code>对象来检索正在检索的SQL结构化或不同类型的自定义映射。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param map a <code>java.util.Map</code> object that contains the mapping
      * from SQL type names to classes in the Java programming language
@@ -2462,6 +3210,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * of this <code>ResultSet</code> object as a <code>Ref</code> object
      * in the Java programming language.
      *
+     * <p>
+     * 将此<code> ResultSet </code>对象的当前行中的指定列的值检索为Java编程语言中的<code> Ref </code>对象
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @return a <code>Ref</code> object representing an SQL <code>REF</code>
      *         value
@@ -2479,6 +3231,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * of this <code>ResultSet</code> object as a <code>Blob</code> object
      * in the Java programming language.
      *
+     * <p>
+     *  将此<code> ResultSet </code>对象的当前行中的指定列的值检索为Java编程语言中的<code> Blob </code>对象
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @return a <code>Blob</code> object representing the SQL
      *         <code>BLOB</code> value in the specified column
@@ -2496,6 +3252,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * of this <code>ResultSet</code> object as a <code>Clob</code> object
      * in the Java programming language.
      *
+     * <p>
+     *  将此<code> ResultSet </code>对象的当前行中的指定列的值检索为Java编程语言中的<code> Clob </code>对象
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @return a <code>Clob</code> object representing the SQL
      *         <code>CLOB</code> value in the specified column
@@ -2513,6 +3273,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * of this <code>ResultSet</code> object as an <code>Array</code> object
      * in the Java programming language.
      *
+     * <p>
+     *  将此<code> ResultSet </code>对象的当前行中的指定列的值检索为Java编程语言中的<code> Array </code>对象
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @return an <code>Array</code> object representing the SQL
      *         <code>ARRAY</code> value in the specified column
@@ -2534,6 +3298,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * This method uses the specified <code>Map</code> object for
      * custom mapping if appropriate.
      *
+     * <p>
+     * 以Java编程语言中的<code> Object </code>检索此<code> ResultSet </code>对象的当前行中指定列的值如果值为SQL <code> NULL </code >,驱
+     * 动程序返回一个Java <code> null </code>此方法使用指定的<code> Map </code>对象进行自定义映射。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param map a <code>java.util.Map</code> object that contains the mapping
      * from SQL type names to classes in the Java programming language
@@ -2554,6 +3323,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * of this <code>ResultSet</code> object as a <code>Ref</code> object
      * in the Java programming language.
      *
+     * <p>
+     *  将此<code> ResultSet </code>对象的当前行中的指定列的值检索为Java编程语言中的<code> Ref </code>对象
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @return a <code>Ref</code> object representing the SQL <code>REF</code>
      *         value in the specified column
@@ -2571,6 +3344,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * of this <code>ResultSet</code> object as a <code>Blob</code> object
      * in the Java programming language.
      *
+     * <p>
+     *  将此<code> ResultSet </code>对象的当前行中的指定列的值检索为Java编程语言中的<code> Blob </code>对象
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @return a <code>Blob</code> object representing the SQL <code>BLOB</code>
      *         value in the specified column
@@ -2588,6 +3365,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * of this <code>ResultSet</code> object as a <code>Clob</code> object
      * in the Java programming language.
      *
+     * <p>
+     * 将此<code> ResultSet </code>对象的当前行中的指定列的值检索为Java编程语言中的<code> Clob </code>对象
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @return a <code>Clob</code> object representing the SQL <code>CLOB</code>
      * value in the specified column
@@ -2605,6 +3386,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * of this <code>ResultSet</code> object as an <code>Array</code> object
      * in the Java programming language.
      *
+     * <p>
+     *  将此<code> ResultSet </code>对象的当前行中的指定列的值检索为Java编程语言中的<code> Array </code>对象
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @return an <code>Array</code> object representing the SQL <code>ARRAY</code> value in
      *         the specified column
@@ -2625,6 +3410,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * value for the date if the underlying database does not store
      * timezone information.
      *
+     * <p>
+     *  将这个<code> ResultSet </code>对象的当前行中的指定列的值检索为Java编程语言中的<code> javasqlDate </code>对象此方法使用给定的日历构建适当的毫秒值对
+     * 于基础数据库不存储时区信息的日期。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param cal the <code>java.util.Calendar</code> object
      * to use in constructing the date
@@ -2646,6 +3436,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * value for the date if the underlying database does not store
      * timezone information.
      *
+     * <p>
+     * 将这个<code> ResultSet </code>对象的当前行中的指定列的值检索为Java编程语言中的<code> javasqlDate </code>对象此方法使用给定的日历构建适当的毫秒值对于
+     * 基础数据库不存储时区信息的日期。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param cal the <code>java.util.Calendar</code> object
      * to use in constructing the date
@@ -2667,6 +3462,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * value for the time if the underlying database does not store
      * timezone information.
      *
+     * <p>
+     *  将此<code> ResultSet </code>对象的当前行中的指定列的值检索为Java编程语言中的<code> javasqlTime </code>对象此方法使用给定的日历构建适当的毫秒值如果
+     * 基础数据库不存储时区信息的时间。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param cal the <code>java.util.Calendar</code> object
      * to use in constructing the time
@@ -2688,6 +3488,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * value for the time if the underlying database does not store
      * timezone information.
      *
+     * <p>
+     * 将此<code> ResultSet </code>对象的当前行中的指定列的值检索为Java编程语言中的<code> javasqlTime </code>对象此方法使用给定的日历构建适当的毫秒值如果基
+     * 础数据库不存储时区信息的时间。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param cal the <code>java.util.Calendar</code> object
      * to use in constructing the time
@@ -2709,6 +3514,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * value for the timestamp if the underlying database does not store
      * timezone information.
      *
+     * <p>
+     *  将这个<code> ResultSet </code>对象的当前行中的指定列的值作为Java编程语言中的<code> javasqlTimestamp </code>对象获取此方法使用给定的日历构建一
+     * 个适当的毫秒值对于基础数据库不存储时区信息的时间戳。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param cal the <code>java.util.Calendar</code> object
      * to use in constructing the timestamp
@@ -2731,6 +3541,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * value for the timestamp if the underlying database does not store
      * timezone information.
      *
+     * <p>
+     * 将这个<code> ResultSet </code>对象的当前行中的指定列的值作为Java编程语言中的<code> javasqlTimestamp </code>对象获取此方法使用给定的日历构建一个
+     * 适当的毫秒值对于基础数据库不存储时区信息的时间戳。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param cal the <code>java.util.Calendar</code> object
      * to use in constructing the date
@@ -2751,6 +3566,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * The constant indicating that open <code>ResultSet</code> objects with this
      * holdability will remain open when the current transaction is committed.
      *
+     * <p>
+     *  当提交当前事务时,指示具有此可保持性的open <code> ResultSet </code>对象的常量将保持打开
+     * 
+     * 
      * @since 1.4
      */
     int HOLD_CURSORS_OVER_COMMIT = 1;
@@ -2759,6 +3578,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * The constant indicating that open <code>ResultSet</code> objects with this
      * holdability will be closed when the current transaction is committed.
      *
+     * <p>
+     *  当提交当前事务时,指示具有此保持性的open <code> ResultSet </code>对象的常量将被关闭
+     * 
+     * 
      * @since 1.4
      */
     int CLOSE_CURSORS_AT_COMMIT = 2;
@@ -2768,6 +3591,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * of this <code>ResultSet</code> object as a <code>java.net.URL</code>
      * object in the Java programming language.
      *
+     * <p>
+     * 将此<code> ResultSet </code>对象的当前行中的指定列的值检索为Java编程语言中的<code> javanetURL </code>对象
+     * 
+     * 
      * @param columnIndex the index of the column 1 is the first, 2 is the second,...
      * @return the column value as a <code>java.net.URL</code> object;
      * if the value is SQL <code>NULL</code>,
@@ -2786,6 +3613,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * of this <code>ResultSet</code> object as a <code>java.net.URL</code>
      * object in the Java programming language.
      *
+     * <p>
+     *  将此<code> ResultSet </code>对象的当前行中的指定列的值检索为Java编程语言中的<code> javanetURL </code>对象
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @return the column value as a <code>java.net.URL</code> object;
      * if the value is SQL <code>NULL</code>,
@@ -2806,6 +3637,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  使用<code> javasqlRef </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateRow </code>
+     * 或<code> insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param x the new column value
      * @exception SQLException if the columnIndex is not valid;
@@ -2825,6 +3661,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     * 使用<code> javasqlRef </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateRow </code>
+     * 或<code> insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param x the new column value
      * @exception SQLException if the columnLabel is not valid;
@@ -2844,6 +3685,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  使用<code> javasqlBlob </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateRow </code>
+     * 或<code> insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param x the new column value
      * @exception SQLException if the columnIndex is not valid;
@@ -2863,6 +3709,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     * 使用<code> javasqlBlob </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateRow </code>
+     * 或<code> insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param x the new column value
      * @exception SQLException if the columnLabel is not valid;
@@ -2882,6 +3733,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  使用<code> javasqlClob </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateRow </code>
+     * 或<code> insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param x the new column value
      * @exception SQLException if the columnIndex is not valid;
@@ -2901,6 +3757,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     * 使用<code> javasqlClob </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateRow </code>
+     * 或<code> insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param x the new column value
      * @exception SQLException if the columnLabel is not valid;
@@ -2920,6 +3781,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  使用<code> javasqlArray </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateRow 
+     * </code>或<code> insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param x the new column value
      * @exception SQLException if the columnIndex is not valid;
@@ -2939,6 +3805,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     * 使用<code> javasqlArray </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateRow </code>
+     * 或<code> insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param x the new column value
      * @exception SQLException if the columnLabel is not valid;
@@ -2958,6 +3829,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * <code>ResultSet</code> object as a <code>java.sql.RowId</code> object in the Java
      * programming language.
      *
+     * <p>
+     *  将这个<code> ResultSet </code>对象的当前行中的指定列的值检索为Java编程语言中的<code> javasqlRowId </code>对象
+     * 
+     * 
      * @param columnIndex the first column is 1, the second 2, ...
      * @return the column value; if the value is a SQL <code>NULL</code> the
      *     value returned is <code>null</code>
@@ -2975,6 +3850,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * <code>ResultSet</code> object as a <code>java.sql.RowId</code> object in the Java
      * programming language.
      *
+     * <p>
+     *  将这个<code> ResultSet </code>对象的当前行中的指定列的值检索为Java编程语言中的<code> javasqlRowId </code>对象
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @return the column value ; if the value is a SQL <code>NULL</code> the
      *     value returned is <code>null</code>
@@ -2994,6 +3873,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * the <code>updateRow</code> or <code>insertRow</code> methods are called
      * to update the database.
      *
+     * <p>
+     * 使用<code> RowId </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不更新基础数据库;而是调用<code> updateRow </code>或<code>
+     *  insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second 2, ...
      * @param x the column value
      * @exception SQLException if the columnIndex is not valid;
@@ -3013,6 +3897,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * the <code>updateRow</code> or <code>insertRow</code> methods are called
      * to update the database.
      *
+     * <p>
+     *  使用<code> RowId </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不更新基础数据库;而是调用<code> updateRow </code>或
+     * <code> insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param x the column value
      * @exception SQLException if the columnLabel is not valid;
@@ -3027,6 +3916,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
 
     /**
      * Retrieves the holdability of this <code>ResultSet</code> object
+     * <p>
+     *  检索此<code> ResultSet </code>对象的可保留性
+     * 
+     * 
      * @return  either <code>ResultSet.HOLD_CURSORS_OVER_COMMIT</code> or <code>ResultSet.CLOSE_CURSORS_AT_COMMIT</code>
      * @throws SQLException if a database access error occurs
      * or this method is called on a closed result set
@@ -3038,6 +3931,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * Retrieves whether this <code>ResultSet</code> object has been closed. A <code>ResultSet</code> is closed if the
      * method close has been called on it, or if it is automatically closed.
      *
+     * <p>
+     * 检索此<code> ResultSet </code>对象是否已关闭如果方法close已被调用,或如果它被自动关闭,则<code> ResultSet </code>
+     * 
+     * 
      * @return true if this <code>ResultSet</code> object is closed; false if it is still open
      * @throws SQLException if a database access error occurs
      * @since 1.6
@@ -3053,6 +3950,12 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  更新指定的列与<code> String </code>值它适用于更新<code> NCHAR </code>,<code> NVARCHAR </code>和<code> LONGNVARCHAR 
+     * </code> updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updateRow </code>或<code> insertRow </code>
+     * 方法来更新数据库。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second 2, ...
      * @param nString the value for the column to be updated
      * @throws SQLException if the columnIndex is not valid;
@@ -3076,6 +3979,12 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     * 更新指定的列与<code> String </code>值它适用于更新<code> NCHAR </code>,<code> NVARCHAR </code>和<code> LONGNVARCHAR </code>
+     *  updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updateRow </code>或<code> insertRow </code>方法来更新
+     * 数据库。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param nString the value for the column to be updated
      * @throws SQLException if the columnLabel is not valid;
@@ -3097,6 +4006,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  使用<code> javasqlNClob </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateRow 
+     * </code>或<code> insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second 2, ...
      * @param nClob the value for the column to be updated
      * @throws SQLException if the columnIndex is not valid;
@@ -3118,6 +4032,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     * 使用<code> javasqlNClob </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateRow </code>
+     * 或<code> insertRow </code>方法来更新数据库。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param nClob the value for the column to be updated
      * @throws SQLException if the columnLabel is not valid;
@@ -3137,6 +4056,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * of this <code>ResultSet</code> object as a <code>NClob</code> object
      * in the Java programming language.
      *
+     * <p>
+     *  将此<code> ResultSet </code>对象的当前行中的指定列的值检索为Java编程语言中的<code> NClob </code>对象
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @return a <code>NClob</code> object representing the SQL
      *         <code>NCLOB</code> value in the specified column
@@ -3156,6 +4079,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * of this <code>ResultSet</code> object as a <code>NClob</code> object
      * in the Java programming language.
      *
+     * <p>
+     *  将此<code> ResultSet </code>对象的当前行中的指定列的值检索为Java编程语言中的<code> NClob </code>对象
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @return a <code>NClob</code> object representing the SQL <code>NCLOB</code>
      * value in the specified column
@@ -3174,6 +4101,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * Retrieves the value of the designated column in  the current row of
      *  this <code>ResultSet</code> as a
      * <code>java.sql.SQLXML</code> object in the Java programming language.
+     * <p>
+     * 将此<code> ResultSet </code>当前行中指定列的值作为Java编程语言中的<code> javasqlSQLXML </code>对象
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @return a <code>SQLXML</code> object that maps an <code>SQL XML</code> value
      * @throws SQLException if the columnIndex is not valid;
@@ -3189,6 +4120,10 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * Retrieves the value of the designated column in  the current row of
      *  this <code>ResultSet</code> as a
      * <code>java.sql.SQLXML</code> object in the Java programming language.
+     * <p>
+     *  将此<code> ResultSet </code>当前行中指定列的值作为Java编程语言中的<code> javasqlSQLXML </code>对象
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @return a <code>SQLXML</code> object that maps an <code>SQL XML</code> value
      * @throws SQLException if the columnLabel is not valid;
@@ -3208,6 +4143,12 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * to update the database.
      * <p>
      *
+     * <p>
+     *  使用<code> javasqlSQLXML </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateRow
+     *  </code>或<code> insertRow </code>方法来更新数据库。
+     * <p>
+     * 
+     * 
      * @param columnIndex the first column is 1, the second 2, ...
      * @param xmlObject the value for the column to be updated
      * @throws SQLException if the columnIndex is not valid;
@@ -3234,6 +4175,12 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * to update the database.
      * <p>
      *
+     * <p>
+     * 使用<code> javasqlSQLXML </code>值更新指定的列updater方法用于更新当前行或插入行中的列值updater方法不会更新基础数据库;而是调用<code> updateRow 
+     * </code>或<code> insertRow </code>方法来更新数据库。
+     * <p>
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param xmlObject the column value
      * @throws SQLException if the columnLabel is not valid;
@@ -3260,6 +4207,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * accessing  <code>NCHAR</code>,<code>NVARCHAR</code>
      * and <code>LONGNVARCHAR</code> columns.
      *
+     * <p>
+     *  以Java编程语言中的<code> String </code>检索此<code> ResultSet </code>对象的当前行中指定列的值。
+     * 它用于访问<code> NCHAR <代码>,<code> NVARCHAR </code>和<code> LONGNVARCHAR </code>列。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @return the column value; if the value is SQL <code>NULL</code>, the
      * value returned is <code>null</code>
@@ -3281,6 +4233,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * accessing  <code>NCHAR</code>,<code>NVARCHAR</code>
      * and <code>LONGNVARCHAR</code> columns.
      *
+     * <p>
+     * 以Java编程语言中的<code> String </code>检索此<code> ResultSet </code>对象的当前行中指定列的值。
+     * 它用于访问<code> NCHAR <代码>,<code> NVARCHAR </code>和<code> LONGNVARCHAR </code>列。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @return the column value; if the value is SQL <code>NULL</code>, the
      * value returned is <code>null</code>
@@ -3302,6 +4259,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * accessing  <code>NCHAR</code>,<code>NVARCHAR</code>
      * and <code>LONGNVARCHAR</code> columns.
      *
+     * <p>
+     *  以<code> javaioReader </code>对象的形式获取此<code> ResultSet </code>对象的当前行中指定列的值。
+     * 它用于访问<code> NCHAR </code>代码> NVARCHAR </code>和<code> LONGNVARCHAR </code>列。
+     * 
+     * 
      * @return a <code>java.io.Reader</code> object that contains the column
      * value; if the value is SQL <code>NULL</code>, the value returned is
      * <code>null</code> in the Java programming language.
@@ -3323,6 +4285,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * accessing  <code>NCHAR</code>,<code>NVARCHAR</code>
      * and <code>LONGNVARCHAR</code> columns.
      *
+     * <p>
+     * 以<code> javaioReader </code>对象的形式获取此<code> ResultSet </code>对象的当前行中指定列的值。
+     * 它用于访问<code> NCHAR </code>代码> NVARCHAR </code>和<code> LONGNVARCHAR </code>列。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @return a <code>java.io.Reader</code> object that contains the column
      * value; if the value is SQL <code>NULL</code>, the value returned is
@@ -3350,6 +4317,14 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  使用字符流值更新指定的列,该值将具有指定的字节数驱动程序执行从Java字符格式到数据库中的国家字符集的必要转换它适用于更新<code> NCHAR </code >,<code> NVARCHAR </code>
+     * 和<code> LONGNVARCHAR </code>列。
+     * <p>
+     * updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updateRow </code>或<code> insertRow </code>方法来更新数
+     * 据库。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param x the new column value
      * @param length the length of the stream
@@ -3378,6 +4353,14 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  使用字符流值更新指定的列,该值将具有指定的字节数驱动程序执行从Java字符格式到数据库中的国家字符集的必要转换适用于更新<code> NCHAR </code >,<code> NVARCHAR </code>
+     * 和<code> LONGNVARCHAR </code>列。
+     * <p>
+     * updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updateRow </code>或<code> insertRow </code>方法来更新数
+     * 据库。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param reader the <code>java.io.Reader</code> object containing
      *        the new column value
@@ -3401,6 +4384,13 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  使用ascii流值更新指定的列,该值将具有指定的字节数
+     * <p>
+     *  updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updateRow </code>或<code> insertRow </code>方法来更新
+     * 数据库。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param x the new column value
      * @param length the length of the stream
@@ -3425,6 +4415,13 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  使用二进制流值更新指定的列,该值将具有指定的字节数
+     * <p>
+     * updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updateRow </code>或<code> insertRow </code>方法来更新数
+     * 据库。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param x the new column value
      * @param length the length of the stream
@@ -3449,6 +4446,13 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  使用字符流值更新指定的列,该值将具有指定的字节数
+     * <p>
+     *  updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updateRow </code>或<code> insertRow </code>方法来更新
+     * 数据库。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param x the new column value
      * @param length the length of the stream
@@ -3472,6 +4476,13 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  使用ascii流值更新指定的列,该值将具有指定的字节数
+     * <p>
+     * updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updateRow </code>或<code> insertRow </code>方法来更新数
+     * 据库。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param x the new column value
      * @param length the length of the stream
@@ -3496,6 +4507,13 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  使用二进制流值更新指定的列,该值将具有指定的字节数
+     * <p>
+     *  updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updateRow </code>或<code> insertRow </code>方法来更新
+     * 数据库。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param x the new column value
      * @param length the length of the stream
@@ -3520,6 +4538,13 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  使用字符流值更新指定的列,该值将具有指定的字节数
+     * <p>
+     * updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updateRow </code>或<code> insertRow </code>方法来更新数
+     * 据库。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param reader the <code>java.io.Reader</code> object containing
      *        the new column value
@@ -3545,6 +4570,14 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  使用给定的输入流更新指定的列,该输入流将具有指定的字节数
+     * 
+     * <p>
+     *  updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updateRow </code>或<code> insertRow </code>方法来更新
+     * 数据库。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param inputStream An object that contains the data to set the parameter
      * value to.
@@ -3569,6 +4602,14 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  使用给定的输入流更新指定的列,该输入流将具有指定的字节数
+     * 
+     * <p>
+     * updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updateRow </code>或<code> insertRow </code>方法来更新数
+     * 据库。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param inputStream An object that contains the data to set the parameter
      * value to.
@@ -3597,6 +4638,15 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  使用给定的<code> Reader </code>对象更新指定的列,这是给定的字符数长当将非常大的UNICODE值输入到<code> LONGVARCHAR </code>参数时,通过<code> 
+     * javaioReader </code>对象发送它JDBC驱动程序将执行从UNICODE到数据库字符格式的任何必要的转换。
+     * 
+     * <p>
+     * updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updateRow </code>或<code> insertRow </code>方法来更新数
+     * 据库。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param reader An object that contains the data to set the parameter value to.
      * @param length the number of characters in the parameter data.
@@ -3624,6 +4674,15 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  使用给定的<code> Reader </code>对象更新指定的列,这是给定的字符数长当将一个非常大的UNICODE值输入到<code> LONGVARCHAR </code>参数时,通过<code>
+     *  javaioReader </code>对象发送它JDBC驱动程序将执行从UNICODE到数据库字符格式的任何必要的转换。
+     * 
+     * <p>
+     * updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updateRow </code>或<code> insertRow </code>方法来更新数
+     * 据库。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param reader An object that contains the data to set the parameter value to.
      * @param length the number of characters in the parameter data.
@@ -3650,6 +4709,15 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  使用给定的<code> Reader </code>对象更新指定的列,这是给定的字符数长当将非常大的UNICODE值输入到<code> LONGVARCHAR </code>参数时,通过<code> 
+     * javaioReader </code>对象发送它JDBC驱动程序将执行从UNICODE到数据库字符格式的任何必要的转换。
+     * 
+     * <p>
+     * updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updateRow </code>或<code> insertRow </code>方法来更新数
+     * 据库。
+     * 
+     * 
      * @param columnIndex the first column is 1, the second 2, ...
      * @param reader An object that contains the data to set the parameter value to.
      * @param length the number of characters in the parameter data.
@@ -3679,6 +4747,15 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * update the underlying database; instead the <code>updateRow</code> or
      * <code>insertRow</code> methods are called to update the database.
      *
+     * <p>
+     *  使用给定的<code> Reader </code>对象更新指定的列,这是给定的字符数长当将非常大的UNICODE值输入到<code> LONGVARCHAR </code>参数时,通过<code> 
+     * javaioReader </code>对象发送它JDBC驱动程序将执行从UNICODE到数据库字符格式的任何必要的转换。
+     * 
+     * <p>
+     * updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updateRow </code>或<code> insertRow </code>方法来更新数
+     * 据库。
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param reader An object that contains the data to set the parameter value to.
      * @param length the number of characters in the parameter data.
@@ -3715,6 +4792,16 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * it might be more efficient to use a version of
      * <code>updateNCharacterStream</code> which takes a length parameter.
      *
+     * <p>
+     *  使用字符流值更新指定的列将根据需要从流中读取数据,直到达到流末尾驱动程序执行必要的从Java字符格式到数据库中的国家字符集的转换它是供使用当更新<code> NCHAR </code>,<code> 
+     * NVARCHAR </code>和<code> LONGNVARCHAR </code>列。
+     * <p>
+     * updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updateRow </code>或<code> insertRow </code>方法来更新数
+     * 据库。
+     * 
+     *  <P> <B>注意：</B>请参阅您的JDBC驱动程序文档,以确定是否使用一个版本的<code> updateNCharacterStream </code>
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param x the new column value
      * @exception SQLException if the columnIndex is not valid;
@@ -3746,6 +4833,16 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * it might be more efficient to use a version of
      * <code>updateNCharacterStream</code> which takes a length parameter.
      *
+     * <p>
+     * 使用字符流值更新指定的列将根据需要从流中读取数据,直到达到流末尾驱动程序执行必要的从Java字符格式到数据库中的国家字符集的转换它是供使用当更新<code> NCHAR </code>,<code> N
+     * VARCHAR </code>和<code> LONGNVARCHAR </code>列。
+     * <p>
+     *  updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updateRow </code>或<code> insertRow </code>方法来更新
+     * 数据库。
+     * 
+     * <P> <B>注意：</B>请参阅您的JDBC驱动程序文档,以确定是否使用一个版本的<code> updateNCharacterStream </code>
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param reader the <code>java.io.Reader</code> object containing
      *        the new column value
@@ -3772,6 +4869,15 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * it might be more efficient to use a version of
      * <code>updateAsciiStream</code> which takes a length parameter.
      *
+     * <p>
+     *  使用ascii流值更新指定的列将根据需要从流中读取数据,直到达到流终止
+     * <p>
+     *  updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updateRow </code>或<code> insertRow </code>方法来更新
+     * 数据库。
+     * 
+     *  <P> <B>注意：</B>请查看您的JDBC驱动程序文档,以确定是否可以使用一个版本的<code> updateAsciiStream </code>
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param x the new column value
      * @exception SQLException if the columnIndex is not valid;
@@ -3799,6 +4905,15 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * it might be more efficient to use a version of
      * <code>updateBinaryStream</code> which takes a length parameter.
      *
+     * <p>
+     * 使用二进制流值更新指定的列将根据需要从流中读取数据,直到到达流末尾
+     * <p>
+     *  updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updateRow </code>或<code> insertRow </code>方法来更新
+     * 数据库。
+     * 
+     *  <P> <B>注意：</B>请查看您的JDBC驱动程序文档,以确定是否使用一个版本的<code> updateBinaryStream </code>
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param x the new column value
      * @exception SQLException if the columnIndex is not valid;
@@ -3826,6 +4941,15 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * it might be more efficient to use a version of
      * <code>updateCharacterStream</code> which takes a length parameter.
      *
+     * <p>
+     *  使用字符流值更新指定的列将根据需要从流中读取数据,直到到达流末尾
+     * <p>
+     * updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updateRow </code>或<code> insertRow </code>方法来更新数
+     * 据库。
+     * 
+     *  <P> <B>注意：</B>请查看您的JDBC驱动程序文档,以确定是否可以使用一个版本的<code> updateCharacterStream </code>
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param x the new column value
      * @exception SQLException if the columnIndex is not valid;
@@ -3852,6 +4976,15 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * it might be more efficient to use a version of
      * <code>updateAsciiStream</code> which takes a length parameter.
      *
+     * <p>
+     *  使用ascii流值更新指定的列将根据需要从流中读取数据,直到达到流终止
+     * <p>
+     * updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updateRow </code>或<code> insertRow </code>方法来更新数
+     * 据库。
+     * 
+     *  <P> <B>注意：</B>请查看您的JDBC驱动程序文档,以确定是否可以使用一个版本的<code> updateAsciiStream </code>
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param x the new column value
      * @exception SQLException if the columnLabel is not valid;
@@ -3879,6 +5012,15 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * it might be more efficient to use a version of
      * <code>updateBinaryStream</code> which takes a length parameter.
      *
+     * <p>
+     *  使用二进制流值更新指定的列将根据需要从流中读取数据,直到到达流末尾
+     * <p>
+     * updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updateRow </code>或<code> insertRow </code>方法来更新数
+     * 据库。
+     * 
+     *  <P> <B>注意：</B>请查看您的JDBC驱动程序文档,以确定是否使用一个版本的<code> updateBinaryStream </code>
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param x the new column value
      * @exception SQLException if the columnLabel is not valid;
@@ -3906,6 +5048,15 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * it might be more efficient to use a version of
      * <code>updateCharacterStream</code> which takes a length parameter.
      *
+     * <p>
+     *  使用字符流值更新指定的列将根据需要从流中读取数据,直到到达流末尾
+     * <p>
+     * updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updateRow </code>或<code> insertRow </code>方法来更新数
+     * 据库。
+     * 
+     *  <P> <B>注意：</B>请查看您的JDBC驱动程序文档,以确定是否可以使用一个版本的<code> updateCharacterStream </code>
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param reader the <code>java.io.Reader</code> object containing
      *        the new column value
@@ -3931,6 +5082,15 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * it might be more efficient to use a version of
      * <code>updateBlob</code> which takes a length parameter.
      *
+     * <p>
+     *  使用给定的输入流更新指定的列将根据需要从流中读取数据,直到达到流末尾
+     * <p>
+     * updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updateRow </code>或<code> insertRow </code>方法来更新数
+     * 据库。
+     * 
+     *  <P> <B>注意：</B>请查看您的JDBC驱动程序文档,以确定是否可以使用一个版本的<code> updateBlob </code>
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param inputStream An object that contains the data to set the parameter
      * value to.
@@ -3956,6 +5116,15 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * it might be more efficient to use a version of
      * <code>updateBlob</code> which takes a length parameter.
      *
+     * <p>
+     *  使用给定的输入流更新指定的列将根据需要从流中读取数据,直到达到流末尾
+     * <p>
+     * updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updateRow </code>或<code> insertRow </code>方法来更新数
+     * 据库。
+     * 
+     *  <P> <B>注意：</B>请查看您的JDBC驱动程序文档,以确定是否可以使用一个版本的<code> updateBlob </code>
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param inputStream An object that contains the data to set the parameter
      * value to.
@@ -3985,6 +5154,16 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * it might be more efficient to use a version of
      * <code>updateClob</code> which takes a length parameter.
      *
+     * <p>
+     *  使用给定的<code> Reader </code>对象更新指定的列。将根据需要从流中读取数据,直到达到流末尾JDBC驱动程序将执行从UNICODE到数据库字符格式的任何必要的转换
+     * 
+     * <p>
+     * updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updateRow </code>或<code> insertRow </code>方法来更新数
+     * 据库。
+     * 
+     *  <P> <B>注意：</B>请查看您的JDBC驱动程序文档,以确定是否使用一个版本的<code> updateClob </code>
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param reader An object that contains the data to set the parameter value to.
      * @exception SQLException if the columnIndex is not valid;
@@ -4014,6 +5193,16 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * it might be more efficient to use a version of
      * <code>updateClob</code> which takes a length parameter.
      *
+     * <p>
+     *  使用给定的<code> Reader </code>对象更新指定的列。将根据需要从流中读取数据,直到达到流末尾JDBC驱动程序将执行从UNICODE到数据库字符格式的任何必要的转换
+     * 
+     * <p>
+     * updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updateRow </code>或<code> insertRow </code>方法来更新数
+     * 据库。
+     * 
+     *  <P> <B>注意：</B>请查看您的JDBC驱动程序文档,以确定是否使用一个版本的<code> updateClob </code>
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param reader An object that contains the data to set the parameter value to.
      * @exception SQLException if the columnLabel is not valid; if a database access error occurs;
@@ -4041,6 +5230,18 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * it might be more efficient to use a version of
      * <code>updateNClob</code> which takes a length parameter.
      *
+     * <p>
+     *  使用给定的<code> Reader </code>更新指定的列
+     * 
+     *  将根据需要从流中读取数据,直到达到流末尾JDBC驱动程序将执行从UNICODE到数据库字符格式的任何必要的转换
+     * 
+     * <p>
+     * updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updateRow </code>或<code> insertRow </code>方法来更新数
+     * 据库。
+     * 
+     *  <P> <B>注意：</B>请查看您的JDBC驱动程序文档,以确定是否使用一个版本的<code> updateNClob </code>
+     * 
+     * 
      * @param columnIndex the first column is 1, the second 2, ...
      * @param reader An object that contains the data to set the parameter value to.
      * @throws SQLException if the columnIndex is not valid;
@@ -4072,6 +5273,16 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * it might be more efficient to use a version of
      * <code>updateNClob</code> which takes a length parameter.
      *
+     * <p>
+     *  使用给定的<code> Reader </code>对象更新指定的列。将根据需要从流中读取数据,直到达到流末尾JDBC驱动程序将执行从UNICODE到数据库字符格式的任何必要的转换
+     * 
+     * <p>
+     * updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用<code> updateRow </code>或<code> insertRow </code>方法来更新数
+     * 据库。
+     * 
+     *  <P> <B>注意：</B>请查看您的JDBC驱动程序文档,以确定是否使用一个版本的<code> updateNClob </code>
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.  If the SQL AS clause was not specified, then the label is the name of the column
      * @param reader An object that contains the data to set the parameter value to.
      * @throws SQLException if the columnLabel is not valid; if the driver does not support national
@@ -4100,6 +5311,13 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * Appendix B, Table B-3 and conversion of appropriate user defined SQL
      * types to a Java type which implements {@code SQLData}, or {@code Struct}.
      * Additional conversions may be supported and are vendor defined.
+     * <p>
+     *  p>检索此<code> ResultSet </code>对象的当前行中的指定列的值,并且如果支持转换,则将从列的SQL类型转换为请求的Java数据类型如果转换不支持或为类型指定null,则会抛出<code>
+     *  SQLException </code>。
+     * p>
+     * 实现必须至少支持附录B,表B-3中定义的转换,并将适当的用户定义的SQL类型转换为实现{@code SQLData}或{@code Struct}的Java类型。可能支持其他转换并且是供应商定义的
+     * 
+     * 
      * @param <T> the type of the class modeled by this Class object
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param type Class representing the Java data type to convert the designated
@@ -4129,6 +5347,13 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      * types to a Java type which implements {@code SQLData}, or {@code Struct}.
      * Additional conversions may be supported and are vendor defined.
      *
+     * <p>
+     *  p>检索此<code> ResultSet </code>对象的当前行中的指定列的值,如果支持转换,则将从列的SQL类型转换为请求的Java数据类型如果转换不支持或为类型指定null,则会抛出<code>
+     *  SQLException </code>。
+     * p>
+     * 实现必须至少支持附录B,表B-3中定义的转换,并将适当的用户定义的SQL类型转换为实现{@code SQLData}或{@code Struct}的Java类型。可能支持其他转换并且是供应商定义的
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS clause.
      * If the SQL AS clause was not specified, then the label is the name
      * of the column
@@ -4164,6 +5389,17 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      *<p>
      * The default implementation will throw {@code SQLFeatureNotSupportedException}
      *
+     * <p>
+     *  使用{@code Object}值更新指定的列
+     * 
+     *  updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用{@code updateRow}或{@code insertRow}方法来更新数据库
+     * p>
+     * 如果第二个参数是{@code InputStream},那么流必须包含由scaleOrLength指定的字节数。
+     * 如果第二个参数是{@code Reader},则读者必须包含由scaleOrLength指定的字符数。如果这些条件不是真的,驱动程序将在执行语句时生成{@code SQLException}。
+     * p>
+     *  默认实现会抛出{@code SQLFeatureNotSupportedException}
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param x the new column value
      * @param targetSqlType the SQL type to be sent to the database
@@ -4205,6 +5441,17 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      *<p>
      * The default implementation will throw {@code SQLFeatureNotSupportedException}
      *
+     * <p>
+     *  使用{@code Object}值更新指定的列
+     * 
+     *  updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用{@code updateRow}或{@code insertRow}方法来更新数据库
+     * p>
+     * 如果第二个参数是{@code InputStream},那么流必须包含由scaleOrLength指定的字节数。
+     * 如果第二个参数是{@code Reader},则读者必须包含由scaleOrLength指定的字符数。如果这些条件不是true,当执行语句时,驱动程序将生成{@code SQLException}。
+     * p>
+     *  默认实现会抛出{@code SQLFeatureNotSupportedException}
+     * 
+     * 
      * @param columnLabel the label for the column specified with the SQL AS
      * clause.  If the SQL AS clause was not specified, then the label is
      * the name of the column
@@ -4241,6 +5488,14 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      *<p>
      * The default implementation will throw {@code SQLFeatureNotSupportedException}
      *
+     * <p>
+     *  使用{@code Object}值更新指定的列
+     * 
+     *  updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用{@code updateRow}或{@code insertRow}方法来更新数据库
+     * p>
+     * 默认实现会抛出{@code SQLFeatureNotSupportedException}
+     * 
+     * 
      * @param columnIndex the first column is 1, the second is 2, ...
      * @param x the new column value
      * @param targetSqlType the SQL type to be sent to the database
@@ -4269,6 +5524,11 @@ public interface ResultSet extends Wrapper, AutoCloseable {
      *<p>
      * The default implementation will throw {@code SQLFeatureNotSupportedException}
      *
+     * <p>
+     *  使用{@code Object}值更新指定的列
+     * 
+     *  updater方法用于更新当前行或插入行中的列值updater方法不更新底层数据库;而是调用{@code updateRow}或{@code insertRow}方法来更新数据库
+     * 
      * @param columnLabel the label for the column specified with the SQL AS
      * clause.  If the SQL AS clause was not specified, then the label is
      * the name of the column

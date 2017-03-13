@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会
+ * 
+ *  根据Apache许可证第20版("许可证")授权;您不得使用此文件,除非符合许可证您可以在获取许可证的副本
+ * 
+ *  http：// wwwapacheorg / licenses / LICENSE-20
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件将按"原样"基础分发,无任何明示或暗示的保证或条件。请参阅许可证管理权限和限制许可证
+ * 
  */
 /*
  * $Id: UnionPathIterator.java,v 1.2.4.1 2005/09/14 19:43:25 jeffsuttor Exp $
+ * <p>
+ *  $ Id：UnionPathIteratorjava,v 1241 2005/09/14 19:43:25 jeffsuttor Exp $
+ * 
  */
 package com.sun.org.apache.xpath.internal.axes;
 
@@ -39,6 +52,11 @@ import com.sun.org.apache.xpath.internal.compiler.OpMap;
  * As each node is iterated via nextNode(), the node is also stored
  * in the NodeVector, so that previousNode() can easily be done.
  * @xsl.usage advanced
+ * <p>
+ * 此类扩展了NodeSetDTM,它实现了DTMIterator,并根据XPath <a href=\"http://wwww3org/TR/xpath#NT-UnionExpr\"> UnionExpr
+ *  </a>以文档顺序一次获取一个节点。
+ * 每个节点通过nextNode()进行迭代,该节点也存储在NodeVector中,这样previousNode()可以很容易地完成@xslusage advanced。
+ * 
  */
 public class UnionPathIterator extends LocPathIterator
         implements Cloneable, DTMIterator, java.io.Serializable, PathComponent
@@ -47,6 +65,9 @@ public class UnionPathIterator extends LocPathIterator
 
   /**
    * Constructor to create an instance which you can add location paths to.
+   * <p>
+   *  构造函数创建一个可以添加位置路径的实例
+   * 
    */
   public UnionPathIterator()
   {
@@ -63,6 +84,10 @@ public class UnionPathIterator extends LocPathIterator
    * Initialize the context values for this expression
    * after it is cloned.
    *
+   * <p>
+   *  在克隆后,对此表达式的上下文值进行初始化
+   * 
+   * 
    * @param context The XPath runtime context for this
    * transformation.
    */
@@ -95,6 +120,10 @@ public class UnionPathIterator extends LocPathIterator
   /**
    * Add an iterator to the union list.
    *
+   * <p>
+   *  向联合列表中添加迭代器
+   * 
+   * 
    * @param expr non-null reference to a location path iterator.
    */
   public void addIterator(DTMIterator expr)
@@ -129,6 +158,10 @@ public class UnionPathIterator extends LocPathIterator
    * state. After<code>detach</code> has been invoked, calls to
    * <code>nextNode</code> or<code>previousNode</code> will raise the
    * exception INVALID_STATE_ERR.
+   * <p>
+   * 从迭代的集合中分离迭代器,释放任何计算资源并将迭代器置于INVALID状态调用<code> detach </code>之后,调用<code> nextNode </code>或<code> previ
+   * ousNode </code>将引发异常INVALID_STATE_ERR。
+   * 
    */
   public void detach()
   {
@@ -148,6 +181,10 @@ public class UnionPathIterator extends LocPathIterator
    * of location path iterators from the opcode list, and call back
    * into the Compiler to create predicate expressions.
    *
+   * <p>
+   *  创建UnionPathIterator对象,包括从操作码列表创建位置路径迭代器,并调用回编译器以创建谓词表达式
+   * 
+   * 
    * @param compiler The Compiler which is creating
    * this expression.
    * @param opPos The position of this iterator in the
@@ -169,6 +206,10 @@ public class UnionPathIterator extends LocPathIterator
   /**
    * This will return an iterator capable of handling the union of paths given.
    *
+   * <p>
+   *  这将返回一个能够处理给定路径的并集的迭代器
+   * 
+   * 
    * @param compiler The Compiler which is creating
    * this expression.
    * @param opPos The position of this iterator in the
@@ -228,6 +269,10 @@ public class UnionPathIterator extends LocPathIterator
 
   /**
    * Get the analysis bits for this walker, as defined in the WalkerFactory.
+   * <p>
+   *  获取WalkerFactory中定义的此Walker的分析位
+   * 
+   * 
    * @return One of WalkerFactory#BIT_DESCENDANT, etc.
    */
   public int getAnalysisBits()
@@ -251,6 +296,10 @@ public class UnionPathIterator extends LocPathIterator
   /**
    * Read the object from a serialization stream.
    *
+   * <p>
+   *  从序列化流中读取对象
+   * 
+   * 
    * @param stream Input stream to read from
    *
    * @throws java.io.IOException
@@ -274,6 +323,10 @@ public class UnionPathIterator extends LocPathIterator
    * Get a cloned LocPathIterator that holds the same
    * position as this iterator.
    *
+   * <p>
+   *  获取与此迭代器具有相同位置的克隆LocPathIterator
+   * 
+   * 
    * @return A clone of this iterator that holds the same node position.
    *
    * @throws CloneNotSupportedException
@@ -301,6 +354,10 @@ public class UnionPathIterator extends LocPathIterator
   /**
    * Create a new location path iterator.
    *
+   * <p>
+   *  创建一个新的位置路径迭代器
+   * 
+   * 
    * @param compiler The Compiler which is creating
    * this expression.
    * @param opPos The position of this iterator in the
@@ -320,6 +377,10 @@ public class UnionPathIterator extends LocPathIterator
   /**
    * Initialize the location path iterators.  Recursive.
    *
+   * <p>
+   * 初始化位置路径迭代器
+   * 
+   * 
    * @param compiler The Compiler which is creating
    * this expression.
    * @param opPos The position of this iterator in the
@@ -378,6 +439,10 @@ public class UnionPathIterator extends LocPathIterator
    *  Returns the next node in the set and advances the position of the
    * iterator in the set. After a DTMIterator is created, the first call
    * to nextNode() returns the first node in the set.
+   * <p>
+   *  返回集合中的下一个节点,并推进迭代器在集合中的位置创建DTMIterator后,第一次调用nextNode()返回集合中的第一个节点
+   * 
+   * 
    * @return  The next <code>Node</code> in the set being iterated over, or
    *   <code>null</code> if there are no more members in that set.
    */
@@ -445,6 +510,10 @@ public class UnionPathIterator extends LocPathIterator
   /**
    * This function is used to fixup variables from QNames to stack frame
    * indexes at stylesheet build time.
+   * <p>
+   *  此函数用于在样式表构建时将QNames中的变量修复为堆栈帧索引
+   * 
+   * 
    * @param vars List of QNames that correspond to variables.  This list
    * should be searched backwards for the first qualified name that
    * corresponds to the variable reference qname.  The position of the
@@ -465,6 +534,10 @@ public class UnionPathIterator extends LocPathIterator
    * The location path iterators, one for each
    * <a href="http://www.w3.org/TR/xpath#NT-LocationPath">location
    * path</a> contained in the union expression.
+   * <p>
+   *  位置路径迭代器,包含在联合表达式中的每个<a href=\"http://wwww3org/TR/xpath#NT-LocationPath\">位置路径</a>
+   * 
+   * 
    * @serial
    */
   protected LocPathIterator[] m_exprs;
@@ -474,6 +547,10 @@ public class UnionPathIterator extends LocPathIterator
    * The location path iterators, one for each
    * <a href="http://www.w3.org/TR/xpath#NT-LocationPath">location
    * path</a> contained in the union expression.
+   * <p>
+   *  位置路径迭代器,包含在联合表达式中的每个<a href=\"http://wwww3org/TR/xpath#NT-LocationPath\">位置路径</a>
+   * 
+   * 
    * @serial
    */
   protected DTMIterator[] m_iterators;
@@ -481,6 +558,10 @@ public class UnionPathIterator extends LocPathIterator
   /**
    * Returns the axis being iterated, if it is known.
    *
+   * <p>
+   *  返回正在迭代的轴(如果已知)
+   * 
+   * 
    * @return Axis.CHILD, etc., or -1 if the axis is not known or is of multiple
    * types.
    */
@@ -500,6 +581,8 @@ public class UnionPathIterator extends LocPathIterator
         }
 
     /**
+    /* <p>
+    /* 
      * @see ExpressionOwner#getExpression()
      */
     public Expression getExpression()
@@ -508,6 +591,8 @@ public class UnionPathIterator extends LocPathIterator
     }
 
     /**
+    /* <p>
+    /* 
      * @see ExpressionOwner#setExpression(Expression)
      */
     public void setExpression(Expression exp)
@@ -534,6 +619,8 @@ public class UnionPathIterator extends LocPathIterator
   }
 
   /**
+  /* <p>
+  /* 
    * @see com.sun.org.apache.xpath.internal.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
    */
   public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
@@ -552,6 +639,8 @@ public class UnionPathIterator extends LocPathIterator
   }
 
     /**
+    /* <p>
+    /* 
      * @see Expression#deepEquals(Expression)
      */
     public boolean deepEquals(Expression expr)

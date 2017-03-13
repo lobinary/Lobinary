@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2005 Apache软件基金会
+ * 
+ *  根据Apache许可证第20版("许可证")授权;您不得使用此文件,除非符合许可证您可以在获取许可证的副本
+ * 
+ *  http：// wwwapacheorg / licenses / LICENSE-20
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件将按"原样"基础分发,无任何明示或暗示的保证或条件。请参阅许可证管理权限和限制许可证
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.dv.xs;
@@ -57,6 +67,10 @@ import org.w3c.dom.TypeInfo;
 /**
  * @xerces.internal
  *
+ * <p>
+ *  @xercesinternal
+ * 
+ * 
  * @author Sandy Gao, IBM
  * @author Neeraj Bajaj, Sun Microsystems, inc.
  *
@@ -678,6 +692,9 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
      * Returns the closest built-in type category this type represents or
      * derived from. For example, if this simple type is a built-in derived
      * type integer the <code>INTEGER_DV</code> is returned.
+     * <p>
+     * 返回此类型表示或派生的最近的内置类型类别例如,如果此简单类型是内置的派生类型整数,则返回<code> INTEGER_DV </code>
+     * 
      */
     public short getBuiltInKind() {
         return this.fBuiltInKind;
@@ -687,6 +704,9 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
      * If variety is <code>atomic</code> the primitive type definition (a
      * built-in primitive datatype definition or the simple ur-type
      * definition) is available, otherwise <code>null</code>.
+     * <p>
+     *  如果品种是<code> atomic </code>,原始类型定义(内置原始数据类型定义或简单ur类型定义)可用,否则<code> null </code>
+     * 
      */
     public XSSimpleTypeDefinition getPrimitiveType() {
         if (fVariety == VARIETY_ATOMIC && fValidationDV != DV_ANYSIMPLETYPE) {
@@ -706,6 +726,9 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
      * If variety is <code>list</code> the item type definition (an atomic or
      * union simple type definition) is available, otherwise
      * <code>null</code>.
+     * <p>
+     *  如果品种是<code> list </code>,则可以使用项类型定义(原子或联合简单类型定义),否则<code> null </code>
+     * 
      */
     public XSSimpleTypeDefinition getItemType() {
         if (fVariety == VARIETY_LIST) {
@@ -721,6 +744,9 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
      * If variety is <code>union</code> the list of member type definitions (a
      * non-empty sequence of simple type definitions) is available,
      * otherwise an empty <code>XSObjectList</code>.
+     * <p>
+     *  如果品种是<code> union </code>,成员类型定义的列表(非空序列的简单类型定义)是可用的,否则空的<code> XSObjectList </code>
+     * 
      */
     public XSObjectList getMemberTypes() {
         if (fVariety == VARIETY_UNION) {
@@ -733,6 +759,9 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
 
     /**
      * If <restriction> is chosen
+     * <p>
+     *  如果选择<restriction>
+     * 
      */
     public void applyFacets(XSFacets facets, short presentFacet, short fixedFacet, ValidationContext context)
     throws InvalidDatatypeFacetException {
@@ -744,6 +773,9 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
 
     /**
      * built-in derived types by restriction
+     * <p>
+     *  内置派生类型受限制
+     * 
      */
     void applyFacets1(XSFacets facets, short presentFacet, short fixedFacet) {
 
@@ -759,6 +791,9 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
 
     /**
      * built-in derived types by restriction
+     * <p>
+     * 内置派生类型受限制
+     * 
      */
     void applyFacets1(XSFacets facets, short presentFacet, short fixedFacet, short patternType) {
 
@@ -774,6 +809,9 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
 
     /**
      * If <restriction> is chosen, or built-in derived types by restriction
+     * <p>
+     *  如果选择<restriction>,或者通过限制内置派生类型
+     * 
      */
     void applyFacets(XSFacets facets, short presentFacet, short fixedFacet, short patternType, ValidationContext context)
     throws InvalidDatatypeFacetException {
@@ -1365,6 +1403,66 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
                                             fDVs[fValidationDV].compare(fMinInclusive, fBase.fMaxExclusive) != -1)
                                             reportError( "minInclusive-valid-restriction.4", new Object[]{fMinInclusive, fBase.fMaxExclusive, fTypeName});
                                             }
+            /* <p>
+            /*  // maxInclusive> fBasemaxInclusive // maxInclusive> = fBasemaxExclusive // maxInclusive <fBaseminInclusive // maxInclusive <= fBaseminExclusive。
+            /* 
+            /* if(((fFacetsDefined&FACET_MAXINCLUSIVE)！= 0)){if(((fBasefFacetsDefined&FACET_MAXINCLUSIVE)！= 0)){result = fDVs [fValidationDV] compare(fMaxInclusive,fBasefMaxInclusive); if((fBasefFixedFacet&FACET_MAXINCLUSIVE)！= 0 && result！= 0){reportError("FixedFacetValue",new Object [] {"maxInclusive",fMaxInclusive,fBasefMaxInclusive,fTypeName}
+            /* ); } if(result！= -1 && result！= 0){reportError("maxInclusive-valid-restriction1",new Object [] {fMaxInclusive,fBasefMaxInclusive,fTypeName}
+            /* ); }} if((fBasefFacetsDefined&FACET_MAXEXCLUSIVE)！= 0)&& fDVs [fValidationDV] compare(fMaxInclusive,f
+            /* BasefMaxExclusive)！= -1){reportError("maxInclusive-valid-restriction1",new Object [] {fMaxInclusive,fBasefMaxExclusive, fTypeName}
+            /* ); }}。
+            /* 
+            /* if(((fBasefFacetsDefined&FACET_MININCLUSIVE)！= 0)){result = fDVs [fValidationDV] compare(fMaxInclusive,fBasefMinInclusive); if(result！= 1 && result！= 0){reportError("maxInclusive-valid-restriction1",new Object [] {fMaxInclusive,fBasefMinInclusive,fTypeName}
+            /* ); }}。
+            /* 
+            /*  if((fBasefFacetsDefined&FACET_MINEXCLUSIVE)！= 0)&& fDVs [fValidationDV] compare(fMaxInclusive,fBasef
+            /* MinExclusive)！= 1)reportError("maxInclusive-valid-restriction1",new Object [] {fMaxInclusive,fBasefMinExclusive,fTypeName}
+            /* ); }}。
+            /* 
+            /* //检查438c3错误：// maxExclusive> fBasemaxExclusive // maxExclusive> fBasemaxInclusive // maxExclusive <= fBaseminInclusive // maxExclusive <= fBaseminExclusive if((fFacetsDefined&FACET_MAXEXCLUSIVE)！= 0)){if((fBasefFacetsDefined&FACET_MAXEXCLUSIVE) ！= 0)){result = fDVs [fValidationDV] compare(fMaxExclusive,fBasefMaxExclusive); if((fBasefFixedFacet&FACET_MAXEXCLUSIVE)！= 0 && result！= 0){reportError("FixedFacetValue",new Object [] {"maxExclusive",fMaxExclusive,fBasefMaxExclusive,fTypeName}); } if(result！= -1 && result！= 0){reportError("maxExclusive-valid-restriction1",new Object [] {fMaxExclusive,fBasefMaxExclusive,fTypeName}); }}。
+            /* 
+            /* if(((fBasefFacetsDefined&FACET_MAXINCLUSIVE)！= 0)){result = fDVs [fValidationDV] compare(fMaxExclusive,fBasefMaxInclusive); if(result！= -1 && result！= 0){reportError("maxExclusive-valid-restriction2",new Object [] {fMaxExclusive,fBasefMaxInclusive,fTypeName}
+            /* ); }}。
+            /* 
+            /*  if((fBasefFacetsDefined&FACET_MINEXCLUSIVE)！= 0)&& fDVs [fValidationDV] compare(fMaxExclusive,fBasef
+            /* MinExclusive)！= 1)reportError("maxExclusive-valid-restriction3",new Object [] {fMaxExclusive,fBasefMinExclusive,fTypeName}
+            /* );。
+            /* 
+            /*  if((fBasefFacetsDefined&FACET_MININCLUSIVE)！= 0)&& fDVs [fValidationDV] compare(fMaxExclusive,fBasef
+            /* MinInclusive)！= 1)reportError("maxExclusive-valid-restriction4",new Object [] {fMaxExclusive,fBasefMinInclusive,fTypeName}
+            /* ); }}。
+            /* 
+            /* //检查439c3错误：// minExclusive <fBaseminExclusive // minExclusive> minExclusive fBasemaxInclusive // <fBaseminInclusive // minExclusive>
+            /*  = fBasemaxExclusive如果(((fFacetsDefined&FACET_MINEXCLUSIVE)= 0)！){如果(((fBasefFacetsDefined&FACET_MINEXCLUSIVE)！ = 0)){结果= fDVs [fValidationDV]比较(fMinExclusive,fBasefMinExclusive);如果((fBasefFixedFacet&FACET_MINEXCLUSIVE)= 0 &&结果= 0！){reportError("FixedFacetValue",新的对象[] {"minExclusive"fMinExclusive,fBasefMinExclusive,fTypeName}
+            /* ); }如果(结果= 1 &&结果= 0！){reportError("minExclusive-有效-restriction1",新的对象[] {fMinExclusive,fBasefMinExclusive,fTypeName}
+            /* ); }}。
+            /* 
+            /* if(((fBasefFacetsDefined&FACET_MAXINCLUSIVE)！= 0)){result = fDVs [fValidationDV] compare(fMinExclusive,fBasefMaxInclusive);。
+            /* 
+            /*  if(result！= -1 && result！= 0){reportError("minExclusive-valid-restriction2",new Object [] {fMinExclusive,fBasefMaxInclusive,fTypeName}
+            /* ); }}。
+            /* 
+            /*  if(((fBasefFacetsDefined&FACET_MININCLUSIVE)！= 0)){result = fDVs [fValidationDV] compare(fMinExclusive,fBasefMinInclusive);。
+            /* 
+            /*  if(result！= 1 && result！= 0){reportError("minExclusive-valid-restriction3",new Object [] {fMinExclusive,fBasefMinInclusive,fTypeName}
+            /* ); }}。
+            /* 
+            /* if((fBasefFacetsDefined&FACET_MAXEXCLUSIVE)！= 0)&& fDVs [fValidationDV] compare(fMinExclusive,fBasefM
+            /* axExclusive)！= -1)reportError("minExclusive-valid-restriction4",new Object [] {fMinExclusive,fBasefMaxExclusive,fTypeName}
+            /*  ; }}。
+            /* 
+            /*  //检查4310c2错误：// minInclusive <fBaseminInclusive // minInclusive> fBasemaxInclusive // minInclusive <= fBaseminExclusive // minInclusive>
+            /*  = fBasemaxExclusive if((fFacetsDefined&FACET_MININCLUSIVE)！= 0)){if((fBasefFacetsDefined&FACET_MININCLUSIVE) ！= 0)){result = fDVs [fValidationDV] compare(fMinInclusive,fBasefMinInclusive);。
+            /* 
+            /* if((fBasefFixedFacet&FACET_MININCLUSIVE)！= 0 && result！= 0){reportError("FixedFacetValue",new Object [] {"minInclusive",fMinInclusive,fBasefMinInclusive,fTypeName}
+            /* ); } if(result！= 1 && result！= 0){reportError("minInclusive-valid-restriction1",new Object [] {fMinInclusive,fBasefMinInclusive,fTypeName}
+            /* ); }} if((fBasefFacetsDefined&FACET_MAXINCLUSIVE)！= 0)){result = fDVs [fValidationDV] compare(fMinInclusive,fBasefMaxInclusive); if(result！= -1 && result！= 0){reportError("minInclusive-valid-restriction2",new Object [] {fMinInclusive,fBasefMaxInclusive,fTypeName}
+            /* ); }} if((fBasefFacetsDefined&FACET_MINEXCLUSIVE)！= 0)&& fDVs [fValidationDV] compare(fMinInclusive,f
+            /* BasefMinExclusive)！= 1)reportError("minInclusive-valid-restriction3),new Object [] {fMinInclusive,fBasefMinExclusive,fTypeName}
+            /* ); if(((fBasefFacetsDefined&FACET_MAXEXCLUSIVE)！= 0)&& fDVs [fValidationDV] compare(fMinInclusive,fBa
+            /* sefMaxExclusive)！= -1)reportError("minInclusive-valid -restriction4",new Object [] {fMinInclusive,fBasefMaxExclusive,fTypeName}
+            /* );}。
+            /* 
              */
             // check 4.3.11.c1 error: totalDigits > fBase.totalDigits
             if (((fFacetsDefined & FACET_TOTALDIGITS) != 0)) {
@@ -1538,6 +1636,9 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
 
     /**
      * validate a value, and return the compiled form
+     * <p>
+     * 验证值,并返回编译的表单
+     * 
      */
     public Object validate(String content, ValidationContext context, ValidatedInfo validatedInfo) throws InvalidDatatypeValueException {
 
@@ -1566,6 +1667,9 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
 
     /**
      * validate a value, and return the compiled form
+     * <p>
+     *  验证值,并返回编译的表单
+     * 
      */
     public ValidatedInfo validateWithInfo(String content, ValidationContext context, ValidatedInfo validatedInfo) throws InvalidDatatypeValueException {
 
@@ -1589,6 +1693,9 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
 
     /**
      * validate a value, and return the compiled form
+     * <p>
+     *  验证值,并返回编译的表单
+     * 
      */
     public Object validate(Object content, ValidationContext context, ValidatedInfo validatedInfo) throws InvalidDatatypeValueException {
 
@@ -1613,6 +1720,10 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
     /**
      * validate an actual value against this DV
      *
+     * <p>
+     *  根据此DV验证实际值
+     * 
+     * 
      * @param context       the validation context
      * @param validatedInfo used to provide the actual value and member types
      */
@@ -2103,6 +2214,9 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
 
     /**
      *  Fundamental Facet: ordered.
+     * <p>
+     *  基本面：有序
+     * 
      */
     public short getOrdered() {
         return fOrdered;
@@ -2110,6 +2224,9 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
 
     /**
      * Fundamental Facet: bounded.
+     * <p>
+     *  基本方面：有界
+     * 
      */
     public boolean getBounded(){
         return fBounded;
@@ -2117,6 +2234,9 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
 
     /**
      * Fundamental Facet: cardinality.
+     * <p>
+     *  基本面：基数
+     * 
      */
     public boolean getFinite(){
         return fFinite;
@@ -2124,6 +2244,9 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
 
     /**
      * Fundamental Facet: numeric.
+     * <p>
+     *  基本方面：数字
+     * 
      */
     public boolean getNumeric(){
         return fNumeric;
@@ -2132,6 +2255,10 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
     /**
      * Convenience method. [Facets]: check whether a facet is defined on this
      * type.
+     * <p>
+     *  方便方法[Facets]：检查是否在此类型上定义了构面
+     * 
+     * 
      * @param facetName  The name of the facet.
      * @return  True if the facet is defined, false otherwise.
      */
@@ -2155,6 +2282,9 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
     /**
      * [facets]: all facets defined on this type. The value is a bit
      * combination of FACET_XXX constants of all defined facets.
+     * <p>
+     *  [facets]：在此类型上定义的所有面值该值是所有定义面的FACET_XXX常量的位组合
+     * 
      */
     public short getDefinedFacets() {
         if (fValidationDV == DV_ANYSIMPLETYPE ||
@@ -2173,6 +2303,10 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
     /**
      * Convenience method. [Facets]: check whether a facet is defined and
      * fixed on this type.
+     * <p>
+     *  方便方法[Facets]：检查在此类型上是否定义和修订构面
+     * 
+     * 
      * @param facetName  The name of the facet.
      * @return  True if the facet is fixed, false otherwise.
      */
@@ -2186,6 +2320,9 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
 
     /**
      * [facets]: all defined facets for this type which are fixed.
+     * <p>
+     *  [facets]：这个类型的所有定义的facets是固定的
+     * 
      */
     public short getFixedFacets() {
         if (fValidationDV == DV_INTEGER)
@@ -2197,6 +2334,10 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
      * Convenience method. Returns a value of a single constraining facet for
      * this simple type definition. This method must not be used to retrieve
      * values for <code>enumeration</code> and <code>pattern</code> facets.
+     * <p>
+     * 方便方法返回此简单类型定义的单个约束构面的值此方法不能用于检索<code>枚举</code>和<code> pattern </code> facets的值
+     * 
+     * 
      * @param facetName The name of the facet, i.e.
      *   <code>FACET_LENGTH, FACET_TOTALDIGITS </code> (see
      *   <code>XSConstants</code>). To retrieve the value for a pattern or
@@ -2241,6 +2382,9 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
     /**
      * A list of enumeration values if it exists, otherwise an empty
      * <code>StringList</code>.
+     * <p>
+     *  枚举值列表(如果存在),否则为空<> StringList </code>
+     * 
      */
     public StringList getLexicalEnumeration() {
         if (fLexicalEnumeration == null){
@@ -2258,6 +2402,9 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
     /**
      * A list of actual enumeration values if it exists, otherwise an empty
      * <code>ObjectList</code>.
+     * <p>
+     *  实际枚举值的列表(如果存在),否则为空的<code> ObjectList </code>
+     * 
      */
     public ObjectList getActualEnumeration() {
         if (fActualEnumeration == null) {
@@ -2282,6 +2429,9 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
     /**
      * A list of enumeration type values (as a list of ShortList objects) if it exists, otherwise returns
      * null
+     * <p>
+     *  如果存在枚举类型值的列表(作为ShortList对象的列表),否则返回null
+     * 
      */
     public ObjectList getEnumerationItemTypeList() {
         if (fEnumerationItemTypeList == null) {
@@ -2323,6 +2473,9 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
     /**
      * A list of pattern values if it exists, otherwise an empty
      * <code>StringList</code>.
+     * <p>
+     *  模式值的列表(如果存在),否则为空的<code> StringList </code>
+     * 
      */
     public StringList getLexicalPattern() {
         if (fPatternType == SPECIAL_PATTERN_NONE && fValidationDV != DV_INTEGER && fPatternStr == null)
@@ -2360,6 +2513,9 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
     /**
      * [annotations]: a set of annotations for this simple type component if
      * it exists, otherwise an empty <code>XSObjectList</code>.
+     * <p>
+     *  [annotations]：这个简单类型组件的一组注释(如果存在),否则为空<code> XSObjectList </code>
+     * 
      */
     public XSObjectList getAnnotations() {
         return (fAnnotations != null) ? fAnnotations : XSObjectListImpl.EMPTY_LIST;
@@ -2607,6 +2763,11 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
      * and namespace. See:
      * http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#TypeInfo-isDerivedFrom
      *
+     * <p>
+     * 检查类型是否是通过限制从另一个派生的,给定名称和命名空间。
+     * 参见：http：// wwww3org / TR / 2004 / REC-DOM-Level-3-Core-20040407 / corehtml#TypeInfo-isDerivedFrom。
+     * 
+     * 
      * @param ancestorNS
      *            The namspace of the ancestor type declaration
      * @param ancestorName
@@ -2677,6 +2838,11 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
      * Checks if a type is derived from another by any combination of restriction, list ir union. See:
      * http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#TypeInfo-isDerivedFrom
      *
+     * <p>
+     *  通过限制,列表ir的任何组合检查类型是否派生自另一个类型请参阅：http：// wwww3org / TR / 2004 / REC-DOM-Level-3-Core-20040407 / coreh
+     * tml#TypeInfo-isDerivedFrom。
+     * 
+     * 
      * @param ancestorNS
      *            The namspace of the ancestor type declaration
      * @param ancestorName
@@ -2734,6 +2900,11 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
      * Checks if a type is derived from another by restriction. See:
      * http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#TypeInfo-isDerivedFrom
      *
+     * <p>
+     *  DOM Level 3通过限制来检查类型是否来自另一个类型请参阅：http：// wwww3org / TR / 2004 / REC-DOM-Level-3-Core-20040407 / core
+     * html#TypeInfo-isDerivedFrom。
+     * 
+     * 
      * @param ancestorNS
      *            The namspace of the ancestor type declaration
      * @param ancestorName
@@ -2764,6 +2935,11 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
      * Checks if a type is derived from another by list. See:
      * http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#TypeInfo-isDerivedFrom
      *
+     * <p>
+     *  检查类型是否是通过列表从另一个派生的参见：http：// wwww3org / TR / 2004 / REC-DOM-Level-3-Core-20040407 / corehtml#TypeInf
+     * o-isDerivedFrom。
+     * 
+     * 
      * @param ancestorNS
      *            The namspace of the ancestor type declaration
      * @param ancestorName
@@ -2796,6 +2972,11 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
      * Checks if a type is derived from another by union.  See:
      * http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#TypeInfo-isDerivedFrom
      *
+     * <p>
+     * 检查类型是否是通过union从另一个派生的参见：http：// wwww3org / TR / 2004 / REC-DOM-Level-3-Core-20040407 / corehtml#TypeI
+     * nfo-isDerivedFrom。
+     * 
+     * 
      * @param ancestorNS
      *            The namspace of the ancestor type declaration
      * @param ancestorName
@@ -2833,6 +3014,9 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
 
     /**
      * Validation context used to validate facet values.
+     * <p>
+     *  用于验证构面值的验证上下文
+     * 
      */
     static final ValidationContext fDummyContext = new ValidationContext() {
         public boolean needFacetChecking() {
@@ -2885,6 +3069,9 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
     /**
      * A wrapper of ValidationContext, to provide a way of switching to a
      * different Namespace declaration context.
+     * <p>
+     *  ValidationContext的包装器,提供一种切换到不同的命名空间声明上下文的方法
+     * 
      */
     static final class ValidationContextImpl implements ValidationContext {
 
@@ -3008,6 +3195,8 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
     }
 
     /**
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xs.XSObject#getNamespaceItem()
      */
     public XSNamespaceItem getNamespaceItem() {
@@ -3019,6 +3208,8 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
     }
 
     /**
+    /* <p>
+    /* 
      * @see java.lang.Object#toString()
      */
     public String toString() {
@@ -3030,6 +3221,9 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
      * <code>XSObjectList</code>. Note: This method must not be used to
      * retrieve values for <code>enumeration</code> and <code>pattern</code>
      * facets.
+     * <p>
+     *  约束面的列表(如果存在),否则为空<code> XSObjectList </code>注意：此方法不能用于检索<code>枚举</code>和<code>
+     * 
      */
     public XSObjectList getFacets() {
         if (fFacets == null &&
@@ -3146,6 +3340,9 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
     /**
      *  A list of enumeration and pattern constraining facets if it exists,
      * otherwise an empty <code>XSObjectList</code>.
+     * <p>
+     *  枚举和模式约束facet的列表(如果存在),否则为空<code> XSObjectList </code>
+     * 
      */
     public XSObjectList getMultiValueFacets() {
         if (fMultiValueFacets == null &&
@@ -3223,10 +3420,17 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
         /*
          * (non-Javadoc)
          *
+         * <p>
+         *  (非Javadoc)
+         * 
+         * 
          * @see com.sun.org.apache.xerces.internal.xs.XSFacet#getAnnotation()
          */
         /**
          * Optional. Annotation.
+         * <p>
+         *  可选注释
+         * 
          */
         public XSAnnotation getAnnotation() {
             return (XSAnnotation) annotations.item(0);
@@ -3235,16 +3439,25 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
         /*
          * (non-Javadoc)
          *
+         * <p>
+         *  (非Javadoc)
+         * 
+         * 
          * @see com.sun.org.apache.xerces.internal.xs.XSFacet#getAnnotations()
          */
         /**
          * Optional. Annotations.
+         * <p>
+         *  可选注释
+         * 
          */
         public XSObjectList getAnnotations() {
             return annotations;
         }
 
         /* (non-Javadoc)
+        /* <p>
+        /* 
          * @see com.sun.org.apache.xerces.internal.xs.XSFacet#getFacetKind()
          */
         public short getFacetKind() {
@@ -3252,6 +3465,8 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
         }
 
         /* (non-Javadoc)
+        /* <p>
+        /* 
          * @see com.sun.org.apache.xerces.internal.xs.XSFacet#getLexicalFacetValue()
          */
         public String getLexicalFacetValue() {
@@ -3259,6 +3474,8 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
         }
 
         /* (non-Javadoc)
+        /* <p>
+        /* 
          * @see com.sun.org.apache.xerces.internal.xs.XSFacet#isFixed()
          */
         public boolean getFixed() {
@@ -3266,6 +3483,8 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
         }
 
         /* (non-Javadoc)
+        /* <p>
+        /* 
          * @see com.sun.org.apache.xerces.internal.xs.XSObject#getName()
          */
         public String getName() {
@@ -3273,6 +3492,8 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
         }
 
         /* (non-Javadoc)
+        /* <p>
+        /* 
          * @see com.sun.org.apache.xerces.internal.xs.XSObject#getNamespace()
          */
         public String getNamespace() {
@@ -3280,6 +3501,8 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
         }
 
         /* (non-Javadoc)
+        /* <p>
+        /* 
          * @see com.sun.org.apache.xerces.internal.xs.XSObject#getNamespaceItem()
          */
         public XSNamespaceItem getNamespaceItem() {
@@ -3288,6 +3511,8 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
         }
 
         /* (non-Javadoc)
+        /* <p>
+        /* 
          * @see com.sun.org.apache.xerces.internal.xs.XSObject#getType()
          */
         public short getType() {
@@ -3308,6 +3533,8 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
         }
 
         /* (non-Javadoc)
+        /* <p>
+        /* 
          * @see com.sun.org.apache.xerces.internal.xs.XSFacet#getFacetKind()
          */
         public short getFacetKind() {
@@ -3315,6 +3542,8 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
         }
 
         /* (non-Javadoc)
+        /* <p>
+        /* 
          * @see com.sun.org.apache.xerces.internal.xs.XSMultiValueFacet#getAnnotations()
          */
         public XSObjectList getAnnotations() {
@@ -3322,6 +3551,8 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
         }
 
         /* (non-Javadoc)
+        /* <p>
+        /* 
          * @see com.sun.org.apache.xerces.internal.xs.XSMultiValueFacet#getLexicalFacetValues()
          */
         public StringList getLexicalFacetValues() {
@@ -3329,6 +3560,8 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
         }
 
         /* (non-Javadoc)
+        /* <p>
+        /* 
          * @see com.sun.org.apache.xerces.internal.xs.XSObject#getName()
          */
         public String getName() {
@@ -3336,6 +3569,8 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
         }
 
         /* (non-Javadoc)
+        /* <p>
+        /* 
          * @see com.sun.org.apache.xerces.internal.xs.XSObject#getNamespace()
          */
         public String getNamespace() {
@@ -3343,6 +3578,8 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
         }
 
         /* (non-Javadoc)
+        /* <p>
+        /* 
          * @see com.sun.org.apache.xerces.internal.xs.XSObject#getNamespaceItem()
          */
         public XSNamespaceItem getNamespaceItem() {
@@ -3351,6 +3588,8 @@ public class XSSimpleTypeDecl implements XSSimpleType, TypeInfo {
         }
 
         /* (non-Javadoc)
+        /* <p>
+        /* 
          * @see com.sun.org.apache.xerces.internal.xs.XSObject#getType()
          */
         public short getType() {

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  */
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2005 Apache软件基金会
+ * 
+ *  根据Apache许可证第20版("许可证")授权;您不得使用此文件,除非符合许可证您可以在获取许可证的副本
+ * 
+ *  http：// wwwapacheorg / licenses / LICENSE-20
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件将按"原样"基础分发,无任何明示或暗示的保证或条件。请参阅许可证管理权限和限制许可证
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl;
@@ -64,6 +74,18 @@ import com.sun.xml.internal.stream.Entity;
  *  <li>http://apache.org/xml/properties/internal/entity-manager</li>
  * </ul>
  *
+ * <p>
+ * 此类负责扫描在XML文档中DTD的内部和外部子集中找到的声明扫描器充当DTD信息的来源,DTD信息传送到DTD处理程序
+ * <p>
+ *  此组件需要使用它的组件管理器中的以下功能和属性：
+ * <ul>
+ *  <li> http：// xmlorg / sax / features / validation </li> <li> http：// apacheorg / xml / features / sc
+ * anner / notify-char-refs </li> <li> http：// apacheorg / xml / properties / internal / symbol-table </li>
+ *  <li> http：// apacheorg / xml / properties / internal / error-reporter </li> <li> http：// apacheorg /
+ *  xml / properties / internal / entity-manager </li>。
+ * </ul>
+ * 
+ * 
  * @author Arnaud  Le Hors, IBM
  * @author Andy Clark, IBM
  * @author Glenn Marcy, IBM
@@ -160,6 +182,9 @@ implements XMLDTDScanner, XMLComponent, XMLEntityHandler {
     /**
      * Stack of content operators (either '|' or ',') in children
      * content.
+     * <p>
+     *  在孩子内容中的内容运算符('|'或',')
+     * 
      */
     private int[] fContentStack = new int[5];
 
@@ -242,6 +267,10 @@ implements XMLDTDScanner, XMLComponent, XMLEntityHandler {
     /**
      * Sets the input source.
      *
+     * <p>
+     *  设置输入源
+     * 
+     * 
      * @param inputSource The input source or null.
      *
      * @throws IOException Thrown on i/o error.
@@ -271,6 +300,10 @@ implements XMLDTDScanner, XMLComponent, XMLEntityHandler {
     /**
      * Scans the external subset of the document.
      *
+     * <p>
+     *  扫描文档的外部子集
+     * 
+     * 
      * @param complete True if the scanner should scan the document
      *                 completely, pushing all events to the registered
      *                 document handler. A value of false indicates that
@@ -315,6 +348,10 @@ implements XMLDTDScanner, XMLComponent, XMLEntityHandler {
     /**
      * Scans the internal subset of the document.
      *
+     * <p>
+     * 扫描文档的内部子集
+     * 
+     * 
      * @param complete True if the scanner should scan the document
      *                 completely, pushing all events to the registered
      *                 document handler. A value of false indicates that
@@ -385,6 +422,10 @@ implements XMLDTDScanner, XMLComponent, XMLEntityHandler {
     /**
      * reset
      *
+     * <p>
+     *  重启
+     * 
+     * 
      * @param componentManager
      */
     public void reset(XMLComponentManager componentManager)
@@ -414,6 +455,9 @@ implements XMLDTDScanner, XMLComponent, XMLEntityHandler {
      * Returns a list of feature identifiers that are recognized by
      * this component. This method may return null if no features
      * are recognized by this component.
+     * <p>
+     *  返回此组件可识别的要素标识符的列表如果此组件未识别任何要素,此方法可能返回null
+     * 
      */
     public String[] getRecognizedFeatures() {
         return (String[])(RECOGNIZED_FEATURES.clone());
@@ -423,6 +467,9 @@ implements XMLDTDScanner, XMLComponent, XMLEntityHandler {
      * Returns a list of property identifiers that are recognized by
      * this component. This method may return null if no properties
      * are recognized by this component.
+     * <p>
+     *  返回此组件可识别的属性标识符的列表如果此组件未识别任何属性,此方法可能返回null
+     * 
      */
     public String[] getRecognizedProperties() {
         return (String[])(RECOGNIZED_PROPERTIES.clone());
@@ -433,6 +480,10 @@ implements XMLDTDScanner, XMLComponent, XMLEntityHandler {
      * component does not want to report a default value for this
      * feature.
      *
+     * <p>
+     *  返回特征的默认状态,如果此组件不希望报告此特征的默认值,则返回null
+     * 
+     * 
      * @param featureId The feature identifier.
      *
      * @since Xerces 2.2.0
@@ -451,6 +502,10 @@ implements XMLDTDScanner, XMLComponent, XMLEntityHandler {
      * component does not want to report a default value for this
      * property.
      *
+     * <p>
+     *  返回属性的默认状态,如果此组件不希望报告此属性的默认值,则返回null
+     * 
+     * 
      * @param propertyId The property identifier.
      *
      * @since Xerces 2.2.0
@@ -471,6 +526,10 @@ implements XMLDTDScanner, XMLComponent, XMLEntityHandler {
     /**
      * setDTDHandler
      *
+     * <p>
+     *  setDTDHandler
+     * 
+     * 
      * @param dtdHandler
      */
     public void setDTDHandler(XMLDTDHandler dtdHandler) {
@@ -480,6 +539,10 @@ implements XMLDTDScanner, XMLComponent, XMLEntityHandler {
     /**
      * getDTDHandler
      *
+     * <p>
+     *  getDTDHandler
+     * 
+     * 
      * @return the XMLDTDHandler
      */
     public XMLDTDHandler getDTDHandler() {
@@ -493,6 +556,10 @@ implements XMLDTDScanner, XMLComponent, XMLEntityHandler {
     /**
      * setDTDContentModelHandler
      *
+     * <p>
+     *  setDTDContentModelHandler
+     * 
+     * 
      * @param dtdContentModelHandler
      */
     public void setDTDContentModelHandler(XMLDTDContentModelHandler
@@ -503,6 +570,10 @@ implements XMLDTDScanner, XMLComponent, XMLEntityHandler {
     /**
      * getDTDContentModelHandler
      *
+     * <p>
+     *  getDTDContentModelHandler
+     * 
+     * 
      * @return XMLDTDContentModelHandler
      */
     public XMLDTDContentModelHandler getDTDContentModelHandler() {
@@ -518,6 +589,10 @@ implements XMLDTDScanner, XMLComponent, XMLEntityHandler {
      * pseudo-name of "[dtd]" parameter entity names start with '%'; and
      * general entities are just specified by their name.
      *
+     * <p>
+     * 此方法通知实体的开始DTD具有伪名称"[dtd]"参数实体名称以'％'开头;和一般实体只是由他们的名字指定
+     * 
+     * 
      * @param name     The name of the entity.
      * @param identifier The resource identifier.
      * @param encoding The auto-detected IANA encoding name of the entity
@@ -567,6 +642,10 @@ implements XMLDTDScanner, XMLComponent, XMLEntityHandler {
      * of "[dtd]" parameter entity names start with '%'; and general entities
      * are just specified by their name.
      *
+     * <p>
+     *  此方法通知实体的结束DTD具有伪名称"[dtd]"参数实体名称以'％'开头;和一般实体只是由他们的名字指定
+     * 
+     * 
      * @param name The name of the entity.
      *
      * @throws XNIException Thrown by handler to signal an error.
@@ -654,6 +733,10 @@ implements XMLDTDScanner, XMLComponent, XMLEntityHandler {
     /**
      * Sets the scanner state.
      *
+     * <p>
+     *  设置扫描仪状态
+     * 
+     * 
      * @param state The new scanner state.
      */
     protected final void setScannerState(int state) {
@@ -693,6 +776,10 @@ implements XMLDTDScanner, XMLComponent, XMLEntityHandler {
     /**
      * start a parameter entity dealing with the textdecl if there is any
      *
+     * <p>
+     *  启动一个处理textdecl的参数实体,如果有的话
+     * 
+     * 
      * @param name The name of the parameter entity to start (without the '%')
      * @param literal Whether this is happening within a literal
      */
@@ -716,6 +803,10 @@ implements XMLDTDScanner, XMLComponent, XMLEntityHandler {
     /**
      * Dispatch an XML "event".
      *
+     * <p>
+     *  调度XML"事件"
+     * 
+     * 
      * @param complete True if this method is intended to scan
      *                 and dispatch as much as possible.
      *
@@ -779,6 +870,10 @@ implements XMLDTDScanner, XMLComponent, XMLEntityHandler {
      * where a document starts with a processing instruction whose
      * target name <em>starts with</em> "xml". (e.g. xmlfoo)
      *
+     * <p>
+     *  扫描处理数据需要处理文档以目标名称<em>​​以</em>"xml"开头的处理指令开始的情况(例如xmlfoo)
+     * 
+     * 
      * @param target The PI target
      * @param data The string to fill in with the data
      */
@@ -803,6 +898,15 @@ implements XMLDTDScanner, XMLComponent, XMLEntityHandler {
      * </pre>
      * <p>
      * <strong>Note:</strong> Called after scanning past '&lt;!--'
+     * <p>
+     *  扫描评论
+     * <p>
+     * <pre>
+     *  [15] Comment :: ='&lt;  - '((Char  - ' - ')|(' - '(Char  - ' - ')))*'
+     * </pre>
+     * <p>
+     * <strong>注意：</strong>扫描过去的"&lt;！ - '
+     * 
      */
     protected final void scanComment() throws IOException, XNIException {
 
@@ -827,6 +931,15 @@ implements XMLDTDScanner, XMLComponent, XMLEntityHandler {
      * </pre>
      * <p>
      * <strong>Note:</strong> Called after scanning past '&lt;!ELEMENT'
+     * <p>
+     *  扫描元素声明
+     * <p>
+     * <pre>
+     *  [45] elementdecl :: ='&lt;！ELEMENT'S名称S contentspec S? '>'[46] contentspec :: ='EMPTY'| 'ANY'|混合|儿童。
+     * </pre>
+     * <p>
+     *  <strong>注意：</strong>在扫描"&lt;！ELEMENT"之后调用
+     * 
      */
     protected final void scanElementDecl() throws IOException, XNIException {
 
@@ -923,6 +1036,13 @@ implements XMLDTDScanner, XMLComponent, XMLEntityHandler {
      *                       | '(' S? '#PCDATA' S? ')'
      * </pre>
      *
+     * <p>
+     *  scan混合内容模型假设内容模型已解析为#PCDATA,并且可以简单地追加到fStringBuffer
+     * <pre>
+     *  混合:: ='('S'''PCDATA'(S'''''S'Name)* S'')*' '('S'''PCDATA'S'''')
+     * </pre>
+     * 
+     * 
      * @param elName The element type name this declaration is about.
      *
      * <strong>Note:</strong> Called after scanning past '(#PCDATA'.
@@ -1001,6 +1121,14 @@ implements XMLDTDScanner, XMLComponent, XMLEntityHandler {
      * [50]    seq       ::=    '(' S? cp ( S? ',' S? cp )* S? ')'
      * </pre>
      *
+     * <p>
+     *  扫描儿童内容模型这假设它可以简单地追加到fStringBuffer
+     * <pre>
+     * [47] children :: =(choice | seq)('?'|'*'|'+')? [48] cp :: =(Name | choice | seq)('?'|'*'|'+')?选择:: ='
+     * ('S'cp(S''''S'cp)+ S''''''''' cp)* S'')'。
+     * </pre>
+     * 
+     * 
      * @param elName The element type name this declaration is about.
      *
      * <strong>Note:</strong> Called after scanning past the first open
@@ -1146,6 +1274,15 @@ implements XMLDTDScanner, XMLComponent, XMLEntityHandler {
      * </pre>
      * <p>
      * <strong>Note:</strong> Called after scanning past '&lt;!ATTLIST'
+     * <p>
+     *  扫描attlist声明
+     * <p>
+     * <pre>
+     *  [52] AttlistDecl :: ='&lt;！ATTLIST'S名称AttDef * '>'[53] AttDef :: = S Name S AttType S DefaultDecl
+     * </pre>
+     * <p>
+     *  <strong>注意：</strong>扫描"&lt;！ATTLIST"之后调用
+     * 
      */
     protected final void scanAttlistDecl() throws IOException, XNIException {
 
@@ -1279,6 +1416,19 @@ implements XMLDTDScanner, XMLComponent, XMLEntityHandler {
      * <p>
      * <strong>Note:</strong> Called after scanning past '&lt;!ATTLIST'
      *
+     * <p>
+     *  扫描属性类型定义
+     * <p>
+     * <pre>
+     * AttType :: = StringType | TokenizedType | EnumeratedType [55] StringType :: ='CDATA'[56] TokenizedTyp
+     * e :: ='ID'| 'IDREF'| 'IDREFS'| 'ENTITY'| 'ENTITIES'| 'NMTOKEN'| 'NMTOKENS'[57] EnumeratedType :: = No
+     * tationType |枚举[58] NotationType :: ='NOTATION'S'('S?Name(S?''''?Name)* S?')'Enumeration :: =' '|'S?Nm
+     * token)* S'')'。
+     * </pre>
+     * <p>
+     *  <strong>注意：</strong>扫描"&lt;！ATTLIST"之后调用
+     * 
+     * 
      * @param elName The element type name this declaration is about.
      * @param atName The attribute name this declaration is about.
      */
@@ -1291,6 +1441,9 @@ implements XMLDTDScanner, XMLComponent, XMLEntityHandler {
          * Watchout: the order here is important: when a string happens to
          * be a substring of another string, the longer one needs to be
          * looked for first!!
+         * <p>
+         *  Watchout：这里的顺序很重要：当一个字符串恰好是另一个字符串的子字符串时,需要首先查找更长的字符串！
+         * 
          */
         if (fEntityScanner.skipString("CDATA")) {
             type = "CDATA";
@@ -1388,6 +1541,14 @@ implements XMLDTDScanner, XMLComponent, XMLEntityHandler {
      * [60] DefaultDecl ::= '#REQUIRED' | '#IMPLIED' | (('#FIXED' S)? AttValue)
      * </pre>
      *
+     * <p>
+     *  扫描属性默认声明
+     * <p>
+     * <pre>
+     *  [60] DefaultDecl :: ='#REQUIRED'| '#IMPLIED'| (('#FIXED'S)?AttValue)
+     * </pre>
+     * 
+     * 
      * @param name The name of the attribute being scanned.
      * @param defaultVal The string to fill in with the default value.
      */
@@ -1439,6 +1600,18 @@ implements XMLDTDScanner, XMLComponent, XMLEntityHandler {
      * </pre>
      * <p>
      * <strong>Note:</strong> Called after scanning past '&lt;!ENTITY'
+     * <p>
+     *  扫描实体声明
+     * <p>
+     * <pre>
+     * EntityDecl :: = GEDec1 | PEDecl [71] GEDecl :: ='&lt;！ENTITY'S Name S EntityDef S? '>'[72] PEDecl :: 
+     * ='&lt;！ENTITY'S'％'S名称S PEDef S? '>'[73] EntityDef :: = EntityValue | (ExternalID NDataDecl?)[74] PEDe
+     * f :: = EntityValue | ExternalID [75] ExternalID :: ='SYSTEM'S SystemLiteral | 'PUBLIC'S PubidLiteral 
+     * S SystemLiteral [76] NDataDecl :: = S'NDATA'S Name。
+     * </pre>
+     * <p>
+     *  <strong>请注意</strong>：扫描"&lt;！ENTITY"
+     * 
      */
     private final void scanEntityDecl() throws IOException, XNIException {
 
@@ -1610,6 +1783,10 @@ implements XMLDTDScanner, XMLComponent, XMLEntityHandler {
     /**
      * Scans an entity value.
      *
+     * <p>
+     *  扫描实体值
+     * 
+     * 
      * @param value The string to fill in with the value.
      * @param nonNormalizedValue The string to fill in with the
      *                           non-normalized value.
@@ -1752,6 +1929,16 @@ implements XMLDTDScanner, XMLComponent, XMLEntityHandler {
      * </pre>
      * <p>
      * <strong>Note:</strong> Called after scanning past '&lt;!NOTATION'
+     * <p>
+     *  扫描符号声明
+     * <p>
+     * <pre>
+     *  [82] NotationDecl :: ='&lt;！NOTATION'S名称S(ExternalID | PublicID)S? '>'[83] PublicID :: ='PUBLIC'S Pu
+     * bidLiteral。
+     * </pre>
+     * <p>
+     *  <strong>注意：</strong>扫描"&lt;！NOTATION"之后调用
+     * 
      */
     private final void scanNotationDecl() throws IOException, XNIException {
 
@@ -1822,6 +2009,16 @@ implements XMLDTDScanner, XMLComponent, XMLEntityHandler {
      * [65] Ignore            ::=    Char* - (Char* ('&lt;![' | ']]>') Char*)
      * </pre>
      * <p>
+     * <p>
+     * 扫描条件部分如果是要忽略的部分,则扫描整个部分,并且此方法仅在找到关闭括号之后返回。当它是一个包含部分时,它返回让主循环负责扫描它。在这种情况下如果由主循环(scanDecls)处理的话,
+     * <p>
+     * <pre>
+     *  conditionalSect :: = includeSect | ignoreSect [62] includeSect :: ='&lt;！['S? "包括"? '['extSubsetDecl
+     * ']]>'[63] ignoreSect :: ='&lt;！['S? 'IGNORE'S? '['ignoreSectContents *']]>'[64] ignoreSectContents ::
+     *  = Ignore('&lt;！['ignoreSectContents']]>'Ignore)* Ignore :: = Char *  - (Char * ;！['|']]>')Char *)。
+     * </pre>
+     * <p>
+     * 
      * <strong>Note:</strong> Called after scanning past '&lt;![' */
     private final void scanConditionalSect(int currPEDepth)
     throws IOException, XNIException {
@@ -1948,6 +2145,10 @@ implements XMLDTDScanner, XMLComponent, XMLEntityHandler {
     /**
      * Dispatch an XML "event".
      *
+     * <p>
+     *  调度XML"事件"
+     * 
+     * 
      * @param complete True if this method is intended to scan
      *                 and dispatch as much as possible.
      *
@@ -2047,6 +2248,14 @@ implements XMLDTDScanner, XMLComponent, XMLEntityHandler {
      * <p>
      * This is recursive and will process has many refs as possible.
      *
+     * <p>
+     * 跳过分隔符这通常只是空格,但它也可以是一个或多个参数实体引用
+     * <p>
+     *  如果有一些它通过从实体管理器调用相应的实体"扩展它们"
+     * <p>
+     *  这是递归的,将会有尽可能多的refs
+     * 
+     * 
      * @param spaceRequired Specify whether some leading whitespace should be
      *                      found
      * @param lookForPERefs Specify whether parameter entity references should
@@ -2080,6 +2289,9 @@ implements XMLDTDScanner, XMLComponent, XMLEntityHandler {
 
     /*
      * Element Children Content Stack
+     * <p>
+     *  元素儿童内容堆栈
+     * 
      */
     private final void pushContentStack(int c) {
         if (fContentStack.length == fContentDepth) {
@@ -2097,6 +2309,9 @@ implements XMLDTDScanner, XMLComponent, XMLEntityHandler {
 
     /*
      * Parameter Entity Stack
+     * <p>
+     *  参数实体堆栈
+     * 
      */
     private final void pushPEStack(int depth, boolean report) {
         if (fPEStack.length == fPEDepth) {
@@ -2126,6 +2341,9 @@ implements XMLDTDScanner, XMLComponent, XMLEntityHandler {
 
     /*
      * Utility method
+     * <p>
+     *  实用方法
+     * 
      */
     private final void ensureEnumerationSize(int size) {
         if (fEnumeration.length == size) {
@@ -2158,6 +2376,10 @@ implements XMLDTDScanner, XMLComponent, XMLEntityHandler {
     /**
      * Add the count of the content buffer and check if the accumulated
      * value exceeds the limit
+     * <p>
+     *  添加内容缓冲区的计数,并检查累积值是否超过限制
+     * 
+     * 
      * @param entityName entity name
      * @param buffer content buffer
      */
@@ -2167,6 +2389,9 @@ implements XMLDTDScanner, XMLComponent, XMLEntityHandler {
 
     /**
      * Add the count and check limit
+     * <p>
+     *  添加计数和检查限制
+     * 
      * @param entityName entity name
      * @param len length of the buffer
      */

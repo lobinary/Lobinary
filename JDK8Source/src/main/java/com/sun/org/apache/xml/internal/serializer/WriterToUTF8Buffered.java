@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2005 Apache软件基金会
+ * 
+ *  根据Apache许可证第20版("许可证")授权;您不得使用此文件,除非符合许可证您可以在获取许可证的副本
+ * 
+ *  http：// wwwapacheorg / licenses / LICENSE-20
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件将按"原样"基础分发,无任何明示或暗示的保证或条件。请参阅许可证管理权限和限制许可证
+ * 
  */
 /*
  * $Id: WriterToUTF8Buffered.java,v 1.2.4.1 2005/09/15 08:15:31 suresh_emailid Exp $
+ * <p>
+ *  $ Id：WriterToUTF8Bufferedjava,v 1241 2005/09/15 08:15:31 suresh_emailid Exp $
+ * 
  */
 package com.sun.org.apache.xml.internal.serializer;
 
@@ -37,17 +50,31 @@ import java.io.Writer;
  * This class is only used internally within Xalan.
  *
  * @xsl.usage internal
+ * <p>
+ * 这个类尽可能快地将unicode字符写入字节流(javaioOutputStream)它缓冲在内部缓冲区中的输出,当完成时必须刷新到OutputStream此刷新是通过close()flush()或fl
+ * ushBuffer()方法。
+ * 
+ *  此类仅在Xalan内部使用
+ * 
+ *  @xslusage内部
+ * 
  */
 final class WriterToUTF8Buffered extends Writer implements WriterChain
 {
 
   /** number of bytes that the byte buffer can hold.
    * This is a fixed constant is used rather than m_outputBytes.lenght for performance.
+   * <p>
+   *  这是一个固定常数而不是m_outputByteslenght的性能
+   * 
    */
   private static final int BYTES_MAX=16*1024;
   /** number of characters that the character buffer can hold.
    * This is 1/3 of the number of bytes because UTF-8 encoding
    * can expand one unicode character by up to 3 bytes.
+   * <p>
+   *  这是字节数的1/3,因为UTF-8编码可以将一个unicode字符扩展最多3个字节
+   * 
    */
   private static final int CHARS_MAX=(BYTES_MAX/3);
 
@@ -59,6 +86,9 @@ final class WriterToUTF8Buffered extends Writer implements WriterChain
   /**
    * The internal buffer where data is stored.
    * (sc & sb remove final to compile in JDK 1.1.8)
+   * <p>
+   *  存储数据的内部缓冲区(sc&sb remove JDK 118中的最终编译)
+   * 
    */
   private final byte m_outputBytes[];
 
@@ -69,6 +99,10 @@ final class WriterToUTF8Buffered extends Writer implements WriterChain
    * in the range <tt>0</tt> through <tt>m_outputBytes.length</tt>; elements
    * <tt>m_outputBytes[0]</tt> through <tt>m_outputBytes[count-1]</tt> contain valid
    * byte data.
+   * <p>
+   * 缓冲区中的有效字节数此值始终在<tt> 0 </tt>到<tt> m_outputByteslength </tt>范围内;元素<tt> m_outputBytes [0] </tt>到<tt> m_o
+   * utputBytes [count-1] </tt>包含有效字节数据。
+   * 
    */
   private int count;
 
@@ -76,6 +110,10 @@ final class WriterToUTF8Buffered extends Writer implements WriterChain
    * Create an buffered UTF-8 writer.
    *
    *
+   * <p>
+   *  创建缓冲的UTF-8 writer
+   * 
+   * 
    * @param   out    the underlying output stream.
    *
    * @throws UnsupportedEncodingException
@@ -102,6 +140,10 @@ final class WriterToUTF8Buffered extends Writer implements WriterChain
    * specified underlying output stream with the specified buffer
    * size.
    *
+   * <p>
+   *  创建一个缓冲的UTF-8写入程序,用于将数据写入指定缓冲区大小的指定基础输出流
+   * 
+   * 
    * @param   out    the underlying output stream.
    * @param   size   the buffer size.
    * @exception IllegalArgumentException if size <= 0.
@@ -129,6 +171,12 @@ final class WriterToUTF8Buffered extends Writer implements WriterChain
    * <p> Subclasses that intend to support efficient single-character output
    * should override this method.
    *
+   * <p>
+   *  写入单个字符要写入的字符包含在给定整数值的16个低位中;则忽略16个高阶位
+   * 
+   *  <p>要支持高效单字符输出的子类应该覆盖此方法
+   * 
+   * 
    * @param c  int specifying a character to be written.
    * @exception  IOException  If an I/O error occurs
    */
@@ -137,6 +185,9 @@ final class WriterToUTF8Buffered extends Writer implements WriterChain
 
     /* If we are close to the end of the buffer then flush it.
      * Remember the buffer can hold a few more bytes than BYTES_MAX
+     * <p>
+     *  记住,缓冲区可以容纳比BYTES_MAX多几个字节
+     * 
      */
     if (count >= BYTES_MAX)
         flushBuffer();
@@ -170,6 +221,10 @@ final class WriterToUTF8Buffered extends Writer implements WriterChain
   /**
    * Write a portion of an array of characters.
    *
+   * <p>
+   *  写一个字符数组的一部分
+   * 
+   * 
    * @param  chars  Array of characters
    * @param  start   Offset from which to start writing characters
    * @param  length   Number of characters to write
@@ -201,6 +256,9 @@ final class WriterToUTF8Buffered extends Writer implements WriterChain
          * not cause an overflow to the output buffer m_outputBytes,
          * and make multiple recursive calls.
          * Be careful about integer overflows in multiplication.
+         * <p>
+         * 所请求的长度超过缓冲区的大小将缓冲区分成块,每个块不会导致输出缓冲区溢出m_outputBytes,并进行多次递归调用在乘法中小心整数溢出
+         * 
          */
         int split = length/CHARS_MAX;
         final int chunks;
@@ -237,6 +295,9 @@ final class WriterToUTF8Buffered extends Writer implements WriterChain
                      * The char array incorrectly ends in a high char
                      * of a high/low surrogate pair, but there is
                      * no corresponding low as the high is the last char
+                     * <p>
+                     *  并且它是高/低对没有低char提供的高字符TODO：错误消息需要char数组不正确地结束在高/低代理对的高字符,但没有对应的低,因为高是最后一个字符
+                     * 
                      */
                     end_chunk--;
                 }
@@ -261,6 +322,9 @@ final class WriterToUTF8Buffered extends Writer implements WriterChain
          * the same result. But this block exists to give the JIT
          * a better chance of optimizing a tight and common loop which
          * occurs when writing out ASCII characters.
+         * <p>
+         *  相同的结果但是这个块存在给JIT更好的机会优化紧凑和公共循环,当写出ASCII字符时发生
+         * 
          */
         char c;
         for(; i < n && (c = chars[i])< 0x80 ; i++ )
@@ -284,6 +348,10 @@ final class WriterToUTF8Buffered extends Writer implements WriterChain
         * Unicode: [1101 10ww] [wwzz zzyy] (high surrogate)
         *          [1101 11yy] [yyxx xxxx] (low surrogate)
         *          * uuuuu = wwww + 1
+        * <p>
+        * 添加以下else if条件以支持UTF-8的XML 11字符：[1111 0uuu] [10uu zzzz] [10yy yyyy] [10xx xxxx] * Unicode：[1101 10ww] 
+        * [wwzz zzyy](high surrogate)[1101 11yy] [yyxx xxxx](low surrogate)* uuuuu = wwww + 1。
+        * 
         */
       else if (c >= 0xD800 && c <= 0xDBFF)
       {
@@ -312,6 +380,10 @@ final class WriterToUTF8Buffered extends Writer implements WriterChain
   /**
    * Write a string.
    *
+   * <p>
+   *  写一个字符串
+   * 
+   * 
    * @param  s  String to be written
    *
    * @exception  IOException  If an I/O error occurs
@@ -335,6 +407,9 @@ final class WriterToUTF8Buffered extends Writer implements WriterChain
         /*
          * The requested length exceeds the size of the buffer,
          * so break it up in chunks that don't exceed the buffer size.
+         * <p>
+         *  请求的长度超过缓冲区的大小,因此将其分成不超过缓冲区大小的块
+         * 
          */
          final int start = 0;
          int split = length/CHARS_MAX;
@@ -367,6 +442,9 @@ final class WriterToUTF8Buffered extends Writer implements WriterChain
                       * of a high/low surrogate pair, but there is
                       * no corresponding low as the high is the last char
                       * Recover by ignoring this last char.
+                      * <p>
+                      *  字符串错误地结束在高/低代理对的高字符,但没有相应的低,因为高是最后的字符恢复通过忽略这最后一个字符
+                      * 
                       */
                  }
              }
@@ -389,6 +467,9 @@ final class WriterToUTF8Buffered extends Writer implements WriterChain
          * the same result. But this block exists to give the JIT
          * a better chance of optimizing a tight and common loop which
          * occurs when writing out ASCII characters.
+         * <p>
+         *  相同的结果但是这个块存在给JIT更好的机会优化紧凑和公共循环,当写出ASCII字符时发生
+         * 
          */
         char c;
         for(; i < n && (c = chars[i])< 0x80 ; i++ )
@@ -412,6 +493,10 @@ final class WriterToUTF8Buffered extends Writer implements WriterChain
       * Unicode: [1101 10ww] [wwzz zzyy] (high surrogate)
       *          [1101 11yy] [yyxx xxxx] (low surrogate)
       *          * uuuuu = wwww + 1
+      * <p>
+      * 添加以下else if条件以支持UTF-8的XML 11字符：[1111 0uuu] [10uu zzzz] [10yy yyyy] [10xx xxxx] * Unicode：[1101 10ww] 
+      * [wwzz zzyy](high surrogate)[1101 11yy] [yyxx xxxx](low surrogate)* uuuuu = wwww + 1。
+      * 
       */
     else if (c >= 0xD800 && c <= 0xDBFF)
     {
@@ -440,6 +525,10 @@ final class WriterToUTF8Buffered extends Writer implements WriterChain
   /**
    * Flush the internal buffer
    *
+   * <p>
+   *  刷新内部缓冲区
+   * 
+   * 
    * @throws IOException
    */
   public void flushBuffer() throws IOException
@@ -460,6 +549,11 @@ final class WriterToUTF8Buffered extends Writer implements WriterChain
    * byte stream, flush it.  Thus one flush() invocation will flush all the
    * buffers in a chain of Writers and OutputStreams.
    *
+   * <p>
+   *  刷新流如果流已经从缓冲区中的各种write()方法保存了任何字符,则立即将它们写入到其预期目标。
+   * 如果该目标是另一个字符或字节流,则刷新它因此,一个flush()调用将刷新在Writer和OutputStreams链中的所有缓冲区。
+   * 
+   * 
    * @exception  IOException  If an I/O error occurs
    *
    * @throws java.io.IOException
@@ -475,6 +569,10 @@ final class WriterToUTF8Buffered extends Writer implements WriterChain
    * further write() or flush() invocations will cause an IOException to be
    * thrown.  Closing a previously-closed stream, however, has no effect.
    *
+   * <p>
+   * 关闭流,首先刷新流一旦流被关闭,进一步的write()或flush()调用将导致抛出IOException。然而,关闭先前关闭的流,没有效果
+   * 
+   * 
    * @exception  IOException  If an I/O error occurs
    *
    * @throws java.io.IOException
@@ -488,6 +586,9 @@ final class WriterToUTF8Buffered extends Writer implements WriterChain
   /**
    * Get the output stream where the events will be serialized to.
    *
+   * <p>
+   *  获取事件将序列化到的输出流
+   * 
    * @return reference to the result stream, or null of only a writer was
    * set.
    */

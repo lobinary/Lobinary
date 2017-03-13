@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2006, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -94,6 +95,29 @@ import sun.awt.geom.AreaOp;
  *     as a human being perceives.
  * </ul>
  *
+ * <p>
+ *  <code> Area </code>对象存储和操作对二维空间的封闭区域的独立于分辨率的描述<code> Area </code>对象可以被转换并且可以执行各种建设性区域几何当与其他<code> Ar
+ * ea </code>对象组合时CAG操作包括区域{@link #add addition},{@link #subtract subtraction},{@link #intersect intersection}
+ * 和{@link #exclusiveOr exclusive }有关各种操作的示例,请参阅链接的方法文档。
+ * <p>
+ * <code> Area </code>类实现了<code> Shape </code>接口,并为其所有的命中测试和路径迭代设施提供全面支持,但<code> Area </code>比一般的路径在多种方式
+ * ：。
+ * <ul>
+ * <li>仅存储封闭路径和子路径</span> </>>由未封闭路径构造的<code> Area </code>对象在构建期间隐式关闭,如同这些路径已由<code> Graphics2Dfill </code>
+ * 方法填充<li >各个存储的子路径的内部都是非空的,并且在构造期间不重叠的路径被分解成单独的组件非重叠部分,该路径的空段被丢弃,然后这些非空和非重叠通过所有后续CAG操作维持属性。
+ * 不同组件子路径的轮廓可以彼此接触,只要它们不交叉使得它们的封闭区域重叠<li>描述<code> Area </code>大纲的路径的几何形状类似于构建它的路径,因为它描述了相同的封闭二维区域,但可以使用
+ * 完全不同的类型和顺序的路径段。
+ * </ul>
+ * 使用<code> Area </code>时并不总是显而易见的有趣问题包括：
+ * <ul>
+ * <li>从未关闭(打开)<code>形状</code>创建<code>区域</code>会在<code>区域</code>对象中生成封闭的大纲<li>创建<代码>区域</code>从不包含区域的<code>
+ *  Shape </code>(即使"closed")产生空的<code> Area </code>。
+ * 此问题的常见示例是生成<code > Area </code>将不会在其<code> PathIterator </code>对象中迭代几何<li>自相交<code> Shape </code>可以分成
+ * 两个(或多个)子路径,每个子路径包含原始路径<li>的一个非相交部分。
+ * <code> Area </code>以描述相同的几何,即使原始轮廓是简单和明显的<code> Area </code>类必须在路径上执行的分析可能不会反映与人类感知的"简单和明显"相同的概念。
+ * </ul>
+ * 
+ * 
  * @since 1.2
  */
 public class Area implements Shape, Cloneable {
@@ -103,6 +127,10 @@ public class Area implements Shape, Cloneable {
 
     /**
      * Default constructor which creates an empty area.
+     * <p>
+     * 默认构造函数创建一个空白区域
+     * 
+     * 
      * @since 1.2
      */
     public Area() {
@@ -115,6 +143,11 @@ public class Area implements Shape, Cloneable {
      * closed, if the <code>Shape</code> is not already closed.  The
      * fill rule (even-odd or winding) specified by the geometry of the
      * <code>Shape</code> is used to determine the resulting enclosed area.
+     * <p>
+     *  <code> Area </code>类从指定的{@link Shape}对象创建一个区域几何。
+     * 如果<code> Shape </code>还没有关闭,几何将被明确关闭填充规则或绕组)由<code> Shape </code>的几何形状指定,用于确定所得到的封闭区域。
+     * 
+     * 
      * @param s  the <code>Shape</code> from which the area is constructed
      * @throws NullPointerException if <code>s</code> is null
      * @since 1.2
@@ -218,6 +251,20 @@ public class Area implements Shape, Cloneable {
      *     ####                             ####     ####        ####
      *     ##                                 ##     ##            ##
      * </pre>
+     * <p>
+     *  将<code> Area </code>的形状添加到此<code> Area </code>的形状。
+     * <code> Area </code>的结果形状将包括两个形状的并集,包含在此或指定的<code> Area </code>中的区域。
+     * <pre>
+     *  //示例：Area a1 = new Area([triangle 0,0 =&gt; 8,0 =&gt; 0,8]);面积a2 =新面积([三角形0,0 => 8,0 => 8,8]); a1add
+     * (a2);。
+     * 
+     * a1(before)+ a2 = a1(after)
+     * 
+     *  ################ ################ ################ ## ############ ############## ################ #
+     * ####### #### ############ ################ ########## ######## ################# ######## ######## ##
+     * ############## ###### ###### ###### ###### #### #### #### #### ## ## ## ##。
+     * </pre>
+     * 
      * @param   rhs  the <code>Area</code> to be added to the
      *          current shape
      * @throws NullPointerException if <code>rhs</code> is null
@@ -251,6 +298,19 @@ public class Area implements Shape, Cloneable {
      *     ####                             ####     ####
      *     ##                                 ##     ##
      * </pre>
+     * <p>
+     *  从<code> Area </code>的形状中减去指定<code> Area </code>的形状。
+     * <code> Area </code>的结果形状将包括仅包含在<代码>区域</code>,而不是在指定的<code> Area </code>中。
+     * <pre>
+     * //示例：Area a1 = new Area([triangle 0,0 =&gt; 8,0 =&gt; 0,8]);面积a2 =新面积([三角形0,0 => 8,0 => 8,8]); a1subt
+     * ract(a2);。
+     * 
+     *  a1(before)-a2 = a1(after)
+     * 
+     *  ################ ################ ############## #### ########## ## ############ ############ #### #
+     * ######### ########## ###### ######## ######## ######## ###### #### ####### #### #### #### ### ##。
+     * </pre>
+     * 
      * @param   rhs  the <code>Area</code> to be subtracted from the
      *          current shape
      * @throws NullPointerException if <code>rhs</code> is null
@@ -284,6 +344,21 @@ public class Area implements Shape, Cloneable {
      *     ####                             ####
      *     ##                                 ##
      * </pre>
+     * <p>
+     * 将<code> Area </code>的形状设置为其当前形状与指定<code> Area </code>的形状的交集。
+     * <code> Area </code>的结果形状将仅包括这些<code> Area </code>和指定的<code> Area </code>中包含的区域。
+     * <pre>
+     *  //示例：Area a1 = new Area([triangle 0,0 =&gt; 8,0 =&gt; 0,8]);面积a2 =新面积([三角形0,0 => 8,0 => 8,8]); a1int
+     * ersect(a2);。
+     * 
+     *  a1(before)相交a2 = a1(after)
+     * 
+     * ################     ################     ################ ##############         ##############     
+     *   ############ ############             ############         ######## ##########                 ####
+     * ######           #### ########                     ######## ######                         ###### ###
+     * #                             #### ##                                 ##。
+     * </pre>
+     * 
      * @param   rhs  the <code>Area</code> to be intersected with this
      *          <code>Area</code>
      * @throws NullPointerException if <code>rhs</code> is null
@@ -318,6 +393,22 @@ public class Area implements Shape, Cloneable {
      *     ####                             ####     ####        ####
      *     ##                                 ##     ##            ##
      * </pre>
+     * <p>
+     *  Sets the shape of this <code>Area</code> to be the combined area of its current shape and the shape 
+     * of the specified <code>Area</code>, minus their intersection The resulting shape of this <code>Area</code>
+     *  will include only areas that were contained in either this <code>Area</code> or in the specified <code>
+     * Area</code>, but not in both。
+     * <pre>
+     * //示例：Area a1 = new Area([triangle 0,0 =&gt; 8,0 =&gt; 0,8]);面积a2 =新面积([三角形0,0 => 8,0 => 8,8]); a1excl
+     * usiveOr(a2);。
+     * 
+     *  a1(before)xor a2 = a1(after)
+     * 
+     *  ################ ################ ############## #### ########## ### ############ ############ #### 
+     * #### #### ###### ########## ###### ###### ######## ######## ###### ########## ###### ###### ###### ##
+     * #### #### #### #### #### ## ## ## ##。
+     * </pre>
+     * 
      * @param   rhs  the <code>Area</code> to be exclusive ORed with this
      *          <code>Area</code>.
      * @throws NullPointerException if <code>rhs</code> is null
@@ -331,6 +422,10 @@ public class Area implements Shape, Cloneable {
     /**
      * Removes all of the geometry from this <code>Area</code> and
      * restores it to an empty area.
+     * <p>
+     *  从<code> Area </code>中删除所有几何图形,并将其恢复到空白区域
+     * 
+     * 
      * @since 1.2
      */
     public void reset() {
@@ -340,6 +435,10 @@ public class Area implements Shape, Cloneable {
 
     /**
      * Tests whether this <code>Area</code> object encloses any area.
+     * <p>
+     * 测试这个<code> Area </code>对象是否包含任何区域
+     * 
+     * 
      * @return    <code>true</code> if this <code>Area</code> object
      * represents an empty area; <code>false</code> otherwise.
      * @since 1.2
@@ -351,6 +450,10 @@ public class Area implements Shape, Cloneable {
     /**
      * Tests whether this <code>Area</code> consists entirely of
      * straight edged polygonal geometry.
+     * <p>
+     *  测试此<code> Area </code>是否完全由直边多边形几何构成
+     * 
+     * 
      * @return    <code>true</code> if the geometry of this
      * <code>Area</code> consists entirely of line segments;
      * <code>false</code> otherwise.
@@ -368,6 +471,10 @@ public class Area implements Shape, Cloneable {
 
     /**
      * Tests whether this <code>Area</code> is rectangular in shape.
+     * <p>
+     *  测试此<code> Area </code>是否为矩形
+     * 
+     * 
      * @return    <code>true</code> if the geometry of this
      * <code>Area</code> is rectangular in shape; <code>false</code>
      * otherwise.
@@ -403,6 +510,11 @@ public class Area implements Shape, Cloneable {
      * contains more than 1 subpath.  The subpaths are counted by the
      * number of {@link PathIterator#SEG_MOVETO SEG_MOVETO}  segments
      * that appear in the path.
+     * <p>
+     *  测试此<code> Area </code>是否由单个闭合子路径组成如果路径包含0或1个子路径,此方法返回<code> true </code>,如果路径包含0或1个子路径,则返回<code> fal
+     * se </code>包含多个子路径子路径由路径中显示的{@link PathIterator#SEG_MOVETO SEG_MOVETO}段的数量计数。
+     * 
+     * 
      * @return    <code>true</code> if the <code>Area</code> is comprised
      * of a single basic geometry; <code>false</code> otherwise.
      * @since 1.2
@@ -450,6 +562,12 @@ public class Area implements Shape, Cloneable {
      * padded to include the control points of curves in the outline
      * of the Shape, but should tightly fit the actual geometry of
      * the outline itself.
+     * <p>
+     *  返回完全包含此<code> Area </code>的高精度边界{@link Rectangle2D}
+     * <p>
+     * Area类将尝试返回可能的最小边界框的形状边界框不会被填充以包括在Shape的轮廓中的曲线的控制点,但应该紧密地适合轮廓本身的实际几何
+     * 
+     * 
      * @return    the bounding <code>Rectangle2D</code> for the
      * <code>Area</code>.
      * @since 1.2
@@ -470,6 +588,13 @@ public class Area implements Shape, Cloneable {
      * the bounding box with integers, the bounding box can only be
      * as tight as the nearest integer coordinates that encompass
      * the geometry of the Shape.
+     * <p>
+     *  返回完全包含此<code> Area </code>的边界{@link Rectangle}
+     * <p>
+     *  Area类将尝试返回可能的最小边界框的形状边界框不会被填充以包括在Shape的轮廓中的曲线的控制点,但是应该紧密适合轮廓本身的实际几何形状由于返回对象表示具有整数的边界框,边界框只能与包含Shape的
+     * 几何形状的最近的整数坐标一样紧密。
+     * 
+     * 
      * @return    the bounding <code>Rectangle</code> for the
      * <code>Area</code>.
      * @since 1.2
@@ -480,6 +605,10 @@ public class Area implements Shape, Cloneable {
 
     /**
      * Returns an exact copy of this <code>Area</code> object.
+     * <p>
+     * 返回此<code> Area </code>对象的精确副本
+     * 
+     * 
      * @return    Created clone object
      * @since 1.2
      */
@@ -491,6 +620,10 @@ public class Area implements Shape, Cloneable {
      * Tests whether the geometries of the two <code>Area</code> objects
      * are equal.
      * This method will return false if the argument is null.
+     * <p>
+     *  测试两个<code> Area </code>对象的几何是否相等如果参数为null,此方法将返回false
+     * 
+     * 
      * @param   other  the <code>Area</code> to be compared to this
      *          <code>Area</code>
      * @return  <code>true</code> if the two geometries are equal;
@@ -515,6 +648,10 @@ public class Area implements Shape, Cloneable {
      * Transforms the geometry of this <code>Area</code> using the specified
      * {@link AffineTransform}.  The geometry is transformed in place, which
      * permanently changes the enclosed area defined by this object.
+     * <p>
+     *  使用指定的{@link AffineTransform}转换此<code> Area </code>的几何。几何将被转换到位,永久更改此对象定义的封闭区域
+     * 
+     * 
      * @param t  the transformation used to transform the area
      * @throws NullPointerException if <code>t</code> is null
      * @since 1.2
@@ -534,6 +671,11 @@ public class Area implements Shape, Cloneable {
      * geometry as this <code>Area</code> transformed by the specified
      * <code>AffineTransform</code>.  This <code>Area</code> object
      * is unchanged.
+     * <p>
+     *  创建一个新的<code> Area </code>对象,该对象包含与通过指定的<code> AffineTransform </code>转换的<code> Area </code>相同的几何体</code>
+     * 不变。
+     * 
+     * 
      * @param t  the specified <code>AffineTransform</code> used to transform
      *           the new <code>Area</code>
      * @throws NullPointerException if <code>t</code> is null
@@ -549,6 +691,10 @@ public class Area implements Shape, Cloneable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public boolean contains(double x, double y) {
@@ -566,6 +712,10 @@ public class Area implements Shape, Cloneable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public boolean contains(Point2D p) {
@@ -574,6 +724,10 @@ public class Area implements Shape, Cloneable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public boolean contains(double x, double y, double w, double h) {
@@ -589,6 +743,10 @@ public class Area implements Shape, Cloneable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public boolean contains(Rectangle2D r) {
@@ -597,6 +755,10 @@ public class Area implements Shape, Cloneable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public boolean intersects(double x, double y, double w, double h) {
@@ -612,6 +774,10 @@ public class Area implements Shape, Cloneable {
 
     /**
      * {@inheritDoc}
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.2
      */
     public boolean intersects(Rectangle2D r) {
@@ -621,6 +787,10 @@ public class Area implements Shape, Cloneable {
     /**
      * Creates a {@link PathIterator} for the outline of this
      * <code>Area</code> object.  This <code>Area</code> object is unchanged.
+     * <p>
+     * 为此<code> Area </code>对象的大纲创建一个{@link PathIterator}这个<code> Area </code>对象不变
+     * 
+     * 
      * @param at an optional <code>AffineTransform</code> to be applied to
      * the coordinates as they are returned in the iteration, or
      * <code>null</code> if untransformed coordinates are desired
@@ -639,6 +809,10 @@ public class Area implements Shape, Cloneable {
      * represented by the SEG_MOVETO, SEG_LINETO, and SEG_CLOSE point
      * types are returned by the iterator.  This <code>Area</code>
      * object is unchanged.
+     * <p>
+     *  为此<code> Area </code>对象的扁平轮廓创建<code> PathIterator </code>只有由SEG_MOVETO,SEG_LINETO和SEG_CLOSE表示的未弯曲路径段
+     * 由迭代器返回此<code> Area </code>对象不变。
+     * 
      * @param at an optional <code>AffineTransform</code> to be
      * applied to the coordinates as they are returned in the
      * iteration, or <code>null</code> if untransformed coordinates

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -140,6 +141,74 @@ package java.io;
  * <li><a href="../lang/Character.html#unicode">Supplementary characters</a>
  *     are represented in the form of surrogate pairs.
  * </ul>
+ * <p>
+ *  {@code DataInput}接口提供从二进制流中读取字节并从中重构任何Java原语类型的数据。
+ * 还有一个工具,用于从<a href ="#modified中的数据重建{@code String} -utf-8">修改的UTF-8 </a>格式。
+ * <p>
+ * 在这个接口中的所有读取例程通常是正确的,如果在读取所需的字节数之前达到文件结尾,则抛出{@code EOFException}(这是一种{@code IOException})If任何字节不能被除文件结
+ * 束以外的任何原因读取,则会抛出除{@code EOFException}之外的{@code IOException}特别是,如果输入流已关闭,可能会抛出{@code IOException}。
+ * 
+ *  <h3> <a name=\"modified-utf-8\">修改的UTF-8 </a> </h3>
+ * <p>
+ * DataInput和DataOutput接口的实现以一种稍微修改UTF-8的格式表示Unicode字符串(有关标准UTF-8格式的信息,请参见<i> </i> 39的Unicode编码格式</i> Un
+ * icode Standard,Version 40 </i>)请注意,在下表中,最高有效位出现在最左边的列。
+ * 
+ * <blockquote>
+ *  <table border ="1"cellspacing ="0"cellpadding ="8"
+ * summary="Bit values and bytes">
+ * <tr>
+ *  <th colspan ="9"> <span style ="font-weight：normal">范围{@code'\\ u005Cu0001'}到{@code'\\ u005Cu007F'}中
+ * 的所有字符由单个字节表示：< / span> </th>。
+ * </tr>
+ * <tr>
+ *  <td> </td> <th colspan ="8"id ="bit_a">位值</th>
+ * </tr>
+ * <tr>
+ *  <th id ="byte1_a">字节1 </th> <td> <center> 0 </center> <td colspan ="7"> <center>
+ * </tr>
+ * <tr>
+ * <th colspan ="9"> <span style ="font-weight：normal">空字符{@code'\\ u005Cu0000'}和范围{@code'\\ u005Cu0080'}
+ * 中的字符到{@code' u005Cu07FF'}由一对字节表示：</span> </th>。
+ * </tr>
+ * <tr>
+ *  <td> </td> <th colspan ="8"id ="bit_b">位值</th>
+ * </tr>
+ * <tr>
+ *  <th id ="byte1_b">字节1 </th> <td> <center> 1 </center> <td> <center> 1 </center> <td> <center> 0 </center>
+ *  <td colspan ="5"> <center> bits 10-6 </center>。
+ * </tr>
+ * <tr>
+ *  <th id ="byte2_a">字节2 </th> <td> <center> 1 </center> <td> <center> 0 </center> <td colspan ="6"> < 0 </center>
+ * 。
+ * </tr>
+ * <tr>
+ *  范围{@code'\\ u005Cu0800'}至{@code'\\ u005CuFFFF'}中的<th colspan ="9"> <span style ="font-weight：normal">
+ *  {@code char}字节：</span> </th>。
+ * </tr>
+ * <tr>
+ *  <td> </td> <th colspan ="8"id ="bit_c">位值</th>
+ * </tr>
+ * <tr>
+ * <th id ="byte1_c">字节1 </th> <td> <center> 1 </center> <td> <center> 1 </center> <td> <center> 1 </center>
+ *  <td> <center> 0 </center> <td colspan ="4"> <center>位15-12 </center>。
+ * </tr>
+ * <tr>
+ *  <th id ="byte2_b">字节2 </th> <td> <center> 1 </center> <td> <center> 0 </center> <td colspan ="6"> <center>
+ *  6 </center>。
+ * </tr>
+ * <tr>
+ *  <th id ="byte3">字节3 </th> <td> <center> 1 </center> <td> <center> 0 </center> <td colspan ="6" 0 </center>
+ * 。
+ * </tr>
+ * </table>
+ * </blockquote>
+ * <p>
+ *  此格式与标准UTF-8格式之间的差异如下：
+ * <ul>
+ * <li>空字节{@code'\\ u005Cu0000'}以2字节格式而不是1字节编码,因此编码字符串从不具有嵌入的空值<li>只有1字节,2字节和使用3个字节的格式<li> <a href=\"/lang/Characterhtml#unicode\">
+ * 补充字符</a>以代理对的形式表示。
+ * </ul>
+ * 
  * @author  Frank Yellin
  * @see     java.io.DataInputStream
  * @see     java.io.DataOutput
@@ -182,6 +251,23 @@ interface DataInput {
      * not all bytes of {@code b} have been
      * updated with data from the input stream.
      *
+     * <p>
+     *  从输入流读取一些字节并将它们存储到缓冲区数组{@code b}读取的字节数等于{@code b}
+     * <p>
+     *  此方法阻止,直到出现以下情况之一：
+     * <ul>
+     *  <li>输入数据的{@ code blength}字节可用,在这种情况下,将返回正常
+     * 
+     *  <li>检测到文件结束,在这种情况下会抛出{@code EOFException}
+     * 
+     * <li>发生I / O错误,在这种情况下,会抛出除{@code EOFException}之外的{@code IOException}
+     * </ul>
+     * <p>
+     *  如果{@code b}是{@code null},则抛出{@code NullPointerException}如果{@code blength}为零,则不读取任何字节。
+     * 否则,读取的第一个字节存储到{@code b [ 0]},下一个进入{@code b [1]},等等如果从这个方法抛出一个异常,那么可能是{@code b}的一些但不是所有字节都已经更新了数据从输入流。
+     *  如果{@code b}是{@code null},则抛出{@code NullPointerException}如果{@code blength}为零,则不读取任何字节。
+     * 
+     * 
      * @param     b   the buffer into which the data is read.
      * @exception  EOFException  if this stream reaches the end before reading
      *               all the bytes.
@@ -226,6 +312,23 @@ interface DataInput {
      * and so on. The number of bytes read is,
      * at most, equal to {@code len}.
      *
+     * <p>
+     *  从输入流读取{@code len}字节
+     * <p>
+     *  此方法阻止,直到出现以下情况之一：
+     * <ul>
+     *  <li>可以使用{@ code len}字节的输入数据,在这种情况下,将返回正常
+     * 
+     *  <li>检测到文件结束,在这种情况下会抛出{@code EOFException}
+     * 
+     * <li>发生I / O错误,在这种情况下,会抛出除{@code EOFException}之外的{@code IOException}
+     * </ul>
+     * <p>
+     *  如果{@code b}是{@code null},则会抛出{@code NullPointerException}如果{@code off}为负值,或者{@code len}为负值或{@code off + len}
+     * 数组{@code b}的长度,然后抛出一个{@code IndexOutOfBoundsException}如果{@code len}为0,那么没有字节被读取。
+     * 否则,读取的第一个字节存储到元素{@code b [off ]},下一个变成{@code b [off + 1]},等等读取的字节数最多等于{@code len}。
+     * 
+     * 
      * @param     b   the buffer into which the data is read.
      * @param off  an int specifying the offset into the data.
      * @param len  an int specifying the number of bytes to read.
@@ -252,6 +355,11 @@ interface DataInput {
      * The actual
      * number of bytes skipped is returned.
      *
+     * <p>
+     * 尝试从输入流中跳过{@code n}字节的数据,丢弃跳过的字节然而,它可能跳过一些较小的字节数,可能为零这可能是由多个条件中的任何一个引起的;在{@code n}字节被跳过之前到达文件末尾只有一种可能性
+     * 此方法不会抛出{@code EOFException}返回实际跳过的字节数。
+     * 
+     * 
      * @param      n   the number of bytes to be skipped.
      * @return     the number of bytes actually skipped.
      * @exception  IOException   if an I/O error occurs.
@@ -266,6 +374,11 @@ interface DataInput {
      * the byte written by the {@code writeBoolean}
      * method of interface {@code DataOutput}.
      *
+     * <p>
+     *  读取一个输入字节并返回{@code true}(如果该字节为非零),如果该字节为零,则返回{@code false}此方法适用于读取由接口{@code DataOutput}的{@code writeBoolean}
+     *  }}。
+     * 
+     * 
      * @return     the {@code boolean} value read.
      * @exception  EOFException  if this stream reaches the end before reading
      *               all the bytes.
@@ -282,6 +395,11 @@ interface DataInput {
      * reading the byte written by the {@code writeByte}
      * method of interface {@code DataOutput}.
      *
+     * <p>
+     * 读取并返回一个输入字节该字节在{@code -128}到{@code 127}范围内被视为有符号值,包含此方法适用于读取接口的{@code writeByte}方法写入的字节{@code DataOutput}
+     * 。
+     * 
+     * 
      * @return     the 8-bit value read.
      * @exception  EOFException  if this stream reaches the end before reading
      *               all the bytes.
@@ -302,6 +420,11 @@ interface DataInput {
      * was intended to be a value in the range
      * {@code 0} through {@code 255}.
      *
+     * <p>
+     *  读取一个输入字节,将其零扩展为类型{@code int},并返回结果,因此在{@code 0}到{@code 255}的范围内此方法适用于读取由如果{@code writeByte}的参数是一个在{@code 0}
+     * 到{@code 255}范围内的值,{@code writeByte}接口{@code DataOutput}。
+     * 
+     * 
      * @return     the unsigned 8-bit value read.
      * @exception  EOFException  if this stream reaches the end before reading
      *               all the bytes.
@@ -323,6 +446,11 @@ interface DataInput {
      * by the {@code writeShort} method of
      * interface {@code DataOutput}.
      *
+     * <p>
+     * 读取两个输入字节并返回一个{@code short}值让{@code a}是第一个字节读取,{@code b}是第二个字节返回的值是：<pre> {@ code(short)(( a << 8)|(b&0xff))} </pre>
+     * 此方法适用于读取由接口{@code DataOutput}的{@code writeShort}。
+     * 
+     * 
      * @return     the 16-bit value read.
      * @exception  EOFException  if this stream reaches the end before reading
      *               all the bytes.
@@ -346,6 +474,12 @@ interface DataInput {
      * was intended to be a value in the range
      * {@code 0} through {@code 65535}.
      *
+     * <p>
+     * 读取两个输入字节并返回{@code 0}到{@code 65535}范围内的{@code int}值让{@code a}成为第一个字节读取,{@code b}成为第二个字节值返回的是：<pre> {@ code((a&0xff)<< 8)|(b&0xff))} </pre>
+     * 此方法适用于读取由{@code writeShort} interface {@code DataOutput},如果{@code writeShort}的参数是要在{@code 0}到{@code 65535}
+     * 范围内的值,。
+     * 
+     * 
      * @return     the unsigned 16-bit value read.
      * @exception  EOFException  if this stream reaches the end before reading
      *               all the bytes.
@@ -366,6 +500,11 @@ interface DataInput {
      * the {@code writeChar} method of interface
      * {@code DataOutput}.
      *
+     * <p>
+     *  读取两个输入字节并返回一个{@code char}值让{@code a}是第一个字节读取,{@code b}是第二个字节返回的值是：<pre> {@ code(char)(( a << 8)|(b&0xff))} </pre>
+     * 此方法适用于读取接口{@code DataOutput}的{@code writeChar}。
+     * 
+     * 
      * @return     the {@code char} value read.
      * @exception  EOFException  if this stream reaches the end before reading
      *               all the bytes.
@@ -385,6 +524,11 @@ interface DataInput {
      * for reading bytes written by the {@code writeInt}
      * method of interface {@code DataOutput}.
      *
+     * <p>
+     * 读取四个输入字节并返回一个{@code int}值让{@code ad}成为第一到第四个字节读返回的值是：<pre> {@ code(((a&0xff)<< 24)| (b&0xff)<< 16)|((c&0xff)<< 8)|(d&0xff))} </pre>
+     * 此方法适用于读取由接口{@code writeInt} {@code DataOutput}。
+     * 
+     * 
      * @return     the {@code int} value read.
      * @exception  EOFException  if this stream reaches the end before reading
      *               all the bytes.
@@ -412,6 +556,12 @@ interface DataInput {
      * for reading bytes written by the {@code writeLong}
      * method of interface {@code DataOutput}.
      *
+     * <p>
+     *  读取8个输入字节并返回一个{@code long}值Let {@code ah}是第一个到第八个字节读取返回的值是：<pre> {@ code((long)(a&0xff)<< 56 )|((长)(b&0xff)<< 48)|((长)(c&0xff)<< 40) &0xff)<< 24)|((long)(f&0xff)<< 16)|((long)(g&0xff)<< 8) pre>。
+     * <p>
+     * 此方法适用于读取由接口{@code DataOutput}的{@code writeLong}方法写入的字节,
+     * 
+     * 
      * @return     the {@code long} value read.
      * @exception  EOFException  if this stream reaches the end before reading
      *               all the bytes.
@@ -432,6 +582,12 @@ interface DataInput {
      * bytes written by the {@code writeFloat}
      * method of interface {@code DataOutput}.
      *
+     * <p>
+     *  读取四个输入字节并返回一个{@code float}值这是通过首先以{@code readInt}方法的方式构造一个{@code int}值,然后将此{@code int}值转换为{@code float}
+     * 的方法与方法{@code FloatintBitsToFloat}的方式相同。
+     * 此方法适用于读取接口{@code DataOutput}的{@code writeFloat}方法写入的字节。
+     * 
+     * 
      * @return     the {@code float} value read.
      * @exception  EOFException  if this stream reaches the end before reading
      *               all the bytes.
@@ -452,6 +608,11 @@ interface DataInput {
      * bytes written by the {@code writeDouble}
      * method of interface {@code DataOutput}.
      *
+     * <p>
+     * 读取8个输入字节并返回一个{@code double}值它首先构造一个{@code long}值,方法与{@code readLong}方法完全相同,然后将此{@code long}值转换为{@code double}
+     * 方法的方式{@code DoublelongBitsToDouble}此方法适用于读取接口{@code DataOutput}的{@code writeDouble}方法写入的字节,。
+     * 
+     * 
      * @return     the {@code double} value read.
      * @exception  EOFException  if this stream reaches the end before reading
      *               all the bytes.
@@ -493,6 +654,16 @@ interface DataInput {
      * will have a value less than {@code \u005Cu0100},
      * that is, {@code (char)256}.
      *
+     * <p>
+     *  从输入流读取下一行文本它读取连续字节,将每个字节分别转换为字符,直到遇到行终止符或文件结尾;读取的字符将作为{@code String}返回。
+     * 请注意,因为此方法处理字节,所以不支持输入完整的Unicode字符集。
+     * <p>
+     * 如果在可以读取一个字节之前遇到文件结尾,则返回{@code null}否则,通过零扩展将读取的每个字节转换为类型{@code char}如果字符{@code' n#'},它被丢弃并且读取停止如果遇到字符
+     * {@code'\\ r'},它被丢弃,并且如果下面的字节转换为字符{@code'\n'}那么也被丢弃;读取然后停止如果在遇到字符{@code'\n'}和{@code'\\ r'}之一之前遇到文件结束,读
+     * 取停止一旦读取停止,则返回{@code String}其中包含所有读取的字符而不是丢弃,按顺序进行请注意,此字符串中的每个字符都将具有小于{@code \\ u005Cu0100}的值,即{@code(char)256}
+     * 。
+     * 
+     * 
      * @return the next line of text from the input stream,
      *         or {@code null} if the end of file is
      *         encountered before a byte can be read.
@@ -578,6 +749,19 @@ interface DataInput {
      * method of interface {@code DataOutput}
      * may be used to write data that is suitable
      * for reading by this method.
+     * <p>
+     * 在使用<a href=\"#modified-utf-8\">修改的UTF-8 </a>格式编码的字符串中读取{@code readUTF}的一般合同是它读取Unicode的表示形式以修改的UTF-8格
+     * 式编码的字符串;这个字符串然后作为{@code String}返回,。
+     * <p>
+     *  首先,读取两个字节并用于以{@code readUnsignedShort}方法的方式构造无符号的16位整数。
+     * 该整数值称为<i> UTF长度</i>,并指定附加字节数要读取这些字节然后通过以组的形式考虑将其转换为字符每组的长度从组的第一个字节的值计算组的后面的字节(如果有的话)是下一组的第一个字节。
+     * <p>
+     * 如果组的第一个字节与位模式{@code 0xxxxxxx}匹配(其中{@code x}表示"可能是{@code 0}或{@code 1}"),那么组只包含该字节字节是零扩展形成一个字符
+     * <p>
+     * 如果组的第一个字节与位模式{@code 110xxxxx}匹配,则该组由该字节{@code a}和第二个字节{@code b}组成。
+     * 如果没有字节{@code b} byte {@code a}是要读取的最后一个字节),或者如果byte {@code b}与位模式{@code 10xxxxxx}不匹配,则抛出{@code UTFDataFormatException}
+     * 否则,组被转换为字符：<pre> {@ code(char)(((a&0x1F)<< 6)|(b&0x3F))} </pre>如果组的第一个字节匹配位模式{ @code 1110xxxx},那么该组由该
+     * 
      * @return     a Unicode string.
      * @exception  EOFException            if this stream reaches the end
      *               before reading all the bytes.

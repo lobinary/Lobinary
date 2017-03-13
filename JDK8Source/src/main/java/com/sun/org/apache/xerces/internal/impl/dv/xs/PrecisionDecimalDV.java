@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2004 Apache软件基金会
+ * 
+ *  根据Apache许可证第20版("许可证")授权;您不得使用此文件,除非符合许可证您可以在获取许可证的副本
+ * 
+ *  http：// wwwapacheorg / licenses / LICENSE-20
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件将按"原样"基础分发,无任何明示或暗示的保证或条件。请参阅许可证管理权限和限制许可证
+ * 
  */
 package com.sun.org.apache.xerces.internal.impl.dv.xs;
 
@@ -27,6 +37,12 @@ import com.sun.org.apache.xerces.internal.impl.dv.ValidationContext;
  *
  * @xerces.experimental
  *
+ * <p>
+ *  <precisionDecimal>数据类型(W3C模式11)的验证程序
+ * 
+ *  @xercesexperimental
+ * 
+ * 
  * @author Ankit Pasricha, IBM
  *
  */
@@ -120,6 +136,10 @@ class PrecisionDecimalDV extends TypeValidator {
             // ignore trailing zeroes in fraction part
             /*while (fracEnd > fracStart && content.charAt(fracEnd-1) == '0') {
              fracEnd--;
+            /* <p>
+            /* fracEnd--;
+            /* 
+            /* 
              }*/
 
             // check whether there is non-digit characters in the fraction part
@@ -235,6 +255,8 @@ class PrecisionDecimalDV extends TypeValidator {
         }
 
         /**
+        /* <p>
+        /* 
          * @return
          */
         private int compareFractionalPart(XPrecisionDecimal oval) {
@@ -341,6 +363,8 @@ class PrecisionDecimalDV extends TypeValidator {
         }
 
         /**
+        /* <p>
+        /* 
          * @param val
          * @return
          */
@@ -352,6 +376,8 @@ class PrecisionDecimalDV extends TypeValidator {
         }
 
         /**
+        /* <p>
+        /* 
          * @param val
          * @return
          */
@@ -387,6 +413,8 @@ class PrecisionDecimalDV extends TypeValidator {
         }
 
         /**
+        /* <p>
+        /* 
          * @param decimal
          * @return
          */
@@ -402,6 +430,8 @@ class PrecisionDecimalDV extends TypeValidator {
 
     }
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.impl.dv.xs.TypeValidator#getAllowedFacets()
      */
     @Override
@@ -410,6 +440,8 @@ class PrecisionDecimalDV extends TypeValidator {
     }
 
     /* (non-Javadoc)
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.impl.dv.xs.TypeValidator#getActualValue(java.lang.String, com.sun.org.apache.xerces.internal.impl.dv.ValidationContext)
      */
     @Override

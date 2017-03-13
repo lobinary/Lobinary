@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -52,6 +53,13 @@ import java.io.Serializable;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  <code> JScrollPane </code> <code> JScrollPaneLayout </code>使用的布局管理器负责九个组件：视口,两个滚动条,行标题,列标题和四个"角"组件
+ * <p>
+ *  <strong>警告：</strong>此类的序列化对象将不与未来的Swing版本兼容当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ * 支持长期存储所有JavaBeans&trade;已添加到<code> javabeans </code>包中请参见{@link javabeansXMLEncoder}。
+ * 
+ * 
  * @see JScrollPane
  * @see JViewport
  *
@@ -64,6 +72,10 @@ public class ScrollPaneLayout
     /**
      * The scrollpane's viewport child.
      * Default is an empty <code>JViewport</code>.
+     * <p>
+     * 滚动条的视口子项默认是一个空的<code> JViewport </code>
+     * 
+     * 
      * @see JScrollPane#setViewport
      */
     protected JViewport viewport;
@@ -72,6 +84,10 @@ public class ScrollPaneLayout
     /**
      * The scrollpane's vertical scrollbar child.
      * Default is a <code>JScrollBar</code>.
+     * <p>
+     *  滚动条的垂直滚动条子项默认是一个<code> JScrollBar </code>
+     * 
+     * 
      * @see JScrollPane#setVerticalScrollBar
      */
     protected JScrollBar vsb;
@@ -80,6 +96,10 @@ public class ScrollPaneLayout
     /**
      * The scrollpane's horizontal scrollbar child.
      * Default is a <code>JScrollBar</code>.
+     * <p>
+     *  滚动条的水平滚动条子项默认是一个<code> JScrollBar </code>
+     * 
+     * 
      * @see JScrollPane#setHorizontalScrollBar
      */
     protected JScrollBar hsb;
@@ -87,6 +107,10 @@ public class ScrollPaneLayout
 
     /**
      * The row header child.  Default is <code>null</code>.
+     * <p>
+     *  行标题子项默认值为<code> null </code>
+     * 
+     * 
      * @see JScrollPane#setRowHeader
      */
     protected JViewport rowHead;
@@ -94,6 +118,10 @@ public class ScrollPaneLayout
 
     /**
      * The column header child.  Default is <code>null</code>.
+     * <p>
+     *  列标题子项默认值为<code> null </code>
+     * 
+     * 
      * @see JScrollPane#setColumnHeader
      */
     protected JViewport colHead;
@@ -102,6 +130,10 @@ public class ScrollPaneLayout
     /**
      * The component to display in the lower left corner.
      * Default is <code>null</code>.
+     * <p>
+     *  要显示在左下角的组件默认为<code> null </code>
+     * 
+     * 
      * @see JScrollPane#setCorner
      */
     protected Component lowerLeft;
@@ -110,6 +142,10 @@ public class ScrollPaneLayout
     /**
      * The component to display in the lower right corner.
      * Default is <code>null</code>.
+     * <p>
+     *  要显示在右下角的组件默认为<code> null </code>
+     * 
+     * 
      * @see JScrollPane#setCorner
      */
     protected Component lowerRight;
@@ -118,6 +154,10 @@ public class ScrollPaneLayout
     /**
      * The component to display in the upper left corner.
      * Default is <code>null</code>.
+     * <p>
+     *  要显示在左上角的组件默认为<code> null </code>
+     * 
+     * 
      * @see JScrollPane#setCorner
      */
     protected Component upperLeft;
@@ -126,6 +166,10 @@ public class ScrollPaneLayout
     /**
      * The component to display in the upper right corner.
      * Default is <code>null</code>.
+     * <p>
+     *  要显示在右上角的组件默认为<code> null </code>
+     * 
+     * 
      * @see JScrollPane#setCorner
      */
     protected Component upperRight;
@@ -137,6 +181,12 @@ public class ScrollPaneLayout
      * <p>
      * This field is obsolete, please use the <code>JScrollPane</code> field instead.
      *
+     * <p>
+     * 垂直滚动条的显示策略默认为<code> ScrollPaneConstantsVERTICAL_SCROLLBAR_​​AS_NEEDED </code>
+     * <p>
+     *  此字段已过时,请改用<code> JScrollPane </code>字段
+     * 
+     * 
      * @see JScrollPane#setVerticalScrollBarPolicy
      */
     protected int vsbPolicy = VERTICAL_SCROLLBAR_AS_NEEDED;
@@ -148,6 +198,12 @@ public class ScrollPaneLayout
      * <p>
      * This field is obsolete, please use the <code>JScrollPane</code> field instead.
      *
+     * <p>
+     *  水平滚动条的显示策略默认为<code> ScrollPaneConstantsHORIZONTAL_SCROLLBAR_​​AS_NEEDED </code>
+     * <p>
+     *  此字段已过时,请改用<code> JScrollPane </code>字段
+     * 
+     * 
      * @see JScrollPane#setHorizontalScrollBarPolicy
      */
     protected int hsbPolicy = HORIZONTAL_SCROLLBAR_AS_NEEDED;
@@ -166,6 +222,13 @@ public class ScrollPaneLayout
      *     }
      * };
      * scrollpane.setLayout(mySPLayout):
+     * </pre>
+     * <p>
+     *  此方法在ScrollPaneLayout设置为<code> JScrollPane的LayoutManager之后被调用</code>它初始化通常由<code> addLayoutComponent 
+     * </code>设置的所有内部字段例如：。
+     * <pre>
+     * ScrollPaneLayout mySPLayout = new ScrollPanelLayout(){public void layoutContainer(Container p){superlayoutContainer(p); // do some extra work here}
+     * }; scrollpanesetLayout(mySPLayout)：。
      * </pre>
      */
     public void syncWithScrollPane(JScrollPane sp) {
@@ -192,6 +255,12 @@ public class ScrollPaneLayout
      * not equal to <code>newC</code> and is non-<code>null</code>,
      * it will be removed from its parent.
      *
+     * <p>
+     *  删除现有组件当添加新组件(例如左角或垂直滚动​​条)时,必须删除旧组件(如果存在)
+     * <p>
+     *  此方法返回<code> newC </code>如果<code> oldC </code>不等于<code> newC </code>且为非<code> null </code>其父
+     * 
+     * 
      * @param oldC the <code>Component</code> to replace
      * @param newC the <code>Component</code> to add
      * @return the <code>newC</code>
@@ -220,6 +289,16 @@ public class ScrollPaneLayout
      * <li>ScrollPaneConstants.UPPER_RIGHT_CORNER
      * </ul>
      *
+     * <p>
+     *  将指定的组件添加到布局使用下列之一来标识布局：
+     * <ul>
+     * <LI> ScrollPaneConstantsVIEWPORT <LI> ScrollPaneConstantsVERTICAL_SCROLLBAR <LI> ScrollPaneConstantsH
+     * ORIZONTAL_SCROLLBAR <LI> ScrollPaneConstantsROW_HEADER <LI> ScrollPaneConstantsCOLUMN_HEADER <LI> Scr
+     * ollPaneConstantsLOWER_LEFT_CORNER <LI> ScrollPaneConstantsLOWER_RIGHT_CORNER <LI> ScrollPaneConstants
+     * UPPER_LEFT_CORNER <LI> ScrollPaneConstantsUPPER_RIGHT_CORNER。
+     * </ul>
+     * 
+     * 
      * @param s the component identifier
      * @param c the the component to be added
      * @exception IllegalArgumentException if <code>s</code> is an invalid key
@@ -262,6 +341,10 @@ public class ScrollPaneLayout
     /**
      * Removes the specified component from the layout.
      *
+     * <p>
+     *  从布局中删除指定的组件
+     * 
+     * 
      * @param c the component to remove
      */
     public void removeLayoutComponent(Component c)
@@ -299,6 +382,10 @@ public class ScrollPaneLayout
     /**
      * Returns the vertical scrollbar-display policy.
      *
+     * <p>
+     *  返回垂直滚动条显示策略
+     * 
+     * 
      * @return an integer giving the display policy
      * @see #setVerticalScrollBarPolicy
      */
@@ -319,6 +406,15 @@ public class ScrollPaneLayout
      * of this method.  It only exists for backwards compatibility
      * with the Swing 1.0.2 (and earlier) versions of this class.
      *
+     * <p>
+     *  设置垂直滚动条显示策略选项为：
+     * <ul>
+     *  <li> ScrollPaneConstantsVERTICAL_SCROLLBAR_​​AS_NEEDED <li> ScrollPaneConstantsVERTICAL_SCROLLBAR_​​
+     * NEVER <li> ScrollPaneConstantsVERTICAL_SCROLLBAR_​​ALWAYS。
+     * </ul>
+     * 注意：应用程序应该使用此方法的<code> JScrollPane </code>版本它只存在于与此类的Swing 102(和更早版本)版本的向后兼容性
+     * 
+     * 
      * @param x an integer giving the display policy
      * @exception IllegalArgumentException if <code>x</code> is an invalid
      *          vertical scroll bar policy, as listed above
@@ -339,6 +435,10 @@ public class ScrollPaneLayout
     /**
      * Returns the horizontal scrollbar-display policy.
      *
+     * <p>
+     *  返回水平滚动条显示策略
+     * 
+     * 
      * @return an integer giving the display policy
      * @see #setHorizontalScrollBarPolicy
      */
@@ -357,6 +457,13 @@ public class ScrollPaneLayout
      * of this method.  It only exists for backwards compatibility
      * with the Swing 1.0.2 (and earlier) versions of this class.
      *
+     * <p>
+     *  设置水平滚动条显示策略选项为：<ul> <li> ScrollPaneConstantsHORIZONTAL_SCROLLBAR_​​AS_NEEDED <li> ScrollPaneConstant
+     * sHORIZONTAL_SCROLLBAR_​​NEVER <li> ScrollPaneConstantsHORIZONTAL_SCROLLBAR_​​ALWAYS。
+     * </ul>
+     *  注意：应用程序应该使用此方法的<code> JScrollPane </code>版本它只存在于与此类的Swing 102(和更早版本)版本的向后兼容性
+     * 
+     * 
      * @param x an int giving the display policy
      * @exception IllegalArgumentException if <code>x</code> is not a valid
      *          horizontal scrollbar policy, as listed above
@@ -377,6 +484,10 @@ public class ScrollPaneLayout
     /**
      * Returns the <code>JViewport</code> object that displays the
      * scrollable contents.
+     * <p>
+     *  返回显示可滚动内容的<code> JViewport </code>对象
+     * 
+     * 
      * @return the <code>JViewport</code> object that displays the scrollable contents
      * @see JScrollPane#getViewport
      */
@@ -387,6 +498,10 @@ public class ScrollPaneLayout
 
     /**
      * Returns the <code>JScrollBar</code> object that handles horizontal scrolling.
+     * <p>
+     * 返回处理水平滚动的<code> JScrollBar </code>对象
+     * 
+     * 
      * @return the <code>JScrollBar</code> object that handles horizontal scrolling
      * @see JScrollPane#getHorizontalScrollBar
      */
@@ -396,6 +511,10 @@ public class ScrollPaneLayout
 
     /**
      * Returns the <code>JScrollBar</code> object that handles vertical scrolling.
+     * <p>
+     *  返回处理垂直滚动的<code> JScrollBar </code>对象
+     * 
+     * 
      * @return the <code>JScrollBar</code> object that handles vertical scrolling
      * @see JScrollPane#getVerticalScrollBar
      */
@@ -406,6 +525,10 @@ public class ScrollPaneLayout
 
     /**
      * Returns the <code>JViewport</code> object that is the row header.
+     * <p>
+     *  返回作为行标题的<code> JViewport </code>对象
+     * 
+     * 
      * @return the <code>JViewport</code> object that is the row header
      * @see JScrollPane#getRowHeader
      */
@@ -416,6 +539,10 @@ public class ScrollPaneLayout
 
     /**
      * Returns the <code>JViewport</code> object that is the column header.
+     * <p>
+     *  返回作为列标题的<code> JViewport </code>对象
+     * 
+     * 
      * @return the <code>JViewport</code> object that is the column header
      * @see JScrollPane#getColumnHeader
      */
@@ -426,6 +553,10 @@ public class ScrollPaneLayout
 
     /**
      * Returns the <code>Component</code> at the specified corner.
+     * <p>
+     *  返回指定角落的<code> Component </code>
+     * 
+     * 
      * @param key the <code>String</code> specifying the corner
      * @return the <code>Component</code> at the specified corner, as defined in
      *         {@link ScrollPaneConstants}; if <code>key</code> is not one of the
@@ -460,6 +591,11 @@ public class ScrollPaneLayout
      * <p>Note that the rowHeader is calculated as part of the preferred width
      * and the colHeader is calculated as part of the preferred size.
      *
+     * <p>
+     *  <code> ScrollPane </code>的首选大小是插入的大小,加上视口的首选大小,加上可见标题的首选大小,以及在给定当前值的情况下出现的滚动条的首选大小视图和当前滚动条displayPol
+     * icies <p>请注意,rowHeader计算为首选宽度的一部分,colHeader作为首选大小的一部分计算。
+     * 
+     * 
      * @param parent the <code>Container</code> that will be laid out
      * @return a <code>Dimension</code> object specifying the preferred size of the
      *         viewport and any scrollbars
@@ -470,6 +606,9 @@ public class ScrollPaneLayout
     {
         /* Sync the (now obsolete) policy fields with the
          * JScrollPane.
+         * <p>
+         *  JScrollPane
+         * 
          */
         JScrollPane scrollPane = (JScrollPane)parent;
         vsbPolicy = scrollPane.getVerticalScrollBarPolicy();
@@ -482,6 +621,9 @@ public class ScrollPaneLayout
         /* Note that viewport.getViewSize() is equivalent to
          * viewport.getView().getPreferredSize() modulo a null
          * view or a view whose size was explicitly set.
+         * <p>
+         * viewportgetView()getPreferredSize()对空视图或其大小已明确设置的视图进行取模
+         * 
          */
 
         Dimension extentSize = null;
@@ -499,6 +641,7 @@ public class ScrollPaneLayout
         }
 
         /* If there's a viewport add its preferredSize.
+        /* <p>
          */
 
         if (extentSize != null) {
@@ -507,6 +650,7 @@ public class ScrollPaneLayout
         }
 
         /* If there's a JScrollPane.viewportBorder, add its insets.
+        /* <p>
          */
 
         Border viewportBorder = scrollPane.getViewportBorder();
@@ -518,6 +662,9 @@ public class ScrollPaneLayout
 
         /* If a header exists and it's visible, factor its
          * preferred size in.
+         * <p>
+         *  首选尺寸
+         * 
          */
 
         if ((rowHead != null) && rowHead.isVisible()) {
@@ -543,6 +690,15 @@ public class ScrollPaneLayout
          * extentSize) to the preferredSize of the view.  Although we're
          * not responsible for laying out the view we'll assume that the
          * JViewport will always give it its preferredSize.
+         * <p>
+         *  如果滚动条策略是AS_NEEDED,这可能有点棘手：
+         * 
+         *   - 如果视图是一个Scrollable,则scrollableTracksViewportWidth和scrollableTracksViewportHeight可用于有效地禁用滚动(如果它们是真的
+         * )在各自的维度。
+         * 
+         *  - 假设滚动条没有被前一个约束禁用,我们需要确定滚动条是否会正确计算JScrollPanes首选大小要做到这一点,我们将viewport的preferredSize(extentSize)与prefe
+         * rredSize的视图虽然我们不负责布局视图,我们将假设JViewport将总是给它的preferredSize。
+         * 
          */
 
         if ((vsb != null) && (vsbPolicy != VERTICAL_SCROLLBAR_NEVER)) {
@@ -586,6 +742,11 @@ public class ScrollPaneLayout
      * of the visible headers, plus the minimum size of the
      * scrollbars whose displayPolicy isn't NEVER.
      *
+     * <p>
+     *  <code> ScrollPane </code>的最小大小是插件的大小加上视口的最小大小,加上滚动条的viewportBorder插入,加上可见标头的最小大小加上其displayPolicy的滚动条
+     * 的最小大小不是永远不会。
+     * 
+     * 
      * @param parent the <code>Container</code> that will be laid out
      * @return a <code>Dimension</code> object specifying the minimum size
      */
@@ -593,6 +754,9 @@ public class ScrollPaneLayout
     {
         /* Sync the (now obsolete) policy fields with the
          * JScrollPane.
+         * <p>
+         *  JScrollPane
+         * 
          */
         JScrollPane scrollPane = (JScrollPane)parent;
         vsbPolicy = scrollPane.getVerticalScrollBarPolicy();
@@ -603,6 +767,7 @@ public class ScrollPaneLayout
         int minHeight = insets.top + insets.bottom;
 
         /* If there's a viewport add its minimumSize.
+        /* <p>
          */
 
         if (viewport != null) {
@@ -612,6 +777,7 @@ public class ScrollPaneLayout
         }
 
         /* If there's a JScrollPane.viewportBorder, add its insets.
+        /* <p>
          */
 
         Border viewportBorder = scrollPane.getViewportBorder();
@@ -623,6 +789,9 @@ public class ScrollPaneLayout
 
         /* If a header exists and it's visible, factor its
          * minimum size in.
+         * <p>
+         *  最小尺寸
+         * 
          */
 
         if ((rowHead != null) && rowHead.isVisible()) {
@@ -639,6 +808,9 @@ public class ScrollPaneLayout
 
         /* If a scrollbar might appear, factor its minimum
          * size in.
+         * <p>
+         *  尺寸
+         * 
          */
 
         if ((vsb != null) && (vsbPolicy != VERTICAL_SCROLLBAR_NEVER)) {
@@ -688,12 +860,34 @@ public class ScrollPaneLayout
      * corners, and a column header gets upper corners.
      * </ul>
      *
+     * <p>
+     * 放出滚动条组件的定位取决于以下约束：
+     * <ul>
+     *  <li>行标题(如果存在且可见)获取其首选宽度和视口的高度
+     * 
+     *  <li>列标题(如果存在且可见)获取其首选高度和视口宽度
+     * 
+     *  <li>如果需要垂直滚动条,即如果视口的范围高度小于其视图高度,或者如果<code> displayPolicy </code>始终显示,则视为相对于其尺寸的行标题,可见
+     * 
+     *  <li>如果需要水平滚动条,则将其视为列标题(请参阅上面关于垂直滚动条的段落)
+     * 
+     *  <li>如果滚动面板有一个非<code> null </code> <code> viewportBorder </code>,那么空间将分配给
+     * 
+     * <li>视口在考虑先前的限制后获得可用空间
+     * 
+     *  <li>角落组件(如果提供)与滚动条和标题的末端对齐如果有垂直滚动条,则会出现右角;如果有一个水平滚动条,下角出现;一个行标题得到左角,一个列标题得到上角
+     * </ul>
+     * 
+     * 
      * @param parent the <code>Container</code> to lay out
      */
     public void layoutContainer(Container parent)
     {
         /* Sync the (now obsolete) policy fields with the
          * JScrollPane.
+         * <p>
+         *  JScrollPane
+         * 
          */
         JScrollPane scrollPane = (JScrollPane)parent;
         vsbPolicy = scrollPane.getVerticalScrollBarPolicy();
@@ -709,12 +903,16 @@ public class ScrollPaneLayout
         availR.height -= insets.top + insets.bottom;
 
         /* Get the scrollPane's orientation.
+        /* <p>
          */
         boolean leftToRight = SwingUtilities.isLeftToRight(scrollPane);
 
         /* If there's a visible column header remove the space it
          * needs from the top of availR.  The column header is treated
          * as if it were fixed height, arbitrary width.
+         * <p>
+         *  需要从顶部的availR列标题被视为固定的高度,任意宽度
+         * 
          */
 
         Rectangle colHeadR = new Rectangle(0, availR.y, 0, 0);
@@ -730,6 +928,9 @@ public class ScrollPaneLayout
         /* If there's a visible row header remove the space it needs
          * from the left or right of availR.  The row header is treated
          * as if it were fixed width, arbitrary height.
+         * <p>
+         *  从availR的左侧或右侧行标题被视为固定宽度,任意高度
+         * 
          */
 
         Rectangle rowHeadR = new Rectangle(0, 0, 0, 0);
@@ -749,6 +950,9 @@ public class ScrollPaneLayout
 
         /* If there's a JScrollPane.viewportBorder, remove the
          * space it occupies for availR.
+         * <p>
+         *  占用空间
+         * 
          */
 
         Border viewportBorder = scrollPane.getViewportBorder();
@@ -784,6 +988,16 @@ public class ScrollPaneLayout
          * width we don't bother with a horizontal scrollbar, similarly
          * if view.getViewTracksViewport(Height) is true we don't bother
          * with a vertical scrollbar.
+         * <p>
+         * 和滚动条rowHeadR是正确的,除了它的高度和y和colHeadR是正确的,除了它的宽度和x一旦我们计算这三个部分的维度,我们可以回去设置rowHeadRheight,rowHeadRy,colHea
+         * dRwidth,colHeadRx和角的边界。
+         * 
+         * 我们将决定通过比较视口视图首选大小和视口范围大小(通常只是它的大小)来放置滚动条。
+         * 使用preferredSize是合理的,因为布局从上向下 - 所以我们期望视口被布置下一个我们假设视口布局管理器会给视图它的首选大小一个例外是当视图实现Scrollable和ScrollablegetV
+         * iewTracksViewport {Width,Height}方法返回true如果视图是跟踪视口宽度,我们不打扰水平滚动条,类似地,如果viewgetViewTracksViewport(Height
+         * )是true,我们不打扰垂直滚动条。
+         * 我们将决定通过比较视口视图首选大小和视口范围大小(通常只是它的大小)来放置滚动条。
+         * 
          */
 
         Component view = (viewport != null) ? viewport.getView() : null;
@@ -814,6 +1028,9 @@ public class ScrollPaneLayout
         /* If there's a vertical scrollbar and we need one, allocate
          * space for it (we'll make it visible later). A vertical
          * scrollbar is considered to be fixed width, arbitrary height.
+         * <p>
+         *  空间(我们将使它以后可见)垂直滚动条被认为是固定宽度,任意高度
+         * 
          */
 
         Rectangle vsbR = new Rectangle(0, availR.y - vpbInsets.top, 0, 0);
@@ -841,6 +1058,9 @@ public class ScrollPaneLayout
         /* If there's a horizontal scrollbar and we need one, allocate
          * space for it (we'll make it visible later). A horizontal
          * scrollbar is considered to be fixed height, arbitrary width.
+         * <p>
+         * 空间(我们将使它以后可见)水平滚动条被认为是固定高度,任意宽度
+         * 
          */
 
         Rectangle hsbR = new Rectangle(availR.x - vpbInsets.left, 0, 0, 0);
@@ -866,6 +1086,9 @@ public class ScrollPaneLayout
              * As a consequence we may have to add the vertical scrollbar,
              * if that hasn't been done so already.  Of course we
              * don't bother with any of this if the vsbPolicy is NEVER.
+             * <p>
+             *  减少视口可用的垂直空间因此,我们可能必须添加垂直滚动条,如果还没有这样做的话,当然我们不打扰任何这一点如果vsbPolicy是从来没有
+             * 
              */
             if ((vsb != null) && !vsbNeeded &&
                 (vsbPolicy != VERTICAL_SCROLLBAR_NEVER)) {
@@ -884,6 +1107,9 @@ public class ScrollPaneLayout
          * methods on the size of the Viewport, so that if we don't
          * ask after resetting the bounds we may have gotten the wrong
          * answer.
+         * <p>
+         *  方法一些组件将Scrollable方法的返回值基于视口的大小,因此如果我们在重置边界之后不询问,我们可能得到错误的答案
+         * 
          */
 
         if (viewport != null) {
@@ -943,6 +1169,9 @@ public class ScrollPaneLayout
 
         /* We now have the final size of the viewport: availR.
          * Now fixup the header and scrollbar widths/heights.
+         * <p>
+         *  现在修正标题和滚动条宽度/高度
+         * 
          */
         vsbR.height = availR.height + vpbInsets.top + vpbInsets.bottom;
         hsbR.width = availR.width + vpbInsets.left + vpbInsets.right;
@@ -953,6 +1182,9 @@ public class ScrollPaneLayout
 
         /* Set the bounds of the remaining components.  The scrollbars
          * are made invisible if they're not needed.
+         * <p>
+         *  如果不需要它们是不可见的
+         * 
          */
 
         if (rowHead != null) {
@@ -1051,6 +1283,10 @@ public class ScrollPaneLayout
      * the viewport border insets (<code>vpbInsets</code>) are used to offset
      * the vsb. This is only called when <code>wantsVSB</code> has
      * changed, eg you shouldn't invoke adjustForVSB(true) twice.
+     * <p>
+     * 基于是否需要垂直滚动条来调整<code> Rectangle </code> <code> </code>可用</code> vsb的位置在<code> vsbR </code>代码>和视口边界插入(<code>
+     *  vpbInsets </code>)用于抵消vsb这只在<code> wantsVSB </code>发生改变时调用,例如,你不应该调用adjustForVSB两次。
+     * 
      */
     private void adjustForVSB(boolean wantsVSB, Rectangle available,
                               Rectangle vsbR, Insets vpbInsets,
@@ -1082,6 +1318,10 @@ public class ScrollPaneLayout
      * the viewport border insets (<code>vpbInsets</code>) are used to offset
      * the hsb.  This is only called when <code>wantsHSB</code> has
      * changed, eg you shouldn't invoked adjustForHSB(true) twice.
+     * <p>
+     *  基于是否需要水平滚动条(<code> wantsHSB </code>)调整<code> Rectangle </code> <code>可用</code> hsb的位置在<code> hsbR <代码>
+     * ,并且视口边界插入(<code> vpbInsets </code>)用于偏移hsb这仅在<code> wantsHSB </code>已更改时调用,例如,不应调用adjustForHSB两次。
+     * 
      */
     private void adjustForHSB(boolean wantsHSB, Rectangle available,
                               Rectangle hsbR, Insets vpbInsets) {
@@ -1105,6 +1345,10 @@ public class ScrollPaneLayout
      * Returns the bounds of the border around the specified scroll pane's
      * viewport.
      *
+     * <p>
+     * 返回指定滚动窗格视口周围的边框的边界
+     * 
+     * 
      * @return the size and position of the viewport border
      * @deprecated As of JDK version Swing1.1
      *    replaced by <code>JScrollPane.getViewportBorderBounds()</code>.
@@ -1116,6 +1360,8 @@ public class ScrollPaneLayout
 
     /**
      * The UI resource version of <code>ScrollPaneLayout</code>.
+     * <p>
+     *  <code> ScrollPaneLayout </code>的UI资源版本
      */
     public static class UIResource extends ScrollPaneLayout implements javax.swing.plaf.UIResource {}
 }

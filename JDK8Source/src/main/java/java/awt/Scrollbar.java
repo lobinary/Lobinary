@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -158,6 +159,67 @@ import javax.accessibility.*;
  * encounter issues with painting, key handling, sizing and
  * positioning.
  *
+ * <p>
+ *  <code> Scrollbar </code>类包含一个滚动条,一个熟悉的用户界面对象滚动条提供了一种方便的方法,允许用户从一系列值中选择以下三个垂直滚动条可以用作滑块控制选择颜色的红色,绿色和蓝色
+ * 分量：。
+ * <p>
+ *  <img src ="doc-files / Scrollbar-1gif"alt ="图像显示3个垂直滑块,并排"
+ * style="float:center; margin: 7px 10px;">
+ * <p>
+ *  本示例中的每个滚动条可以使用类似于以下代码创建：
+ * 
+ *  <hr> <blockquote> <pre> redSlider = new Scrollbar(ScrollbarVERTICAL,0,1,0,255); add(redSlider); </pre>
+ *  </blockquote> <hr>。
+ * <p>
+ * 或者,滚动条可以表示值的范围。例如,如果滚动条用于滚动文本,则"泡"(也称为"拇指"或"滚动框")的宽度可以用于表示可见的文本量以下是表示范围的滚动条的示例：
+ * <p>
+ *  <img src ="doc-files / Scrollbar-2gif"alt ="图像显示水平滑块,起始范围为0,结束范围为300滑块缩略图标记为60"
+ * style="float:center; margin: 7px 10px;">
+ * <p>
+ *  在此示例中由气泡表示的值范围是<em>可见量</em>。在本示例中,可以使用如下代码创建水平滚动条：
+ * 
+ *  <hr> <blockquote> <pre> ranger = new Scrollbar(ScrollbarHORIZONTAL,0,60,0,300); add(ranger); </pre> 
+ * </blockquote> <hr>。
+ * <p>
+ * 注意,滚动条的实际最大值是<code> maximum </code>减去<code> visible amount </code>。
+ * 在前面的例子中,因为<code> maximum </code> <code> visible amount </code>为60,实际最大值为240滚动条轨道的范围为0  -  300气泡的左侧表示滚
+ * 动条的值。
+ * 注意,滚动条的实际最大值是<code> maximum </code>减去<code> visible amount </code>。
+ * <p>
+ * 通常,用户通过用鼠标进行手势来改变滚动条的值例如,用户可以上下拖动滚动条的气泡,或者在滚动条的单位增量或块增量区域中点击键盘手势也可以映射到滚动条按照惯例,<b>页面向上</b>和<b>页面向下</b>
+ * 键等同于单击滚动条的块增量和块减量区域。
+ * <p>
+ *  当用户更改滚动条的值时,滚动条接收<code> AdjustmentEvent </code>的实例。滚动条处理此事件,将其传递给任何注册的侦听器
+ * <p>
+ * 任何希望被通知滚动条的值的变化的对象应该实现<code> AdjustmentListener </code>,它是包中定义的接口<code> javaawtevent </code>监听器可以通过调用
+ * 方法动态添加和删除<code> addAdjustmentListener </code>和<code> removeAdjustmentListener </code>。
+ * <p>
+ *  <code> AdjustmentEvent </code>类定义了五种类型的调整事件,如下所示：
+ * 
+ * <ul>
+ * <li>当用户点击水平滚动条的左箭头时,用户拖动滚动条的气泡</li> <code> AdjustmentEventUNIT_INCREMENT </code>或垂直滚动​​条的顶部箭头,或者当用户点击
+ * 水平滚动条的右箭头或底部箭头时,发出来自键盘<li> <code> AdjustmentEventUNIT_DECREMENT </code>的等效手势或者使得当用户在轨道中点击时,在水平滚动条上的气泡
+ * 的左边,或者在上面的水平滚动条上,发出来自键盘<li> <code> AdjustmentEventBLOCK_INCREMENT </code>的等效手势在一个垂直的滚动条的泡影按照惯例,如果用户使用
+ * 定义<b>页面向上</b>键<li> <code> AdjustmentEventBLOCK_DECREMENT </code>的键盘,<b>页面向上键</b>当用户在轨道中点击时,在水平滚动条上的气泡
+ * 右侧或在垂直滚动条上的气泡下方发送。
+ * 按照惯例,<b> Page&nbsp;向下</b>键是等效的,如果用户正在使用定义了<b> Page&nbsp;向下</b>键的键盘。
+ * </ul>
+ * <p>
+ * JDK&nbsp; 10事件系统支持向后兼容性,但不建议使用新版本的平台。
+ * JDK 11引入的五种类型的调整事件对应于与以前平台版本中的滚动条相关联的五种事件类型以下列表提供了调整事件类型及其替换的相应JDK&nbsp; 10事件类型。
+ * 
+ * <ul>
+ * <li> <code> AdjustmentEventTRACK </code>取代<code> EventSCROLL_LINE_UP </code> <li> <code> AdjustmentEv
+ * entUNIT_DECREMENT </code>,调整EventEventTRACK </code>取代<code> EventSCROLL_ABSOLUTE </code> <li> <code> 
+ * AdjustmentEventUNIT_INCREMENT </code > <code> EventSCROLL_PAGE_DOWN </code>替换<code> EventSCROLL_PAGE_
+ * UP </code> </code>代替<code> EventSCROLL_PAGE_DOWN </code> <li> <code> AdjustmentEventBLOCK_DECREMENT </code>
+ * 。
+ * </ul>
+ * <p>
+ * <b>注意</b>：我们建议仅使用<code> Scrollbar </code>进行值选择如果要在容器中实现可滚动组件,我们建议您使用{@link ScrollPane ScrollPane}使用<code>
+ *  Scrollbar </code>为此目的,你可能会遇到绘画,键处理,大小和位置的问题。
+ * 
+ * 
  * @author      Sami Shaio
  * @see         java.awt.event.AdjustmentEvent
  * @see         java.awt.event.AdjustmentListener
@@ -167,11 +229,17 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
 
     /**
      * A constant that indicates a horizontal scroll bar.
+     * <p>
+     *  指示水平滚动条的常数
+     * 
      */
     public static final int     HORIZONTAL = 0;
 
     /**
      * A constant that indicates a vertical scroll bar.
+     * <p>
+     *  指示垂直滚动条的常数
+     * 
      */
     public static final int     VERTICAL   = 1;
 
@@ -181,6 +249,11 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
      * and less than or equal to
      * <code>maximum - visibleAmount</code>
      *
+     * <p>
+     *  <code> Scrollbar </code>的值必须大于或等于<code> minimum </code>且小于或等于<code> maximum  -  visibleAmount </code>
+     * 。
+     * 
+     * 
      * @serial
      * @see #getValue
      * @see #setValue
@@ -192,6 +265,10 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
      * This value must be greater than the <code>minimum</code>
      * value.<br>
      *
+     * <p>
+     *  <code> Scrollbar的最大值</code>此值必须大于<code>最小值</code>的值<br>
+     * 
+     * 
      * @serial
      * @see #getMaximum
      * @see #setMaximum
@@ -203,6 +280,10 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
      * This value must be less than the <code>maximum</code>
      * value.<br>
      *
+     * <p>
+     * <code> Scrollbar的最小值</code>此值必须小于<code>最大</code>值<br>
+     * 
+     * 
      * @serial
      * @see #getMinimum
      * @see #setMinimum
@@ -216,6 +297,10 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
      * Depending on platform, this may be visually indicated
      * by the size of the bubble.
      *
+     * <p>
+     *  <code> Scrollbar </code>的气泡的大小当滚动条用于选择一个范围的值时,visibleAmount代表该范围的大小。根据平台,这可以通过泡沫
+     * 
+     * 
      * @serial
      * @see #getVisibleAmount
      * @see #setVisibleAmount
@@ -229,6 +314,11 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
      * orientation can be either : <code>VERTICAL</code> or
      * <code>HORIZONTAL</code> only.
      *
+     * <p>
+     *  <code> Scrollbar </code>的方向 - 水平或垂直此值应在创建滚动条时指定<BR>方向可以是：<code> VERTICAL </code>或<code> HORIZONTAL </code>
+     * 。
+     * 
+     * 
      * @serial
      * @see #getOrientation
      * @see #setOrientation
@@ -240,6 +330,10 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
      * up or down by a line.
      * This value must be greater than zero.
      *
+     * <p>
+     *  滚动条值在向上或向下移动一行时的变化量此值必须大于零
+     * 
+     * 
      * @serial
      * @see #getLineIncrement
      * @see #setLineIncrement
@@ -251,6 +345,10 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
      * up or down by a page.
      * This value must be greater than zero.
      *
+     * <p>
+     * 在向上或向下移动页面时滚动条值将改变的量此值必须大于零
+     * 
+     * 
      * @serial
      * @see #getPageIncrement
      * @see #setPageIncrement
@@ -262,6 +360,10 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
      * True if the value is in the process of changing as a result of
      * actions being taken by the user.
      *
+     * <p>
+     *  <code> Scrollbar </code>的调整状态如果值正在由于用户执行的操作而发生更改的过程中
+     * 
+     * 
      * @see #getValueIsAdjusting
      * @see #setValueIsAdjusting
      * @since 1.4
@@ -275,11 +377,17 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
 
     /*
      * JDK 1.1 serialVersionUID
+     * <p>
+     *  JDK 11 serialVersionUID
+     * 
      */
     private static final long serialVersionUID = 8451667562882310543L;
 
     /**
      * Initialize JNI field and method IDs.
+     * <p>
+     *  初始化JNI字段和方法ID
+     * 
      */
     private static native void initIDs();
 
@@ -349,6 +457,37 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
      * </tr>
      * </table>
      *
+     * <p>
+     *  构造新的垂直滚动条滚动条的默认属性如下表所示：
+     * 
+     * <table border=1 summary="Scrollbar default properties">
+     * <tr>
+     *  <th>属性</th> <th>描述</th> <th>默认值</th>
+     * </tr>
+     * <tr>
+     *  <td> orientation </td> <td>指示滚动条是垂直的<br>还是水平的</td> <td> <code> ScrollbarVERTICAL </code> </td>
+     * </tr>
+     * <tr>
+     *  <td> value </td> <td>用于控制滚动条气泡的位置的值</td> <td> 0 </td>
+     * </tr>
+     * <tr>
+     * <td>可见数量</td> <td>滚动条范围的可见数量,<br>通常由<br>滚动条的气泡大小表示</td> <td> 10 </td>
+     * </tr>
+     * <tr>
+     *  <td>最小值</td> <td>滚动条的最小值</td> <td> 0 </td>
+     * </tr>
+     * <tr>
+     *  <td>最大值</td> <td>滚动条的最大值</td> <td> 100 </td>
+     * </tr>
+     * <tr>
+     *  </span> </span> </span> </span> </span> </span> </<td> 1 </td>
+     * </tr>
+     * <tr>
+     *  </span> <td>块增量</td> <td>当按下<br> Page Up或Page Down键时,<br>或当滚动条轨迹被点击时, / td> <td> 10 </td>
+     * </tr>
+     * </table>
+     * 
+     * 
      * @exception HeadlessException if GraphicsEnvironment.isHeadless()
      * returns true.
      * @see java.awt.GraphicsEnvironment#isHeadless
@@ -365,6 +504,13 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
      * or <code>Scrollbar.VERTICAL</code>,
      * indicating a horizontal or vertical scroll bar, respectively.
      *
+     * <p>
+     *  构造具有指定方向的新滚动条
+     * <p>
+     * <code> orientation </code>参数必须使用<code> ScrollbarHORIZONTAL </code>或<code> ScrollbarVERTICAL </code>两个
+     * 值之一,分别表示水平或垂直滚动​​条。
+     * 
+     * 
      * @param       orientation   indicates the orientation of the scroll bar
      * @exception   IllegalArgumentException    when an illegal value for
      *                    the <code>orientation</code> argument is supplied
@@ -388,6 +534,15 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
      * The parameters supplied to this constructor are subject to the
      * constraints described in {@link #setValues(int, int, int, int)}.
      *
+     * <p>
+     *  构造具有指定方向,初始值,可见量和最小值和最大值的新滚动条
+     * <p>
+     *  <code> orientation </code>参数必须使用<code> ScrollbarHORIZONTAL </code>或<code> ScrollbarVERTICAL </code>两
+     * 个值之一,分别表示水平或垂直滚动​​条。
+     * <p>
+     *  提供给此构造函数的参数受{@link #setValues(int,int,int,int)}中描述的约束的约束
+     * 
+     * 
      * @param     orientation   indicates the orientation of the scroll bar.
      * @param     value     the initial value of the scroll bar
      * @param     visible   the visible amount of the scroll bar, typically
@@ -418,6 +573,9 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
     /**
      * Constructs a name for this component.  Called by <code>getName</code>
      * when the name is <code>null</code>.
+     * <p>
+     *  构造此组件的名称当名称为<code> null </code>时,由<code> getName </code>
+     * 
      */
     String constructComponentName() {
         synchronized (Scrollbar.class) {
@@ -429,6 +587,9 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
      * Creates the <code>Scrollbar</code>'s peer.  The peer allows you to modify
      * the appearance of the <code>Scrollbar</code> without changing any of its
      * functionality.
+     * <p>
+     * 创建<code> Scrollbar </code>的对等体对等体允许您修改<code> Scrollbar </code>的外观,而不改变其任何功能
+     * 
      */
     public void addNotify() {
         synchronized (getTreeLock()) {
@@ -441,6 +602,10 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
     /**
      * Returns the orientation of this scroll bar.
      *
+     * <p>
+     *  返回此滚动条的方向
+     * 
+     * 
      * @return    the orientation of this scroll bar, either
      *               <code>Scrollbar.HORIZONTAL</code> or
      *               <code>Scrollbar.VERTICAL</code>
@@ -453,6 +618,10 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
     /**
      * Sets the orientation for this scroll bar.
      *
+     * <p>
+     *  设置此滚动条的方向
+     * 
+     * 
      * @param orientation  the orientation of this scroll bar, either
      *               <code>Scrollbar.HORIZONTAL</code> or
      *               <code>Scrollbar.VERTICAL</code>
@@ -495,6 +664,10 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
     /**
      * Gets the current value of this scroll bar.
      *
+     * <p>
+     *  获取此滚动条的当前值
+     * 
+     * 
      * @return      the current value of this scroll bar
      * @see         java.awt.Scrollbar#getMinimum
      * @see         java.awt.Scrollbar#getMaximum
@@ -521,6 +694,17 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
      * Calling this method does not fire an
      * <code>AdjustmentEvent</code>.
      *
+     * <p>
+     *  将此滚动条的值设置为指定的值
+     * <p>
+     *  如果提供的值小于当前<code> minimum </code>或大于当前<code> maximum  -  visibleAmount </code>,则<code> minimum </code>
+     * 或<code> maximum  -  visibleAmount </code>。
+     * <p>
+     * 通常,程序应该通过同时调用<code> setValues </code>方法来更改滚动条的值,同时设置滚动条的最小值,最大值,可见量和值属性,使它们相互一致
+     * <p>
+     *  调用此方法不会触发<code> AdjustmentEvent </code>
+     * 
+     * 
      * @param       newValue   the new value of the scroll bar
      * @see         java.awt.Scrollbar#setValues
      * @see         java.awt.Scrollbar#getValue
@@ -536,6 +720,10 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
     /**
      * Gets the minimum value of this scroll bar.
      *
+     * <p>
+     *  获取此滚动条的最小值
+     * 
+     * 
      * @return      the minimum value of this scroll bar
      * @see         java.awt.Scrollbar#getValue
      * @see         java.awt.Scrollbar#getMaximum
@@ -563,6 +751,16 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
      * will result in the new minimum value being set to
      * <code>Integer.MAX_VALUE - 1</code>.
      *
+     * <p>
+     *  设置此滚动条的最小值
+     * <p>
+     *  当调用<code> setMinimum </code>时,将更改最小值,并更改其他值(包括最大值,可见量和当前滚动条值)以与新的最小值
+     * <p>
+     * 通常,程序只能通过同时调用<code> setValues </code>方法来更改滚动条的最小值,同时设置滚动条的最小值,最大值,可见量和值属性bar,使它们相互一致
+     * <p>
+     *  注意,将最小值设置为<code> IntegerMAX_VALUE </code>将导致新的最小值设置为<code> IntegerMAX_VALUE  -  1 </code>
+     * 
+     * 
      * @param       newMinimum   the new minimum value for this scroll bar
      * @see         java.awt.Scrollbar#setValues
      * @see         java.awt.Scrollbar#setMaximum
@@ -580,6 +778,10 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
     /**
      * Gets the maximum value of this scroll bar.
      *
+     * <p>
+     *  获取此滚动条的最大值
+     * 
+     * 
      * @return      the maximum value of this scroll bar
      * @see         java.awt.Scrollbar#getValue
      * @see         java.awt.Scrollbar#getMinimum
@@ -607,6 +809,16 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
      * will result in the new maximum value being set to
      * <code>Integer.MIN_VALUE + 1</code>.
      *
+     * <p>
+     *  设置此滚动条的最大值
+     * <p>
+     *  当调用<code> setMaximum </code>时,将更改最大值,并更改其他值(包括最小值,可见量和当前滚动条值)以与新的最大值
+     * <p>
+     * 通常,程序只能通过同时调用<code> setValues </code>方法来更改滚动条的最大值,同时设置滚动条的最小值,最大值,可见数量和值属性bar,使它们相互一致
+     * <p>
+     *  请注意,将最大值设置为<code> IntegerMIN_VALUE </code>会导致新的最大值设置为<code> IntegerMIN_VALUE + 1 </code>
+     * 
+     * 
      * @param       newMaximum   the new maximum value
      *                     for this scroll bar
      * @see         java.awt.Scrollbar#setValues
@@ -647,6 +859,15 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
      * Whether the bubble is displayed or not will not affect
      * the value returned by <code>getVisibleAmount</code>.
      *
+     * <p>
+     *  获取此滚动条的可见数量
+     * <p>
+     * 当滚动条用于选择值范围时,可见量用于表示当前可见的值的范围。
+     * 滚动条的气泡(也称为缩略图或滚动框)的大小通常给出可视表示可见量与滚动条的范围的关系注意,根据平台,可见量属性的值可能不能通过气泡的大小在视觉上指示。
+     * <p>
+     *  当滚动条不可移动时(例如,当它占据滚动条的轨道的整个长度或者当滚动条被禁用时),可能不显示滚动条的气泡。是否显示气泡不会影响返回的值<code> getVisibleAmount </code>
+     * 
+     * 
      * @return      the visible amount of this scroll bar
      * @see         java.awt.Scrollbar#setVisibleAmount
      * @since       JDK1.1
@@ -656,6 +877,8 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by <code>getVisibleAmount()</code>.
      */
@@ -694,6 +917,19 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
      * and value properties of a scroll bar, so that they are
      * mutually consistent.
      *
+     * <p>
+     *  设置此滚动条的可见量
+     * <p>
+     * 当滚动条用于选择值范围时,可见量用于表示当前可见的值的范围。
+     * 滚动条的气泡(也称为缩略图或滚动框)的大小通常给出可视表示可见量与滚动条的范围的关系注意,根据平台,可见量属性的值可能不能通过气泡的大小在视觉上指示。
+     * <p>
+     *  当滚动条不可移动时(例如,当它占据滚动条的轨道的整个长度或者当滚动条被禁用时),可能不显示滚动条的气泡。是否显示气泡不会影响返回的值<code> getVisibleAmount </code>
+     * <p>
+     * 如果提供的可见数量小于<code>一个</code>或大于当前<code> maximum  -  minimum </code>,则<code>一个</code>或<code> / code>
+     * <p>
+     *  通常,程序应该通过同时调用<code> setValues </code>方法来更改滚动条的值,同时设置滚动条的最小值,最大值,可见量和值属性,使它们相互一致
+     * 
+     * 
      * @param       newAmount the new visible amount
      * @see         java.awt.Scrollbar#getVisibleAmount
      * @see         java.awt.Scrollbar#setValues
@@ -719,6 +955,14 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
      * In some operating systems, this property
      * can be ignored by the underlying controls.
      *
+     * <p>
+     *  设置此滚动条的单位增量
+     * <p>
+     * 单位增量是当用户激活滚动条的单位增量区域时添加或减去的值,通常通过滚动条作为调整事件接收的鼠标或键盘手势单位增量必须大于零攻击将单位增量设置为小于1的值将导致设置值1
+     * <p>
+     *  在某些操作系统中,底层控件可以忽略此属性
+     * 
+     * 
      * @param        v  the amount by which to increment or decrement
      *                         the scroll bar's value
      * @see          java.awt.Scrollbar#getUnitIncrement
@@ -729,6 +973,8 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by <code>setUnitIncrement(int)</code>.
      */
@@ -759,6 +1005,14 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
      * In some operating systems, this property
      * can be ignored by the underlying controls.
      *
+     * <p>
+     *  获取此滚动条的单位增量
+     * <p>
+     *  单位增量是当用户激活滚动条的单位增量区域时添加或减去的值,通常通过滚动条作为调整事件接收的鼠标或键盘手势。单位增量必须大于零
+     * <p>
+     * 在某些操作系统中,底层控件可以忽略此属性
+     * 
+     * 
      * @return      the unit increment of this scroll bar
      * @see         java.awt.Scrollbar#setUnitIncrement
      * @since       JDK1.1
@@ -768,6 +1022,8 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by <code>getUnitIncrement()</code>.
      */
@@ -787,6 +1043,12 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
      * Attepts to set the block increment to a value lower than 1
      * will result in a value of 1 being set.
      *
+     * <p>
+     *  设置此滚动条的块增量
+     * <p>
+     *  块增量是当用户激活滚动条的块增量区域时添加或减去的值,通常通过滚动条接收作为调整事件的鼠标或键盘手势块增量必须大于零攻击将块增量设置为小于1的值将导致设置值1
+     * 
+     * 
      * @param        v  the amount by which to increment or decrement
      *                         the scroll bar's value
      * @see          java.awt.Scrollbar#getBlockIncrement
@@ -797,6 +1059,8 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by <code>setBlockIncrement()</code>.
      */
@@ -824,6 +1088,12 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
      * that the scroll bar receives as an adjustment event.
      * The block increment must be greater than zero.
      *
+     * <p>
+     *  获取此滚动条的块增量
+     * <p>
+     * 块增量是当用户激活滚动条的块增量区域时添加或减去的值,通常通过滚动条作为调整事件接收的鼠标或键盘手势。块增量必须大于零
+     * 
+     * 
      * @return      the block increment of this scroll bar
      * @see         java.awt.Scrollbar#setBlockIncrement
      * @since       JDK1.1
@@ -833,6 +1103,8 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated As of JDK version 1.1,
      * replaced by <code>getBlockIncrement()</code>.
      */
@@ -865,6 +1137,20 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
      * Calling this method does not fire an
      * <code>AdjustmentEvent</code>.
      *
+     * <p>
+     *  设置此滚动条的四个属性的值：<code> value </code>,<code> visibleAmount </code>,<code> minimum </code>和<code> maximu
+     * m </code>为这些属性提供的不一致或不正确,它们将被更改以确保一致性。
+     * <p>
+     * 此方法同时并同步设置四个滚动条属性的值,确保这些属性的值相互一致。
+     * 它强制以下约束：<code> maximum </code>必须大于<code> minimum </code> ,<code> maximum-minimum </code>必须不能大于<code> 
+     * IntegerMAX_VALUE </code>,<code> visibleAmount </code>必须大于零<code> visibleAmount </code> <code> maximum
+     *   -  minimum </code>不能小于<code> minimum </code>,且<code> value </code>不能大于<code > maximum  -  visibleAm
+     * ount </code>。
+     * 此方法同时并同步设置四个滚动条属性的值,确保这些属性的值相互一致。
+     * <p>
+     *  调用此方法不会触发<code> AdjustmentEvent </code>
+     * 
+     * 
      * @param      value is the position in the current window
      * @param      visible is the visible amount of the scroll bar
      * @param      minimum is the minimum value of the scroll bar
@@ -926,6 +1212,10 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
      * Returns true if the value is in the process of changing as a
      * result of actions being taken by the user.
      *
+     * <p>
+     * 如果值处于由用户执行的操作的结果而发生更改的过程中,则返回true
+     * 
+     * 
      * @return the value of the <code>valueIsAdjusting</code> property
      * @see #setValueIsAdjusting
      * @since 1.4
@@ -937,6 +1227,10 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
     /**
      * Sets the <code>valueIsAdjusting</code> property.
      *
+     * <p>
+     *  设置<code> valueIsAdjusting </code>属性
+     * 
+     * 
      * @param b new adjustment-in-progress status
      * @see #getValueIsAdjusting
      * @since 1.4
@@ -967,6 +1261,11 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
      * <p>Refer to <a href="doc-files/AWTThreadIssues.html#ListenersThreads"
      * >AWT Threading Issues</a> for details on AWT's threading model.
      *
+     * <p>
+     *  添加指定的调整侦听器以从此滚动条接收<code> AdjustmentEvent </code>的实例如果l是<code> null </code>,则不会抛出任何异常并且不执行任何操作<p>请参阅<a href ="doc-files / AWTThreadIssueshtml#ListenersThreads">
+     *  AWT线程问题</a>有关AWT的线程模型的详细信息。
+     * 
+     * 
      * @param        l the adjustment listener
      * @see          #removeAdjustmentListener
      * @see          #getAdjustmentListeners
@@ -990,6 +1289,11 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
      * <p>Refer to <a href="doc-files/AWTThreadIssues.html#ListenersThreads"
      * >AWT Threading Issues</a> for details on AWT's threading model.
      *
+     * <p>
+     * 删除指定的调整侦听器,使其不再从此滚动条接收<code> AdjustmentEvent </code>的实例如果l是<code> null </code>,则不会抛出任何异常并且不执行任何操作<p>到
+     * <a href=\"doc-files/AWTThreadIssueshtml#ListenersThreads\"> AWT线程问题</a>了解有关AWT线程模型的详细信息。
+     * 
+     * 
      * @param           l    the adjustment listener
      * @see             #addAdjustmentListener
      * @see             #getAdjustmentListeners
@@ -1008,6 +1312,10 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
      * Returns an array of all the adjustment listeners
      * registered on this scrollbar.
      *
+     * <p>
+     *  返回在此滚动条上注册的所有调整侦听器的数组
+     * 
+     * 
      * @return all of this scrollbar's <code>AdjustmentListener</code>s
      *         or an empty array if no adjustment
      *         listeners are currently registered
@@ -1039,6 +1347,18 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
      *
      * If no such listeners exist, this method returns an empty array.
      *
+     * <p>
+     *  返回当前注册为<code> <em> </em>侦听器</code>的所有对象的数组</code> </em> / code>使用<code> add <em> </em>侦听器</code>方法注册
+     * 。
+     * <p>
+     * 您可以使用类文字指定<code> listenerType </code>参数,例如<code> <em> Foo </em> Listenerclass </code>例如,您可以查询<code> S
+     * crollbar </code > <code> c </code>为它的鼠标监听器使用以下代码：。
+     * 
+     *  <pre> MouseListener [] mls =(MouseListener [])(cgetListeners(MouseListenerclass)); </pre>
+     * 
+     *  如果不存在此类侦听器,则此方法将返回一个空数组
+     * 
+     * 
      * @param listenerType the type of listeners requested; this parameter
      *          should specify an interface that descends from
      *          <code>java.util.EventListener</code>
@@ -1083,6 +1403,11 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
      * the behavior is unspecified and may result in an
      * exception.
      *
+     * <p>
+     *  在此滚动条上处理事件如果事件是<code> AdjustmentEvent </code>的实例,它会调用<code> processAdjustmentEvent </code>方法。
+     * 否则,它将调用其超类的<code> processEvent </code> p>请注意,如果事件参数是<code> null </code>,行为是未指定的,可能会导致异常。
+     * 
+     * 
      * @param        e the event
      * @see          java.awt.event.AdjustmentEvent
      * @see          java.awt.Scrollbar#processAdjustmentEvent
@@ -1113,6 +1438,17 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
      * the behavior is unspecified and may result in an
      * exception.
      *
+     * <p>
+     * 通过将调度事件分派到任何已注册的<code> AdjustmentListener </code>对象,来处理在此滚动条上发生的调整事件
+     * <p>
+     *  除非为此组件启用了调整事件,否则不会调用此方法调整事件在以下情况之一时启用：
+     * <ul>
+     *  <li>通过<code> addAdjustmentListener </code> <li>注册<code> AdjustmentListener </code>对象。
+     * 调整事件通过<code> enableEvents </code>。
+     * </ul>
+     *  <p>请注意,如果事件参数是<code> null </code>,行为未指定,可能会导致异常
+     * 
+     * 
      * @param       e the adjustment event
      * @see         java.awt.event.AdjustmentEvent
      * @see         java.awt.event.AdjustmentListener
@@ -1134,6 +1470,11 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
      * implementations. The returned string may be empty but may not be
      * <code>null</code>.
      *
+     * <p>
+     * 返回表示此<code> Scrollbar的状态的字符串</code>此方法仅用于调试目的,返回的字符串的内容和格式可能会在实现之间变化返回的字符串可能为空但可能不<code> null </code>
+     * 。
+     * 
+     * 
      * @return      the parameter string of this scroll bar
      */
     protected String paramString() {
@@ -1148,11 +1489,16 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
 
 
     /* Serialization support.
+    /* <p>
      */
 
     /**
      * The scroll bar's serialized Data Version.
      *
+     * <p>
+     *  滚动条的序列化数据版本
+     * 
+     * 
      * @serial
      */
     private int scrollbarSerializedDataVersion = 1;
@@ -1163,6 +1509,10 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
      * as optional data. The non-serializable listeners are
      * detected and no attempt is made to serialize them.
      *
+     * <p>
+     *  将默认可序列化字段写入流写入可序列化的列表<code> AdjustmentListeners </code>作为可选数据检测到非可序列化的侦听器,并且不尝试将它们序列化
+     * 
+     * 
      * @param s the <code>ObjectOutputStream</code> to write
      * @serialData <code>null</code> terminated sequence of 0
      *   or more pairs; the pair consists of a <code>String</code>
@@ -1191,6 +1541,11 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
      * <code>Scrollbar</code>.
      * Unrecognized keys or values will be ignored.
      *
+     * <p>
+     *  读取<code> ObjectInputStream </code>,如果不是<code> null </code>添加一个监听器来接收由<code> Scrollbar触发的调整事件</code>无
+     * 法识别的键或值将被忽略。
+     * 
+     * 
      * @param s the <code>ObjectInputStream</code> to read
      * @exception HeadlessException if
      *   <code>GraphicsEnvironment.isHeadless</code> returns
@@ -1228,6 +1583,11 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
      * <code>AccessibleAWTScrollBar</code>. A new
      * <code>AccessibleAWTScrollBar</code> instance is created if necessary.
      *
+     * <p>
+     * 获取与此<code> Scrollbar </code>关联的<code> AccessibleContext </code>对于滚动条,<code> AccessibleContext </code>
+     * 采用<code> AccessibleAWTScrollBar </code> >如果需要,创建AccessibleAWTScrollBar </code>实例。
+     * 
+     * 
      * @return an <code>AccessibleAWTScrollBar</code> that serves as the
      *         <code>AccessibleContext</code> of this <code>ScrollBar</code>
      * @since 1.3
@@ -1244,6 +1604,10 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
      * <code>Scrollbar</code> class.  It provides an implementation of
      * the Java Accessibility API appropriate to scrollbar
      * user-interface elements.
+     * <p>
+     *  此类实现<code> Scrollbar </code>类的辅助功能支持它提供了适用于滚动条用户界面元素的Java辅助功能API的实现
+     * 
+     * 
      * @since 1.3
      */
     protected class AccessibleAWTScrollBar extends AccessibleAWTComponent
@@ -1251,12 +1615,19 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
     {
         /*
          * JDK 1.3 serialVersionUID
+         * <p>
+         *  JDK 13 serialVersionUID
+         * 
          */
         private static final long serialVersionUID = -344337268523697807L;
 
         /**
          * Get the state set of this object.
          *
+         * <p>
+         *  获取此对象的状态集
+         * 
+         * 
          * @return an instance of <code>AccessibleState</code>
          *     containing the current state of the object
          * @see AccessibleState
@@ -1277,6 +1648,10 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
         /**
          * Get the role of this object.
          *
+         * <p>
+         *  获取此对象的作用
+         * 
+         * 
          * @return an instance of <code>AccessibleRole</code>
          *     describing the role of the object
          */
@@ -1291,6 +1666,11 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
          * responsible for implementing the
          * <code>AccessibleValue</code> interface on behalf of itself.
          *
+         * <p>
+         * 获取与此对象关联的<code> AccessibleValue </code>在此类的Java辅助功能API的实现中,返回此对象,该对象负责代表自身实现<code> AccessibleValue </code>
+         * 。
+         * 
+         * 
          * @return this object
          */
         public AccessibleValue getAccessibleValue() {
@@ -1300,6 +1680,10 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
         /**
          * Get the accessible value of this object.
          *
+         * <p>
+         *  获取此对象的可访问值
+         * 
+         * 
          * @return The current value of this object.
          */
         public Number getCurrentAccessibleValue() {
@@ -1309,6 +1693,10 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
         /**
          * Set the value of this object as a Number.
          *
+         * <p>
+         *  将此对象的值设置为Number
+         * 
+         * 
          * @return True if the value was set.
          */
         public boolean setCurrentAccessibleValue(Number n) {
@@ -1323,6 +1711,10 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
         /**
          * Get the minimum accessible value of this object.
          *
+         * <p>
+         *  获取此对象的最小可访问值
+         * 
+         * 
          * @return The minimum value of this object.
          */
         public Number getMinimumAccessibleValue() {
@@ -1332,6 +1724,9 @@ public class Scrollbar extends Component implements Adjustable, Accessible {
         /**
          * Get the maximum accessible value of this object.
          *
+         * <p>
+         *  获取此对象的最大可访问值
+         * 
          * @return The maximum value of this object.
          */
         public Number getMaximumAccessibleValue() {

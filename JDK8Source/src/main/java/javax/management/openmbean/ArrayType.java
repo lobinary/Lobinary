@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -93,6 +94,53 @@ import java.lang.reflect.Array;
  * }</pre>
  *
  *
+ * <p>
+ *  <code> ArrayType </code>类是<i>打开类型</i>类,其实例描述所有<i>开放数据</i>值, i>值
+ * <p>
+ *  有效的{@code ArrayType}实例的示例是：<pre> {@ code // javalangString的2维数组ArrayType <String [] []> a1 = new ArrayType <String [] []>(2,SimpleTypeSTRING);。
+ * 
+ *  // 1维数组int ArrayType <int []> a2 = new ArrayType <int []>(SimpleTypeINTEGER,true);
+ * 
+ *  // javalangInteger的1维数组ArrayType <Integer []> a3 = new ArrayType <Integer []>(SimpleTypeINTEGER,fals
+ * e);。
+ * 
+ * // 4维数组int ArrayType <int [] [] [] []> a4 = new ArrayType <int [] [] [] []>(3,a2);
+ * 
+ *  // javalangInteger的4维数组ArrayType <Integer [] [] [] []> a5 = new ArrayType <Integer [] [] [] []>(3,a3
+ * )。
+ * 
+ *  // javalangString的1维数组ArrayType <String []> a6 = new ArrayType <String []>(SimpleTypeSTRING,false);。
+ * 
+ *  // long ArrayType的1维数组<long []> a7 = new ArrayType <long []>(SimpleTypeLONG,true);
+ * 
+ *  // javalangInteger的1维数组ArrayType <Integer []> a8 = ArrayTypegetArrayType(SimpleTypeINTEGER);
+ * 
+ *  // javalangInteger的2维数组ArrayType <Integer [] []> a9 = ArrayTypegetArrayType(a8);
+ * 
+ *  // 2维数组int ArrayType <int [] []> a10 = ArrayTypegetPrimitiveArrayType(int [] [] class);
+ * 
+ * // 3维数组int ArrayType <int [] [] []> a11 = ArrayTypegetArrayType(a10);
+ * 
+ *  // 1维数组float ArrayType <float []> a12 = ArrayTypegetPrimitiveArrayType(float [] class);
+ * 
+ *  // float arrayType的二维数组<float [] []> a13 = ArrayTypegetArrayType(a12);
+ * 
+ *  // javaxmanagementObjectName的1维数组ArrayType <ObjectName []> a14 = ArrayTypegetArrayType(SimpleTypeOBJ
+ * ECTNAME);。
+ * 
+ *  // javaxmanagementObjectName的2维数组ArrayType <ObjectName [] []> a15 = ArrayTypegetArrayType(a14);
+ * 
+ *  // javalangString的3维数组ArrayType <String [] [] []> a16 = new ArrayType <String [] [] []>(3,SimpleType
+ * STRING);。
+ * 
+ *  // javalangString的1维数组ArrayType <String []> a17 = new ArrayType <String []>(1,SimpleTypeSTRING);
+ * 
+ * // javalangString的2维数组ArrayType <String [] []> a18 = new ArrayType <String [] []>(1,a17);
+ * 
+ *  // javalangString的3维数组ArrayType <String [] [] []> a19 = new ArrayType <String [] [] []>(1,a18); } </pre>
+ * 。
+ * 
+ * 
  * @since 1.5
  */
 /*
@@ -110,6 +158,14 @@ import java.lang.reflect.Array;
   an Open Type (RFE 5045358).  We would want this to be an OpenType<int[]>
   which can't be expressed as <E[]> because E can't be a primitive type
   like int.
+/* <p>
+/*  生成注意：我们可以定义一个类型参数,它是元素类型,类ArrayType <E>扩展OpenType <E []>然而,这不是我们所有那么多我们不能说public OpenType <E> getEle
+/* mentOpenType()因为这个ArrayType可以是多维数组例如,如果我们有ArrayType(2,SimpleTypeINTEGER),那么E必须是Integer [],而getElement
+/* OpenType()将返回SimpleTypeINTEGER,它是一个OpenType <Integer>。
+/* 
+/* 此外,我们想支持int [](以及Integer [])作为一个开放类型(RFE 5045358)我们希望这是一个OpenType <int []>,它不能表示为<E [] >因为E不能像int类型的原
+/* 始类型。
+/* 
  */
 public class ArrayType<T> extends OpenType<T> {
 
@@ -117,18 +173,24 @@ public class ArrayType<T> extends OpenType<T> {
     static final long serialVersionUID = 720504429830309770L;
 
     /**
+    /* <p>
+    /* 
      * @serial The dimension of arrays described by this {@link ArrayType}
      *         instance.
      */
     private int dimension;
 
     /**
+    /* <p>
+    /* 
      * @serial The <i>open type</i> of element values contained in the arrays
      *         described by this {@link ArrayType} instance.
      */
     private OpenType<?> elementType;
 
     /**
+    /* <p>
+    /* 
      * @serial This flag indicates whether this {@link ArrayType}
      *         describes a primitive array.
      *
@@ -168,6 +230,10 @@ public class ArrayType<T> extends OpenType<T> {
     /**
      * Return the key used to identify the element type in
      * arrays - e.g. "Z" for boolean, "C" for char etc...
+     * <p>
+     *  返回用于标识数组中元素类型的键 - 例如,"Z"表示布尔值,"C"表示字符等
+     * 
+     * 
      * @param elementClassName the wrapper class name of the array
      *        element ("Boolean",  "Character", etc...)
      * @return the key corresponding to the given type ("Z", "C", etc...)
@@ -185,6 +251,10 @@ public class ArrayType<T> extends OpenType<T> {
     /**
      * Return the primitive type name corresponding to the given wrapper class.
      * e.g. "boolean" for "Boolean", "char" for "Character" etc...
+     * <p>
+     *  返回与给定包装类对应的原始类型名称,例如"boolean"表示"Boolean","char"表示"Character"等
+     * 
+     * 
      * @param elementClassName the type of the array element ("Boolean",
      *        "Character", etc...)
      * @return the primitive type name corresponding to the given wrapper class
@@ -204,6 +274,10 @@ public class ArrayType<T> extends OpenType<T> {
      * Return the primitive open type corresponding to the given primitive type.
      * e.g. SimpleType.BOOLEAN for "boolean", SimpleType.CHARACTER for
      * "char", etc...
+     * <p>
+     *  返回对应于给定原语类型的原语打开类型,例如对于"布尔"的SimpleTypeBOOLEAN,对于"char"的SimpleTypeCHARACTER等
+     * 
+     * 
      * @param primitiveTypeName the primitive type of the array element ("boolean",
      *        "char", etc...)
      * @return the OpenType corresponding to the given primitive type name
@@ -267,6 +341,27 @@ public class ArrayType<T> extends OpenType<T> {
      * System.out.println("array type description = " + t3.getDescription());
      * }</pre>
      *
+     * <p>
+     * 构造一个<tt> ArrayType </tt>实例,用于描述<i>打开数据</i>值,它是<var> dimension </var> > elementType </var>
+     * <p>
+     *  当在<tt> ArrayType </tt>实例上调用时,{@link OpenType#getClassName()getClassName}方法返回它描述的数组实例的类名(遵循{@link Class#getName )getName()方法</code>),而不是数组元素的类名(通过调用<tt> getElementOpenType()getClassName()</tt>。
+     * <p>
+     * 与<code> ArrayType </code>实例的类型名对应的内部字段也设置为它描述的数组实例的类名。
+     * 换句话说,方法<code> getClassName </code> getTypeName </code>返回相同的字符串值与此<code> ArrayType </code>实例的描述对应的内部字段
+     * 设置为遵循以下模板的字符串值：。
+     * 与<code> ArrayType </code>实例的类型名对应的内部字段也设置为它描述的数组实例的类名。
+     * <ul>
+     *  <li>如果非基本数组：<tt> <i>&lt; dimension&gt; </i>  -  <i>&lt; element_class_name&gt; </i> </tt> </li>原始数组：
+     * <t> <i>&lt; dimension&gt; </i>  - 尺寸数组<i>&lt; primitive_type_of_the_element_class_name&gt; </i> </tt>
+     *  </li>。
+     * </ul>
+     * <p>
+     * 作为一个例子,下面的代码：<pre> {@ code ArrayType <String [] [] []> t = new ArrayType <String [] [] []>(3,SimpleTypeSTRING); Systemoutprintln("array class name ="+ tgetClassName()); Systemoutprintln("element class name ="+ tgetElementOpenType()getClassName()); Systemoutprintln("array type name ="+ tgetTypeName()); Systemoutprintln("array type description ="+ tgetDescription()); }
+     *  </pre>会产生以下输出：<pre> {@ code array class name = [[[LjavalangString;元素类名称= javalangString数组类型名称= [[[LjavalangString;数组类型description = javalang的3维数组String}
+     *  </pre>并且下面的代码等价于上面列出的代码也会产生相同的输出：<pre> {@ code ArrayType <String []> t1 = new ArrayType <String []> ,SimpleTypeSTRING); ArrayType <String [] []> t2 = new ArrayType <String [] []>(1,t1); ArrayType <String [] [] []> t3 = new ArrayType <String [] [] []>(1,t2); Systemoutprintln("array class name ="+ t3getClassName()); Systemoutprintln("element class name ="+ t3getElementOpenType()getClassName()); Systemoutprintln("array type name ="+ t3getTypeName()); Systemoutprintln("array type description ="+ t3getDescription()); }
+     *  </pre>。
+     * 
+     * 
      * @param  dimension  the dimension of arrays described by this <tt>ArrayType</tt> instance;
      *                    must be greater than or equal to 1.
      *
@@ -349,6 +444,29 @@ public class ArrayType<T> extends OpenType<T> {
      * array type description = 1-dimension array of int
      * }</pre>
      *
+     * <p>
+     * 为提供的{@code SimpleType}构造一个{@code ArrayType}实例,
+     * <p>
+     *  当{@code primitiveArray}是{@code true}时,此构造函数支持创建基本类型数组,
+     * <p>
+     *  对于基本数组,{@link #getElementOpenType()}方法返回对应于数组的基本类型的包装类型的{@link SimpleType}
+     * <p>
+     *  当在<tt> ArrayType </tt>实例上调用时,{@link OpenType#getClassName()getClassName}方法返回它描述的数组实例的类名(遵循{@link Class#getName )getName()方法</code>),而不是数组元素的类名(通过调用<tt> getElementOpenType()getClassName()</tt>。
+     * <p>
+     * 与<code> ArrayType </code>实例的类型名对应的内部字段也设置为它描述的数组实例的类名。
+     * 换句话说,方法<code> getClassName </code> getTypeName </code>返回相同的字符串值与此<code> ArrayType </code>实例的描述对应的内部字段
+     * 设置为遵循以下模板的字符串值：。
+     * 与<code> ArrayType </code>实例的类型名对应的内部字段也设置为它描述的数组实例的类名。
+     * <ul>
+     *  <li>如果非基本数组：<tt> <i> <element_class_name> </i> </t>> </li> <li>的1维数组of <i>&lt; primitive_type_of_the
+     * _element_class_name&gt; </i> </tt> </li>。
+     * </ul>
+     * <p>
+     * 例如,下面的代码：<pre> {@ code ArrayType <int []> t = new ArrayType <int []>(SimpleTypeINTEGER,true); Systemoutprintln("array class name ="+ tgetClassName()); Systemoutprintln("element class name ="+ tgetElementOpenType()getClassName()); Systemoutprintln("array type name ="+ tgetTypeName()); Systemoutprintln("array type description ="+ tgetDescription()); }
+     *  </pre>将会产生以下输出：<pre> {@ code array class name = [I element class name = javalangInteger array type name = [I array type description = 1-dimensional array of int}
+     * 。
+     * 
+     * 
      * @param elementType the {@code SimpleType} of the element values
      *                    contained in the arrays described by this
      *                    {@code ArrayType} instance.
@@ -485,6 +603,10 @@ public class ArrayType<T> extends OpenType<T> {
     /**
      * Returns the dimension of arrays described by this <tt>ArrayType</tt> instance.
      *
+     * <p>
+     *  返回此<tt> ArrayType </tt>实例描述的数组的维度
+     * 
+     * 
      * @return the dimension.
      */
     public int getDimension() {
@@ -495,6 +617,10 @@ public class ArrayType<T> extends OpenType<T> {
     /**
      * Returns the <i>open type</i> of element values contained in the arrays described by this <tt>ArrayType</tt> instance.
      *
+     * <p>
+     * 返回此<tt> ArrayType </tt>实例描述的数组中包含的<i>打开类型</i>
+     * 
+     * 
      * @return the element type.
      */
     public OpenType<?> getElementOpenType() {
@@ -506,6 +632,10 @@ public class ArrayType<T> extends OpenType<T> {
      * Returns <code>true</code> if the open data values this open
      * type describes are primitive arrays, <code>false</code> otherwise.
      *
+     * <p>
+     *  如果此开放类型描述的开放数据值是原始数组,则返回<code> true </code>,否则返回<code> false </code>
+     * 
+     * 
      * @return true if this is a primitive array type.
      *
      * @since 1.6
@@ -538,6 +668,19 @@ public class ArrayType<T> extends OpenType<T> {
      * by this <code>ArrayType</code> instance.</li>
      * </ul>
      *
+     * <p>
+     *  测试<var> obj </var>是否为<code> ArrayType </code>实例的值
+     * <p>
+     *  当且仅当<var> obj </var>不为null时,<var> obj </var>是一个数组,下面的任何一个都是<tt> true </var> / tt>：
+     * 
+     * <ul>
+     * <li>如果此<code> ArrayType </code>实例描述了<tt> SimpleType </tt>元素或其对应的基本类型的数组,则<var> obj </var>的类名与为此<code>
+     *  ArrayType </code>实例定义的className字段(即由{@link OpenType#getClassName()getClassName}方法返回的类名称,其中包含维度信息),<br>
+     * &nbsp; </li> <li>如果此<code> ArrayType </code>实例描述实现{@code TabularData}接口或{@code CompositeData}接口的类的数组,
+     * 则<var> obj </var>数组,并且{<var> obj </var>中包含的每个元素都为null或由此<code> ArrayType </code>实例指定的元素的开放类型的有效值</li>。
+     * </ul>
+     * 
+     * 
      * @param obj the object to be tested.
      *
      * @return <code>true</code> if <var>obj</var> is a value for this
@@ -612,6 +755,11 @@ public class ArrayType<T> extends OpenType<T> {
      * for the element open type specified by this ArrayType instance.
      *
      * This method's implementation uses recursion to go down the dimensions of the array argument.
+     * <p>
+     * 当且仅当包含在维Dim的数组参数x_dim_Array中的所有元素都是由此ArrayType实例指定的元素打开类型的有效值(即为null或正确的openType)时返回true
+     * 
+     *  这个方法的实现使用递归来递减数组参数的维度
+     * 
      */
     private boolean checkElementsType(Object[] x_dim_Array, int dim) {
 
@@ -656,6 +804,12 @@ public class ArrayType<T> extends OpenType<T> {
      * describe array instances which have the same dimension, elements'
      * open type and primitive array flag.
      *
+     * <p>
+     *  将指定的<code> obj </code>参数与此<code> ArrayType </code>实例进行比较以确保相等
+     * <p>
+     *  当且仅当它们描述具有相同维度,元素的开放类型和基本数组标志的数组实例时,两个<code> ArrayType </code>实例是相等的
+     * 
+     * 
      * @param obj the object to be compared for equality with this
      *            <code>ArrayType</code> instance; if <var>obj</var>
      *            is <code>null</code> or is not an instance of the
@@ -715,6 +869,17 @@ public class ArrayType<T> extends OpenType<T> {
      * to <code>hashCode</code>, and then the same value is returned
      * for subsequent calls.
      *
+     * <p>
+     *  返回此<code> ArrayType </code>实例的哈希码值
+     * <p>
+     * <code> ArrayType </code>实例的哈希码是<code> equals </code>比较中使用的所有信息元素的哈希码的总和(即维度,元素的开放类型和原始数组标记)原始值的哈希码是相应
+     * 的盒装对象的哈希码(例如<tt> true </tt>的哈希码是<tt> BooleanTRUEhashCode()</tt>)这确保了<code> t1equals </code>代表任何两个<code>
+     *  ArrayType </code>实例<code> t1 </code>和<code> t2 </code>的<code> t1hashCode()== t2hashCode ,按照方法的一般合同的要
+     * 求{@link Object#hashCode()ObjecthashCode()}。
+     * <p>
+     * 由于<code> ArrayType </code>实例是不可变的,所以在第一次调用<code> hashCode </code>时,计算一次该实例的哈希码,然后为后续调用返回相同的值
+     * 
+     * 
      * @return  the hash code value for this <code>ArrayType</code> instance
      */
     public int hashCode() {
@@ -747,6 +912,14 @@ public class ArrayType<T> extends OpenType<T> {
      * once, on the first call to <code>toString</code>, and
      * then the same value is returned for subsequent calls.
      *
+     * <p>
+     *  返回此<code> ArrayType </code>实例的字符串表示形式
+     * <p>
+     *  字符串表示由此类的名称(即<code> javaxmanagementopenmbeanArrayType </code>),类型名称,维度,元素的开放类型和为此实例定义的基本数组标志
+     * <p>
+     *  由于<code> ArrayType </code>实例是不可变的,所以在第一次调用<code> toString </code>时计算该实例的字符串表示一次,然后为后续调用返回相同的值
+     * 
+     * 
      * @return a string representation of this <code>ArrayType</code> instance
      */
     public String toString() {
@@ -793,6 +966,18 @@ public class ArrayType<T> extends OpenType<T> {
      * array type description = 3-dimension array of java.lang.String
      * }</pre>
      *
+     * <p>
+     *  以类型安全的方式创建{@code ArrayType}实例
+     * <p>
+     * 可以通过根据需要调用此方法多次来构建多维数组
+     * <p>
+     *  使用相同的参数调用此方法两次可能会返回相同的对象或两个相同但不完全相同的对象
+     * <p>
+     * 例如,下面的代码：<pre> {@ code ArrayType <String []> t1 = ArrayTypegetArrayType(SimpleTypeSTRING); ArrayType <String [] []> t2 = ArrayTypegetArrayType(t1); ArrayType <String [] [] []> t3 = ArrayTypegetArrayType(t2); Systemoutprintln("array class name ="+ t3getClassName()); Systemoutprintln("element class name ="+ t3getElementOpenType()getClassName()); Systemoutprintln("array type name ="+ t3getTypeName()); Systemoutprintln("array type description ="+ t3getDescription()); }
+     *  </pre>会产生以下输出：<pre> {@ code array class name = [[[LjavalangString;元素类名称= javalangString数组类型名称= [[[LjavalangString;数组类型description = 3维数组javalangString}
+     *  </pre>。
+     * 
+     * 
      * @param  elementType  the <i>open type</i> of element values contained
      *                      in the arrays described by this <tt>ArrayType</tt>
      *                      instance; must be an instance of either
@@ -834,6 +1019,15 @@ public class ArrayType<T> extends OpenType<T> {
      * array type description = 3-dimension array of int
      * }</pre>
      *
+     * <p>
+     * 以类型安全的方式创建{@code ArrayType}实例
+     * <p>
+     *  使用相同的参数调用此方法两次可能会返回相同的对象或两个相同但不完全相同的对象
+     * <p>
+     * 作为一个例子,下面的代码：<pre> {@ code ArrayType <int [] [] []> t = ArrayTypegetPrimitiveArrayType(int [] [] [] class); Systemoutprintln("array class name ="+ tgetClassName()); Systemoutprintln("element class name ="+ tgetElementOpenType()getClassName()); Systemoutprintln("array type name ="+ tgetTypeName()); Systemoutprintln("array type description ="+ tgetDescription()); }
+     *  </pre>会产生以下输出：<pre> {@ code array class name = [[[元素类名称= javalangInteger数组类型名称= [[数组类型描述= 3维数组int] / pre>。
+     * 
+     * 
      * @param arrayClass a primitive array class such as {@code int[].class},
      *                   {@code boolean[][].class}, etc. The {@link
      *                   #getElementOpenType()} method of the returned
@@ -893,6 +1087,8 @@ public class ArrayType<T> extends OpenType<T> {
      * Replace/resolve the object read from the stream before it is returned
      * to the caller.
      *
+     * <p>
+     * 
      * @serialData The new serial form of this class defines a new serializable
      * {@code boolean} field {@code primitiveArray}. In order to guarantee the
      * interoperability with previous versions of this class the new serial
@@ -961,6 +1157,10 @@ public class ArrayType<T> extends OpenType<T> {
      * Nominate a replacement for this object in the stream before the object
      * is written.
      *
+     * <p>
+     *  在流返回给调用者之前,替换/解析从流读取的对象
+     * 
+     * 
      * @serialData The new serial form of this class defines a new serializable
      * {@code boolean} field {@code primitiveArray}. In order to guarantee the
      * interoperability with previous versions of this class the new serial

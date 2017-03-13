@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -31,6 +32,13 @@
  *** States Code.  All rights reserved.
  ******************************************************************
  ******************************************************************
+ * <p>
+ *  **************************************************** ************** ********************************
+ * **** **************************** * COPYRIGHT(c)Eastman Kodak Company,1997 *根据United Nations Title 17
+ * 的未发表作品*国家代码保留所有权利******************************************** ******************** ******************
+ * ************ **********************************。
+ * 
+ * 
  ******************************************************************/
 
 package java.awt.image;
@@ -69,6 +77,23 @@ import java.util.Arrays;
  *  {@link DataBuffer#TYPE_INT TYPE_INT},
  *  {@link DataBuffer#TYPE_FLOAT TYPE_FLOAT},
  *  {@link DataBuffer#TYPE_DOUBLE TYPE_DOUBLE},
+ * <p>
+ * 该类表示存储的图像数据,使得像素的每个样本占据DataBuffer的一个数据元素。它存储构成N个单独数据阵列元素中的像素的N个样本。
+ * 不同的频带可以在DataBuffer访问器方法的不同存储体中以便可以直接操纵图像数据该类可以支持不同种类的交织,例如频带交织,扫描线交织和像素交织。
+ * 像素跨越是在相同扫描线上的相同带的两个样本之间的数据阵列元素的数目。
+ *  stride是给定采样和下一扫描线的同一列中的相应采样之间的数据阵列元素的数量带偏移表示从保持每个频带的DataBuffer的组的第一数据阵列元素到频带的第一采样的数据阵列元素的数目。
+ * 频带从0到N-1编号。
+ * 该类可以表示每个sample是一个无符号整数,可以分别存储在8,16或32位(分别使用<code> DataBufferTYPE_BYTE </code>,<code> DataBufferTYPE_U
+ * SHORT </code>或<code> DataBufferTYPE_INT </code>每个样本是可以以16位存储的带符号整数数据(使用<code> DataBufferTYPE_SHORT </code>
+ * )的数据,或者每个样本是有符号浮点数或双数量的数据(使用<code> DataBufferTYPE_FLOAT < / code>或<code> DataBufferTYPE_DOUBLE </code>
+ * )给定ComponentSampleModel的所有样本以相同的精度存储所有步长和偏移必须是非负的。
+ * 频带从0到N-1编号。
+ * 此类支持{@link DataBuffer#TYPE_BYTE TYPE_BYTE},{@link DataBuffer#TYPE_USHORT TYPE_USHORT},{@link DataBuffer#TYPE_SHORT TYPE_SHORT}
+ *  ,{@link DataBuffer#TYPE_INT TYPE_INT},{@link DataBuffer#TYPE_FLOAT TYPE_FLOAT},{@link DataBuffer#TYPE_DOUBLE TYPE_DOUBLE}
+ * ,。
+ * 频带从0到N-1编号。
+ * 
+ * 
  *  @see java.awt.image.PixelInterleavedSampleModel
  *  @see java.awt.image.BandedSampleModel
  */
@@ -84,23 +109,35 @@ public class ComponentSampleModel extends SampleModel
     /**
      * The number of bands in this
      * <code>ComponentSampleModel</code>.
+     * <p>
+     * 这个<code> ComponentSampleModel </code>中的波段数
+     * 
      */
     protected int numBands = 1;
 
     /**
      * The number of banks in this
      * <code>ComponentSampleModel</code>.
+     * <p>
+     *  此<<code> ComponentSampleModel </code>中的库数
+     * 
      */
     protected int numBanks = 1;
 
     /**
      *  Line stride (in data array elements) of the region of image
      *  data described by this ComponentSampleModel.
+     * <p>
+     *  此ComponentSampleModel描述的图像数据区域的行步长(在数据数组元素中)
+     * 
      */
     protected int scanlineStride;
 
     /** Pixel stride (in data array elements) of the region of image
      *  data described by this ComponentSampleModel.
+     * <p>
+     *  此ComponentSampleModel描述的数据
+     * 
      */
     protected int pixelStride;
 
@@ -114,6 +151,10 @@ public class ComponentSampleModel extends SampleModel
      * Constructs a ComponentSampleModel with the specified parameters.
      * The number of bands will be given by the length of the bandOffsets array.
      * All bands will be stored in the first bank of the DataBuffer.
+     * <p>
+     *  构造具有指定参数的ComponentSampleModel频段数将由bandOffsets数组的长度给出所有频段将存储在DataBuffer的第一个库中
+     * 
+     * 
      * @param dataType  the data type for storing samples
      * @param w         the width (in pixels) of the region of
      *     image data described
@@ -176,6 +217,10 @@ public class ComponentSampleModel extends SampleModel
      * The number of bands will be given by the length of the bandOffsets array.
      * Different bands may be stored in different banks of the DataBuffer.
      *
+     * <p>
+     *  构造具有指定参数的ComponentSampleModel带数的数量将由bandOffsets数组的长度给出不同的带可以存储在DataBuffer的不同库中
+     * 
+     * 
      * @param dataType  the data type for storing samples
      * @param w         the width (in pixels) of the region of
      *     image data described
@@ -255,6 +300,9 @@ public class ComponentSampleModel extends SampleModel
     /**
      * Returns the size of the data buffer (in data elements) needed
      * for a data buffer that matches this ComponentSampleModel.
+     * <p>
+     * 返回与此ComponentSampleModel匹配的数据缓冲区所需的数据缓冲区的大小(在数据元素中)
+     * 
      */
      private int getBufferSize() {
          int maxBandOff=bandOffsets[0];
@@ -297,6 +345,9 @@ public class ComponentSampleModel extends SampleModel
 
      /**
       * Preserves band ordering with new step factor...
+      * <p>
+      *  使用新的步进因子保持带宽排序
+      * 
       */
     int []orderBands(int orig[], int step) {
         int map[] = new int[orig.length];
@@ -322,6 +373,11 @@ public class ComponentSampleModel extends SampleModel
      * width and height.  The new <code>SampleModel</code> will have the same
      * number of bands, storage data type, interleaving scheme, and
      * pixel stride as this <code>SampleModel</code>.
+     * <p>
+     *  创建具有指定宽度和高度的新<Component> SampleModel </code>新<code> SampleModel </code>将具有与此<code>相同数量的波段,存储数据类型,交叉方
+     * 案和像素跨度, SampleModel </code>。
+     * 
+     * 
      * @param w the width of the resulting <code>SampleModel</code>
      * @param h the height of the resulting <code>SampleModel</code>
      * @return a new <code>ComponentSampleModel</code> with the specified size
@@ -403,6 +459,12 @@ public class ComponentSampleModel extends SampleModel
      * can be used with.  The new ComponentSampleModel/DataBuffer
      * combination will represent an image with a subset of the bands
      * of the original ComponentSampleModel/DataBuffer combination.
+     * <p>
+     *  使用此ComponentSampleModel的频带的子集创建新的ComponentSampleModel新的ComponentSampleModel可以与现有ComponentSampleModel
+     * 可以一起使用的任何DataBuffer一起使用新的ComponentSampleModel / DataBuffer组合将表示具有原始ComponentSampleModel的频带的子集的图像/ Dat
+     * aBuffer组合。
+     * 
+     * 
      * @param bands a subset of bands from this
      *              <code>ComponentSampleModel</code>
      * @return a <code>ComponentSampleModel</code> created with a subset
@@ -432,6 +494,11 @@ public class ComponentSampleModel extends SampleModel
      * <code>ComponentSampleModel</code>.
      * The <code>DataBuffer</code> object's data type, number of banks,
      * and size are be consistent with this <code>ComponentSampleModel</code>.
+     * <p>
+     * 创建与此<code> ComponentSampleModel </code>对应的<code> DataBuffer </code> <code> DataBuffer </code>对象的数据类型,
+     * 组数和大小与此<code> ComponentSampleModel </code>。
+     * 
+     * 
      * @return a <code>DataBuffer</code> whose data type, number of banks
      *         and size are consistent with this
      *         <code>ComponentSampleModel</code>.
@@ -473,6 +540,13 @@ public class ComponentSampleModel extends SampleModel
      * <pre>
      *        data.getElem(csm.getOffset(x, y));
      * </pre>
+     * <p>
+     *  第一频带的样本可以从具有<code> ComponentSampleModel </code> <code> csm </code>的<code> DataBuffer </code> <code> 
+     * data </code>。
+     * <pre>
+     *  datagetElem(csmgetOffset(x,y));
+     * </pre>
+     * 
      * @param x the X location of the pixel
      * @param y the Y location of the pixel
      * @return the offset for the first band of the specified pixel.
@@ -489,6 +563,13 @@ public class ComponentSampleModel extends SampleModel
      * <pre>
      *       data.getElem(csm.getOffset(x, y, b));
      * </pre>
+     * <p>
+     *  可以从具有<code> ComponentSampleModel </code> <code> csm </code的<code> DataBuffer </code> <code> data </code>
+     * 中检索频带<code> b </code> > as。
+     * <pre>
+     *  datagetElem(csmgetOffset(x,y,b));
+     * </pre>
+     * 
      * @param x the X location of the specified pixel
      * @param y the Y location of the specified pixel
      * @param b the specified band
@@ -500,6 +581,8 @@ public class ComponentSampleModel extends SampleModel
     }
 
     /** Returns the number of bits per sample for all bands.
+    /* <p>
+    /* 
      *  @return an array containing the number of bits per sample
      *          for all bands, where each element in the array
      *          represents a band.
@@ -515,6 +598,8 @@ public class ComponentSampleModel extends SampleModel
     }
 
     /** Returns the number of bits per sample for the specified band.
+    /* <p>
+    /* 
      *  @param band the specified band
      *  @return the number of bits per sample for the specified band.
      */
@@ -523,6 +608,8 @@ public class ComponentSampleModel extends SampleModel
     }
 
     /** Returns the bank indices for all bands.
+    /* <p>
+    /* 
      *  @return the bank indices for all bands.
      */
     public final int [] getBankIndices() {
@@ -530,6 +617,8 @@ public class ComponentSampleModel extends SampleModel
     }
 
     /** Returns the band offset for all bands.
+    /* <p>
+    /* 
      *  @return the band offsets for all bands.
      */
     public final int [] getBandOffsets() {
@@ -537,6 +626,8 @@ public class ComponentSampleModel extends SampleModel
     }
 
     /** Returns the scanline stride of this ComponentSampleModel.
+    /* <p>
+    /* 
      *  @return the scanline stride of this <code>ComponentSampleModel</code>.
      */
     public final int getScanlineStride() {
@@ -544,6 +635,8 @@ public class ComponentSampleModel extends SampleModel
     }
 
     /** Returns the pixel stride of this ComponentSampleModel.
+    /* <p>
+    /* 
      *  @return the pixel stride of this <code>ComponentSampleModel</code>.
      */
     public final int getPixelStride() {
@@ -558,6 +651,11 @@ public class ComponentSampleModel extends SampleModel
      * methods.
      * For a <code>ComponentSampleModel</code>, this is identical to the
      * number of bands.
+     * <p>
+     * 返回使用{@link #getDataElements(int,int,Object,DataBuffer)}和{@link #setDataElements(int,int,Object,DataBuffer)}
+     * 方法传输像素所需的数据元素数对于<code> ComponentSampleModel </code>,这与频带数量相同。
+     * 
+     * 
      * @return the number of data elements needed to transfer a pixel with
      *         the <code>getDataElements</code> and
      *         <code>setDataElements</code> methods.
@@ -604,6 +702,28 @@ public class ComponentSampleModel extends SampleModel
      * <code>null</code> and is not large enough to hold
      * the pixel data.
      *
+     * <p>
+     *  返回<code> TransferType </code>类型的基本数组中的单个像素的数据对于<code> ComponentSampleModel </code>,这与数据类型相同,并且每个数组元素
+     * 返回一个样本。
+     *  <code> obj </code>应该作为<code> null </code>传递,以便自动创建<code> Object </code>,并且是正确的基本数据类型。
+     * <p>
+     * 以下代码说明从<code> DataBuffer </code> <code> db1 </code>传输一个像素的数据,其存储布局由<code> ComponentSampleModel </code>
+     *  <code> csm1 </code>到<code> DataBuffer </code> <code> db2 </code>,其存储布局由<code> ComponentSampleModel </code>
+     *  <code> csm2 </code>描述。
+     *  > getPixel </code>和<code> setPixel </code>。
+     * <pre>
+     *  ComponentSampleModel csm1,csm2; DataBufferInt db1,db2; csm2setDataElements(x,y,csm1getDataElements(x
+     * ,y,null,db1),db2);。
+     * </pre>
+     * 
+     * 如果<code> SampleModel </code>对象具有相同的数字,则使用<code> getDataElements </code>和<code> setDataElements </code>
+     * 在两个<code> DataBuffer / SampleModel </code>的带,对应的带具有每个样本相同的位数,并且<code> TransferType </code>是相同的。
+     * <p>
+     *  如果<code> obj </code>不是<code> null </code>,它应该是类型<code> TransferType </code>的原始数组否则,抛出一个<code> ClassC
+     * astException </code>如果坐标不在边界中,或者<code> obj </code>不是<code> null </code>且不足以容纳像素数据,则可能会抛出<code> ArrayI
+     * ndexOutOfBoundsException </code>。
+     * 
+     * 
      * @param x         the X coordinate of the pixel location
      * @param y         the Y coordinate of the pixel location
      * @param obj       if non-<code>null</code>, a primitive array
@@ -723,6 +843,10 @@ public class ComponentSampleModel extends SampleModel
      * one sample per array element.
      * An <code>ArrayIndexOutOfBoundsException</code> might be thrown if
      * the coordinates are not in bounds.
+     * <p>
+     * 返回int数组中指定像素的所有样本,每个数组元素一个样本如果坐标不在边界中,可能会抛出<code> ArrayIndexOutOfBoundsException </code>
+     * 
+     * 
      * @param x         the X coordinate of the pixel location
      * @param y         the Y coordinate of the pixel location
      * @param iArray    If non-null, returns the samples in this array
@@ -758,6 +882,10 @@ public class ComponentSampleModel extends SampleModel
      * an int array, one sample per array element.
      * An <code>ArrayIndexOutOfBoundsException</code> might be thrown if
      * the coordinates are not in bounds.
+     * <p>
+     *  返回int数组中指定的像素矩形的所有样本,每个数组元素一个样本如果坐标不在边界中,可能会抛出<code> ArrayIndexOutOfBoundsException </code>
+     * 
+     * 
      * @param x         The X coordinate of the upper left pixel location
      * @param y         The Y coordinate of the upper left pixel location
      * @param w         The width of the pixel rectangle
@@ -806,6 +934,10 @@ public class ComponentSampleModel extends SampleModel
      * located at (x,y).
      * An <code>ArrayIndexOutOfBoundsException</code> might be thrown if
      * the coordinates are not in bounds.
+     * <p>
+     *  以位于(x,y)的像素的指定带中的样本为int返回如果坐标不在边界中,可能会抛出<code> ArrayIndexOutOfBoundsException </code>
+     * 
+     * 
      * @param x         the X coordinate of the pixel location
      * @param y         the Y coordinate of the pixel location
      * @param b         the band to return
@@ -830,6 +962,10 @@ public class ComponentSampleModel extends SampleModel
      * for the pixel located at (x,y) as a float.
      * An <code>ArrayIndexOutOfBoundsException</code> might be
      * thrown if the coordinates are not in bounds.
+     * <p>
+     *  以位于(x,y)的像素作为浮点返回指定带中的样本如果坐标不在边界中,可能会抛出<code> ArrayIndexOutOfBoundsException </code>
+     * 
+     * 
      * @param x         The X coordinate of the pixel location
      * @param y         The Y coordinate of the pixel location
      * @param b         The band to return
@@ -855,6 +991,10 @@ public class ComponentSampleModel extends SampleModel
      * for a pixel located at (x,y) as a double.
      * An <code>ArrayIndexOutOfBoundsException</code> might be
      * thrown if the coordinates are not in bounds.
+     * <p>
+     * 以位于(x,y)的像素为单位返回指定带中的样本作为double如果坐标不在边界中,则可能会抛出<code> ArrayIndexOutOfBoundsException </code>
+     * 
+     * 
      * @param x         The X coordinate of the pixel location
      * @param y         The Y coordinate of the pixel location
      * @param b         The band to return
@@ -880,6 +1020,10 @@ public class ComponentSampleModel extends SampleModel
      * of pixels in an int array, one sample per data array element.
      * An <code>ArrayIndexOutOfBoundsException</code> might be thrown if
      * the coordinates are not in bounds.
+     * <p>
+     *  返回在int数组中指定像素矩形的指定带中的样本,每个数据数组元素一个样本如果坐标不在边界中,可能会抛出<code> ArrayIndexOutOfBoundsException </code>
+     * 
+     * 
      * @param x         The X coordinate of the upper left pixel location
      * @param y         The Y coordinate of the upper left pixel location
      * @param w         the width of the pixel rectangle
@@ -950,6 +1094,26 @@ public class ComponentSampleModel extends SampleModel
      * An <code>ArrayIndexOutOfBoundsException</code> might be thrown if
      * the coordinates are not in bounds, or if <code>obj</code> is not large
      * enough to hold the pixel data.
+     * <p>
+     *  在<code> TransferType </code>类型的基本数组中为指定的<code> DataBuffer </code>中的单个像素设置数据。
+     * 对于<code> ComponentSampleModel </code>,这与数据相同类型,并且每个数组元素传输一个样本。
+     * <p>
+     * 以下代码说明从<code> DataBuffer </code> <code> db1 </code>传输一个像素的数据,其存储布局由<code> ComponentSampleModel </code>
+     *  <code> csm1 </code>到<code> DataBuffer </code> <code> db2 </code>,其存储布局由<code> ComponentSampleModel </code>
+     *  <code> csm2 </code>描述。
+     *  > getPixel </code>和<code> setPixel </code>。
+     * <pre>
+     *  ComponentSampleModel csm1,csm2; DataBufferInt db1,db2; csm2setDataElements(x,y,csm1getDataElements(x
+     * ,y,null,db1),db2);。
+     * </pre>
+     * 如果<code> SampleModel </code>对象具有相同的数字,则使用<code> getDataElements </code>和<code> setDataElements </code>
+     * 在两个<code> DataBuffer / SampleModel </code>的带,对应的带具有每个样本相同的位数,并且<code> TransferType </code>是相同的。
+     * <p>
+     *  如果<code> obj </code>不是类型<code> TransferType </code>的原始数组,则会抛出<class> ClassCastException </code> </code>
+     * 如果坐标为true,则可能会抛出<code> ArrayIndexOutOfBoundsException </code>不在边界中,或者如果<code> obj </code>不够大,不足以容纳像素数
+     * 据。
+     * 
+     * 
      * @param x         the X coordinate of the pixel location
      * @param y         the Y coordinate of the pixel location
      * @param obj       a primitive array containing pixel data
@@ -1027,6 +1191,11 @@ public class ComponentSampleModel extends SampleModel
      * samples for input.  An <code>ArrayIndexOutOfBoundsException</code>
      * might be thrown if the coordinates are
      * not in bounds.
+     * <p>
+     * 设置<code> DataBuffer </code>中的像素使用输入的样本的int数组如果坐标不在边界中,可能会抛出<code> ArrayIndexOutOfBoundsException </code>
+     * 。
+     * 
+     * 
      * @param x         The X coordinate of the pixel location
      * @param y         The Y coordinate of the pixel location
      * @param iArray    The input samples in an int array
@@ -1050,6 +1219,10 @@ public class ComponentSampleModel extends SampleModel
      * one sample per array element.
      * An <code>ArrayIndexOutOfBoundsException</code> might be thrown if the
      * coordinates are not in bounds.
+     * <p>
+     *  设置来自包含每个数组元素一个样本的int数组的像素矩形的所有样本如果坐标不在边界中,可能会抛出<code> ArrayIndexOutOfBoundsException </code>
+     * 
+     * 
      * @param x         The X coordinate of the upper left pixel location
      * @param y         The Y coordinate of the upper left pixel location
      * @param w         The width of the pixel rectangle
@@ -1091,6 +1264,11 @@ public class ComponentSampleModel extends SampleModel
      * in the <code>DataBuffer</code> using an int for input.
      * An <code>ArrayIndexOutOfBoundsException</code> might be thrown if the
      * coordinates are not in bounds.
+     * <p>
+     *  使用输入的int为<code> DataBuffer </code>中位于(x,y)的像素设置指定频带中的样本。
+     * 如果坐标不在,则可能会抛出<code> ArrayIndexOutOfBoundsException </code>边界。
+     * 
+     * 
      * @param x         The X coordinate of the pixel location
      * @param y         The Y coordinate of the pixel location
      * @param b         the band to set
@@ -1114,6 +1292,11 @@ public class ComponentSampleModel extends SampleModel
      * in the <code>DataBuffer</code> using a float for input.
      * An <code>ArrayIndexOutOfBoundsException</code> might be thrown if
      * the coordinates are not in bounds.
+     * <p>
+     * 使用输入的float为<code> DataBuffer </code>中的(x,y)处的像素设置指定频带中的样本。
+     * 如果坐标不在,则可能会抛出<code> ArrayIndexOutOfBoundsException </code>边界。
+     * 
+     * 
      * @param x         The X coordinate of the pixel location
      * @param y         The Y coordinate of the pixel location
      * @param b         The band to set
@@ -1139,6 +1322,11 @@ public class ComponentSampleModel extends SampleModel
      * in the <code>DataBuffer</code> using a double for input.
      * An <code>ArrayIndexOutOfBoundsException</code> might be thrown if
      * the coordinates are not in bounds.
+     * <p>
+     *  在<code> DataBuffer </code>中为(x,y)的像素设置指定频带中的样本,使用double作为输入。
+     * 如果坐标不在,则可能会抛出<code> ArrayIndexOutOfBoundsException </code>边界。
+     * 
+     * 
      * @param x         The X coordinate of the pixel location
      * @param y         The Y coordinate of the pixel location
      * @param b         The band to set
@@ -1164,6 +1352,10 @@ public class ComponentSampleModel extends SampleModel
      * of pixels from an int array containing one sample per data array element.
      * An <code>ArrayIndexOutOfBoundsException</code> might be thrown if the
      * coordinates are not in bounds.
+     * <p>
+     *  对于指定的像素矩形,从一个包含每个数据数组元素一个样本的int数组中设置指定范围的样本如果坐标不在边界中,可能会抛出<code> ArrayIndexOutOfBoundsException </code>
+     * 。
+     * 
      * @param x         The X coordinate of the upper left pixel location
      * @param y         The Y coordinate of the upper left pixel location
      * @param w         The width of the pixel rectangle

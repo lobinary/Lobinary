@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2001, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -282,6 +283,72 @@
  * or method in any class or interface in this package will cause a {@link
  * java.lang.NullPointerException NullPointerException} to be thrown.
  *
+ * <p>
+ *  定义通道,表示与能够执行I / O操作的实体的连接,例如文件和套接字;定义选择器,用于多路复用的非阻塞I / O操作
+ * 
+ *  <a name=\"channels\"> </a>
+ * 
+ * <blockquote> <table cellspacing = 1 cellpadding = 0 summary ="列出频道及其说明"> <tr> <th align ="left">频道</th>
+ *  <th align ="left">说明</th> </td> I / O操作的关联</td> </td> </td> </td> </t> </t> <tr> <td valign = top> <tt>
+ * &nbsp;&nbsp; <i> {@ link javaniochannelsReadableByteChannel} </i> </tt> td> </tr> <tr> <td valign = top>
+ *  <tt>&nbsp;&nbsp;&nbsp;&nbsp; <i> {@ link javaniochannelsScatteringByteChannel}&nbsp;&nbsp; </i> </tt>
+ *  <td>可读入缓冲区序列</td> </tr> <tr> <td valign = top> <tt>&nbsp;&nbsp; <i> {@ link javaniochannelsWritableByteChannel}
+ *  </i> > </td> <td>可以从缓冲区写入</td> </tr> <tr> <td valign = top> <tt>&nbsp;&nbsp;&nbsp;&nbsp; <i> {@ link javaniochannelsGatheringByteChannel}
+ *  </i> </tt> </td> <td>可以从一系列缓冲区写入</td> </tr> <tr> <td valign = top> <tt>&nbsp;&nbsp; < i> {@ link javaniochannelsByteChannel}
+ *  </i> </tt> </td> <td>可以读取/写入缓冲区</td> </tr> <tr> <td valign = top> tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&
+ * nbsp;&nbsp; <i> {@ link javaniochannelsSeekableByteChannel} </i> </tt> </td> <td> A {@code ByteChannel}
+ * 的字节</td> </tr> <tr> <td valign = top> <tt>&nbsp;&nbsp; <i> {@ link javaniochannelsAsynchronousChannel}
+ *  </i> </tt> </td> <td>异步I / O操作</td> </tr> <tr> <td valign = top> <tt>&nbsp;&nbsp;&nbsp;&nbsp; <i> {@ link javaniochannelsAsynchronousByteChannel}
+ *  </i> </tt> </td> <td>可以异步读取和写入字节</td> </tr> <tr> <td valign = top> <tt>&nbsp; {@link javaniochannelsNetworkChannel}
+ *  </i> </tt> </td> <td>通向网络套接字的频道</td> </tr> <tr> <td valign = top> <tt>&nbsp;&nbsp; &nbsp;&nbsp; <i> 
+ * {@ link javaniochannels MulticastChannel} </i> </tt> </td> <td>可以加入互联网协议(IP)多播群组</td> </tr> <tr> <td valign = top>
+ *  <tt> {@ link javaniochannelsChannels} </tt> </td> <td>频道/流互操作的实用方法</td> </tr> </table> </blockquote>
+ * 。
+ * 
+ * </>> </i>表示到诸如硬件设备,文件,网络套接字或程序组件之类的能够执行一个或多个不同的I / O操作的实体的打开连接,例如读取或写入如{@link javaniochannelsChannel}
+ * 接口中所述,通道可以是打开或关闭的,并且它们都可以异步关闭</i>和<i>可中断</i>。
+ * 
+ *  <p> {@link javaniochannelsChannel}接口由其他几个接口扩展
+ * 
+ * <p> {@link javaniochannelsReadableByteChannel}接口指定了一个{@link javaniochannelsReadableByteChannel#read read}
+ * 方法,将字节从通道读入缓冲区;类似地,{@link javaniochannelsWritableByteChannel}接口指定了一个将字节从缓冲区写入通道的{@link javaniochannelsWritableByteChannel#write write}
+ * 方法。
+ * {@link javaniochannelsByteChannel}接口将这两个接口统一为通道的通用情况,和写字节{@link javaniochannelsSeekableByteChannel}接口
+ * 将{@code ByteChannel}接口扩展到{@link javaniochannelsSeekableByteChannel#position()query}和{@link javaniochannelsSeekableByteChannel#position(long)modify}
+ * 渠道的当前位置及其{@link javaniochannelsSeekableByteChannel#size size}。
+ * 
+ * 
+ * <p> {@link javaniochannelsNetworkChannel}接口指定了{@link javaniochannelsNetworkChannel#bind bind}渠道套接字的方法
+ * ,获取套接字绑定到的地址,以及{@link javaniochannelsNetworkChannel#getOption get}和{@link javaniochannelsNetworkChannel#setOption set}
+ * 套接字选项{@link javaniochannelsMulticastChannel}接口规定了加入互联网协议(IP)多播组的方法。
+ * 
+ * <p> {@link javaniochannelsChannels}实用程序类定义了支持<tt> {@ link javaio} </tt>包的流类与此包的通道类的互操作的静态方法可以构造合适的通道来
+ * 自{@link javaioInputStream}或{@link javaioOutputStream},相反,可以从通道构造{@link javaioInputStream}或{@link javaioOutputStream}
+ *  A可以构造使用给定字符集的{@link javaioReader}以解码来自给定可读字节通道的字节,并且相反地,可以构造{@link javaioWriter},其使用给定的字符集将字符编码为字节并将
+ * 其写入给定的可写字节通道。
+ * 
+ * <blockquote> <table cellspacing = 1 cellpadding = 0 summary ="列出文件通道及其描述"> <tr> <th align ="left">文件通
+ * 道</th> <th align ="left">描述< th> </tr> <tr> <td valign = top> <tt> {@ link javaniochannelsFileChannel}
+ *  </tt> </td> <td>读取,写入,映射和操作文件</td> </tr > <tr> <td valign = top> <tt> {@ link javaniochannelsFileLock}
+ *  </tt> </td> <td>锁定(区域)文件</td> <td valign = top> <tt> {@ link javanioMappedByteBuffer}&nbsp;&nbsp; </tt>
+ *  </td> <td>映射到文件区域的直接字节缓冲区</td> <// table> </blockquote>。
+ * 
+ * <p> {@link javaniochannelsFileChannel}类支持从连接到文件的通道读取字节和写入字节的常见操作,以及查询和修改当前文件位置并将文件截断为特定size定义用于获取整个文件
+ * 或文件特定区域上的锁的方法;这些方法返回{@link javaniochannelsFileLock}类的实例。
+ * 最后,它定义了用于强制更新文件以被写入包含它的存储设备的方法,用于在文件和其它通道之间有效地传输字节,以及用于映射区域的文件直接进入内存。
+ * 
+ * <p>通过调用其中一个静态{@link javaniochannelsFileChannel#open open}方法或调用{@link javaioFileInputStream} {@link javaioFileOutputStream}
+ * 的{@code getChannel}方法来创建{@code FileChannel} ,或{@link javaioRandomAccessFile}返回连接到与<tt> {@ link javaio}
+ *  </tt>类相同的底层文件的文件通道。
+ * 
+ * <a name=\"multiplex\"> </a> <blockquote> <table cellspacing = 1 cellpadding = 0 summary ="列出多路复用,非阻塞通道及其描述">
+ *  <tr> <th align ="left">多路复用,非阻塞I / O </th> <th align ="left"> <p>描述</th> </tr> <tr> <td valign = top>
+ *  <tt> {@ link javaniochannelsSelectableChannel} tt> </td> <td>可以复用的频道</td> </tr> <tr> <td valign = top>
+ *  <tt>&nbsp;&nbsp; {@ link javaniochannelsDatagramChannel} </td> <td>通往数据报导向插座的通道</td> </tr> <tr> <td valign = top>
+ *  <tt>&nbsp; {@ link javaniochannelsPipeSinkChannel} </td> <td>管道的写入结束</td> </tr> <tr> <td valign = top>
+ *  <tt>&nbsp;&nbsp; {@ link javaniochannelsPipeSourceChannel} </tt> </td> <td>读取管道末端</td> </tr> <tr> <td valign = top>
+ *  <tt>&nbsp;&nbsp; {@ link javaniochannelsServerSocketChannel}&nbsp;&nbsp; </tt> </td> <td>流向面向流的侦听套接字
+ * 
  * @since 1.4
  * @author Mark Reinhold
  * @author JSR-51 Expert Group

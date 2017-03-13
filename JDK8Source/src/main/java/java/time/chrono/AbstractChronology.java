@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,22 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * <p>
+ *  版权所有(c)2012,Stephen Colebourne和Michael Nascimento Santos
+ * 
+ *  版权所有
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  *源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明
+ * 
+ *  *二进制形式的再分发必须在随分发版提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明
+ * 
+ * *未经特定事先书面许可,JSR-310的名称及其贡献者的名称不得用于支持或宣传衍生自此软件的产品
+ * 
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或暗示的担保,包括但不限于适销性和针对特定用途的适用性的默示担保,在任何情况下均不得免版权所有者或贡献者对任何直接,间接,偶发,特殊,惩罚性或后果性损害
+ * (包括但不限于替代商品或服务的采购,使用,数据或利润损失;或业务中断)有责任的理论,无论是在合同,严格责任或侵权(包括疏忽或其他方式)以任何方式使用本软件,即使已被告知此类损害的可能性。
+ * 
  */
 package java.time.chrono;
 
@@ -122,12 +139,27 @@ import sun.util.logging.PlatformLogger;
  * All implementations that can be instantiated must be final, immutable and thread-safe.
  * Subclasses should be Serializable wherever possible.
  *
+ * <p>
+ * 日历系统的抽象实现,用于组织和识别日期
+ * <p>
+ *  主日期和时间API建立在ISO日历系统上时间顺序在幕后操作,代表日历系统的一般概念
+ * <p>
+ *  有关详细信息,请参阅{@link Chronology}
+ * 
+ *  @implSpec这个类与{@code Chronology}接口分离,因此静态方法不会被继承当{@code Chronology}可以直接实现时,强烈建议扩展这个抽象类
+ * <p>
+ *  这个类必须小心地实现,以确保其他类正常运行所有可以实例化的实现必须是final,immutable和线程安全的子类应该是可序列化的
+ * 
+ * 
  * @since 1.8
  */
 public abstract class AbstractChronology implements Chronology {
 
     /**
      * ChronoLocalDate order constant.
+     * <p>
+     *  ChronoLocalDate订单常量
+     * 
      */
     static final Comparator<ChronoLocalDate> DATE_ORDER =
         (Comparator<ChronoLocalDate> & Serializable) (date1, date2) -> {
@@ -135,6 +167,9 @@ public abstract class AbstractChronology implements Chronology {
         };
     /**
      * ChronoLocalDateTime order constant.
+     * <p>
+     * ChronoLocalDateTime顺序常量
+     * 
      */
     static final Comparator<ChronoLocalDateTime<? extends ChronoLocalDate>> DATE_TIME_ORDER =
         (Comparator<ChronoLocalDateTime<? extends ChronoLocalDate>> & Serializable) (dateTime1, dateTime2) -> {
@@ -146,6 +181,9 @@ public abstract class AbstractChronology implements Chronology {
         };
     /**
      * ChronoZonedDateTime order constant.
+     * <p>
+     *  ChronoZonedDateTime顺序常量
+     * 
      */
     static final Comparator<ChronoZonedDateTime<?>> INSTANT_ORDER =
             (Comparator<ChronoZonedDateTime<?>> & Serializable) (dateTime1, dateTime2) -> {
@@ -158,10 +196,16 @@ public abstract class AbstractChronology implements Chronology {
 
     /**
      * Map of available calendars by ID.
+     * <p>
+     *  可用日历的地图(按ID)
+     * 
      */
     private static final ConcurrentHashMap<String, Chronology> CHRONOS_BY_ID = new ConcurrentHashMap<>();
     /**
      * Map of available calendars by calendar type.
+     * <p>
+     *  按日历类型显示可用日历的地图
+     * 
      */
     private static final ConcurrentHashMap<String, Chronology> CHRONOS_BY_TYPE = new ConcurrentHashMap<>();
 
@@ -170,6 +214,10 @@ public abstract class AbstractChronology implements Chronology {
      * Chronologies must not be registered until they are completely constructed.
      * Specifically, not in the constructor of Chronology.
      *
+     * <p>
+     *  通过{@link #of(String)}查找的ID和类型注册年表Chronology必须在完全构建之前注册。具体而言,不是在年表的构造函数中
+     * 
+     * 
      * @param chrono the chronology to register; not null
      * @return the already registered Chronology if any, may be null
      */
@@ -182,6 +230,10 @@ public abstract class AbstractChronology implements Chronology {
      * Chronos must not be registered until they are completely constructed.
      * Specifically, not in the constructor of Chronology.
      *
+     * <p>
+     *  通过{@link #of(String)}查找的ID和类型注册年表。Chronos必须注册,直到它们完全构造特别是,不是在年表的构造函数
+     * 
+     * 
      * @param chrono the chronology to register; not null
      * @param id the ID to register the chronology; not null
      * @return the already registered Chronology if any, may be null
@@ -210,6 +262,13 @@ public abstract class AbstractChronology implements Chronology {
      * Multiple threads may perform the initialization concurrently.
      * Only the first registration of each Chronology is retained by the
      * ConcurrentHashMap.
+     * <p>
+     * 将映射从id和类型初始化为Chronology ServiceLoader用于查找和注册在bootclass加载器中找到的任何实现{@link javatimechronoAbstractChronology}
+     * 内置的年表是明确注册的通过Thread的上下文类加载器配置的日历是本地的线程并被忽略。
+     * <p>
+     *  初始化仅使用IsoChronology的注册作为测试和最后一步进行一次多线程可以同时执行初始化只有每个Chronology的第一个注册被ConcurrentHashMap保留
+     * 
+     * 
      * @return true if the cache was initialized
      */
     private static boolean initCache() {
@@ -247,6 +306,12 @@ public abstract class AbstractChronology implements Chronology {
      * <p>
      * See {@link Chronology#ofLocale(Locale)}.
      *
+     * <p>
+     *  从语言环境获取{@code Chronology}的实例
+     * <p>
+     *  请参阅{@link Chronology#ofLocale(Locale)}
+     * 
+     * 
      * @param locale  the locale to use to obtain the calendar system, not null
      * @return the calendar system associated with the locale, not null
      * @throws java.time.DateTimeException if the locale-specified calendar cannot be found
@@ -285,6 +350,12 @@ public abstract class AbstractChronology implements Chronology {
      * <p>
      * See {@link Chronology#of(String)}.
      *
+     * <p>
+     * 从年表ID或日历系统类型获取{@code Chronology}的实例
+     * <p>
+     *  请参阅{@link Chronology#of(String)}
+     * 
+     * 
      * @param id  the chronology ID or calendar system type, not null
      * @return the chronology with the identifier requested, not null
      * @throws java.time.DateTimeException if the chronology cannot be found
@@ -315,6 +386,10 @@ public abstract class AbstractChronology implements Chronology {
      * Obtains an instance of {@code Chronology} from a chronology ID or
      * calendar system type.
      *
+     * <p>
+     *  从年表ID或日历系统类型获取{@code Chronology}的实例
+     * 
+     * 
      * @param id  the chronology ID or calendar system type, not null
      * @return the chronology with the identifier requested, or {@code null} if not found
      */
@@ -334,6 +409,12 @@ public abstract class AbstractChronology implements Chronology {
      * any chronologies provided by the application via ServiceLoader
      * configuration.
      *
+     * <p>
+     *  返回可用的年表
+     * <p>
+     *  每个返回的{@code Chronology}可供系统使用这些年表包括系统年表和应用程序通过ServiceLoader配置提供的任何年表
+     * 
+     * 
      * @return the independent, modifiable set of the available chronology IDs, not null
      */
     static Set<Chronology> getAvailableChronologies() {
@@ -352,6 +433,9 @@ public abstract class AbstractChronology implements Chronology {
     //-----------------------------------------------------------------------
     /**
      * Creates an instance.
+     * <p>
+     *  创建实例
+     * 
      */
     protected AbstractChronology() {
     }
@@ -443,6 +527,47 @@ public abstract class AbstractChronology implements Chronology {
      * has the value 1, that first day-of-year has the value 1, and that the
      * first of the month and year always exists.
      *
+     * <p>
+     *  在解析期间将解析的{@code ChronoField}值解析为日期
+     * <p>
+     * 大多数{@code TemporalField}实现使用字段上的resolve方法解析相比之下,{@code ChronoField}类定义了仅对于年表有意义的字段。
+     * 因此,{@code ChronoField}日期字段在此解析特定年表的上下文。
+     * <p>
+     *  {@code ChronoField}实例由此方法解析,可能会在子类中覆盖
+     * <ul>
+     * <li> {@ code EPOCH_DAY}  - 如果存在,则将其转换为日期,然后根据日期交叉检查所有其他日期字段。
+     * <li> {@ code PROLEPTIC_MONTH}  - 如果存在,则将其拆分为{ @code YEAR}和{@code MONTH_OF_YEAR}如果模式是strict或smart,则会验证
+     * 此字段<li> {@ code YEAR_OF_ERA}和{@code ERA}  - 如果两者都存在, @code YEAR}在宽松模式下,{@code YEAR_OF_ERA}范围未验证,在智能和严
+     * 格模式下,{@code ERA}在所有三种模式中的范围内验证如果只有{@code YEAR_OF_ERA} ,并且模式是智能的或宽松的,则假定最后一个可用的时代在严格模式中,不假定时代,并且{@code YEAR_OF_ERA}
+     * 保持不变如果只有{@code ERA}存在,那么它将保持不变。
+     * <li> {@ code EPOCH_DAY}  - 如果存在,则将其转换为日期,然后根据日期交叉检查所有其他日期字段。
+     * <li> {@ code YEAR},{@code MONTH_OF_YEAR}和{@code DAY_OF_MONTH}  - 如果三个都存在,日期在所有三种模式下,{@code YEAR}被验证如果
+     * 模式是智能或严格,则验证月份和日期如果模式是宽松的,则日期以等同于在在所请求的年份中的第一个月的第一天,然后加上在月中的差额,然后在天中的差异如果模式是聪明的,并且日期大于年 - 月的最大值,那么天将月
+     * 份调整为最后一个日期如果模式为严格,则三个字段必须形成有效日期<li> {@ code YEAR}和{@code DAY_OF_YEAR}  - 如果两者都存在,则它们被组合以形成日期在所有三种模式下,
+     * {@code YEAR}被验证如果模式是宽松的,以等同于在所请求年份的第一天创建日期的方式组合,然后添加天数差异如果模式是智能或严格,则这两个字段必须形成有效日期<li> {@ code YEAR} ,
+     * {@code MONTH_OF_YEAR},{@code ALIGNED_WEEK_OF_MONTH}和{@code ALIGNED_DAY_OF_WEEK_IN_MONTH}  - 如果所有四个都存在
+     * ,则将它们组合形成日期在所有三种模式下,{@code YEAR}如果模式是宽松的,则日期以等同于在所请求的年份中的第一个月的第一天创建日期的方式组合,然后添加差异以月为单位,然后以星期为单位,然后以天为
+     * 单位如果模式是智能的或严格的,则所有四个字段被验证到它们的外部范围。
+     * <li> {@ code EPOCH_DAY}  - 如果存在,则将其转换为日期,然后根据日期交叉检查所有其他日期字段。
+     * 然后,日期以等同于在所请求的年份和月份的第一天创建日期的方式组合,然后将以星期和天为单位的量相加达到其值如果模式为strict,则日期会另外验证,以检查日期和周的调整是否未更改月份<li> {@ code YEAR}
+     * ,{@code MONTH_OF_YEAR},{@code ALIGNED_WEEK_OF_MONTH}和{@代码DAY_OF_WEEK}  - 如果所有四个都存在,则将它们组合以形成日期该方法与上述{@code ALIGNED_DAY_OF_WEEK_IN_MONTH}
+     * 中的年,月和周相同。
+     * <li> {@ code EPOCH_DAY}  - 如果存在,则将其转换为日期,然后根据日期交叉检查所有其他日期字段。
+     * 一旦处理了年,月和周,星期几被调整为下一个或相同的匹配星期< li> {@ code YEAR},{@code ALIGNED_WEEK_OF_YEAR}和{@code ALIGNED_DAY_OF_WEEK_IN_YEAR}
+     *   - 如果所有三个都存在,则将它们组合形成日期在所有三种模式下,{@code YEAR}是宽松的,则日期以等同于在所请求的年份的第一天创建日期的方式组合,然后以星期,然后以天为单位来添加差异。
+     * <li> {@ code EPOCH_DAY}  - 如果存在,则将其转换为日期,然后根据日期交叉检查所有其他日期字段。
+     * 如果模式是智能的或严格的,则所有三个字段被验证到它们的外部范围日期然后以等同于在所请求年份的第一天创建日期的方式组合,然后添加以周和天为单位的量以达到其值。
+     * 如果模式是严格的,则日期被另外验证以检查日期和周调整没有改变年份<li> {@ code YEAR},{@code ALIGNED_WEEK_OF_YEAR}和{@code DAY_OF_WEEK}  
+     * - 如果所有三个都存在,那么它们被组合以形成日期该方法与所描述的相同在{@code ALIGNED_DAY_OF_WEEK_IN_YEAR}中的多年和几周内,一旦处理了几年和几周,就会将星期几调整为下一
+     * 个或相同的匹配星期。
+     * 如果模式是智能的或严格的,则所有三个字段被验证到它们的外部范围日期然后以等同于在所请求年份的第一天创建日期的方式组合,然后添加以周和天为单位的量以达到其值。
+     * </ul>
+     * <p>
+     * 默认实现适用于大多数日历系统如果在没有{@link javatimetemporalChronoField#ERA}的情况下找到{@link javatimetemporalChronoField#YEAR_OF_ERA}
+     * ,则使用{@link #eras()}中的最后一个时代。
+     * 实现假设为7天星期,第一个日期具有值1,第一个日期具有值1,并且月和年的第一个总是存在。
+     * 
+     * 
      * @param fieldValues  the map of fields to values, which can be updated, not null
      * @param resolverStyle  the requested type of resolve, not null
      * @return the resolved date, null if insufficient information to create a date
@@ -666,6 +791,8 @@ public abstract class AbstractChronology implements Chronology {
      * If the field is already present and it has a different value to that specified, then
      * an exception is thrown.
      *
+     * <p>
+     * 
      * @param field  the field to add, not null
      * @param value  the value to add, not null
      * @throws java.time.DateTimeException if the field is already present with a different value
@@ -690,6 +817,12 @@ public abstract class AbstractChronology implements Chronology {
      * This implementation compares the chronology ID.
      * Subclasses must compare any additional state that they store.
      *
+     * <p>
+     *  向映射中添加字段值对,检查冲突
+     * <p>
+     *  如果字段不存在,则将字段值对添加到映射中如果字段已存在,并且它具有与指定的值相同的值,则不会执行操作,如果字段已存在且具有不同的值到指定的,然后抛出异常
+     * 
+     * 
      * @param other  the other chronology to compare to, not null
      * @return the comparator value, negative if less, positive if greater
      */
@@ -707,6 +840,14 @@ public abstract class AbstractChronology implements Chronology {
      * This implementation checks the type and calls
      * {@link #compareTo(java.time.chrono.Chronology)}.
      *
+     * <p>
+     * 将这个年表与另一个年表比较
+     * <p>
+     *  比较顺序首先由年表ID字符串,然后由任何特定于子类的附加信息它是"一致等于",由{@link Comparable}定义,
+     * 
+     *  @implSpec此实现比较年表ID子类必须比较它们存储的任何其他状态
+     * 
+     * 
      * @param obj  the object to check, null returns false
      * @return true if this is equal to the other chronology
      */
@@ -730,6 +871,14 @@ public abstract class AbstractChronology implements Chronology {
      * This implementation is based on the chronology ID and class.
      * Subclasses should add any additional state that they store.
      *
+     * <p>
+     *  检查这个年表是否等于另一个年表
+     * <p>
+     *  比较基于对象的整个状态
+     * 
+     *  @implSpec这个实现检查类型和调用{@link #compareTo(javatimechronoChronology)}
+     * 
+     * 
      * @return a suitable hash code
      */
     @Override
@@ -741,6 +890,14 @@ public abstract class AbstractChronology implements Chronology {
     /**
      * Outputs this chronology as a {@code String}, using the chronology ID.
      *
+     * <p>
+     *  此年表的哈希代码
+     * <p>
+     *  哈希码应该基于对象的整个状态
+     * 
+     * @implSpec这个实现是基于年表ID和类子类应该添加他们存储的任何附加状态
+     * 
+     * 
      * @return a string representation of this chronology, not null
      */
     @Override
@@ -757,6 +914,10 @@ public abstract class AbstractChronology implements Chronology {
      *  out.writeUTF(getId());
      * </pre>
      *
+     * <p>
+     *  使用年表ID将此年表输出为{@code String}
+     * 
+     * 
      * @return the instance of {@code Ser}, not null
      */
     Object writeReplace() {
@@ -766,6 +927,12 @@ public abstract class AbstractChronology implements Chronology {
     /**
      * Defend against malicious streams.
      *
+     * <p>
+     *  使用<a href=\"///serialized-formhtml#javatimechronoSer\">专用序列化表单</a>撰写年表
+     * <pre>
+     *  outwriteByte(1); //将此标识为年表outwriteUTF(getId());
+     * </pre>
+     * 
      * @param s the stream to read
      * @throws java.io.InvalidObjectException always
      */

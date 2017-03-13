@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -89,6 +90,31 @@ import java.security.cert.*;
  * {@code type} (class name) for the underlying permission
  * that has not been resolved.
  *
+ * <p>
+ *  UnresolvedPermission类用于保存在初始化策略时"未解析"的权限未解析的权限是在策略初始化时实际的Permission类不存在的权限(见下文)
+ * 
+ *  <p> Java运行时策略(指定哪些权限可用于来自不同主体的代码)由策略对象表示每当策略被初始化或刷新时,将为策略允许的所有权限创建适当类的权限对象
+ * 
+ * <p>策略配置引用的许多权限类类型都是本地存在的(即,可以在CLASSPATH上找到的权限类类型)。
+ * 在策略初始化期间可以实例化这些权限的对象例如,可以实例化javaioFilePermission,因为FilePermission类位于CLASSPATH上。
+ * 
+ *  <p>在策略初始化期间可能还不存在其他权限类。例如,引用的权限类可能在稍后将被加载的JAR文件中。对于每个这样的类,UnresolvedPermission被实例化。
+ * 因此,UnresolvedPermission本质上是一个"占位符"包含有关权限的信息。
+ * 
+ * <p>稍后,当代码对先前未解析的类型的权限调用AccessControllercheckPermission,但之前已加载其类时,该类型的先前未解析的权限为"已解决"。
+ * 也就是说,对于每个此类UnresolvedPermission,根据UnresolvedPermission中的信息实例化适当的类类型。
+ * 
+ * <p>要实例化新类,UnresolvedPermission假定该类提供了一个零,一个和/或两个参数的构造函数。
+ * 零参数构造函数将用于实例化没有名称和无动作的权限一个一参数构造函数假设以{@code String}名称作为输入,并且假设一个双参数构造函数接受一个{@code String}名称和{@code String}
+ * 动作作为输入UnresolvedPermission可以调用一个带有{@code null }名称和/或操作如果适当的权限构造函数不可用,则忽略UnresolvedPermission,并且不会将相关权
+ * 限授予执行代码。
+ * <p>要实例化新类,UnresolvedPermission假定该类提供了一个零,一个和/或两个参数的构造函数。
+ * 
+ *  <p>新创建的权限对象将替换已删除的UnresolvedPermission
+ * 
+ * <p>请注意,{@code UnresolvedPermission}的{@code getName}方法会返回尚未解决的基础权限的{@code type}(类名称)
+ * 
+ * 
  * @see java.security.Permission
  * @see java.security.Permissions
  * @see java.security.PermissionCollection
@@ -112,6 +138,10 @@ implements java.io.Serializable
      * The class name of the Permission class that will be
      * created when this unresolved permission is resolved.
      *
+     * <p>
+     *  解析此未解析权限时将创建的Permission类的类名
+     * 
+     * 
      * @serial
      */
     private String type;
@@ -119,6 +149,10 @@ implements java.io.Serializable
     /**
      * The permission name.
      *
+     * <p>
+     *  权限名称
+     * 
+     * 
      * @serial
      */
     private String name;
@@ -126,6 +160,10 @@ implements java.io.Serializable
     /**
      * The actions of the permission.
      *
+     * <p>
+     *  权限的操作
+     * 
+     * 
      * @serial
      */
     private String actions;
@@ -137,6 +175,10 @@ implements java.io.Serializable
      * information needed later to actually create a Permission of the
      * specified class, when the permission is resolved.
      *
+     * <p>
+     *  创建一个新的UnresolvedPermission包含稍后需要的权限信息,以实际创建指定类的Permission,当权限被解决
+     * 
+     * 
      * @param type the class name of the Permission class that will be
      * created when this unresolved permission is resolved.
      * @param name the name of the permission.
@@ -223,6 +265,9 @@ implements java.io.Serializable
     /**
      * try and resolve this permission using the class loader of the permission
      * that was passed in.
+     * <p>
+     *  请尝试使用传入的权限的类装入器解析此权限
+     * 
      */
     Permission resolve(Permission p, java.security.cert.Certificate certs[]) {
         if (this.certs != null) {
@@ -300,6 +345,10 @@ implements java.io.Serializable
      * That is, an UnresolvedPermission is never considered to
      * imply another permission.
      *
+     * <p>
+     *  此方法对未解析的权限始终返回false。也就是说,UnresolvedPermission不会被认为暗示另一个权限
+     * 
+     * 
      * @param p the permission to check against.
      *
      * @return false.
@@ -318,6 +367,12 @@ implements java.io.Serializable
      * actual signer certificates.  Supporting certificate chains
      * are not taken into consideration by this method.
      *
+     * <p>
+     * 检查两个UnresolvedPermission对象是否相等检查<i> obj </i>是否为UnresolvedPermission,并且具有与此对象相同的类型(类)名称,权限名称,操作和证书
+     * 
+     *  <p>要确定证书等同性,此方法仅比较实际签署者证书此方法不考虑支持证书链
+     * 
+     * 
      * @param obj the object we are testing for equality with this object.
      *
      * @return true if obj is an UnresolvedPermission, and has the same
@@ -395,6 +450,10 @@ implements java.io.Serializable
     /**
      * Returns the hash code value for this object.
      *
+     * <p>
+     *  返回此对象的哈希码值
+     * 
+     * 
      * @return a hash code value for this object.
      */
 
@@ -415,6 +474,11 @@ implements java.io.Serializable
      * is resolved may be non-null, but an UnresolvedPermission
      * itself is never considered to have any actions.
      *
+     * <p>
+     *  返回操作的规范字符串表示形式,目前为空字符串"",因为没有对UnresolvedPermission的操作。
+     * 也就是说,当此UnresolvedPermission被解析时创建的权限的操作可能是非空的,但是UnresolvedPermission本身永远不会被认为有任何动作。
+     * 
+     * 
      * @return the empty string "".
      */
     public String getActions()
@@ -426,6 +490,10 @@ implements java.io.Serializable
      * Get the type (class name) of the underlying permission that
      * has not been resolved.
      *
+     * <p>
+     * 获取尚未解析的基础权限的类型(类名称)
+     * 
+     * 
      * @return the type (class name) of the underlying permission that
      *  has not been resolved
      *
@@ -439,6 +507,10 @@ implements java.io.Serializable
      * Get the target name of the underlying permission that
      * has not been resolved.
      *
+     * <p>
+     *  获取尚未解决的基础权限的目标名称
+     * 
+     * 
      * @return the target name of the underlying permission that
      *          has not been resolved, or {@code null},
      *          if there is no target name
@@ -453,6 +525,10 @@ implements java.io.Serializable
      * Get the actions for the underlying permission that
      * has not been resolved.
      *
+     * <p>
+     *  获取尚未解决的基础权限的操作
+     * 
+     * 
      * @return the actions for the underlying permission that
      *          has not been resolved, or {@code null}
      *          if there are no actions
@@ -467,6 +543,10 @@ implements java.io.Serializable
      * Get the signer certificates (without any supporting chain)
      * for the underlying permission that has not been resolved.
      *
+     * <p>
+     *  获取尚未解决的基础权限的签署者证书(没有任何支持链)
+     * 
+     * 
      * @return the signer certificates for the underlying permission that
      * has not been resolved, or null, if there are no signer certificates.
      * Returns a new array each time this method is called.
@@ -482,6 +562,10 @@ implements java.io.Serializable
      * is to specify the class name, the permission name, and the actions, in
      * the following format: '(unresolved "ClassName" "name" "actions")'.
      *
+     * <p>
+     *  返回描述此UnresolvedPermission的字符串约定是以以下格式指定类名,权限名称和操作：'(未解析的"ClassName""name""actions")'
+     * 
+     * 
      * @return information about this UnresolvedPermission.
      */
     public String toString() {
@@ -492,6 +576,10 @@ implements java.io.Serializable
      * Returns a new PermissionCollection object for storing
      * UnresolvedPermission  objects.
      * <p>
+     * <p>
+     *  返回用于存储UnresolvedPermission对象的新PermissionCollection对象
+     * <p>
+     * 
      * @return a new PermissionCollection object suitable for
      * storing UnresolvedPermissions.
      */
@@ -503,6 +591,10 @@ implements java.io.Serializable
     /**
      * Writes this object out to a stream (i.e., serializes it).
      *
+     * <p>
+     *  将此对象写出到流(即,序列化它)
+     * 
+     * 
      * @serialData An initial {@code String} denoting the
      * {@code type} is followed by a {@code String} denoting the
      * {@code name} is followed by a {@code String} denoting the
@@ -543,6 +635,8 @@ implements java.io.Serializable
 
     /**
      * Restores this object from a stream (i.e., deserializes it).
+     * <p>
+     *  从流中恢复此对象(即,对其进行反序列化)
      */
     private void readObject(java.io.ObjectInputStream ois)
         throws IOException, ClassNotFoundException

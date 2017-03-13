@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.DynamicAny;
 
 
@@ -75,6 +76,27 @@ package org.omg.DynamicAny;
     * org.omg.CORBA.Object interface. However, any attempt to invoke operations exported through the Object
     * interface may raise the standard NO_IMPLEMENT exception.
     * An attempt to use a DynAny object with the DII may raise the NO_IMPLEMENT exception.
+    * <p>
+    * 任何值都可以动态解释(遍历)并通过DynAny对象构造DynAny对象与对应于插入到任何<P>中的值的副本的数据值相关联DynAny对象可以被视为组件的有序集合DynAnys对于表示基本类型(例如lon
+    * g)或无组件类型(如空异常)的DynAnys,组件的有序集合为空每个DynAny对象将当前位置的概念保留到其组件DynAnys的集合中当前位置由从0到n-1的索引值来标识,其中n是分量的数目。
+    * 特殊索引值-1指示指向无处的当前位置对于不能具有当前位置的值(例如空异常),索引值固定为-1如果使用具有组件的值初始化DynAny,则将索引初始化为0在创建未初始化的DynAny(即是一个没有值的Dyn
+    * Any,但允许组件的TypeCode),当前位置取决于由DynAny表示的值的类型(当前位置设置为0或-1,这取决于新的DynAny是否获取默认值对于其组件)<P>迭代操作rewind,seek和nex
+    * t可用于更改当前位置,current_component操作返回当前位置的组件。
+    * component_count操作返回DynAny的组件数量总的来说,这些操作允许对DynAny的组件进行迭代,例如,(递归地)检查其内容。构造的DynAny对象是与构造类型相关联的DynAny对象。
+    * 有一个不同的接口,继承自DynAny接口,与IDL中的每种构造类型相关联(固定,枚举,结构,序列,联合,数组,异常和值类型)构造的DynAny对象导出操作,可以创建新的DynAny对象,与构造的数据值的
+    * 组件相关联作为示例,DynStruct与结构值相关联这意味着DynStruct可以被视为拥有组件的有序集合,每个结构成员DynStruct对象导出的操作允许创建新的DynAny对象,每个对象都与stru
+    * ct <P>的成员相关联。
+    * 如果DynAny对象是从另一个(构造的)DynAny对象获取的,例如表示结构成员的DynAny从DynStruct创建的成员DynAny在逻辑上包含在DynStruct中调用插入或获取操作保持当前位置不
+    * 变毁坏顶层DynAny对象(一个未获得作为另一个DynAny的组件)也会销毁任何从其获取的组件DynAny对象销毁非顶级DynAny对象不做任何事情对销毁的顶级DynAny或其任何后代调用操作会引发OB
+    * JECT_NOT_EXIST如果程序员想要销毁一个DynAny对象,但仍然想要操作与其相关联的数据值的某个组件,那么他或她应该首先为该组件创建一个DynAny,然后创建一个创建的DynAny对象的副本< P>
+    *  DynAny对象的行为已经定义,以便在分配的内存空间和访问速度方面实现高效实现DynAny对象旨在用于遍历从任何提取的值或在运行时构造any的值它们用于其他目的不推荐<P>插入和获取操作是处理基本Dy
+    * nAny对象所必需的,但也有助于处理构造的DynAny对象将基本数据类型值插入到构造的DynAny对象中意味着初始化与DynAny对象相关联的构造数据值的当前组件例如,在DynStruct上调用inse
+    * rt_boolean意味着在关联的struct数据值的当前位置插入布尔数据值如果TypeCode等于DynAny中包含的TypeCode,或者如果DynAny具有组件,则等价于当前位置的DynAny的T
+    * ypeCode,那么类型对于插入或提取值是一致的<D> DynAny和DynAnyFactory对象意在对其在其中被创建和使用的过程的本地这意味着对DynAny和DynAnyFactory对象的引用不能
+    * 被导出到其他进程或用ORB外部化object_to_string()如果任何尝试这样做,违规操作将引发MARSHAL系统异常由于其接口在IDL中指定,DynAny对象导出在标准orgomgCORBAOb
+    * ject接口中定义的操作。
+    * 但是,任何尝试调用通过对象导出的操作接口可能引发标准NO_IMPLEMENT异常尝试对DII使用DynAny对象可能会引发NO_IMPLEMENT异常。
+    * 
     */
 public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements org.omg.DynamicAny.DynAny
 {
@@ -89,6 +111,11 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
         * Note that the TypeCode associated with a DynAny object is initialized at the time the
         * DynAny is created and cannot be changed during lifetime of the DynAny object.
         *
+        * <p>
+        * 返回与此DynAny对象关联的TypeCode DynAny对象通过分配给它的TypeCode值创建此TypeCode值确定通过DynAny对象处理的值的类型请注意,与DynAny对象关联的TypeCo
+        * de在DynAny在DynAny对象的生命周期中不能被更改。
+        * 
+        * 
         * @return The TypeCode associated with this DynAny object
         */
   public org.omg.CORBA.TypeCode type ()
@@ -110,6 +137,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
         * The current position of the target DynAny is set to zero for values that have components
         * and to -1 for values that do not have components.
         *
+        * <p>
+        *  使用与另一个DynAny对象相关联的值初始化与DynAny对象关联的值对于具有组件的值,将目标DynAny的当前位置设置为零,对于没有组件的值将值设置为-1
+        * 
+        * 
         * @param dyn_any
         * @exception TypeMismatch if the type of the passed DynAny is not equivalent to the type of target DynAny
         */
@@ -131,6 +162,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
         * The current position of the target DynAny is set to zero for values that have components
         * and to -1 for values that do not have components.
         *
+        * <p>
+        * 使用包含在any中的值来初始化与DynAny对象相关联的值。目标的当前位置DynAny对于具有组件的值设置为零,对于没有组件的值设置为-1
+        * 
+        * 
         * @exception TypeMismatch if the type of the passed Any is not equivalent to the type of target DynAny
         * @exception InvalidValue if the passed Any does not contain a legal value (such as a null string)
         */
@@ -152,6 +187,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
         * A copy of the TypeCode associated with the DynAny object is assigned to the resulting any.
         * The value associated with the DynAny object is copied into the any.
         *
+        * <p>
+        *  从DynAny对象创建任何值与DynAny对象关联的TypeCode的副本被分配给结果any与DynAny对象关联的值被复制到任何
+        * 
+        * 
         * @return a new Any object with the same value and TypeCode
         */
   public org.omg.CORBA.Any to_any ()
@@ -173,6 +212,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
         * have equal values.
         * The current position of the two DynAnys being compared has no effect on the result of equal.
         *
+        * <p>
+        *  比较两个DynAny值的相等性两个DynAny值是相等的,如果它们的TypeCodes是等效的,并且递归地,所有组件DynAnys具有相等的值。比较的两个DynAnys的当前位置对等于
+        * 
+        * 
         * @return true of the DynAnys are equal, false otherwise
         */
   public boolean equal (org.omg.DynamicAny.DynAny dyn_any)
@@ -201,6 +244,15 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
         * It is possible to manipulate a component of a DynAny beyond the life time of the DynAny
         * from which the component was obtained by making a copy of the component with the copy operation
         * before destroying the DynAny from which the component was obtained.
+        * <p>
+        * 销毁DynAny对象此操作释放用于表示与DynAny对象关联的数据值的任何资源。
+        * 必须在从ORB接口上的一个创建操作或通过DynAnycopy()返回的引用获取的引用上调用此资源,以避免资源泄露在组件DynAny对象(例如,由current_component操作返回的对象)上调用d
+        * estroy不执行任何操作DynAny对象的破坏意味着破坏从其获取的所有DynAny对象。
+        * 销毁DynAny对象此操作释放用于表示与DynAny对象关联的数据值的任何资源。
+        * 也就是说,对被破坏的DynAny的组件的引用变为无效对此类引用的调用引发OBJECT_NOT_EXIST通过在破坏从中获得组件的DynAny之前,通过使用复制操作创建组件的副本,可以操纵DynAny的组
+        * 件超过组件获得的DynAny的生命周期。
+        * 销毁DynAny对象此操作释放用于表示与DynAny对象关联的数据值的任何资源。
+        * 
         */
   public void destroy ()
   {
@@ -220,6 +272,11 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
         * The operation is polymorphic, that is, invoking it on one of the types derived from DynAny,
         * such as DynStruct, creates the derived type but returns its reference as the DynAny base type.
         *
+        * <p>
+        * 创建一个新的DynAny对象,其值是对其进行调用的DynAny的深拷贝操作该操作是多态的,即在从DynAny派生的某个类型(如DynStruct)上调用它,创建派生类型,但返回其引用作为DynAny基类
+        * 型。
+        * 
+        * 
         * @return a deep copy of the DynAny object
         */
   public org.omg.DynamicAny.DynAny copy ()
@@ -238,6 +295,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
   /**
         * Inserts a boolean value into the DynAny.
         *
+        * <p>
+        *  在DynAny中插入一个布尔值
+        * 
+        * 
         * @exception InvalidValue if this DynAny has components but has a current position of -1
         * @exception TypeMismatch if called on a DynAny whose current component itself has components
         */
@@ -257,6 +318,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
   /**
         * Inserts a byte value into the DynAny. The IDL octet data type is mapped to the Java byte data type.
         *
+        * <p>
+        *  在DynAny中插入字节值IDL八位字节数据类型映射到Java字节数据类型
+        * 
+        * 
         * @exception InvalidValue if this DynAny has components but has a current position of -1
         * @exception TypeMismatch if called on a DynAny whose current component itself has components
         */
@@ -276,6 +341,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
   /**
         * Inserts a char value into the DynAny.
         *
+        * <p>
+        *  在DynAny中插入一个char值
+        * 
+        * 
         * @exception InvalidValue if this DynAny has components but has a current position of -1
         * @exception TypeMismatch if called on a DynAny whose current component itself has components
         */
@@ -295,6 +364,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
   /**
         * Inserts a short value into the DynAny.
         *
+        * <p>
+        *  在DynAny中插入一个短的值
+        * 
+        * 
         * @exception InvalidValue if this DynAny has components but has a current position of -1
         * @exception TypeMismatch if called on a DynAny whose current component itself has components
         */
@@ -314,6 +387,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
   /**
         * Inserts a short value into the DynAny. The IDL ushort data type is mapped to the Java short data type.
         *
+        * <p>
+        *  在DynAny中插入一个短值IDL ushort数据类型映射到Java short数据类型
+        * 
+        * 
         * @exception InvalidValue if this DynAny has components but has a current position of -1
         * @exception TypeMismatch if called on a DynAny whose current component itself has components
         */
@@ -333,6 +410,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
   /**
         * Inserts an integer value into the DynAny. The IDL long data type is mapped to the Java int data type.
         *
+        * <p>
+        *  在DynAny中插入整数值IDL long数据类型映射到Java int数据类型
+        * 
+        * 
         * @exception InvalidValue if this DynAny has components but has a current position of -1
         * @exception TypeMismatch if called on a DynAny whose current component itself has components
         */
@@ -352,6 +433,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
   /**
         * Inserts an integer value into the DynAny. The IDL ulong data type is mapped to the Java int data type.
         *
+        * <p>
+        * 在DynAny中插入一个整数值IDL ulong数据类型映射到Java int数据类型
+        * 
+        * 
         * @exception InvalidValue if this DynAny has components but has a current position of -1
         * @exception TypeMismatch if called on a DynAny whose current component itself has components
         */
@@ -371,6 +456,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
   /**
         * Inserts a float value into the DynAny.
         *
+        * <p>
+        *  在DynAny中插入一个浮点值
+        * 
+        * 
         * @exception InvalidValue if this DynAny has components but has a current position of -1
         * @exception TypeMismatch if called on a DynAny whose current component itself has components
         */
@@ -390,6 +479,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
   /**
         * Inserts a double value into the DynAny.
         *
+        * <p>
+        *  在DynAny中插入一个double值
+        * 
+        * 
         * @exception InvalidValue if this DynAny has components but has a current position of -1
         * @exception TypeMismatch if called on a DynAny whose current component itself has components
         */
@@ -410,6 +503,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
         * Inserts a string value into the DynAny.
         * Both bounded and unbounded strings are inserted using this method.
         *
+        * <p>
+        *  将字符串值插入DynAny使用此方法插入有界和无限字符串
+        * 
+        * 
         * @exception InvalidValue if this DynAny has components but has a current position of -1
         * @exception InvalidValue if the string inserted is longer than the bound of a bounded string
         * @exception TypeMismatch if called on a DynAny whose current component itself has components
@@ -430,6 +527,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
   /**
         * Inserts a reference to a CORBA object into the DynAny.
         *
+        * <p>
+        *  将对CORBA对象的引用插入到DynAny中
+        * 
+        * 
         * @exception InvalidValue if this DynAny has components but has a current position of -1
         * @exception TypeMismatch if called on a DynAny whose current component itself has components
         */
@@ -449,6 +550,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
   /**
         * Inserts a TypeCode object into the DynAny.
         *
+        * <p>
+        *  在DynAny中插入一个TypeCode对象
+        * 
+        * 
         * @exception InvalidValue if this DynAny has components but has a current position of -1
         * @exception TypeMismatch if called on a DynAny whose current component itself has components
         */
@@ -468,6 +573,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
   /**
         * Inserts a long value into the DynAny. The IDL long long data type is mapped to the Java long data type.
         *
+        * <p>
+        *  在DynAny中插入长整型值将IDL长整型数据类型映射到Java长整型数据类型
+        * 
+        * 
         * @exception InvalidValue if this DynAny has components but has a current position of -1
         * @exception TypeMismatch if called on a DynAny whose current component itself has components
         */
@@ -488,6 +597,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
         * Inserts a long value into the DynAny.
         * The IDL unsigned long long data type is mapped to the Java long data type.
         *
+        * <p>
+        *  在DynAny中插入长整型值IDL unsigned long long数据类型映射到Java长整型数据类型
+        * 
+        * 
         * @exception InvalidValue if this DynAny has components but has a current position of -1
         * @exception TypeMismatch if called on a DynAny whose current component itself has components
         */
@@ -507,6 +620,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
   /**
         * Inserts a char value into the DynAny. The IDL wchar data type is mapped to the Java char data type.
         *
+        * <p>
+        *  在DynAny中插入字符值将IDL wchar数据类型映射到Java字符数据类型
+        * 
+        * 
         * @exception InvalidValue if this DynAny has components but has a current position of -1
         * @exception TypeMismatch if called on a DynAny whose current component itself has components
         */
@@ -527,6 +644,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
         * Inserts a string value into the DynAny.
         * Both bounded and unbounded strings are inserted using this method.
         *
+        * <p>
+        * 将字符串值插入DynAny使用此方法插入有界和无限字符串
+        * 
+        * 
         * @exception InvalidValue if this DynAny has components but has a current position of -1
         * @exception InvalidValue if the string inserted is longer than the bound of a bounded string
         */
@@ -546,6 +667,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
   /**
         * Inserts an Any value into the Any represented by this DynAny.
         *
+        * <p>
+        *  在此DynAny表示的Any中插入Any值
+        * 
+        * 
         * @exception InvalidValue if this DynAny has components but has a current position of -1
         * @exception TypeMismatch if called on a DynAny whose current component itself has components
         */
@@ -565,6 +690,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
   /**
         * Inserts the Any value contained in the parameter DynAny into the Any represented by this DynAny.
         *
+        * <p>
+        *  将包含在参数DynAny中的Any值插入到此DynAny表示的Any中
+        * 
+        * 
         * @exception InvalidValue if this DynAny has components but has a current position of -1
         * @exception TypeMismatch if called on a DynAny whose current component itself has components
         */
@@ -585,6 +714,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
         * Inserts a reference to a Serializable object into this DynAny.
         * The IDL ValueBase type is mapped to the Java Serializable type.
         *
+        * <p>
+        *  在此DynAny中插入对可序列化对象的引用IDL ValueBase类型映射到Java可序列化类型
+        * 
+        * 
         * @exception InvalidValue if this DynAny has components but has a current position of -1
         * @exception TypeMismatch if called on a DynAny whose current component itself has components
         */
@@ -604,6 +737,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
   /**
         * Extracts the boolean value from this DynAny.
         *
+        * <p>
+        *  从此DynAny提取布尔值
+        * 
+        * 
         * @exception TypeMismatch if the accessed component in the DynAny is of a type
         * that is not equivalent to the requested type.
         * @exception TypeMismatch if called on a DynAny whose current component itself has components
@@ -625,6 +762,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
   /**
         * Extracts the byte value from this DynAny. The IDL octet data type is mapped to the Java byte data type.
         *
+        * <p>
+        *  从此DynAny提取字节值IDL八位字节数据类型映射到Java字节数据类型
+        * 
+        * 
         * @exception TypeMismatch if the accessed component in the DynAny is of a type
         * that is not equivalent to the requested type.
         * @exception TypeMismatch if called on a DynAny whose current component itself has components
@@ -646,6 +787,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
   /**
         * Extracts the char value from this DynAny.
         *
+        * <p>
+        *  从此DynAny提取char值
+        * 
+        * 
         * @exception TypeMismatch if the accessed component in the DynAny is of a type
         * that is not equivalent to the requested type.
         * @exception TypeMismatch if called on a DynAny whose current component itself has components
@@ -667,6 +812,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
   /**
         * Extracts the short value from this DynAny.
         *
+        * <p>
+        *  从此DynAny提取短值
+        * 
+        * 
         * @exception TypeMismatch if the accessed component in the DynAny is of a type
         * that is not equivalent to the requested type.
         * @exception TypeMismatch if called on a DynAny whose current component itself has components
@@ -688,6 +837,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
   /**
         * Extracts the short value from this DynAny. The IDL ushort data type is mapped to the Java short data type.
         *
+        * <p>
+        *  从此DynAny提取短值IDL ushort数据类型映射到Java short数据类型
+        * 
+        * 
         * @exception TypeMismatch if the accessed component in the DynAny is of a type
         * that is not equivalent to the requested type.
         * @exception TypeMismatch if called on a DynAny whose current component itself has components
@@ -709,6 +862,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
   /**
         * Extracts the integer value from this DynAny. The IDL long data type is mapped to the Java int data type.
         *
+        * <p>
+        * 从此DynAny提取整数值IDL long数据类型映射到Java int数据类型
+        * 
+        * 
         * @exception TypeMismatch if the accessed component in the DynAny is of a type
         * that is not equivalent to the requested type.
         * @exception TypeMismatch if called on a DynAny whose current component itself has components
@@ -730,6 +887,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
   /**
         * Extracts the integer value from this DynAny. The IDL ulong data type is mapped to the Java int data type.
         *
+        * <p>
+        *  从此DynAny抽取整数值IDL ulong数据类型映射到Java int数据类型
+        * 
+        * 
         * @exception TypeMismatch if the accessed component in the DynAny is of a type
         * that is not equivalent to the requested type.
         * @exception TypeMismatch if called on a DynAny whose current component itself has components
@@ -751,6 +912,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
   /**
         * Extracts the float value from this DynAny.
         *
+        * <p>
+        *  从此DynAny提取浮点值
+        * 
+        * 
         * @exception TypeMismatch if the accessed component in the DynAny is of a type
         * that is not equivalent to the requested type.
         * @exception TypeMismatch if called on a DynAny whose current component itself has components
@@ -772,6 +937,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
   /**
         * Extracts the double value from this DynAny.
         *
+        * <p>
+        *  从此DynAny提取double值
+        * 
+        * 
         * @exception TypeMismatch if the accessed component in the DynAny is of a type
         * that is not equivalent to the requested type.
         * @exception TypeMismatch if called on a DynAny whose current component itself has components
@@ -794,6 +963,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
         * Extracts the string value from this DynAny.
         * Both bounded and unbounded strings are extracted using this method.
         *
+        * <p>
+        *  从此DynAny提取字符串值使用此方法提取有界和无界字符串
+        * 
+        * 
         * @exception TypeMismatch if the accessed component in the DynAny is of a type
         * that is not equivalent to the requested type.
         * @exception TypeMismatch if called on a DynAny whose current component itself has components
@@ -815,6 +988,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
   /**
         * Extracts the reference to a CORBA Object from this DynAny.
         *
+        * <p>
+        *  从此DynAny中提取对CORBA对象的引用
+        * 
+        * 
         * @exception TypeMismatch if the accessed component in the DynAny is of a type
         * that is not equivalent to the requested type.
         * @exception TypeMismatch if called on a DynAny whose current component itself has components
@@ -836,6 +1013,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
   /**
         * Extracts the TypeCode object from this DynAny.
         *
+        * <p>
+        *  从此DynAny提取TypeCode对象
+        * 
+        * 
         * @exception TypeMismatch if the accessed component in the DynAny is of a type
         * that is not equivalent to the requested type.
         * @exception TypeMismatch if called on a DynAny whose current component itself has components
@@ -857,6 +1038,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
   /**
         * Extracts the long value from this DynAny. The IDL long long data type is mapped to the Java long data type.
         *
+        * <p>
+        *  从此DynAny中提取长值IDL long long数据类型映射到Java长数据类型
+        * 
+        * 
         * @exception TypeMismatch if the accessed component in the DynAny is of a type
         * that is not equivalent to the requested type.
         * @exception TypeMismatch if called on a DynAny whose current component itself has components
@@ -879,6 +1064,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
         * Extracts the long value from this DynAny.
         * The IDL unsigned long long data type is mapped to the Java long data type.
         *
+        * <p>
+        *  从此DynAny中提取长值IDL unsigned long long数据类型映射到Java长数据类型
+        * 
+        * 
         * @exception TypeMismatch if the accessed component in the DynAny is of a type
         * that is not equivalent to the requested type.
         * @exception TypeMismatch if called on a DynAny whose current component itself has components
@@ -900,6 +1089,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
   /**
         * Extracts the long value from this DynAny. The IDL wchar data type is mapped to the Java char data type.
         *
+        * <p>
+        * 从此DynAny抽取长值IDL wchar数据类型映射到Java char数据类型
+        * 
+        * 
         * @exception TypeMismatch if the accessed component in the DynAny is of a type
         * that is not equivalent to the requested type.
         * @exception TypeMismatch if called on a DynAny whose current component itself has components
@@ -922,6 +1115,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
         * Extracts the string value from this DynAny.
         * Both bounded and unbounded strings are extracted using this method.
         *
+        * <p>
+        *  从此DynAny提取字符串值使用此方法提取有界和无界字符串
+        * 
+        * 
         * @exception TypeMismatch if the accessed component in the DynAny is of a type
         * that is not equivalent to the requested type.
         * @exception TypeMismatch if called on a DynAny whose current component itself has components
@@ -942,6 +1139,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
   /**
         * Extracts an Any value contained in the Any represented by this DynAny.
         *
+        * <p>
+        *  提取由此DynAny表示的Any中包含的任何值
+        * 
+        * 
         * @exception TypeMismatch if the accessed component in the DynAny is of a type
         * that is not equivalent to the requested type.
         * @exception TypeMismatch if called on a DynAny whose current component itself has components
@@ -964,6 +1165,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
         * Extracts the Any value contained in the Any represented by this DynAny and returns it wrapped
         * into a new DynAny.
         *
+        * <p>
+        *  提取由此DynAny表示的Any中包含的Any值,并将其包装到新的DynAny中
+        * 
+        * 
         * @exception TypeMismatch if the accessed component in the DynAny is of a type
         * that is not equivalent to the requested type.
         * @exception TypeMismatch if called on a DynAny whose current component itself has components
@@ -986,6 +1191,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
         * Extracts a Serializable object from this DynAny.
         * The IDL ValueBase type is mapped to the Java Serializable type.
         *
+        * <p>
+        *  从此DynAny提取可序列化对象IDL ValueBase类型映射到Java可序列化类型
+        * 
+        * 
         * @exception TypeMismatch if the accessed component in the DynAny is of a type
         * that is not equivalent to the requested type.
         * @exception TypeMismatch if called on a DynAny whose current component itself has components
@@ -1012,6 +1221,10 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
         * Calling seek with a negative index is legal. It sets the current position to -1 to indicate
         * no component and returns false. Passing a non-negative index value for a DynAny that does not
         * have a component at the corresponding position sets the current position to -1 and returns false.
+        * <p>
+        * 将当前位置设置为索引当前位置索引为0到n-1,即索引零对应于第一个组件如果结果当前位置指示DynAny的组件,则操作返回true,如果索引指示位置不对应于组件调用具有负索引的查找是合法的将当前位置设置为
+        * -1以指示没有组件并返回false为在相应位置集合处没有组件的DynAny传递非负索引值将当前位置设置为-1并返回false。
+        * 
         */
   public boolean seek (int index)
   {
@@ -1028,6 +1241,9 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
 
   /**
         * Is equivalent to seek(0).
+        * <p>
+        *  相当于seek(0)
+        * 
         */
   public void rewind ()
   {
@@ -1047,6 +1263,9 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
         * The operation returns true while the resulting current position indicates a component, false otherwise.
         * A false return value leaves the current position at -1.
         * Invoking next on a DynAny without components leaves the current position at -1 and returns false.
+        * <p>
+        * 将当前位置推进到下一个组件操作返回true,而结果当前位置表示组件,否则返回false false返回值将当前位置保留为-1在没有组件的DynAny上调用next,将当前位置保留为-1,然后返回假
+        * 
         */
   public boolean next ()
   {
@@ -1074,6 +1293,12 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
         * <LI>For unions, the operation returns 2 if the discriminator indicates that a named member is active,
         * otherwise, it returns 1.
         * <LI>For DynFixed and DynEnum, the operation returns zero.
+        * </UL>
+        * <p>
+        *  返回DynAny的组件数对于没有组件的DynAny,它返回零操作只计算顶层的组件例如,如果在具有单个成员的DynStruct上调用component_count,则返回值为1,而不管成员的类型
+        * <UL>
+        * <LI>对于序列,操作返回当前元素数量<LI>对于结构,异常和值类型,操作返回成员数量<LI>对于数组,操作返回元素数量<LI> For联合,如果鉴别器指示命名成员是活动的,则操作返回2,否则返回1 <LI>
+        * 对于DynFixed和DynEnum,操作返回零。
         * </UL>
         */
   public int component_count ()
@@ -1104,6 +1329,11 @@ public class _DynAnyStub extends org.omg.CORBA.portable.ObjectImpl implements or
         * current_component and next can be used to initialize all the components of the value.
         * Once the dynamic value is completely initialized, to_any creates the corresponding any value.
         *
+        * <p>
+        * 在当前位置返回组件的DynAny它不提前当前位置,因此重复调用current_component而不进行干预调用rewind,next或seek返回相同的组件返回的DynAny对象引用可用于获取/设置当
+        * 前组件的值如果当前组件表示复杂类型,则可以根据TypeCode缩小返回的引用,以获取与复杂类型相对应的接口。
+        * 在不具有组件的DynAny上调用current_component,例如DynEnum或空异常,引发TypeMismatch在当前位置为-1的DynAny上调用current_component返回ni
+        * 
         * @exception TypeMismatch If called on a DynAny that cannot have components,
         * such as a DynEnum or an empty exception
         */

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2004, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -46,6 +47,12 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * <p> This annotation can be used with the following annotations:
  * {@link XmlJavaTypeAdapter}, {@link XmlElementWrapper}.
  *
+ * <p>
+ *  标记引用具有{@link XmlElement}或JAXBElement的类的属性
+ * 
+ * <p>
+ *  与元素属性(具有{@link XmlElement}注释的属性)相比,引用属性具有不同的替换语义。
+ * 
  * @author <ul><li>Kohsuke Kawaguchi, Sun Microsystems, Inc.</li><li>Sekhar Vajjhala, Sun Microsystems, Inc.</li></ul>
  *
  * @see XmlElementWrapper

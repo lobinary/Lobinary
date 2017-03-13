@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会
+ * 
+ *  根据Apache许可证第20版("许可证")授权;您不得使用此文件,除非符合许可证您可以在获取许可证的副本
+ * 
+ *  http：// wwwapacheorg / licenses / LICENSE-20
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件将按"原样"基础分发,无任何明示或暗示的保证或条件。请参阅许可证管理权限和限制许可证
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.xpath.regex;
@@ -31,6 +41,12 @@ import java.util.Vector;
  *
  * @xerces.internal
  *
+ * <p>
+ *  正则表达式解析器
+ * 
+ *  @xercesinternal
+ * 
+ * 
  * @version $Id: RegexParser.java,v 1.8 2010-11-01 04:39:54 joehw Exp $
  */
 class RegexParser {
@@ -151,6 +167,10 @@ class RegexParser {
         Token tok = this.parse(regex, options);
         return new RegularExpression(regex, tok, this.parennumber, this.hasBackReferences, options);
     }
+    /* <p>
+    /* public RegularExpression createRegex(String regex,int options)throws ParseException {Token tok = thisparse(regex,options); return new RegularExpression(regex,tok,thisparennumber,thishasBackReferences,options); }
+    /* }。
+    /* 
     */
 
     protected final void setContext(int con) {
@@ -308,6 +328,10 @@ class RegexParser {
      *            | '(?=' regex ')'  | '(?!' regex ')'  | '(?&lt;=' regex ')'  | '(?&lt;!' regex ')'
      * atom ::= char | '.' | range | '(' regex ')' | '(?:' regex ')' | '\' [0-9]
      *          | '\w' | '\W' | '\d' | '\D' | '\s' | '\S' | category-block
+     * <p>
+     *  regex :: = term(`|`term)* term :: = factor + factor :: =('^'|'$'|'\\ A'|'\\ Z'|'\\ z'|'\\ b' '\\ B'|
+     * '\\ <'|'\\>'atom(('*'|'+'|'?'| minmax)'?'? '(?='regex')'| '(?！'regex')'| '(α<='regex')' '(?&lt ;!'regex')'atom :: = char | ''|范围| '('regex')'| '(?：'regex')'| '\\'[0-9] | '\\ w'| '\\ W'| '\\ d'| '\\ D'| '\\ s'| '\\ S'|类别块。
+     * 
      */
     Token parseRegex() throws ParseException {
         Token tok = this.parseTerm();
@@ -326,6 +350,9 @@ class RegexParser {
 
     /**
      * term ::= factor+
+     * <p>
+     *  term :: =因子+
+     * 
      */
     Token parseTerm() throws ParseException {
         int ch = this.read();
@@ -650,6 +677,10 @@ class RegexParser {
      * minmax ::= '{' min (',' max?)? '}'
      * min ::= [0-9]+
      * max ::= [0-9]+
+     * <p>
+     * factor :: =('^'|'$'|'\\ A'|'\\ Z'|'\\ z'|'\\ b'|'\\ B'|' ('*'|'+'|'?'| minmax)'?'?)?) '(?='regex')'| 
+     * '(?！'regex')'| '(α<='regex')' '(?&lt ;!'regex')' '(?#'[^)] *')'minmax :: ='{'min(','max?)? '}'min :: = [0-9] + max :: = [0-9] +。
+     * 
      */
     Token parseFactor() throws ParseException {
         int ch = this.read();
@@ -754,6 +785,10 @@ class RegexParser {
      *          | '\w' | '\W' | '\d' | '\D' | '\s' | '\S' | category-block
      *          | '(?>' regex ')'
      * char ::= '\\' | '\' [efnrt] | bmp-code | character-1
+     * <p>
+     *  atom :: = char | ''| char-class | '('regex')'| '(?：'regex')'| '\\'[0-9] | '\\ w'| '\\ W'| '\\ d'| '\
+     * \ D'| '\\ s'| '\\ S'| category-block | '(?>'regex')'char :: ='\\\\'| '\\'[efnrt] | bmp-code |字符1。
+     * 
      */
     Token parseAtom() throws ParseException {
         int ch = this.read();
@@ -775,6 +810,11 @@ class RegexParser {
              *           | range-char '-' range-char
              * range-char ::= '\[' | '\]' | '\\' | '\' [,-efnrtv] | bmp-code | character-2
              * bmp-char ::= '\' 'u' [0-9a-fA-F] [0-9a-fA-F] [0-9a-fA-F] [0-9a-fA-F]
+             * <p>
+             *  char-class :: ='['('^'?range','?)+']'range :: ='\\ d'| '\\ w'| '\\ s'| category-block | range-char |
+             *  range-char' - 'range-char range-char :: ='\\ ['| '\\]'| '\\\\'| '\\'[,-efnrtv] | bmp-code | [0-9a-fA
+             * -F] [0-9a-fA-F] [0-9a-fA-F] [0-9a-fA-F ]]。
+             * 
              */
           case T_LBRACKET:      return this.parseCharacterClass(true);
           case T_SET_OPERATIONS: return this.parseSetOperations();
@@ -875,6 +915,11 @@ class RegexParser {
      *           | range-char '-' range-char
      * range-char ::= '\[' | '\]' | '\\' | '\' [,-efnrtv] | bmp-code | character-2
      * bmp-code ::= '\' 'u' [0-9a-fA-F] [0-9a-fA-F] [0-9a-fA-F] [0-9a-fA-F]
+     * <p>
+     * char-class :: ='['('^'?range','?)+']'range :: ='\\ d'| '\\ w'| '\\ s'| category-block | range-char | 
+     * range-char' - 'range-char range-char :: ='\\ ['| '\\]'| '\\\\'| '\\'[,-efnrtv] | bmp-code | character
+     * -2 bmp-code :: ='\\'u'[0-9a-fA-F] [0-9a-fA-F] [0-9a-fA-F] [0-9a-fA-F ]]。
+     * 
      */
     protected RangeToken parseCharacterClass(boolean useNrange) throws ParseException {
         this.setContext(S_INBRACKETS);
@@ -1034,6 +1079,9 @@ class RegexParser {
 
     /**
      * '(?[' ... ']' (('-' | '+' | '&') '[' ... ']')? ')'
+     * <p>
+     *  '(?['']'((' - '|'+'|'&')'['']')?'
+     * 
      */
     protected RangeToken parseSetOperations() throws ParseException {
         RangeToken tok = this.parseCharacterClass(false);
@@ -1096,6 +1144,7 @@ class RegexParser {
     }
 
     /**
+    /* <p>
      */
     int decodeEscaped() throws ParseException {
         if (this.read() != T_BACKSOLIDUS)  throw ex("parser.next.1", this.offset-1);

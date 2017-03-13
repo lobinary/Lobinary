@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -67,6 +68,19 @@ import java.awt.Image;
  *
  * }</pre>
  *
+ * <p>
+ *  PixelGrabber类实现了一个ImageConsumer,它可以附加到一个Image或ImageProducer对象来检索该图像中的像素的一个子集下面是一个例子：<pre> {@ code
+ * 
+ *  public void handlesinglepixel(int x,int y,int pixel){int alpha =(pixel >> 24)&0xff; int red =(pixel >> 16)&0xff; int green =(pixel >> 8)&0xff; int blue =(pixel)&0xff; //根据需要处理像素}
+ * 。
+ * 
+ * public void handlepixels(Image img,int x,int y,int w,int h){int [] pixels = new int [w * h] PixelGrabber pg = new PixelGrabber(img,x,y,w,h,pixels,0,w);尝试{pggrabPixels(); }
+ *  catch(InterruptedException e){Systemerrprintln("interrupted waiting for pixels！");返回; } if((pggetSta
+ * tus()&ImageObserverABORT)！= 0){Systemerrprintln("image fetch aborted or errored");返回;对于(int i = 0; i <w; i ++){handlesinglepixel(x + i,y + j,pixels [j * w + i]); }}}。
+ * 
+ *  } </pre>
+ * 
+ * 
  * @see ColorModel#getRGBdefault
  *
  * @author      Jim Graham
@@ -100,6 +114,11 @@ public class PixelGrabber implements ImageConsumer {
      * The RGB data for pixel (i, j) where (i, j) is inside the rectangle
      * (x, y, w, h) is stored in the array at
      * <tt>pix[(j - y) * scansize + (i - x) + off]</tt>.
+     * <p>
+     * 创建一个PixelGrabber对象,以从指定的图像抓取(x,y,w,h)矩形部分的像素到给定的数组中。像素存储到默认的RGB颜色数组中的数组中。
+     * pixel(i,j)其中(i,j)在矩形(x,y,w,h)内部存储在<tt> pix [(j-y)* scansize +(i-x)+ off]。
+     * 
+     * 
      * @see ColorModel#getRGBdefault
      * @param img the image to retrieve pixels from
      * @param x the x coordinate of the upper left corner of the rectangle
@@ -128,6 +147,13 @@ public class PixelGrabber implements ImageConsumer {
      * The RGB data for pixel (i, j) where (i, j) is inside the rectangle
      * (x, y, w, h) is stored in the array at
      * <tt>pix[(j - y) * scansize + (i - x) + off]</tt>.
+     * <p>
+     *  创建一个PixelGrabber对象,从指定的ImageProducer产生的图像中将(x,y,w,h)矩形部分的像素抓取到给定的数组中。
+     * 像素存储到默认的RGB数组中ColorModel像素的RGB数据其中(i,j)在矩形(x,y,w,h)内部被存储在<tt> pix [(j-y)* scansize +(i-x)+ off] </tt>
+     * 。
+     *  创建一个PixelGrabber对象,从指定的ImageProducer产生的图像中将(x,y,w,h)矩形部分的像素抓取到给定的数组中。
+     * 
+     * 
      * @param ip the <code>ImageProducer</code> that produces the
      * image from which to retrieve pixels
      * @param x the x coordinate of the upper left corner of the rectangle
@@ -168,6 +194,12 @@ public class PixelGrabber implements ImageConsumer {
      * PixelGrabber to hold the pixels in either case.  If {@code (w < 0)} or
      * {@code (h < 0)}, then they will default to the remaining width and
      * height of the source data when that information is delivered.
+     * <p>
+     * 创建一个PixelGrabber对象从指定的图像中获取(x,y,w,h)矩形部分的像素如果每次调用setPixels时使用相同的ColorModel,则像素将累积在原始ColorModel中,否则像素将
+     * 累积默认的RGB ColorModel如果forceRGB参数为true,那么像素将被累积在默认的RGB ColorModel中。
+     * PixelGrabber分配一个缓冲区来保存像素。如果{@code(w <0)}或{@代码(h <0)},那么当传递该信息时,它们将默认为源数据的剩余宽度和高度。
+     * 
+     * 
      * @param img the image to retrieve the image data from
      * @param x the x coordinate of the upper left corner of the rectangle
      * of pixels to retrieve from the image, relative to the default
@@ -194,6 +226,9 @@ public class PixelGrabber implements ImageConsumer {
 
     /**
      * Request the PixelGrabber to start fetching the pixels.
+     * <p>
+     *  请求PixelGrabber开始提取像素
+     * 
      */
     public synchronized void startGrabbing() {
         if ((flags & DONEBITS) != 0) {
@@ -208,6 +243,9 @@ public class PixelGrabber implements ImageConsumer {
 
     /**
      * Request the PixelGrabber to abort the image fetch.
+     * <p>
+     *  请求PixelGrabber中止图片提取
+     * 
      */
     public synchronized void abortGrabbing() {
         imageComplete(IMAGEABORTED);
@@ -217,6 +255,10 @@ public class PixelGrabber implements ImageConsumer {
      * Request the Image or ImageProducer to start delivering pixels and
      * wait for all of the pixels in the rectangle of interest to be
      * delivered.
+     * <p>
+     * 请求图像或ImageProducer开始传送像素,并等待感兴趣的矩形中的所有像素被传送
+     * 
+     * 
      * @return true if the pixels were successfully grabbed, false on
      * abort, error or timeout
      * @exception InterruptedException
@@ -239,6 +281,13 @@ public class PixelGrabber implements ImageConsumer {
      * <li> If {@code ms < 0}, returns <code>true</code> if all pixels
      * are grabbed, <code>false</code> otherwise and does not wait.
      * </ul>
+     * <p>
+     *  请求图像或ImageProducer开始传递像素,并等待感兴趣的矩形中的所有像素被传递或直到指定的超时时间过去此方法的行为方式取决于<code> ms <代码>：
+     * <ul>
+     *  <li>如果{@code ms == 0},则等待所有像素传送<li>如果{@code ms> 0},则等待所有像素以超时到期时间传送<li>如果{@code ms <0 },如果所有像素都被抓取,则返回<code>
+     *  true </code>,否则返回<code> false </code>。
+     * </ul>
+     * 
      * @param ms the number of milliseconds to wait for the image pixels
      * to arrive before timing out
      * @return true if the pixels were successfully grabbed, false on
@@ -276,6 +325,10 @@ public class PixelGrabber implements ImageConsumer {
     /**
      * Return the status of the pixels.  The ImageObserver flags
      * representing the available pixel information are returned.
+     * <p>
+     *  返回像素的状态返回表示可用像素信息的ImageObserver标志
+     * 
+     * 
      * @return the bitwise OR of all relevant ImageObserver flags
      * @see ImageObserver
      */
@@ -288,6 +341,10 @@ public class PixelGrabber implements ImageConsumer {
      * If no width was specified for the rectangle of pixels to grab then
      * then this information will only be available after the image has
      * delivered the dimensions.
+     * <p>
+     * 获取像素缓冲区的宽度(在调整图像宽度之后)如果没有为像素的矩形指定宽度,则该信息将仅在图像传递尺寸之后可用
+     * 
+     * 
      * @return the final width used for the pixel buffer or -1 if the width
      * is not yet known
      * @see #getStatus
@@ -301,6 +358,10 @@ public class PixelGrabber implements ImageConsumer {
      * If no width was specified for the rectangle of pixels to grab then
      * then this information will only be available after the image has
      * delivered the dimensions.
+     * <p>
+     *  获取像素缓冲区的高度(在调整图像高度之后)如果没有为要抓取的像素矩形指定宽度,那么此信息将仅在图像传递尺寸后可用
+     * 
+     * 
      * @return the final height used for the pixel buffer or -1 if the height
      * is not yet known
      * @see #getStatus
@@ -319,6 +380,11 @@ public class PixelGrabber implements ImageConsumer {
      * uses more than one ColorModel to deliver the data, the array
      * object returned by this method may change over time until the
      * image grab is complete.
+     * <p>
+     * 获取像素缓冲区如果PixelGrabber不是使用显式像素缓冲区构建的,以保存像素,则此方法将返回null,直到已知图像数据的大小和格式。
+     * 因为PixelGrabber可能会在默认RGB中累积数据ColorModel在任何时候,如果源图像使用多个ColorModel来传递数据,则此方法返回的数组对象可能会随时间改变,直到图像抓取完成。
+     * 
+     * 
      * @return either a byte array or an int array
      * @see #getStatus
      * @see #setPixels(int, int, int, int, ColorModel, byte[], int, int)
@@ -342,6 +408,12 @@ public class PixelGrabber implements ImageConsumer {
      * object returned by this method may change over time until the
      * image grab is complete and may not reflect any of the ColorModel
      * objects that was used by the ImageProducer to deliver the pixels.
+     * <p>
+     * 获取存储在数组中的像素的ColorModel如果PixelGrabber是使用显式像素缓冲区构造的,那么此方法将始终返回默认的RGB ColorModel,否则它可能返回null,直到由ImagePro
+     * ducer使用的ColorModel已知由于PixelGrabber可能下降如果源图像使用多个ColorModel来传递数据,则返回在默认RGB ColorModel中累积数据,由该方法返回的Color
+     * Model对象可以随时间改变,直到图像抓取完成并且可能不反映任何ImageProducer用于传递像素的ColorModel对象。
+     * 
+     * 
      * @return the ColorModel object used for storing the pixels
      * @see #getStatus
      * @see ColorModel#getRGBdefault
@@ -360,6 +432,12 @@ public class PixelGrabber implements ImageConsumer {
      * this class to retrieve pixels from an image should avoid calling
      * this method directly since that operation could result in problems
      * with retrieving the requested pixels.
+     * <p>
+     *  setDimensions方法是ImageConsumer API的一部分,该类必须实现以检索像素
+     * <p>
+     * 注意：此方法旨在被其像素的图像的ImageProducer调用使用此类从图像检索像素的开发人员应避免直接调用此方法,因为该操作可能导致检索请求的像素的问题
+     * 
+     * 
      * @param width the width of the dimension
      * @param height the height of the dimension
      */
@@ -390,6 +468,12 @@ public class PixelGrabber implements ImageConsumer {
      * this class to retrieve pixels from an image should avoid calling
      * this method directly since that operation could result in problems
      * with retrieving the requested pixels.
+     * <p>
+     *  setHints方法是ImageConsumer API的一部分,该类必须实现以检索像素
+     * <p>
+     *  注意：此方法旨在被其像素的图像的ImageProducer调用使用此类从图像检索像素的开发人员应避免直接调用此方法,因为该操作可能导致检索请求的像素的问题
+     * 
+     * 
      * @param hints a set of hints used to process the pixels
      */
     public void setHints(int hints) {
@@ -405,6 +489,12 @@ public class PixelGrabber implements ImageConsumer {
      * this class to retrieve pixels from an image should avoid calling
      * this method directly since that operation could result in problems
      * with retrieving the requested pixels.
+     * <p>
+     * setProperties方法是ImageConsumer API的一部分,该类必须实现以检索像素
+     * <p>
+     *  注意：此方法旨在被其像素的图像的ImageProducer调用使用此类从图像检索像素的开发人员应避免直接调用此方法,因为该操作可能导致检索请求的像素的问题
+     * 
+     * 
      * @param props the list of properties
      */
     public void setProperties(Hashtable<?,?> props) {
@@ -420,6 +510,12 @@ public class PixelGrabber implements ImageConsumer {
      * this class to retrieve pixels from an image should avoid calling
      * this method directly since that operation could result in problems
      * with retrieving the requested pixels.
+     * <p>
+     *  setColorModel方法是ImageConsumer API的一部分,该类必须实现以检索像素
+     * <p>
+     * 注意：此方法旨在被其像素的图像的ImageProducer调用使用此类从图像检索像素的开发人员应避免直接调用此方法,因为该操作可能导致检索请求的像素的问题
+     * 
+     * 
      * @param model the specified <code>ColorModel</code>
      * @see #getColorModel
      */
@@ -455,6 +551,12 @@ public class PixelGrabber implements ImageConsumer {
      * this class to retrieve pixels from an image should avoid calling
      * this method directly since that operation could result in problems
      * with retrieving the requested pixels.
+     * <p>
+     *  setPixels方法是ImageConsumer API的一部分,该类必须实现以检索像素
+     * <p>
+     *  注意：此方法旨在被其像素的图像的ImageProducer调用使用此类从图像检索像素的开发人员应避免直接调用此方法,因为该操作可能导致检索请求的像素的问题
+     * 
+     * 
      * @param srcX the X coordinate of the upper-left corner
      *        of the area of pixels to be set
      * @param srcY the Y coordinate of the upper-left corner
@@ -542,6 +644,12 @@ public class PixelGrabber implements ImageConsumer {
      * this class to retrieve pixels from an image should avoid calling
      * this method directly since that operation could result in problems
      * with retrieving the requested pixels.
+     * <p>
+     * setPixels方法是ImageConsumer API的一部分,该类必须实现以检索像素
+     * <p>
+     *  注意：此方法旨在被其像素的图像的ImageProducer调用使用此类从图像检索像素的开发人员应避免直接调用此方法,因为该操作可能导致检索请求的像素的问题
+     * 
+     * 
      * @param srcX the X coordinate of the upper-left corner
      *        of the area of pixels to be set
      * @param srcY the Y coordinate of the upper-left corner
@@ -631,6 +739,12 @@ public class PixelGrabber implements ImageConsumer {
      * this class to retrieve pixels from an image should avoid calling
      * this method directly since that operation could result in problems
      * with retrieving the requested pixels.
+     * <p>
+     *  imageComplete方法是ImageConsumer API的一部分,该类必须实现以检索像素
+     * <p>
+     * 注意：此方法旨在被其像素的图像的ImageProducer调用使用此类从图像检索像素的开发人员应避免直接调用此方法,因为该操作可能导致检索请求的像素的问题
+     * 
+     * 
      * @param status the status of image loading
      */
     public synchronized void imageComplete(int status) {
@@ -662,6 +776,8 @@ public class PixelGrabber implements ImageConsumer {
      * preferred method because it conforms to the convention of
      * naming information-retrieval methods with the form
      * "getXXX".
+     * <p>
+     * 
      * @return the bitwise OR of all relevant ImageObserver flags
      * @see ImageObserver
      * @see #getStatus()

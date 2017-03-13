@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2005 Apache软件基金会
+ * 
+ *  根据Apache许可证第20版("许可证")授权;您不得使用此文件,除非符合许可证您可以在获取许可证的副本
+ * 
+ *  http：// wwwapacheorg / licenses / LICENSE-20
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件将按"原样"基础分发,无任何明示或暗示的保证或条件。请参阅许可证管理权限和限制许可证
+ * 
  */
 package com.sun.org.apache.xerces.internal.xpointer;
 
@@ -38,6 +48,11 @@ import com.sun.org.apache.xerces.internal.xs.XSTypeDefinition;
  * </p>
  *
  *
+ * <p>
+ * <p>
+ * 实现XPointerPart接口并处理ShortHand指针的处理它至多标识资源的信息集中的一个元素;具体地,具有匹配的NCName作为标识符的文档顺序中的第一个(如果有的话)
+ * </p>
+ * 
  */
 class ShortHandPointer implements XPointerPart {
 
@@ -63,6 +78,10 @@ class ShortHandPointer implements XPointerPart {
     /**
      * The XPointerProcessor takes care of this.  Simply set the ShortHand Pointer here.
      *
+     * <p>
+     *  XPointerProcessor负责这里简单地设置ShortHand Pointer这里
+     * 
+     * 
      * @see com.sun.org.apache.xerces.internal.xpointer.XPointerPart#parseXPointer(java.lang.String)
      */
     public void parseXPointer(String part) throws XNIException {
@@ -76,6 +95,10 @@ class ShortHandPointer implements XPointerPart {
      * Section 3.2 of the XPointer Framework Recommendation.
      * Note that in the current implementation only supports DTD determined ID's.
      *
+     * <p>
+     *  根据XPointer框架建议第32节中定义的规则解析XPointer ShortHand指针注意,在当前实现中仅支持DTD确定的ID
+     * 
+     * 
      * @see com.sun.org.apache.xerces.internal.xpointer.XPointerPart#resolveXPointer(com.sun.org.apache.xerces.internal.xni.QName, com.sun.org.apache.xerces.internal.xni.XMLAttributes, com.sun.org.apache.xerces.internal.xni.Augmentations, int event)
      */
     int fMatchingChildCount = 0;
@@ -116,6 +139,8 @@ class ShortHandPointer implements XPointerPart {
 
     /**
      *
+     * <p>
+     * 
      * @param element
      * @param attributes
      * @param augs
@@ -176,6 +201,10 @@ class ShortHandPointer implements XPointerPart {
     /**
      * Rerturns the DTD determine-ID
      *
+     * <p>
+     *  重新生成DTD确定ID
+     * 
+     * 
      * @param attributes
      * @param index
      * @return String
@@ -194,6 +223,10 @@ class ShortHandPointer implements XPointerPart {
      * Returns the schema-determined-ID.
      *
      *
+     * <p>
+     *  返回模式确定的ID
+     * 
+     * 
      * @param attributes
      * @param index
      * @return A String containing the schema-determined ID.
@@ -238,6 +271,10 @@ class ShortHandPointer implements XPointerPart {
     /**
      * Not quite sure how this can be correctly implemented.
      *
+     * <p>
+     *  不太确定如何可以正确实现
+     * 
+     * 
      * @param attributes
      * @param index
      * @return String - We return null since we currenly do not supprt this.
@@ -250,6 +287,8 @@ class ShortHandPointer implements XPointerPart {
 
     /**
      *
+     * <p>
+     * 
      * @see com.sun.org.apache.xerces.internal.xpointer.XPointerPart#isFragmentResolved()
      */
     public boolean isFragmentResolved() {
@@ -258,6 +297,8 @@ class ShortHandPointer implements XPointerPart {
 
     /**
      *
+     * <p>
+     * 
      * @see com.sun.org.apache.xerces.internal.xpointer.XPointerPart#isChildFragmentResolved()
      */
     public boolean isChildFragmentResolved() {
@@ -267,6 +308,10 @@ class ShortHandPointer implements XPointerPart {
     /**
      * Returns the name of the ShortHand pointer
      *
+     * <p>
+     *  返回ShortHand指针的名称
+     * 
+     * 
      * @see com.sun.org.apache.xerces.internal.xpointer.XPointerPart#getSchemeName()
      */
     public String getSchemeName() {
@@ -274,6 +319,8 @@ class ShortHandPointer implements XPointerPart {
     }
 
     /**
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xpointer.XPointerPart#getSchemeData()
      */
     public String getSchemeData() {
@@ -281,6 +328,8 @@ class ShortHandPointer implements XPointerPart {
     }
 
     /**
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xpointer.XPointerPart#setSchemeName(java.lang.String)
      */
     public void setSchemeName(String schemeName) {
@@ -288,6 +337,8 @@ class ShortHandPointer implements XPointerPart {
     }
 
     /**
+    /* <p>
+    /* 
      * @see com.sun.org.apache.xerces.internal.xpointer.XPointerPart#setSchemeData(java.lang.String)
      */
     public void setSchemeData(String schemeData) {

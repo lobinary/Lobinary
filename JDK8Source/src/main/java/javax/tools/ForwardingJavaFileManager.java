@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2012, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -35,6 +36,10 @@ import javax.tools.JavaFileObject.Kind;
  * might override some of these methods and might also provide
  * additional fields and methods.
  *
+ * <p>
+ *  向给定文件管理器的转发调用此类的子类可能会覆盖这些方法中的一些,并且还可能提供其他字段和方法
+ * 
+ * 
  * @param <M> the kind of file manager forwarded to by this object
  * @author Peter von der Ah&eacute;
  * @since 1.6
@@ -43,11 +48,18 @@ public class ForwardingJavaFileManager<M extends JavaFileManager> implements Jav
 
     /**
      * The file manager which all methods are delegated to.
+     * <p>
+     *  委派所有方法的文件管理器
+     * 
      */
     protected final M fileManager;
 
     /**
      * Creates a new instance of ForwardingJavaFileManager.
+     * <p>
+     *  创建一个新的ForwardingJavaFileManager实例
+     * 
+     * 
      * @param fileManager delegate to this file manager
      */
     protected ForwardingJavaFileManager(M fileManager) {
@@ -56,6 +68,8 @@ public class ForwardingJavaFileManager<M extends JavaFileManager> implements Jav
     }
 
     /**
+    /* <p>
+    /* 
      * @throws SecurityException {@inheritDoc}
      * @throws IllegalStateException {@inheritDoc}
      */
@@ -64,6 +78,8 @@ public class ForwardingJavaFileManager<M extends JavaFileManager> implements Jav
     }
 
     /**
+    /* <p>
+    /* 
      * @throws IOException {@inheritDoc}
      * @throws IllegalStateException {@inheritDoc}
      */
@@ -77,6 +93,8 @@ public class ForwardingJavaFileManager<M extends JavaFileManager> implements Jav
     }
 
     /**
+    /* <p>
+    /* 
      * @throws IllegalStateException {@inheritDoc}
      */
     public String inferBinaryName(Location location, JavaFileObject file) {
@@ -84,6 +102,8 @@ public class ForwardingJavaFileManager<M extends JavaFileManager> implements Jav
     }
 
     /**
+    /* <p>
+    /* 
      * @throws IllegalArgumentException {@inheritDoc}
      */
     public boolean isSameFile(FileObject a, FileObject b) {
@@ -91,6 +111,8 @@ public class ForwardingJavaFileManager<M extends JavaFileManager> implements Jav
     }
 
     /**
+    /* <p>
+    /* 
      * @throws IllegalArgumentException {@inheritDoc}
      * @throws IllegalStateException {@inheritDoc}
      */
@@ -107,6 +129,8 @@ public class ForwardingJavaFileManager<M extends JavaFileManager> implements Jav
     }
 
     /**
+    /* <p>
+    /* 
      * @throws IllegalArgumentException {@inheritDoc}
      * @throws IllegalStateException {@inheritDoc}
      */
@@ -119,6 +143,8 @@ public class ForwardingJavaFileManager<M extends JavaFileManager> implements Jav
     }
 
     /**
+    /* <p>
+    /* 
      * @throws IllegalArgumentException {@inheritDoc}
      * @throws IllegalStateException {@inheritDoc}
      */
@@ -132,6 +158,8 @@ public class ForwardingJavaFileManager<M extends JavaFileManager> implements Jav
     }
 
     /**
+    /* <p>
+    /* 
      * @throws IllegalArgumentException {@inheritDoc}
      * @throws IllegalStateException {@inheritDoc}
      */
@@ -144,6 +172,8 @@ public class ForwardingJavaFileManager<M extends JavaFileManager> implements Jav
     }
 
     /**
+    /* <p>
+    /* 
      * @throws IllegalArgumentException {@inheritDoc}
      * @throws IllegalStateException {@inheritDoc}
      */

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1994, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -53,6 +54,12 @@ import sun.reflect.annotation.AnnotationType;
  * variables; a means of loading files and libraries; and a utility
  * method for quickly copying a portion of an array.
  *
+ * <p>
+ *  <code> System </code>类包含几个有用的类字段和方法它不能被实例化
+ * 
+ *  <p> <code> System </code>类提供的工具包括标准输入,标准输出和错误输出流;访问外部定义的属性和环境变量;加载文件和库的方法;以及用于快速复制数组的一部分的实用方法
+ * 
+ * 
  * @author  unascribed
  * @since   JDK1.0
  */
@@ -64,6 +71,9 @@ public final class System {
      * the initialization for this class separated from clinit.
      * Note that to use properties set by the VM, see the constraints
      * described in the initializeSystemClass method.
+     * <p>
+     *  VM将调用initializeSystemClass方法来完成从clinit分离的此类的初始化请注意,要使用由VM设置的属性,请参阅initializeSystemClass方法中描述的约束
+     * 
      */
     private static native void registerNatives();
     static {
@@ -79,6 +89,9 @@ public final class System {
      * open and ready to supply input data. Typically this stream
      * corresponds to keyboard input or another input source specified by
      * the host environment or user.
+     * <p>
+     * "标准"输入流此流已经打开并准备提供输入数据通常此流对应于键盘输入或由主机环境或用户指定的另一个输入源
+     * 
      */
     public final static InputStream in = null;
 
@@ -96,6 +109,14 @@ public final class System {
      * <p>
      * See the <code>println</code> methods in class <code>PrintStream</code>.
      *
+     * <p>
+     *  "标准"输出流此流已打开并准备接受输出数据通常此流对应于显示输出或由主机环境或用户指定的另一个输出目标
+     * <p>
+     *  对于简单的独立Java应用程序,写一行输出数据的典型方法是：<blockquote> <pre> Systemoutprintln(data)</pre> </blockquote>
+     * <p>
+     *  参见<code> PrintStream </code>类中的<code> println </code>方法
+     * 
+     * 
      * @see     java.io.PrintStream#println()
      * @see     java.io.PrintStream#println(boolean)
      * @see     java.io.PrintStream#println(char)
@@ -120,10 +141,17 @@ public final class System {
      * of a user even if the principal output stream, the value of the
      * variable <code>out</code>, has been redirected to a file or other
      * destination that is typically not continuously monitored.
+     * <p>
+     *  "标准"错误输出流此流已打开并准备好接受输出数据
+     * <p>
+     * 通常,该流对应于显示输出或由主机环境或用户指定的另一输出目的。
+     * 按照惯例,该输出流用于显示应该立即引起用户注意的错误消息或其他信息,即使主输出流,变量<code> out </code>的值已被重定向到文件或其他目标,通常不会被连续监视。
+     * 
      */
     public final static PrintStream err = null;
 
     /* The security manager for the system.
+    /* <p>
      */
     private static volatile SecurityManager security = null;
 
@@ -135,6 +163,14 @@ public final class System {
      *  to see if it's ok to reassign the "standard" input stream.
      * <p>
      *
+     * <p>
+     *  重新分配"标准"输入流
+     * 
+     *  <p>首先,如果有安全管理器,则使用<code> RuntimePermission("setIO")</code>权限调用其<code> checkPermission </code>方法,以查看是
+     * 否可以重新分配" "输入流。
+     * <p>
+     * 
+     * 
      * @param in the new standard input stream.
      *
      * @throws SecurityException
@@ -159,6 +195,13 @@ public final class System {
      * method is called with a <code>RuntimePermission("setIO")</code> permission
      *  to see if it's ok to reassign the "standard" output stream.
      *
+     * <p>
+     *  重新分配"标准"输出流
+     * 
+     * <p>首先,如果有安全管理器,则使用<code> RuntimePermission("setIO")</code>权限调用其<code> checkPermission </code>方法,以查看是否
+     * 可以重新分配" "输出流。
+     * 
+     * 
      * @param out the new standard output stream
      *
      * @throws SecurityException
@@ -183,6 +226,13 @@ public final class System {
      * method is called with a <code>RuntimePermission("setIO")</code> permission
      *  to see if it's ok to reassign the "standard" error output stream.
      *
+     * <p>
+     *  重新分配"标准"错误输出流
+     * 
+     *  <p>首先,如果有安全管理器,则使用<code> RuntimePermission("setIO")</code>权限调用其<code> checkPermission </code>方法,以查看是
+     * 否可以重新分配" "错误输出流。
+     * 
+     * 
      * @param err the new standard error output stream.
      *
      * @throws SecurityException
@@ -205,6 +255,10 @@ public final class System {
      * Returns the unique {@link java.io.Console Console} object associated
      * with the current Java virtual machine, if any.
      *
+     * <p>
+     *  返回与当前Java虚拟机关联的唯一{@link javaioConsole Console}对象(如果有)
+     * 
+     * 
      * @return  The system console, if any, otherwise <tt>null</tt>.
      *
      * @since   1.6
@@ -232,6 +286,16 @@ public final class System {
      * inheritedChannel}, this method may return other kinds of
      * channels in the future.
      *
+     * <p>
+     *  返回从创建此Java虚拟机的实体继承的通道
+     * 
+     * <p>此方法返回通过调用系统范围默认{@link javaniochannelsspiSelectorProvider}对象的{@link javaniochannelsspiSelectorProvider#inheritedChannel inheritedChannel}
+     * 方法获得的渠道</p>。
+     * 
+     *  <p>除了{@link javaniochannelsspiSelectorProvider#inheritedChannel inheritedChannel}中描述的面向网络的频道,此方法可能会在
+     * 未来返回其他类型的频道。
+     * 
+     * 
      * @return  The inherited channel, if any, otherwise <tt>null</tt>.
      *
      * @throws  IOException
@@ -273,6 +337,15 @@ public final class System {
      * security manager has been established, then no action is taken and
      * the method simply returns.
      *
+     * <p>
+     *  设置系统安全
+     * 
+     * <p>如果已经安装了安全管理器,此方法首先使用<code> RuntimePermission("setSecurityManager")</code>权限调用安全管理器的<code> checkPer
+     * mission </code>方法,现有的安全管理器这可能会导致抛出一个<code> SecurityException </code>。
+     * 
+     *  <p>否则,参数被建立为当前安全管理器如果参数是<code> null </code>,并且没有建立安全管理器,则不采取任何动作,该方法简单地返回
+     * 
+     * 
      * @param      s   the security manager.
      * @exception  SecurityException  if the security manager has already
      *             been set and its <code>checkPermission</code> method
@@ -325,6 +398,10 @@ public final class System {
     /**
      * Gets the system security interface.
      *
+     * <p>
+     *  获取系统安全接口
+     * 
+     * 
      * @return  if a security manager has already been established for the
      *          current application, then that security manager is returned;
      *          otherwise, <code>null</code> is returned.
@@ -346,6 +423,12 @@ public final class System {
      * a discussion of slight discrepancies that may arise between
      * "computer time" and coordinated universal time (UTC).
      *
+     * <p>
+     * 返回当前时间(以毫秒为单位)请注意,虽然返回值的时间单位为毫秒,但值的粒度取决于底层操作系统,并且可能更大例如,许多操作系统以几十毫秒为单位测量时间
+     * 
+     *  <p>有关<计算机时间>和协调世界时(UTC)之间可能出现的微小差异的讨论,请参阅<code> Date </code>
+     * 
+     * 
      * @return  the difference, measured in milliseconds, between
      *          the current time and midnight, January 1, 1970 UTC.
      * @see     java.util.Date
@@ -392,6 +475,26 @@ public final class System {
      * one should use {@code t1 - t0 < 0}, not {@code t1 < t0},
      * because of the possibility of numerical overflow.
      *
+     * <p>
+     *  返回正在运行的Java虚拟机的高分辨率时间源的当前值(以纳秒为单位)
+     * 
+     * <p>此方法只能用于测量经过的时间,与系统或挂钟时间的任何其他概念无关。
+     * 返回的值表示纳秒,因为某些固定但任意的<i>原点时间(也许在未来,因此值可能为负)在Java虚拟机的实例中,此方法的所有调用使用相同的源;其他虚拟机实例可能使用不同的来源。
+     * 
+     *  <p>此方法提供纳秒精度,但不一定是纳秒分辨率(即值的变化频率) - 不保证除了分辨率至少与{@link #currentTimeMillis()}一样好
+     * 
+     * <p>跨越大于约292年(2 <sup> 63 </sup>纳秒)的连续调用中的差异将无法正确计算由于数值溢出而产生的经过时间
+     * 
+     *  <p>此方法返回的值只有在计算在Java虚拟机的同一实例内获得的两个这样的值之间的差异时才变得有意义
+     * 
+     *  <p>例如,要测量一些代码需要执行多长时间：<pre> {@code long startTime = SystemnanoTime(); //被测量的代码long estimatedTime = SystemnanoTime() -  startTime;}
+     *  </pre>。
+     * 
+     *  <p>要比较两个nanoTime值<pre> {@code long t0 = SystemnanoTime(); long t1 = SystemnanoTime();} </pre>
+     * 
+     *  应该使用{@code t1  -  t0 <0},而不是{@code t1 <t0},因为数值溢出的可能性
+     * 
+     * 
      * @return the current value of the running Java Virtual Machine's
      *         high-resolution time source, in nanoseconds
      * @since 1.5
@@ -477,6 +580,40 @@ public final class System {
      * paragraph effectively applies only to the situation where both
      * arrays have component types that are reference types.)
      *
+     * <p>
+     * 将指定源数组的数组从指定位置复制到目标数组的指定位置将数组组件的子序列从<code> src </code>引用的源数组复制到引用的目标数组<code> dest </code>复制的组件数等于<code>
+     *  length </code>参数<code> srcPos </code>到<code> srcPos + length-1 </code >分别复制到目的地数组中的<code> destPos </code>
+     * 到<code> destPos + length-1 </code>。
+     * <p>
+     * 如果<code> src </code>和<code> dest </code>参数指向相同的数组对象,则执行复制,就像位置<code> srcPos </code>到<code> srcPos + l
+     * ength-1 </code>首先被复制到具有<code> length </code>组件的临时数组,然后将临时数组的内容复制到<code> destPos </code> destPos + len
+     * gth-1 </code>。
+     * <p>
+     *  如果<code> dest </code>是<code> null </code>,则抛出<code> NullPointerException </code>
+     * <p>
+     *  如果<code> src </code>是<code> null </code>,那么将抛出<code> NullPointerException </code>,并且不修改目标数组
+     * <p>
+     * 否则,如果以下任何一个为真,则抛出<code> ArrayStoreException </code>,并且不修改目标：
+     * <ul>
+     *  <li> <code> src </code>参数指的是不是数组的对象<li> <code> dest </code>参数指的是不是数组的对象<li> <code > src </code>参数和<code>
+     *  dest </code>参数指的是其组件类型是不同基本类型的数组<li> <code> src </code>参数是指具有基本组件类型的数组, <code> dest </code>参数是指具有引用组
+     * 件类型的数组<li> <code> src </code>参数是指具有引用组件类型和<code> dest </code > argument是指具有原始组件类型的数组。
+     * </ul>
+     * <p>
+     * 否则,如果以下任何一个为真,则抛出<code> IndexOutOfBoundsException </code>,并且不修改目标：
+     * <ul>
+     *  <li> <code> srcPos </code>参数为负<li> <code> destPos </code>参数为负<li> <code> > srcPos + length </code>大于
+     * <code> srclength </code>,则源数组<li> <code> destPos + length </code>的长度大于<code> destlength </code> ,目标数组
+     * 的长度。
+     * </ul>
+     * <p>
+     * 否则,如果源阵列从位置<code> srcPos </code>到<code> srcPos + length-1 </code>的任何实际组件无法通过赋值转换转换为目标数组的组件类型,代码> Arra
+     * yStoreException </code>在这种情况下,让<b> <i> k </i> </b>是小于长度的最小非负整数,使得<code> src [srcPos + </code> </i> <code >
+     * ] </code>不能转换为目标数组的组件类型;当抛出异常时,来自<code> srcPos </code>到<code> srcPos + </code> <i> k </i> <code> -1 </code>
+     * 的源阵列组件将已经被复制到目的地数组位置<code> destPos </code>到<code> destPos + </code> <i> k </i> <code> -1 </code>,并且目标
+     * 数组的其他位置都不会被修改(由于已经列出的限制,本段仅有效地应用于两个数组都具有作为引用类型的组件类型的情况)。
+     * 
+     * 
      * @param      src      the source array.
      * @param      srcPos   starting position in the source array.
      * @param      dest     the destination array.
@@ -501,6 +638,10 @@ public final class System {
      * hashCode().
      * The hash code for the null reference is zero.
      *
+     * <p>
+     * 返回与默认方法hashCode()返回的给定对象相同的哈希码,无论给定对象的类是否覆盖了hashCode()null引用的哈希码为零
+     * 
+     * 
      * @param x object for which the hashCode is to be calculated
      * @return  the hashCode
      * @since   JDK1.1
@@ -525,6 +666,14 @@ public final class System {
      * <dt>user.name            <dd>User account name
      * <dt>user.home            <dd>User home directory
      * <dt>user.dir             <dd>User's current working directory
+     * </dl>
+     * <p>
+     *  系统属性保证定义以下属性：
+     * <dl>
+     * <dt> javaversion <dd> Java版本号<dt> javavendor <dd> Java供应商特定字符串<dt> javavendorurl <dd> Java供应商URL <dt>
+     *  javahome <dd> Java安装目录<版本号<dt> javaclasspath <dd> Java classpath <dt> osname <dd>操作系统名称<dt> osarch <dd>
+     * 操作系统架构<dt> osversion <dd>操作系统版本<dt> fileseparator < (Unix上的"/")<dt> pathseparator <dd>路径分隔符(Unix上的"："
+     * )<dt> lineseparator <dd>行分隔符(Unix上的"\n") name <dt> userhome <dd>用户主目录<dt> userdir <dd>用户的当前工作目录。
      * </dl>
      */
 
@@ -615,6 +764,40 @@ public final class System {
      * <code>getProperties</code> operation, it may choose to permit the
      * {@link #getProperty(String)} operation.
      *
+     * <p>
+     * 确定当前系统属性
+     * <p>
+     *  首先,如果有安全管理器,它的<code> checkPropertiesAccess </code>方法被称为不带参数,这可能导致安全异常
+     * <p>
+     *  由{@link #getProperty(字符串)}方法使用的当前系统属性集合返回为一个<代码>属性</code>对象如果没有当前系统属性的集合,一组系统属性是第一已创建和初始化此组系统属性始终包括以
+     * 下键的值：。
+     * <table summary="Shows property keys and associated values">
+     * <tr> <th>键</th> <th>相关值说明</tr> </tr> <tr> <td> <code> javaversion </code> </td> <td> Java Runtime Env
+     * ironment版本</td> </tr> <tr> <td> <code> javavendor </code> </td> <td> Java Runtime Environment供应商</td>
+     *  </tr> <tr> <td> <code > javavendorurl </code> </td> <td> Java供应商URL </td> </tr> <tr> <td> <code> jav
+     * ahome </code> </td> <td> </td> </td> </td> </t>> </td> </t>> </td> </tr> </td> </t> </code> </td> </td>
+     *  Java虚拟机规范供应商</td> </tr> <tr> <td> <code> javavmspecificationname </code> </td> <td> </td> </tr> <tr>
+     *  <td> <code> javavm版本</code> </td> <td> Java虚拟机实现版本</td> </tr> <tr> <td> <code> javavmvendor </code> 
+     * </td> <td>供应商</td> </tr> <tr> <td> <code> javavmname </code> </td> <td> Java虚拟机实施名称</td> </tr> <tr> <td>
+     *  <代码> javaspecificationversion </code> </td> <td> Java运行时环境规范版本</td> </tr> <tr> <td> <code> javaspeci
+     * ficationvendor </code>环境规范供应商</td> </tr> <tr> <td> <code> javaspecificationname </code> </td> <td> Ja
+     * va运行时环境规范名称</td> </tr> <tr> <td > <code> javaclassversion </code> </td> <td> Java类格式版本号</td> </tr> <tr>
+     *  <td> <code> javaclasspath </code> </td> <td> Java类路径</td> </tr> <tr> <td> <code> javalibrary路径</code>
+     *  </td> <td>加载库时搜索的路径列表</td> </tr> <tr> <td> <code> javaiotmpdir </code> </td> <td>临时文件路径</td> </tr> <tr>
+     *  <td> <code> javacompiler </code> </td> <td>要使用的JIT编译器名称</td> </tr> <tr> < td> <code> javaextdirs </code>
+     *  </td> <td>扩展目录或目录的路径<b>已弃用</b> <i>此属性及其实现机制可能会在将来删除发布</i> </td> </tr> <tr> <td> <code> osname </code>
+     *  </td> <td>操作系统名称</td> </tr> <tr> <td > <code> osarch </code> </td> <td>操作系统架构</td> </tr> <tr> <td> <code>
+     *  osversion </code> </td> </td> </td> </td> </td> </td> <td> <code>路径分隔符</code> </td> <td>路径分隔符(在UNIX上
+     * 为"：")</td> </tr> <tr> <td> <code> lineseparator </code> </td> <td>行分隔符(UNIX上的"\n")</td> </tr> <tr> <td>
+     *  <code>用户名</code> </td> <td>用户的帐户名称</td> </tr > <tr> <td> <code> userhome </code> </td> <td>用户的主目录</td>
+     *  </tr> <tr> <td> <code> userdir </code> </td > <td>用户的当前工作目录</td> </tr>。
+     * </table>
+     * <p>
+     * 系统属性值中的多个路径由平台的路径分隔符分隔
+     * <p>
+     *  注意,即使安全管理器不允许<code> getProperties </code>操作,它也可以选择允许{@link #getProperty(String)}操作
+     * 
+     * 
      * @return     the system properties
      * @exception  SecurityException  if a security manager exists and its
      *             <code>checkPropertiesAccess</code> method doesn't allow access
@@ -641,6 +824,12 @@ public final class System {
      * <p>On UNIX systems, it returns {@code "\n"}; on Microsoft
      * Windows systems it returns {@code "\r\n"}.
      *
+     * <p>
+     *  返回系统相关的行分隔符字符串它总是返回相同的值 -  {@linkplain #getProperty(String)系统属性的初始值} {@code lineseparator}
+     * 
+     *  <p>在UNIX系统上,它返回{@code"\n"};在Microsoft Windows系统上,它返回{@code"\\ r\n"}
+     * 
+     * 
      * @return the system-dependent line separator string
      * @since 1.7
      */
@@ -663,6 +852,14 @@ public final class System {
      * <code>null</code>, then the current set of system properties is
      * forgotten.
      *
+     * <p>
+     *  将系统属性设置为<code> Properties </code>参数
+     * <p>
+     *  首先,如果有安全管理器,它的<code> checkPropertiesAccess </code>方法被称为不带参数,这可能导致安全异常
+     * <p>
+     * 参数成为{@link #getProperty(String)}方法使用的当前系统属性集合如果参数为<code> null </code>,则当前的系统属性集将被遗忘
+     * 
+     * 
      * @param      props   the new system properties.
      * @exception  SecurityException  if a security manager exists and its
      *             <code>checkPropertiesAccess</code> method doesn't allow access
@@ -695,6 +892,14 @@ public final class System {
      * properties is first created and initialized in the same manner as
      * for the <code>getProperties</code> method.
      *
+     * <p>
+     *  获取指定键指示的系统属性
+     * <p>
+     *  首先,如果有一个安全管理器,它的<code> checkPropertyAccess </code>方法被调用与作为其参数的密钥这可能导致SecurityException
+     * <p>
+     *  如果没有当前的系统属性集,则首先以与<code> getProperties </code>方法相同的方式创建和初始化一组系统属性
+     * 
+     * 
      * @param      key   the name of the system property.
      * @return     the string value of the system property,
      *             or <code>null</code> if there is no property with that key.
@@ -731,6 +936,14 @@ public final class System {
      * properties is first created and initialized in the same manner as
      * for the <code>getProperties</code> method.
      *
+     * <p>
+     *  获取指定键指示的系统属性
+     * <p>
+     *  首先,如果有安全管理器,则以<code> key </code>作为其参数来调用其<code> checkPropertyAccess </code>
+     * <p>
+     * 如果没有当前的系统属性集,则首先以与<code> getProperties </code>方法相同的方式创建和初始化一组系统属性
+     * 
+     * 
      * @param      key   the name of the system property.
      * @param      def   a default value.
      * @return     the string value of the system property,
@@ -767,6 +980,14 @@ public final class System {
      * value.
      * <p>
      *
+     * <p>
+     *  设置由指定键指示的系统属性
+     * <p>
+     *  首先,如果安全管理器存在,它的<code> SecurityManagercheckPermission </code>方法被调用与<code> PropertyPermission(key,"wri
+     * te")</code>权限这可能导致SecurityException被抛出如果没有异常抛出,指定的属性设置为给定的值。
+     * <p>
+     * 
+     * 
      * @param      key   the name of the system property.
      * @param      value the value of the system property.
      * @return     the previous value of the system property,
@@ -806,6 +1027,14 @@ public final class System {
      * If no exception is thrown, the specified property is removed.
      * <p>
      *
+     * <p>
+     *  删除指定键指示的系统属性
+     * <p>
+     * 首先,如果安全管理器存在,它的<code> SecurityManagercheckPermission </code>方法被调用与<code> PropertyPermission(key,"writ
+     * e")</code>权限这可能导致SecurityException被抛出如果没有异常抛出,指定的属性将被删除。
+     * <p>
+     * 
+     * 
      * @param      key   the name of the system property to be removed.
      * @return     the previous string value of the system property,
      *             or <code>null</code> if there was no property with that key.
@@ -876,6 +1105,22 @@ public final class System {
      * <code>System.getenv("FOO").equals(System.getenv("foo"))</code>
      * is likely to be true on Microsoft Windows.
      *
+     * <p>
+     *  获取指定环境变量的值环境变量是系统相关的外部命名值
+     * 
+     *  <p>如果存在安全管理器,则会使用<code> {@ link RuntimePermission}("getenv"+ name)</code>权限调用其{@link SecurityManager#checkPermission checkPermission}
+     * 方法。
+     * 这可能会导致{@ link SecurityException}被抛出如果没有抛出异常,则返回变量<code> name </code>的值。
+     * 
+     * <p> <a name=\"EnvironmentVSSystemProperties\"> <i>系统属性</i>和<i>环境变量</i> </a>概念上都是名称和值之间的映射两种机制都可用于传递用户
+     * 定义信息到Java进程环境变量具有更多的全局效应,因为它们对定义它们的进程的所有后代都是可见的,而不仅仅是紧接着的Java子进程。
+     * 它们可以具有略微不同的语义,例如不区分大小写,系统由于这些原因,环境变量更可能具有非预期的副作用最好在可能的情况下使用系统属性当需要全局效果时,或者当外部系统接口需要环境变量(例如<code> PATH
+     *  </code>)时,应使用环境变量。
+     * 
+     * <p>在UNIX系统上,<code> name </code>的字母大小写通常是重要的,而在Microsoft Windows系统上通常不是。
+     * 例如,表达式<code> Systemgetenv("FOO")equals(Systemgetenv foo"))</code>在Microsoft Windows上可能是真的。
+     * 
+     * 
      * @param  name the name of the environment variable
      * @return the string value of the variable, or <code>null</code>
      *         if the variable is not defined in the system environment
@@ -929,6 +1174,25 @@ public final class System {
      * <a href=#EnvironmentVSSystemProperties>system properties</a>
      * are generally preferred over environment variables.
      *
+     * <p>
+     *  返回当前系统环境的不可修改的字符串映射视图环境是从名称到从父进程传递到子进程的值的系统相关映射
+     * 
+     *  <p>如果系统不支持环境变量,则返回空映射
+     * 
+     * <P>返回的映射永远不会包含null键或值试图查询null键或值的存在都将抛出{@link NullPointerException异常}试图查询键或值的存在它的类型是{不@link String}会抛
+     * 出一个{@link ClassCastException}。
+     * 
+     *  <p>返回的地图及其集合视图可能不符合{@link Object#equals}和{@link Object#hashCode}方法的一般合同
+     * 
+     *  <p>返回的地图在所有平台上通常区分大小写
+     * 
+     *  <p>如果存在安全管理器,则会使用<code> {@ link RuntimePermission}("getenv *")</code>权限调用其{@link SecurityManager#checkPermission checkPermission}
+     * 方法。
+     * 这可能会导致{@link SecurityException}被抛出。
+     * 
+     * <p>将信息传递给Java子流程时,<a href=#EnvironmentVSSystemProperties>系统属性</a>通常优先于环境变量
+     * 
+     * 
      * @return the environment as a map of variable names to values
      * @throws SecurityException
      *         if a security manager exists and its
@@ -961,6 +1225,15 @@ public final class System {
      * Runtime.getRuntime().exit(n)
      * </pre></blockquote>
      *
+     * <p>
+     *  终止当前运行的Java虚拟机参数用作状态代码;按照惯例,非零状态码表示异常终止
+     * <p>
+     *  此方法调用<code> Runtime </code>类中的<code> exit </code>方法此方法不会正常返回
+     * <p>
+     *  调用<code> Systemexit(n)</code>实际上等价于调用：<blockquote> <pre> RuntimegetRuntime()exit(n)</pre> </blockquote>
+     * 。
+     * 
+     * 
      * @param      status   exit status.
      * @throws  SecurityException
      *        if a security manager exists and its <code>checkExit</code>
@@ -987,6 +1260,15 @@ public final class System {
      * Runtime.getRuntime().gc()
      * </pre></blockquote>
      *
+     * <p>
+     *  运行垃圾收集器
+     * <p>
+     * 调用<code> gc </code>方法表明Java虚拟机花费了回收未使用的对象的努力,以使它们当前占用的内存可用于快速重用当控制从方法调用返回时,Java虚拟机已经尽最大努力从所有丢弃的对象中回收空
+     * 间。
+     * <p>
+     *  调用<code> Systemgc()</code>实际上等价于调用：<blockquote> <pre> RuntimegetRuntime()gc()</pre> </blockquote>
+     * 
+     * 
      * @see     java.lang.Runtime#gc()
      */
     public static void gc() {
@@ -1009,6 +1291,16 @@ public final class System {
      * Runtime.getRuntime().runFinalization()
      * </pre></blockquote>
      *
+     * <p>
+     *  运行任何对象的finalization方法,等待最终确定
+     * <p>
+     * 调用此方法表明Java虚拟机花费努力来运行已被发现被丢弃但其<code> finalize </code>方法尚未运行的对象的<code> finalize </code>方法当控制从方法调用返回,Ja
+     * va虚拟机已尽最大努力完成所有未完成的最终化。
+     * <p>
+     *  调用<code> SystemrunFinalization()</code>实际上等效于调用：<blockquote> <pre> RuntimegetRuntime()ru​​nFinalizat
+     * ion()</pre> </blockquote>。
+     * 
+     * 
      * @see     java.lang.Runtime#runFinalization()
      */
     public static void runFinalization() {
@@ -1026,6 +1318,12 @@ public final class System {
      * with 0 as its argument to ensure the exit is allowed.
      * This could result in a SecurityException.
      *
+     * <p>
+     *  在退出时启用或禁用终结;这样做指定具有尚未被自动调用的finalizer的所有对象的finalizer将在Java运行时退出之前运行默认情况下,禁用退出时的finalization
+     * 
+     * <p>如果有安全管理器,则首先调用其<code> checkExit </code>方法,其中的参数为0,以确保允许退出。这可能导致SecurityException
+     * 
+     * 
      * @deprecated  This method is inherently unsafe.  It may result in
      *      finalizers being called on live objects while other threads are
      *      concurrently manipulating those objects, resulting in erratic
@@ -1068,6 +1366,19 @@ public final class System {
      * Runtime.getRuntime().load(name)
      * </pre></blockquote>
      *
+     * <p>
+     *  加载由filename参数指定的本机库文件名参数必须是绝对路径名
+     * 
+     *  如果文件名参数,当剥离任何特定于平台的库前缀,路径和文件扩展名时,表示其名称为例如L的库,并且称为L的本地库与VM静态链接,则JNI_OnLoad_L函数由库导出的调用而不是尝试加载动态库与文件系统中
+     * 不存在匹配参数的文件名有关更多详细信息,请参阅JNI规范。
+     * 
+     * 否则,filename参数将以实现相关的方式映射到本机库映像
+     * 
+     * <p>
+     *  调用<code> Systemload(name)</code>实际上等效于调用：<blockquote> <pre> RuntimegetRuntime()load(name)</pre> </blockquote>
+     * 。
+     * 
+     * 
      * @param      filename   the file to load.
      * @exception  SecurityException  if a security manager exists and its
      *             <code>checkLink</code> method doesn't allow
@@ -1104,6 +1415,16 @@ public final class System {
      * Runtime.getRuntime().loadLibrary(name)
      * </pre></blockquote>
      *
+     * <p>
+     *  加载由<code> libname </code>参数指定的本机库</code> libname </code>参数不能包含任何平台特定的前缀,文件扩展名或路径如果一个本地库称为<code> libn
+     * ame </code >与VM静态链接,则调用由库导出的JNI_OnLoad_ <code> libname </code>函数有关详细信息,请参阅JNI规范。
+     * 
+     * 否则,libname参数从系统库位置加载,并以实现相关的方式映射到本机库映像
+     * <p>
+     *  调用<code> SystemloadLibrary(name)</code>实际上等效于调用<blockquote> <pre> RuntimegetRuntime()loadLibrary(nam
+     * e)</pre> </blockquote>。
+     * 
+     * 
      * @param      libname   the name of the library.
      * @exception  SecurityException  if a security manager exists and its
      *             <code>checkLink</code> method doesn't allow
@@ -1126,6 +1447,10 @@ public final class System {
      * Maps a library name into a platform-specific string representing
      * a native library.
      *
+     * <p>
+     *  将库名称映射到表示本机库的平台特定字符串
+     * 
+     * 
      * @param      libname the name of the library.
      * @return     a platform-dependent native library name.
      * @exception  NullPointerException if <code>libname</code> is
@@ -1138,6 +1463,9 @@ public final class System {
 
     /**
      * Create PrintStream for stdout/err based on encoding.
+     * <p>
+     *  基于编码为stdout / err创建PrintStream
+     * 
      */
     private static PrintStream newPrintStream(FileOutputStream fos, String enc) {
        if (enc != null) {
@@ -1151,6 +1479,8 @@ public final class System {
 
     /**
      * Initialize the system class.  Called after thread initialization.
+     * <p>
+     *  初始化系统类在线程初始化后调用
      */
     private static void initializeSystemClass() {
 

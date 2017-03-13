@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  */
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2005 Apache软件基金会
+ * 
+ *  根据Apache许可证第20版("许可证")授权;您不得使用此文件,除非符合许可证您可以在获取许可证的副本
+ * 
+ *  http：// wwwapacheorg / licenses / LICENSE-20
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件将按"原样"基础分发,无任何明示或暗示的保证或条件。请参阅许可证管理权限和限制许可证
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl;
@@ -64,6 +74,19 @@ import com.sun.xml.internal.stream.Entity;
  *  <li>http://apache.org/xml/properties/internal/entity-manager</li>
  * </ul>
  *
+ * <p>
+ * 此类负责持有扫描XML文档结构和内容以及DTD结构和内容的通用扫描方法XMLDocumentScanner和XMLDTDScanner都从此基类继承
+ * 
+ * <p>
+ *  此组件需要使用它的组件管理器中的以下功能和属性：
+ * <ul>
+ *  <li> http：// xmlorg / sax / features / validation </li> <li> http：// apacheorg / xml / features / sc
+ * anner / notify-char-refs </li> <li> http：// apacheorg / xml / properties / internal / symbol-table </li>
+ *  <li> http：// apacheorg / xml / properties / internal / error-reporter </li> <li> http：// apacheorg /
+ *  xml / properties / internal / entity-manager </li>。
+ * </ul>
+ * 
+ * 
  * @author Andy Clark, IBM
  * @author Arnaud  Le Hors, IBM
  * @author Eric Ye, IBM
@@ -136,6 +159,9 @@ public abstract class XMLScanner
     /**
      * Validation. This feature identifier is:
      * http://xml.org/sax/features/validation
+     * <p>
+     *  验证此功能标识符为：http：// xmlorg / sax / features / validation
+     * 
      */
     protected boolean fValidation = false;
 
@@ -246,6 +272,8 @@ public abstract class XMLScanner
     /**
      *
      *
+     * <p>
+     * 
      * @param componentManager The component manager.
      *
      * @throws SAXException Throws exception if required features and
@@ -287,6 +315,10 @@ public abstract class XMLScanner
     /**
      * Sets the value of a property during parsing.
      *
+     * <p>
+     *  在解析期间设置属性的值
+     * 
+     * 
      * @param propertyId
      * @param value
      */
@@ -313,12 +345,19 @@ public abstract class XMLScanner
             fStaxProperties = (HashMap)value;
             //TODO::discuss with neeraj what are his thoughts on passing properties.
             //For now use this
+                /* <p>
+                /* fStaxProperties =(HashMap)value; // TODO ::与neeraj讨论他对传递属性的想法//现在使用这个
+                /* 
+                /* 
         }*/
 
     } // setProperty(String,Object)
 
     /*
      * Sets the feature of the scanner.
+     * <p>
+     *  设置扫描仪的功能
+     * 
      */
     public void setFeature(String featureId, boolean value)
     throws XMLConfigurationException {
@@ -332,6 +371,9 @@ public abstract class XMLScanner
 
     /*
      * Gets the state of the feature of the scanner.
+     * <p>
+     *  获取扫描仪功能的状态
+     * 
      */
     public boolean getFeature(String featureId)
     throws XMLConfigurationException {
@@ -392,6 +434,16 @@ public abstract class XMLScanner
      * [77] TextDecl ::= '<?xml' VersionInfo? EncodingDecl S? '?>'
      * </pre>
      *
+     * <p>
+     *  扫描XML或文本声明
+     * <p>
+     * <pre>
+     *  [23] XMLDecl :: ='<?xml'VersionInfo EncodingDecl? SDDecl? S? '?''[24] VersionInfo :: = S'version'Eq('VersionNum'|"VersionNum")EncodingDecl :: = S'encoding'Eq('"'EncName'"'|"'" "'")EncInd :: = [A-Za-z]([A-Za-z0-9_] |' - ')* SDDecl :: = "('yes'|'no')"'")|('"'('yes'|'no')'"))。
+     * 
+     *  TextDecl :: ='<?xml'VersionInfo? EncodingDecl S? '?>'
+     * </pre>
+     * 
+     * 
      * @param scanningTextDecl True if a text declaration is to
      *                         be scanned instead of an XML
      *                         declaration.
@@ -567,6 +619,10 @@ public abstract class XMLScanner
     /**
      * Scans a pseudo attribute.
      *
+     * <p>
+     *  扫描伪属性
+     * 
+     * 
      * @param scanningTextDecl True if scanning this pseudo-attribute for a
      *                         TextDecl; false if scanning XMLDecl. This
      *                         flag is needed to report the correct type of
@@ -639,6 +695,10 @@ public abstract class XMLScanner
      * Scans the name of a pseudo attribute. The only legal names
      * in XML 1.0/1.1 documents are 'version', 'encoding' and 'standalone'.
      *
+     * <p>
+     * 扫描伪属性的名称XML 10/11文档中唯一合法的名称是"version","encoding"和"standalone"
+     * 
+     * 
      * @return the name of the pseudo attribute or <code>null</code>
      * if a legal pseudo attribute name could not be scanned.
      */
@@ -671,6 +731,13 @@ public abstract class XMLScanner
      * [16] PI ::= '&lt;?' PITarget (S (Char* - (Char* '?>' Char*)))? '?>'
      * [17] PITarget ::= Name - (('X' | 'x') ('M' | 'm') ('L' | 'l'))
      * </pre>
+     * <p>
+     *  扫描处理指令
+     * <p>
+     * <pre>
+     *  PI :: ='&lt ;?' PITarget(S(Char *  - (Char *'?'Char *)))? '?''[17] PITarget :: = Name  - (('X'|'x')(
+     * 'M'|'m')('L'|'l'))。
+     * </pre>
      */
     //CHANGED:
     //EARLIER: scanPI()
@@ -701,6 +768,12 @@ public abstract class XMLScanner
      * This method would always read the whole data. We have while loop and data is buffered
      * until delimeter is encountered.
      *
+     * <p>
+     *  扫描处理数据需要处理文档以目标名称<em>​​以</em>"xml"开头的处理指令开始的情况(例如xmlfoo)
+     * 
+     *  这个方法将总是读取整个数据我们有while循环和数据缓冲,直到遇到delimeter
+     * 
+     * 
      * @param target The PI target
      * @param data The string to fill in with the data
      */
@@ -766,6 +839,16 @@ public abstract class XMLScanner
      * <strong>Note:</strong> This method uses fString, anything in it
      * at the time of calling is lost.
      *
+     * <p>
+     *  扫描评论
+     * <p>
+     * <pre>
+     *  [15] Comment :: ='&lt;  - '((Char  - ' - ')|(' - '(Char  - ' - ')))*'
+     * </pre>
+     * <p>
+     * <strong>注意</strong>：扫描过去之后通过&lt;！ - '<strong>注意：</strong>此方法使用fString,调用时其中的任何内容都丢失
+     * 
+     * 
      * @param text The buffer to fill in with the text.
      */
     protected void scanComment(XMLStringBuffer text)
@@ -804,6 +887,12 @@ public abstract class XMLScanner
      *
      * [10] AttValue ::= '"' ([^<&"] | Reference)* '"' | "'" ([^<&'] | Reference)* "'"
      *
+     * <p>
+     *  扫描属性值并规范化空格将所有空格字符转换为空格字符
+     * 
+     *  [10] AttValue :: ='''([^ <&"] | Reference)*'"'|"
+     * 
+     * 
      * @param value The XMLString to fill in with the value.
      * @param nonNormalizedValue The XMLString to fill in with the
      *                           non-normalized value.
@@ -1024,6 +1113,10 @@ public abstract class XMLScanner
     /**
      * Scans External ID and return the public and system IDs.
      *
+     * <p>
+     *  扫描外部ID并返回公共ID和系统ID
+     * 
+     * 
      * @param identifiers An array of size 2 to return the system id,
      *                    and public id (in that order).
      * @param optionalSystemId Specifies whether the system id is optional.
@@ -1106,6 +1199,17 @@ public abstract class XMLScanner
      * identifier must be normalized to single space characters (#x20), and
      * leading and trailing white space must be removed.
      *
+     * <p>
+     *  扫描公共ID文字
+     * 
+     *  [12] PubidLiteral :: ='"'PubidChar *'"'| "'"(PubidChar  - "'")*"'"[13] PubidChar :: =#x20 | #xD | #x
+     * A | [a-zA-Z0-9] | [ - '()+,/：=?;！*#@ $ _％]。
+     * 
+     *  返回的字符串根据以下规则进行规范化,来自http：// wwww3org / TR / REC-xml#dt-pubid：
+     * 
+     * 在尝试匹配之前,必须将公共标识符中的所有空白字符串归一化为单个空格字符(#x20),并且必须删除前导和尾部空格
+     * 
+     * 
      * @param literal The string to fill in with the public ID literal.
      * @return True on success.
      *
@@ -1158,6 +1262,9 @@ public abstract class XMLScanner
     /**
      * Normalize whitespace in an XMLString converting all whitespace
      * characters to space characters.
+     * <p>
+     *  规范化XMLString中的空格,将所有空格字符转换为空格字符
+     * 
      */
     protected void normalizeWhitespace(XMLString value) {
         int i=0;
@@ -1184,6 +1291,10 @@ public abstract class XMLScanner
      * parameter entity names start with '%'; and general entities are just
      * specified by their name.
      *
+     * <p>
+     *  此方法通知实体的开始文档实体具有伪名称"[xml]"DTD具有伪名称"[dtd]"参数实体名称以'％'开头;和一般实体只是由他们的名字指定
+     * 
+     * 
      * @param name     The name of the entity.
      * @param identifier The resource identifier.
      * @param encoding The auto-detected IANA encoding name of the entity
@@ -1211,6 +1322,10 @@ public abstract class XMLScanner
      * parameter entity names start with '%'; and general entities are just
      * specified by their name.
      *
+     * <p>
+     *  此方法通知实体的结束文档实体具有伪名称"[xml]"DTD具有伪名称"[dtd]"参数实体名称以'％'开头;和一般实体只是由他们的名字指定
+     * 
+     * 
      * @param name The name of the entity.
      *
      * @throws XNIException Thrown by handler to signal an error.
@@ -1234,6 +1349,17 @@ public abstract class XMLScanner
      * <strong>Note:</strong> This method uses fStringBuffer, anything in it
      * at the time of calling is lost.
      *
+     * <p>
+     * 扫描字符引用并将相应的字符附加到指定的缓冲区
+     * 
+     * <p>
+     * <pre>
+     *  [66] CharRef :: ='&#'[0-9] +';' | '&#x'[0-9a-fA-F] +';'
+     * </pre>
+     * 
+     *  <strong>注意</strong>：此方法使用fStringBuffer,调用时其中的任何内容都会丢失
+     * 
+     * 
      * @param buf the character buffer to append chars to
      * @param buf2 the character buffer to append non-normalized chars to
      *
@@ -1394,6 +1520,8 @@ public abstract class XMLScanner
      * <strong>Note:</strong> This assumes the current char has already been
      * identified as a high surrogate.
      *
+     * <p>
+     * 
      * @param buf The StringBuffer to append the read surrogates to.
      * @return True if it succeeded.
      */
@@ -1430,6 +1558,11 @@ public abstract class XMLScanner
 
     /**
      * Convenience function used in all XML scanners.
+     * <p>
+     *  扫描代理并将它们附加到指定的缓冲区
+     * <p>
+     *  <strong>注意：</strong>这假设当前字符已被标识为高代理
+     * 
      */
     protected void reportFatalError(String msgId, Object[] args)
     throws XNIException {

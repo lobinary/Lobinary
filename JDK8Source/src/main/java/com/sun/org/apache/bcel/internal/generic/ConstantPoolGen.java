@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,6 +57,31 @@ package com.sun.org.apache.bcel.internal.generic;
  * individuals on behalf of the Apache Software Foundation.  For more
  * information on the Apache Software Foundation, please see
  * <http://www.apache.org/>.
+ * <p>
+ *  Apache软件许可证,版本11
+ * 
+ *  版权所有(c)2001 Apache软件基金会保留所有权利
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  1源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明
+ * 
+ *  2二进制形式的再分发必须在随分发版提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明
+ * 
+ * 3包含在重新分发中的最终用户文档(如果有的话)必须包括以下声明："本产品包括Apache Software Foundation(http：// wwwapacheorg /)开发的软件。
+ * 或者,此确认可能出现在软件本身,如果和第三方承诺通常出现的地方。
+ * 
+ *  4未经事先书面许可,不得使用"Apache"和"Apache Software Foundation"和"Apache BCEL"这些名称来认可或推广从本软件衍生的产品对于书面许可,请联系apache
+ *  @ apacheorg。
+ * 
+ *  5未经Apache软件基金会事先书面许可,不得将本软件衍生的产品称为"Apache","Apache BCEL"或"Apache"名称。
+ * 
+ * 本软件按"原样"提供,任何明示或暗示的保证,包括但不限于适销性和针对特定用途的适用性的默示担保,在任何情况下均不得免责,APACHE软件基金会或其参与人应负赔偿责任对于任何直接,间接,偶发,特殊,惩罚性
+ * 或后果性损害(包括但不限于替代商品或服务的采购;使用,数据或利润损失;或业务中断)责任,无论是在合同,严格责任或侵权(包括疏忽或其他方式),以任何方式使用本软件,即使已被告知此类损害的可能性======
+ * ==============================================================。
+ * 
+ * 此软件包括许多个人代表Apache软件基金会所做的自愿捐款有关Apache软件基金会的更多信息,请参阅<http：// wwwapacheorg />
+ * 
  */
 
 import com.sun.org.apache.bcel.internal.Constants;
@@ -72,6 +98,11 @@ import java.util.HashMap;
  * Constants.MAX_SHORT entries. Note that the first (0) is used by the
  * JVM and that Double and Long constants need two slots.
  *
+ * <p>
+ *  这个类用于构建一个常量池用户通过`addXXX'方法,`addString',`addClass'等等添加常量这些方法返回一个索引到常量池最后,`getFinalConstantPool()'返回常量
+ * 池up使用`getConstantPool()'可以获得常量池的中间版本常量池具有ConstantsMAX_SHORT条目的容量请注意,第一个(0)由JVM使用,Double和Long常量需要两个槽。
+ * 
+ * 
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
  * @see Constant
  */
@@ -93,6 +124,10 @@ public class ConstantPoolGen implements java.io.Serializable {
   /**
    * Initialize with given array of constants.
    *
+   * <p>
+   *  用给定的常数数组初始化
+   * 
+   * 
    * @param c array of given constants, new ones will be appended
    */
   public ConstantPoolGen(Constant[] cs) {
@@ -157,6 +192,9 @@ public class ConstantPoolGen implements java.io.Serializable {
 
   /**
    * Initialize with given constant pool.
+   * <p>
+   *  用给定的常量池初始化
+   * 
    */
   public ConstantPoolGen(ConstantPool cp) {
     this(cp.getConstantPool());
@@ -164,10 +202,14 @@ public class ConstantPoolGen implements java.io.Serializable {
 
   /**
    * Create empty constant pool.
+   * <p>
+   * 创建空常量池
+   * 
    */
   public ConstantPoolGen() {}
 
   /** Resize internal array of constants.
+  /* <p>
    */
   protected void adjustSize() {
     if(index + 3 >= size) {
@@ -184,6 +226,10 @@ public class ConstantPoolGen implements java.io.Serializable {
   /**
    * Look for ConstantString in ConstantPool containing String `str'.
    *
+   * <p>
+   *  在包含String的ConstantPool中查找ConstantString`str'
+   * 
+   * 
    * @param str String to search for
    * @return index on success, -1 otherwise
    */
@@ -195,6 +241,10 @@ public class ConstantPoolGen implements java.io.Serializable {
   /**
    * Add a new String constant to the ConstantPool, if it is not already in there.
    *
+   * <p>
+   *  向ConstantPool添加一个新的String常量,如果它不在那里
+   * 
+   * 
    * @param str String to add
    * @return index of entry
    */
@@ -223,6 +273,10 @@ public class ConstantPoolGen implements java.io.Serializable {
   /**
    * Look for ConstantClass in ConstantPool named `str'.
    *
+   * <p>
+   *  在ConstantPool中查找ConstantClass名为`str'
+   * 
+   * 
    * @param str String to search for
    * @return index on success, -1 otherwise
    */
@@ -252,6 +306,10 @@ public class ConstantPoolGen implements java.io.Serializable {
   /**
    * Add a new Class reference to the ConstantPool, if it is not already in there.
    *
+   * <p>
+   *  添加一个新的类引用到ConstantPool,如果它不在那里
+   * 
+   * 
    * @param str Class to add
    * @return index of entry
    */
@@ -262,6 +320,10 @@ public class ConstantPoolGen implements java.io.Serializable {
   /**
    * Add a new Class reference to the ConstantPool for a given type.
    *
+   * <p>
+   *  为给定类型的ConstantPool添加一个新的类引用
+   * 
+   * 
    * @param str Class to add
    * @return index of entry
    */
@@ -273,6 +335,10 @@ public class ConstantPoolGen implements java.io.Serializable {
    * Add a reference to an array class (e.g. String[][]) as needed by MULTIANEWARRAY
    * instruction, e.g. to the ConstantPool.
    *
+   * <p>
+   *  根据MULTIANEWARRAY指令的需要向数组类添加引用(例如String [] []),例如指向ConstantPool
+   * 
+   * 
    * @param type type of array class
    * @return index of entry
    */
@@ -283,6 +349,10 @@ public class ConstantPoolGen implements java.io.Serializable {
   /**
    * Look for ConstantInteger in ConstantPool.
    *
+   * <p>
+   *  在ConstantPool中查找ConstantInteger
+   * 
+   * 
    * @param n integer number to look for
    * @return index on success, -1 otherwise
    */
@@ -302,6 +372,10 @@ public class ConstantPoolGen implements java.io.Serializable {
   /**
    * Add a new Integer constant to the ConstantPool, if it is not already in there.
    *
+   * <p>
+   *  向ConstantPool添加一个新的Integer常量,如果它不在那里
+   * 
+   * 
    * @param n integer number to add
    * @return index of entry
    */
@@ -322,6 +396,10 @@ public class ConstantPoolGen implements java.io.Serializable {
   /**
    * Look for ConstantFloat in ConstantPool.
    *
+   * <p>
+   *  在ConstantPool中查找ConstantFloat
+   * 
+   * 
    * @param n Float number to look for
    * @return index on success, -1 otherwise
    */
@@ -343,6 +421,10 @@ public class ConstantPoolGen implements java.io.Serializable {
   /**
    * Add a new Float constant to the ConstantPool, if it is not already in there.
    *
+   * <p>
+   *  向ConstantPool添加一个新的Float常量,如果它不在那里
+   * 
+   * 
    * @param n Float number to add
    * @return index of entry
    */
@@ -365,6 +447,10 @@ public class ConstantPoolGen implements java.io.Serializable {
   /**
    * Look for ConstantUtf8 in ConstantPool.
    *
+   * <p>
+   *  在ConstantPool中查找ConstantUtf8
+   * 
+   * 
    * @param n Utf8 string to look for
    * @return index on success, -1 otherwise
    */
@@ -377,6 +463,10 @@ public class ConstantPoolGen implements java.io.Serializable {
   /**
    * Add a new Utf8 constant to the ConstantPool, if it is not already in there.
    *
+   * <p>
+   * 添加一个新的Utf8常量到ConstantPool,如果它不是已经在那里
+   * 
+   * 
    * @param n Utf8 string to add
    * @return index of entry
    */
@@ -399,6 +489,10 @@ public class ConstantPoolGen implements java.io.Serializable {
   /**
    * Look for ConstantLong in ConstantPool.
    *
+   * <p>
+   *  在ConstantPool中查找ConstantLong
+   * 
+   * 
    * @param n Long number to look for
    * @return index on success, -1 otherwise
    */
@@ -418,6 +512,10 @@ public class ConstantPoolGen implements java.io.Serializable {
   /**
    * Add a new long constant to the ConstantPool, if it is not already in there.
    *
+   * <p>
+   *  向ConstantPool添加一个新的长常量,如果它还不在那里
+   * 
+   * 
    * @param n Long number to add
    * @return index of entry
    */
@@ -439,6 +537,10 @@ public class ConstantPoolGen implements java.io.Serializable {
   /**
    * Look for ConstantDouble in ConstantPool.
    *
+   * <p>
+   *  在ConstantPool中查找ConstantDouble
+   * 
+   * 
    * @param n Double number to look for
    * @return index on success, -1 otherwise
    */
@@ -460,6 +562,10 @@ public class ConstantPoolGen implements java.io.Serializable {
   /**
    * Add a new double constant to the ConstantPool, if it is not already in there.
    *
+   * <p>
+   *  向ConstantPool中添加一个新的双常数,如果它不在那里
+   * 
+   * 
    * @param n Double number to add
    * @return index of entry
    */
@@ -483,6 +589,10 @@ public class ConstantPoolGen implements java.io.Serializable {
   /**
    * Look for ConstantNameAndType in ConstantPool.
    *
+   * <p>
+   *  在ConstantPool中查找ConstantNameAndType
+   * 
+   * 
    * @param name of variable/method
    * @param signature of variable/method
    * @return index on success, -1 otherwise
@@ -496,6 +606,10 @@ public class ConstantPoolGen implements java.io.Serializable {
    * Add a new NameAndType constant to the ConstantPool if it is not already
    * in there.
    *
+   * <p>
+   *  向ConstantPool添加一个新的NameAndType常量,如果它不在那里
+   * 
+   * 
    * @param n NameAndType string to add
    * @return index of entry
    */
@@ -522,6 +636,10 @@ public class ConstantPoolGen implements java.io.Serializable {
   /**
    * Look for ConstantMethodref in ConstantPool.
    *
+   * <p>
+   *  在ConstantPool中查找ConstantMethodref
+   * 
+   * 
    * @param class_name Where to find method
    * @param method_name Guess what
    * @param signature return and argument types
@@ -542,6 +660,10 @@ public class ConstantPoolGen implements java.io.Serializable {
    * Add a new Methodref constant to the ConstantPool, if it is not already
    * in there.
    *
+   * <p>
+   *  向ConstantPool添加一个新的Methodref常量,如果它还不在那里
+   * 
+   * 
    * @param n Methodref string to add
    * @return index of entry
    */
@@ -572,6 +694,10 @@ public class ConstantPoolGen implements java.io.Serializable {
   /**
    * Look for ConstantInterfaceMethodref in ConstantPool.
    *
+   * <p>
+   *  在ConstantPool中查找ConstantInterfaceMethodref
+   * 
+   * 
    * @param class_name Where to find method
    * @param method_name Guess what
    * @param signature return and argument types
@@ -592,6 +718,10 @@ public class ConstantPoolGen implements java.io.Serializable {
    * Add a new InterfaceMethodref constant to the ConstantPool, if it is not already
    * in there.
    *
+   * <p>
+   *  向ConstantPool添加一个新的InterfaceMethodref常量,如果它不在那里
+   * 
+   * 
    * @param n InterfaceMethodref string to add
    * @return index of entry
    */
@@ -622,6 +752,10 @@ public class ConstantPoolGen implements java.io.Serializable {
   /**
    * Look for ConstantFieldref in ConstantPool.
    *
+   * <p>
+   *  在ConstantPool中查找ConstantFieldref
+   * 
+   * 
    * @param class_name Where to find method
    * @param field_name Guess what
    * @param signature return and argument types
@@ -637,6 +771,10 @@ public class ConstantPoolGen implements java.io.Serializable {
    * Add a new Fieldref constant to the ConstantPool, if it is not already
    * in there.
    *
+   * <p>
+   * 向ConstantPool添加一个新的Fieldref常量,如果它不在那里
+   * 
+   * 
    * @param n Fieldref string to add
    * @return index of entry
    */
@@ -660,6 +798,8 @@ public class ConstantPoolGen implements java.io.Serializable {
   }
 
   /**
+  /* <p>
+  /* 
    * @param i index in constant pool
    * @return constant pool entry at index i
    */
@@ -668,12 +808,18 @@ public class ConstantPoolGen implements java.io.Serializable {
   /**
    * Use with care!
    *
+   * <p>
+   *  小心使用！
+   * 
+   * 
    * @param i index in constant pool
    * @param c new constant pool entry at index i
    */
   public void setConstant(int i, Constant c) { constants[i] = c; }
 
   /**
+  /* <p>
+  /* 
    * @return intermediate constant pool
    */
   public ConstantPool getConstantPool() {
@@ -681,6 +827,8 @@ public class ConstantPoolGen implements java.io.Serializable {
   }
 
   /**
+  /* <p>
+  /* 
    * @return current size of constant pool
    */
   public int getSize() {
@@ -688,6 +836,8 @@ public class ConstantPoolGen implements java.io.Serializable {
   }
 
   /**
+  /* <p>
+  /* 
    * @return constant pool with proper length
    */
   public ConstantPool getFinalConstantPool() {
@@ -699,6 +849,8 @@ public class ConstantPoolGen implements java.io.Serializable {
   }
 
   /**
+  /* <p>
+  /* 
    * @return String representation.
    */
   public String toString() {
@@ -711,6 +863,7 @@ public class ConstantPoolGen implements java.io.Serializable {
   }
 
   /** Import constant from another ConstantPool and return new index.
+  /* <p>
    */
   public int addConstant(Constant c, ConstantPoolGen cp) {
     Constant[] constants = cp.getConstantPool().getConstantPool();

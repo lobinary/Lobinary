@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2009, 2013, Oracle and/or its affiliates. All rights reserved.
  * Copyright 2009 Google Inc.  All Rights Reserved.
@@ -37,6 +38,13 @@ package java.util;
  * If this is the case, you are better off deleting ComparableTimSort to
  * eliminate the code duplication.  (See Arrays.java for details.)
  *
+ * <p>
+ *  这是{@link TimSort}的近似副本,修改为使用实现{@link Comparable}的对象数组,而不是使用显式比较器
+ * 
+ *  <p>如果您正在使用优化VM,您可能会发现ComparableTimSort与TimSort相比没有提供任何性能优势,比较器只返回{@code((Comparable)first)compareTo(Second)}
+ * 如果是这种情况,您最好删除ComparableTimSort以消除代码重复(有关详细信息,请参阅Arraysjava)。
+ * 
+ * 
  * @author Josh Bloch
  */
 class ComparableTimSort {
@@ -56,17 +64,32 @@ class ComparableTimSort {
      * ArrayOutOfBounds exception.  See listsort.txt for a discussion
      * of the minimum stack length required as a function of the length
      * of the array being sorted and the minimum merge sequence length.
+     * <p>
+     * 这是将被合并的最小大小的序列较短的序列将通过调用binarySort来延长如果整个数组小于此长度,则不会执行合并
+     * 
+     *  这个常数应该是二的幂在Tim Peter的C实现中为64,但是32在经验上决定在此实现中更好地工作在不太可能发生的情况下,您将此常数设置为不是二的幂的数,需要更改{@link #minRunLength}
+     * 计算。
+     * 
+     * 如果你减少这个常量,你必须改变TimSort构造函数中的stackLen计算,否则冒着ArrayOutOfBounds异常。
+     * 参见listsorttxt讨论作为被排序的数组长度和最小合并序列的函数的最小堆栈长度长度。
+     * 
      */
     private static final int MIN_MERGE = 32;
 
     /**
      * The array being sorted.
+     * <p>
+     *  正在排序的数组
+     * 
      */
     private final Object[] a;
 
     /**
      * When we get into galloping mode, we stay there until both runs win less
      * often than MIN_GALLOP consecutive times.
+     * <p>
+     *  当我们进入舞动模式时,我们呆在那里,直到两次连续赢得比MIN_GALLOP连续的次数少
+     * 
      */
     private static final int  MIN_GALLOP = 7;
 
@@ -74,6 +97,9 @@ class ComparableTimSort {
      * This controls when we get *into* galloping mode.  It is initialized
      * to MIN_GALLOP.  The mergeLo and mergeHi methods nudge it higher for
      * random data, and lower for highly structured data.
+     * <p>
+     *  这控制了当我们获得*进入*舞动模式它被初始化为MIN_GALLOP mergeLo和mergeHi方法微调它为随机数据更高,而对于高度结构化数据
+     * 
      */
     private int minGallop = MIN_GALLOP;
 
@@ -83,6 +109,11 @@ class ComparableTimSort {
      *
      * Unlike Tim's original C version, we do not allocate this much storage
      * when sorting smaller arrays.  This change was required for performance.
+     * <p>
+     *  tmp数组的最大初始大小,用于合并数组可以增长以适应需求
+     * 
+     * 与Tim的原始C版本不同,在排序较小的数组时,我们不会分配这么多的存储空间这种更改是性能所必需的
+     * 
      */
     private static final int INITIAL_TMP_STORAGE_LENGTH = 256;
 
@@ -90,6 +121,9 @@ class ComparableTimSort {
      * Temp storage for merges. A workspace array may optionally be
      * provided in constructor, and if so will be used as long as it
      * is big enough.
+     * <p>
+     *  合并的临时存储可以在构造函数中可选地提供工作区数组,如果是,则只要足够大
+     * 
      */
     private Object[] tmp;
     private int tmpBase; // base of tmp array slice
@@ -104,6 +138,13 @@ class ComparableTimSort {
      *
      * so we could cut the storage for this, but it's a minor amount,
      * and keeping all the info explicit simplifies the code.
+     * <p>
+     *  要合并的未决运行的堆栈运行i从地址base [i]开始,并为len [i]元素延伸它总是为真(只要索引在边界内)：
+     * 
+     *  runBase [i] + runLen [i] == runBase [i + 1]
+     * 
+     *  所以我们可以削减这个存储,但它是一个微小的数量,并保持所有的信息显式简化的代码
+     * 
      */
     private int stackSize = 0;  // Number of pending runs on stack
     private final int[] runBase;
@@ -112,6 +153,10 @@ class ComparableTimSort {
     /**
      * Creates a TimSort instance to maintain the state of an ongoing sort.
      *
+     * <p>
+     *  创建TimSort实例以维持正在进行的排序的状态
+     * 
+     * 
      * @param a the array to be sorted
      * @param work a workspace array (slice)
      * @param workBase origin of usable space in work array
@@ -144,6 +189,10 @@ class ComparableTimSort {
          * large) stack lengths for smaller arrays.  The "magic numbers" in the
          * computation below must be changed if MIN_MERGE is decreased.  See
          * the MIN_MERGE declaration above for more information.
+         * <p>
+         * 分配运行合并堆栈(不能扩展)堆栈长度要求在listsorttxt中描述C版本始终使用相同的堆栈长度(85),但是这被测量为过于昂贵,当排序"中型"数组(例如,100个元素)在Java中因此,我们使用较小
+         * (但足够大)的堆栈长度为较小的数组如果MIN_MERGE减少,下面的计算中的"魔术数字"必须更改请参阅上面的MIN_MERGE声明更多信息。
+         * 
          */
         int stackLen = (len <    120  ?  5 :
                         len <   1542  ? 10 :
@@ -155,6 +204,9 @@ class ComparableTimSort {
     /*
      * The next method (package private and static) constitutes the
      * entire API of this class.
+     * <p>
+     *  下一个方法(包私有和静态)构成这个类的整个API
+     * 
      */
 
     /**
@@ -164,6 +216,10 @@ class ComparableTimSort {
      * any necessary array bounds checks and expanding parameters into
      * the required forms.
      *
+     * <p>
+     * 排序给定范围,使用给定的工作区数组切片用于临时存储(如果可能)此方法设计为在执行任何必需的数组边界检查并将参数扩展为所需形式后从公共方法(在类Arrays中)调用
+     * 
+     * 
      * @param a the array to be sorted
      * @param lo the index of the first element, inclusive, to be sorted
      * @param hi the index of the last element, exclusive, to be sorted
@@ -190,6 +246,9 @@ class ComparableTimSort {
          * March over the array once, left to right, finding natural runs,
          * extending short natural runs to minRun elements, and merging runs
          * to maintain stack invariant.
+         * <p>
+         *  在数组上一次,从左到右,找到自然运行,将自然运行延伸到minRun元素,并合并运行以保持堆栈不变
+         * 
          */
         ComparableTimSort ts = new ComparableTimSort(a, work, workBase, workLen);
         int minRun = minRunLength(nRemaining);
@@ -230,6 +289,12 @@ class ComparableTimSort {
      * elements from index {@code lo}, inclusive, to {@code start},
      * exclusive are already sorted.
      *
+     * <p>
+     *  使用二进制插入排序对指定数组的指定部分排序这是排序少量元素的最佳方法它需要O(n log n)比较,但O(n ^ 2)数据移动(最差情况)
+     * 
+     * 如果指定范围的初始部分已经排序,则此方法可以利用它：该方法假定从{@code lo}(包括)到{@code start},exclusive的元素已经排序
+     * 
+     * 
      * @param a the array in which a range is to be sorted
      * @param lo the index of the first element in the range to be sorted
      * @param hi the index after the last element in the range to be sorted
@@ -252,6 +317,9 @@ class ComparableTimSort {
              * Invariants:
              *   pivot >= all in [lo, left).
              *   pivot <  all in [right, start).
+             * <p>
+             *  不变量：pivot> = all in [lo,left)pivot <all in [right,start]
+             * 
              */
             while (left < right) {
                 int mid = (left + right) >>> 1;
@@ -268,6 +336,9 @@ class ComparableTimSort {
              * that if there are elements equal to pivot, left points to the
              * first slot after them -- that's why this sort is stable.
              * Slide elements over to make room for pivot.
+             * <p>
+             *  不变量仍然保持：pivot> = all in [lo,left)and pivot <all in [left,start),因此pivot属于left注意,如果有元素等于pivot,left指向第一个槽后面 -  - 这就是为什么这一类是稳定的幻灯片元素,以腾出空间枢轴。
+             * 
              */
             int n = start - left;  // The number of elements to move
             // Switch is just an optimization for arraycopy in default case
@@ -298,6 +369,20 @@ class ComparableTimSort {
      * definition of "descending" is needed so that the call can safely
      * reverse a descending sequence without violating stability.
      *
+     * <p>
+     *  返回在指定数组中指定位置开始的运行的长度,如果运行下降,则反转运行(确保运行在方法返回时总是递增)
+     * 
+     * 运行是最长的升序序列,具有：
+     * 
+     *  a [lo] <= a [lo + 1] <= a [lo + 2] <=
+     * 
+     *  或最长的递减序列：
+     * 
+     *  a [lo]> a [lo + 1]> a [lo + 2]>
+     * 
+     *  对于其在稳定合并中的预期用途,需要"下降"的定义的严格性,使得调用可以安全地反转降序而不违反稳定性
+     * 
+     * 
      * @param a the array in which a run is to be counted and possibly reversed
      * @param lo index of the first element in the run
      * @param hi index after the last element that may be contained in the run.
@@ -328,6 +413,10 @@ class ComparableTimSort {
     /**
      * Reverse the specified range of the specified array.
      *
+     * <p>
+     *  反转指定数组的指定范围
+     * 
+     * 
      * @param a the array in which a range is to be reversed
      * @param lo the index of the first element in the range to be reversed
      * @param hi the index after the last element in the range to be reversed
@@ -355,6 +444,16 @@ class ComparableTimSort {
      *
      * For the rationale, see listsort.txt.
      *
+     * <p>
+     *  返回指定长度的数组的最小可接受运行长度。自然运行时间比此短,将使用{@link #binarySort}
+     * 
+     *  粗略地说,计算是：
+     * 
+     * 如果n <MIN_MERGE,返回n(它太小,不能处理奇怪的东西)否则如果n是2的精确幂,返回MIN_MERGE / 2否则返回int k,MIN_MERGE / 2 <= k <= MIN_MERGE, / k接近,但严格小于,精确的2的幂。
+     * 
+     *  有关基本原理,请参见listsorttxt
+     * 
+     * 
      * @param n the length of the array to be sorted
      * @return the length of the minimum run to be merged
      */
@@ -371,6 +470,10 @@ class ComparableTimSort {
     /**
      * Pushes the specified run onto the pending-run stack.
      *
+     * <p>
+     *  将指定的运行推入待运行的堆栈
+     * 
+     * 
      * @param runBase index of the first element in the run
      * @param runLen  the number of elements in the run
      */
@@ -390,6 +493,13 @@ class ComparableTimSort {
      * This method is called each time a new run is pushed onto the stack,
      * so the invariants are guaranteed to hold for i < stackSize upon
      * entry to the method.
+     * <p>
+     *  检查等待合并的运行堆栈,并合并相邻的运行,直到堆栈不变式重新建立：
+     * 
+     *  1 runLen [i-3]> runLen [i-2] + runLen [i-1] 2 runLen [
+     * 
+     *  每次将新的运行推入堆栈时,将调用此方法,因此保证在进入方法时保持i <stackSize的不变量
+     * 
      */
     private void mergeCollapse() {
         while (stackSize > 1) {
@@ -409,6 +519,9 @@ class ComparableTimSort {
     /**
      * Merges all runs on the stack until only one remains.  This method is
      * called once, to complete the sort.
+     * <p>
+     * 合并所有在堆栈上运行,直到只剩下一个此方法被调用一次,完成排序
+     * 
      */
     private void mergeForceCollapse() {
         while (stackSize > 1) {
@@ -424,6 +537,10 @@ class ComparableTimSort {
      * the penultimate or antepenultimate run on the stack.  In other words,
      * i must be equal to stackSize-2 or stackSize-3.
      *
+     * <p>
+     *  在堆栈索引i和i + 1处合并两个运行。运行i必须是堆栈上的倒数第二个或者倒数第二个运行。换句话说,i必须等于stackSize-2或者stackSize-3
+     * 
+     * 
      * @param i stack index of the first of the two runs to merge
      */
     @SuppressWarnings("unchecked")
@@ -443,6 +560,9 @@ class ComparableTimSort {
          * Record the length of the combined runs; if i is the 3rd-last
          * run now, also slide over the last run (which isn't involved
          * in this merge).  The current run (i+1) goes away in any case.
+         * <p>
+         *  记录组合运行的长度;如果i是现在的第三个最后一个运行,也滑过最后一个运行(这不涉及这个合并)当前运行(i + 1)在任何情况下消失
+         * 
          */
         runLen[i] = len1 + len2;
         if (i == stackSize - 3) {
@@ -454,6 +574,9 @@ class ComparableTimSort {
         /*
          * Find where the first element of run2 goes in run1. Prior elements
          * in run1 can be ignored (because they're already in place).
+         * <p>
+         *  找到run2的第一个元素在run1中的位置run1中的先前元素可以被忽略(因为它们已经就位)
+         * 
          */
         int k = gallopRight((Comparable<Object>) a[base2], a, base1, len1, 0);
         assert k >= 0;
@@ -465,6 +588,9 @@ class ComparableTimSort {
         /*
          * Find where the last element of run1 goes in run2. Subsequent elements
          * in run2 can be ignored (because they're already in place).
+         * <p>
+         *  找到run1的最后一个元素在run2中的位置run2中的后续元素可以被忽略(因为它们已经就位)
+         * 
          */
         len2 = gallopLeft((Comparable<Object>) a[base1 + len1 - 1], a,
                 base2, len2, len2 - 1);
@@ -484,6 +610,10 @@ class ComparableTimSort {
      * specified sorted range; if the range contains an element equal to key,
      * returns the index of the leftmost equal element.
      *
+     * <p>
+     * 找到要将指定键插入指定排序范围的位置;如果范围包含等于key的元素,则返回最左边的等于元素的索引
+     * 
+     * 
      * @param key the key whose insertion point to search for
      * @param a the array in which to search
      * @param base the index of the first element in the range
@@ -540,6 +670,9 @@ class ComparableTimSort {
          * Now a[base+lastOfs] < key <= a[base+ofs], so key belongs somewhere
          * to the right of lastOfs but no farther right than ofs.  Do a binary
          * search, with invariant a[base + lastOfs - 1] < key <= a[base + ofs].
+         * <p>
+         *  现在一个[base + lastOfs] <key <= a [base + ofs],所以key属于lastOfs的右边,但没有比right更右的二进制搜索,不变量为[base + lastOfs  -  1] <= a [base + ofs]。
+         * 
          */
         lastOfs++;
         while (lastOfs < ofs) {
@@ -558,6 +691,10 @@ class ComparableTimSort {
      * Like gallopLeft, except that if the range contains an element equal to
      * key, gallopRight returns the index after the rightmost equal element.
      *
+     * <p>
+     *  像gallopLeft,除了如果范围包含等于key的元素,gallopRight返回最右边的元素之后的索引
+     * 
+     * 
      * @param key the key whose insertion point to search for
      * @param a the array in which to search
      * @param base the index of the first element in the range
@@ -610,6 +747,9 @@ class ComparableTimSort {
          * Now a[b + lastOfs] <= key < a[b + ofs], so key belongs somewhere to
          * the right of lastOfs but no farther right than ofs.  Do a binary
          * search, with invariant a[b + lastOfs - 1] <= key < a[b + ofs].
+         * <p>
+         *  现在a [b + lastOfs] <= key <a [b + ofs],所以key属于lastOfs右边的某个位置,但是没有比ofs更远的二进制搜索,不变量a [b + lastOfs  -  1]键<a [b + ofs]。
+         * 
          */
         lastOfs++;
         while (lastOfs < ofs) {
@@ -634,6 +774,13 @@ class ComparableTimSort {
      * its twin, mergeHi should be called if len1 >= len2.  (Either method
      * may be called if len1 == len2.)
      *
+     * <p>
+     * 以稳定的方式合并两个相邻的运行第一个运行的第一个元素必须大于第二个运行的第一个元素(a [base1]> a [base2]),并且第一个运行的最后一个元素a [base1 + len1-1])必须大于
+     * 第二次运行的所有元素。
+     * 
+     *  对于性能,只有当len1 <= len2时才应调用此方法;它的双,mergeHi应该被调用如果len1> = len2(如果len1 == len2,可以调用任一方法)
+     * 
+     * 
      * @param base1 index of first element in first run to be merged
      * @param len1  length of first run to be merged (must be > 0)
      * @param base2 index of first element in second run to be merged
@@ -674,6 +821,9 @@ class ComparableTimSort {
             /*
              * Do the straightforward thing until (if ever) one run starts
              * winning consistently.
+             * <p>
+             *  做简单的事情,直到(如果有)一个运行开始赢得一贯
+             * 
              */
             do {
                 assert len1 > 1 && len2 > 0;
@@ -696,6 +846,9 @@ class ComparableTimSort {
              * One run is winning so consistently that galloping may be a
              * huge win. So try that, and continue galloping until (if ever)
              * neither run appears to be winning consistently anymore.
+             * <p>
+             *  一个运行赢得如此一致,舞动可能是一个巨大的胜利所以试试,并继续疾驰,直到(如果曾经)两个运行似乎一直赢了不断的
+             * 
              */
             do {
                 assert len1 > 1 && len2 > 0;
@@ -751,6 +904,10 @@ class ComparableTimSort {
      * len1 >= len2; mergeLo should be called if len1 <= len2.  (Either method
      * may be called if len1 == len2.)
      *
+     * <p>
+     * 像mergeLo,除了这个方法应该被调用只有当len1> = len2; mergeLo应该被调用如果len1 <= len2(如果len1 == len2,可以调用任一方法)
+     * 
+     * 
      * @param base1 index of first element in first run to be merged
      * @param len1  length of first run to be merged (must be > 0)
      * @param base2 index of first element in second run to be merged
@@ -794,6 +951,9 @@ class ComparableTimSort {
             /*
              * Do the straightforward thing until (if ever) one run
              * appears to win consistently.
+             * <p>
+             *  做直接的事情,直到(如果有)一个跑步似乎赢得一贯
+             * 
              */
             do {
                 assert len1 > 0 && len2 > 1;
@@ -816,6 +976,9 @@ class ComparableTimSort {
              * One run is winning so consistently that galloping may be a
              * huge win. So try that, and continue galloping until (if ever)
              * neither run appears to be winning consistently anymore.
+             * <p>
+             *  一个运行赢得如此一致,舞动可能是一个巨大的胜利所以试试,并继续疾驰,直到(如果曾经)两个运行似乎一直赢了不断的
+             * 
              */
             do {
                 assert len1 > 0 && len2 > 1;
@@ -873,6 +1036,9 @@ class ComparableTimSort {
      * number of elements, increasing its size if necessary.  The size
      * increases exponentially to ensure amortized linear time complexity.
      *
+     * <p>
+     *  确保外部数组tmp至少具有指定数量的元素,如果必要,增加其大小大小按指数规律增加,以确保摊销的线性时间复杂度
+     * 
      * @param minCapacity the minimum required capacity of the tmp array
      * @return tmp, whether or not it grew
      */

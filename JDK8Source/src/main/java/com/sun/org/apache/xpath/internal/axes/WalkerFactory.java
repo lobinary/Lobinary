@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会
+ * 
+ *  根据Apache许可证第20版("许可证")授权;您不得使用此文件,除非符合许可证您可以在获取许可证的副本
+ * 
+ *  http：// wwwapacheorg / licenses / LICENSE-20
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件将按"原样"基础分发,无任何明示或暗示的保证或条件。请参阅许可证管理权限和限制许可证
+ * 
  */
 /*
  * $Id: WalkerFactory.java,v 1.2.4.1 2005/09/10 03:42:19 jeffsuttor Exp $
+ * <p>
+ *  $ Id：WalkerFactoryjava,v 1241 2005/09/10 03:42:19 jeffsuttor Exp $
+ * 
  */
 package com.sun.org.apache.xpath.internal.axes;
 
@@ -42,6 +55,9 @@ import com.sun.org.apache.xpath.internal.res.XPATHErrorResources;
  * This class is both a factory for XPath location path expressions,
  * which are built from the opcode map output, and an analysis engine
  * for the location path expressions in order to provide optimization hints.
+ * <p>
+ * 这个类既是XPath位置路径表达式的工厂,它是从操作码映射输出构​​建的,也是位置路径表达式的分析引擎,以便提供优化提示
+ * 
  */
 public class WalkerFactory
 {
@@ -49,6 +65,10 @@ public class WalkerFactory
   /**
    * This method is for building an array of possible levels
    * where the target element(s) could be found for a match.
+   * <p>
+   *  此方法用于构建可能级别的数组,其中可找到用于匹配的目标元素
+   * 
+   * 
    * @param lpi The owning location path iterator.
    * @param compiler non-null reference to compiler object that has processed
    *                 the XPath operations into an opcode map.
@@ -83,6 +103,10 @@ public class WalkerFactory
   /**
    * This method is for building an array of possible levels
    * where the target element(s) could be found for a match.
+   * <p>
+   *  此方法用于构建可能级别的数组,其中可找到用于匹配的目标元素
+   * 
+   * 
    * @param lpi The owning location path iterator object.
    * @param compiler non-null reference to compiler object that has processed
    *                 the XPath operations into an opcode map.
@@ -149,6 +173,10 @@ public class WalkerFactory
    * Create a new LocPathIterator iterator.  The exact type of iterator
    * returned is based on an analysis of the XPath operations.
    *
+   * <p>
+   *  创建一个新的LocPathIterator迭代器返回的迭代器的确切类型基于对XPath操作的分析
+   * 
+   * 
    * @param compiler non-null reference to compiler object that has processed
    *                 the XPath operations into an opcode map.
    * @param opPos The position of the operation code for this itterator.
@@ -290,6 +318,10 @@ public class WalkerFactory
    * Special purpose function to see if we can optimize the pattern for
    * a DescendantIterator.
    *
+   * <p>
+   *  特殊功能看看我们是否可以优化DescendantIterator的模式
+   * 
+   * 
    * @param compiler non-null reference to compiler object that has processed
    *                 the XPath operations into an opcode map.
    * @param stepOpCodePos The opcode position for the step.
@@ -349,6 +381,10 @@ public class WalkerFactory
 
     /**
      * Get a corresponding BIT_XXX from an axis.
+     * <p>
+     *  从轴获取对应的BIT_XXX
+     * 
+     * 
      * @param axis One of Axis.ANCESTOR, etc.
      * @return One of BIT_ANCESTOR, etc.
      */
@@ -471,6 +507,9 @@ public class WalkerFactory
 
   /**
    * Tell if the predicates need to have proximity knowledge.
+   * <p>
+   *  告诉谓词是否需要具有邻近性知识
+   * 
    */
   public static boolean mightBeProximate(Compiler compiler, int opPos, int stepType)
           throws javax.xml.transform.TransformerException
@@ -545,6 +584,10 @@ public class WalkerFactory
    * Special purpose function to see if we can optimize the pattern for
    * a DescendantIterator.
    *
+   * <p>
+   * 特殊功能看看我们是否可以优化DescendantIterator的模式
+   * 
+   * 
    * @param compiler non-null reference to compiler object that has processed
    *                 the XPath operations into an opcode map.
    * @param stepOpCodePos The opcode position for the step.
@@ -653,6 +696,10 @@ public class WalkerFactory
    * the location path as a whole.  See the BIT_XXX constants for meaning about
    * each of the bits.
    *
+   * <p>
+   *  分析位置路径并返回32位,提供有关位置路径的信息。有关每个位的含义,请参阅BIT_XXX常量
+   * 
+   * 
    * @param compiler non-null reference to compiler object that has processed
    *                 the XPath operations into an opcode map.
    * @param stepOpCodePos The opcode position for the step.
@@ -778,6 +825,10 @@ public class WalkerFactory
    * Tell if the given axis goes downword.  Bogus name, if you can think of
    * a better one, please do tell.  This really has to do with inverting
    * attribute axis.
+   * <p>
+   *  告诉如果给定的轴是downword Bogus名字,如果你能想到一个更好的,请告诉这真的有关反转属性轴
+   * 
+   * 
    * @param axis One of Axis.XXX.
    * @return true if the axis is not a child axis and does not go up from
    * the axis root.
@@ -808,6 +859,17 @@ public class WalkerFactory
    * the location path have to be executed by the following step,
    * because they have to know the context of their execution.
    *
+   * <p>
+   * 阅读<a href=\"http://wwww3org/TR/xpath#location-paths\"> LocationPath </a>作为广义匹配模式这意味着LocationPath被向后读取
+   * ,作为给定节点上的测试,以查看它是否匹配选择的标准,并且在上下文节点结束。
+   * 本质上,这是来自给定节点的向后查询,以找到上下文节点。
+   * 因此,选择"foo / daz [2] "is,in non-abreviated expanded syntax,"self :: node()/ following-sibling :: foo /
+   *  child :: daz [position()= 2]"把这作为一个可能节点的匹配模式,输出到"self :: daz / parent :: foo [child :: daz [position
+   * ()= 2 and isPrevStepNode()] precedingSibling :: node()[isContextNodeOfLocationPath()]",添加魔术isPrevStep
+   * Node和isContextNodeOfLocationPath操作位置路径中的谓词必须通过以下步骤执行,因为它们必须知道其执行的上下文。
+   * 本质上,这是来自给定节点的向后查询,以找到上下文节点。
+   * 
+   * 
    * @param mpi The MatchPatternIterator to which the steps will be attached.
    * @param compiler The compiler that holds the syntax tree/op map to
    * construct from.
@@ -960,6 +1022,10 @@ public class WalkerFactory
    * Create a StepPattern that is contained within a LocationPath.
    *
    *
+   * <p>
+   * 创建一个包含在LocationPath中的StepPattern
+   * 
+   * 
    * @param compiler The compiler that holds the syntax tree/op map to
    * construct from.
    * @param stepOpCodePos The current op code position within the opmap.
@@ -1117,6 +1183,10 @@ public class WalkerFactory
    * Analyze a step and give information about it's predicates.  Right now this
    * just returns true or false if the step has a predicate.
    *
+   * <p>
+   *  分析一个步骤并给出它的谓词的信息现在,如果该步骤有一个谓词,则只返回true或false
+   * 
+   * 
    * @param compiler non-null reference to compiler object that has processed
    *                 the XPath operations into an opcode map.
    * @param opPos The opcode position for the step.
@@ -1153,6 +1223,10 @@ public class WalkerFactory
   /**
    * Create the proper Walker from the axes type.
    *
+   * <p>
+   *  从轴类型创建正确的Walker
+   * 
+   * 
    * @param compiler non-null reference to compiler object that has processed
    *                 the XPath operations into an opcode map.
    * @param opPos The opcode position for the step.
@@ -1177,6 +1251,11 @@ public class WalkerFactory
     System.out.println("3: "+compiler.getOp(opPos+3));
     System.out.println("4: "+compiler.getOp(opPos+4));
     System.out.println("5: "+compiler.getOp(opPos+5));
+    /* <p>
+    /*  Systemoutprintln("0："+ compilergetOp(opPos)); Systemoutprintln("1："+ compilergetOp(opPos + 1)); Syst
+    /* emoutprintln("2："+ compilergetOp(opPos + 2)); Systemoutprintln("3："+ compilergetOp(opPos + 3)); Syste
+    /* moutprintln("4："+ compilergetOp(opPos + 4)); Systemoutprintln("5："+ compilergetOp(opPos + 5));。
+    /* 
     */
     boolean simpleInit = false;
     int totalNumberWalkers = (analysis & BITS_COUNT);
@@ -1267,6 +1346,10 @@ public class WalkerFactory
       System.out.println("or stuff: "+(whatToShow & (DTMFilter.SHOW_ATTRIBUTE
                              | DTMFilter.SHOW_ELEMENT
                              | DTMFilter.SHOW_PROCESSING_INSTRUCTION)));
+      /* <p>
+      /*  Systemoutprint("construct："); NodeTestdebugWhatToShow(whatToShow); Systemoutprintln("or stuff："+(wha
+      /* tToShow&(DTMFilterSHOW_ATTRIBUTE | DTMFilterSHOW_ELEMENT | DTMFilterSHOW_PROCESSING_INSTRUCTION)));。
+      /* 
       */
       if ((0 == (whatToShow
                  & (DTMFilter.SHOW_ATTRIBUTE | DTMFilter.SHOW_NAMESPACE | DTMFilter.SHOW_ELEMENT
@@ -1590,6 +1673,10 @@ public class WalkerFactory
    * Tell if the pattern can be 'walked' with the iteration steps in natural
    * document order, without duplicates.
    *
+   * <p>
+   * 告诉模式是否可以用自然文档顺序的迭代步骤"步行",没有重复
+   * 
+   * 
    * @param analysis The general analysis of the pattern.
    *
    * @return true if the walk can be done in natural order.
@@ -1612,6 +1699,10 @@ public class WalkerFactory
    * Tell if the pattern can be 'walked' with the iteration steps in natural
    * document order, without duplicates.
    *
+   * <p>
+   *  告诉模式是否可以用自然文档顺序的迭代步骤"步行",没有重复
+   * 
+   * 
    * @param compiler non-null reference to compiler object that has processed
    *                 the XPath operations into an opcode map.
    * @param stepOpCodePos The opcode position for the step.
@@ -1733,6 +1824,9 @@ public class WalkerFactory
   /**
    * First 8 bits are the number of top-level location steps.  Hopefully
    *  there will never be more that 255 location steps!!!
+   * <p>
+   *  前8位是顶层位置步骤的数量希望永远不会有更多的255位置步骤！
+   * 
    */
   public static final int BITS_COUNT = 0x000000FF;
 
@@ -1784,6 +1878,9 @@ public class WalkerFactory
   /**
    * Bit is on if any of the walkers contain a filter (i.e. id(), extension
    *  function, etc.) step.
+   * <p>
+   *  如果任何步行者包含过滤器(即id(),扩展函数等)步骤,则位被打开
+   * 
    */
   public static final int BIT_FILTER = (0x00001000 << 14);
 
@@ -1793,6 +1890,9 @@ public class WalkerFactory
   /**
    * If any of these bits are on, the expression may likely traverse outside
    *  the given subtree.
+   * <p>
+   *  如果这些位中的任何一个为开,则表达式可能遍历给定子树之外
+   * 
    */
   public static final int BITMASK_TRAVERSES_OUTSIDE_SUBTREE = (BIT_NAMESPACE  // ??
                                                                 | BIT_PRECEDING_SIBLING
@@ -1808,6 +1908,9 @@ public class WalkerFactory
   /**
    * Bit is on if any of the walkers can go backwards in document
    *  order from the context node.
+   * <p>
+   *  如果任何步行者可以从文本顺序以文本顺序从上下文节点返回,则位为打开
+   * 
    */
   public static final int BIT_BACKWARDS_SELF = (0x00001000 << 16);
 
@@ -1817,6 +1920,8 @@ public class WalkerFactory
   /**
    * Bit is on if any of the walkers contain an node() test.  This is
    *  really only useful if the count is 1.
+   * <p>
+   *  如果任何一个步行器包含一个node()测试这个位是开的这只是有用的,如果计数为1
    */
   public static final int BIT_NODETEST_ANY = (0x00001000 << 18);
 

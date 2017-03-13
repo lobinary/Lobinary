@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -19,6 +20,14 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
+ * <p>
+ *  根据一个或多个贡献者许可协议授予Apache软件基金会(ASF)有关版权所有权的其他信息,请参阅随本作品分发的NOTICE文件。
+ * ASF根据Apache许可证第20版("许可证")向您授予此文件;您不得使用此文件,除非符合许可证您可以在获取许可证的副本。
+ * 
+ *  http：// wwwapacheorg / licenses / LICENSE-20
+ * 
+ * 除非适用法律要求或书面同意,否则根据许可证分发的软件将按"原样"基础分发,无任何明示或暗示的保证或条件。请参阅许可证管理权限和限制许可证
+ * 
  */
 package com.sun.org.apache.xml.internal.security.transforms.implementations;
 
@@ -52,6 +61,12 @@ import org.w3c.dom.Element;
  * Implements the <CODE>http://www.w3.org/TR/1999/REC-xslt-19991116</CODE>
  * transform.
  *
+ * <p>
+ *  类TransformXSLT
+ * 
+ *  实现<CODE> http：// wwww3org / TR / 1999 / REC-xslt-19991116 </CODE>变换
+ * 
+ * 
  * @author Christian Geuer-Pollmann
  */
 public class TransformXSLT extends TransformSpi {
@@ -71,6 +86,11 @@ public class TransformXSLT extends TransformSpi {
      * Method engineGetURI
      *
      * @inheritDoc
+     * <p>
+     *  方法engineGetURI
+     * 
+     *  @inheritDoc
+     * 
      */
     protected String engineGetURI() {
         return implementedTransformURI;
@@ -100,6 +120,9 @@ public class TransformXSLT extends TransformSpi {
              * input is an XPath node-set, then the signature application should
              * attempt to convert it to octets (apply Canonical XML]) as described
              * in the Reference Processing Model (section 4.3.3.2).
+             * <p>
+             *  此转换需要一个八位字节流作为输入如果实际输入是XPath节点集,那么签名应用程序应尝试将其转换为八位字节(应用规范XML),如参考处理模型(第4332节)
+             * 
              */
             Source xmlSource =
                 new StreamSource(new ByteArrayInputStream(input.getBytes()));
@@ -112,6 +135,10 @@ public class TransformXSLT extends TransformSpi {
              * whereby this.xsltElement is not the rootElement of the Document,
              * this causes problems;
              * so we convert the stylesheet to byte[] and use this as input stream
+             * <p>
+             * 这种复杂的样式表本身的转换是必要的,因为需要获得纯样式表。
+             * 如果我们简单地说源样式表=新的DOMSource(thisxsltElement);由此thisxsltElement不是Document的rootElement,这会导致问题;因此我们将样式表转换为b
+             * yte []并将其用作输入流。
              */
             {
                 ByteArrayOutputStream os = new ByteArrayOutputStream();

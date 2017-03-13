@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1998, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -74,6 +75,21 @@ import sun.swing.SwingUtilities2;
  * has been added to the <code>java.beans</code> package.
  * Please see {@link java.beans.XMLEncoder}.
  *
+ * <p>
+ *  Java的外观和感觉,也称为金属
+ * <p>
+ *  {@code MetalLookAndFeel}提供的每个{@code ComponentUI}从defaults表中导出它的行为除非另有说明,这个包中的每个{@code ComponentUI}实现
+ * 都记录了他们使用的默认集合。
+ * 除非另有说明,默认值在调用{@code installUI}时安装,并按照{@code LookAndFeel}中列出的建议安装默认值。
+ * <p>
+ * {@code MetalLookAndFeel}从{@code MetalTheme}中得到它的调色板和字体默认主题是{@code OceanTheme}主题可以使用{@code setCurrentTheme}
+ * 方法更改,有关更改主题的详细信息默认主题为{@code DefaultMetalTheme}系统属性{@code"swingmetalTheme"}可以设置为{@code"steel"},表示默认值应为
+ * {@code DefaultMetalTheme}。
+ * <p>
+ * <strong>警告：</strong>此类的序列化对象将不与未来的Swing版本兼容当前的序列化支持适用于运行相同版本的Swing的应用程序之间的短期存储或RMI。
+ * 支持长期存储所有JavaBeans&trade;已添加到<code> javabeans </code>包中请参见{@link javabeansXMLEncoder}。
+ * 
+ * 
  * @see MetalTheme
  * @see DefaultMetalTheme
  * @see OceanTheme
@@ -88,27 +104,42 @@ public class MetalLookAndFeel extends BasicLookAndFeel
 
     /**
      * True if checked for windows yet.
+     * <p>
+     *  如果选中窗口,则为True
+     * 
      */
     private static boolean checkedWindows;
     /**
      * True if running on Windows.
+     * <p>
+     *  如果在Windows上运行,则为true
+     * 
      */
     private static boolean isWindows;
 
     /**
      * Set to true first time we've checked swing.useSystemFontSettings.
+     * <p>
+     *  设置为true,我们第一次检查swinguseSystemFontSettings
+     * 
      */
     private static boolean checkedSystemFontSettings;
 
     /**
      * True indicates we should use system fonts, unless the developer has
      * specified otherwise with Application.useSystemFontSettings.
+     * <p>
+     *  True表示我们应该使用系统字体,除非开发人员使用ApplicationuseSystemFontSettings另外指定
+     * 
      */
     private static boolean useSystemFonts;
 
 
     /**
      * Returns true if running on Windows.
+     * <p>
+     *  如果在Windows上运行,则返回true
+     * 
      */
     static boolean isWindows() {
         if (!checkedWindows) {
@@ -128,6 +159,9 @@ public class MetalLookAndFeel extends BasicLookAndFeel
     /**
      * Returns true if system fonts should be used, this is only useful
      * for windows.
+     * <p>
+     *  如果应使用系统字体,则返回true,这只对窗口有用
+     * 
      */
     static boolean useSystemFonts() {
         if (isWindows() && useSystemFonts) {
@@ -150,6 +184,9 @@ public class MetalLookAndFeel extends BasicLookAndFeel
     /**
      * Returns true if the high contrast theme should be used as the default
      * theme.
+     * <p>
+     * 如果高对比度主题应用作默认主题,则返回true
+     * 
      */
     private static boolean useHighContrastTheme() {
         if (isWindows() && useSystemFonts()) {
@@ -164,6 +201,9 @@ public class MetalLookAndFeel extends BasicLookAndFeel
 
     /**
      * Returns true if we're using the Ocean Theme.
+     * <p>
+     *  如果我们使用海洋主题,则返回true
+     * 
      */
     static boolean usingOcean() {
         return (getCurrentTheme() instanceof OceanTheme);
@@ -173,6 +213,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Returns the name of this look and feel. This returns
      * {@code "Metal"}.
      *
+     * <p>
+     *  返回这个外观的名称这返回{@code"Metal"}
+     * 
+     * 
      * @return the name of this look and feel
      */
     public String getName() {
@@ -183,6 +227,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Returns an identifier for this look and feel. This returns
      * {@code "Metal"}.
      *
+     * <p>
+     *  返回此外观的标识符返回{@code"Metal"}
+     * 
+     * 
      * @return the identifier of this look and feel
      */
     public String getID() {
@@ -193,6 +241,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Returns a short description of this look and feel. This returns
      * {@code "The Java(tm) Look and Feel"}.
 
+     * <p>
+     *  返回此外观的简短描述返回{@code"Java(tm)Look and Feel"}
+     * 
+     * 
      * @return a short description for the look and feel
      */
     public String getDescription() {
@@ -203,6 +255,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Returns {@code false}; {@code MetalLookAndFeel} is not a native
      * look and feel.
      *
+     * <p>
+     *  返回{@code false}; {@code MetalLookAndFeel}不是原生的外观和感觉
+     * 
+     * 
      * @return {@code false}
      */
     public boolean isNativeLookAndFeel() {
@@ -213,6 +269,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Returns {@code true}; {@code MetalLookAndFeel} can be run on
      * any platform.
      *
+     * <p>
+     *  返回{@code true}; {@code MetalLookAndFeel}可以在任何平台上运行
+     * 
+     * 
      * @return {@code true}
      */
     public boolean isSupportedLookAndFeel() {
@@ -223,6 +283,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Returns {@code true}; metal can provide {@code Window}
      * decorations.
      *
+     * <p>
+     *  返回{@code true};金属可以提供{@code Window}装饰
+     * 
+     * 
      * @return {@code true}
      *
      * @see JDialog#setDefaultLookAndFeelDecorated
@@ -246,6 +310,13 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * "MetalColorChooserUI"}, as such, {@code
      * javax.swing.plaf.basic.BasicColorChooserUI} is used.
      *
+     * <p>
+     * 使用从{@code uiClassID}到ui类{@code MetalLookAndFeel}的完全限定名称的映射填充{@code table}为名为MetalXXXUI的包{@code javaxswingplafmetal}
+     * 中的每个类注册一个条目。
+     * string {@code XXX}是Swing的uiClassIDs之一对于没有金属类的{@code uiClassIDs},使用{@code javaxswingplafbasic}中的相应类。
+     * 例如,metal没有一个名为{@code "MetalColorChooserUI"},因此,使用{@code javaxswingplafbasicBasicColorChooserUI}。
+     * 
+     * 
      * @param table the {@code UIDefaults} instance the entries are
      *        added to
      * @throws NullPointerException if {@code table} is {@code null}
@@ -374,6 +445,68 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * </table>
      * The value {@code theme} corresponds to the current {@code MetalTheme}.
      *
+     * <p>
+     *  使用系统颜色填充{@code table}以下值添加到{@code table}：<table border ="1"cellpadding ="1"cellspacing ="0"
+     * summary="Metal's system color mapping">
+     * <tr valign="top"  align="left">
+     * <th style ="background-color：#CCCCFF"align ="left">键<th style ="background-color：#CCCCFF"align ="left">
+     * 值。
+     * <tr valign="top"  align="left">
+     *  <td>"desktop"<td> {@ code themegetDesktopColor()}
+     * <tr valign="top"  align="left">
+     *  <td>"activeCaption"<td> {@ code themegetWindowTitleBackground()}
+     * <tr valign="top"  align="left">
+     *  <td>"activeCaptionText"<td> {@ code themegetWindowTitleForeground()}
+     * <tr valign="top"  align="left">
+     *  <td>"activeCaptionBorder"<td> {@ code themegetPrimaryControlShadow()}
+     * <tr valign="top"  align="left">
+     *  <td>"inactiveCaption"<td> {@ code themegetWindowTitleInactiveBackground()}
+     * <tr valign="top"  align="left">
+     *  <td>"inactiveCaptionText"<td> {@ code themegetWindowTitleInactiveForeground()}
+     * <tr valign="top"  align="left">
+     *  <td>"inactiveCaptionBorder"<td> {@ code themegetControlShadow()}
+     * <tr valign="top"  align="left">
+     *  <td>"window"<td> {@ code themegetWindowBackground()}
+     * <tr valign="top"  align="left">
+     *  <td>"windowBorder"<td> {@ code themegetControl()}
+     * <tr valign="top"  align="left">
+     *  <td>"windowText"<td> {@ code themegetUserTextColor()}
+     * <tr valign="top"  align="left">
+     *  <td>"menu"<td> {@ code themegetMenuBackground()}
+     * <tr valign="top"  align="left">
+     * <td>"menuText"<td> {@ code themegetMenuForeground()}
+     * <tr valign="top"  align="left">
+     *  <td>"text"<td> {@ code themegetWindowBackground()}
+     * <tr valign="top"  align="left">
+     *  <td>"textText"<td> {@ code themegetUserTextColor()}
+     * <tr valign="top"  align="left">
+     *  <td>"textHighlight"<td> {@ code themegetTextHighlightColor()}
+     * <tr valign="top"  align="left">
+     *  <td>"textHighlightText"<td> {@ code themegetHighlightedTextColor()}
+     * <tr valign="top"  align="left">
+     *  <td>"textInactiveText"<td> {@ code themegetInactiveSystemTextColor()}
+     * <tr valign="top"  align="left">
+     *  <td>"control"<td> {@ code themegetControl()}
+     * <tr valign="top"  align="left">
+     *  <td>"controlText"<td> {@ code themegetControlTextColor()}
+     * <tr valign="top"  align="left">
+     *  <td>"controlHighlight"<td> {@ code themegetControlHighlight()}
+     * <tr valign="top"  align="left">
+     *  <td>"controlLtHighlight"<td> {@ code themegetControlHighlight()}
+     * <tr valign="top"  align="left">
+     *  <td>"controlShadow"<td> {@ code themegetControlShadow()}
+     * <tr valign="top"  align="left">
+     *  <td>"controlDkShadow"<td> {@ code themegetControlDarkShadow()}
+     * <tr valign="top"  align="left">
+     *  <td>"scrollbar"<td> {@ code themegetControl()}
+     * <tr valign="top"  align="left">
+     * <td>"info"<td> {@ code themegetPrimaryControl()}
+     * <tr valign="top"  align="left">
+     *  <td>"infoText"<td> {@ code themegetPrimaryControlInfo()}
+     * </table>
+     *  值{@code theme}对应于当前的{@code MetalTheme}
+     * 
+     * 
      * @param table the {@code UIDefaults} object the values are added to
      * @throws NullPointerException if {@code table} is {@code null}
      */
@@ -416,6 +549,9 @@ public class MetalLookAndFeel extends BasicLookAndFeel
     /**
      * Initialize the defaults table with the name of the ResourceBundle
      * used for getting localized defaults.
+     * <p>
+     *  使用用于获取本地化默认值的ResourceBundle的名称初始化defaults表
+     * 
      */
     private void initResourceBundle(UIDefaults table) {
         table.addResourceBundle( "com.sun.swing.internal.plaf.metal.resources.metal" );
@@ -424,6 +560,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
     /**
      * Populates {@code table} with the defaults for metal.
      *
+     * <p>
+     *  使用默认金属填充{@code table}
+     * 
+     * 
      * @param table the {@code UIDefaults} to add the values to
      * @throws NullPointerException if {@code table} is {@code null}
      */
@@ -501,6 +641,8 @@ public class MetalLookAndFeel extends BasicLookAndFeel
                           "KP_LEFT", DefaultEditorKit.backwardAction,
                             "ENTER", JTextField.notifyAction,
                   "ctrl BACK_SLASH", "unselect"/*DefaultEditorKit.unselectAction*/,
+                  "ctrl BACK_SLASH", "unselect"/* <p>
+                  "ctrl BACK_SLASH", "unselect"/* 
                    "control shift O", "toggle-componentOrientation"/*DefaultEditorKit.toggleComponentOrientation*/
         });
 
@@ -541,6 +683,8 @@ public class MetalLookAndFeel extends BasicLookAndFeel
                           "KP_LEFT", DefaultEditorKit.backwardAction,
                             "ENTER", JTextField.notifyAction,
                   "ctrl BACK_SLASH", "unselect"/*DefaultEditorKit.unselectAction*/,
+                  "ctrl BACK_SLASH", "unselect"/* <p>
+                  "ctrl BACK_SLASH", "unselect"/* 
                    "control shift O", "toggle-componentOrientation"/*DefaultEditorKit.toggleComponentOrientation*/
         });
 
@@ -606,6 +750,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
                            "ctrl T", "next-link-action",
                      "ctrl shift T", "previous-link-action",
                        "ctrl SPACE", "activate-link-action",
+                  "ctrl BACK_SLASH", "unselect"/* <p>
+                  "ctrl BACK_SLASH", "unselect"/*  "ctrl Shift","ctrl T","next-link-action","ctrl T","ctrl shift"上一链接动作","ctrl SPACE","激活链接动作"
+                  "ctrl BACK_SLASH", "unselect"/* 
+                  "ctrl BACK_SLASH", "unselect"/* 
                    "control shift O", "toggle-componentOrientation"/*DefaultEditorKit.toggleComponentOrientation*/
         });
 
@@ -1548,6 +1696,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Ensures the current {@code MetalTheme} is {@code non-null}. This is
      * a cover method for {@code getCurrentTheme}.
      *
+     * <p>
+     *  确保当前{@code MetalTheme}是{@code非null}这是{@code getCurrentTheme}的覆盖方法
+     * 
+     * 
      * @see #getCurrentTheme
      */
     protected void createDefaultTheme() {
@@ -1563,6 +1715,13 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * {@code UIManager} when the look and feel is set as the current
      * look and feel and after {@code initialize} has been invoked.
      *
+     * <p>
+     * 返回外观和感觉默认值按顺序调用{@code createDefaultTheme()},{@code supergetDefaults()}和{@code getCurrentTheme()addCustomEntriesToTable(table)}
+     * 。
+     * <p>
+     *  虽然这个方法是公开的,但只有当外观和感觉设置为当前的外观和感觉,并且在调用{@code initialize}之后,它才应该被{@code UIManager}调用
+     * 
+     * 
      * @return the look and feel defaults
      *
      * @see #createDefaultTheme
@@ -1584,6 +1743,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
     /**
      * {@inheritDoc}
      *
+     * <p>
+     *  {@inheritDoc}
+     * 
+     * 
      * @since 1.4
      */
     public void provideErrorFeedback(Component component) {
@@ -1608,6 +1771,20 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * </pre>
      * If this is not done the results are undefined.
      *
+     * <p>
+     *  设置<code> MetalLookAndFeel </code>使用的主题
+     * <p>
+     *  设置主题后,需要重新安装{@code MetalLookAndFeel},并需要重新创建uis以下显示了如何做到这一点：
+     * <pre>
+     *  MetalLookAndFeelsetCurrentTheme(theme);
+     * 
+     *  //重新安装金属外观和感觉UIManagersetLookAndFeel(new MetalLookAndFeel());
+     * 
+     * //更新所有组件的ComponentUIs //需要为所有窗口调用SwingUtilitiesupdateComponentTreeUI(rootComponent);
+     * </pre>
+     *  如果不这样做,结果是未定义的
+     * 
+     * 
      * @param theme the theme to use
      * @throws NullPointerException if {@code theme} is {@code null}
      * @see #getCurrentTheme
@@ -1626,6 +1803,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Return the theme currently being used by <code>MetalLookAndFeel</code>.
      * If the current theme is {@code null}, the default theme is created.
      *
+     * <p>
+     *  返回当前被<code> MetalLookAndFeel使用的主题</code>如果当前主题是{@code null},则创建默认主题
+     * 
+     * 
      * @return the current theme
      * @see #setCurrentTheme
      * @since 1.5
@@ -1674,6 +1855,13 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Some look and feels might not render the disabled Icon, in which
      * case they will ignore this.
      *
+     * <p>
+     *  返回一个具有禁用外观的<code> Icon </code>此方法用于在未指定时生成禁用的<code> Icon </code>例如,如果创建<code> JButton </code >并且只通过<code>
+     *  setIcon </code>指定<code> Icon </code>此方法将被调用以生成禁用<code> Icon </code>如果null作为<code> code>此方法返回null。
+     * <p>
+     * 一些外观和感觉可能不会呈现禁用的图标,在这种情况下,他们会忽略这一点
+     * 
+     * 
      * @param component JComponent that will display the Icon, may be null
      * @param icon Icon to generate disable icon from.
      * @return Disabled icon, or null if a suitable Icon can not be
@@ -1702,6 +1890,14 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Some look and feels might not render the disabled and selected Icon,
      * in which case they will ignore this.
      *
+     * <p>
+     *  返回一个<code> Icon </code>以供同时被选中的禁用组件使用此方法用于为处于禁用和选定状态但没有禁用组件的组件生成<code> Icon </code>例如,如果您创建一个<code> 
+     * JButton </code>并且只通过<code> setIcon </code>指定<code> Icon </code>将被调用以生成禁用和选择的<code>图标</code>如果null作为<code>
+     * 图标传递</code>此方法返回null。
+     * <p>
+     *  某些外观和感觉可能无法呈现已停用和已选择的图标,在这种情况下,他们将忽略此
+     * 
+     * 
      * @param component JComponent that will display the Icon, may be null
      * @param icon Icon to generate disabled and selected icon from.
      * @return Disabled and Selected icon, or null if a suitable Icon can not
@@ -1720,6 +1916,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Returns the control text font of the current theme. This is a
      * cover method for {@code getCurrentTheme().getControlTextColor()}.
      *
+     * <p>
+     * 返回当前主题的控件文本字体这是{@code getCurrentTheme()getControlTextColor()}的覆盖方法
+     * 
+     * 
      * @return the control text font
      *
      * @see MetalTheme
@@ -1730,6 +1930,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Returns the system text font of the current theme. This is a
      * cover method for {@code getCurrentTheme().getSystemTextFont()}.
      *
+     * <p>
+     *  返回当前主题的系统文本字体这是{@code getCurrentTheme()getSystemTextFont()的覆盖方法}
+     * 
+     * 
      * @return the system text font
      *
      * @see MetalTheme
@@ -1740,6 +1944,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Returns the user text font of the current theme. This is a
      * cover method for {@code getCurrentTheme().getUserTextFont()}.
      *
+     * <p>
+     *  返回当前主题的用户文本字体这是{@code getCurrentTheme()getUserTextFont()的覆盖方法}
+     * 
+     * 
      * @return the user text font
      *
      * @see MetalTheme
@@ -1750,6 +1958,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Returns the menu text font of the current theme. This is a
      * cover method for {@code getCurrentTheme().getMenuTextFont()}.
      *
+     * <p>
+     *  返回当前主题的菜单文本字体这是{@code getCurrentTheme()getMenuTextFont()的覆盖方法}
+     * 
+     * 
      * @return the menu text font
      *
      * @see MetalTheme
@@ -1760,6 +1972,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Returns the window title font of the current theme. This is a
      * cover method for {@code getCurrentTheme().getWindowTitleFont()}.
      *
+     * <p>
+     *  返回当前主题的窗口标题字体这是{@code getCurrentTheme()getWindowTitleFont()的覆盖方法}
+     * 
+     * 
      * @return the window title font
      *
      * @see MetalTheme
@@ -1770,6 +1986,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Returns the sub-text font of the current theme. This is a
      * cover method for {@code getCurrentTheme().getSubTextFont()}.
      *
+     * <p>
+     *  返回当前主题的子文本字体这是{@code getCurrentTheme()getSubTextFont()的覆盖方法}
+     * 
+     * 
      * @return the sub-text font
      *
      * @see MetalTheme
@@ -1780,6 +2000,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Returns the desktop color of the current theme. This is a
      * cover method for {@code getCurrentTheme().getDesktopColor()}.
      *
+     * <p>
+     * 返回当前主题的桌面颜色这是{@code getCurrentTheme()getDesktopColor()}的覆盖方法
+     * 
+     * 
      * @return the desktop color
      *
      * @see MetalTheme
@@ -1790,6 +2014,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Returns the focus color of the current theme. This is a
      * cover method for {@code getCurrentTheme().getFocusColor()}.
      *
+     * <p>
+     *  返回当前主题的焦点颜色这是{@code getCurrentTheme()getFocusColor()}的覆盖方法
+     * 
+     * 
      * @return the focus color
      *
      * @see MetalTheme
@@ -1800,6 +2028,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Returns the white color of the current theme. This is a
      * cover method for {@code getCurrentTheme().getWhite()}.
      *
+     * <p>
+     *  返回当前主题的白色这是{@code getCurrentTheme()getWhite()的覆盖方法}
+     * 
+     * 
      * @return the white color
      *
      * @see MetalTheme
@@ -1810,6 +2042,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Returns the black color of the current theme. This is a
      * cover method for {@code getCurrentTheme().getBlack()}.
      *
+     * <p>
+     *  返回当前主题的黑色这是{@code getCurrentTheme()getBlack()的覆盖方法}
+     * 
+     * 
      * @return the black color
      *
      * @see MetalTheme
@@ -1820,6 +2056,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Returns the control color of the current theme. This is a
      * cover method for {@code getCurrentTheme().getControl()}.
      *
+     * <p>
+     *  返回当前主题的控件颜色这是{@code getCurrentTheme()getControl()的覆盖方法}
+     * 
+     * 
      * @return the control color
      *
      * @see MetalTheme
@@ -1830,6 +2070,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Returns the control shadow color of the current theme. This is a
      * cover method for {@code getCurrentTheme().getControlShadow()}.
      *
+     * <p>
+     *  返回当前主题的控件阴影颜色这是{@code getCurrentTheme()getControlShadow()}的覆盖方法
+     * 
+     * 
      * @return the control shadow color
      *
      * @see MetalTheme
@@ -1840,6 +2084,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Returns the control dark shadow color of the current theme. This is a
      * cover method for {@code getCurrentTheme().getControlDarkShadow()}.
      *
+     * <p>
+     * 返回当前主题的控件深阴影颜色这是{@code getCurrentTheme()getControlDarkShadow()}的覆盖方法
+     * 
+     * 
      * @return the control dark shadow color
      *
      * @see MetalTheme
@@ -1850,6 +2098,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Returns the control info color of the current theme. This is a
      * cover method for {@code getCurrentTheme().getControlInfo()}.
      *
+     * <p>
+     *  返回当前主题的控件信息颜色这是{@code getCurrentTheme()getControlInfo()}的覆盖方法
+     * 
+     * 
      * @return the control info color
      *
      * @see MetalTheme
@@ -1860,6 +2112,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Returns the control highlight color of the current theme. This is a
      * cover method for {@code getCurrentTheme().getControlHighlight()}.
      *
+     * <p>
+     *  返回当前主题的控件高亮颜色这是{@code getCurrentTheme()getControlHighlight()}的覆盖方法
+     * 
+     * 
      * @return the control highlight color
      *
      * @see MetalTheme
@@ -1870,6 +2126,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Returns the control disabled color of the current theme. This is a
      * cover method for {@code getCurrentTheme().getControlDisabled()}.
      *
+     * <p>
+     *  返回当前主题的控件禁用的颜色这是{@code getCurrentTheme()getControlDisabled()}的覆盖方法
+     * 
+     * 
      * @return the control disabled color
      *
      * @see MetalTheme
@@ -1880,6 +2140,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Returns the primary control color of the current theme. This is a
      * cover method for {@code getCurrentTheme().getPrimaryControl()}.
      *
+     * <p>
+     *  返回当前主题的主控制颜色这是{@code getCurrentTheme()getPrimaryControl()}的覆盖方法
+     * 
+     * 
      * @return the primary control color
      *
      * @see MetalTheme
@@ -1890,6 +2154,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Returns the primary control shadow color of the current theme. This is a
      * cover method for {@code getCurrentTheme().getPrimaryControlShadow()}.
      *
+     * <p>
+     * 返回当前主题的主控制阴影颜色这是{@code getCurrentTheme()getPrimaryControlShadow()}的覆盖方法
+     * 
+     * 
      * @return the primary control shadow color
      *
      * @see MetalTheme
@@ -1901,6 +2169,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * theme. This is a cover method for {@code
      * getCurrentTheme().getPrimaryControlDarkShadow()}.
      *
+     * <p>
+     *  返回当前主题的主控件暗阴影颜色这是{@code getCurrentTheme()getPrimaryControlDarkShadow()}的覆盖方法
+     * 
+     * 
      * @return the primary control dark shadow color
      *
      * @see MetalTheme
@@ -1911,6 +2183,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Returns the primary control info color of the current theme. This is a
      * cover method for {@code getCurrentTheme().getPrimaryControlInfo()}.
      *
+     * <p>
+     *  返回当前主题的主控制信息颜色这是{@code getCurrentTheme()getPrimaryControlInfo()}的覆盖方法
+     * 
+     * 
      * @return the primary control info color
      *
      * @see MetalTheme
@@ -1922,6 +2198,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * theme. This is a cover method for {@code
      * getCurrentTheme().getPrimaryControlHighlight()}.
      *
+     * <p>
+     *  返回当前主题的主控件高亮颜色这是{@code getCurrentTheme()getPrimaryControlHighlight()}的覆盖方法
+     * 
+     * 
      * @return the primary control highlight color
      *
      * @see MetalTheme
@@ -1932,6 +2212,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Returns the system text color of the current theme. This is a
      * cover method for {@code getCurrentTheme().getSystemTextColor()}.
      *
+     * <p>
+     *  返回当前主题的系统文本颜色这是{@code getCurrentTheme()getSystemTextColor()}的覆盖方法
+     * 
+     * 
      * @return the system text color
      *
      * @see MetalTheme
@@ -1942,6 +2226,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Returns the control text color of the current theme. This is a
      * cover method for {@code getCurrentTheme().getControlTextColor()}.
      *
+     * <p>
+     * 返回当前主题的控件文本颜色这是{@code getCurrentTheme()getControlTextColor()}的覆盖方法,
+     * 
+     * 
      * @return the control text color
      *
      * @see MetalTheme
@@ -1953,6 +2241,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * cover method for {@code
      * getCurrentTheme().getInactiveControlTextColor()}.
      *
+     * <p>
+     *  返回当前主题的非活动控件文本颜色这是{@code getCurrentTheme()getInactiveControlTextColor()}的覆盖方法
+     * 
+     * 
      * @return the inactive control text color
      *
      * @see MetalTheme
@@ -1964,6 +2256,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * cover method for {@code
      * getCurrentTheme().getInactiveSystemTextColor()}.
      *
+     * <p>
+     *  返回当前主题的非活动系统文本颜色这是{@code getCurrentTheme()getInactiveSystemTextColor()}的覆盖方法
+     * 
+     * 
      * @return the inactive system text color
      *
      * @see MetalTheme
@@ -1974,6 +2270,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Returns the user text color of the current theme. This is a
      * cover method for {@code getCurrentTheme().getUserTextColor()}.
      *
+     * <p>
+     *  返回当前主题的用户文本颜色这是{@code getCurrentTheme()getUserTextColor()}的覆盖方法
+     * 
+     * 
      * @return the user text color
      *
      * @see MetalTheme
@@ -1984,6 +2284,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Returns the text highlight color of the current theme. This is a
      * cover method for {@code getCurrentTheme().getTextHighlightColor()}.
      *
+     * <p>
+     *  返回当前主题的文本高亮颜色这是{@code getCurrentTheme()getTextHighlightColor()}的覆盖方法
+     * 
+     * 
      * @return the text highlight color
      *
      * @see MetalTheme
@@ -1994,6 +2298,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Returns the highlighted text color of the current theme. This is a
      * cover method for {@code getCurrentTheme().getHighlightedTextColor()}.
      *
+     * <p>
+     * 返回当前主题的突出显示的文本颜色这是{@code getCurrentTheme()getHighlightedTextColor()}的覆盖方法
+     * 
+     * 
      * @return the highlighted text color
      *
      * @see MetalTheme
@@ -2004,6 +2312,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Returns the window background color of the current theme. This is a
      * cover method for {@code getCurrentTheme().getWindowBackground()}.
      *
+     * <p>
+     *  返回当前主题的窗口背景颜色这是{@code getCurrentTheme()getWindowBackground()}的覆盖方法
+     * 
+     * 
      * @return the window background color
      *
      * @see MetalTheme
@@ -2015,6 +2327,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * theme. This is a cover method for {@code
      * getCurrentTheme().getWindowTitleBackground()}.
      *
+     * <p>
+     *  返回当前主题的窗口标题背景颜色这是{@code getCurrentTheme()getWindowTitleBackground()}的覆盖方法
+     * 
+     * 
      * @return the window title background color
      *
      * @see MetalTheme
@@ -2026,6 +2342,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * theme. This is a cover method for {@code
      * getCurrentTheme().getWindowTitleForeground()}.
      *
+     * <p>
+     *  返回当前主题的窗口标题前景颜色这是{@code getCurrentTheme()getWindowTitleForeground()}的覆盖方法
+     * 
+     * 
      * @return the window title foreground color
      *
      * @see MetalTheme
@@ -2037,6 +2357,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * theme. This is a cover method for {@code
      * getCurrentTheme().getWindowTitleInactiveBackground()}.
      *
+     * <p>
+     *  返回窗口标题当前主题的非活动背景颜色这是{@code getCurrentTheme()getWindowTitleInactiveBackground()}的覆盖方法
+     * 
+     * 
      * @return the window title inactive background color
      *
      * @see MetalTheme
@@ -2048,6 +2372,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * theme. This is a cover method for {@code
      * getCurrentTheme().getWindowTitleInactiveForeground()}.
      *
+     * <p>
+     * 返回当前主题的窗口标题无效的前景颜色这是{@code getCurrentTheme()getWindowTitleInactiveForeground()}的覆盖方法
+     * 
+     * 
      * @return the window title inactive foreground color
      *
      * @see MetalTheme
@@ -2058,6 +2386,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Returns the menu background color of the current theme. This is
      * a cover method for {@code getCurrentTheme().getMenuBackground()}.
      *
+     * <p>
+     *  返回当前主题的菜单背景颜色这是{@code getCurrentTheme()getMenuBackground()}的覆盖方法
+     * 
+     * 
      * @return the menu background color
      *
      * @see MetalTheme
@@ -2068,6 +2400,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Returns the menu foreground color of the current theme. This is
      * a cover method for {@code getCurrentTheme().getMenuForeground()}.
      *
+     * <p>
+     *  返回当前主题的菜单前景色这是{@code getCurrentTheme()getMenuForeground()}的覆盖方法
+     * 
+     * 
      * @return the menu foreground color
      *
      * @see MetalTheme
@@ -2079,6 +2415,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * a cover method for
      * {@code getCurrentTheme().getMenuSelectedBackground()}.
      *
+     * <p>
+     *  返回当前主题的菜单选择的背景颜色这是{@code getCurrentTheme()getMenuSelectedBackground()}的覆盖方法
+     * 
+     * 
      * @return the menu selected background color
      *
      * @see MetalTheme
@@ -2090,6 +2430,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * a cover method for
      * {@code getCurrentTheme().getMenuSelectedForeground()}.
      *
+     * <p>
+     *  返回菜单选择的当前主题的前景颜色这是{@code getCurrentTheme()getMenuSelectedForeground()}的覆盖方法
+     * 
+     * 
      * @return the menu selected foreground color
      *
      * @see MetalTheme
@@ -2101,6 +2445,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * a cover method for
      * {@code getCurrentTheme().getMenuDisabledForeground()}.
      *
+     * <p>
+     * 返回当前主题的菜单禁用的前景色这是{@code getCurrentTheme()getMenuDisabledForeground()}的覆盖方法
+     * 
+     * 
      * @return the menu disabled foreground color
      *
      * @see MetalTheme
@@ -2111,6 +2459,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Returns the separator background color of the current theme. This is
      * a cover method for {@code getCurrentTheme().getSeparatorBackground()}.
      *
+     * <p>
+     *  返回当前主题的分隔符背景颜色这是{@code getCurrentTheme()getSeparatorBackground()的覆盖方法}
+     * 
+     * 
      * @return the separator background color
      *
      * @see MetalTheme
@@ -2121,6 +2473,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Returns the separator foreground color of the current theme. This is
      * a cover method for {@code getCurrentTheme().getSeparatorForeground()}.
      *
+     * <p>
+     *  返回当前主题的分隔符前景色这是{@code getCurrentTheme()getSeparatorForeground()}的覆盖方法
+     * 
+     * 
      * @return the separator foreground color
      *
      * @see MetalTheme
@@ -2131,6 +2487,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * Returns the accelerator foreground color of the current theme. This is
      * a cover method for {@code getCurrentTheme().getAcceleratorForeground()}.
      *
+     * <p>
+     *  返回当前主题的加速器前景颜色这是{@code getCurrentTheme()getAcceleratorForeground()}的覆盖方法,
+     * 
+     * 
      * @return the separator accelerator foreground color
      *
      * @see MetalTheme
@@ -2142,6 +2502,10 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * current theme. This is a cover method for {@code
      * getCurrentTheme().getAcceleratorSelectedForeground()}.
      *
+     * <p>
+     *  返回加速器选择的当前主题的前景色这是{@code getCurrentTheme()getAcceleratorSelectedForeground()}的覆盖方法,
+     * 
+     * 
      * @return the accelerator selected foreground color
      *
      * @see MetalTheme
@@ -2154,6 +2518,11 @@ public class MetalLookAndFeel extends BasicLookAndFeel
      * design guidelines as specified at
      * <a href="http://www.oracle.com/technetwork/java/hig-136467.html">http://www.oracle.com/technetwork/java/hig-136467.html</a>.
      *
+     * <p>
+     * 返回实施Java外观设计指南的{@code LayoutStyle},如<a href=\"http://wwworaclecom/technetwork/java/hig-136467html\"> 
+     * http：// wwworaclecom / technetwork / java / hig- 136467html </a>。
+     * 
+     * 
      * @return LayoutStyle implementing the Java look and feel design
      *         guidelines
      * @since 1.6
@@ -2165,6 +2534,9 @@ public class MetalLookAndFeel extends BasicLookAndFeel
 
     /**
      * FontActiveValue redirects to the appropriate metal theme method.
+     * <p>
+     *  FontActiveValue重定向到相应的金属主题方法
+     * 
      */
     private static class FontActiveValue implements UIDefaults.ActiveValue {
         private int type;
@@ -2242,6 +2614,9 @@ public class MetalLookAndFeel extends BasicLookAndFeel
 
         /**
          * Updates the UI of the passed in window and all its children.
+         * <p>
+         *  更新传入的窗口及其所有子窗口的UI
+         * 
          */
         private static void updateWindowUI(Window window) {
             SwingUtilities.updateComponentTreeUI(window);
@@ -2253,6 +2628,9 @@ public class MetalLookAndFeel extends BasicLookAndFeel
 
         /**
          * Updates the UIs of all the known Frames.
+         * <p>
+         *  更新所有已知帧的UI
+         * 
          */
         private static void updateAllUIs() {
             Frame appFrames[] = Frame.getFrames();
@@ -2263,11 +2641,17 @@ public class MetalLookAndFeel extends BasicLookAndFeel
 
         /**
          * Indicates if an updateUI call is pending.
+         * <p>
+         *  指示updateUI调用是否挂起
+         * 
          */
         private static boolean updatePending;
 
         /**
          * Sets whether or not an updateUI call is pending.
+         * <p>
+         *  设置updateUI调用是否正在等待
+         * 
          */
         private static synchronized void setUpdatePending(boolean update) {
             updatePending = update;
@@ -2275,6 +2659,8 @@ public class MetalLookAndFeel extends BasicLookAndFeel
 
         /**
          * Returns true if a UI update is pending.
+         * <p>
+         *  如果UI更新待处理,则返回true
          */
         private static synchronized boolean isUpdatePending() {
             return updatePending;

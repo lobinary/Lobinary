@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,22 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * <p>
+ *  版权所有(c)2007-2012,Stephen Colebourne和Michael Nascimento Santos
+ * 
+ *  版权所有
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  *源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明
+ * 
+ *  *二进制形式的再分发必须在随分发版提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明
+ * 
+ * *未经特定事先书面许可,JSR-310的名称及其贡献者的名称不得用于支持或宣传衍生自此软件的产品
+ * 
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或暗示的担保,包括但不限于适销性和针对特定用途的适用性的默示担保,在任何情况下均不得免版权所有者或贡献者对任何直接,间接,偶发,特殊,惩罚性或后果性损害
+ * (包括但不限于替代商品或服务的采购,使用,数据或利润损失;或业务中断)有责任的理论,无论是在合同,严格责任或侵权(包括疏忽或其他方式)以任何方式使用本软件,即使已被告知此类损害的可能性。
+ * 
  */
 package java.time;
 
@@ -120,6 +137,23 @@ import java.util.Objects;
  * @implSpec
  * This class is immutable and thread-safe.
  *
+ * <p>
+ * ISO-8601日历系统中没有时区的时间,例如{@code 10:15:30}
+ * <p>
+ *  {@code LocalTime}是一个不可变的日期时间对象,表示一个时间,通常被视为小时 - 分钟 - 秒时间被表示为纳秒精度例如,值"13：4530123456789"可以存储在{@code LocalTime }
+ * }。
+ * <p>
+ *  它不存储或表示日期或时区相反,它是在挂钟上看到的本地时间的描述它不能表示时间线上的即时,没有附加信息,如偏移或时区
+ * <p>
+ *  ISO-8601日历系统是当今世界上大多数世界使用的现代民用日历系统。此API假定所有日历系统使用相同的表示形式,此类别,日期时间
+ * 
+ * <p>
+ * 这是<a href=\"{@docRoot}/java/lang/doc-files/ValueBasedhtml\">基于价值的</a>类;在{@code LocalTime}的实例上使用身份敏感操作
+ * (包括引用相等({@code ==}),身份哈希码或同步)可能有不可预测的结果,应该避免使用{@code equals}方法应该用于比较。
+ * 
+ *  @implSpec这个类是不可变的和线程安全的
+ * 
+ * 
  * @since 1.8
  */
 public final class LocalTime
@@ -128,23 +162,38 @@ public final class LocalTime
     /**
      * The minimum supported {@code LocalTime}, '00:00'.
      * This is the time of midnight at the start of the day.
+     * <p>
+     *  支持的最低{@code LocalTime},'00：00'这是一天开始的午夜时间
+     * 
      */
     public static final LocalTime MIN;
     /**
      * The maximum supported {@code LocalTime}, '23:59:59.999999999'.
      * This is the time just before midnight at the end of the day.
+     * <p>
+     *  最大支持的{@code LocalTime},'23：59：59999999999'这是午夜前一天结束的时间
+     * 
      */
     public static final LocalTime MAX;
     /**
      * The time of midnight at the start of the day, '00:00'.
+     * <p>
+     *  一天开始时的午夜时间,"00：00"
+     * 
      */
     public static final LocalTime MIDNIGHT;
     /**
      * The time of noon in the middle of the day, '12:00'.
+     * <p>
+     *  中午时间是"12：00"
+     * 
      */
     public static final LocalTime NOON;
     /**
      * Constants for the local time of each hour.
+     * <p>
+     *  每个小时的本地时间的常量
+     * 
      */
     private static final LocalTime[] HOURS = new LocalTime[24];
     static {
@@ -159,72 +208,123 @@ public final class LocalTime
 
     /**
      * Hours per day.
+     * <p>
+     * 每天小时
+     * 
      */
     static final int HOURS_PER_DAY = 24;
     /**
      * Minutes per hour.
+     * <p>
+     *  分钟/小时
+     * 
      */
     static final int MINUTES_PER_HOUR = 60;
     /**
      * Minutes per day.
+     * <p>
+     *  每天分钟
+     * 
      */
     static final int MINUTES_PER_DAY = MINUTES_PER_HOUR * HOURS_PER_DAY;
     /**
      * Seconds per minute.
+     * <p>
+     *  秒每分钟
+     * 
      */
     static final int SECONDS_PER_MINUTE = 60;
     /**
      * Seconds per hour.
+     * <p>
+     *  每小时秒数
+     * 
      */
     static final int SECONDS_PER_HOUR = SECONDS_PER_MINUTE * MINUTES_PER_HOUR;
     /**
      * Seconds per day.
+     * <p>
+     *  每天秒数
+     * 
      */
     static final int SECONDS_PER_DAY = SECONDS_PER_HOUR * HOURS_PER_DAY;
     /**
      * Milliseconds per day.
+     * <p>
+     *  每天毫秒
+     * 
      */
     static final long MILLIS_PER_DAY = SECONDS_PER_DAY * 1000L;
     /**
      * Microseconds per day.
+     * <p>
+     *  每天微秒
+     * 
      */
     static final long MICROS_PER_DAY = SECONDS_PER_DAY * 1000_000L;
     /**
      * Nanos per second.
+     * <p>
+     *  纳秒每秒
+     * 
      */
     static final long NANOS_PER_SECOND = 1000_000_000L;
     /**
      * Nanos per minute.
+     * <p>
+     *  Nanos每分钟
+     * 
      */
     static final long NANOS_PER_MINUTE = NANOS_PER_SECOND * SECONDS_PER_MINUTE;
     /**
      * Nanos per hour.
+     * <p>
+     *  Nanos每小时
+     * 
      */
     static final long NANOS_PER_HOUR = NANOS_PER_MINUTE * MINUTES_PER_HOUR;
     /**
      * Nanos per day.
+     * <p>
+     *  Nanos每天
+     * 
      */
     static final long NANOS_PER_DAY = NANOS_PER_HOUR * HOURS_PER_DAY;
 
     /**
      * Serialization version.
+     * <p>
+     *  序列化版本
+     * 
      */
     private static final long serialVersionUID = 6414437269572265201L;
 
     /**
      * The hour.
+     * <p>
+     *  小时
+     * 
      */
     private final byte hour;
     /**
      * The minute.
+     * <p>
+     *  分钟
+     * 
      */
     private final byte minute;
     /**
      * The second.
+     * <p>
+     *  第二
+     * 
      */
     private final byte second;
     /**
      * The nanosecond.
+     * <p>
+     *  纳秒
+     * 
      */
     private final int nano;
 
@@ -238,6 +338,14 @@ public final class LocalTime
      * Using this method will prevent the ability to use an alternate clock for testing
      * because the clock is hard-coded.
      *
+     * <p>
+     *  在默认时区中从系统时钟获取当前时间
+     * <p>
+     *  这将在默认时区中查询{@link Clock#systemDefaultZone()系统时钟}以获取当前时间
+     * <p>
+     *  使用此方法将会阻止使用备用时钟进行测试,因为时钟是硬编码的
+     * 
+     * 
      * @return the current time using the system clock and default time-zone, not null
      */
     public static LocalTime now() {
@@ -253,6 +361,14 @@ public final class LocalTime
      * Using this method will prevent the ability to use an alternate clock for testing
      * because the clock is hard-coded.
      *
+     * <p>
+     *  在指定的时区中从系统时钟获取当前时间
+     * <p>
+     * 这将查询{@link Clock#system(ZoneId)系统时钟}以获取当前时间指定时区避免依赖于默认时区
+     * <p>
+     *  使用此方法将会阻止使用备用时钟进行测试,因为时钟是硬编码的
+     * 
+     * 
      * @param zone  the zone ID to use, not null
      * @return the current time using the system clock, not null
      */
@@ -267,6 +383,12 @@ public final class LocalTime
      * Using this method allows the use of an alternate clock for testing.
      * The alternate clock may be introduced using {@link Clock dependency injection}.
      *
+     * <p>
+     *  从指定的时钟获取当前时间
+     * <p>
+     *  这将查询指定的时钟以获取当前时间使用此方法允许使用备用时钟进行测试可以使用{@link时钟依赖注入}
+     * 
+     * 
      * @param clock  the clock to use, not null
      * @return the current time, not null
      */
@@ -287,6 +409,12 @@ public final class LocalTime
      * This returns a {@code LocalTime} with the specified hour and minute.
      * The second and nanosecond fields will be set to zero.
      *
+     * <p>
+     *  从一个小时和分钟获取{@code LocalTime}的实例
+     * <p>
+     *  这将返回带有指定小时和分钟的{@code LocalTime}第二个和纳秒字段将设置为零
+     * 
+     * 
      * @param hour  the hour-of-day to represent, from 0 to 23
      * @param minute  the minute-of-hour to represent, from 0 to 59
      * @return the local time, not null
@@ -307,6 +435,12 @@ public final class LocalTime
      * This returns a {@code LocalTime} with the specified hour, minute and second.
      * The nanosecond field will be set to zero.
      *
+     * <p>
+     * 从一小时,一分钟和二秒获取{@code LocalTime}的实例
+     * <p>
+     *  这将返回带有指定小时,分钟和秒的{@code LocalTime}纳秒字段将设置为零
+     * 
+     * 
      * @param hour  the hour-of-day to represent, from 0 to 23
      * @param minute  the minute-of-hour to represent, from 0 to 59
      * @param second  the second-of-minute to represent, from 0 to 59
@@ -328,6 +462,12 @@ public final class LocalTime
      * <p>
      * This returns a {@code LocalTime} with the specified hour, minute, second and nanosecond.
      *
+     * <p>
+     *  从小时,分钟,秒和纳秒获取{@code LocalTime}的实例
+     * <p>
+     *  这将返回一个带有指定的小时,分​​钟,秒和纳秒的{@code LocalTime}
+     * 
+     * 
      * @param hour  the hour-of-day to represent, from 0 to 23
      * @param minute  the minute-of-hour to represent, from 0 to 59
      * @param second  the second-of-minute to represent, from 0 to 59
@@ -350,6 +490,12 @@ public final class LocalTime
      * This returns a {@code LocalTime} with the specified second-of-day.
      * The nanosecond field will be set to zero.
      *
+     * <p>
+     *  从二分之一的值获取{@code LocalTime}的实例
+     * <p>
+     *  这将返回带有指定秒数的{@code LocalTime}。纳秒字段将设置为零
+     * 
+     * 
      * @param secondOfDay  the second-of-day, from {@code 0} to {@code 24 * 60 * 60 - 1}
      * @return the local time, not null
      * @throws DateTimeException if the second-of-day value is invalid
@@ -368,6 +514,12 @@ public final class LocalTime
      * <p>
      * This returns a {@code LocalTime} with the specified nanosecond-of-day.
      *
+     * <p>
+     *  从纳秒级值获取{@code LocalTime}的实例
+     * <p>
+     *  这将返回一个具有指定纳秒的{@code LocalTime}
+     * 
+     * 
      * @param nanoOfDay  the nano of day, from {@code 0} to {@code 24 * 60 * 60 * 1,000,000,000 - 1}
      * @return the local time, not null
      * @throws DateTimeException if the nanos of day value is invalid
@@ -397,6 +549,16 @@ public final class LocalTime
      * This method matches the signature of the functional interface {@link TemporalQuery}
      * allowing it to be used in queries via method reference, {@code LocalTime::from}.
      *
+     * <p>
+     *  从临时对象获取{@code LocalTime}的实例
+     * <p>
+     * 这将根据指定的时间获得本地时间。{@code TemporalAccessor}表示一组任意的日期和时间信息,该工厂将其转换为{@code LocalTime}的实例,
+     * <p>
+     *  转换使用{@link TemporalQueries#localTime()}查询,该查询依赖于提取{@link ChronoField#NANO_OF_DAY NANO_OF_DAY}字段
+     * <p>
+     *  此方法匹配功能接口{@link TemporalQuery}的签名,允许它通过方法引用在{@code LocalTime :: from}
+     * 
+     * 
      * @param temporal  the temporal object to convert, not null
      * @return the local time, not null
      * @throws DateTimeException if unable to convert to a {@code LocalTime}
@@ -418,6 +580,12 @@ public final class LocalTime
      * The string must represent a valid time and is parsed using
      * {@link java.time.format.DateTimeFormatter#ISO_LOCAL_TIME}.
      *
+     * <p>
+     *  从文本字符串(例如{@code 10:15})获取{@code LocalTime}的实例,
+     * <p>
+     *  该字符串必须表示有效的时间,并使用{@link javatimeformatDateTimeFormatter#ISO_LOCAL_TIME}
+     * 
+     * 
      * @param text the text to parse such as "10:15:30", not null
      * @return the parsed local time, not null
      * @throws DateTimeParseException if the text cannot be parsed
@@ -431,6 +599,12 @@ public final class LocalTime
      * <p>
      * The text is parsed using the formatter, returning a time.
      *
+     * <p>
+     * 使用特定格式化程序从文本字符串获取{@code LocalTime}的实例
+     * <p>
+     *  使用格式化程序解析文本,返回时间
+     * 
+     * 
      * @param text  the text to parse, not null
      * @param formatter  the formatter to use, not null
      * @return the parsed local time, not null
@@ -447,6 +621,12 @@ public final class LocalTime
      * <p>
      * This factory may return a cached value, but applications must not rely on this.
      *
+     * <p>
+     *  从小时,分钟,秒和纳秒字段创建本地时间
+     * <p>
+     *  这个工厂可能返回一个缓存的值,但应用程序不能依赖这个
+     * 
+     * 
      * @param hour  the hour-of-day to represent, validated from 0 to 23
      * @param minute  the minute-of-hour to represent, validated from 0 to 59
      * @param second  the second-of-minute to represent, validated from 0 to 59
@@ -463,6 +643,10 @@ public final class LocalTime
     /**
      * Constructor, previously validated.
      *
+     * <p>
+     *  构造函数,先前已验证
+     * 
+     * 
      * @param hour  the hour-of-day to represent, validated from 0 to 23
      * @param minute  the minute-of-hour to represent, validated from 0 to 59
      * @param second  the second-of-minute to represent, validated from 0 to 59
@@ -510,6 +694,26 @@ public final class LocalTime
      * passing {@code this} as the argument.
      * Whether the field is supported is determined by the field.
      *
+     * <p>
+     *  检查是否支持指定的字段
+     * <p>
+     *  这将检查是否可以查询指定字段的此时间如果为false,则调用{@link #range(TemporalField)范围},{@link #get(TemporalField)get}和{@link #with(TemporalField,long) }
+     * 方法将抛出异常。
+     * <p>
+     *  如果字段是{@link ChronoField},则在此实现查询支持的字段为：
+     * <ul>
+     * <li> {@ code NANO_OF_DAY} <li> {@ code MANI_OF_DAY} <li> {@ code MULI_OF_DAY} <li> {@ code MICRO_OF_DAY}
+     *  > {@ code SECOND_OF_MINUTE} <li> {@ code SECOND_OF_DAY} <li> {@ code MINUTE_OF_HOUR} <li> {@ code MINUTE_OF_DAY}
+     *  <li> {@ code HOUR_OF_AMPM} <li> {@ code CLOCK_HOUR_OF_AMPM} @code HOUR_OF_DAY} <li> {@ code CLOCK_HOUR_OF_DAY}
+     *  <li> {@ code AMPM_OF_DAY}。
+     * </ul>
+     *  所有其他{@code ChronoField}实例将返回false
+     * <p>
+     *  如果字段不是{@code ChronoField},则通过调用{@code TemporalFieldisSupportedBy(TemporalAccessor)}传递{@code this}作为参
+     * 数来获得此方法的结果。
+     * 字段是否受支持由字段。
+     * 
+     * 
      * @param field  the field to check, null returns false
      * @return true if the field is supported on this time, false if not
      */
@@ -546,6 +750,23 @@ public final class LocalTime
      * passing {@code this} as the argument.
      * Whether the unit is supported is determined by the unit.
      *
+     * <p>
+     *  检查是否支持指定的单元
+     * <p>
+     * 这将检查指定的单元是否可以添加到此日期时间或从此日期时间减去。
+     * 如果为false,则调用{@link #plus(long,TemporalUnit)}和{@link #minus(long,TemporalUnit)minus}会抛出异常。
+     * <p>
+     *  如果单位是{@link ChronoUnit},则在此实现查询支持的单位是：
+     * <ul>
+     *  <li> {@ code MINUTES} <li> {@ code MICROS} <li> {@ code MILLIS} <li> {@ code SECONDS} <li> {@ code MINUTES}
+     *  > {@ code HALF_DAYS}。
+     * </ul>
+     *  所有其他{@code ChronoUnit}实例将返回false
+     * <p>
+     *  如果单元不是{@code ChronoUnit},则通过调用{@code TemporalUnitisSupportedBy(Temporal)}传递{@code this}作为参数获得此方法的结果。
+     * 单元是否受支持由单元确定。
+     * 
+     * 
      * @param unit  the unit to check, null returns false
      * @return true if the unit can be added/subtracted, false if not
      */
@@ -576,6 +797,21 @@ public final class LocalTime
      * passing {@code this} as the argument.
      * Whether the range can be obtained is determined by the field.
      *
+     * <p>
+     * 获取指定字段的有效值范围
+     * <p>
+     *  范围对象表示字段的最小和最大有效值此时间用于提高返回范围的精度如果不可能返回范围,因为该字段不受支持或由于某种其他原因,异常是抛出
+     * <p>
+     *  如果字段是{@link ChronoField},则在此实现查询。
+     * {@link #isSupported(TemporalField)supported fields}将返回适当的范围实例所有其他{@code ChronoField}实例将抛出一个{@code UnsupportedTemporalTypeException}
+     * 。
+     *  如果字段是{@link ChronoField},则在此实现查询。
+     * <p>
+     * 如果字段不是{@code ChronoField},则通过调用{@code TemporalFieldrangeRefinedBy(TemporalAccessor)}传递{@code this}作为参
+     * 数来获得此方法的结果。
+     * 是否可以获得范围由字段。
+     * 
+     * 
      * @param field  the field to query the range for, not null
      * @return the range of valid values for the field, not null
      * @throws DateTimeException if the range for the field cannot be obtained
@@ -605,6 +841,22 @@ public final class LocalTime
      * passing {@code this} as the argument. Whether the value can be obtained,
      * and what the value represents, is determined by the field.
      *
+     * <p>
+     *  从这个时间获取指定字段的值作为{@code int}
+     * <p>
+     *  这次查询指定字段的值返回的值将始终在该字段的有效值范围内如果不可能返回该值,因为该字段不受支持或由于某种其他原因,异常被抛出
+     * <p>
+     * 如果字段是{@link ChronoField},则在此执行查询。
+     * {@link #isSupported(TemporalField)supported fields}将根据此时间返回有效值,{@code NANO_OF_DAY}和{@code MICRO_OF_DAY}
+     * 除外太大,无法适应{@code int}并抛出{@code DateTimeException}所有其他{@code ChronoField}实例将抛出{@code UnsupportedTemporalTypeException}
+     * 。
+     * 如果字段是{@link ChronoField},则在此执行查询。
+     * <p>
+     *  如果字段不是{@code ChronoField},那么通过调用{@code TemporalFieldgetFrom(TemporalAccessor)}传递{@code this}作为参数获得此方
+     * 法的结果。
+     * 是否可以获取该值,以及值表示,由字段确定。
+     * 
+     * 
      * @param field  the field to get, not null
      * @return the value for the field
      * @throws DateTimeException if a value for the field cannot be obtained or
@@ -638,6 +890,19 @@ public final class LocalTime
      * passing {@code this} as the argument. Whether the value can be obtained,
      * and what the value represents, is determined by the field.
      *
+     * <p>
+     *  从此时获取指定字段的值为{@code long}
+     * <p>
+     * 这次查询指定字段的值如果不可能返回值,因为该字段不受支持或由于某种其他原因,抛出异常
+     * <p>
+     *  如果字段是{@link ChronoField},那么在此实现查询{@link #isSupported(TemporalField)支持的字段}将基于此时间返回有效值所有其他{@code ChronoField}
+     * 实例将抛出一个{@code UnsupportedTemporalTypeException}。
+     * <p>
+     *  如果字段不是{@code ChronoField},那么通过调用{@code TemporalFieldgetFrom(TemporalAccessor)}传递{@code this}作为参数获得此方
+     * 法的结果。
+     * 是否可以获取该值,以及值表示,由字段确定。
+     * 
+     * 
      * @param field  the field to get, not null
      * @return the value for the field
      * @throws DateTimeException if a value for the field cannot be obtained
@@ -683,6 +948,10 @@ public final class LocalTime
     /**
      * Gets the hour-of-day field.
      *
+     * <p>
+     *  获取日期字段
+     * 
+     * 
      * @return the hour-of-day, from 0 to 23
      */
     public int getHour() {
@@ -692,6 +961,10 @@ public final class LocalTime
     /**
      * Gets the minute-of-hour field.
      *
+     * <p>
+     * 获取小时字段
+     * 
+     * 
      * @return the minute-of-hour, from 0 to 59
      */
     public int getMinute() {
@@ -701,6 +974,10 @@ public final class LocalTime
     /**
      * Gets the second-of-minute field.
      *
+     * <p>
+     *  获取秒数字段
+     * 
+     * 
      * @return the second-of-minute, from 0 to 59
      */
     public int getSecond() {
@@ -710,6 +987,10 @@ public final class LocalTime
     /**
      * Gets the nano-of-second field.
      *
+     * <p>
+     *  获取纳秒二次场
+     * 
+     * 
      * @return the nano-of-second, from 0 to 999,999,999
      */
     public int getNano() {
@@ -733,6 +1014,18 @@ public final class LocalTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此时间的调整副本
+     * <p>
+     *  这会返回一个{@code LocalTime},基于这个时间,调整时间使用指定的调整器策略对象进行调整读取调整器的文档以了解将要进行的调整
+     * <p>
+     *  简单的调整器可以简单地设置一个字段,例如小时字段更复杂的调整器可以将时间设置为一天的最后一个小时
+     * <p>
+     *  此方法的结果是通过调用指定的调整器传递{@code this}作为参数的{@link TemporalAdjuster#adjustInto(Temporal)}方法获得的
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param adjuster the adjuster to use, not null
      * @return a {@code LocalTime} based on {@code this} with the adjustment made, not null
      * @throws DateTimeException if the adjustment cannot be made
@@ -822,6 +1115,39 @@ public final class LocalTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     * 返回此时的指定字段设置为新值的副本
+     * <p>
+     *  这将返回一个{@code LocalTime},基于这一点,指定字段的值更改这可以用于更改任何支持的字段,如小时,分钟或秒如果不可能设置值,因为该字段不受支持或由于某种其他原因,抛出异常
+     * <p>
+     *  如果字段是{@link ChronoField},则在此执行调整。支持的字段的行为如下：
+     * <ul>
+     * <li> {@ code NANO_OF_SECOND}  - 返回具有指定纳秒的{@code LocalTime}小时,分钟和秒将不变<li> {@ code NANO_OF_DAY}  - 返回{@code LocalTime}
+     * 指定的nano-of-day这完全取代了时间,相当于{@link #ofNanoOfDay(long)} <li> {@ code MICRO_OF_SECOND}  - 返回一个{@code LocalTime}
+     * 指定的微秒乘以1000小时,分钟和秒将不变<li> {@ code MICRO_OF_DAY}  - 返回带有指定微秒的{@code LocalTime}这完全取代了时间,并且相当于使用{@link #ofNanoOfDay(long)}
+     * 乘以微秒乘以1000<li> {@ code MILLI_OF_SECOND}  - 返回一个{@code LocalTime},由指定毫秒乘以1,000,000的纳秒替换小时,分钟和秒将不变<li> 
+     * {@ code MILLI_OF_DAY}  - 返回一个带有指定毫秒的{@code LocalTime}这完全取代了时间,相当于使用{@link #ofNanoOfDay(long)}乘以天数乘以1,
+     * 000,000 <li> {@code SECOND_OF_MINUTE}  - 以指定的秒钟返回{@code LocalTime}小时,分钟和毫微秒将不变<li> {@ code SECOND_OF_DAY}
+     *   - 返回{@code LocalTime}与指定的秒数纳秒将不变<li> {@ code MINUTE_OF_HOUR}  - 返回一个{@code LocalTime}与指定的小时小时,秒钟和纳秒
+     * 将不变<li> {@ code MINUTE_OF_DAY}  - 返回带有指定分钟数的{@code LocalTime}第二分钟和nano- of-second将不会改变<li> {@ code HOUR_OF_AMPM}
+     *   - 返回带有指定的下午 - 下午时间的{@code LocalTime} AM / PM,小时,秒钟和纳米-of-second将不会改变<li> {@ code CLOCK_HOUR_OF_AMPM}
+     *   - 返回带有指定的clock-hour-of-am-pm的{@code LocalTime}。
+     * AM / PM,小时,分钟和纳秒(nano-of-second)将不变<li> {@ code HOUR_OF_DAY}  - 返回带有指定时钟的{@code LocalTime}时分秒,分钟和纳秒 -
+     *  秒将不变<li> {@ code CLOCK_HOUR_OF_DAY}  - 返回具有指定时钟小时的{@code LocalTime}秒钟,秒钟和毫微秒将不变<li> {@code AMPM_OF_DAY}
+     *   - 返回带有指定AM / PM的{@code LocalTime}时间下午,下午,分钟,秒钟和毫微秒。
+     * </ul>
+     * <p>
+     * 在所有情况下,如果新值超出字段的有效值范围,那么将抛出{@code DateTimeException}
+     * <p>
+     *  所有其他{@code ChronoField}实例将抛出{@code UnsupportedTemporalTypeException}
+     * <p>
+     *  如果字段不是{@code ChronoField},那么通过调用{@code TemporalFieldadjustInto(Temporal,long)}传递{@code this}作为参数来获得此
+     * 方法的结果。
+     * 在这种情况下,字段确定是否如何调整瞬间。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param field  the field to set in the result, not null
      * @param newValue  the new value of the field in the result
      * @return a {@code LocalTime} based on {@code this} with the specified field set, not null
@@ -862,6 +1188,12 @@ public final class LocalTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此{@code LocalTime}的副本,并更改​​日期值
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param hour  the hour-of-day to set in the result, from 0 to 23
      * @return a {@code LocalTime} based on this time with the requested hour, not null
      * @throws DateTimeException if the hour value is invalid
@@ -879,6 +1211,12 @@ public final class LocalTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此{@code LocalTime}的小时值更改的副本
+     * <p>
+     * 此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param minute  the minute-of-hour to set in the result, from 0 to 59
      * @return a {@code LocalTime} based on this time with the requested minute, not null
      * @throws DateTimeException if the minute value is invalid
@@ -896,6 +1234,12 @@ public final class LocalTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此{@code LocalTime}的副本,其中二分钟值已更改
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param second  the second-of-minute to set in the result, from 0 to 59
      * @return a {@code LocalTime} based on this time with the requested second, not null
      * @throws DateTimeException if the second value is invalid
@@ -913,6 +1257,12 @@ public final class LocalTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此{@code LocalTime}的纳秒值已更改的副本
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param nanoOfSecond  the nano-of-second to set in the result, from 0 to 999,999,999
      * @return a {@code LocalTime} based on this time with the requested nanosecond, not null
      * @throws DateTimeException if the nanos value is invalid
@@ -941,6 +1291,18 @@ public final class LocalTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此{@code LocalTime}的副本,并截断时间
+     * <p>
+     *  截断时间返回原始时间的副本,其中字段小于指定的单位设置为零例如,使用{@link ChronoUnit#MINUTES minutes}单位截断将设置秒钟的二分之一和纳秒的字段到零
+     * <p>
+     * 单位必须有一个{@linkplain TemporalUnit#getDuration()duration},它分成标准日的长度,不包括余数这包括{@link ChronoUnit}和{@link ChronoUnit#DAYS DAYS}
+     * 上提供的所有时间单位。
+     * 异常。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param unit  the unit to truncate to, not null
      * @return a {@code LocalTime} based on this time with the time truncated, not null
      * @throws DateTimeException if unable to truncate
@@ -978,6 +1340,17 @@ public final class LocalTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此时间的指定添加金额的副本
+     * <p>
+     *  这将返回一个{@code LocalTime},基于这个,添加了指定的量。该量通常是{@link Duration},但可以是实现{@link TemporalAmount}接口的任何其他类型
+     * <p>
+     * 计算通过调用{@link TemporalAmount#addTo(Temporal)}来委托给金额对象。
+     * 金额实现可以以任何希望的方式实现添加,但它通常回调{@link #plus(long,TemporalUnit )}请参阅金额实施的文档,以确定是否可以成功添加。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param amountToAdd  the amount to add, not null
      * @return a {@code LocalTime} based on this time with the addition made, not null
      * @throws DateTimeException if the addition cannot be made
@@ -1033,6 +1406,30 @@ public final class LocalTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此时间的指定添加金额的副本
+     * <p>
+     *  这将返回一个{@code LocalTime},根据这一个,与添加的单位的金额如果不可能添加金额,因为该单位不被支持或一些其他原因,抛出异常
+     * <p>
+     * 如果字段是{@link ChronoUnit},则在此处实现添加。支持的字段的行为如下：
+     * <ul>
+     * <li> {@ code NANOS}  - 返回添加了指定的纳秒数的{@code LocalTime}这等效于{@link #plusNanos(long)} <li> {@ code MICROS}
+     *   - 返回{@code LocalTime}添加指定的微秒数。
+     * 这等于{@link #plusNanos(long)},其数量乘以1000 <li> {@ code MILLIS}  - 返回指定毫秒数的{@code LocalTime}添加这相当于{@link #plusNanos(long)}
+     * ,数量乘以1,000,000 <li> {@ code SECONDS}  - 返回一个添加了指定秒数的{@code LocalTime}这相当于{@link #plusSeconds(long)} <li>
+     *  {@ code MINUTES}  - 返回添加了指定分钟数的{@code LocalTime}这等价于{@link #plusMinutes(long)}<li> {@ code HOURS}  -
+     *  返回添加了指定小时数的{@code LocalTime}这等效于{@link #plusHours(long)} <li> {@ code HALF_DAYS}  - 返回{@code LocalTime}
+     * 添加指定的半天数这相当于{@link #plusHours(long)},其数量乘以12。
+     * </ul>
+     * <p>
+     * 所有其他{@code ChronoUnit}实例将抛出{@code UnsupportedTemporalTypeException}
+     * <p>
+     *  如果字段不是{@code ChronoUnit},那么通过调用{@code TemporalUnitaddTo(Temporal,long)}传递{@code this}作为参数来获得此方法的结果。
+     * 在这种情况下,单元确定是否如何执行添加。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param amountToAdd  the amount of the unit to add to the result, may be negative
      * @param unit  the unit of the amount to add, not null
      * @return a {@code LocalTime} based on this time with the specified amount added, not null
@@ -1066,6 +1463,14 @@ public final class LocalTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  以指定的周期(以小时为单位)返回此{@code LocalTime}的副本
+     * <p>
+     *  这会将指定的小时数添加到此时间,返回新时间计算将在午夜左右
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param hoursToAdd  the hours to add, may be negative
      * @return a {@code LocalTime} based on this time with the hours added, not null
      */
@@ -1085,6 +1490,14 @@ public final class LocalTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  以指定的周期(以分钟为单位)返回此{@code LocalTime}的副本
+     * <p>
+     * 这将为此时间添加指定的分钟数,返回一个新时间该计算在午夜左右
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param minutesToAdd  the minutes to add, may be negative
      * @return a {@code LocalTime} based on this time with the minutes added, not null
      */
@@ -1110,6 +1523,14 @@ public final class LocalTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此{@code LocalTime}的副本,其中指定的周期(以秒为单位)添加
+     * <p>
+     *  这将为此时间添加指定的秒数,返回一个新时间该计算在午夜左右
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param secondstoAdd  the seconds to add, may be negative
      * @return a {@code LocalTime} based on this time with the seconds added, not null
      */
@@ -1137,6 +1558,14 @@ public final class LocalTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此{@code LocalTime}的副本,其中指定的周期(以纳秒为单位)添加
+     * <p>
+     *  这将为此时间添加指定的纳秒数,返回一个新时间。计算在午夜左右
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param nanosToAdd  the nanos to add, may be negative
      * @return a {@code LocalTime} based on this time with the nanoseconds added, not null
      */
@@ -1172,6 +1601,17 @@ public final class LocalTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此时间减去指定金额的副本
+     * <p>
+     * 这会返回一个{@code LocalTime},基于这个值,减去指定的值。该值通常为{@link Duration},但可以是实现{@link TemporalAmount}接口的任何其他类型
+     * <p>
+     *  通过调用{@link TemporalAmount#subtractFrom(Temporal)}来将计算委托给金额对象。
+     * 金额实现可以以任何希望的方式实现减法,但是它通常回调{@link #minus(long,TemporalUnit )}请参阅金额实施的文档,以确定是否可以成功扣除。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param amountToSubtract  the amount to subtract, not null
      * @return a {@code LocalTime} based on this time with the subtraction made, not null
      * @throws DateTimeException if the subtraction cannot be made
@@ -1194,6 +1634,16 @@ public final class LocalTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此时间减去指定金额的副本
+     * <p>
+     * 这将返回一个{@code LocalTime},根据这一个,与减去单位的金额如果不可能减去金额,因为该单位不被支持或由于一些其他原因,抛出异常
+     * <p>
+     *  此方法等效于{@link #plus(long,TemporalUnit)},其值为negated请参阅该方法,了解有关如何加法和减法的完整描述
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param amountToSubtract  the amount of the unit to subtract from the result, may be negative
      * @param unit  the unit of the amount to subtract, not null
      * @return a {@code LocalTime} based on this time with the specified amount subtracted, not null
@@ -1215,6 +1665,14 @@ public final class LocalTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  以减去的小时为单位返回此{@code LocalTime}的副本
+     * <p>
+     *  这将从此时间减去指定的小时数,返回一个新时间该计算将在午夜左右
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param hoursToSubtract  the hours to subtract, may be negative
      * @return a {@code LocalTime} based on this time with the hours subtracted, not null
      */
@@ -1230,6 +1688,14 @@ public final class LocalTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     * 返回此{@code LocalTime}的副本,其中指定的周期(减去分钟)
+     * <p>
+     *  这将从此时间减去指定的分钟数,返回一个新时间。计算在午夜左右
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param minutesToSubtract  the minutes to subtract, may be negative
      * @return a {@code LocalTime} based on this time with the minutes subtracted, not null
      */
@@ -1245,6 +1711,14 @@ public final class LocalTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此{@code LocalTime}的副本,指定的周期(以秒为单位)减去
+     * <p>
+     *  这将从此时间减去指定的秒数,返回一个新时间该计算将在午夜左右
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param secondsToSubtract  the seconds to subtract, may be negative
      * @return a {@code LocalTime} based on this time with the seconds subtracted, not null
      */
@@ -1260,6 +1734,14 @@ public final class LocalTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此{@code LocalTime}的副本,以指定的周期减去纳秒
+     * <p>
+     *  这将从此时间减去指定的纳秒数,返回一个新时间该计算在午夜左右
+     * <p>
+     * 此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param nanosToSubtract  the nanos to subtract, may be negative
      * @return a {@code LocalTime} based on this time with the nanoseconds subtracted, not null
      */
@@ -1280,6 +1762,14 @@ public final class LocalTime
      * {@link TemporalQuery#queryFrom(TemporalAccessor)} method on the
      * specified query passing {@code this} as the argument.
      *
+     * <p>
+     *  此时使用指定的查询查询
+     * <p>
+     *  这次使用指定的查询策略对象查询{@code TemporalQuery}对象定义用于获取结果的逻辑读取查询的文档以了解此方法的结果将是什么
+     * <p>
+     *  此方法的结果是通过在指定的查询上调用{@link TemporalQuery#queryFrom(TemporalAccessor)}方法{@code this}作为参数
+     * 
+     * 
      * @param <R> the type of the result
      * @param query  the query to invoke, not null
      * @return the query result, null may be returned (defined by the query)
@@ -1323,6 +1813,22 @@ public final class LocalTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  将指定的时间对象调整为与此对象具有相同的时间
+     * <p>
+     *  这返回一个与输入相同的observable类型的时间对象,其时间更改为与此相同
+     * <p>
+     * 调整等同于使用{@link Temporal#with(TemporalField,long)}传递{@link ChronoField#NANO_OF_DAY}作为字段
+     * <p>
+     *  在大多数情况下,通过使用{@link Temporal#with(TemporalAdjuster)}来反转呼叫模式是更清楚的：
+     * <pre>
+     *  //这两行是等价的,但第二种方法是推荐temporal = thisLocalTimeadjustInto(temporal); temporal = temporalwith(thisLocalTi
+     * me);。
+     * </pre>
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param temporal  the target object to be adjusted, not null
      * @return the adjusted object, not null
      * @throws DateTimeException if unable to make the adjustment
@@ -1372,6 +1878,30 @@ public final class LocalTime
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  以指定单位计算直到另一时间的时间量
+     * <p>
+     * 这将计算两个{@code LocalTime}对象之间在单个{@code TemporalUnit}方面的时间量开始和结束点是{@code this}和指定的时间如果结束在结束之前start使用{@link #from(TemporalAccessor)}
+     * 将传递给此方法的{@code Temporal}转换为{@code LocalTime}。
+     * 例如,两个时间之间的小时数可以使用{@code startTimeuntil(endTime , 小时)}。
+     * <p>
+     *  计算返回一个整数,表示两次之间的完整单位数。例如,11:30和13:29之间的小时数将只有一小时,因为它是两小时的一分钟
+     * <p>
+     * 有两种使用这种方法的等效方法第一种是调用这种方法第二种是使用{@link TemporalUnit#between(Temporal,Temporal)}：
+     * <pre>
+     *  //这两行是等价的amount = startuntil(end,MINUTES); amount = MINUTES between(start,end);
+     * </pre>
+     *  应该基于哪个使得代码更可读的选择
+     * <p>
+     *  {@code NANOS},{@code MICROS},{@code MILLIS},{@code SECONDS},{@code MINUTES},{@code HOURS}的单位{@link ChronoUnit}
+     * 和{@code HALF_DAYS}的支持其他{@code ChronoUnit}值会抛出异常。
+     * <p>
+     * 如果单元不是{@code ChronoUnit},则该方法的结果通过调用{@code TemporalUnit between(Temporal,Temporal)}传递{@code this}作为第一
+     * 个参数和转换的输入时间作为第二个参数论据。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param endExclusive  the end time, exclusive, which is converted to a {@code LocalTime}, not null
      * @param unit  the unit to measure the amount in, not null
      * @return the amount of time between this time and the end time
@@ -1404,6 +1934,12 @@ public final class LocalTime
      * <p>
      * This time will be passed to the formatter to produce a string.
      *
+     * <p>
+     *  此时使用指定的格式化程序格式化
+     * <p>
+     *  这个时间将被传递给格式化程序以产生一个字符串
+     * 
+     * 
      * @param formatter  the formatter to use, not null
      * @return the formatted time string, not null
      * @throws DateTimeException if an error occurs during printing
@@ -1420,6 +1956,12 @@ public final class LocalTime
      * This returns a {@code LocalDateTime} formed from this time at the specified date.
      * All possible combinations of date and time are valid.
      *
+     * <p>
+     *  将此时间与日期结合以创建{@code LocalDateTime}
+     * <p>
+     *  这将返回在指定日期从此时间生成的{@code LocalDateTime}所有可能的日期和时间组合都有效
+     * 
+     * 
      * @param date  the date to combine with, not null
      * @return the local date-time formed from this time and the specified date, not null
      */
@@ -1433,6 +1975,12 @@ public final class LocalTime
      * This returns an {@code OffsetTime} formed from this time at the specified offset.
      * All possible combinations of time and offset are valid.
      *
+     * <p>
+     *  将此时间与偏移组合,以创建{@code OffsetTime}
+     * <p>
+     * 这将返回从此时在指定偏移形成的{@code OffsetTime}所有可能的时间和偏移组合都有效
+     * 
+     * 
      * @param offset  the offset to combine with, not null
      * @return the offset time formed from this time and the specified offset, not null
      */
@@ -1445,6 +1993,10 @@ public final class LocalTime
      * Extracts the time as seconds of day,
      * from {@code 0} to {@code 24 * 60 * 60 - 1}.
      *
+     * <p>
+     *  以{@code 0}到{@code 24 * 60 * 60  -  1}的秒为单位提取时间。
+     * 
+     * 
      * @return the second-of-day equivalent to this time
      */
     public int toSecondOfDay() {
@@ -1458,6 +2010,10 @@ public final class LocalTime
      * Extracts the time as nanos of day,
      * from {@code 0} to {@code 24 * 60 * 60 * 1,000,000,000 - 1}.
      *
+     * <p>
+     *  以{@code 0}到{@code 24 * 60 * 60 * 1,000,000,000  -  1}的形式提取时间(以天为单位)
+     * 
+     * 
      * @return the nano of day equivalent to this time
      */
     public long toNanoOfDay() {
@@ -1475,6 +2031,12 @@ public final class LocalTime
      * The comparison is based on the time-line position of the local times within a day.
      * It is "consistent with equals", as defined by {@link Comparable}.
      *
+     * <p>
+     *  将此{@code LocalTime}与另一个时间进行比较
+     * <p>
+     *  比较是基于一天内本地时间的时间线位置。它与"等于"一致,由{@link Comparable}定义。
+     * 
+     * 
      * @param other  the other time to compare to, not null
      * @return the comparator value, negative if less, positive if greater
      * @throws NullPointerException if {@code other} is null
@@ -1499,6 +2061,12 @@ public final class LocalTime
      * <p>
      * The comparison is based on the time-line position of the time within a day.
      *
+     * <p>
+     *  检查此{@code LocalTime}是否晚于指定时间
+     * <p>
+     *  比较基于一天内的时间线位置
+     * 
+     * 
      * @param other  the other time to compare to, not null
      * @return true if this is after the specified time
      * @throws NullPointerException if {@code other} is null
@@ -1512,6 +2080,12 @@ public final class LocalTime
      * <p>
      * The comparison is based on the time-line position of the time within a day.
      *
+     * <p>
+     *  检查此{@code LocalTime}是否在指定时间之前
+     * <p>
+     *  比较基于一天内的时间线位置
+     * 
+     * 
      * @param other  the other time to compare to, not null
      * @return true if this point is before the specified time
      * @throws NullPointerException if {@code other} is null
@@ -1530,6 +2104,15 @@ public final class LocalTime
      * To compare the date of two {@code TemporalAccessor} instances, use
      * {@link ChronoField#NANO_OF_DAY} as a comparator.
      *
+     * <p>
+     * 检查此时间是否等于另一时间
+     * <p>
+     *  比较基于一天内的时间线位置
+     * <p>
+     *  仅比较类型为{@code LocalTime}的对象,其他类型返回false要比较两个{@code TemporalAccessor}实例的日期,请使用{@link ChronoField#NANO_OF_DAY}
+     * 作为比较器。
+     * 
+     * 
      * @param obj  the object to check, null returns false
      * @return true if this is equal to the other time
      */
@@ -1549,6 +2132,10 @@ public final class LocalTime
     /**
      * A hash code for this time.
      *
+     * <p>
+     *  此时的哈希代码
+     * 
+     * 
      * @return a suitable hash code
      */
     @Override
@@ -1572,6 +2159,16 @@ public final class LocalTime
      * The format used will be the shortest that outputs the full value of
      * the time where the omitted parts are implied to be zero.
      *
+     * <p>
+     *  此时输出为{@code String},例如{@code 10:15}
+     * <p>
+     *  输出将是以下ISO-8601格式之一：
+     * <ul>
+     *  <li> {@ code HH：mm} </li> <li> {@ code HH：mm：ss} </li> <li> {@ code HH：mm：ssSSS} @code HH：mm：ssSSSSS
+     * S} </li> <li> {@ code HH：mm：ssSSSSSSSSS} </li>。
+     * </ul>
+     *  使用的格式将是输出完全值的时间的最短,其中省略的部分被暗示为零
+     * 
      * @return a string representation of this time, not null
      */
     @Override
@@ -1603,6 +2200,9 @@ public final class LocalTime
     /**
      * Writes the object using a
      * <a href="../../serialized-form.html#java.time.Ser">dedicated serialized form</a>.
+     * <p>
+     * 
+     * 
      * @serialData
      * A twos-complement value indicates the remaining values are not in the stream
      * and should be set to zero.
@@ -1638,6 +2238,10 @@ public final class LocalTime
     /**
      * Defend against malicious streams.
      *
+     * <p>
+     * 使用<a href=\"//serialized-formhtml#javatimeSer\">专用序列化表单</a>写入对象
+     * 
+     * 
      * @param s the stream to read
      * @throws InvalidObjectException always
      */

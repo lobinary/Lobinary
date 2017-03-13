@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -95,6 +96,47 @@ import java.util.Objects;
  * threads. </p>
  *
  *
+ * <p>
+ *  通过解释{@link Pattern}对{@linkplain javalangCharSequence字符序列}执行匹配操作的引擎,
+ * 
+ *  <p>通过调用模式的{@link Pattern#matcher matcher}方法从模式创建匹配器一旦创建,匹配器可用于执行三种不同类型的匹配操作：
+ * 
+ * <ul>
+ * 
+ *  <li> <p> {@link #matches matches}方法尝试将整个输入序列与模式匹配</p> </li>
+ * 
+ *  <li> <p> {@link #lookingAt lookingAt}方法尝试从开头开始匹配输入序列</p> </li>
+ * 
+ * <li> <p> {@link #find find}方法会扫描输入序列,寻找与模式匹配的下一个子序列</p> </li>
+ * 
+ * </ul>
+ * 
+ *  <p>这些方法中的每一个都返回一个表示成功或失败的布尔值。通过查询匹配器的状态可以获得关于成功匹配的更多信息
+ * 
+ * <p>匹配器在其输入的一个子集中查找匹配,称为<i> region </i>。默认情况下,该区域包含所有匹配器的输入。
+ * 该区域可以通过{@link #region region}通过{@link #regionStart regionStart}和{@link #regionEnd regionEnd}方法查询区域边界与
+ * 某些模式构造交互的方式可以更改请参阅{@link #useAnchoringBounds useAnchoringBounds}和{@link #useTransparentBounds useTransparentBounds}
+ * 更多细节。
+ * <p>匹配器在其输入的一个子集中查找匹配,称为<i> region </i>。默认情况下,该区域包含所有匹配器的输入。
+ * 
+ * <p>此类还定义了用新字符串替换匹配子序列的方法,如果需要,可以从匹配结果计算其内容。
+ * {@link #appendReplacement appendReplacement}和{@link #appendTail appendTail}方法可以串联使用以便将结果收集到现有的字符串缓冲器中
+ * ,或者更方便的{@link #replaceAll replaceAll}方法可以用于创建其中输入序列中的每个匹配子序列被替换的字符串。
+ * <p>此类还定义了用新字符串替换匹配子序列的方法,如果需要,可以从匹配结果计算其内容。
+ * 
+ * <p>匹配器的显式状态包括最近成功匹配的开始和结束索引。它还包括每个<a href=\"Patternhtml#cg\">捕获组捕获的输入子序列的开始和结束索引< a>以及这些子序列的总计数。
+ * 为了方便,还提供了用于以字符串形式返回这些捕获的子序列的方法。
+ * 
+ *  <p>匹配器的显式状态最初未定义;在成功匹配之前尝试查询它的任何部分将导致{@link IllegalStateException}被抛出匹配器的显式状态由每个匹配操作重新计算
+ * 
+ * <p>匹配器的隐式状态包括输入字符序列以及<i>附加位置</i>,它最初为零,并由{@link #appendReplacement appendReplacement}方法更新
+ * 
+ *  <p>匹配器可以通过调用其{@link #reset()}方法显式地重置,或者如果需要新的输入序列,它的{@link #reset(javalangCharSequence)reset(CharSequence)}
+ * 方法重置匹配器丢弃其显式状态信息并将追加位置设置为零。
+ * 
+ *  <p>此类别的实例不适用于多个并行主题</p>
+ * 
+ * 
  * @author      Mike McCloskey
  * @author      Mark Reinhold
  * @author      JSR-51 Expert Group
@@ -106,12 +148,18 @@ public final class Matcher implements MatchResult {
 
     /**
      * The Pattern object that created this Matcher.
+     * <p>
+     *  创建此匹配器的Pattern对象
+     * 
      */
     Pattern parentPattern;
 
     /**
      * The storage used by groups. They may contain invalid values if
      * a group was skipped during the matching.
+     * <p>
+     *  组使用的存储如果在匹配期间跳过组,则它们可能包含无效值
+     * 
      */
     int[] groups;
 
@@ -119,17 +167,26 @@ public final class Matcher implements MatchResult {
      * The range within the sequence that is to be matched. Anchors
      * will match at these "hard" boundaries. Changing the region
      * changes these values.
+     * <p>
+     * 要匹配的序列内的范围锚在这些"硬"边界处匹配。更改区域会更改这些值
+     * 
      */
     int from, to;
 
     /**
      * Lookbehind uses this value to ensure that the subexpression
      * match ends at the point where the lookbehind was encountered.
+     * <p>
+     *  Lookbehind使用此值确保子表达式匹配在遇到lookbehind的点结束
+     * 
      */
     int lookbehindTo;
 
     /**
      * The original string being matched.
+     * <p>
+     *  正在匹配的原始字符串
+     * 
      */
     CharSequence text;
 
@@ -137,6 +194,9 @@ public final class Matcher implements MatchResult {
      * Matcher state used by the last node. NOANCHOR is used when a
      * match does not have to consume all of the input. ENDANCHOR is
      * the mode used for matching all the input.
+     * <p>
+     *  匹配不需要消耗所有输入时使用最后一个节点使用的匹配器状态NOANCHOR ENDANCHOR是用于匹配所有输入的模式
+     * 
      */
     static final int ENDANCHOR = 1;
     static final int NOANCHOR = 0;
@@ -147,16 +207,25 @@ public final class Matcher implements MatchResult {
      * match failed then first is -1; last initially holds 0 then it
      * holds the index of the end of the last match (which is where the
      * next search starts).
+     * <p>
+     *  最后匹配模式的字符串范围如果最后一个匹配失败,那么第一个是-1;最后保持0,则其保持最后匹配的结束的索引(这是下一搜索开始的地方)
+     * 
      */
     int first = -1, last = 0;
 
     /**
      * The end index of what matched in the last match operation.
+     * <p>
+     *  在最后一次匹配操作中匹配的结束索引
+     * 
      */
     int oldLast = -1;
 
     /**
      * The index of the last position appended in a substitution.
+     * <p>
+     *  替换中附加的最后一个位置的索引
+     * 
      */
     int lastAppendPosition = 0;
 
@@ -164,6 +233,9 @@ public final class Matcher implements MatchResult {
      * Storage used by nodes to tell what repetition they are on in
      * a pattern, and where groups begin. The nodes themselves are stateless,
      * so they rely on this field to hold state during a match.
+     * <p>
+     * 节点使用的存储,用于告诉它们在模式中的重复,以及组开始节点本身是无状态的,因此它们依赖此字段在匹配期间保持状态
+     * 
      */
     int[] locals;
 
@@ -179,6 +251,12 @@ public final class Matcher implements MatchResult {
      * will not change the match.
      * If hitEnd is false and a match was not found, then more
      * input will not cause a match to be found.
+     * <p>
+     *  布尔值,指示更多输入是否可以更改上次匹配的结果
+     * 
+     *  如果hitEnd为true,并且找到匹配,则更多的输入可能导致找到不同的匹配如果hitEnd为真,并且没有找到匹配,则更多的输入可能导致匹配被找到如果hitEnd为假并且匹配被发现,则更多的输入将不会
+     * 改变匹配如果hitEnd为假,并且没有找到匹配,则更多的输入将不会导致找到匹配。
+     * 
      */
     boolean hitEnd;
 
@@ -191,6 +269,12 @@ public final class Matcher implements MatchResult {
      * If requireEnd is false and a match was found, then more
      * input might change the match but the match won't be lost.
      * If a match was not found, then requireEnd has no meaning.
+     * <p>
+     *  布尔值,指示更多输入是否可以将正匹配更改为负匹配
+     * 
+     * 如果requireEnd为true,并且找到匹配,则更多的输入可能导致匹配丢失如果requireEnd为假并且找到匹配,则更多的输入可能改变匹配,但匹配不会丢失如果匹配没有找到,那么requireEnd
+     * 没有意义。
+     * 
      */
     boolean requireEnd;
 
@@ -198,23 +282,35 @@ public final class Matcher implements MatchResult {
      * If transparentBounds is true then the boundaries of this
      * matcher's region are transparent to lookahead, lookbehind,
      * and boundary matching constructs that try to see beyond them.
+     * <p>
+     *  如果transparentBounds为true,那么这个匹配器区域的边界对于lookahead,lookbehind和边界匹配结构是透明的,它们试图看到它们
+     * 
      */
     boolean transparentBounds = false;
 
     /**
      * If anchoringBounds is true then the boundaries of this
      * matcher's region match anchors such as ^ and $.
+     * <p>
+     *  如果anchoringBounds为true,那么这个匹配器区域的边界匹配锚如^和$
+     * 
      */
     boolean anchoringBounds = true;
 
     /**
      * No default constructor.
+     * <p>
+     *  没有默认构造函数
+     * 
      */
     Matcher() {
     }
 
     /**
      * All matchers have the state used by Pattern during a match.
+     * <p>
+     *  所有匹配器都具有匹配期间Pattern使用的状态
+     * 
      */
     Matcher(Pattern parent, CharSequence text) {
         this.parentPattern = parent;
@@ -232,6 +328,10 @@ public final class Matcher implements MatchResult {
     /**
      * Returns the pattern that is interpreted by this matcher.
      *
+     * <p>
+     *  返回此匹配器解释的模式
+     * 
+     * 
      * @return  The pattern for which this matcher was created
      */
     public Pattern pattern() {
@@ -243,6 +343,10 @@ public final class Matcher implements MatchResult {
      * The result is unaffected by subsequent operations performed upon this
      * matcher.
      *
+     * <p>
+     * 返回此匹配器的匹配状态为{@link MatchResult}结果不受此匹配器上执行的后续操作的影响
+     * 
+     * 
      * @return  a <code>MatchResult</code> with the state of this matcher
      * @since 1.5
      */
@@ -263,6 +367,12 @@ public final class Matcher implements MatchResult {
       * matcher's position in the input is maintained and its
       * last append position is unaffected.</p>
       *
+      * <p>
+      *  更改<tt>模式</tt>(此<tt>匹配器</tt>用于查找匹配项)
+      * 
+      *  <p>此方法导致此匹配器丢失关于发生的最后匹配的组的信息。输入中的匹配器的位置被保持,并且其最后附加位置不受影响。</p>
+      * 
+      * 
       * @param  newPattern
       *         The new pattern used by this matcher
       * @return  This matcher
@@ -294,6 +404,12 @@ public final class Matcher implements MatchResult {
      * default region, which is its entire character sequence. The anchoring
      * and transparency of this matcher's region boundaries are unaffected.
      *
+     * <p>
+     *  重置此匹配器
+     * 
+     *  <p>重置匹配器会丢弃所有显式状态信息,并将其附加位置设置为零。匹配器的区域设置为默认区域,即其整个字符序列。此匹配器区域边界的锚定和透明度不受影响
+     * 
+     * 
      * @return  This matcher
      */
     public Matcher reset() {
@@ -319,6 +435,12 @@ public final class Matcher implements MatchResult {
      * anchoring and transparency of this matcher's region boundaries are
      * unaffected.
      *
+     * <p>
+     *  使用新的输入序列重置此匹配器
+     * 
+     * <p>重置匹配器会丢弃所有显式状态信息,并将其附加位置设置为零。匹配器的区域设置为默认区域,即其整个字符序列。此匹配器区域边界的锚定和透明度不受影响
+     * 
+     * 
      * @param  input
      *         The new input character sequence
      *
@@ -332,6 +454,10 @@ public final class Matcher implements MatchResult {
     /**
      * Returns the start index of the previous match.
      *
+     * <p>
+     *  返回上一个匹配的开始索引
+     * 
+     * 
      * @return  The index of the first character matched
      *
      * @throws  IllegalStateException
@@ -353,6 +479,13 @@ public final class Matcher implements MatchResult {
      * the expression <i>m.</i><tt>start(0)</tt> is equivalent to
      * <i>m.</i><tt>start()</tt>.  </p>
      *
+     * <p>
+     *  返回在上一个匹配操作期间由给定组捕获的子序列的开始索引
+     * 
+     *  <p> <a href=\"Patternhtml#cg\">捕获组</a>从左到右进行索引,从一个组开始,组0表示整个模式,因此表达式<i> m </i> <tt> start(0)</tt>等效于
+     * <i> m </i> <tt> start()</tt> </p>。
+     * 
+     * 
      * @param  group
      *         The index of a capturing group in this matcher's pattern
      *
@@ -381,6 +514,10 @@ public final class Matcher implements MatchResult {
      * <a href="Pattern.html#groupname">named-capturing group</a> during the
      * previous match operation.
      *
+     * <p>
+     * 返回在先前匹配操作期间由给定<a href=\"Patternhtml#groupname\">命名捕获组</a>捕获的子序列的开始索引
+     * 
+     * 
      * @param  name
      *         The name of a named-capturing group in this matcher's pattern
      *
@@ -404,6 +541,10 @@ public final class Matcher implements MatchResult {
     /**
      * Returns the offset after the last character matched.
      *
+     * <p>
+     *  返回在匹配的最后一个字符之后的偏移量
+     * 
+     * 
      * @return  The offset after the last character matched
      *
      * @throws  IllegalStateException
@@ -425,6 +566,13 @@ public final class Matcher implements MatchResult {
      * the expression <i>m.</i><tt>end(0)</tt> is equivalent to
      * <i>m.</i><tt>end()</tt>.  </p>
      *
+     * <p>
+     *  返回在上一个匹配操作期间由给定组捕获的子序列的最后一个字符之后的偏移量
+     * 
+     *  <p> <a href=\"Patternhtml#cg\">捕获组</a>从左到右进行索引,从一个组开始,组0表示整个模式,因此表达式<i> m </i> <tt> end(0)</tt>等效于<i>
+     *  m </i> <tt> end()</tt> </p>。
+     * 
+     * 
      * @param  group
      *         The index of a capturing group in this matcher's pattern
      *
@@ -453,6 +601,10 @@ public final class Matcher implements MatchResult {
      * captured by the given <a href="Pattern.html#groupname">named-capturing
      * group</a> during the previous match operation.
      *
+     * <p>
+     *  返回之前匹配操作期间由给定<a href=\"Patternhtml#groupname\">命名捕获组</a>捕获的子序列的最后一个字符后的偏移量
+     * 
+     * 
      * @param  name
      *         The name of a named-capturing group in this matcher's pattern
      *
@@ -485,6 +637,15 @@ public final class Matcher implements MatchResult {
      * string.  This method will return the empty string when the pattern
      * successfully matches the empty string in the input.  </p>
      *
+     * <p>
+     * 返回与上一个匹配匹配的输入子序列
+     * 
+     *  <p>对于具有输入序列<i> s </i>的匹配器m,表达式<i> m <tt> group()</tt>和<i> s <tt>子串(</tt> <i> m </i> <tt> start(),</tt>
+     * &nbsp; m </i> <tt> end </tt>是等效的</p>。
+     * 
+     *  <p>请注意,某些模式(例如<tt> a * </tt>)与空字符串匹配此方法将在模式成功匹配输入中的空字符串时返回空字符串</p>
+     * 
+     * 
      * @return The (possibly empty) subsequence matched by the previous match,
      *         in string form
      *
@@ -516,6 +677,20 @@ public final class Matcher implements MatchResult {
      * This method will return the empty string when such a group successfully
      * matches the empty string in the input.  </p>
      *
+     * <p>
+     *  返回在先前的匹配操作期间由给定组捕获的输入子序列
+     * 
+     * 对于匹配器m,输入序列<i> s和组索引</i>,表达式<m> <tt > </tt>(</tt> <i> <tt>)</tt>和<i> </tt> start(</tt> <i> g </i> <tt>
+     * ),</tt>&nbsp; m </i> <tt> end(</tt> i> <tt>))</tt>等效</p>。
+     * 
+     *  <p> <a href=\"Patternhtml#cg\">捕获组</a>从左到右进行索引,从一个组开始,组0表示整个模式,因此表达式<tt> mgroup(0)</tt>等效于<tt> mgrou
+     * p()</tt>。
+     * </p>
+     * 
+     * <p>如果匹配成功,但指定的组未能匹配输入序列的任何部分,则返回<tt> null </tt>注意,有些组,例如<tt>(a *)</tt >,匹配空字符串当此组成功匹配输入</p>中的空字符串时,此方
+     * 法将返回空字符串。
+     * 
+     * 
      * @param  group
      *         The index of a capturing group in this matcher's pattern
      *
@@ -552,6 +727,13 @@ public final class Matcher implements MatchResult {
      * This method will return the empty string when such a group successfully
      * matches the empty string in the input.  </p>
      *
+     * <p>
+     *  返回在上一次匹配操作期间由给定<a href=\"Patternhtml#groupname\">命名捕获组</a>捕获的输入子序列
+     * 
+     * <p>如果匹配成功,但指定的组未能匹配输入序列的任何部分,则返回<tt> null </tt>注意,有些组,例如<tt>(a *)</tt >,匹配空字符串当此组成功匹配输入</p>中的空字符串时,此方
+     * 法将返回空字符串。
+     * 
+     * 
      * @param  name
      *         The name of a named-capturing group in this matcher's pattern
      *
@@ -585,6 +767,14 @@ public final class Matcher implements MatchResult {
      * returned by this method is guaranteed to be a valid group index for
      * this matcher.  </p>
      *
+     * <p>
+     *  返回此匹配器模式中捕获组的数量
+     * 
+     *  <p>组0按照惯例表示整个模式它不包括在此计数中
+     * 
+     *  <p>小于或等于此方法返回的值的任何非负整数保证为此匹配器的有效组索引</p>
+     * 
+     * 
      * @return The number of capturing groups in this matcher's pattern
      */
     public int groupCount() {
@@ -597,6 +787,12 @@ public final class Matcher implements MatchResult {
      * <p> If the match succeeds then more information can be obtained via the
      * <tt>start</tt>, <tt>end</tt>, and <tt>group</tt> methods.  </p>
      *
+     * <p>
+     *  尝试将整个区域与模式匹配
+     * 
+     * <p>如果匹配成功,则可以通过<tt>开始</tt>,<tt>结束</tt>和<tt>组</tt>方法</p>
+     * 
+     * 
      * @return  <tt>true</tt> if, and only if, the entire region sequence
      *          matches this matcher's pattern
      */
@@ -616,6 +812,14 @@ public final class Matcher implements MatchResult {
      * <p> If the match succeeds then more information can be obtained via the
      * <tt>start</tt>, <tt>end</tt>, and <tt>group</tt> methods.  </p>
      *
+     * <p>
+     *  尝试查找与模式匹配的输入序列的下一个子序列
+     * 
+     *  <p>此方法在此匹配器区域的开始处开始,或者如果方法的先前调用成功并且匹配器之前未被重置,则在与先前匹配不匹配的第一个字符
+     * 
+     *  <p>如果匹配成功,则可以通过<tt>开始</tt>,<tt>结束</tt>和<tt>组</tt>方法</p>
+     * 
+     * 
      * @return  <tt>true</tt> if, and only if, a subsequence of the input
      *          sequence matches this matcher's pattern
      */
@@ -647,6 +851,12 @@ public final class Matcher implements MatchResult {
      * invocations of the {@link #find()} method will start at the first
      * character not matched by this match.  </p>
      *
+     * <p>
+     *  重置此匹配器,然后尝试查找与指定索引处开始的模式匹配的输入序列的下一个子序列
+     * 
+     * <p>如果匹配成功,则可以通过<tt>开始</tt>,<tt>结束</tt>和<tt>组</tt>方法获得更多信息, @link #find()}方法将从不匹配此匹配的第一个字符开始。</p>
+     * 
+     * 
      * @param start the index to start searching for a match
      * @throws  IndexOutOfBoundsException
      *          If start is less than zero or if start is greater than the
@@ -675,6 +885,14 @@ public final class Matcher implements MatchResult {
      * <p> If the match succeeds then more information can be obtained via the
      * <tt>start</tt>, <tt>end</tt>, and <tt>group</tt> methods.  </p>
      *
+     * <p>
+     *  尝试将输入序列(从区域开头开始)与模式匹配
+     * 
+     *  <p>与{@link #matches matches}方法一样,此方法始终从区域的开头开始;不像该方法,它不需要整个区域匹配
+     * 
+     *  <p>如果匹配成功,则可以通过<tt>开始</tt>,<tt>结束</tt>和<tt>组</tt>方法</p>
+     * 
+     * 
      * @return  <tt>true</tt> if, and only if, a prefix of the input
      *          sequence matches this matcher's pattern
      */
@@ -693,6 +911,14 @@ public final class Matcher implements MatchResult {
      * in <code>s</code> treated as a literal sequence. Slashes ('\') and
      * dollar signs ('$') will be given no special meaning.
      *
+     * <p>
+     *  返回指定<code> String </code>的字面替换<code> String </code>
+     * 
+     * 这个方法产生一个在{@link Matcher}类的<code> appendReplacement </code>方法中用作文字替换<code> s </code>的<code> String </code>
+     * 字符串</code>将匹配<code> s </code>中处理为字面序列的字符序列。
+     * 斜线('\\')和美元符号('$')将没有特殊含义。
+     * 
+     * 
      * @param  s The string to be literalized
      * @return  A literal string replacement
      * @since 1.5
@@ -771,6 +997,38 @@ public final class Matcher implements MatchResult {
      * m.appendTail(sb);
      * System.out.println(sb.toString());</pre></blockquote>
      *
+     * <p>
+     *  实现非终端追加和替换步骤
+     * 
+     *  <p>此方法执行以下操作：</p>
+     * 
+     * <ol>
+     * 
+     *  <li> <p>它从输入序列读取字符,从追加位置开始,并将它们附加到给定的字符串缓冲区。
+     * 在读取前一个匹配之前的最后一个字符时停止,也就是索引{@link #start()}&nbsp; <tt>  -  </tt>&nbsp; <tt> 1 </tt> </p> </li>。
+     * 
+     * <li> <p>它将给定的替换字符串附加到字符串缓冲区</p> </li>
+     * 
+     *  <li> <p>它将此匹配器的附加位置设置为匹配的最后一个字符的索引,加上一个,即{@link #end()} </p> </li>
+     * 
+     * </ol>
+     * 
+     * <p>替换字符串可能包含对上一次匹配过程中捕获的子序列的引用：<tt> $ {</tt> <i> name </i> <tt>} </tt>或<tt> $ </tt> <i> g </i>将被分别评估相
+     * 应的{@link #group(String)group(name)}或{@link #group(int)group对于<tt> $ </tt> <i> g </i>,<tt> $ </tt>之后的第一个数字始终被视为组参考的一部分。
+     * 法定组参考只有数字'0'到'9'被认为是组参考的电位分量例如,如果第二组匹配字符串<tt>"foo"</tt>,则传递替换字符串<tt>"$ 2bar"</tt>会导致<foo> </tt>附加到字符串
+     * 缓冲区美元符号(<tt> $ </tt>)可以作为替换字符串中的文字包含在其前面的反斜杠(<tt> \\ $ </tt>)。
+     * 
+     * <p>请注意,替换字符串中的反斜杠(<tt> \\ </tt>)和美元符号(<tt> $ </tt>)可能会导致结果与被视为替换字符串字符串美元符号可以被视为对上述捕获的子序列的引用,反斜杠用于替换替换
+     * 字符串中的文字字符。
+     * 
+     *  <p>此方法旨在与{@link #appendTail appendTail}和{@link #find find}方法一起使用在以下代码中,例如,在院子里写入<tt>一只狗两只狗</tt>到标准输出
+     * 流：</p>。
+     * 
+     * <blockquote> <pre> Pattern p = Patterncompile("cat"); Matcher m = pmatcher("one cat two cats in the y
+     * ard"); StringBuffer sb = new StringBuffer(); while(mfind()){mappendReplacement(sb,"dog"); } mappendTa
+     * il(sb); Systemoutprintln(sbtoString()); </pre> </blockquote>。
+     * 
+     * 
      * @param  sb
      *         The target string buffer
      *
@@ -902,6 +1160,13 @@ public final class Matcher implements MatchResult {
      * #appendReplacement appendReplacement} method in order to copy the
      * remainder of the input sequence.  </p>
      *
+     * <p>
+     *  实施终端追加和替换步骤
+     * 
+     *  <p>此方法从输入序列中读取字符,从追加位置开始,并将它们附加到给定的字符串缓冲区。
+     * 它旨在在{@link #appendReplacement appendReplacement}方法的一次或多次调用后调用,以复制输入序列的剩余部分</p>。
+     * 
+     * 
      * @param  sb
      *         The target string buffer
      *
@@ -939,6 +1204,21 @@ public final class Matcher implements MatchResult {
      * is to be used in further matching operations then it should first be
      * reset.  </p>
      *
+     * <p>
+     *  用给定的替换字符串替换与模式匹配的输入序列的每个子序列
+     * 
+     * <p>此方法首先重置此匹配器然后扫描输入序列查找模式的匹配不是任何匹配的一部分的字符直接附加到结果字符串;每个匹配在替换字符串的结果中替换替换字符串可以包含对捕获的子序列的引用,如{@link #appendReplacement appendReplacement}
+     * 方法。
+     * 
+     *  <p>请注意,替换字符串中的反斜杠(<tt> \\ </tt>)和美元符号(<tt> $ </tt>)可能会导致结果与被视为替换字符串字符串美元符号可以被视为对上述捕获的子序列的引用,反斜杠用于替换替
+     * 换字符串中的文字字符。
+     * 
+     * <p>给定正则表达式<tt> a * b </tt>,输入<tt>"aabfooaabfooabfoob"</tt>和替换字符串<tt>" - "</tt>方法对该表达式的匹配器将产生字符串<tt>" 
+     * -  foo-foo-foo  - "</tt>。
+     * 
+     *  <p>调用此方法将更改此匹配器的状态如果匹配器将用于进一步匹配操作,则应首先重置</p>
+     * 
+     * 
      * @param  replacement
      *         The replacement string
      *
@@ -988,6 +1268,21 @@ public final class Matcher implements MatchResult {
      * is to be used in further matching operations then it should first be
      * reset.  </p>
      *
+     * <p>
+     *  将与模式匹配的输入序列的第一个子序列替换为给定的替换字符串
+     * 
+     * <p>此方法首先重置此匹配器然后扫描输入序列查找匹配的模式不是匹配的字符的一部分直接附加到结果字符串;匹配在替换字符串的结果中替换替换字符串可以包含对捕获的子序列的引用,如{@link #appendReplacement appendReplacement}
+     * 方法。
+     * 
+     *  <p>请注意,替换字符串中的反斜杠(<tt> \\ </tt>)和美元符号(<tt> $ </tt>)可能会导致结果与被视为替换字符串字符串美元符号可以被视为对上述捕获的子序列的引用,反斜杠用于替换替
+     * 换字符串中的文字字符。
+     * 
+     * <p>给定正则表达式<tt> dog </tt>,输入<tt>"zzzdogzzzdogzzz"</tt>和替换字符串<tt>"cat"</tt>该表达式的匹配器将产生字符串<tt>"zzzcatzzz
+     * dogzzz"</tt> </p>。
+     * 
+     *  <p>调用此方法将更改此匹配器的状态如果匹配器将用于进一步匹配操作,则应首先重置</p>
+     * 
+     * 
      * @param  replacement
      *         The replacement string
      * @return  The string constructed by replacing the first matching
@@ -1019,6 +1314,14 @@ public final class Matcher implements MatchResult {
      * as anchors may behave differently at or around the boundaries of the
      * region.
      *
+     * <p>
+     *  设置此匹配器区域的限制区域是将被搜索以找到匹配的输入序列的一部分。
+     * 调用此方法重置匹配器,然后将该区域设置为从由<code> start </span>指定的索引开始, code>参数,并在由<code> end </code>参数指定的索引处结束。
+     * 
+     * <p>根据所使用的透明度和锚定(请参阅{@link #useTransparentBounds useTransparentBounds}和{@link #useAnchoringBounds useAnchoringBounds}
+     * ),某些结构(例如锚点)可能在区域边界处或周围的行为不同。
+     * 
+     * 
      * @param  start
      *         The index to start searching at (inclusive)
      * @param  end
@@ -1050,6 +1353,11 @@ public final class Matcher implements MatchResult {
      * within {@link #regionStart regionStart} (inclusive) and
      * {@link #regionEnd regionEnd} (exclusive).
      *
+     * <p>
+     *  报告此匹配器区域的开始索引此匹配器执行的搜索仅限于在{@link #regionStart regionStart}(包括)和{@link #regionEnd regionEnd}(独占)中查找匹配
+     * 项。
+     * 
+     * 
      * @return  The starting point of this matcher's region
      * @since 1.5
      */
@@ -1063,6 +1371,11 @@ public final class Matcher implements MatchResult {
      * within {@link #regionStart regionStart} (inclusive) and
      * {@link #regionEnd regionEnd} (exclusive).
      *
+     * <p>
+     *  报告此匹配器区域的结束索引(独占)此匹配器执行的搜索仅限于在{@link #regionStart regionStart}(包括)和{@link #regionEnd regionEnd}(独占)中
+     * 查找匹配项。
+     * 
+     * 
      * @return  the ending point of this matcher's region
      * @since 1.5
      */
@@ -1082,6 +1395,16 @@ public final class Matcher implements MatchResult {
      *
      * <p> By default, a matcher uses opaque region boundaries.
      *
+     * <p>
+     *  查询此匹配器的区域边界的透明度
+     * 
+     * <p>如果此匹配器使用<i>透明</i>边界,则返回<tt> true </tt>,如果使用<i> opaque </i>
+     * 
+     *  <p>有关透明和不透明边界的说明,请参阅{@link #useTransparentBounds useTransparentBounds}
+     * 
+     *  <p>默认情况下,匹配器使用不透明区域边界
+     * 
+     * 
      * @return <tt>true</tt> iff this matcher is using transparent bounds,
      *         <tt>false</tt> otherwise.
      * @see java.util.regex.Matcher#useTransparentBounds(boolean)
@@ -1111,6 +1434,18 @@ public final class Matcher implements MatchResult {
      *
      * <p> By default, a matcher uses opaque bounds.
      *
+     * <p>
+     *  设置此匹配器的区域边界的透明度
+     * 
+     *  <p>使用<tt> true </tt>参数调用此方法会将此匹配器设置为使用<i>透明</i>边界如果布尔参数为<tt> false </tt>,则<i > opaque </i> bounds
+     * 
+     * <p>使用透明边界,此匹配器区域的边界对于前瞻,后瞻和边界匹配结构是透明的。这些结构可以看到超出该区域的边界,以查看匹配是否合适
+     * 
+     *  <p>使用不透明边界,这个匹配器区域的边界对于lookahead,lookbehind和边界匹配结构是不透明的,它们可能试图超越它们。这些结构不能超过边界,所以它们将不能匹配区域外的任何东西
+     * 
+     *  <p>默认情况下,匹配器使用不透明边界
+     * 
+     * 
      * @param  b a boolean indicating whether to use opaque or transparent
      *         regions
      * @return this matcher
@@ -1133,6 +1468,16 @@ public final class Matcher implements MatchResult {
      *
      * <p> By default, a matcher uses anchoring region boundaries.
      *
+     * <p>
+     *  查询此匹配器的区域边界的锚定
+     * 
+     *  <p>如果此匹配器使用<i>锚定</i>边界,<tt> false </tt>,则此方法返回<tt> true </tt>
+     * 
+     * <p>有关锚定界限的说明,请参阅{@link #useAnchoringBounds useAnchoringBounds}
+     * 
+     *  <p>默认情况下,匹配器使用锚定区域边界
+     * 
+     * 
      * @return <tt>true</tt> iff this matcher is using anchoring bounds,
      *         <tt>false</tt> otherwise.
      * @see java.util.regex.Matcher#useAnchoringBounds(boolean)
@@ -1158,6 +1503,18 @@ public final class Matcher implements MatchResult {
      *
      * <p> By default, a matcher uses anchoring region boundaries.
      *
+     * <p>
+     *  设置此匹配器的区域边界的锚定
+     * 
+     *  <p>使用<tt> true </tt>参数调用此方法会将此匹配器设置为使用<i> anchor </i> bounds如果布尔参数为<tt> false </tt>,则<i >非锚定</i>边界
+     * 
+     *  <p>使用锚定边界,此匹配器区域的边界匹配锚如^和$
+     * 
+     *  <p>没有锚定界限,此匹配器区域的边界将不匹配锚如^和$
+     * 
+     *  <p>默认情况下,匹配器使用锚定区域边界
+     * 
+     * 
      * @param  b a boolean indicating whether or not to use anchoring bounds.
      * @return this matcher
      * @see java.util.regex.Matcher#hasAnchoringBounds
@@ -1173,6 +1530,10 @@ public final class Matcher implements MatchResult {
      * string representation of a <code>Matcher</code> contains information
      * that may be useful for debugging. The exact format is unspecified.
      *
+     * <p>
+     * <p>返回此匹配器的字符串表示形式<code> Matcher </code>的字符串表示形式包含可能对调试有用的信息准确的格式未指定
+     * 
+     * 
      * @return  The string representation of this matcher
      * @since 1.5
      */
@@ -1197,6 +1558,12 @@ public final class Matcher implements MatchResult {
      * <p>When this method returns true, then it is possible that more input
      * would have changed the result of the last search.
      *
+     * <p>
+     *  <p>如果在此匹配器执行的最后一次匹配操作中搜索引擎触发输入结束,则返回true
+     * 
+     *  <p>当此方法返回true时,有可能更多的输入将更改上次搜索的结果
+     * 
+     * 
      * @return  true iff the end of input was hit in the last match; false
      *          otherwise
      * @since 1.5
@@ -1215,6 +1582,13 @@ public final class Matcher implements MatchResult {
      * match won't be lost. If a match was not found, then requireEnd has no
      * meaning.
      *
+     * <p>
+     *  <p>如果更多输入可能将正匹配更改为负匹配,则返回true
+     * 
+     * <p>如果此方法返回true,并且找到匹配,则更多输入可能导致匹配丢失如果此方法返回false并且找到匹配,则更多输入可能会更改匹配,但匹配不会lost如果没有找到匹配,那么requireEnd没有意义
+     * 。
+     * 
+     * 
      * @return  true iff more input could change a positive match into a
      *          negative one.
      * @since 1.5
@@ -1235,6 +1609,12 @@ public final class Matcher implements MatchResult {
      * regex tries to match at that index but ^ won't match there. Subsequent
      * calls to the search methods start at a new "soft" boundary which is
      * the end of the previous match.
+     * <p>
+     *  启动搜索以在给定的边界内查找模式这些组用默认值填充,并且状态机的根的匹配被称为状态机将保持匹配的状态,因为它在该匹配器中继续进行
+     * 
+     * Matcherfrom在这里没有设置,因为它是搜索开始的"硬"边界,锚点将设置为从。
+     * param是搜索开始的"软"边界,这意味着正则表达式尝试匹配索引,但^将不匹配那里对搜索方法的后续调用从新的"软"边界开始,这是上一次匹配的结束。
+     * 
      */
     boolean search(int from) {
         this.hitEnd = false;
@@ -1257,6 +1637,9 @@ public final class Matcher implements MatchResult {
      * bounds. The groups are filled with default values and the match of the
      * root of the state machine is called. The state machine will hold the
      * state of the match as it proceeds in this matcher.
+     * <p>
+     *  在给定范围内启动对模式的锚定匹配的搜索使用默认值填充组,并且状态机的根的匹配被称为状态机将保持匹配的状态,如在该匹配器中继续
+     * 
      */
     boolean match(int from, int anchor) {
         this.hitEnd = false;
@@ -1277,6 +1660,10 @@ public final class Matcher implements MatchResult {
     /**
      * Returns the end index of the text.
      *
+     * <p>
+     *  返回文本的结束索引
+     * 
+     * 
      * @return the index after the last character in the text
      */
     int getTextLength() {
@@ -1286,6 +1673,10 @@ public final class Matcher implements MatchResult {
     /**
      * Generates a String from this Matcher's input in the specified range.
      *
+     * <p>
+     *  从指定范围内的此匹配器输入生成一个字符串
+     * 
+     * 
      * @param  beginIndex   the beginning index, inclusive
      * @param  endIndex     the ending index, exclusive
      * @return A String generated from this Matcher's input
@@ -1297,6 +1688,10 @@ public final class Matcher implements MatchResult {
     /**
      * Returns this Matcher's input character at index i.
      *
+     * <p>
+     *  返回索引i处的该匹配器的输入字符
+     * 
+     * 
      * @return A char from the specified index
      */
     char charAt(int i) {
@@ -1306,6 +1701,9 @@ public final class Matcher implements MatchResult {
     /**
      * Returns the group index of the matched capturing group.
      *
+     * <p>
+     * 返回匹配捕获组的组索引
+     * 
      * @return the index of the named-capturing group
      */
     int getMatchedGroupIndex(String name) {

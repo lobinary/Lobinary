@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2014, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -57,6 +58,19 @@ import java.util.stream.StreamSupport;
  * <p>A {@code BitSet} is not safe for multithreaded use without
  * external synchronization.
  *
+ * <p>
+ *  这个类实现了一个根据需要增长的位向量。位集合的每个组件都有一个{@code boolean}值{@code BitSet}的位由非负整数索引。
+ * 可以检查,设置或清除各个索引位一个{@code BitSet}可以用于通过逻辑AND,逻辑包含性OR和逻辑异或运算来修改另一个{@code BitSet}的内容。
+ * 
+ *  <p>默认情况下,集合中的所有位最初都具有值{@code false}
+ * 
+ * <p>每个位集都有一个当前大小,它是位集合当前使用的空间的位数注意,大小与位集的实现有关,因此它可能随着实现而改变。位集与位集的逻辑长度相关并且独立于实现而被定义
+ * 
+ *  <p>除非另有说明,否则将null参数传递给{@code BitSet}中的任何方法将导致{@code NullPointerException}
+ * 
+ *  <p> {@code BitSet}对于没有外部同步的多线程使用是不安全的
+ * 
+ * 
  * @author  Arthur van Hoff
  * @author  Michael McCloskey
  * @author  Martin Buchholz
@@ -67,6 +81,9 @@ public class BitSet implements Cloneable, java.io.Serializable {
      * BitSets are packed into arrays of "words."  Currently a word is
      * a long, which consists of 64 bits, requiring 6 address bits.
      * The choice of word size is determined purely by performance concerns.
+     * <p>
+     *  BitSet被打包成"字"的数组。目前一个字是长的,由64位组成,需要6个地址位。字大小的选择完全由性能关注
+     * 
      */
     private final static int ADDRESS_BITS_PER_WORD = 6;
     private final static int BITS_PER_WORD = 1 << ADDRESS_BITS_PER_WORD;
@@ -76,6 +93,8 @@ public class BitSet implements Cloneable, java.io.Serializable {
     private static final long WORD_MASK = 0xffffffffffffffffL;
 
     /**
+    /* <p>
+    /* 
      * @serialField bits long[]
      *
      * The bits in this BitSet.  The ith bit is stored in bits[i/64] at
@@ -88,17 +107,26 @@ public class BitSet implements Cloneable, java.io.Serializable {
 
     /**
      * The internal field corresponding to the serialField "bits".
+     * <p>
+     * 对应于serialField"bits"的内部字段
+     * 
      */
     private long[] words;
 
     /**
      * The number of words in the logical size of this BitSet.
+     * <p>
+     *  此BitSet的逻辑大小中的字数
+     * 
      */
     private transient int wordsInUse = 0;
 
     /**
      * Whether the size of "words" is user-specified.  If so, we assume
      * the user knows what he's doing and try harder to preserve it.
+     * <p>
+     *  "字"的大小是否是用户指定的如果是,我们假设用户知道他在做什么,并更努力地保留它
+     * 
      */
     private transient boolean sizeIsSticky = false;
 
@@ -107,6 +135,9 @@ public class BitSet implements Cloneable, java.io.Serializable {
 
     /**
      * Given a bit index, return word index containing it.
+     * <p>
+     *  给定一个位索引,返回包含它的索引
+     * 
      */
     private static int wordIndex(int bitIndex) {
         return bitIndex >> ADDRESS_BITS_PER_WORD;
@@ -114,6 +145,9 @@ public class BitSet implements Cloneable, java.io.Serializable {
 
     /**
      * Every public method must preserve these invariants.
+     * <p>
+     *  每个公共方法必须保留这些不变量
+     * 
      */
     private void checkInvariants() {
         assert(wordsInUse == 0 || words[wordsInUse - 1] != 0);
@@ -125,6 +159,9 @@ public class BitSet implements Cloneable, java.io.Serializable {
      * Sets the field wordsInUse to the logical size in words of the bit set.
      * WARNING:This method assumes that the number of words actually in use is
      * less than or equal to the current value of wordsInUse!
+     * <p>
+     *  将字段wordsInUse设置为位设置的字中的逻辑大小WARNING：此方法假设实际使用的字的数目小于或等于wordsInUse的当前值！
+     * 
      */
     private void recalculateWordsInUse() {
         // Traverse the bitset until a used word is found
@@ -138,6 +175,9 @@ public class BitSet implements Cloneable, java.io.Serializable {
 
     /**
      * Creates a new bit set. All bits are initially {@code false}.
+     * <p>
+     *  创建新的位集所有位最初为{@code false}
+     * 
      */
     public BitSet() {
         initWords(BITS_PER_WORD);
@@ -149,6 +189,10 @@ public class BitSet implements Cloneable, java.io.Serializable {
      * represent bits with indices in the range {@code 0} through
      * {@code nbits-1}. All bits are initially {@code false}.
      *
+     * <p>
+     *  创建一个位集,其初始大小足以显式地表示位于{@code 0}到{@code nbits-1}范围内的索引的位。所有位最初为{@code false}
+     * 
+     * 
      * @param  nbits the initial size of the bit set
      * @throws NegativeArraySizeException if the specified initial size
      *         is negative
@@ -169,6 +213,9 @@ public class BitSet implements Cloneable, java.io.Serializable {
     /**
      * Creates a bit set using words as the internal representation.
      * The last word (if there is one) must be non-zero.
+     * <p>
+     * 使用字作为内部表示创建位集最后一个字(如果有一个)必须为非零
+     * 
      */
     private BitSet(long[] words) {
         this.words = words;
@@ -186,6 +233,14 @@ public class BitSet implements Cloneable, java.io.Serializable {
      * <p>This method is equivalent to
      * {@code BitSet.valueOf(LongBuffer.wrap(longs))}.
      *
+     * <p>
+     *  返回包含给定长数组中所有位的新位集
+     * 
+     *  <p>更精确地说,<br> {@code BitSetvalueOf(longs)get(n)==((longs [n / 64]&(1L <<(n％64)))！= 0)} <br>对于所有{@code n <64 * longslength}。
+     * 
+     *  <p>此方法相当于{@code BitSetvalueOf(LongBufferwrap(longs))}
+     * 
+     * 
      * @param longs a long array containing a little-endian representation
      *        of a sequence of bits to be used as the initial bits of the
      *        new bit set
@@ -210,6 +265,15 @@ public class BitSet implements Cloneable, java.io.Serializable {
      * <p>The long buffer is not modified by this method, and no
      * reference to the buffer is retained by the bit set.
      *
+     * <p>
+     *  返回一个新的位集,它包含给定长缓冲区中位置和限制之间的所有位
+     * 
+     *  <p>更精确地说,<br> {@code BitSetvalueOf(lb)get(n)==((lbget(lbposition()+ n / 64)&(1L <<(n％64)))！= 0) } <br>
+     * 适用于所有{@code n <64 * lbremaining()}。
+     * 
+     *  <p>长缓冲区不会被此方法修改,并且位集合不会保留对缓冲区的引用
+     * 
+     * 
      * @param lb a long buffer containing a little-endian representation
      *        of a sequence of bits between its position and limit, to be
      *        used as the initial bits of the new bit set
@@ -237,6 +301,14 @@ public class BitSet implements Cloneable, java.io.Serializable {
      * <p>This method is equivalent to
      * {@code BitSet.valueOf(ByteBuffer.wrap(bytes))}.
      *
+     * <p>
+     * 返回包含给定字节数组中所有位的新位集
+     * 
+     *  <p>更精确地说,<br> {@code BitSetvalueOf(bytes)get(n)==((bytes [n / 8]&(1 <<(n％8)))！= 0)} <br>对于所有{@code n <8 * byteslength}。
+     * 
+     *  <p>此方法相当于{@code BitSetvalueOf(ByteBufferwrap(bytes))}
+     * 
+     * 
      * @param bytes a byte array containing a little-endian
      *        representation of a sequence of bits to be used as the
      *        initial bits of the new bit set
@@ -258,6 +330,15 @@ public class BitSet implements Cloneable, java.io.Serializable {
      * <p>The byte buffer is not modified by this method, and no
      * reference to the buffer is retained by the bit set.
      *
+     * <p>
+     *  返回包含位置和限制之间的给定字节缓冲区中的所有位的新位集
+     * 
+     *  <p>更精确地说,<br> {@code BitSetvalueOf(bb)get(n)==((bbget(bbposition()+ n / 8)&(1 <<(n％8)))！= 0) } <br>适
+     * 用于所有{@code n <8 * bbremaining()}。
+     * 
+     *  <p>字节缓冲区不会被此方法修改,并且位设置不会保留对缓冲区的引用
+     * 
+     * 
      * @param bb a byte buffer containing a little-endian representation
      *        of a sequence of bits between its position and limit, to be
      *        used as the initial bits of the new bit set
@@ -289,6 +370,13 @@ public class BitSet implements Cloneable, java.io.Serializable {
      * <br>{@code s.get(n) == ((bytes[n/8] & (1<<(n%8))) != 0)}
      * <br>for all {@code n < 8 * bytes.length}.
      *
+     * <p>
+     *  返回包含此位集中的所有位的新字节数组
+     * 
+     * <p>更精确地说,如果<br> {@code byte [] bytes = stoByteArray();} <br>然后{@code byteslength ==(slength()+ 7)/ 8}
+     * 和<br> {@code所有{@code n <8 * byteslength}的sget(n)==((bytes [n / 8]&(1 <<(n％8)))。
+     * 
+     * 
      * @return a byte array containing a little-endian representation
      *         of all the bits in this bit set
      * @since 1.7
@@ -318,6 +406,13 @@ public class BitSet implements Cloneable, java.io.Serializable {
      * <br>{@code s.get(n) == ((longs[n/64] & (1L<<(n%64))) != 0)}
      * <br>for all {@code n < 64 * longs.length}.
      *
+     * <p>
+     *  返回包含此位集中的所有位的新长数组
+     * 
+     *  <p>更精确地说,如果<br> {@code long [] longs = stoLongArray();} <br>然后{@code longslength ==(slength()+ 63)/ 64}
+     * 和<br> {@code所有{@code n <64 * longslength}的sget(n)==((longs [n / 64])(1L <<(n％64)))。
+     * 
+     * 
      * @return a long array containing a little-endian representation
      *         of all the bits in this bit set
      * @since 1.7
@@ -328,6 +423,10 @@ public class BitSet implements Cloneable, java.io.Serializable {
 
     /**
      * Ensures that the BitSet can hold enough words.
+     * <p>
+     *  确保BitSet可以容纳足够的字
+     * 
+     * 
      * @param wordsRequired the minimum acceptable number of words.
      */
     private void ensureCapacity(int wordsRequired) {
@@ -344,6 +443,10 @@ public class BitSet implements Cloneable, java.io.Serializable {
      * temporarily violating the invariants.  The caller must
      * restore the invariants before returning to the user,
      * possibly using recalculateWordsInUse().
+     * <p>
+     *  确保BitSet可以容纳给定的wordIndex,临时违反不变量调用者必须在返回用户之前恢复不变量,可能使用recalculateWordsInUse()
+     * 
+     * 
      * @param wordIndex the index to be accommodated.
      */
     private void expandTo(int wordIndex) {
@@ -356,6 +459,9 @@ public class BitSet implements Cloneable, java.io.Serializable {
 
     /**
      * Checks that fromIndex ... toIndex is a valid range of bit indices.
+     * <p>
+     * 检查fromIndex toIndex是位索引的有效范围
+     * 
      */
     private static void checkRange(int fromIndex, int toIndex) {
         if (fromIndex < 0)
@@ -371,6 +477,10 @@ public class BitSet implements Cloneable, java.io.Serializable {
      * Sets the bit at the specified index to the complement of its
      * current value.
      *
+     * <p>
+     *  将指定索引处的位设置为其当前值的补码
+     * 
+     * 
      * @param  bitIndex the index of the bit to flip
      * @throws IndexOutOfBoundsException if the specified index is negative
      * @since  1.4
@@ -393,6 +503,10 @@ public class BitSet implements Cloneable, java.io.Serializable {
      * specified {@code toIndex} (exclusive) to the complement of its current
      * value.
      *
+     * <p>
+     *  将从指定的{@code fromIndex}(包括)到指定的{@code toIndex}(独占)的每个位设置为其当前值的补码
+     * 
+     * 
      * @param  fromIndex index of the first bit to flip
      * @param  toIndex index after the last bit to flip
      * @throws IndexOutOfBoundsException if {@code fromIndex} is negative,
@@ -435,6 +549,10 @@ public class BitSet implements Cloneable, java.io.Serializable {
     /**
      * Sets the bit at the specified index to {@code true}.
      *
+     * <p>
+     *  将指定索引处的位设置为{@code true}
+     * 
+     * 
      * @param  bitIndex a bit index
      * @throws IndexOutOfBoundsException if the specified index is negative
      * @since  JDK1.0
@@ -454,6 +572,10 @@ public class BitSet implements Cloneable, java.io.Serializable {
     /**
      * Sets the bit at the specified index to the specified value.
      *
+     * <p>
+     *  将指定索引处的位设置为指定值
+     * 
+     * 
      * @param  bitIndex a bit index
      * @param  value a boolean value to set
      * @throws IndexOutOfBoundsException if the specified index is negative
@@ -470,6 +592,10 @@ public class BitSet implements Cloneable, java.io.Serializable {
      * Sets the bits from the specified {@code fromIndex} (inclusive) to the
      * specified {@code toIndex} (exclusive) to {@code true}.
      *
+     * <p>
+     *  将从指定的{@code fromIndex}(包括)到指定的{@code toIndex}(独占)的位设置为{@code true}
+     * 
+     * 
      * @param  fromIndex index of the first bit to be set
      * @param  toIndex index after the last bit to be set
      * @throws IndexOutOfBoundsException if {@code fromIndex} is negative,
@@ -513,6 +639,10 @@ public class BitSet implements Cloneable, java.io.Serializable {
      * Sets the bits from the specified {@code fromIndex} (inclusive) to the
      * specified {@code toIndex} (exclusive) to the specified value.
      *
+     * <p>
+     *  将从指定的{@code fromIndex}(包括)到指定的{@code toIndex}(独占)的位设置为指定的值
+     * 
+     * 
      * @param  fromIndex index of the first bit to be set
      * @param  toIndex index after the last bit to be set
      * @param  value value to set the selected bits to
@@ -531,6 +661,10 @@ public class BitSet implements Cloneable, java.io.Serializable {
     /**
      * Sets the bit specified by the index to {@code false}.
      *
+     * <p>
+     *  将索引指定的位设置为{@code false}
+     * 
+     * 
      * @param  bitIndex the index of the bit to be cleared
      * @throws IndexOutOfBoundsException if the specified index is negative
      * @since  JDK1.0
@@ -553,6 +687,10 @@ public class BitSet implements Cloneable, java.io.Serializable {
      * Sets the bits from the specified {@code fromIndex} (inclusive) to the
      * specified {@code toIndex} (exclusive) to {@code false}.
      *
+     * <p>
+     * 将从指定的{@code fromIndex}(包括)到指定的{@code toIndex}(独占)的位设置为{@code false}
+     * 
+     * 
      * @param  fromIndex index of the first bit to be cleared
      * @param  toIndex index after the last bit to be cleared
      * @throws IndexOutOfBoundsException if {@code fromIndex} is negative,
@@ -601,6 +739,10 @@ public class BitSet implements Cloneable, java.io.Serializable {
     /**
      * Sets all of the bits in this BitSet to {@code false}.
      *
+     * <p>
+     *  将此BitSet中的所有位设置为{@code false}
+     * 
+     * 
      * @since 1.4
      */
     public void clear() {
@@ -614,6 +756,10 @@ public class BitSet implements Cloneable, java.io.Serializable {
      * is currently set in this {@code BitSet}; otherwise, the result
      * is {@code false}.
      *
+     * <p>
+     *  返回具有指定索引的位的值如果具有索引{@code bitIndex}的位当前在此{@code BitSet}中设置,则值为{@code true};否则,结果是{@code false}
+     * 
+     * 
      * @param  bitIndex   the bit index
      * @return the value of the bit with the specified index
      * @throws IndexOutOfBoundsException if the specified index is negative
@@ -633,6 +779,10 @@ public class BitSet implements Cloneable, java.io.Serializable {
      * Returns a new {@code BitSet} composed of bits from this {@code BitSet}
      * from {@code fromIndex} (inclusive) to {@code toIndex} (exclusive).
      *
+     * <p>
+     *  返回一个由{@code BitSet}从{@code fromIndex}(包括)到{@code toIndex}(独占)的位组成的新{@code BitSet}
+     * 
+     * 
      * @param  fromIndex index of the first bit to include
      * @param  toIndex index after the last bit to include
      * @return a new {@code BitSet} from a range of this {@code BitSet}
@@ -701,6 +851,14 @@ public class BitSet implements Cloneable, java.io.Serializable {
      *     }
      * }}</pre>
      *
+     * <p>
+     *  返回设置为{@code true}的第一个位在指定的起始索引处或之后发生的索引。如果不存在此位,则返回{@code -1}
+     * 
+     *  <p>要迭代{@code BitSet}中的{@code true}位,请使用以下循环：
+     * 
+     * (i == bsnextSetBit(i + 1)){//对索引i进行操作if(i == IntegerMAX_VALUE){break; //或(i + 1)会溢出}}} </pre>
+     * 
+     * 
      * @param  fromIndex the index to start checking from (inclusive)
      * @return the index of the next set bit, or {@code -1} if there
      *         is no such bit
@@ -732,6 +890,10 @@ public class BitSet implements Cloneable, java.io.Serializable {
      * Returns the index of the first bit that is set to {@code false}
      * that occurs on or after the specified starting index.
      *
+     * <p>
+     *  返回在指定的起始索引处或之后设置为{@code false}的第一个位的索引
+     * 
+     * 
      * @param  fromIndex the index to start checking from (inclusive)
      * @return the index of the next clear bit
      * @throws IndexOutOfBoundsException if the specified index is negative
@@ -774,6 +936,14 @@ public class BitSet implements Cloneable, java.io.Serializable {
      *     // operate on index i here
      * }}</pre>
      *
+     * <p>
+     *  返回在指定的起始索引之前或之前发生的设置为{@code true}的最近位的索引。如果没有这样的位存在,或者如果给出{@code -1}作为起始索引,则{@code -1}
+     * 
+     *  <p>要迭代{@code BitSet}中的{@code true}位,请使用以下循环：
+     * 
+     *  <pre> {@code for(int i = bslength();(i = bspreviousSetBit(i-1))> = 0;){//在索引i上操作}} </pre>
+     * 
+     * 
      * @param  fromIndex the index to start checking from (inclusive)
      * @return the index of the previous set bit, or {@code -1} if there
      *         is no such bit
@@ -812,6 +982,10 @@ public class BitSet implements Cloneable, java.io.Serializable {
      * If no such bit exists, or if {@code -1} is given as the
      * starting index, then {@code -1} is returned.
      *
+     * <p>
+     * 返回在指定的起始索引之前或之前发生的设置为{@code false}的最近位的索引如果没有这样的位存在,或者如果给出{@code -1}作为起始索引,则{@code -1}
+     * 
+     * 
      * @param  fromIndex the index to start checking from (inclusive)
      * @return the index of the previous clear bit, or {@code -1} if there
      *         is no such bit
@@ -849,6 +1023,10 @@ public class BitSet implements Cloneable, java.io.Serializable {
      * the highest set bit in the {@code BitSet} plus one. Returns zero
      * if the {@code BitSet} contains no set bits.
      *
+     * <p>
+     *  返回此{@code BitSet}的"逻辑大小"：{@code BitSet}中的最高设置位的索引加1如果{@code BitSet}不包含设置位,则返回零
+     * 
+     * 
      * @return the logical size of this {@code BitSet}
      * @since  1.2
      */
@@ -864,6 +1042,10 @@ public class BitSet implements Cloneable, java.io.Serializable {
      * Returns true if this {@code BitSet} contains no bits that are set
      * to {@code true}.
      *
+     * <p>
+     *  如果此{@code BitSet}不包含设置为{@code true}的位,则返回true,
+     * 
+     * 
      * @return boolean indicating whether this {@code BitSet} is empty
      * @since  1.4
      */
@@ -875,6 +1057,10 @@ public class BitSet implements Cloneable, java.io.Serializable {
      * Returns true if the specified {@code BitSet} has any bits set to
      * {@code true} that are also set to {@code true} in this {@code BitSet}.
      *
+     * <p>
+     *  如果指定的{@code BitSet}的任何位设置为{@code true},并且在此{@code BitSet}中也设置为{@code true}
+     * 
+     * 
      * @param  set {@code BitSet} to intersect with
      * @return boolean indicating whether this {@code BitSet} intersects
      *         the specified {@code BitSet}
@@ -890,6 +1076,10 @@ public class BitSet implements Cloneable, java.io.Serializable {
     /**
      * Returns the number of bits set to {@code true} in this {@code BitSet}.
      *
+     * <p>
+     *  返回在{@code BitSet}中设置为{@code true}的位数,
+     * 
+     * 
      * @return the number of bits set to {@code true} in this {@code BitSet}
      * @since  1.4
      */
@@ -907,6 +1097,11 @@ public class BitSet implements Cloneable, java.io.Serializable {
      * had the value {@code true} and the corresponding bit in the
      * bit set argument also had the value {@code true}.
      *
+     * <p>
+     * 执行此目标位设置的逻辑<b> AND </b>与参数位集合修改此位集合,以使其中的每个位都具有值{@code true},如果且仅当两者最初都具有值{@code true},并且位集合参数中的相应位也具
+     * 有值{@code true}。
+     * 
+     * 
      * @param set a bit set
      */
     public void and(BitSet set) {
@@ -931,6 +1126,11 @@ public class BitSet implements Cloneable, java.io.Serializable {
      * value {@code true} or the corresponding bit in the bit set
      * argument has the value {@code true}.
      *
+     * <p>
+     *  使用bit set参数执行此位集的逻辑<b> OR </b>此位集被修改,以使其中的一个位具有值{@code true},如果且仅当它已经具有值{ @code true}或位集参数中的相应位具有值{@code true}
+     * 。
+     * 
+     * 
      * @param set a bit set
      */
     public void or(BitSet set) {
@@ -970,6 +1170,13 @@ public class BitSet implements Cloneable, java.io.Serializable {
      *     corresponding bit in the argument has the value {@code true}.
      * </ul>
      *
+     * <p>
+     *  使用位集参数执行此位集的逻辑<b> XOR </b>如果且仅当以下语句之一成立时,此位集才被修改,以使其中的一个位具有值{@code true}
+     * <ul>
+     * <li>该位最初具有值{@code true},并且参数中的相应位具有值{@code false} <li>该位最初具有值{@code false},并且相应位该参数具有值{@code true}
+     * </ul>
+     * 
+     * 
      * @param  set a bit set
      */
     public void xor(BitSet set) {
@@ -998,6 +1205,10 @@ public class BitSet implements Cloneable, java.io.Serializable {
      * Clears all of the bits in this {@code BitSet} whose corresponding
      * bit is set in the specified {@code BitSet}.
      *
+     * <p>
+     *  清除此{@code BitSet}中的所有位,这些位的相应位在指定的{@code BitSet}
+     * 
+     * 
      * @param  set the {@code BitSet} with which to mask this
      *         {@code BitSet}
      * @since  1.2
@@ -1027,6 +1238,13 @@ public class BitSet implements Cloneable, java.io.Serializable {
      * }}</pre>
      * Note that the hash code changes if the set of bits is altered.
      *
+     * <p>
+     *  返回此位集的哈希码值哈希码仅取决于在此{@code BitSet}中设置的位,
+     * 
+     *  <p>哈希码定义为以下计算的结果：<pre> {@code public int hashCode(){long h = 1234; long [] words = toLongArray(); for(int i = wordslength; --i> = 0;)h ^ = words [i] *(i + 1); return(int)((h >> 32)^ h); }
+     * } </pre>请注意,如果位集合被改变,哈希码会改变。
+     * 
+     * 
      * @return the hash code value for this bit set
      */
     public int hashCode() {
@@ -1042,6 +1260,10 @@ public class BitSet implements Cloneable, java.io.Serializable {
      * {@code BitSet} to represent bit values.
      * The maximum element in the set is the size - 1st element.
      *
+     * <p>
+     * 返回由{@code BitSet}实际使用的空间的位数以表示位值集合中的最大元素是size  -  1st元素
+     * 
+     * 
      * @return the number of bits currently in this bit set
      */
     public int size() {
@@ -1057,6 +1279,12 @@ public class BitSet implements Cloneable, java.io.Serializable {
      * <pre>((BitSet)obj).get(k) == this.get(k)</pre>
      * must be true. The current sizes of the two bit sets are not compared.
      *
+     * <p>
+     *  将此对象与指定的对象进行比较结果是{@code true}当且仅当参数不是{@code null},并且是一个{@code Bitset}对象,其具有完全相同的位集合设置为{@code true}作为
+     * 该位集合。
+     * 也就是说,对于每个非负的{@code int}索引{@code k},<pre>((BitSet)obj)get(k)== thisget(k)</不比较两个位集的当前大小。
+     * 
+     * 
      * @param  obj the object to compare with
      * @return {@code true} if the objects are the same;
      *         {@code false} otherwise
@@ -1090,6 +1318,10 @@ public class BitSet implements Cloneable, java.io.Serializable {
      * The clone of the bit set is another bit set that has exactly the
      * same bits set to {@code true} as this bit set.
      *
+     * <p>
+     *  克隆这个{@code BitSet}产生一个等于它的新的{@code BitSet}。位集合的克隆是另一个位集合,具有设置为{@code true}的完全相同的位,因为该位集合
+     * 
+     * 
      * @return a clone of this bit set
      * @see    #size()
      */
@@ -1111,6 +1343,9 @@ public class BitSet implements Cloneable, java.io.Serializable {
      * Attempts to reduce internal storage used for the bits in this bit set.
      * Calling this method may, but is not required to, affect the value
      * returned by a subsequent call to the {@link #size()} method.
+     * <p>
+     * 尝试减少用于此位集合中的位的内部存储调用此方法可以但不要求影响对{@link #size()}方法的后续调用返回的值
+     * 
      */
     private void trimToSize() {
         if (wordsInUse != words.length) {
@@ -1122,6 +1357,9 @@ public class BitSet implements Cloneable, java.io.Serializable {
     /**
      * Save the state of the {@code BitSet} instance to a stream (i.e.,
      * serialize it).
+     * <p>
+     *  将{@code BitSet}实例的状态保存到流(即,序列化它)
+     * 
      */
     private void writeObject(ObjectOutputStream s)
         throws IOException {
@@ -1139,6 +1377,9 @@ public class BitSet implements Cloneable, java.io.Serializable {
     /**
      * Reconstitute the {@code BitSet} instance from a stream (i.e.,
      * deserialize it).
+     * <p>
+     *  从流重构{@code BitSet}实例(即,反序列化它)
+     * 
      */
     private void readObject(ObjectInputStream s)
         throws IOException, ClassNotFoundException {
@@ -1176,6 +1417,16 @@ public class BitSet implements Cloneable, java.io.Serializable {
      * drPepper.set(10);</pre>
      * Now {@code drPepper.toString()} returns "{@code {2, 4, 10}}".
      *
+     * <p>
+     *  返回此位集合的字符串表示式对于此{@code BitSet}在设置状态下包含一个位的每个索引,该索引的十进制表示包含在结果中。
+     * 此类索引按从最低到最高的顺序列出,分隔由","" (逗号和空格),并用大括号括起来,得到一组整数的常用数学符号。
+     * 
+     *  <p>示例：
+     * <pre>
+     * BitSet drPepper = new BitSet(); </pre>现在{@code drPeppertoString()}返回"{@code {}}"
+     * <pre>
+     *  drPepperset(2); </pre>现在{@code drPeppertoString()}返回"{@code {2}}"
+     * 
      * @return a string representation of this bit set
      */
     public String toString() {
@@ -1213,6 +1464,11 @@ public class BitSet implements Cloneable, java.io.Serializable {
      * terminal stream operation.  Otherwise, the result of the terminal
      * stream operation is undefined.
      *
+     * <p>
+     * <pre>
+     *  drPepperset(4); drPepperset(10); </pre>现在{@code drPeppertoString()}返回"{@code {2,4,10}}"
+     * 
+     * 
      * @return a stream of integers representing set indices
      * @since 1.8
      */

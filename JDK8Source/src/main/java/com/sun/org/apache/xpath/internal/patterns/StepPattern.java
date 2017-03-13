@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2004 Apache软件基金会
+ * 
+ *  根据Apache许可证第20版("许可证")授权;您不得使用此文件,除非符合许可证您可以在获取许可证的副本
+ * 
+ *  http：// wwwapacheorg / licenses / LICENSE-20
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件将按"原样"基础分发,无任何明示或暗示的保证或条件。请参阅许可证管理权限和限制许可证
+ * 
  */
 /*
  * $Id: StepPattern.java,v 1.2.4.2 2005/09/15 00:21:16 jeffsuttor Exp $
+ * <p>
+ *  $ Id：StepPatternjava,v 1242 2005/09/15 00:21:16 jeffsuttor Exp $
+ * 
  */
 package com.sun.org.apache.xpath.internal.patterns;
 
@@ -37,6 +50,9 @@ import com.sun.org.apache.xpath.internal.objects.XObject;
 /**
  * This class represents a single pattern match step.
  * @xsl.usage advanced
+ * <p>
+ * 此类表示单个模式匹配步骤@xslusage高级
+ * 
  */
 public class StepPattern extends NodeTest implements SubContextList, ExpressionOwner
 {
@@ -49,6 +65,10 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
    * Construct a StepPattern that tests for namespaces and node names.
    *
    *
+   * <p>
+   *  构造一个用于测试名称空间和节点名称的StepPattern
+   * 
+   * 
    * @param whatToShow Bit set defined mainly by {@link org.w3c.dom.traversal.NodeFilter}.
    * @param namespace The namespace to be tested.
    * @param name The local name to be tested.
@@ -68,6 +88,10 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
    * Construct a StepPattern that doesn't test for node names.
    *
    *
+   * <p>
+   *  构造不测试节点名称的StepPattern
+   * 
+   * 
    * @param whatToShow Bit set defined mainly by {@link org.w3c.dom.traversal.NodeFilter}.
    * @param axis The Axis for this test, one of of Axes.ANCESTORORSELF, etc.
    * @param axisForPredicate No longer used.
@@ -82,6 +106,10 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
 
   /**
    * The target local name or psuedo name, for hash table lookup optimization.
+   * <p>
+   *  目标本地名称或伪装名称,用于哈希表查找优化
+   * 
+   * 
    *  @serial
    */
   String m_targetString;  // only calculate on head
@@ -90,6 +118,10 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
    * Calculate the local name or psuedo name of the node that this pattern will test,
    * for hash table lookup optimization.
    *
+   * <p>
+   *  计算此模式将测试的节点的本地名称或伪装名称,以进行哈希表查找优化
+   * 
+   * 
    * @see com.sun.org.apache.xpath.internal.compiler.PsuedoNames
    */
   public void calcTargetString()
@@ -131,6 +163,10 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
    * for hash table lookup optimization.
    *
    *
+   * <p>
+   *  获取此模式将测试的节点的本地名称或伪装名称,以进行哈希表查找优化
+   * 
+   * 
    * @return local name or psuedo name of the node.
    * @see com.sun.org.apache.xpath.internal.compiler.PsuedoNames
    */
@@ -142,6 +178,10 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
   /**
    * Reference to nodetest and predicate for
    * parent or ancestor.
+   * <p>
+   *  对父节点或祖先的nodetest和谓词的引用
+   * 
+   * 
    * @serial
    */
   StepPattern m_relativePathPattern;
@@ -149,6 +189,10 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
   /**
    * This function is used to fixup variables from QNames to stack frame
    * indexes at stylesheet build time.
+   * <p>
+   *  此函数用于在样式表构建时将QNames中的变量修复为堆栈帧索引
+   * 
+   * 
    * @param vars List of QNames that correspond to variables.  This list
    * should be searched backwards for the first qualified name that
    * corresponds to the variable reference qname.  The position of the
@@ -181,6 +225,10 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
    * parent or ancestor.
    *
    *
+   * <p>
+   *  将引用设置为父节点或祖先的nodetest和谓词
+   * 
+   * 
    * @param expr The relative pattern expression.
    */
   public void setRelativePathPattern(StepPattern expr)
@@ -197,6 +245,10 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
    * parent or ancestor.
    *
    *
+   * <p>
+   * 获取父节点或祖先的nodetest和谓词的引用
+   * 
+   * 
    * @return The relative pattern expression.
    */
   public StepPattern getRelativePathPattern()
@@ -206,6 +258,10 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
 
   //  /**
   //   * Set the list of predicate expressions for this pattern step.
+  //   * <p>
+  //   *  // *设置此模式步骤的谓词表达式列表
+  //   * 
+  //   * 
   //   * @param predicates List of expression objects.
   //   */
   //  public void setPredicates(Expression[] predicates)
@@ -215,6 +271,10 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
 
   /**
    * Set the list of predicate expressions for this pattern step.
+   * <p>
+   *  设置此模式步骤的谓词表达式列表
+   * 
+   * 
    * @return List of expression objects.
    */
   public Expression[] getPredicates()
@@ -224,6 +284,10 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
 
   /**
    * The list of predicate expressions for this pattern step.
+   * <p>
+   *  此模式步骤的谓词表达式列表
+   * 
+   * 
    *  @serial
    */
   Expression[] m_predicates;
@@ -235,6 +299,12 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
    * NOTE: Ancestors tests with predicates are problematic, and will require
    * special treatment.
    *
+   * <p>
+   *  告诉这个表达式或它的子表达式是否可以遍历当前子树
+   * 
+   *  注意：使用谓词的祖先测试有问题,需要特殊处理
+   * 
+   * 
    * @return true if traversal outside the context node's subtree can occur.
    */
   public boolean canTraverseOutsideSubtree()
@@ -255,6 +325,10 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
    * Get a predicate expression.
    *
    *
+   * <p>
+   *  获取谓词表达式
+   * 
+   * 
    * @param i The index of the predicate.
    *
    * @return A predicate expression.
@@ -268,6 +342,10 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
    * Get the number of predicates for this match pattern step.
    *
    *
+   * <p>
+   *  获取此匹配模式步骤的谓词数
+   * 
+   * 
    * @return the number of predicates for this match pattern step.
    */
   public final int getPredicateCount()
@@ -279,6 +357,10 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
    * Set the predicates for this match pattern step.
    *
    *
+   * <p>
+   *  设置此匹配模式步骤的谓词
+   * 
+   * 
    * @param predicates An array of expressions that define predicates
    *                   for this step.
    */
@@ -299,6 +381,9 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
 
   /**
    * Static calc of match score.
+   * <p>
+   *  静态计算匹配得分
+   * 
    */
   public void calcScore()
   {
@@ -318,6 +403,10 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
    * Execute this pattern step, including predicates.
    *
    *
+   * <p>
+   *  执行此模式步骤,包括谓词
+   * 
+   * 
    * @param xctxt XPath runtime context.
    * @param currentNode The current node context.
    *
@@ -349,6 +438,10 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
    * Execute this pattern step, including predicates.
    *
    *
+   * <p>
+   *  执行此模式步骤,包括谓词
+   * 
+   * 
    * @param xctxt XPath runtime context.
    *
    * @return {@link com.sun.org.apache.xpath.internal.patterns.NodeTest#SCORE_NODETEST},
@@ -370,6 +463,10 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
    * result of the expression.
    *
    *
+   * <p>
+   *  在XPath运行时上下文中执行一个表达式,并返回表达式的结果
+   * 
+   * 
    * @param xctxt The XPath runtime context.
    * @param currentNode The currentNode.
    * @param dtm The DTM of the current node.
@@ -418,6 +515,10 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
   /**
    * New Method to check whether the current node satisfies a position predicate
    *
+   * <p>
+   * 新方法检查当前节点是否满足位置谓词
+   * 
+   * 
    * @param xctxt The XPath runtime context.
    * @param predPos Which predicate we're evaluating of foo[1][2][3].
    * @param dtm The DTM of the current node.
@@ -515,6 +616,10 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
    * node test.
    *
    *
+   * <p>
+   *  基于此节点测试获取当前节点的接近位置索引
+   * 
+   * 
    * @param xctxt XPath runtime context.
    * @param predPos Which predicate we're evaluating of foo[1][2][3].
    * @param findLast If true, don't terminate when the context node is found.
@@ -621,6 +726,10 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
    * node test.
    *
    *
+   * <p>
+   *  基于此节点测试获取当前节点的接近位置索引
+   * 
+   * 
    * @param xctxt XPath runtime context.
    *
    * @return the proximity position index of the current node based on the
@@ -638,6 +747,10 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
    * node.
    *
    *
+   * <p>
+   *  获取与测试匹配的节点的计数,这是在子上下文选择中可以通过此测试的最后一个节点的接近位置在基于XSLT 1的索引中,此计数是最后一个节点的索引
+   * 
+   * 
    * @param xctxt XPath runtime context.
    *
    * @return the count of the nodes that match the test.
@@ -651,6 +764,10 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
    * Execute the match pattern step relative to another step.
    *
    *
+   * <p>
+   *  相对于另一个步骤执行匹配模式步骤
+   * 
+   * 
    * @param xctxt The XPath runtime context.
    * @param dtm The DTM of the current node.
    * @param currentNode The current node context.
@@ -699,6 +816,10 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
    * Execute the predicates on this step to determine if the current node
    * should be filtered or accepted.
    *
+   * <p>
+   *  对此步骤执行谓词以确定是否应过滤或接受当前节点
+   * 
+   * 
    * @param xctxt The XPath runtime context.
    * @param dtm The DTM of the current node.
    * @param currentNode The current node context.
@@ -783,6 +904,10 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
    * Get the string represenentation of this step for diagnostic purposes.
    *
    *
+   * <p>
+   *  获取此步骤的字符串表示以进行诊断
+   * 
+   * 
    * @return A string representation of this step, built by reverse-engineering
    * the contained info.
    */
@@ -880,6 +1005,10 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
   /**
    * Get the match score of the given node.
    *
+   * <p>
+   *  获取给定节点的匹配分数
+   * 
+   * 
    * @param xctxt The XPath runtime context.
    * @param context The node to be tested.
    *
@@ -917,6 +1046,10 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
    * Set the axis that this step should follow.
    *
    *
+   * <p>
+   *  设置此步骤应遵循的轴
+   * 
+   * 
    * @param axis The Axis for this test, one of of Axes.ANCESTORORSELF, etc.
    */
   public void setAxis(int axis)
@@ -928,6 +1061,10 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
    * Get the axis that this step follows.
    *
    *
+   * <p>
+   * 获取此步骤遵循的轴
+   * 
+   * 
    * @return The Axis for this test, one of of Axes.ANCESTORORSELF, etc.
    */
   public int getAxis()
@@ -945,6 +1082,8 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
         }
 
     /**
+    /* <p>
+    /* 
      * @see ExpressionOwner#getExpression()
      */
     public Expression getExpression()
@@ -954,6 +1093,8 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
 
 
     /**
+    /* <p>
+    /* 
      * @see ExpressionOwner#setExpression(Expression)
      */
     public void setExpression(Expression exp)
@@ -964,6 +1105,8 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
   }
 
   /**
+  /* <p>
+  /* 
    * @see com.sun.org.apache.xpath.internal.XPathVisitable#callVisitors(ExpressionOwner, XPathVisitor)
    */
   public void callVisitors(ExpressionOwner owner, XPathVisitor visitor)
@@ -977,6 +1120,9 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
   /**
    * Call the visitors on the subtree.  Factored out from callVisitors
    * so it may be called by derived classes.
+   * <p>
+   *  调用子类中的访问者从callVisitors中移除,因此它可以由派生类调用
+   * 
    */
   protected void callSubtreeVisitors(XPathVisitor visitor)
   {
@@ -1000,6 +1146,8 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
 
 
   /**
+  /* <p>
+  /* 
    * @see ExpressionOwner#getExpression()
    */
   public Expression getExpression()
@@ -1008,6 +1156,8 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
   }
 
   /**
+  /* <p>
+  /* 
    * @see ExpressionOwner#setExpression(Expression)
    */
   public void setExpression(Expression exp)
@@ -1017,6 +1167,8 @@ public class StepPattern extends NodeTest implements SubContextList, ExpressionO
   }
 
   /**
+  /* <p>
+  /* 
    * @see Expression#deepEquals(Expression)
    */
   public boolean deepEquals(Expression expr)

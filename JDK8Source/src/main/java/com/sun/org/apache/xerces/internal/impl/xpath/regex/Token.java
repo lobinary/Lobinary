@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2002,2004,2005 Apache软件基金会
+ * 
+ *  根据Apache许可证第20版("许可证")授权;您不得使用此文件,除非符合许可证您可以在获取许可证的副本
+ * 
+ *  http：// wwwapacheorg / licenses / LICENSE-20
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件将按"原样"基础分发,无任何明示或暗示的保证或条件。请参阅许可证管理权限和限制许可证
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.xpath.regex;
@@ -28,6 +38,12 @@ import java.util.Hashtable;
  *
  * @xerces.internal
  *
+ * <p>
+ *  这个类表示解析树中的一个节点
+ * 
+ *  @xercesinternal
+ * 
+ * 
  * @version $Id: Token.java,v 1.7 2010/07/27 05:02:34 joehw Exp $
  */
 class Token implements java.io.Serializable {
@@ -186,6 +202,9 @@ class Token implements java.io.Serializable {
 
     /**
      * A number of children.
+     * <p>
+     * 一些孩子
+     * 
      */
     int size() {
         return 0;
@@ -254,6 +273,9 @@ class Token implements java.io.Serializable {
 
     /**
      * How many characters are needed?
+     * <p>
+     *  需要多少个字符?
+     * 
      */
     final int getMinLength() {
         switch (this.type) {
@@ -401,6 +423,9 @@ class Token implements java.io.Serializable {
              *  a|b|c -> FC_TERMINAL
              *  a|.|c -> FC_ANY
              *  a|b|  -> FC_CONTINUE
+             * <p>
+             *  a | b | c-> FC_TERMINAL a || c-> FC_ANY a | b | - > FC_CONTINUE
+             * 
              */
             int ret2 = FC_CONTINUE;
             boolean hasEmpty = false;
@@ -503,6 +528,13 @@ class Token implements java.io.Serializable {
         if (tok.type == STRING)  otherlength = tok.getString().length();
         else if (tok.type == CHAR)  otherlength = tok.getChar() >= 0x10000 ? 2 : 1;
         else throw new RuntimeException("Internal Error: Illegal type: "+tok.type);
+        /* <p>
+        /*  int mylength; if(thistype == STRING)mylength = thisgetString()length(); else if(thistype == CHAR)myl
+        /* ength = thisgetChar()> = 0x10000? 2：1; else throw new RuntimeException("Internal Error：Illegal type："
+        /* + thistype); int otherlength; if(toktype == STRING)otherlength = tokgetString()length(); else if(tokt
+        /* ype == CHAR)otherlength = tokgetChar()> = 0x10000? 2：1; else throw new RuntimeException("Internal Err
+        /* or：Illegal type："+ toktype);。
+        /* 
         */
         int mylength;
         if (this.type == STRING)  mylength = this.getString().length();
@@ -607,98 +639,284 @@ class Token implements java.io.Serializable {
     //blockNames in UNICODE 3.1 that supported by XML Schema REC
     private static final String[] blockNames = {
         /*0000..007F;*/ "Basic Latin",
+        /* <p>
+        /* 
         /*0080..00FF;*/ "Latin-1 Supplement",
+        /* <p>
+        /* 
         /*0100..017F;*/ "Latin Extended-A",
+        /* <p>
+        /* 
         /*0180..024F;*/ "Latin Extended-B",
+        /* <p>
+        /* 
         /*0250..02AF;*/ "IPA Extensions",
+        /* <p>
+        /* 
         /*02B0..02FF;*/ "Spacing Modifier Letters",
+        /* <p>
+        /* 
         /*0300..036F;*/ "Combining Diacritical Marks",
+        /* <p>
+        /* 
         /*0370..03FF;*/ "Greek",
+        /* <p>
+        /* 
         /*0400..04FF;*/ "Cyrillic",
+        /* <p>
+        /* 
         /*0530..058F;*/ "Armenian",
+        /* <p>
+        /* 
         /*0590..05FF;*/ "Hebrew",
+        /* <p>
+        /* 
         /*0600..06FF;*/ "Arabic",
+        /* <p>
+        /* 
         /*0700..074F;*/ "Syriac",
+        /* <p>
+        /* 
         /*0780..07BF;*/ "Thaana",
+        /* <p>
+        /* 
         /*0900..097F;*/ "Devanagari",
+        /* <p>
+        /* 
         /*0980..09FF;*/ "Bengali",
+        /* <p>
+        /* 
         /*0A00..0A7F;*/ "Gurmukhi",
+        /* <p>
+        /* 
         /*0A80..0AFF;*/ "Gujarati",
+        /* <p>
+        /* 
         /*0B00..0B7F;*/ "Oriya",
+        /* <p>
+        /* 
         /*0B80..0BFF;*/ "Tamil",
+        /* <p>
+        /* 
         /*0C00..0C7F;*/ "Telugu",
+        /* <p>
+        /* 
         /*0C80..0CFF;*/ "Kannada",
+        /* <p>
+        /* 
         /*0D00..0D7F;*/ "Malayalam",
+        /* <p>
+        /* 
         /*0D80..0DFF;*/ "Sinhala",
+        /* <p>
+        /* 
         /*0E00..0E7F;*/ "Thai",
+        /* <p>
+        /* 
         /*0E80..0EFF;*/ "Lao",
+        /* <p>
+        /* 
         /*0F00..0FFF;*/ "Tibetan",
+        /* <p>
+        /* 
         /*1000..109F;*/ "Myanmar",
+        /* <p>
+        /* 
         /*10A0..10FF;*/ "Georgian",
+        /* <p>
+        /* 
         /*1100..11FF;*/ "Hangul Jamo",
+        /* <p>
+        /* 
         /*1200..137F;*/ "Ethiopic",
+        /* <p>
+        /* 
         /*13A0..13FF;*/ "Cherokee",
+        /* <p>
+        /* 
         /*1400..167F;*/ "Unified Canadian Aboriginal Syllabics",
+        /* <p>
+        /* 
         /*1680..169F;*/ "Ogham",
+        /* <p>
+        /* 
         /*16A0..16FF;*/ "Runic",
+        /* <p>
+        /* 
         /*1780..17FF;*/ "Khmer",
+        /* <p>
+        /* 
         /*1800..18AF;*/ "Mongolian",
+        /* <p>
+        /* 
         /*1E00..1EFF;*/ "Latin Extended Additional",
+        /* <p>
+        /* 
         /*1F00..1FFF;*/ "Greek Extended",
+        /* <p>
+        /* 
         /*2000..206F;*/ "General Punctuation",
+        /* <p>
+        /* 
         /*2070..209F;*/ "Superscripts and Subscripts",
+        /* <p>
+        /* 
         /*20A0..20CF;*/ "Currency Symbols",
+        /* <p>
+        /* 
         /*20D0..20FF;*/ "Combining Marks for Symbols",
+        /* <p>
+        /* 
         /*2100..214F;*/ "Letterlike Symbols",
+        /* <p>
+        /* 
         /*2150..218F;*/ "Number Forms",
+        /* <p>
+        /* 
         /*2190..21FF;*/ "Arrows",
+        /* <p>
+        /* 
         /*2200..22FF;*/ "Mathematical Operators",
+        /* <p>
+        /* 
         /*2300..23FF;*/ "Miscellaneous Technical",
+        /* <p>
+        /* 
         /*2400..243F;*/ "Control Pictures",
+        /* <p>
+        /* 
         /*2440..245F;*/ "Optical Character Recognition",
+        /* <p>
+        /* 
         /*2460..24FF;*/ "Enclosed Alphanumerics",
+        /* <p>
+        /* 
         /*2500..257F;*/ "Box Drawing",
+        /* <p>
+        /* 
         /*2580..259F;*/ "Block Elements",
+        /* <p>
+        /* 
         /*25A0..25FF;*/ "Geometric Shapes",
+        /* <p>
+        /* 
         /*2600..26FF;*/ "Miscellaneous Symbols",
+        /* <p>
+        /* 
         /*2700..27BF;*/ "Dingbats",
+        /* <p>
+        /* 
         /*2800..28FF;*/ "Braille Patterns",
+        /* <p>
+        /* 
         /*2E80..2EFF;*/ "CJK Radicals Supplement",
+        /* <p>
+        /* 
         /*2F00..2FDF;*/ "Kangxi Radicals",
+        /* <p>
+        /* 
         /*2FF0..2FFF;*/ "Ideographic Description Characters",
+        /* <p>
+        /* 
         /*3000..303F;*/ "CJK Symbols and Punctuation",
+        /* <p>
+        /* 
         /*3040..309F;*/ "Hiragana",
+        /* <p>
+        /* 
         /*30A0..30FF;*/ "Katakana",
+        /* <p>
+        /* 
         /*3100..312F;*/ "Bopomofo",
+        /* <p>
+        /* 
         /*3130..318F;*/ "Hangul Compatibility Jamo",
+        /* <p>
+        /* 
         /*3190..319F;*/ "Kanbun",
+        /* <p>
+        /* 
         /*31A0..31BF;*/ "Bopomofo Extended",
+        /* <p>
+        /* 
         /*3200..32FF;*/ "Enclosed CJK Letters and Months",
+        /* <p>
+        /* 
         /*3300..33FF;*/ "CJK Compatibility",
+        /* <p>
+        /* 
         /*3400..4DB5;*/ "CJK Unified Ideographs Extension A",
+        /* <p>
+        /* 
         /*4E00..9FFF;*/ "CJK Unified Ideographs",
+        /* <p>
+        /* 
         /*A000..A48F;*/ "Yi Syllables",
+        /* <p>
+        /* 
         /*A490..A4CF;*/ "Yi Radicals",
+        /* <p>
+        /* 
         /*AC00..D7A3;*/ "Hangul Syllables",
+        /* <p>
+        /* 
         /*E000..F8FF;*/ "Private Use",
+        /* <p>
+        /* 
         /*F900..FAFF;*/ "CJK Compatibility Ideographs",
+        /* <p>
+        /* 
         /*FB00..FB4F;*/ "Alphabetic Presentation Forms",
+        /* <p>
+        /* 
         /*FB50..FDFF;*/ "Arabic Presentation Forms-A",
+        /* <p>
+        /* 
         /*FE20..FE2F;*/ "Combining Half Marks",
+        /* <p>
+        /* 
         /*FE30..FE4F;*/ "CJK Compatibility Forms",
+        /* <p>
+        /* 
         /*FE50..FE6F;*/ "Small Form Variants",
+        /* <p>
+        /* 
         /*FE70..FEFE;*/ "Arabic Presentation Forms-B",
+        /* <p>
+        /* 
         /*FEFF..FEFF;*/ "Specials",
+        /* <p>
+        /* 
         /*FF00..FFEF;*/ "Halfwidth and Fullwidth Forms",
          //missing Specials add manually
+        /* <p>
+        /*  // missing手动添加Specials
+        /* 
+        /* 
         /*10300..1032F;*/ "Old Italic",         // 84
+        /* <p>
+        /* 
         /*10330..1034F;*/ "Gothic",
+        /* <p>
+        /* 
         /*10400..1044F;*/ "Deseret",
+        /* <p>
+        /* 
         /*1D000..1D0FF;*/ "Byzantine Musical Symbols",
+        /* <p>
+        /* 
         /*1D100..1D1FF;*/ "Musical Symbols",
+        /* <p>
+        /* 
         /*1D400..1D7FF;*/ "Mathematical Alphanumeric Symbols",
+        /* <p>
+        /* 
         /*20000..2A6D6;*/ "CJK Unified Ideographs Extension B",
+        /* <p>
+        /* 
         /*2F800..2FA1F;*/ "CJK Compatibility Ideographs Supplement",
+        /* <p>
+        /* 
         /*E0000..E007F;*/ "Tags",
         //missing 2 private use add manually
 
@@ -976,6 +1194,63 @@ class Token implements java.io.Serializable {
     /**
      * This method is called by only getRange().
      * So this method need not MT-safe.
+     * <p>
+     *  // missing 2 private use手动添加
+     * 
+     * }; // ADD THOSE MANUALLY // F0000FFFFD; "Private Use",// 10000010FFFD; "私人使用"// FFF0FFFD; "Specials",
+     * static final String blockRanges ="\\ u0000 \\ u007F \\ u0080 \\ u00FF \\ u0100 \\ u017F \\ u0180 \\ u
+     * 024F \\ u0250 \\ u02AF \\ u02F0 \\ u02FF \\ u0300 \\ u036F"+"\\ u0370 \\ u03FF \\ u0400 \\ u04FF \\ u
+     * 0530 \\ u058F \\ u0590 \\ u05FF \\ u0600 \\ u06FF \\ u0700 \\ u074F \\ u0780 \\ u07BF"+"\\ u0900 \\ u
+     * 097F \\ u0980 \\ u09FF \\ u0A00 \\ u0A7F \\ u0A80 \\ u0AFF \\ u0B00 \\ u0B7F \\ u0B80 \\ u0BFF \\ u0C
+     * 00 \\ u0C7F \\ u0C80 \\ u0CFF"+"\\ u0D00 \\ u0D7F \\ u0D80 \\ u0DFF \\ u0E00 \\ u0E7F \\ u0E80 \\ u0E
+     * FF \\ u0F00 \\ u0FFF \\ u1000 \\ u109F \\ u10A0 \\ u10FF \\ u1100 \\ u11FF"+"\\ u1200 \\ u137F \\ u13
+     * A0 \\ u13FF \\ u1400 \\ u167F \\ u1680 \\ u169F \\ u16A0 \\ u16FF \\ u1780 \\ u17FF \\ u1800 \\ u18AF
+     *  \\ u1E00 \\ u1EFF"+"\\ u1F00 \\ u1FFF \\ u2000 \\ u206F \\ u2070 \\ u209F \\ u20A0 \\ u20CF \\ u20D0
+     *  \\ u20FF \\ u2100 \\ u214F \\ u2150 \\ u218F \\ u2190 \\ u21FF \\ u2200 \\ u22FF"+"\\ u2300 \\ u23FF
+     *  \\ u2400 \\ u243F \\ u2440 \\ u245F \\ u2460 \\ u24FF \\ u2500 \\ u257F \\ u2580 \\ u259F \\ u25A0 \
+     * \ u25FF \\ u2600 \\ u26FF \\ u2700 \\ u27BF"+"\\ u2800 \\ u28FF \\ u2E80 \\ u2EFF \\ u2F00 \\ u2FDF \
+     * \ u2FF0 \\ u2FFF \\ u3000 \\ u303F \\ u3040 \\ u309F \\ u30A0 \\ u30FF \\ u3100 \\ u312F \\ u3130 \\ 
+     * u318F"+"\\ u3190 \\ u319F \\ u31A0 \\ u31BF \\ u3200 \\ u32FF \\ u3300 \\ u33FF \\ u3400 \\ u4DB5 \\ 
+     * u4E00 \\ u9FFF \\ uA000 \\ uA48F \\ uA490 \\ uA4CF"+"\\ uAC00 \\ uD7A3 \\ uE000 \\ uF8FF \\ uF900 \\ 
+     * uFAFF \\ uFB00 \\ uFB4F \\ uFB50 \\ uFDEF"+"\\ uFE20 \\ uFE2F \\ uFE30 \\ uFE4F \\ uFE50 \\ uFE6F \\ 
+     * uFE70 \\ uFEFE \\ uFEFF \\ uFEFF \\ uFF00 \\ uFFEF"; static final int [] nonBMPBlockRanges = {0x10300,0x1032F,// 84 0x10330,0x1034F,0x10400,0x1044F,0x1D000,0x1D0FF,0x1D100,0x1D1FF,0x1D400,0x1D7FF,0x20000,0x2A6D6,0x2F800,0x2FA1F ,0xE0000,0xE007F}
+     * ; private static final int NONBMP_BLOCK_START = 84;}; // ADD THOSE MANUALLY // F0000FFFFD; "Private U
+     * se",// 10000010FFFD; "私人使用"// FFF0。
+     * 
+     * 静态保护RangeToken getRange(String name,boolean positive){if(Tokencategoriessize()== 0){synchronized(Tokencategories){Token [] ranges = new Token [TokencategoryNameslength]; for(int i = 0; i <rangeslength; i ++){ranges [i] = TokencreateRange(); } int type; for(int i = 0; i <0x10000; i ++){type = CharactergetType((char)i); if(type == CharacterSTART_PUNCTUATION || type == Character END_PUNCTUATION){//构建Pi值表if(i == 0x00AB || i == 0x2018 || i == 0x201B || i == 0x201C || i == 0x201F || i == 0x2039){type = CHAR_INIT_QUOTE; } //构建Pf值表if(i == 0x00BB || i == 0x2019 || i == 0x201D || i == 0x203A){type = CHAR_FINAL_QUOTE; }} ranges [type] addRange(i,i); switch(type){case CharacterUPPERCASE_LETTER：case字符LOWERCASE_LETTER：case CharacterTITLECASE_LETTER：case CharacterMODIFIER_LETTER：case CharacterOTHER_LETTER：type = CHAR_LETTER;打破; case CharacterNON_SPACING_MARK：case CharacterCOMBINING_SPACING_MARK：case CharacterENCLOSING_MARK：type = CHAR_MARK;打破; case CharacterDECIMAL_DIGIT_NUMBER：case CharacterLETTER_NUMBER：case CharacterOTHER_NUMBER：type = CHAR_NUMBER;打破; case CharacterSPACE_SEPARATOR：case CharacterLINE_SEPARATOR：case CharacterPARAGRAPH_SEPARATOR：type = CHAR_SEPARATOR;打破; case CharacterCONTROL：case CharacterFORMAT：case CharacterSURROGATE：case CharacterPRIVATE_USE：case CharacterUNASSIGNED：type = CHAR_OTHER;打破; case CharacterCONNECTOR_PUNCTUATION：case CharacterDASH_PUNCTUATION：case字符START_PUNCTUATION：case字符END_PUNCTUATION：case CHAR_INIT_QUOTE：case CHAR_FINAL_QUOTE：case CharacterOTHER_PUNCTUATION：type = CHAR_PUNCTUATION;打破; case CharacterMATH_SYMBOL：case CharacterCURRENCY_SYMBOL：case CharacterMODIFIER_SYMBOL：case CharacterOTHER_SYMBOL：type = CHAR_SYMBOL;打破; default：throw new RuntimeException("orgapachexercesutilsregexToken#getRange()：Unknown Unicode category："+ type); } ranges [type] addRange(i,i); } // for all characters ranges [CharacterUNASSIGNED] addRange(0x10000,TokenUTF16_MAX);。
+     * 
+     * if(TokencategoryNames [i]！= null){if(i == CharacterUNASSIGNED){//未分配的区域[i] addRange(0x10000,TokenUTF16_MAX); }
+     *  Tokencategoriesput(TokencategoryNames [i],ranges [i]); Tokencategories2put(TokencategoryNames [i],To
+     * kencomplementRanges(ranges [i])); }} // REVISIT：我们真的需要支持块名称在Unicode 31 //或者我们可以创建所有的名称以IsBLOCKNAME格式(
+     * XML Schema REC)? // StringBuffer buffer = new StringBuffer(50); for(int i = 0; i <TokenblockNameslength; i ++){Token r1 = TokencreateRange(); int location; if(i <NONBMP_BLOCK_START){location = i * 2; int rstart = TokenblockRangescharAt(location); int rend = TokenblockRangescharAt(location + 1); // DEBUGING // Systemoutprintln(n +""+ IntegertoHexString(rstart)// +" - "+ IntegertoHexString(rend)); r1addRange(rstart,rend); } else {location =(i  -  NONBMP_BLOCK_START)* 2; r1addRange(TokenonBMPBlockRanges [location],TokennonBMPBlockRanges [location + 1]); } String n = TokenblockNames [i]; if(nequals("Specials"))r1addRange(0xfff0,0xfffd); if(nequals("Private Use")){r1addRange(0xF0000,0xFFFFD); r1addRange(0x100000,0x10FFFD); } Tokencategoriesput(n,r1); Tokencategories2put(n,TokencomplementRanges(r1)); buffersetLength(0); bufferappend("Is");如果(nindexOf('')>
+     *  = 0){for(int ci = 0; ci <nlength(); ci ++)if(ncharAt(ci)！='')bufferappend((char)ncharAt(ci)) ; } else {bufferappend(n); } TokensetAlias(buffertoString(),n,true); }}。
+     * 
+     * // TR#18 12 TokensetAlias("ASSIGNED","Cn",false); TokensetAlias("UNASSIGNED","Cn",true); Token all = 
+     * TokencreateRange(); alladdRange(0,TokenUTF16_MAX); Tokencategoriesput("ALL",all); Tokencategories2put
+     * ("ALL",TokencomplementRanges(all)); TokenregisterNonXS("ASSIGNED"); TokenregisterNonXS("UNASSIGNED");
+     *  TokenregisterNonXS("ALL");。
+     * 
+     *  Token isalpha = TokencreateRange(); isalphamergeRanges(ranges [CharacterUPPERCASE_LETTER]); // Lu is
+     * alphamergeRanges(ranges [CharacterLOWERCASE_LETTER]); // Ll isalphamergeRanges(ranges [CharacterOTHER
+     * _LETTER]); // Lo Tokencategoriesput("IsAlpha",isalpha); Tokencategories2put("IsAlpha",Tokencomplement
+     * Ranges(isalpha)); TokenregisterNonXS("IsAlpha");。
+     * 
+     * Token isalnum = TokencreateRange(); isalnummergeRanges(isalpha); // Lu Ll Lo isalnummergeRanges(range
+     * s [CharacterDECIMAL_DIGIT_NUMBER]); // Nd Tokencategoriesput("IsAlnum",isalnum); Tokencategories2put(
+     * "IsAlnum",TokencomplementRanges(isalnum)); TokenregisterNonXS("IsAlnum");。
+     * 
+     *  Token isspace = TokencreateRange(); isspacemergeRanges(Tokentoken_spaces); isspacemergeRanges(ranges
+     *  [CHAR_SEPARATOR]); // Z Tokencategoriesput("IsSpace",isspace); Tokencategories2put("IsSpace",Tokenco
+     * mplementRanges(isspace)); TokenregisterNonXS("IsSpace");。
+     * 
+     * Token isword = TokencreateRange(); iswordmergeRanges(isalnum); // Lu Ll Lo Nd iswordaddRange('_','_')
+     * ; Tokencategoriesput("IsWord",isword); Tokencategories2put("IsWord",TokencomplementRanges(isword)); T
+     * okenregisterNonXS("IsWord");。
+     * 
+     *  Token isascii = TokencreateRange(); isasciiaddRange(0,127); Tokencategoriesput("IsASCII",isascii); T
+     * okencategories2put("IsASCII",TokencomplementRanges(isascii)); TokenregisterNonXS("IsASCII");。
+     * 
+     *  Token isnotgraph = TokencreateRange(); isnotgraphmergeRanges(ranges [CHAR_OTHER]); isnotgraphaddRang
      */
     static protected void registerNonXS(String name) {
         if (Token.nonxs == null)
@@ -1055,6 +1330,35 @@ class Token implements java.io.Serializable {
 
     /**
      * Combing Character Sequence in Perl 5.6.
+     * <p>
+     * e('',''); Tokencategoriesput("IsGraph",TokencomplementRanges(isnotgraph)); Tokencategories2put("IsGra
+     * ph",isnotgraph); TokenregisterNonXS("IsGraph");。
+     * 
+     * Token isxdigit = TokencreateRange(); isxdigitaddRange('0','9'); isxdigitaddRange('A','F'); isxdigitad
+     * dRange('a','f'); Tokencategoriesput("IsXDigit",TokencomplementRanges(isxdigit)); Tokencategories2put(
+     * "IsXDigit",isxdigit); TokenregisterNonXS("IsXDigit");。
+     * 
+     *  TokensetAlias("IsDigit","Nd",true); TokensetAlias("IsUpper","Lu",true); TokensetAlias("IsLower","L1"
+     * ,true); TokensetAlias("IsCntrl","C",true); TokensetAlias("IsPrint","C",false); TokensetAlias("IsPunct
+     * ","P",true); TokenregisterNonXS("IsDigit"); TokenregisterNonXS("IsUpper"); TokenregisterNonXS("IsLowe
+     * r"); TokenregisterNonXS("IsCntrl"); TokenregisterNonXS("IsPrint"); TokenregisterNonXS("IsPunct");。
+     * 
+     * TokensetAlias("alpha","IsAlpha",true); TokensetAlias("alnum","IsAlnum",true); TokensetAlias("ascii","
+     * IsASCII",true); TokensetAlias("cntrl","IsCntrl",true); TokensetAlias("digit","IsDigit",true); Tokense
+     * tAlias("graph","IsGraph",true); TokensetAlias("lower","IsLower",true); TokensetAlias("print","IsPrint
+     * ",true); TokensetAlias("punct","IsPunct",true); TokensetAlias("space","IsSpace",true); TokensetAlias(
+     * "upper","IsUpper",true); TokensetAlias("word","IsWord",true); // Perl extension TokensetAlias("xdigit
+     * ","IsXDigit",true); TokenregisterNonXS("alpha"); TokenregisterNonXS("alnum"); TokenregisterNonXS("asc
+     * ii"); TokenregisterNonXS("cntrl"); TokenregisterNonXS("digit"); TokenregisterNonXS("graph"); Tokenreg
+     * isterNonXS("lower"); TokenregisterNonXS("print");令牌registerNonXS("punct"); TokenregisterNonXS("space"
+     * ); TokenregisterNonXS("upper"); TokenregisterNonXS("word"); TokenregisterNonXS("xdigit"); } // synchr
+     * onized} // if null RangeToken tok = positive? (RangeToken)Tokencategoriesget(name)：(RangeToken)Tokenc
+     * ategories2get(name); // if(tok == null)Systemoutprintln(name);回报; } static protected RangeToken getRa
+     * nge(String name,boolean positive,boolean xs){RangeToken range = TokengetRange(name,positive); if(xs && range！= null && TokenisRegisterNonXS(name))range = null;返回范围; }
+     * }。
+     * 
+     * static Hashtable nonxs = null; / **此方法仅由getRange()调用所以此方法不需要MT安全
+     * 
      */
     static private Token token_ccs = null;
     static synchronized Token getCombiningCharacterSequence() {
@@ -1072,6 +1376,7 @@ class Token implements java.io.Serializable {
     // ------------------------------------------------------
     /**
      * This class represents a node in parse tree.
+     * <p>
      */
     static class StringToken extends Token implements java.io.Serializable {
 
@@ -1103,6 +1408,9 @@ class Token implements java.io.Serializable {
 
     /**
      * This class represents a node in parse tree.
+     * <p>
+     *  组合字符序列在Perl 56
+     * 
      */
     static class ConcatToken extends Token implements java.io.Serializable {
 
@@ -1138,6 +1446,9 @@ class Token implements java.io.Serializable {
 
     /**
      * This class represents a node in parse tree.
+     * <p>
+     *  这个类表示解析树中的一个节点
+     * 
      */
     static class CharToken extends Token implements java.io.Serializable {
 
@@ -1202,6 +1513,9 @@ class Token implements java.io.Serializable {
 
     /**
      * This class represents a node in parse tree.
+     * <p>
+     *  这个类表示解析树中的一个节点
+     * 
      */
     static class ClosureToken extends Token implements java.io.Serializable {
 
@@ -1271,6 +1585,9 @@ class Token implements java.io.Serializable {
 
     /**
      * This class represents a node in parse tree.
+     * <p>
+     *  这个类表示解析树中的一个节点
+     * 
      */
     static class ParenToken extends Token implements java.io.Serializable {
 
@@ -1329,6 +1646,9 @@ class Token implements java.io.Serializable {
 
     /**
      * (?(condition)yes-pattern|no-pattern)
+     * <p>
+     *  这个类表示解析树中的一个节点
+     * 
      */
     static class ConditionToken extends Token implements java.io.Serializable {
 
@@ -1375,6 +1695,9 @@ class Token implements java.io.Serializable {
 
     /**
      * (ims-ims: .... )
+     * <p>
+     *  这个类表示解析树中的一个节点
+     * 
      */
     static class ModifierToken extends Token implements java.io.Serializable {
 
@@ -1418,6 +1741,9 @@ class Token implements java.io.Serializable {
     /**
      * This class represents a node in parse tree.
      * for UNION or CONCAT.
+     * <p>
+     *  (?(条件)是模式|无模式)
+     * 
      */
     static class UnionToken extends Token implements java.io.Serializable {
 

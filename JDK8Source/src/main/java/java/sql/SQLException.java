@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1996, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -49,6 +50,17 @@ import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
  *       error information.
  *   <LI> the causal relationship, if any for this <code>SQLException</code>.
  * </UL>
+ * <p>
+ *  <P>提供有关数据库访问错误或其他错误的信息的异常
+ * 
+ *  <P>每个<code> SQLException </code>提供了几种信息：
+ * <UL>
+ * <LI>描述错误的字符串这用作Java异常消息,可通过方法<code> getMesasge </code> <LI>提供"SQLstate"字符串,该字符串遵循XOPEN SQLstate约定或SQL
+ * ：2003约定SQLState字符串的值在适当的规范中描述。
+ * <code> DatabaseMetaData </code>方法<code> getSQLStateType </code>可用于发现驱动程序是否返回XOPEN类型或SQL：2003类型< LI>每个
+ * 供应商特定的整数错误代码通常这将是基础数据库返回的实际错误代码<LI>链接到下一个异常这可以用于提供额外的错误信息<LI>因果关系,如果对此<code> SQLException </code>有任何影
+ * 响。
+ * </UL>
  */
 public class SQLException extends java.lang.Exception
                           implements Iterable<Throwable> {
@@ -62,6 +74,12 @@ public class SQLException extends java.lang.Exception
      * initialized by a call to the
      * {@link Throwable#initCause(java.lang.Throwable)} method.
      * <p>
+     * <p>
+     * 构造具有给定<code>原因</code>,<code> SQLState </code>和<code> vendorCode </code>的<code> SQLException </code>
+     * 
+     *  <code> cause </code>未初始化,并且随后可以通过调用{@link Throwable#initCause(javalangThrowable)}方法来初始化
+     * <p>
+     * 
      * @param reason a description of the exception
      * @param SQLState an XOPEN or SQL:2003 code identifying the exception
      * @param vendorCode a database vendor-specific exception code
@@ -89,6 +107,12 @@ public class SQLException extends java.lang.Exception
      * {@link Throwable#initCause(java.lang.Throwable)} method. The vendor code
      * is initialized to 0.
      * <p>
+     * <p>
+     *  用给定的<code> reason </code>和<code> SQLState </code>构造一个<code> SQLException </code>
+     * 
+     *  <code> cause </code>没有初始化,可以通过调用{@link Throwable#initCause(javalangThrowable)}方法初始化。供应商代码初始化为0
+     * <p>
+     * 
      * @param reason a description of the exception
      * @param SQLState an XOPEN or SQL:2003 code identifying the exception
      */
@@ -113,6 +137,13 @@ public class SQLException extends java.lang.Exception
      * initialized by a call to the
      * {@link Throwable#initCause(java.lang.Throwable)} method.
      * <p>
+     * <p>
+     *  使用给定的<code>原因构造<code> SQLException </code>对象</code> <code> SQLState </code>初始化为<code> null </code>,并
+     * 且供应商代码初始化为0。
+     * 
+     * <code> cause </code>未初始化,并且随后可以通过调用{@link Throwable#initCause(javalangThrowable)}方法来初始化
+     * <p>
+     * 
      * @param reason a description of the exception
      */
     public SQLException(String reason) {
@@ -135,6 +166,12 @@ public class SQLException extends java.lang.Exception
      * initialized by a call to the
      * {@link Throwable#initCause(java.lang.Throwable)} method.
      *
+     * <p>
+     *  构造<code> SQLException </code>对象<code> reason </code>,<code> SQLState </code>初始化为<code> null </code>,
+     * 供应商代码初始化为0。
+     * 
+     *  <code> cause </code>未初始化,并且随后可以通过调用{@link Throwable#initCause(javalangThrowable)}方法来初始化
+     * 
      */
     public SQLException() {
         super();
@@ -156,6 +193,12 @@ public class SQLException extends java.lang.Exception
      * <code>cause==null</code> or to <code>cause.toString()</code> if
      * <code>cause!=null</code>.
      * <p>
+     * <p>
+     * 使用给定的<code>原因构造<code> SQLException </code>对象</code> <code> SQLState </code>初始化为<code> null </code>,并且
+     * 供应商代码初始化为0如果<code> cause == null </code>或<code> causetoString()</code>如果<code>原因,<code> reason </code>
+     * 被初始化为<code> null < = null </code>。
+     * <p>
+     * 
      * @param cause the underlying reason for this <code>SQLException</code>
      * (which is saved for later retrieval by the <code>getCause()</code> method);
      * may be null indicating the cause is non-existent or unknown.
@@ -177,6 +220,11 @@ public class SQLException extends java.lang.Exception
      * The <code>SQLState</code> is  initialized to <code>null</code>
      * and the vendor code is initialized to 0.
      * <p>
+     * <p>
+     *  构造具有给定<code>原因</code>和<code>原因的<code> SQLException </code>对象</code> <code> SQLState </code>初始化为<code>
+     *  null </code >,并将供应商代码初始化为0。
+     * <p>
+     * 
      * @param reason a description of the exception.
      * @param cause the underlying reason for this <code>SQLException</code>
      * (which is saved for later retrieval by the <code>getCause()</code> method);
@@ -198,6 +246,11 @@ public class SQLException extends java.lang.Exception
      * <code>reason</code>, <code>SQLState</code> and  <code>cause</code>.
      * The vendor code is initialized to 0.
      * <p>
+     * <p>
+     *  构造具有给定<code>原因</code>,<code> SQLState </code>和<code>原因</code>的<code> SQLException </code>对象供应商代码初始化为
+     * 0。
+     * <p>
+     * 
      * @param reason a description of the exception.
      * @param sqlState an XOPEN or SQL:2003 code identifying the exception
      * @param cause the underlying reason for this <code>SQLException</code>
@@ -224,6 +277,11 @@ public class SQLException extends java.lang.Exception
      * <code>reason</code>, <code>SQLState</code>, <code>vendorCode</code>
      * and  <code>cause</code>.
      * <p>
+     * <p>
+     * 构造具有给定<code>原因</code>,<code> SQLState </code>,<code> vendorCode </code>和<code>原因</code>的<code> SQLExc
+     * eption </code>。
+     * <p>
+     * 
      * @param reason a description of the exception
      * @param sqlState an XOPEN or SQL:2003 code identifying the exception
      * @param vendorCode a database vendor-specific exception code
@@ -249,6 +307,10 @@ public class SQLException extends java.lang.Exception
     /**
      * Retrieves the SQLState for this <code>SQLException</code> object.
      *
+     * <p>
+     *  检索此<code> SQLException </code>对象的SQLState
+     * 
+     * 
      * @return the SQLState value
      */
     public String getSQLState() {
@@ -259,6 +321,10 @@ public class SQLException extends java.lang.Exception
      * Retrieves the vendor-specific exception code
      * for this <code>SQLException</code> object.
      *
+     * <p>
+     *  检索此<code> SQLException </code>对象的供应商特定的异常代码
+     * 
+     * 
      * @return the vendor's error code
      */
     public int getErrorCode() {
@@ -269,6 +335,10 @@ public class SQLException extends java.lang.Exception
      * Retrieves the exception chained to this
      * <code>SQLException</code> object by setNextException(SQLException ex).
      *
+     * <p>
+     *  通过setNextException(SQLException ex)检索链接到此<code> SQLException </code>对象的异常。
+     * 
+     * 
      * @return the next <code>SQLException</code> object in the chain;
      *         <code>null</code> if there are none
      * @see #setNextException
@@ -280,6 +350,10 @@ public class SQLException extends java.lang.Exception
     /**
      * Adds an <code>SQLException</code> object to the end of the chain.
      *
+     * <p>
+     *  在链的末尾添加一个<code> SQLException </code>对象
+     * 
+     * 
      * @param ex the new exception that will be added to the end of
      *            the <code>SQLException</code> chain
      * @see #getNextException
@@ -306,6 +380,10 @@ public class SQLException extends java.lang.Exception
      * be used to iterate over each SQLException and its underlying cause
      * (if any).
      *
+     * <p>
+     *  返回对链接的SQLExceptions的迭代器迭代器将用于遍历每个SQLException及其根本原因(如果有)
+     * 
+     * 
      * @return an iterator over the chained SQLExceptions and causes in the proper
      * order
      *
@@ -354,16 +432,22 @@ public class SQLException extends java.lang.Exception
     }
 
     /**
+    /* <p>
+    /* 
          * @serial
          */
     private String SQLState;
 
         /**
+        /* <p>
+        /* 
          * @serial
          */
     private int vendorCode;
 
         /**
+        /* <p>
+        /* 
          * @serial
          */
     private volatile SQLException next;

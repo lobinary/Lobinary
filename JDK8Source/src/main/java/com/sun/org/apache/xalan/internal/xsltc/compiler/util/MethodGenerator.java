@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,9 +17,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2001-2004 Apache软件基金会
+ * 
+ *  根据Apache许可证第20版("许可证")授权;您不得使用此文件,除非符合许可证您可以在获取许可证的副本
+ * 
+ *  http：// wwwapacheorg / licenses / LICENSE-20
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件将按"原样"基础分发,不附有任何明示或暗示的保证或条件。请参阅许可证管理权限和限制许可证
+ * 
  */
 /*
  * $Id: MethodGenerator.java,v 1.2.4.1 2005/09/05 11:16:47 pvedula Exp $
+ * <p>
+ *  $ Id：MethodGeneratorjava,v 1241 2005/09/05 11:16:47 pvedula Exp $
+ * 
  */
 
 package com.sun.org.apache.xalan.internal.xsltc.compiler.util;
@@ -76,6 +89,8 @@ import com.sun.org.apache.xalan.internal.xsltc.compiler.Pattern;
 import com.sun.org.apache.xalan.internal.xsltc.compiler.XSLTC;
 
 /**
+/* <p>
+/* 
  * @author Jacek Ambroziak
  * @author Santiago Pericas-Geertsen
  */
@@ -130,6 +145,9 @@ public class MethodGenerator extends MethodGen
                  * test sequences to avoid compiling the same pattern multiple
                  * times. Note that patterns whose kernels are "*", "node()"
                  * and "@*" can between shared by test sequences.
+                 * <p>
+                 * 测试序列使用的模式和指令列表之间的映射,以避免多次编译同一模式请注意,内核为"*","node()"和"@ *"的模式可以由测试序列共享
+                 * 
                  */
         private Hashtable _preCompiled = new Hashtable();
 
@@ -220,6 +238,9 @@ public class MethodGenerator extends MethodGen
      * initialized, then call addLocalVariable2() so that the new variable
      * is known to the allocator. Failing to do this may cause the allocator
      * to return a slot that is already in use.
+     * <p>
+     *  分配一个局部变量如果槽分配器已经被初始化,则调用addLocalVariable2(),以使新变量对于分配器是已知的。如果不这样做可能导致分配器返回一个已在使用的槽
+     * 
      */
     public LocalVariableGen addLocalVariable(String name, Type type,
                                              InstructionHandle start,
@@ -266,6 +287,13 @@ public class MethodGenerator extends MethodGen
      * methods by
      * {@link #outline(InstructionHandle,InstructionHandle,String,ClassGenerator)},
      * this class keeps track of all local variables defined by the method.</p>
+     * <p>
+     * 保持跟踪方法中使用的所有局部变量<p> {@link MethodGen#addLocalVariable(String,Type,InstructionHandle,InstructionHandle)}
+     *  </code>和{@link MethodGen#addLocalVariable(String,Type,int,InstructionHandle, {@link MethodGen}的方法只会跟
+     * 踪{@link LocalVariableGen}对象,直到它被调用{@link MethodGen#removeLocalVariable(LocalVariableGen)}删除为止。
+     * </p> <p >为了支持通过{@link #outline(InstructionHandle,InstructionHandle,String,ClassGenerator)}将局部变量有效地复制到
+     * 概括的方法,此类保持跟踪由方法定义的所有局部变量</p>。
+     * 
      */
     protected class LocalVariableRegistry {
         /**
@@ -281,11 +309,21 @@ public class MethodGenerator extends MethodGen
          * corresponding entry contains all such <code>LocalVariableGen</code>s
          * registered for the same slot; and if none occurs, the entry will be
          * <code>null</code>.
+         * <p>
+         * <p>为此方法创建的所有{@link LocalVariableGen}的一个<code> javalangArrayList </code>,由本地变量的槽号索引。
+         * 局部变量的JVM堆栈帧被分为"槽"可以用于在方法中存储多于一个变量,而不考虑类型,只要字节码保持两个不相交的范围。
+         * </p> <p>如果仅发生特定时隙的使用的一次注册, <code> _variables </code>的相应条目包含<code> LocalVariableGen </code>;如果多于一个,则相应
+         * 的条目包含为同一时隙注册的所有这样的<code> LocalVariableGen </code>;如果没有发生,则条目将是<code> null </code>。
+         * 局部变量的JVM堆栈帧被分为"槽"可以用于在方法中存储多于一个变量,而不考虑类型,只要字节码保持两个不相交的范围。
+         * 
          */
         protected ArrayList _variables = new ArrayList();
 
         /**
          * Maps a name to a {@link LocalVariableGen}
+         * <p>
+         *  将名称映射到{@link LocalVariableGen}
+         * 
          */
         protected HashMap _nameToLVGMap = new HashMap();
 
@@ -299,6 +337,13 @@ public class MethodGenerator extends MethodGen
          * <code>LocalVariableGen</code> with the same slot index previously
          * registered for this method.  <b><em>(Unchecked.)</em></b></li>
          * </ul></p>
+         * <p>
+         * 为此方法注册{@link orgapachebcelgenericLocalVariableGen} <p> <b>前提条件：</b>
+         * <ul>
+         *  <li> <code> lvg </code>的指令范围与之前为此方法注册的相同时隙索引的任何<code> LocalVariableGen </code>的指令范围不重叠<b> <em> (未选中)
+         * </em> </b> </li> </ul> </p>。
+         * 
+         * 
          * @param lvg The variable to be registered
          */
         protected void registerLocalVariable(LocalVariableGen lvg) {
@@ -348,6 +393,12 @@ public class MethodGenerator extends MethodGen
          * the {@link InstructionList} associated with this
          * {@link MethodGenerator}.</li>
          * </ul></p>
+         * <p>
+         *  <p>查找哪个{@link LocalVariableGen}(如果有)在方法的字节代码中的特定位置为特定JVM本地堆栈帧槽注册</p> <p> <b>前提条件：</b >
+         * <ul>
+         *  <li>与此{@link MethodGenerator} </li> </ul> </p>关联的{@link InstructionList}已调用{@link InstructionList#setPositions()。
+         * 
+         * 
          * @param slot the JVM local stack frame slot number
          * @param offset the position in the byte code
          * @return the <code>LocalVariableGen</code> for the local variable
@@ -404,6 +455,14 @@ public class MethodGenerator extends MethodGen
          * set, which causes problems for outlining..</p>
          * <p>See also {@link #lookUpByName(String)} and
          * {@link #removeByNameTracking(LocalVariableGen)}</P
+         * <p>
+         * <p>设置指定的{@link LocalVariableGen}对象的名称到<code> LocalVariableGen </code>本身的映射</p> <p>这是一个hack XSLTC是依赖于事
+         * 实正在查找的名称将不会被重复,这是不保证它替换了以前调用{@link MethodGen#getLocalVariables()}的代码,并循环通过它包含的<code> LocalVariableGen
+         *  </code>对象找到一个具有指定名称的代码然而,<code> getLocalVariables()</code>具有为任何未设置它们的<code> LocalVariableGen </code>
+         * 设置开始和结束的副作用,大纲的问题</p> <p>另请参阅{@link #lookUpByName(String)}和{@link #removeByNameTracking(LocalVariableGen)}
+         *  </P。
+         * 
+         * 
          * @param lvg a <code>LocalVariableGen</code>
          */
         protected void registerByName(LocalVariableGen lvg) {
@@ -432,6 +491,11 @@ public class MethodGenerator extends MethodGen
          * {@link LocalVariableGen} to itself.
          * See also {@link #registerByName(LocalVariableGen)} and
          * {@link #lookUpByName(String)}
+         * <p>
+         * 从指定的{@link LocalVariableGen}的名称中删除映射参见{@link #registerByName(LocalVariableGen)}和{@link #lookUpByName(String)}
+         * 。
+         * 
+         * 
          * @param lvg a <code>LocalVariableGen</code>
          */
         protected void removeByNameTracking(LocalVariableGen lvg) {
@@ -455,6 +519,12 @@ public class MethodGenerator extends MethodGen
          * corresponding to it.</p>
          * <p>See also {@link #registerByName(LocalVariableGen)} and
          * {@link #removeByNameTracking(LocalVariableGen)}</p>
+         * <p>
+         *  <p>给定变量名称,找到与其对应的{@link LocalVariableGen}。
+         * </p> <p>另请参阅{@link #registerByName(LocalVariableGen)}和{@link #removeByNameTracking(LocalVariableGen) p>。
+         *  <p>给定变量名称,找到与其对应的{@link LocalVariableGen}。
+         * 
+         * 
          * @param name
          * @return
          */
@@ -486,6 +556,13 @@ public class MethodGenerator extends MethodGen
          * a side-effect of setting the start and end range for any
          * <code>LocalVariableGen</code> if either was <code>null</code>.  That
          * side-effect causes problems for outlining of code in XSLTC.
+         * <p>
+         *  <p>获取此方法的所有{@link LocalVariableGen}对象</p> <p>当<code> includeRemoved </code>参数的值为<code> false </code>
+         * 时, @link MethodGen#getLocalVariables()},如果任一<code> null </code>,则会对任何<code> LocalVariableGen </code>设
+         * 置开始和结束范围的副作用。
+         * 副作用会导致轮廓出现问题的代码。
+         * 
+         * 
          * @param includeRemoved Specifies whether all local variables ever
          * declared should be returned (<code>true</code>) or only those not
          * removed (<code>false</code>)
@@ -548,6 +625,12 @@ public class MethodGenerator extends MethodGen
      * <li>The {@link InstructionList#setPositions()} has been called for the
      * {@link InstructionList} associated with this {@link MethodGenerator}.
      * </li></ul></p>
+     * <p>
+     * 确定特定变量在该方法的字节代码中的特定偏移量是否正在使用<p> <b>前提条件：</b>
+     * <ul>
+     *  <li>与此{@link MethodGenerator} </li> </ul> </p>关联的{@link InstructionList}已调用{@link InstructionList#setPositions()。
+     * 
+     * 
      * @param lvg the {@link LocalVariableGen} for the variable
      * @param offset the position in the byte code
      * @return <code>true</code> if and only if the specified variable is in
@@ -705,6 +788,9 @@ public class MethodGenerator extends MethodGen
 
     /**
      * Add a pre-compiled pattern to this mode.
+     * <p>
+     *  将预编译模式添加到此模式
+     * 
      */
     public void addInstructionList(Pattern pattern, InstructionList ilist) {
         _preCompiled.put(pattern, ilist);
@@ -713,6 +799,9 @@ public class MethodGenerator extends MethodGen
     /**
      * Get the instruction list for a pre-compiled pattern. Used by
      * test sequences to avoid compiling patterns more than once.
+     * <p>
+     *  获取预编译模式的指令列表由测试序列使用,以避免多次编译模式
+     * 
      */
     public InstructionList getInstructionList(Pattern pattern) {
         return (InstructionList) _preCompiled.get(pattern);
@@ -722,23 +811,35 @@ public class MethodGenerator extends MethodGen
      * Used to keep track of an outlineable chunk of instructions in the
      * current method.  See {@link OutlineableChunkStart} and
      * {@link OutlineableChunkEnd} for more information.
+     * <p>
+     *  用于跟踪当前方法中可概括的指令块。有关详细信息,请参阅{@link OutlineableChunkStart}和{@link OutlineableChunkEnd}
+     * 
      */
     private class Chunk implements Comparable {
         /**
          * {@link InstructionHandle} of the first instruction in the outlineable
          * chunk.
+         * <p>
+         *  {@link InstructionHandle}在可概括块中的第一条指令
+         * 
          */
         private InstructionHandle m_start;
 
         /**
          * {@link org.apache.bcel.generic.InstructionHandle} of the first
          * instruction in the outlineable chunk.
+         * <p>
+         * {@ link orgapachebcelgenericInstructionHandle}的可概括块中的第一条指令
+         * 
          */
         private InstructionHandle m_end;
 
         /**
          * Number of bytes in the instructions contained in this outlineable
          * chunk.
+         * <p>
+         *  包含在此可概括块中的指令中的字节数
+         * 
          */
         private int m_size;
 
@@ -750,6 +851,12 @@ public class MethodGenerator extends MethodGen
          * the {@link InstructionList} associated with this
          * {@link MethodGenerator}.</li>
          * </ul></p>
+         * <p>
+         *  <p>概要{@link MethodGeneratorChunk}的构造方法</p> <p> <b>前提条件：</b>
+         * <ul>
+         *  <li>与此{@link MethodGenerator} </li> </ul> </p>关联的{@link InstructionList}已调用{@link InstructionList#setPositions()。
+         * 
+         * 
          * @param start The {@link InstructionHandle} of the first
          *              instruction in the outlineable chunk.
          * @param end The {@link InstructionHandle} of the last
@@ -767,6 +874,11 @@ public class MethodGenerator extends MethodGen
          * <code>MethodGenerator.Chunk</code>, with no other intervening
          * instructions, including {@link OutlineableChunkStart} or
          * {@link OutlineableChunkEnd} instructions.
+         * <p>
+         *  确定此可概括{@link MethodGeneratorChunk}是否紧跟在参数<code> MethodGeneratorChunk </code>后面,而没有其他中间指令,包括{@link OutlineableChunkStart}
+         * 或{@link OutlineableChunkEnd}指令。
+         * 
+         * 
          * @param neighbour an outlineable {@link MethodGenerator.Chunk}
          * @return <code>true</code> if and only if the argument chunk
          * immediately follows <code>this</code> chunk
@@ -777,6 +889,10 @@ public class MethodGenerator extends MethodGen
 
         /**
          * Getter method for the start of this {@linke MethodGenerator.Chunk}
+         * <p>
+         *  Getter方法开始这个{@linke MethodGeneratorChunk}
+         * 
+         * 
          * @return the {@link org.apache.bcel.generic.InstructionHandle} of the
          * start of this chunk
          */
@@ -786,6 +902,10 @@ public class MethodGenerator extends MethodGen
 
         /**
          * Getter method for the end of this {@link MethodGenerator.Chunk}
+         * <p>
+         * Getter方法结束这个{@link MethodGeneratorChunk}
+         * 
+         * 
          * @return the {@link InstructionHandle} of the start of this chunk
          */
         InstructionHandle getChunkEnd() {
@@ -794,6 +914,10 @@ public class MethodGenerator extends MethodGen
 
         /**
          * The size of this {@link MethodGenerator.Chunk}
+         * <p>
+         *  这个{@link MethodGeneratorChunk}
+         * 
+         * 
          * @return the number of bytes in the byte code represented by this
          *         chunk.
          */
@@ -804,6 +928,10 @@ public class MethodGenerator extends MethodGen
         /**
          * Implements the <code>java.util.Comparable.compareTo(Object)</code>
          * method.
+         * <p>
+         *  实现<code> javautilComparablecompareTo(Object)</code>方法
+         * 
+         * 
          * @return
          * <ul>
          * <li>A positive <code>int</code> if the length of <code>this</code>
@@ -821,6 +949,10 @@ public class MethodGenerator extends MethodGen
     /**
      * Find the outlineable chunks in this method that would be the best choices
      * to outline, based on size and position in the method.
+     * <p>
+     *  根据方法中的大小和位置,在此方法中查找可概括的块,这将是最佳选择概述
+     * 
+     * 
      * @param classGen The {@link ClassGen} with which the generated methods
      *                 will be associated
      * @param totalMethodSize the size of the bytecode in the original method
@@ -987,6 +1119,10 @@ public class MethodGenerator extends MethodGen
     /**
      * Merge adjacent sibling chunks to produce larger candidate chunks for
      * outlining
+     * <p>
+     *  合并相邻的兄弟块以产生更大的候选块以用于轮廓
+     * 
+     * 
      * @param chunks array of sibling {@link MethodGenerator.Chunk}s that are
      *               under consideration for outlining.  Chunks must be in
      *               the order encountered in the {@link InstructionList}
@@ -1127,6 +1263,10 @@ public class MethodGenerator extends MethodGen
      * Breaks up the IL for this {@link MethodGenerator} into separate
      * outlined methods so that no method exceeds the 64KB limit on the length
      * of the byte code associated with a method.
+     * <p>
+     *  将此{@link MethodGenerator}的IL分解成单独的概括方法,以便没有方法超过与方法关联的字节代码的长度的64KB限制
+     * 
+     * 
      * @param classGen The {@link ClassGen} with which the generated methods
      *                 will be associated
      * @param originalMethodSize The number of bytes of bytecode represented by
@@ -1213,6 +1353,11 @@ public class MethodGenerator extends MethodGen
      * old method with a reference to that new method.  No
      * {@link OutlineableChunkStart} or {@link OutlineableChunkEnd} instructions
      * are copied.
+     * <p>
+     * 给定一个在当前{@link MethodGenerator}移动("大纲")块的一个可概括的代码块到一个新的方法,并替换旧方法中的块与该新方法的引用否{@link OutlineableChunkStart}
+     * 或{ @link OutlineableChunkEnd}指令被复制。
+     * 
+     * 
      * @param first The {@link InstructionHandle} of the first instruction in
      *              the chunk to outline
      * @param last The <code>InstructionHandle</code> of the last instruction in
@@ -1761,6 +1906,10 @@ public class MethodGenerator extends MethodGen
      * Helper method to generate an instance of a subclass of
      * {@link LoadInstruction} based on the specified {@link Type} that will
      * load the specified local variable
+     * <p>
+     *  Helper方法根据指定的{@link Type}生成一个{@link LoadInstruction}子类的实例,该类将加载指定的局部变量
+     * 
+     * 
      * @param index the JVM stack frame index of the variable that is to be
      * loaded
      * @param type the {@link Type} of the variable
@@ -1792,6 +1941,10 @@ public class MethodGenerator extends MethodGen
      * Helper method to generate an instance of a subclass of
      * {@link StoreInstruction} based on the specified {@link Type} that will
      * store a value in the specified local variable
+     * <p>
+     *  Helper方法基于指定的{@link类型}生成{@link StoreInstruction}的子类的实例,它将在指定的局部变量中存储一个值
+     * 
+     * 
      * @param index the JVM stack frame index of the variable that is to be
      * stored
      * @param type the {@link Type} of the variable
@@ -1821,12 +1974,18 @@ public class MethodGenerator extends MethodGen
 
     /**
      * Track the number of outlineable chunks seen.
+     * <p>
+     *  跟踪可见的大概块数
+     * 
      */
     private int m_totalChunks = 0;
 
     /**
      * Track the number of outlineable chunks started but not yet ended.  Used
      * to detect imbalances in byte code generation.
+     * <p>
+     *  跟踪已启动但尚未结束的可概括块的数量用于检测字节码生成中的不平衡
+     * 
      */
     private int m_openChunks = 0;
 
@@ -1837,6 +1996,10 @@ public class MethodGenerator extends MethodGen
      * at the end of the method's {@link InstructionList}, or at the start of
      * the method if the <code>InstructionList</code> is empty.
      * See {@link OutlineableChunkStart} for more information.
+     * <p>
+     * 将方法的{@link InstructionList}的结束标记为可概括的代码块的开始可概括的块在{@link InstructionHandle}之后开始,该方法的{@link InstructionList}
+     * 结束,或者在开始时如果<code> InstructionList </code>为空,请参见{@link OutlineableChunkStart}以获取更多信息。
+     * 
      */
     public void markChunkStart() {
         // m_chunkTree.markChunkStart();
@@ -1849,6 +2012,9 @@ public class MethodGenerator extends MethodGen
     /**
      * Mark the end of an outlineable chunk of code.  See
      * {@link OutlineableChunkStart} for more information.
+     * <p>
+     *  标记可大纲代码块的结束更多信息,请参阅{@link OutlineableChunkStart}
+     * 
      */
     public void markChunkEnd() {
         // m_chunkTree.markChunkEnd();
@@ -1872,6 +2038,12 @@ public class MethodGenerator extends MethodGen
      * exceed the 64KB limit, this method will attempt to split the code in
      * the {@link InstructionList} associated with this
      * <code>MethodGenerator</code> into several methods.</p>
+     * <p>
+     * <p>获取由此{@link MethodGenerator}生成的所有{@link Method} {@link MethodGen#getMethod()}只返回一个<code> Method </code>
+     * 对象此方法考虑了Java Virtual机器规格限制一个方法大小为64KB,并且可能返回多个<code>方法</code> </p> <p>如果与<code> MethodGenerator </code>
+     * 关联的代码超过64KB限制,此方法将尝试将与此<code> MethodGenerator </code>关联的{@link InstructionList}中的代码分成几个方法</p>。
+     * 
+     * 
      * @param classGen the {@link ClassGenerator} of which these methods are
      *                 members
      * @return an array of all the <code>Method</code>s generated
@@ -1973,6 +2145,17 @@ public class MethodGenerator extends MethodGen
      * <code>MethodGenerator</code> will invalidate the changes made by this
      * method.</li></ul>
      * </p>
+     * <p>
+     * <p>重写分支以避免相对分支偏移的JVM限制如果{@link MethodGenerator}的字节码不超过32KB,则不需要调用此方法</p> <p> Java虚拟机规范允许方法的代码部分长度最大为6
+     * 4KB但是,一些控制传输指令将相对偏移指定为有符号16位数量,将范围限制为可能在方法中的指令子集</p> <p > <code> TABLESWITCH </code>和<code> LOOKUPSWI
+     * TCH </code>指令总是使用32位带符号的相对偏移量,因此它们不受此问题的影响<code> GOTO </code>和<code> JSR </code>指令有两种形式,其中一种使用16位相对偏移
+     * 量,另一种使用32位相对偏移BCEL库决定是否使用基于指令目标的相对偏移的宽形式的<code> GOTO </code>或<code> JSR </code>指令,而无需用户的任何干预库</p> <p>
+     * 这留下了各种条件分支指令,<code> IFEQ </code>,<code> IFNULL </code>,<code> IF_ICMPEQ </code> em>,所有这些都使用16位带符号的相对偏
+     * 移,没有32位宽的形式可用</p> <p>此方法扫描与此{@link MethodGenerator}关联的{@link InstructionList},并找到可能超过相对分支偏移的16位限制的所有条
+     * 件分支指令。
+     * 每个此类指令的逻辑被反转,并使其指向其后的指令。然后,在条件分支和先前跟随的指令之间插入无条件分支到指令的原始目标。无条件分支被允许具有16位或32位相对偏移,如上所述例如,。
+     * <code>
+     * 
      * @return <code>true</code> if the <code>InstructionList</code> was
      * modified; <code>false</code> otherwise
      * @see The Java Virtual Machine Specification, Second Edition

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -23,6 +24,8 @@
  *
  */
 /*
+/* <p>
+/* 
  * @author    IBM Corp.
  *
  * Copyright IBM Corp. 1999-2000.  All rights reserved.
@@ -101,6 +104,31 @@ import javax.management.RuntimeOperationsException;
  *
  * <p>The <b>serialVersionUID</b> of this class is <code>6532732096650090465L</code>.
  *
+ * <p>
+ *  <p> ModelMBeanOperationInfo对象描述了ModelMBean的管理操作。
+ * 它是MBeanOperationInfo的子类,添加了相关的描述符和DescriptorAccess接口的实现</p>。
+ * 
+ * <P id="descriptor">
+ *  描述符中的字段被定义,但不限于,以下注意,当该表中的类型是Number时,也可以使用作为Long的十进制表示的String </P>
+ * 
+ * <table border="1" cellpadding="5" summary="ModelMBeanOperationInfo Fields">
+ * <tr> <th>名称</th> <th>类型</th> <th>含义</th> </tr> <tr> <td>名称</td> <td>字符串</td> <td>操作名称</td> </tr> <tr>
+ *  <td> descriptorType </td> <td>字符串</td> <td>必须是"operation"</td> </tr> <tr > <td> class </td> <td> Str
+ * ing </td> <td>定义方法的类别(完全限定)</td> </tr> <tr> <td> > String </td> <td>必须是"operation","getter"或"setter"</td>
+ *  </tr> <tr> <td> targetObject </td> <td> <td>要执行此方法的对象</td> </tr> <tr> <td> targetType </td> <td> Str
+ * ing </td> <td> targetObject的对象引用类型可以是：ObjectReference |句柄| EJBHandle | IOR | RMIReference </td> </tr>
+ *  <tr> <td> value </td> <td>对象</td> <td>操作的缓存值</td> </tr> <tr> <td> displayName </td> <td>字符串</td> <td>
+ * 操作的可读显示名称。
+ * </table>
+ * 
+ * <p>默认描述符将具有name,descriptorType,displayName和role fields set name和displayName字段的默认值是操作名称</p>
+ * 
+ *  <p> <b>注意：</b>由于本规范之前版本的不一致,建议不要对<code> currencyTimeLimit </code>使用负值或零值。
+ * 表示高速缓存的值从不有效,省略<code> currencyTimeLimit </code>字段要指示它始终有效,请对此字段使用非常大的数字</p>。
+ * 
+ *  <p>此类别的<b> serialVersionUID </b>是<code> 6532732096650090465L </code>
+ * 
+ * 
  * @since 1.5
  */
 
@@ -137,6 +165,8 @@ public class ModelMBeanOperationInfo extends MBeanOperationInfo
     // Actual serial version and serial form
     private static final long serialVersionUID;
     /**
+    /* <p>
+    /* 
      * @serialField operationDescriptor Descriptor The descriptor
      * containing the appropriate metadata for this instance
      */
@@ -162,6 +192,8 @@ public class ModelMBeanOperationInfo extends MBeanOperationInfo
     // END Serialization compatibility stuff
 
         /**
+        /* <p>
+        /* 
          * @serial The descriptor containing the appropriate metadata for this instance
          */
         private Descriptor operationDescriptor = validDescriptor(null);
@@ -175,6 +207,11 @@ public class ModelMBeanOperationInfo extends MBeanOperationInfo
          * on the {@code Method} object that contain the {@link
          * DescriptorKey} meta-annotation.
          *
+         * <p>
+         * 使用默认描述符构造ModelMBeanOperationInfo对象构造对象的{@link Descriptor}将包含由{@code Method}对象上的任何注释贡献的字段,该对象包含{@link DescriptorKey}
+         * 元注释。
+         * 
+         * 
          * @param operationMethod The java.lang.reflect.Method object
          * describing the MBean operation.
          * @param description A human readable description of the operation.
@@ -200,6 +237,11 @@ public class ModelMBeanOperationInfo extends MBeanOperationInfo
          * contributed by any annotations on the {@code Method} object
          * that contain the {@link DescriptorKey} meta-annotation.
          *
+         * <p>
+         *  构造ModelMBeanOperationInfo对象构造的对象的{@link描述符}将包含由{@code Method}对象上的任何注释贡献的字段,该对象包含{@link DescriptorKey}
+         * 元注释。
+         * 
+         * 
          * @param operationMethod The java.lang.reflect.Method object
          * describing the MBean operation.
          * @param description A human readable description of the
@@ -240,6 +282,10 @@ public class ModelMBeanOperationInfo extends MBeanOperationInfo
         /**
         * Constructs a ModelMBeanOperationInfo object with a default descriptor.
         *
+        * <p>
+        *  构造具有默认描述符的ModelMBeanOperationInfo对象
+        * 
+        * 
         * @param name The name of the method.
         * @param description A human readable description of the operation.
         * @param signature MBeanParameterInfo objects describing the
@@ -271,6 +317,10 @@ public class ModelMBeanOperationInfo extends MBeanOperationInfo
         /**
         * Constructs a ModelMBeanOperationInfo object.
         *
+        * <p>
+        *  构造ModelMBeanOperationInfo对象
+        * 
+        * 
         * @param name The name of the method.
         * @param description A human readable description of the operation.
         * @param signature MBeanParameterInfo objects describing the
@@ -316,6 +366,10 @@ public class ModelMBeanOperationInfo extends MBeanOperationInfo
          * Constructs a new ModelMBeanOperationInfo object from this
          * ModelMBeanOperation Object.
          *
+         * <p>
+         *  从此ModelMBeanOperation对象构造一个新的ModelMBeanOperationInfo对象
+         * 
+         * 
          * @param inInfo the ModelMBeanOperationInfo to be duplicated
          *
          */
@@ -341,6 +395,9 @@ public class ModelMBeanOperationInfo extends MBeanOperationInfo
         * Creates and returns a new ModelMBeanOperationInfo which is a
         * duplicate of this ModelMBeanOperationInfo.
         *
+        * <p>
+        *  创建并返回一个新的ModelMBeanOperationInfo,它是此ModelMBeanOperationInfo的副本
+        * 
         */
 
         public Object clone ()
@@ -357,6 +414,10 @@ public class ModelMBeanOperationInfo extends MBeanOperationInfo
          * Returns a copy of the associated Descriptor of the
          * ModelMBeanOperationInfo.
          *
+         * <p>
+         * 返回ModelMBeanOperationInfo的相关描述符的副本
+         * 
+         * 
          * @return Descriptor associated with the
          * ModelMBeanOperationInfo object.
          *
@@ -386,6 +447,11 @@ public class ModelMBeanOperationInfo extends MBeanOperationInfo
          * RuntimeOperationsException wrapping an
          * IllegalArgumentException is thrown.
          *
+         * <p>
+         *  为ModelMBeanOperationInfo设置相关的描述符(完全替换)如果新的描述符为空,则相关的描述符将恢复为默认描述符。
+         * 描述符在分配之前被验证如果新的描述符无效,则抛出包含IllegalArgumentException的RuntimeOperationsException。
+         * 
+         * 
          * @param inDescriptor replaces the Descriptor associated with the
          * ModelMBeanOperation.
          *
@@ -407,6 +473,9 @@ public class ModelMBeanOperationInfo extends MBeanOperationInfo
         /**
         * Returns a string containing the entire contents of the
         * ModelMBeanOperationInfo in human readable form.
+        * <p>
+        *  返回一个包含人类可读形式的ModelMBeanOperationInfo的全部内容的字符串
+        * 
         */
         public String toString()
         {
@@ -439,6 +508,13 @@ public class ModelMBeanOperationInfo extends MBeanOperationInfo
          * descriptorType="operation", role="operation"
          *
          *
+         * <p>
+         *  克隆传递的描述符,设置默认值,并检查有效性如果描述符无效(例如有错误的"名称"),这表示编程错误和一个RuntimeOperationsException将抛出
+         * 
+         * 如果尚未设置以下字段,则将默认为：displayName = thisgetName(),name = thisgetName(),descriptorType ="operation",role ="
+         * operation"。
+         * 
+         * 
          * @param in Descriptor to be checked, or null which is equivalent to
          * an empty Descriptor.
          * @exception RuntimeOperationsException if Descriptor is invalid
@@ -509,6 +585,9 @@ public class ModelMBeanOperationInfo extends MBeanOperationInfo
 
     /**
      * Deserializes a {@link ModelMBeanOperationInfo} from an {@link ObjectInputStream}.
+     * <p>
+     *  从{@link ObjectInputStream}反序列化{@link ModelMBeanOperationInfo}
+     * 
      */
     private void readObject(ObjectInputStream in)
             throws IOException, ClassNotFoundException {
@@ -519,6 +598,8 @@ public class ModelMBeanOperationInfo extends MBeanOperationInfo
 
     /**
      * Serializes a {@link ModelMBeanOperationInfo} to an {@link ObjectOutputStream}.
+     * <p>
+     *  将{@link ModelMBeanOperationInfo}序列化为{@link ObjectOutputStream}
      */
     private void writeObject(ObjectOutputStream out)
             throws IOException {

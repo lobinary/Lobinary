@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -158,6 +159,63 @@ import java.security.PrivilegedAction;
  * be rearranged.
  * </dl>
  *
+ * <p>
+ *  Swing JEditorPane文本组件通过称为EditorKit的插件机制支持不同类型的内容因为HTML是一种非常流行的内容格式,所以默认提供了一些支持默认支持由此类提供,支持HTML版本32具有
+ * 一些扩展),并且正朝向版本40迁移&lt; applet&gt;标签,但是为&lt; object&gt;标签提供了一些支持。
+ * 标签。
+ * <p>
+ *  HTML EditorKit提供了几个目标,它们对HTML建模的方式有影响。这些都在很大程度上影响了它的设计
+ * <dl>
+ * <dt>
+ *  支持编辑
+ * <dd>
+ * 看起来很明显,JEditorPane的插件应该提供编辑支持,但是这个事实有几个设计注意事项有大量的HTML文档不能正确符合HTML规范。
+ * 这些必须被归一化为正确的形式(如果要编辑它们)另外,用户不喜欢呈现过多的结构编辑,因此使用传统的文本编辑手势比使用完全如在HTML文档中定义的HTML结构更受欢迎。
+ * <p>
+ *  HTML的建模由<code> HTMLDocument </code>类提供它的文档描述了如何建模HTML的细节编辑支持利用了大量的文本包
+ * 
+ * <dt>
+ *  可扩展/可扩展
+ * <dd>
+ * 为了最大化这个套件的有用性,大量的努力已经使其可扩展这些是一些功能
+ * <ol>
+ * <li>
+ *  解析器是可替换的默认解析器是基于DTD的热Java解析器可以使用不同的DTD,或者可以使用完全不同的解析器。
+ * 更改解析器,重新实现getParser方法默认解析器在首次请求时动态加载,所以类文件将永远不会加载,如果使用替代解析器默认解析器是在一个单独的包名为解析器下面这个包。
+ * <li>
+ * 解析器驱动由HTMLDocument提供的ParserCallback要更改回调,将HTMLDocument子类化并重新实现createDefaultDocument方法以返回生成不同阅读器的文档读取器
+ * 控制文档的结构虽然Document默认提供HTML支持,没有什么可以阻止支持导致替代元素结构的非HTML标记。
+ * <li>
+ * 模型的默认视图是作为View实现的层次结构提供的,因此可以通过提供新的View实现来轻松地定制特定元素的显示方式或为新类型的元素添加功能。
+ * 默认的视图集由<code > HTMLFactory </code>类这可以通过子类化或替换HTMLFactory并重新实现getViewFactory方法来轻松更改,以返回替代工厂。
+ * <li>
+ * View实现主要是从CSS属性保存在视图中这使得有可能在同一模型上映射多个视图显示不同这对于打印尤其有用对于大多数HTML属性,HTML属性被转换到CSS属性显示这有助于使View实现更通用的目的
+ * </ol>
+ * 
+ * <dt>
+ *  异步加载
+ * <dd>
+ * 较大的文档涉及大量的解析并需要一些时间加载默认情况下,这个工具包生成的文档将被异步加载,如果使用<code> JEditorPanesetPage </code>加载这是由文档的一个属性控制方法{@link #createDefaultDocument createDefaultDocument}
+ * 可以被覆盖改变这个批处理的工作是由<code> HTMLDocumentHTMLReader </code>类实现的工作是由<code> DefaultStyledDocument </code>和<code>
+ *  AbstractDocument </code >在文本包中的类。
+ * 
+ * <dt>
+ *  从当前LAF进行定制
+ * <dd>
+ * HTML提供了一组众所周知的特征而没有精确地指定显示特性Swing具有用于其外观和感觉实现的主题机制。
+ * 期望的是,外观和感觉将显示特性馈送到HTML视图中具有较差视觉的用户例如想要高对比度和大于典型字体。
+ * <p>
+ *  对此的支持由<code> StyleSheet </code>类提供。HTML的表示可能受到EditorKit上的StyleSheet属性的设置的很大影响
+ * 
+ * <dt>
+ *  不有损
+ * <dd>
+ * EditorKit具有读取和保存文档的能力如果两个操作之间没有数据丢失,通常是最令人满意的。
+ * HTMLEditorKit的策略是存储未被识别的东西,或者不一定可见,因此他们可以随后写出HTML文档的模型因此应包含在阅读文档时发现的所有信息。
+ * 这在某些方面受到需要支持编辑的约束(即,不正确的文档有时必须被归一化)指导原则是信息不应该丢失,但有些可能被合成以产生更正确的模型或可能被重新排列。
+ * </dl>
+ * 
+ * 
  * @author  Timothy Prinzing
  */
 public class HTMLEditorKit extends StyledEditorKit implements Accessible {
@@ -167,6 +225,9 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
     /**
      * Constructs an HTMLEditorKit, creates a StyleContext,
      * and loads the style sheet.
+     * <p>
+     *  构造一个HTMLEditorKit,创建一个StyleContext,并加载样式表
+     * 
      */
     public HTMLEditorKit() {
 
@@ -177,6 +238,10 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
      * kit represents support for.  This kit supports
      * the type <code>text/html</code>.
      *
+     * <p>
+     * 获取此套件表示支持的数据的MIME类型此套件支持类型<code> text / html </code>
+     * 
+     * 
      * @return the type
      */
     public String getContentType() {
@@ -188,6 +253,10 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
      * views of any models that are produced by this
      * kit.
      *
+     * <p>
+     *  获取适合于生成此套件生产的任何型号视图的工厂
+     * 
+     * 
      * @return the factory
      */
     public ViewFactory getViewFactory() {
@@ -198,6 +267,10 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
      * Create an uninitialized text storage model
      * that is appropriate for this type of editor.
      *
+     * <p>
+     *  创建适合此类型编辑器的未初始化文本存储模型
+     * 
+     * 
      * @return the model
      */
     public Document createDefaultDocument() {
@@ -217,6 +290,9 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
      * Try to get an HTML parser from the document.  If no parser is set for
      * the document, return the editor kit's default parser.  It is an error
      * if no parser could be obtained from the editor kit.
+     * <p>
+     *  尝试从文档中获取HTML解析器如果没有为文档设置解析器,则返回编辑器工具箱的默认解析器如果无法从编辑器套件中获取解析器,则会出现错误
+     * 
      */
     private Parser ensureParser(HTMLDocument doc) throws IOException {
         Parser p = doc.getParser();
@@ -237,6 +313,11 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
      * be thrown. When inserting into a non-empty document all tags outside
      * of the body (head, title) will be dropped.
      *
+     * <p>
+     * 插入来自给定流的内容如果<code> doc </code>是HTMLDocument的实例,则将读取HTML 32文本将HTML插入到非空文档中必须在body元素内,如果不插入到主体中将抛出异常当插入
+     * 到非空文档中时,将删除body(head,title)之外的所有标记。
+     * 
+     * 
      * @param in  the stream to read from
      * @param doc the destination for the insertion
      * @param pos the location in the document to place the
@@ -268,6 +349,10 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
     /**
      * Inserts HTML into an existing document.
      *
+     * <p>
+     *  将HTML插入到现有文档中
+     * 
+     * 
      * @param doc       the document to insert into
      * @param offset    the offset to insert HTML at
      * @param popDepth  the number of ElementSpec.EndTagTypes to generate before
@@ -301,6 +386,10 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
      * Write content from a document to the given stream
      * in a format appropriate for this kind of content handler.
      *
+     * <p>
+     *  以适合此类内容处理程序的格式将内容从文档写入给定流
+     * 
+     * 
      * @param out  the stream to write to
      * @param doc  the source for the write
      * @param pos  the location in the document to fetch the
@@ -328,6 +417,10 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
      * Called when the kit is being installed into the
      * a JEditorPane.
      *
+     * <p>
+     *  在将工具包安装到JEditorPane中时调用
+     * 
+     * 
      * @param c the JEditorPane
      */
     public void install(JEditorPane c) {
@@ -343,6 +436,10 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
      * JEditorPane.  This is used to unregister any
      * listeners that were attached.
      *
+     * <p>
+     *  在从JEditorPane中删除套件时调用此命令用于注销已连接的任何侦听器
+     * 
+     * 
      * @param c the JEditorPane
      */
     public void deinstall(JEditorPane c) {
@@ -356,6 +453,9 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
     /**
      * Default Cascading Style Sheet file that sets
      * up the tag views.
+     * <p>
+     *  默认级联样式表文件,用于设置标记视图
+     * 
      */
     public static final String DEFAULT_CSS = "default.css";
 
@@ -368,6 +468,10 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
      * specified is shared by all HTMLEditorKit instances.
      * This should be reimplemented to provide a finer granularity
      * if desired.
+     * <p>
+     * 设置要用于呈现各种HTML元素的样式集合这些样式根据CSS规范指定由工具包生成的每个文档都将有一个工作表副本,它可以添加特定于文档的样式。
+     * 默认情况下,StyleSheet指定由所有HTMLEditorKit实例共享。如果需要,应重新实现以提供更细的粒度。
+     * 
      */
     public void setStyleSheet(StyleSheet s) {
         if (s == null) {
@@ -382,6 +486,9 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
      * HTML elements.  By default the resource specified by
      * DEFAULT_CSS gets loaded, and is shared by all HTMLEditorKit
      * instances.
+     * <p>
+     *  获取当前用于呈现HTML元素的样式集默认情况下,由DEFAULT_CSS指定的资源将被加载,并由所有HTMLEditorKit实例共享
+     * 
      */
     public StyleSheet getStyleSheet() {
         AppContext appContext = AppContext.getAppContext();
@@ -410,6 +517,10 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
      * protection of a doPrivileged call to allow the HTMLEditorKit
      * to function when used in an applet.
      *
+     * <p>
+     *  获取相对于HTMLEditorKit类文件的资源如果在12上调用,加载将发生在doPrivileged调用的保护下,以允许HTMLEditorKit在applet中使用时起作用
+     * 
+     * 
      * @param name the name of the resource, relative to the
      *  HTMLEditorKit class
      * @return a stream representing the resource
@@ -429,6 +540,10 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
      * augmented by the collection of commands defined
      * locally for style operations.
      *
+     * <p>
+     * 获取编辑器的命令列表这是超类支持的命令列表,由样式操作本地定义的命令集合扩充
+     * 
+     * 
      * @return the command list
      */
     public Action[] getActions() {
@@ -443,6 +558,11 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
      * are in <code>set</code>.<p>
      * This is called anytime the caret moves over a different location.
      *
+     * <p>
+     *  将<code> element </code>的AttributeSet中的键/值复制到<code> set </code>这不会复制组件,图标或元素名称属性子类可能希望改进什么是什么,这里但是请确保
+     * 先删除<code> set </code> <p>中的所有属性。
+     * 这是在插入符移动到不同位置时调用的。
+     * 
      */
     protected void createInputAttributes(Element element,
                                          MutableAttributeSet set) {
@@ -493,6 +613,10 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
      * Gets the input attributes used for the styled
      * editing actions.
      *
+     * <p>
+     *  获取用于样式编辑操作的输入属性
+     * 
+     * 
      * @return the attribute set
      */
     public MutableAttributeSet getInputAttributes() {
@@ -505,6 +629,10 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
     /**
      * Sets the default cursor.
      *
+     * <p>
+     *  设置默认光标
+     * 
+     * 
      * @since 1.3
      */
     public void setDefaultCursor(Cursor cursor) {
@@ -514,6 +642,10 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
     /**
      * Returns the default cursor.
      *
+     * <p>
+     *  返回默认游标
+     * 
+     * 
      * @since 1.3
      */
     public Cursor getDefaultCursor() {
@@ -523,6 +655,10 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
     /**
      * Sets the cursor to use over links.
      *
+     * <p>
+     *  将光标设置为通过链接使用
+     * 
+     * 
      * @since 1.3
      */
     public void setLinkCursor(Cursor cursor) {
@@ -531,6 +667,10 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
 
     /**
      * Returns the cursor to use over hyper links.
+     * <p>
+     *  返回要通过超链接使用的游标
+     * 
+     * 
      * @since 1.3
      */
     public Cursor getLinkCursor() {
@@ -541,6 +681,10 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
      * Indicates whether an html form submission is processed automatically
      * or only <code>FormSubmitEvent</code> is fired.
      *
+     * <p>
+     * 指示是自动处理html表单提交还是仅触发<code> FormSubmitEvent </code>
+     * 
+     * 
      * @return true  if html form submission is processed automatically,
      *         false otherwise.
      *
@@ -556,6 +700,10 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
      * automatically or only <code>FormSubmitEvent</code> is fired.
      * By default it is set to true.
      *
+     * <p>
+     *  指定是否自动处理html表单提交,或只有<code> FormSubmitEvent </code>被触发。默认情况下,它设置为true
+     * 
+     * 
      * @see #isAutoFormSubmission()
      * @see FormSubmitEvent
      * @since 1.5
@@ -567,6 +715,10 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
     /**
      * Creates a copy of the editor kit.
      *
+     * <p>
+     *  创建编辑器工具包的副本
+     * 
+     * 
      * @return the copy
      */
     public Object clone() {
@@ -585,6 +737,9 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
      * to avoid the overhead of loading the default parser if
      * it's not used.  The default parser is the HotJava parser
      * using an HTML 3.2 DTD.
+     * <p>
+     *  获取用于读取HTML流的解析器可以重新实现以提供不同的解析器默认实现是动态加载的,以避免加载默认解析器(如果没有使用)的开销默认解析器是使用HTML 32 DTD的HotJava解析器
+     * 
      */
     protected Parser getParser() {
         if (defaultParser == null) {
@@ -603,6 +758,10 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
     /**
      * returns the AccessibleContext associated with this editor kit
      *
+     * <p>
+     *  返回与此编辑器工具包相关联的AccessibleContext
+     * 
+     * 
      * @return the AccessibleContext associated with this editor kit
      * @since 1.4
      */
@@ -638,19 +797,30 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
     /**
      * Class to watch the associated component and fire
      * hyperlink events on it when appropriate.
+     * <p>
+     *  类在适当的时候监视相关组件并在其上触发超链接事件
+     * 
      */
     public static class LinkController extends MouseAdapter implements MouseMotionListener, Serializable {
         private Element curElem = null;
         /**
          * If true, the current element (curElem) represents an image.
+         * <p>
+         * 如果为true,则当前元素(curElem)表示图像
+         * 
          */
         private boolean curElemImage = false;
         private String href = null;
         /** This is used by viewToModel to avoid allocing a new array each
+        /* <p>
+        /* 
          * time. */
         private transient Position.Bias[] bias = new Position.Bias[1];
         /**
          * Current offset.
+         * <p>
+         *  电流偏移
+         * 
          */
         private int curOffset;
 
@@ -660,6 +830,10 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
          * the clicked event is used to drive an attempt to
          * follow the reference specified by a link.
          *
+         * <p>
+         *  调用鼠标单击事件如果组件是只读的(即浏览器),则单击的事件用于驱动尝试遵循链接指定的引用
+         * 
+         * 
          * @param e the mouse event
          * @see MouseListener#mouseClicked
          */
@@ -752,6 +926,9 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
         /**
          * Returns a string anchor if the passed in element has a
          * USEMAP that contains the passed in location.
+         * <p>
+         *  如果传入的in元素具有包含传入的位置的USEMAP,则返回字符串anchor
+         * 
          */
         private String getMapHREF(JEditorPane html, HTMLDocument hdoc,
                                   Element elem, AttributeSet attr, int offset,
@@ -792,6 +969,9 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
          * Returns true if the View representing <code>e</code> contains
          * the location <code>x</code>, <code>y</code>. <code>offset</code>
          * gives the offset into the Document to check for.
+         * <p>
+         *  如果代表<code> e </code>的视图包含位置<code> x </code>,<code> y </code> <code> offset </code>对于
+         * 
          */
         private boolean doesElementContainLocation(JEditorPane editor,
                                                    Element e, int offset,
@@ -826,6 +1006,10 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
          * to forward to the method with the same name, but with the following
          * args both == -1.
          *
+         * <p>
+         *  调用linkActivated在相关联的JEditorPane上,如果给定位置表示链接<p>这被实现为转发到具有相同名称的方法,但具有以下args均== == -1
+         * 
+         * 
          * @param pos the position
          * @param editor the editor pane
          */
@@ -840,6 +1024,11 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
          * <code>y</code> will give the location of the mouse, otherwise
          * they will be {@literal <} 0.
          *
+         * <p>
+         * 如果给定位置表示链接,则在关联的JEditorPane上调用linkedActivated如果这是鼠标点击的结果,则<code> x </code>和<code> y </code>将给出鼠标的位置,否
+         * 则,将为{@literal <} 0。
+         * 
+         * 
          * @param pos the position
          * @param html the editor pane
          */
@@ -881,6 +1070,9 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
          * Creates and returns a new instance of HyperlinkEvent. If
          * <code>hdoc</code> is a frame document a HTMLFrameHyperlinkEvent
          * will be created.
+         * <p>
+         *  创建并返回一个新的HyperlinkEvent实例如果<code> hdoc </code>是一个框架文档,将创建一个HTMLFrameHyperlinkEvent
+         * 
          */
         HyperlinkEvent createHyperlinkEvent(JEditorPane html,
                                             HTMLDocument hdoc, String href,
@@ -963,12 +1155,18 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
      * Interface to be supported by the parser.  This enables
      * providing a different parser while reusing some of the
      * implementation provided by this editor kit.
+     * <p>
+     *  解析器支持的接口这允许提供不同的解析器,同时重用此编辑器工具包提供的一些实现
+     * 
      */
     public static abstract class Parser {
         /**
          * Parse the given stream and drive the given callback
          * with the results of the parse.  This method should
          * be implemented to be thread-safe.
+         * <p>
+         *  解析给定的流并驱动给定的回调与解析的结果此方法应实现为线程安全
+         * 
          */
         public abstract void parse(Reader r, ParserCallback cb, boolean ignoreCharSet) throws IOException;
 
@@ -984,6 +1182,11 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
      * information on the contents of the AttributeSets, the positions, and
      * other info.
      *
+     * <p>
+     * 解析的结果驱动这些回调方法打开和关闭动作应该是平衡的</code> flush </code>方法将是最后一个调用的方法,让接收者有机会将任何挂起的数据冲入文档<p>参考DocumentParser,使
+     * 用的默认解析器,有关AttributeSets的内容,位置和其他信息的更多信息。
+     * 
+     * 
      * @see javax.swing.text.html.parser.DocumentParser
      */
     public static class ParserCallback {
@@ -992,6 +1195,10 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
          * the element is implied eg, the string '&lt;&gt;foo&lt;\t&gt;'
          * contains an implied html element and an implied body element.
          *
+         * <p>
+         *  这作为属性集中的属性被传递以指示元素被隐含,例如,字符串'&lt;&gt; foo&lt; \\ t&gt;包含一个隐含的html元素和一个隐含的body元素
+         * 
+         * 
          * @since 1.3
          */
         public static final Object IMPLIED = "_implied_";
@@ -1024,6 +1231,10 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
          * or \r\n, which ever is encountered the most in parsing the
          * stream.
          *
+         * <p>
+         *  这在流被解析之后但在<code> flush </code> <code> eol </code>之前是\n,\\ r或\\ r\n之一被调用大多数在解析流
+         * 
+         * 
          * @since 1.3
          */
         public void handleEndOfLineString(String eol) {
@@ -1110,12 +1321,40 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
      * <td>HTML.Tag.FRAME<td>FrameView
      * </tr>
      * </table>
+     * <p>
+     * 构建HTML视图的工厂下表描述了默认情况下将构建的工厂
+     * 
+     * <table summary="Describes the tag and view created by this factory by default">
+     * <tr>
+     * <th align = left> Tag <th align = left> View created </tr> <tr> <td> HTMLTagCONTENT <td> InlineView </tr>
+     *  <tr> <td> HTMLTagIMPLIED <td> javaxswingtexthtmlParagraphView </tr> < tr> <td> HTMLTagP <td> javaxsw
+     * ingtexthtmlParagraphView </tr> <tr> <td> HTMLTagH1 <td> javaxswingtexthtmlParagraphView </tr> <tr> <td>
+     *  HTMLTagH2 <td> javaxswingtexthtmlParagraphView </tr> <tr> <td> HTMLTagH3 <td> javaxswingtexthtmlPara
+     * graphView </tr> <td> javaxswingtexthtmlParagraphView </tr> <trd> <td> HTMLTagH4 <td> javaxswingtextht
+     * mlParagraphView </tr> <td> </tr> <tr> <td> HTMLTagDT <td> HTMLTagDIR <td> HTMLTagDIR <td> </tr> <trd>
+     *  <td> ListView </tr> tr> <td> HTMLTagUL <td> ListView </tr> <tr> <td> HTMLTagOL <td> ListView </tr> <tr>
+     *  <td> HTMLTag李<TD> BlockView用来</TR> <TR> <TD> HTMLTagDL <TD> BlockView用来</TR> <TR> <TD> HTMLTagDD <TD>
+     *  BlockView用来</TR> <TR> <TD> HTMLTagBODY <TD> BlockView用来</TR> <TR> <TD> HTMLTagHTML <TD> BlockView用来</TR>
+     *  <TR> <TD> HTMLTagCENTER <TD> BlockView用来</TR> <TR> <TD> HTMLTagDIV <TD> BlockView用来</TR> < TR> <TD> 
+     * HTMLTagBLOCKQUOTE <TD> BlockView用来</TR> <TR> <TD> HTMLTagPRE <TD> BlockView用来</TR> <TR> <TD> HTMLTagB
+     * LOCKQUOTE <TD> BlockView用来</TR> <TR> <TD> HTMLTagPRE <TD> BlockView用来</TR> <TR> <TD> HTMLTagIMG <TD>的
+     * ImageView </TR> <TR> <TD> HTMLTagHR <TD> HRuleView </TR> <TR> <TD> HTMLTagBR <TD> BRView </TR> <TR> <TD>
+     *  HTMLTagTABLE <TD> javaxswingtexthtmlTableView </TR> <TR> <TD> HTMLTagINPUT <TD> FormView控件</TR> <TR>
+     *  <TD> HTMLTagSELECT <TD> FormView控件</TR> < TR> <TD> HTMLTagTEXTAREA <TD> FormView控件</TR> <TR> <TD> HT
+     * MLTagOBJECT <TD>的ObjectView </TR> <TR> <TD> HTMLTagFRAMESET <td> FrameSetView </tr> <tr> <td> HTMLTag
+     * FRAME <td> FrameView。
+     * </tr>
+     * </table>
      */
     public static class HTMLFactory implements ViewFactory {
 
         /**
          * Creates a view from an element.
          *
+         * <p>
+         * 从元素创建视图
+         * 
+         * 
          * @param elem the element
          * @return the view
          */
@@ -1358,6 +1597,10 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
              * only in that case cachedViewPort is not equal to null.
              * we need to keep this reference in order to remove BodyBoxView from viewPort listeners.
              *
+             * <p>
+             *  我们保持弱引用viewPort当且仅当BodyBoxView正在侦听ComponentEvents只有在那种情况下cachedViewPort不等于null我们需要保持这个引用为了从viewPort侦
+             * 听器中删除BodyBoxView。
+             * 
              */
             private Reference<JViewport> cachedViewPort = null;
             private boolean isListening = false;
@@ -1370,48 +1613,72 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
     // --- Action implementations ------------------------------
 
 /** The bold action identifier
+/* <p>
 */
     public static final String  BOLD_ACTION = "html-bold-action";
 /** The italic action identifier
+/* <p>
 */
     public static final String  ITALIC_ACTION = "html-italic-action";
 /** The paragraph left indent action identifier
+/* <p>
 */
     public static final String  PARA_INDENT_LEFT = "html-para-indent-left";
 /** The paragraph right indent action identifier
+/* <p>
 */
     public static final String  PARA_INDENT_RIGHT = "html-para-indent-right";
 /** The  font size increase to next value action identifier
+/* <p>
 */
     public static final String  FONT_CHANGE_BIGGER = "html-font-bigger";
 /** The font size decrease to next value action identifier
+/* <p>
 */
     public static final String  FONT_CHANGE_SMALLER = "html-font-smaller";
 /** The Color choice action identifier
      The color is passed as an argument
+/* <p>
+/*  颜色作为参数传递
+/* 
 */
     public static final String  COLOR_ACTION = "html-color-action";
 /** The logical style choice action identifier
      The logical style is passed in as an argument
+/* <p>
+/*  逻辑样式作为参数传入
+/* 
 */
     public static final String  LOGICAL_STYLE_ACTION = "html-logical-style-action";
     /**
      * Align images at the top.
+     * <p>
+     *  在顶部对齐图像
+     * 
      */
     public static final String  IMG_ALIGN_TOP = "html-image-align-top";
 
     /**
      * Align images in the middle.
+     * <p>
+     *  在中间对齐图像
+     * 
      */
     public static final String  IMG_ALIGN_MIDDLE = "html-image-align-middle";
 
     /**
      * Align images at the bottom.
+     * <p>
+     *  对齐底部的图像
+     * 
      */
     public static final String  IMG_ALIGN_BOTTOM = "html-image-align-bottom";
 
     /**
      * Align images at the border.
+     * <p>
+     *  在边框处对齐图像
+     * 
      */
     public static final String  IMG_BORDER = "html-image-border";
 
@@ -1480,6 +1747,9 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
      * <p>NOTE: None of the convenience methods obtain a lock on the
      * document. If you have another thread modifying the text these
      * methods may have inconsistent behavior, or return the wrong thing.
+     * <p>
+     *  一个抽象动作提供一些方便的方法,可能有助于将HTML插入到现有文档中<p>注意：没有方便的方法获得对文档的锁如果你有另一个线程修改文本,这些方法可能有不一致的行为,返回错误的东西
+     * 
      */
     public static abstract class HTMLTextAction extends StyledTextAction {
         public HTMLTextAction(String name) {
@@ -1487,6 +1757,8 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
         }
 
         /**
+        /* <p>
+        /* 
          * @return HTMLDocument of <code>e</code>.
          */
         protected HTMLDocument getHTMLDocument(JEditorPane e) {
@@ -1498,6 +1770,8 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
         }
 
         /**
+        /* <p>
+        /* 
          * @return HTMLEditorKit for <code>e</code>.
          */
         protected HTMLEditorKit getHTMLEditorKit(JEditorPane e) {
@@ -1511,6 +1785,9 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
         /**
          * Returns an array of the Elements that contain <code>offset</code>.
          * The first elements corresponds to the root.
+         * <p>
+         * 返回包含<code> offset </code>的Elements数组。第一个元素对应于根
+         * 
          */
         protected Element[] getElementsAt(HTMLDocument doc, int offset) {
             return getElementsAt(doc.getDefaultRootElement(), offset, 0);
@@ -1518,6 +1795,9 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
 
         /**
          * Recursive method used by getElementsAt.
+         * <p>
+         *  getElementsAt使用递归方法
+         * 
          */
         private Element[] getElementsAt(Element parent, int offset,
                                         int depth) {
@@ -1538,6 +1818,10 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
          * return -1 if no elements is found representing <code>tag</code>,
          * or 0 if the parent of the leaf at <code>offset</code> represents
          * <code>tag</code>.
+         * <p>
+         *  返回从最深的叶开始,到达代表<code>标签的元素所需的元素数量</code>如果没有找到代表<code> tag </code>的元素,则返回-1;如果在<code> offset </code>处
+         * 的叶的父代表<code>标签</code>。
+         * 
          */
         protected int elementCountToTag(HTMLDocument doc, int offset,
                                         HTML.Tag tag) {
@@ -1557,6 +1841,9 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
         /**
          * Returns the deepest element at <code>offset</code> matching
          * <code>tag</code>.
+         * <p>
+         *  返回与<code> offset </code>匹配的<code>标签</code>中最深的元素
+         * 
          */
         protected Element findElementMatchingTag(HTMLDocument doc, int offset,
                                                  HTML.Tag tag) {
@@ -1590,6 +1877,13 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
      * <p>There is also an option to supply an alternate parentTag and
      * addTag. These will be checked for if there is no parentTag at
      * offset.
+     * <p>
+     * InsertHTMLTextAction可用于将HTML的任意字符串插入现有HTML文档至少需要提供两个HTMLTag第一个标签parentTag标识文档中的父元素以添加元素第二个标签addTag标识第
+     * 一个应该添加到文档中的HTML标记中的一个重要的事情是,解析器将生成所有适当的标记,即使它们不在<p>中传递的HTML字符串中。
+     * 例如,让我们说,你想创建一个操作来将表插入到body中parentTag将是HTMLTagBODY,addTag将是HTMLTagTABLE,并且该字符串可以是类似&lt; table&gt;&lt; 
+     * tr&gt;&lt; td&gt;&lt; / td&gt ;&lt; / tr&gt;&lt; / table&gt;<p>还有一个选项提供一个备用的parentTag和addTag这些将被检查是否没
+     * 有parentTag在偏移。
+     * 
      */
     public static class InsertHTMLTextAction extends HTMLTextAction {
         public InsertHTMLTextAction(String name, String html,
@@ -1625,6 +1919,9 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
         /**
          * A cover for HTMLEditorKit.insertHTML. If an exception it
          * thrown it is wrapped in a RuntimeException and thrown.
+         * <p>
+         * HTMLEditorKitinsertHTML的封面如果它抛出的异常被包装在一个RuntimeException并抛出
+         * 
          */
         protected void insertHTML(JEditorPane editor, HTMLDocument doc,
                                   int offset, String html, int popDepth,
@@ -1644,6 +1941,10 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
          * This is invoked when inserting at a boundary. It determines
          * the number of pops, and then the number of pushes that need
          * to be performed, and then invokes insertHTML.
+         * <p>
+         *  当在边界处插入时调用它确定pops的数量,然后确定需要执行的推进的数量,然后调用insertHTML
+         * 
+         * 
          * @since 1.3
          */
         protected void insertAtBoundary(JEditorPane editor, HTMLDocument doc,
@@ -1658,6 +1959,10 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
          * This is invoked when inserting at a boundary. It determines
          * the number of pops, and then the number of pushes that need
          * to be performed, and then invokes insertHTML.
+         * <p>
+         *  当在边界处插入时调用它确定pops的数量,然后确定需要执行的推进的数量,然后调用insertHTML
+         * 
+         * 
          * @deprecated As of Java 2 platform v1.3, use insertAtBoundary
          */
         @Deprecated
@@ -1722,6 +2027,10 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
          * <code>offset</code>, this will invoke either insertAtBoundary
          * or <code>insertHTML</code>. This returns true if there is
          * a match, and one of the inserts is invoked.
+         * <p>
+         *  如果在<code> offset </code>处有一个名为<code>标签</code>的元素,则将调用insertAtBoundary或<code> insertHTML </code>如果匹配,
+         * 则返回true,的插入。
+         * 
          */
         /*protected*/
         boolean insertIntoTag(JEditorPane editor, HTMLDocument doc,
@@ -1744,6 +2053,9 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
 
         /**
          * Called after an insertion to adjust the selection.
+         * <p>
+         *  插入后调用以调整选择
+         * 
          */
         /* protected */
         void adjustSelection(JEditorPane pane, HTMLDocument doc,
@@ -1774,6 +2086,10 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
         /**
          * Inserts the HTML into the document.
          *
+         * <p>
+         *  将HTML插入文档
+         * 
+         * 
          * @param ae the event
          */
         public void actionPerformed(ActionEvent ae) {
@@ -1807,9 +2123,13 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
         /** Tag in HTML to start adding tags from. */
         protected HTML.Tag addTag;
         /** Alternate Tag to check for in the document if parentTag is
+        /* <p>
+        /* 
          * not found. */
         protected HTML.Tag alternateParentTag;
         /** Alternate tag in HTML to start adding tags from if parentTag
+        /* <p>
+        /* 
          * is not found and alternateParentTag is found. */
         protected HTML.Tag alternateAddTag;
         /** True indicates the selection should be adjusted after an insert. */
@@ -1821,6 +2141,9 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
      * InsertHRAction is special, at actionPerformed time it will determine
      * the parent HTML.Tag based on the paragraph element at the selection
      * start.
+     * <p>
+     * InsertHRAction是特殊的,在actionPerformed时,它将基于选择开始处的段落元素确定父HTMLTag
+     * 
      */
     static class InsertHRAction extends InsertHTMLTextAction {
         InsertHRAction() {
@@ -1831,6 +2154,10 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
         /**
          * Inserts the HTML into the document.
          *
+         * <p>
+         *  将HTML插入文档
+         * 
+         * 
          * @param ae the event
          */
         public void actionPerformed(ActionEvent ae) {
@@ -1852,6 +2179,9 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
 
     /*
      * Returns the object in an AttributeSet matching a key
+     * <p>
+     *  返回与键匹配的AttributeSet中的对象
+     * 
      */
     static private Object getAttrValue(AttributeSet attr, HTML.Attribute key) {
         Enumeration names = attr.getAttributeNames();
@@ -1875,6 +2205,9 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
      * or object. TODO: This method relies on support from the
      * javax.accessibility package.  The text package should support
      * keyboard navigation of text elements directly.
+     * <p>
+     *  将焦点移动到下一个或上一个超文本链接或对象的动作TODO：此方法依赖于javaxaccessibility包的支持文本包应支持直接的文本元素的键盘导航
+     * 
      */
     static class NavigateLinkAction extends TextAction implements CaretListener {
 
@@ -1884,6 +2217,9 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
 
         /*
          * Create this action with the appropriate identifier.
+         * <p>
+         *  使用适当的标识符创建此操作
+         * 
          */
         public NavigateLinkAction(String actionName) {
             super(actionName);
@@ -1893,6 +2229,10 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
         /**
          * Called when the caret position is updated.
          *
+         * <p>
+         *  更新插入符位置时调用
+         * 
+         * 
          * @param e the caret event
          */
         public void caretUpdate(CaretEvent e) {
@@ -1915,6 +2255,9 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
 
         /*
          * The operation to perform when this action is triggered.
+         * <p>
+         *  触发此操作时执行的操作
+         * 
          */
         public void actionPerformed(ActionEvent e) {
             JTextComponent comp = getTextComponent(e);
@@ -1982,6 +2325,9 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
 
         /*
          * Moves the caret from mark to dot
+         * <p>
+         *  将插入符号从标记移动到圆点
+         * 
          */
         private void moveCaretPosition(JTextComponent comp, HTMLEditorKit kit,
                                        int mark, int dot) {
@@ -2014,6 +2360,9 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
         /**
          * A highlight painter that draws a one-pixel border around
          * the highlighted area.
+         * <p>
+         *  突出显示的绘图工具,在突出显示的区域周围绘制一个像素的边框
+         * 
          */
         static class FocusHighlightPainter extends
             DefaultHighlighter.DefaultHighlightPainter {
@@ -2025,6 +2374,10 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
             /**
              * Paints a portion of a highlight.
              *
+             * <p>
+             *  描绘高亮的一部分
+             * 
+             * 
              * @param g the graphics context
              * @param offs0 the starting model offset &ge; 0
              * @param offs1 the ending model offset &ge; offs1
@@ -2084,11 +2437,17 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
      * TODO: This method relies on support from the
      * javax.accessibility package.  The text package should support
      * keyboard navigation of text elements directly.
+     * <p>
+     * 激活具有焦点的超文本链接的操作TODO：此方法依赖于javaxaccessibility包的支持文本包应支持直接的文本元素的键盘导航
+     * 
      */
     static class ActivateLinkAction extends TextAction {
 
         /**
          * Create this action with the appropriate identifier.
+         * <p>
+         *  使用适当的标识符创建此操作
+         * 
          */
         public ActivateLinkAction(String actionName) {
             super(actionName);
@@ -2096,6 +2455,9 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
 
         /*
          * activates the hyperlink at offset
+         * <p>
+         *  激活偏移处的超链接
+         * 
          */
         private void activateLink(String href, HTMLDocument doc,
                                   JEditorPane editor, int offset) {
@@ -2114,6 +2476,9 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
 
         /*
          * Invokes default action on the object in an element
+         * <p>
+         *  在元素中的对象上调用默认操作
+         * 
          */
         private void doObjectAction(JEditorPane editor, Element elem) {
             View view = getView(editor, elem);
@@ -2133,6 +2498,9 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
 
         /*
          * Returns the root view for a document
+         * <p>
+         *  返回文档的根视图
+         * 
          */
         private View getRootView(JEditorPane editor) {
             return editor.getUI().getRootView(editor);
@@ -2140,6 +2508,9 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
 
         /*
          * Returns a view associated with an element
+         * <p>
+         *  返回与元素关联的视图
+         * 
          */
         private View getView(JEditorPane editor, Element elem) {
             Object lock = lock(editor);
@@ -2171,6 +2542,9 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
          * If possible acquires a lock on the Document.  If a lock has been
          * obtained a key will be retured that should be passed to
          * <code>unlock</code>.
+         * <p>
+         *  如果可能,获取文档上的锁如果已获得锁,则将重新生成一个键,该键应传递到<code> unlock </code>
+         * 
          */
         private Object lock(JEditorPane editor) {
             Document document = editor.getDocument();
@@ -2184,6 +2558,9 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
 
         /*
          * Releases a lock previously obtained via <code>lock</code>.
+         * <p>
+         *  释放之前通过<code> lock </code>获得的锁
+         * 
          */
         private void unlock(Object key) {
             if (key != null) {
@@ -2193,6 +2570,9 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
 
         /*
          * The operation to perform when this action is triggered.
+         * <p>
+         *  触发此操作时执行的操作
+         * 
          */
         public void actionPerformed(ActionEvent e) {
 
@@ -2255,6 +2635,9 @@ public class HTMLEditorKit extends StyledEditorKit implements Accessible {
 
     /*
      * Move the caret to the beginning of the document.
+     * <p>
+     *  将插入符号移动到文档的开头
+     * 
      * @see DefaultEditorKit#beginAction
      * @see HTMLEditorKit#getActions
      */

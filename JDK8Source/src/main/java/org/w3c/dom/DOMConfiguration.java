@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -37,6 +38,13 @@
  * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * [1] http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231
+ * <p>
+ *  版权所有(c)2004万维网联盟,
+ * 
+ *  (马萨诸塞理工学院,欧洲研究信息学和数学联合会,庆应大学)保留所有权利本作品根据W3C(r)软件许可证[1]分发,希望它有用,但没有任何保证;甚至没有对适销性或适用于特定用途的隐含保证
+ * 
+ *  [1] http：// wwww3org / Consortium / Legal / 2002 / copyright-software-20021231
+ * 
  */
 
 package org.w3c.dom;
@@ -383,11 +391,158 @@ package org.w3c.dom;
  * set, <code>Document.normalizeDocument()</code> will invoke the resource
  * resolver instead of using <code>Document.documentURI</code>.
  * <p>See also the <a href='http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407'>Document Object Model (DOM) Level 3 Core Specification</a>.
+ * <p>
+ * <code> DOMConfiguration </code>接口表示文档的配置并维护一个已识别参数的表。
+ * 使用配置,可以更改<code> DocumentnormalizeDocument()</code>行为,例如替换<code > </>> </code>节点或指定在请求验证<code> Documen
+ * t </code>时必须使用的模式类型的</> CDATASection </code>节点<code> DOMConfiguration </code >对象也用于<代码中的[<a href='http://wwww3org/TR/2004/REC-DOM-Level-3-LS-20040407'>
+ *  DOM 3级加载和保存</a>] > DOMParser </code>和<code> DOMSerializer </code> interfaces <p> <code> DOMConfigura
+ * tion </code>对象使用的参数名称在DOM Level 3规范中定义名称不区分大小写为了避免可能的冲突,作为约定,引用在DOM规范之外定义的参数的名称应该是唯一的因为参数被公开为名称中的属性,建
+ * 议遵循[Unicode]的标识符添加字符' - '(HYPHEN-MINUS),但它不是由DOM实现DOM强制实现DOM级3核心实现需要识别本规范中定义的所有参数某些参数值也可能需要被实现支持参考参数的
+ * 定义知道一个值是否必须被支持<p> <b>注意：</b>参数类似于SAX2中使用的特性和属性[<a href ='http：// wwwsaxprojectorg /' > SAX </a>]<p>以下
+ * DOM中定义的参数列表：。
+ * <code> DOMConfiguration </code>接口表示文档的配置并维护一个已识别参数的表。
+ * <dl>
+ * <dt>
+ * <code>"canonical-form"</code> </dt>
+ * <dd>
+ * <dl>
+ * <dt> <code> true </code> </dt> <dd> [<em>可选</em>]根据[<a href ='http：// wwww3org / TR / 2001 / REC-xml-c14n-20010315'>
+ *  Canonical XML </a>],例如从树中删除<code> DocumentType </code>节点(如果有),或从每个元素中删除多余的命名空间声明这限制在DOM中可以表示的内容;特别是没
+ * 有办法在DOM中指定属性的顺序另外,将此参数设置为<code> true </code>也会设置下面列出的参数的状态。
+ * 那些参数将把"canonical-form"恢复为<code> false </code>参数设置为<code> false </code>："entities","normalize-characte
+ * rs","cdata-sections"参数设置为<code> true </code>："namespaces","namespace-declarations","well-formed","ele
+ * ment-content-whitespace"除非在参数说明中明确指定, / dd>。
+ * <dt>
+ * <code> false </code> </em> </em> <em> </dd> <dt> <code>"cdata-sections"</code> </dt>
+ * <dd>
+ * <dl>
+ * <dt>
+ *  <code> true </code> </em> <em> </em> <em> </dd> <dt> <code> false </code> </dt> <dd> [<em>必需</em>]将文
+ * 档中的<code> CDATASection </code>代码>节点然后将新的<code> Text </code>节点与任何相邻的<code> Text </code>节点</dd> </dl>。
+ * <dt>
+ *  <code>"check-character-normalization"</code> </dt>
+ * <dd>
+ * <dl>
+ * <dt> <code> true </code> </dt> <dd> [<em>可选</em>]检查文档中的字符是否<a href ='http：// wwww3org / TR / 2004 / REC-xml11-20040204 /#dt-fullnorm'>
+ * 完全规范化</a>,如[<a href='http://wwww3org/TR/2004/REC-xml11-20040204/'>]的附录B中所定义XML 11 </a>]当遇到标准化检查失败的一系列
+ * 字符时,发出<code> DOMErrortype </code>等于"check-character-normalization-failure"的错误</dd> <dt > <code> false
+ *  </code> </em> </em>(<em>默认</em>)不检查字符是否被归一化</dd> > </dd> <dt> <code>"comments"</code> </dt>。
+ * <dd>
+ * <dl>
+ * <dt>
+ * <code> true </code> </em> <em> </em>(<em> </em> dd </code> </d> </em>在文件中舍弃<code>注释</code>节点</dd> > </dd>
+ * 。
+ * <dt>
+ *  <code>"datatype-normalization"</code> </dt>
+ * <dd>
+ * <dl>
+ * <dt> <code> true </code> </dt> <dd> [<em>可选</em>]在树中公开模式规范化值,例如<a href ='http：// wwww3org / TR / 2001 / REC-xmlschema-1-20010502 /#key-nv'>
+ *  XML模式情况下的XML模式规范化值</a>由于此参数需要具有模式信息,因此"validate"参数也将设置为<code> true </code>当"validate"为<code> false </code>
+ * 时激活此参数没有效果,并且不会发生模式归一化<p> <b>注意：</b>包含XML 10处理的结果,此参数不适用于[<a href='http://wwww3org/TR/2004/REC-xml-20040204'>
+ *  XML 10]第333节中定义的属性值规范化, / a>],并且仅适用于文档类型定义(DTD)以外的模式语言</DD>。
+ * <dt>
+ * <code> false </code> </dt> </em>(<em> </em>)不要在树上执行模式归一化</dd> > </dd>
+ * <dt>
+ *  <code>"element-content-whitespace"</code> </dt>
+ * <dd>
+ * <dl>
+ *  <dt> <code> true </code> </em>(<em> </em> > <code> false </code> </dt> </em>]放弃元素内容中包含空格的所有<code> Te
+ * xt </code>节点,如<a href ='http：// wwww3org / TR / 2004 / REC-xml-infoset-20040204#infoitemcharacter'> [
+ * element content whitespace] </a>实现期望使用属性<code> TextisElementContentWhitespace </code>如果应该丢弃<code> Tex
+ * t </code>节点</dd> </dl> </dd> <dt> <code>"entities"</code>。
+ * <dd>
+ * <dl>
+ * <dt>
+ * <code> true </code> </em> </em>(<em> </em>)在文档中保留<code> EntityReference </code> dd
+ * <dt>
+ *  <code> false </code> </dt> <dd> [<em>必需</em>]从文档中删除所有<code> EntityReference </code>节点,将实体扩展直接放置在< > 
+ * Text </code>节点被规范化,如<code> Nodenormalize </code>中定义。
+ * 只有<a href='http://wwww3org/TR/2004/REC-xml-infoset-20040204/#infoitemrse'>未展开实体引用</a>保存在文档</dd>中。
+ * </dl>
+ *  <p> <b>注意：</b>此参数不影响<code>实体</code>节点</dd>
+ * <dt>
+ * <code>"error-handler"</code> </dt> </em>包含<code> DOMErrorHandler </code>对象如果在文档中遇到错误,实现将调用使用此参数注册的<code>
+ *  DOMErrorHandler </code>实现可以提供一个默认的<code> DOMErrorHandler </code>对象当被调用时,<code> DOMErrorrelatedData </code>
+ * 错误发生如果实现无法确定发生错误的节点,<code> DOMErrorrelatedData </code>将包含<code> Document </code>节点从错误处理程序内对文档的突变将导致实现
+ * 依赖行为</dd> <dt> <code>"infoset"</code> </dt>。
+ * <dd>
+ * <dl>
+ * <dt>
+ * <code> true </code> </dt> <dd> [<em>必需</em>]在文档中保留XML信息集中定义的信息[<a href ='http：// wwww3org / TR / 2004 / REC-xml-infoset-20040204 /'>
+ *  XML信息集</a>]这将强制以下参数为<code> false </code>："validate-if-schema","entities","datatype -normalization","
+ * cdata-sections"这将强制以下参数为<code> true </code>："namespace-declarations","well-formed","element-content-w
+ * hitespace","comments" "除非在参数的描述中明确指定,否则不改变其他参数注意,只有当上面指定的各个参数适当设置时,使用<code> getParameter </code>查询此参数
+ * 才会返回<code> true </code></dd> <dt> <code> false </code> </dt> <dd>将<code>信息集</code>设置为<code> false </code>
+ *  > </dd> <dt> <code>"namespaces"</code> </dt>。
+ * <dd>
+ * <dl>
+ * <dt>
+ * <code> true </code> </dt> </em> <em> </em>执行</dd> <dt>代码> false </code> </dt> </em>不要执行命名空间处理</dd> </dl>
+ * 。
+ * <dt>
+ *  <code>"namespace-declarations"</code> </dt> <dd>如果参数"namespaces"设置为<code> false </code>
+ * <dl>
+ * <dt> <code> true </code> </em> <em> </em>包含名称空间声明属性,请参阅[<a href='http://wwww3org/TR/1999/REC-xml-names-19990114/'>
+ *  XML命名空间</a>]中的"声明命名空间"部分和[<a href] ='http：// wwww3org / TR / 2004 / REC-xml-names11-20040204 /'> XML
+ * 命名空间11 </a>] </dd> <dt> <code> false </code> </dd> [<em> required </em>]丢弃所有命名空间声明属性即使此参数设置为<code> fa
+ * lse </code> </dd,命名空间前缀(<code> Nodeprefix </code> > </dl> </dd> <dt> <code>"normalize-characters"</code>
+ *  </dt>。
+ * 
  * @since DOM Level 3
  */
 public interface DOMConfiguration {
     /**
      * Set the value of a parameter.
+     * <p>
+     * <dd>
+     * <dl>
+     * <dt> <code> true </code> </dt> <dd> [<em>可选</em>] <a href ='http：// wwww3org / TR / 2004 / REC-xml11-20040204 /# dt-fullnorm'>
+     * 将[<a href='http://wwww3org/TR/2004/REC-xml11-20040204/'> XML 11]的附录B中定义的文档中的字符完全标准化</a> a>] </dd>。
+     * <dt>
+     * <code> false </code> </dt> </em> <em> </em>不要执行字符规范化</dd> dd> <dt> <code>"schema-location"</code> </dt>
+     *  </em>代表包含URI列表的<code> DOMString </code> ,由空格分隔(符合第23节中定义的<a href='http://wwww3org/TR/2004/REC-xml-20040204#NT-S'>
+     * 非终端产品S </a>的字符[<a href = 'http：// wwww3org / TR / 2004 / REC-xml-20040204'> XML 10 </a>]),表示验证应该发生的模式
+     * ,即当前模式此列表中引用的模式类型必须匹配<code> schema-type </code>指定的类型,否则实现的行为是未定义的使用此属性指定的模式优先于文档本身中指定的模式信息对于命名空间感知模式,
+     * 如果使用此属性指定的模式和文档实例中指定的模式(即使用<code> schemaLocation </code>属性)在模式文档中(即使用模式<code> import </code>机制)共享相同的<code>
+     *  targetNamespace </code>,将使用由用户使用此属性指定的模式如果使用此属性指定的两个模式共享相同的<code> targetNamespace </code>或没有命名空间,行为是
+     * 依赖于实现如果没有提供位置,此参数是<code> null </code><p> <b>注意：</b>除非设置了"schema-type"参数值,否则将忽略<code>"schema-location"
+     * </code>参数强烈建议<code> DocumentdocumentURI <代码>,以便实现可以成功解析引用的任何外部实体</dd>。
+     * <dt>
+     * <code>"schema-type"</code> </dt> <dd> [<em>可选</em>]表示一个包含绝对URI并表示类型的<code> DOMString </code>用于验证文档的模式
+     * 语言注意,没有对绝对URI进行词法检查如果未设置此参数,则实现可以基于支持的模式语言和负载上使用的模式语言提供默认值time如果没有提供值,此参数为<code> null </code> <p> <b>
+     * 注：</b>对于XML模式[<a href ='http：// wwww3org / TR / 2001 / REC -xmlschema-1-20010502 /'> XML Schema Part 
+     * 1 </a>],应用程序必须使用值<code>"http：// wwww3org / 2001 / XMLSchema"</code>对于XML DTD [<a href = 'http：// wwww3org / TR / 2004 / REC-xml-20040204'>
+     *  XML 10 </a>],应用程序必须使用值<code>"http：// wwww3org / TR / REC-xml"</code>其他模式语言超出了W3C的范围,因此应该推荐一个绝对URI使用此
+     * 方法的顺序</dd> <dt> <code>"split-cdata-sections"</code> </。
+     * <dd>
+     * <dl>
+     * <dt>
+     * <code> true </code> </em> <em> </em>(<em> </em>)</em>分割CDATA区段包含CDATA区段终止符号']]&gt;当CDATA段被拆分时,发出一个警告,
+     * 其中<code> DOMErrortype </code>等于<code>"cdata-sections-splitted"</code>和<code> DOMErrorrelatedData </code>
+     * 代码> CDATASection </code>节点在分割</dd>中生成的文档顺序。
+     * <dt>
+     *  <code> false </code> </dt> </em>如果<code> CDATASection </code>包含不​​可表示的字符, </dd> <dt> <code>"validate
+     * "</code> </dt>。
+     * <dd>
+     * <dl>
+     * <dt> <code> true </code> </dt> <dd> [<em>可选</em>]需要对模式(即XML模式,DTD,任何其他类型或模式表示)该文档按[<a href='http://wwww3org/TR/2004/REC-xml-20040204'>
+     *  XML 10 </a>]定义进行规范化。
+     * 如果发现验证错误,或者没有模式发现,错误处理程序被通知除非参数"datatype-normalization"是<code> true </code>,此模式标准化值将不会根据使用的模式公开此参数将重新
+     * 评估：。
+     * <ul>
+     *  <li>属性节点<code> Attrspecified </code>等于<code> Attr </code>接口的说明中规定的<code> false </code>
+     * </li>
+     * <li>所有<code> Text </code>节点的属性<code> TextisElementContentWhitespace </code>的值;
+     * </li>
+     *  <li>所有<code> Attr </code>节点的属性<code> AttrisId </code>的值;
+     * </li>
+     *  <li>属性<code> ElementschemaTypeInfo </code>和<code> AttrschemaTypeInfo </code>
+     * </li>
+     * </ul>
+     * <p> <b>注意：</b>"validate-if-schema"和"validate"是互斥的,将其中一个设置为<code> true </code>会将另一个设置为<code> false </code>
+     * 应用程序还应考虑在验证文档时将"well-formed"参数设置为<code> true </code>(该选项的默认值)</dd> <dt> <code> false < / code> </em>]
+     *  <em> <em> </em> <em> </em>不需要完成模式处理,包括内部子集处理。
+     * 
      * @param name The name of the parameter to set.
      * @param value  The new value or <code>null</code> if the user wishes to
      *   unset the parameter. While the type of the value parameter is
@@ -408,6 +563,32 @@ public interface DOMConfiguration {
 
     /**
      *  Return the value of a parameter if known.
+     * <p>
+     * 如果"validate-if-schema"是<code> true </code> </dd> </dl> </dd> <dt> <code>"validate-if-schema"</code> /
+     *  dt>。
+     * <dd>
+     * <dl>
+     * <dt> <code> true </code> </dt> <dd> [<em>可选</em>]只有在文档元素的声明可以在模式中找到如果启用了验证,此参数的行为与参数"validate"设置为<code>
+     *  true </code> <p> <b>的行为相同。
+     * 注意：</b>"validate-if-schema"和"validate"是互斥的,将其中一个设置为<code> true </code>会将另一个设置为<code> false </code> dd
+     * > <dt> <code> false </code> </dt> </em>(<em>默认</em>包括内部子集处理的模式保留默认属性值信息注意,如果"validate"是<code> true </code>
+     *  </dd> </dl> </dd> <dt> <code>"格式正确的"</code>。
+     * <dd>
+     * <dl>
+     * <dt> <code> true </code> </em> </em>(<em>默认</em>)检查所有节点是否根据XML版本在<code> DocumentxmlVersion </code>中使用
+     * ：。
+     * <ul>
+     *  <li>检查属性<code> NodenodeName </code>是否包含根据其节点类型的无效字符,并生成<code> <code>类型的<code> DOMError </code>"wf-in
+     * valid-character-in-node- name"</code>,如果需要,可以使用<code> DOMErrorSEVERITY_ERROR </code>严重性;。
+     * </li>
+     *  <li>检查<code> Attr </code>,<code> Element </code>,<code> Comment </code>,<code> Text </code>,<code> C
+     * DATASection < / code>节点生成无效字符,并生成<code>"wf-invalid-character"</code>类型的<code> DOMError </code>,如果必要,使
+     * 用<code> DOMErrorSEVERITY_ERROR </code>。
+     * </li>
+     * <li>检查<code> ProcessingInstruction </code>节点中无效字符的数据,并生成<code>"wf-invalid-character"</code>类型的<code> 
+     * DOMError </code> <code> DOMErrorSEVERITY_ERROR </code>严重性;。
+     * </li>
+     * 
      * @param name  The name of the parameter.
      * @return  The current object associated with the specified parameter or
      *   <code>null</code> if no object has been associated or if the
@@ -420,6 +601,19 @@ public interface DOMConfiguration {
 
     /**
      * Check if setting a parameter to a specific value is supported.
+     * <p>
+     *  </ul> </dd>
+     * <dt>
+     *  <code> false </code> </dt> </em>不检查XML格式</dd> </dl>
+     * </dl>
+     * <p>与实体相关联的系统标识符的分辨率使用<code> DocumentdocumentURI </code>来完成。
+     * 但是,当在[<a href ='http：// wwww3org / TR / 2004 / REC DOM实现中支持"DOM Level 3-LS-20040407'> DOM Level 3 Loa
+     * d and Save </a>],参数"resource-resolver"也可以在<code> DOMConfiguration </code>对象附加到<code> Document </code>
+     * 节点如果设置此参数,<code> DocumentnormalizeDocument()</code>将调用资源解析器,而不是使用<code> DocumentdocumentURI </code> <p>
+     *  <a href='http://wwww3org/TR/2004/REC-DOM-Level-3-Core-20040407'>文档对象模型(DOM)3级核心规范</a>。
+     * <p>与实体相关联的系统标识符的分辨率使用<code> DocumentdocumentURI </code>来完成。
+     * 
+     * 
      * @param name The name of the parameter to check.
      * @param value  An object. if <code>null</code>, the returned value is
      *   <code>true</code>.
@@ -436,6 +630,9 @@ public interface DOMConfiguration {
      * <code>DOMConfiguration</code> object and for which at least one value
      * can be set by the application. Note that this list can also contain
      * parameter names defined outside this specification.
+     * <p>
+     *  设置参数的值
+     * 
      */
     public DOMStringList getParameterNames();
 

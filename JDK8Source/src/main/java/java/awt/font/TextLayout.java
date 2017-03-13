@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -36,6 +37,13 @@
  * This notice and attribution to Taligent may not be removed.
  * Taligent is a registered trademark of Taligent, Inc.
  *
+ * <p>
+ *  (C)版权所有Taligent,Inc 1996  -  1997,保留所有权利(C)版权所有IBM Corp 1996-2003,保留所有权利
+ * 
+ *  此源代码和文档的原始版本受版权保护,并由Taligent,Inc(IBM的全资子公司)拥有。这些资料根据Taligent与Sun之间的许可协议的条款提供此技术受多项美国和国际专利保护
+ * 
+ *  本通知和Taligent的归属不得删除Taligent是Taligent,Inc的注册商标
+ * 
  */
 
 package java.awt.font;
@@ -231,6 +239,77 @@ import sun.text.CodePointIterator;
  * measurement-related APIs are in baseline-relative coordinates,
  * while display-related APIs are in standard coordinates.
  *
+ * <p>
+ *  <code> TextLayout </code>是样式字符数据的不可变图形表示
+ * <p>
+ * 它提供以下功能：
+ * <ul>
+ *  <li>隐式双向分析和重新排序,<li>光标定位和移动,包括混合方向文本的分割游标,<li>突出显示,包括混合方向文本的逻辑和视觉突出显示< ,中心),<li>点击测试,<li>对齐,<li>默认字体
+ * 替换,<li>指标信息,例如上升,下降和提前,<li>渲染。
+ * </ul>
+ * <p>
+ *  可以使用<code> draw </code>方法呈现<code> TextLayout </code>对象
+ * <p>
+ * <code> TextLayout </code>可以直接构造,也可以通过使用{@link LineBreakMeasurer}构造。
+ * 当直接构造时,源文本代表一个段落<code> LineBreakMeasurer </code>允许将样式文本分成适合特定宽度的线条有关详细信息,请参阅<code> LineBreakMeasurer 
+ * </code>文档。
+ * <code> TextLayout </code>可以直接构造,也可以通过使用{@link LineBreakMeasurer}构造。
+ * <p>
+ *  <code> TextLayout </code>结构逻辑上进行如下：
+ * <ul>
+ * <li>提取和检查段落属性,<li>分析文本以进行双向重新排序,如果需要,计算重新排序信息,<li>将文本分段为样式运行<li>首先通过使用样式运行选择字体如果存在属性{@link TextAttribute#FONT}
+ * ,则使用已定义的属性计算默认字体;如果文本在多个基线上,则运行或子臂进一步分为子臂,共享公共基线,<li>使用所选字体为每次运行生成glyphvectors,<li>对glyphvectors执行最终双
+ * 向重新排序。
+ * </ul>
+ * <p>
+ * 从<code> TextLayout </code>对象的方法返回的所有图形信息都是相对于<code> TextLayout </code>的原点,它是<code> TextLayout </code>
+ * 对象的基线与左边缘此外,传递到<code> TextLayout </code>对象的方法中的坐标被认为是相对于<code> TextLayout </code>对象的原点客户端通常需要在<code> 
+ * TextLayout </code>对象的坐标系统和另一个对象(例如{@link javaawtGraphics Graphics}对象)中的坐标系统,。
+ * <p>
+ * <code> TextLayout </code>对象是从样式文本构造的,但它们不保留对其源文本的引用。
+ * 因此,以前用于生成<code> TextLayout </code>的文本中的更改不会影响<代码> TextLayout </code>。
+ * <p>
+ * <code> TextLayout </code>对象(<code> getNextRightHit </code>,<code> getNextLeftHit </code>和<code> hitTe
+ * stChar </code>)中的三个方法返回{@link TextHitInfo}这些<code> TextHitInfo </code>对象中包含的偏移量相对于<code> TextLayout </code>
+ * 的开始,<b>不是</b>到用来创建<code> TextLayout < / code>类似地,接受<code> TextHitInfo </code>实例作为参数的<code> TextLayout
+ *  </code>方法期望<code> TextHitInfo </code>对象的偏移量相对于<code> TextLayout <代码>,而不是任何基础文本存储模型。
+ * <p>
+ * <strong>示例</strong>：<p>构造并绘制<code> TextLayout </code>及其边框矩形：<blockquote> <pre> Graphics2D g = Point2D
+ *  loc =; Font font = FontgetFont("Helvetica-bold-italic"); FontRenderContext frc = ggetFontRenderConte
+ * xt(); TextLayout layout = new TextLayout("This is a string",font,frc); layoutdraw(g,(float)locgetX(),
+ * (float)locgetY());。
+ * 
+ *  Rectangle2D bounds = layoutgetBounds(); boundsetRect(boundsgetX()+ locgetX(),boundsgetY()+ locgetY()
+ * ,boundsgetWidth(),boundsgetHeight()); gdraw(bounds);。
+ * </pre>
+ * </blockquote>
+ * <p>
+ * 点击测试<code> TextLayout </code>(确定哪个字符在特定图形位置)：<blockquote> <pre> Point2D click =; TextHitInfo hit = la
+ * youthitTestChar((float)(clickgetX() -  locgetX()),(float)(clickgetY() -  locgetY()));。
+ * </pre>
+ * </blockquote>
+ * <p>
+ *  响应右箭头键：<blockquote> <pre> int insertionIndex =; TextHitInfo next = layoutgetNextRightHit(insertionIn
+ * dex); if(next！= null){//将图形转换为屏幕上布局的原点gtranslate(locgetX(),locgetY()); Shape [] carets = layoutgetCaretShapes(nextgetInsertionIndex()); gdraw(carets [0]); if(carets [1]！= null){gdraw(carets [1]); }
+ * } </pre> </blockquote>。
+ * <p>
+ * 在源文本中绘制对应于子字符串的选择范围所选区域可能在视觉上不连续：<blockquote> <pre> // selStart,selLimit应该相对于布局,//不是源文本
+ * 
+ *  int selStart =,selLimit =;颜色selectionColor =;形状选择= layoutgetLogicalHighlightShape(selStart,selLimit)
+ * ; //选择可以包括不相交的区域//图形被假定为被转换到布局gsetColor(selectionColor)的原点; gfill(selection); </pre> </blockquote>。
+ * <p>
+ * 绘制视觉上连续的选择范围选择范围可以对应于源文本中的多于一个子串可以使用<code> getLogicalRangesForVisualSelection()</code>来获得相应源文本子串的范围：<blockquote>
+ *  <pre> TextHitInfo selStart =,selLimit =; Shape selection = layoutgetVisualHighlightShape(selStart,se
+ * lLimit); gsetColor(selectionColor); gfill(selection); int [] ranges = getLogicalRangesForVisualSelect
+ * ion(selStart,selLimit); // ranges [0],ranges [1]是第一个选择范围,// ranges [2],ranges [3]是第二个选择范围,等等</pre> </blockquote>
+ * 。
+ * <p>
+ * 注意：字体旋转可能会导致文本基线被旋转,并且具有不同旋转的多个运行可能导致基线弯曲或曲折为了解决这种(罕见的)可能性,指定一些API返回指标,在基线相对坐标中的值(例如,上升,提前),并且其他在"在标准
+ * 坐标"(例如,getBounds)中。
+ * 基线相对坐标中的值将"x"坐标映射到沿着基线的距离沿着基线),以及"y"坐标到在"x"处沿基线的垂线的距离(正y是从基线向量顺时针旋转90度)。
+ * 沿着x和y轴测量标准坐标中的值,其中0,0在TextLayout的原点每个相关API的文档指示什么值在什么坐标系中。一般来说,与测量相关的API在基线相对坐标中,而与显示相关的API在标准坐标中。
+ * 
+ * 
  * @see LineBreakMeasurer
  * @see TextAttribute
  * @see TextHitInfo
@@ -254,6 +333,9 @@ public final class TextLayout implements Cloneable {
      * TextLayouts are supposedly immutable.  If you mutate a TextLayout under
      * the covers (like the justification code does) you'll need to set this
      * back to false.  Could be replaced with textLine != null <--> cacheIsValid.
+     * <p>
+     * TextLayouts被认为是不可变的如果你改变一个TextLayout在覆盖下(像对齐代码),你需要将其设置为false可以替换为textLine！= null < - > cacheIsValid。
+     * 
      */
     private boolean cacheIsValid = false;
 
@@ -282,18 +364,27 @@ public final class TextLayout implements Cloneable {
     /*
      * Natural bounds is used internally.  It is built on demand in
      * getNaturalBounds.
+     * <p>
+     *  自然界在内部使用它是建立在getNaturalBounds的需求
+     * 
      */
     private Rectangle2D naturalBounds = null;
 
     /*
      * boundsRect encloses all of the bits this TextLayout can draw.  It
      * is build on demand in getBounds.
+     * <p>
+     *  boundsRect包含这个TextLayout可以绘制的所有位它是根据需求在getBounds中构建的
+     * 
      */
     private Rectangle2D boundsRect = null;
 
     /*
      * flag to supress/allow carets inside of ligatures when hit testing or
      * arrow-keying
+     * <p>
+     *  标志以在命中测试或箭头键时抑制/允许连字内的插入符号
+     * 
      */
     private boolean caretsInLigaturesAreAllowed = false;
 
@@ -313,11 +404,25 @@ public final class TextLayout implements Cloneable {
      * one of them as the strong caret.
      * <p>
      * Most clients do not need to use this class.
+     * <p>
+     * 定义用于确定强插入符位置的策略此类包含一个方法<code> getStrongCaret </code>,用于指定确定双插入符文本中的强插入符的策略。
+     * 强插入符用于移动插入符到左边或右边这个类的实例可以传递到<code> getCaretShapes </code>,<code> getNextLeftHit </code>和<code> getNex
+     * tRightHit </code>。
+     * 定义用于确定强插入符位置的策略此类包含一个方法<code> getStrongCaret </code>,用于指定确定双插入符文本中的强插入符的策略。
+     * <p>
+     *  要指定替换插入符策略,子类<code> CaretPolicy </code>并覆盖<code> getStrongCaret </code> <code> getStrongCaret </code>
+     * 应检查两个<code> TextHitInfo </code>他们作为强的插入符号。
+     * <p>
+     *  大多数客户端不需要使用这个类
+     * 
      */
     public static class CaretPolicy {
 
         /**
          * Constructs a <code>CaretPolicy</code>.
+         * <p>
+         *  构造一个<code> CaretPolicy </code>
+         * 
          */
          public CaretPolicy() {
          }
@@ -325,6 +430,10 @@ public final class TextLayout implements Cloneable {
         /**
          * Chooses one of the specified <code>TextHitInfo</code> instances as
          * a strong caret in the specified <code>TextLayout</code>.
+         * <p>
+         * 选择指定的<code> TextHitInfo </code>实例之一作为指定的<code> TextLayout </code>中的强脱字符
+         * 
+         * 
          * @param hit1 a valid hit in <code>layout</code>
          * @param hit2 a valid hit in <code>layout</code>
          * @param layout the <code>TextLayout</code> in which
@@ -349,6 +458,10 @@ public final class TextLayout implements Cloneable {
      * counterdirectional character.  If the characters' directions are
      * the same, a hit on the leading edge of a character is stronger
      * than a hit on the trailing edge of a character.
+     * <p>
+     *  当客户端没有指定策略时,使用此<code> CaretPolicy </code>使用此策略,对与方向与行方向相同的字符的命中比对反向字符的命中更强如果字符'方向相同,在字符的前边缘上的命中比在字符的
+     * 后边缘上的命中更强。
+     * 
      */
     public static final CaretPolicy DEFAULT_CARET_POLICY = new CaretPolicy();
 
@@ -360,6 +473,12 @@ public final class TextLayout implements Cloneable {
      * The <code>String</code> must specify a single paragraph of text,
      * because an entire paragraph is required for the bidirectional
      * algorithm.
+     * <p>
+     *  从<code> String </code>和{@link Font}构造<code> TextLayout </code>所有文本都使用指定的<code> Font </code>
+     * <p>
+     *  <code> String </code>必须指定文本的单个段落,因为双向算法需要整个段落
+     * 
+     * 
      * @param string the text to display
      * @param font a <code>Font</code> used to style the text
      * @param frc contains information about a graphics device which is needed
@@ -408,6 +527,14 @@ public final class TextLayout implements Cloneable {
      * <p>
      * <code>string</code> must specify a single paragraph of text because an
      * entire paragraph is required for the bidirectional algorithm.
+     * <p>
+     * 从<code> String </code>和属性集构造<code> TextLayout </code>
+     * <p>
+     *  所有文本都使用提供的属性设置样式
+     * <p>
+     *  <code> string </code>必须指定单个文本段落,因为双向算法需要整个段落
+     * 
+     * 
      * @param string the text to display
      * @param attributes the attributes used to style the text
      * @param frc contains information about a graphics device which is needed
@@ -448,6 +575,9 @@ public final class TextLayout implements Cloneable {
      * attributes specify a font, assume it can display all the text without
      * checking.
      * If the AttributeSet contains an embedded graphic, return null.
+     * <p>
+     *  确定属性的字体,如果单个字体可以渲染一个基线上的所有文本,则返回它,否则为null如果属性指定字体,则假定它可以显示所有文本,而不检查如果AttributeSet包含嵌入图形,返回null
+     * 
      */
     private static Font singleFont(char[] text,
                                    int start,
@@ -493,6 +623,12 @@ public final class TextLayout implements Cloneable {
      * The iterator must specify a single paragraph of text because an
      * entire paragraph is required for the bidirectional
      * algorithm.
+     * <p>
+     *  在迭代器的样式文本上构造一个<code> TextLayout </code>
+     * <p>
+     *  迭代器必须指定单个文本段落,因为双向算法需要整个段落
+     * 
+     * 
      * @param text the styled text to display
      * @param frc contains information about a graphics device which is needed
      *       to measure the text correctly.
@@ -541,6 +677,10 @@ public final class TextLayout implements Cloneable {
     /**
      * Creates a <code>TextLayout</code> from a {@link TextLine} and
      * some paragraph data.  This method is used by {@link TextMeasurer}.
+     * <p>
+     * 从{@link TextLine}和一些段落数据创建<code> TextLayout </code>此方法由{@link TextMeasurer}
+     * 
+     * 
      * @param textLine the line measurement attributes to apply to the
      *       the resulting <code>TextLayout</code>
      * @param baseline the baseline of the text
@@ -564,6 +704,9 @@ public final class TextLayout implements Cloneable {
 
     /**
      * Initialize the paragraph-specific data.
+     * <p>
+     *  初始化段落特定的数据
+     * 
      */
     private void paragraphInit(byte aBaseline, CoreMetrics lm,
                                Map<? extends Attribute, ?> paragraphAttrs,
@@ -586,6 +729,9 @@ public final class TextLayout implements Cloneable {
      * all one style
      * all renderable by one font (ie no embedded graphics)
      * all on one baseline
+     * <p>
+     *  快速初始化生成单个字形集这需要：所有一个样式都可以由一个字体(即没有嵌入图形)全部在一个基线上呈现
+     * 
      */
     private void fastInit(char[] chars, Font font,
                           Map<? extends Attribute, ?> attrs,
@@ -615,6 +761,10 @@ public final class TextLayout implements Cloneable {
     /*
      * the standard init generates multiple glyph sets based on style,
      * renderable, and baseline runs.
+     * <p>
+     *  标准init基于样式,可呈现和基线运行生成多个字形集
+     * 
+     * 
      * @param chars the text in the iterator, extracted into a char array
      */
     private void standardInit(AttributedCharacterIterator text, char[] chars, FontRenderContext frc) {
@@ -658,6 +808,9 @@ public final class TextLayout implements Cloneable {
      * A utility to rebuild the ascent/descent/leading/advance cache.
      * You'll need to call this if you clone and mutate (like justification,
      * editing methods do)
+     * <p>
+     *  重建上升/下降/前进/提前缓存的实用程序如果您克隆和变异(如调整,编辑方法),您将需要调用此方法,
+     * 
      */
     private void ensureCache() {
         if (!cacheIsValid) {
@@ -731,6 +884,9 @@ public final class TextLayout implements Cloneable {
     /**
      * The 'natural bounds' encloses all the carets the layout can draw.
      *
+     * <p>
+     *  "自然边界"包含布局可以绘制的所有插入符号
+     * 
      */
     private Rectangle2D getNaturalBounds() {
         ensureCache();
@@ -744,6 +900,9 @@ public final class TextLayout implements Cloneable {
 
     /**
      * Creates a copy of this <code>TextLayout</code>.
+     * <p>
+     *  创建此<code> TextLayout </code>的副本
+     * 
      */
     protected Object clone() {
         /*
@@ -757,6 +916,11 @@ public final class TextLayout implements Cloneable {
          * glyphvectors, so will the new ones.  A partial solution is to set the
          * prototypical GlyphIterator to null when the glyphvectors change.  If
          * you forget this one time, you're hosed.
+         * <p>
+         * 谢谢！我认为这是安全的一旦创建,没有突变的glyphvectors或数组但我们需要确保{jbr}实际上,这不是真的克隆代码mutated后克隆它实际上不改变glyphvectors(这是不可能的),但它
+         * 取代他们与合理的集合这是一个问题的GlyphIterator创建,因为新的GlyphIterator是通过克隆原型创建的如果原型有过时的glyphvectors,那么新的一部分解决方案是设置原型Glyp
+         * hIterator为null当glyphvectors改变时如果你忘记这一次,你是爱的。
+         * 
          */
         try {
             return super.clone();
@@ -769,6 +933,9 @@ public final class TextLayout implements Cloneable {
     /*
      * Utility to throw an expection if an invalid TextHitInfo is passed
      * as a parameter.  Avoids code duplication.
+     * <p>
+     *  用于在无效的TextHitInfo作为参数传递时抛出异常的实用程序避免代码重复
+     * 
      */
     private void checkTextHit(TextHitInfo hit) {
         if (hit == null) {
@@ -789,6 +956,13 @@ public final class TextLayout implements Cloneable {
      * exception is thrown.  If this <code>TextLayout</code> object's
      * justification ratio is zero, a <code>TextLayout</code> identical
      * to this <code>TextLayout</code> is returned.
+     * <p>
+     * 创建<code> TextLayout </code>的对齐到指定宽度的副本
+     * <p>
+     *  如果这个<code> TextLayout </code>已经被调整,抛出一个异常如果这个<code> TextLayout </code>对象的调整比例是零,一个<code> TextLayout 
+     * </code> TextLayout </code>。
+     * 
+     * 
      * @param justificationWidth the width to use when justifying the line.
      * For best results, it should not be too different from the current
      * advance of the line.
@@ -838,6 +1012,14 @@ public final class TextLayout implements Cloneable {
      * will call this method on a clone of this layout, preserving
      * the original.
      *
+     * <p>
+     *  调整此布局通过子类来覆盖以控制对齐(如果有子类,那是)
+     * 
+     * 布局只会证明段落属性(从源文本,可能由布局属性默认)指示非零对齐比率文本将被对齐到指示的宽度。当前实现还调整悬挂标点符号和尾部空格悬停对齐宽度一旦对齐,布局可能不会重新调整
+     * <p>
+     *  一些代码可能依赖于布局的不可变子类别不应该直接调用它,而是应该调用getJustifiedLayout,它将在此布局的克隆上调用此方法,保留原始
+     * 
+     * 
      * @param justificationWidth the width to use when justifying the line.
      * For best results, it should not be too different from the current
      * advance of the line.
@@ -854,6 +1036,11 @@ public final class TextLayout implements Cloneable {
      * which are roman, centered and hanging.  Ascent and descent are
      * relative to this baseline.  The <code>baselineOffsets</code>
      * are also relative to this baseline.
+     * <p>
+     * 返回此<code> TextLayout </code>的基线。基线是<code> Font </code>中定义的值之一,它们是罗马语,居中和垂直的。
+     * 上升和下降是相对于此基线的<code> baselineOffsets </code>也相对于此基线。
+     * 
+     * 
      * @return the baseline of this <code>TextLayout</code>.
      * @see #getBaselineOffsets()
      * @see Font
@@ -872,6 +1059,15 @@ public final class TextLayout implements Cloneable {
      * baseline, so that <code>getBaselineOffsets[getBaseline()] == 0</code>.
      * Offsets are added to the position of the <code>TextLayout</code>
      * object's baseline to get the position for the new baseline.
+     * <p>
+     *  返回用于此<code> TextLayout </code>的基线的offsets数组
+     * <p>
+     *  数组由<code> Font </code>中定义的值之一索引,这些值是罗马,居中和悬挂的。
+     * 这些值是相对于这个<code> TextLayout </code>对象的基线,所以<code> getBaselineOffsets [getBaseline()] == 0 </code>偏移被添加
+     * 到<code> TextLayout </code>对象的基线的位置,以获得新基线的位置。
+     *  数组由<code> Font </code>中定义的值之一索引,这些值是罗马,居中和悬挂的。
+     * 
+     * 
      * @return the offsets array containing the baselines used for this
      *    <code>TextLayout</code>.
      * @see #getBaseline()
@@ -888,6 +1084,10 @@ public final class TextLayout implements Cloneable {
      * The advance is the distance from the origin to the advance of the
      * rightmost (bottommost) character.  This is in baseline-relative
      * coordinates.
+     * <p>
+     * 返回<code> TextLayout </code>的提前。advance是从原点到最右边(最底部)字符的前进距离。这是基线相对坐标
+     * 
+     * 
      * @return the advance of this <code>TextLayout</code>.
      */
     public float getAdvance() {
@@ -898,6 +1098,10 @@ public final class TextLayout implements Cloneable {
     /**
      * Returns the advance of this <code>TextLayout</code>, minus trailing
      * whitespace.  This is in baseline-relative coordinates.
+     * <p>
+     *  返回这个<code> TextLayout </code>的前进,减去尾部空格这是在基线相对坐标中
+     * 
+     * 
      * @return the advance of this <code>TextLayout</code> without the
      *      trailing whitespace.
      * @see #getAdvance()
@@ -916,6 +1120,11 @@ public final class TextLayout implements Cloneable {
      * ascent, offset, and baseline of each glyph.  The ascent is
      * the maximum ascent from the baseline of all the text in the
      * TextLayout.  It is in baseline-relative coordinates.
+     * <p>
+     *  返回这个<code> TextLayout </code>的上升Ascent是从<code> TextLayout </code>的顶部(右)到基线的距离。它总是为正或零。
+     * 上升足以容纳上标文本,并且是每个字形的上升,偏移和基线的总和的上限上升是从TextLayout中的所有文本的基线的最大上升它是在基线相对坐标。
+     * 
+     * 
      * @return the ascent of this <code>TextLayout</code>.
      */
     public float getAscent() {
@@ -931,6 +1140,13 @@ public final class TextLayout implements Cloneable {
      * maximum of the sum of the descent, offset, and baseline of each glyph.
      * This is the maximum descent from the baseline of all the text in
      * the TextLayout.  It is in baseline-relative coordinates.
+     * <p>
+     * 返回此<code> TextLayout </code>的下降。
+     * 下降是从基线到<code> TextLayout </code>底部的距离(左)它总是正或零下降足以容纳下标文本,并且是每个字形的下降,偏移和基线的总和的最大值这是从TextLayout中的所有文本的基
+     * 线的最大下降它是在基线相对坐标。
+     * 返回此<code> TextLayout </code>的下降。
+     * 
+     * 
      * @return the descent of this <code>TextLayout</code>.
      */
     public float getDescent() {
@@ -957,6 +1173,15 @@ public final class TextLayout implements Cloneable {
      * }
      * return maxDL - maxD;
      * </pre></blockquote>
+     * <p>
+     *  返回<code> TextLayout </code>的前导。前导是此<code> TextLayout </code>的建议行间距。这是基线相对坐标
+     * <p>
+     * 前导是从<code> TextLayout </code>中所有glyphvectors的前导,下降和基线计算的。
+     * 该算法大致如下：<blockquote> <pre> maxD = 0; maxDL = 0; for(GlyphVector g in all glyphvectors){maxD = max(maxD,ggetDescent()+ offsets [ggetBaseline()]); maxDL = max(maxDL,ggetDescent()+ ggetLeading()+ offsets [ggetBaseline()]); }
+     *  return maxDL  -  maxD; </pre> </blockquote>。
+     * 前导是从<code> TextLayout </code>中所有glyphvectors的前导,下降和基线计算的。
+     * 
+     * 
      * @return the leading of this <code>TextLayout</code>.
      */
     public float getLeading() {
@@ -971,6 +1196,11 @@ public final class TextLayout implements Cloneable {
      * pixels rendered by the TextLayout.</p>
      * It might not coincide exactly with the ascent, descent,
      * origin or advance of the <code>TextLayout</code>.
+     * <p>
+     *  返回此<code> TextLayout </code>的边界。边界在标准坐标中<p>由于光栅化效果,此边界可能不会包含由TextLayout </p>呈现的所有像素。
+     * 它可能不完全与TextLayout </code>的上升,下降,起点或前进。
+     * 
+     * 
      * @return a {@link Rectangle2D} that is the bounds of this
      *        <code>TextLayout</code>.
      */
@@ -1003,6 +1233,12 @@ public final class TextLayout implements Cloneable {
      * <code>TextLayout</code>, and can be null.  If it is null, the
      * <code>FontRenderContext</code> of this <code>TextLayout</code>
      * is used.
+     * <p>
+     * 当在给定位置以给定<code> FontRenderContext </code>的图形呈现时,返回此<code> TextLayout </code>的像素边界图形呈现上下文不需要与<code> Fo
+     * ntRenderContext < / code>用于创建此<code> TextLayout </code>,并且可以为null如果为null,则使用此<code> TextLayout </code>
+     * 的<code> FontRenderContext </code>。
+     * 
+     * 
      * @param frc the <code>FontRenderContext</code> of the <code>Graphics</code>.
      * @param x the x-coordinate at which to render this <code>TextLayout</code>.
      * @param y the y-coordinate at which to render this <code>TextLayout</code>.
@@ -1026,6 +1262,13 @@ public final class TextLayout implements Cloneable {
      * tabs run left to right, so that logically successive layouts position
      * left to right.  The opposite is true for RTL layouts. By default they
      * should position flush left, and tabs run right-to-left.
+     * <p>
+     * 如果此<code> TextLayout </code>具有从左到右的基本方向,则返回<code> true </code>,如果它具有从右到左的基本方向,则返回<code> true </code>代
+     * 码> TextLayout </code>具有从左到右(LTR)或从右到左(RTL)的基本方向。
+     * 基本方向与行上文本的实际方向无关,可以是LTR ,RTL或混合从左到右布局默认情况下应该位置向左如果布局在选项卡行上,选项卡从左到右运行,使逻辑上连续的布局位置从左到右相反是真实的RTL布局通过默认情况
+     * 下它们应该左对齐,选项卡从右到左。
+     * 
+     * 
      * @return <code>true</code> if the base direction of this
      *         <code>TextLayout</code> is left-to-right; <code>false</code>
      *         otherwise.
@@ -1036,6 +1279,10 @@ public final class TextLayout implements Cloneable {
 
     /**
      * Returns <code>true</code> if this <code>TextLayout</code> is vertical.
+     * <p>
+     *  如果此<code> TextLayout </code>是垂直的,则返回<code> true </code>
+     * 
+     * 
      * @return <code>true</code> if this <code>TextLayout</code> is vertical;
      *      <code>false</code> otherwise.
      */
@@ -1046,6 +1293,10 @@ public final class TextLayout implements Cloneable {
     /**
      * Returns the number of characters represented by this
      * <code>TextLayout</code>.
+     * <p>
+     * 返回由此<code> TextLayout </code>表示的字符数
+     * 
+     * 
      * @return the number of characters in this <code>TextLayout</code>.
      */
     public int getCharacterCount() {
@@ -1120,6 +1371,40 @@ public final class TextLayout implements Cloneable {
      * can call getVisualOtherHit();  if the visual companion is
      * (-1, TRAILING) or (characterCount, LEADING), then the hit is at the
      * first (last) caret position in the layout.
+     * <p>
+     *  脱模和打击测试
+     * 
+     *  文本行上的位置由TextHitInfo的实例表示任何具有characterOffset(介于0和characterCount-1之间)的TextHitInfo表示行上的有效位置。
+     * 此外,[-1,尾随]和[characterCount,leading]分别表示在该行的逻辑开始和结束处的位置。
+     * 
+     *  由TextLayout使用和返回的TextHitInfo中的characterOffset是相对于文本布局的开始,而不一定是客户端正在使用的文本存储的开头
+     * 
+     * 每个有效的TextHitInfo都有一个或两个插入符与它相关联。插入符是TextLayout中的一个可视位置,指示TextHitInfo上的文本在屏幕上的显示位置。
+     * 如果TextHitInfo表示方向边界上的位置,则有两个可能的可见位置对于新插入的文本请考虑以下示例,其中大写字母表示从右到左的文本,整个行方向为从左到右：。
+     * 
+     *  文本存储：[a,b,C,D,E,f]显示：a b E D C f
+     * 
+     *  文本命中信息(1,t)表示'b'的尾侧如果"q",从左到右字符插入到该位置的文本存储器中,它将显示在'b'和'E'：
+     * 
+     *  文本存储：[a,b,q,C,D,E,f]显示：a b q E D C f
+     * 
+     * 然而,如果从右到左的"W"被插入到'b'之后的存储器中,存储和显示将是：
+     * 
+     *  文本存储：[a,b,W,C,D,E,f]显示：a b E D C W f
+     * 
+     *  因此,对于原始文本存储,应该为位置(1,t)显示两个插入符号：一个在视觉上在'b'和'E'之间,一个视觉上在'C'和'f'
+     * 
+     *  当为TextHitInfo显示两个插入符号时,一个插入符号是"强"插入符号,另一个是"弱"插入符号。
+     * 当插入字符的方向与TextLayout的方向相同时,插入符号将显示在哪里当字符的方向与TextLayout的方向相反时,弱插入符显示字符插入字符的显示位置。
+     * 
+     * 客户端不应该过分关注正确插入符号显示的细节TextLayoutgetCaretShapes(TextHitInfo)将返回一个两个路径的数组,表示应当显示插入符号数组中的第一个路径是强插入符号;第二个元
+     * 素,如果非空,是弱插入符号如果第二个元素为null,那么对于给定的TextHitInfo没有弱插入符号。
+     * 
+     * 因为文本可以在视觉上重新排序,逻辑上连续的TextHitInfo可能不是视觉上连续的。
+     * 这意味着客户端不能通过检查TextHitInfo告诉该命中是否表示布局中的第一个(或最后一个)插入符客户端可以调用getVisualOtherHit();如果可视伴随是(-1,TRAILING)或(ch
+     * aracterCount,LEADING),则命中位于布局中的第一个(最后一个)插入位置。
+     * 因为文本可以在视觉上重新排序,逻辑上连续的TextHitInfo可能不是视觉上连续的。
+     * 
      */
 
     private float[] getCaretInfo(int caret,
@@ -1207,6 +1492,12 @@ public final class TextLayout implements Cloneable {
      * <p>
      * This method is meant for informational use.  To display carets, it
      * is better to use <code>getCaretShapes</code>.
+     * <p>
+     *  返回与<code> hit </code>对应的插入符号的信息数组的第一个元素是插入符与基线的交集,作为沿着基线的距离数组的第二个元素是逆斜率(run /上升),相对于该点的基线测量
+     * <p>
+     * 此方法适用于信息使用要显示插入符号,最好使用<code> getCaretShapes </code>
+     * 
+     * 
      * @param hit a hit on a character in this <code>TextLayout</code>
      * @param bounds the bounds to which the caret info is constructed.
      *     The bounds is in baseline-relative coordinates.
@@ -1313,6 +1604,11 @@ public final class TextLayout implements Cloneable {
      * Returns information about the caret corresponding to <code>hit</code>.
      * This method is a convenience overload of <code>getCaretInfo</code> and
      * uses the natural bounds of this <code>TextLayout</code>.
+     * <p>
+     *  返回有关<code> hit </code>对应的插入符的信息此方法是<code> getCaretInfo </code>的一个方便的重载,并使用此<code> TextLayout </code>
+     * 。
+     * 
+     * 
      * @param hit a hit on a character in this <code>TextLayout</code>
      * @return the information about a caret corresponding to a hit.  The
      *     returned caret info is in baseline-relative coordinates.
@@ -1327,6 +1623,10 @@ public final class TextLayout implements Cloneable {
      * Carets are numbered from left to right (top to bottom) starting from
      * zero. This always places carets next to the character hit, on the
      * indicated side of the character.
+     * <p>
+     *  返回与<code> hit </code>对应的脱字符索引</code>。从零开始,从左到右(从上到下)对光标进行编号。这总是在字符的指示侧将光标放在字符命中的旁边
+     * 
+     * 
      * @param hit a hit on a character in this <code>TextLayout</code>
      * @return a caret index corresponding to the specified hit.
      */
@@ -1353,6 +1653,10 @@ public final class TextLayout implements Cloneable {
      * Given a caret index, return a hit whose caret is at the index.
      * The hit is NOT guaranteed to be strong!!!
      *
+     * <p>
+     *  给定一个插入符索引,返回一个命中的插入符号在索引。命中不保证是强的！
+     * 
+     * 
      * @param caret a caret index.
      * @return a hit on this layout whose strong caret is at the requested
      * index.
@@ -1404,6 +1708,10 @@ public final class TextLayout implements Cloneable {
      * is no such hit, returns <code>null</code>.
      * If the hit character index is out of bounds, an
      * {@link IllegalArgumentException} is thrown.
+     * <p>
+     * 向右(底部)返回下一个插入符的命中;如果没有这样的命中,返回<code> null </code>如果命中字符索引超出边界,则抛出{@link IllegalArgumentException}
+     * 
+     * 
      * @param hit a hit on a character in this layout
      * @return a hit whose caret appears at the next position to the
      * right (bottom) of the caret of the provided hit or <code>null</code>.
@@ -1432,6 +1740,10 @@ public final class TextLayout implements Cloneable {
      * specified policy.
      * The returned hit is the stronger of the two possible
      * hits, as determined by the specified policy.
+     * <p>
+     *  向右(底部)返回下一个插入符的命中;如果没有这样的命中,则返回<code> null </code>命中在指定偏移处的强插入符的右侧,由指定的策略确定返回的命中是两个可能的命中中的更强的,指定的策略。
+     * 
+     * 
      * @param offset an insertion offset in this <code>TextLayout</code>.
      * Cannot be less than 0 or greater than this <code>TextLayout</code>
      * object's character count.
@@ -1470,6 +1782,10 @@ public final class TextLayout implements Cloneable {
      * default policy.
      * The returned hit is the stronger of the two possible
      * hits, as determined by the default policy.
+     * <p>
+     * 向右(底部)返回下一个插入符的命中;如果没有这样的命中,返回<code> null </code>命中位于指定偏移处的强插入符的右侧,由默认策略确定返回的命中是两个可能的命中中更强的,默认策略
+     * 
+     * 
      * @param offset an insertion offset in this <code>TextLayout</code>.
      * Cannot be less than 0 or greater than the <code>TextLayout</code>
      * object's character count.
@@ -1486,6 +1802,11 @@ public final class TextLayout implements Cloneable {
      * hit, returns <code>null</code>.
      * If the hit character index is out of bounds, an
      * <code>IllegalArgumentException</code> is thrown.
+     * <p>
+     *  向左(上)返回下一个插入符的命中;如果没有这样的命中,返回<code> null </code>如果命中字符索引超出边界,则抛出<code> IllegalArgumentException </code>
+     * 。
+     * 
+     * 
      * @param hit a hit on a character in this <code>TextLayout</code>.
      * @return a hit whose caret appears at the next position to the
      * left (top) of the caret of the provided hit, or <code>null</code>.
@@ -1514,6 +1835,10 @@ public final class TextLayout implements Cloneable {
      * specified policy.
      * The returned hit is the stronger of the two possible
      * hits, as determined by the specified policy.
+     * <p>
+     * 向左(上)返回下一个插入符的命中;如果没有这样的命中,则返回<code> null </code>命中在指定偏移处的强插入符的左侧,由指定的策略确定返回的命中是两个可能的命中中更强的,指定的策略
+     * 
+     * 
      * @param offset an insertion offset in this <code>TextLayout</code>.
      * Cannot be less than 0 or greater than this <code>TextLayout</code>
      * object's character count.
@@ -1552,6 +1877,10 @@ public final class TextLayout implements Cloneable {
      * default policy.
      * The returned hit is the stronger of the two possible
      * hits, as determined by the default policy.
+     * <p>
+     *  向左(上)返回下一个插入符的命中;如果没有这样的命中,返回<code> null </code>命中位于指定偏移处的强插入符号的左侧,由默认策略确定返回的命中是两个可能的命中中的更强,默认策略
+     * 
+     * 
      * @param offset an insertion offset in this <code>TextLayout</code>.
      * Cannot be less than 0 or greater than this <code>TextLayout</code>
      * object's character count.
@@ -1565,6 +1894,10 @@ public final class TextLayout implements Cloneable {
 
     /**
      * Returns the hit on the opposite side of the specified hit's caret.
+     * <p>
+     *  返回指定的匹配的插入符号对面的匹配
+     * 
+     * 
      * @param hit the specified hit
      * @return a hit that is on the opposite side of the specified hit's
      *    caret.
@@ -1642,6 +1975,11 @@ public final class TextLayout implements Cloneable {
      * baseline at the caret
      * position, and extending from ascent above the baseline to descent below
      * it.
+     * <p>
+     *  返回对应于插入符x0,y0,x1,y1的端点的四个浮点数组
+     * 
+     * 这将创建一条沿着插入符号斜坡的线,该插入符号在插入符号位置与基线相交,并从基线上方的上升延伸到下方的下降
+     * 
      */
     private double[] getCaretPath(int caret, Rectangle2D bounds,
                                   boolean clipToBounds) {
@@ -1776,6 +2114,10 @@ public final class TextLayout implements Cloneable {
     /**
      * Returns a {@link Shape} representing the caret at the specified
      * hit inside the specified bounds.
+     * <p>
+     *  返回表示指定边界内指定点击处的插入符号的{@link Shape}
+     * 
+     * 
      * @param hit the hit at which to generate the caret
      * @param bounds the bounds of the <code>TextLayout</code> to use
      *    in generating the caret.  The bounds is in baseline-relative
@@ -1797,6 +2139,10 @@ public final class TextLayout implements Cloneable {
     /**
      * Returns a <code>Shape</code> representing the caret at the specified
      * hit inside the natural bounds of this <code>TextLayout</code>.
+     * <p>
+     *  返回一个代表在<code> TextLayout </code>的自然边界内的指定点击处的插入符号的<code> Shape </code>
+     * 
+     * 
      * @param hit the hit at which to generate the caret
      * @return a <code>Shape</code> representing the caret.  The returned
      *     shape is in standard coordinates.
@@ -1810,6 +2156,9 @@ public final class TextLayout implements Cloneable {
      * Return the "stronger" of the TextHitInfos.  The TextHitInfos
      * should be logical or visual counterparts.  They are not
      * checked for validity.
+     * <p>
+     *  返回TextHitInfos的"更强"TextHitInfos应该是逻辑或视觉对应它们不检查有效性
+     * 
      */
     private final TextHitInfo getStrongHit(TextHitInfo hit1, TextHitInfo hit2) {
 
@@ -1840,6 +2189,10 @@ public final class TextLayout implements Cloneable {
      * Returns the level of the character at <code>index</code>.
      * Indices -1 and <code>characterCount</code> are assigned the base
      * level of this <code>TextLayout</code>.
+     * <p>
+     *  返回<code> index </code>索引-1和<code> characterCount </code>的字符等级分配给此<code> TextLayout </code>
+     * 
+     * 
      * @param index the index of the character from which to get the level
      * @return the level of the character at the specified index.
      */
@@ -1860,6 +2213,10 @@ public final class TextLayout implements Cloneable {
 
     /**
      * Returns two paths corresponding to the strong and weak caret.
+     * <p>
+     *  返回对应于强和弱插入符的两个路径
+     * 
+     * 
      * @param offset an offset in this <code>TextLayout</code>
      * @param bounds the bounds to which to extend the carets.  The
      * bounds is in baseline-relative coordinates.
@@ -1922,6 +2279,10 @@ public final class TextLayout implements Cloneable {
      * Returns two paths corresponding to the strong and weak caret.
      * This method is a convenience overload of <code>getCaretShapes</code>
      * that uses the default caret policy.
+     * <p>
+     * 返回对应于强和弱插入符的两个路径此方法是使用默认插入符策略的<code> getCaretShapes </code>的方便重载
+     * 
+     * 
      * @param offset an offset in this <code>TextLayout</code>
      * @param bounds the bounds to which to extend the carets.  This is
      *     in baseline-relative coordinates.
@@ -1939,6 +2300,11 @@ public final class TextLayout implements Cloneable {
      * This method is a convenience overload of <code>getCaretShapes</code>
      * that uses the default caret policy and this <code>TextLayout</code>
      * object's natural bounds.
+     * <p>
+     *  返回对应于强和弱插入符的两个路径此方法是使用默认插入符策略的<code> getCaretShapes </code>的方便重载,并且此<code> TextLayout </code>对象的自然边界
+     * 。
+     * 
+     * 
      * @param offset an offset in this <code>TextLayout</code>
      * @return two paths corresponding to the strong and weak caret as
      *    defined by the <code>DEFAULT_CARET_POLICY</code>.  These are
@@ -2018,6 +2384,9 @@ public final class TextLayout implements Cloneable {
      * A utility to return the path bounding the area to the left (top) of the
      * layout.
      * Shape is never outside of bounds.
+     * <p>
+     *  将布局形状的左侧(顶部)返回到区域边界的路径的实用程序不会超出边界
+     * 
      */
     private GeneralPath leftShape(Rectangle2D bounds) {
 
@@ -2040,6 +2409,9 @@ public final class TextLayout implements Cloneable {
     /*
      * A utility to return the path bounding the area to the right (bottom) of
      * the layout.
+     * <p>
+     *  用于将界定区域的路径返回到布局右侧(底部)的实用程序
+     * 
      */
     private GeneralPath rightShape(Rectangle2D bounds) {
         double[] path1;
@@ -2066,6 +2438,10 @@ public final class TextLayout implements Cloneable {
 
     /**
      * Returns the logical ranges of text corresponding to a visual selection.
+     * <p>
+     *  返回与视觉选择对应的文本的逻辑范围
+     * 
+     * 
      * @param firstEndpoint an endpoint of the visual range
      * @param secondEndpoint the other endpoint of the visual range.
      * This endpoint can be less than <code>firstEndpoint</code>.
@@ -2098,6 +2474,9 @@ public final class TextLayout implements Cloneable {
          * of the selection range walk through runs marking characters that
          * were included in the visual range there is probably a more efficient
          * way to do this, but this ought to work, so hey
+         * <p>
+         * 现在我们有视觉索引的字形在选择范围的开始和限制通过运行标记包含在视觉范围内的字符可能有一个更有效的方式做到这一点,但这应该工作,所以嘿
+         * 
          */
 
         if (startIndex < limitIndex) {
@@ -2111,6 +2490,9 @@ public final class TextLayout implements Cloneable {
         /*
          * count how many runs we have, ought to be one or two, but perhaps
          * things are especially weird
+         * <p>
+         *  计算我们有多少次运行,应该是一两次,但也许事情特别奇怪
+         * 
          */
         int count = 0;
         boolean inrun = false;
@@ -2166,6 +2548,20 @@ public final class TextLayout implements Cloneable {
      * visually contiguous text is logically discontiguous.  Also note that
      * since the rightmost position on the layout (to the right of 'A') is
      * selected, the selection is extended to the right of the bounds.
+     * <p>
+     *  返回在指定范围内包含可视选择的路径,扩展到<code> bounds </code>
+     * <p>
+     *  如果选择包括最左(最高)位置,则选择扩展到<code> bounds的左(上)</code>如果选择包括最右(最低)位置,则选择扩展到右)的边界选择的高度(垂直线上的宽度)总是扩展到<code> bo
+     * unds </code>。
+     * <p>
+     * 虽然选择总是连续的,但逻辑上选择的文本在具有混合方向文本的行上可以是不连续的。
+     * 可以使用<code> getLogicalRangesForVisualSelection </code>来检索所选文本的逻辑范围。
+     * 例如,考虑文本"ABCdef"字母表示从右到左的线上呈现的从左到右的文本,具有从0L('A'的前边缘)到3T('d'的后边缘)的视觉选择。
+     * 文本显示如下,带有加粗下划线的区域表示选择：<br> <pre> d <u> <b> efCBA </b> </u>。
+     * </pre>
+     * 逻辑选择范围是0-3,4-6(ABC,ef),因为视觉上连续的文本在逻辑上是不连续的。还要注意,由于布局上最右边的位置("A"的右边)被选择,所以选择是扩展到边界的右边
+     * 
+     * 
      * @param firstEndpoint one end of the visual selection
      * @param secondEndpoint the other end of the visual selection
      * @param bounds the bounding rectangle to which to extend the selection.
@@ -2222,6 +2618,11 @@ public final class TextLayout implements Cloneable {
      * specified range, extended to the bounds.  This method is a
      * convenience overload of <code>getVisualHighlightShape</code> that
      * uses the natural bounds of this <code>TextLayout</code>.
+     * <p>
+     *  返回一个<code> Shape </code>,在指定范围内包含可视化选择,扩展到bounds这个方法是一个方便的重载<code> getVisualHighlightShape </code>,它
+     * 使用了<code> TextLayout < / code>。
+     * 
+     * 
      * @param firstEndpoint one end of the visual selection
      * @param secondEndpoint the other end of the visual selection
      * @return a <code>Shape</code> enclosing the selection.  This is
@@ -2260,6 +2661,22 @@ public final class TextLayout implements Cloneable {
      * of the <code>bounds</code> before the start of the layout, which in
      * this case (a right-to-left line) is the right portion of the
      * <code>bounds</code>.
+     * <p>
+     *  返回包含指定范围内的逻辑选择的<code> Shape </code>,扩展到指定的<code> bounds </code>
+     * <p>
+     * 如果选择范围包括第一逻辑字符,则在该<code> TextLayout </code>开始之前将选择扩展到<code> bounds </code>的部分。
+     * 如果范围包括最后一个逻辑字符,在<code> TextLayout </code>结束后扩展到<code> bounds </code>的部分。
+     * 选择的高度(垂直线上的宽度)总是扩展到<code> bounds </code>。
+     * <p>
+     * 在具有混合方向文本的行上,选择可以是不连续的只有在开始和限制之间的逻辑范围中的那些字符出现选择例如,考虑文本"ABCdef",其中大写字母表示从右到左文本,左边的行,逻辑选择从0到4('ABCd')文本
+     * 显示如下,用粗体表示选择,并为扩展加下划线：<br> <pre> <u> <b> d </b> ef <u> <b> CBA </b> </u>。
+     * </pre>
+     * 选择是不连续的,因为所选字符在视觉上不连续。
+     * 还要注意,由于范围包括第一个逻辑字符(A),所以选择扩展到布局开始之前的<code> bounds </code>部分,在这种情况下(从右到左的行)是<code> bounds </code>的右边部分
+     * 。
+     * 选择是不连续的,因为所选字符在视觉上不连续。
+     * 
+     * 
      * @param firstEndpoint an endpoint in the range of characters to select
      * @param secondEndpoint the other endpoint of the range of characters
      * to select. Can be less than <code>firstEndpoint</code>.  The range
@@ -2359,6 +2776,11 @@ public final class TextLayout implements Cloneable {
      * <code>TextLayout</code>.  This method is a convenience overload of
      * <code>getLogicalHighlightShape</code> that uses the natural bounds of
      * this <code>TextLayout</code>.
+     * <p>
+     *  返回一个包含指定范围内的逻辑选择的<code> Shape </code>,扩展到这个<code> TextLayout </code>的自然边界这个方法是一个方便的重载<code> getLogic
+     * alHighlightShape </code>使用这个<code> TextLayout </code>的自然界限。
+     * 
+     * 
      * @param firstEndpoint an endpoint in the range of characters to select
      * @param secondEndpoint the other endpoint of the range of characters
      * to select. Can be less than <code>firstEndpoint</code>.  The range
@@ -2377,6 +2799,10 @@ public final class TextLayout implements Cloneable {
      * The black box bounds is an area consisting of the union of the bounding
      * boxes of all the glyphs corresponding to the characters between start
      * and limit.  This area can be disjoint.
+     * <p>
+     * 返回指定范围内的字符的黑盒边界黑盒边界是由所有字形的边界框的并集​​组成的区域,对应于开始和限制之间的字符。该区域可以是不相交的
+     * 
+     * 
      * @param firstEndpoint one end of the character range
      * @param secondEndpoint the other end of the character range.  Can be
      * less than <code>firstEndpoint</code>.
@@ -2399,6 +2825,9 @@ public final class TextLayout implements Cloneable {
         /*
          * return an area that consists of the bounding boxes of all the
          * characters from firstEndpoint to limit
+         * <p>
+         *  返回由firstEndpoint到limit的所有字符的边界框组成的区域
+         * 
          */
 
         GeneralPath result = new GeneralPath(GeneralPath.WIND_NON_ZERO);
@@ -2434,6 +2863,10 @@ public final class TextLayout implements Cloneable {
      * negative if the point is to the left of the caret on a horizontal
      * line, or above the caret on a vertical line.
      * Utility for use by hitTestChar.
+     * <p>
+     *  返回沿着<code> caretInfo </code>中定义的线方向从点(x,y)到插入符号的距离。
+     * 如果点在水平线或上方的插入符号的左侧,则距离为负在垂直线上的插入符号hitTestChar使用的实用程序。
+     * 
      */
     private float caretToPointDistance(float[] caretInfo, float x, float y) {
         // distanceOffBaseline is negative if you're 'above' baseline
@@ -2453,6 +2886,12 @@ public final class TextLayout implements Cloneable {
      * or the trailing edge of the last logical character, as appropriate,
      * regardless of the position of that character in the line.  Only the
      * direction along the baseline is used to make this evaluation.
+     * <p>
+     * 返回对应于指定点的<code> TextHitInfo </code> <code> TextLayout </code>映射的边界之外的坐标位于第一个逻辑字符的前沿或最后一个逻辑字符的后沿字符,无论该
+     * 字符在行中的位置。
+     * 只有沿着基线的方向用于进行此评估。
+     * 
+     * 
      * @param x the x offset from the origin of this
      *     <code>TextLayout</code>.  This is in standard coordinates.
      * @param y the y offset from the origin of this
@@ -2556,6 +2995,11 @@ public final class TextLayout implements Cloneable {
      * specified point.  This method is a convenience overload of
      * <code>hitTestChar</code> that uses the natural bounds of this
      * <code>TextLayout</code>.
+     * <p>
+     *  返回对应于指定点的<code> TextHitInfo </code>此方法是<code> hitTestChar </code>的一个方便的重载,它使用此<code> TextLayout </code>
+     * 。
+     * 
+     * 
      * @param x the x offset from the origin of this
      *     <code>TextLayout</code>.  This is in standard coordinates.
      * @param y the y offset from the origin of this
@@ -2570,6 +3014,10 @@ public final class TextLayout implements Cloneable {
 
     /**
      * Returns the hash code of this <code>TextLayout</code>.
+     * <p>
+     *  返回此<code> TextLayout </code>的哈希码
+     * 
+     * 
      * @return the hash code of this <code>TextLayout</code>.
      */
     public int hashCode() {
@@ -2584,6 +3032,11 @@ public final class TextLayout implements Cloneable {
      * Returns <code>true</code> if the specified <code>Object</code> is a
      * <code>TextLayout</code> object and if the specified <code>Object</code>
      * equals this <code>TextLayout</code>.
+     * <p>
+     * 如果指定的<code> Object </code>是<code> TextLayout </code>对象,并且指定的<code> Object </code>等于此<code> TextLayout
+     *  < / code>。
+     * 
+     * 
      * @param obj an <code>Object</code> to test for equality
      * @return <code>true</code> if the specified <code>Object</code>
      *      equals this <code>TextLayout</code>; <code>false</code>
@@ -2596,6 +3049,10 @@ public final class TextLayout implements Cloneable {
     /**
      * Returns <code>true</code> if the two layouts are equal.
      * Two layouts are equal if they contain equal glyphvectors in the same order.
+     * <p>
+     *  如果两个布局相等,则返回<code> true </code>如果两个布局包含相同顺序的相等的glyphvectors,则它们相等
+     * 
+     * 
      * @param rhs the <code>TextLayout</code> to compare to this
      *       <code>TextLayout</code>
      * @return <code>true</code> if the specified <code>TextLayout</code>
@@ -2617,6 +3074,10 @@ public final class TextLayout implements Cloneable {
 
     /**
      * Returns debugging information for this <code>TextLayout</code>.
+     * <p>
+     *  返回此<code> TextLayout </code>的调试信息
+     * 
+     * 
      * @return the <code>textLine</code> of this <code>TextLayout</code>
      *        as a <code>String</code>.
      */
@@ -2632,6 +3093,11 @@ public final class TextLayout implements Cloneable {
      * any point within <code>getBounds()</code> of this position.  This
      * leaves the <code>g2</code> unchanged.  Text is rendered along the
      * baseline path.
+     * <p>
+     *  在指定的{@link javaawtGraphics2D Graphics2D}上下文中的指定位置呈现此<code> TextLayout </code>布局的原点放在x,y渲染可以触及<code> 
+     * getBounds / code>这使得<code> g2 </code>不变的文本沿着基线路径呈现。
+     * 
+     * 
      * @param g2 the <code>Graphics2D</code> context into which to render
      *         the layout
      * @param x the X coordinate of the origin of this <code>TextLayout</code>
@@ -2649,6 +3115,9 @@ public final class TextLayout implements Cloneable {
 
     /**
      * Package-only method for testing ONLY.  Please don't abuse.
+     * <p>
+     *  仅用于测试的仅包装方法请不要滥用
+     * 
      */
     TextLine getTextLineForTesting() {
 
@@ -2660,6 +3129,9 @@ public final class TextLayout implements Cloneable {
      * Return the index of the first character with a different baseline from the
      * character at start, or limit if all characters between start and limit have
      * the same baseline.
+     * <p>
+     * 返回与开始时字符不同的基线的第一个字符的索引,或者如果start和limit之间的所有字符具有相同的基线,则返回limit
+     * 
      */
     private static int sameBaselineUpTo(Font font, char[] text,
                                         int start, int limit) {
@@ -2671,6 +3143,9 @@ public final class TextLayout implements Cloneable {
             ++start;
         }
         return start;
+        /* <p>
+        /*  byte bl = fontgetBaselineFor(text [start ++]); while(start <limit && fontgetBaselineFor(text [start])== bl){++ start; } return start;。
+        /* 
         */
     }
 
@@ -2691,6 +3166,10 @@ public final class TextLayout implements Cloneable {
     /**
      * Returns a <code>Shape</code> representing the outline of this
      * <code>TextLayout</code>.
+     * <p>
+     *  返回代表此<code> TextLayout </code>大纲的<code> Shape </code>
+     * 
+     * 
      * @param tx an optional {@link AffineTransform} to apply to the
      *     outline of this <code>TextLayout</code>.
      * @return a <code>Shape</code> that is the outline of this
@@ -2709,6 +3188,10 @@ public final class TextLayout implements Cloneable {
     /**
      * Return the LayoutPath, or null if the layout path is the
      * default path (x maps to advance, y maps to offset).
+     * <p>
+     *  返回LayoutPath,如果布局路径是默认路径,则返回null(x映射为advance,y映射为offset)
+     * 
+     * 
      * @return the layout path
      * @since 1.6
      */
@@ -2722,6 +3205,9 @@ public final class TextLayout implements Cloneable {
      * edge of the character, as appropriate.  If the path is
      * broken at the side of the character represented by the hit, the
      * point will be adjacent to the character.
+     * <p>
+     *  将点击转换为标准坐标中的点该点在字符的前边缘或后边缘处的字符的基线上,如果适当的话。如果路径在由点击表示的字符的一侧断开,点将是邻近字符
+     * 
      * @param hit the hit to check.  This must be a valid hit on
      * the TextLayout.
      * @param point the returned point. The point is in standard

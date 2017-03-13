@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2002,2004 Apache软件基金会
+ * 
+ *  根据Apache许可证第20版("许可证")授权;您不得使用此文件,除非符合许可证您可以在获取许可证的副本
+ * 
+ *  http：// wwwapacheorg / licenses / LICENSE-20
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件将按"原样"基础分发,无任何明示或暗示的保证或条件。请参阅许可证管理权限和限制许可证
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.util;
@@ -466,6 +476,237 @@ import java.util.Hashtable;
  *  </TR>
  * </TABLE>
  *
+ * <p>
+ * EncodingMap是一个方便的类,用于处理IANA编码名称和Java编码名称之间的转换,反之亦然。
+ * XML实例文档中使用的编码名称<strong>必须</strong>是指定的IANA编码名称或这些名称的别名IANA定义。
+ * <p>
+ * <TABLE BORDER="0" WIDTH="100%">
+ * <TR>
+ * <TD WIDTH="33%">
+ *  <P ALIGN ="CENTER"> <B>公用名称</B>
+ * </TD>
+ * <TD WIDTH="15%">
+ *  <P ALIGN ="CENTER"> <B>在XML文件中使用此名称</B>
+ * </TD>
+ * <TD WIDTH="12%">
+ *  <P ALIGN ="CENTER"> <B>名称类型</B>
+ * </TD>
+ * <TD WIDTH="31%">
+ *  <P ALIGN ="CENTER"> <B> Xerces将转换为此Java编码器名称</B>
+ * </TD>
+ * </TR>
+ * <TR>
+ *  <TD WIDTH ="33％"> 8位Unicode </TD>
+ * <TD WIDTH="15%">
+ *  <P ALIGN ="CENTER"> UTF-8
+ * </TD>
+ * <TD WIDTH="12%">
+ *  <P ALIGN ="CENTER"> IANA
+ * </TD>
+ * <TD WIDTH="31%">
+ *  <P ALIGN ="CENTER"> UTF8
+ * </TD>
+ * </TR>
+ * <TR>
+ *  <TD WIDTH ="33％"> ISO Latin 1 </TD>
+ * <TD WIDTH="15%">
+ *  <P ALIGN ="CENTER"> ISO-8859-1
+ * </TD>
+ * <TD WIDTH="12%">
+ *  <P ALIGN ="CENTER"> MIME
+ * </TD>
+ * <TD WIDTH="31%">
+ *  <P ALIGN ="CENTER"> ISO-8859-1
+ * </TD>
+ * </TR>
+ * <TR>
+ *  <TD WIDTH ="33％"> ISO Latin 2 </TD>
+ * <TD WIDTH="15%">
+ *  <P ALIGN ="CENTER"> ISO-8859-2
+ * </TD>
+ * <TD WIDTH="12%">
+ * <P ALIGN ="CENTER"> MIME
+ * </TD>
+ * <TD WIDTH="31%">
+ *  <P ALIGN ="CENTER"> ISO-8859-2
+ * </TD>
+ * </TR>
+ * <TR>
+ *  <TD WIDTH ="33％"> ISO Latin 3 </TD>
+ * <TD WIDTH="15%">
+ *  <P ALIGN ="CENTER"> ISO-8859-3
+ * </TD>
+ * <TD WIDTH="12%">
+ *  <P ALIGN ="CENTER"> MIME
+ * </TD>
+ * <TD WIDTH="31%">
+ *  <P ALIGN ="CENTER"> ISO-8859-3
+ * </TD>
+ * </TR>
+ * <TR>
+ *  <TD WIDTH ="33％"> ISO Latin 4 </TD>
+ * <TD WIDTH="15%">
+ *  <P ALIGN ="CENTER"> ISO-8859-4
+ * </TD>
+ * <TD WIDTH="12%">
+ *  <P ALIGN ="CENTER"> MIME
+ * </TD>
+ * <TD WIDTH="31%">
+ *  <P ALIGN ="CENTER"> ISO-8859-4
+ * </TD>
+ * </TR>
+ * <TR>
+ *  <TD WIDTH ="33％"> ISO拉丁西里尔文</TD>
+ * <TD WIDTH="15%">
+ *  <P ALIGN ="CENTER"> ISO-8859-5
+ * </TD>
+ * <TD WIDTH="12%">
+ *  <P ALIGN ="CENTER"> MIME
+ * </TD>
+ * <TD WIDTH="31%">
+ *  <P ALIGN ="CENTER"> ISO-8859-5
+ * </TD>
+ * </TR>
+ * <TR>
+ *  <TD WIDTH ="33％"> ISO拉丁美洲</TD>
+ * <TD WIDTH="15%">
+ *  <P ALIGN ="CENTER"> ISO-8859-6
+ * </TD>
+ * <TD WIDTH="12%">
+ *  <P ALIGN ="CENTER"> MIME
+ * </TD>
+ * <TD WIDTH="31%">
+ *  <P ALIGN ="CENTER"> ISO-8859-6
+ * </TD>
+ * </TR>
+ * <TR>
+ *  <TD WIDTH ="33％"> ISO拉丁文希腊语</TD>
+ * <TD WIDTH="15%">
+ *  <P ALIGN ="CENTER"> ISO-8859-7
+ * </TD>
+ * <TD WIDTH="12%">
+ *  <P ALIGN ="CENTER"> MIME
+ * </TD>
+ * <TD WIDTH="31%">
+ *  <P ALIGN ="CENTER"> ISO-8859-7
+ * </TD>
+ * </TR>
+ * <TR>
+ *  <TD WIDTH ="33％"> ISO拉丁语希伯来语</TD>
+ * <TD WIDTH="15%">
+ *  <P ALIGN ="CENTER"> ISO-8859-8
+ * </TD>
+ * <TD WIDTH="12%">
+ *  <P ALIGN ="CENTER"> MIME
+ * </TD>
+ * <TD WIDTH="31%">
+ *  <P ALIGN ="CENTER"> ISO-8859-8
+ * </TD>
+ * </TR>
+ * <TR>
+ * <TD WIDTH ="33％"> ISO Latin 5 </TD>
+ * <TD WIDTH="15%">
+ *  <P ALIGN ="CENTER"> ISO-8859-9
+ * </TD>
+ * <TD WIDTH="12%">
+ *  <P ALIGN ="CENTER"> MIME
+ * </TD>
+ * <TD WIDTH="31%">
+ *  <P ALIGN ="CENTER"> ISO-8859-9
+ * </TD>
+ * </TR>
+ * <TR>
+ *  <TD WIDTH ="33％"> EBCDIC：US </TD>
+ * <TD WIDTH="15%">
+ *  <P ALIGN ="CENTER"> ebcdic-cp-us
+ * </TD>
+ * <TD WIDTH="12%">
+ *  <P ALIGN ="CENTER"> IANA
+ * </TD>
+ * <TD WIDTH="31%">
+ *  <P ALIGN ="CENTER"> cp037
+ * </TD>
+ * </TR>
+ * <TR>
+ *  <TD WIDTH ="33％"> EBCDIC：加拿大</TD>
+ * <TD WIDTH="15%">
+ *  <P ALIGN ="CENTER"> ebcdic-cp-ca
+ * </TD>
+ * <TD WIDTH="12%">
+ *  <P ALIGN ="CENTER"> IANA
+ * </TD>
+ * <TD WIDTH="31%">
+ *  <P ALIGN ="CENTER"> cp037
+ * </TD>
+ * </TR>
+ * <TR>
+ *  <TD WIDTH ="33％"> EBCDIC：荷兰</TD>
+ * <TD WIDTH="15%">
+ *  <P ALIGN ="CENTER"> ebcdic-cp-nl
+ * </TD>
+ * <TD WIDTH="12%">
+ *  <P ALIGN ="CENTER"> IANA
+ * </TD>
+ * <TD WIDTH="31%">
+ *  <P ALIGN ="CENTER"> cp037
+ * </TD>
+ * </TR>
+ * <TR>
+ *  <TD WIDTH ="33％"> EBCDIC：丹麦</TD>
+ * <TD WIDTH="15%">
+ *  <P ALIGN ="CENTER"> ebcdic-cp-dk
+ * </TD>
+ * <TD WIDTH="12%">
+ *  <P ALIGN ="CENTER"> IANA
+ * </TD>
+ * <TD WIDTH="31%">
+ *  <P ALIGN ="CENTER"> cp277
+ * </TD>
+ * </TR>
+ * <TR>
+ *  <TD WIDTH ="33％"> EBCDIC：挪威</TD>
+ * <TD WIDTH="15%">
+ *  <P ALIGN ="CENTER"> ebcdic-cp-no
+ * </TD>
+ * <TD WIDTH="12%">
+ *  <P ALIGN ="CENTER"> IANA
+ * </TD>
+ * <TD WIDTH="31%">
+ *  <P ALIGN ="CENTER"> cp277
+ * </TD>
+ * </TR>
+ * <TR>
+ *  <TD WIDTH ="33％"> EBCDIC：芬兰</TD>
+ * <TD WIDTH="15%">
+ *  <P ALIGN ="CENTER"> ebcdic-cp-fi
+ * </TD>
+ * <TD WIDTH="12%">
+ * <P ALIGN ="CENTER"> IANA
+ * </TD>
+ * <TD WIDTH="31%">
+ *  <P ALIGN ="CENTER"> cp278
+ * </TD>
+ * </TR>
+ * <TR>
+ *  <TD WIDTH ="33％"> EBCDIC：Sweden </TD>
+ * <TD WIDTH="15%">
+ *  <P ALIGN ="CENTER"> ebcdic-cp-se
+ * </TD>
+ * <TD WIDTH="12%">
+ *  <P ALIGN ="CENTER"> IANA
+ * </TD>
+ * <TD WIDTH="31%">
+ *  <P ALIGN ="CENTER"> cp278
+ * </TD>
+ * </TR>
+ * <TR>
+ *  <TD WIDTH ="33％"> EBCDIC：意大利</TD>
+ * <TD WIDTH="15%">
+ *  <P ALIGN ="CENTER"> ebcdic-cp-it
+ * </TD>
+ * <TD WIDTH="12%">
+ *  <P ALIGN ="CENTER"> IANA
+ * 
  * @author TAMURA Kent, IBM
  * @author Andy Clark, IBM
  *
@@ -956,6 +1197,123 @@ public class EncodingMap {
     /**
      * Adds an IANA to Java encoding name mapping.
      *
+     * <p>
+     * </TD>
+     * <TD WIDTH="31%">
+     *  <P ALIGN ="CENTER"> cp280
+     * </TD>
+     * </TR>
+     * <TR>
+     *  <TD WIDTH ="33％"> EBCDIC：西班牙,拉丁美洲</TD>
+     * <TD WIDTH="15%">
+     *  <P ALIGN ="CENTER"> ebcdic-cp-es
+     * </TD>
+     * <TD WIDTH="12%">
+     *  <P ALIGN ="CENTER"> IANA
+     * </TD>
+     * <TD WIDTH="31%">
+     *  <P ALIGN ="CENTER"> cp284
+     * </TD>
+     * </TR>
+     * <TR>
+     *  <TD WIDTH ="33％"> EBCDIC：英国</TD>
+     * <TD WIDTH="15%">
+     *  <P ALIGN ="CENTER"> ebcdic-cp-gb
+     * </TD>
+     * <TD WIDTH="12%">
+     *  <P ALIGN ="CENTER"> IANA
+     * </TD>
+     * <TD WIDTH="31%">
+     *  <P ALIGN ="CENTER"> cp285
+     * </TD>
+     * </TR>
+     * <TR>
+     *  <TD WIDTH ="33％"> EBCDIC：法国</TD>
+     * <TD WIDTH="15%">
+     *  <P ALIGN ="CENTER"> ebcdic-cp-fr
+     * </TD>
+     * <TD WIDTH="12%">
+     *  <P ALIGN ="CENTER"> IANA
+     * </TD>
+     * <TD WIDTH="31%">
+     *  <P ALIGN ="CENTER"> cp297
+     * </TD>
+     * </TR>
+     * <TR>
+     *  <TD WIDTH ="33％"> EBCDIC：阿拉伯语</TD>
+     * <TD WIDTH="15%">
+     *  <P ALIGN ="CENTER"> ebcdic-cp-ar1
+     * </TD>
+     * <TD WIDTH="12%">
+     *  <P ALIGN ="CENTER"> IANA
+     * </TD>
+     * <TD WIDTH="31%">
+     *  <P ALIGN ="CENTER"> cp420
+     * </TD>
+     * </TR>
+     * <TR>
+     * <TD WIDTH ="33％"> EBCDIC：希伯来语</TD>
+     * <TD WIDTH="15%">
+     *  <P ALIGN ="CENTER"> ebcdic-cp-he
+     * </TD>
+     * <TD WIDTH="12%">
+     *  <P ALIGN ="CENTER"> IANA
+     * </TD>
+     * <TD WIDTH="31%">
+     *  <P ALIGN ="CENTER"> cp424
+     * </TD>
+     * </TR>
+     * <TR>
+     *  <TD WIDTH ="33％"> EBCDIC：瑞士</TD>
+     * <TD WIDTH="15%">
+     *  <P ALIGN ="CENTER"> ebcdic-cp-ch
+     * </TD>
+     * <TD WIDTH="12%">
+     *  <P ALIGN ="CENTER"> IANA
+     * </TD>
+     * <TD WIDTH="31%">
+     *  <P ALIGN ="CENTER"> cp500
+     * </TD>
+     * </TR>
+     * <TR>
+     *  <TD WIDTH ="33％"> EBCDIC：Roece </TD>
+     * <TD WIDTH="15%">
+     *  <P ALIGN ="CENTER"> ebcdic-cp-roece
+     * </TD>
+     * <TD WIDTH="12%">
+     *  <P ALIGN ="CENTER"> IANA
+     * </TD>
+     * <TD WIDTH="31%">
+     *  <P ALIGN ="CENTER"> cp870
+     * </TD>
+     * </TR>
+     * <TR>
+     *  <TD WIDTH ="33％"> EBCDIC：南斯拉夫</TD>
+     * <TD WIDTH="15%">
+     *  <P ALIGN ="CENTER"> ebcdic-cp-yu
+     * </TD>
+     * <TD WIDTH="12%">
+     *  <P ALIGN ="CENTER"> IANA
+     * </TD>
+     * <TD WIDTH="31%">
+     *  <P ALIGN ="CENTER"> cp870
+     * </TD>
+     * </TR>
+     * <TR>
+     *  <TD WIDTH ="33％"> EBCDIC：冰岛</TD>
+     * <TD WIDTH="15%">
+     *  <P ALIGN ="CENTER"> ebcdic-cp-is
+     * </TD>
+     * <TD WIDTH="12%">
+     *  <P ALIGN ="CENTER"> IANA
+     * </TD>
+     * <TD WIDTH="31%">
+     *  <P ALIGN ="CENTER"> cp871
+     * </TD>
+     * </TR>
+     * <TR>
+     *  <TD WIDTH ="33％"> EBCDIC：Urdu </TD>
+     * 
      * @param ianaEncoding The IANA encoding name.
      * @param javaEncoding The Java encoding name.
      *
@@ -971,6 +1329,65 @@ public class EncodingMap {
     /**
      * Returns the Java encoding name for the specified IANA encoding name.
      *
+     * <p>
+     * <TD WIDTH="15%">
+     *  <P ALIGN ="CENTER"> ebcdic-cp-ar2
+     * </TD>
+     * <TD WIDTH="12%">
+     *  <P ALIGN ="CENTER"> IANA
+     * </TD>
+     * <TD WIDTH="31%">
+     *  <P ALIGN ="CENTER"> cp918
+     * </TD>
+     * </TR>
+     * <TR>
+     *  <TD WIDTH ="33％"> PRC的中文,混合1/2字节</TD>
+     * <TD WIDTH="15%">
+     *  <P ALIGN ="CENTER"> gb2312
+     * </TD>
+     * <TD WIDTH="12%">
+     * <P ALIGN ="CENTER"> MIME
+     * </TD>
+     * <TD WIDTH="31%">
+     *  <P ALIGN ="CENTER"> GB2312
+     * </TD>
+     * </TR>
+     * <TR>
+     *  <TD WIDTH ="33％">扩展的Unix代码,包装为日语</TD>
+     * <TD WIDTH="15%">
+     *  <P ALIGN ="CENTER"> euc-jp
+     * </TD>
+     * <TD WIDTH="12%">
+     *  <P ALIGN ="CENTER"> MIME
+     * </TD>
+     * <TD WIDTH="31%">
+     *  <P ALIGN ="CENTER"> eucjis
+     * </TD>
+     * </TR>
+     * <TR>
+     *  <TD WIDTH ="33％">日语：iso-2022-jp </TD>
+     * <TD WIDTH="15%">
+     *  <P ALIGN ="CENTER"> iso-2020-jp
+     * </TD>
+     * <TD WIDTH="12%">
+     *  <P ALIGN ="CENTER"> MIME
+     * </TD>
+     * <TD WIDTH="31%">
+     *  <P ALIGN ="CENTER"> JIS
+     * </TD>
+     * </TR>
+     * <TR>
+     *  <TD WIDTH ="33％">日语：Shift JIS </TD>
+     * <TD WIDTH="15%">
+     *  <P ALIGN ="CENTER"> Shift_JIS
+     * </TD>
+     * <TD WIDTH="12%">
+     *  <P ALIGN ="CENTER"> MIME
+     * </TD>
+     * <TD WIDTH="31%">
+     *  <P ALIGN ="CENTER"> SJIS
+     * </TD>
+     * 
      * @param ianaEncoding The IANA encoding name.
      */
     public static String getIANA2JavaMapping(String ianaEncoding) {
@@ -980,6 +1397,37 @@ public class EncodingMap {
     /**
      * Removes an IANA to Java encoding name mapping.
      *
+     * <p>
+     * </TR>
+     * <TR>
+     *  <TD WIDTH ="33％">中文：Big5 </TD>
+     * <TD WIDTH="15%">
+     *  <P ALIGN ="CENTER"> Big5
+     * </TD>
+     * <TD WIDTH="12%">
+     *  <P ALIGN ="CENTER"> MIME
+     * </TD>
+     * <TD WIDTH="31%">
+     *  <P ALIGN ="CENTER"> Big5
+     * </TD>
+     * </TR>
+     * <TR>
+     *  <TD WIDTH ="33％">扩展的Unix代码,包装为韩语</TD>
+     * <TD WIDTH="15%">
+     *  <P ALIGN ="CENTER"> euc-kr
+     * </TD>
+     * <TD WIDTH="12%">
+     *  <P ALIGN ="CENTER"> MIME
+     * </TD>
+     * <TD WIDTH="31%">
+     *  <P ALIGN ="CENTER"> iso2022kr
+     * </TD>
+     * </TR>
+     * <TR>
+     *  <TD WIDTH ="33％">西里尔文</TD>
+     * <TD WIDTH="15%">
+     *  <p ALIGN ="CENTER"> koi8-r
+     * 
      * @param ianaEncoding The IANA encoding name.
      *
      * @deprecated Use of this method is not recommended. Its
@@ -993,6 +1441,18 @@ public class EncodingMap {
     /**
      * Adds a Java to IANA encoding name mapping.
      *
+     * <p>
+     * </TD>
+     * <TD WIDTH="12%">
+     *  <P ALIGN ="CENTER"> MIME
+     * </TD>
+     * <TD WIDTH="31%">
+     *  <p ALIGN ="CENTER"> koi8-r
+     * </TD>
+     * </TR>
+     * </TABLE>
+     * 
+     * 
      * @param javaEncoding The Java encoding name.
      * @param ianaEncoding The IANA encoding name.
      *
@@ -1008,6 +1468,10 @@ public class EncodingMap {
     /**
      * Returns the IANA encoding name for the specified Java encoding name.
      *
+     * <p>
+     * 将IANA添加到Java编码名称映射
+     * 
+     * 
      * @param javaEncoding The Java encoding name.
      */
     public static String getJava2IANAMapping(String javaEncoding) {
@@ -1017,6 +1481,10 @@ public class EncodingMap {
     /**
      * Removes a Java to IANA encoding name mapping.
      *
+     * <p>
+     *  返回指定IANA编码名称的Java编码名称
+     * 
+     * 
      * @param javaEncoding The Java encoding name.
      *
      * @deprecated Use of this method is not recommended. Its

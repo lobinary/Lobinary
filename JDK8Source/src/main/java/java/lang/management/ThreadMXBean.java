@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -111,6 +112,50 @@ import java.util.Map;
  * {@link #findDeadlockedThreads} methods to find deadlocks in
  * the running application.
  *
+ * <p>
+ *  Java虚拟机的线程系统的管理接口
+ * 
+ *  <p> Java虚拟机具有此接口的实现类的单个实例实现此接口的实例是<a href=\"ManagementFactoryhtml#MXBean\"> MXBean </a>,可通过调用{@link ManagementFactory#getThreadMXBean}
+ * 方法或{@link ManagementFactory#getPlatformMBeanServer platform <tt> MBeanServer </tt>}方法。
+ * 
+ *  <p>用于唯一标识MBeanServer中的线程系统的MXBean的<tt> ObjectName </tt>是：
+ * <blockquote>
+ *  {@link ManagementFactory#THREAD_MXBEAN_NAME <tt> javalang：type = Threading </tt>}
+ * </blockquote>
+ * 
+ * 它可以通过调用{@link PlatformManagedObject#getObjectName}方法获得
+ * 
+ *  <h3>线程ID </h3>线程ID是通过调用线程的{@link javalangThread#getId}方法返回的正长整数值线程ID在其生命周期内是唯一的当线程终止时,此线程ID可能重复使用
+ * 
+ *  <p>此接口中的一些方法将线程ID或线程ID数组作为输入参数并返回每线程信息
+ * 
+ *  <h3>线程CPU时间</h3> Java虚拟机实现可以支持测量当前线程,任何线程或无线程的CPU时间
+ * 
+ * <p>
+ * {@link #isThreadCpuTimeSupported}方法可用于确定Java虚拟机是否支持测量任何线程的CPU时间{@link #isCurrentThreadCpuTimeSupported}
+ * 方法可用于确定Java虚拟机是否支持CPU的测量当前线程的时间支持任何线程的CPU时间测量的Java虚拟机实现也将支持当前线程的时间。
+ * 
+ *  <p>此接口提供的CPU时间具有纳秒精度,但不一定是纳秒精度
+ * 
+ * <p>
+ * Java虚拟机可以默认禁用CPU时间测量。
+ * {@link #isThreadCpuTimeEnabled}和{@link #setThreadCpuTimeEnabled}方法可用于测试是否启用CPU时间测量,并分别启用/禁用此支持。
+ * 启用线程CPU测量在一些Java虚拟机实现中是昂贵的。
+ * 
+ *  <h3>线程争用监视</h3>某些Java虚拟机可能支持线程争用监视当启用线程争用监视时,线程阻止同步或等待通知的累积经过时间将被收集并返回<a href ="ThreadInfohtml#SyncStats">
+ *  <tt> ThreadInfo </tt> </a>对象。
+ * <p>
+ * {@link #isThreadContentionMonitoringSupported}方法可用于确定Java虚拟机是否支持线程争用监视线程争用监视默认情况下禁用{@link #setThreadContentionMonitoringEnabled}
+ * 方法可用于启用线程争用监视。
+ * 
+ * <h3>同步信息和死锁检测</h3>一些Java虚拟机可能支持监视{@linkplain #isObjectMonitorUsageSupported对象监视器使用情况}和{@linkplain #isSynchronizerUsageSupported拥有的同步器使用情况}
+ *  {@link #getThreadInfo(long [布尔,布尔)}和{@link #dumpAllThreads}方法可用于获得线程堆栈跟踪和同步信息,包括哪个{@linkplain LockInfo </i>}
+ * 锁定线程以获取或等待,以及它锁定线程当前拥有。
+ * <p>
+ *  <tt> ThreadMXBean </tt>接口提供{@link #findMonitorDeadlockedThreads}和{@link #findDeadlockedThreads}方法,以在
+ * 运行的应用程序中找到死锁。
+ * 
+ * 
  * @see ManagementFactory#getPlatformMXBeans(Class)
  * @see <a href="../../../javax/management/package-summary.html">
  *      JMX Specification.</a>
@@ -126,6 +171,10 @@ public interface ThreadMXBean extends PlatformManagedObject {
      * Returns the current number of live threads including both
      * daemon and non-daemon threads.
      *
+     * <p>
+     * 返回包括守护程序线程和非守护程序线程的当前活动线程数
+     * 
+     * 
      * @return the current number of live threads.
      */
     public int getThreadCount();
@@ -134,6 +183,10 @@ public interface ThreadMXBean extends PlatformManagedObject {
      * Returns the peak live thread count since the Java virtual machine
      * started or peak was reset.
      *
+     * <p>
+     *  返回自Java虚拟机启动或峰值复位后的峰值活线程计数
+     * 
+     * 
      * @return the peak live thread count.
      */
     public int getPeakThreadCount();
@@ -142,6 +195,10 @@ public interface ThreadMXBean extends PlatformManagedObject {
      * Returns the total number of threads created and also started
      * since the Java virtual machine started.
      *
+     * <p>
+     *  返回自Java虚拟机启动以来已创建并启动的线程总数
+     * 
+     * 
      * @return the total number of threads started.
      */
     public long getTotalStartedThreadCount();
@@ -149,6 +206,10 @@ public interface ThreadMXBean extends PlatformManagedObject {
     /**
      * Returns the current number of live daemon threads.
      *
+     * <p>
+     *  返回当前的守护进程线程数
+     * 
+     * 
      * @return the current number of live daemon threads.
      */
     public int getDaemonThreadCount();
@@ -158,6 +219,10 @@ public interface ThreadMXBean extends PlatformManagedObject {
      * Some threads included in the returned array
      * may have been terminated when this method returns.
      *
+     * <p>
+     *  返回所有活动线程ID返回数组中包含的某些线程可能在此方法返回时已终止
+     * 
+     * 
      * @return an array of <tt>long</tt>, each is a thread ID.
      *
      * @throws java.lang.SecurityException if a security manager
@@ -191,6 +256,22 @@ public interface ThreadMXBean extends PlatformManagedObject {
      * <tt>CompositeData</tt> with attributes as specified in the
      * {@link ThreadInfo#from ThreadInfo.from} method.
      *
+     * <p>
+     *  返回指定<tt> id </tt>的线程的线程信息,没有堆栈跟踪此方法等效于调用：
+     * <blockquote>
+     *  {@link #getThreadInfo(long,int)getThreadInfo(id,0);}
+     * </blockquote>
+     * 
+     * <p>
+     * 此方法返回表示指定ID的线程的线程信息的<tt> ThreadInfo </tt>对象。返回的<tt> ThreadInfo </tt>对象中的堆栈跟踪,锁定监视器和锁定同步器将为空
+     * 
+     *  如果给定ID的线程不存活或不存在,则此方法将返回<tt> null </tt>如果线程已启动且尚未死亡,则线程仍然存活
+     * 
+     * <p>
+     *  <b> MBeanServer访问</b>：<br> <tt> ThreadInfo </tt>的映射类型是具有在{@link ThreadInfo#from ThreadInfofrom}方法中指定
+     * 的属性的<tt> CompositeData </tt>。
+     * 
+     * 
      * @param id the thread ID of the thread. Must be positive.
      *
      * @return a {@link ThreadInfo} object for the thread of the given ID
@@ -229,6 +310,20 @@ public interface ThreadMXBean extends PlatformManagedObject {
      * <tt>CompositeData</tt> with attributes as specified in the
      * {@link ThreadInfo#from ThreadInfo.from} method.
      *
+     * <p>
+     * 返回其ID在输入数组中的每个线程的线程信息<tt> ids </tt>没有堆栈跟踪此方法等效于调用：<blockquote> <pre> {@link #getThreadInfo(long [],int )getThreadInfo}
+     * (ids,0); </pre> </blockquote>。
+     * 
+     * <p>
+     *  此方法返回<tt> ThreadInfo </tt>对象的数组每个<tt> ThreadInfo </tt>对象中的堆栈跟踪,锁定监视器和锁定同步器将为空
+     * 
+     *  如果给定ID的线程不存活或不存在,则返回数组中的相应元素将包含<tt> null </tt>如果线程已经启动并且尚未死亡
+     * 
+     * <p>
+     *  <b> MBeanServer访问</b>：<br> <tt> ThreadInfo </tt>的映射类型是具有在{@link ThreadInfo#from ThreadInfofrom}方法中指定
+     * 的属性的<tt> CompositeData </tt>。
+     * 
+     * 
      * @param ids an array of thread IDs.
      * @return an array of the {@link ThreadInfo} objects, each containing
      * information about a thread whose ID is in the corresponding
@@ -272,6 +367,22 @@ public interface ThreadMXBean extends PlatformManagedObject {
      * <tt>CompositeData</tt> with attributes as specified in the
      * {@link ThreadInfo#from ThreadInfo.from} method.
      *
+     * <p>
+     * 返回指定<tt> id </tt>的线程的线程信息,堆栈跟踪指定数量的堆栈跟踪元素<tt> maxDepth </tt>参数指示{@link StackTraceElement}要从堆栈跟踪中检索如果<tt>
+     *  maxDepth == IntegerMAX_VALUE </tt>,线程的整个堆栈跟踪将被转储如果<tt> maxDepth == 0 </tt>,线程的堆栈跟踪将不会被转储此方法不会获取锁定的监视
+     * 器和锁定的线程同步器。
+     * <p>
+     *  当Java虚拟机没有关于线程或<tt> maxDepth == 0 </tt>的堆栈跟踪信息时,<tt> ThreadInfo </tt>对象中的堆栈跟踪将是一个<tt> StackTraceElem
+     * ent </tt>。
+     * 
+     * <p>
+     * 如果给定ID的线程不存活或不存在,则此方法将返回<tt> null </tt>如果线程已启动且尚未死亡,则线程仍然存活
+     * 
+     * <p>
+     *  <b> MBeanServer访问</b>：<br> <tt> ThreadInfo </tt>的映射类型是具有在{@link ThreadInfo#from ThreadInfofrom}方法中指定
+     * 的属性的<tt> CompositeData </tt>。
+     * 
+     * 
      * @param id the thread ID of the thread. Must be positive.
      * @param maxDepth the maximum number of entries in the stack trace
      * to be dumped. <tt>Integer.MAX_VALUE</tt> could be used to request
@@ -324,6 +435,22 @@ public interface ThreadMXBean extends PlatformManagedObject {
      * <tt>CompositeData</tt> with attributes as specified in the
      * {@link ThreadInfo#from ThreadInfo.from} method.
      *
+     * <p>
+     * 返回其ID在输入数组<tt> ids </tt>中的每个线程的线程信息,堆栈跟踪具有指定数量的堆栈跟踪元素<tt> maxDepth </tt>参数指示最大数目{ @link StackTraceElement}
+     * 从堆栈跟踪中检索如果<tt> maxDepth == IntegerMAX_VALUE </tt>,线程的整个堆栈跟踪将被转储如果<tt> maxDepth == 0 </tt>,没有堆栈跟踪的线程将被
+     * 转储此方法不会获得锁定的监视器和线程的锁定同步器。
+     * <p>
+     *  当Java虚拟机没有关于线程或<tt> maxDepth == 0 </tt>的堆栈跟踪信息时,<tt> ThreadInfo </tt>对象中的堆栈跟踪将是一个<tt> StackTraceElem
+     * ent </tt>。
+     * <p>
+     * 此方法返回<tt> ThreadInfo </tt>对象的数组,每个对象都是与<tt> ids </tt>数组中索引相同的线程的线程信息如果给定ID的线程不是活动或不存在,<tt> null </tt>
+     * 将在返回数组中的相应元素中设置如果线程已启动且尚未死亡,则线程仍然活动。
+     * 
+     * <p>
+     *  <b> MBeanServer访问</b>：<br> <tt> ThreadInfo </tt>的映射类型是具有在{@link ThreadInfo#from ThreadInfofrom}方法中指定
+     * 的属性的<tt> CompositeData </tt>。
+     * 
+     * 
      * @param ids an array of thread IDs
      * @param maxDepth the maximum number of entries in the stack trace
      * to be dumped. <tt>Integer.MAX_VALUE</tt> could be used to request
@@ -347,6 +474,10 @@ public interface ThreadMXBean extends PlatformManagedObject {
     /**
      * Tests if the Java virtual machine supports thread contention monitoring.
      *
+     * <p>
+     *  测试Java虚拟机是否支持线程争用监视
+     * 
+     * 
      * @return
      *   <tt>true</tt>
      *     if the Java virtual machine supports thread contention monitoring;
@@ -357,6 +488,10 @@ public interface ThreadMXBean extends PlatformManagedObject {
     /**
      * Tests if thread contention monitoring is enabled.
      *
+     * <p>
+     *  测试是否启用线程争用监视
+     * 
+     * 
      * @return <tt>true</tt> if thread contention monitoring is enabled;
      *         <tt>false</tt> otherwise.
      *
@@ -371,6 +506,10 @@ public interface ThreadMXBean extends PlatformManagedObject {
      * Enables or disables thread contention monitoring.
      * Thread contention monitoring is disabled by default.
      *
+     * <p>
+     *  启用或禁用线程争用监视默认情况下禁用线程争用监视
+     * 
+     * 
      * @param enable <tt>true</tt> to enable;
      *               <tt>false</tt> to disable.
      *
@@ -400,6 +539,14 @@ public interface ThreadMXBean extends PlatformManagedObject {
      *   {@link #getThreadCpuTime getThreadCpuTime}(Thread.currentThread().getId());
      * </pre></blockquote>
      *
+     * <p>
+     * 以纳秒为单位返回当前线程的总CPU时间。返回值的精度为纳秒,但不一定为纳秒精度如果实现区分用户模式时间和系统模式时间,则返回的CPU时间是当前线程具有的时间量在用户模式或系统模式下执行
+     * 
+     * <p>
+     *  这是一个方便的本地管理使用方法,相当于调用：<blockquote> <pre> {@link #getThreadCpuTime getThreadCpuTime}(ThreadcurrentThr
+     * ead()getId()); </pre> </blockquote>。
+     * 
+     * 
      * @return the total CPU time for the current thread if CPU time
      * measurement is enabled; <tt>-1</tt> otherwise.
      *
@@ -427,6 +574,14 @@ public interface ThreadMXBean extends PlatformManagedObject {
      *   {@link #getThreadUserTime getThreadUserTime}(Thread.currentThread().getId());
      * </pre></blockquote>
      *
+     * <p>
+     *  返回当前线程在用户模式下以纳秒为单位执行的CPU时间返回值的精度为纳秒,但不一定为纳秒精度
+     * 
+     * <p>
+     * 这是一个方便的本地管理使用的方法,相当于调用：<blockquote> <pre> {@link #getThreadUserTime getThreadUserTime}(ThreadcurrentT
+     * hread()getId()); </pre> </blockquote>。
+     * 
+     * 
      * @return the user-level CPU time for the current thread if CPU time
      * measurement is enabled; <tt>-1</tt> otherwise.
      *
@@ -460,6 +615,15 @@ public interface ThreadMXBean extends PlatformManagedObject {
      * and including the time that the capability is enabled as the point
      * where CPU time measurement starts.
      *
+     * <p>
+     *  以纳秒为单位返回指定ID的线程的总CPU时间。返回值的精度为纳秒,但不一定为纳秒精度如果实现区分用户模式时间和系统模式时间,则返回的CPU时间是线程已在用户模式或系统模式下执行
+     * 
+     * <p>
+     *  如果指定ID的线程不存在或不存在,此方法返回<tt> -1 </tt>如果禁用CPU时间测量,此方法返回<tt> -1 </tt>线程存活如果它已经开始并且还没有死亡
+     * <p>
+     * 如果在线程启动后启用CPU时间测量,Java虚拟机实现可以选择任何时间,直到并包括启用能力的时间作为CPU时间测量开始的点
+     * 
+     * 
      * @param id the thread ID of a thread
      * @return the total CPU time for a thread of the specified ID
      * if the thread of the specified ID exists, the thread is alive,
@@ -495,6 +659,15 @@ public interface ThreadMXBean extends PlatformManagedObject {
      * and including the time that the capability is enabled as the point
      * where CPU time measurement starts.
      *
+     * <p>
+     *  返回指定ID的线程在用户模式下以纳秒为单位执行的CPU时间。返回的值为纳秒精度,但不一定为纳秒精度
+     * 
+     * <p>
+     *  如果指定ID的线程不存在或不存在,此方法返回<tt> -1 </tt>如果禁用CPU时间测量,此方法返回<tt> -1 </tt>线程存活如果它已经开始并且还没有死亡
+     * <p>
+     * 如果在线程启动后启用CPU时间测量,Java虚拟机实现可以选择任何时间,直到并包括启用能力的时间作为CPU时间测量开始的点
+     * 
+     * 
      * @param id the thread ID of a thread
      * @return the user-level CPU time for a thread of the specified ID
      * if the thread of the specified ID exists, the thread is alive,
@@ -520,6 +693,10 @@ public interface ThreadMXBean extends PlatformManagedObject {
      * measurement for any thread will also support CPU time
      * measurement for the current thread.
      *
+     * <p>
+     *  测试Java虚拟机实现是否支持任何线程的CPU时间测量支持任何线程的CPU时间测量的Java虚拟机实现也将支持当前线程的CPU时间测量
+     * 
+     * 
      * @return
      *   <tt>true</tt>
      *     if the Java virtual machine supports CPU time
@@ -534,6 +711,10 @@ public interface ThreadMXBean extends PlatformManagedObject {
      * This method returns <tt>true</tt> if {@link #isThreadCpuTimeSupported}
      * returns <tt>true</tt>.
      *
+     * <p>
+     *  测试Java虚拟机是否支持当前线程的CPU时间测量如果{@link #isThreadCpuTimeSupported}返回<tt> true </tt>,此方法返回<tt> true </tt>
+     * 
+     * 
      * @return
      *   <tt>true</tt>
      *     if the Java virtual machine supports CPU time
@@ -545,6 +726,10 @@ public interface ThreadMXBean extends PlatformManagedObject {
     /**
      * Tests if thread CPU time measurement is enabled.
      *
+     * <p>
+     *  测试是否启用线程CPU时间测量
+     * 
+     * 
      * @return <tt>true</tt> if thread CPU time measurement is enabled;
      *         <tt>false</tt> otherwise.
      *
@@ -561,6 +746,10 @@ public interface ThreadMXBean extends PlatformManagedObject {
      * Enables or disables thread CPU time measurement.  The default
      * is platform dependent.
      *
+     * <p>
+     *  启用或禁用线程CPU时间测量默认值是平台相关的
+     * 
+     * 
      * @param enable <tt>true</tt> to enable;
      *               <tt>false</tt> to disable.
      *
@@ -601,6 +790,18 @@ public interface ThreadMXBean extends PlatformManagedObject {
      * the {@link #findDeadlockedThreads findDeadlockedThreads} method
      * should be used.
      *
+     * <p>
+     * 查找处于死锁状态的线程等待获取对象监视器的循环。
+     * 即,在{@link Object#wait Objectwait}调用之后阻塞等待进入同步块或等待重新启动同步块的线程,其中每个线程都拥有一个在一个周期中尝试获取另一个线程已经持有的另一个监视器。
+     * <p>
+     *  更正式地,线程是<em>监视器死锁</em>,如果它是关系"正在等待对象监视器拥有"的循环的一部分。在最简单的情况下,线程A被阻塞等待监视器线程B,并且线程B被阻塞等待线程A拥有的监视器
+     * <p>
+     *  此方法设计用于故障排除使用,但不是用于同步控制它可能是一个昂贵的操作
+     * <p>
+     * 此方法发现仅涉及对象监视器的死锁要查找涉及对象监视器和<a href=\"LockInfohtml#OwnableSynchronizer\">可拥有同步器</a>的死锁,应使用{@link #findDeadlockedThreads findDeadlockedThreads}
+     * 方法。
+     * 
+     * 
      * @return an array of IDs of the threads that are monitor
      * deadlocked, if any; <tt>null</tt> otherwise.
      *
@@ -616,6 +817,10 @@ public interface ThreadMXBean extends PlatformManagedObject {
      * Resets the peak thread count to the current number of
      * live threads.
      *
+     * <p>
+     *  将峰值线程计数重置为当前活动线程数
+     * 
+     * 
      * @throws java.lang.SecurityException if a security manager
      *         exists and the caller does not have
      *         ManagementPermission("control").
@@ -638,6 +843,14 @@ public interface ThreadMXBean extends PlatformManagedObject {
      * This method is designed for troubleshooting use, but not for
      * synchronization control.  It might be an expensive operation.
      *
+     * <p>
+     *  查找处于死锁状态的线程周期,等待获取对象监视器或<a href=\"LockInfohtml#OwnableSynchronizer\">可拥有的同步器</a>
+     * 
+     *  线程在等待这两种类型的锁的循环中被死锁</em>,如果每个线程在尝试获取另一个已经由循环中的另一个线程持有的锁时拥有一个锁
+     * <p>
+     * 此方法设计用于故障排除使用,但不是用于同步控制它可能是一个昂贵的操作
+     * 
+     * 
      * @return an array of IDs of the threads that are
      * deadlocked waiting for object monitors or ownable synchronizers, if any;
      * <tt>null</tt> otherwise.
@@ -658,6 +871,10 @@ public interface ThreadMXBean extends PlatformManagedObject {
      * Tests if the Java virtual machine supports monitoring of
      * object monitor usage.
      *
+     * <p>
+     *  测试Java虚拟机是否支持监视对象监视器使用情况
+     * 
+     * 
      * @return
      *   <tt>true</tt>
      *     if the Java virtual machine supports monitoring of
@@ -674,6 +891,12 @@ public interface ThreadMXBean extends PlatformManagedObject {
      * <a href="LockInfo.html#OwnableSynchronizer">
      * ownable synchronizer</a> usage.
      *
+     * <p>
+     *  测试Java虚拟机是否支持监视
+     * <a href="LockInfo.html#OwnableSynchronizer">
+     *  拥有同步器</a>使用
+     * 
+     * 
      * @return
      *   <tt>true</tt>
      *     if the Java virtual machine supports monitoring of ownable
@@ -734,6 +957,25 @@ public interface ThreadMXBean extends PlatformManagedObject {
      * <tt>CompositeData</tt> with attributes as specified in the
      * {@link ThreadInfo#from ThreadInfo.from} method.
      *
+     * <p>
+     *  返回ID在输入数组<tt> ids </tt>中的每个线程的线程信息,具有堆栈跟踪和同步信息
+     * 
+     * <p>
+     *  该方法获得每个线程的线程信息的快照,包括：
+     * <ul>
+     * <li>整个堆栈跟踪</li> <li>如果<tt> lockedMonitors </tt>为<tt> true </tt>和</li> <li>目前由线程锁定的<a href=\"LockInfohtml#OwnableSynchronizer\">
+     * 可拥有同步器</a>(如果<tt> lockedSynchronizers </tt>为<tt> true </tt> </li>。
+     * </ul>
+     * <p>
+     *  此方法返回<tt> ThreadInfo </tt>对象的数组,每个对象都是与<tt> ids </tt>数组中索引相同的线程的线程信息如果给定ID的线程不是活动或不存在,<tt> null </tt>
+     * 将在返回数组中的相应元素中设置如果线程已启动且尚未死亡,则线程仍然活动。
+     * <p>
+     * 如果线程不锁定任何对象监视器或<tt> lockedMonitors </tt>为<tt> false </tt>,则返回的<tt> ThreadInfo </tt>对象将有一个空的<tt> Monit
+     * orInfo </tt > array类似地,如果线程不锁定任何同步器或<tt> lockedSynchronizers </tt>为<tt> false </tt>,则返回的<tt> ThreadIn
+     * fo </tt>对象将有一个空的<tt> LockInfo </tt>数组。
+     * 
+     * <p>
+     * 
      * @param  ids an array of thread IDs.
      * @param  lockedMonitors if <tt>true</tt>, retrieves all locked monitors.
      * @param  lockedSynchronizers if <tt>true</tt>, retrieves all locked
@@ -776,6 +1018,16 @@ public interface ThreadMXBean extends PlatformManagedObject {
      * as specified in the {@link #getThreadInfo(long[], boolean, boolean)}
      * method.
      *
+     * <p>
+     *  当<tt> lockedMonitors </tt>和<tt> lockedSynchronizers </tt>参数都为<tt> false </tt>时,它等效于调用：<blockquote> <pre>
+     *  {@link #getThreadInfo ],int)getThreadInfo(ids,IntegerMAX_VALUE)} </pre> </blockquote>。
+     * 
+     * <p>
+     *  此方法设计用于故障排除使用,但不是用于同步控制它可能是一个昂贵的操作
+     * 
+     * <p>
+     * <b> MBeanServer访问</b>：<br> <tt> ThreadInfo </tt>的映射类型是具有在{@link ThreadInfo#from ThreadInfofrom}方法中指定的
+     * 
      * @param  lockedMonitors if <tt>true</tt>, dump all locked monitors.
      * @param  lockedSynchronizers if <tt>true</tt>, dump all locked
      *             ownable synchronizers.

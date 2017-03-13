@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2009, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -37,6 +38,13 @@ package java.util;
  * necessary array bounds checks and expanding parameters into the
  * required forms.
  *
+ * <p>
+ *  这个类实现了Vladimir Yaroslavskiy,Jon Bentley和Josh Bloch的Dual-Pivot Quicksort算法。
+ * 该算法在许多数据集上提供了O(n log(n))性能,导致其他quicksorts降级为二次性能,并且通常比传统(单向)Quicksort实现。
+ * 
+ *  所有暴露的方法是package-private,设计为在执行任何必要的数组边界检查和将参数扩展为所需的形式后从公共方法(在类Arrays中)
+ * 
+ * 
  * @author Vladimir Yaroslavskiy
  * @author Jon Bentley
  * @author Josh Bloch
@@ -48,55 +56,86 @@ final class DualPivotQuicksort {
 
     /**
      * Prevents instantiation.
+     * <p>
+     *  防止实例化
+     * 
      */
     private DualPivotQuicksort() {}
 
     /*
      * Tuning parameters.
+     * <p>
+     *  调整参数
+     * 
      */
 
     /**
      * The maximum number of runs in merge sort.
+     * <p>
+     *  合并排序的最大运行次数
+     * 
      */
     private static final int MAX_RUN_COUNT = 67;
 
     /**
      * The maximum length of run in merge sort.
+     * <p>
+     *  合并排序中运行的最大长度
+     * 
      */
     private static final int MAX_RUN_LENGTH = 33;
 
     /**
      * If the length of an array to be sorted is less than this
      * constant, Quicksort is used in preference to merge sort.
+     * <p>
+     * 如果要排序的数组的长度小于此常量,则Quicksort优先使用合并排序
+     * 
      */
     private static final int QUICKSORT_THRESHOLD = 286;
 
     /**
      * If the length of an array to be sorted is less than this
      * constant, insertion sort is used in preference to Quicksort.
+     * <p>
+     *  如果要排序的数组的长度小于此常量,则使用插入排序优先于快速排序
+     * 
      */
     private static final int INSERTION_SORT_THRESHOLD = 47;
 
     /**
      * If the length of a byte array to be sorted is greater than this
      * constant, counting sort is used in preference to insertion sort.
+     * <p>
+     *  如果要排序的字节数组的长度大于此常量,则使用计数排序优先于插入排序
+     * 
      */
     private static final int COUNTING_SORT_THRESHOLD_FOR_BYTE = 29;
 
     /**
      * If the length of a short or char array to be sorted is greater
      * than this constant, counting sort is used in preference to Quicksort.
+     * <p>
+     *  如果要排序的short或char数组的长度大于此常量,则使用计数排序优先于Quicksort
+     * 
      */
     private static final int COUNTING_SORT_THRESHOLD_FOR_SHORT_OR_CHAR = 3200;
 
     /*
      * Sorting methods for seven primitive types.
+     * <p>
+     *  七种基本类型的排序方法
+     * 
      */
 
     /**
      * Sorts the specified range of the array using the given
      * workspace array slice if possible for merging
      *
+     * <p>
+     *  如果可能,可以使用给定的工作区数组切片对数组的指定范围进行排序
+     * 
+     * 
      * @param a the array to be sorted
      * @param left the index of the first element, inclusive, to be sorted
      * @param right the index of the last element, inclusive, to be sorted
@@ -115,6 +154,9 @@ final class DualPivotQuicksort {
         /*
          * Index run[i] is the start of i-th run
          * (ascending or descending sequence).
+         * <p>
+         *  索引run [i]是第i次运行的开始(升序或降序)
+         * 
          */
         int[] run = new int[MAX_RUN_COUNT + 1];
         int count = 0; run[0] = left;
@@ -140,6 +182,9 @@ final class DualPivotQuicksort {
             /*
              * The array is not highly structured,
              * use Quicksort instead of merge sort.
+             * <p>
+             *  数组不是高度结构化的,使用Quicksort而不是合并排序
+             * 
              */
             if (++count == MAX_RUN_COUNT) {
                 sort(a, left, right, true);
@@ -206,6 +251,10 @@ final class DualPivotQuicksort {
     /**
      * Sorts the specified range of the array by Dual-Pivot Quicksort.
      *
+     * <p>
+     * 通过Dual-Pivot Quicksort对数组的指定范围进行排序
+     * 
+     * 
      * @param a the array to be sorted
      * @param left the index of the first element, inclusive, to be sorted
      * @param right the index of the last element, inclusive, to be sorted
@@ -221,6 +270,9 @@ final class DualPivotQuicksort {
                  * Traditional (without sentinel) insertion sort,
                  * optimized for server VM, is used in case of
                  * the leftmost part.
+                 * <p>
+                 *  传统(无前哨)插入排序,针对服务器VM优化,用于最左部分的情况
+                 * 
                  */
                 for (int i = left, j = i; i < right; j = ++i) {
                     int ai = a[i + 1];
@@ -235,6 +287,9 @@ final class DualPivotQuicksort {
             } else {
                 /*
                  * Skip the longest ascending sequence.
+                 * <p>
+                 *  跳过最长的升序序列
+                 * 
                  */
                 do {
                     if (left >= right) {
@@ -249,6 +304,9 @@ final class DualPivotQuicksort {
                  * the more optimized algorithm, so called pair insertion
                  * sort, which is faster (in the context of Quicksort)
                  * than traditional implementation of insertion sort.
+                 * <p>
+                 *  来自邻接部分的每个元素起哨兵的作用,因此这允许我们避免每次迭代的左侧范围检查此外,我们使用更优化的算法,因此称为对插入排序,其比在Quicksort的上下文中更快传统实现插入排序
+                 * 
                  */
                 for (int k = left; ++left <= right; k = ++left) {
                     int a1 = a[k], a2 = a[left];
@@ -285,6 +343,9 @@ final class DualPivotQuicksort {
          * pivot selection as described below. The choice for spacing
          * these elements was empirically determined to work well on
          * a wide variety of inputs.
+         * <p>
+         *  在该范围中围绕(并包括)中心元素对五个均匀间隔的元素进行排序这些元素将用于如下所述的枢轴选择。间距的选择这些元素的经验决定为在各种输入
+         * 
          */
         int e3 = (left + right) >>> 1; // The midpoint
         int e2 = e3 - seventh;
@@ -320,6 +381,9 @@ final class DualPivotQuicksort {
              * Use the second and fourth of the five sorted elements as pivots.
              * These values are inexpensive approximations of the first and
              * second terciles of the array. Note that pivot1 <= pivot2.
+             * <p>
+             * 使用五个排序的元素中的第二个和第四个作为枢轴这些值是数组的第一个和第二个terciles的便宜近似值注意pivot1 <= pivot2
+             * 
              */
             int pivot1 = a[e2];
             int pivot2 = a[e4];
@@ -329,12 +393,18 @@ final class DualPivotQuicksort {
              * locations formerly occupied by the pivots. When partitioning
              * is complete, the pivots are swapped back into their final
              * positions, and excluded from subsequent sorting.
+             * <p>
+             *  要分类的第一个和最后一个元素被移动到以前由枢轴占据的位置。当分区完成时,枢轴被交换回到它们的最终位置,并且从随后的排序中排除
+             * 
              */
             a[e2] = a[left];
             a[e4] = a[right];
 
             /*
              * Skip elements, which are less or greater than pivot values.
+             * <p>
+             *  跳过元素,小于或大于透视值
+             * 
              */
             while (a[++less] < pivot1);
             while (a[--great] > pivot2);
@@ -357,6 +427,18 @@ final class DualPivotQuicksort {
              *              all in (great, right) > pivot2
              *
              * Pointer k is the first index of ?-part.
+             * <p>
+             *  分区：
+             * 
+             * 左部分中心部分右部分+ ------------------------------------------- ------------------- + | <pivot1 | pivot1 <= && <= pivot2 | ? | >
+             *  pivot2 | + ------------------------------------------------- ------------- + ^ ^ ^ | | |少k大。
+             * 
+             *  不变量：
+             * 
+             *  all in(left,less)<pivot1 pivot1 <= all in [less,k)<= pivot2 all in(great,right)> pivot2
+             * 
+             *  指针k是α部分的第一个索引
+             * 
              */
             outer:
             for (int k = less - 1; ++k <= great; ) {
@@ -366,6 +448,9 @@ final class DualPivotQuicksort {
                     /*
                      * Here and below we use "a[i] = b; i++;" instead
                      * of "a[i++] = b;" due to performance issue.
+                     * <p>
+                     *  在这里和下面我们使用"a [i] = b; i ++;"而不是"a [i ++] = b;"由于性能问题
+                     * 
                      */
                     a[less] = ak;
                     ++less;
@@ -385,6 +470,9 @@ final class DualPivotQuicksort {
                     /*
                      * Here and below we use "a[i] = b; i--;" instead
                      * of "a[i--] = b;" due to performance issue.
+                     * <p>
+                     *  在这里和下面,我们使用"a [i] = b; i--;"而不是"a [i--] = b;"由于性能问题
+                     * 
                      */
                     a[great] = ak;
                     --great;
@@ -402,10 +490,16 @@ final class DualPivotQuicksort {
             /*
              * If center part is too large (comprises > 4/7 of the array),
              * swap internal pivot values to ends.
+             * <p>
+             * 如果中心零件太大(包含> 4/7的数组),将内部枢轴值交换到结尾
+             * 
              */
             if (less < e1 && e5 < great) {
                 /*
                  * Skip elements, which are equal to pivot values.
+                 * <p>
+                 *  跳过元素,等于数值
+                 * 
                  */
                 while (a[less] == pivot1) {
                     ++less;
@@ -433,6 +527,17 @@ final class DualPivotQuicksort {
                  *              all in (great, *) == pivot2
                  *
                  * Pointer k is the first index of ?-part.
+                 * <p>
+                 *  分区：
+                 * 
+                 *  左部分中心部分右部分+ ------------------------------------------- --------------- + | == pivot1 | pivot1 <&& <pivot2 | ? | == pivot2 | + ------------------------------------------------- --------- + ^ ^ ^ | | |少k大。
+                 * 
+                 *  不变量：
+                 * 
+                 *  all in(*,less)== pivot1 pivot1 <all in [less,k)<pivot2 all in(great,*)== pivot2
+                 * 
+                 *  指针k是α部分的第一个索引
+                 * 
                  */
                 outer:
                 for (int k = less - 1; ++k <= great; ) {
@@ -456,6 +561,10 @@ final class DualPivotQuicksort {
                              * of different signs. Therefore in float and
                              * double sorting methods we have to use more
                              * accurate assignment a[less] = a[great].
+                             * <p>
+                             * 即使一个[great]等于pivot1,赋值a [less] = pivot1也许是不正确的,如果一个[great]和pivot1是不同符号的浮点零。
+                             * 因此,在浮点和双排序方法中,我们必须使用更准确赋值a [less] = a [great]。
+                             * 
                              */
                             a[less] = pivot1;
                             ++less;
@@ -475,6 +584,9 @@ final class DualPivotQuicksort {
             /*
              * Use the third of the five sorted elements as pivot.
              * This value is inexpensive approximation of the median.
+             * <p>
+             *  使用五个排序的元素中的第三个作为枢轴此值是中值的廉价近似
+             * 
              */
             int pivot = a[e3];
 
@@ -497,6 +609,18 @@ final class DualPivotQuicksort {
              *   all in (great, right) > pivot
              *
              * Pointer k is the first index of ?-part.
+             * <p>
+             *  分区退化为传统的3路(或"荷兰国旗")模式：
+             * 
+             *  左部分中心部分右部分+ ------------------------------------------- ------ + | <pivot | == pivot | ? | > pivot |
+             *  + ------------------------------------------------- + ^ ^ ^ | | |少k大。
+             * 
+             *  不变量：
+             * 
+             * all in(left,less)<pivot all in [less,k)== pivot all in(great,right)> pivot
+             * 
+             *  指针k是α部分的第一个索引
+             * 
              */
             for (int k = less; k <= great; ++k) {
                 if (a[k] == pivot) {
@@ -523,6 +647,9 @@ final class DualPivotQuicksort {
                          * zeros of different signs. Therefore in float
                          * and double sorting methods we have to use
                          * more accurate assignment a[k] = a[great].
+                         * <p>
+                         *  即使一个[大]等于枢轴,赋值a [k] =枢轴可能是不正确的,如果一个[大]和枢轴是不同符号的浮点零。因此,在浮点和双重排序方法中,我们必须使用更准确赋值a [k] = a [
+                         * 
                          */
                         a[k] = pivot;
                     }
@@ -535,6 +662,9 @@ final class DualPivotQuicksort {
              * Sort left and right parts recursively.
              * All elements from center part are equal
              * and, therefore, already sorted.
+             * <p>
+             *  递归排序左右部件来自中心部件的所有元素相等,因此已经排序
+             * 
              */
             sort(a, left, less - 1, leftmost);
             sort(a, great + 1, right, false);
@@ -545,6 +675,10 @@ final class DualPivotQuicksort {
      * Sorts the specified range of the array using the given
      * workspace array slice if possible for merging
      *
+     * <p>
+     *  如果可能,可以使用给定的工作区数组切片对数组的指定范围进行排序
+     * 
+     * 
      * @param a the array to be sorted
      * @param left the index of the first element, inclusive, to be sorted
      * @param right the index of the last element, inclusive, to be sorted
@@ -563,6 +697,9 @@ final class DualPivotQuicksort {
         /*
          * Index run[i] is the start of i-th run
          * (ascending or descending sequence).
+         * <p>
+         *  索引run [i]是第i次运行的开始(升序或降序)
+         * 
          */
         int[] run = new int[MAX_RUN_COUNT + 1];
         int count = 0; run[0] = left;
@@ -588,6 +725,9 @@ final class DualPivotQuicksort {
             /*
              * The array is not highly structured,
              * use Quicksort instead of merge sort.
+             * <p>
+             *  数组不是高度结构化的,使用Quicksort而不是合并排序
+             * 
              */
             if (++count == MAX_RUN_COUNT) {
                 sort(a, left, right, true);
@@ -654,6 +794,10 @@ final class DualPivotQuicksort {
     /**
      * Sorts the specified range of the array by Dual-Pivot Quicksort.
      *
+     * <p>
+     * 通过Dual-Pivot Quicksort对数组的指定范围进行排序
+     * 
+     * 
      * @param a the array to be sorted
      * @param left the index of the first element, inclusive, to be sorted
      * @param right the index of the last element, inclusive, to be sorted
@@ -669,6 +813,9 @@ final class DualPivotQuicksort {
                  * Traditional (without sentinel) insertion sort,
                  * optimized for server VM, is used in case of
                  * the leftmost part.
+                 * <p>
+                 *  传统(无前哨)插入排序,针对服务器VM优化,用于最左部分的情况
+                 * 
                  */
                 for (int i = left, j = i; i < right; j = ++i) {
                     long ai = a[i + 1];
@@ -683,6 +830,9 @@ final class DualPivotQuicksort {
             } else {
                 /*
                  * Skip the longest ascending sequence.
+                 * <p>
+                 *  跳过最长的升序序列
+                 * 
                  */
                 do {
                     if (left >= right) {
@@ -697,6 +847,9 @@ final class DualPivotQuicksort {
                  * the more optimized algorithm, so called pair insertion
                  * sort, which is faster (in the context of Quicksort)
                  * than traditional implementation of insertion sort.
+                 * <p>
+                 *  来自邻接部分的每个元素起哨兵的作用,因此这允许我们避免每次迭代的左侧范围检查此外,我们使用更优化的算法,因此称为对插入排序,其比在Quicksort的上下文中更快传统实现插入排序
+                 * 
                  */
                 for (int k = left; ++left <= right; k = ++left) {
                     long a1 = a[k], a2 = a[left];
@@ -733,6 +886,9 @@ final class DualPivotQuicksort {
          * pivot selection as described below. The choice for spacing
          * these elements was empirically determined to work well on
          * a wide variety of inputs.
+         * <p>
+         *  在该范围中围绕(并包括)中心元素对五个均匀间隔的元素进行排序这些元素将用于如下所述的枢轴选择。间距的选择这些元素的经验决定为在各种输入
+         * 
          */
         int e3 = (left + right) >>> 1; // The midpoint
         int e2 = e3 - seventh;
@@ -768,6 +924,9 @@ final class DualPivotQuicksort {
              * Use the second and fourth of the five sorted elements as pivots.
              * These values are inexpensive approximations of the first and
              * second terciles of the array. Note that pivot1 <= pivot2.
+             * <p>
+             * 使用五个排序的元素中的第二个和第四个作为枢轴这些值是数组的第一个和第二个terciles的便宜近似值注意pivot1 <= pivot2
+             * 
              */
             long pivot1 = a[e2];
             long pivot2 = a[e4];
@@ -777,12 +936,18 @@ final class DualPivotQuicksort {
              * locations formerly occupied by the pivots. When partitioning
              * is complete, the pivots are swapped back into their final
              * positions, and excluded from subsequent sorting.
+             * <p>
+             *  要分类的第一个和最后一个元素被移动到以前由枢轴占据的位置。当分区完成时,枢轴被交换回到它们的最终位置,并且从随后的排序中排除
+             * 
              */
             a[e2] = a[left];
             a[e4] = a[right];
 
             /*
              * Skip elements, which are less or greater than pivot values.
+             * <p>
+             *  跳过元素,小于或大于透视值
+             * 
              */
             while (a[++less] < pivot1);
             while (a[--great] > pivot2);
@@ -805,6 +970,18 @@ final class DualPivotQuicksort {
              *              all in (great, right) > pivot2
              *
              * Pointer k is the first index of ?-part.
+             * <p>
+             *  分区：
+             * 
+             * 左部分中心部分右部分+ ------------------------------------------- ------------------- + | <pivot1 | pivot1 <= && <= pivot2 | ? | >
+             *  pivot2 | + ------------------------------------------------- ------------- + ^ ^ ^ | | |少k大。
+             * 
+             *  不变量：
+             * 
+             *  all in(left,less)<pivot1 pivot1 <= all in [less,k)<= pivot2 all in(great,right)> pivot2
+             * 
+             *  指针k是α部分的第一个索引
+             * 
              */
             outer:
             for (int k = less - 1; ++k <= great; ) {
@@ -814,6 +991,9 @@ final class DualPivotQuicksort {
                     /*
                      * Here and below we use "a[i] = b; i++;" instead
                      * of "a[i++] = b;" due to performance issue.
+                     * <p>
+                     *  在这里和下面我们使用"a [i] = b; i ++;"而不是"a [i ++] = b;"由于性能问题
+                     * 
                      */
                     a[less] = ak;
                     ++less;
@@ -833,6 +1013,9 @@ final class DualPivotQuicksort {
                     /*
                      * Here and below we use "a[i] = b; i--;" instead
                      * of "a[i--] = b;" due to performance issue.
+                     * <p>
+                     *  在这里和下面,我们使用"a [i] = b; i--;"而不是"a [i--] = b;"由于性能问题
+                     * 
                      */
                     a[great] = ak;
                     --great;
@@ -850,10 +1033,16 @@ final class DualPivotQuicksort {
             /*
              * If center part is too large (comprises > 4/7 of the array),
              * swap internal pivot values to ends.
+             * <p>
+             * 如果中心零件太大(包含> 4/7的数组),将内部枢轴值交换到结尾
+             * 
              */
             if (less < e1 && e5 < great) {
                 /*
                  * Skip elements, which are equal to pivot values.
+                 * <p>
+                 *  跳过元素,等于数值
+                 * 
                  */
                 while (a[less] == pivot1) {
                     ++less;
@@ -881,6 +1070,17 @@ final class DualPivotQuicksort {
                  *              all in (great, *) == pivot2
                  *
                  * Pointer k is the first index of ?-part.
+                 * <p>
+                 *  分区：
+                 * 
+                 *  左部分中心部分右部分+ ------------------------------------------- --------------- + | == pivot1 | pivot1 <&& <pivot2 | ? | == pivot2 | + ------------------------------------------------- --------- + ^ ^ ^ | | |少k大。
+                 * 
+                 *  不变量：
+                 * 
+                 *  all in(*,less)== pivot1 pivot1 <all in [less,k)<pivot2 all in(great,*)== pivot2
+                 * 
+                 *  指针k是α部分的第一个索引
+                 * 
                  */
                 outer:
                 for (int k = less - 1; ++k <= great; ) {
@@ -904,6 +1104,10 @@ final class DualPivotQuicksort {
                              * of different signs. Therefore in float and
                              * double sorting methods we have to use more
                              * accurate assignment a[less] = a[great].
+                             * <p>
+                             * 即使一个[great]等于pivot1,赋值a [less] = pivot1也许是不正确的,如果一个[great]和pivot1是不同符号的浮点零。
+                             * 因此,在浮点和双排序方法中,我们必须使用更准确赋值a [less] = a [great]。
+                             * 
                              */
                             a[less] = pivot1;
                             ++less;
@@ -923,6 +1127,9 @@ final class DualPivotQuicksort {
             /*
              * Use the third of the five sorted elements as pivot.
              * This value is inexpensive approximation of the median.
+             * <p>
+             *  使用五个排序的元素中的第三个作为枢轴此值是中值的廉价近似
+             * 
              */
             long pivot = a[e3];
 
@@ -945,6 +1152,18 @@ final class DualPivotQuicksort {
              *   all in (great, right) > pivot
              *
              * Pointer k is the first index of ?-part.
+             * <p>
+             *  分区退化为传统的3路(或"荷兰国旗")模式：
+             * 
+             *  左部分中心部分右部分+ ------------------------------------------- ------ + | <pivot | == pivot | ? | > pivot |
+             *  + ------------------------------------------------- + ^ ^ ^ | | |少k大。
+             * 
+             *  不变量：
+             * 
+             * all in(left,less)<pivot all in [less,k)== pivot all in(great,right)> pivot
+             * 
+             *  指针k是α部分的第一个索引
+             * 
              */
             for (int k = less; k <= great; ++k) {
                 if (a[k] == pivot) {
@@ -971,6 +1190,9 @@ final class DualPivotQuicksort {
                          * zeros of different signs. Therefore in float
                          * and double sorting methods we have to use
                          * more accurate assignment a[k] = a[great].
+                         * <p>
+                         *  即使一个[大]等于枢轴,赋值a [k] =枢轴可能是不正确的,如果一个[大]和枢轴是不同符号的浮点零。因此,在浮点和双重排序方法中,我们必须使用更准确赋值a [k] = a [
+                         * 
                          */
                         a[k] = pivot;
                     }
@@ -983,6 +1205,9 @@ final class DualPivotQuicksort {
              * Sort left and right parts recursively.
              * All elements from center part are equal
              * and, therefore, already sorted.
+             * <p>
+             *  递归排序左右部件来自中心部件的所有元素相等,因此已经排序
+             * 
              */
             sort(a, left, less - 1, leftmost);
             sort(a, great + 1, right, false);
@@ -993,6 +1218,10 @@ final class DualPivotQuicksort {
      * Sorts the specified range of the array using the given
      * workspace array slice if possible for merging
      *
+     * <p>
+     *  如果可能,可以使用给定的工作区数组切片对数组的指定范围进行排序
+     * 
+     * 
      * @param a the array to be sorted
      * @param left the index of the first element, inclusive, to be sorted
      * @param right the index of the last element, inclusive, to be sorted
@@ -1029,6 +1258,10 @@ final class DualPivotQuicksort {
     /**
      * Sorts the specified range of the array.
      *
+     * <p>
+     *  对数组的指定范围进行排序
+     * 
+     * 
      * @param a the array to be sorted
      * @param left the index of the first element, inclusive, to be sorted
      * @param right the index of the last element, inclusive, to be sorted
@@ -1047,6 +1280,9 @@ final class DualPivotQuicksort {
         /*
          * Index run[i] is the start of i-th run
          * (ascending or descending sequence).
+         * <p>
+         *  索引run [i]是第i次运行的开始(升序或降序)
+         * 
          */
         int[] run = new int[MAX_RUN_COUNT + 1];
         int count = 0; run[0] = left;
@@ -1072,6 +1308,9 @@ final class DualPivotQuicksort {
             /*
              * The array is not highly structured,
              * use Quicksort instead of merge sort.
+             * <p>
+             *  数组不是高度结构化的,使用Quicksort而不是合并排序
+             * 
              */
             if (++count == MAX_RUN_COUNT) {
                 sort(a, left, right, true);
@@ -1138,6 +1377,10 @@ final class DualPivotQuicksort {
     /**
      * Sorts the specified range of the array by Dual-Pivot Quicksort.
      *
+     * <p>
+     * 通过Dual-Pivot Quicksort对数组的指定范围进行排序
+     * 
+     * 
      * @param a the array to be sorted
      * @param left the index of the first element, inclusive, to be sorted
      * @param right the index of the last element, inclusive, to be sorted
@@ -1153,6 +1396,9 @@ final class DualPivotQuicksort {
                  * Traditional (without sentinel) insertion sort,
                  * optimized for server VM, is used in case of
                  * the leftmost part.
+                 * <p>
+                 *  传统(无前哨)插入排序,针对服务器VM优化,用于最左部分的情况
+                 * 
                  */
                 for (int i = left, j = i; i < right; j = ++i) {
                     short ai = a[i + 1];
@@ -1167,6 +1413,9 @@ final class DualPivotQuicksort {
             } else {
                 /*
                  * Skip the longest ascending sequence.
+                 * <p>
+                 *  跳过最长的升序序列
+                 * 
                  */
                 do {
                     if (left >= right) {
@@ -1181,6 +1430,9 @@ final class DualPivotQuicksort {
                  * the more optimized algorithm, so called pair insertion
                  * sort, which is faster (in the context of Quicksort)
                  * than traditional implementation of insertion sort.
+                 * <p>
+                 *  来自邻接部分的每个元素起哨兵的作用,因此这允许我们避免每次迭代的左侧范围检查此外,我们使用更优化的算法,因此称为对插入排序,其比在Quicksort的上下文中更快传统实现插入排序
+                 * 
                  */
                 for (int k = left; ++left <= right; k = ++left) {
                     short a1 = a[k], a2 = a[left];
@@ -1217,6 +1469,9 @@ final class DualPivotQuicksort {
          * pivot selection as described below. The choice for spacing
          * these elements was empirically determined to work well on
          * a wide variety of inputs.
+         * <p>
+         *  在该范围中围绕(并包括)中心元素对五个均匀间隔的元素进行排序这些元素将用于如下所述的枢轴选择。间距的选择这些元素的经验决定为在各种输入
+         * 
          */
         int e3 = (left + right) >>> 1; // The midpoint
         int e2 = e3 - seventh;
@@ -1252,6 +1507,9 @@ final class DualPivotQuicksort {
              * Use the second and fourth of the five sorted elements as pivots.
              * These values are inexpensive approximations of the first and
              * second terciles of the array. Note that pivot1 <= pivot2.
+             * <p>
+             * 使用五个排序的元素中的第二个和第四个作为枢轴这些值是数组的第一个和第二个terciles的便宜近似值注意pivot1 <= pivot2
+             * 
              */
             short pivot1 = a[e2];
             short pivot2 = a[e4];
@@ -1261,12 +1519,18 @@ final class DualPivotQuicksort {
              * locations formerly occupied by the pivots. When partitioning
              * is complete, the pivots are swapped back into their final
              * positions, and excluded from subsequent sorting.
+             * <p>
+             *  要分类的第一个和最后一个元素被移动到以前由枢轴占据的位置。当分区完成时,枢轴被交换回到它们的最终位置,并且从随后的排序中排除
+             * 
              */
             a[e2] = a[left];
             a[e4] = a[right];
 
             /*
              * Skip elements, which are less or greater than pivot values.
+             * <p>
+             *  跳过元素,小于或大于透视值
+             * 
              */
             while (a[++less] < pivot1);
             while (a[--great] > pivot2);
@@ -1289,6 +1553,18 @@ final class DualPivotQuicksort {
              *              all in (great, right) > pivot2
              *
              * Pointer k is the first index of ?-part.
+             * <p>
+             *  分区：
+             * 
+             * 左部分中心部分右部分+ ------------------------------------------- ------------------- + | <pivot1 | pivot1 <= && <= pivot2 | ? | >
+             *  pivot2 | + ------------------------------------------------- ------------- + ^ ^ ^ | | |少k大。
+             * 
+             *  不变量：
+             * 
+             *  all in(left,less)<pivot1 pivot1 <= all in [less,k)<= pivot2 all in(great,right)> pivot2
+             * 
+             *  指针k是α部分的第一个索引
+             * 
              */
             outer:
             for (int k = less - 1; ++k <= great; ) {
@@ -1298,6 +1574,9 @@ final class DualPivotQuicksort {
                     /*
                      * Here and below we use "a[i] = b; i++;" instead
                      * of "a[i++] = b;" due to performance issue.
+                     * <p>
+                     *  在这里和下面我们使用"a [i] = b; i ++;"而不是"a [i ++] = b;"由于性能问题
+                     * 
                      */
                     a[less] = ak;
                     ++less;
@@ -1317,6 +1596,9 @@ final class DualPivotQuicksort {
                     /*
                      * Here and below we use "a[i] = b; i--;" instead
                      * of "a[i--] = b;" due to performance issue.
+                     * <p>
+                     *  在这里和下面,我们使用"a [i] = b; i--;"而不是"a [i--] = b;"由于性能问题
+                     * 
                      */
                     a[great] = ak;
                     --great;
@@ -1334,10 +1616,16 @@ final class DualPivotQuicksort {
             /*
              * If center part is too large (comprises > 4/7 of the array),
              * swap internal pivot values to ends.
+             * <p>
+             * 如果中心零件太大(包含> 4/7的数组),将内部枢轴值交换到结尾
+             * 
              */
             if (less < e1 && e5 < great) {
                 /*
                  * Skip elements, which are equal to pivot values.
+                 * <p>
+                 *  跳过元素,等于数值
+                 * 
                  */
                 while (a[less] == pivot1) {
                     ++less;
@@ -1365,6 +1653,17 @@ final class DualPivotQuicksort {
                  *              all in (great, *) == pivot2
                  *
                  * Pointer k is the first index of ?-part.
+                 * <p>
+                 *  分区：
+                 * 
+                 *  左部分中心部分右部分+ ------------------------------------------- --------------- + | == pivot1 | pivot1 <&& <pivot2 | ? | == pivot2 | + ------------------------------------------------- --------- + ^ ^ ^ | | |少k大。
+                 * 
+                 *  不变量：
+                 * 
+                 *  all in(*,less)== pivot1 pivot1 <all in [less,k)<pivot2 all in(great,*)== pivot2
+                 * 
+                 *  指针k是α部分的第一个索引
+                 * 
                  */
                 outer:
                 for (int k = less - 1; ++k <= great; ) {
@@ -1388,6 +1687,10 @@ final class DualPivotQuicksort {
                              * of different signs. Therefore in float and
                              * double sorting methods we have to use more
                              * accurate assignment a[less] = a[great].
+                             * <p>
+                             * 即使一个[great]等于pivot1,赋值a [less] = pivot1也许是不正确的,如果一个[great]和pivot1是不同符号的浮点零。
+                             * 因此,在浮点和双排序方法中,我们必须使用更准确赋值a [less] = a [great]。
+                             * 
                              */
                             a[less] = pivot1;
                             ++less;
@@ -1407,6 +1710,9 @@ final class DualPivotQuicksort {
             /*
              * Use the third of the five sorted elements as pivot.
              * This value is inexpensive approximation of the median.
+             * <p>
+             *  使用五个排序的元素中的第三个作为枢轴此值是中值的廉价近似
+             * 
              */
             short pivot = a[e3];
 
@@ -1429,6 +1735,18 @@ final class DualPivotQuicksort {
              *   all in (great, right) > pivot
              *
              * Pointer k is the first index of ?-part.
+             * <p>
+             *  分区退化为传统的3路(或"荷兰国旗")模式：
+             * 
+             *  左部分中心部分右部分+ ------------------------------------------- ------ + | <pivot | == pivot | ? | > pivot |
+             *  + ------------------------------------------------- + ^ ^ ^ | | |少k大。
+             * 
+             *  不变量：
+             * 
+             * all in(left,less)<pivot all in [less,k)== pivot all in(great,right)> pivot
+             * 
+             *  指针k是α部分的第一个索引
+             * 
              */
             for (int k = less; k <= great; ++k) {
                 if (a[k] == pivot) {
@@ -1455,6 +1773,9 @@ final class DualPivotQuicksort {
                          * zeros of different signs. Therefore in float
                          * and double sorting methods we have to use
                          * more accurate assignment a[k] = a[great].
+                         * <p>
+                         *  即使一个[大]等于枢轴,赋值a [k] =枢轴可能是不正确的,如果一个[大]和枢轴是不同符号的浮点零。因此,在浮点和双重排序方法中,我们必须使用更准确赋值a [k] = a [
+                         * 
                          */
                         a[k] = pivot;
                     }
@@ -1467,6 +1788,9 @@ final class DualPivotQuicksort {
              * Sort left and right parts recursively.
              * All elements from center part are equal
              * and, therefore, already sorted.
+             * <p>
+             *  递归排序左右部件来自中心部件的所有元素相等,因此已经排序
+             * 
              */
             sort(a, left, less - 1, leftmost);
             sort(a, great + 1, right, false);
@@ -1477,6 +1801,10 @@ final class DualPivotQuicksort {
      * Sorts the specified range of the array using the given
      * workspace array slice if possible for merging
      *
+     * <p>
+     *  如果可能,可以使用给定的工作区数组切片对数组的指定范围进行排序
+     * 
+     * 
      * @param a the array to be sorted
      * @param left the index of the first element, inclusive, to be sorted
      * @param right the index of the last element, inclusive, to be sorted
@@ -1513,6 +1841,10 @@ final class DualPivotQuicksort {
     /**
      * Sorts the specified range of the array.
      *
+     * <p>
+     *  对数组的指定范围进行排序
+     * 
+     * 
      * @param a the array to be sorted
      * @param left the index of the first element, inclusive, to be sorted
      * @param right the index of the last element, inclusive, to be sorted
@@ -1531,6 +1863,9 @@ final class DualPivotQuicksort {
         /*
          * Index run[i] is the start of i-th run
          * (ascending or descending sequence).
+         * <p>
+         *  索引run [i]是第i次运行的开始(升序或降序)
+         * 
          */
         int[] run = new int[MAX_RUN_COUNT + 1];
         int count = 0; run[0] = left;
@@ -1556,6 +1891,9 @@ final class DualPivotQuicksort {
             /*
              * The array is not highly structured,
              * use Quicksort instead of merge sort.
+             * <p>
+             *  数组不是高度结构化的,使用Quicksort而不是合并排序
+             * 
              */
             if (++count == MAX_RUN_COUNT) {
                 sort(a, left, right, true);
@@ -1622,6 +1960,10 @@ final class DualPivotQuicksort {
     /**
      * Sorts the specified range of the array by Dual-Pivot Quicksort.
      *
+     * <p>
+     * 通过Dual-Pivot Quicksort对数组的指定范围进行排序
+     * 
+     * 
      * @param a the array to be sorted
      * @param left the index of the first element, inclusive, to be sorted
      * @param right the index of the last element, inclusive, to be sorted
@@ -1637,6 +1979,9 @@ final class DualPivotQuicksort {
                  * Traditional (without sentinel) insertion sort,
                  * optimized for server VM, is used in case of
                  * the leftmost part.
+                 * <p>
+                 *  传统(无前哨)插入排序,针对服务器VM优化,用于最左部分的情况
+                 * 
                  */
                 for (int i = left, j = i; i < right; j = ++i) {
                     char ai = a[i + 1];
@@ -1651,6 +1996,9 @@ final class DualPivotQuicksort {
             } else {
                 /*
                  * Skip the longest ascending sequence.
+                 * <p>
+                 *  跳过最长的升序序列
+                 * 
                  */
                 do {
                     if (left >= right) {
@@ -1665,6 +2013,9 @@ final class DualPivotQuicksort {
                  * the more optimized algorithm, so called pair insertion
                  * sort, which is faster (in the context of Quicksort)
                  * than traditional implementation of insertion sort.
+                 * <p>
+                 *  来自邻接部分的每个元素起哨兵的作用,因此这允许我们避免每次迭代的左侧范围检查此外,我们使用更优化的算法,因此称为对插入排序,其比在Quicksort的上下文中更快传统实现插入排序
+                 * 
                  */
                 for (int k = left; ++left <= right; k = ++left) {
                     char a1 = a[k], a2 = a[left];
@@ -1701,6 +2052,9 @@ final class DualPivotQuicksort {
          * pivot selection as described below. The choice for spacing
          * these elements was empirically determined to work well on
          * a wide variety of inputs.
+         * <p>
+         *  在该范围中围绕(并包括)中心元素对五个均匀间隔的元素进行排序这些元素将用于如下所述的枢轴选择。间距的选择这些元素的经验决定为在各种输入
+         * 
          */
         int e3 = (left + right) >>> 1; // The midpoint
         int e2 = e3 - seventh;
@@ -1736,6 +2090,9 @@ final class DualPivotQuicksort {
              * Use the second and fourth of the five sorted elements as pivots.
              * These values are inexpensive approximations of the first and
              * second terciles of the array. Note that pivot1 <= pivot2.
+             * <p>
+             * 使用五个排序的元素中的第二个和第四个作为枢轴这些值是数组的第一个和第二个terciles的便宜近似值注意pivot1 <= pivot2
+             * 
              */
             char pivot1 = a[e2];
             char pivot2 = a[e4];
@@ -1745,12 +2102,18 @@ final class DualPivotQuicksort {
              * locations formerly occupied by the pivots. When partitioning
              * is complete, the pivots are swapped back into their final
              * positions, and excluded from subsequent sorting.
+             * <p>
+             *  要分类的第一个和最后一个元素被移动到以前由枢轴占据的位置。当分区完成时,枢轴被交换回到它们的最终位置,并且从随后的排序中排除
+             * 
              */
             a[e2] = a[left];
             a[e4] = a[right];
 
             /*
              * Skip elements, which are less or greater than pivot values.
+             * <p>
+             *  跳过元素,小于或大于透视值
+             * 
              */
             while (a[++less] < pivot1);
             while (a[--great] > pivot2);
@@ -1773,6 +2136,18 @@ final class DualPivotQuicksort {
              *              all in (great, right) > pivot2
              *
              * Pointer k is the first index of ?-part.
+             * <p>
+             *  分区：
+             * 
+             * 左部分中心部分右部分+ ------------------------------------------- ------------------- + | <pivot1 | pivot1 <= && <= pivot2 | ? | >
+             *  pivot2 | + ------------------------------------------------- ------------- + ^ ^ ^ | | |少k大。
+             * 
+             *  不变量：
+             * 
+             *  all in(left,less)<pivot1 pivot1 <= all in [less,k)<= pivot2 all in(great,right)> pivot2
+             * 
+             *  指针k是α部分的第一个索引
+             * 
              */
             outer:
             for (int k = less - 1; ++k <= great; ) {
@@ -1782,6 +2157,9 @@ final class DualPivotQuicksort {
                     /*
                      * Here and below we use "a[i] = b; i++;" instead
                      * of "a[i++] = b;" due to performance issue.
+                     * <p>
+                     *  在这里和下面我们使用"a [i] = b; i ++;"而不是"a [i ++] = b;"由于性能问题
+                     * 
                      */
                     a[less] = ak;
                     ++less;
@@ -1801,6 +2179,9 @@ final class DualPivotQuicksort {
                     /*
                      * Here and below we use "a[i] = b; i--;" instead
                      * of "a[i--] = b;" due to performance issue.
+                     * <p>
+                     *  在这里和下面,我们使用"a [i] = b; i--;"而不是"a [i--] = b;"由于性能问题
+                     * 
                      */
                     a[great] = ak;
                     --great;
@@ -1818,10 +2199,16 @@ final class DualPivotQuicksort {
             /*
              * If center part is too large (comprises > 4/7 of the array),
              * swap internal pivot values to ends.
+             * <p>
+             * 如果中心零件太大(包含> 4/7的数组),将内部枢轴值交换到结尾
+             * 
              */
             if (less < e1 && e5 < great) {
                 /*
                  * Skip elements, which are equal to pivot values.
+                 * <p>
+                 *  跳过元素,等于数值
+                 * 
                  */
                 while (a[less] == pivot1) {
                     ++less;
@@ -1849,6 +2236,17 @@ final class DualPivotQuicksort {
                  *              all in (great, *) == pivot2
                  *
                  * Pointer k is the first index of ?-part.
+                 * <p>
+                 *  分区：
+                 * 
+                 *  左部分中心部分右部分+ ------------------------------------------- --------------- + | == pivot1 | pivot1 <&& <pivot2 | ? | == pivot2 | + ------------------------------------------------- --------- + ^ ^ ^ | | |少k大。
+                 * 
+                 *  不变量：
+                 * 
+                 *  all in(*,less)== pivot1 pivot1 <all in [less,k)<pivot2 all in(great,*)== pivot2
+                 * 
+                 *  指针k是α部分的第一个索引
+                 * 
                  */
                 outer:
                 for (int k = less - 1; ++k <= great; ) {
@@ -1872,6 +2270,10 @@ final class DualPivotQuicksort {
                              * of different signs. Therefore in float and
                              * double sorting methods we have to use more
                              * accurate assignment a[less] = a[great].
+                             * <p>
+                             * 即使一个[great]等于pivot1,赋值a [less] = pivot1也许是不正确的,如果一个[great]和pivot1是不同符号的浮点零。
+                             * 因此,在浮点和双排序方法中,我们必须使用更准确赋值a [less] = a [great]。
+                             * 
                              */
                             a[less] = pivot1;
                             ++less;
@@ -1891,6 +2293,9 @@ final class DualPivotQuicksort {
             /*
              * Use the third of the five sorted elements as pivot.
              * This value is inexpensive approximation of the median.
+             * <p>
+             *  使用五个排序的元素中的第三个作为枢轴此值是中值的廉价近似
+             * 
              */
             char pivot = a[e3];
 
@@ -1913,6 +2318,18 @@ final class DualPivotQuicksort {
              *   all in (great, right) > pivot
              *
              * Pointer k is the first index of ?-part.
+             * <p>
+             *  分区退化为传统的3路(或"荷兰国旗")模式：
+             * 
+             *  左部分中心部分右部分+ ------------------------------------------- ------ + | <pivot | == pivot | ? | > pivot |
+             *  + ------------------------------------------------- + ^ ^ ^ | | |少k大。
+             * 
+             *  不变量：
+             * 
+             * all in(left,less)<pivot all in [less,k)== pivot all in(great,right)> pivot
+             * 
+             *  指针k是α部分的第一个索引
+             * 
              */
             for (int k = less; k <= great; ++k) {
                 if (a[k] == pivot) {
@@ -1939,6 +2356,9 @@ final class DualPivotQuicksort {
                          * zeros of different signs. Therefore in float
                          * and double sorting methods we have to use
                          * more accurate assignment a[k] = a[great].
+                         * <p>
+                         *  即使一个[大]等于枢轴,赋值a [k] =枢轴可能是不正确的,如果一个[大]和枢轴是不同符号的浮点零。因此,在浮点和双重排序方法中,我们必须使用更准确赋值a [k] = a [
+                         * 
                          */
                         a[k] = pivot;
                     }
@@ -1951,6 +2371,9 @@ final class DualPivotQuicksort {
              * Sort left and right parts recursively.
              * All elements from center part are equal
              * and, therefore, already sorted.
+             * <p>
+             *  递归排序左右部件来自中心部件的所有元素相等,因此已经排序
+             * 
              */
             sort(a, left, less - 1, leftmost);
             sort(a, great + 1, right, false);
@@ -1963,6 +2386,10 @@ final class DualPivotQuicksort {
     /**
      * Sorts the specified range of the array.
      *
+     * <p>
+     *  对数组的指定范围进行排序
+     * 
+     * 
      * @param a the array to be sorted
      * @param left the index of the first element, inclusive, to be sorted
      * @param right the index of the last element, inclusive, to be sorted
@@ -2002,6 +2429,10 @@ final class DualPivotQuicksort {
      * Sorts the specified range of the array using the given
      * workspace array slice if possible for merging
      *
+     * <p>
+     *  如果可能,可以使用给定的工作区数组切片对数组的指定范围进行排序
+     * 
+     * 
      * @param a the array to be sorted
      * @param left the index of the first element, inclusive, to be sorted
      * @param right the index of the last element, inclusive, to be sorted
@@ -2013,6 +2444,9 @@ final class DualPivotQuicksort {
                      float[] work, int workBase, int workLen) {
         /*
          * Phase 1: Move NaNs to the end of the array.
+         * <p>
+         *  阶段1：将NaNs移动到数组的末尾
+         * 
          */
         while (left <= right && Float.isNaN(a[right])) {
             --right;
@@ -2028,16 +2462,25 @@ final class DualPivotQuicksort {
 
         /*
          * Phase 2: Sort everything except NaNs (which are already in place).
+         * <p>
+         *  阶段2：排除NaNs以外的所有内容(已经就位)
+         * 
          */
         doSort(a, left, right, work, workBase, workLen);
 
         /*
          * Phase 3: Place negative zeros before positive zeros.
+         * <p>
+         * 阶段3：在正零之前放置负零
+         * 
          */
         int hi = right;
 
         /*
          * Find the first zero, or first positive, or last negative element.
+         * <p>
+         *  找到第一个零,或第一个正或最后一个否定元素
+         * 
          */
         while (left < hi) {
             int middle = (left + hi) >>> 1;
@@ -2052,6 +2495,9 @@ final class DualPivotQuicksort {
 
         /*
          * Skip the last negative value (if any) or all leading negative zeros.
+         * <p>
+         *  跳过最后一个负值(如果有)或所有前导负零
+         * 
          */
         while (left <= right && Float.floatToRawIntBits(a[left]) < 0) {
             ++left;
@@ -2077,6 +2523,20 @@ final class DualPivotQuicksort {
          *   all in [k, right] >=  0.0
          *
          * Pointer k is the first index of ?-part.
+         * <p>
+         *  将负零移动到子范围的开头
+         * 
+         *  分区：
+         * 
+         *  + ------------------------------------------------- --- + | <00 | -00 | 00 | ? (> = 00)| + ---------
+         * ---------------------------------------- --- + ^ ^ ^ | | |左p k。
+         * 
+         *  不变量：
+         * 
+         *  所有在[k,右]> = 00所有在[左,p)== -00全部在[p,k)
+         * 
+         *  指针k是α部分的第一个索引
+         * 
          */
         for (int k = left, p = left - 1; ++k <= right; ) {
             float ak = a[k];
@@ -2093,6 +2553,10 @@ final class DualPivotQuicksort {
     /**
      * Sorts the specified range of the array.
      *
+     * <p>
+     *  对数组的指定范围进行排序
+     * 
+     * 
      * @param a the array to be sorted
      * @param left the index of the first element, inclusive, to be sorted
      * @param right the index of the last element, inclusive, to be sorted
@@ -2111,6 +2575,9 @@ final class DualPivotQuicksort {
         /*
          * Index run[i] is the start of i-th run
          * (ascending or descending sequence).
+         * <p>
+         *  索引run [i]是第i次运行的开始(升序或降序)
+         * 
          */
         int[] run = new int[MAX_RUN_COUNT + 1];
         int count = 0; run[0] = left;
@@ -2136,6 +2603,9 @@ final class DualPivotQuicksort {
             /*
              * The array is not highly structured,
              * use Quicksort instead of merge sort.
+             * <p>
+             * 数组不是高度结构化的,使用Quicksort而不是合并排序
+             * 
              */
             if (++count == MAX_RUN_COUNT) {
                 sort(a, left, right, true);
@@ -2202,6 +2672,10 @@ final class DualPivotQuicksort {
     /**
      * Sorts the specified range of the array by Dual-Pivot Quicksort.
      *
+     * <p>
+     *  通过Dual-Pivot Quicksort对数组的指定范围进行排序
+     * 
+     * 
      * @param a the array to be sorted
      * @param left the index of the first element, inclusive, to be sorted
      * @param right the index of the last element, inclusive, to be sorted
@@ -2217,6 +2691,9 @@ final class DualPivotQuicksort {
                  * Traditional (without sentinel) insertion sort,
                  * optimized for server VM, is used in case of
                  * the leftmost part.
+                 * <p>
+                 *  传统(无前哨)插入排序,针对服务器VM优化,用于最左部分的情况
+                 * 
                  */
                 for (int i = left, j = i; i < right; j = ++i) {
                     float ai = a[i + 1];
@@ -2231,6 +2708,9 @@ final class DualPivotQuicksort {
             } else {
                 /*
                  * Skip the longest ascending sequence.
+                 * <p>
+                 *  跳过最长的升序序列
+                 * 
                  */
                 do {
                     if (left >= right) {
@@ -2245,6 +2725,9 @@ final class DualPivotQuicksort {
                  * the more optimized algorithm, so called pair insertion
                  * sort, which is faster (in the context of Quicksort)
                  * than traditional implementation of insertion sort.
+                 * <p>
+                 *  来自邻接部分的每个元素起哨兵的作用,因此这允许我们避免每次迭代的左侧范围检查此外,我们使用更优化的算法,因此称为对插入排序,其比在Quicksort的上下文中更快传统实现插入排序
+                 * 
                  */
                 for (int k = left; ++left <= right; k = ++left) {
                     float a1 = a[k], a2 = a[left];
@@ -2281,6 +2764,9 @@ final class DualPivotQuicksort {
          * pivot selection as described below. The choice for spacing
          * these elements was empirically determined to work well on
          * a wide variety of inputs.
+         * <p>
+         * 在该范围中围绕(并包括)中心元素对五个均匀间隔的元素进行排序这些元素将用于如下所述的枢轴选择。间距的选择这些元素的经验决定为在各种输入
+         * 
          */
         int e3 = (left + right) >>> 1; // The midpoint
         int e2 = e3 - seventh;
@@ -2316,6 +2802,9 @@ final class DualPivotQuicksort {
              * Use the second and fourth of the five sorted elements as pivots.
              * These values are inexpensive approximations of the first and
              * second terciles of the array. Note that pivot1 <= pivot2.
+             * <p>
+             *  使用五个排序的元素中的第二个和第四个作为枢轴这些值是数组的第一个和第二个terciles的便宜近似值注意pivot1 <= pivot2
+             * 
              */
             float pivot1 = a[e2];
             float pivot2 = a[e4];
@@ -2325,12 +2814,18 @@ final class DualPivotQuicksort {
              * locations formerly occupied by the pivots. When partitioning
              * is complete, the pivots are swapped back into their final
              * positions, and excluded from subsequent sorting.
+             * <p>
+             *  要分类的第一个和最后一个元素被移动到以前由枢轴占据的位置。当分区完成时,枢轴被交换回到它们的最终位置,并且从随后的排序中排除
+             * 
              */
             a[e2] = a[left];
             a[e4] = a[right];
 
             /*
              * Skip elements, which are less or greater than pivot values.
+             * <p>
+             *  跳过元素,小于或大于透视值
+             * 
              */
             while (a[++less] < pivot1);
             while (a[--great] > pivot2);
@@ -2353,6 +2848,18 @@ final class DualPivotQuicksort {
              *              all in (great, right) > pivot2
              *
              * Pointer k is the first index of ?-part.
+             * <p>
+             *  分区：
+             * 
+             * 左部分中心部分右部分+ ------------------------------------------- ------------------- + | <pivot1 | pivot1 <= && <= pivot2 | ? | >
+             *  pivot2 | + ------------------------------------------------- ------------- + ^ ^ ^ | | |少k大。
+             * 
+             *  不变量：
+             * 
+             *  all in(left,less)<pivot1 pivot1 <= all in [less,k)<= pivot2 all in(great,right)> pivot2
+             * 
+             *  指针k是α部分的第一个索引
+             * 
              */
             outer:
             for (int k = less - 1; ++k <= great; ) {
@@ -2362,6 +2869,9 @@ final class DualPivotQuicksort {
                     /*
                      * Here and below we use "a[i] = b; i++;" instead
                      * of "a[i++] = b;" due to performance issue.
+                     * <p>
+                     *  在这里和下面我们使用"a [i] = b; i ++;"而不是"a [i ++] = b;"由于性能问题
+                     * 
                      */
                     a[less] = ak;
                     ++less;
@@ -2381,6 +2891,9 @@ final class DualPivotQuicksort {
                     /*
                      * Here and below we use "a[i] = b; i--;" instead
                      * of "a[i--] = b;" due to performance issue.
+                     * <p>
+                     *  在这里和下面,我们使用"a [i] = b; i--;"而不是"a [i--] = b;"由于性能问题
+                     * 
                      */
                     a[great] = ak;
                     --great;
@@ -2398,10 +2911,16 @@ final class DualPivotQuicksort {
             /*
              * If center part is too large (comprises > 4/7 of the array),
              * swap internal pivot values to ends.
+             * <p>
+             * 如果中心零件太大(包含> 4/7的数组),将内部枢轴值交换到结尾
+             * 
              */
             if (less < e1 && e5 < great) {
                 /*
                  * Skip elements, which are equal to pivot values.
+                 * <p>
+                 *  跳过元素,等于数值
+                 * 
                  */
                 while (a[less] == pivot1) {
                     ++less;
@@ -2429,6 +2948,17 @@ final class DualPivotQuicksort {
                  *              all in (great, *) == pivot2
                  *
                  * Pointer k is the first index of ?-part.
+                 * <p>
+                 *  分区：
+                 * 
+                 *  左部分中心部分右部分+ ------------------------------------------- --------------- + | == pivot1 | pivot1 <&& <pivot2 | ? | == pivot2 | + ------------------------------------------------- --------- + ^ ^ ^ | | |少k大。
+                 * 
+                 *  不变量：
+                 * 
+                 *  all in(*,less)== pivot1 pivot1 <all in [less,k)<pivot2 all in(great,*)== pivot2
+                 * 
+                 *  指针k是α部分的第一个索引
+                 * 
                  */
                 outer:
                 for (int k = less - 1; ++k <= great; ) {
@@ -2452,6 +2982,10 @@ final class DualPivotQuicksort {
                              * of different signs. Therefore in float and
                              * double sorting methods we have to use more
                              * accurate assignment a[less] = a[great].
+                             * <p>
+                             * 即使一个[great]等于pivot1,赋值a [less] = pivot1也许是不正确的,如果一个[great]和pivot1是不同符号的浮点零。
+                             * 因此,在浮点和双排序方法中,我们必须使用更准确赋值a [less] = a [great]。
+                             * 
                              */
                             a[less] = a[great];
                             ++less;
@@ -2471,6 +3005,9 @@ final class DualPivotQuicksort {
             /*
              * Use the third of the five sorted elements as pivot.
              * This value is inexpensive approximation of the median.
+             * <p>
+             *  使用五个排序的元素中的第三个作为枢轴此值是中值的廉价近似
+             * 
              */
             float pivot = a[e3];
 
@@ -2493,6 +3030,18 @@ final class DualPivotQuicksort {
              *   all in (great, right) > pivot
              *
              * Pointer k is the first index of ?-part.
+             * <p>
+             *  分区退化为传统的3路(或"荷兰国旗")模式：
+             * 
+             *  左部分中心部分右部分+ ------------------------------------------- ------ + | <pivot | == pivot | ? | > pivot |
+             *  + ------------------------------------------------- + ^ ^ ^ | | |少k大。
+             * 
+             *  不变量：
+             * 
+             * all in(left,less)<pivot all in [less,k)== pivot all in(great,right)> pivot
+             * 
+             *  指针k是α部分的第一个索引
+             * 
              */
             for (int k = less; k <= great; ++k) {
                 if (a[k] == pivot) {
@@ -2519,6 +3068,9 @@ final class DualPivotQuicksort {
                          * zeros of different signs. Therefore in float
                          * and double sorting methods we have to use
                          * more accurate assignment a[k] = a[great].
+                         * <p>
+                         *  即使一个[大]等于枢轴,赋值a [k] =枢轴可能是不正确的,如果一个[大]和枢轴是不同符号的浮点零。因此,在浮点和双重排序方法中,我们必须使用更准确赋值a [k] = a [
+                         * 
                          */
                         a[k] = a[great];
                     }
@@ -2531,6 +3083,9 @@ final class DualPivotQuicksort {
              * Sort left and right parts recursively.
              * All elements from center part are equal
              * and, therefore, already sorted.
+             * <p>
+             *  递归排序左右部件来自中心部件的所有元素相等,因此已经排序
+             * 
              */
             sort(a, left, less - 1, leftmost);
             sort(a, great + 1, right, false);
@@ -2541,6 +3096,10 @@ final class DualPivotQuicksort {
      * Sorts the specified range of the array using the given
      * workspace array slice if possible for merging
      *
+     * <p>
+     *  如果可能,可以使用给定的工作区数组切片对数组的指定范围进行排序
+     * 
+     * 
      * @param a the array to be sorted
      * @param left the index of the first element, inclusive, to be sorted
      * @param right the index of the last element, inclusive, to be sorted
@@ -2552,6 +3111,9 @@ final class DualPivotQuicksort {
                      double[] work, int workBase, int workLen) {
         /*
          * Phase 1: Move NaNs to the end of the array.
+         * <p>
+         *  阶段1：将NaNs移动到数组的末尾
+         * 
          */
         while (left <= right && Double.isNaN(a[right])) {
             --right;
@@ -2567,16 +3129,25 @@ final class DualPivotQuicksort {
 
         /*
          * Phase 2: Sort everything except NaNs (which are already in place).
+         * <p>
+         *  阶段2：排除NaNs以外的所有内容(已经就位)
+         * 
          */
         doSort(a, left, right, work, workBase, workLen);
 
         /*
          * Phase 3: Place negative zeros before positive zeros.
+         * <p>
+         *  阶段3：在正零之前放置负零
+         * 
          */
         int hi = right;
 
         /*
          * Find the first zero, or first positive, or last negative element.
+         * <p>
+         * 找到第一个零,或第一个正或最后一个否定元素
+         * 
          */
         while (left < hi) {
             int middle = (left + hi) >>> 1;
@@ -2591,6 +3162,9 @@ final class DualPivotQuicksort {
 
         /*
          * Skip the last negative value (if any) or all leading negative zeros.
+         * <p>
+         *  跳过最后一个负值(如果有)或所有前导负零
+         * 
          */
         while (left <= right && Double.doubleToRawLongBits(a[left]) < 0) {
             ++left;
@@ -2616,6 +3190,20 @@ final class DualPivotQuicksort {
          *   all in [k, right] >=  0.0
          *
          * Pointer k is the first index of ?-part.
+         * <p>
+         *  将负零移动到子范围的开头
+         * 
+         *  分区：
+         * 
+         *  + ------------------------------------------------- --- + | <00 | -00 | 00 | ? (> = 00)| + ---------
+         * ---------------------------------------- --- + ^ ^ ^ | | |左p k。
+         * 
+         *  不变量：
+         * 
+         *  所有在[k,右]> = 00所有在[左,p)== -00全部在[p,k)
+         * 
+         *  指针k是α部分的第一个索引
+         * 
          */
         for (int k = left, p = left - 1; ++k <= right; ) {
             double ak = a[k];
@@ -2632,6 +3220,10 @@ final class DualPivotQuicksort {
     /**
      * Sorts the specified range of the array.
      *
+     * <p>
+     *  对数组的指定范围进行排序
+     * 
+     * 
      * @param a the array to be sorted
      * @param left the index of the first element, inclusive, to be sorted
      * @param right the index of the last element, inclusive, to be sorted
@@ -2650,6 +3242,9 @@ final class DualPivotQuicksort {
         /*
          * Index run[i] is the start of i-th run
          * (ascending or descending sequence).
+         * <p>
+         *  索引run [i]是第i次运行的开始(升序或降序)
+         * 
          */
         int[] run = new int[MAX_RUN_COUNT + 1];
         int count = 0; run[0] = left;
@@ -2675,6 +3270,9 @@ final class DualPivotQuicksort {
             /*
              * The array is not highly structured,
              * use Quicksort instead of merge sort.
+             * <p>
+             *  数组不是高度结构化的,使用Quicksort而不是合并排序
+             * 
              */
             if (++count == MAX_RUN_COUNT) {
                 sort(a, left, right, true);
@@ -2741,6 +3339,10 @@ final class DualPivotQuicksort {
     /**
      * Sorts the specified range of the array by Dual-Pivot Quicksort.
      *
+     * <p>
+     * 通过Dual-Pivot Quicksort对数组的指定范围进行排序
+     * 
+     * 
      * @param a the array to be sorted
      * @param left the index of the first element, inclusive, to be sorted
      * @param right the index of the last element, inclusive, to be sorted
@@ -2756,6 +3358,9 @@ final class DualPivotQuicksort {
                  * Traditional (without sentinel) insertion sort,
                  * optimized for server VM, is used in case of
                  * the leftmost part.
+                 * <p>
+                 *  传统(无前哨)插入排序,针对服务器VM优化,用于最左部分的情况
+                 * 
                  */
                 for (int i = left, j = i; i < right; j = ++i) {
                     double ai = a[i + 1];
@@ -2770,6 +3375,9 @@ final class DualPivotQuicksort {
             } else {
                 /*
                  * Skip the longest ascending sequence.
+                 * <p>
+                 *  跳过最长的升序序列
+                 * 
                  */
                 do {
                     if (left >= right) {
@@ -2784,6 +3392,9 @@ final class DualPivotQuicksort {
                  * the more optimized algorithm, so called pair insertion
                  * sort, which is faster (in the context of Quicksort)
                  * than traditional implementation of insertion sort.
+                 * <p>
+                 *  来自邻接部分的每个元素起哨兵的作用,因此这允许我们避免每次迭代的左侧范围检查此外,我们使用更优化的算法,因此称为对插入排序,其比在Quicksort的上下文中更快传统实现插入排序
+                 * 
                  */
                 for (int k = left; ++left <= right; k = ++left) {
                     double a1 = a[k], a2 = a[left];
@@ -2820,6 +3431,9 @@ final class DualPivotQuicksort {
          * pivot selection as described below. The choice for spacing
          * these elements was empirically determined to work well on
          * a wide variety of inputs.
+         * <p>
+         *  在该范围中围绕(并包括)中心元素对五个均匀间隔的元素进行排序这些元素将用于如下所述的枢轴选择。间距的选择这些元素的经验决定为在各种输入
+         * 
          */
         int e3 = (left + right) >>> 1; // The midpoint
         int e2 = e3 - seventh;
@@ -2855,6 +3469,9 @@ final class DualPivotQuicksort {
              * Use the second and fourth of the five sorted elements as pivots.
              * These values are inexpensive approximations of the first and
              * second terciles of the array. Note that pivot1 <= pivot2.
+             * <p>
+             * 使用五个排序的元素中的第二个和第四个作为枢轴这些值是数组的第一个和第二个terciles的便宜近似值注意pivot1 <= pivot2
+             * 
              */
             double pivot1 = a[e2];
             double pivot2 = a[e4];
@@ -2864,12 +3481,18 @@ final class DualPivotQuicksort {
              * locations formerly occupied by the pivots. When partitioning
              * is complete, the pivots are swapped back into their final
              * positions, and excluded from subsequent sorting.
+             * <p>
+             *  要分类的第一个和最后一个元素被移动到以前由枢轴占据的位置。当分区完成时,枢轴被交换回到它们的最终位置,并且从随后的排序中排除
+             * 
              */
             a[e2] = a[left];
             a[e4] = a[right];
 
             /*
              * Skip elements, which are less or greater than pivot values.
+             * <p>
+             *  跳过元素,小于或大于透视值
+             * 
              */
             while (a[++less] < pivot1);
             while (a[--great] > pivot2);
@@ -2892,6 +3515,18 @@ final class DualPivotQuicksort {
              *              all in (great, right) > pivot2
              *
              * Pointer k is the first index of ?-part.
+             * <p>
+             *  分区：
+             * 
+             * 左部分中心部分右部分+ ------------------------------------------- ------------------- + | <pivot1 | pivot1 <= && <= pivot2 | ? | >
+             *  pivot2 | + ------------------------------------------------- ------------- + ^ ^ ^ | | |少k大。
+             * 
+             *  不变量：
+             * 
+             *  all in(left,less)<pivot1 pivot1 <= all in [less,k)<= pivot2 all in(great,right)> pivot2
+             * 
+             *  指针k是α部分的第一个索引
+             * 
              */
             outer:
             for (int k = less - 1; ++k <= great; ) {
@@ -2901,6 +3536,9 @@ final class DualPivotQuicksort {
                     /*
                      * Here and below we use "a[i] = b; i++;" instead
                      * of "a[i++] = b;" due to performance issue.
+                     * <p>
+                     *  在这里和下面我们使用"a [i] = b; i ++;"而不是"a [i ++] = b;"由于性能问题
+                     * 
                      */
                     a[less] = ak;
                     ++less;
@@ -2920,6 +3558,9 @@ final class DualPivotQuicksort {
                     /*
                      * Here and below we use "a[i] = b; i--;" instead
                      * of "a[i--] = b;" due to performance issue.
+                     * <p>
+                     *  在这里和下面,我们使用"a [i] = b; i--;"而不是"a [i--] = b;"由于性能问题
+                     * 
                      */
                     a[great] = ak;
                     --great;
@@ -2937,10 +3578,16 @@ final class DualPivotQuicksort {
             /*
              * If center part is too large (comprises > 4/7 of the array),
              * swap internal pivot values to ends.
+             * <p>
+             * 如果中心零件太大(包含> 4/7的数组),将内部枢轴值交换到结尾
+             * 
              */
             if (less < e1 && e5 < great) {
                 /*
                  * Skip elements, which are equal to pivot values.
+                 * <p>
+                 *  跳过元素,等于数值
+                 * 
                  */
                 while (a[less] == pivot1) {
                     ++less;
@@ -2968,6 +3615,17 @@ final class DualPivotQuicksort {
                  *              all in (great, *) == pivot2
                  *
                  * Pointer k is the first index of ?-part.
+                 * <p>
+                 *  分区：
+                 * 
+                 *  左部分中心部分右部分+ ------------------------------------------- --------------- + | == pivot1 | pivot1 <&& <pivot2 | ? | == pivot2 | + ------------------------------------------------- --------- + ^ ^ ^ | | |少k大。
+                 * 
+                 *  不变量：
+                 * 
+                 *  all in(*,less)== pivot1 pivot1 <all in [less,k)<pivot2 all in(great,*)== pivot2
+                 * 
+                 *  指针k是α部分的第一个索引
+                 * 
                  */
                 outer:
                 for (int k = less - 1; ++k <= great; ) {
@@ -2991,6 +3649,10 @@ final class DualPivotQuicksort {
                              * of different signs. Therefore in float and
                              * double sorting methods we have to use more
                              * accurate assignment a[less] = a[great].
+                             * <p>
+                             * 即使一个[great]等于pivot1,赋值a [less] = pivot1也许是不正确的,如果一个[great]和pivot1是不同符号的浮点零。
+                             * 因此,在浮点和双排序方法中,我们必须使用更准确赋值a [less] = a [great]。
+                             * 
                              */
                             a[less] = a[great];
                             ++less;
@@ -3010,6 +3672,9 @@ final class DualPivotQuicksort {
             /*
              * Use the third of the five sorted elements as pivot.
              * This value is inexpensive approximation of the median.
+             * <p>
+             *  使用五个排序的元素中的第三个作为枢轴此值是中值的廉价近似
+             * 
              */
             double pivot = a[e3];
 
@@ -3032,6 +3697,16 @@ final class DualPivotQuicksort {
              *   all in (great, right) > pivot
              *
              * Pointer k is the first index of ?-part.
+             * <p>
+             *  分区退化为传统的3路(或"荷兰国旗")模式：
+             * 
+             *  左部分中心部分右部分+ ------------------------------------------- ------ + | <pivot | == pivot | ? | > pivot |
+             *  + ------------------------------------------------- + ^ ^ ^ | | |少k大。
+             * 
+             *  不变量：
+             * 
+             * all in(left,less)<pivot all in [less,k)== pivot all in(great,right)> pivot
+             * 
              */
             for (int k = less; k <= great; ++k) {
                 if (a[k] == pivot) {
@@ -3058,6 +3733,9 @@ final class DualPivotQuicksort {
                          * zeros of different signs. Therefore in float
                          * and double sorting methods we have to use
                          * more accurate assignment a[k] = a[great].
+                         * <p>
+                         *  指针k是α部分的第一个索引
+                         * 
                          */
                         a[k] = a[great];
                     }
@@ -3070,6 +3748,9 @@ final class DualPivotQuicksort {
              * Sort left and right parts recursively.
              * All elements from center part are equal
              * and, therefore, already sorted.
+             * <p>
+             *  即使一个[大]等于枢轴,赋值a [k] =枢轴可能是不正确的,如果一个[大]和枢轴是不同符号的浮点零。因此,在浮点和双重排序方法中,我们必须使用更准确赋值a [k] = a [
+             * 
              */
             sort(a, left, less - 1, leftmost);
             sort(a, great + 1, right, false);

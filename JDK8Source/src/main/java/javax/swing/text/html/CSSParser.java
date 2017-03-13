@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1999, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -53,6 +54,19 @@ import java.io.*;
  * case insensitively (such as selectors), it should use toLowerCase, or
  * something similar.
  *
+ * <p>
+ *  CSS解析器这通过实现CSSParserCallback接口的委托方式工作。通知委托人以下事件：
+ * <ul>
+ * <li>导入语句：<code> handleImport </code> <li>选择器<code> handleSelector </code>对每个字符串调用此方法例如,如果Reader包含p,ba
+ * r,{} <code> startRule </code> <li>规则中的属性通过<code> handleProperty </li>代码>每个属性/值键调用一次,例如字体大小：foo;将使得通过一
+ * 个'font size'值通知代表<li>规则中的值通过<code> handleValue <代码>,通知总值<li>当规则结束时,<code> endRule </code>。
+ * </ul>
+ * 这将解析远远超过CSS 1,并松散地实现在<b> <b> <b> <b> <b> <b> <b> </b> CSS1> http：// wwww3org / TR / REC-CSS1 </a>如果错误
+ * 导致解析,将抛出RuntimeException。
+ * <p>
+ *  这将保留案例如果回调希望不敏感地处理某些情节(例如选择器),它应该使用toLowerCase或类似的东西
+ * 
+ * 
  * @author Scott Violet
  */
 class CSSParser {
@@ -92,6 +106,17 @@ class CSSParser {
                                                ')', 0};
 
 
+    // comments /* <p>
+    // comments /*  //标识符 - 字母,数字,破折号和转义字符//以匹配对开头{,} []和{}始终以匹配对形式出现,'和'也许
+    // comments /* 
+    // comments /* //表示正在解析的令牌的类型private static final int IDENTIFIER = 1; private static final int BRACKET_OPEN = 2; pri
+    // comments /* vate static final int BRACKET_CLOSE = 3; private static final int BRACE_OPEN = 4; private static fina
+    // comments /* l int BRACE_CLOSE = 5; private static final int PAREN_OPEN = 6; private static final int PAREN_CLOSE 
+    // comments /* = 7; private static final int END = -1;。
+    // comments /* 
+    // comments /*  private static final char [] charMapping = {0,0,'[',']','{','}','(',')',0}
+    // comments /* 
+    // comments /* 
     /** Set to true if one character has been read ahead. */
     private boolean        didPushChar;
     /** The read ahead character. */
@@ -161,6 +186,9 @@ class CSSParser {
     /**
      * Gets the next statement, returning false if the end is reached. A
      * statement is either an @rule, or a ruleset.
+     * <p>
+     *  获取下一条语句,如果到达结束则返回false语句是@rule或规则集
+     * 
      */
     private boolean getNextStatement() throws IOException {
         unitBuffer.setLength(0);
@@ -199,6 +227,9 @@ class CSSParser {
 
     /**
      * Parses an @ rule, stopping at a matching brace pair, or ;.
+     * <p>
+     *  解析@规则,停在匹配的括号对,或;
+     * 
      */
     private void parseAtRule() throws IOException {
         // PENDING: make this more effecient.
@@ -265,6 +296,9 @@ class CSSParser {
     /**
      * Parses the next rule set, which is a selector followed by a
      * declaration block.
+     * <p>
+     *  解析下一个规则集,它是一个选择器,后跟一个声明块
+     * 
      */
     private void parseRuleSet() throws IOException {
         if (parseSelectors()) {
@@ -277,6 +311,9 @@ class CSSParser {
     /**
      * Parses a set of selectors, returning false if the end of the stream
      * is reached.
+     * <p>
+     * 解析一组选择器,如果到达流的结尾则返回false
+     * 
      */
     private boolean parseSelectors() throws IOException {
         // Parse the selectors
@@ -319,6 +356,9 @@ class CSSParser {
     /**
      * Parses a declaration block. Which a number of declarations followed
      * by a })].
+     * <p>
+     *  解析声明块其中一个声明后跟一个})]
+     * 
      */
     private void parseDeclarationBlock() throws IOException {
         for (;;) {
@@ -339,6 +379,9 @@ class CSSParser {
     /**
      * Parses a single declaration, which is an identifier a : and another
      * identifier. This returns the last token seen.
+     * <p>
+     *  解析单个声明,它是一个标识符a：和另一个标识符这返回最后一个看到的标记
+     * 
      */
     // identifier+: identifier* ;|}
     private int parseDeclaration() throws IOException {
@@ -363,6 +406,9 @@ class CSSParser {
      * Parses identifiers until <code>extraChar</code> is encountered,
      * returning the ending token, which will be IDENTIFIER if extraChar
      * is found.
+     * <p>
+     *  解析标识符,直到遇到<code> extraChar </code>,返回结束令牌,如果找到extraChar,它将是IDENTIFIER
+     * 
      */
     private int parseIdentifiers(char extraChar,
                                  boolean wantsBlocks) throws IOException {
@@ -421,6 +467,9 @@ class CSSParser {
     /**
      * Parses till a matching block close is encountered. This is only
      * appropriate to be called at the top level (no nesting).
+     * <p>
+     *  解析到匹配块关闭时遇到这只适合在顶层调用(无嵌套)
+     * 
      */
     private void parseTillClosed(int openToken) throws IOException {
         int       nextToken;
@@ -467,6 +516,9 @@ class CSSParser {
 
     /**
      * Fetches the next token.
+     * <p>
+     *  获取下一个令牌
+     * 
      */
     private int nextToken(char idChar) throws IOException {
         readWS = false;
@@ -511,6 +563,9 @@ class CSSParser {
      * Gets an identifier, returning true if the length of the string is greater than 0,
      * stopping when <code>stopChar</code>, whitespace, or one of {}()[] is
      * hit.
+     * <p>
+     *  获取标识符,如果字符串的长度大于0则返回true,当<code> stopChar </code>,空格或{}()[]
+     * 
      */
     // NOTE: this could be combined with readTill, as they contain somewhat
     // similar functionality.
@@ -633,6 +688,9 @@ class CSSParser {
     /**
      * Reads till a <code>stopChar</code> is encountered, escaping characters
      * as necessary.
+     * <p>
+     * 读取,直到遇到<code> stopChar </code>,根据需要转义字符
+     * 
      */
     private void readTill(char stopChar) throws IOException {
         boolean lastWasEscape = false;
@@ -732,6 +790,9 @@ class CSSParser {
 
     /**
      * Parses a comment block.
+     * <p>
+     *  解析注释块
+     * 
      */
     private void readComment() throws IOException {
         int nextChar;
@@ -761,6 +822,9 @@ class CSSParser {
 
     /**
      * Called when a block start is encountered ({[.
+     * <p>
+     *  遇到块启动时调用({[
+     * 
      */
     private void startBlock(int startToken) {
         if (stackCount == unitStack.length) {
@@ -774,6 +838,9 @@ class CSSParser {
 
     /**
      * Called when an end block is encountered )]}
+     * <p>
+     *  当遇到结束块时调用)]}
+     * 
      */
     private void endBlock(int endToken) {
         int    startToken;
@@ -803,6 +870,8 @@ class CSSParser {
     }
 
     /**
+    /* <p>
+    /* 
      * @return true if currently in a block.
      */
     private boolean inBlock() {
@@ -811,6 +880,9 @@ class CSSParser {
 
     /**
      * Skips any white space, returning the character after the white space.
+     * <p>
+     *  跳过任何空格,返回空格后的字符
+     * 
      */
     private int readWS() throws IOException {
         int nextChar;
@@ -823,6 +895,9 @@ class CSSParser {
 
     /**
      * Reads a character from the stream.
+     * <p>
+     *  从流中读取字符
+     * 
      */
     private int readChar() throws IOException {
         if (didPushChar) {
@@ -836,12 +911,17 @@ class CSSParser {
             return (int)Character.toLowerCase((char)retValue);
         }
         return retValue;
+        /* <p>
+        /*  if(retValue！= -1){return(int)CharactertoLowerCase((char)retValue); } return retValue;
+        /* 
         */
     }
 
     /**
      * Supports one character look ahead, this will throw if called twice
      * in a row.
+     * <p>
+     *  支持一个字符前面,如果连续调用两次,这将抛出
      */
     private void pushChar(int tempChar) {
         if (didPushChar) {

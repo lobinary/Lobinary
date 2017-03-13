@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2005 Apache软件基金会
+ * 
+ *  根据Apache许可证第20版("许可证")授权;您不得使用此文件,除非符合许可证您可以在获取许可证的副本
+ * 
+ *  http：// wwwapacheorg / licenses / LICENSE-20
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件将按"原样"基础分发,无任何明示或暗示的保证或条件。请参阅许可证管理权限和限制许可证
+ * 
  */
 package com.sun.org.apache.xerces.internal.xpointer;
 
@@ -59,6 +69,23 @@ import com.sun.org.apache.xerces.internal.xni.parser.XMLErrorHandler;
  *
  * @xerces.internal
  *
+ * <p>
+ * <p>
+ * 这是一个管道组件,它扩展了XIncludeHandler以执行在W3C XPointerFramework和element()方案中指定的XPointer特定处理
+ * </p>
+ * 
+ * <p>
+ *  此组件分析管道中的每个事件,查找与父XInclude元素的xpointer属性值中的PointerPart匹配的元素如果匹配成功,则所有子代都由此组件传递
+ * </p>
+ * 
+ * <p>
+ *  有关XPointer Framework和ShortHand指针的更多信息,请参见<a href=\"http://wwww3org/TR/xptr-framework//\"> XPointer框架
+ * 建议</a>。
+ * 请参阅<a href ="http：//关于XPointer元素()方案的详细信息,请参见"wwww3org / TR / xptr-element /"> XPointer元素。
+ * </p>
+ * 
+ *  @xercesinternal
+ * 
  */
 public final class XPointerHandler extends XIncludeHandler implements
         XPointerProcessor {
@@ -98,6 +125,7 @@ public final class XPointerHandler extends XIncludeHandler implements
 
     /**
      *
+     * <p>
      */
     public XPointerHandler() {
         super();
@@ -124,6 +152,10 @@ public final class XPointerHandler extends XIncludeHandler implements
     /**
      * Parses the XPointer framework expression and delegates scheme specific parsing.
      *
+     * <p>
+     * 解析XPointer框架表达式并委派方案特定的解析
+     * 
+     * 
      * @see com.sun.org.apache.xerces.internal.xpointer.XPointerProcessor#parseXPointer(java.lang.String)
      */
     public void parseXPointer(String xpointer) throws XNIException {
@@ -281,6 +313,8 @@ public final class XPointerHandler extends XIncludeHandler implements
 
     /**
      *
+     * <p>
+     * 
      * @see com.sun.org.apache.xerces.internal.xpointer.XPointerProcessor#resolveXPointer(com.sun.org.apache.xerces.internal.xni.QName, com.sun.org.apache.xerces.internal.xni.XMLAttributes, com.sun.org.apache.xerces.internal.xni.Augmentations, int event)
      */
     public boolean resolveXPointer(QName element, XMLAttributes attributes,
@@ -324,6 +358,10 @@ public final class XPointerHandler extends XIncludeHandler implements
     /**
      * Returns true if the Node fragment is resolved.
      *
+     * <p>
+     *  如果节点片段已解决,则返回true
+     * 
+     * 
      * @see com.sun.org.apache.xerces.internal.xpointer.XPointerProcessor#isFragmentResolved()
      */
     public boolean isFragmentResolved() throws XNIException {
@@ -341,6 +379,10 @@ public final class XPointerHandler extends XIncludeHandler implements
      * Returns true if the XPointer expression resolves to a non-element child
      * of the current resource fragment.
      *
+     * <p>
+     *  如果XPointer表达式解析为当前资源片段的非元素子元素,则返回true
+     * 
+     * 
      * @see com.sun.org.apache.xerces.internal.xpointer.XPointerPart#isChildFragmentResolved()
      *
      */
@@ -353,6 +395,10 @@ public final class XPointerHandler extends XIncludeHandler implements
     /**
      * Returns true if the XPointer successfully found a sub-resource .
      *
+     * <p>
+     *  如果XPointer成功找到子资源,则返回true
+     * 
+     * 
      * @see com.sun.org.apache.xerces.internal.xpointer.XPointerProcessor#isFragmentResolved()
      */
     public boolean isXPointerResolved() throws XNIException {
@@ -362,6 +408,10 @@ public final class XPointerHandler extends XIncludeHandler implements
     /**
      * Returns the pointer part used to resolve the document fragment.
      *
+     * <p>
+     *  返回用于解析文档片段的指针部分
+     * 
+     * 
      * @return String - The pointer part used to resolve the document fragment.
      */
     public XPointerPart getXPointerPart() {
@@ -371,6 +421,9 @@ public final class XPointerHandler extends XIncludeHandler implements
     /**
      * Reports XPointer Errors
      *
+     * <p>
+     *  报告XPointer错误
+     * 
      */
     private void reportError(String key, Object[] arguments)
             throws XNIException {
@@ -378,6 +431,10 @@ public final class XPointerHandler extends XIncludeHandler implements
         fXPointerErrorReporter.reportError(
                 XPointerMessageFormatter.XPOINTER_DOMAIN, key, arguments,
                 XMLErrorReporter.SEVERITY_ERROR);
+        /* <p>
+        /*  fXPointerErrorReporterreportError(XPointerMessageFormatterXPOINTER_DOMAIN,key,arguments,XMLErrorRepo
+        /* rterSEVERITY_ERROR);。
+        /* 
         */
         throw new XNIException((fErrorReporter
                                 .getMessageFormatter(XPointerMessageFormatter.XPOINTER_DOMAIN))
@@ -387,6 +444,9 @@ public final class XPointerHandler extends XIncludeHandler implements
     /**
      * Reports XPointer Warnings
      *
+     * <p>
+     *  报告XPointer警告
+     * 
      */
     private void reportWarning(String key, Object[] arguments)
             throws XNIException {
@@ -398,6 +458,9 @@ public final class XPointerHandler extends XIncludeHandler implements
     /**
      * Initializes error handling objects
      *
+     * <p>
+     *  初始化错误处理对象
+     * 
      */
     protected void initErrorReporter() {
         if (fXPointerErrorReporter == null) {
@@ -409,6 +472,10 @@ public final class XPointerHandler extends XIncludeHandler implements
         /*
          fXPointerErrorReporter.setProperty(Constants.XERCES_PROPERTY_PREFIX
          + Constants.ERROR_HANDLER_PROPERTY, fErrorHandler);
+        /* <p>
+        /*  fXPointerErrorReportersetProperty(ConstantsXERCES_PROPERTY_PREFIX + ConstantsERROR_HANDLER_PROPERTY,
+        /* fErrorHandler);。
+        /* 
          */
         fXPointerErrorReporter.putMessageFormatter(
                 XPointerMessageFormatter.XPOINTER_DOMAIN,
@@ -417,6 +484,9 @@ public final class XPointerHandler extends XIncludeHandler implements
 
     /**
      * Initializes the XPointer Processor;
+     * <p>
+     *  初始化XPointer处理器;
+     * 
      */
     protected void init() {
         fXPointerParts.clear();
@@ -432,6 +502,10 @@ public final class XPointerHandler extends XIncludeHandler implements
     /**
      * Returns a Vector of XPointerPart objects
      *
+     * <p>
+     *  返回XPointerPart对象的向量
+     * 
+     * 
      * @return A Vector of XPointerPart objects.
      */
     public Vector getPointerParts() {
@@ -443,6 +517,11 @@ public final class XPointerHandler extends XIncludeHandler implements
      *
      * @xerces.internal
      *
+     * <p>
+     * XPointer Framework令牌列表
+     * 
+     *  @xercesinternal
+     * 
      */
     private final class Tokens {
 
@@ -458,6 +537,12 @@ public final class XPointerHandler extends XIncludeHandler implements
          * [8] NormalChar  ::= UnicodeChar - [()^]
          * [9] UnicodeChar ::= [#x0-#x10FFFF]
          *
+         * <p>
+         *  XPointer Framework Token [1] Pointer :: = Shorthand | SchemeBased [2] Shorthand :: = NCName [3] Sche
+         * meBased :: = PointerPart(S?PointerPart)* [4] PointerPart :: = SchemeName'('SchemeData')'SchemeName ::
+         *  = QName [6] :: = EscapedData * [7] EscapedData :: = NormalChar | '^('|'^)'| '^^'| '('SchemeData')'[8
+         * ] NormalChar :: = UnicodeChar  -  [()^] [9] UnicodeChar :: = [#x0-#x10FFFF]。
+         * 
          */
         private static final int XPTRTOKEN_OPEN_PAREN = 0,
                 XPTRTOKEN_CLOSE_PAREN = 1, XPTRTOKEN_SHORTHAND = 2,
@@ -485,6 +570,10 @@ public final class XPointerHandler extends XIncludeHandler implements
         /**
          * Constructor
          *
+         * <p>
+         *  构造函数
+         * 
+         * 
          * @param symbolTable SymbolTable
          */
         private Tokens(SymbolTable symbolTable) {
@@ -504,6 +593,10 @@ public final class XPointerHandler extends XIncludeHandler implements
 
         /**
          * Returns the token String
+         * <p>
+         *  返回标记String
+         * 
+         * 
          * @param token The index of the token
          * @return String The token string
          */
@@ -514,6 +607,10 @@ public final class XPointerHandler extends XIncludeHandler implements
         /**
          * Add the specified string as a token
          *
+         * <p>
+         *  将指定的字符串添加为令牌
+         * 
+         * 
          * @param token The token string
          */
         private void addToken(String tokenStr) {
@@ -528,6 +625,10 @@ public final class XPointerHandler extends XIncludeHandler implements
         /**
          * Add the specified int token
          *
+         * <p>
+         *  添加指定的int令牌
+         * 
+         * 
          * @param token The int specifying the token
          */
         private void addToken(int token) {
@@ -544,6 +645,9 @@ public final class XPointerHandler extends XIncludeHandler implements
 
         /**
          * Resets the current position to the head of the token list.
+         * <p>
+         *  将当前位置重置为令牌列表的头
+         * 
          */
         private void rewind() {
             fCurrentTokenIndex = 0;
@@ -552,6 +656,9 @@ public final class XPointerHandler extends XIncludeHandler implements
         /**
          * Returns true if the {@link #getNextToken()} method
          * returns a valid token.
+         * <p>
+         *  如果{@link #getNextToken()}方法返回有效的令牌,则返回true
+         * 
          */
         private boolean hasMore() {
             return fCurrentTokenIndex < fTokenCount;
@@ -563,6 +670,11 @@ public final class XPointerHandler extends XIncludeHandler implements
          *
          * throws If there's no such next token, this method throws
          * <tt>new XNIException("XPointerProcessingError");</tt>.
+         * <p>
+         *  在当前位置获取令牌,然后将当前位置前进一个
+         * 
+         * throws如果没有这样的下一个标记,这个方法会抛出<tt> new XNIException("XPointerProcessingError"); </tt>
+         * 
          */
         private int nextToken() throws XNIException {
             if (fCurrentTokenIndex == fTokenCount) {
@@ -577,6 +689,11 @@ public final class XPointerHandler extends XIncludeHandler implements
          *
          * If there's no such next token, this method throws
          * <tt>new XNIException("XPointerProcessingError");</tt>.
+         * <p>
+         *  在当前位置获取令牌,而不推进当前位置
+         * 
+         *  如果没有这样的下一个标记,这个方法会抛出<tt> new XNIException("XPointerProcessingError"); </tt>
+         * 
          */
         private int peekToken() throws XNIException {
             if (fCurrentTokenIndex == fTokenCount) {
@@ -592,6 +709,12 @@ public final class XPointerHandler extends XIncludeHandler implements
          * is not a string token, this method throws
          * If there's no such next token, this method throws
          * <tt>new XNIException("XPointerProcessingError");</tt>.
+         * <p>
+         *  在当前位置获取一个字符串的令牌
+         * 
+         *  如果没有当前令牌或者当前令牌不是字符串令牌,则此方法抛出如果没有这样的下一个令牌,此方法将抛出<tt> new XNIException("XPointerProcessingError"); </tt>
+         * 。
+         * 
          */
         private String nextTokenAsString() throws XNIException {
             String tokenStrint = getTokenString(nextToken());
@@ -608,6 +731,11 @@ public final class XPointerHandler extends XIncludeHandler implements
      *
      * @xerces.internal
      *
+     * <p>
+     *  XPointer表达式扫描器扫描XPointer框架表达式
+     * 
+     *  @xercesinternal
+     * 
      */
     private class Scanner {
 
@@ -623,6 +751,13 @@ public final class XPointerHandler extends XIncludeHandler implements
          *  P,  Q,  R,  S,  T,  U,  V,  W,  X,  Y,  Z,  [,  \,  ],  ^,  _,  // 5
          *  `,  a,  b,  c,  d,  e,  f,  g,  h,  i,  j,  k,  l,  m,  n,  o,  // 6
          *  p,  q,  r,  s,  t,  u,  v,  w,  x,  y,  z,  {,  |,  },  ~, DEL  // 7
+         * <p>
+         *  7位ASCII子集
+         * 
+         * 0 1 2 3 4 5 6 7 8 9 ABCDEF 0,0,0,0,0,0,0,0,0,HT,LF,0,0,CR,0,0,0 // 0,0,0, 0,0,0,0,0,0,0,0,1,0,0,0,0,0
+         * ,0, ,*,+,,,  - ,,/,// 2 0,1,2,3,4,5,6,7,8,9, A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W a,b,c,d,e,
+         * f,g,h,i,j,k,l,m,n, o,// 6 p,q,r,s,t,u,v,w,x,y,z,{,。
+         * 
          */
         private static final byte CHARTYPE_INVALID = 0, // invalid XML character
                 CHARTYPE_OTHER = 1, // not special - one of "#%&;?\`{}~" or DEL
@@ -658,6 +793,10 @@ public final class XPointerHandler extends XIncludeHandler implements
         /**
          * Constructs an XPointer Framework expression scanner.
          *
+         * <p>
+         *  构造XPointer Framework表达式扫描程序
+         * 
+         * 
          * @param symbolTable SymbolTable
          */
         private Scanner(SymbolTable symbolTable) {
@@ -669,6 +808,9 @@ public final class XPointerHandler extends XIncludeHandler implements
         /**
          * Scans the XPointer Expression
          *
+         * <p>
+         *  扫描XPointer表达式
+         * 
          */
         private boolean scanExpr(SymbolTable symbolTable, Tokens tokens,
                 String data, int currentOffset, int endOffset)
@@ -857,6 +999,11 @@ public final class XPointerHandler extends XIncludeHandler implements
          * [5] NCName ::= (Letter | '_') (NCNameChar)*
          * [6] NCNameChar ::= Letter | Digit | '.' | '-' | '_' | CombiningChar | Extender
          *
+         * <p>
+         * 从NC中的命名空间扫描NCName [5] NCName :: =(Letter |'_')(NCNameChar)* [6] NCNameChar :: = Letter |数字| ''| ' - '
+         * | '_'|组合Char |扩展器。
+         * 
+         * 
          * @param data A String containing the XPointer expression
          * @param endOffset The int XPointer expression length
          * @param currentOffset An int representing the current position of the XPointer expression pointer
@@ -903,6 +1050,10 @@ public final class XPointerHandler extends XIncludeHandler implements
          * [8]    NormalChar   ::=    UnicodeChar - [()^]
          * [9]    UnicodeChar  ::=    [#x0-#x10FFFF]
          *
+         * <p>
+         *  扫描SchemeData [6] SchemeData :: = EscapedData * [7] EscapedData :: = NormalChar | '^('|'^)'| '^^'| '(
+         * 'SchemeData')'[8] NormalChar :: = UnicodeChar  -  [()^] [9] UnicodeChar :: = [#x0-#x10FFFF]。
+         * 
          */
         private int scanData(String data, StringBuffer schemeData,
                 int endOffset, int currentOffset) {
@@ -971,6 +1122,10 @@ public final class XPointerHandler extends XIncludeHandler implements
          * to disallow certain tokens from being used in the scanned
          * XPath expression. This is a convenient way of allowing only
          * a subset of XPath.
+         * <p>
+         *  此方法将指定的标记添加到标记列表默认情况下,此方法允许所有标记。
+         * 但是,XPathExprScanner的子类可以覆盖此方法,以禁止在扫描的XPath表达式中使用某些标记这是一种方便的方法, XPath的子集。
+         * 
          */
         protected void addToken(Tokens tokens, int token) throws XNIException {
             tokens.addToken(token);
@@ -984,6 +1139,10 @@ public final class XPointerHandler extends XIncludeHandler implements
     /**
      * If the comment is a child of a matched element, then pass else return.
      *
+     * <p>
+     *  如果注释是匹配元素的子元素,则传递else返回
+     * 
+     * 
      * @param text   The text in the comment.
      * @param augs   Additional information that may include infoset augmentations
      *
@@ -1008,6 +1167,12 @@ public final class XPointerHandler extends XIncludeHandler implements
      * to the application as anything other than text. The application is
      * responsible for parsing the data.
      *
+     * <p>
+     * 处理指令处理指令由目标名称和可选的文本数据组成。数据仅对应用程序有意义
+     * <p>
+     *  通常,处理指令的数据将包含一系列伪属性这些伪属性遵循元素属性的形式,但是<strong>不</strong>作为除文本之外的任何东西解析或呈现给应用程序应用程序负责解析数据
+     * 
+     * 
      * @param target The target.
      * @param data   The data or null if none specified.
      * @param augs   Additional information that may include infoset augmentations
@@ -1026,6 +1191,10 @@ public final class XPointerHandler extends XIncludeHandler implements
     /**
      * The start of an element.
      *
+     * <p>
+     *  元素的开始
+     * 
+     * 
      * @param element    The name of the element.
      * @param attributes The element attributes.
      * @param augs       Additional information that may include infoset augmentations
@@ -1057,6 +1226,10 @@ public final class XPointerHandler extends XIncludeHandler implements
     /**
      * An empty element.
      *
+     * <p>
+     *  空元素
+     * 
+     * 
      * @param element    The name of the element.
      * @param attributes The element attributes.
      * @param augs       Additional information that may include infoset augmentations
@@ -1087,6 +1260,10 @@ public final class XPointerHandler extends XIncludeHandler implements
     /**
      * Character content.
      *
+     * <p>
+     *  字符内容
+     * 
+     * 
      * @param text   The content.
      * @param augs   Additional information that may include infoset augmentations
      *
@@ -1109,6 +1286,10 @@ public final class XPointerHandler extends XIncludeHandler implements
      * characters in the document are ignorable based on the element
      * content model.
      *
+     * <p>
+     * 可忽略的空格对于要调用的此方法,文档源必须具有某种方式来确定只包含空格字符的文本应该被视为可忽略。例如,验证器可以确定文档中的空白字符的长度是否可基于元素内容模型
+     * 
+     * 
      * @param text   The ignorable whitespace.
      * @param augs   Additional information that may include infoset augmentations
      *
@@ -1126,6 +1307,10 @@ public final class XPointerHandler extends XIncludeHandler implements
     /**
      * The end of an element.
      *
+     * <p>
+     *  元素的结尾
+     * 
+     * 
      * @param element The name of the element.
      * @param augs    Additional information that may include infoset augmentations
      *
@@ -1146,6 +1331,10 @@ public final class XPointerHandler extends XIncludeHandler implements
     /**
      * The start of a CDATA section.
      *
+     * <p>
+     *  CDATA节的开始
+     * 
+     * 
      * @param augs   Additional information that may include infoset augmentations
      *
      * @exception XNIException
@@ -1161,6 +1350,10 @@ public final class XPointerHandler extends XIncludeHandler implements
     /**
      * The end of a CDATA section.
      *
+     * <p>
+     *  CDATA段的结尾
+     * 
+     * 
      * @param augs   Additional information that may include infoset augmentations
      *
      * @exception XNIException
@@ -1184,6 +1377,11 @@ public final class XPointerHandler extends XIncludeHandler implements
      * <strong>Note:</strong> Components should silently ignore properties
      * that do not affect the operation of the component.
      *
+     * <p>
+     * <p>
+     *  设置属性的值当属性更改值时,此方法由组件管理器在复位后任何时间调用
+     * </p>
+     * 
      * @param propertyId The property identifier.
      * @param value      The value of the property.
      *

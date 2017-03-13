@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,6 +57,31 @@ package com.sun.org.apache.bcel.internal.classfile;
  * individuals on behalf of the Apache Software Foundation.  For more
  * information on the Apache Software Foundation, please see
  * <http://www.apache.org/>.
+ * <p>
+ *  Apache软件许可证,版本11
+ * 
+ *  版权所有(c)2001 Apache软件基金会保留所有权利
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  1源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明
+ * 
+ *  2二进制形式的再分发必须在随分发版提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明
+ * 
+ * 3包含在重新分发中的最终用户文档(如果有的话)必须包括以下声明："本产品包括Apache Software Foundation(http：// wwwapacheorg /)开发的软件。
+ * 或者,此确认可能出现在软件本身,如果和第三方承诺通常出现的地方。
+ * 
+ *  4未经事先书面许可,不得使用"Apache"和"Apache Software Foundation"和"Apache BCEL"这些名称来认可或推广从本软件衍生的产品对于书面许可,请联系apache
+ *  @ apacheorg。
+ * 
+ *  5未经Apache软件基金会事先书面许可,不得将本软件衍生的产品称为"Apache","Apache BCEL"或"Apache"名称。
+ * 
+ * 本软件按"原样"提供,任何明示或暗示的保证,包括但不限于适销性和针对特定用途的适用性的默示担保,在任何情况下均不得免责,APACHE软件基金会或其参与人应负赔偿责任对于任何直接,间接,偶发,特殊,惩罚性
+ * 或后果性损害(包括但不限于替代商品或服务的采购;使用,数据或利润损失;或业务中断)责任,无论是在合同,严格责任或侵权(包括疏忽或其他方式),以任何方式使用本软件,即使已被告知此类损害的可能性======
+ * ==============================================================。
+ * 
+ * 此软件包括许多个人代表Apache软件基金会所做的自愿捐款有关Apache软件基金会的更多信息,请参阅<http：// wwwapacheorg />
+ * 
  */
 
 import  com.sun.org.apache.bcel.internal.Constants;
@@ -65,6 +91,10 @@ import  java.io.*;
  * This class represents a local variable within a method. It contains its
  * scope, name, signature and index on the method's frame.
  *
+ * <p>
+ *  此类表示方法中的局部变量。它包含方法框架上的作用域,名称,签名和索引
+ * 
+ * 
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
  * @see     LocalVariableTable
  */
@@ -77,6 +107,9 @@ public final class LocalVariable
   private int signature_index; // Index of variable signature
   private int index;            /* Variable is `index'th local variable on
                                 * this method's frame.
+                                * <p>
+                                *  这个方法的框架
+                                * 
                                 */
 
   private ConstantPool constant_pool;
@@ -84,6 +117,9 @@ public final class LocalVariable
   /**
    * Initialize from another object. Note that both objects use the same
    * references (shallow copy). Use copy() for a physical copy.
+   * <p>
+   *  从另一个对象初始化请注意,两个对象使用相同的引用(浅拷贝)对物理副本使用copy()
+   * 
    */
   public LocalVariable(LocalVariable c) {
     this(c.getStartPC(), c.getLength(), c.getNameIndex(),
@@ -92,6 +128,10 @@ public final class LocalVariable
 
   /**
    * Construct object from file stream.
+   * <p>
+   *  从文件流构造对象
+   * 
+   * 
    * @param file Input stream
    * @throws IOException
    */
@@ -104,6 +144,8 @@ public final class LocalVariable
   }
 
   /**
+  /* <p>
+  /* 
    * @param start_pc Range in which the variable
    * @param length ... is valid
    * @param name_index Index in constant pool of variable name
@@ -128,6 +170,10 @@ public final class LocalVariable
    * defined by the contents of a Java class. I.e., the hierarchy of methods,
    * fields, attributes, etc. spawns a tree of objects.
    *
+   * <p>
+   *  由遍历由Java类Ie的内容隐含地定义的树的节点的对象调用,方法,字段,属性等的层次结构产生对象的树
+   * 
+   * 
    * @param v Visitor object
    */
   public void accept(Visitor v) {
@@ -137,6 +183,10 @@ public final class LocalVariable
   /**
    * Dump local variable to file stream in binary format.
    *
+   * <p>
+   *  以二进制格式将局部变量转储到文件流
+   * 
+   * 
    * @param file Output file stream
    * @throws IOException
    */
@@ -150,16 +200,22 @@ public final class LocalVariable
   }
 
   /**
+  /* <p>
+  /* 
    * @return Constant pool used by this object.
    */
   public final ConstantPool getConstantPool() { return constant_pool; }
 
   /**
+  /* <p>
+  /* 
    * @return Variable is valid within getStartPC() .. getStartPC()+getLength()
    */
   public final int getLength()         { return length; }
 
   /**
+  /* <p>
+  /* 
    * @return Variable name.
    */
   public final String getName() {
@@ -170,11 +226,15 @@ public final class LocalVariable
   }
 
   /**
+  /* <p>
+  /* 
    * @return Index in constant pool of variable name.
    */
   public final int getNameIndex()      { return name_index; }
 
   /**
+  /* <p>
+  /* 
    * @return Signature.
    */
   public final String getSignature() {
@@ -185,21 +245,29 @@ public final class LocalVariable
   }
 
   /**
+  /* <p>
+  /* 
    * @return Index in constant pool of variable signature.
    */
   public final int getSignatureIndex() { return signature_index; }
 
   /**
+  /* <p>
+  /* 
    * @return index of register where variable is stored
    */
   public final int getIndex()           { return index; }
 
   /**
+  /* <p>
+  /* 
    * @return Start of range where he variable is valid
    */
   public final int getStartPC()        { return start_pc; }
 
   /**
+  /* <p>
+  /* 
    * @param constant_pool Constant pool to be used for this object.
    */
   public final void setConstantPool(ConstantPool constant_pool) {
@@ -207,6 +275,8 @@ public final class LocalVariable
   }
 
   /**
+  /* <p>
+  /* 
    * @param length.
    */
   public final void setLength(int length) {
@@ -214,6 +284,8 @@ public final class LocalVariable
   }
 
   /**
+  /* <p>
+  /* 
    * @param name_index.
    */
   public final void setNameIndex(int name_index) {
@@ -221,6 +293,8 @@ public final class LocalVariable
   }
 
   /**
+  /* <p>
+  /* 
    * @param signature_index.
    */
   public final void setSignatureIndex(int signature_index) {
@@ -228,11 +302,15 @@ public final class LocalVariable
   }
 
   /**
+  /* <p>
+  /* 
    * @param index.
    */
   public final void setIndex(int index) { this.index = index; }
 
   /**
+  /* <p>
+  /* 
    * @param start_pc Specify range where the local variable is valid.
    */
   public final void setStartPC(int start_pc) {
@@ -240,6 +318,8 @@ public final class LocalVariable
   }
 
   /**
+  /* <p>
+  /* 
    * @return string representation.
    */
   public final String toString() {
@@ -250,6 +330,8 @@ public final class LocalVariable
   }
 
   /**
+  /* <p>
+  /* 
    * @return deep copy of this object
    */
   public LocalVariable copy() {

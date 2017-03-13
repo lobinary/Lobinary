@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2000, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -51,6 +52,16 @@ import javax.management.ImmutableDescriptor;
  *  <li>its description.</li>
  * </ul>
  *
+ * <p>
+ *  <code> OpenType </code>类是描述实际<i>开放数据值</i>的所有类的父抽象类
+ * <p>
+ *  <i>打开类型</i>由以下定义：
+ * <ul>
+ *  <li>此类型描述的开放数据值的完全限定的Java类名;请注意,对于打开的数据值只允许有限的一组Java类(请参阅{@link #ALLOWED_CLASSNAMES_LIST ALLOWED_CLASSNAMES_LIST}
+ * ),</li> <li>其名称,</li> <li>。
+ * </ul>
+ * 
+ * 
  * @param <T> the Java type that instances described by this type must
  * have.  For example, {@link SimpleType#INTEGER} is a {@code
  * SimpleType<Integer>} which is a subclass of {@code OpenType<Integer>},
@@ -91,6 +102,13 @@ public abstract class OpenType<T> implements Serializable {
         TabularData.class.getName() } ;
        </pre>
      *
+     * <p>
+     * 允许打开数据值的Ja​​va类的完全限定名称列表这些类中的任何一个或其对应的基本类型的多维数组也是开放数据值的允许类
+     * 
+     *  <pre> ALLOWED_CLASSNAMES_LIST = {"javalangVoid","javalangBoolean","javalangCharacter,javalangByte,javalangShort,javalangInteger,javalangLong,javalangFloat,javalangDouble,javalangString,javamathBigDecimal, ","<pre>ALLOWED_CLASSNAMES_LIST = { \"javalangVoid\", \"javalangBoolean\", \"javalangCharacter\", \"javalangByte\", \"javalangShort\", \"javalangInteger\", \"javalangLong\", \"javalangFloat\", \"javalangDouble\", \"javalangString\", \"javamathBigDecimal\"javamathBigInteger","javautilDate","javaxmanagementObjectName",CompositeDataclassgetName(),TabularDataclassgetName()}
+     * ;。
+     * </pre>
+     * 
      */
     public static final List<String> ALLOWED_CLASSNAMES_LIST =
       Collections.unmodifiableList(
@@ -114,6 +132,8 @@ public abstract class OpenType<T> implements Serializable {
 
 
     /**
+    /* <p>
+    /* 
      * @deprecated Use {@link #ALLOWED_CLASSNAMES_LIST ALLOWED_CLASSNAMES_LIST} instead.
      */
     @Deprecated
@@ -122,28 +142,40 @@ public abstract class OpenType<T> implements Serializable {
 
 
     /**
+    /* <p>
+    /* 
      * @serial The fully qualified Java class name of open data values this
      *         type describes.
      */
     private String className;
 
     /**
+    /* <p>
+    /* 
      * @serial The type description (should not be null or empty).
      */
     private String description;
 
     /**
+    /* <p>
+    /* 
      * @serial The name given to this type (should not be null or empty).
      */
     private String typeName;
 
     /**
      * Tells if this type describes an array (checked in constructor).
+     * <p>
+     *  告诉这个类型是否描述了一个数组(在构造函数中检查)
+     * 
      */
     private transient boolean isArray = false;
 
     /**
      * Cached Descriptor for this OpenType, constructed on demand.
+     * <p>
+     *  此OpenType的缓存描述符,按需构建
+     * 
      */
     private transient Descriptor descriptor;
 
@@ -154,6 +186,11 @@ public abstract class OpenType<T> implements Serializable {
      * checking for the validity of the given parameters.
      * The validity constraints are described below for each parameter.
      * <br>&nbsp;
+     * <p>
+     * 构造一个<code> OpenType </code>实例(实际上是<code> OpenType </code>的子类实例是抽象的),检查给定参数的有效性。
+     * 下面描述每个参数的有效性约束<br>&nbsp ;。
+     * 
+     * 
      * @param  className  The fully qualified Java class name of the open data values this open type describes.
      *                    The valid Java class names allowed for open data values are listed in
      *                    {@link #ALLOWED_CLASSNAMES_LIST ALLOWED_CLASSNAMES_LIST}.
@@ -266,6 +303,8 @@ public abstract class OpenType<T> implements Serializable {
     }
 
     /* Return argValue.trim() provided argValue is neither null nor empty;
+    /* <p>
+    /* 
        otherwise throw IllegalArgumentException.  */
     private static String valid(String argName, String argValue) {
         if (argValue == null || (argValue = argValue.trim()).equals(""))
@@ -301,6 +340,15 @@ public abstract class OpenType<T> implements Serializable {
      * and a 3-dimensional array of int has for class name
      * &quot;<code>[[[I</code>&quot; (without the quotes)
      *
+     * <p>
+     * 返回此开放类型描述的打开数据值的标准Java类名称{@link #ALLOWED_CLASSNAMES_LIST ALLOWED_CLASSNAMES_LIST}列出了打开数据值的唯一可能的Java类名
+     * 称。
+     * 这些类中的任何一个或其对应的基本类型的多维数组也是允许的类,在这种情况下,类名遵循由<code> javalangClass </code>的方法{@link Class#getName()getName()}
+     * 定义的规则。
+     * 例如,一个3维数组对于类名"<code> [[[LjavalangString; </code>") (没有引号),一个3维的整数数组具有类名"<code> [[[Ljavalang整数; </code>
+     *  (不带引号),并且int的3维数组具有类名"<code> [[[I </code> (不含引号)。
+     * 
+     * 
      * @return the class name.
      */
     public String getClassName() {
@@ -316,6 +364,10 @@ public abstract class OpenType<T> implements Serializable {
     /**
      * Returns the name of this <code>OpenType</code> instance.
      *
+     * <p>
+     * 返回此<code> OpenType </code>实例的名称
+     * 
+     * 
      * @return the type name.
      */
     public String getTypeName() {
@@ -326,6 +378,10 @@ public abstract class OpenType<T> implements Serializable {
     /**
      * Returns the text description of this <code>OpenType</code> instance.
      *
+     * <p>
+     *  返回此<code> OpenType </code>实例的文本描述
+     * 
+     * 
      * @return the description.
      */
     public String getDescription() {
@@ -337,6 +393,10 @@ public abstract class OpenType<T> implements Serializable {
      * Returns <code>true</code> if the open data values this open
      * type describes are arrays, <code>false</code> otherwise.
      *
+     * <p>
+     *  如果此开放类型描述的开放数据值为数组,则返回<code> true </code>,否则返回<code> false </code>
+     * 
+     * 
      * @return true if this is an array type.
      */
     public boolean isArray() {
@@ -347,6 +407,10 @@ public abstract class OpenType<T> implements Serializable {
     /**
      * Tests whether <var>obj</var> is a value for this open type.
      *
+     * <p>
+     *  测试<var> obj </var>是否为此打开类型的值
+     * 
+     * 
      * @param obj the object to be tested for validity.
      *
      * @return <code>true</code> if <var>obj</var> is a value for this
@@ -359,6 +423,10 @@ public abstract class OpenType<T> implements Serializable {
      * The default implementation of this method returns true only if the
      * types are equal.
      *
+     * <p>
+     *  测试给定类型的值是否可以分配给此开放类型此方法的默认实现仅在类型相等时返回true
+     * 
+     * 
      * @param ot the type to be tested.
      *
      * @return true if {@code ot} is assignable to this open type.
@@ -373,6 +441,10 @@ public abstract class OpenType<T> implements Serializable {
      * Compares the specified <code>obj</code> parameter with this
      * open type instance for equality.
      *
+     * <p>
+     *  将指定的<code> obj </code>参数与此开放类型实例进行比较以确保相等
+     * 
+     * 
      * @param obj the object to compare to.
      *
      * @return true if this object and <code>obj</code> are equal.
@@ -384,12 +456,18 @@ public abstract class OpenType<T> implements Serializable {
     /**
      * Returns a string representation of this open type instance.
      *
+     * <p>
+     *  返回此打开类型实例的字符串表示形式
+     * 
+     * 
      * @return the string representation.
      */
     public abstract String toString() ;
 
     /**
      * Deserializes an {@link OpenType} from an {@link java.io.ObjectInputStream}.
+     * <p>
+     *  从{@link javaioObjectInputStream}反序列化{@link OpenType}
      */
     private void readObject(ObjectInputStream in)
             throws IOException, ClassNotFoundException {

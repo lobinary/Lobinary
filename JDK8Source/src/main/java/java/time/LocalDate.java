@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2012, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -58,6 +59,22 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * <p>
+ *  版权所有(c)2007-2012,Stephen Colebourne和Michael Nascimento Santos
+ * 
+ *  版权所有
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  *源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明
+ * 
+ *  *二进制形式的再分发必须在随分发版提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明
+ * 
+ * *未经特定事先书面许可,JSR-310的名称及其贡献者的名称不得用于支持或宣传衍生自此软件的产品
+ * 
+ * 本软件由版权所有者和贡献者"按原样"提供,任何明示或暗示的担保,包括但不限于适销性和针对特定用途的适用性的默示担保,在任何情况下均不得免版权所有者或贡献者对任何直接,间接,偶发,特殊,惩罚性或后果性损害
+ * (包括但不限于替代商品或服务的采购,使用,数据或利润损失;或业务中断)有责任的理论,无论是在合同,严格责任或侵权(包括疏忽或其他方式)以任何方式使用本软件,即使已被告知此类损害的可能性。
+ * 
  */
 package java.time;
 
@@ -132,6 +149,24 @@ import java.util.Objects;
  * @implSpec
  * This class is immutable and thread-safe.
  *
+ * <p>
+ * 在ISO-8601日历系统中没有时区的日期,例如{@code 2007-12-03}
+ * <p>
+ *  {@code LocalDate}是一个不可变的日期时间对象,表示一个日期,通常被视为年 - 月 - 日。
+ * 其他日期字段,例如年,星期和星期,可以也被访问例如,值"2007年10月2日"可以存储在{@code LocalDate}。
+ * <p>
+ *  此类不存储或表示时间或时区。相反,它是用于生日的日期的描述。它不能在没有附加信息(如偏移或时区)的时间线上表示一个时刻
+ * <p>
+ * ISO-8601日历系统是当今世界上大多数地区使用的现代民用日历系统。
+ * 它相当于普通的公历日历系统,其中适用于闰年的今天规则对于今天大多数应用,ISO- 8601规则完全合适但是,任何使用历史日期并要求它们准确的应用程序都会发现ISO-8601方法不适用。
+ * 
+ * <p>
+ *  这是<a href=\"{@docRoot}/java/lang/doc-files/ValueBasedhtml\">基于价值的</a>类;在{@code LocalDate}的实例上使用身份敏感操
+ * 作(包括引用相等({@code ==}),身份哈希码或同步)可能有不可预测的结果,应该避免使用{@code equals}方法应该用于比较。
+ * 
+ * @implSpec这个类是不可变的和线程安全的
+ * 
+ * 
  * @since 1.8
  */
 public final class LocalDate
@@ -140,39 +175,63 @@ public final class LocalDate
     /**
      * The minimum supported {@code LocalDate}, '-999999999-01-01'.
      * This could be used by an application as a "far past" date.
+     * <p>
+     *  最低支持{@code LocalDate},'-999999999-01-01'这可以由应用程序用作"过去"日期
+     * 
      */
     public static final LocalDate MIN = LocalDate.of(Year.MIN_VALUE, 1, 1);
     /**
      * The maximum supported {@code LocalDate}, '+999999999-12-31'.
      * This could be used by an application as a "far future" date.
+     * <p>
+     *  最大支持的{@code LocalDate},'+ 999999999-12-31'这可以被应用程序用作"远期"日期
+     * 
      */
     public static final LocalDate MAX = LocalDate.of(Year.MAX_VALUE, 12, 31);
 
     /**
      * Serialization version.
+     * <p>
+     *  序列化版本
+     * 
      */
     private static final long serialVersionUID = 2942565459149668126L;
     /**
      * The number of days in a 400 year cycle.
+     * <p>
+     *  在400年周期中的天数
+     * 
      */
     private static final int DAYS_PER_CYCLE = 146097;
     /**
      * The number of days from year zero to year 1970.
      * There are five 400 year cycles from year zero to 2000.
      * There are 7 leap years from 1970 to 2000.
+     * <p>
+     *  从0年到1970年的天数从0年到2000年有5个400年周期从1970年到2000年有7个闰年
+     * 
      */
     static final long DAYS_0000_TO_1970 = (DAYS_PER_CYCLE * 5L) - (30L * 365L + 7L);
 
     /**
      * The year.
+     * <p>
+     *  那一年
+     * 
      */
     private final int year;
     /**
      * The month-of-year.
+     * <p>
+     *  一年中的月份
+     * 
      */
     private final short month;
     /**
      * The day-of-month.
+     * <p>
+     *  日期
+     * 
      */
     private final short day;
 
@@ -186,6 +245,14 @@ public final class LocalDate
      * Using this method will prevent the ability to use an alternate clock for testing
      * because the clock is hard-coded.
      *
+     * <p>
+     *  在默认时区中从系统时钟获取当前日期
+     * <p>
+     *  这将在默认时区中查询{@link Clock#systemDefaultZone()系统时钟}以获取当前日期
+     * <p>
+     * 使用此方法将会阻止使用备用时钟进行测试,因为时钟是硬编码的
+     * 
+     * 
      * @return the current date using the system clock and default time-zone, not null
      */
     public static LocalDate now() {
@@ -201,6 +268,14 @@ public final class LocalDate
      * Using this method will prevent the ability to use an alternate clock for testing
      * because the clock is hard-coded.
      *
+     * <p>
+     *  在指定的时区中从系统时钟获取当前日期
+     * <p>
+     *  这将查询{@link Clock#system(ZoneId)系统时钟}以获取当前日期指定时区避免依赖于默认时区
+     * <p>
+     *  使用此方法将会阻止使用备用时钟进行测试,因为时钟是硬编码的
+     * 
+     * 
      * @param zone  the zone ID to use, not null
      * @return the current date using the system clock, not null
      */
@@ -215,6 +290,12 @@ public final class LocalDate
      * Using this method allows the use of an alternate clock for testing.
      * The alternate clock may be introduced using {@link Clock dependency injection}.
      *
+     * <p>
+     *  从指定的时钟获取当前日期
+     * <p>
+     *  这将查询指定的时钟以获取当前日期 - 今天使用此方法允许使用备用时钟进行测试备用时钟可以使用{@link时钟依赖注入}
+     * 
+     * 
      * @param clock  the clock to use, not null
      * @return the current date, not null
      */
@@ -235,6 +316,12 @@ public final class LocalDate
      * This returns a {@code LocalDate} with the specified year, month and day-of-month.
      * The day must be valid for the year and month, otherwise an exception will be thrown.
      *
+     * <p>
+     * 从年,月和日获取{@code LocalDate}的实例
+     * <p>
+     *  这将返回带有指定的年,月和日的{@code LocalDate}日期必须对年和月有效,否则将抛出异常
+     * 
+     * 
      * @param year  the year to represent, from MIN_YEAR to MAX_YEAR
      * @param month  the month-of-year to represent, not null
      * @param dayOfMonth  the day-of-month to represent, from 1 to 31
@@ -255,6 +342,12 @@ public final class LocalDate
      * This returns a {@code LocalDate} with the specified year, month and day-of-month.
      * The day must be valid for the year and month, otherwise an exception will be thrown.
      *
+     * <p>
+     *  从年,月和日获取{@code LocalDate}的实例
+     * <p>
+     *  这将返回带有指定的年,月和日的{@code LocalDate}日期必须对年和月有效,否则将抛出异常
+     * 
+     * 
      * @param year  the year to represent, from MIN_YEAR to MAX_YEAR
      * @param month  the month-of-year to represent, from 1 (January) to 12 (December)
      * @param dayOfMonth  the day-of-month to represent, from 1 to 31
@@ -276,6 +369,12 @@ public final class LocalDate
      * This returns a {@code LocalDate} with the specified year and day-of-year.
      * The day-of-year must be valid for the year, otherwise an exception will be thrown.
      *
+     * <p>
+     *  从一年和一年中获取{@code LocalDate}的实例
+     * <p>
+     *  这将返回一个带有指定年份和年份的{@code LocalDate}年份必须对该年有效,否则将抛出异常
+     * 
+     * 
      * @param year  the year to represent, from MIN_YEAR to MAX_YEAR
      * @param dayOfYear  the day-of-year to represent, from 1 to 366
      * @return the local date, not null
@@ -306,6 +405,13 @@ public final class LocalDate
      * The {@link ChronoField#EPOCH_DAY EPOCH_DAY} is a simple incrementing count
      * of days where day 0 is 1970-01-01. Negative numbers represent earlier days.
      *
+     * <p>
+     *  从时代天计数获取{@code LocalDate}的实例
+     * <p>
+     * 这将返回一个带有指定的纪元日的{@code LocalDate} {@link ChronoField#EPOCH_DAY EPOCH_DAY}是一个简单的递增计数,其中第0天为1970-01-01负数
+     * 表示早期。
+     * 
+     * 
      * @param epochDay  the Epoch Day to convert, based on the epoch 1970-01-01
      * @return the local date, not null
      * @throws DateTimeException if the epoch days exceeds the supported date range
@@ -356,6 +462,16 @@ public final class LocalDate
      * This method matches the signature of the functional interface {@link TemporalQuery}
      * allowing it to be used as a query via method reference, {@code LocalDate::from}.
      *
+     * <p>
+     *  从临时对象获取{@code LocalDate}的实例
+     * <p>
+     *  这将根据指定的时间获得一个本地日期A {@code TemporalAccessor}表示一组任意的日期和时间信息,该工厂转换为{@code LocalDate}的实例,
+     * <p>
+     *  转换使用{@link TemporalQueries#localDate()}查询,该查询依赖于提取{@link ChronoField#EPOCH_DAY EPOCH_DAY}字段
+     * <p>
+     * 此方法匹配功能接口{@link TemporalQuery}的签名,允许它通过方法引用用作查询,{@code LocalDate :: from}
+     * 
+     * 
      * @param temporal  the temporal object to convert, not null
      * @return the local date, not null
      * @throws DateTimeException if unable to convert to a {@code LocalDate}
@@ -377,6 +493,12 @@ public final class LocalDate
      * The string must represent a valid date and is parsed using
      * {@link java.time.format.DateTimeFormatter#ISO_LOCAL_DATE}.
      *
+     * <p>
+     *  从文本字符串(例如{@code 2007-12-03})获取{@code LocalDate}的实例,
+     * <p>
+     *  该字符串必须表示有效的日期,并使用{@link javatimeformatDateTimeFormatter#ISO_LOCAL_DATE}进行解析
+     * 
+     * 
      * @param text  the text to parse such as "2007-12-03", not null
      * @return the parsed local date, not null
      * @throws DateTimeParseException if the text cannot be parsed
@@ -390,6 +512,12 @@ public final class LocalDate
      * <p>
      * The text is parsed using the formatter, returning a date.
      *
+     * <p>
+     *  使用特定格式化程序从文本字符串获取{@code LocalDate}的实例
+     * <p>
+     *  使用格式化程序解析文本,返回日期
+     * 
+     * 
      * @param text  the text to parse, not null
      * @param formatter  the formatter to use, not null
      * @return the parsed local date, not null
@@ -404,6 +532,10 @@ public final class LocalDate
     /**
      * Creates a local date from the year, month and day fields.
      *
+     * <p>
+     *  从年,月和日字段创建本地日期
+     * 
+     * 
      * @param year  the year to represent, validated from MIN_YEAR to MAX_YEAR
      * @param month  the month-of-year to represent, from 1 to 12, validated
      * @param dayOfMonth  the day-of-month to represent, validated from 1 to 31
@@ -438,6 +570,10 @@ public final class LocalDate
     /**
      * Resolves the date, resolving days past the end of month.
      *
+     * <p>
+     *  解决日期,解决月底之前的天数
+     * 
+     * 
      * @param year  the year to represent, validated from MIN_YEAR to MAX_YEAR
      * @param month  the month-of-year to represent, validated from 1 to 12
      * @param day  the day-of-month to represent, validated from 1 to 31
@@ -461,6 +597,10 @@ public final class LocalDate
     /**
      * Constructor, previously validated.
      *
+     * <p>
+     *  构造函数,先前已验证
+     * 
+     * 
      * @param year  the year to represent, from MIN_YEAR to MAX_YEAR
      * @param month  the month-of-year to represent, not null
      * @param dayOfMonth  the day-of-month to represent, valid for year-month, from 1 to 31
@@ -504,6 +644,26 @@ public final class LocalDate
      * passing {@code this} as the argument.
      * Whether the field is supported is determined by the field.
      *
+     * <p>
+     *  检查是否支持指定的字段
+     * <p>
+     * 这将检查是否可以查询指定字段的此日期如果为false,则调用{@link #range(TemporalField)范围},{@link #get(TemporalField)get}和{@link #with(TemporalField,long) }
+     * 方法将抛出异常。
+     * <p>
+     *  如果字段是{@link ChronoField},则在此实现查询支持的字段为：
+     * <ul>
+     *  <li> {@ code DAY_OF_WEEK} <li> {@ code ALIGNED_DAY_OF_WEEK_IN_MONTH} <li> {@ code ALIGNED_DAY_OF_WEEK_IN_YEAR}
+     *  <li> {@ code DAY_OF_MONTH} <li> {@ code DAY_OF_YEAR} <li> {@ code EPOCH_DAY} > {@ code ALIGNED_WEEK_OF_MONTH}
+     *  <li> {@ code ALIGNED_WEEK_OF_YEAR} <li> {@ code MONTH_OF_YEAR} <li> {@ code PROLEPTIC_MONTH} <li> {@ code YEAR_OF_ERA}
+     *  <li> {@ code YEAR} @code ERA}。
+     * </ul>
+     *  所有其他{@code ChronoField}实例将返回false
+     * <p>
+     * 如果字段不是{@code ChronoField},则通过调用{@code TemporalFieldisSupportedBy(TemporalAccessor)}传递{@code this}作为参数
+     * 来获得此方法的结果。
+     * 字段是否受支持由字段。
+     * 
+     * 
      * @param field  the field to check, null returns false
      * @return true if the field is supported on this date, false if not
      */
@@ -538,6 +698,23 @@ public final class LocalDate
      * passing {@code this} as the argument.
      * Whether the unit is supported is determined by the unit.
      *
+     * <p>
+     *  检查是否支持指定的单元
+     * <p>
+     *  这将检查指定的单元是否可以添加到此日期时间或从此日期时间减去。
+     * 如果为false,则调用{@link #plus(long,TemporalUnit)}和{@link #minus(long,TemporalUnit)minus}会抛出异常。
+     * <p>
+     *  如果单位是{@link ChronoUnit},则在此实现查询支持的单位是：
+     * <ul>
+     *  <li> {@ code DAYS} <li> {@ code WEEKS} <li> {@ code MONTHS} <li> {@ code YEARS} <li> {@ code DECADES}
+     *  <li> > {@ code MILLENNIA} <li> {@ code ERAS}。
+     * </ul>
+     * 所有其他{@code ChronoUnit}实例将返回false
+     * <p>
+     *  如果单元不是{@code ChronoUnit},则通过调用{@code TemporalUnitisSupportedBy(Temporal)}传递{@code this}作为参数获得此方法的结果。
+     * 单元是否受支持由单元确定。
+     * 
+     * 
      * @param unit  the unit to check, null returns false
      * @return true if the unit can be added/subtracted, false if not
      */
@@ -565,6 +742,21 @@ public final class LocalDate
      * passing {@code this} as the argument.
      * Whether the range can be obtained is determined by the field.
      *
+     * <p>
+     *  获取指定字段的有效值范围
+     * <p>
+     *  范围对象表示字段的最小和最大有效值此日期用于提高返回范围的准确性如果不可能返回范围,因为该字段不受支持或由于某种其他原因,异常是抛出
+     * <p>
+     * 如果字段是{@link ChronoField},则在此实现查询。
+     * {@link #isSupported(TemporalField)supported fields}将返回适当的范围实例所有其他{@code ChronoField}实例将抛出一个{@code UnsupportedTemporalTypeException}
+     * 。
+     * 如果字段是{@link ChronoField},则在此实现查询。
+     * <p>
+     *  如果字段不是{@code ChronoField},则通过调用{@code TemporalFieldrangeRefinedBy(TemporalAccessor)}传递{@code this}作为
+     * 参数来获得此方法的结果。
+     * 是否可以获得范围由字段。
+     * 
+     * 
      * @param field  the field to query the range for, not null
      * @return the range of valid values for the field, not null
      * @throws DateTimeException if the range for the field cannot be obtained
@@ -608,6 +800,22 @@ public final class LocalDate
      * passing {@code this} as the argument. Whether the value can be obtained,
      * and what the value represents, is determined by the field.
      *
+     * <p>
+     *  从此日期获取指定字段的值作为{@code int}
+     * <p>
+     * 这将为该日期查询指定字段的值返回的值将始终在该字段的有效值范围内如果不可能返回该值,因为该字段不受支持或由于某种其他原因,被抛出
+     * <p>
+     *  如果该字段是{@link ChronoField},则此处实现查询。
+     * {@link #isSupported(TemporalField)supported fields}将根据此日期返回有效值,{@code EPOCH_DAY}和{@code PROLEPTIC_MONTH}
+     * 除外太大,无法适应{@code int}并抛出{@code DateTimeException}所有其他{@code ChronoField}实例将抛出{@code UnsupportedTemporalTypeException}
+     * 。
+     *  如果该字段是{@link ChronoField},则此处实现查询。
+     * <p>
+     * 如果字段不是{@code ChronoField},那么通过调用{@code TemporalFieldgetFrom(TemporalAccessor)}传递{@code this}作为参数获得此方法
+     * 的结果。
+     * 是否可以获取该值,以及值表示,由字段确定。
+     * 
+     * 
      * @param field  the field to get, not null
      * @return the value for the field
      * @throws DateTimeException if a value for the field cannot be obtained or
@@ -641,6 +849,21 @@ public final class LocalDate
      * passing {@code this} as the argument. Whether the value can be obtained,
      * and what the value represents, is determined by the field.
      *
+     * <p>
+     *  从此日期获取指定字段的值作为{@code long}
+     * <p>
+     *  这将查询指定字段的值的此日期如果不可能返回值,因为该字段不受支持或由于某种其他原因,抛出异常
+     * <p>
+     * 如果字段是{@link ChronoField},则在此实现查询。
+     * {@link #isSupported(TemporalField)supported fields}将根据此日期返回有效值所有其他{@code ChronoField}实例将抛出一个{@code UnsupportedTemporalTypeException}
+     * 。
+     * 如果字段是{@link ChronoField},则在此实现查询。
+     * <p>
+     *  如果字段不是{@code ChronoField},那么通过调用{@code TemporalFieldgetFrom(TemporalAccessor)}传递{@code this}作为参数获得此方
+     * 法的结果。
+     * 是否可以获取该值,以及值表示,由字段确定。
+     * 
+     * 
      * @param field  the field to get, not null
      * @return the value for the field
      * @throws DateTimeException if a value for the field cannot be obtained
@@ -693,6 +916,12 @@ public final class LocalDate
      * in most of the world. It is equivalent to the proleptic Gregorian calendar
      * system, in which today's rules for leap years are applied for all time.
      *
+     * <p>
+     *  获取此日期的年表,这是ISO日历系统
+     * <p>
+     * {@code Chronology}代表正在使用的日历系统ISO-8601日历系统是当今世界上大多数地区使用的现代民用日历系统。它相当于普通的公历日历系统,其中应用了今天的闰年规则所有时间
+     * 
+     * 
      * @return the ISO chronology, not null
      */
     @Override
@@ -716,6 +945,17 @@ public final class LocalDate
      * The returned era will be a singleton capable of being compared with the constants
      * in {@link IsoChronology} using the {@code ==} operator.
      *
+     * <p>
+     *  获取此日期适用的时代
+     * <p>
+     *  官方的ISO-8601标准没有定义时代,然而{@code IsoChronology}却定义了两个时代,从第一年起的"CE"和从零年开始的"BCE"。
+     * 因为在朱利安 - 格里高利切换之前的日期不一致历史上,"BCE"和"CE"之间的转换也不与常用的时代对齐,通常使用"BC"和"AD"。
+     * <p>
+     * 这个类的用户通常应该忽略这个方法,因为它存在主要是为了履行{@link ChronoLocalDate}合同,有必要支持日本日历系统
+     * <p>
+     *  返回的时代将是一个单例,能够使用{@code ==}运算符与{@link IsoChronology}中的常量进行比较
+     * 
+     * 
      * @return the {@code IsoChronology} era constant applicable at this date, not null
      */
     @Override // override for Javadoc
@@ -731,6 +971,14 @@ public final class LocalDate
      * The year returned by this method is proleptic as per {@code get(YEAR)}.
      * To obtain the year-of-era, use {@code get(YEAR_OF_ERA)}.
      *
+     * <p>
+     *  获取年份字段
+     * <p>
+     *  此方法返回年份的原始{@code int}值
+     * <p>
+     *  这个方法返回的年份是{@code get(YEAR)}。为了获得年代,使用{@code get(YEAR_OF_ERA)}
+     * 
+     * 
      * @return the year, from MIN_YEAR to MAX_YEAR
      */
     public int getYear() {
@@ -744,6 +992,12 @@ public final class LocalDate
      * Application code is frequently clearer if the enum {@link Month}
      * is used by calling {@link #getMonth()}.
      *
+     * <p>
+     *  获取年份字段从1到12
+     * <p>
+     *  此方法将{@code int}从1到12的月份返回为应用程序代码通常更清晰,如果调用{@link #getMonth()}使用枚举{@link Month}
+     * 
+     * 
      * @return the month-of-year, from 1 to 12
      * @see #getMonth()
      */
@@ -759,6 +1013,13 @@ public final class LocalDate
      * If you need access to the primitive {@code int} value then the enum
      * provides the {@link Month#getValue() int value}.
      *
+     * <p>
+     * 使用{@code Month}枚举获取年份字段
+     * <p>
+     *  此方法返回该月的枚举{@link Month}这避免了对{@code int}值的含义的混淆如果您需要访问原始{@code int}值,则枚举提供{@link Month#getValue ()int value}
+     * 。
+     * 
+     * 
      * @return the month-of-year, not null
      * @see #getMonthValue()
      */
@@ -771,6 +1032,12 @@ public final class LocalDate
      * <p>
      * This method returns the primitive {@code int} value for the day-of-month.
      *
+     * <p>
+     *  获取日期字段
+     * <p>
+     *  此方法返回日期的原始{@code int}值
+     * 
+     * 
      * @return the day-of-month, from 1 to 31
      */
     public int getDayOfMonth() {
@@ -782,6 +1049,12 @@ public final class LocalDate
      * <p>
      * This method returns the primitive {@code int} value for the day-of-year.
      *
+     * <p>
+     *  获取年份字段
+     * <p>
+     *  此方法返回一年中的原始{@code int}值
+     * 
+     * 
      * @return the day-of-year, from 1 to 365, or 366 in a leap year
      */
     public int getDayOfYear() {
@@ -799,6 +1072,15 @@ public final class LocalDate
      * Additional information can be obtained from the {@code DayOfWeek}.
      * This includes textual names of the values.
      *
+     * <p>
+     *  获取星期字段,这是一个枚举{@code DayOfWeek}
+     * <p>
+     * 此方法返回星期几的枚举{@link DayOfWeek}这避免了对{@code int}值的含义的混淆如果您需要访问原始的{@code int}值,那么枚举提供了{@链接DayOfWeek#getValue()int value}
+     * 。
+     * <p>
+     *  其他信息可以从{@code DayOfWeek}获取,其中包括值的文本名称
+     * 
+     * 
      * @return the day-of-week, not null
      */
     public DayOfWeek getDayOfWeek() {
@@ -823,6 +1105,16 @@ public final class LocalDate
      * The calculation is proleptic - applying the same rules into the far future and far past.
      * This is historically inaccurate, but is correct for the ISO-8601 standard.
      *
+     * <p>
+     *  根据ISO proleptic日历系统规则检查年份是否为闰年
+     * <p>
+     *  这种方法适用于整个时间线的闰年的现行规则一般来说,一年是一个闰年,如果它可以除以四而没有余数,然而,年除以100,不是闰年,除了年可整除由400
+     * <p>
+     * 例如,1904年是一个闰年,可以被4整除1900年不是一个闰年,因为它可以被100整除,但2000年是一个闰年,因为它可以被400整除
+     * <p>
+     *  计算是推测的 - 将相同的规则应用到远远和远远过去这是历史上不准确的,但是对于ISO-8601标准是正确的
+     * 
+     * 
      * @return true if the year is leap, false otherwise
      */
     @Override // override for Javadoc and performance
@@ -836,6 +1128,12 @@ public final class LocalDate
      * This returns the length of the month in days.
      * For example, a date in January would return 31.
      *
+     * <p>
+     *  返回此日期表示的月份的长度
+     * <p>
+     *  这将返回月份的长度(以天为单位)例如,1月的日期将返回31
+     * 
+     * 
      * @return the length of the month in days
      */
     @Override
@@ -858,6 +1156,12 @@ public final class LocalDate
      * <p>
      * This returns the length of the year in days, either 365 or 366.
      *
+     * <p>
+     *  返回由此日期表示的年份的长度
+     * <p>
+     *  这将返回年的长度,以天为单位,365或366
+     * 
+     * 
      * @return 366 if the year is leap, 365 otherwise
      */
     @Override // override for Javadoc and performance
@@ -896,6 +1200,27 @@ public final class LocalDate
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此日期的调整副本
+     * <p>
+     * 这将返回一个{@code LocalDate},基于这个日期,日期已调整使用指定的adjuster策略对象进行调整读取调整器的文档以了解将要进行的调整
+     * <p>
+     *  一个简单的调整器可以简单地设置一个字段,例如年份字段更复杂的调整器可能将日期设置为月的最后一天在{@link TemporalAdjuster}中提供了一些常见调整选项,包括查找"月的最后一天"和"下
+     * 周三"关键日期时间类也实现{@code TemporalAdjuster}接口,例如{@link Month}和{@link javatimeMonthDay MonthDay}调整器负责处理特殊情况,
+     * 例如作为月和闰年的变化长度。
+     * <p>
+     * 例如,此代码返回7月最后一天的日期：
+     * <pre>
+     *  import static javatimeMonth *; import static javatimetemporalAdjusters *;
+     * 
+     *  result = localDatewith(JULY)with(lastDayOfMonth());
+     * </pre>
+     * <p>
+     *  此方法的结果是通过调用指定的调整器传递{@code this}作为参数的{@link TemporalAdjuster#adjustInto(Temporal)}方法获得的
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param adjuster the adjuster to use, not null
      * @return a {@code LocalDate} based on {@code this} with the adjustment made, not null
      * @throws DateTimeException if the adjustment cannot be made
@@ -1007,6 +1332,52 @@ public final class LocalDate
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此日期的副本,指定的字段设置为新值
+     * <p>
+     * 这将返回一个{@code LocalDate},基于这一个,指定字段的值更改这可以用于更改任何支持的字段,例如年,月或日子如果不可能设置值,因为该字段不受支持或由于某种其他原因,抛出异常
+     * <p>
+     *  在某些情况下,更改指定字段可能导致生成日期无效,例如将月份从1月31日更改为2月会使日期无效在这种情况下,字段负责解决日期通常它将选择上一个有效日期,这将是本示例中二月的最后一个有效日期
+     * <p>
+     * 如果字段是{@link ChronoField},则在此执行调整。支持的字段的行为如下：
+     * <ul>
+     * <li> {@ code DAY_OF_WEEK}  - 返回带有指定星期的{@code LocalDate}日期在星期一至星期日的边界内向前或向后调整6天<li> {@ code ALIGNED_DAY_OF_WEEK_IN_MONTH}
+     *   - 返回具有指定的对齐日 - 星期的{@code LocalDate}日期被调整为指定的基于月份的对齐日 - 星期对齐的星期被计数,使得给定月份的第一周从该月的第一天开始这可能会导致该日期最多移动到
+     * 下一个月的6天<li> {@ code ALIGNED_DAY_OF_WEEK_IN_YEAR}  - 返回指定的星期几的{@code LocalDate}将日期调整为指定的基于年份的对齐日期对齐的周数
+     * 计数,使得给定年份的第一周从该年的第一天开始。
+     * 这可能会导致该日期向下移动到6天。
+     * <li> {@ code DAY_OF_MONTH}  - 返回{@代码LocalDate}与指定的日期不同月份和年份将保持不变如果日期对年份和月份无效,则会抛出{@code DateTimeException}
+     *  <li> {@ code DAY_OF_YEAR} - 返回带有指定年份的{@code LocalDate}年份不会改变如果年份日期对年份无效,则会抛出{@code DateTimeException}
+     *  <li> {@ code EPOCH_DAY }  - 返回一个带有指定的epoch-day的{@code LocalDate}这完全取代了日期,相当于{@link #ofEpochDay(long)}
+     * <li> {@ code ALIGNED_WEEK_OF_MONTH}  - 返回具有指定排列周的月份的{@code LocalDate}计算排列的周数,以便给定月份的第一周从该月的第一天开始此调整将移
+     * 动结果将与此日期具有相同的星期几这可能会将日期移动到下一个月<li> {@ code ALIGNED_WEEK_OF_YEAR}  - 返回{@代码LocalDate}与指定的aligned-week-
+     * of-year对齐的周数进行计数,使得给定年份的第一周从该年的第一天开始。
+     * 这可能会导致该日期向下移动到6天。
+     * 此调整将整周块的日期移动到与指定周相匹配结果将与此日期具有相同的星期几这可能会导致将日期移动到下一年<li> {@ code MONTH_OF_YEAR}  - 返回带有指定年份的{@code LocalDate}
+     * 年份将保持不变日期也将是除非对新的月份和年份无效,在这种情况下,将月份调整为新的月份和年份的最大有效值<li> {@ code PROLEPTIC_MONTH}  - 返回{@code LocalDate}
+     * 与指定的搜索月份的日期将保持不变,除非对新的月份和年份无效。
+     * 这可能会导致该日期向下移动到6天。
+     * 在这种情况下,将月份调整为新的月份的最大有效值和年</li> {@ code YEAR_OF_ERA}  - 返回具有指定年份的{@code LocalDate}时代和月份将保持不变除非对新的月份和年份
+     * 无效,否则日期也将保持不变。
+     * 这可能会导致该日期向下移动到6天。
+     * 在这种情况下,将月份调整为新的月份和年份的最大有效值<li> {@代码YEAR}  - 返回带有指定年份的{@code LocalDate}月份将保持不变除非月份和年份无效,否则日期也将保持不变。
+     * 在这种情况下, - 月份调整为新的月份和年份的最大有效值<li> {@ code ERA}  - 返回指定时代的{@code LocalDate}年份和月份将保持不变天数 - 月份也将保持不变,除非对新
+     * 的月份和年份无效。
+     * 在这种情况下,将月份调整为新的月份和年份的最大有效值<li> {@代码YEAR}  - 返回带有指定年份的{@code LocalDate}月份将保持不变除非月份和年份无效,否则日期也将保持不变。
+     * 在这种情况下,将月份调整为新的月份和年份的最大有效值。
+     * </ul>
+     * <p>
+     * 在所有情况下,如果新值超出字段的有效值范围,那么将抛出{@code DateTimeException}
+     * <p>
+     *  所有其他{@code ChronoField}实例将抛出{@code UnsupportedTemporalTypeException}
+     * <p>
+     *  如果字段不是{@code ChronoField},那么通过调用{@code TemporalFieldadjustInto(Temporal,long)}传递{@code this}作为参数来获得此
+     * 方法的结果。
+     * 在这种情况下,字段确定是否如何调整瞬间。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param field  the field to set in the result, not null
      * @param newValue  the new value of the field in the result
      * @return a {@code LocalDate} based on {@code this} with the specified field set, not null
@@ -1046,6 +1417,12 @@ public final class LocalDate
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此日期与已更改年份的副本如果日期对于年份无效,将更改为月份的最后有效日期
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param year  the year to set in the result, from MIN_YEAR to MAX_YEAR
      * @return a {@code LocalDate} based on this date with the requested year, not null
      * @throws DateTimeException if the year value is invalid
@@ -1064,6 +1441,12 @@ public final class LocalDate
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     * 返回此日期的副本,并更改​​年份。如果年份的日期无效,将更改为月份的最后一个有效日期
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param month  the month-of-year to set in the result, from 1 (January) to 12 (December)
      * @return a {@code LocalDate} based on this date with the requested month, not null
      * @throws DateTimeException if the month-of-year value is invalid
@@ -1082,6 +1465,12 @@ public final class LocalDate
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此日期的副本,其中包含更改的日期。如果生成的日期无效,则抛出异常
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param dayOfMonth  the day-of-month to set in the result, from 1 to 28-31
      * @return a {@code LocalDate} based on this date with the requested day, not null
      * @throws DateTimeException if the day-of-month value is invalid,
@@ -1100,6 +1489,12 @@ public final class LocalDate
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此日期的副本,其中包含年份已更改如果生成的日期无效,则抛出异常
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param dayOfYear  the day-of-year to set in the result, from 1 to 365-366
      * @return a {@code LocalDate} based on this date with the requested day, not null
      * @throws DateTimeException if the day-of-year value is invalid,
@@ -1128,6 +1523,17 @@ public final class LocalDate
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此日期的指定添加金额的副本
+     * <p>
+     * 这会返回一个{@code LocalDate},基于这个值,添加了指定的量。该值通常是{@link Period},但可以是实现{@link TemporalAmount}接口的任何其他类型
+     * <p>
+     *  计算通过调用{@link TemporalAmount#addTo(Temporal)}来委托给金额对象。
+     * 金额实现可以以任何希望的方式实现添加,但它通常回调{@link #plus(long,TemporalUnit )}请参阅金额实施的文档,以确定是否可以成功添加。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param amountToAdd  the amount to add, not null
      * @return a {@code LocalDate} based on this date with the addition made, not null
      * @throws DateTimeException if the addition cannot be made
@@ -1217,6 +1623,37 @@ public final class LocalDate
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此日期的指定添加金额的副本
+     * <p>
+     * 这将返回一个{@code LocalDate},根据这一个,与添加的单位的金额如果不可能添加金额,因为单位不被支持或由于一些其他原因,抛出异常
+     * <p>
+     *  在某些情况下,添加金额可能导致生成日期无效例如,将一个月添加到1月31日将导致2月31日在这种情况下,单位负责解决日期通常,它将选择上一个有效日期,这将是本示例中2月的最后一个有效日
+     * <p>
+     *  如果字段是{@link ChronoUnit},则在此处实现添加。支持的字段的行为如下：
+     * <ul>
+     * <li> {@ code DAYS}  - 返回添加了指定天数的{@code LocalDate}这等效于{@link #plusDays(long)} <li> {@ code WEEKS}  - 返
+     * 回{@code LocalDate}添加指定的周数这等同于{@link #plusWeeks(long)}并使用7天的周<li> {@ code MONTHS}  - 返回指定月数的{@code LocalDate}
+     * 添加这相当于{@link #plusMonths(long)}除非对新的月份和年份无效,否则日期将保持不变。
+     * 在这种情况下,将月份调整为最大有效新的月份和年份的值<@> {@ code YEARS}  - 返回添加了指定年数的{@code LocalDate}这等价于{@link #plusYears(long)}
+     * 除非对新的月份和年份无效,否则日期将保持不变。
+     * 在这种情况下,将月份调整为新的月份和年份的最大有效值<li> {@ code DECADES }  - 返回一个带有指定增加的十进制数的{@code LocalDate}这相当于调用{@link #plusYears(long)}
+     * 乘以10的值除非日期无效,否则日期将保持不变对于新的月份和年份在这种情况下,将月份调整为新的月份和年份的最大有效值<li> {@ code CENTURIES}  - 返回指定数量的{@code LocalDate}
+     *  centuries added这相当于调用{@link #plusYears(long)},其数量乘以100除非对新的月份和年份无效,否则日期将保持不变。
+     * 在这种情况下,将月份调整为新的月份和年份的最大有效值<li> {@ code MILLENNIA }  - 返回一个带有指定的千年数的{@code LocalDate}这相当于调用{@link #plusYears(long)}
+     * 乘以1000除非日期无效,日期将保持不变对于新的月份和年份在这种情况下,将月份调整为新的月份和年份的最大有效值<li> {@ code ERAS}  - 返回指定数量的{@code LocalDate}
+     *  eras added仅支持两个时间,所以数量必须为一,零或减一如果金额不为零,那么年份会更改,以使年份不变。
+     * 除非对新的月份和年份无效,否则日期将保持不变。在这种情况下,日期 - 月被调整为新的月份和年份的最大有效值。
+     * </ul>
+     * <p>
+     * 所有其他{@code ChronoUnit}实例将抛出{@code UnsupportedTemporalTypeException}
+     * <p>
+     *  如果字段不是{@code ChronoUnit},那么通过调用{@code TemporalUnitaddTo(Temporal,long)}传递{@code this}作为参数来获得此方法的结果。
+     * 在这种情况下,单元确定是否如何执行添加。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param amountToAdd  the amount of the unit to add to the result, may be negative
      * @param unit  the unit of the amount to add, not null
      * @return a {@code LocalDate} based on this date with the specified amount added, not null
@@ -1260,6 +1697,19 @@ public final class LocalDate
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此{@code LocalDate}的副本,其中包含指定的周期(以增加的年数)
+     * <p>
+     *  此方法通过三个步骤将指定的金额添加到"年份"字段中：
+     * <ol>
+     *  <li>将输入年份添加到年份字段</li> <li>检查结果日期是否无效</li> <li>如有必要,将日期调整为最后一天。</li >
+     * </ol>
+     * <p>
+     * 例如,2008-02-29(闰年)加一年将导致无效日期2009-02-29(标准年)而不是返回无效结果,该月的最后一个有效日,2009-02-28 ,被选择
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param yearsToAdd  the years to add, may be negative
      * @return a {@code LocalDate} based on this date with the years added, not null
      * @throws DateTimeException if the result exceeds the supported date range
@@ -1288,6 +1738,19 @@ public final class LocalDate
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此{@code LocalDate}的副本,其中包含指定的期间(以月为单位)
+     * <p>
+     *  此方法通过三个步骤将指定的金额添加到months字段：
+     * <ol>
+     *  <li>将输入月份添加到年份字段</li> <li>检查结果日期是否无效</li> <li>将日期调整为最后一个有效日,如果必要</li>
+     * </ol>
+     * <p>
+     * 例如,2007-03-31加一个月将导致无效日期2007-04-31而不是返回无效结果,而是选择该月的最后一个有效日(2007-04-30)
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param monthsToAdd  the months to add, may be negative
      * @return a {@code LocalDate} based on this date with the months added, not null
      * @throws DateTimeException if the result exceeds the supported date range
@@ -1314,6 +1777,16 @@ public final class LocalDate
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此{@code LocalDate}的副本,其中包含指定的周期(以星期为单位)
+     * <p>
+     *  此方法将星期中的指定金额添加到天字段中,根据需要增加月和年字段,以确保结果保持有效结果仅在超过最大/最小年份时无效
+     * <p>
+     *  例如,2008-12-31加上一周将导致2009-01-07
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param weeksToAdd  the weeks to add, may be negative
      * @return a {@code LocalDate} based on this date with the weeks added, not null
      * @throws DateTimeException if the result exceeds the supported date range
@@ -1333,6 +1806,16 @@ public final class LocalDate
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回添加了指定天数的此{@code LocalDate}的副本
+     * <p>
+     * 此方法将指定的金额添加到"日期"字段中,根据需要增加月份和年份字段,以确保结果保持有效结果仅在超过最大/最小年份时无效
+     * <p>
+     *  例如,2008-12-31加一天将导致2009-01-01
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param daysToAdd  the days to add, may be negative
      * @return a {@code LocalDate} based on this date with the days added, not null
      * @throws DateTimeException if the result exceeds the supported date range
@@ -1361,6 +1844,17 @@ public final class LocalDate
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此日期的指定减去的金额的副本
+     * <p>
+     *  这会返回一个{@code LocalDate},基于这个值,减去指定的量。该值通常是{@link Period},但可以是实现{@link TemporalAmount}接口的任何其他类型
+     * <p>
+     * 通过调用{@link TemporalAmount#subtractFrom(Temporal)}来将计算委托给金额对象。
+     * 金额实现可以以任何希望的方式实现减法,但是它通常回调{@link #minus(long,TemporalUnit )}请参阅金额实施的文档,以确定是否可以成功扣除。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param amountToSubtract  the amount to subtract, not null
      * @return a {@code LocalDate} based on this date with the subtraction made, not null
      * @throws DateTimeException if the subtraction cannot be made
@@ -1388,6 +1882,16 @@ public final class LocalDate
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此日期的指定减去的金额的副本
+     * <p>
+     *  这将返回一个{@code LocalDate},根据这一个,与减去单位的金额如果不可能减去金额,因为单位不被支持或由于其他原因,抛出异常
+     * <p>
+     * 此方法等效于{@link #plus(long,TemporalUnit)},其值为negated请参阅该方法,了解有关如何加法和减法的完整描述
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param amountToSubtract  the amount of the unit to subtract from the result, may be negative
      * @param unit  the unit of the amount to subtract, not null
      * @return a {@code LocalDate} based on this date with the specified amount subtracted, not null
@@ -1417,6 +1921,19 @@ public final class LocalDate
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此{@code LocalDate}的副本,其中指定的时间段减去年
+     * <p>
+     *  此方法通过三个步骤从年份字段中减去指定的金额：
+     * <ol>
+     *  <li>将输入的年份减去年份字段</li> <li>检查结果日期是否无效</li> <li>如有必要,将日期调整为最后一天。</li >
+     * </ol>
+     * <p>
+     * 例如,2008-02-29(闰年)减去一年将导致无效日期2007-02-29(标准年)而不是返回无效结果,该月的最后一个有效日,2007-02-28 ,被选择
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param yearsToSubtract  the years to subtract, may be negative
      * @return a {@code LocalDate} based on this date with the years subtracted, not null
      * @throws DateTimeException if the result exceeds the supported date range
@@ -1441,6 +1958,19 @@ public final class LocalDate
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此{@code LocalDate}的副本,其中指定的周期减去月
+     * <p>
+     *  此方法从三个步骤中的月字段中减去指定的金额：
+     * <ol>
+     *  <li>将输入月份减去年月日字段</li> <li>检查结果日期是否无效</li> <li>将月份调整为最后一个有效日,如果必要</li>
+     * </ol>
+     * <p>
+     * 例如,2007-03-31减去一个月将导致无效日期2007-02-31而不是返回无效结果,而是选择该月的最后一个有效日(2007-02-28)
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param monthsToSubtract  the months to subtract, may be negative
      * @return a {@code LocalDate} based on this date with the months subtracted, not null
      * @throws DateTimeException if the result exceeds the supported date range
@@ -1460,6 +1990,16 @@ public final class LocalDate
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此{@code LocalDate}的副本,其中指定的周期减去后的周数
+     * <p>
+     *  此方法从星期减去指定的金额,从字段减少月份和年份字段,以确保结果保持有效结果仅在超过最大/最小年份时无效
+     * <p>
+     *  例如,2009-01-07减一周将导致2008-12-31
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param weeksToSubtract  the weeks to subtract, may be negative
      * @return a {@code LocalDate} based on this date with the weeks subtracted, not null
      * @throws DateTimeException if the result exceeds the supported date range
@@ -1479,6 +2019,16 @@ public final class LocalDate
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  返回此{@code LocalDate}的指定减去天数的副本
+     * <p>
+     * 此方法从必要的天字段减少月和年字段中减去指定的金额,以确保结果保持有效结果仅在超过最大/最小年份时才无效
+     * <p>
+     *  例如,2009-01-01减去一天将导致2008-12-31
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param daysToSubtract  the days to subtract, may be negative
      * @return a {@code LocalDate} based on this date with the days subtracted, not null
      * @throws DateTimeException if the result exceeds the supported date range
@@ -1500,6 +2050,14 @@ public final class LocalDate
      * {@link TemporalQuery#queryFrom(TemporalAccessor)} method on the
      * specified query passing {@code this} as the argument.
      *
+     * <p>
+     *  使用指定的查询查询此日期
+     * <p>
+     *  这使用指定的查询策略对象查询此日期{@code TemporalQuery}对象定义用于获取结果的逻辑读取查询的文档以了解此方法的结果将是什么
+     * <p>
+     * 此方法的结果是通过在指定的查询上调用{@link TemporalQuery#queryFrom(TemporalAccessor)}方法{@code this}作为参数
+     * 
+     * 
      * @param <R> the type of the result
      * @param query  the query to invoke, not null
      * @return the query result, null may be returned (defined by the query)
@@ -1534,6 +2092,22 @@ public final class LocalDate
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  将指定的时间对象调整为与此对象具有相同的日期
+     * <p>
+     *  这返回一个与输入相同的observable类型的时间对象,日期更改为与此相同
+     * <p>
+     *  该调整等同于使用{@link Temporal#with(TemporalField,long)}传递{@link ChronoField#EPOCH_DAY}作为字段
+     * <p>
+     *  在大多数情况下,通过使用{@link Temporal#with(TemporalAdjuster)}来反转呼叫模式是更清楚的：
+     * <pre>
+     *  //这两行是等效的,但第二种方法是推荐temporal = thisLocalDateadjustInto(temporal); temporal = temporalwith(thisLocalDa
+     * te);。
+     * </pre>
+     * <p>
+     * 此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param temporal  the target object to be adjusted, not null
      * @return the adjusted object, not null
      * @throws DateTimeException if unable to make the adjustment
@@ -1583,6 +2157,30 @@ public final class LocalDate
      * <p>
      * This instance is immutable and unaffected by this method call.
      *
+     * <p>
+     *  根据指定的单位计算直到另一个日期的时间量
+     * <p>
+     *  这将计算两个{@code LocalDate}对象之间在单个{@code TemporalUnit}方面的时间量开始和结束点是{@code this}和指定的日期如果结束在结束之前start使用{@link #from(TemporalAccessor)}
+     * 将传递给此方法的{@code Temporal}转换为{@code LocalDate}。
+     * 例如,两个日期之间的天数可以使用{@code startDateuntil(endDate , 天)}。
+     * <p>
+     * 计算返回一个整数,表示两个日期之间的完整单位数例如,2012-06-15和2012-08-14之间的月份数将只有一个月,因为它是两个月的一天
+     * <p>
+     *  有两种使用这种方法的等效方法第一种是调用这种方法第二种是使用{@link TemporalUnit#between(Temporal,Temporal)}：
+     * <pre>
+     *  //这两行是等价的amount = startuntil(end,MONTHS); amount = MONTHS between(start,end);
+     * </pre>
+     *  应该基于哪个使得代码更可读的选择
+     * <p>
+     * {@code ChronoUnit}单位{@code DAYS},{@code WEEKS},{@code MONTHS},{@code YEARS},{@code DECADES},{@code CENTURIES}
+     *  ,{@code MILLENNIA}和{@code ERAS}其他{@code ChronoUnit}值会抛出异常。
+     * <p>
+     *  如果单元不是{@code ChronoUnit},则该方法的结果通过调用{@code TemporalUnit between(Temporal,Temporal)}传递{@code this}作为第
+     * 一个参数和转换的输入时间作为第二个参数论据。
+     * <p>
+     *  此实例是不可变的,不受此方法调用的影响
+     * 
+     * 
      * @param endExclusive  the end date, exclusive, which is converted to a {@code LocalDate}, not null
      * @param unit  the unit to measure the amount in, not null
      * @return the amount of time between this date and the end date
@@ -1649,6 +2247,23 @@ public final class LocalDate
      * </pre>
      * The choice should be made based on which makes the code more readable.
      *
+     * <p>
+     *  计算此日期与另一个日期之间的期间为{@code Period}
+     * <p>
+     * 这将以年,月和日计算两个日期之间的周期开始和结束点是{@code this}和指定的日期如果结束在开始之前,结果将为负值负号将是相同的每年,每月和每天
+     * <p>
+     *  使用ISO日历系统执行计算如果需要,输入日期将转换为ISO
+     * <p>
+     * 包括开始日期,但不包括结束日期通过删除完整月份,然后计算剩余天数计算期间,调整以确保两者具有相同的符号。然后将月数标准化为年和月在12个月年份如果结束日期大于或等于开始日期的月份,则认为一个月份完成。
+     * 例如,从{@code 2010-01-15}到{@code 2011-03-18}是"1年,2个月和3天"。
+     * <p>
+     *  有两种等效的方法使用这种方法第一种是调用这种方法第二种是使用{@link Period#between(LocalDate,LocalDate)}：
+     * <pre>
+     *  //这两行是等价的period = startuntil(end);周期=(开始,结束)之间的周期;
+     * </pre>
+     * 应该基于哪个使得代码更可读的选择
+     * 
+     * 
      * @param endDateExclusive  the end date, exclusive, which may be in any chronology, not null
      * @return the period between this date and the end date, not null
      */
@@ -1675,6 +2290,12 @@ public final class LocalDate
      * <p>
      * This date will be passed to the formatter to produce a string.
      *
+     * <p>
+     *  使用指定的格式化程序格式化此日期
+     * <p>
+     *  此日期将传递到格式化程序以生成字符串
+     * 
+     * 
      * @param formatter  the formatter to use, not null
      * @return the formatted date string, not null
      * @throws DateTimeException if an error occurs during printing
@@ -1692,6 +2313,12 @@ public final class LocalDate
      * This returns a {@code LocalDateTime} formed from this date at the specified time.
      * All possible combinations of date and time are valid.
      *
+     * <p>
+     *  将此日期与时间组合以创建{@code LocalDateTime}
+     * <p>
+     *  这将返回在指定时间从此日期形成的{@code LocalDateTime}所有可能的日期和时间组合都有效
+     * 
+     * 
      * @param time  the time to combine with, not null
      * @return the local date-time formed from this date and the specified time, not null
      */
@@ -1709,6 +2336,12 @@ public final class LocalDate
      * The individual time fields must be within their valid range.
      * All possible combinations of date and time are valid.
      *
+     * <p>
+     *  将此日期与时间组合以创建{@code LocalDateTime}
+     * <p>
+     *  这将返回在指定的小时和分钟从此日期形成的{@code LocalDateTime}秒和纳秒字段将设置为零个别时间字段必须在其有效范围内所有可能的日期和时间组合都有效
+     * 
+     * 
      * @param hour  the hour-of-day to use, from 0 to 23
      * @param minute  the minute-of-hour to use, from 0 to 59
      * @return the local date-time formed from this date and the specified time, not null
@@ -1727,6 +2360,12 @@ public final class LocalDate
      * The individual time fields must be within their valid range.
      * All possible combinations of date and time are valid.
      *
+     * <p>
+     *  将此日期与时间组合以创建{@code LocalDateTime}
+     * <p>
+     * 这将返回从此日期以指定的小时,分​​钟和秒形成的{@code LocalDateTime}纳秒字段将设置为零个别时间字段必须在其有效范围内所有可能的日期和时间组合都有效
+     * 
+     * 
      * @param hour  the hour-of-day to use, from 0 to 23
      * @param minute  the minute-of-hour to use, from 0 to 59
      * @param second  the second-of-minute to represent, from 0 to 59
@@ -1745,6 +2384,12 @@ public final class LocalDate
      * The individual time fields must be within their valid range.
      * All possible combinations of date and time are valid.
      *
+     * <p>
+     *  将此日期与时间组合以创建{@code LocalDateTime}
+     * <p>
+     *  这将返回从此日期以指定的小时,分​​钟,秒和纳秒形成的{@code LocalDateTime}各个时间字段必须在其有效范围内所有可能的日期和时间组合都有效
+     * 
+     * 
      * @param hour  the hour-of-day to use, from 0 to 23
      * @param minute  the minute-of-hour to use, from 0 to 59
      * @param second  the second-of-minute to represent, from 0 to 59
@@ -1762,6 +2407,12 @@ public final class LocalDate
      * This returns an {@code OffsetDateTime} formed from this date at the specified time.
      * All possible combinations of date and time are valid.
      *
+     * <p>
+     *  将此日期与偏移时间组合,以创建{@code OffsetDateTime}
+     * <p>
+     *  这将返回在指定时间从此日期形成的{@code OffsetDateTime}所有可能的日期和时间组合都有效
+     * 
+     * 
      * @param time  the time to combine with, not null
      * @return the offset date-time formed from this date and the specified time, not null
      */
@@ -1776,6 +2427,12 @@ public final class LocalDate
      * This returns a {@code LocalDateTime} formed from this date at the time of
      * midnight, 00:00, at the start of this date.
      *
+     * <p>
+     * 将此日期与午夜时间相结合,以便在此日期的开始创建{@code LocalDateTime}
+     * <p>
+     *  这会返回从此日期开始在午夜00:00开始生成的{@code LocalDateTime}
+     * 
+     * 
      * @return the local date-time of midnight at the start of this date, not null
      */
     public LocalDateTime atStartOfDay() {
@@ -1799,6 +2456,18 @@ public final class LocalDate
      * To convert to a specific time in a given time-zone call {@link #atTime(LocalTime)}
      * followed by {@link LocalDateTime#atZone(ZoneId)}.
      *
+     * <p>
+     *  根据时区中的规则,从最早有效时间的此日期返回分区日期时间
+     * <p>
+     *  时区规则(例如夏令时)意味着并非每个本地日期时间对于指定区域有效,因此本地日期时间可能不是午夜
+     * <p>
+     * 在大多数情况下,对于本地日期时间只有一个有效偏移量。在重叠的情况下,存在两个有效偏移量,并且使用较早的偏移量,对应于日期上午夜的第一次出现。间隔,分区日期时间将表示紧接间隙之后的时刻
+     * <p>
+     *  如果区域ID是{@link ZoneOffset},那么结果总是有一个午夜时间
+     * <p>
+     *  要转换到给定时区调用{@link #atTime(LocalTime)}中的特定时间,然后转换为{@link LocalDateTime#atZone(ZoneId)}
+     * 
+     * 
      * @param zone  the zone ID to use, not null
      * @return the zoned date-time formed from this date and the earliest valid time for the zone, not null
      */
@@ -1852,6 +2521,15 @@ public final class LocalDate
      * If some dates being compared are in different chronologies, then the
      * chronology is also considered, see {@link java.time.chrono.ChronoLocalDate#compareTo}.
      *
+     * <p>
+     *  将此日期与另一个日期进行比较
+     * <p>
+     *  比较主要基于日期,从最早到最晚它是"与等号一致",由{@link Comparable}定义,
+     * <p>
+     * 如果所有被比较的日期都是{@code LocalDate}的实例,那么比较将完全基于日期。
+     * 如果一些被比较的日期是不同的时间表,那么也考虑年表,参见{@link javatimechronoChronoLocalDate#compareTo}。
+     * 
+     * 
      * @param other  the other date to compare to, not null
      * @return the comparator value, negative if less, positive if greater
      */
@@ -1892,6 +2570,21 @@ public final class LocalDate
      * This is different from the comparison in {@link #compareTo(ChronoLocalDate)},
      * but is the same approach as {@link ChronoLocalDate#timeLineOrder()}.
      *
+     * <p>
+     *  检查此日期是否晚于指定日期
+     * <p>
+     *  这将检查此日期是否表示本地时间线上另一个日期之后的点
+     * <pre>
+     *  LocalDate a = LocalDateof(2012,6,30); LocalDate b = LocalDateof(2012,7,1); aisAfter(b)== false aisAf
+     * ter(a)== false bisAfter(a)== true。
+     * </pre>
+     * <p>
+     * 此方法仅考虑两个日期在本地时间轴上的位置。
+     * 它不考虑年表或日历系统这与{@link #compareTo(ChronoLocalDate)}中的比较不同,但是是相同的方法作为{@link ChronoLocalDate#timeLineOrder()}
+     * 。
+     * 此方法仅考虑两个日期在本地时间轴上的位置。
+     * 
+     * 
      * @param other  the other date to compare to, not null
      * @return true if this date is after the specified date
      */
@@ -1921,6 +2614,21 @@ public final class LocalDate
      * This is different from the comparison in {@link #compareTo(ChronoLocalDate)},
      * but is the same approach as {@link ChronoLocalDate#timeLineOrder()}.
      *
+     * <p>
+     *  检查此日期是否早于指定日期
+     * <p>
+     *  这将检查此日期是否表示本地时间线上另一个日期之前的点
+     * <pre>
+     *  LocalDate a = LocalDateof(2012,6,30); LocalDate b = LocalDateof(2012,7,1); aisBefore(b)== true aisBe
+     * fore(a)== false bisBefore(a)== false。
+     * </pre>
+     * <p>
+     * 此方法仅考虑两个日期在本地时间轴上的位置。
+     * 它不考虑年表或日历系统这与{@link #compareTo(ChronoLocalDate)}中的比较不同,但是是相同的方法作为{@link ChronoLocalDate#timeLineOrder()}
+     * 。
+     * 此方法仅考虑两个日期在本地时间轴上的位置。
+     * 
+     * 
      * @param other  the other date to compare to, not null
      * @return true if this date is before the specified date
      */
@@ -1950,6 +2658,21 @@ public final class LocalDate
      * This is different from the comparison in {@link #compareTo(ChronoLocalDate)}
      * but is the same approach as {@link ChronoLocalDate#timeLineOrder()}.
      *
+     * <p>
+     *  检查此日期是否等于指定的日期
+     * <p>
+     *  这将检查此日期是否表示本地时间线上与其他日期相同的点
+     * <pre>
+     *  LocalDate a = LocalDateof(2012,6,30); LocalDate b = LocalDateof(2012,7,1); aisEqual(b)== false aisEq
+     * ual(a)== true bisEqual(a)== false。
+     * </pre>
+     * <p>
+     * 此方法仅考虑两个日期在本地时间轴上的位置。
+     * 它不考虑年表或日历系统这与{@link #compareTo(ChronoLocalDate)}中的比较不同,但是是相同的方法, {@link ChronoLocalDate#timeLineOrder()}
+     * 。
+     * 此方法仅考虑两个日期在本地时间轴上的位置。
+     * 
+     * 
      * @param other  the other date to compare to, not null
      * @return true if this date is equal to the specified date
      */
@@ -1971,6 +2694,15 @@ public final class LocalDate
      * To compare the dates of two {@code TemporalAccessor} instances, including dates
      * in two different chronologies, use {@link ChronoField#EPOCH_DAY} as a comparator.
      *
+     * <p>
+     *  检查此日期是否等于另一个日期
+     * <p>
+     *  将此{@code LocalDate}与另一个比较,确保日期是相同的
+     * <p>
+     *  仅比较{@code LocalDate}类型的对象,其他类型返回false要比较两个{@code TemporalAccessor}实例的日期,包括两个不同年代的日期,请使用{@link ChronoField#EPOCH_DAY}
+     * 作为比较。
+     * 
+     * 
      * @param obj  the object to check, null returns false
      * @return true if this is equal to the other date
      */
@@ -1988,6 +2720,10 @@ public final class LocalDate
     /**
      * A hash code for this date.
      *
+     * <p>
+     *  此日期的哈希码
+     * 
+     * 
      * @return a suitable hash code
      */
     @Override
@@ -2004,6 +2740,12 @@ public final class LocalDate
      * <p>
      * The output will be in the ISO-8601 format {@code uuuu-MM-dd}.
      *
+     * <p>
+     *  将此日期作为{@code String}输出,例如{@code 2007-12-03}
+     * <p>
+     * 输出将采用ISO-8601格式{@code uuuu-MM-dd}
+     * 
+     * 
      * @return a string representation of this date, not null
      */
     @Override
@@ -2036,6 +2778,10 @@ public final class LocalDate
     /**
      * Writes the object using a
      * <a href="../../serialized-form.html#java.time.Ser">dedicated serialized form</a>.
+     * <p>
+     *  使用<a href=\"//serialized-formhtml#javatimeSer\">专用序列化表单</a>写入对象
+     * 
+     * 
      * @serialData
      * <pre>
      *  out.writeByte(3);  // identifies a LocalDate
@@ -2053,6 +2799,9 @@ public final class LocalDate
     /**
      * Defend against malicious streams.
      *
+     * <p>
+     *  防御恶意流
+     * 
      * @param s the stream to read
      * @throws InvalidObjectException always
      */

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2002, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -116,6 +117,11 @@ import sun.rmi.transport.LiveRef;
  * example with an {@link RMIServer} stub obtained without going
  * through JNDI.</p>
  *
+ * <p>
+ *  <p>与远程RMI连接器的连接通常,这种连接使用{@link javaxmanagementremoteJMXConnectorFactory JMXConnectorFactory}来实现。
+ * 但是,专门的应用程序可以直接使用这个类,例如使用{@link RMIServer}存根而不通过JNDI < p>。
+ * 
+ * 
  * @since 1.5
  */
 public class RMIConnector implements JMXConnector, Serializable, JMXAddressable {
@@ -171,6 +177,32 @@ public class RMIConnector implements JMXConnector, Serializable, JMXAddressable 
      * service:jmx:iiop://<em>[host[:port]]</em>/stub/<em>encoded-stub</em>
      * </pre>
      *
+     * <p>
+     *  <p>构造一个将连接RMI连接器服务器与给定地址的<code> RMIConnector </code> </p>
+     * 
+     *  <p>地址可以直接引用连接器服务器,使用以下语法之一：</p>
+     * 
+     * <pre>
+     * service：jmx：rmi：// <em> [host [：port]] </em> / stub / <em> encoded-stub </em> service：jmx：iiop：// <em>
+     *  port]] </em> / ior / <em> encoded-IOR </em>。
+     * </pre>
+     * 
+     *  <p>(这里,方括号<code> [] </code>不是地址的一部分,但表示主机和端口是可选的)</p>
+     * 
+     *  <p>地址可以改为通过JNDI指定在哪里找到RMI存根,使用以下语法之一：</p>
+     * 
+     * <pre>
+     *  service：jmx：rmi：// <em> [host [：port]] </em> / jndi / <em> jndi-name </em> service：jmx：iiop：// <em>端
+     * 口]] </em> / jndi / <em> jndi-name </em>。
+     * </pre>
+     * 
+     *  <p>实现还可以识别其他地址语法,例如：</p>
+     * 
+     * <pre>
+     *  service：jmx：iiop：// <em> [host [：port]] </em> / stub / <em> encoded-stub </em>
+     * </pre>
+     * 
+     * 
      * @param url the address of the RMI connector server.
      *
      * @param environment additional attributes specifying how to make
@@ -189,6 +221,10 @@ public class RMIConnector implements JMXConnector, Serializable, JMXAddressable 
     /**
      * <p>Constructs an <code>RMIConnector</code> using the given RMI stub.
      *
+     * <p>
+     *  <p>使用给定的RMI存根构造一个<code> RMIConnector </code>
+     * 
+     * 
      * @param rmiServer an RMI stub representing the RMI connector server.
      * @param environment additional attributes specifying how to make
      * the connection.  This parameter can be null, which is
@@ -208,6 +244,10 @@ public class RMIConnector implements JMXConnector, Serializable, JMXAddressable 
      * concise but informative representation that is easy for a
      * person to read.</p>
      *
+     * <p>
+     * <p>返回此对象的字符串表示形式一般来说,<code> toString </code>方法返回一个"文本表示"此对象的字符串结果应该是一个简洁的信息表示, </p>
+     * 
+     * 
      * @return a String representation of this object.
      **/
     @Override
@@ -227,6 +267,10 @@ public class RMIConnector implements JMXConnector, Serializable, JMXAddressable 
     /**
      * <p>The address of this connector.</p>
      *
+     * <p>
+     *  <p>此连接器的地址</p>
+     * 
+     * 
      * @return the address of this connector, or null if it
      * does not have one.
      *
@@ -241,6 +285,8 @@ public class RMIConnector implements JMXConnector, Serializable, JMXAddressable 
     //--------------------------------------------------------------------
 
     /**
+    /* <p>
+    /* 
      * @throws IOException if the connection could not be made because of a
      *   communication problem, or in the case of the {@code iiop} protocol,
      *   that RMI/IIOP is not supported
@@ -250,6 +296,8 @@ public class RMIConnector implements JMXConnector, Serializable, JMXAddressable 
     }
 
     /**
+    /* <p>
+    /* 
      * @throws IOException if the connection could not be made because of a
      *   communication problem, or in the case of the {@code iiop} protocol,
      *   that RMI/IIOP is not supported
@@ -520,6 +568,10 @@ public class RMIConnector implements JMXConnector, Serializable, JMXAddressable 
 
         /* Send notification of closure.  We don't do this if the user
          * never called connect() on the connector, because there's no
+         * <p>
+         *  从来没有在连接器上调用connect(),因为没有
+         * 
+         * 
          * connection id in that case.  */
 
         if (savedConnectionId != null) {
@@ -1551,6 +1603,10 @@ public class RMIConnector implements JMXConnector, Serializable, JMXAddressable 
                    will throw a ServerException at client side which wraps this
                    UnmarshalException.
                    No failed notif here.
+                /* <p>
+                /*  在服务器端的一些用户抛出的异常将被rmi包装到一个ServerException例如,RMIConnnectorServer将一个ClassNotFoundException包装到一个Unmarsha
+                /* lException,rmi将抛出一个ServerException在客户端包装这个UnmarshalException没有失败在这里。
+                /* 
                  */
                 Throwable tt = ((ServerException)ioe).detail;
 
@@ -1728,6 +1784,24 @@ public class RMIConnector implements JMXConnector, Serializable, JMXAddressable 
      * stubs. However, no reference is ever kept on the ORB provided
      * in the <var>environment</var> map, if any.</li>
      * </ul>
+     * <p>
+     *  <p>为了可以使用,IIOP存根必须连接到ORB如果存在以下情况,存根将自动连接到ORB：
+     * <ul>
+     * <li>它由COS命名返回</li> <li>其服务器对应已通过JNDI在COS命名中注册</li>
+     * </ul>
+     *  否则,它未连接从Jini反序列化的存根未连接从未注册的RMIIIOPServerImpl获取的存根不是连接的<br>未连接的存根无法序列化,因此无法在Jini中注册未连接的存根不能用于调用服务器上的方
+     * 法。
+     * <p>
+     * 为了缓和这个,这个方法将连接给定的存根如果它还没有连接如果给定的<var> RMIServer </var>不是{@link javaxrmiCORBAStub javaxrmiCORBAStub}的实
+     * 例,那么该方法不做任何事情,简单地返回该存根否则,此方法将尝试将存根连接到ORB,如下所示：。
+     * <ul>
+     * <li>此方法在提供的<var> environment </var>中查找"javanamingcorbaorb"属性如果找到,则引用的对象({@link orgomgCORBAORB ORB})用于
+     * 连接存根。
+     * 否则, orgomgCORBAORB是通过调用{@link orgomgCORBAORB#init(String [],Properties)orgomgCORBAORBinit((String [])null,(Properties)null)}
+     * 创建的。
+     * } </li> <li>新创建的ORB保存在静态{ @link WeakReference}并且可以重用于连接其他存根然而,如果任何</var> </var>环境</var>地图中提供的ORB,。
+     * </ul>
+     * 
      * @param rmiServer A RMI Server Stub.
      * @param environment An environment map, possibly containing an ORB.
      * @return the given stub.
@@ -1764,6 +1838,12 @@ public class RMIConnector implements JMXConnector, Serializable, JMXAddressable 
      * {@link WeakReference} and can be reused for connecting other
      * stubs. However, no reference is ever kept on the ORB provided
      * in the <var>environment</var> map, if any.
+     * <p>
+     * 获取由<var> environment </var>指定的ORB,或创建一个新的<p>此方法在提供的<var>环境</var>中查找"javanamingcorbaorb"属性如果找到, ({@link orgomgCORBAORB ORB}
+     * )否则,通过调用{@link orgomgCORBAORB#init(String [],javautilProperties)创建一个新的orgomgCORBAORB orgomgCORBAORBinit((String [])null,(Properties)null)}
+     *  <p >新创建的ORB保存在一个静态的{@link WeakReference}中,并可以重用于连接其他存根然而,没有对<var> environment </var>地图中提供的ORB进行引用。
+     * 
+     * 
      * @param environment An environment map, possibly containing an ORB.
      * @return An ORB.
      * @exception IllegalArgumentException if the
@@ -1795,6 +1875,11 @@ public class RMIConnector implements JMXConnector, Serializable, JMXAddressable 
      * ObjectInputStream}.
      * Calls <code>s.defaultReadObject()</code> and then initializes
      * all transient variables that need initializing.
+     * <p>
+     * 从{@link javaioObjectInputStream ObjectInputStream}调用<code> sdefaultReadObject()</code>中读取RMIConnector
+     * 字段,然后初始化所有需要初始化的瞬态变量。
+     * 
+     * 
      * @param s The ObjectInputStream to read from.
      * @exception InvalidObjectException if none of <var>rmiServer</var> stub
      *    or <var>jmxServiceURL</var> are set.
@@ -1836,6 +1921,17 @@ public class RMIConnector implements JMXConnector, Serializable, JMXAddressable 
      * object is needed for serialization or transmission to a remote
      * application, it is recommended to obtain a new RMIConnector stub
      * by calling {@link RMIConnectorServer#toJMXConnector(Map)}.</p>
+     * <p>
+     * 将RMIConnector字段写入{@link javaioObjectOutputStream ObjectOutputStream} <p>在序列化之前将底层RMIServer存根连接到ORB(如果
+     * 需要)使用提供给构造函数的环境映射(如果有)和文档in {@link javaxmanagementremotermi} </p> <p>这个方法然后调用<code> sdefaultWriteObje
+     * ct()</code>通常,如果这个对象是用JMXServiceURL构造的话,<var> rmiServer </var> var> jmxServiceURL </var>为null如果此对象使用R
+     * MIServer存根<p>构造请注意,环境映射不是序列化的,因为它包含的对象假设是上下文相关的,仅与本地环境相关类装载器,ORB等)</p> <p>在反序列化RMIConnector之后,假定用户将调用
+     * {@link #connect(Map)},提供一个新的Map,该Map可以包含与新的本地环境上下文相关的值< p> <p>由于在序列化之前需要连接到ORB,并且由于要连接的ORB是这些上下文参数之一,
+     * 因此不建议重新序列化一个刚解序列化的对象 - 因为反序列化对象没有映射因此,当需要RMIConnector对象来序列化或传输到远程应用程序时,建议通过调用{@link RMIConnectorServer#toJMXConnector(Map)}
+     * 获取新的RMIConnector存根。
+     * </p>。
+     * 
+     * 
      * @param s The ObjectOutputStream to write to.
      * @exception InvalidObjectException if none of <var>rmiServer</var> stub
      *    or <var>jmxServiceURL</var> are set.
@@ -1937,6 +2033,10 @@ public class RMIConnector implements JMXConnector, Serializable, JMXAddressable 
 
     /**
      * Lookup the RMIServer stub in a directory.
+     * <p>
+     * 在目录中查找RMIServer存根
+     * 
+     * 
      * @param jndiURL A JNDI URL indicating the location of the Stub
      *                (see {@link javax.management.remote.rmi}), e.g.:
      *   <ul><li><tt>rmi://registry-host:port/rmi-stub-name</tt></li>
@@ -2114,6 +2214,37 @@ public class RMIConnector implements JMXConnector, Serializable, JMXAddressable 
                 return ref.invoke(obj, method, params, opnum);
             }
         }
+    /* <p>
+    /*  下面的代码段避免了RMI的类加载问题问题是,RMI存根在反序列化远程方法返回值或异常时,首先将参考它在调用堆栈中找到的第一个非引导类加载器。
+    /* 导致在JMX远程API的实现之间不可移植的行为值得注意的是,J2SE 14上的实现将在堆栈上找到RMI存根的加载器但是在J2SE 5中,此存根由引导加载器加载,因此RMI将找到加载器的调用MBeanSe
+    /* rverConnection方法的用户代码。
+    /*  下面的代码段避免了RMI的类加载问题问题是,RMI存根在反序列化远程方法返回值或异常时,首先将参考它在调用堆栈中找到的第一个非引导类加载器。
+    /* 
+    /* 为了避免这个问题,我们利用RMI存根在内部做什么每个远程调用将结束调用refinvoke(),其中ref是给RMI存根的构造函数的RemoteRef参数。
+    /* 在这个调用中,反序列化将发生So我们制造我们自己的RemoteRef,它将一切都委托给"真正的",但是由不知道其他类的类加载器加载类加载器NoCallStackClassLoader这样做：Remote
+    /* Ref是由proxyRefClassName命名的类的实例,它由类加载器使用由以下字符串定义的字节代码。
+    /* 为了避免这个问题,我们利用RMI存根在内部做什么每个远程调用将结束调用refinvoke(),其中ref是给RMI存根的构造函数的RemoteRef参数。
+    /* 
+    /* 当反序列化发生时,调用栈是这样的：MBeanServerConnectiongetAttribute(或任何) - > RMIConnectionImpl_StubgetAttribute  - > P
+    /* roxyRefinvoke(getAttribute) - > UnicastRefinvoke(getAttribute)。
+    /* 
+    /*  这里UnicastRef是当存根被反序列化(它是一些RMI内部类)时创建的RemoteRef它和"内部RMI东西"由引导加载程序加载,因此对堆栈搜索是透明的第一个非引导加载程序找到是我们的ProxyR
+    /* efLoader,根据需要。
+    /* 
+    /*  在此代码的未来版本中,集成到J2SE 5中,这种解决方法可以直接访问RMI的内部代码。现在,我们为J2SE和独立的参考实现使用相同的代码库
+    /* 
+    /* 下面的字节代码编码以下类,使用带有-g：none选项的J2SE 142编译
+    /* 
+    /*  package comsunjmxremoteinternal;
+    /* 
+    /*  import javalangreflectMethod; import javarmiRemote; import javarmiserverRemoteRef; import comsunjmxr
+    /* emoteinternalProxyRef;。
+    /* 
+    /*  public class PRef extends ProxyRef {public PRef(RemoteRef ref){super(ref); }}
+    /* 
+    /*  public Object invoke(Remote obj,Method method,Object [] params,long opnum)throws Exception {return refinvoke(obj,method,params,opnum); }
+    /* }。
+    /* 
      */
 
     private static final String rmiServerImplStubClassName =
@@ -2318,6 +2449,41 @@ public class RMIConnector implements JMXConnector, Serializable, JMXAddressable 
         }
 
 
+       What we would have * <p>
+       What we would have *  下面的代码执行类似的技巧RMI / IIOP到上面描述的RMI / JRMP不同于JRMP,但是,我们不能容易地插入一个对象在RMIConnection存根和RMI / IIOP反序列化代码之间,如下
+       What we would have * 面解释。
+       What we would have * 
+       What we would have * RMI / IIOP stub中的方法执行以下操作为每个请求创建一个orgomgCORBA_2_3portableOutputStream,并将参数写入它然后它调用_invoke(OutputStrea
+       What we would have * m),它从CORBA的ObjectImpl继承返回orgomgCORBA_2_3portableInputStream返回值从此InputStream读取所以在反序列化期间的堆栈如下所示：。
+       What we would have * 
+       What we would have *  MBeanServerConnectiongetAttribute(或任何) - > _RMIConnection_StubgetAttribute  - > UtilreadAny(一个CORBA方
+       What we would have * 法) - > InputStreamread_any  - >内部CORBA的东西。
+       What we would have * 
+       What we would have * 我们希望*完成的操作与RMI / JRMP是一样的。
+       What we would have * 我们创建一个"ProxyDelegate",它是一个orgomgCORBAportableDelegate,它只是将每个操作转发到RMIConnection存根的真正的原始委托,除了InputStrea
+       What we would have * m返回by _invoke由一个"ProxyInputStream"包装,它由我们的NoCallStackClassLoader。
+       What we would have * 我们希望*完成的操作与RMI / JRMP是一样的。
+       What we would have * 
+       What we would have *  不幸的是,这不工作,至少与Sun的J2SE 142,因为CORBA代码不是设计允许您更改代理任意你从代码中获取一个ClassCastException,期望Delegate实现一个内部接口
+       What we would have * 
+       What we would have * 所以我们做以下我们创建一个存根的子类,覆盖_invoke方法,以便将返回的InputStream包装在ProxyInputStream中我们使用NoCallStackClassLoader创建一个Pro
+       What we would have * xyInputStream的子类,并覆盖它的read_any和read_value(Class)方法(这些是在MBeanServerConnection的反序列化过程中调用的唯一方法返回值)我们从原始存
+       What we would have * 根中提取Delegate并将其插入到我们的子类存根中,然后走开。
+       What we would have * 存根的状态仅由其Delegate。
+       What we would have * 
+       What we would have *  我们还需要捕获ApplicationException,它将编码在被调用方法的throws子句中声明的任何异常。它的InputStream还需要被包装在一个ProxyInputSteam中
+       What we would have * 
+       What we would have * 我们在存根子类中重写_releaseReply,以便用原始的InputStream替换ProxyInputStream参数。
+       What we would have * 如果_releaseReply的实现最终将此InputStream转换为特定于实现的接口(在Sun的J2SE 5中)。
+       What we would have * 
+       What we would have *  由于调用堆栈搜索在ProxyInputStream子类中停止,所以不必严格必须由NoCallStackClassLoader加载存根子类。
+       What we would have * 但是,它有两个原因是方便的：一个是它意味着ProxyInputStream子类可以直接访问,而不是使用反射另一个是,它避免了构建问题,因为通常stubs是在其他类编译之后创建的,所以我们不能访问他们从这
+       What we would have * 个类,没有,再次使用反射。
+       What we would have *  由于调用堆栈搜索在ProxyInputStream子类中停止,所以不必严格必须由NoCallStackClassLoader加载存根子类。
+       What we would have * 
+       What we would have * 下面的字符串编码以下两个Java类,使用javac -g：none编译
+       What we would have * 
+       What we would have *  package comsunjmxremoteprotocoliiop;
      */
     private static final String iiopConnectionStubClassName =
         "org.omg.stub.javax.management.remote.rmi._RMIConnection_Stub";
@@ -2502,6 +2668,25 @@ public class RMIConnector implements JMXConnector, Serializable, JMXAddressable 
      * Translates the specified character, which is assumed to be in the
      * "Base 64 Alphabet" into its equivalent 6-bit positive integer.
      *
+     * <p>
+     * 
+     *  import orgomgstubjavaxmanagementremotermi_RMIConnection_Stub;
+     * 
+     *  import orgomgCORBAportableApplicationException; import orgomgCORBAportableInputStream; import orgomg
+     * CORBAportableOutputStream; import orgomgCORBAportableRemarshalException;。
+     * 
+     *  public class ProxyStub extends _RMIConnection_Stub {public InputStream _invoke(OutputStream out)throws ApplicationException,RemarshalException {try {return new PInputStream(super_invoke(out)); }
+     *  catch(ApplicationException e){InputStream pis = new PInputStream(egetInputStream()); throw new ApplicationException(egetId(),pis); }
+     * }。
+     * 
+     * public void _releaseReply(InputStream in){if(in！= null)in =((PInputStream)in)getProxiedInputStream(); super_releaseReply(in); }
+     * }。
+     * 
+     *  package comsunjmxremoteprotocoliiop;
+     * 
+     *  public class PInputStream extends ProxyInputStream {public PInputStream(orgomgCORBAportableInputStream in){super(in); }
+     * }。
+     * 
      * @throws IllegalArgumentException if
      *        c is not in the Base64 Alphabet.
      */
@@ -2524,6 +2709,12 @@ public class RMIConnector implements JMXConnector, Serializable, JMXAddressable 
      * into their 6-bit positive integer equivalents.  Characters that
      * are not in the Base64 alphabet but fall within the bounds of the
      * array are translated to -1.
+     * <p>
+     * 
+     *  public orgomgCORBAAny read_any(){return inread_any(); }}
+     * 
+     *  public javaioSerializable read_value(class clz){return narrow()read_value(clz); }}
+     * 
      */
     private static final byte base64ToInt[] = {
         -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
@@ -2564,6 +2755,10 @@ public class RMIConnector implements JMXConnector, Serializable, JMXAddressable 
     // Private variables
     //--------------------------------------------------------------------
     /**
+    /* <p>
+    /*  将指定字符(假定为"Base 64 Alphabet"中的字符)转换为等效的6位正整数
+    /* 
+    /* 
      * @serial The RMIServer stub of the RMI JMX Connector server to
      * which this client connector is (or will be) connected. This
      * field can be null when <var>jmxServiceURL</var> is not
@@ -2577,6 +2772,10 @@ public class RMIConnector implements JMXConnector, Serializable, JMXAddressable 
     private final RMIServer rmiServer;
 
     /**
+    /* <p>
+    /* 此数组是一个查找表,它将从"Base64字母表"(如RFC 2045的表1中指定)中绘制的Unicode字符转换为其6位正整数等价字符不在Base64字母表中但落在数组被翻译为-1
+    /* 
+    /* 
      * @serial The JMXServiceURL of the RMI JMX Connector server to
      * which this client connector will be connected. This field can
      * be null when <var>rmiServer</var> is not null. If both
@@ -2621,6 +2820,8 @@ public class RMIConnector implements JMXConnector, Serializable, JMXAddressable 
     /**
      * A static WeakReference to an {@link org.omg.CORBA.ORB ORB} to
      * connect unconnected stubs.
+     * <p>
+     * 
      **/
     private static volatile WeakReference<Object> orb = null;
 

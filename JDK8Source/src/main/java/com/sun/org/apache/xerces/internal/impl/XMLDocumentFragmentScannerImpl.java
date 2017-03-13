@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2013, Oracle and/or its affiliates. All rights reserved.
  */
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有2005 Apache软件基金会
+ * 
+ *  根据Apache许可证第20版("许可证")授权;您不得使用此文件,除非符合许可证您可以在获取许可证的副本
+ * 
+ *  http：// wwwapacheorg / licenses / LICENSE-20
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件将按"原样"基础分发,无任何明示或暗示的保证或条件。请参阅许可证管理权限和限制许可证
+ * 
  */
 
 
@@ -71,6 +81,12 @@ import javax.xml.stream.events.XMLEvent;
  * efficiently build pull parser. Lot of improvements have been done and
  * the code has been added to support stax functionality/features.
  *
+ * <p>
+ *  这个类负责扫描文档片段的结构和内容
+ * 
+ * 这个类已经被修改为根据更新的设计更适合有效地构建pull解析器已经完成了大量的改进和代码已添加到支持stax功能/功能
+ * 
+ * 
  * @author Neeraj Bajaj SUN Microsystems
  * @author K.Venugopal SUN Microsystems
  * @author Glenn Marcy, IBM
@@ -175,6 +191,9 @@ public class XMLDocumentFragmentScannerImpl
 
     /** access external dtd: file protocol
      *  For DOM/SAX, the secure feature is set to true by default
+     * <p>
+     *  对于DOM / SAX,默认情况下将安全功能设置为true
+     * 
      */
     final static String EXTERNAL_ACCESS_DEFAULT = Constants.EXTERNAL_ACCESS_DEFAULT;
 
@@ -292,6 +311,10 @@ public class XMLDocumentFragmentScannerImpl
     /** Document system identifier.
      * REVISIT:  So what's this used for?  - NG
      * protected String fDocumentSystemId;
+     * <p>
+     *  REVISIT：那么这是什么用? -  NG protected String fDocumentSystemId;
+     * 
+     * 
      ******/
 
     protected String fPITarget ;
@@ -319,12 +342,18 @@ public class XMLDocumentFragmentScannerImpl
     /**
      * comma-delimited list of protocols that are allowed for the purpose
      * of accessing external dtd or entity references
+     * <p>
+     *  以访问外部dtd或实体引用为目的允许的逗号分隔的协议列表
+     * 
      */
     protected String fAccessExternalDTD = EXTERNAL_ACCESS_DEFAULT;
 
     /**
      * standard uri conformant (strict uri).
      * http://apache.org/xml/features/standard-uri-conformant
+     * <p>
+     *  标准uri conformant(严格uri)http：// apacheorg / xml / features / standard-uri-conformant
+     * 
      */
     protected boolean fStrictURI;
 
@@ -348,6 +377,9 @@ public class XMLDocumentFragmentScannerImpl
      * CHANGED: Using XMLAttributesIteratorImpl instead of XMLAttributesImpl. This class
      * implements Iterator interface so we can directly give Attributes in the form of
      * iterator.
+     * <p>
+     *  CHANGED：使用XMLAttributesIteratorImpl而不是XMLAttributesImpl这个类实现了Iterator接口,所以我们可以直接给出迭代器形式的属性
+     * 
      */
     protected XMLAttributesIteratorImpl fAttributes = new XMLAttributesIteratorImpl();
 
@@ -419,6 +451,10 @@ public class XMLDocumentFragmentScannerImpl
     /**
      * Sets the input source.
      *
+     * <p>
+     *  设置输入源
+     * 
+     * 
      * @param inputSource The input source.
      *
      * @throws IOException Thrown on i/o error.
@@ -432,6 +468,10 @@ public class XMLDocumentFragmentScannerImpl
     /**
      * Scans a document.
      *
+     * <p>
+     *  扫描文档
+     * 
+     * 
      * @param complete True if the scanner should scan the document
      *                 completely, pushing all events to the registered
      *                 document handler. A value of false indicates that
@@ -530,6 +570,8 @@ public class XMLDocumentFragmentScannerImpl
     }
 
     /** return the next state on the input
+    /* <p>
+    /* 
      * @return int
      */
 
@@ -546,6 +588,10 @@ public class XMLDocumentFragmentScannerImpl
      * about any features and properties that affect the operation of the
      * component.
      *
+     * <p>
+     * 重置组件组件可以查询组件管理器关于影响组件操作的任何功能和属性
+     * 
+     * 
      * @param componentManager The component manager.
      *
      * @throws SAXException Thrown by component on initialization error.
@@ -671,6 +717,9 @@ public class XMLDocumentFragmentScannerImpl
      * Returns a list of feature identifiers that are recognized by
      * this component. This method may return null if no features
      * are recognized by this component.
+     * <p>
+     *  返回此组件可识别的要素标识符的列表如果此组件未识别任何要素,此方法可能返回null
+     * 
      */
     public String[] getRecognizedFeatures() {
         return (String[])(RECOGNIZED_FEATURES.clone());
@@ -683,6 +732,12 @@ public class XMLDocumentFragmentScannerImpl
      * <strong>Note:</strong> Components should silently ignore features
      * that do not affect the operation of the component.
      *
+     * <p>
+     *  设置功能的状态当功能更改状态时,此方法由组件管理器在复位后任何时间调用
+     * <p>
+     *  <strong>注意：</strong>组件应默认忽略不影响组件操作的功能
+     * 
+     * 
      * @param featureId The feature identifier.
      * @param state     The state of the feature.
      *
@@ -710,6 +765,9 @@ public class XMLDocumentFragmentScannerImpl
      * Returns a list of property identifiers that are recognized by
      * this component. This method may return null if no properties
      * are recognized by this component.
+     * <p>
+     *  返回此组件可识别的属性标识符的列表如果此组件未识别任何属性,此方法可能返回null
+     * 
      */
     public String[] getRecognizedProperties() {
         return (String[])(RECOGNIZED_PROPERTIES.clone());
@@ -722,6 +780,12 @@ public class XMLDocumentFragmentScannerImpl
      * <strong>Note:</strong> Components should silently ignore properties
      * that do not affect the operation of the component.
      *
+     * <p>
+     * 设置属性的值当属性更改值时,此方法由组件管理器在复位后任何时间调用
+     * <p>
+     *  <strong>注意：</strong>组件应静默忽略不影响组件操作的属性
+     * 
+     * 
      * @param propertyId The property identifier.
      * @param value      The value of the property.
      *
@@ -775,6 +839,10 @@ public class XMLDocumentFragmentScannerImpl
      * component does not want to report a default value for this
      * feature.
      *
+     * <p>
+     *  返回特征的默认状态,如果此组件不希望报告此特征的默认值,则返回null
+     * 
+     * 
      * @param featureId The feature identifier.
      *
      * @since Xerces 2.2.0
@@ -793,6 +861,10 @@ public class XMLDocumentFragmentScannerImpl
      * component does not want to report a default value for this
      * property.
      *
+     * <p>
+     *  返回属性的默认状态,如果此组件不希望报告此属性的默认值,则返回null
+     * 
+     * 
      * @param propertyId The property identifier.
      *
      * @since Xerces 2.2.0
@@ -813,6 +885,10 @@ public class XMLDocumentFragmentScannerImpl
     /**
      * setDocumentHandler
      *
+     * <p>
+     *  setDocumentHandler
+     * 
+     * 
      * @param documentHandler
      */
     public void setDocumentHandler(XMLDocumentHandler documentHandler) {
@@ -835,6 +911,10 @@ public class XMLDocumentFragmentScannerImpl
      * pseudo-name of "[dtd]" parameter entity names start with '%'; and
      * general entities are just specified by their name.
      *
+     * <p>
+     *  此方法通知实体的开始DTD具有伪名称"[dtd]"参数实体名称以'％'开头;和一般实体只是由他们的名字指定
+     * 
+     * 
      * @param name     The name of the entity.
      * @param identifier The resource identifier.
      * @param encoding The auto-detected IANA encoding name of the entity
@@ -881,6 +961,10 @@ public class XMLDocumentFragmentScannerImpl
      * of "[dtd]" parameter entity names start with '%'; and general entities
      * are just specified by their name.
      *
+     * <p>
+     * 此方法通知实体的结束DTD具有伪名称"[dtd]"参数实体名称以'％'开头;和一般实体只是由他们的名字指定
+     * 
+     * 
      * @param name The name of the entity.
      * @param augs Additional information that may include infoset augmentations
      *
@@ -895,6 +979,10 @@ public class XMLDocumentFragmentScannerImpl
          * fDocumentHandler.characters(fStringBuffer, null);
          * fStringBuffer.length = 0; // make sure we know it's been flushed
          * }
+         * <p>
+         *  // flush可能的挂起输出缓冲区 - 参见scanContent if(fInScanContent && fStringBufferlength！= 0 && fDocumentHandler！
+         * = null){fDocumentHandlercharacters(fStringBuffer,null); fStringBufferlength = 0; //确保我们知道它已经被刷新}。
+         * 
          */
         super.endEntity(name, augs);
 
@@ -941,6 +1029,18 @@ public class XMLDocumentFragmentScannerImpl
      * [77] TextDecl ::= '&lt;?xml' VersionInfo? EncodingDecl S? '?>'
      * </pre>
      *
+     * <p>
+     *  扫描XML或文本声明
+     * <p>
+     * <pre>
+     * [23] XMLDecl :: ='&lt;?xml'VersionInfo EncodingDecl? SDDecl? S? '?''[24] VersionInfo :: = S'version'E
+     * q('VersionNum'|"VersionNum")EncodingDecl :: = S'encoding'Eq('"'EncName'"'|"'" "'")EncInd :: = [A-Za-z
+     * ]([A-Za-z0-9_] |' - ')* SDDecl :: = "('yes'|'no')"'")|('"'('yes'|'no')'"))。
+     * 
+     *  TextDecl :: ='&lt;?xml'VersionInfo? EncodingDecl S? '?>'
+     * </pre>
+     * 
+     * 
      * @param scanningTextDecl True if a text declaration is to
      *                         be scanned instead of an XML
      *                         declaration.
@@ -1009,6 +1109,10 @@ public class XMLDocumentFragmentScannerImpl
      * where a document starts with a processing instruction whose
      * target name <em>starts with</em> "xml". (e.g. xmlfoo)
      *
+     * <p>
+     *  扫描处理数据需要处理文档以目标名称<em>​​以</em>"xml"开头的处理指令开始的情况(例如xmlfoo)
+     * 
+     * 
      * @param target The PI target
      * @param data The XMLStringBuffer to fill in with the data
      */
@@ -1032,6 +1136,15 @@ public class XMLDocumentFragmentScannerImpl
      * </pre>
      * <p>
      * <strong>Note:</strong> Called after scanning past '&lt;!--'
+     * <p>
+     *  扫描评论
+     * <p>
+     * <pre>
+     *  [15] Comment :: ='&lt;  - '((Char  - ' - ')|(' - '(Char  - ' - ')))*'
+     * </pre>
+     * <p>
+     *  <strong>注意：</strong>扫描过去的"&lt;！ - '
+     * 
      */
     protected void scanComment() throws IOException, XNIException {
         fContentBuffer.clear();
@@ -1232,6 +1345,19 @@ public class XMLDocumentFragmentScannerImpl
      * these variables before calling this method.
      * NB: Content in fAttributes is valid only till the state of the parser is XMLEvent.START_ELEMENT
      *
+     * <p>
+     * 扫描start元素此方法将处理命名空间信息的绑定,并通知处理程序元素的开始
+     * <p>
+     * <pre>
+     *  [44] EmptyElemTag :: ='&lt;'名称(S属性)* S? '/>'[40] STag :: ='&lt;'名称(S属性)* S? '>'
+     * </pre>
+     * <p>
+     *  <strong>注意：</strong>此方法假定前导'&lt;'字符已被消耗
+     * <p>
+     *  <strong>注意：</strong>此方法使用fElementQName和fAttributes变量这些变量的内容将被销毁调用方应在调用此方法之前从这些变量中复制重要信息NB：fAttribute
+     * s中的内容仅在状态的解析器为XMLEventSTART_ELEMENT。
+     * 
+     * 
      * @return True if element is empty. (i.e. It matches
      *          production [44].
      */
@@ -1373,6 +1499,9 @@ public class XMLDocumentFragmentScannerImpl
     /**
      * Looks for the close of start tag, i.e. if it finds '>' or '/>'
      * Characters are consumed.
+     * <p>
+     *  查找start标签的关闭,即如果它找到'>'或'/>'字符被消耗
+     * 
      */
     protected boolean seekCloseOfStartTag() throws IOException, XNIException {
         // spaces
@@ -1418,6 +1547,18 @@ public class XMLDocumentFragmentScannerImpl
      * fQName variables. The contents of these variables will be
      * destroyed.
      *
+     * <p>
+     *  扫描属性
+     * <p>
+     * <pre>
+     * Attribute :: =命名Eq AttValue
+     * </pre>
+     * <p>
+     *  <strong>注意</strong>：此方法假定流上的下一个字符是属性名称的第一个字符
+     * <p>
+     *  <strong>注意：</strong>此方法使用fAttributeQName和fQName变量这些变量的内容将被销毁
+     * 
+     * 
      * @param attributes The attributes list for the scanned attribute.
      */
 
@@ -1447,6 +1588,17 @@ public class XMLDocumentFragmentScannerImpl
      *
      * // content
      * int oldLen = attributes.getLength();
+     * <p>
+     *  protected void scanAttribute(AttributeIteratorImpl attributes)throws IOException,XNIException {if(DEBUG_START_END_ELEMENT)Systemoutprintln(">>> scanAttribute()");。
+     * 
+     *  // name if(fNamespaces){fEntityScannerscanQName(fAttributeQName); } else {String name = fEntityScannerscanName(); fAttributeQNamesetValues(null,name,name,null); }
+     * }。
+     * 
+     * // equals fEntityScannerskipSpaces(); if(！fEntityScannerskipChar('=')){reportFatalError("EqRequiredInAttribute",new Object [] {fAttributeQNamerawname}
+     * ); } fEntityScannerskipSpaces();。
+     * 
+     *  // content int oldLen = attributesgetLength();
+     * 
      */
     /**xxx there is one check of duplicate attribute that has been removed.
      * attributes.addAttribute(fAttributeQName, XMLSymbols.fCDATASymbol, null);
@@ -1457,6 +1609,12 @@ public class XMLDocumentFragmentScannerImpl
      * new Object[]{fCurrentElement.rawname,
      * fAttributeQName.rawname});
      * }
+     * <p>
+     *  attributesaddAttribute(fAttributeQName,XMLSymbolsfCDATASymbol,null);
+     * 
+     *  // WFC：Unique Att Spec if(oldLen == attributesgetLength()){reportFatalError("AttributeNotUnique",new Object [] {fCurrentElementrawname,fAttributeQNamerawname}
+     * ); }}。
+     * 
      */
 
     /*
@@ -1475,6 +1633,17 @@ public class XMLDocumentFragmentScannerImpl
         if (DEBUG_START_END_ELEMENT) System.out.println("<<< scanAttribute()");
     } // scanAttribute(XMLAttributes)
 
+    /* <p>
+    /*  // REVISIT：需要包括另外一种情况：外部PE和独立是没有布尔isVC = fHasExternalDTD &&！fStandalone; scanAttributeValue(fTempStr
+    /* ing,fTempString2,fAttributeQNamerawname,attributes,oldLen,isVC);。
+    /* 
+    /* // attributessetValue(oldLen,fTempStringtoString()); // attributessetNonNormalizedValue(oldLen,fTempS
+    /* tring2toString()); // attributessetSpecified(oldLen,true);。
+    /* 
+    /*  AttributeImpl attribute = new AttributeImpl(fAttributeQNameprefix,fAttributeQNamelocalpart,fAttribut
+    /* eQNameuri,fTempStringtoString(),fTempString2toString(),XMLSymbolsfCDATASymbol,true); fAttributesaddAt
+    /* tribute(attribute); if(DEBUG_START_END_ELEMENT)Systemoutprintln("<<< scanAttribute()"); } // scanAttribute(XMLAttributes)。
+    /* 
      */
 
     /** return the attribute iterator implementation */
@@ -1509,6 +1678,18 @@ public class XMLDocumentFragmentScannerImpl
      * fQName variables. The contents of these variables will be
      * destroyed.
      *
+     * <p>
+     *  扫描属性名称值对
+     * <p>
+     * <pre>
+     *  Attribute :: =命名Eq AttValue
+     * </pre>
+     * <p>
+     *  <strong>注意</strong>：此方法假定流上的下一个字符是属性名称的第一个字符
+     * <p>
+     * <strong>注意：</strong>此方法使用fAttributeQName和fQName变量这些变量的内容将被销毁
+     * 
+     * 
      * @param attributes The attributes list for the scanned attribute.
      */
 
@@ -1577,6 +1758,10 @@ public class XMLDocumentFragmentScannerImpl
     /**
      * Scans element content.
      *
+     * <p>
+     *  扫描元素内容
+     * 
+     * 
      * @return Returns the next character on the stream.
      */
     //CHANGED:
@@ -1635,6 +1820,12 @@ public class XMLDocumentFragmentScannerImpl
      * <strong>Note:</strong> This method uses the fTempString and
      * fStringBuffer variables.
      *
+     * <p>
+     *  扫描CDATA节
+     * <p>
+     *  <strong>注意：</strong>此方法使用fTempString和fStringBuffer变量
+     * 
+     * 
      * @param complete True if the CDATA section is to be scanned
      *                 completely.
      *
@@ -1678,6 +1869,15 @@ public class XMLDocumentFragmentScannerImpl
                  * contentBuffer.append("]]");
                  * fDocumentHandler.characters(contentBuffer, null);
                  * }
+                 * <p>
+                 *  int brackets = 2; while(fEntityScannerskipChar(''')){brackets ++; }}
+                 * 
+                 *  //当我们发现多于2个方括号if(fDocumentHandler！= null &&括号> 2){//我们不需要清除缓冲区// contentBufferclear(); for(int i = 2; i <brackets; i ++){contentBufferappend('''); } fDocumentHandlercharacters(contentBuffer,null); }}。
+                 * 
+                 * if(fEntityScannerskipChar('>')){break; } if(fDocumentHandler！= null){//我们现在不需要清除缓冲区// contentBufferclear(); contentBufferappend("]]"); fDocumentHandlercharacters(contentBuffer,null); }
+                 * }。
+                 * 
+                 * 
                  **/
             } else {
                 int c = fEntityScanner.peekChar();
@@ -1725,6 +1925,16 @@ public class XMLDocumentFragmentScannerImpl
      * copy the needed information out of this variable before calling
      * this method.
      *
+     * <p>
+     *  扫描结束元素
+     * <p>
+     * <pre>
+     *  [42] ETag :: ='&lt; /'名称S? '>'
+     * </pre>
+     * <p>
+     *  <strong>注意：</strong>此方法使用fElementQName变量此变量的内容将被销毁调用方应在调用此方法之前将所需的信息从此变量中复制
+     * 
+     * 
      * @return The element depth.
      */
     protected int scanEndElement() throws IOException, XNIException {
@@ -1794,6 +2004,12 @@ public class XMLDocumentFragmentScannerImpl
      * <pre>
      * [66] CharRef ::= '&#' [0-9]+ ';' | '&#x' [0-9a-fA-F]+ ';'
      * </pre>
+     * <p>
+     *  扫描字符引用
+     * <p>
+     * <pre>
+     *  [66] CharRef :: ='&#'[0-9] +';' | '&#x'[0-9a-fA-F] +';'
+     * </pre>
      */
     protected void scanCharReference()
     throws IOException, XNIException {
@@ -1834,6 +2050,10 @@ public class XMLDocumentFragmentScannerImpl
     /**
      * Scans an entity reference.
      *
+     * <p>
+     *  扫描实体引用
+     * 
+     * 
      * @return returns true if the new entity is started. If it was built-in entity
      *         'false' is returned.
      * @throws IOException  Thrown if i/o error occurs.
@@ -1915,6 +2135,10 @@ public class XMLDocumentFragmentScannerImpl
 
     /**
      * Check if the depth exceeds the maxElementDepth limit
+     * <p>
+     *  检查深度是否超过maxElementDepth限制
+     * 
+     * 
      * @param elementName name of the current element
      */
     void checkDepth(String elementName) {
@@ -1932,6 +2156,10 @@ public class XMLDocumentFragmentScannerImpl
      * Calls document handler with a single character resulting from
      * built-in entity resolution.
      *
+     * <p>
+     *  使用由内置实体解析导致的单个字符调用文档处理程序
+     * 
+     * 
      * @param c
      * @param entity built-in name
      * @param XMLStringBuffer append the character to buffer
@@ -1963,6 +2191,10 @@ public class XMLDocumentFragmentScannerImpl
     /**
      * Sets the scanner state.
      *
+     * <p>
+     *  设置扫描仪状态
+     * 
+     * 
      * @param state The new scanner state.
      */
     protected final void setScannerState(int state) {
@@ -1981,6 +2213,10 @@ public class XMLDocumentFragmentScannerImpl
     /**
      * Sets the Driver.
      *
+     * <p>
+     *  设置驱动程序
+     * 
+     * 
      * @param Driver The new Driver.
      */
     protected final void setDriver(Driver driver) {
@@ -2050,6 +2286,10 @@ public class XMLDocumentFragmentScannerImpl
     /**
      * Check the protocol used in the systemId against allowed protocols
      *
+     * <p>
+     * 根据允许的协议检查systemId中使用的协议
+     * 
+     * 
      * @param systemId the Id of the URI
      * @param allowedProtocols a list of allowed protocols separated by comma
      * @return the name of the protocol if rejected, null otherwise
@@ -2065,6 +2305,8 @@ public class XMLDocumentFragmentScannerImpl
     //
 
     /**
+    /* <p>
+    /* 
      * @author Neeraj Bajaj, Sun Microsystems.
      */
     protected static final class Element {
@@ -2089,6 +2331,9 @@ public class XMLDocumentFragmentScannerImpl
         /**
          * Constructs a new Element from the given QName and next Element
          * reference.
+         * <p>
+         *  从给定的QName和下一个元素引用构造一个新的元素
+         * 
          */
         public Element(QName qname, Element next) {
             this.qname.setValues(qname);
@@ -2101,6 +2346,10 @@ public class XMLDocumentFragmentScannerImpl
     /**
      * Element stack.
      *
+     * <p>
+     *  元素堆栈
+     * 
+     * 
      * @author Neeraj Bajaj, Sun Microsystems.
      */
     protected class ElementStack2 {
@@ -2141,6 +2390,10 @@ public class XMLDocumentFragmentScannerImpl
              * Element [] temp = new Element[length * 2];
              * System.arraycopy(fElements, 0, temp, 0, length);
              * fElements = temp;
+             * <p>
+             *  int length = fElementslength; Element [] temp = new Element [length * 2]; SystemArraycopy(fElements,
+             * 0,temp,0,length); fElements = temp;。
+             * 
              */
             //resize QNames
             int oldLength = fQName.length;
@@ -2162,6 +2415,10 @@ public class XMLDocumentFragmentScannerImpl
         /** Check if the element scanned during the start element
          *matches the stored element.
          *
+         * <p>
+         *  修改存储的元素
+         * 
+         * 
          *@return true if the match suceeds.
          */
         public boolean matchElement(QName element) {
@@ -2205,6 +2462,10 @@ public class XMLDocumentFragmentScannerImpl
 
         /**
          * This function doesn't increase depth. The function in this function is
+         * <p>
+         *  此功能不增加深度此功能中的功能是
+         * 
+         * 
          *broken down into two functions for efficiency. <@see>matchElement</see>.
          * This function just returns the pointer to the object and its values are set.
          *
@@ -2230,6 +2491,9 @@ public class XMLDocumentFragmentScannerImpl
 
         /** Note that this function is considerably different than nextElement()
          * This function just returns the previously stored elements
+         * <p>
+         *  此函数只返回先前存储的元素
+         * 
          */
         public QName getNext(){
             //when position reaches number of elements in the list..
@@ -2241,6 +2505,7 @@ public class XMLDocumentFragmentScannerImpl
         }
 
         /** returns the current depth
+        /* <p>
          */
         public int popElement(){
             return fDepth--;
@@ -2262,6 +2527,10 @@ public class XMLDocumentFragmentScannerImpl
      * checking, and it re-uses objects instead of throwing popped items
      * away.
      *
+     * <p>
+     *  元素堆栈这个堆栈没有同步操作,错误检查,它重用对象,而不是抛出弹出的项目
+     * 
+     * 
      * @author Andy Clark, IBM
      */
     protected class ElementStack {
@@ -2311,6 +2580,13 @@ public class XMLDocumentFragmentScannerImpl
          * is <em>not</em> orphaned to the caller. It should be
          * considered read-only.
          *
+         * <p>
+         *  推栈上的一个元素
+         * <p>
+         * <strong>注意：</strong> QName值被复制到堆栈中换句话说,调用者不会</em>将元素孤立到堆栈。
+         * 此外,返回的QName对象是<em> not < / em>孤立到调用者应该被认为是只读的。
+         * 
+         * 
          * @param element The element to push onto the stack.
          *
          * @return Returns the actual QName object that stores the
@@ -2332,6 +2608,9 @@ public class XMLDocumentFragmentScannerImpl
 
         /** Note that this function is considerably different than nextElement()
          * This function just returns the previously stored elements
+         * <p>
+         *  此函数只返回先前存储的元素
+         * 
          */
         public QName getNext(){
             //when position reaches number of elements in the list..
@@ -2352,6 +2631,9 @@ public class XMLDocumentFragmentScannerImpl
          * 1. Increase the depth - because element was sucessfully skipped.
          *2. Store the position of the element token in array  "last opened tag" at depth.
          *3. increase the position counter so as to point to the next element in the array
+         * <p>
+         *  1增加深度 - 因为元素已成功跳过将元素标记的位置存储在深度数组"last opened tag"中增加位置计数器,以便指向数组中的下一个元素
+         * 
          */
         public void push(){
 
@@ -2361,6 +2643,10 @@ public class XMLDocumentFragmentScannerImpl
         /** Check if the element scanned during the start element
          *matches the stored element.
          *
+         * <p>
+         *  修改存储的元素
+         * 
+         * 
          *@return true if the match suceeds.
          */
         public boolean matchElement(QName element) {
@@ -2447,6 +2733,10 @@ public class XMLDocumentFragmentScannerImpl
         /**
          * Returns the next element on the stack.
          *
+         * <p>
+         *  返回堆栈中的下一个元素
+         * 
+         * 
          * @return Returns the actual QName object. Callee should
          * use this object to store the details of next element encountered.
          */
@@ -2476,6 +2766,11 @@ public class XMLDocumentFragmentScannerImpl
          * <strong>Note:</strong> The object returned is <em>not</em>
          * orphaned to the caller. Therefore, the caller should consider
          * the object to be read-only.
+         * <p>
+         *  通过设置指定的QName的值,将元素从堆栈中弹出
+         * <p>
+         * <strong>注意</strong>：返回的对象不是</em>孤立到调用者因此,调用者应该将该对象视为只读对象
+         * 
          */
         public QName popElement() {
             //return the same object that was pushed -- this would avoid
@@ -2499,6 +2794,9 @@ public class XMLDocumentFragmentScannerImpl
         /** Reposition the stack. fInt [] contains all the opened tags at particular depth.
          * Transfer all the opened tags starting from depth '2' to the current depth and reposition them
          *as per the depth.
+         * <p>
+         *  将所有打开的标签从深度"2"转移到当前深度,并根据深度重新定位它们
+         * 
          */
         public void reposition(){
             for( int i = 2 ; i <= fDepth ; i++){
@@ -2526,6 +2824,10 @@ public class XMLDocumentFragmentScannerImpl
          * For Well formedness checks we can have the same QName object that was pushed.
          * the values will be set only if application need to know about the endElement
          * -- neeraj.bajaj@sun.com
+         * <p>
+         *  这个函数是对endElement进行优化的结果 - 我们不需要为每个结束元素设置值。
+         * 对于形成性检查,我们可以有相同的QName对象,只有当应用程序需要知道关于endelement  -  neerajbajaj @ suncom。
+         * 
          */
 
         public QName getLastPoppedElement(){
@@ -2545,6 +2847,13 @@ public class XMLDocumentFragmentScannerImpl
      * can maintain a different internal state.
      *
      *
+     * <p>
+     *  驱动解析器到输入上的下一个状态/事件解析器保证在下一个状态/事件停止
+     * 
+     * 内部XML文档分为几个状态每个状态表示XML文档的一部分当此函数正常返回时,它已读取XML文档的部分并返回与已读取的文档的部分相对应的状态为了优化,特定驱动程序可以提前读取文件的部分(返回的状态)只是读
+     * 取并且可以保持不同的内部状态。
+     * 
+     * 
      * @author Neeraj Bajaj, Sun Microsystems
      */
     protected interface Driver {
@@ -2561,6 +2870,13 @@ public class XMLDocumentFragmentScannerImpl
          * can read ahead of the section of document (state returned) just read and
          * can maintain a different internal state.
          *
+         * <p>
+         *  驱动解析器到输入上的下一个状态/事件解析器保证在下一个状态/事件停止
+         * 
+         * 内部XML文档分为几个状态每个状态表示XML文档的一部分当此函数正常返回时,它已读取XML文档的部分并返回与已读取的文档的部分相对应的状态为了优化,特定驱动程序可以提前读取文件的部分(返回的状态)只是读
+         * 取并且可以保持不同的内部状态。
+         * 
+         * 
          * @return state representing the section of document just read.
          *
          * @throws IOException  Thrown on i/o error.
@@ -2580,6 +2896,12 @@ public class XMLDocumentFragmentScannerImpl
      * efficiently build pull parser. Lot of performance improvements have been done and
      * the code has been added to support stax functionality/features.
      *
+     * <p>
+     *  处理内容扫描的驱动程序此驱动程序能够读取XML文档的片段当完成读取XML文档的片段时,它可以将读取作业传递给另一个驱动程序
+     * 
+     * 这个类已经根据新设计进行了修改,更适合有效地构建pull解析器已经完成了大量的性能改进,并且添加了代码以支持stax功能/特性
+     * 
+     * 
      * @author Neeraj Bajaj, Sun Microsystems
      *
      *
@@ -2597,6 +2919,9 @@ public class XMLDocumentFragmentScannerImpl
 
         /**
          *  decides the appropriate state of the parser
+         * <p>
+         *  决定解析器的适当状态
+         * 
          */
         private void startOfMarkup() throws IOException {
             fMarkupDepth++;
@@ -2665,6 +2990,12 @@ public class XMLDocumentFragmentScannerImpl
          * different milepost, parser stops at each sub state (milepost). Based on this state it is
          * decided if paresr needs to stop at next milepost ??
          *
+         * <p>
+         * SCANNER_STATE_CONTENT和SCANNER_STATE_START_OF_MARKUP是解析器的两个超状态在对解析器的当前状态有疑问的任何时间点,状态应设置为SCANNER_STATE_
+         * CONTENT解析器将自动复位其自身,并将解析器的状态设置为其子状态子状态在解析器中基于不同的XML组件(如SCANNER_STATE_ENTITY_REFERENCE,SCANNER_STATE_ST
+         * ART_ELEMENT,SCANNER_STATE_CDATA等)来定义。
+         * 这些子状态帮助解析器对解析进行精细控制这些是不同的milepost,解析器在每个子状态(milepost)停止,基于这个状态,决定是否paresr需要停在下一个里程碑??。
+         * 
          */
         public void decideSubState() throws IOException {
             while( fScannerState == SCANNER_STATE_CONTENT || fScannerState == SCANNER_STATE_START_OF_MARKUP){
@@ -2696,6 +3027,13 @@ public class XMLDocumentFragmentScannerImpl
          *
          * State returned corresponds to Stax states.
          *
+         * <p>
+         * 驱动解析器到输入上的下一个状态/事件解析器保证在下一个状态/事件停止内部XML文档被分成几个状态每个状态代表XML文档的一个部分当这个函数正常返回时,它已经读取了部分的XML文档并返回对应于已经读取的文
+         * 档的部分的状态对于优化,特定驱动程序可以提前读取文档的部分(返回的状态),只是读取并且可以维持不同的内部状态。
+         * 
+         *  返回的状态对应于Stax状态
+         * 
+         * 
          * @return state representing the section of document just read.
          *
          * @throws IOException  Thrown on i/o error.
@@ -3166,6 +3504,10 @@ public class XMLDocumentFragmentScannerImpl
         /**
          * Add the count of the content buffer and check if the accumulated
          * value exceeds the limit
+         * <p>
+         *  添加内容缓冲区的计数,并检查累积值是否超过限制
+         * 
+         * 
          * @param buffer content buffer
          */
         protected void checkLimit(XMLStringBuffer buffer) {
@@ -3202,6 +3544,10 @@ public class XMLDocumentFragmentScannerImpl
          * to add code to handle scanning for a the "DOCTYPE" string
          * after the string "<!" has been scanned.
          *
+         * <p>
+         * 扫描DOCTYPE钩子此方法是一个钩子,用于子类添加代码以处理对字符串"<！"之后的"DOCTYPE"字符串的扫描。已扫描
+         * 
+         * 
          * @return True if the "DOCTYPE" was scanned; false if "DOCTYPE"
          *          was not scanned.
          */
@@ -3218,6 +3564,11 @@ public class XMLDocumentFragmentScannerImpl
          * scanner must handle the trailing miscellanous section of
          * the document after the end of the document's root element.
          *
+         * <p>
+         *  元素深度iz零这个方法是当元素深度为零时子类添加代码的钩子当扫描文档片段时,元素深度为零是正常的但是,当扫描完整的XML文档时,扫描器必须处理尾部文档的miscellanous部分在文档的根元素结束之
+         * 后。
+         * 
+         * 
          * @return True if the caller should stop and return true which
          *          allows the scanner to switch to a new scanning
          *          driver. A return value of false indicates that
@@ -3235,6 +3586,10 @@ public class XMLDocumentFragmentScannerImpl
          * "root" element. However, when scanning a full XML document,
          * the scanner must handle the root element specially.
          *
+         * <p>
+         *  扫描根元素钩子此方法是一个用于子类的钩子,用于添加处理根元素扫描的代码当扫描文档片段时,没有"root"元素但是,当扫描完整的XML文档时,扫描程序必须处理根元素
+         * 
+         * 
          * @return True if the caller should stop and return true which
          *          allows the scanner to switch to a new scanning
          *          driver. A return value of false indicates that
@@ -3251,6 +3606,9 @@ public class XMLDocumentFragmentScannerImpl
          * a document fragment is OK if the markup depth is zero.
          * However, when scanning a full XML document, an end of file
          * is always premature.
+         * <p>
+         * 文件结束钩子此方法是一个用于子类的钩子,用于添加处理文件结束的代码如果标记深度为零,则文档片段中的文件末尾为OK但是,当扫描完整的XML文档时,文件末尾为总是过早
+         * 
          */
         protected void endOfFileHook(EOFException e)
         throws IOException, XNIException {
@@ -3277,6 +3635,10 @@ public class XMLDocumentFragmentScannerImpl
      *  if all the attributes has been consumed, it adds a new XMLString inthe pool and returns the same
      *  XMLString.
      *
+     * <p>
+     *  维护属性fAttributeCacheUsedCount跟踪从池中消耗的属性数量,如果所有属性都已消耗,则在池中添加一个新的XMLString并返回相同的XMLString
+     * 
+     * 
      * @return XMLString XMLString used to store an attribute value.
      */
 
@@ -3293,6 +3655,9 @@ public class XMLDocumentFragmentScannerImpl
 
     /**
      * Implements XMLBufferListener interface.
+     * <p>
+     *  实现XMLBufferListener接口
+     * 
      */
 
     public void refresh(){
@@ -3302,6 +3667,9 @@ public class XMLDocumentFragmentScannerImpl
     /**
      * receives callbacks from {@link XMLEntityReader } when buffer
      * is being changed.
+     * <p>
+     *  当缓冲区正在更改时从{@link XMLEntityReader}接收回调
+     * 
      * @param refreshPosition
      */
     public void refresh(int refreshPosition){

@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 package org.omg.PortableInterceptor;
 
 
@@ -219,6 +220,75 @@ package org.omg.PortableInterceptor;
    *       point after it calls <code>ServantLocator.postinvoke()</code></li>.
    * </ol>
    *
+   * <p>
+   *  请求信息,可供服务器端请求拦截器访问
+   * <p>
+   *  <code> ServerRequestInfo </code>上的一些属性和操作在所有拦截点都无效下表显示了每个属性或操作的有效性如果它无效,则尝试访问它将导致一个<code> BAD_INV_OR
+   * DER < / code>以标准次要代码14抛出。
+   * <p>
+   * 
+   * <table border=1 summary="Shows the validity of each attribute or operation">
+   * <thead>
+   * <tr>
+   * <th>&nbsp; </th> <th id ="rec_req_ser_con"valign ="bottom"> receive_request_ <br> service_contexts </th>
+   *  <th id ="rec_req"valign ="bottom"> receive_request </th> th id ="send_rep"valign ="bottom"> send_rep
+   * ly </th> <th id ="send_exc"valign ="bottom"> send_exception </th> <th id ="send_oth"valign ="bottom">
+   *  send_other < / th>。
+   * </tr>
+   * </thead>
+   * <tbody>
+   * 
+   * <tr>
+   *  <td id ="ri"colspan = 6> <i>继承自RequestInfo：</i> </td>
+   * </tr>
+   * 
+   *  <tr> <th> <th> </span> </span> </span> rec_req"> yes </td> <td headers ="ri req_id send_oth"> yes </td>
+   *  <td header ="ri req_id send_exc"> yes </td> / td> </tr>。
+   * 
+   * <tr> <th id ="op"> <p align ="left">操作</p> </th> <td headers ="ri op rec_req_ser_con"> yes </td> <td headers ="ri op "</td>
+   *  <td header ="ri op send_exc"> yes </td> <td headers ="ri op send_oth"> yes </td> / td> </tr>。
+   * 
+   *  <tr> <th id ="args"> <p align ="left">参数</p> </th> <td headers ="ri args rec_req_ser_con">否</td> <td headers ="ri args rec_req">
+   *  yes <sub> 1 </sub> </td> <td headers ="ri args send_rep"> yes </td> <td headers ="ri args send_exc">
+   *  no <sub> </td> <td headers ="ri args send_oth"> no <sub> 2 </sub> </td> </tr>。
+   * 
+   * <tr> <th id ="exps"> <p align ="left">例外</p> </th> <td headers ="ri exps rec_req_ser_con">否</td> <td headers ="ri exps rec_req">
+   *  yes </td> <td headers ="ri exps send_oth"> yes </td> <td headers ="ri exps send_exc"> yes </td> / td
+   * > </tr>。
+   * 
+   *  <tr> <th> <th> </span> </span> </span> </span> </span> rec_req"> yes </td> <td headers ="ri contexts send_oth">
+   *  yes </td> <td header ="ri contexts send_exc"> yes </td> / td> </tr>。
+   * 
+   * <tr> <th id ="op_con"> <p align ="left"> operation_context </p> </th> <td headers ="ri op_con rec_req_ser_con">
+   * 否</td> <td headers ="ri op_con "</td> <td header ="ri op_con send_exc"> no </td> <td headers ="ri op_con send_oth">
+   *  no </td> / td>。
+   * </tr>
+   * 
+   *  <tr> <th id ="result"> <p align ="left"> result </p> </th> <td headers ="ri result rec_req_ser_con">
+   *  no </td> <td headers ="ri result rec_req"> no </td> <td headers ="ri result send_oth"> no </td> <td headers ="ri result send_exc">
+   *  no </td> / td>。
+   * </tr>
+   * 
+   * <tr> <th id ="res_ex"> <p align ="left"> response_expected </p> </th> <td headers ="ri res_ex rec_req_ser_con">
+   *  yes </td> <td headers ="ri res_ex rec_req"> yes </td> <td headers ="ri res_ex send_oth"> yes </td> <td header ="ri res_ex send_exc">
+   *  yes </td> / td> </tr>。
+   * 
+   *  <tr> <th id ="syn_scp"> <p align ="left"> sync_scope </p> </th> <td headers ="ri syn_scp rec_req_ser_con">
+   *  yes </td> <td headers ="ri syn_scp rec_req"> yes </td> <td headers ="ri syn_scp send_requ"> yes </td>
+   *  <td headers ="ri syn_scp send_exc"> yes </td> / td> </tr>。
+   * 
+   *  <tr> <td> <b> request_id </b> </td> <td>是</td> <td>是</td> <td>是</td> <td>是</td> </tr>
+   * 
+   *  <tr> <td> <b>操作</b> </td> <td>是</td> <td>是</td> <td>是</td> <td>是</td> </tr>
+   * 
+   * <tr> <td> <b>参数</b> </td> <td> no </td> <td> yes <sub> 1 </sub </td> <td> td> no <sub> 2 </sub> </td>
+   *  <td> no <sub> 2 </sub> </td> </tr>。
+   * 
+   *  <tr> <td> <b>例外</b> </td> <td>没有</td> <td>是</td> <td>是</td> <td> <td>是</td> </tr>
+   * 
+   *  <tr> <td> <b>上下文</b> </td> <td>没有</td> <td>是</td> <td>是</td> <td> <td>是</td> </tr>
+   * 
+   * 
    * @see ServerRequestInterceptor
    */
 public interface ServerRequestInfo extends ServerRequestInfoOperations, org.omg.PortableInterceptor.RequestInfo, org.omg.CORBA.portable.IDLEntity 

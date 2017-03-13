@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -53,6 +54,8 @@ public class ProxyRef implements RemoteRef {
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated
      */
     @Deprecated
@@ -66,6 +69,8 @@ public class ProxyRef implements RemoteRef {
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated
      */
     @Deprecated
@@ -78,6 +83,8 @@ public class ProxyRef implements RemoteRef {
     }
 
     /**
+    /* <p>
+    /* 
      * @deprecated
      */
     @Deprecated

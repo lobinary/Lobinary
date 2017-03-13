@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -220,6 +221,82 @@ import static sun.font.EAttribute.*;
  * clockwise from the baseline vector).  APIs for which this is
  * especially important are called out as having 'baseline-relative
  * coordinates.'
+ * <p>
+ *  <code> Font </code>类表示用于以可见方式呈现文本的字体。
+ * 字体提供将<em>字符</em>序列映射到<em>字形</em>并且在<code> Graphics </code>和<code> Component </code>对象上渲染字形序列。
+ * 
+ *  <h3>字符和字形</h3>
+ * 
+ *  一个<em>字符</em>是以抽象方式表示诸如字母,数字或标点符号的项。例如,<code>'g'</code>,拉丁小写字母G一个人物
+ * <p>
+ * </em> <em> </em> <em> </em> </em>是用于渲染字符或字符序列的形状。在简单的书写系统中,例如拉丁文,通常一个字形代表一个字符。
+ * 一对一对应例如,字符"&aacute;"拉丁小写字母A与ACUTE,可以用两个字形表示：一个用于'a',一个用于'&acute;'另一方面,双字符串"fi"可以由单个字形,"fi"连字表示。
+ * 在复杂的书写系统中,例如阿拉伯语或南亚和东南亚书写系统,字符之间的关系和字形可以更复杂并且涉及字形的上下文相关选择以及字形重排序。
+ * 
+ * 字体封装了呈现所选字符集所需的字形集合以及将字符序列映射到对应的字形序列所需的表
+ * 
+ *  <h3>物理和逻辑字体</h3>
+ * 
+ *  Java平台区分两种字体：<em>物理</em>字体和<em>逻辑</em>字体
+ * <p>
+ * <em>物理</em>字体是包含使用诸如TrueType或PostScript Type 1之类的字体技术从字符序列到字形序列映射的字形数据和表的实际字体库。
+ * Java平台的所有实现必须支持TrueType字体;对其他字体技术的支持是与实现相关的物理字体可以使用诸如Helvetica,Palatino,HonMincho或任何数量的其他字体名称的名称通常,每种
+ * 物理字体仅支持有限的一组写入系统,例如,仅拉丁字符或仅日语和基本拉丁语可用物理字体集在配置之间各不相同需要特定字体的应用程序可以捆绑它们并使用{@link #createFont createFont}
+ * 方法实例化它们。
+ * <em>物理</em>字体是包含使用诸如TrueType或PostScript Type 1之类的字体技术从字符序列到字形序列映射的字形数据和表的实际字体库。
+ * <p>
+ * <em>逻辑</em>字体是Java平台定义的五种字体,必须由任何Java运行时环境支持：Serif,SansSerif,Monospaced,Dialog和DialogInput这些逻辑字体不是实际的
+ * 字体库。
+ * 逻辑字体名称通过Java运行时环境映射到物理字体映射是实现并且通常依赖于区域设置,因此它们提供的外观和度量标准通常,每个逻辑字体名称映射到几个物理字体,以覆盖大范围的字符。
+ * <p>
+ *  对等AWT组件(例如{@link Label Label}和{@link TextField TextField})只能使用逻辑字体
+ * <p>
+ * 有关使用物理或逻辑字体的相对优缺点的讨论,请参见<a href=\"http://wwworaclecom/technetwork/java/javase/tech/faq-jsp-138165html\">
+ * 国际化常见问题解答</a>文件。
+ * 
+ *  <h3>字体和名称</h3>
+ * 
+ *  <code>字体</code>可以有多个面,如重,中,斜,哥特和正则所有这些面都有类似的排版设计
+ * <p>
+ * 从<code> Font </code>对象中可以获得三个不同的名称<em>​​逻辑字体名称</em>只是用于构造字体的名称<em>​​ font face name < / em>,或简称为<em>字
+ * 体名称</em>是特定字体的名称,例如Helvetica Bold </em>是字体家族的名称,印刷设计跨几个面孔,如Helvetica。
+ * <p>
+ *  <code> Font </code>类表示来自存在于主机系统的系统资源中的字体表面的集合的字体表面的实例。
+ * 例如,Arial Bold和Courier Bold Italic是字体表面可以存在几个与字体相关联的<code>字体</code>对象,每个字体在大小,样式,变换和字体特征方面各不相同。
+ * <p>
+ * <code> GraphicsEnvironment </code>类的{@link GraphicsEnvironment#getAllFonts()getAllFonts}方法返回系统中可用的所有字
+ * 体面的数组这些字体面作为<code> Font </code>大小为1,身份转换和默认字体特征这些基本字体然后可以用于通过<code> derivFont </code>导出具有不同大小,样式,变换和字
+ * 体特征的新<code> Font </code>方法。
+ * 
+ *  <h3> Font和TextAttribute </h3>
+ * 
+ * <p> <code> Font </code>支持大多数<code> TextAttribute </code> s这使得一些操作,如渲染下划线文本,方便,因为没有必要显式构造一个<code> Text
+ * Layout </code > object可以通过使用<code> TextAttribute </code>值的<code> Map </code>构造或派生来在Font上设置属性。
+ * 
+ * <p>某些<code> TextAttributes </code>的值不可序列化,因此尝试序列化具有此类值的<code> Font </code>实例将不会序列化它们这意味着一个字体流将不会等于包含非
+ * 可序列化属性的原始字体。
+ * 这应该很少引起问题,因为这些属性通常仅在特殊情况下使用,并且不可能被序列化。
+ * 
+ * <ul>
+ * <code> </code>使用<code> Paint </code>值子类<code> Color </code>是可序列化的,而<code> GradientPaint </code>代码>和<code>
+ *  TexturePaint </code>不是</li> <li> <code> CHAR_REPLACEMENT </code>使用<code> GraphicAttribute </code>值子类
+ * <code> ShapeGraphicAttribute <代码> ImageGraphicAttribute </code>不可序列化</li> </li> <li> <code> INPUT_MET
+ * HOD_HIGHLIGHT </code>使用<code> InputMethodHighlight </code>。
+ * </ul>
+ * 
+ * <p>创建<code> Paint </code>和<code> GraphicAttribute </code>的自定义子类的客户端可以使它们可序列化,并避免此问题使用输入法高亮的客户端可以将这些转换
+ * 为平台特定的属性在当前平台上突出显示,并将其设置为字体作为解决方法。
+ * 
+ *  <p> <code>基于地图</code>的构造函数和<code> derivFont </code> API忽略FONT属性,并且不会被Font保留;如果FONT属性可能存在,则应使用静态{@link #getFont}
+ * 方法有关详细信息,请参阅{@link javaawtfontTextAttribute#FONT}。
+ * </p>。
+ * 
+ * <p>几个属性将导致额外的渲染开销并潜在地调用布局如果<code> Font </code>有这样的属性,<code> {@ link #hasLayoutAttributes()} </code>方法
+ * 将返回true < p>。
+ * 
+ *  <p>注意：字体旋转可以导致文本基线被旋转为了解决这种(罕见的)可能性,字体API被指定返回度量并采用参数'在基线相对坐标'这将"x"坐标映射到沿着基线的前进(正x沿着基线向前),并且"y"坐标到沿"
+ * x"的基线的垂线的距离(正y是从基线矢量顺时针旋转90度)这是特别重要的,被称为具有"基线相对坐标"。
+ * 
  */
 public class Font implements java.io.Serializable
 {
@@ -252,6 +329,10 @@ public class Font implements java.io.Serializable
      * This is now only used during serialization.  Typically
      * it is null.
      *
+     * <p>
+     * 现在只在序列化期间使用它通常为null
+     * 
+     * 
      * @serial
      * @see #getAttributes()
      */
@@ -259,12 +340,19 @@ public class Font implements java.io.Serializable
 
     /*
      * Constants to be used for logical font family names.
+     * <p>
+     *  用于逻辑字体系列名称的常量
+     * 
      */
 
     /**
      * A String constant for the canonical family name of the
      * logical font "Dialog". It is useful in Font construction
      * to provide compile-time verification of the name.
+     * <p>
+     *  逻辑字体"Dialog"的规范族名称的字符串常量在Font构造中提供名称的编译时验证非常有用
+     * 
+     * 
      * @since 1.6
      */
     public static final String DIALOG = "Dialog";
@@ -273,6 +361,10 @@ public class Font implements java.io.Serializable
      * A String constant for the canonical family name of the
      * logical font "DialogInput". It is useful in Font construction
      * to provide compile-time verification of the name.
+     * <p>
+     *  逻辑字体"DialogInput"的规范系列名称的字符串常量在Font构造中提供名称的编译时验证非常有用
+     * 
+     * 
      * @since 1.6
      */
     public static final String DIALOG_INPUT = "DialogInput";
@@ -281,6 +373,10 @@ public class Font implements java.io.Serializable
      * A String constant for the canonical family name of the
      * logical font "SansSerif". It is useful in Font construction
      * to provide compile-time verification of the name.
+     * <p>
+     *  用于逻辑字体"SansSerif"的规范族名称的字符串常量在字体构造中提供名称的编译时验证非常有用
+     * 
+     * 
      * @since 1.6
      */
     public static final String SANS_SERIF = "SansSerif";
@@ -289,6 +385,10 @@ public class Font implements java.io.Serializable
      * A String constant for the canonical family name of the
      * logical font "Serif". It is useful in Font construction
      * to provide compile-time verification of the name.
+     * <p>
+     *  逻辑字体"Serif"的规范族名称的字符串常量在字体构造中提供名称的编译时验证非常有用
+     * 
+     * 
      * @since 1.6
      */
     public static final String SERIF = "Serif";
@@ -297,6 +397,10 @@ public class Font implements java.io.Serializable
      * A String constant for the canonical family name of the
      * logical font "Monospaced". It is useful in Font construction
      * to provide compile-time verification of the name.
+     * <p>
+     * 逻辑字体"Monospaced"的规范族名称的字符串常量在Font构造中提供名称的编译时验证非常有用
+     * 
+     * 
      * @since 1.6
      */
     public static final String MONOSPACED = "Monospaced";
@@ -304,39 +408,60 @@ public class Font implements java.io.Serializable
     /*
      * Constants to be used for styles. Can be combined to mix
      * styles.
+     * <p>
+     *  用于样式的常量可以组合为混合样式
+     * 
      */
 
     /**
      * The plain style constant.
+     * <p>
+     *  平原风格常量
+     * 
      */
     public static final int PLAIN       = 0;
 
     /**
      * The bold style constant.  This can be combined with the other style
      * constants (except PLAIN) for mixed styles.
+     * <p>
+     *  粗体样式常量可以与其他样式常量(除了PLAIN)组合用于混合样式
+     * 
      */
     public static final int BOLD        = 1;
 
     /**
      * The italicized style constant.  This can be combined with the other
      * style constants (except PLAIN) for mixed styles.
+     * <p>
+     *  斜体样式常量这可以与其他样式常量(除了PLAIN)组合用于混合样式
+     * 
      */
     public static final int ITALIC      = 2;
 
     /**
      * The baseline used in most Roman scripts when laying out text.
+     * <p>
+     *  在布局文本时大多数罗马语言中使用的基线
+     * 
      */
     public static final int ROMAN_BASELINE = 0;
 
     /**
      * The baseline used in ideographic scripts like Chinese, Japanese,
      * and Korean when laying out text.
+     * <p>
+     *  布局文本时使用的表意文字脚本中的基线,如中文,日语和韩语
+     * 
      */
     public static final int CENTER_BASELINE = 1;
 
     /**
      * The baseline used in Devanigiri and similar scripts when laying
      * out text.
+     * <p>
+     *  在布局文本时,Devanigiri和类似脚本中使用的基线
+     * 
      */
     public static final int HANGING_BASELINE = 2;
 
@@ -348,6 +473,11 @@ public class Font implements java.io.Serializable
      * format, which adds support for fonts with Postscript outlines,
      * this tag therefore references these fonts, as well as those
      * with TrueType outlines.
+     * <p>
+     * 标识类型为TRUETYPE的字体资源用于为{@link #createFont}方法指定TrueType字体资源TrueType格式已扩展为OpenType格式,这增加了对PostScript脚本字体的
+     * 支持,因此该标签引用这些字体,以及具有TrueType轮廓的那些。
+     * 
+     * 
      * @since 1.3
      */
 
@@ -357,6 +487,10 @@ public class Font implements java.io.Serializable
      * Identify a font resource of type TYPE1.
      * Used to specify a Type1 font resource to the
      * {@link #createFont} method.
+     * <p>
+     *  标识TYPE1类型的字体资源用于指定{@link #createFont}方法的Type1字体资源
+     * 
+     * 
      * @since 1.5
      */
     public static final int TYPE1_FONT = 1;
@@ -364,6 +498,10 @@ public class Font implements java.io.Serializable
     /**
      * The logical name of this <code>Font</code>, as passed to the
      * constructor.
+     * <p>
+     *  传递给构造函数的<code> Font </code>的逻辑名
+     * 
+     * 
      * @since JDK1.0
      *
      * @serial
@@ -374,6 +512,10 @@ public class Font implements java.io.Serializable
     /**
      * The style of this <code>Font</code>, as passed to the constructor.
      * This style can be PLAIN, BOLD, ITALIC, or BOLD+ITALIC.
+     * <p>
+     *  传递给构造函数的<code> Font </code>的样式此样式可以是PLAIN,BOLD,ITALIC或BOLD + ITALIC
+     * 
+     * 
      * @since JDK1.0
      *
      * @serial
@@ -383,6 +525,10 @@ public class Font implements java.io.Serializable
 
     /**
      * The point size of this <code>Font</code>, rounded to integer.
+     * <p>
+     *  此<code> Font </code>的点大小,四舍五入为整数
+     * 
+     * 
      * @since JDK1.0
      *
      * @serial
@@ -393,6 +539,10 @@ public class Font implements java.io.Serializable
     /**
      * The point size of this <code>Font</code> in <code>float</code>.
      *
+     * <p>
+     *  <code> float </code>中的<code> Font </code>的点大小
+     * 
+     * 
      * @serial
      * @see #getSize()
      * @see #getSize2D()
@@ -401,6 +551,9 @@ public class Font implements java.io.Serializable
 
     /**
      * The platform specific font information.
+     * <p>
+     * 平台特定的字体信息
+     * 
      */
     private transient FontPeer peer;
     private transient long pData;       // native JDK1.1 font pointer
@@ -412,12 +565,18 @@ public class Font implements java.io.Serializable
     /*
      * If the origin of a Font is a created font then this attribute
      * must be set on all derived fonts too.
+     * <p>
+     *  如果字体的原点是创建的字体,那么该属性也必须在所有派生字体上设置
+     * 
      */
     private transient boolean createdFont = false;
 
     /*
      * This is true if the font transform is not identity.  It
      * is used to avoid unnecessary instantiation of an AffineTransform.
+     * <p>
+     *  这是真的如果字体变换不是identity它用于避免不必要的实例化AffineTransform
+     * 
      */
     private transient boolean nonIdentityTx;
 
@@ -425,16 +584,26 @@ public class Font implements java.io.Serializable
      * A cached value used when a transform is required for internal
      * use.  This must not be exposed to callers since AffineTransform
      * is mutable.
+     * <p>
+     *  当内部使用需要转换时使用的高速缓存值由于AffineTransform是可变的,因此不能暴露给调用者
+     * 
      */
     private static final AffineTransform identityTx = new AffineTransform();
 
     /*
      * JDK 1.1 serialVersionUID
+     * <p>
+     *  JDK 11 serialVersionUID
+     * 
      */
     private static final long serialVersionUID = -4206021311591459213L;
 
     /**
      * Gets the peer of this <code>Font</code>.
+     * <p>
+     *  获取此<code> Font </code>的对等体
+     * 
+     * 
      * @return  the peer of the <code>Font</code>.
      * @since JDK1.1
      * @deprecated Font rendering is now platform independent.
@@ -466,6 +635,11 @@ public class Font implements java.io.Serializable
      * <p>Since the AttributeValues object is mutable, and it
      * is cached in the font, care must be taken to ensure that
      * it is not mutated.
+     * <p>
+     *  返回与此字体关联的AttributeValues对象大多数时候,内部对象是null如果需要,它将从字体的"标准"状态创建只有非默认值将在AttributeValues对象中设置
+     * 
+     * <p>由于AttributeValues对象是可变的,并且它以字体缓存,因此必须注意确保它不会改变
+     * 
      */
     private AttributeValues getAttributeValues() {
         if (values == null) {
@@ -503,6 +677,9 @@ public class Font implements java.io.Serializable
         /* Do not cache the de-referenced font2D. It must be explicitly
          * de-referenced to pick up a valid font in the event that the
          * original one is marked invalid
+         * <p>
+         *  取消引用以在原始标记无效的情况下选取有效字体
+         * 
          */
         return font2DHandle.font2D;
     }
@@ -544,6 +721,23 @@ public class Font implements java.io.Serializable
      * by {@link #getFamily() getFamily} will be "Dialog".
      * <p>
      *
+     * <p>
+     *  从指定的名称,样式和点大小创建新的<code> Font </code>
+     * <p>
+     * 字体名称可以是字体名称或字体系列名称它与样式一起使用以找到合适的字体面当指定字体系列名称时,style参数用于从家族中选择最合适的面孔指定字体面名称,面部样式和样式参数被合并以定位来自相同族的最佳匹配字
+     * 体例如,如果面部名称"Arial Bold"以样式<code> FontITALIC </code>指定,则字体系统在"Arial"系列中查找粗体和斜体的面部,并且可以将字体实例与物理字体面"Arial
+     *  Bold Italic"相关联。
+     * 样式参数与指定面部样式合并,不添加或减去这意味着,指定粗体字和粗体样式不会使字体双重加粗,并且指定粗体字和平滑样式不会减小字体。
+     * <p>
+     * 如果没有找到所请求风格的面部,则字体系统可以应用算法风格以实现期望的风格。例如,如果请求<code> ITALIC </code>,但没有斜体面,则来自平面的字形可以在算法上倾斜(倾斜)
+     * <p>
+     *  字体名称查找不区分大小写,使用美国语言环境的大小写折叠规则
+     * <p>
+     *  如果<code> name </code>参数表示除逻辑字体以外的其他东西,即被解释为物理字体面或族,并且这不能通过实现映射到物理字体或兼容的替代,系统会将Font实例映射到"Dialog",例如,{@link #getFamily()getFamily}
+     * 报告的族将是"Dialog"。
+     * <p>
+     * 
+     * 
      * @param name the font name.  This can be a font face name or a font
      * family name, and may represent either a logical font or a physical
      * font found in this {@code GraphicsEnvironment}.
@@ -591,6 +785,10 @@ public class Font implements java.io.Serializable
          * CompositeFonts can only be marked as "created" if they are used
          * to add fall backs to a physical font. And non-composites are
          * always from "Font.createFont()" and shouldn't get this treatment.
+         * <p>
+         * 作为父的一个例外是,如果派生的字体被要求在一个不同的样式,那么也检查它的一个CompositeFont,如果是这样从该样式的组件构建一个新的CompositeFont CompositeFonts只能被
+         * 标记为"创建"如果他们用于添加后退到一个物理字体和非复合材料总是从"FontcreateFont()",不应该得到这种处理。
+         * 
          */
         if (created) {
             if (handle.font2D instanceof CompositeFont &&
@@ -610,6 +808,9 @@ public class Font implements java.io.Serializable
         this.createdFont = true;
         /* Font2D instances created by this method track their font file
          * so that when the Font2D is GC'd it can also remove the file.
+         * <p>
+         *  所以当Font2D是GC'd它也可以删除文件
+         * 
          */
         FontManager fm = FontManagerFactory.getInstance();
         this.font2DHandle = fm.createFont2D(fontFile, fontFormat, isCopy,
@@ -642,6 +843,13 @@ public class Font implements java.io.Serializable
      * oldName == null will be interpreted as the name is unchanged.
      * oldStyle = -1 will be interpreted as the style is unchanged.
      * In these cases there is no need to interrogate "values".
+     * <p>
+     * 从流创建的字体将使用与父相同的font2D实例他们可以被区分,因为"created"参数将是"true"由于没有办法重新创建这些字体,他们需要有传递的底层font2D的句柄"创建"也是真的当一个特殊的复
+     * 合材料被句柄引用基本上相同的原因但是,当在这些情况下导出字体两个特殊的属性需要特别注意：家庭/脸和风格在这些情况下,"复合材料"需要使用最佳字体为家庭和样式的新值重新创建对于使用createFont()
+     * 创建的字体,这些处理不同.JDK通常可以合成不同的样式(例如粗体)对于使用"createFont"创建的字体,这是一个合理的解决方案,但它也可能(虽然很少)导出具有不同系列属性的字体在这种情况下,JDK
+     * 需要打破与原始Font2D的关系,并找到一个新的字体oldName和oldStyle被提供,所以他们可以与什么的Font2D和值比较：oldName == null将被解释为名称不变oldStyle =
+     *  -1将被解释为样式不变在这些情况下,没有需要询问"价值观"。
+     * 
      */
     private Font(AttributeValues values, String oldName, int oldStyle,
                  boolean created, Font2DHandle handle) {
@@ -687,6 +895,13 @@ public class Font implements java.io.Serializable
      * <p>
      * If <code>attributes</code> is <code>null</code>, a new
      * <code>Font</code> is initialized with default values.
+     * <p>
+     * 使用指定的属性创建新的<code> Font </code>只有在{@link javaawtfontTextAttribute TextAttribute}中定义的键才被识别。
+     * 此外,此构造函数不能识别FONT属性(请参阅{@link #getAvailableAttributes}有效类型的值将影响新的<code> Font </code>。
+     * <p>
+     *  如果<code> attributes </code>是<code> null </code>,一个新的<code> Font </code>
+     * 
+     * 
      * @see java.awt.font.TextAttribute
      * @param attributes the attributes to assign to the new
      *          <code>Font</code>, or <code>null</code>
@@ -698,6 +913,10 @@ public class Font implements java.io.Serializable
     /**
      * Creates a new <code>Font</code> from the specified <code>font</code>.
      * This constructor is intended for use by subclasses.
+     * <p>
+     *  从指定的<code>字体</code>创建一个新的<code> Font </code>此构造函数供子类使用
+     * 
+     * 
      * @param font from which to create this <code>Font</code>.
      * @throws NullPointerException if <code>font</code> is null
      * @since 1.6
@@ -717,12 +936,18 @@ public class Font implements java.io.Serializable
 
     /**
      * Font recognizes all attributes except FONT.
+     * <p>
+     *  字体识别除FONT之外的所有属性
+     * 
      */
     private static final int RECOGNIZED_MASK = AttributeValues.MASK_ALL
         & ~AttributeValues.getMask(EFONT);
 
     /**
      * These attributes are considered primary by the FONT attribute.
+     * <p>
+     *  这些属性被FONT属性视为主要属性
+     * 
      */
     private static final int PRIMARY_MASK =
         AttributeValues.getMask(EFAMILY, EWEIGHT, EWIDTH, EPOSTURE, ESIZE,
@@ -730,12 +955,18 @@ public class Font implements java.io.Serializable
 
     /**
      * These attributes are considered secondary by the FONT attribute.
+     * <p>
+     *  这些属性被FONT属性视为次要的
+     * 
      */
     private static final int SECONDARY_MASK =
         RECOGNIZED_MASK & ~PRIMARY_MASK;
 
     /**
      * These attributes are handled by layout.
+     * <p>
+     *  这些属性由布局处理
+     * 
      */
     private static final int LAYOUT_MASK =
         AttributeValues.getMask(ECHAR_REPLACEMENT, EFOREGROUND, EBACKGROUND,
@@ -750,6 +981,9 @@ public class Font implements java.io.Serializable
 
     /**
      * Initialize the standard Font fields from the values object.
+     * <p>
+     * 从值对象初始化标准字体字段
+     * 
      */
     private void initFromValues(AttributeValues values) {
         this.values = values;
@@ -773,6 +1007,11 @@ public class Font implements java.io.Serializable
      * {@link java.awt.font.TextAttribute#FONT} for more
      * information.
      *
+     * <p>
+     *  返回适用于属性的<code> Font </code>如果<code> attributes </code>包含一个<code> FONT </code>属性,其有效的<code> Font </code>
+     * 将与任何其余属性合并请参阅{@link javaawtfontTextAttribute#FONT}了解更多信息。
+     * 
+     * 
      * @param attributes the attributes to assign to the new
      *          <code>Font</code>
      * @return a new <code>Font</code> created with the specified
@@ -823,6 +1062,9 @@ public class Font implements java.io.Serializable
      * Used with the byte count tracker for fonts created from streams.
      * If a thread can create temp files anyway, no point in counting
      * font bytes.
+     * <p>
+     *  与字节计数跟踪器用于从流创建的字体如果一个线程可以创建临时文件无论如何,计数字体字节没有意义
+     * 
      */
     private static boolean hasTempPermission() {
 
@@ -855,6 +1097,14 @@ public class Font implements java.io.Serializable
      * returned <code>Font</code> must be registered in the
      * <code>GraphicsEnviroment</code> by calling
      * {@link GraphicsEnvironment#registerFont(Font) registerFont(Font)}.
+     * <p>
+     * 使用指定的字体类型和输入数据返回新的<code> Font </code>新的<code> Font </code>创建为点大小为1和样式{@link #PLAIN PLAIN}然后与此类中的<code>
+     *  derivFont </code>方法一起使用,以派生具有不同大小,样式,变形和字体特征的新<code> Font </code>对象此方法不关闭{@link InputStream}。
+     * <p>
+     *  为了使Font构造函数提供<code> Font </code>,返回的<code> Font </code>必须通过调用{@link GraphicsEnvironment#registerFont(Font)registerFont注册在<code> GraphicsEnviroment </code> (Font)}
+     * 。
+     * 
+     * 
      * @param fontFormat the type of the <code>Font</code>, which is
      * {@link #TRUETYPE_FONT TRUETYPE_FONT} if a TrueType resource is specified.
      * or {@link #TYPE1_FONT TYPE1_FONT} if a Type 1 resource is specified.
@@ -964,6 +1214,10 @@ public class Font implements java.io.Serializable
                  * in the tracker object before returning from the
                  * constructor, so we can set 'copiedFontData' to true here
                  * without waiting for the results of that constructor.
+                 * <p>
+                 * 将被删除为了支持长寿命的AppContext,我们需要减少字节数量的文件的大小如果数据不是一个有效的字体,实现将删除tmp文件和减少字节计数在跟踪器对象在从构造函数返回之前,所以我们可以将'copied
+                 * FontData'设置为true,而不必等待该构造函数的结果。
+                 * 
                  */
                 copiedFontData = true;
                 Font font = new Font(tFile, fontFormat, true, tracker);
@@ -1008,6 +1262,11 @@ public class Font implements java.io.Serializable
      * This base font can then be used with the <code>deriveFont</code>
      * methods in this class to derive new <code>Font</code> objects with
      * varying sizes, styles, transforms and font features.
+     * <p>
+     *  使用指定的字体类型和指定的字体文件返回新的<code> Font </code>新的<code> Font </code>创建为点大小为1和样式{@link #PLAIN PLAIN}字体可以与该类中
+     * 的<code> derivFont </code>方法一起使用,以导出具有不同大小,样式,变换和字体特征的新<code> Font </code>对象。
+     * 
+     * 
      * @param fontFormat the type of the <code>Font</code>, which is
      * {@link #TRUETYPE_FONT TRUETYPE_FONT} if a TrueType resource is
      * specified or {@link #TYPE1_FONT TYPE1_FONT} if a Type 1 resource is
@@ -1067,6 +1326,13 @@ public class Font implements java.io.Serializable
      * should call {@link #isTransformed} first, and only call this
      * method if <code>isTransformed</code> returns true.
      *
+     * <p>
+     * 返回与此<code> Font </code>关联的变换的副本。此变换不一定是用于构造字体的变换。
+     * 如果字体具有算法上标或宽度调整,则将合并到返回的<code> AffineTransform </code>。
+     * <p>
+     *  通常,字体不会被转换客户端通常应首先调用{@link #isTransformed},并且只有当<code> isTransformed </code>返回true时才调用此方法
+     * 
+     * 
      * @return an {@link AffineTransform} object representing the
      *          transform attribute of this <code>Font</code> object.
      */
@@ -1083,6 +1349,11 @@ public class Font implements java.io.Serializable
          * transform returned will also reflect the effects of WIDTH and
          * SUPERSCRIPT attributes.  Clients who want the actual transform
          * need to call getRequestedAttributes.
+         * <p>
+         *  应该首先调用isTransformed(),以决定是否需要获取变换,但有些可能不在这里我们检查看看是否有一个非同一性变换,并且只做工作取得和/或计算它,如果是这样,否则我们返回一个新的身份变换
+         * 
+         * 请注意,变换不一定与作为地图中的属性传递的变换相同,因为返回的变换也将反映WIDTH和SUPERSCRIPT属性的效果需要实际变换的客户需要调用getRequestedAttributes
+         * 
          */
         if (nonIdentityTx) {
             AttributeValues values = getAttributeValues();
@@ -1175,6 +1446,16 @@ public class Font implements java.io.Serializable
      *
      * <p>Use <code>getName</code> to get the logical name of the font.
      * Use <code>getFontName</code> to get the font face name of the font.
+     * <p>
+     *  返回此<code> Font </code>的家族名称
+     * 
+     *  <p>字体的家族名称是字体特定的两种字体如Helvetica Italic和Helvetica Bold有相同的姓氏,<Hel> Helvetica </i>,而他们的字体名称是<i> Helveti
+     * ca Bold </i >和<i> Helvetica Italic </i>可用的家族名称列表可以通过使用{@link GraphicsEnvironment#getAvailableFontFamilyNames()}
+     * 方法获得。
+     * 
+     * <p>使用<code> getName </code>获取字体的逻辑名称使用<code> getFontName </code>获取字体的字体名称
+     * 
+     * 
      * @return a <code>String</code> that is the family name of this
      *          <code>Font</code>.
      *
@@ -1206,6 +1487,16 @@ public class Font implements java.io.Serializable
      * {@link GraphicsEnvironment#getAvailableFontFamilyNames()} method.
      *
      * <p>Use <code>getFontName</code> to get the font face name of the font.
+     * <p>
+     *  返回为指定区域设置本地化的<code> Font </code>的系列名称
+     * 
+     *  <p>字体的家族名称是字体特定的两种字体如Helvetica Italic和Helvetica Bold有相同的姓氏,<Hel> Helvetica </i>,而他们的字体名称是<i> Helveti
+     * ca Bold </i >和<i> Helvetica Italic </i>可用的家族名称列表可以通过使用{@link GraphicsEnvironment#getAvailableFontFamilyNames()}
+     * 方法获得。
+     * 
+     *  <p>使用<code> getFontName </code>获取字体的字体名称
+     * 
+     * 
      * @param l locale for which to get the family name
      * @return a <code>String</code> representing the family name of the
      *          font, localized for the specified locale.
@@ -1224,6 +1515,10 @@ public class Font implements java.io.Serializable
      * Returns the postscript name of this <code>Font</code>.
      * Use <code>getFamily</code> to get the family name of the font.
      * Use <code>getFontName</code> to get the font face name of the font.
+     * <p>
+     * 返回此<code> Font </code>的后缀名称使用<code> getFamily </code>获取字体的家族名称使用<code> getFontName </code>获取字体的字体名称
+     * 
+     * 
      * @return a <code>String</code> representing the postscript name of
      *          this <code>Font</code>.
      * @since 1.2
@@ -1236,6 +1531,10 @@ public class Font implements java.io.Serializable
      * Returns the logical name of this <code>Font</code>.
      * Use <code>getFamily</code> to get the family name of the font.
      * Use <code>getFontName</code> to get the font face name of the font.
+     * <p>
+     *  返回此<code> Font </code>的逻辑名称使用<code> getFamily </code>获取字体的家族名称使用<code> getFontName </code>获取字体的字体名称。
+     * 
+     * 
      * @return a <code>String</code> representing the logical name of
      *          this <code>Font</code>.
      * @see #getFamily
@@ -1251,6 +1550,11 @@ public class Font implements java.io.Serializable
      * Helvetica Bold could be returned as a font face name.
      * Use <code>getFamily</code> to get the family name of the font.
      * Use <code>getName</code> to get the logical name of the font.
+     * <p>
+     *  返回此<code> Font </code>的字体面名称例如,Helvetica Bold可以作为字体名称返回使用<code> getFamily </code>获取字体的家族名称使用<code> g
+     * etName </code>以获取字体的逻辑名称。
+     * 
+     * 
      * @return a <code>String</code> representing the font face name of
      *          this <code>Font</code>.
      * @see #getFamily
@@ -1266,6 +1570,10 @@ public class Font implements java.io.Serializable
      * for the specified locale. For example, Helvetica Fett could be
      * returned as the font face name.
      * Use <code>getFamily</code> to get the family name of the font.
+     * <p>
+     * 返回为指定语言环境本地化的<code> Font </code>的字体面名称例如,可以返回Helvetica Fett作为字体面名称使用<code> getFamily </code>获取字体
+     * 
+     * 
      * @param l a locale for which to get the font face name
      * @return a <code>String</code> representing the font face name,
      *          localized for the specified locale.
@@ -1282,6 +1590,10 @@ public class Font implements java.io.Serializable
     /**
      * Returns the style of this <code>Font</code>.  The style can be
      * PLAIN, BOLD, ITALIC, or BOLD+ITALIC.
+     * <p>
+     *  返回此<code> Font </code>的样式。样式可以是PLAIN,BOLD,ITALIC或BOLD + ITALIC
+     * 
+     * 
      * @return the style of this <code>Font</code>
      * @see #isPlain
      * @see #isBold
@@ -1307,6 +1619,13 @@ public class Font implements java.io.Serializable
      * device space coordinates 72 user
      * space units equal 1 inch in device space.  In this case one point
      * is 1/72 of an inch.
+     * <p>
+     *  返回这个<code> Font </code>的点大小,舍入为整数大多数用户都熟悉使用<i>点大小</i>来指定字体中字形的大小的想法。
+     * 此点大小定义在单个间隔文本文档中一条线的基线与下一条线的基线之间的测量点尺寸基于<i>印刷点</i>,大约1/72英寸。
+     * <p>
+     * Java(tm)2D API采用约定,一个点等效于用户坐标中的一个单位当使用归一化变换将用户空间坐标转换为设备空间坐标72个用户空间单位在设备空间中等于1英寸在这种情况下,一个点是1/72英寸
+     * 
+     * 
      * @return the point size of this <code>Font</code> in 1/72 of an
      *          inch units.
      * @see #getSize2D
@@ -1321,6 +1640,10 @@ public class Font implements java.io.Serializable
     /**
      * Returns the point size of this <code>Font</code> in
      * <code>float</code> value.
+     * <p>
+     *  返回<code> float </code>值中<code> Font </code>的点大小
+     * 
+     * 
      * @return the point size of this <code>Font</code> as a
      * <code>float</code> value.
      * @see #getSize
@@ -1333,6 +1656,10 @@ public class Font implements java.io.Serializable
     /**
      * Indicates whether or not this <code>Font</code> object's style is
      * PLAIN.
+     * <p>
+     *  指示此<code> Font </code>对象的样式是否为PLAIN
+     * 
+     * 
      * @return    <code>true</code> if this <code>Font</code> has a
      *            PLAIN style;
      *            <code>false</code> otherwise.
@@ -1346,6 +1673,10 @@ public class Font implements java.io.Serializable
     /**
      * Indicates whether or not this <code>Font</code> object's style is
      * BOLD.
+     * <p>
+     *  指示此<code> Font </code>对象的样式是否为BOLD
+     * 
+     * 
      * @return    <code>true</code> if this <code>Font</code> object's
      *            style is BOLD;
      *            <code>false</code> otherwise.
@@ -1359,6 +1690,10 @@ public class Font implements java.io.Serializable
     /**
      * Indicates whether or not this <code>Font</code> object's style is
      * ITALIC.
+     * <p>
+     *  指示此<code> Font </code>对象的样式是否为ITALIC
+     * 
+     * 
      * @return    <code>true</code> if this <code>Font</code> object's
      *            style is ITALIC;
      *            <code>false</code> otherwise.
@@ -1373,6 +1708,10 @@ public class Font implements java.io.Serializable
      * Indicates whether or not this <code>Font</code> object has a
      * transform that affects its size in addition to the Size
      * attribute.
+     * <p>
+     *  指示除了Size属性之外,这个<code> Font </code>对象是否有影响其大小的变换
+     * 
+     * 
      * @return  <code>true</code> if this <code>Font</code> object
      *          has a non-identity AffineTransform attribute.
      *          <code>false</code> otherwise.
@@ -1386,6 +1725,10 @@ public class Font implements java.io.Serializable
     /**
      * Return true if this Font contains attributes that require extra
      * layout processing.
+     * <p>
+     * 如果此字体包含需要额外布局处理的属性,则返回true
+     * 
+     * 
      * @return true if the font has layout attributes
      * @since 1.6
      */
@@ -1402,6 +1745,11 @@ public class Font implements java.io.Serializable
      * If the specified property is not found, or the executing code does
      * not have permission to read the property, null is returned instead.
      *
+     * <p>
+     *  从系统属性列表中返回<code> Font </code>对象<code> nm </code>被视为要获取的系统属性的名称此属性的<code> String </code>值然后根据<code> F
+     * ontdecode(String)</code>的规定解释为<code> Font </code>对象如果未找到指定的属性,或执行代码没有读取属性的权限,返回null。
+     * 
+     * 
      * @param nm the property name
      * @return a <code>Font</code> object that the property name
      *          describes, or null if no such property exists.
@@ -1479,6 +1827,35 @@ public class Font implements java.io.Serializable
      * If <code>str</code> is <code>null</code>, a new <code>Font</code>
      * is returned with the family name "Dialog", a size of 12 and a
      * PLAIN style.
+     * <p>
+     *  返回<code> str </code>参数描述的<code> Font </code>要确保此方法返回所需的字体,请以这些方式之一格式化<code> str </code>参数
+     * 
+     * <ul>
+     * <LI>的<em>字体名 - 风格的pointsize </em>的<LI>的<em>字体名-的pointsize </em>的<LI>的<em>字体名风格</em>的<LI>的<em>字体名</EM>
+     *  <LI>的<em>字体名风格的pointsize </em>的<LI>的<em>的pointsize字体名</em>的<LI>的<em>字体名风格</em>的<LI>的<em>字体名</em>的。
+     * </ul>
+     *  在<I>风格</I>是不区分大小写的四串之一：<代码>"普通"</代码>,<代码>"大胆"</代码>,<代码>"BOLDITALIC"</码>或<代码>"斜体"</code>的,并且是的pointsi
+     * ze点大小。
+     * 例如十进制正整数表示,如果你想要的字体阙是宋体,黑体,18点大小,你会调用此方法："宋体-BOLD-18"这相当于调用字体构造器：<代码>新字体("宋体",FontBold,18); </code>的和
+     * 值被解释由阙构造指定。
+     * <p>
+     * 有效的尾随十进制字段总是被解释为pointsize因此,包含尾随十进制值的字体名称不应该用于仅字体名形式
+     * <p>
+     *  如果样式名称字段不是有效的样式字符串之一,它将被解释为字体名称的一部分,并使用默认样式
+     * <p>
+     *  只能使用''或' - '中的一个来分隔输入中的字段。
+     * 标识的分隔符是最接近字符串末尾的分隔符,它将有效的pointize或有效的样式名称与字符串的其余部分分隔Null空)pointize和style字段被视为具有该字段的默认值的有效字段。
+     * p>
+     * 某些字体名称可能包含分隔符"'或' - '如果<code> str </code>没有用3个组件组成,例如<code> style </code>或<code> pointsize </code>字段不
+     * 存在于<code> str </code>中,并且<code> fontname </code>也包含确定为分隔符字符的字符,然后这些字符显示为<code> fontname < / code>可能会被
+     * 解释为分隔符,因此可能无法正确识别字体名称。
+     * 
+     * <p>
+     * 默认大小为12,默认样式为PLAIN如果<code> str </code>没有指定有效的大小,返回的<code> Font </code>的大小为12如果<code> str </code >未指定有
+     * 效的样式,返回的字体具有PLAIN的样式如果未在<code> str </code>参数中指定有效的字体名称,此方法将返回一个字体,其名称为"Dialog"要确定系统上可用的字体系列名称,请使用{@link GraphicsEnvironment#getAvailableFontFamilyNames()}
+     * 方法如果<code> str </code>是<code> null </code> / code>返回的名称为"Dialog",大小为12和PLAIN样式。
+     * 
+     * 
      * @param str the name of the font, or <code>null</code>
      * @return the <code>Font</code> object that <code>str</code>
      *          describes, or a new default <code>Font</code> if
@@ -1512,6 +1889,8 @@ public class Font implements java.io.Serializable
                 }
             } catch (NumberFormatException e) {
                 /* It wasn't a valid size, if we didn't also find the
+                /* <p>
+                /* 
                  * start of the style string perhaps this is the style */
                 styleIndex = sizeIndex;
                 sizeIndex = strlen;
@@ -1535,6 +1914,9 @@ public class Font implements java.io.Serializable
             } else {
                 /* this string isn't any of the expected styles, so
                  * assume its part of the font name
+                 * <p>
+                 *  假设其部分字体名称
+                 * 
                  */
                 styleIndex = sizeIndex;
                 if (str.charAt(styleIndex-1) == sepChar) {
@@ -1572,6 +1954,13 @@ public class Font implements java.io.Serializable
      * If the specified property is not found, or the executing code does not
      * have permission to read the property, the <code>font</code>
      * argument is returned instead.
+     * <p>
+     * 从系统属性列表获取指定的<code> Font </code>与<code> System </code>中的<code> getProperty </code>方法一样,第一个参数被视为系统属性的名称
+     * 要获取此属性的<code> String </code>值将解释为<code> Font </code>对象。
+     * <p>
+     *  属性值应该是<code> Fontdecode(String)</code>接受的形式之一。如果未找到指定的属性,或者执行代码没有读取属性的权限,则<code> font < code>参数
+     * 
+     * 
      * @param nm the case-insensitive property name
      * @param font a default <code>Font</code> to return if property
      *          <code>nm</code> is not defined
@@ -1594,6 +1983,10 @@ public class Font implements java.io.Serializable
     transient int hash;
     /**
      * Returns a hashcode for this <code>Font</code>.
+     * <p>
+     *  返回此<code> Font </code>的哈希码
+     * 
+     * 
      * @return     a hashcode value for this <code>Font</code>.
      * @since      JDK1.0
      */
@@ -1605,6 +1998,9 @@ public class Font implements java.io.Serializable
              * nonIdentityTx is set whenever there is a transform in
              * 'values'. The tests for null are required because it can
              * also be set for other reasons.
+             * <p>
+             * 所以包括在哈希计算中的变换nonIdentityTx在"values"中有变换时设置为null的测试是必需的,因为它也可以设置为其他原因
+             * 
              */
             if (nonIdentityTx &&
                 values != null && values.getTransform() != null) {
@@ -1617,6 +2013,10 @@ public class Font implements java.io.Serializable
     /**
      * Compares this <code>Font</code> object to the specified
      * <code>Object</code>.
+     * <p>
+     *  将此<code> Font </code>对象与指定的<code> Object </code>进行比较
+     * 
+     * 
      * @param obj the <code>Object</code> to compare
      * @return <code>true</code> if the objects are the same
      *          or if the argument is a <code>Font</code> object
@@ -1644,6 +2044,9 @@ public class Font implements java.io.Serializable
                      * a Map or other values. So if only one font has
                      * the field initialized we need to initialize it in
                      * the other instance and compare.
+                     * <p>
+                     *  该字体是从一个Map构造的,或者使用一个Map或其他值派生的。所以如果只有一个字体已经初始化了字段,我们需要在另一个实例中初始化它,然后比较
+                     * 
                      */
                     if (values == null) {
                         if (font.values == null) {
@@ -1665,6 +2068,10 @@ public class Font implements java.io.Serializable
     /**
      * Converts this <code>Font</code> object to a <code>String</code>
      * representation.
+     * <p>
+     *  将此<code> Font </code>对象转换为<code> String </code>表示形式
+     * 
+     * 
      * @return     a <code>String</code> representation of this
      *          <code>Font</code> object.
      * @since      JDK1.0
@@ -1693,10 +2100,18 @@ public class Font implements java.io.Serializable
      *  <code>writeObject</code> time.  An integer version is
      *  written so that future versions of this class will be
      *  able to recognize serialized output from this one.
+     * <p>
+     * 方法是必要的,因为构造函数创建字体的对等体,并且我们不能序列化对等体类似地,计算的字体"family"在<code> readObject </code>时可能与在<code> writeObject 
+     * </code>编写整数版本,以便此类的未来版本能够识别此类的序列化输出。
+     * 
      */
     /**
      * The <code>Font</code> Serializable Data Form.
      *
+     * <p>
+     *  <code>字体</code>可序列化数据表单
+     * 
+     * 
      * @serial
      */
     private int fontSerializedDataVersion = 1;
@@ -1704,6 +2119,10 @@ public class Font implements java.io.Serializable
     /**
      * Writes default serializable fields to a stream.
      *
+     * <p>
+     *  将缺省可序列化字段写入流
+     * 
+     * 
      * @param s the <code>ObjectOutputStream</code> to write
      * @see AWTEventMulticaster#save(ObjectOutputStream, String, EventListener)
      * @see #readObject(java.io.ObjectInputStream)
@@ -1728,6 +2147,10 @@ public class Font implements java.io.Serializable
      * Reads the <code>ObjectInputStream</code>.
      * Unrecognized keys or values will be ignored.
      *
+     * <p>
+     *  读取<code> ObjectInputStream </code>无法识别的键或值将被忽略
+     * 
+     * 
      * @param s the <code>ObjectInputStream</code> to read
      * @serial
      * @see #writeObject(java.io.ObjectOutputStream)
@@ -1768,6 +2191,10 @@ public class Font implements java.io.Serializable
      * Returns the number of glyphs in this <code>Font</code>. Glyph codes
      * for this <code>Font</code> range from 0 to
      * <code>getNumGlyphs()</code> - 1.
+     * <p>
+     *  返回此<code> Font </code>字形代码中此字符</code>范围从0到<code>的字形数量getNumGlyphs()</code>  -  1
+     * 
+     * 
      * @return the number of glyphs in this <code>Font</code>.
      * @since 1.2
      */
@@ -1778,6 +2205,10 @@ public class Font implements java.io.Serializable
     /**
      * Returns the glyphCode which is used when this <code>Font</code>
      * does not have a glyph for a specified unicode code point.
+     * <p>
+     * 返回当此<code> Font </code>没有指定Unicode代码点的字形时使用的glyphCode
+     * 
+     * 
      * @return the glyphCode of this <code>Font</code>.
      * @since 1.2
      */
@@ -1793,6 +2224,12 @@ public class Font implements java.io.Serializable
      * The character argument determines the writing system to use. Clients
      * should not assume all characters use the same baseline.
      *
+     * <p>
+     *  返回适合显示此字符的基线
+     * <p>
+     *  大字体可以支持不同的写入系统,每个系统可以使用不同的基线字符参数决定要使用的写入系统客户端不应该假定所有字符使用相同的基线
+     * 
+     * 
      * @param c a character used to identify the writing system
      * @return the baseline appropriate for the specified character.
      * @see LineMetrics#getBaselineOffsets
@@ -1809,6 +2246,10 @@ public class Font implements java.io.Serializable
      * Returns a map of font attributes available in this
      * <code>Font</code>.  Attributes include things like ligatures and
      * glyph substitution.
+     * <p>
+     *  返回此<code> Font </code>中可用的字体属性的地图属性包括连字和字形替换等
+     * 
+     * 
      * @return the attributes map of this <code>Font</code>.
      */
     public Map<TextAttribute,?> getAttributes(){
@@ -1819,6 +2260,10 @@ public class Font implements java.io.Serializable
      * Returns the keys of all the attributes supported by this
      * <code>Font</code>.  These attributes can be used to derive other
      * fonts.
+     * <p>
+     *  返回此<code> Font </code>支持的所有属性的键。这些属性可用于导出其他字体
+     * 
+     * 
      * @return an array containing the keys of all the attributes
      *          supported by this <code>Font</code>.
      * @since 1.2
@@ -1857,6 +2302,10 @@ public class Font implements java.io.Serializable
     /**
      * Creates a new <code>Font</code> object by replicating this
      * <code>Font</code> object and applying a new style and size.
+     * <p>
+     *  通过复制此<code> Font </code>对象并应用新的样式和大小创建一个新的<code> Font </code>
+     * 
+     * 
      * @param style the style for the new <code>Font</code>
      * @param size the size for the new <code>Font</code>
      * @return a new <code>Font</code> object.
@@ -1876,6 +2325,10 @@ public class Font implements java.io.Serializable
     /**
      * Creates a new <code>Font</code> object by replicating this
      * <code>Font</code> object and applying a new style and transform.
+     * <p>
+     * 通过复制此<code> Font </code>对象并应用新的样式和变换来创建新的<code> Font </code>
+     * 
+     * 
      * @param style the style for the new <code>Font</code>
      * @param trans the <code>AffineTransform</code> associated with the
      * new <code>Font</code>
@@ -1895,6 +2348,10 @@ public class Font implements java.io.Serializable
     /**
      * Creates a new <code>Font</code> object by replicating the current
      * <code>Font</code> object and applying a new size to it.
+     * <p>
+     *  通过复制当前的<code> Font </code>对象并应用新的大小创建一个新的<code> Font </code>对象
+     * 
+     * 
      * @param size the size for the new <code>Font</code>.
      * @return a new <code>Font</code> object.
      * @since 1.2
@@ -1911,6 +2368,10 @@ public class Font implements java.io.Serializable
     /**
      * Creates a new <code>Font</code> object by replicating the current
      * <code>Font</code> object and applying a new transform to it.
+     * <p>
+     *  通过复制当前<code> Font </code>对象并对其应用新的变换来创建新的<code> Font </code>对象
+     * 
+     * 
      * @param trans the <code>AffineTransform</code> associated with the
      * new <code>Font</code>
      * @return a new <code>Font</code> object.
@@ -1927,6 +2388,10 @@ public class Font implements java.io.Serializable
     /**
      * Creates a new <code>Font</code> object by replicating the current
      * <code>Font</code> object and applying a new style to it.
+     * <p>
+     *  通过复制当前<code> Font </code>对象并对其应用新样式来创建新的<code> Font </code>对象
+     * 
+     * 
      * @param style the style for the new <code>Font</code>
      * @return a new <code>Font</code> object.
      * @since 1.2
@@ -1946,6 +2411,10 @@ public class Font implements java.io.Serializable
      * <code>Font</code> object and applying a new set of font attributes
      * to it.
      *
+     * <p>
+     *  通过复制当前<code> Font </code>对象并应用一组新的字体属性来创建一个新的<code> Font </code>对象
+     * 
+     * 
      * @param attributes a map of attributes enabled for the new
      * <code>Font</code>
      * @return a new <code>Font</code> object.
@@ -1971,6 +2440,13 @@ public class Font implements java.io.Serializable
      * supplementary characters, use the {@link #canDisplay(int)}
      * method or <code>canDisplayUpTo</code> methods.
      *
+     * <p>
+     *  检查此<code> Font </code>是否具有指定字符的字形
+     * 
+     * <p> <b>注意：</b>此方法无法处理<a href=\"//java/lang/Characterhtml#supplementary\">补充字符</a>要支持所有Unicode字符(包括补充字
+     * 符),请使用{@link #canDisplay(int)}方法或<code> canDisplayUpTo </code>方法。
+     * 
+     * 
      * @param c the character for which a glyph is needed
      * @return <code>true</code> if this <code>Font</code> has a glyph for this
      *          character; <code>false</code> otherwise.
@@ -1984,6 +2460,10 @@ public class Font implements java.io.Serializable
      * Checks if this <code>Font</code> has a glyph for the specified
      * character.
      *
+     * <p>
+     *  检查此<code> Font </code>是否具有指定字符的字形
+     * 
+     * 
      * @param codePoint the character (Unicode code point) for which a glyph
      *        is needed.
      * @return <code>true</code> if this <code>Font</code> has a glyph for the
@@ -2010,6 +2490,12 @@ public class Font implements java.io.Serializable
      * <code>Font</code> cannot display without using the missing glyph
      * code. If the <code>Font</code> can display all characters, -1 is
      * returned.
+     * <p>
+     * 指示此<code> Font </code>是否可以显示指定的<code> String </code>对于具有Unicode编码的字符串,重要的是要知道特定字体是否可以显示字符串This方法返回一个偏
+     * 移量<code> Font </code>在不使用缺少的字形代码的情况下无法显示的第一个字符</code> <code> str </code>如果<code> Font </code>显示所有字符,返
+     * 回-1。
+     * 
+     * 
      * @param str a <code>String</code> object
      * @return an offset into <code>str</code> that points
      *          to the first character in <code>str</code> that this
@@ -2042,6 +2528,11 @@ public class Font implements java.io.Serializable
      * the characters in the specified <code>text</code>
      * starting at <code>start</code> and ending at
      * <code>limit</code>.  This method is a convenience overload.
+     * <p>
+     *  指示此<code> Font </code>是否可以显示从<code>开始</code>开始并以<code> limit </code>结束的指定<code>文本</code>中的字符。
+     * 方法是一种方便的重载。
+     * 
+     * 
      * @param text the specified array of <code>char</code> values
      * @param start the specified starting offset (in
      *              <code>char</code>s) into the specified array of
@@ -2079,6 +2570,10 @@ public class Font implements java.io.Serializable
      * text specified by the <code>iter</code> starting at
      * <code>start</code> and ending at <code>limit</code>.
      *
+     * <p>
+     * 指示此<code> Font </code>是否可以显示从<code>开始</code>开始并以<code> limit </code>结束的<code> iter </code>
+     * 
+     * 
      * @param iter  a {@link CharacterIterator} object
      * @param start the specified starting offset into the specified
      *              <code>CharacterIterator</code>.
@@ -2118,6 +2613,10 @@ public class Font implements java.io.Serializable
      * Returns the italic angle of this <code>Font</code>.  The italic angle
      * is the inverse slope of the caret which best matches the posture of this
      * <code>Font</code>.
+     * <p>
+     *  返回此<code> Font </code>的斜体角。斜体角是与此<code> Font </code>的姿势最匹配的插入符号的反斜率。
+     * 
+     * 
      * @see TextAttribute#POSTURE
      * @return the angle of the ITALIC style of this <code>Font</code>.
      */
@@ -2132,6 +2631,10 @@ public class Font implements java.io.Serializable
      * a property of the font, the font transform is needed not the
      * device transform. Finally, this is private but the only caller of this
      * in the JDK - and the only likely caller - is in this same class.
+     * <p>
+     *  我们需要传递它们以查找警告如果我们可以传递已经被使用的它可以防止额外的警告被分配注意,由于斜体角是字体的属性,字体变换不需要设备变换最后,这是私有的,但在JDK中唯一的调用者 - 和唯一可能的调用者 
+     * - 在同一个类。
+     * 
      */
     private float getItalicAngle(FontRenderContext frc) {
         Object aa, fm;
@@ -2153,6 +2656,11 @@ public class Font implements java.io.Serializable
      * fonts might have different <code>LineMetrics</code>.  If the
      * logical <code>Font</code> is a single
      * font then the metrics would be uniform.
+     * <p>
+     * 检查此<code> Font </code>是否具有统一的线度量逻辑<code> Font </code>可能是一个复合字体,这意味着它由不同的物理字体组成,这些字体可能有不同的<code> LineM
+     * etrics </code>如果逻辑<code> Font </code>是一个单一的字体,那么度量将是统一的。
+     * 
+     * 
      * @return <code>true</code> if this <code>Font</code> has
      * uniform line metrics; <code>false</code> otherwise.
      */
@@ -2171,6 +2679,9 @@ public class Font implements java.io.Serializable
              * metrics, although it probably should be: REMIND find why not?
              * The font transform is used but its applied in getFontMetrics, so
              * just pass identity here
+             * <p>
+             *  指标,虽然可能应该是：REMIND找到为什么不?使用字体变换,但它应用于getFontMetrics,所以只是在这里传递身份
+             * 
              */
             float [] metrics = new float[8];
             getFont2D().getFontMetrics(this, identityTx,
@@ -2237,6 +2748,10 @@ public class Font implements java.io.Serializable
     /**
      * Returns a {@link LineMetrics} object created with the specified
      * <code>String</code> and {@link FontRenderContext}.
+     * <p>
+     *  返回使用指定的<code> String </code>和{@link FontRenderContext}创建的{@link LineMetrics}
+     * 
+     * 
      * @param str the specified <code>String</code>
      * @param frc the specified <code>FontRenderContext</code>
      * @return a <code>LineMetrics</code> object created with the
@@ -2251,6 +2766,10 @@ public class Font implements java.io.Serializable
     /**
      * Returns a <code>LineMetrics</code> object created with the
      * specified arguments.
+     * <p>
+     *  返回使用指定参数创建的<code> LineMetrics </code>对象
+     * 
+     * 
      * @param str the specified <code>String</code>
      * @param beginIndex the initial offset of <code>str</code>
      * @param limit the end offset of <code>str</code>
@@ -2270,6 +2789,10 @@ public class Font implements java.io.Serializable
     /**
      * Returns a <code>LineMetrics</code> object created with the
      * specified arguments.
+     * <p>
+     * 返回使用指定参数创建的<code> LineMetrics </code>对象
+     * 
+     * 
      * @param chars an array of characters
      * @param beginIndex the initial offset of <code>chars</code>
      * @param limit the end offset of <code>chars</code>
@@ -2289,6 +2812,10 @@ public class Font implements java.io.Serializable
     /**
      * Returns a <code>LineMetrics</code> object created with the
      * specified arguments.
+     * <p>
+     *  返回使用指定参数创建的<code> LineMetrics </code>对象
+     * 
+     * 
      * @param ci the specified <code>CharacterIterator</code>
      * @param beginIndex the initial offset in <code>ci</code>
      * @param limit the end offset of <code>ci</code>
@@ -2317,6 +2844,12 @@ public class Font implements java.io.Serializable
      * <code>TextLayout</code>.
      * <p>Note: The returned bounds is in baseline-relative coordinates
      * (see {@link java.awt.Font class notes}).
+     * <p>
+     * 返回指定<code> FontRenderContext </code>中指定<code> String </code>的逻辑边界逻辑边界包含origin,ascent,advance和height,其
+     * 中包括前导逻辑边界不总是包含所有文本例如,在某些语言和某些字体中,重音标记可以位于上升或下降下方。
+     * 要获得一个包含所有文本的可视边界框,请使用{@link TextLayout#getBounds()注意：返回的边界在基线相对坐标中(参见{@link javaawtFont类注释})。
+     * 
+     * 
      * @param str the specified <code>String</code>
      * @param frc the specified <code>FontRenderContext</code>
      * @return a {@link Rectangle2D} that is the bounding box of the
@@ -2343,6 +2876,12 @@ public class Font implements java.io.Serializable
      * <code>TextLayout</code>.
      * <p>Note: The returned bounds is in baseline-relative coordinates
      * (see {@link java.awt.Font class notes}).
+     * <p>
+     * 返回指定<code> FontRenderContext </code>中指定<code> String </code>的逻辑边界逻辑边界包含origin,ascent,advance和height,其
+     * 中包括前导逻辑边界不总是包含所有文本例如,在某些语言和某些字体中,重音标记可以位于上升或下降下方。
+     * 要获得一个包含所有文本的可视边界框,请使用{@link TextLayout#getBounds()注意：返回的边界在基线相对坐标中(参见{@link javaawtFont类注释})。
+     * 
+     * 
      * @param str the specified <code>String</code>
      * @param beginIndex the initial offset of <code>str</code>
      * @param limit the end offset of <code>str</code>
@@ -2377,6 +2916,14 @@ public class Font implements java.io.Serializable
      * <code>TextLayout</code>.
      * <p>Note: The returned bounds is in baseline-relative coordinates
      * (see {@link java.awt.Font class notes}).
+     * <p>
+     * 返回指定的<code> FontRenderContext </code>中指定的字符数组的逻辑边界逻辑边界包含原点,上升,前进和高度,其中包括前导逻辑边界不会始终包含所有文本。
+     * 例如,在某些语言和一些字体中,重音标记可以位于上升或下降下方。
+     * 要获得一个包含所有文本的视觉边界框,请使用{@link TextLayout#getBounds()getBounds}代码> TextLayout </code> <p>注意：返回的边界在基线相对坐标
+     * 中(参见{@link javaawtFont类注释})。
+     * 例如,在某些语言和一些字体中,重音标记可以位于上升或下降下方。
+     * 
+     * 
      * @param chars an array of characters
      * @param beginIndex the initial offset in the array of
      * characters
@@ -2444,6 +2991,12 @@ public class Font implements java.io.Serializable
      * <code>TextLayout</code>.
      * <p>Note: The returned bounds is in baseline-relative coordinates
      * (see {@link java.awt.Font class notes}).
+     * <p>
+     * 返回在指定的<code> FontRenderContext </code>中指定的{@link CharacterIterator}中索引的字符的逻辑边界逻辑边界包含起点,上升,前进和高度,其中包括前
+     * 导逻辑边界不始终包含所有文本例如,在某些语言和某些字体中,重音标记可以位于上升或下降下方要获得一个包含所有文本的视觉边界框,请使用{@link TextLayout#getBounds )getBounds}
+     * 方法<code> TextLayout </code> <p>注意：返回的边界在基线相对坐标中(参见{@link javaawtFont类注释})。
+     * 
+     * 
      * @param ci the specified <code>CharacterIterator</code>
      * @param beginIndex the initial offset in <code>ci</code>
      * @param limit the end offset in <code>ci</code>
@@ -2493,6 +3046,10 @@ public class Font implements java.io.Serializable
      * bounds as defined in the specified <code>FontRenderContext</code>.
      * <p>Note: The returned bounds is in baseline-relative coordinates
      * (see {@link java.awt.Font class notes}).
+     * <p>
+     * 返回具有指定的<code> FontRenderContext </code> <p>中定义的最大边界的字符的边界注意：返回的边界在基线相对坐标中(参见{@link javaawtFont类注释})
+     * 
+     * 
      * @param frc the specified <code>FontRenderContext</code>
      * @return a <code>Rectangle2D</code> that is the bounding box
      * for the character with the maximum bounds.
@@ -2515,6 +3072,11 @@ public class Font implements java.io.Serializable
      * means that this method is not useful for some scripts, such
      * as Arabic, Hebrew, Thai, and Indic, that require reordering,
      * shaping, or ligature substitution.
+     * <p>
+     *  通过在<code> Font </code>中基于Unicode cmap将字符映射到字形,创建一个{@link javaawtfontGlyphVector GlyphVector}此方法除了将字形
+     * 映射到字符之外不进行其他处理这意味着方法对于需要重新排序,整形或连字替代的一些脚本(如阿拉伯语,希伯来语,泰语和印度语)不是有用的。
+     * 
+     * 
      * @param frc the specified <code>FontRenderContext</code>
      * @param str the specified <code>String</code>
      * @return a new <code>GlyphVector</code> created with the
@@ -2534,6 +3096,11 @@ public class Font implements java.io.Serializable
      * means that this method is not useful for some scripts, such
      * as Arabic, Hebrew, Thai, and Indic, that require reordering,
      * shaping, or ligature substitution.
+     * <p>
+     * 通过在<code> Font </code>中基于Unicode cmap将字符映射到字形,创建一个{@link javaawtfontGlyphVector GlyphVector}此方法除了将字形映
+     * 射到字符之外不进行其他处理这意味着方法对于需要重新排序,整形或连字替代的一些脚本(如阿拉伯语,希伯来语,泰语和印度语)不是有用的。
+     * 
+     * 
      * @param frc the specified <code>FontRenderContext</code>
      * @param chars the specified array of characters
      * @return a new <code>GlyphVector</code> created with the
@@ -2553,6 +3120,11 @@ public class Font implements java.io.Serializable
      * means that this method is not useful for some scripts, such
      * as Arabic, Hebrew, Thai, and Indic, that require reordering,
      * shaping, or ligature substitution.
+     * <p>
+     * 创建一个{@link javaawtfontGlyphVector GlyphVector}通过映射指定的字符到glyphs一对一基于Unicode cmap在此<code>字体</code>此方法除了
+     * 字形映射到字符之外没有其他处理这意味着该方法对于需要重新排序,整形或连字替换的一些脚本(如阿拉伯语,希伯来语,泰语和印度语)不是有用的。
+     * 
+     * 
      * @param frc the specified <code>FontRenderContext</code>
      * @param ci the specified <code>CharacterIterator</code>
      * @return a new <code>GlyphVector</code> created with the
@@ -2573,6 +3145,11 @@ public class Font implements java.io.Serializable
      * means that this method is not useful for some scripts, such
      * as Arabic, Hebrew, Thai, and Indic, that require reordering,
      * shaping, or ligature substitution.
+     * <p>
+     * 通过在<code> Font </code>中基于Unicode cmap将字符映射到字形,创建一个{@link javaawtfontGlyphVector GlyphVector}此方法除了将字形映
+     * 射到字符之外不进行其他处理这意味着方法对于需要重新排序,整形或连字替代的一些脚本(如阿拉伯语,希伯来语,泰语和印度语)不是有用的。
+     * 
+     * 
      * @param frc the specified <code>FontRenderContext</code>
      * @param glyphCodes the specified integer array
      * @return a new <code>GlyphVector</code> created with the
@@ -2610,6 +3187,20 @@ public class Font implements java.io.Serializable
      * <p>
      * All other values for the flags parameter are reserved.
      *
+     * <p>
+     *  返回一个新的<code> GlyphVector </code>对象,如果可能,执行完全布局的文本复杂的文本,如阿拉伯语或印地语需要完全布局支持不同的脚本取决于字体和实现
+     * <p>
+     * 布局需要由<code> Bidi </code>执行的双向分析,并且只应在具有统一方向的文本上执行。
+     * 方向在flags参数中指示,方法是使用LAYOUT_RIGHT_TO_LEFT表示从右到左阿拉伯语和希伯来语)运行方向,或LAYOUT_LEFT_TO_RIGHT,表示从左到右(英语)运行方向。
+     * <p>
+     *  此外,某些操作(如阿拉伯语整形)需要上下文,以便开始和限制处的字符可以具有正确的形状。
+     * 有时,缓冲区中超出提供的范围的数据不具有有效数据值LAYOUT_NO_START_CONTEXT和LAYOUT_NO_LIMIT_CONTEXT可以是添加到flags参数中,以指示文本在开始之前,或者在
+     * 限制之后,分别不应该检查上下文。
+     *  此外,某些操作(如阿拉伯语整形)需要上下文,以便开始和限制处的字符可以具有正确的形状。
+     * <p>
+     * flags参数的所有其他值都保留
+     * 
+     * 
      * @param frc the specified <code>FontRenderContext</code>
      * @param text the text to layout
      * @param start the start of the text to use for the <code>GlyphVector</code>
@@ -2643,24 +3234,36 @@ public class Font implements java.io.Serializable
     /**
      * A flag to layoutGlyphVector indicating that text is left-to-right as
      * determined by Bidi analysis.
+     * <p>
+     *  layoutGlyphVector的一个标志,指示文本是由Bidi分析确定的从左到右
+     * 
      */
     public static final int LAYOUT_LEFT_TO_RIGHT = 0;
 
     /**
      * A flag to layoutGlyphVector indicating that text is right-to-left as
      * determined by Bidi analysis.
+     * <p>
+     *  layoutGlyphVector的标志,指示由Bidi分析确定的文本是从右到左
+     * 
      */
     public static final int LAYOUT_RIGHT_TO_LEFT = 1;
 
     /**
      * A flag to layoutGlyphVector indicating that text in the char array
      * before the indicated start should not be examined.
+     * <p>
+     *  layoutGlyphVector的标志,指示在指定的开始之前的char数组中的文本不应该被检查
+     * 
      */
     public static final int LAYOUT_NO_START_CONTEXT = 2;
 
     /**
      * A flag to layoutGlyphVector indicating that text in the char array
      * after the indicated limit should not be examined.
+     * <p>
+     *  layoutGlyphVector的标志,指示在指定的限制后的char数组中的文本不应该被检查
+     * 
      */
     public static final int LAYOUT_NO_LIMIT_CONTEXT = 4;
 
@@ -2681,6 +3284,8 @@ public class Font implements java.io.Serializable
 
     /*
      * Initialize JNI field and method IDs
+     * <p>
+     *  初始化JNI字段和方法ID
      */
     private static native void initIDs();
 }

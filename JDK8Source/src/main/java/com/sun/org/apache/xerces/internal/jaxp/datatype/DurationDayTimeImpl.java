@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
@@ -24,6 +25,9 @@
 
 /*
  * Copyright (c) 2009 by Oracle Corporation. All Rights Reserved.
+ * <p>
+ *  版权所有(c)2009 by Oracle Corporation保留所有权利
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.jaxp.datatype;
@@ -44,6 +48,14 @@ import javax.xml.datatype.DatatypeConstants;
  * </p>
  *
  *
+ * <p>
+ *  <p>表示<a href=\"http://wwww3org/TR/xpath-datamodel#dayTimeDuration\"> XQuery中指定的<code> Duration </code>
+ * 的子类型<code> xdt：dayTimeDuration </code> 10和XPath 20数据模型,xdt：dayTimeDuration </a> </p>。
+ * 
+ *  <p> DurationYearMonth对象表示格雷戈里时间的一个周期,其中包含仅包含年份和月份组成部分的词汇表示"<em> PnDTnHnMnS </em>"
+ * </p>
+ * 
+ * 
  * @author <a href="mailto:Vikram.Aroskar@Sun.COM">Vikram Aroskar</a>
  * @author <a href="mailto:Huizhe.wang@oracle.com">Joe Wang</a>
  * @version $Revision: 1.2 $, $Date: 2010/05/19 23:20:06 $
@@ -96,6 +108,20 @@ class DurationDayTimeImpl
      * An {@link UnsupportedOperationException} will be thrown with a message indicating implementation limits
      * if implementation capacities are exceeded.</p>
      *
+     * <p>
+     * <p>通过解析其<code> String </code>表示形式,"<em> PnDTnHnMnS </em>",</code>构造类型<code> xdt：dayTimeDuration </code>
+     * 的< a href ="http：// wwww3org / TR / xpath-datamodel#dayTimeDuration"> XQuery 10和XPath 20数据模型,xdt：dayT
+     * imeDuration </a> </p>。
+     * 
+     *  <p>数据类型<code> xdt：dayTimeDuration </code>是<code> xs：duration </code>的子类型,其词法表示仅包含日,小时,分钟和秒组件此数据类型位于命
+     * 名空间<代码> http：// wwww3org / 2003/11 / xpath-datatypes </code> </p>。
+     * 
+     *  <p>所有四个值都已设置,并可从创建的{@link Duration} </p>中获得
+     * 
+     * <p> XML模式规范说明值可以是任意大小实现可以选择不支持或不能支持任意大和/或小的值。
+     * {@link UnsupportedOperationException}将抛出一个消息,指示实现限制,如果实现超过容量</p>。
+     * 
+     * 
          * @param lexicalRepresentation Lexical representation of a duration.
          *
          * @throws IllegalArgumentException If <code>lexicalRepresentation</code> is not a valid representation of a <code>Duration</code> expressed only in terms of days and time.
@@ -144,6 +170,20 @@ class DurationDayTimeImpl
          *
      * <p>Any remaining milliseconds after determining the day, hour, minute and second are discarded.</p>
      *
+     * <p>
+     *  <p>使用指定的毫秒数创建<code> xdt：dayTimeDuration </code>类型的<code> Duration </code>
+     * <a href="http://www.w3.org/TR/xpath-datamodel#dayTimeDuration">
+     *  XQuery 10和XPath 20数据模型,xdt：dayTimeDuration </a> </p>
+     * 
+     *  <p>数据类型<code> xdt：dayTimeDuration </code>是<code> xs：duration </code>的子类型,其词法表示仅包含日,小时,分钟和秒组件此数据类型位于命
+     * 名空间<代码> http：// wwww3org / 2003/11 / xpath-datatypes </code> </p>。
+     * 
+     * <p>通过从指定的毫秒计算它们的值来设置所有四个值,并且可以使用所创建的{@link Duration}的<code> get </code>方法获得这些值符合和定义：</p >
+     * <ul>
+     *  <li> ISO 8601：2000(E)第5532节替代格式</li> <li> <a href=\"http://wwww3org/TR/xmlschema-2/#isoformats\"> W3
+     * C XML Schema 10第2部分,附录D,ISO 8601日期和时间格式</a>。
+     * </li>
+     * 
      * @param durationInMilliseconds Milliseconds of <code>Duration</code> to create.
      *
      * @return New <code>Duration</code> created with the specified <code>durationInMilliseconds</code>.
@@ -162,6 +202,14 @@ class DurationDayTimeImpl
 
     /**
      * The value space of xs:dayTimeDuration is the set of fractional second values.
+     * <p>
+     *  <li> {@ link XMLGregorianCalendar}日期/时间XML模式10和Java表示之间的数据类型字段映射</li>
+     * </ul>
+     * 
+     * <p>默认的开始实例由{@link GregorianCalendar}使用时代的开始来定义：{@link javautilCalendar#YEAR} = 1970,{@link javautilCalendar#MONTH}
+     *  = {@link javautilCalendar# JANUARY},{@link javautilCalendar#DATE} = 1,等等这是很重要的,因为在Gregorian日历中有变化,例如
+     * 闰年在不同的日子= {@link javautilCalendar#FEBRUARY},所以{@link持续时间#getDays()}可能受影响</p>。
+     * 
      * @return fractional second values
      */
     public float getValue() {

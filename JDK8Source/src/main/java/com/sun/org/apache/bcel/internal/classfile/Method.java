@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -56,6 +57,31 @@ package com.sun.org.apache.bcel.internal.classfile;
  * individuals on behalf of the Apache Software Foundation.  For more
  * information on the Apache Software Foundation, please see
  * <http://www.apache.org/>.
+ * <p>
+ *  Apache软件许可证,版本11
+ * 
+ *  版权所有(c)2001 Apache软件基金会保留所有权利
+ * 
+ *  如果满足以下条件,则允许重新分发和使用源代码和二进制形式(带或不带修改)：
+ * 
+ *  1源代码的再分发必须保留上述版权声明,此条件列表和以下免责声明
+ * 
+ *  2二进制形式的再分发必须在随分发版提供的文档和/或其他材料中复制上述版权声明,此条件列表和以下免责声明
+ * 
+ * 3包含在重新分发中的最终用户文档(如果有的话)必须包括以下声明："本产品包括Apache Software Foundation(http：// wwwapacheorg /)开发的软件。
+ * 或者,此确认可能出现在软件本身,如果和第三方承诺通常出现的地方。
+ * 
+ *  4未经事先书面许可,不得使用"Apache"和"Apache Software Foundation"和"Apache BCEL"这些名称来认可或推广从本软件衍生的产品对于书面许可,请联系apache
+ *  @ apacheorg。
+ * 
+ *  5未经Apache软件基金会事先书面许可,不得将本软件衍生的产品称为"Apache","Apache BCEL"或"Apache"名称。
+ * 
+ * 本软件按"原样"提供,任何明示或暗示的保证,包括但不限于适销性和针对特定用途的适用性的默示担保,在任何情况下均不得免责,APACHE软件基金会或其参与人应负赔偿责任对于任何直接,间接,偶发,特殊,惩罚性
+ * 或后果性损害(包括但不限于替代商品或服务的采购;使用,数据或利润损失;或业务中断)责任,无论是在合同,严格责任或侵权(包括疏忽或其他方式),以任何方式使用本软件,即使已被告知此类损害的可能性======
+ * ==============================================================。
+ * 
+ * 此软件包括许多个人代表Apache软件基金会所做的自愿捐款有关Apache软件基金会的更多信息,请参阅<http：// wwwapacheorg />
+ * 
  */
 import com.sun.org.apache.bcel.internal.Constants;
 import com.sun.org.apache.bcel.internal.generic.Type;
@@ -66,18 +92,28 @@ import java.io.*;
  * for a method in the class. See JVM specification for details.
  * A method has access flags, a name, a signature and a number of attributes.
  *
+ * <p>
+ *  这个类表示方法信息结构,即类中的方法的表示。参见JVM规范详细信息方法具有访问标志,名称,签名和多个属性
+ * 
+ * 
  * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
  */
 public final class Method extends FieldOrMethod {
   /**
    * Empty constructor, all attributes have to be defined via `setXXX'
    * methods. Use at your own risk.
+   * <p>
+   *  空构造函数,所有属性都必须通过"setXXX"方法定义使用风险自负
+   * 
    */
   public Method() {}
 
   /**
    * Initialize from another object. Note that both objects use the same
    * references (shallow copy). Use clone() for a physical copy.
+   * <p>
+   *  从另一个对象初始化请注意,两个对象使用相同的引用(浅拷贝)对物理副本使用clone()
+   * 
    */
   public Method(Method c) {
     super(c);
@@ -85,6 +121,10 @@ public final class Method extends FieldOrMethod {
 
   /**
    * Construct object from file stream.
+   * <p>
+   *  从文件流构造对象
+   * 
+   * 
    * @param file Input stream
    * @throws IOException
    * @throws ClassFormatException
@@ -96,6 +136,8 @@ public final class Method extends FieldOrMethod {
   }
 
   /**
+  /* <p>
+  /* 
    * @param access_flags Access rights of method
    * @param name_index Points to field name in constant pool
    * @param signature_index Points to encoded signature
@@ -113,6 +155,10 @@ public final class Method extends FieldOrMethod {
    * defined by the contents of a Java class. I.e., the hierarchy of methods,
    * fields, attributes, etc. spawns a tree of objects.
    *
+   * <p>
+   * 由遍历由Java类Ie的内容隐含地定义的树的节点的对象调用,方法,字段,属性等的层次结构产生对象的树
+   * 
+   * 
    * @param v Visitor object
    */
   public void accept(Visitor v) {
@@ -120,6 +166,8 @@ public final class Method extends FieldOrMethod {
   }
 
   /**
+  /* <p>
+  /* 
    * @return Code attribute of method, if any
    */
   public final Code getCode() {
@@ -131,6 +179,8 @@ public final class Method extends FieldOrMethod {
   }
 
   /**
+  /* <p>
+  /* 
    * @return ExceptionTable attribute of method, if any, i.e., list all
    * exceptions the method may throw not exception handlers!
    */
@@ -144,6 +194,9 @@ public final class Method extends FieldOrMethod {
 
   /** @return LocalVariableTable of code attribute if any, i.e. the call is forwarded
    * to the Code atribute.
+   * <p>
+   *  到代码颂
+   * 
    */
   public final LocalVariableTable getLocalVariableTable() {
     Code code = getCode();
@@ -156,6 +209,9 @@ public final class Method extends FieldOrMethod {
 
   /** @return LineNumberTable of code attribute if any, i.e. the call is forwarded
    * to the Code atribute.
+   * <p>
+   *  到代码颂
+   * 
    */
   public final LineNumberTable getLineNumberTable() {
     Code code = getCode();
@@ -170,6 +226,10 @@ public final class Method extends FieldOrMethod {
    * Return string representation close to declaration format,
    * `public static void _main(String[] args) throws IOException', e.g.
    *
+   * <p>
+   *  返回字符串表示接近声明格式,`public static void _main(String [] args)throws IOException',例如
+   * 
+   * 
    * @return String representation of the method.
    */
   public final String toString() {
@@ -209,6 +269,8 @@ public final class Method extends FieldOrMethod {
   }
 
   /**
+  /* <p>
+  /* 
    * @return deep copy of this method
    */
   public final Method copy(ConstantPool constant_pool) {
@@ -216,6 +278,8 @@ public final class Method extends FieldOrMethod {
   }
 
   /**
+  /* <p>
+  /* 
    * @return return type of method
    */
   public Type getReturnType() {
@@ -223,6 +287,8 @@ public final class Method extends FieldOrMethod {
   }
 
   /**
+  /* <p>
+  /* 
    * @return array of method argument types
    */
   public Type[] getArgumentTypes() {

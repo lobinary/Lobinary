@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2003, 2008, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -66,6 +67,24 @@ import javax.net.ssl.SSLSocketFactory;
  * socket.  The value of this system property is a string that is a
  * comma-separated list of SSL/TLS protocol versions to enable.</p>
  *
+ * <p>
+ *  <p> RMI运行时使用<code> SslRMIClientSocketFactory </code>实例,以通过SSL获取RMI调用的客户端套接字</p>
+ * 
+ *  <p>此类通过安全套接字层(SSL)或传输层安全(TLS)协议实现<code> RMIClientSocketFactory </code>
+ * 
+ * <p>此类使用默认的<code> SSLSocketFactory </code>创建SSL套接字(参见{@link SSLSocketFactory#getDefault})此类的所有实例在功能上是等
+ * 价的特别地,它们都共享相同的信任库,服务器需要客户端认证时的密钥库此行为可以通过覆盖{@link #createSocket(String,int)}方法在子类中进行修改;在这种情况下,{@link #equals(Object)equals}
+ * 和{@link #hashCode()hashCode}也可能需要重写</p>。
+ * 
+ * <p>如果指定了系统属性<code> javaxrmisslclientenabledCipherSuites </code>,则{@link #createSocket(String,int)}方法将
+ * 在返回套接字之前调用{@link SSLSocket#setEnabledCipherSuites(String [])}此系统属性的值是一个字符串,它是启用</p>的SSL / TLS密码套件的逗号分
+ * 隔列表。
+ * 
+ *  <p>如果指定了系统属性<code> javaxrmisslclientenabledProtocols </code>,则{@link #createSocket(String,int)}方法将在返
+ * 回套接字之前调用{@link SSLSocket#setEnabledProtocols(String [])}此系统属性的值是一个字符串,它是要启用的SSL / TLS协议版本的逗号分隔列表。
+ * </p>。
+ * 
+ * 
  * @see javax.net.ssl.SSLSocketFactory
  * @see javax.rmi.ssl.SslRMIServerSocketFactory
  * @since 1.5
@@ -75,6 +94,9 @@ public class SslRMIClientSocketFactory
 
     /**
      * <p>Creates a new <code>SslRMIClientSocketFactory</code>.</p>
+     * <p>
+     *  <p>创建新的<code> SslRMIClientSocketFactory </code> </p>
+     * 
      */
     public SslRMIClientSocketFactory() {
         // We don't force the initialization of the default SSLSocketFactory
@@ -110,6 +132,15 @@ public class SslRMIClientSocketFactory
      * socket. The value of this system property is a string that is a
      * comma-separated list of SSL/TLS protocol versions to
      * enable.</p>
+     * <p>
+     *  <p>创建SSL套接字</p>
+     * 
+     * <p>如果指定了系统属性<code> javaxrmisslclientenabledCipherSuites </code>,则此方法将在返回套接字之前调用{@link SSLSocket#setEnabledCipherSuites(String [])}
+     * 此系统属性的值是一个字符串,逗号分隔的SSL / TLS密码套件列表以启用</p>。
+     * 
+     *  <p>如果指定了系统属性<code> javaxrmisslclientenabledProtocols </code>,则此方法将在返回套接字之前调用{@link SSLSocket#setEnabledProtocols(String [])}
+     * 此系统属性的值是一个字符串,逗号分隔的SSL / TLS协议版本列表以启用</p>。
+     * 
      */
     public Socket createSocket(String host, int port) throws IOException {
         // Retrieve the SSLSocketFactory
@@ -171,6 +202,12 @@ public class SslRMIClientSocketFactory
      * <p>A subclass should override this method (as well
      * as {@link #hashCode()}) if its instances are not all
      * functionally equivalent.</p>
+     * <p>
+     *  <p>表示某些其他物件是否「等于」这个</p>
+     * 
+     * <p>因为这个类的所有实例在功能上是等价的(它们都使用默认的<code> SSLSocketFactory </code>),所以这个方法简单地返回<code> thisgetClass()equals
+     * (objgetClass())</code> p>。
+     * 
      */
     public boolean equals(Object obj) {
         if (obj == null) return false;
@@ -182,6 +219,10 @@ public class SslRMIClientSocketFactory
      * <p>Returns a hash code value for this
      * <code>SslRMIClientSocketFactory</code>.</p>
      *
+     * <p>
+     *  <p>如果子类的实例不是全部功能相同,则子类应重写此方法(以及{@link #hashCode()})</p>
+     * 
+     * 
      * @return a hash code value for this
      * <code>SslRMIClientSocketFactory</code>.
      */

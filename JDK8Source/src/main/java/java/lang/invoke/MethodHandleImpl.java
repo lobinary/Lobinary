@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2008, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -44,6 +45,10 @@ import static java.lang.invoke.MethodHandles.Lookup.IMPL_LOOKUP;
 
 /**
  * Trusted implementation code for MethodHandle.
+ * <p>
+ *  MethodHandle的可信实现代码
+ * 
+ * 
  * @author jrose
  */
 /*non-public*/ abstract class MethodHandleImpl {
@@ -178,6 +183,53 @@ import static java.lang.invoke.MethodHandles.Lookup.IMPL_LOOKUP;
      * For each argument, convert incoming argument to the exact type needed.
      * The argument conversions allowed are casting, boxing and unboxing,
      * integral widening or narrowing, and floating point widening or narrowing.
+     * <p>
+     *  //不要调整这个特殊的平台：private static final int MAX_ARITY; static {final Object [] values = {255}; AccessCont
+     * rollerdoPrivileged(new PrivilegedAction <Void>(){@覆盖public Void run(){values [0] = IntegergetInteger(MethodHandleImplclassgetName()+"MAX_ARITY",255); return null;}
+     * }); MAX_ARITY =(Integer)values [0]; }}。
+     * 
+     *  ///创建方法句柄的工厂方法：
+     * 
+     *  static void initStatics(){//触发所选的静态初始化MemberNameFactoryINSTANCEgetClass(); }}
+     * 
+     * static MethodHandle makeArrayElementAccessor(Class <?> arrayClass,boolean isSetter){if(arrayClass == Object [] class)return(isSetter?ArrayAccessorOBJECT_ARRAY_SETTER：ArrayAccessorOBJECT_ARRAY_GETTER); if(！arrayClassisArray())throw newIllegalArgumentException("not an array："+ arrayClass); MethodHandle [] cache = ArrayAccessorTYPED_ACCESSORSget(arrayClass); int cacheIndex =(isSetter?ArrayAccessorSETTER_INDEX：ArrayAccessorGETTER_INDEX); MethodHandle mh = cache [cacheIndex]; if(mh！= null)return mh; mh = ArrayAccessorgetAccessor(arrayClass,isSetter); MethodType correctType = ArrayAccessorcorrectType(arrayClass,isSetter); if(mhtype()！= correctType){assert(mhtype()parameterType(0)== Object [] class); assert((isSetter?mhtype()parameterType(2)：mhtype()returnType())== Objectclass); assert(isSetter || correctTypeparameterType(0)getComponentType()== correctTypereturnType()); //安全地非严格查看,因为元素类型来自数组类型mh = mhviewAsType(correctType,false); }
+     *  mh = makeIntrinsic(mh,(isSetter?IntrinsicARRAY_STORE：IntrinsicARRAY_LOAD)); //原子性地更新访问器缓存synchronize
+     * d(cache){if(cache [cacheIndex] == null){cache [cacheIndex] = mh; } else {//丢弃新构造的访问器并使用缓存版本mh = cache [cacheIndex]; }
+     * } return mh; }}。
+     * 
+     * static final class ArrayAccessor {///支持数组元素访问static final int GETTER_INDEX = 0,SETTER_INDEX = 1,INDEX_LIMIT = 2; static final ClassValue <MethodHandle []> TYPED_ACCESSORS = new ClassValue <MethodHandle []>(){@覆盖protected MethodHandle [] computeValue(Class <type> type){return new MethodHandle [INDEX_LIMIT]; }
+     * }; static final MethodHandle OBJECT_ARRAY_GETTER,OBJECT_ARRAY_SETTER; static {MethodHandle [] cache = TYPED_ACCESSORSget(Object [] class); cache [GETTER_INDEX] = OBJECT_ARRAY_GETTER = makeIntrinsic(getAccessor(Object [] class,false),IntrinsicARRAY_LOAD); cache [SETTER_INDEX] = OBJECT_ARRAY_SETTER = makeIntrinsic(getAccessor(Object [] class,true),IntrinsicARRAY_STORE);。
+     * 
+     * assert(InvokerBytecodeGeneratorisStaticallyInvocable(ArrayAccessorOBJECT_ARRAY_GETTERinternalMemberNa
+     * me())); assert(InvokerBytecodeGeneratorisStaticallyInvocable(ArrayAccessorOBJECT_ARRAY_SETTERinternal
+     * MemberName())); }}。
+     * 
+     * static int getElementI(int [] a,int i){return a [i]; } static long getElementJ(long [] a,int i){return a [i]; }
+     *  static float getElementF(float [] a,int i){return a [i]; } static double getElementD(double [] a,int
+     *  i){return a [i]; } static boolean getElementZ(boolean [] a,int i){return a [i]; } static byte getEle
+     * mentB(byte [] a,int i){return a [i]; } static short getElementS(short [] a,int i){return a [i]; } sta
+     * tic char getElementC(char [] a,int i){return a [i]; } static Object getElementL(Object [] a,int i){return a [i]; }
+     * }。
+     * 
+     * static void setElementI(int [] a,int i,int x){a [i] = x; } static void setElementJ(long [] a,int i,lo
+     * ng x){a [i] = x; } static void setElementF(float [] a,int i,float x){a [i] = x; } static void setElem
+     * entD(double [] a,int i,double x){a [i] = x; } static void setElementZ(boolean [] a,int i,boolean x){a [i] = x; }
+     *  static void setElementB(byte [] a,int i,byte x){a [i] = x; } static void setElementS(short [] a,int 
+     * i,short x){a [i] = x; } static void setElementC(char [] a,int i,char x){a [i] = x; } static void setE
+     * lementL(Object [] a,int i,Object x){a [i] = x; }}。
+     * 
+     * static String name(Class <?> arrayClass,boolean isSetter){Class <?> elemClass = arrayClassgetComponentType(); if(elemClass == null)throw newIllegalArgumentException("not an array",arrayClass); return(！isSetter?"getElement"："setElement")+ WrapperbasicTypeChar(elemClass); }
+     *  static MethodType type(Class <?> arrayClass,boolean isSetter){Class <?> elemClass = arrayClassgetComponentType(); class <?> arrayArgClass = arrayClass; if(！elemClassisPrimitive()){arrayArgClass = Object [] class; elemClass = Objectclass; }
+     *  return！isSetter? MethodTypemethodType(elemClass,arrayArgClass,intclass)：MethodTypemethodType(voidcla
+     * ss,arrayArgClass,intclass,elemClass); } static MethodType correctType(Class <?> arrayClass,boolean is
+     * Setter){Class <?> elemClass = arrayClassgetComponentType(); return！isSetter? MethodTypemethodType(elemClass,arrayClass,intclass)：MethodTypemethodType(voidclass,arrayClass,intclass,elemClass); }
+     *  static MethodHandle getAccessor(Class <?> arrayClass,boolean isSetter){String name = name(arrayClass,isSetter); MethodType type = type(arrayClass,isSetter); try {return IMPL_LOOKUPfindStatic(ArrayAccessorclass,name,type); }
+     *  catch(ReflectiveOperationException ex){throw uncaughtException(ex); }}}。
+     * 
+     * / **创建一个JVM级适配器方法句柄,使给定的方法句柄符合类似的newType,只使用成对参数转换对于每个参数,将传入的参数转换为所需的确切类型允许的参数转换是转换,装箱和拆箱,积分扩展或变窄,以及浮
+     * 点扩大或变窄。
+     * 
+     * 
      * @param srcType required call type
      * @param target original method handle
      * @param strict if true, only asType conversions are allowed; if false, explicitCastArguments conversions allowed
@@ -344,6 +396,10 @@ import static java.lang.invoke.MethodHandles.Lookup.IMPL_LOOKUP;
 
     /**
      * Identity function, with reference cast.
+     * <p>
+     *  身份函数,参考cast
+     * 
+     * 
      * @param t an arbitrary reference type
      * @param x an arbitrary reference value
      * @return the same value x
@@ -377,6 +433,11 @@ import static java.lang.invoke.MethodHandles.Lookup.IMPL_LOOKUP;
     }
     static MethodHandle makePairwiseConvert(MethodHandle target, MethodType srcType,
                                             boolean strict) {
+            if (!VerifyType.isNullConversion(src, dst, /* <p>
+            if (!VerifyType.isNullConversion(src, dst, /*  convSpecs [i] = valueConversion(src,dst,strict,monobox); }} return convSpecs; } static MethodHandle 
+            if (!VerifyType.isNullConversion(src, dst, /* makePairwiseConvert(MethodHandle target,MethodType srcType,boolean strict){。
+            if (!VerifyType.isNullConversion(src, dst, /* 
+            if (!VerifyType.isNullConversion(src, dst, /* 
         return makePairwiseConvert(target, srcType, strict, /*monobox=*/ false);
     }
 
@@ -385,6 +446,11 @@ import static java.lang.invoke.MethodHandles.Lookup.IMPL_LOOKUP;
      * This conversion function will be used as a LF NamedFunction.
      * Return a Class object if a simple cast is needed.
      * Return void.class if void is involved.
+     * <p>
+     *  }}
+     * 
+     * / **找到从给定源到给定目标的转换函数此转换函数将用作LF NamedFunction如果需要简单转换,返回Class对象返回voidclass如果涉及void
+     * 
      */
     static Object valueConversion(Class<?> src, Class<?> dst, boolean strict, boolean monobox) {
         assert(!VerifyType.isNullConversion(src, dst, /*keepInterfaces=*/ strict));  // caller responsibility
@@ -409,6 +475,12 @@ import static java.lang.invoke.MethodHandles.Lookup.IMPL_LOOKUP;
                     if (strict)
                         fn = fn.asType(mt);
                     else
+        assert(!VerifyType.isNullConversion(src, dst, /* <p>
+        assert(!VerifyType.isNullConversion(src, dst, /* if(dst == voidclass)return dst; MethodHandle fn; if(srcisPrimitive()){if(src == voidclass){return voidclass; //调用者必须特别承认这个}
+        assert(!VerifyType.isNullConversion(src, dst, /*  else if(dstisPrimitive()){//例子：int-> byte,byte-> int,boolean-> int(！strict)fn = ValueConversionsconvertPrimitive(src,dst); }
+        assert(!VerifyType.isNullConversion(src, dst, /*  else {//示例：int-> Integer,boolean-> Object,float-> Number Wrapper wsrc = WrapperforPrimitiveType(src); fn = ValueConversionsboxExact(wsrc); assert(fntype()parameterType(0)== wsrcprimitiveType()); assert(fntype()returnType()== wsrcwrapperType()); if(！VerifyTypeisNullConversion(wsrcwrapperType(),dst,strict)){//角落情况,如int-> Long,这可能会失败MethodType mt = MethodTypemethodType(dst,src); if(strict)fn = fnasType(mt);其他。
+        assert(!VerifyType.isNullConversion(src, dst, /* 
+        assert(!VerifyType.isNullConversion(src, dst, /* 
                         fn = MethodHandleImpl.makePairwiseConvert(fn, mt, /*strict=*/ false);
                 }
             }
@@ -521,6 +593,41 @@ import static java.lang.invoke.MethodHandles.Lookup.IMPL_LOOKUP;
         }
     }
 
+                        fn = MethodHandleImpl.makePairwiseConvert(fn, mt, /* <p>
+                        fn = MethodHandleImpl.makePairwiseConvert(fn, mt, /* }}} else if(dstisPrimitive()){Wrapper wdst = WrapperforPrimitiveType(dst); if(singlebox || src == wdstwrapperType()){//使用强类型的反汇编器,如果可能fn = ValueConversionsunboxExact(wdst,strict); }
+                        fn = MethodHandleImpl.makePairwiseConvert(fn, mt, /*  else {//例子：Object-> int,Number-> int,Comparable-> int,Byte-> int //必须包括额外的转换// src必须在运行时检查,以检测字节,字符等fn = (strict?ValueConversionsunboxWiden(wdst)：ValueConversionsunboxCast(wdst)); }
+                        fn = MethodHandleImpl.makePairwiseConvert(fn, mt, /* } else {//简单引用转换//注意：不要检查类层次关系//在src和dst之间在所有情况下,一个"null"参数//将通过转换return dst; } assert(fntype()parame
+                        fn = MethodHandleImpl.makePairwiseConvert(fn, mt, /* terCount()<= 1)："pc"+ ArraysasList(srcgetSimpleName(),dstgetSimpleName(),fn); return fn; }}。
+                        fn = MethodHandleImpl.makePairwiseConvert(fn, mt, /* 
+                        fn = MethodHandleImpl.makePairwiseConvert(fn, mt, /* static MethodHandle makeVarargsCollector(MethodHandle target,Class <?> arrayType){MethodType type = targettype(); int last = typeparameterCount() -  1; if(typeparameterType(last)！= arrayType)target = targetasType(typechangeParameterType(last,arrayType)); target = targetasFixedArity(); //确保这个属性被关闭return new AsVarargsCollector(target,arrayType); }
+                        fn = MethodHandleImpl.makePairwiseConvert(fn, mt, /* }。
+                        fn = MethodHandleImpl.makePairwiseConvert(fn, mt, /* 
+                        fn = MethodHandleImpl.makePairwiseConvert(fn, mt, /*  private static final class AsVarargsCollector extends DelegatingMethodHandle {private final MethodHandle target; private final Class <?> arrayType; private @Stable MethodHandle asCollectorCache;。
+                        fn = MethodHandleImpl.makePairwiseConvert(fn, mt, /* 
+                        fn = MethodHandleImpl.makePairwiseConvert(fn, mt, /* AsVarargsCollector(MethodHandle target,Class <?> arrayType){this(targettype(),target,arrayType); } As
+                        fn = MethodHandleImpl.makePairwiseConvert(fn, mt, /* VarargsCollector(MethodType type,MethodHandle target,Class <?> arrayType){super(type,target); thistarget = target; thisarrayType = arrayType; thisasCollectorCache = targetasCollector(arrayType,0); }
+                        fn = MethodHandleImpl.makePairwiseConvert(fn, mt, /* }。
+                        fn = MethodHandleImpl.makePairwiseConvert(fn, mt, /* 
+                        fn = MethodHandleImpl.makePairwiseConvert(fn, mt, /*  @Override public boolean isVarargsCollector(){return true; }}
+                        fn = MethodHandleImpl.makePairwiseConvert(fn, mt, /* 
+                        fn = MethodHandleImpl.makePairwiseConvert(fn, mt, /*  @Override protected MethodHandle getTarget(){return target; }}
+                        fn = MethodHandleImpl.makePairwiseConvert(fn, mt, /* 
+                        fn = MethodHandleImpl.makePairwiseConvert(fn, mt, /*  @Override public MethodHandle asFixedArity(){return target; }}
+                        fn = MethodHandleImpl.makePairwiseConvert(fn, mt, /* 
+                        fn = MethodHandleImpl.makePairwiseConvert(fn, mt, /*  @Override MethodHandle setVarargs(MemberName member){if(memberisVarargs())return this; return asFixedArity(); }
+                        fn = MethodHandleImpl.makePairwiseConvert(fn, mt, /* }。
+                        fn = MethodHandleImpl.makePairwiseConvert(fn, mt, /* 
+                        fn = MethodHandleImpl.makePairwiseConvert(fn, mt, /* @Override public MethodHandle asTypeUncached(MethodType newType){MethodType type = thistype(); int collectArg = typeparameterCount() -  1; int newArity = newTypeparameterCount(); if(newArity == collectArg + 1 && typeparameterType(collectArg)isAssignableFrom(newTypeparameterType(collectArg))){//如果arity和trailing参数是兼容的,做正常的事情return asTypeCache = asFixedArity }
+                        fn = MethodHandleImpl.makePairwiseConvert(fn, mt, /*  //检查缓存MethodHandle acc = asCollectorCache; if(acc！= null && acctype()parameterCount()== newArity)ret
+                        fn = MethodHandleImpl.makePairwiseConvert(fn, mt, /* urn asTypeCache = accasType(newType); //构建和缓存收集器int arrayLength = newArity  -  collectArg; MethodHand
+                        fn = MethodHandleImpl.makePairwiseConvert(fn, mt, /* le收集器; try {collector = asFixedArity()asCollector(arrayType,arrayLength); assert(collectortype()parameterCount()== newArity)："newArity ="+ newArity +"but collector ="+ collector; }
+                        fn = MethodHandleImpl.makePairwiseConvert(fn, mt, /*  catch(IllegalArgumentException ex){throw new WrongMethodTypeException("can not build collector",ex); }
+                        fn = MethodHandleImpl.makePairwiseConvert(fn, mt, /*  asCollectorCache = collector; return asTypeCache = collectorasType(newType); }}。
+                        fn = MethodHandleImpl.makePairwiseConvert(fn, mt, /* 
+                        fn = MethodHandleImpl.makePairwiseConvert(fn, mt, /* @Override boolean viewAsTypeChecks(MethodType newType,boolean strict){superviewAsTypeChecks(newType,true); if(strict)return true; //非严格检查的额外断言：assert(type)lastParameterType()getComponentType()isAssignableFrom(newTypelastParameterType()getComponentType()))：ArraysasList(this,newType); return true; }
+                        fn = MethodHandleImpl.makePairwiseConvert(fn, mt, /* }。
+                        fn = MethodHandleImpl.makePairwiseConvert(fn, mt, /* 
+                        fn = MethodHandleImpl.makePairwiseConvert(fn, mt, /* 
     /** Factory method:  Spread selected argument. */
     static MethodHandle makeSpreadArguments(MethodHandle target,
                                             Class<?> spreadArgType, int spreadArgPos, int spreadArgCount) {
@@ -587,6 +694,9 @@ import static java.lang.invoke.MethodHandles.Lookup.IMPL_LOOKUP;
     /**
      * Pre-initialized NamedFunctions for bootstrapping purposes.
      * Factored in an inner class to delay initialization until first usage.
+     * <p>
+     *  用于引导目的的预初始化NamedFunctions在内部类中被考虑到延迟初始化直到第一次使用
+     * 
      */
     static class Lazy {
         private static final Class<?> MHI = MethodHandleImpl.class;
@@ -735,6 +845,9 @@ import static java.lang.invoke.MethodHandles.Lookup.IMPL_LOOKUP;
     /**
      * Block inlining during JIT-compilation of a target method handle if it hasn't been invoked enough times.
      * Corresponding LambdaForm has @DontInline when compiled into bytecode.
+     * <p>
+     *  在目标方法句柄的JIT编译期间阻塞内联(如果它没有被调用足够多次)对应的LambdaForm在编译成字节码时具有@DontInline
+     * 
      */
     static
     MethodHandle makeBlockInlningWrapper(MethodHandle target) {
@@ -768,6 +881,10 @@ import static java.lang.invoke.MethodHandles.Lookup.IMPL_LOOKUP;
      * It is in counting state for the first n invocations and then transitions to non-counting state.
      * Behavior in counting and non-counting states is determined by lambda forms produced by
      * countingFormProducer & nonCountingFormProducer respectively.
+     * <p>
+     * 计数方法句柄它有2个状态：计数和非计数它在前n个调用的计数状态,然后转换到非计数状态计数和非计数状态的行为分别由countingFormProducer&nonCountingFormProducer产
+     * 生的lambda形式确定。
+     * 
      */
     static class CountingWrapper extends DelegatingMethodHandle {
         private final MethodHandle target;
@@ -910,6 +1027,15 @@ import static java.lang.invoke.MethodHandles.Lookup.IMPL_LOOKUP;
      *
      * Having t8 and t10 passed outside and not hardcoded into a lambda form allows to share lambda forms
      * among catchException combinators with the same basic type.
+     * <p>
+     * catchException组合器的LambaForm形状如下：<blockquote> <pre> {@ code guardWithCatch = Lambda(a0：L,a1：L,a2：L)=> {t3：L = BoundMethodHandle $ Species_LLLLLargL0(a0：L) ; t4：L = BoundMethodHandle $ Species_LLLLLargL1(a0：L); t5：L = BoundMethodHandle $ Species_LLLLLargL2(a0：L); t6：L = BoundMethodHandle $ Species_LLLLLargL3(a0：L); t7：L = BoundMethodHandle $ Species_LLLLLargL4(a0：L); t8：L = MethodHandleinvokeBasic(t6：L,a1：L,a2：L); t9：L = MethodHandleImplguardWithCatch(t3：L,t4：L,t5：L,t8：L); t10：I = MethodHandleinvokeBasic(t7：L,t9：L); t10：I}
+     * } </pre> </blockquote>。
+     * 
+     * argL0和argL2是目标和catcher方法句柄argL1是异常类argL3和argL4是辅助方法句柄：argL3盒参数并将它们包装到Object [](ValueConversionsarray(
+     * ))和argL4 unboxes结果如果必要(ValueConversionsunbox())。
+     * 
+     *  将t8和t10传递到外部并且不硬编码为lambda形式允许在具有相同基本类型的catchException组合器之间共享lambda形式
+     * 
      */
     private static LambdaForm makeGuardWithCatchForm(MethodType basicType) {
         MethodType lambdaType = basicType.invokerType();
@@ -1007,6 +1133,10 @@ import static java.lang.invoke.MethodHandles.Lookup.IMPL_LOOKUP;
     /**
      * Intrinsified during LambdaForm compilation
      * (see {@link InvokerBytecodeGenerator#emitGuardWithCatch emitGuardWithCatch}).
+     * <p>
+     *  在LambdaForm编译期间Intrinsified(参见{@link InvokerBytecodeGenerator#emitGuardWithCatch emitGuardWithCatch}
+     * )。
+     * 
      */
     @LambdaForm.Hidden
     static Object guardWithCatch(MethodHandle target, Class<? extends Throwable> exType, MethodHandle catcher,
@@ -1074,6 +1204,10 @@ import static java.lang.invoke.MethodHandles.Lookup.IMPL_LOOKUP;
      * This is an expensive no-op unless the method which is called
      * is sensitive to its caller.  A small number of system methods
      * are in this category, including Class.forName and Method.invoke.
+     * <p>
+     * 为方法句柄创建一个别名,当被调用时,它似乎是从相同的类加载器和保护域中调用hostClass这是一个昂贵的无操作,除非被调用的方法对其调用者敏感少量的系统方法在此类别中,包括ClassforName和M
+     * ethodinvoke。
+     * 
      */
     static
     MethodHandle bindCaller(MethodHandle mh, Class<?> hostClass) {
@@ -1285,6 +1419,8 @@ import static java.lang.invoke.MethodHandles.Lookup.IMPL_LOOKUP;
     }
 
     /** Mark arbitrary method handle as intrinsic.
+    /* <p>
+    /* 
      * InvokerBytecodeGenerator uses this info to produce more efficient bytecode shape. */
     private static final class IntrinsicMethodHandle extends DelegatingMethodHandle {
         private final MethodHandle target;
@@ -1403,6 +1539,10 @@ import static java.lang.invoke.MethodHandles.Lookup.IMPL_LOOKUP;
         fillWithArguments(a, 0, args);
         return a;
     }
+    private static Object[] fillNewArray(Integer len, Object[] /* <p>
+    private static Object[] fillNewArray(Integer len, Object[] /*  Object [] a = new Object [len]; fillWithArguments(a,0,args); return a; }}
+    private static Object[] fillNewArray(Integer len, Object[] /* 
+    private static Object[] fillNewArray(Integer len, Object[] /* 
     private static Object[] fillNewTypedArray(Object[] example, Integer len, Object[] /*not ...*/ args) {
         Object[] a = Arrays.copyOf(example, len);
         assert(a.getClass() != Object[].class);
@@ -1464,6 +1604,26 @@ import static java.lang.invoke.MethodHandles.Lookup.IMPL_LOOKUP;
 
     /** Return a method handle that takes the indicated number of Object
      *  arguments and returns an Object array of them, as if for varargs.
+     * <p>
+     * Object [] a = ArrayscopyOf(example,len); assert(agetClass()！= Object [] class); fillWithArguments(a,0
+     * ,args); return a; } private static void fillWithArguments(Object [] a,int pos,Object args){Systemarraycopy(args,0,a,pos,args长度); }
+     *  //使用Integer pos而不是int pos避免引导问题private static Object [] fillArray(Integer pos,Object [] a,Object a0)
+     * {fillWithArguments(a,pos,a0); return a; } private static Object [] fillArray(Integer pos,Object [] a,
+     * Object a0,Object a1){fillWithArguments(a,pos,a0,a1); return a; } private static Object [] fillArray(I
+     * nteger pos,Object [] a,Object a0,Object a1,Object a2){fillWithArguments(a,pos,a0,a1,a2); return a; } 
+     * private static Object [] fillArray(Integer pos,Object [] a,Object a0,Object a1,Object a2,Object a3){fillWithArguments(a,pos,a0,a1,a2,a3); return a; }
+     *  private static Object [] fillArray(Integer pos,Object [] a,Object a0,Object a1,Object a2,Object a3,O
+     * bject a4){fillWithArguments(a,pos,a0,a1,a2,a3,a4); return a; } private static Object [] fillArray(Int
+     * eger pos,Object [] a,Object a0,Object a1,Object a2,Object a3,Object a4,Object a5){fillWithArguments(a,pos,a0,a1,a2,a3,a4 ,a5); return a; }
+     *  private static Object [] fillArray(Integer pos,Object [] a,Object a0,Object a1,Object a2,Object a3,O
+     * bject a4,Object a5,Object a6){fillWithArguments(a,pos,a0,a1,a2, a3,a4,a5,a6); return a; } private sta
+     * tic Object [] fillArray(Integer pos,Object [] a,Object a0,Object a1,Object a2,Object a3,Object a4,Obj
+     * ect a5,Object a6,Object a7){fillWithArguments(a,pos,a0,a1 ,a2,a3,a4,a5,a6,a7); return a; } private st
+     * atic Object [] fillArray(Integer pos,Object [] a,Object a0,Object a1,Object a2,Object a3,Object a4,Ob
+     * ject a5,Object a6,Object a7,Object a8){fillWithArguments(a,pos,a0,a1,a2,a3,a4,a5,a6,a7,a8); return a; }
+     *  private static Object [] fillArray(Integer pos,Object [] a,Object a0,Object a1,Object a2,Object a3,O
+     * bject a4,Object a5,Object a6,Object a7,Object a8,Object a9){fillWithArguments ,pos,a0,a1,a2,a3,a4,a5,a6,a7,a8,a9) return a; }
+     * }Object [] a = ArrayscopyOf(example,len); assert(agetClass()！= Object [] class); fillWithArguments(a,
      */
     static MethodHandle varargsArray(int nargs) {
         MethodHandle mh = Lazy.ARRAYS[nargs];
@@ -1515,6 +1675,16 @@ import static java.lang.invoke.MethodHandles.Lookup.IMPL_LOOKUP;
     /** fill_array_to_right(N).invoke(a, argL..arg[N-1])
      *  fills a[L]..a[N-1] with corresponding arguments,
      *  and then returns a.  The value L is a global constant (LEFT_ARGS).
+     * <p>
+     * 0,args); return a; } private static void fillWithArguments(Object [] a,int pos,Object args){Systemarraycopy(args,0,a,pos,args。
+     * 
+     * private static final int FILL_ARRAYS_COUNT = 11; //当前的fillArray方法数
+     * 
+     *  private static MethodHandle [] makeFillArrays(){ArrayList <MethodHandle> mhs = new ArrayList <>(); mhsadd(null); //没有空填充;至少需要一个a0(;;){MethodHandle mh = findCollector("fillArray",mhssize(),Object [] class,Integerclass,Object [] class); if(mh == null)break; mhsadd(mh); }
+     *  assert(mhssize()== FILL_ARRAYS_COUNT); return mhstoArray(new MethodHandle [0]); }}。
+     * 
+     *  private static Object copyAsPrimitiveArray(Wrapper w,Object boxes){Object a = wmakeArray(boxeslength); wcopyArrayUnboxing(boxes,0,a,0,boxeslength); return a; }
+     * }。
      */
     private static MethodHandle fillToRight(int nargs) {
         MethodHandle filler = FILL_ARRAY_TO_RIGHT[nargs];
@@ -1569,6 +1739,10 @@ import static java.lang.invoke.MethodHandles.Lookup.IMPL_LOOKUP;
     /** Return a method handle that takes the indicated number of
      *  typed arguments and returns an array of them.
      *  The type argument is the array type.
+     * <p>
+     * 
+     * / **返回一个方法句柄,它接受指定数量的Object参数,并返回一个Object数组,就像varargs一样
+     * 
      */
     static MethodHandle varargsArray(Class<?> arrayType, int nargs) {
         Class<?> elemType = arrayType.getComponentType();

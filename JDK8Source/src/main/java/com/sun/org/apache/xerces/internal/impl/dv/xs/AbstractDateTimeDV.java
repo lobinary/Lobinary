@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2007, 2015, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -16,6 +17,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * <p>
+ *  版权所有1999-2005 Apache软件基金会
+ * 
+ *  根据Apache许可证第20版("许可证")授权;您不得使用此文件,除非符合许可证您可以在获取许可证的副本
+ * 
+ *  http：// wwwapacheorg / licenses / LICENSE-20
+ * 
+ *  除非适用法律要求或书面同意,否则根据许可证分发的软件将按"原样"基础分发,无任何明示或暗示的保证或条件。请参阅许可证管理权限和限制许可证
+ * 
  */
 
 package com.sun.org.apache.xerces.internal.impl.dv.xs;
@@ -43,6 +53,14 @@ import com.sun.org.apache.xerces.internal.xs.datatypes.XSDateTime;
  *
  * @xerces.internal
  *
+ * <p>
+ * 这是所有日期/时间数据类型验证器的基类它实现解析,验证和比较数据类型的公共代码扩展此类的类,必须实现parse()方法
+ * 
+ *  REVISIT：有很多实例变量,当我们支持语法缓存时会导致问题语法可能同时被两个解析器实例使用,然后相同的简单类型decl对象可以用于同时验证两个字符串 - SG
+ * 
+ *  @xercesinternal
+ * 
+ * 
  * @author Elena Litani
  * @author Len Berman
  * @author Gopal Sharma, SUN Microsystems Inc.
@@ -98,6 +116,10 @@ public abstract class AbstractDateTimeDV extends TypeValidator {
      * Compare algorithm described in dateDime (3.2.7). Duration datatype
      * overwrites this method
      *
+     * <p>
+     *  dateDime(327)中描述的比较算法Duration数据类型将覆盖此方法
+     * 
+     * 
      * @param date1 normalized date representation of the first value
      * @param date2 normalized date representation of the second value
      * @param strict
@@ -184,6 +206,10 @@ public abstract class AbstractDateTimeDV extends TypeValidator {
      * Given normalized values, determines order-relation between give date/time
      * objects.
      *
+     * <p>
+     *  给定归一化值,确定给定日期/时间对象之间的顺序关系
+     * 
+     * 
      * @param date1 date/time object
      * @param date2 date/time object
      * @return 0 if date1 and date2 are equal, a value less than 0 if date1 is
@@ -242,6 +268,10 @@ public abstract class AbstractDateTimeDV extends TypeValidator {
     /**
      * Parses time hh:mm:ss.sss and time zone if any
      *
+     * <p>
+     *  解析时间hh：mm：sssss和时区(如果有)
+     * 
+     * 
      * @param start
      * @param end
      * @param data
@@ -285,6 +315,10 @@ public abstract class AbstractDateTimeDV extends TypeValidator {
     /**
      * Parses date CCYY-MM-DD
      *
+     * <p>
+     *  解析日期CCYY-MM-DD
+     * 
+     * 
      * @param buffer
      * @param start start position
      * @param end end position
@@ -306,6 +340,10 @@ public abstract class AbstractDateTimeDV extends TypeValidator {
     /**
      * Parses date CCYY-MM
      *
+     * <p>
+     *  解析日期CCYY-MM
+     * 
+     * 
      * @param buffer
      * @param start start position
      * @param end end position
@@ -344,6 +382,10 @@ public abstract class AbstractDateTimeDV extends TypeValidator {
      * Shared code from Date and YearMonth datatypes. Finds if time zone sign is
      * present
      *
+     * <p>
+     * Date和YearMonth数据类型的共享代码查找是否存在时区符号
+     * 
+     * 
      * @param end
      * @param date
      * @exception RuntimeException
@@ -364,6 +406,10 @@ public abstract class AbstractDateTimeDV extends TypeValidator {
     /**
      * Parses time zone: 'Z' or {+,-} followed by hh:mm
      *
+     * <p>
+     *  Parses时区：'Z'或{+, - }后跟hh：mm
+     * 
+     * 
      * @param data
      * @param sign
      * @exception RuntimeException
@@ -407,6 +453,10 @@ public abstract class AbstractDateTimeDV extends TypeValidator {
     /**
      * Computes index of given char within StringBuffer
      *
+     * <p>
+     *  计算StringBuffer中给定char的索引
+     * 
+     * 
      * @param start
      * @param end
      * @param ch character to look for in StringBuffer
@@ -425,6 +475,10 @@ public abstract class AbstractDateTimeDV extends TypeValidator {
      * Validates given date/time object accoring to W3C PR Schema [D.1 ISO 8601
      * Conventions]
      *
+     * <p>
+     *  根据W3C PR验证给定的日期/时间对象模式[D1 ISO 8601约定]
+     * 
+     * 
      * @param data
      */
     protected void validateDateTime(DateTimeData data) {
@@ -434,6 +488,9 @@ public abstract class AbstractDateTimeDV extends TypeValidator {
 
         /**
          * XML Schema 1.1 - RQ-123: Allow year 0000 in date related types.
+         * <p>
+         *  XML模式11  -  RQ-123：允许年份相关类型的年份0000
+         * 
          */
         if (!Constants.SCHEMA_1_1_SUPPORT && data.year == 0) {
             throw new RuntimeException("The year \"0000\" is an illegal year value");
@@ -497,6 +554,10 @@ public abstract class AbstractDateTimeDV extends TypeValidator {
     /**
      * Return index of UTC char: 'Z', '+', '-'
      *
+     * <p>
+     *  UTC char的返回索引：'Z','+',' - '
+     * 
+     * 
      * @param start
      * @param end
      * @return index of the UTC character that was found
@@ -516,6 +577,9 @@ public abstract class AbstractDateTimeDV extends TypeValidator {
     /**
      * Returns
      * <code>true</code> if the character at start is 'Z', '+' or '-'.
+     * <p>
+     *  如果开始处的字符为"Z","+"或" - ",则返回<code> true </code>
+     * 
      */
     protected final boolean isNextCharUTCSign(String buffer, int start, int end) {
         if (start < end) {
@@ -528,6 +592,10 @@ public abstract class AbstractDateTimeDV extends TypeValidator {
     /**
      * Given start and end position, parses string value
      *
+     * <p>
+     *  给定开始和结束位置,解析字符串值
+     * 
+     * 
      * @param buffer string to parse
      * @param start start position
      * @param end end position
@@ -609,6 +677,10 @@ public abstract class AbstractDateTimeDV extends TypeValidator {
      * If timezone present - normalize dateTime [E Adding durations to
      * dateTimes]
      *
+     * <p>
+     *  如果timezone存在 - 规范化dateTime [E将durations添加到dateTimes]
+     * 
+     * 
      * @param date CCYY-MM-DDThh:mm:ss+03
      */
     protected void normalize(DateTimeData date) {
@@ -664,6 +736,8 @@ public abstract class AbstractDateTimeDV extends TypeValidator {
     }
 
     /**
+    /* <p>
+    /* 
      * @param date
      */
     protected void saveUnnormalized(DateTimeData date) {
@@ -678,6 +752,10 @@ public abstract class AbstractDateTimeDV extends TypeValidator {
     /**
      * Resets object representation of date/time
      *
+     * <p>
+     *  重置日期/时间的对象表示
+     * 
+     * 
      * @param data date/time object
      */
     protected void resetDateObj(DateTimeData data) {
@@ -695,6 +773,10 @@ public abstract class AbstractDateTimeDV extends TypeValidator {
     /**
      * Given {year,month} computes maximum number of days for given month
      *
+     * <p>
+     *  给定{year,month}计算给定月份的最大天数
+     * 
+     * 
      * @param year
      * @param month
      * @return integer containg the number of days in a given month
@@ -928,6 +1010,9 @@ public abstract class AbstractDateTimeDV extends TypeValidator {
 
     /**
      * Represents date time data
+     * <p>
+     *  表示日期时间数据
+     * 
      */
     static final class DateTimeData implements XSDateTime {
 
@@ -999,6 +1084,8 @@ public abstract class AbstractDateTimeDV extends TypeValidator {
             return canonical;
         }
         /* (non-Javadoc)
+        /* <p>
+        /* 
          * @see org.apache.xerces.xs.datatypes.XSDateTime#getYear()
          */
 
@@ -1010,6 +1097,8 @@ public abstract class AbstractDateTimeDV extends TypeValidator {
             return normalized ? year : unNormYear;
         }
         /* (non-Javadoc)
+        /* <p>
+        /* 
          * @see org.apache.xerces.xs.datatypes.XSDateTime#getMonth()
          */
 
@@ -1021,6 +1110,8 @@ public abstract class AbstractDateTimeDV extends TypeValidator {
             return normalized ? month : unNormMonth;
         }
         /* (non-Javadoc)
+        /* <p>
+        /* 
          * @see org.apache.xerces.xs.datatypes.XSDateTime#getDay()
          */
 
@@ -1032,6 +1123,8 @@ public abstract class AbstractDateTimeDV extends TypeValidator {
             return normalized ? day : unNormDay;
         }
         /* (non-Javadoc)
+        /* <p>
+        /* 
          * @see org.apache.xerces.xs.datatypes.XSDateTime#getHour()
          */
 
@@ -1043,6 +1136,8 @@ public abstract class AbstractDateTimeDV extends TypeValidator {
             return normalized ? hour : unNormHour;
         }
         /* (non-Javadoc)
+        /* <p>
+        /* 
          * @see org.apache.xerces.xs.datatypes.XSDateTime#getMinutes()
          */
 
@@ -1054,6 +1149,8 @@ public abstract class AbstractDateTimeDV extends TypeValidator {
             return normalized ? minute : unNormMinute;
         }
         /* (non-Javadoc)
+        /* <p>
+        /* 
          * @see org.apache.xerces.xs.datatypes.XSDateTime#getSeconds()
          */
 
@@ -1065,6 +1162,8 @@ public abstract class AbstractDateTimeDV extends TypeValidator {
             return normalized ? second : unNormSecond;
         }
         /* (non-Javadoc)
+        /* <p>
+        /* 
          * @see org.apache.xerces.xs.datatypes.XSDateTime#hasTimeZone()
          */
 
@@ -1073,6 +1172,8 @@ public abstract class AbstractDateTimeDV extends TypeValidator {
             return utc != 0;
         }
         /* (non-Javadoc)
+        /* <p>
+        /* 
          * @see org.apache.xerces.xs.datatypes.XSDateTime#getTimeZoneHours()
          */
 
@@ -1081,6 +1182,8 @@ public abstract class AbstractDateTimeDV extends TypeValidator {
             return timezoneHr;
         }
         /* (non-Javadoc)
+        /* <p>
+        /* 
          * @see org.apache.xerces.xs.datatypes.XSDateTime#getTimeZoneMinutes()
          */
 
@@ -1089,6 +1192,8 @@ public abstract class AbstractDateTimeDV extends TypeValidator {
             return timezoneMin;
         }
         /* (non-Javadoc)
+        /* <p>
+        /* 
          * @see org.apache.xerces.xs.datatypes.XSDateTime#getLexicalValue()
          */
 
@@ -1097,6 +1202,8 @@ public abstract class AbstractDateTimeDV extends TypeValidator {
             return originalValue;
         }
         /* (non-Javadoc)
+        /* <p>
+        /* 
          * @see org.apache.xerces.xs.datatypes.XSDateTime#normalize()
          */
 
@@ -1110,6 +1217,8 @@ public abstract class AbstractDateTimeDV extends TypeValidator {
             return this;
         }
         /* (non-Javadoc)
+        /* <p>
+        /* 
          * @see org.apache.xerces.xs.datatypes.XSDateTime#isNormalized()
          */
 
@@ -1136,6 +1245,8 @@ public abstract class AbstractDateTimeDV extends TypeValidator {
         }
 
         /* (non-Javadoc)
+        /* <p>
+        /* 
          * @see org.apache.xerces.xs.datatypes.XSDateTime#getXMLGregorianCalendar()
          */
         @Override
@@ -1143,6 +1254,8 @@ public abstract class AbstractDateTimeDV extends TypeValidator {
             return type.getXMLGregorianCalendar(this);
         }
         /* (non-Javadoc)
+        /* <p>
+        /* 
          * @see org.apache.xerces.xs.datatypes.XSDateTime#getDuration()
          */
 

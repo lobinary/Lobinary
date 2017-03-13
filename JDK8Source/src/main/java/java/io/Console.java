@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 2005, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -85,6 +86,32 @@ import sun.nio.cs.StreamEncoder;
  * }
  * }</pre></blockquote>
  *
+ * <p>
+ *  访问与当前Java虚拟机相关联的基于字符的控制台设备(如果有)的方法
+ * 
+ * <p>虚拟机是否具有控制台取决于底层平台以及调用虚拟机的方式如果虚拟机从交互式命令行启动,而不重定向标准输入和输出流,则其控制台将存在,并且通常将被连接到从其启动虚拟机的键盘和显示器。
+ * 如果虚拟机例如由后台作业调度器自动启动,则它通常将不具有控制台。
+ * <p>
+ * 如果这个虚拟机有一个控制台,那么它是由这个类的一个唯一的实例表示,可以通过调用{@link javalangSystem#console()}方法获得如果没有控制台设备可用,那么该方法的调用将返回< tt>
+ *  null </tt>。
+ * <p>
+ *  读取和写入操作被同步以保证关键操作的原子完成;因此调用方法{@link #readLine()},{@link #readPassword()},{@link #format format()},{@link #printf printf()}
+ * 以及读取,格式化和写入操作对{@link #reader()}和{@link #writer()}返回的对象可能在多线程场景中阻塞。
+ * <p>
+ * 对{@link #reader()}和{@link #writer()}返回的对象调用<tt> close()</tt>不会关闭这些对象的基础流
+ * <p>
+ *  当到达控制台输入流的结尾时,控制台读取方法返回<tt> null </tt>,例如在Unix上输入control-D或在Windows上输入control-Z。
+ * 如果以后有其他字符,后续读取操作将会成功在控制台的输入设备上输入。
+ * <p>
+ *  除非另有说明,否则将<tt> null </tt>参数传递给此类中的任何方法将导致抛出{@link NullPointerException}
+ * <p>
+ * <b>安全性备注：</b>如果应用程式需要读取密码或其他安全资料,请使用{@link #readPassword()}或{@link #readPassword(String,Object)},并手动将
+ * 在处理后返回字符数组,以最小化内存中敏感数据的生存期。
+ * 
+ *  <blockquote> <pre> {@ code Console cons; char [] passwd; if((cons = Systemconsole())！= null &&(passwd = consreadPassword("[％s]","Password："))！= null){javautilArraysfill(passwd,''); }
+ * } </pre> </blockquote>。
+ * 
+ * 
  * @author  Xueming Shen
  * @since   1.6
  */
@@ -95,6 +122,10 @@ public final class Console implements Flushable
     * Retrieves the unique {@link java.io.PrintWriter PrintWriter} object
     * associated with this console.
     *
+    * <p>
+    *  检索与此控制台关联的唯一{@link javaioPrintWriter PrintWriter}对象
+    * 
+    * 
     * @return  The printwriter associated with this console
     */
     public PrintWriter writer() {
@@ -130,6 +161,21 @@ public final class Console implements Flushable
     * a carriage return (<tt>'\r'</tt>), a carriage return followed immediately
     * by a linefeed, or an end of stream.
     *
+    * <p>
+    *  检索与此控制台关联的唯一{@link javaioReader Reader}对象
+    * <p>
+    * 此方法旨在由复杂的应用程序使用,例如使用{@link javautilScanner}对象,该对象利用由<tt> Scanner </tt>：<blockquote> <pre> Console con
+    *  =>提供的丰富的解析/ Systemconsole(); if(con！= null){Scanner sc = new Scanner(conreader()); } </pre> </blockquote>
+    * 。
+    * <p>
+    *  对于仅需要面向行读取的简单应用程序,请使用<tt> {@ link #readLine} </tt>
+    * <p>
+    * 批量读取操作{@link javaioReader#read(char [])read(char [])},{@link javaioReader#read(char [],int,int)read(char [],int,int)}
+    * 所返回对象的{@link javaioReader#read(javanioCharBuffer)read(javanioCharBuffer)}将不会读取超出每个调用的行限制的字符,即使目标缓冲区有更
+    * 多字符的空间{@code Reader}的{ @code read}方法可能会阻止在控制台的输入设备上未输入或到达行限制线限制被认为是换行符(<tt>'\n'</tt>)中的任何一个,回车符(<tt>'
+    * \\ r'</tt>),回车符后紧跟换行符,或者结束符。
+    * 
+    * 
     * @return  The reader associated with this console
     */
     public Reader reader() {
@@ -140,6 +186,10 @@ public final class Console implements Flushable
     * Writes a formatted string to this console's output stream using
     * the specified format string and arguments.
     *
+    * <p>
+    * 使用指定的格式字符串和参数将格式化的字符串写入此控制台的输出流
+    * 
+    * 
     * @param  fmt
     *         A format string as described in <a
     *         href="../util/Formatter.html#syntax">Format string syntax</a>
@@ -179,6 +229,12 @@ public final class Console implements Flushable
     * args)</tt> behaves in exactly the same way as the invocation of
     * <pre>con.format(format, args)</pre>.
     *
+    * <p>
+    *  一种方便的方法,使用指定的格式字符串和参数将格式化的字符串写入此控制台的输出流
+    * 
+    *  <p>调用此方法的形式<tt> conprintf(format,args)</tt>的行为方式与调用<pre> conformat(format,args)</pre>
+    * 
+    * 
     * @param  format
     *         A format string as described in <a
     *         href="../util/Formatter.html#syntax">Format string syntax</a>.
@@ -213,6 +269,10 @@ public final class Console implements Flushable
     * Provides a formatted prompt, then reads a single line of text from the
     * console.
     *
+    * <p>
+    *  提供格式化提示,然后从控制台读取单行文本
+    * 
+    * 
     * @param  fmt
     *         A format string as described in <a
     *         href="../util/Formatter.html#syntax">Format string syntax</a>.
@@ -261,6 +321,10 @@ public final class Console implements Flushable
    /**
     * Reads a single line of text from the console.
     *
+    * <p>
+    *  从控制台读取单行文本
+    * 
+    * 
     * @throws IOError
     *         If an I/O error occurs.
     *
@@ -276,6 +340,10 @@ public final class Console implements Flushable
     * Provides a formatted prompt, then reads a password or passphrase from
     * the console with echoing disabled.
     *
+    * <p>
+    *  提供格式化提示,然后从控制台读取密码或密码,并禁用回显
+    * 
+    * 
     * @param  fmt
     *         A format string as described in <a
     *         href="../util/Formatter.html#syntax">Format string syntax</a>
@@ -341,6 +409,10 @@ public final class Console implements Flushable
    /**
     * Reads a password or passphrase from the console with echoing disabled
     *
+    * <p>
+    *  从控制台读取禁用回显的密码或密码
+    * 
+    * 
     * @throws IOError
     *         If an I/O error occurs.
     *
@@ -355,6 +427,9 @@ public final class Console implements Flushable
     /**
      * Flushes the console and forces any buffered output to be written
      * immediately .
+     * <p>
+     *  刷新控制台并强制立即写入任何缓冲输出
+     * 
      */
     public void flush() {
         pw.flush();
@@ -445,6 +520,9 @@ public final class Console implements Flushable
                                  * we're in canonical mode so each "fill" should
                                  * come back with an eol. if there no lf or nl at
                                  * the end of returned bytes we reached an eof.
+                                 * <p>
+                                 * 我们处于规范模式,所以每个"填充"应该回来一个eol如果没有lf或nl在返回的字节结束我们到达一个eof
+                                 * 
                                  */
                                 eof = true;
                             }
@@ -458,6 +536,9 @@ public final class Console implements Flushable
                         /*
                          * if invoked by our readline, skip the leftover, otherwise
                          * return the LF.
+                         * <p>
+                         *  如果由我们的readline调用,跳过剩余,否则返回LF
+                         * 
                          */
                         nextChar++;
                     }
@@ -472,6 +553,9 @@ public final class Console implements Flushable
                                 /* no space left even the next is LF, so return
                                  * whatever we have if the invoker is not our
                                  * readLine()
+                                 * <p>
+                                 *  如果调用者不是我们的readLine()
+                                 * 
                                  */
                                 if (cbuf == rcb) {
                                     cbuf = grow();
@@ -488,6 +572,9 @@ public final class Console implements Flushable
                                  * don't miss a LF, if there is one, it's possible
                                  * that it got cut off during last round reading
                                  * simply because the read in buffer was full.
+                                 * <p>
+                                 *  我们有一个CR,我们到达缓冲区中的读取结束,填充以确保我们不会错过LF,如果有一个,它可能是在上一轮读取期间被切断,因为缓冲区中的读取是充分
+                                 * 
                                  */
                                 nChars = in.read(cb, 0, cb.length);
                                 nextChar = 0;
@@ -520,6 +607,8 @@ public final class Console implements Flushable
             // it be necessary.
             sun.misc.SharedSecrets.getJavaLangAccess()
                 .registerShutdownHook(0 /* shutdown hook invocation order */,
+                .registerShutdownHook(0 /* <p>
+                .registerShutdownHook(0 /* 
                     false /* only register if shutdown is not in progress */,
                     new Runnable() {
                         public void run() {

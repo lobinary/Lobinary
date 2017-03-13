@@ -1,3 +1,4 @@
+/***** Lobxxx Translate Finished ******/
 /*
  * Copyright (c) 1997, 2013, Oracle and/or its affiliates. All rights reserved.
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
@@ -135,6 +136,61 @@ import sun.security.util.Debug;
  * transfer and share confidential data among parties who may not
  * otherwise have access to the data.
  *
+ * <p>
+ *  此类表示通过套接字访问网络SocketPermission由主机规范和一组"操作"组成,用于指定连接到该主机的方法主机被指定为
+ * <pre>
+ *  host =(hostname | IPv4address | iPv6reference)[：portrange] portrange = portnumber | -portnumber | po
+ * rtnumber- [portnumber]。
+ * </pre>
+ *  主机表示为DNS名称,数字IP地址或"localhost"(对于本地计算机)通配符"*"可能在DNS名称主机规范中包含一次。如果包含它,它必须在最左边的位置,如"* suncom"
+ * <p>
+ * IPv6参考的格式应遵循<a href=\"http://wwwietforg/rfc/rfc2732txt\"> <i> RFC 2732：URL中的字面IPv6地址格式</i> </a>中指定的格式
+ * ：。
+ * <pre>
+ *  ipv6reference ="["IPv6address"]"
+ * /pre>
+ *  例如,您可以按如下所示构造SocketPermission实例：
+ * <pre>
+ *  String hostAddress = inetaddressgetHostAddress(); if(inetaddress instanceof Inet6Address){sp = new SocketPermission("["+ hostAddress +"]："+ port,action); }
+ *  else {sp = new SocketPermission(hostAddress +"："+ port,action); }}。
+ * </pre>
+ *  要么
+ * <pre>
+ *  String host = urlgetHost(); sp = new SocketPermission(host +"："+ port,action);
+ * </pre>
+ * <p>
+ *  IPv6文字地址的<A HREF=\"Inet6Addresshtml#lform\">完全解压缩形式</A>也有效
+ * <p>
+ * 端口或端口是可选的。
+ * "N"形式的端口规范,其中N是端口号,表示所有编号为N i及以上的端口,而规定形式"-N"指示所有编号为<i> N和以下的端口特殊端口值{@code 0}指整个<i>临时</i>端口范围这是固定范围的端
+ * 口系统可以使用来分配动态端口。
+ * 端口或端口是可选的。实际范围可以是系统依赖的。
+ * <p>
+ *  连接到主机的可能方法是
+ * <pre>
+ *  接受连接侦听解析
+ * </pre>
+ *  "listen"操作只有在与"localhost"一起使用时才有意义,并且意味着绑定到指定端口的能力当存在任何其他操作时,暗示"解析"操作操作"解析"是指主机/ ip名称服务查找
+ * <P>
+ * 操作字符串在处理之前转换为小写<p>作为SocketPermissions的创建和含义的示例,请注意,如果以下权限：
+ * 
+ * <pre>
+ *  p1 = new SocketPermission("puffinengsuncom：7777","connect,accept");
+ * </pre>
+ * 
+ *  被授予某些代码,它允许该代码连接到{@code puffinengsuncom}上的端口7777,并接受该端口上的连接
+ * 
+ *  <p>同样,如果有以下权限：
+ * 
+ * <pre>
+ *  p2 = new SocketPermission("localhost：1024-","accept,connect,listen");
+ * </pre>
+ * 
+ *  被授予某些代码,它允许该代码接受连接,连接到或侦听本地主机上1024和65535之间的任何端口
+ * 
+ * <p>注意：授予代码权限以接受或连接到远程主机可能很危险,因为恶意代码可以更容易地在可能不能访问数据的各方之间传输和共享机密数据
+ * 
+ * 
  * @see java.security.Permissions
  * @see SocketPermission
  *
@@ -152,31 +208,49 @@ public final class SocketPermission extends Permission
 
     /**
      * Connect to host:port
+     * <p>
+     *  连接到主机：端口
+     * 
      */
     private final static int CONNECT    = 0x1;
 
     /**
      * Listen on host:port
+     * <p>
+     *  在主机：端口上监听
+     * 
      */
     private final static int LISTEN     = 0x2;
 
     /**
      * Accept a connection from host:port
+     * <p>
+     *  从host：port接受连接
+     * 
      */
     private final static int ACCEPT     = 0x4;
 
     /**
      * Resolve DNS queries
+     * <p>
+     *  解析DNS查询
+     * 
      */
     private final static int RESOLVE    = 0x8;
 
     /**
      * No actions
+     * <p>
+     *  无操作
+     * 
      */
     private final static int NONE               = 0x0;
 
     /**
      * All actions
+     * <p>
+     *  所有操作
+     * 
      */
     private final static int ALL        = CONNECT|LISTEN|ACCEPT|RESOLVE;
 
@@ -192,6 +266,10 @@ public final class SocketPermission extends Permission
     /**
      * the actions string.
      *
+     * <p>
+     *  操作字符串
+     * 
+     * 
      * @serial
      */
 
@@ -281,6 +359,26 @@ public final class SocketPermission extends Permission
      *    nr = new SocketPermission("204.160.241.0:1024-65535", "connect");
      * </pre>
      *
+     * <p>
+     *  使用指定的操作创建新的SocketPermission对象主机表示为DNS名称或数字IP地址(可选)可以提供端口或portrange(用冒号分隔DNS名称或IP地址)
+     * <p>
+     *  要指定本地机器,请使用"localhost"作为<i>主机</i>。另请注意：空的主机</i> String("")等效于"localhost"
+     * <p>
+     * <i> actions </i>参数包含为指定主机(和端口)授予的操作的逗号分隔列表。
+     * 可能的操作是"connect","listen","accept","resolve"","The <i>actions</i> parameter contains a comma-separated
+     *  list of the actions granted for the specified host (and port(s)) Possible actions are \"connect\", \
+     * "listen\", \"accept\", \"resolve\或者当指定其他三个中的任何三个时,那些"解析"的任何组合被自动添加。
+     * <i> actions </i>参数包含为指定主机(和端口)授予的操作的逗号分隔列表。
+     * <p>
+     *  SocketPermission实例化的示例如下：
+     * <pre>
+     *  nr = new SocketPermission("wwwcatalogcom","connect"); nr = new SocketPermission("wwwsuncom：80","conn
+     * ect"); nr = new SocketPermission("* suncom","connect"); nr = new SocketPermission("* edu","resolve");
+     *  nr = new SocketPermission("2041602410","connect"); nr = new SocketPermission("localhost：1024-65535",
+     * "listen"); nr = new SocketPermission("2041602410：1024-65535","connect");。
+     * </pre>
+     * 
+     * 
      * @param host the hostname or IPaddress of the computer, optionally
      * including a colon followed by a port or port range.
      * @param action the action string.
@@ -309,6 +407,9 @@ public final class SocketPermission extends Permission
             /* IPv6 literal address used in this context should follow
              * the format specified in RFC 2732;
              * if not, we try to solve the unambiguous case
+             * <p>
+             * RFC 2732中指定的格式;如果没有,我们试图解决明确的情况
+             * 
              */
             int ind;
             if (host.charAt(0) != '[') {
@@ -316,6 +417,9 @@ public final class SocketPermission extends Permission
                     /* More than one ":", meaning IPv6 address is not
                      * in RFC 2732 format;
                      * We will rectify user errors for all unambiguious cases
+                     * <p>
+                     *  在RFC 2732格式;我们将纠正所有不明确情况的用户错误
+                     * 
                      */
                     StringTokenizer st = new StringTokenizer(host, ":");
                     int tokens = st.countTokens();
@@ -377,6 +481,9 @@ public final class SocketPermission extends Permission
     /**
      * Returns true if the permission has specified zero
      * as its value (or lower bound) signifying the ephemeral range
+     * <p>
+     *  如果权限指定零为其值(或下限)表示临时范围,则返回true
+     * 
      */
     private boolean includesEphemerals() {
         return portrange[0] == 0;
@@ -386,6 +493,9 @@ public final class SocketPermission extends Permission
      * Initialize the SocketPermission object. We don't do any DNS lookups
      * as this point, instead we hold off until the implies method is
      * called.
+     * <p>
+     *  初始化SocketPermission对象我们这里不做任何DNS查找,而是直到调用了implicit方法为止
+     * 
      */
     private void init(String host, int mask) {
         // Set the integer mask that represents the actions
@@ -485,6 +595,10 @@ public final class SocketPermission extends Permission
     /**
      * Convert an action string to an integer actions mask.
      *
+     * <p>
+     *  将操作字符串转换为整数操作掩码
+     * 
+     * 
      * @param action the action string
      * @return the action mask
      */
@@ -641,6 +755,9 @@ public final class SocketPermission extends Permission
     /**
      * attempt to get the fully qualified domain name
      *
+     * <p>
+     *  尝试获取完全限定域名
+     * 
      */
     void getCanonName()
         throws UnknownHostException
@@ -764,6 +881,9 @@ public final class SocketPermission extends Permission
     /**
      * get IP addresses. Sets invalid to true if we can't get them.
      *
+     * <p>
+     *  获取IP地址如果我们无法获取IP地址,则将invalid设置为true
+     * 
      */
     void getIP()
         throws UnknownHostException
@@ -826,6 +946,25 @@ public final class SocketPermission extends Permission
      * </ul>
      *
      * If none of the above are true, {@code implies} returns false.
+     * <p>
+     *  检查此套接字权限对象是否"暗示"指定的权限
+     * <P>
+     *  更具体地说,这个方法首先确保所有以下都是真的(如果任何一个不返回false则返回false)：
+     * <ul>
+     * <li> <i> p </i>是SocketPermission的实例,<li> <i> p </i>的操作是此对象操作的一个子集,<li> <i> p </i >的端口范围包含在此端口范围中注意：当p
+     * 仅包含操作"resolve"时,将忽略端口范围,。
+     * </ul>
+     * 
+     *  然后{@code implies}按顺序检查下列各项,如果所述条件为真,则每个返回true：
+     * <ul>
+     * <li>如果此对象已使用单个IP地址初始化,并且<i> p </i>的IP地址之一等于此对象的IP地址<li>如果此对象是通配符域(例如* suncom )和<i> p </i>的规范名称(没有任何前面
+     * 的*的名称)以此对象的规范主机名结尾例如,* suncom表示* engsuncom <li>如果此对象未使用单个IP地址,并且此对象的IP地址之一等于<i> p </i>的IP地址之一<li>如果此规
+     * 范名称等于<i> p </i>的规范名称。
+     * </ul>
+     * 
+     *  如果上面没有一个是真的,{@code implies}返回false
+     * 
+     * 
      * @param p the permission to check against.
      *
      * @return true if the specified permission is implied by this object,
@@ -864,6 +1003,16 @@ public final class SocketPermission extends Permission
      *      to find a match based on the IP addresses in both objects.
      * <li> Attempt to match on the canonical hostnames of both objects.
      * </ul>
+     * <p>
+     *  检查传入的权限的操作是否是此对象操作的正确子集
+     * <P>
+     *  按以下顺序检查：
+     * <ul>
+     * <li>检查"p"是SocketPermission的实例<li>检查"p"的操作是当前对象操作的正确子集<li>检查"p"的端口范围是否包含在此端口中范围<li>如果此对象使用IP地址初始化,请检查"
+     * p"的IP地址之一是否等于此对象的IP地址<li>如果任一对象是通配符域(即"* suncom") ,尝试基于通配符进行匹配<li>如果此对象未使用IP地址初始化,请尝试根据两个对象中的IP地址查找匹配
+     * <li>尝试在两个对象的规范主机名上进行匹配。
+     * </ul>
+     * 
      * @param that the incoming permission request
      *
      * @return true if "permission" is a proper subset of the current object,
@@ -1002,6 +1151,10 @@ public final class SocketPermission extends Permission
     /**
      * Checks two SocketPermission objects for equality.
      * <P>
+     * <p>
+     *  检查两个SocketPermission对象是否相等
+     * <P>
+     * 
      * @param obj the object to test for equality with this object.
      *
      * @return true if <i>obj</i> is a SocketPermission, and has the
@@ -1066,6 +1219,10 @@ public final class SocketPermission extends Permission
     /**
      * Returns the hash code value for this object.
      *
+     * <p>
+     *  返回此对象的哈希码值
+     * 
+     * 
      * @return a hash code value for this object.
      */
 
@@ -1075,6 +1232,10 @@ public final class SocketPermission extends Permission
          * or a wildcard, use getName().hashCode(), otherwise use
          * the hashCode() of the host name returned from
          * java.net.InetAddress.getHostName method.
+         * <p>
+         * 如果此SocketPermission使用IP地址或通配符初始化,请使用getName()hashCode(),否则使用从javanetInetAddressgetHostName方法返回的主机名的ha
+         * shCode()。
+         * 
          */
 
         if (init_with_ip || wildcard) {
@@ -1096,6 +1257,10 @@ public final class SocketPermission extends Permission
     /**
      * Return the current action mask.
      *
+     * <p>
+     *  返回当前操作掩码
+     * 
+     * 
      * @return the actions mask.
      */
 
@@ -1109,6 +1274,10 @@ public final class SocketPermission extends Permission
      * Always returns present actions in the following order:
      * connect, listen, accept, resolve.
      *
+     * <p>
+     *  返回指定掩码中的操作的"规范字符串表示"始终按以下顺序返回当前操作：connect,listen,accept,resolve
+     * 
+     * 
      * @param mask a specific integer action mask to translate into a string
      * @return the canonical string representation of the actions
      */
@@ -1149,6 +1318,10 @@ public final class SocketPermission extends Permission
      * Always returns present actions in the following order:
      * connect, listen, accept, resolve.
      *
+     * <p>
+     *  返回操作的规范字符串表示始终按以下顺序返回当前操作：connect,listen,accept,resolve
+     * 
+     * 
      * @return the canonical string representation of the actions.
      */
     public String getActions()
@@ -1168,6 +1341,12 @@ public final class SocketPermission extends Permission
      * PermissionCollection {@code implies}
      * method to be implemented in an efficient (and consistent) manner.
      *
+     * <p>
+     *  返回一个新的PermissionCollection对象用于存储SocketPermission对象
+     * <p>
+     * SocketPermission对象必须以允许以任何顺序插入到集合中的方式存储,但这也使得PermissionCollection {@code implies}方法能够以高效(且一致)的方式实现
+     * 
+     * 
      * @return a new PermissionCollection object suitable for storing SocketPermissions.
      */
 
@@ -1179,6 +1358,9 @@ public final class SocketPermission extends Permission
      * WriteObject is called to save the state of the SocketPermission
      * to a stream. The actions are serialized, and the superclass
      * takes care of the name.
+     * <p>
+     *  调用WriteObject来将SocketPermission的状态保存到流操作是序列化的,超类负责处理名称
+     * 
      */
     private synchronized void writeObject(java.io.ObjectOutputStream s)
         throws IOException
@@ -1193,6 +1375,9 @@ public final class SocketPermission extends Permission
     /**
      * readObject is called to restore the state of the SocketPermission from
      * a stream.
+     * <p>
+     *  readObject被调用以从流恢复SocketPermission的状态
+     * 
      */
     private synchronized void readObject(java.io.ObjectInputStream s)
          throws IOException, ClassNotFoundException
@@ -1205,6 +1390,9 @@ public final class SocketPermission extends Permission
     /**
      * Check the system/security property for the ephemeral port range
      * for this system. The suffix is either "high" or "low"
+     * <p>
+     *  检查此系统的临时端口范围的系统/安全属性后缀为"高"或"低"
+     * 
      */
     private static int initEphemeralPorts(String suffix, int defval) {
         return AccessController.doPrivileged(
@@ -1228,6 +1416,9 @@ public final class SocketPermission extends Permission
      * Check if the target range is within the policy range
      * together with the ephemeral range for this platform
      * (if policy includes ephemeral range)
+     * <p>
+     *  检查目标范围是否在此平台的临时范围(如果策略包括临时范围)以及策略范围内,
+     * 
      */
     private static boolean inRange(
         int policyLow, int policyHigh, int targetLow, int targetHigh
@@ -1310,6 +1501,17 @@ public final class SocketPermission extends Permission
         System.out.println("nps.implies(that) = " + nps.implies(that_));
         System.out.println("-----\n");
     }
+    /* <p>
+    /* public String toString(){StringBuffer s = new StringBuffer(supertoString()+"\n"+"cname ="+ cname +"\n"+"wildcard ="+ wildcard +"\n"+" ="+ invalid +"\n"+"portrange ="+ portrange [0] +","+ portrange [1] +"\n if(addresses！= null)for(int i = 0; i <addresseslength; i ++){sappend(addresses [i] getHostAddress()); sappend("\n"); } else {sappend("(no addresses)\n"); }}。
+    /* 
+    /*  return stoString(); }}
+    /* 
+    /* public static void main(String args [])throws Exception {SocketPermission this_ = new SocketPermission(args [0],"connect"); SocketPermission that_ = new SocketPermission(args [1],"connect"); Systemoutprintln("-----\n"); Systemoutprintln("thisimplies(that)="+ this_implies(that_)); Systemoutprintln("-----\n"); Systemoutprintln("this ="+ this_); Systemoutprintln("-----\n"); Systemoutprintln("that ="+ that_); Systemoutprintln("-----\n");。
+    /* 
+    /*  SocketPermissionCollection nps = new SocketPermissionCollection(); npsadd(this_); npsadd(new SocketP
+    /* ermission("www-lelandstanfordedu","connect")); npsadd(new SocketPermission("www-suncom","connect")); 
+    /* Systemoutprintln("npsimplies(that)="+ npsimplies(that_)); Systemoutprintln("-----\n"); }}。
+    /* 
     */
 }
 
@@ -1320,6 +1522,10 @@ if wildcard, its the wild card
 else its the cname?
 
  *
+ * <p>
+ * if(init'd与IP,key是IP作为字符串)如果通配符,其通配符否则其cname?
+ * 
+ * 
  * @see java.security.Permission
  * @see java.security.Permissions
  * @see java.security.PermissionCollection
@@ -1339,6 +1545,9 @@ final class SocketPermissionCollection extends PermissionCollection
     /**
      * Create an empty SocketPermissions object.
      *
+     * <p>
+     *  创建一个空的SocketPermissions对象
+     * 
      */
 
     public SocketPermissionCollection() {
@@ -1349,6 +1558,10 @@ final class SocketPermissionCollection extends PermissionCollection
      * Adds a permission to the SocketPermissions. The key for the hash is
      * the name in the case of wildcards, or all the IP addresses.
      *
+     * <p>
+     *  向SocketPermissions添加权限哈希的键是通配符名称或所有IP地址的名称
+     * 
+     * 
      * @param permission the Permission object to add.
      *
      * @exception IllegalArgumentException - if the permission is not a
@@ -1376,6 +1589,10 @@ final class SocketPermissionCollection extends PermissionCollection
      * Check and see if this collection of permissions implies the permissions
      * expressed in "permission".
      *
+     * <p>
+     *  检查并查看此权限集合是否意味着在"权限"中表示的权限
+     * 
+     * 
      * @param permission the Permission object to compare
      *
      * @return true if "permission" is a proper subset of a permission in
@@ -1414,6 +1631,10 @@ final class SocketPermissionCollection extends PermissionCollection
      * Returns an enumeration of all the SocketPermission objects in the
      * container.
      *
+     * <p>
+     *  返回容器中所有SocketPermission对象的枚举
+     * 
+     * 
      * @return an enumeration of all the SocketPermission objects.
      */
 
@@ -1437,6 +1658,8 @@ final class SocketPermissionCollection extends PermissionCollection
     // private Vector permissions;
 
     /**
+    /* <p>
+    /* 
      * @serialField permissions java.util.Vector
      *     A list of the SocketPermissions for this set.
      */
@@ -1445,11 +1668,16 @@ final class SocketPermissionCollection extends PermissionCollection
     };
 
     /**
+    /* <p>
+    /* 
      * @serialData "permissions" field (a Vector containing the SocketPermissions).
      */
     /*
      * Writes the contents of the perms field out as a Vector for
      * serialization compatibility with earlier releases.
+     * <p>
+     *  将perms字段的内容作为Vector与先前版本的序列化兼容性写入
+     * 
      */
     private void writeObject(ObjectOutputStream out) throws IOException {
         // Don't call out.defaultWriteObject()
@@ -1468,6 +1696,8 @@ final class SocketPermissionCollection extends PermissionCollection
 
     /*
      * Reads in a Vector of SocketPermissions and saves them in the perms field.
+     * <p>
+     *  读取SocketPermissions的向量并将其保存在perms字段中
      */
     private void readObject(ObjectInputStream in)
         throws IOException, ClassNotFoundException
