@@ -33,9 +33,11 @@ import com.l.web.house.util.DU;
 import com.l.web.house.util.HttpUtil;
 
 @Service
-public class 链家房屋信息捕获 extends 房屋信息捕获基类{
+public class LinkedHouseImpl extends 房屋信息捕获基类{
 
-	private final static Logger logger = LoggerFactory.getLogger(链家房屋信息捕获.class);
+	private static final int 捕获房屋概要信息开始页数 = 1;
+
+	private final static Logger logger = LoggerFactory.getLogger(LinkedHouseImpl.class);
 	
 	private final static String 房屋信息来源 = "链家";
 	static int index = 0;
@@ -51,7 +53,7 @@ public class 链家房屋信息捕获 extends 房屋信息捕获基类{
 	
 	@Override
 	public void 捕获房屋信息() throws Exception {
-//		捕获房屋概要信息();
+		捕获房屋概要信息();
 		从数据库捕获房屋详细信息();
 		获取小区信息();
 	}
@@ -328,7 +330,7 @@ public class 链家房屋信息捕获 extends 房屋信息捕获基类{
 			logger.info("准备捕获链家房屋信息");
 			logger.info("准备获取总数据");
 			int 最大页数 = 100;
-			for (int i = 84; i <= 最大页数; i++) {
+			for (int i = 捕获房屋概要信息开始页数; i <= 最大页数; i++) {
 				二手房筛选网址 = "http://bj.lianjia.com/ershoufang/pg"+i+"l1l2l3l4p1p2/";//l1一室  l2两室  p1 200w内 p2 200~250w
 				String rs = HttpUtil.doGet(二手房筛选网址);
 				//h2 class="total fl">共找到<span> 1688 </span>套北京二手房<

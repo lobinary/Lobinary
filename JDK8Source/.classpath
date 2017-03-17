@@ -28,6 +28,7 @@
 		</attributes>
 		<accessrules>
 			<accessrule kind="accessible" pattern="com/sun/**"/>
+			<accessrule kind="accessible" pattern="**"/>
 		</accessrules>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">

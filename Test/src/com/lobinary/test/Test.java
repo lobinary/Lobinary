@@ -10,6 +10,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+
 public class Test {
 	
 	public static void main(String[] args) throws Exception {
@@ -263,15 +269,18 @@ public class Test {
 			if(kk.equals("\\n"))System.out.println("碰到了");
 		}
 		
-//		System.out.println(Throwable.class);\
+//		System.out.println(Throwable.class);
 //		String ssss = "";
 //		System.out.println(ssss.substring(0,8));
 		
+//		String 换行符替换 = "this is the enter '\\n' or '\\t'";
+//		System.out.println(换行符替换.replace("\\n", "#n#").replace("#n#", "\\n"));
 		
-		String 换行符替换 = "this is the enter '\\n' or '\\t'";
-		System.out.println(换行符替换.replace("\\n", "#n#").replace("#n#", "\\n"));
-		
-		
+		CloseableHttpClient httpclient = HttpClients.createDefault();  
+		HttpGet h = new HttpGet("http://www.baidu.com?s=lob&l=xxx");
+		CloseableHttpResponse resp = httpclient.execute(h);
+		String result = EntityUtils.toString(resp.getEntity(),"UTF-8");  
+		System.out.println(result);
 	}
 	
 }

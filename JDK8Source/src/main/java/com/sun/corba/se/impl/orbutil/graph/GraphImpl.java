@@ -49,10 +49,6 @@ public class GraphImpl extends AbstractSet implements Graph
         addAll( coll ) ;
     }
 
-    private Map /* <p>
-    private Map /*  public GraphImpl(){nodeToData = new HashMap(); }}
-    private Map /* 
-    private Map /* 
 /***********************************************************************************/
 /************ AbstractSet implementation *******************************************/
 /***********************************************************************************/
@@ -68,7 +64,7 @@ public class GraphImpl extends AbstractSet implements Graph
 
         if (!found) {
             NodeData nd = new NodeData() ;
-            nodeToData.put( node, nd ) ;
+            nodeToData.put( node, nd ) ; 
         }
 
         return !found ;

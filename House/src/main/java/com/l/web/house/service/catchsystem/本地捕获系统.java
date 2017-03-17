@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.l.web.house.service.catchsystem.impl.链家房屋信息捕获;
+import com.l.web.house.service.catchsystem.impl.LinkedHouseImpl;
 
 public class 本地捕获系统 {
 
@@ -13,7 +13,7 @@ public class 本地捕获系统 {
 
 	public static void main(String[] args) throws Exception {
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("spring/spring-application.xml");
-		链家房屋信息捕获 链家房屋信息捕获 = (链家房屋信息捕获) ctx.getBean(链家房屋信息捕获.class);
+		LinkedHouseImpl 链家房屋信息捕获 = (LinkedHouseImpl) ctx.getBean(LinkedHouseImpl.class);
 		链家房屋信息捕获.捕获房屋信息();
 	}
 	

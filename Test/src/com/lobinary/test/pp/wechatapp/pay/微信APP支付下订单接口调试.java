@@ -86,7 +86,7 @@ public class 微信APP支付下订单接口调试 {
 	
 	public static String 获取生成订单XML(){
 		String result = "<xml>"
-							+ "<appid>wx2421b1c4370ec43b</appid>"
+							+ "<appid>wx95f2b27daf603387</appid>"
 							+ "<attach>支付测试</attach>"
 							+ "<body>APP支付测试</body>"
 							+ "<mch_id>10000100</mch_id>"
@@ -107,7 +107,7 @@ public class 微信APP支付下订单接口调试 {
     public static String sendXMLDataByPost(String url, String xmlData) throws Exception {  
     	System.out.println("requestUrl:"+url);
     	System.out.println("xml:"+xmlData);
-        if (client == null){  
+        if (client == null){
             client = HttpClients.createDefault();  
         }  
         HttpPost post = new HttpPost(url);  
