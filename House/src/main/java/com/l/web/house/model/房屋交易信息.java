@@ -13,6 +13,13 @@ public class 房屋交易信息 {
 	public Date 价格更新日期;
 	public int 关注人数;
 	public int 看房人数;
+	public String 有效状态;
+	public String get有效状态() {
+		return 有效状态;
+	}
+	public void set有效状态(String 有效状态) {
+		this.有效状态 = 有效状态;
+	}
 	public String getId() {
 		return id;
 	}

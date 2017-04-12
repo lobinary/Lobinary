@@ -17,6 +17,7 @@ public class 本地捕获系统 {
 		链家房屋信息捕获.捕获房屋信息();
 	}
 	
+	
 	public void test(String... a){
 		for (String s : a) {
 			System.out.println(s);

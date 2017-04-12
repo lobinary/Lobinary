@@ -275,9 +275,10 @@ public class HttpUtil {
 	 * 
 	 * @param urlStr
 	 * @return
+	 * @throws Exception 
 	 * @throws Exception
 	 */
-	public static String doGet(String urlStr) {
+	public static String doGet(String urlStr) throws Exception {
 		URL url = null;
 		HttpURLConnection conn = null;
 		InputStream is = null;
@@ -303,12 +304,13 @@ public class HttpUtil {
 				}
 				baos.flush();
 				return baos.toString();
-			} else {
+			} else if(conn.getResponseCode() == 404){
+				throw new RuntimeException("404");
+			}else {
+				System.out.println("返回码是："+conn.getResponseCode());
 				throw new RuntimeException(" responseCode is not 200 ... ");
 			}
 
-		} catch (Exception e) {
-			e.printStackTrace();
 		} finally {
 			try {
 				if (is != null)
@@ -322,8 +324,6 @@ public class HttpUtil {
 			}
 			conn.disconnect();
 		}
-
-		return null;
 
 	}
 

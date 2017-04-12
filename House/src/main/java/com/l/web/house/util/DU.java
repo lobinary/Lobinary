@@ -6,6 +6,7 @@ import java.util.Date;
 public class DU {
 
 	public static Date getDate(String Year){
+		if(Year==null)return null;
 		Year = Year.trim();
 		Calendar c = Calendar.getInstance();
 		c.set(Calendar.YEAR, Integer.parseInt(Year));

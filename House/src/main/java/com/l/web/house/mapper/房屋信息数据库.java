@@ -1,5 +1,6 @@
 package com.l.web.house.mapper;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
@@ -67,13 +68,13 @@ public interface 房屋信息数据库 {
 			+ "(id, 房屋基本信息id, 照片网络地址, 照片本地地址, 照片类型, 照片所属位置)"
 			+ " VALUES"
 			+ " (#{id}, #{房屋基本信息id}, #{照片网络地址}, #{照片本地地址}, #{照片类型}, #{照片所属位置})")
-	public int 添加房屋照片信息(房屋照片信息 房屋照片信息);
+	public int 添加房屋照片信息(房屋照片信息 房屋照片信息) throws SQLIntegrityConstraintViolationException;
 
 	@Insert("INSERT INTO 房屋户型信息 "
 			+ "(id, 房屋基本信息id, 房间类型, 房间面积, 窗户朝向, 窗户类型)"
 			+ " VALUES"
 			+ " (#{id}, #{房屋基本信息id}, #{房间类型}, #{房间面积}, #{窗户朝向}, #{窗户类型})")
-	public int 添加房屋户型信息(房屋户型信息 房屋户型信息);
+	public int 添加房屋户型信息(房屋户型信息 房屋户型信息) throws SQLIntegrityConstraintViolationException;
 
 	@Insert("INSERT INTO 小区基本信息 "
 			+ "(id, 信息来源, 编号, 名称, 坐标, "

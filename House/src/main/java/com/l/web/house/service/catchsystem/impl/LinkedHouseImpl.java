@@ -1,5 +1,6 @@
 package com.l.web.house.service.catchsystem.impl;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -31,6 +32,8 @@ import com.l.web.house.model.房屋照片信息;
 import com.l.web.house.service.catchsystem.房屋信息捕获基类;
 import com.l.web.house.util.DU;
 import com.l.web.house.util.HttpUtil;
+import com.l.web.house.util.O;
+import com.l.web.house.util.PU;
 
 @Service
 public class LinkedHouseImpl extends 房屋信息捕获基类{
@@ -61,91 +64,124 @@ public class LinkedHouseImpl extends 房屋信息捕获基类{
 	private void 从数据库捕获房屋详细信息() throws Exception, InterruptedException {
 		List<房屋基本信息 > 房屋基本信息List = 房屋信息数据库.查找基本信息根据当前状态(房屋信息来源,"0",2000);
 		for (房屋基本信息 房屋基本信息 : 房屋基本信息List) {
-			System.out.println(房屋基本信息.getId());
+//			System.out.println(房屋基本信息.getId());
 			抓取单个房屋详细信息(房屋基本信息);
-			Thread.sleep(1000);
+//			Thread.sleep(1000);
 		}
 	}
 	
 	public void 抓取单个房屋详细信息(房屋基本信息 f) throws Exception {
 //		f.网址 = "http://bj.lianjia.com/ershoufang/101101067412.html";
-		String rs = HttpUtil.doGet(f.网址);
+		String rs;
+		try {
+			rs = HttpUtil.doGet(f.网址);
+		} catch (Exception e1) {
+			if("404".equals(e1.getMessage())){
+				System.out.println("房屋信息不存在,网址为:"+f.网址);
+	    		f.当前状态 = "-1";
+				房屋信息数据库.更新房屋基本信息(f);
+				return ;
+			}else{
+				throw e1;
+			}
+		}
 		System.out.println("网址为："+f.网址);
 //		System.out.println(rs);
 		try {  
+			
+			
+    		f.当前状态 = "1";//首先更改状态，下方遇到特殊情况，更改为对应的状态，也就算是默认值了
+    		
+    		
             Parser parser = new Parser(rs);  
             // TextExtractingVisitor visitor = new TextExtractingVisitor();  
             // parser.visitAllNodesWith(visitor);  
             // String textInPage = visitor.getExtractedText();  
-            // System.out.println(textInPage);  
+            // //System.out.println(textInPage);  
             //查找含有filter-strip__list样式的元素  
+    		房屋交易信息 j = 房屋信息数据库.查找最新交易信息根据来源和唯一标识(房屋信息来源, f.房屋唯一标识);
+    		j.id = idsdf.format(new Date()) + f.id;
             String 标题 = 捕获数据(parser, new HasAttributeFilter("class", "main"));  
-            System.out.println("标题:"+标题);
+            //System.out.println("标题:"+标题);
     		parser.reset();
             String 子标题 = 捕获数据(parser, new HasAttributeFilter("class", "sub"));  
             f.子标题 = 子标题;
-            System.out.println("子标题"+子标题);
+            //System.out.println("子标题"+子标题);
     		parser.reset();
-//    		System.out.println(parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "tax")).elementAt(0).getChildren().elementAt(0).toPlainTextString());
-    		String 首付S = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "tax")).elementAt(0).getChildren().elementAt(0).toPlainTextString().replace("首付", "").replace("万", "");
-    		System.out.println(首付S);
-    		double 首付 = (Double.parseDouble(首付S))*10000;
-			房屋交易信息 j = 房屋信息数据库.查找最新交易信息根据来源和唯一标识(房屋信息来源, f.房屋唯一标识);
-			j.id = idsdf.format(new Date()) + f.id;
-    		j.首付 = 首付;
-    		System.out.println("首付："+首付);
+    		
+    		//首付
+//    		//System.out.println(parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "tax")).elementAt(0).getChildren().elementAt(0).toPlainTextString());
+    		try {
+				String 首付S = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "tax")).elementAt(0).getChildren().elementAt(0).getChildren().elementAt(0).toPlainTextString().replace("首付", "").replace("万", "");
+				if(首付S!=null){
+					//System.out.println(首付S);
+					double 首付 = (Double.parseDouble(首付S))*10000;
+					j.首付 = 首付;
+					//System.out.println("首付："+首付);
+					parser.reset();
+				}
+				
+				//税费S
+				String 税费S = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "tax")).elementAt(0).getChildren().elementAt(0).getChildren().elementAt(2).toPlainTextString().replace("税费", "").replace("万", "").replace("(仅供参考)", "");
+				if(税费S!=null){
+					double 税费 = (Double.parseDouble(税费S))*10000;
+					j.税费 = 税费;
+					//System.out.println("税费："+税费);
+					parser.reset();
+					
+				}
+			} catch (Exception e1) {
+				logger.error("获取首付、税费异常",e1);
+				f.当前状态 = "4";
+				f.备注 = rs;
+			}
+    		try{
+	    		//所在小区编号
+	//    		String 所在小区编号 = rs.substring(rs.indexOf("resblockPosition")+18);
+	//    		String 所在小区编号 = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "communityName")).elementAt(0).getChildren().elementAt(3).getText().replace("a href=\"/xiaoqu/", "").replace("/\" target=\"_blank\" class=\"info\"", "");
+	//    		f.所在小区编号 = 所在小区编号;
+	//    		//System.out.println("小区编号:"+所在小区编号);
+	    		String 所在小区编号S = rs.substring(rs.indexOf("resblockId")+12);
+	    		f.所在小区编号 = 所在小区编号S.substring(0,所在小区编号S.indexOf("'"));
+	    		parser.reset();
+				NodeList 位置属性Node = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "areaName")).elementAt(1).getChildren();
+				位置属性Node = 位置属性Node.elementAt(1).getChildren();
+				String 所在区县 = 位置属性Node.elementAt(0).toPlainTextString();
+				f.所在区县 = 所在区县;
+				//System.out.println("所在区县:"+所在区县);
+				parser.reset();
+				String 所在地点 = 位置属性Node.elementAt(2).toPlainTextString();
+				f.所在地点 = 所在地点;
+				//System.out.println("所在位置："+所在地点);
+				parser.reset();
+				String 所在环数 = 位置属性Node.elementAt(3).toPlainTextString().replace("&nbsp;", "");
+				f.所在环数 = 所在环数;
+				//System.out.println("所在环数:"+所在环数);
+				parser.reset();
+	    		String 联系人 = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "brokerName")).elementAt(0).getChildren().elementAt(0).toPlainTextString();
+	    		f.联系人 = 联系人;
+	    		//System.out.println("联系人:"+联系人);
+	    		parser.reset();
+	    		String 联系信息 = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "phone")).elementAt(1).toPlainTextString().replace("\n", "").replace(" ", "");
+	    		f.联系信息 = 联系信息;
+	    		//System.out.println("联系信息:"+联系信息);
+	    		parser.reset();
+			} catch (Exception e1) {
+				logger.info("获取首付、税费异常",e1);
+				f.当前状态 = "4";
+				f.备注 = rs;
+			}
     		parser.reset();
-    		String 税费S = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "tax")).elementAt(0).getChildren().elementAt(2).toPlainTextString().replace("税费", "").replace("万", "").replace("(仅供参考)", "");
-    		double 税费 = (Double.parseDouble(税费S))*10000;
-    		j.税费 = 税费;
-    		System.out.println("税费："+税费);
-    		parser.reset();
-    		String 所在小区编号 = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "communityName")).elementAt(0).getChildren().elementAt(3).getText().replace("a href=\"/xiaoqu/", "").replace("/\" target=\"_blank\" class=\"info\"", "");
-    		f.所在小区编号 = 所在小区编号;
-    		System.out.println("小区编号:"+所在小区编号);
-    		parser.reset();
-    		String 所在区县 = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "areaName")).elementAt(0).getChildren().elementAt(3).getChildren().elementAt(0).toPlainTextString();
-    		f.所在区县 = 所在区县;
-    		System.out.println("所在区县:"+所在区县);
-    		parser.reset();
-    		String 所在地点 = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "areaName")).elementAt(0).getChildren().elementAt(3).getChildren().elementAt(2).toPlainTextString();
-    		f.所在地点 = 所在地点;
-    		System.out.println("所在位置："+所在地点);
-    		parser.reset();
-    		String 所在环数 = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "areaName")).elementAt(0).getChildren().elementAt(3).getChildren().elementAt(3).toPlainTextString().replace("&nbsp;", "");
-    		f.所在环数 = 所在环数;
-    		System.out.println("所在环数:"+所在环数);
-    		parser.reset();
-    		String 联系人 = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "brokerName")).elementAt(0).getChildren().elementAt(0).toPlainTextString();
-    		f.联系人 = 联系人;
-    		System.out.println("联系人:"+联系人);
-    		parser.reset();
-    		String 联系信息 = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "phone")).elementAt(1).toPlainTextString().replace("\n", "").replace(" ", "");
-    		f.联系信息 = 联系信息;
-    		System.out.println("联系信息:"+联系信息);
-    		parser.reset();
-    		System.out.println("==============================房屋基本属性=============================================");
+    		//System.out.println("==============================房屋基本属性=============================================");
     		Map<String,String> 属性Map = new HashMap<String,String>();
-    		NodeList 基本属性 = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "base")).elementAt(0).getChildren().elementAt(3).getChildren().elementAt(1).getChildren();
-    		for (int i = 0; i < 基本属性.size(); i++) {
-    			Node 单个基本属性 = 基本属性.elementAt(i);
-    			if(单个基本属性.toPlainTextString().trim().length()==0)continue;
-    			String 属性键 = 单个基本属性.getChildren().elementAt(0).toPlainTextString();
-				String 属性值 = 单个基本属性.getChildren().elementAt(1).toPlainTextString();
-				System.out.println(i+":"+属性键+":"+属性值);
-    			属性Map.put(属性键, 属性值);
-    		}
-    		parser.reset();
-    		NodeList 交易属性 = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "transaction")).elementAt(0).getChildren().elementAt(3).getChildren().elementAt(1).getChildren();
-    		for (int i = 0; i < 交易属性.size(); i++) {
-    			Node 单个交易属性 = 交易属性.elementAt(i);
-//    			System.out.println(单个交易属性.toPlainTextString());
-    			if(单个交易属性.toPlainTextString().trim().length()==0)continue;
-    			String 属性键 = 单个交易属性.getChildren().elementAt(0).toPlainTextString();
-				String 属性值 = 单个交易属性.getChildren().elementAt(1).toPlainTextString();
-				System.out.println(i+":"+属性键+":"+属性值);
-    			属性Map.put(属性键, 属性值);
-    		}
+    		NodeList 基本属性NodeList = PU.parser(rs,PU.Attribute("class","base"),PU.Attribute("class","content"),PU.Tag("ul"));
+    		Map<String, String> 基本属性Map = PU.listUL(基本属性NodeList);
+    		NodeList 交易属性NodeList = PU.parser(rs,PU.Attribute("class","transaction"),PU.Attribute("class","content"),PU.Tag("ul"));
+    		Map<String, String> 交易属性Map = PU.listUL(交易属性NodeList);
+    		属性Map.putAll(基本属性Map);
+    		属性Map.putAll(交易属性Map);
+//    		O.o(交易属性Map, "交易属性Map");
+//    		O.o(属性Map, "属性Map");
     		f.户型 = 属性Map.remove("房屋户型");
     		
     		//f.所在楼层 = 
@@ -153,8 +189,8 @@ public class LinkedHouseImpl extends 房屋信息捕获基类{
     		f.建筑面积 = Double.parseDouble(属性Map.remove("建筑面积").replace("㎡", ""));
     		f.户型结构 = 属性Map.remove("户型结构");
     		String 使用面积S = 属性Map.remove("套内面积");
-    		if(使用面积S!=null&&!使用面积S.equals("暂无数据")){
-    			f.实用面积 = Double.parseDouble(使用面积S.replace("㎡", ""));
+    		if(使用面积S!=null&&(!(使用面积S.trim().equals("暂无数据")))){
+    			f.实用面积 = Double.parseDouble(使用面积S.trim().replace("㎡", ""));
     		}
     		f.建筑类型 = 属性Map.remove("建筑类型");
     		f.朝向 = 属性Map.remove("房屋朝向");
@@ -168,17 +204,19 @@ public class LinkedHouseImpl extends 房屋信息捕获基类{
     		f.用电类型 = 属性Map.remove("用电类型");
     		f.用水类型 = 属性Map.remove("用水类型");
     		String 产权年限S = 属性Map.remove("产权年限");
-    		if(产权年限S!=null&&!产权年限S.equals("未知"))f.产权年限 = Integer.parseInt(产权年限S.replace("年", ""));
+    		if(产权年限S!=null&&!产权年限S.trim().equals("未知"))f.产权年限 = Integer.parseInt(产权年限S.trim().replace("年", ""));
     		SimpleDateFormat sdf挂牌时间 = new SimpleDateFormat("YYYY-MM-dd");
     		f.挂牌时间 = sdf挂牌时间.parse(属性Map.remove("挂牌时间"));
     		f.交易权属 = 属性Map.remove("交易权属");
     		String 上次交易时间 = 属性Map.remove("上次交易");
-    		if(!上次交易时间.equals("暂无数据")){
+    		if(上次交易时间!=null&&!"暂无数据".equals(上次交易时间)){
     			f.上次交易时间 = sdf挂牌时间.parse(上次交易时间);
     		}
     		f.房屋用途 = 属性Map.remove("房屋用途");
-    		String 房本年限S = 属性Map.remove("房本年限");//满五年 满两年 不满两年
-    		if(房本年限S.equals("满五年")){
+    		String 房本年限S = 属性Map.remove("房屋年限").trim();//满五年 满两年 不满两年
+    		if(房本年限S== null){
+    			f.房本年限 = 0;
+    		}else if(房本年限S.equals("满五年")){
     			f.房本年限 = 5;
     		}else if(房本年限S.equals("满两年")){
     			f.房本年限 = 2;
@@ -193,48 +231,56 @@ public class LinkedHouseImpl extends 房屋信息捕获基类{
     		f.产权所属 = 属性Map.remove("产权所属");
     		f.抵押信息 = 属性Map.remove("抵押信息");
     		f.房本备注 = 属性Map.remove("房本备件");
+    		String 建成年代 = 属性Map.remove("建成年代");
+			f.建房时间 = DU.getDate(建成年代==null||建成年代.trim().equals("未知")?null:建成年代);
+    		属性Map.remove("房权所属");
+    		属性Map.remove("链家编号");
     		if(属性Map.size()>0){
-    			System.out.println("============发现未知基本属性============");
+    			//System.out.println("============发现未知基本属性============");
     			Boolean 是否提示 = true;
     			for (String k : 属性Map.keySet()) {
     				if(k.equals("别墅类型"))是否提示 = false;
-					System.out.println(k + ":" + 属性Map.get(k));
+					//System.out.println(k + ":" + 属性Map.get(k));
 				}
-    			System.out.println("============发现未知基本属性============");
+    			//System.out.println("============发现未知基本属性============");
     			if(是否提示) throw new Exception("发现未知基本属性");
     		}
-    		System.out.println("==============================================房源特色=============================================");
+    		//System.out.println("==============================================房源特色=============================================");
     		parser.reset();
     		Map<String,String> 房源特色Map = new HashMap<String, String>();
-    		NodeList 房源特色 = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "introContent showbasemore")).elementAt(0).getChildren();
-    		for (int i = 0; i < 房源特色.size(); i++) {
-    			Node 单个特色属性 = 房源特色.elementAt(i);
-    			if(单个特色属性.toPlainTextString().trim().length()==0)continue;
-    			String 单个特色属性S = 单个特色属性.toPlainTextString().replace("\n", "");
-//    			System.out.println(单个特色属性S);
-    			String[] 单个特色属性拆分 = 单个特色属性S.split(" ");
-    			List<String> 特色属性list = new ArrayList<String>();
-    			for (int jj = 0; jj < 单个特色属性拆分.length; jj++) {
-    				String 单个特色属性SS = 单个特色属性拆分[jj];
-    				if(单个特色属性SS.length()==0)continue;
-    				特色属性list.add(单个特色属性SS);
-//					System.out.println(i+":"+j+":"+单个特色属性SS);
-				}
-    			if(特色属性list.size()>=2){
-    				String 特色属性拼合值 = "";
-    				for (String 特色属性单个值 : 特色属性list) {
-    					特色属性拼合值+=特色属性单个值+",";
+    		try {
+				NodeList 房源特色 = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "introContent showbasemore")).elementAt(0).getChildren();
+				for (int i = 0; i < 房源特色.size(); i++) {
+					Node 单个特色属性 = 房源特色.elementAt(i);
+					if(单个特色属性.toPlainTextString().trim().length()==0)continue;
+					String 单个特色属性S = 单个特色属性.toPlainTextString().replace("\n", "");
+//    			//System.out.println(单个特色属性S);
+					String[] 单个特色属性拆分 = 单个特色属性S.split(" ");
+					List<String> 特色属性list = new ArrayList<String>();
+					for (int jj = 0; jj < 单个特色属性拆分.length; jj++) {
+						String 单个特色属性SS = 单个特色属性拆分[jj];
+						if(单个特色属性SS.length()==0)continue;
+						特色属性list.add(单个特色属性SS);
+//					//System.out.println(i+":"+j+":"+单个特色属性SS);
 					}
-    				System.out.println(特色属性list.get(0)+":"+ 特色属性拼合值);
-					房源特色Map.put(特色属性list.get(0), 特色属性拼合值);
-    			}
-    		}
+					if(特色属性list.size()>=2){
+						String 特色属性拼合值 = "";
+						for (String 特色属性单个值 : 特色属性list) {
+							特色属性拼合值+=特色属性单个值+",";
+						}
+						//System.out.println(特色属性list.get(0)+":"+ 特色属性拼合值);
+						房源特色Map.put(特色属性list.get(0), 特色属性拼合值);
+					}
+				}
+			} catch (Exception e2) {
+				logger.warn("没有房源信息");
+			}
     		String 递增备注 = "";
     		for (String k : 房源特色Map.keySet()) {
     			递增备注 += k + ":" + 房源特色Map.get(k) + ";";
 			}
     		f.备注 += 递增备注;
-    		System.out.println("==============================================房屋布局=============================================");
+    		//System.out.println("==============================================房屋布局=============================================");
     		if(rs.contains("col-1")){
     			try {
 					parser.reset();
@@ -246,18 +292,22 @@ public class LinkedHouseImpl extends 房屋信息捕获基类{
 						double 房间面积 = Double.parseDouble(单个户型属性.getChildren().elementAt(3).toPlainTextString().replace("平米", ""));
 						String 有无窗户 = 单个户型属性.getChildren().elementAt(7).toPlainTextString();
 						String 窗户朝向 = 单个户型属性.getChildren().elementAt(5).toPlainTextString();
-						System.out.println("房间类型:"+ 房间类型);
-						System.out.println("房间面积:"+ 房间面积);
-						System.out.println("有无窗户:"+ 有无窗户);
-						System.out.println("窗户朝向:"+ 窗户朝向);
+						//System.out.println("房间类型:"+ 房间类型);
+						//System.out.println("房间面积:"+ 房间面积);
+						//System.out.println("有无窗户:"+ 有无窗户);
+						//System.out.println("窗户朝向:"+ 窗户朝向);
 						房屋户型信息 房屋户型信息 = new 房屋户型信息();
 						房屋户型信息.id = f.id  + i+ 房间类型;
 						房屋户型信息.房屋基本信息id = f.id;
 						房屋户型信息.窗户朝向 = 窗户朝向;
 						房屋户型信息.房间类型 = 房间类型;
 						房屋户型信息.房间面积 = 房间面积;
-						房屋信息数据库.添加房屋户型信息(房屋户型信息);
-						System.out.println("===========================");
+						try {
+							房屋信息数据库.添加房屋户型信息(房屋户型信息);
+						} catch (SQLIntegrityConstraintViolationException e) {
+							logger.info("已经插入，不再插入");
+						}
+						//System.out.println("===========================");
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -265,7 +315,7 @@ public class LinkedHouseImpl extends 房屋信息捕获基类{
     		}
     		
     		//content-wrapper housePic
-    		System.out.println("==============================================房屋照片=============================================");
+    		//System.out.println("==============================================房屋照片=============================================");
     		parser.reset();
     		if(rs.contains("<div class=\"title\">房源照片</div>")){
 	    		NodeList 房间照片主节点 = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "content-wrapper housePic"))
@@ -274,31 +324,47 @@ public class LinkedHouseImpl extends 房屋信息捕获基类{
 	    			Node 房间照片子节点 = 房间照片主节点.elementAt(i);
 	    			if(房间照片子节点.getText().trim().length()==0||!房间照片子节点.getText().contains("data-index"))continue;
 	    			String 房间照片未截取前字符串 = 房间照片子节点.getChildren().elementAt(1).getText();
-	//				System.out.println(房间照片未截取前字符串);
+	//				//System.out.println(房间照片未截取前字符串);
 					String 照片URL = 房间照片未截取前字符串.substring(9,房间照片未截取前字符串.indexOf("jpg")+3);
 					String 照片位置 = 房间照片未截取前字符串.substring(房间照片未截取前字符串.indexOf("alt=")+5,房间照片未截取前字符串.lastIndexOf("\""));
-					System.out.println("照片URL:"+照片URL);
-					System.out.println("照片位置:"+照片位置);
+					//System.out.println("照片URL:"+照片URL);
+					//System.out.println("照片位置:"+照片位置);
 					房屋照片信息 房屋照片信息 = new 房屋照片信息();
 					房屋照片信息.id = f.id  + i + 照片位置;
 					房屋照片信息.房屋基本信息id = f.id;
 					房屋照片信息.照片所属位置 = 照片位置;
 					房屋照片信息.照片网络地址 = 照片URL;
 					房屋照片信息.照片类型 = "jpg";
-					房屋信息数据库.添加房屋照片信息(房屋照片信息);
-					System.out.println("=============================");
+					try {
+						房屋信息数据库.添加房屋照片信息(房屋照片信息);
+					} catch (SQLIntegrityConstraintViolationException e) {
+						logger.info("已经插入，不再插入");
+					}
+					//System.out.println("=============================");
 	    		}
     		}
     		parser.reset();
-    		String 是否唯一 = rs.substring(rs.indexOf("isUnique")+10, rs.indexOf("registerTime")-9);
-    		f.是否唯一 = 是否唯一;
-    		System.out.println("是否唯一："+是否唯一);
-    		if(!(是否唯一.equals("唯一住宅")||是否唯一.equals("暂无数据")||是否唯一.equals("不唯一"))){
-    			throw new Exception("未知的是否唯一属性"+是否唯一);
-    		}
-    		f.当前状态 = "1";
+    		try {
+				String 是否唯一 = rs.substring(rs.indexOf("isUnique")+10, rs.indexOf("registerTime")-9);
+				f.是否唯一 = 是否唯一;
+				//System.out.println("是否唯一："+是否唯一);
+				if(!(是否唯一.equals("唯一住宅")||是否唯一.equals("暂无数据")||是否唯一.equals("不唯一"))){
+					throw new Exception("未知的是否唯一属性"+是否唯一);
+				}
+			} catch (Exception e1) {
+				logger.info("是否唯一装配异常");
+			}
+    		logger.info("准备更新房屋信息:"+f);
     		房屋信息数据库.更新房屋基本信息(f);
-    		房屋信息数据库.添加房屋交易信息(j);
+    		try {
+    			房屋交易信息 j2 = 房屋信息数据库.查找最新交易信息根据来源和唯一标识(f.房屋信息来源, f.房屋唯一标识);
+    			if(j2.总价 != j.总价){
+        			logger.info("房屋"+j.房屋基本信息id+"价格从"+j.总价+"变成"+j2.总价);
+    				房屋信息数据库.添加房屋交易信息(j);
+    			}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
         } catch (ParserException e) {
             // TODO Auto-generated catch block  
             e.printStackTrace();  
@@ -307,7 +373,7 @@ public class LinkedHouseImpl extends 房屋信息捕获基类{
 
 	private static String 捕获数据(Parser parser, NodeFilter filter) throws ParserException {
 		NodeList nodes = parser.extractAllNodesThatMatch(filter);  
-		System.out.println("------抓取到" + nodes.size() + "条符合条件记录------");  
+//		System.out.println("------抓取到" + nodes.size() + "条符合条件记录------");  
 		for (int i = 0; i < nodes.size(); i++) {  
 		    Node node = nodes.elementAt(i);  
 //                System.out.println();  
@@ -339,22 +405,23 @@ public class LinkedHouseImpl extends 房屋信息捕获基类{
 				最大页数 = Integer.parseInt(最大页数S.trim());
 				最大页数 = (最大页数/30) + 1;
 				rs = rs.substring(rs.indexOf("class=\"content"),rs.indexOf("bigImgList"));
-				logger.info("========================================================================================================================");
-				logger.info(rs);
-				logger.info("==========================================================================子数据开始==============================================");
+//				logger.info("========================================================================================================================");
+//				logger.info(rs);
+//				logger.info("==========================================================================子数据开始==============================================");
 				String[] rsArray = rs.split("<div class=\"info clear\"><div class=\"title\"><a class=\"\" href=\"");
 				for (String s : rsArray) {
 					if(s.contains("data-log_index")&&!s.contains("左侧内容")){
-						logger.info("========================================================================================================================");
+//						logger.info("========================================================================================================================");
 						房屋概要信息捕获(s);
+//						Thread.sleep(3000);
 					}
 				}
-				logger.info("==========================================================================子数据结束==============================================");
+//				logger.info("==========================================================================子数据结束==============================================");
 				System.out.println("共有"+ 最大页数 +"页数据，当前为第"+i+"页数据");
 				Thread.sleep(1);
 			}
-			logger.info("总数据获取完毕，共计：20条数据，准备依次解析单个数据");
-			logger.info("单个数据解析完毕，解析结果：成功19条，失败1条");
+//			logger.info("总数据获取完毕，共计：20条数据，准备依次解析单个数据");
+//			logger.info("单个数据解析完毕，解析结果：成功19条，失败1条");
 		} catch (Exception e) {
 			System.out.println("当前访问网址为:"+二手房筛选网址);
 			throw e;
@@ -494,7 +561,7 @@ public class LinkedHouseImpl extends 房屋信息捕获基类{
 		房屋信息数据库.添加小区基本信息(小区基本信息);
 	}
 	
-	public void test2(){
+	public void test2() throws Exception{
 		/**
 		 * 全北京概要数据
 			min_price:150
@@ -553,15 +620,15 @@ public class LinkedHouseImpl extends 房屋信息捕获基类{
 		 *  data-original="http://image1.ljcdn.com/110000-inspection/80ab76cc-1204-4ae1-87bc-116ee402030d.jpg.232x174.jpg" alt="地铁6号线 民水民电LOFT 有燃气"></a>
 		*/
 //		String ss = "http://bj.lianjia.com/ershoufang/101100879074.html\" target=\"_blank\" data-log_index=\"1\"   data-el=\"ershoufang\"  data-sl=\"\">东亚五环国际 不限购开间 可注册公司 低总价</a><span class=\"yezhushuo tagBlock\">房主自荐</span></div><div class=\"address\"><div class=\"houseInfo\"><span class=\"houseIcon\"></span><a href=\"http://bj.lianjia.com/xiaoqu/1111047687491/\" target=\"_blank\" data-log_index=\"1\" data-el=\"region\">东亚五环国际 </a> | 1室0厅 | 34.8平米 | 西 | 精装 | 有电梯</div></div><div class=\"flood\"><div class=\"positionInfo\"><span class=\"positionIcon\"></span>中楼层(共20层)2014年建塔楼  -  <a href=\"http://bj.lianjia.com/ershoufang/jiugong1/\" target=\"_blank\">旧宫</a></div></div><div class=\"followInfo\"><span class=\"starIcon\"></span>111人关注 / 共52次带看 / 2个月以前发布</div><div class=\"tag\"><span class=\"five\">房本满两年</span><span class=\"haskey\">随时看房</span><span class=\"is_restriction\">不限购</span></div><div class=\"priceInfo\"><div class=\"totalPrice\"><span>125</span>万</div><div class=\"unitPrice\" data-hid=\"101100879074\" data-rid=\"1111047687491\" data-price=\"35920\"><span>单价35920元/平米</span></div></div></div><div class=\"listButtonContainer\"><div class=\"btn-follow followBtn\" data-hid=\"101100879074\"><span class=\"follow-text\">关注</span></div><div class=\"compareBtn LOGCLICK\" data-hid=\"101100879074\" log-mod=\"101100879074\" data-log_evtid=\"10230\">加入对比</div></div></li><li class=\"clear\"><a class=\"img \" href=\"http://bj.lianjia.com/ershoufang/101100591721.html\" target=\"_blank\"data-log_index=\"2\" data-el=\"ershoufang\" data-sl=\"\"><img class=\"lj-lazy\" src=\"http://s1.ljcdn.com/feroot/pc/asset/img/blank.gif?_v=20170119161557\" data-original=\"http://image1.ljcdn.com/110000-inspection/80ab76cc-1204-4ae1-87bc-116ee402030d.jpg.232x174.jpg\" alt=\"地铁6号线 民水民电LOFT 有燃气\"></a>";
-		System.out.println(ss);
+//		System.out.println(ss);
 		
 		String 房屋唯一标识 = ss.substring(ss.indexOf("ershoufang")+11, ss.indexOf("html")-1);
-		System.out.println("唯一标识:"+房屋唯一标识);
+		//System.out.println("唯一标识:"+房屋唯一标识);
 
 		String 网址  = ss.substring(0, ss.indexOf("\""));
-		System.out.println("网址:"+网址);
+		//System.out.println("网址:"+网址);
 		String 标题 = ss.substring(ss.indexOf("data-sl=\"\">")+11, ss.indexOf("</a>"));
-		System.out.println("标题:"+标题);
+		//System.out.println("标题:"+标题);
 		String xx = ss.substring(ss.indexOf("region")+8,ss.indexOf("flood"));
 		if(xx.contains("独栋别墅")){
 			xx = xx.replace(" | 独栋别墅", "");
@@ -575,14 +642,14 @@ public class LinkedHouseImpl extends 房屋信息捕获基类{
 		String 电梯 = null;
 		try {
 			所在小区 = sp[0].substring(0,sp[0].length()-5).trim();
-			System.out.println("小区:"+所在小区);
+			//System.out.println("小区:"+所在小区);
 			户型 = sp[1].trim();
-			System.out.println("户型:"+户型);
+			//System.out.println("户型:"+户型);
 			String 建筑面积S = sp[2].trim().replace("平米", "");
 			建筑面积 = Double.parseDouble(建筑面积S);
-			System.out.println("总面积:"+建筑面积);
+			//System.out.println("总面积:"+建筑面积);
 			朝向 = sp[3].trim().replace(" ", "");
-			System.out.println("朝向:"+朝向);
+			//System.out.println("朝向:"+朝向);
 			装修 = null;
 			if(sp.length>4){
 				String zx = sp[4].trim();
@@ -592,17 +659,17 @@ public class LinkedHouseImpl extends 房屋信息捕获基类{
 					throw new Exception("位置装修类型："+装修);
 				}
 			}
-			System.out.println("装修:"+装修);
+			//System.out.println("装修:"+装修);
 			电梯 = "无电梯";
 			if(sp.length>5){
 				if(sp[5].contains("有电梯")){
 					电梯 = "有电梯";
-					System.out.println("电梯:"+电梯);
+					//System.out.println("电梯:"+电梯);
 				}else if(sp[5].contains("无电梯")){
 					电梯 = "无电梯";
-					System.out.println("电梯:"+电梯);
+					//System.out.println("电梯:"+电梯);
 				} else{
-					System.out.println("未知属性："+sp[5]);
+					//System.out.println("未知属性："+sp[5]);
 					throw new Exception();
 				}
 				
@@ -623,7 +690,7 @@ public class LinkedHouseImpl extends 房屋信息捕获基类{
 		int 所在楼层 = 0;
 		if(楼层.contains("(")){//中楼层(共16层)2008年建板楼 - 燕郊城区
 			String 总楼层Str = 楼层.substring(楼层.indexOf("(")+2,楼层.indexOf(")")-1);
-			System.out.println("总楼层:"+总楼层Str);
+			//System.out.println("总楼层:"+总楼层Str);
 			try {
 				总楼层 = Integer.parseInt(总楼层Str);
 				if(楼层.contains("低楼层")){
@@ -641,14 +708,14 @@ public class LinkedHouseImpl extends 房屋信息捕获基类{
 				}else if(楼层.contains("未知楼层")){
 					 所在楼层 = 0;
 				}else {
-					System.out.println("未知楼层："+楼层);
+					//System.out.println("未知楼层："+楼层);
 					throw new Exception("未知楼层："+楼层);
 				}
-				System.out.println("所在楼层："+ 所在楼层);
+				//System.out.println("所在楼层："+ 所在楼层);
 				if(楼层.contains("年")){
 					String 建房年份S = 楼层.substring(楼层.indexOf(")")+1,楼层.indexOf("年"));
 					建房时间 = DU.getDate(建房年份S);
-					System.out.println("建房时间:" + sdf.format(建房时间));
+//					System.out.println("建房时间:" + sdf.format(建房时间));
 					建筑类型 = 楼层.substring(楼层.indexOf("年建")+2, 楼层.indexOf("-")-2);
 				}else{
 					建筑类型 = 楼层.substring(楼层.indexOf(")")+1, 楼层.indexOf("-")-2);
@@ -663,21 +730,21 @@ public class LinkedHouseImpl extends 房屋信息捕获基类{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			System.out.println("建筑类型："+建筑类型);
-			System.out.println("建房时间"+建房时间);
+//			System.out.println("建筑类型："+建筑类型);
+//			System.out.println("建房时间"+建房时间);
 		}else if(楼层.contains("层")){//5层2006年建板楼 - 北七家
 //			System.out.println(楼层.substring(0,楼层.indexOf("层")));
 //			System.out.println(楼层.substring(楼层.indexOf("层")+1,楼层.indexOf("年")));
 //			System.out.println(楼层.substring(楼层.indexOf("年")+1,楼层.indexOf("-")-1));
 //			System.out.println(楼层.substring(楼层.indexOf("-")+2));
 			String 总楼层Str = 楼层.substring(0,楼层.indexOf("层"));
-			System.out.println("总楼层:"+总楼层Str);
+//			System.out.println("总楼层:"+总楼层Str);
 			总楼层 = Integer.parseInt(总楼层Str);
 			
 			if(楼层.contains("年")){
 				String 建房年份S = 楼层.substring(楼层.indexOf("层")+1,楼层.indexOf("年"));
 				建房时间 = DU.getDate(建房年份S);
-				System.out.println("建房时间:" + sdf.format(建房时间));
+//				System.out.println("建房时间:" + sdf.format(建房时间));
 				建筑类型 = 楼层.substring(楼层.indexOf("年")+1,楼层.indexOf("-")-1);
 			}else{
 				建筑类型 = 楼层.substring(楼层.indexOf(")")+1, 楼层.indexOf("-")-2);
@@ -685,36 +752,36 @@ public class LinkedHouseImpl extends 房屋信息捕获基类{
 					throw new Exception("未知建筑类型:"+建筑类型);
 				}
 			}
-			System.out.println("建房时间"+建房时间);
+//			System.out.println("建房时间"+建房时间);
 		}else{//2002年建板塔结合 - 木樨园
 			if(楼层.contains("年")){
 				String 建房年份S = 楼层.substring(楼层.indexOf("年")-4,楼层.indexOf("年"));
 				建房时间 = DU.getDate(建房年份S);
-				System.out.println("建房时间:" + sdf.format(建房时间));
+//				System.out.println("建房时间:" + sdf.format(建房时间));
 				建筑类型 = 楼层.substring(楼层.indexOf("年")+1,楼层.indexOf("-")-1);
 			}
-			System.out.println("建房时间"+建房时间);
+//			System.out.println("建房时间"+建房时间);
 		}
 		所在地点 = 楼层.substring(楼层.indexOf("blank")+7);
-		System.out.println("所在地点:"+所在地点);
+//		System.out.println("所在地点:"+所在地点);
 		String 关注人数AS = ss.substring(ss.indexOf("followInfo")+42,ss.indexOf("发布"));
 		String[] 关注人数A = 关注人数AS.split("/");
 		String 关注人数S = 关注人数A[0].substring(0, 关注人数A[0].indexOf("人"));
 		int 关注人数 = Integer.parseInt(关注人数S);
-		System.out.println("关注人数："+关注人数);
+//		System.out.println("关注人数："+关注人数);
 		String 带看次数S = 关注人数A[1].substring(2, 关注人数A[1].indexOf("次"));
 		int 看房人数 = Integer.parseInt(带看次数S);
-		System.out.println("带看次数："+看房人数);
+//		System.out.println("带看次数："+看房人数);
 		String 发布时间S = 关注人数A[2];
 		Date 发布时间 = null;
 		if(发布时间S.contains("月")){
 			String 月份 = 发布时间S.substring(0, 发布时间S.indexOf("个"));
 			发布时间 = DU.获取几月前的时间(月份);
-			System.out.println("发布时间："+发布时间);
+//			System.out.println("发布时间："+发布时间);
 		}else if(发布时间S.contains("天")){
 			String 天数 = 发布时间S.substring(0, 发布时间S.indexOf("天"));
 			发布时间 = DU.获取几天前的时间(天数);
-			System.out.println("发布时间："+sdf.format(发布时间));
+//			System.out.println("发布时间："+sdf.format(发布时间));
 		}else if(发布时间S.contains("一年")){
 			Calendar c1 = Calendar.getInstance();
 			c1.set(Calendar.HOUR_OF_DAY, 0);
@@ -722,25 +789,25 @@ public class LinkedHouseImpl extends 房屋信息捕获基类{
 			c1.set(Calendar.SECOND, 0);
 			c1.add(Calendar.YEAR, (-1*1));
 			发布时间 = c1.getTime();
-			System.out.println("发布时间："+sdf.format(c1.getTime()));
+//			System.out.println("发布时间："+sdf.format(c1.getTime()));
 		}else if(发布时间S.contains("刚刚")){
 			Calendar c1 = Calendar.getInstance();
 			c1.set(Calendar.HOUR_OF_DAY, 0);
 			c1.set(Calendar.MINUTE, 0);
 			c1.set(Calendar.SECOND, 0);
 			发布时间 = c1.getTime();
-			System.out.println("发布时间："+sdf.format(c1.getTime()));
+//			System.out.println("发布时间："+sdf.format(c1.getTime()));
 		}else {
-			System.out.println("未知发布时间："+发布时间S);
+//			System.out.println("未知发布时间："+发布时间S);
 			throw new Exception();
 		}
 		String zjg = ss.substring(ss.indexOf("totalPrice")+18,ss.indexOf("unitPrice")-26);
 		double 总价 = Double.parseDouble(zjg)*10000;
-		System.out.println("总价格："+总价);
+//		System.out.println("总价格："+总价);
 		
 		String mpmjg = ss.substring(ss.lastIndexOf(">单价")+3,ss.indexOf("/平米")-1);
 		int 每平米价格 = Integer.parseInt(mpmjg);
-		System.out.println("每平米价格："+每平米价格 );
+//		System.out.println("每平米价格："+每平米价格 );
 		
 		//备注
 		String 备注 = ss.substring(ss.indexOf("class=\"tag\""),ss.indexOf("priceInfo"));
@@ -752,7 +819,7 @@ public class LinkedHouseImpl extends 房屋信息捕获基类{
 				备注 += 备注T+";" ;
 			}
 		}
-		System.out.println("备注："+备注);
+//		System.out.println("备注："+备注);
 		房屋基本信息 f = getBaseInfo();
 		
 		f.setId(idsdf.format(new Date()) + 房屋唯一标识);
@@ -781,23 +848,28 @@ public class LinkedHouseImpl extends 房屋信息捕获基类{
 		j.set关注人数(关注人数);
 		j.set每平米价格(每平米价格);
 		j.set看房人数(看房人数);
-		logger.info(f.toString());
-		logger.info(j.toString());
+//		logger.info(f.toString());
+//		logger.info(j.toString());
 		房屋基本信息 f2 = 房屋信息数据库.查找基本信息根据来源和唯一标识(房屋信息来源, 房屋唯一标识);
 		房屋交易信息 j2 = 房屋信息数据库.查找最新交易信息根据来源和唯一标识(房屋信息来源, 房屋唯一标识);
 		if(f2==null){
-			System.out.println("未发现房屋");
+			System.out.println("准备添加房屋:"+f);
 			房屋信息数据库.添加房屋基本信息(f);
+			System.out.println("准备添加房屋交易信息:"+j);
 			房屋信息数据库.添加房屋交易信息(j);
 		}else{
 			j.set房屋基本信息id(f2.getId());
-			System.out.println("发现已存在房屋:"+f2.toString());
+//			System.out.println("发现已存在房屋:"+f2.toString());
+			f2.最后更新日期 = new Date();
+//			System.out.println("准备更新房屋更新日期:"+f);
+			房屋信息数据库.更新房屋基本信息(f2);
 			if(j2.get总价()!=j.总价){
 				System.out.println("######################发现价格变动信息##############################################################################################");
+				System.out.println("房屋"+j.房屋基本信息id+"价格从"+j.总价+"变成"+j2.总价);
 				房屋信息数据库.添加房屋交易信息(j);
+			}else{
+//				System.out.println("房屋价格未变"+j);
 			}
-			f2.最后更新日期 = new Date();
-			房屋信息数据库.更新房屋基本信息(f2);
 		}
 		return f;
 	}
