@@ -89,18 +89,30 @@ public class ReadWriteLock用法 {
 
 		public String getS() {
 			readLock.lock();
-			System.out.println(Thread.currentThread().getName() + "准备读取值");
-			TU.s(1000);
-			readLock.unlock();
+			try {
+				System.out.println(Thread.currentThread().getName() + "准备读取值");
+				TU.s(1000);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				readLock.unlock();
+			}
 			return s;
 		}
 
 		public void setS(String s) {
 			writeLock.lock();
-			System.out.println(Thread.currentThread().getName() + "准备写值：" + s);
-			this.s = s;
-			TU.s(2000);
-			writeLock.unlock();
+			try {
+				System.out.println(Thread.currentThread().getName() + "准备写值：" + s);
+				this.s = s;
+				TU.s(2000);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				writeLock.unlock();
+			}
+			
 		}
 
 	}
