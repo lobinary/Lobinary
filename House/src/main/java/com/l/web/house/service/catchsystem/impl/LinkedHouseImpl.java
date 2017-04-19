@@ -56,7 +56,7 @@ public class LinkedHouseImpl extends 房屋信息捕获基类{
 	
 	@Override
 	public void 捕获房屋信息() throws Exception {
-		捕获房屋概要信息();
+//		捕获房屋概要信息();
 		从数据库捕获房屋详细信息();
 		获取小区信息();
 	}
@@ -112,51 +112,52 @@ public class LinkedHouseImpl extends 房屋信息捕获基类{
     		//首付
 //    		//System.out.println(parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "tax")).elementAt(0).getChildren().elementAt(0).toPlainTextString());
     		try {
-				String 首付S = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "tax")).elementAt(0).getChildren().elementAt(0).getChildren().elementAt(0).toPlainTextString().replace("首付", "").replace("万", "");
+				String 首付S = PU.parser(rs,1,PU.Attribute("class","price "),PU.Tag("span"));
 				if(首付S!=null){
 					//System.out.println(首付S);
 					double 首付 = (Double.parseDouble(首付S))*10000;
 					j.首付 = 首付;
 					//System.out.println("首付："+首付);
-					parser.reset();
 				}
-				
-				//税费S
-				String 税费S = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "tax")).elementAt(0).getChildren().elementAt(0).getChildren().elementAt(2).toPlainTextString().replace("税费", "").replace("万", "").replace("(仅供参考)", "");
-				if(税费S!=null){
-					double 税费 = (Double.parseDouble(税费S))*10000;
-					j.税费 = 税费;
-					//System.out.println("税费："+税费);
-					parser.reset();
-					
-				}
+//				String 每平米价格 = PU.parser(rs,1,PU.Attribute("class","unitPrice"),PU.Tag("span")).replace("元/平米", "");
+//				j.每平米价格 = (Double.parseDouble(每平米价格 ));
+				//税费S 税费被取消展示
+//				String 税费S = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "tax")).elementAt(0).getChildren().elementAt(0).getChildren().elementAt(2).toPlainTextString().replace("税费", "").replace("万", "").replace("(仅供参考)", "");
+//				if(税费S!=null){
+//					double 税费 = (Double.parseDouble(税费S))*10000;
+//					j.税费 = 税费;
+//					//System.out.println("税费："+税费);
+//					parser.reset();
+//					
+//				}
 			} catch (Exception e1) {
 				logger.error("获取首付、税费异常",e1);
 				f.当前状态 = "4";
 				f.备注 = rs;
 			}
     		try{
+    			/**
+    			 * <div class="areaName">
+    			 * 		<i></i>
+    			 * 		<span class="label">所在区域</span>
+    			 * 		<span class="info">
+    			 * 			<a href="/ershoufang/yanjiao/" target="_blank">燕郊</a>&nbsp;
+    			 * 			<a href="/ershoufang/yanshunluguodao/" target="_blank">燕顺路国道</a>&nbsp;
+    			 * 		</span>
+    			 * 		<a href="" class="supplement" title="" style="color:#394043;"></a>
+    			 * </div>
+    			 */
 	    		//所在小区编号
-	//    		String 所在小区编号 = rs.substring(rs.indexOf("resblockPosition")+18);
-	//    		String 所在小区编号 = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "communityName")).elementAt(0).getChildren().elementAt(3).getText().replace("a href=\"/xiaoqu/", "").replace("/\" target=\"_blank\" class=\"info\"", "");
+//	    		String 所在小区编号 = rs.substring(rs.indexOf("resblockPosition")+18);
+//	    		String 所在小区编号 = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "communityName")).elementAt(0).getChildren().elementAt(3).getText().replace("a href=\"/xiaoqu/", "").replace("/\" target=\"_blank\" class=\"info\"", "");
 	//    		f.所在小区编号 = 所在小区编号;
 	//    		//System.out.println("小区编号:"+所在小区编号);
 	    		String 所在小区编号S = rs.substring(rs.indexOf("resblockId")+12);
 	    		f.所在小区编号 = 所在小区编号S.substring(0,所在小区编号S.indexOf("'"));
-	    		parser.reset();
-				NodeList 位置属性Node = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "areaName")).elementAt(1).getChildren();
-				位置属性Node = 位置属性Node.elementAt(1).getChildren();
-				String 所在区县 = 位置属性Node.elementAt(0).toPlainTextString();
-				f.所在区县 = 所在区县;
-				//System.out.println("所在区县:"+所在区县);
-				parser.reset();
-				String 所在地点 = 位置属性Node.elementAt(2).toPlainTextString();
-				f.所在地点 = 所在地点;
-				//System.out.println("所在位置："+所在地点);
-				parser.reset();
-				String 所在环数 = 位置属性Node.elementAt(3).toPlainTextString().replace("&nbsp;", "");
-				f.所在环数 = 所在环数;
-				//System.out.println("所在环数:"+所在环数);
+				f.所在区县 = PU.parser(rs,1,PU.Attribute("class","areaName"),PU.Attribute("class","info"),PU.Tag("a"));
+				f.所在地点 = PU.parser(rs,2,PU.Attribute("class","areaName"),PU.Attribute("class","info"),PU.Tag("a"));
+//				String 所在环数 = 位置属性Node.elementAt(3).toPlainTextString().replace("&nbsp;", "");
+//				f.所在环数 = 所在环数;
 				parser.reset();
 	    		String 联系人 = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "brokerName")).elementAt(0).getChildren().elementAt(0).toPlainTextString();
 	    		f.联系人 = 联系人;
@@ -359,7 +360,7 @@ public class LinkedHouseImpl extends 房屋信息捕获基类{
     		try {
     			房屋交易信息 j2 = 房屋信息数据库.查找最新交易信息根据来源和唯一标识(f.房屋信息来源, f.房屋唯一标识);
     			if(j2.总价 != j.总价){
-        			logger.info("房屋"+j.房屋基本信息id+"价格从"+j.总价+"变成"+j2.总价);
+        			logger.info("房屋"+j.房屋基本信息id+"价格从"+j.总价+"变成"+j2.总价+(j.总价>j2.总价?"↓↓↓↓↓↓↓↓↓↓↓↓↓↓":"↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑"));
     				房屋信息数据库.添加房屋交易信息(j);
     			}
 			} catch (Exception e) {
@@ -865,7 +866,7 @@ public class LinkedHouseImpl extends 房屋信息捕获基类{
 			房屋信息数据库.更新房屋基本信息(f2);
 			if(j2.get总价()!=j.总价){
 				System.out.println("######################发现价格变动信息##############################################################################################");
-				System.out.println("房屋"+j.房屋基本信息id+"价格从"+j.总价+"变成"+j2.总价);
+				System.out.println("房屋"+j.房屋基本信息id+"价格从"+j.总价+"变成"+j2.总价+(j.总价>j2.总价?"↓↓↓↓↓↓↓↓↓↓↓↓↓↓":"↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑"));
 				房屋信息数据库.添加房屋交易信息(j);
 			}else{
 //				System.out.println("房屋价格未变"+j);

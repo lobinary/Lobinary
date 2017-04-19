@@ -2,9 +2,20 @@
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns="http://www.springframework.org/schema/beans"
     xsi:schemaLocation="http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
-    <bean id="person" class="com.lobinary.源码.spring.core.Person">
+    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd" >
+	
+   <!--  <bean id="person" class="com.lobinary.源码.spring.core.Person">
         <property name="name" value="Lxxx"/>
         <property name="age" value="26"/>
-    </bean>
+    </bean> -->
+    
+    
+  <bean id="mapper" class="org.dozer.spring.DozerBeanMapperFactoryBean">
+    <property name="mappingFiles">
+      <list>
+        <value>classpath*:framework/Dozer/dozer-mapping.xml</value>
+      </list>
+    </property>
+  </bean>
+  
 </beans>

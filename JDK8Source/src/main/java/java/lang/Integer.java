@@ -565,37 +565,47 @@ public final class Integer extends Number implements Comparable<Integer> {
      *  如果i == Integer.MIN_VALUE将失败
      * 
      */
-    static void getChars(int i, int index, char[] buf) {
-        int q, r;
-        int charPos = index;
-        char sign = 0;
+    static void getChars(int int数据, int 开始指针, char[] 字符串数组) {
+        int 被截取后的数字, 截取的数字;
+        int 字符串数组指针 = 开始指针;
+        char 正负数标识 = 0;
 
-        if (i < 0) {
-            sign = '-';
-            i = -i;
+      //提取符号位，并将i转换成正数
+        if (int数据 < 0) {
+            正负数标识 = '-';
+            int数据 = -int数据;
         }
 
         // Generate two digits per iteration
-        while (i >= 65536) {
-            q = i / 100;
+        while (int数据 >= 65536) {//如果是16位到32位的int值			1234567
+            被截取后的数字 = int数据 / 100;								//q=  12345
         // really: r = i - (q * 100);
-            r = i - ((q << 6) + (q << 5) + (q << 2));
-            i = q;
-            buf [--charPos] = DigitOnes[r];
-            buf [--charPos] = DigitTens[r];
+            截取的数字 = int数据 - ((被截取后的数字 << 6) + (被截取后的数字 << 5) + (被截取后的数字 << 2));	//r=1234567-(12345*100) = 1234567-1234500=67;
+            int数据 = 被截取后的数字;										//int数据=12345
+            			
+            字符串数组 [--字符串数组指针] = DigitOnes[截取的数字];		//[][][][][][][7]
+            字符串数组 [--字符串数组指针] = DigitTens[截取的数字];		//[][][][][][6][7]
         }
 
         // Fall thru to fast mode for smaller numbers
-        // assert(i <= 65536, i);
+//         assert(int数据 <= 65536, int数据);
+        //int数据=12345 
         for (;;) {
-            q = (i * 52429) >>> (16+3);
-            r = i - ((q << 3) + (q << 1));  // r = i-(q*10) ...
-            buf [--charPos] = digits [r];
-            i = q;
-            if (i == 0) break;
+        	//12345-12340=5
+        	//12345/10*10
+        	//
+            被截取后的数字 = (int数据 * 52429) >>> (16+3);	//12345/10
+            //  0010 0110 1001 0100 0000 1001 1010 0101
+            //	0000 0000 0000 0000 0000 0100 1101 0010 //100 0000 1001 1010 0101
+            //	被截取后的数字 = 1234
+            //  截取的数字 = 12345 - ((1234<<3)+(1234<<1))=12345-(9872+2468)=12345-12340=5
+            截取的数字 = int数据 - ((被截取后的数字 << 3) + (被截取后的数字 << 1));  // r = i-(q*10) ...
+            字符串数组 [--字符串数组指针] = digits [截取的数字];//[][][][][5][6][7]
+            int数据 = 被截取后的数字;//int数据 = 1234
+            if (int数据 == 0) break;
         }
-        if (sign != 0) {
-            buf [--charPos] = sign;
+        if (正负数标识 != 0) {
+            字符串数组 [--字符串数组指针] = 正负数标识;
         }
     }
 

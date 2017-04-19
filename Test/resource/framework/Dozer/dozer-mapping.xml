@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+  <mapping>
+    <class-a>com.lobinary.框架.Dozer.DozerA</class-a>
+    <class-b>com.lobinary.框架.Dozer.DozerB</class-b>
+    <field>
+      <a>name</a>
+      <b>value</b>
+    </field>
+  </mapping>
+</mappings>

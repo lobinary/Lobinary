@@ -42,11 +42,44 @@ public class PU {
 	 * @param args
 	 * @throws Exception
 	 */
+	/**
+	 * <div class="areaName">
+	 * 		<i></i>
+	 * 		<span class="label">所在区域</span>
+	 * 		<span class="info">
+	 * 			<a href="/ershoufang/yanjiao/" target="_blank">燕郊</a>&nbsp;
+	 * 			<a href="/ershoufang/yanshunluguodao/" target="_blank">燕顺路国道</a>&nbsp;
+	 * 		</span>
+	 * 		<a href="" class="supplement" title="" style="color:#394043;"></a>
+	 * </div>
+	 */
+	
+	
+	
+	
+	
+	
 	public static void main(String[] args) throws Exception {
-		String rs = HttpUtil.doGet("http://bj.lianjia.com/ershoufang/101101126725.html");
-		NodeList 基本属性 = PU.parser(rs,PU.Attribute("class","base"),PU.Attribute("class","content"),PU.Tag("ul"));
-		listUL(基本属性);
+		String rs = HttpUtil.doGet("http://bj.lianjia.com/ershoufang/101101143187.html");
+//		System.out.println(rs);
+		String 基本属性 = PU.parser(rs,1,PU.Attribute("class","price "),PU.Tag("span"));
+		System.out.println(基本属性);
+		基本属性 = PU.parser(rs,1,PU.Attribute("class","unitPrice"),PU.Tag("span"));
+		System.out.println(基本属性);
+		
+		System.out.println(PU.parser(rs,PU.Attribute("class","panel"),PU.Attribute("class","totalCount")).toHtml());
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	public static Map<String,String> listUL(NodeList nl){
 		Map<String,String> map = new HashMap<String,String>();
@@ -77,6 +110,19 @@ public class PU {
 	}
 	
 	/**
+	 * 通过参数捕获数据，多用于直接捕获文本数据
+	 * @param html 
+	 * @param stringIndex 元素位置，起始为1
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	public static String parser(String html,int stringIndex, PUFilter... param) throws Exception {
+		NodeList result = parser(html,  param);
+		return result.elementAt(stringIndex-1).toPlainTextString();
+	}
+	
+	/**
 	 * 查找出parser中的数据
 	 * @param parser
 	 * @param param 标签或类名
@@ -94,36 +140,41 @@ public class PU {
         		}else{
         			throw new Exception("暂不支持首选filter为：["+f.types+"]");
         		}
+
+//        		System.out.println(基本属性Node.toHtml());
+//        		System.out.println("===============================");
         		continue;
         	}
         	
-    		SimpleNodeIterator 基本属性Nodes = 基本属性Node.elementAt(0).getChildren().elements();
-    		while (基本属性Nodes.hasMoreNodes()) {
-    			try {
-					Node n = 基本属性Nodes.nextNode();
-					if(f.types == PageEnum.ATTRIBUTE){
-						if(n instanceof TextNode){
-							continue;
+			try {
+				if(f.types == PageEnum.ATTRIBUTE){
+					Parser ps = new Parser(基本属性Node.toHtml());
+					基本属性Node = ps.extractAllNodesThatMatch( new HasAttributeFilter(f.name, f.value));
+				}else if(f.types == PageEnum.TAG){
+					Parser ps = new Parser(基本属性Node.toHtml());
+					基本属性Node = ps.extractAllNodesThatMatch( new TagNameFilter(f.name));
+					if(f.index!=0){
+						if(基本属性Node.size()<f.index){
+							throw new Exception("标签："+f+"的位置index设置超限，当前为："+基本属性Node.size()+"，最大应为："+f.index);
 						}
-						Parser ps = new Parser(n.toHtml(true));
-						基本属性Node = ps.extractAllNodesThatMatch( new HasAttributeFilter(f.name, f.value));
-					}else if(f.types == PageEnum.TAG){
-						if(n instanceof TextNode){
-							continue;
-						}
-						Parser ps = new Parser(n.toHtml(true));
-						基本属性Node = ps.extractAllNodesThatMatch( new TagNameFilter(f.name));
-					}else{
-						throw new Exception("暂不支持的PageEnum["+f.types+"]类型");
+						Node elementAt = 基本属性Node.elementAt(f.index-1);
+						基本属性Node.removeAll();
+						基本属性Node.add(elementAt);
 					}
-				} catch (Exception e) {
-					logger.error("====================================================================================================");
-					logger.error(基本属性Node.toHtml(),e);
-					logger.error("====================================================================================================");
-					throw new Exception("捕获数据["+f+"]异常：");
+				}else{
+					throw new Exception("暂不支持的PageEnum["+f.types+"]类型");
 				}
-    			
+			} catch (Exception e) {
+				logger.error("====================================================================================================");
+				logger.error(基本属性Node.toHtml(),e);
+				logger.error("====================================================================================================");
+				throw new Exception("捕获数据["+f+"]异常：");
+			}
+			
+    		if(基本属性Node==null){
+    			throw new Exception("捕获数据异常，筛选数据为null，当前筛选条件为:"+f);
     		}
+//    		System.out.println(基本属性Node.toHtml());
 //    		System.out.println("===============================");
 		}
 		return 基本属性Node;
@@ -153,7 +204,7 @@ public class PU {
 		private PageEnum types;//类型
 		private String name;//某些需要的name
 		private String value;//值
-		private int index;//位置 1，2，3，没有0
+		private int index=0;//位置 1，2，3，没有0
 		public PUFilter(PageEnum types, String name) {
 			super();
 			this.types = types;

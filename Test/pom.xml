@@ -133,6 +133,13 @@
 			<artifactId>derby</artifactId>
 			<version>10.12.1.1</version>
 		</dependency>
+		
+		<!-- Dozer -->
+		<dependency>
+		    <groupId>net.sf.dozer</groupId>
+		    <artifactId>dozer</artifactId>
+		    <version>5.4.0</version>
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.apache.derby/derbyclient 网络版derby -->
 		<dependency>
