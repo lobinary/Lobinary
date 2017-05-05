@@ -86,11 +86,11 @@ public class FileUtil {
 	}
 	
 	/**
-	 * 判断文件是否存在，如果不存在就创建该文件
+	 * 判断文件是否存在，如果不存在就创建该文件,存在就直接返回
 	 * @param file
 	 * @throws IOException
 	 */
-	public static void fileIsExist(File file) throws IOException{
+	public static File createFile(File file) throws IOException{
 		if(!file.exists()){
 			String filePath = file.getPath();
 			try {
@@ -108,6 +108,33 @@ public class FileUtil {
 			}
 			file.createNewFile();
 		}
+		return file;
+	}
+	
+	/**
+	 * 判断文件是否存在，如果不存在就创建该文件
+	 * @param file
+	 * @throws IOException
+	 */
+	public static File fileIsExist(File file) throws IOException{
+		if(!file.exists()){
+			String filePath = file.getPath();
+			try {
+				filePath = filePath.substring(0, filePath.lastIndexOf("//"));
+			} catch (StringIndexOutOfBoundsException e) {
+				try {
+					filePath = filePath.substring(0, filePath.lastIndexOf("/"));
+				} catch (StringIndexOutOfBoundsException e1) {
+					filePath = filePath.substring(0, filePath.lastIndexOf("\\"));
+				}
+			}
+			File filePathDir = new File(filePath);
+			if(!filePathDir.exists()){
+				filePathDir.mkdirs();
+			}
+			file.createNewFile();
+		}
+		return file;
 	}
 	
 	public static void main(String[] args) {

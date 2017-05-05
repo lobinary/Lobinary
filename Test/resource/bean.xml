@@ -4,10 +4,10 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-4.0.xsd" >
 	
-   <!--  <bean id="person" class="com.lobinary.源码.spring.core.Person">
+   <bean id="person" class="com.lobinary.源码.spring.core.Person">
         <property name="name" value="Lxxx"/>
         <property name="age" value="26"/>
-    </bean> -->
+    </bean>
     
     
   <bean id="mapper" class="org.dozer.spring.DozerBeanMapperFactoryBean">
