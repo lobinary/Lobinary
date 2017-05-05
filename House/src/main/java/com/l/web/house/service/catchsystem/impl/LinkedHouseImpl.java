@@ -21,6 +21,8 @@ import org.htmlparser.util.NodeList;
 import org.htmlparser.util.ParserException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
 import com.l.web.house.mapper.房屋信息数据库;
@@ -53,6 +55,12 @@ public class LinkedHouseImpl extends 房屋信息捕获基类{
 	SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-ddHHmmss");
 
 	SimpleDateFormat idsdf = new SimpleDateFormat("YYYYMMddHHmmss");
+	
+	public static void main(String[] args) throws Exception {
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("spring/spring-application.xml");
+		LinkedHouseImpl 链家房屋信息捕获 = (LinkedHouseImpl) ctx.getBean(LinkedHouseImpl.class);
+		链家房屋信息捕获.捕获房屋信息();
+	}
 	
 	@Override
 	public void 捕获房屋信息() throws Exception {

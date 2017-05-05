@@ -1,13 +1,12 @@
 package com.lobinary.框架.RabbitMQ.单发多收之发布订阅;
-import com.rabbitmq.client.ConnectionFactory;
-import com.rabbitmq.client.Connection;
 
 import org.springframework.amqp.core.ExchangeTypes;
 
 import com.lobinary.java.多线程.TU;
 import com.lobinary.框架.RabbitMQ.RabbitMQConfig;
-import com.rabbitmq.client.AMQP.Exchange;
 import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
 
 /**
  * 
@@ -24,24 +23,24 @@ import com.rabbitmq.client.Channel;
  */
 public class EmitLog {
 
-  private static final String EXCHANGE_NAME = "logs";
+	private static final String EXCHANGE_NAME = "logs";
 
-  public static void main(String[] argv) throws Exception {
+	public static void main(String[] argv) throws Exception {
 
-	ConnectionFactory factory = RabbitMQConfig.getFactory();
-    Connection connection = factory.newConnection();
-    Channel channel = connection.createChannel();
+		ConnectionFactory factory = RabbitMQConfig.getFactory();
+		Connection connection = factory.newConnection();
+		Channel channel = connection.createChannel();
 
-    channel.exchangeDeclare(EXCHANGE_NAME, ExchangeTypes.FANOUT);
-    
-    for (int i = 0; i < 5; i++) {
-        String message = "广播消息"+i;
-        channel.basicPublish(EXCHANGE_NAME, "", null, message.getBytes());
-        TU.l(" [x] 发送广播消息：'" + message + "'");
+		channel.exchangeDeclare(EXCHANGE_NAME, ExchangeTypes.FANOUT);
+
+		for (int i = 0; i < 5; i++) {
+			String message = "广播消息" + i;
+			channel.basicPublish(EXCHANGE_NAME, "", null, message.getBytes());
+			TU.l(" [x] 发送广播消息：'" + message + "'");
+		}
+
+		channel.close();
+		connection.close();
 	}
-    
-    channel.close();
-    connection.close();
-  }
-  
+
 }

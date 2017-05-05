@@ -8,6 +8,7 @@ public class CoreMainMethod {
 	private static ApplicationContext ctx;
 
 	public static void main(String[] args) {
+		System.out.println("hello");
 		ctx = new ClassPathXmlApplicationContext("bean.xml");
 		Person p = ctx.getBean("person",Person.class);//创建bean的引用对象
         p.info();
