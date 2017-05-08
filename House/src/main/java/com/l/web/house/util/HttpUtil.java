@@ -291,7 +291,9 @@ public class HttpUtil {
 			conn.setRequestMethod("GET");
 			conn.setRequestProperty("accept", "*/*");
 			conn.setRequestProperty("connection", "Keep-Alive");
-			String uuid = "892b69b6-0556-42ac-9e52-ac71449f3312";
+//			String uuid = "892b69b6-0556-42ac-9e52-ac71449f3312";
+			String uuid = "27ace5e3-9dcc-4df7-b218-0b38e917da37";
+			
         	conn.setRequestProperty("Cookie", "lianjia_uuid="+uuid);  
 			if (conn.getResponseCode() == 200) {
 				is = conn.getInputStream();
@@ -311,6 +313,9 @@ public class HttpUtil {
 				throw new RuntimeException(" responseCode is not 200 ... ");
 			}
 
+		}catch (Exception e){
+			System.out.println("访问网址发生异常："+urlStr);
+			throw e;
 		} finally {
 			try {
 				if (is != null)

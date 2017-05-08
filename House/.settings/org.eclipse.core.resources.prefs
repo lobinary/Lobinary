@@ -1,2 +1,3 @@
 eclipse.preferences.version=1
 encoding//src/main/resources/mybatis/jdbc.properties=UTF-8
+encoding//src/main/resources/mybatis/jdbc2.properties=UTF-8

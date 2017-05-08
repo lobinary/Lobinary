@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.mybatis.spring.annotation.MapperScan;
 
+import com.l.web.house.dto.房屋统计信息;
 import com.l.web.house.model.小区基本信息;
 import com.l.web.house.model.房屋交易信息;
 import com.l.web.house.model.房屋基本信息;
@@ -52,9 +53,9 @@ public interface 房屋信息数据库 {
 	public List<房屋基本信息> 查找基本信息根据当前状态(@Param("房屋信息来源")String 房屋信息来源,@Param("当前状态")String 当前状态,@Param("限制条数")int 限制条数);
 	
 	@Insert("INSERT INTO 房屋交易信息 "
-			+ "(id, 房屋基本信息id, 总价, 首付, 税费, 每平米价格)"
+			+ "(id, 房屋基本信息id, 总价, 首付, 税费, 每平米价格, 批次号)"
 			+ " VALUES"
-			+ " (#{id}, #{房屋基本信息id}, #{总价}, #{首付}, #{税费}, #{每平米价格})")
+			+ " (#{id}, #{房屋基本信息id}, #{总价}, #{首付}, #{税费}, #{每平米价格}, #{批次号})")
 	public int 添加房屋交易信息(房屋交易信息 房屋交易信息);
 	
 	@Select("select j.* "+
@@ -95,5 +96,7 @@ public interface 房屋信息数据库 {
 			+ "	from 小区基本信息 "
 			+ ") ")
 	public List<String> 查找未抓取过的小区编号根据房屋来源(String 房屋信息来源);
+
+	public 房屋统计信息 查询捕获房屋统计信息();
 
 }

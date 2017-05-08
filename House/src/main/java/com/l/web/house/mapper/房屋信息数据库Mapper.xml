@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.l.web.house.mapper.房屋信息数据库">
+
+	<select id="查询捕获房屋统计信息" resultType="com.l.web.house.dto.房屋统计信息">
+select (select count(1)
+		from
+		(
+		select b.房屋基本信息id
+		jbid,(select 总价
+		from 房屋交易信息 x
+		where x.房屋基本信息id = b.房屋基本信息id
+		order by
+		价格更新日期 desc
+		limit 0,1 ) - (select 总价
+		from 房屋交易信息 y
+		where
+		y.房屋基本信息id =
+		b.房屋基本信息id
+		order by 价格更新日期 desc
+		limit 1,1 ) jgc
+		from 房屋交易信息
+		b
+		where b.id in
+		(
+		select max(jj.id)
+		from 房屋交易信息 jj
+		group by jj.房屋基本信息id
+		)
+		) i
+		where i.jgc
+		>0) 房屋涨价数量 ,
+		(select count(1)
+		from
+		(
+
+		select b.房屋基本信息id jbid,(select 总价
+		from 房屋交易信息 x
+		where x.房屋基本信息id = b.房屋基本信息id
+		order by 价格更新日期 desc
+		limit
+		0,1 ) - (select 总价
+		from 房屋交易信息 y
+		where
+		y.房屋基本信息id = b.房屋基本信息id
+		order by
+		价格更新日期 desc
+		limit 1,1 ) jgc
+		from 房屋交易信息
+		b
+		where b.id in
+		(
+		select max(jj.id)
+		from 房屋交易信息 jj
+		group by jj.房屋基本信息id
+		)
+		) i
+		where i.jgc &lt; 0) 房屋降价数量,
+		(select
+		count(1)
+		from
+		(
+
+		select b.房屋基本信息id jbid,(select 总价
+		from 房屋交易信息 x
+		where
+		x.房屋基本信息id = b.房屋基本信息id
+		order by 价格更新日期 desc
+		limit 0,1 ) - (select 总价
+		from 房屋交易信息 y
+		where
+		y.房屋基本信息id = b.房屋基本信息id
+		order by 价格更新日期 desc
+		limit 1,1
+		) jgc
+		from 房屋交易信息
+		b
+		where b.id in
+		(
+		select max(jj.id)
+		from 房屋交易信息 jj
+		group by
+		jj.房屋基本信息id
+		)
+		) i
+		where i.jgc =0) 房屋平稳数量
+		from 房屋基本信息 ll
+		where ll.id = (
+		select max(id)
+		from 房屋基本信息 zz
+		)
+	</select>
+</mapper>

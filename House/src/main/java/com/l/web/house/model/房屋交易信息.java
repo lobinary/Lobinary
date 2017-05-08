@@ -14,6 +14,14 @@ public class 房屋交易信息 {
 	public int 关注人数;
 	public int 看房人数;
 	public String 有效状态;
+	public String 批次号;
+	
+	public String get批次号() {
+		return 批次号;
+	}
+	public void set批次号(String 批次号) {
+		this.批次号 = 批次号;
+	}
 	public String get有效状态() {
 		return 有效状态;
 	}

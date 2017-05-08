@@ -25,6 +25,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
+import com.l.web.house.dto.房屋统计信息;
 import com.l.web.house.mapper.房屋信息数据库;
 import com.l.web.house.model.小区基本信息;
 import com.l.web.house.model.房屋交易信息;
@@ -34,13 +35,14 @@ import com.l.web.house.model.房屋照片信息;
 import com.l.web.house.service.catchsystem.房屋信息捕获基类;
 import com.l.web.house.util.DU;
 import com.l.web.house.util.HttpUtil;
-import com.l.web.house.util.O;
 import com.l.web.house.util.PU;
+import com.lobinary.工具类.date.DateStyle;
+import com.lobinary.工具类.date.DateUtil;
 
-@Service
+@Service("linkedHouseImpl")
 public class LinkedHouseImpl extends 房屋信息捕获基类{
 
-	private static final int 捕获房屋概要信息开始页数 = 1;
+	private static int 捕获房屋概要信息开始页数 = 1;
 
 	private final static Logger logger = LoggerFactory.getLogger(LinkedHouseImpl.class);
 	
@@ -55,16 +57,19 @@ public class LinkedHouseImpl extends 房屋信息捕获基类{
 	SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-ddHHmmss");
 
 	SimpleDateFormat idsdf = new SimpleDateFormat("YYYYMMddHHmmss");
+
+	private String 批次号 = DateUtil.getCurrentTime(DateStyle.YYYYMMDDHHMMSS);
 	
 	public static void main(String[] args) throws Exception {
-		ApplicationContext ctx = new ClassPathXmlApplicationContext("spring/spring-application.xml");
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath*:spring/spring-application.xml");
 		LinkedHouseImpl 链家房屋信息捕获 = (LinkedHouseImpl) ctx.getBean(LinkedHouseImpl.class);
-		链家房屋信息捕获.捕获房屋信息();
+//		链家房屋信息捕获.捕获房屋信息();
+		链家房屋信息捕获.查询捕获房屋统计信息();
 	}
 	
 	@Override
-	public void 捕获房屋信息() throws Exception {
-//		捕获房屋概要信息();
+	public void 捕获房屋信息(String... o) throws Exception {
+		捕获房屋概要信息(o);
 		从数据库捕获房屋详细信息();
 		获取小区信息();
 	}
@@ -108,6 +113,7 @@ public class LinkedHouseImpl extends 房屋信息捕获基类{
             // //System.out.println(textInPage);  
             //查找含有filter-strip__list样式的元素  
     		房屋交易信息 j = 房屋信息数据库.查找最新交易信息根据来源和唯一标识(房屋信息来源, f.房屋唯一标识);
+    		j.set批次号(批次号);
     		j.id = idsdf.format(new Date()) + f.id;
             String 标题 = 捕获数据(parser, new HasAttributeFilter("class", "main"));  
             //System.out.println("标题:"+标题);
@@ -399,20 +405,25 @@ public class LinkedHouseImpl extends 房屋信息捕获基类{
 		return null;
 	}
 	
-	private void 捕获房屋概要信息() throws Exception {
+	private void 捕获房屋概要信息(Object... o) throws Exception {
 		String 二手房筛选网址 = null;
 		try {
 			logger.info("准备捕获链家房屋信息");
 			logger.info("准备获取总数据");
 			int 最大页数 = 100;
+			if(o!=null&&o.length==1){
+				捕获房屋概要信息开始页数 = Integer.parseInt(o[0].toString());
+			}
 			for (int i = 捕获房屋概要信息开始页数; i <= 最大页数; i++) {
 				二手房筛选网址 = "http://bj.lianjia.com/ershoufang/pg"+i+"l1l2l3l4p1p2/";//l1一室  l2两室  p1 200w内 p2 200~250w
+//				System.out.println("准备获取："+二手房筛选网址);
 				String rs = HttpUtil.doGet(二手房筛选网址);
+//				System.out.println("获取完毕："+rs);
 				//h2 class="total fl">共找到<span> 1688 </span>套北京二手房<
 //			System.out.println(rs);
 				String 最大页数S = rs.substring(rs.indexOf("total fl")+20, rs.indexOf("套北京二手房")-7);
 				最大页数 = Integer.parseInt(最大页数S.trim());
-				最大页数 = (最大页数/30) + 1;
+				最大页数 = (最大页数/30) + (最大页数%30==0?0:1);
 				rs = rs.substring(rs.indexOf("class=\"content"),rs.indexOf("bigImgList"));
 //				logger.info("========================================================================================================================");
 //				logger.info(rs);
@@ -433,7 +444,7 @@ public class LinkedHouseImpl extends 房屋信息捕获基类{
 //			logger.info("单个数据解析完毕，解析结果：成功19条，失败1条");
 		} catch (Exception e) {
 			System.out.println("当前访问网址为:"+二手房筛选网址);
-			throw e;
+			throw new Exception("捕获房屋异常:"+"<a href=\""+二手房筛选网址+"\" >"+二手房筛选网址+"</a> ",e);
 		}
 	}
 	
@@ -632,10 +643,10 @@ public class LinkedHouseImpl extends 房屋信息捕获基类{
 //		System.out.println(ss);
 		
 		String 房屋唯一标识 = ss.substring(ss.indexOf("ershoufang")+11, ss.indexOf("html")-1);
-		//System.out.println("唯一标识:"+房屋唯一标识);
+//		System.out.println("唯一标识:"+房屋唯一标识);
 
 		String 网址  = ss.substring(0, ss.indexOf("\""));
-		//System.out.println("网址:"+网址);
+//		System.out.println("网址:"+网址);
 		String 标题 = ss.substring(ss.indexOf("data-sl=\"\">")+11, ss.indexOf("</a>"));
 		//System.out.println("标题:"+标题);
 		String xx = ss.substring(ss.indexOf("region")+8,ss.indexOf("flood"));
@@ -851,6 +862,7 @@ public class LinkedHouseImpl extends 房屋信息捕获基类{
 		f.总楼层 = 总楼层;
 		f.备注 = 备注;
 		房屋交易信息 j = new 房屋交易信息();
+		j.set批次号(批次号);
 		j.setId(sdf.format(new Date())+房屋唯一标识);
 		j.set房屋基本信息id(f.getId());
 		j.set总价(总价);
@@ -882,4 +894,11 @@ public class LinkedHouseImpl extends 房屋信息捕获基类{
 		}
 		return f;
 	}
+
+	@Override
+	public 房屋统计信息 查询捕获房屋统计信息() throws Exception {
+		房屋统计信息 result = 房屋信息数据库.查询捕获房屋统计信息();
+		return result;
+	}
+
 }

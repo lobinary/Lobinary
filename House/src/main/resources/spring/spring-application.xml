@@ -7,12 +7,12 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd
        "
-       default-autowire="byName">
+       default-autowire="byType">
 
 	<!-- 使用annotation 自动注册bean, 并保证@Required、@Autowired的属性被注入 -->
 	<context:component-scan base-package="com.l.web.house" ></context:component-scan>
 	
-	<import resource="classpath:mybatis/spring-mybatis.xml"/>
+	<import resource="classpath*:mybatis/spring-mybatis.xml"/>
 	<!-- <import resource="classpath:redis/spring-redis.xml"/>
 	<import resource="classpath:redis/redis.xml"/> -->
 	
@@ -20,7 +20,7 @@
 	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
-				<value>classpath:mybatis/jdbc.properties</value>
+				<value>classpath*:mybatis/jdbc2.properties</value>
 				<!-- <value>classpath:redis/redis.properties</value> -->
 			</list>
 		</property>

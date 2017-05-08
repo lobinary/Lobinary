@@ -65,6 +65,10 @@ import java.io.ObjectStreamException;
 public abstract class Enum<E extends Enum<E>>
         implements Comparable<E>, Serializable {
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
      * The name of this enum constant, as declared in the enum declaration.
      * Most programmers should use the {@link #toString} method rather than
      * accessing this field.

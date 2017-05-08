@@ -146,24 +146,28 @@ public class Java源码注释翻译工具 extends 实用工具标签标准类 {
 		add(线程4);
 		
 		线程1处理文件内容 = new JTextField();
+		线程1处理文件内容.setForeground(Color.white);
 		线程1处理文件内容.setEditable(false);
 		线程1处理文件内容.setBounds(82, 439, 1004, 36);
 		add(线程1处理文件内容);
 		线程1处理文件内容.setColumns(10);
 		
 		线程2处理文件内容 = new JTextField();
+		线程2处理文件内容.setForeground(Color.white);
 		线程2处理文件内容.setEditable(false);
 		线程2处理文件内容.setColumns(10);
 		线程2处理文件内容.setBounds(82, 485, 1004, 36);
 		add(线程2处理文件内容);
 		
 		线程3处理文件内容 = new JTextField();
+		线程3处理文件内容.setForeground(Color.white);
 		线程3处理文件内容.setEditable(false);
 		线程3处理文件内容.setColumns(10);
 		线程3处理文件内容.setBounds(82, 532, 1004, 36);
 		add(线程3处理文件内容);
 		
 		线程4处理文件内容 = new JTextField();
+		线程4处理文件内容.setForeground(Color.white);
 		线程4处理文件内容.setEditable(false);
 		线程4处理文件内容.setColumns(10);
 		线程4处理文件内容.setBounds(82, 579, 1004, 36);
