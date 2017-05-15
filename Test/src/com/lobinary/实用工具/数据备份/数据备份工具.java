@@ -577,14 +577,16 @@ public class 数据备份工具 extends 实用工具标签标准类 {
 					long length = 源文件.length();
 					if (!目的文件.exists()) {
 						源文件.renameTo(目的文件);
-						updateProgressInfo("从:" + 源文件路径 + "移动文件到:" + 目的文件路径 + "状态：完成", length);
+						updateProgressInfo("从:" + 源文件.getAbsolutePath() + "移动文件到:" + 目的文件.getAbsolutePath() + "状态：完成", length);
 					} else if (isSameFile(目的文件,源文件)) {
-						updateProgressInfo("从:" + 源文件路径 + "移动文件到:" + 目的文件路径 + ",状态：备份文件已经存在", length);
+						updateProgressInfo("从:" + 源文件.getAbsolutePath() + "移动文件到:" + 目的文件.getAbsolutePath() + ",状态：备份文件已经存在", length);
 						boolean df = 源文件.exists();
 					} else {
 						目的文件 = new File(toFile.getAbsolutePath() + "/" + 源文件.getName().replace(".", DateUtil.DateToString(new Date(), "_yyyy年MM月dd日HHmmss_SSS") + "."));
-						源文件.renameTo(目的文件);
-						updateProgressInfo("从:" + 源文件路径 + "移动文件到:" + 目的文件路径 + "状态：存在同名不同数据文件", length);
+//						boolean finished = 源文件.renameTo(目的文件);
+						FileUtils.copyFile(源文件, 目的文件);
+						源文件.delete();
+						updateProgressInfo("从:" + 源文件.getAbsolutePath() + "移动文件到:" + 目的文件.getAbsolutePath() + "状态：存在同名不同数据文件", length);
 					}
 				}
 				源文件路径 = "null";
