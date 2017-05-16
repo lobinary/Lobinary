@@ -1,5 +1,6 @@
 package com.l.web.house.service.catchsystem.impl;
 
+import java.io.File;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -26,13 +27,13 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
 import com.l.web.house.dto.房屋统计信息;
-import com.l.web.house.mapper.房屋信息数据库;
 import com.l.web.house.model.小区基本信息;
 import com.l.web.house.model.房屋交易信息;
 import com.l.web.house.model.房屋基本信息;
 import com.l.web.house.model.房屋户型信息;
 import com.l.web.house.model.房屋照片信息;
 import com.l.web.house.service.catchsystem.房屋信息捕获基类;
+import com.l.web.house.util.CreateChartServiceImpl;
 import com.l.web.house.util.DU;
 import com.l.web.house.util.HttpUtil;
 import com.l.web.house.util.PU;
@@ -51,20 +52,21 @@ public class LinkedHouseImpl extends 房屋信息捕获基类{
 	@Resource
 	SqlSessionFactory sqlSessionFactory;
 	
-	@Resource
-	房屋信息数据库 房屋信息数据库;
 	
 	SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-ddHHmmss");
 
 	SimpleDateFormat idsdf = new SimpleDateFormat("YYYYMMddHHmmss");
 
-	private String 批次号 = DateUtil.getCurrentTime(DateStyle.YYYYMMDDHHMMSS);
 	
 	public static void main(String[] args) throws Exception {
-		ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath*:spring/spring-application.xml");
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:spring/spring-application.xml");
 		LinkedHouseImpl 链家房屋信息捕获 = (LinkedHouseImpl) ctx.getBean(LinkedHouseImpl.class);
 //		链家房屋信息捕获.捕获房屋信息();
-		链家房屋信息捕获.查询捕获房屋统计信息();
+//		链家房屋信息捕获.查询捕获房屋统计信息();
+		List<房屋统计信息> list = 链家房屋信息捕获.查询房屋价格走势根据批次号("20170503000000");
+		String fs = CreateChartServiceImpl.创建链家价格走势图(list);
+		File f = new File(fs);
+		System.out.println(f.getAbsolutePath());
 	}
 	
 	@Override
@@ -895,10 +897,5 @@ public class LinkedHouseImpl extends 房屋信息捕获基类{
 		return f;
 	}
 
-	@Override
-	public 房屋统计信息 查询捕获房屋统计信息() throws Exception {
-		房屋统计信息 result = 房屋信息数据库.查询捕获房屋统计信息();
-		return result;
-	}
 
 }

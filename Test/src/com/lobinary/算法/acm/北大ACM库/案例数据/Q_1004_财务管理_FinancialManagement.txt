@@ -1,0 +1,44 @@
+财务管理
+时间限制：1000MS内存限制：10000K
+总提交：183681接受：69485
+描述
+
+拉里今年毕业，终于找到了工作。他赚了很多钱，但似乎从来没有足够的。拉里决定，他需要抓住他的财务投资组合，解决他的融资​​问题。第一步是弄清楚他的钱是怎样的。拉里有他的银行账号，想看看他有多少钱。通过编写程序来帮助拉里，从过去十二个月的每一个月开始他的期末余额，并计算他的平均账户余额。
+输入
+
+输入将为十二行。每行将包含其银行帐户在特定月份的结余。每个数字将是积极的，并显示给一分钱。不包括美元符号。
+产量
+
+产出将是一个数字，即十二个月的期末余额的平均值（平均值）。它将四舍五入到最近的一分钱，之前是一个美元符号，然后是行尾。输出中不会有其他空格或字符。
+Financial Management
+Time Limit: 1000MS		Memory Limit: 10000K
+Total Submissions: 183681		Accepted: 69485
+Description
+
+Larry graduated this year and finally has a job. He's making a lot of money, but somehow never seems to have enough. Larry has decided that he needs to grab hold of his financial portfolio and solve his financing problems. The first step is to figure out what's been going on with his money. Larry has his bank account statements and wants to see how much money he has. Help Larry by writing a program to take his closing balance from each of the past twelve months and calculate his average account balance.
+Input
+
+The input will be twelve lines. Each line will contain the closing balance of his bank account for a particular month. Each number will be positive and displayed to the penny. No dollar sign will be included.
+Output
+
+The output will be a single number, the average (mean) of the closing balances for the twelve months. It will be rounded to the nearest penny, preceded immediately by a dollar sign, and followed by the end-of-line. There will be no other spaces or characters in the output.
+Sample Input
+
+100.00
+489.12
+12454.12
+1234.10
+823.05
+109.20
+5.27
+1542.25
+839.18
+83.99
+1295.01
+1.75
+Sample Output
+
+$1581.42
+Source
+
+Mid-Atlantic 2001

@@ -1,5 +1,6 @@
 package com.lobinary.工具类;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.HashMap;
@@ -11,6 +12,10 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeUtility;
+
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.mail.javamail.MimeMessageHelper;
 
 /**
  * MailUtil 邮件工具类
@@ -45,12 +50,7 @@ public class MU {
 //	private static String receiveMailAccount = "lobinary@qq.com";
 
 	public static void main(String[] args) throws Exception {
-//		Session session = getSession(null);
-//		// 3. 创建一封邮件
-//		MimeMessage message = testcreateMimeMessage(session, defaultEmailU, receiveMailAccount);
-//		send2MailServer(session, message);
-		
-//		sendMail("Doncat消息通知", "欢迎使用<a href=\"www.baidu.com\" >doncat</a>消息通知服务", "Doncat 通知系统", "lobinary@qq.com");
+		sendImageMail("Doncat消息通知", "欢迎使用<a href=\"www.baidu.com\" >doncat</a>消息通知服务", "Doncat 通知系统", "lobinary@qq.com","ljrxxx@aliyun.com");
 	}
 
 	public static boolean sendMail(String title, String mailInfo, String senderDisplayName,String receiveMail,String ccMail) throws UnsupportedEncodingException, MessagingException {
@@ -59,6 +59,14 @@ public class MU {
 		Map<String, String> ccMailMap = new HashMap<String,String>();
 		ccMailMap.put(ccMail, "收件方");
 		return sendMail(null, title, mailInfo, null, null,senderDisplayName, receiveMailMap , ccMailMap, null);
+	}
+	
+	public static boolean sendImageMail(String title, String mailInfo, String senderDisplayName,String receiveMail,String ccMail) throws UnsupportedEncodingException, MessagingException {
+		Map<String, String> receiveMailMap = new HashMap<String,String>();
+		receiveMailMap.put(receiveMail, "收件方");
+		Map<String, String> ccMailMap = new HashMap<String,String>();
+		ccMailMap.put(ccMail, "收件方");
+		return sendImageMail(null, title, mailInfo, null, null,senderDisplayName, receiveMailMap , ccMailMap, null);
 	}
 
 	/**
@@ -82,6 +90,20 @@ public class MU {
 		Session session = getSession(props);
 		// 创建一封邮件
 		MimeMessage message = constructionMailMessage(title, mailInfo, sendMail, senderDisplayName, receiveMailMap, ccMailMap, bccMailMap, session);
+		// 发送邮件
+		send2MailServer(session, message,sendMail,password);
+		return true;
+
+	}
+
+	public static boolean sendImageMail(Properties props, String title, String mailInfo, String sendMail, String password, String senderDisplayName,
+			Map<String, String> receiveMailMap, Map<String, String> ccMailMap, Map<String, String> bccMailMap) throws UnsupportedEncodingException, MessagingException {
+		// 构造回话
+		Session session = getSession(props);
+		// 创建一封邮件
+		MimeMessage message = constructionMailMessage(title, mailInfo, sendMail, senderDisplayName, receiveMailMap, ccMailMap, bccMailMap, session);
+		
+		sendImageMail2MailServer(message, "D:\\apps\\house\\img\\2.jpg", "D:\\apps\\house\\img\\price-trend.png");
 		// 发送邮件
 		send2MailServer(session, message,sendMail,password);
 		return true;
@@ -172,7 +194,7 @@ public class MU {
 		message.setSubject(title==null?DEFAULT_TITLE:title, "UTF-8");
 
 		// 5. Content: 邮件正文（可以使用html标签）
-		message.setContent(mailInfo, "text/html;charset=UTF-8");
+//		message.setContent(mailInfo, "text/html;charset=UTF-8");
 
 		// 6. 设置显示的发件时间
 		message.setSentDate(new Date());
@@ -180,6 +202,57 @@ public class MU {
 		// 7. 保存前面的设置
 		message.saveChanges();
 		return message;
+	}
+	
+	public static MimeMessage sendImageMail2MailServer(MimeMessage mimeMessage,String... imageFiles) throws MessagingException, UnsupportedEncodingException{
+		MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "GB2312");  
+
+        String imageStr = "img";
+        StringBuffer html = new StringBuffer();  
+        html.append("<html>");  
+        html.append("<head>");  
+        html.append("<meta http-equiv='Content-Type' content='multipart/alternative; charset=UTF-8'>");  
+        html.append("</head>");  
+        html.append("<body bgcolor='#ccccff'>");  
+        html.append("<center>");  
+        html.append("<h1>你好，Doncat</h1>");  
+        Map<String,String> imageMap = new HashMap<String, String>();
+        int imageId = 1;
+        for (String imageFile : imageFiles) {
+            String contentId = imageStr+imageId;
+            imageMap.put(contentId,imageFile);  
+            html.append("<p>"+contentId+":");  
+            html.append("<img src='cid:"+contentId+"'>"); 
+		}
+        html.append("</center>");  
+        html.append("</body>");  
+        html.append("</html>");  
+        helper.setText(html.toString(), true); 
+        
+        
+        for(String keys : imageMap.keySet()){
+            FileSystemResource imageResource = new FileSystemResource(new File(imageMap.get(keys)));  
+            helper.addInline(keys,imageResource);
+        } 
+        //添加附件  
+        File file = new File("D:/apps/house/img/fj.jpg");  
+        helper.addAttachment("fj.jpg",file);  
+           
+        //添加中文名的，不做下面的处理会出现乱码的。  
+        String filename = MimeUtility.encodeText(new String("中文标题附件.txt".getBytes(),"UTF-8"),"UTF-8","B");  
+        File f = new File("D:/apps/house/img/中文标题附件.txt");  
+        helper.addAttachment(filename,f);  
+           
+//        helper.setFrom("green006@163.com");  
+//        helper.setTo("green006@163.com");  
+//        helper.setSubject("spring javamail test");  
+           
+//        logger.info(mimeMessage.getContentID());  
+//        logger.info(mimeMessage.getContent());  
+           
+          return mimeMessage;
+//        mailsender.send(mimeMessage);  
+//        logger.info("a mime mail with an attachment has bean sent !");  
 	}
 	
 	private static void send2MailServer(Session session, MimeMessage message,String u,String p) throws MessagingException {

@@ -20,6 +20,14 @@
 	</properties>
 
 	<dependencies>
+	
+	<!-- https://mvnrepository.com/artifact/org.jfree/jfreechart -->
+	<dependency>
+	    <groupId>org.jfree</groupId>
+	    <artifactId>jfreechart</artifactId>
+	    <version>1.0.19</version>
+	</dependency>
+		
 		<!-- 添加Spring依赖 -->
 		<dependency>
 			<groupId>org.springframework</groupId>

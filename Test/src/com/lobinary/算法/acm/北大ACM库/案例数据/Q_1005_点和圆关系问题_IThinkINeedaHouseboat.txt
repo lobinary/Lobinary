@@ -1,0 +1,59 @@
+我想我需要一艘船屋
+时间限制：1000MS内存限制：10000K
+总提交：103895接受：45209
+描述
+
+Fred Mapper正在考虑在路易斯安那州购买一些土地来建造他的房子。在调查土地的过程中，他了解到，由于密西西比河造成的侵蚀，路易斯安那州每年实际萎缩50平方英里。由于弗雷德希望在余生中住在这所房子里，他需要知道他的土地是否会被侵蚀。
+
+在做了更多的研究后，弗雷德已经知道，失去的土地是半圆形的。这个半圆是以（0,0）为中心的圆的一部分，其中将圆作为X轴的线对齐。 X轴下方的位置在水中。半圆在1年初的面积为0（半圆如图所示）
+
+
+输入
+
+第一行输入将是一个正整数，表示将包括多少数据集（N）。接下来的N行将包含Fred正在考虑的X和Y笛卡尔坐标。这些是以英里为单位测量的浮点数。 Y坐标将为非负值。 （0,0）不会被给予。
+产量
+
+对于每个数据集，应显示一行输出。该行应采取以下形式：“属性N：该年度Z中的该属性将开始侵蚀”。其中N是数据集（从1开始计数），Z是第一年（从1开始），该属性将在年底Z半的半圆必须是一个整数。在最后一个数据集之后，应该打印出“END OF OUTPUT”。
+
+暗示
+
+没有属性会出现在半圆边界上：它将在内部或外部。
+这个问题会自动判断。您的答案必须完全匹配，包括大小写，标点符号和空格。这包括行尾的时期。
+所有地点以英里为单位。
+资源
+
+2001年中大西洋
+I Think I Need a Houseboat
+Time Limit: 1000MS		Memory Limit: 10000K
+Total Submissions: 103895		Accepted: 45209
+Description
+
+Fred Mapper is considering purchasing some land in Louisiana to build his house on. In the process of investigating the land, he learned that the state of Louisiana is actually shrinking by 50 square miles each year, due to erosion caused by the Mississippi River. Since Fred is hoping to live in this house the rest of his life, he needs to know if his land is going to be lost to erosion. 
+
+After doing more research, Fred has learned that the land that is being lost forms a semicircle. This semicircle is part of a circle centered at (0,0), with the line that bisects the circle being the X axis. Locations below the X axis are in the water. The semicircle has an area of 0 at the beginning of year 1. (Semicircle illustrated in the Figure.) 
+
+
+Input
+
+The first line of input will be a positive integer indicating how many data sets will be included (N). Each of the next N lines will contain the X and Y Cartesian coordinates of the land Fred is considering. These will be floating point numbers measured in miles. The Y coordinate will be non-negative. (0,0) will not be given.
+Output
+
+For each data set, a single line of output should appear. This line should take the form of: “Property N: This property will begin eroding in year Z.” Where N is the data set (counting from 1), and Z is the first year (start from 1) this property will be within the semicircle AT THE END OF YEAR Z. Z must be an integer. After the last data set, this should print out “END OF OUTPUT.”
+Sample Input
+
+2
+1.0 1.0
+25.0 0.0
+Sample Output
+
+Property 1: This property will begin eroding in year 1.
+Property 2: This property will begin eroding in year 20.
+END OF OUTPUT.
+Hint
+
+1.No property will appear exactly on the semicircle boundary: it will either be inside or outside. 
+2.This problem will be judged automatically. Your answer must match exactly, including the capitalization, punctuation, and white-space. This includes the periods at the ends of the lines. 
+3.All locations are given in miles.
+Source
+
+Mid-Atlantic 2001

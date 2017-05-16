@@ -99,4 +99,13 @@ public interface 房屋信息数据库 {
 
 	public 房屋统计信息 查询捕获房屋统计信息();
 
+	/**
+	 * 
+	 * @param 批次号 起始批次号
+	 * @return
+	 */
+	public List<房屋统计信息> 查询房屋价格走势根据批次号(String 批次号);
+
+	public List<房屋统计信息> 查询批次号价格变动数据(String 批次号);
+
 }

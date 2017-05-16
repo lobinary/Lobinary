@@ -3,91 +3,286 @@
 <mapper namespace="com.l.web.house.mapper.房屋信息数据库">
 
 	<select id="查询捕获房屋统计信息" resultType="com.l.web.house.dto.房屋统计信息">
-select (select count(1)
-		from
-		(
-		select b.房屋基本信息id
-		jbid,(select 总价
-		from 房屋交易信息 x
-		where x.房屋基本信息id = b.房屋基本信息id
-		order by
-		价格更新日期 desc
-		limit 0,1 ) - (select 总价
-		from 房屋交易信息 y
-		where
-		y.房屋基本信息id =
-		b.房屋基本信息id
-		order by 价格更新日期 desc
-		limit 1,1 ) jgc
-		from 房屋交易信息
-		b
-		where b.id in
-		(
-		select max(jj.id)
-		from 房屋交易信息 jj
-		group by jj.房屋基本信息id
-		)
-		) i
-		where i.jgc
-		>0) 房屋涨价数量 ,
-		(select count(1)
-		from
-		(
-
-		select b.房屋基本信息id jbid,(select 总价
-		from 房屋交易信息 x
-		where x.房屋基本信息id = b.房屋基本信息id
-		order by 价格更新日期 desc
-		limit
-		0,1 ) - (select 总价
-		from 房屋交易信息 y
-		where
-		y.房屋基本信息id = b.房屋基本信息id
-		order by
-		价格更新日期 desc
-		limit 1,1 ) jgc
-		from 房屋交易信息
-		b
-		where b.id in
-		(
-		select max(jj.id)
-		from 房屋交易信息 jj
-		group by jj.房屋基本信息id
-		)
-		) i
-		where i.jgc &lt; 0) 房屋降价数量,
-		(select
-		count(1)
-		from
-		(
-
-		select b.房屋基本信息id jbid,(select 总价
-		from 房屋交易信息 x
-		where
-		x.房屋基本信息id = b.房屋基本信息id
-		order by 价格更新日期 desc
-		limit 0,1 ) - (select 总价
-		from 房屋交易信息 y
-		where
-		y.房屋基本信息id = b.房屋基本信息id
-		order by 价格更新日期 desc
-		limit 1,1
-		) jgc
-		from 房屋交易信息
-		b
-		where b.id in
-		(
-		select max(jj.id)
-		from 房屋交易信息 jj
-		group by
-		jj.房屋基本信息id
-		)
-		) i
-		where i.jgc =0) 房屋平稳数量
-		from 房屋基本信息 ll
-		where ll.id = (
-		select max(id)
-		from 房屋基本信息 zz
-		)
+		select (select count(1)
+				from
+				(
+				select b.房屋基本信息id
+				jbid,(select 总价
+				from 房屋交易信息 x
+				where x.房屋基本信息id = b.房屋基本信息id
+				order by
+				价格更新日期 desc
+				limit 0,1 ) - (select 总价
+				from 房屋交易信息 y
+				where
+				y.房屋基本信息id =
+				b.房屋基本信息id
+				order by 价格更新日期 desc
+				limit 1,1 ) jgc
+				from 房屋交易信息
+				b
+				where b.id in
+				(
+				select max(jj.id)
+				from 房屋交易信息 jj
+				group by jj.房屋基本信息id
+				)
+				) i
+				where i.jgc
+				>0) 房屋涨价数量 ,
+				(select count(1)
+				from
+				(
+		
+				select b.房屋基本信息id jbid,(select 总价
+				from 房屋交易信息 x
+				where x.房屋基本信息id = b.房屋基本信息id
+				order by 价格更新日期 desc
+				limit
+				0,1 ) - (select 总价
+				from 房屋交易信息 y
+				where
+				y.房屋基本信息id = b.房屋基本信息id
+				order by
+				价格更新日期 desc
+				limit 1,1 ) jgc
+				from 房屋交易信息
+				b
+				where b.id in
+				(
+				select max(jj.id)
+				from 房屋交易信息 jj
+				group by jj.房屋基本信息id
+				)
+				) i
+				where i.jgc &lt; 0) 房屋降价数量,
+				(select
+				count(1)
+				from
+				(
+		
+				select b.房屋基本信息id jbid,(select 总价
+				from 房屋交易信息 x
+				where
+				x.房屋基本信息id = b.房屋基本信息id
+				order by 价格更新日期 desc
+				limit 0,1 ) - (select 总价
+				from 房屋交易信息 y
+				where
+				y.房屋基本信息id = b.房屋基本信息id
+				order by 价格更新日期 desc
+				limit 1,1
+				) jgc
+				from 房屋交易信息
+				b
+				where b.id in
+				(
+				select max(jj.id)
+				from 房屋交易信息 jj
+				group by
+				jj.房屋基本信息id
+				)
+				) i
+				where i.jgc =0) 房屋平稳数量
+				from 房屋基本信息 ll
+				where ll.id = (
+				select max(id)
+				from 房屋基本信息 zz
+				)
 	</select>
+	
+	<select id="查询房屋价格走势根据批次号" resultType="com.l.web.house.dto.房屋统计信息">
+		select 
+
+		(select count(1)
+		from 房屋交易信息 jz
+		where jz.id in
+		(
+			select max(j2.id)
+		    from 房屋交易信息 j2
+		    group by j2.房屋基本信息id
+		)
+		and 
+			(select max(j.总价)#之所以取max，是因为有一些房子，是在同一批次号中出现了两笔更改数据
+			from house.房屋交易信息 j
+			where j.房屋基本信息id = jz.房屋基本信息id
+			and j.批次号 in
+				(
+					select max(jp.批次号)
+					from house.房屋交易信息 jp
+					where jp.批次号 &lt;= jj.批次号
+					and jp.房屋基本信息id = jz.房屋基本信息id
+				)
+			)
+		    &gt;
+			(
+			select max(j.总价)
+			from house.房屋交易信息 j
+			where j.房屋基本信息id = jz.房屋基本信息id
+			and j.批次号 in
+				(
+					select max(jp.批次号)
+					from house.房屋交易信息 jp
+					where jp.批次号  &lt; jj.批次号
+					and jp.房屋基本信息id = jz.房屋基本信息id
+				)
+			)
+		    ) 房屋涨价数量
+		    ,
+		(select count(1)
+		from 房屋交易信息 jz
+		where jz.id in
+		(
+			select max(j2.id)
+		    from 房屋交易信息 j2
+		    group by j2.房屋基本信息id
+		)
+		and 
+			(select max(j.总价)#之所以取max，是因为有一些房子，是在同一批次号中出现了两笔更改数据
+			from house.房屋交易信息 j
+			where j.房屋基本信息id = jz.房屋基本信息id
+			and j.批次号 in
+				(
+					select max(jp.批次号)
+					from house.房屋交易信息 jp
+					where jp.批次号  &lt;= jj.批次号
+					and jp.房屋基本信息id = jz.房屋基本信息id
+				)
+			)
+		    &lt;
+			(
+			select max(j.总价)
+			from house.房屋交易信息 j
+			where j.房屋基本信息id = jz.房屋基本信息id
+			and j.批次号 in
+				(
+					select max(jp.批次号)
+					from house.房屋交易信息 jp
+					where jp.批次号  &lt; jj.批次号
+					and jp.房屋基本信息id = jz.房屋基本信息id
+				)
+			)
+		    ) 房屋降价数量
+		    ,
+		    
+		(select count(1)
+		from 房屋交易信息 jz
+		where jz.id in
+		(
+			select max(j2.id)
+		    from 房屋交易信息 j2
+		    group by j2.房屋基本信息id
+		)
+		and 
+			(select max(j.总价)#之所以取max，是因为有一些房子，是在同一批次号中出现了两笔更改数据
+			from house.房屋交易信息 j
+			where j.房屋基本信息id = jz.房屋基本信息id
+			and j.批次号 in
+				(
+					select max(jp.批次号)
+					from house.房屋交易信息 jp
+					where jp.批次号  &lt;= jj.批次号
+					and jp.房屋基本信息id = jz.房屋基本信息id
+				)
+			)
+		    =
+			(
+			select max(j.总价)
+			from house.房屋交易信息 j
+			where j.房屋基本信息id = jz.房屋基本信息id
+			and j.批次号 in
+				(
+					select max(jp.批次号)
+					from house.房屋交易信息 jp
+					where jp.批次号  &lt; jj.批次号
+					and jp.房屋基本信息id = jz.房屋基本信息id
+				)
+			)
+		    ) 房屋平稳数量
+		    ,jj.批次号
+		FROM
+		    房屋交易信息 jj
+		WHERE jj.id in (SELECT  MAX(id) FROM 房屋交易信息 group by 批次号)
+		and jj.批次号 &gt;= #{批次号}
+		order by jj.批次号
+	</select>
+	
+	
+	
+	<select id="查询批次号价格变动数据" resultType="com.l.web.house.dto.房屋统计信息">
+				select *
+		from (
+		select jz.房屋基本信息id  房屋基本信息id,f.网址,f.所在区县,f.所在小区,f.朝向,f.户型,f.实用面积,f.产权年限,f.建筑类型
+		(select max(jp.批次号)
+		    from house.房屋交易信息 jp
+		    where jp.批次号 &lt;= #{批次号}
+		    and jp.房屋基本信息id = jz.房屋基本信息id) 房屋本批次号,
+		    
+		(
+		select max(j.总价)
+		from house.房屋交易信息 j
+		where j.房屋基本信息id = jz.房屋基本信息id
+		and j.批次号 in
+		(
+			select max(jp.批次号)
+		    from house.房屋交易信息 jp
+		    where jp.批次号 &lt;= #{批次号}
+		    and jp.房屋基本信息id = jz.房屋基本信息id
+		)
+		) 房屋本批次价格,
+		(
+			select max(jp.批次号)
+		    from house.房屋交易信息 jp
+		    where jp.批次号 &lt; #{批次号}
+		    and jp.房屋基本信息id = jz.房屋基本信息id
+		) 房屋上一批次号,
+		(
+		select max(j.总价)
+		from house.房屋交易信息 j
+		where j.房屋基本信息id = jz.房屋基本信息id
+		and j.批次号 in
+		(
+			select max(jp.批次号)
+		    from house.房屋交易信息 jp
+		    where jp.批次号 &lt; #{批次号}
+		    and jp.房屋基本信息id = jz.房屋基本信息id
+		)
+		) 房屋上批次价格,
+		(
+		select max(j.总价)
+		from house.房屋交易信息 j
+		where j.房屋基本信息id = jz.房屋基本信息id
+		and j.批次号 in
+		(
+			select max(jp.批次号)
+		    from house.房屋交易信息 jp
+		    where jp.批次号 &lt;= #{批次号}
+		    and jp.房屋基本信息id = jz.房屋基本信息id
+		)
+		)-
+		(
+		select max(j.总价)
+		from house.房屋交易信息 j
+		where j.房屋基本信息id = jz.房屋基本信息id
+		and (
+		
+			j.批次号 in
+			(
+				select max(jp.批次号)
+				from house.房屋交易信息 jp
+				where jp.批次号 &lt; #{批次号}
+				and jp.房屋基本信息id = jz.房屋基本信息id
+			)
+		)
+		) 差距价格
+		from house.房屋交易信息 jz left join house.房屋基本信息 f on jz.房屋基本信息id = f.id
+		where jz.批次号 &lt;= #{批次号} 
+		group by jz.房屋基本信息id
+		
+		)tt
+		where tt.差距价格!=0
+		order by tt.差距价格
+				
+	</select>
+	
 </mapper>

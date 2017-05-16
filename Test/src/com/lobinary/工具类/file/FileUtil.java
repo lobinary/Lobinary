@@ -84,7 +84,15 @@ public class FileUtil {
         output.close();  
         input.close();  
 	}
-	
+
+	/**
+	 * 判断文件是否存在，如果不存在就创建该文件,存在就直接返回
+	 * @param file
+	 * @throws IOException
+	 */
+	public static File createFile(String file) throws IOException{
+		return createFile(new File(file));
+	}
 	/**
 	 * 判断文件是否存在，如果不存在就创建该文件,存在就直接返回
 	 * @param file
