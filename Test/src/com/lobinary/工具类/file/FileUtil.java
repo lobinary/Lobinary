@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import org.springframework.util.DigestUtils;
+
 /**
  * 
  * <pre>
@@ -285,5 +287,51 @@ public class FileUtil {
 		}
 		bufferWritter.flush();
 		bufferWritter.close();
-	}   
+	}   	
+	
+
+	/**
+	 * 递归寻找文件夹下的文件
+	 * @param folder
+	 * @return
+	 */
+	public static List<File> searchFile(File folder){
+		List<File> result = new ArrayList<File>();
+		if(folder!=null&&folder.isDirectory()){
+			File[] fl = folder.listFiles();
+			if(fl!=null&&fl.length>0){
+				for (int i = 0; i < fl.length; i++) {
+					File f = fl[i];
+					if(f.isDirectory()){
+						result.addAll(searchFile(f));
+					}else{
+						System.out.println("寻找到文件："+f.getAbsolutePath());
+						result.add(f);
+					}
+				}
+			}
+		}
+		return result;
+	}
+	
+	
+	/**
+	 * 通过md5教研文件一致性
+	 * @param f1
+	 * @param f2
+	 * @return
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+	public static boolean isSameFile(File f1,File f2) throws FileNotFoundException, IOException{
+		if(f1.isFile()&&f2.isFile()&&f1.length()==f2.length()){
+			return getMD5(f1).equals(getMD5(f2));
+		}else{
+			return false;
+		}
+	}
+	
+	public static String getMD5(File f) throws FileNotFoundException, IOException{
+		return DigestUtils.md5DigestAsHex(new FileInputStream(f));
+	}
 }

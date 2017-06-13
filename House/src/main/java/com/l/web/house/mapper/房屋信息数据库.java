@@ -108,4 +108,9 @@ public interface 房屋信息数据库 {
 
 	public List<房屋统计信息> 查询批次号价格变动数据(String 批次号);
 
+	@Select(" SELECT * " +
+			" FROM house.房屋基本信息 h left join house.房屋交易信息 j on h.id = j.房屋基本信息id  " +
+			" where h.创建时间 > #{date} ")
+	public List<房屋基本信息> 查询房屋基本信息通过创建日期(String date);
+
 }

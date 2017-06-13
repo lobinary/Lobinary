@@ -5,6 +5,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.l.web.house.service.catchsystem.impl.LinkedHouseImpl;
 import com.lobinary.工具类.LU;
+import com.mysql.cj.jdbc.Driver;
 
 public class Start {
 	
@@ -20,6 +21,7 @@ public class Start {
 		链家房屋信息捕获.捕获房屋信息();
 //		System.out.println("欢迎访问房屋捕获系统3");
 //		LU.l("欢迎访问房屋捕获系统4");
+		
 	}
 
 }

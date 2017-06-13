@@ -2,7 +2,7 @@ package com.l.web.house.model;
 
 import java.util.Date;
 
-public class 房屋基本信息 {
+public class 房屋基本信息 extends 房屋交易信息{
 
 	public String id;
 	public String 房屋信息来源;

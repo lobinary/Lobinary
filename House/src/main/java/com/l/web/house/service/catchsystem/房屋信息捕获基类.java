@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import com.l.web.house.dto.房屋统计信息;
 import com.l.web.house.mapper.房屋信息数据库;
+import com.l.web.house.model.房屋基本信息;
 import com.lobinary.工具类.date.DateStyle;
 import com.lobinary.工具类.date.DateUtil;
 
@@ -39,6 +40,10 @@ public abstract class 房屋信息捕获基类 implements 房屋信息捕获接�
 		List<房屋统计信息> list = 房屋信息数据库.查询批次号价格变动数据(批次号);
 		return list;
 	}
-	
+
+	@Override
+	public List<房屋基本信息> 查询房屋基本信息通过创建日期(String date) {
+		return 房屋信息数据库.查询房屋基本信息通过创建日期(date);
+	}
 	
 }

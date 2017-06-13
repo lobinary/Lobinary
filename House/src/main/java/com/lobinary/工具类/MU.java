@@ -17,6 +17,8 @@ import javax.mail.internet.MimeUtility;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
+import com.sun.mail.smtp.SMTPTransport;
+
 /**
  * MailUtil 邮件工具类
  * 
@@ -194,7 +196,7 @@ public class MU {
 		message.setSubject(title==null?DEFAULT_TITLE:title, "UTF-8");
 
 		// 5. Content: 邮件正文（可以使用html标签）
-//		message.setContent(mailInfo, "text/html;charset=UTF-8");
+		message.setContent(mailInfo, "text/html;charset=UTF-8");
 
 		// 6. 设置显示的发件时间
 		message.setSentDate(new Date());
@@ -283,7 +285,6 @@ public class MU {
 		// 6. 发送邮件, 发到所有的收件地址, message.getAllRecipients() 获取到的是在创建邮件对象时添加的所有收件人,
 		// 抄送人, 密送人
 		transport.sendMessage(message, message.getAllRecipients());
-
 		// 7. 关闭连接
 		transport.close();
 	}

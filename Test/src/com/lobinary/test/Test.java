@@ -18,8 +18,9 @@ import org.apache.http.util.EntityUtils;
 
 public class Test {
 	
+	
 	public static void main(String[] args) throws Exception {
-		
+		System.out.println(System.getProperty("java.io.tmpdir"));
 		System.out.println(21252%21252);
 		
 //		String r = "^(?!.*(\\.js|\\.css|receive|access3|\\.png|\\.ico|\\.jpg|\\.img)).*$";

@@ -12,6 +12,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.l.web.house.dto.房屋统计信息;
+import com.l.web.house.model.房屋基本信息;
 import com.l.web.house.service.catchsystem.impl.LinkedHouseImpl;
 import com.l.web.house.util.CreateChartServiceImpl;
 import com.lobinary.工具类.date.DateUtil;
@@ -49,9 +50,7 @@ public class TU {
 		LU.changeLogFile(FILE_LOCATION);
 		
 		LU.l("======================"+appName+"定时任务=====执行开始======================");
-		System.out.println("A");
 		LU.changeSystemOut2Log();
-		System.out.println("B");
 		try {
 			job(args);
 		} catch (Exception e) {
@@ -77,7 +76,10 @@ public class TU {
 		List<房屋统计信息> 查询房屋价格走势根据批次号 = 链家房屋信息捕获.查询房屋价格走势根据批次号("20170503000000");
 		String 创建链家价格走势图文件 = CreateChartServiceImpl.创建链家价格走势图(查询房屋价格走势根据批次号);
 		List<房屋统计信息> 查询批次号价格变动数据 = 链家房屋信息捕获.查询批次号价格变动数据(null);
+		List<房屋基本信息> 本日捕获的房屋数据 = 链家房屋信息捕获.查询房屋基本信息通过创建日期(DateUtil.DateToString(new Date(),"yyyy-MM-dd 00:00:00"));
 		StringBuilder sb = new StringBuilder();
+		sb.append("<br>");
+		sb.append("本日价格变动房屋汇总");
 		sb.append("<br>");
 		sb.append("<table border=\"1\" cellspacing=\"0\" cellpadding=\"0\" style=\"border-collapse:collapse; border-color:#000000\">");
 		sb.append("<th>序号</th>");
@@ -114,6 +116,40 @@ public class TU {
 			sb.append("<td>"+f.get房屋本批次号()+"</td>");
 			sb.append("<td>"+f.get房屋上一批次号()+"</td>");
 			sb.append("<td>"+f.get房屋上批次价格()+"</td>");
+			sb.append("</tr>");
+		}
+		sb.append("</table>");
+
+		sb.append("<br>");
+		sb.append("本日新增房屋汇总");
+		sb.append("<br>");
+		sb.append("<table border=\"1\" cellspacing=\"0\" cellpadding=\"0\" style=\"border-collapse:collapse; border-color:#000000\">");
+		sb.append("<th>序号</th>");
+		sb.append("<th>网址</th>");
+		sb.append("<th>当前价格</th>");
+		sb.append("<th>户型</th>");
+		sb.append("<th>实用面积</th>");
+		sb.append("<th>建筑类型</th>");
+		sb.append("<th>所在区县</th>");
+		sb.append("<th>所在小区</th>");
+		sb.append("<th>朝向</th>");
+		sb.append("<th>产权年限</th>");
+		sb.append("<th>房屋基本信息id</th>");
+		i=0;
+		for (房屋基本信息 f : 本日捕获的房屋数据) {
+			i++;
+			sb.append("<tr>");
+			sb.append("<td>"+i+"</td>");
+			sb.append("<td><a href='"+f.get网址()+"' >"+f.get网址()+"</a></td>");
+			sb.append("<td>"+f.get总价()+"</td>");
+			sb.append("<td>"+f.get户型()+"</td>");
+			sb.append("<td>"+f.get实用面积()+"</td>");
+			sb.append("<td>"+f.get建筑类型()+"</td>");
+			sb.append("<td>"+f.get所在区县()+"</td>");
+			sb.append("<td>"+f.get所在小区()+"</td>");
+			sb.append("<td>"+f.get朝向()+"</td>");
+			sb.append("<td>"+f.get产权年限()+"</td>");
+			sb.append("<td>"+f.get房屋基本信息id()+"</td>");
 			sb.append("</tr>");
 		}
 		sb.append("</table>");

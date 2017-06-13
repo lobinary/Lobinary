@@ -37,8 +37,6 @@ import com.l.web.house.util.CreateChartServiceImpl;
 import com.l.web.house.util.DU;
 import com.l.web.house.util.HttpUtil;
 import com.l.web.house.util.PU;
-import com.lobinary.工具类.date.DateStyle;
-import com.lobinary.工具类.date.DateUtil;
 
 @Service("linkedHouseImpl")
 public class LinkedHouseImpl extends 房屋信息捕获基类{
@@ -61,7 +59,7 @@ public class LinkedHouseImpl extends 房屋信息捕获基类{
 	public static void main(String[] args) throws Exception {
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:spring/spring-application.xml");
 		LinkedHouseImpl 链家房屋信息捕获 = (LinkedHouseImpl) ctx.getBean(LinkedHouseImpl.class);
-//		链家房屋信息捕获.捕获房屋信息();
+		链家房屋信息捕获.捕获房屋信息();
 //		链家房屋信息捕获.查询捕获房屋统计信息();
 		List<房屋统计信息> list = 链家房屋信息捕获.查询房屋价格走势根据批次号("20170503000000");
 		String fs = CreateChartServiceImpl.创建链家价格走势图(list);
@@ -71,6 +69,9 @@ public class LinkedHouseImpl extends 房屋信息捕获基类{
 	
 	@Override
 	public void 捕获房屋信息(String... o) throws Exception {
+		if(o.length==2){
+			HttpUtil.uuid = o[1];
+		}
 		捕获房屋概要信息(o);
 		从数据库捕获房屋详细信息();
 		获取小区信息();
@@ -896,6 +897,5 @@ public class LinkedHouseImpl extends 房屋信息捕获基类{
 		}
 		return f;
 	}
-
 
 }

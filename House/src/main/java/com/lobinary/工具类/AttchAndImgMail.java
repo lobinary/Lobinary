@@ -69,41 +69,44 @@ public class AttchAndImgMail{
        // setContent(“邮件的正文内容”,”设置邮件内容的编码方式”)
        
        text.setContent(mailInfo.replace("{image}", "<img src='cid:a'>"),"text/html;charset=gb2312");
-       //创建图片
-       MimeBodyPart img = new MimeBodyPart();
-       /*JavaMail API不限制信息只为文本,任何形式的信息都可能作茧自缚MimeMessage的一部分.
-        * 除了文本信息,作为文件附件包含在电子邮件信息的一部分是很普遍的.
-        * JavaMail API通过使用DataHandler对象,提供一个允许我们包含非文本BodyPart对象的简便方法.*/
-       DataHandler dh = new DataHandler(new FileDataSource(imageStr));
-       img.setDataHandler(dh);
-       //创建图片的一个表示用于显示在邮件中显示
-       img.setContentID("a");
-      
-       //关系   正文和图片的
-       MimeMultipart mm = new MimeMultipart();
-       mm.addBodyPart(text);
-       mm.addBodyPart(img);
-       mm.setSubType("related");//设置正文与图片之间的关系
-       //图班与正文的 body
-       MimeBodyPart all = new MimeBodyPart();
-       all.setContent(mm);
-       //附件与正文（text 和 img）的关系
-       MimeMultipart mm2 = new MimeMultipart();
-       mm2.addBodyPart(all);
-       mm2.setSubType("mixed");//设置正文与附件之间的关系
-
-       if(attachmentFile!=null){
-           //创建附件
-           MimeBodyPart attch = new MimeBodyPart();
-           DataHandler dh1 = new DataHandler(new FileDataSource(attachmentFile));
-           attch.setDataHandler(dh1);
-           String filename1 = dh1.getName();
-            // MimeUtility 是一个工具类，encodeText（）用于处理附件字，防止中文乱码问题
-           attch.setFileName(MimeUtility.encodeText(filename1));
-           mm2.addBodyPart(attch);
+       if(imageStr!=null){
+           //创建图片
+           MimeBodyPart img = new MimeBodyPart();
+           
+	       /*JavaMail API不限制信息只为文本,任何形式的信息都可能作茧自缚MimeMessage的一部分.
+	        * 除了文本信息,作为文件附件包含在电子邮件信息的一部分是很普遍的.
+	        * JavaMail API通过使用DataHandler对象,提供一个允许我们包含非文本BodyPart对象的简便方法.*/
+	       DataHandler dh = new DataHandler(new FileDataSource(imageStr));
+	       img.setDataHandler(dh);
+	       //创建图片的一个表示用于显示在邮件中显示
+	       img.setContentID("a");
+	      
+	       //关系   正文和图片的
+	       MimeMultipart mm = new MimeMultipart();
+	       mm.addBodyPart(text);
+	       mm.addBodyPart(img);
+	       mm.setSubType("related");//设置正文与图片之间的关系
+	       //图班与正文的 body
+	       MimeBodyPart all = new MimeBodyPart();
+	       all.setContent(mm);
+	       //附件与正文（text 和 img）的关系
+	       MimeMultipart mm2 = new MimeMultipart();
+	       mm2.addBodyPart(all);
+	       mm2.setSubType("mixed");//设置正文与附件之间的关系
+	       if(attachmentFile!=null){
+	           //创建附件
+	           MimeBodyPart attch = new MimeBodyPart();
+	           DataHandler dh1 = new DataHandler(new FileDataSource(attachmentFile));
+	           attch.setDataHandler(dh1);
+	           String filename1 = dh1.getName();
+	            // MimeUtility 是一个工具类，encodeText（）用于处理附件字，防止中文乱码问题
+	           attch.setFileName(MimeUtility.encodeText(filename1));
+	           mm2.addBodyPart(attch);
+	       }
+	       
+	       message.setContent(mm2);
        }
        
-       message.setContent(mm2);
        message.saveChanges(); //保存修改
        Transport.send(message);//发送邮件
       

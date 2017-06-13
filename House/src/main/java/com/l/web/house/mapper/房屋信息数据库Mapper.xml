@@ -212,7 +212,7 @@
 	<select id="查询批次号价格变动数据" resultType="com.l.web.house.dto.房屋统计信息">
 				select *
 		from (
-		select jz.房屋基本信息id  房屋基本信息id,f.网址,f.所在区县,f.所在小区,f.朝向,f.户型,f.实用面积,f.产权年限,f.建筑类型
+		select jz.房屋基本信息id  房屋基本信息id,f.网址,f.所在区县,f.所在小区,f.朝向,f.户型,f.实用面积,f.产权年限,f.建筑类型,
 		(select max(jp.批次号)
 		    from house.房屋交易信息 jp
 		    where jp.批次号 &lt;= #{批次号}

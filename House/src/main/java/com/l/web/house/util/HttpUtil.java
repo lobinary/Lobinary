@@ -33,7 +33,16 @@ public class HttpUtil {
 
     private static final Logger logger = Logger.getLogger(HttpUtil.class);
     private static final Integer TIMEOUT_IN_MILLIONS = 60000;
+	public static String uuid = null;
 
+    
+    public static void main(String[] args) throws Exception {
+        String content = HttpUtil.sendGetRequest("http://bj.lianjia.com/ershoufang/pg1l1l2l3l4p1p2");
+//        System.out.println(content);
+//        System.out.println(doGet("http://bj.lianjia.com/ershoufang/pg1l1l2l3l4p1p2"));
+    }
+    
+    
     private HttpUtil() {
     }
 
@@ -212,12 +221,6 @@ public class HttpUtil {
         }
         return EntityUtils.toString(entity, charset);
     }
-    
-    public static void main(String[] args) {
-        String content = HttpUtil.sendGetRequest("http://192.168.10.200:8080/abc/sms/sendSms.hd?phone=18608623600&msg=hello");
-        System.out.println(content);
-    }
-    
 
 	public interface CallBack {
 		void onRequestComplete(String result);
@@ -279,6 +282,11 @@ public class HttpUtil {
 	 * @throws Exception
 	 */
 	public static String doGet(String urlStr) throws Exception {
+		return sendGetRequest(urlStr);
+	}
+	
+	public static String doGetRequest(String urlStr) throws Exception{
+
 		URL url = null;
 		HttpURLConnection conn = null;
 		InputStream is = null;
@@ -291,11 +299,19 @@ public class HttpUtil {
 			conn.setRequestMethod("GET");
 			conn.setRequestProperty("accept", "*/*");
 			conn.setRequestProperty("connection", "Keep-Alive");
-//			String uuid = "892b69b6-0556-42ac-9e52-ac71449f3312";
-			String uuid = "27ace5e3-9dcc-4df7-b218-0b38e917da37";
-			
-        	conn.setRequestProperty("Cookie", "lianjia_uuid="+uuid);  
-			if (conn.getResponseCode() == 200) {
+
+			/*
+			 * select_city=110000
+			 * all-lj=138f1e66bf8c368d8c8b328e9ff033b4
+			 * lianjia_ssid=cb059b8c-5dc3-4950-bd93-286629102373
+			 * lianjia_uuid=7c3d327e-7e22-4b25-a24c-1215ec539095
+			 * lianjia_ssid=b0bb61ef-da4e-4c47-a79e-7fc82e30af91
+					lianjia_uuid=a813ac8b-eaee-40d4-b954-b336ff4a641e
+			 */
+			if(uuid!=null){
+	        	conn.setRequestProperty("Cookie", "lianjia_uuid="+uuid);
+			} 
+			if (conn.getResponseCode() == 200 || conn.getResponseCode() == 301) {
 				is = conn.getInputStream();
 				baos = new ByteArrayOutputStream();
 				int len = -1;
@@ -330,6 +346,7 @@ public class HttpUtil {
 			conn.disconnect();
 		}
 
+	
 	}
 
 	/**
