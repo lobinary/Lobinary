@@ -55,11 +55,11 @@ public class 同文件匹配工具  extends 实用工具标签标准类{
 							String 源码路径 = 源码文件夹路径.getText();
 							if(源码路径.length()==0){
 								alert("温馨提示","请选择源码路径");
-								选择源码路径(父窗口);
+//								选择源码路径(父窗口);
 							}
 							try {
 								源码路径 = 源码文件夹路径.getText();
-								翻译路径下的所有Java文件注释(源码路径);
+//								翻译路径下的所有Java文件注释(源码路径);
 							} catch (Exception e1) {
 								e1.printStackTrace();
 								out(e1);
@@ -82,7 +82,7 @@ public class 同文件匹配工具  extends 实用工具标签标准类{
 			JButton 选择源码目录按钮 = new JButton("选择目标目录");
 			选择源码目录按钮.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					选择源码路径(父窗口);
+//					选择源码路径(父窗口);
 				}
 
 			});

@@ -20,6 +20,10 @@ public class Test {
 	
 	
 	public static void main(String[] args) throws Exception {
+		Integer integer = Integer.parseInt("1");
+		
+		
+		
 		System.out.println(System.getProperty("java.io.tmpdir"));
 		System.out.println(21252%21252);
 		

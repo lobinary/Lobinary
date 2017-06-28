@@ -73,7 +73,7 @@ public class TU {
 		LinkedHouseImpl 链家房屋信息捕获 = (LinkedHouseImpl) ctx.getBean(LinkedHouseImpl.class);
 		链家房屋信息捕获.捕获房屋信息(args);
 		房屋统计信息 查询捕获房屋统计信息 = 链家房屋信息捕获.查询捕获房屋统计信息();
-		List<房屋统计信息> 查询房屋价格走势根据批次号 = 链家房屋信息捕获.查询房屋价格走势根据批次号("20170503000000");
+		List<房屋统计信息> 查询房屋价格走势根据批次号 = 链家房屋信息捕获.查询房屋价格走势根据批次号("20170527000000");
 		String 创建链家价格走势图文件 = CreateChartServiceImpl.创建链家价格走势图(查询房屋价格走势根据批次号);
 		List<房屋统计信息> 查询批次号价格变动数据 = 链家房屋信息捕获.查询批次号价格变动数据(null);
 		List<房屋基本信息> 本日捕获的房屋数据 = 链家房屋信息捕获.查询房屋基本信息通过创建日期(DateUtil.DateToString(new Date(),"yyyy-MM-dd 00:00:00"));

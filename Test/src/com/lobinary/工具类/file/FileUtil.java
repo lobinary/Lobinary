@@ -15,6 +15,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -148,9 +149,10 @@ public class FileUtil {
 	}
 	
 	public static void main(String[] args) {
-        getCreateTime();   
-        getModifiedTime_1();   
-        getModifiedTime_2();         
+		File f = new File("C:\\test\\1.PNG");
+        getCreateTime(f.getAbsolutePath());   
+        getModifiedTimeStr(f);   
+        getModifyTimeCal(f);         
 	}
 	
 	/**
@@ -230,8 +232,7 @@ public class FileUtil {
     /**  
      * 读取文件创建时间  
      */  
-    public static void getCreateTime(){   
-        String filePath = "C://test.txt";   
+    public static void getCreateTime(String filePath){   
         String strTime = null;   
         try {   
             Process p = Runtime.getRuntime().exec("cmd /C dir "            
@@ -255,28 +256,27 @@ public class FileUtil {
     /**  
      * 读取文件修改时间的方法1  
      */    
-    @SuppressWarnings("deprecation")   
-    public static void getModifiedTime_1(){   
-        File f = new File("C://test.txt");               
-        Calendar cal = Calendar.getInstance();   
-        long time = f.lastModified();   
+    public static String getModifiedTimeStr(File f){
+        Calendar cal = Calendar.getInstance();
+        long time = f.lastModified();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");          
         cal.setTimeInMillis(time);     
-        //此处toLocalString()方法是不推荐的，但是仍可输出   
-        System.out.println("修改时间[1] " + cal.getTime().toLocaleString());    
-        //输出：修改时间[1]    2009-8-17 10:32:38   
+//        System.out.println("修改时间[2] " + formatter.format(cal.getTime()));      
+        //输出：修改时间[2]    2009-08-17 10:32:38   
+        return formatter.format(cal.getTime());
     }   
-       
+    
     /**  
      * 读取修改时间的方法2  
      */  
-    public static void getModifiedTime_2(){   
-        File f = new File("C://test.txt");               
-        Calendar cal = Calendar.getInstance();   
-        long time = f.lastModified();   
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");          
+    public static Calendar getModifyTimeCal(File f){
+        Calendar cal = Calendar.getInstance();
+        long time = f.lastModified();
+//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");          
         cal.setTimeInMillis(time);     
-        System.out.println("修改时间[2] " + formatter.format(cal.getTime()));      
+//        System.out.println("修改时间[2] " + formatter.format(cal.getTime()));      
         //输出：修改时间[2]    2009-08-17 10:32:38   
+        return cal;
     }
 
 	public static void insertList2File(List<String> list, File file) throws IOException {
@@ -334,4 +334,60 @@ public class FileUtil {
 	public static String getMD5(File f) throws FileNotFoundException, IOException{
 		return DigestUtils.md5DigestAsHex(new FileInputStream(f));
 	}
+	
+	public static String formetFileSize(long fileS) {// 转换文件大小
+		DecimalFormat df = new DecimalFormat("#0.00");
+		String fileSizeString = "";
+		if (fileS < 1024) {
+			fileSizeString = df.format((double) fileS) + "B";
+		} else if (fileS < 1048576) {
+			fileSizeString = df.format((double) fileS / 1024) + "K";
+		} else if (fileS < 1073741824) {
+			fileSizeString = df.format((double) fileS / 1048576) + "M";
+		} else {
+			fileSizeString = df.format((double) fileS / 1073741824) + "G";
+		}
+		return fileSizeString;
+	}
+
+	/**
+	 * 获取文件夹 大小
+	 * @param f
+	 * @return
+	 * @throws Exception
+	 */
+	public static long getFileSize(File f) throws Exception{
+		long size = 0;
+		File flist[] = f.listFiles();
+		if(flist==null)return 0;
+		for (int i = 0; i < flist.length; i++) {
+			if (flist[i].isDirectory()) {
+				size = size + getFileSize(flist[i]);
+			} else {
+				size = size + flist[i].length();
+			}
+		}
+		return size;
+	}
+	
+	/**
+	 * 获取文件夹 大小
+	 * @param f
+	 * @return
+	 * @throws Exception
+	 */
+	public static int getFileNums(File f) throws Exception{
+		int nums = 0;
+		File flist[] = f.listFiles();
+		if(flist==null)return 0;
+		for (int i = 0; i < flist.length; i++) {
+			if (flist[i].isDirectory()) {
+				nums = nums + getFileNums(flist[i]);
+			} else {
+				nums++;
+			}
+		}
+		return nums;
+	}
+	
 }
