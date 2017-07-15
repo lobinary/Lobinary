@@ -2,7 +2,7 @@ package com.l.web.house.model;
 
 import java.util.Date;
 
-public class 房屋基本信息 extends 房屋交易信息{
+public class 房屋基本信息 extends 房屋交易信息 implements Comparable<房屋基本信息>{
 
 	public String id;
 	public String 房屋信息来源;
@@ -372,5 +372,12 @@ public class 房屋基本信息 extends 房屋交易信息{
 	public void set有效状态(String 有效状态) {
 		this.有效状态 = 有效状态;
 	}
+    @Override
+    public int compareTo(房屋基本信息 o) {
+        if(o==null)return 0;
+        if(o.get首付()>this.get首付())return -1;
+        if(o.get首付()<this.get首付())return 1;
+        return 0;
+    }
 
 }

@@ -1,0 +1,487 @@
+{
+    "data": {
+        "selectors": {
+            "deal_property": [
+                {
+                    "name": "商品房",
+                    "value": 307500000001,
+                    "selected": true
+                },
+                {
+                    "name": "已购公房",
+                    "value": 307500000002,
+                    "selected": false
+                },
+                {
+                    "name": "一类经济适用房",
+                    "value": 307500000009,
+                    "selected": false
+                },
+                {
+                    "name": "二类经济适用房",
+                    "value": 307500000010,
+                    "selected": false
+                }
+            ],
+            "is_unique": [
+                {
+                    "name": "唯一",
+                    "value": 1,
+                    "selected": true
+                },
+                {
+                    "name": "不唯一",
+                    "value": 2,
+                    "selected": false
+                }
+            ],
+            "buy_house_time": [
+                {
+                    "name": "不满两年",
+                    "value": 1,
+                    "selected": false
+                },
+                {
+                    "name": "满两年",
+                    "value": 2,
+                    "selected": false
+                },
+                {
+                    "name": "满五年",
+                    "value": 3,
+                    "selected": true
+                }
+            ],
+            "tao_shu": [
+                {
+                    "name": "首套",
+                    "value": 1,
+                    "selected": true
+                },
+                {
+                    "name": "二套",
+                    "value": 2,
+                    "selected": false
+                }
+            ],
+            "loan_type": [
+                {
+                    "name": "商业贷款",
+                    "value": 1,
+                    "selected": true
+                },
+                {
+                    "name": "公积金贷款",
+                    "value": 2,
+                    "selected": false
+                },
+                {
+                    "name": "组合贷款",
+                    "value": 3,
+                    "selected": false
+                },
+                {
+                    "name": "全款",
+                    "value": 4,
+                    "selected": false
+                }
+            ],
+            "loan_percentage": [
+                {
+                    "name": "65%",
+                    "value": "0.65",
+                    "selected": true
+                },
+                {
+                    "name": "60%",
+                    "value": "0.6",
+                    "selected": false
+                },
+                {
+                    "name": "55%",
+                    "value": "0.55",
+                    "selected": false
+                },
+                {
+                    "name": "50%",
+                    "value": "0.5",
+                    "selected": false
+                },
+                {
+                    "name": "45%",
+                    "value": "0.45",
+                    "selected": false
+                },
+                {
+                    "name": "40%",
+                    "value": "0.4",
+                    "selected": false
+                },
+                {
+                    "name": "35%",
+                    "value": "0.35",
+                    "selected": false
+                },
+                {
+                    "name": "30%",
+                    "value": "0.3",
+                    "selected": false
+                },
+                {
+                    "name": "25%",
+                    "value": "0.25",
+                    "selected": false
+                },
+                {
+                    "name": "20%",
+                    "value": "0.2",
+                    "selected": false
+                }
+            ],
+            "loan_year": [
+                {
+                    "name": "25年",
+                    "value": 25,
+                    "selected": true
+                },
+                {
+                    "name": "24年",
+                    "value": 24,
+                    "selected": false
+                },
+                {
+                    "name": "23年",
+                    "value": 23,
+                    "selected": false
+                },
+                {
+                    "name": "22年",
+                    "value": 22,
+                    "selected": false
+                },
+                {
+                    "name": "21年",
+                    "value": 21,
+                    "selected": false
+                },
+                {
+                    "name": "20年",
+                    "value": 20,
+                    "selected": false
+                },
+                {
+                    "name": "19年",
+                    "value": 19,
+                    "selected": false
+                },
+                {
+                    "name": "18年",
+                    "value": 18,
+                    "selected": false
+                },
+                {
+                    "name": "17年",
+                    "value": 17,
+                    "selected": false
+                },
+                {
+                    "name": "16年",
+                    "value": 16,
+                    "selected": false
+                },
+                {
+                    "name": "15年",
+                    "value": 15,
+                    "selected": false
+                },
+                {
+                    "name": "14年",
+                    "value": 14,
+                    "selected": false
+                },
+                {
+                    "name": "13年",
+                    "value": 13,
+                    "selected": false
+                },
+                {
+                    "name": "12年",
+                    "value": 12,
+                    "selected": false
+                },
+                {
+                    "name": "11年",
+                    "value": 11,
+                    "selected": false
+                },
+                {
+                    "name": "10年",
+                    "value": 10,
+                    "selected": false
+                },
+                {
+                    "name": "9年",
+                    "value": 9,
+                    "selected": false
+                },
+                {
+                    "name": "8年",
+                    "value": 8,
+                    "selected": false
+                },
+                {
+                    "name": "7年",
+                    "value": 7,
+                    "selected": false
+                },
+                {
+                    "name": "6年",
+                    "value": 6,
+                    "selected": false
+                },
+                {
+                    "name": "5年",
+                    "value": 5,
+                    "selected": false
+                },
+                {
+                    "name": "4年",
+                    "value": 4,
+                    "selected": false
+                },
+                {
+                    "name": "3年",
+                    "value": 3,
+                    "selected": false
+                },
+                {
+                    "name": "2年",
+                    "value": 2,
+                    "selected": false
+                },
+                {
+                    "name": "1年",
+                    "value": 1,
+                    "selected": false
+                }
+            ],
+            "rate_shangdai": [
+                {
+                    "name": "最新基准利率",
+                    "value": "0.049",
+                    "selected": true
+                },
+                {
+                    "name": "最新基准利率95折",
+                    "value": "0.04655",
+                    "selected": false
+                },
+                {
+                    "name": "最新基准利率9折",
+                    "value": "0.0441",
+                    "selected": false
+                },
+                {
+                    "name": "最新基准利率88折",
+                    "value": "0.04312",
+                    "selected": false
+                },
+                {
+                    "name": "最新基准利率87折",
+                    "value": "0.04263",
+                    "selected": false
+                },
+                {
+                    "name": "最新基准利率86折",
+                    "value": "0.04214",
+                    "selected": false
+                },
+                {
+                    "name": "最新基准利率85折",
+                    "value": "0.04165",
+                    "selected": false
+                },
+                {
+                    "name": "最新基准利率82折",
+                    "value": "0.04018",
+                    "selected": false
+                },
+                {
+                    "name": "最新基准利率8折",
+                    "value": "0.0392",
+                    "selected": false
+                },
+                {
+                    "name": "最新基准利率75折",
+                    "value": "0.03675",
+                    "selected": false
+                },
+                {
+                    "name": "最新基准利率7折",
+                    "value": "0.0343",
+                    "selected": false
+                },
+                {
+                    "name": "最新基准利率1.1倍",
+                    "value": "0.0539",
+                    "selected": false
+                },
+                {
+                    "name": "最新基准利率1.2倍",
+                    "value": "0.0588",
+                    "selected": false
+                },
+                {
+                    "name": "最新基准利率1.3倍",
+                    "value": "0.0637",
+                    "selected": false
+                }
+            ],
+            "rate_gongjijin": [
+                {
+                    "name": "最新基准利率",
+                    "value": "0.0325",
+                    "selected": true
+                },
+                {
+                    "name": "最新基准利率95折",
+                    "value": "0.030875",
+                    "selected": false
+                },
+                {
+                    "name": "最新基准利率9折",
+                    "value": "0.02925",
+                    "selected": false
+                },
+                {
+                    "name": "最新基准利率88折",
+                    "value": "0.0286",
+                    "selected": false
+                },
+                {
+                    "name": "最新基准利率87折",
+                    "value": "0.028275",
+                    "selected": false
+                },
+                {
+                    "name": "最新基准利率86折",
+                    "value": "0.02795",
+                    "selected": false
+                },
+                {
+                    "name": "最新基准利率85折",
+                    "value": "0.027625",
+                    "selected": false
+                },
+                {
+                    "name": "最新基准利率82折",
+                    "value": "0.02665",
+                    "selected": false
+                },
+                {
+                    "name": "最新基准利率8折",
+                    "value": "0.026",
+                    "selected": false
+                },
+                {
+                    "name": "最新基准利率75折",
+                    "value": "0.024375",
+                    "selected": false
+                },
+                {
+                    "name": "最新基准利率7折",
+                    "value": "0.02275",
+                    "selected": false
+                },
+                {
+                    "name": "最新基准利率1.1倍",
+                    "value": "0.03575",
+                    "selected": false
+                },
+                {
+                    "name": "最新基准利率1.2倍",
+                    "value": "0.039",
+                    "selected": false
+                },
+                {
+                    "name": "最新基准利率1.3倍",
+                    "value": "0.04225",
+                    "selected": false
+                }
+            ]
+        },
+        "params": {
+            "city_id": 110000,
+            "price_listing": 358,
+            "deal_property": 307500000001,
+            "is_unique": 1,
+            "buy_house_time": 3,
+            "tao_shu": 1,
+            "loan_history": 1,
+            "loan_type": 1,
+            "loan_percentage": "0.65",
+            "loan_year": 25,
+            "loan_gongjijin": 0,
+            "loan_shangdai": 197.795,
+            "loan_total": 197.795,
+            "rate_gongjijin": "0.0325",
+            "rate_gongjijin_input": "0.0325",
+            "rate_shangdai": "0.049",
+            "rate_shangdai_input": "0.049",
+            "price_type": null,
+            "building_name": "清逸西园",
+            "house_area": "77.1",
+            "inside_area": "0.00",
+            "floor": "3",
+            "orientations": "100500000003,100500000007",
+            "build_structure": "0",
+            "district_id": "23008615",
+            "district_name": "大兴",
+            "cycle_line": 40630004,
+            "bizcircle_id": "18335749",
+            "house_type": 107500000003,
+            "pinggujia": 304.3,
+            "is_ordinary": 1,
+            "max_percentage": 0.65
+        },
+        "payment": {
+            "cost_house": 160.3,
+            "cost_tax": 3.1,
+            "tax_info": {
+                "total": 30430,
+                "tax_base": "3043000.00",
+                "list": [
+                    {
+                        "name": "增值税及附加",
+                        "tax": 0
+                    },
+                    {
+                        "name": "契税",
+                        "tax": 30430
+                    },
+                    {
+                        "name": "个人所得税",
+                        "tax": 0
+                    }
+                ]
+            },
+            "cost_jingjiren": 9.7,
+            "loan_info": {
+                "elp": {
+                    "mp": 11448,
+                    "tm": 300,
+                    "interest": 1456435,
+                    "total": 3434385
+                },
+                "epp": {
+                    "mp": 14670,
+                    "tm": 300,
+                    "interest": 1215533,
+                    "total": 3193483,
+                    "mpd": 27
+                }
+            }
+        }
+    },
+    "errorCode": 0
+}

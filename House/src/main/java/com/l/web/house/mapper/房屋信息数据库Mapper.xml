@@ -212,7 +212,7 @@
 	<select id="查询批次号价格变动数据" resultType="com.l.web.house.dto.房屋统计信息">
 				select *
 		from (
-		select jz.房屋基本信息id  房屋基本信息id,f.网址,f.所在区县,f.所在小区,f.朝向,f.户型,f.实用面积,f.产权年限,f.建筑类型,
+		select jz.房屋基本信息id  房屋基本信息id,f.网址,f.标题,f.所在区县,f.所在小区,f.朝向,f.户型,f.实用面积,f.产权年限,f.建筑类型,
 		(select max(jp.批次号)
 		    from house.房屋交易信息 jp
 		    where jp.批次号 &lt;= #{批次号}
@@ -230,6 +230,30 @@
 		    and jp.房屋基本信息id = jz.房屋基本信息id
 		)
 		) 房屋本批次价格,
+		(
+            select max(j.首付)
+            from house.房屋交易信息 j
+            where j.房屋基本信息id = jz.房屋基本信息id
+            and j.批次号 in
+            (
+                select max(jp.批次号)
+                from house.房屋交易信息 jp
+                where jp.批次号 &lt;= #{批次号}
+                and jp.房屋基本信息id = jz.房屋基本信息id
+            )
+        ) 房屋本批次首付,
+        (
+            select max(j.评估价)
+            from house.房屋交易信息 j
+            where j.房屋基本信息id = jz.房屋基本信息id
+            and j.批次号 in
+            (
+                select max(jp.批次号)
+                from house.房屋交易信息 jp
+                where jp.批次号 &lt;= #{批次号}
+                and jp.房屋基本信息id = jz.房屋基本信息id
+            )
+        ) 房屋本批次评估价,
 		(
 			select max(jp.批次号)
 		    from house.房屋交易信息 jp
@@ -281,7 +305,7 @@
 		
 		)tt
 		where tt.差距价格!=0
-		order by tt.差距价格
+		order by tt.房屋本批次首付
 				
 	</select>
 	

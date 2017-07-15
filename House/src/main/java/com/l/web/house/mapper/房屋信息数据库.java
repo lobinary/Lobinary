@@ -53,9 +53,9 @@ public interface 房屋信息数据库 {
 	public List<房屋基本信息> 查找基本信息根据当前状态(@Param("房屋信息来源")String 房屋信息来源,@Param("当前状态")String 当前状态,@Param("限制条数")int 限制条数);
 	
 	@Insert("INSERT INTO 房屋交易信息 "
-			+ "(id, 房屋基本信息id, 总价, 首付, 税费, 每平米价格, 批次号)"
+			+ "(id, 房屋基本信息id, 总价, 评估价, 首付, 税费, 每平米价格, 批次号)"
 			+ " VALUES"
-			+ " (#{id}, #{房屋基本信息id}, #{总价}, #{首付}, #{税费}, #{每平米价格}, #{批次号})")
+			+ " (#{id}, #{房屋基本信息id}, #{总价},#{评估价}, #{首付}, #{税费}, #{每平米价格}, #{批次号})")
 	public int 添加房屋交易信息(房屋交易信息 房屋交易信息);
 	
 	@Select("select j.* "+
@@ -108,9 +108,21 @@ public interface 房屋信息数据库 {
 
 	public List<房屋统计信息> 查询批次号价格变动数据(String 批次号);
 
-	@Select(" SELECT * " +
-			" FROM house.房屋基本信息 h left join house.房屋交易信息 j on h.id = j.房屋基本信息id  " +
-			" where h.创建时间 > #{date} ")
+	@Select(" SELECT * "+
+	        " FROM house.房屋基本信息 h , house.房屋交易信息 j "+
+	        " where  h.id = j.房屋基本信息id   "+
+	        " and h.创建时间 > #{date} "+
+	        " and j.id =  "+
+	        " ( "+
+	        "     select max(id) "+
+	        "     from house.房屋交易信息 j2 "+
+	        "     where j2.房屋基本信息id = j.房屋基本信息id "+
+	        " )")
 	public List<房屋基本信息> 查询房屋基本信息通过创建日期(String date);
+
+    @Update("update 房屋交易信息 set 总价=#{总价},评估价=#{评估价},首付=#{首付},税费=#{税费}, "
+            + "每平米价格=#{每平米价格}, 有效状态=#{有效状态},批次号=#{批次号} "
+            + " where id=#{id}")
+    public void 更新房屋交易信息(房屋交易信息 j);
 
 }

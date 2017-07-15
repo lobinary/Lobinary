@@ -6,7 +6,9 @@ public class 房屋统计信息 extends 房屋基本信息{
 	
 	private String 房屋基本信息id;
 	private String 房屋本批次号;
-	private String 房屋本批次价格;
+    private String 房屋本批次价格;
+    private String 房屋本批次首付;
+    private String 房屋本批次评估价;
 	private String 房屋上一批次号;
 	private String 房屋上批次价格;
 	private String 差距价格;
@@ -81,4 +83,16 @@ public class 房屋统计信息 extends 房屋基本信息{
 	public void set房屋上批次价格(String 房屋上批次价格) {
 		this.房屋上批次价格 = 房屋上批次价格;
 	}
+    public String get房屋本批次首付() {
+        return 房屋本批次首付;
+    }
+    public void set房屋本批次首付(String 房屋本批次首付) {
+        this.房屋本批次首付 = 房屋本批次首付;
+    }
+    public String get房屋本批次评估价() {
+        return 房屋本批次评估价;
+    }
+    public void set房屋本批次评估价(String 房屋本批次评估价) {
+        this.房屋本批次评估价 = 房屋本批次评估价;
+    }
 }

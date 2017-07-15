@@ -20,7 +20,7 @@
 	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
-				<value>classpath*:mybatis/jdbc2.properties</value>
+				<value>classpath*:mybatis/jdbc.properties</value>
 				<!-- <value>classpath:redis/redis.properties</value> -->
 			</list>
 		</property>

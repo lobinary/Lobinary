@@ -7,6 +7,7 @@ public class 房屋交易信息 {
 	public String id;
 	public String 房屋基本信息id;
 	public double 总价;
+	public double 评估价;
 	public double 首付;
 	public double 税费;
 	public double 每平米价格;
@@ -82,9 +83,16 @@ public class 房屋交易信息 {
 	public void set看房人数(int 看房人数) {
 		this.看房人数 = 看房人数;
 	}
-	@Override
-	public String toString() {
-		return "房屋交易信息 [id=" + id + ", 房屋基本信息id=" + 房屋基本信息id + ", 总价=" + 总价 + ", 首付=" + 首付 + ", 税费=" + 税费 + ", 每平米价格=" + 每平米价格 + ", 价格更新日期=" + 价格更新日期 + ", 关注人数=" + 关注人数 + ", 看房人数=" + 看房人数 + "]";
-	}
+    public double get评估价() {
+        return 评估价;
+    }
+    public void set评估价(double 评估价) {
+        this.评估价 = 评估价;
+    }
+    @Override
+    public String toString() {
+        return "房屋交易信息 [id=" + id + ", 房屋基本信息id=" + 房屋基本信息id + ", 总价=" + 总价 + ", 评估价=" + 评估价 + ", 首付=" + 首付 + ", 税费=" + 税费 + ", 每平米价格=" + 每平米价格 + ", 价格更新日期=" + 价格更新日期
+                + ", 关注人数=" + 关注人数 + ", 看房人数=" + 看房人数 + ", 有效状态=" + 有效状态 + ", 批次号=" + 批次号 + "]";
+    }
 
 }

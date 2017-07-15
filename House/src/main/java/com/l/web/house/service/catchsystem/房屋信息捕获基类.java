@@ -1,5 +1,6 @@
 package com.l.web.house.service.catchsystem;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -43,7 +44,9 @@ public abstract class 房屋信息捕获基类 implements 房屋信息捕获接�
 
 	@Override
 	public List<房屋基本信息> 查询房屋基本信息通过创建日期(String date) {
-		return 房屋信息数据库.查询房屋基本信息通过创建日期(date);
+		List<房屋基本信息> list = 房屋信息数据库.查询房屋基本信息通过创建日期(date);
+		Collections.sort(list);
+        return list;
 	}
 	
 }
