@@ -14,6 +14,8 @@ public class Redis简单使用 {
 	 * <dependency> <groupId>redis.clients</groupId>
 	 * <artifactId>jedis</artifactId> <version>2.9.0</version> </dependency>
 	 * 
+	 * Redis命令：http://doc.redisfans.com/
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {

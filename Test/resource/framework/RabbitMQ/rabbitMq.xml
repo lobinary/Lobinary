@@ -1,39 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rabbit="http://www.springframework.org/schema/rabbit"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
      http://www.springframework.org/schema/beans
      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
      http://www.springframework.org/schema/rabbit
      http://www.springframework.org/schema/rabbit/spring-rabbit-1.0.xsd">
+     
 	<!--配置connection-factory，指定连接rabbit server参数 -->
-	<rabbit:connection-factory id="connectionFactory"
-		username="xxx" password="123qwe" host="127.0.0.1" port="5672" />
-		
-	<!--定义rabbit template用于数据的接收和发送 -->
-	<rabbit:template id="amqpTemplate"  connection-factory="connectionFactory" 
-	    exchange="exchangeTest" />
-		
-	<!--通过指定下面的admin信息，当前producer中的exchange和queue会在rabbitmq服务器上自动生成 -->
-	<rabbit:admin connection-factory="connectionFactory" />
+	<rabbit:connection-factory id="connectionFactory" username="xxx" password="123qwe" host="127.0.0.1" port="5672" />
 
-	<!--定义queue -->
-	<rabbit:queue name="queueTest" durable="true" auto-delete="false" exclusive="false" />
+    <!--通过指定下面的admin信息，当前producer中的exchange和queue会在rabbitmq服务器上自动生成 -->
+    <rabbit:admin connection-factory="connectionFactory" />
 
-	<!-- 定义direct exchange，绑定queueTest -->
-	<rabbit:direct-exchange name="exchangeTest" durable="true" auto-delete="false">
-		<rabbit:bindings>
-			<rabbit:binding queue="queueTest" key="queueTestKey"></rabbit:binding>
-		</rabbit:bindings>
-	</rabbit:direct-exchange>
-	
+    <!--定义queue -->
+    <rabbit:queue name="queueTest" durable="true" auto-delete="false" exclusive="false" />
+
+    <!-- 定义direct exchange，绑定queueTest -->
+    <rabbit:direct-exchange name="exchangeTest" durable="true" auto-delete="false">
+        <rabbit:bindings>
+            <rabbit:binding queue="queueTest" key="queueTestKey"></rabbit:binding>
+        </rabbit:bindings>
+    </rabbit:direct-exchange>
+    
+    
+    <!-- 交易交换机 -->
+    <rabbit:topic-exchange name="yqt.exchange.trade" durable="true" auto-delete="false">
+        <rabbit:bindings>
+            <rabbit:binding pattern="pay_success" queue="yqt.quene.order.merchantNotify"/>
+            <rabbit:binding pattern="pay_success" queue="yqt.quene.order.tradeCalcFee"/>
+            <rabbit:binding pattern="pay_success" queue="yqt.quene.order.tradeWechatNotify"/>
+            <rabbit:binding pattern="wechant_micropay_alert" queue="yqt.quene.order.wechantMicropayAlertQueryPayResult"/>
+            <rabbit:binding pattern="refund_success" queue="yqt.quene.order.refundCalcFee"/>
+            <rabbit:binding pattern="refund_success" queue="yqt.quene.order.refundWechatNotify"/>
+            <rabbit:binding pattern="pay_success_notify" queue="yqt.quene.order.payResultNotify"/>
+        </rabbit:bindings>
+    </rabbit:topic-exchange>
+    
+    
+    <!-- 交易队列 -->
+    <rabbit:queue name="yqt.quene.order.merchantNotify" durable="true" auto-delete="false" exclusive="false"/>
+    <rabbit:queue name="yqt.quene.order.tradeCalcFee" durable="true" auto-delete="false" exclusive="false"/>
+    <rabbit:queue name="yqt.quene.order.tradeWechatNotify" durable="true" auto-delete="false" exclusive="false"/>
+    <rabbit:queue name="yqt.quene.order.wechantMicropayAlertQueryPayResult" durable="true" auto-delete="false" exclusive="false"/>
+    <rabbit:queue name="yqt.quene.order.refundCalcFee" durable="true" auto-delete="false" exclusive="false"/>
+    <rabbit:queue name="yqt.quene.order.refundWechatNotify" durable="true" auto-delete="false" exclusive="false"/>
+    <rabbit:queue name="yqt.quene.order.payResultNotify" durable="true" auto-delete="false" exclusive="false"/>
+    
+    
+
+    <!-- 队列消费者 -->
+    <bean id="merchantNotifyConsume" class="com.lobinary.框架.RabbitMQ.test.TestConsume"/>
+    
+    <!-- 队列监听器 -->
+    <rabbit:listener-container connection-factory="connectionFactory" acknowledge="manual" concurrency="3">
+        <rabbit:listener queues="yqt.quene.order.merchantNotify" ref="merchantNotifyConsume"/>
+        <rabbit:listener queues="yqt.quene.order.tradeCalcFee" ref="merchantNotifyConsume"/>
+        <rabbit:listener queues="yqt.quene.order.tradeWechatNotify" ref="merchantNotifyConsume"/>
+        <rabbit:listener queues="yqt.quene.order.wechantMicropayAlertQueryPayResult" ref="merchantNotifyConsume"/>
+        <rabbit:listener queues="yqt.quene.order.refundCalcFee" ref="merchantNotifyConsume"/>
+        <rabbit:listener queues="yqt.quene.order.refundWechatNotify" ref="merchantNotifyConsume"/>
+        <rabbit:listener queues="yqt.quene.order.payResultNotify" ref="merchantNotifyConsume"/>
+    </rabbit:listener-container>
+    
+	<!--定义rabbit template用于数据的接收和发送 
+	               有的项目没有自动绑定queue，原因有两个:
+	                                               （1）没有配置amqpadmin
+	                                               （2）lazy-init设置的是true。
+	       spring的amqpadmin在系统启动时会自动get出exchange，queue的bean，将她们在rabbitmq中注册。-->
+	<rabbit:template id="rabbitMQTemplate" connection-factory="connectionFactory" exchange="exchangeTest" />
+
 	<!-- 消息接收者 -->
 	<bean id="messageReceiver" class="com.lobinary.框架.RabbitMQ.使用spring加载.MessageConsumer"></bean>
-	
-	<!-- queue litener  观察 监听模式 当有消息到达时会通知监听在对应的队列上的监听对象-->
-    <rabbit:listener-container connection-factory="connectionFactory">
-             <rabbit:listener queues="queueTest" ref="messageReceiver"/>
-    </rabbit:listener-container>
-	
+
+	<!-- queue litener 观察 监听模式 当有消息到达时会通知监听在对应的队列上的监听对象 -->
+	<rabbit:listener-container connection-factory="connectionFactory">
+		<rabbit:listener queues="queueTest" ref="messageReceiver" />
+	</rabbit:listener-container>
+
 </beans>

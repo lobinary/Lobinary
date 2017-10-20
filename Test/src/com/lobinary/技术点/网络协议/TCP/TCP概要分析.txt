@@ -1,0 +1,97 @@
+
+参考文献：
+http://www.cnblogs.com/Jessy/p/3535612.html
+http://kb.cnblogs.com/page/209100/
+
+
+TCP每次信息交互都有一个标识位来表示本次交互的数据是干啥的，TCP状态则是交互两侧（服务端，客户端）的状态表示。
+
+ip.dst == 104.125.16.231 or ip.src == 104.125.16.231
+
+tcp标志:
+    SYN(synchronous建立联机)
+    ACK(acknowledgement 确认)
+    PSH(push传送)
+    FIN(finish结束)
+    RST(reset重置)
+    URG(urgent紧急)
+    Sequence number(顺序号码)
+    Acknowledge number(确认号码)
+
+TCP状态： 
+    LISTEN - 侦听来自远方TCP端口的连接请求； 
+    SYN-SENT -在发送连接请求后等待匹配的连接请求； 
+    SYN-RECEIVED - 在收到和发送一个连接请求后等待对连接请求的确认； 
+    ESTABLISHED- 代表一个打开的连接，数据可以传送给用户； 
+    FIN-WAIT-1 - 等待远程TCP的连接中断请求，或先前的连接中断请求的确认；
+    FIN-WAIT-2 - 从远程TCP等待连接中断请求； 
+    CLOSE-WAIT - 等待从本地用户发来的连接中断请求； 
+    CLOSING -等待远程TCP对连接中断的确认； 
+    LAST-ACK - 等待原来发向远程TCP的连接中断请求的确认； 
+    TIME-WAIT -等待足够的时间以确保远程TCP接收到连接中断请求的确认； 
+    CLOSED - 没有任何连接状态；
+
+
+HTTP的三次握手：
+客户端：在吗 我给你1，你还我2
+服务端：我在，给你2，我给你A，你记得还我B
+客户端：好的，收到你给我的2了，我现在还一个你想要的B
+
+HTTP关闭四次握手：
+客户端：我准备关闭我的写通道，我给你1，你还我2
+服务端：知道你要关闭你的写通道，给你2，我现在关闭读通道，状态变成(CLOSE_WAIT)，我准备关闭我的写通道了，我给你A，你还我B
+客户端：收到你的2了，我关闭了我的写通道，知道你要关你的写通道了，那我关了我这边的读通道，还给你B(TIME_WAIT,等待双倍Maximum Segment Lifetime时间)
+服务端：收到你的B，那我关闭写通道了啊
+
+检查服务器各状态数量：
+    netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'  
+得到的数据结果如下:
+
+                状态                            数量
+    TIME_WAIT       1443        
+    CLOSE_WAIT      1122    被动关闭的server收到FIN后，无论如何都会回ack，但未向client发出FIN的TCP状态是CLOSE_WAIT。出现这种状况一般都是由于server端代码的问题，如果你的服务器上出现大量CLOSE_WAIT，应该要考虑检查代码。
+    SYN_SENT        3
+    FIN_WAIT1       2074    
+    FIN_WAIT2       195
+    ESTABLISHED     89782   表示正在连接的数量
+    SYN_RECV        7314
+    CLOSING         9
+    LAST_ACK        2372
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

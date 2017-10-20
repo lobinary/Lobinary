@@ -80,7 +80,9 @@ public class LinkedHouseImpl extends 房屋信息捕获基类 {
         if (o.length == 2) {
             HttpUtil.setUuid(o[1]);
         }
-//         捕获房屋概要信息(o);
+        if(o.length ==3){
+            捕获房屋概要信息(o);
+        }
         从数据库捕获房屋详细信息();
         获取小区信息();
     }
@@ -853,10 +855,28 @@ public class LinkedHouseImpl extends 房屋信息捕获基类 {
                 }
                 // System.out.println("所在楼层："+ 所在楼层);
                 if (楼层.contains("年")) {
-                    String 建房年份S = 楼层.substring(楼层.indexOf(")") + 1, 楼层.indexOf("年"));
-                    建房时间 = DU.getDate(建房年份S);
+                    try {
+                        String 建房年份S = 楼层.substring(楼层.indexOf("年") - 4, 楼层.indexOf("年"));
+                        建房时间 = DU.getDate(建房年份S);
+                    } catch (Exception e) {
+                        logger.error("捕获建房时间异常,楼层：{}",楼层);
+                        throw e;
+                    }
                     // System.out.println("建房时间:" + sdf.format(建房时间));
-                    建筑类型 = 楼层.substring(楼层.indexOf("年建") + 2, 楼层.indexOf("-") - 2);
+                    try {
+                        if(楼层.contains("板楼")){
+                            建筑类型 = "板楼";
+                        }else if(楼层.contains("塔楼")){
+                            建筑类型 = "塔楼";
+                        }else if(楼层.contains("板塔结合")){
+                            建筑类型 = "板塔结合";
+                        }else{
+                            throw new Exception("未知建筑类型");
+                        }
+                    } catch (Exception e) {
+                        logger.error("捕获建筑类型时异常,楼层：{}",楼层);
+                        throw e;
+                    }
                 } else {
                     建筑类型 = 楼层.substring(楼层.indexOf(")") + 1, 楼层.indexOf("-") - 2);
                     if (建筑类型.contains("楼") || 建筑类型.contains("板塔")) {

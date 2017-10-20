@@ -24,7 +24,7 @@ import com.rabbitmq.client.Channel;
 public class RabbitMQSender {
 
 	static String routingKey = "routingKey1.#";//绑定的id
-    static String exchange = "topic-exchange";//绑定Exchange名
+    static String exchange = "lobinary-topic-exchange";//绑定Exchange名
     static String queue = "queue2";//绑定的queue名
     
     

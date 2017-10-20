@@ -1,0 +1,24 @@
+
+应用层协议：
+    DHCP · DNS · FTP · Gopher · HTTP[Hypertext Transfer Protocol]· IMAP4 · IRC · NNTP · XMPP
+    POP3 · SIP · SMTP ·SNMP · SSH ·TELNET · RPC · RTCP · RTP
+    RTSP· SDP · SOAP · GTP · STUN · NTP· SSDP · BGP · RIP ·ED2K等
+    
+传输层协议：
+    TCP[Transmission Control Protocol] · UDP · TLS · DCCP · SCTP · RSVP · OSPF 等
+    
+网络层协议：
+    IP (IPv4[internet Protocol Version 4] · IPv6) · ICMP· ICMPv6·IGMP ·IS-IS · IPsec 等
+    
+数据链路层：
+    Wi-Fi(IEEE 802.11) · WiMAX(IEEE 802.16) · ARP · RARP
+    ATM · DTM · 令牌环 · 以太网[Ethernet] ·FDDI · 帧中继 · GPRS · EVDO
+    HSPA · HDLC · PPP · L2TP ·PPTP · ISDN·STP 等
+    
+物理层 ：
+    SONET/SDH ·以太网[Ethernet] · 调制解调器 · 电力线通信(PLC)
+    G.709 · 光导纤维 · 同轴电缆 · 双绞线等
+    
+    
+
+    

@@ -21,7 +21,8 @@ public class Test {
 	
 	public static void main(String[] args) throws Exception {
 		Integer integer = Integer.parseInt("1");
-		
+
+	       Class x = com.sun.image.codec.jpeg.ImageFormatException.class;
 		
 		
 		System.out.println(System.getProperty("java.io.tmpdir"));

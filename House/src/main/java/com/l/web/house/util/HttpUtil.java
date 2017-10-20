@@ -45,9 +45,10 @@ public class HttpUtil {
     private static String uuid = "224ea28c-8b4b-4d21-806b-6b3f8c90d6bf";
 
     public static void main(String[] args) throws Exception {
-        uuid = "224ea28c-8b4b-4d21-806b-6b3f8c90d6bf";
+//        uuid = "224ea28c-8b4b-4d21-806b-6b3f8c90d6bf";
 //        String content = HttpUtil.sendGetRequest("https://bj.lianjia.com/ershoufang/pg1p2p1p4p3/");
-        String content = HttpUtil.sendGet("https://bj.lianjia.com/ershoufang/pg1p2p1p4p3/");
+//        String content = HttpUtil.sendGet("https://bj.lianjia.com/ershoufang/pg1p2p1p4p3/");
+        String content = HttpUtil.sendGet("http://www.jd.com");
          System.out.println(content);
         // System.out.println(doGet("http://bj.lianjia.com/ershoufang/pg1l1l2l3l4p1p2"));
     }
