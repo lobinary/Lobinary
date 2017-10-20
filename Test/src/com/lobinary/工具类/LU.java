@@ -6,8 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintStream;
 import java.util.Date;
 
 import com.lobinary.工具类.date.DateUtil;
@@ -73,6 +71,9 @@ public class LU {
 		try {
 			bufferWritter.write(DateUtil.getCurrentTime()+" - "+log+"\n");
 			bufferWritter.flush();
+			if(!changedSystemOut){
+			    System.out.println(log);
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

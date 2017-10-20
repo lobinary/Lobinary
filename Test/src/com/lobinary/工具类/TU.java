@@ -34,5 +34,11 @@ public class TU {
 	
 		
 	}
+	
+	public static void main(String[] args) {
+        TT.run();
+    }
+	
+	
 
 }

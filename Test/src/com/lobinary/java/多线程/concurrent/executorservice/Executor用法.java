@@ -2,6 +2,7 @@ package com.lobinary.java.多线程.concurrent.executorservice;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class Executor用法 {
 	private final static ExecutorService threadPool = Executors.newFixedThreadPool(2);//newSingleThreadExecutor();
@@ -14,7 +15,7 @@ public class Executor用法 {
 				 *	其它线程池类像ThreadPoolExecutor和ScheduledThreadPoolExecutor都有这些方法。
 			*/	
 			threadPool.execute(new Executor用法_线程());
-			threadPool.submit(new Executor用法_线程());
+			Future<?> future = threadPool.submit(new Executor用法_线程());
 		}
 		System.out.println("线程添加完毕");
 //		threadPool.shutdown();
