@@ -46,6 +46,7 @@ public class TU {
      * @throws InterruptedException
      */
     public static void main(String[] args) throws UnsupportedEncodingException, MessagingException, InterruptedException {
+        //  1   2不刷新房屋明细，获取详情   3刷新房屋明细并获取详情   4不刷新房屋
         args = new String[3];
         args[0] = "1";
         args[1] = "24aa469b-9a2d-58f4-968b-f22bcd0fa756";
@@ -88,8 +89,14 @@ public class TU {
     private static void job(String[] args) throws Exception {
         LU.changeLogFile(FILE_LOCATION);
         ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath*:spring/spring-application.xml");
-        LinkedHouseImpl 链家房屋信息捕获 = ctx.getBean(LinkedHouseImpl.class);
-//        链家房屋信息捕获.捕获房屋信息(args);
+        LinkedHouseImpl 链家房屋信息捕获 = (LinkedHouseImpl) ctx.getBean("linkedHouseImpl");
+        if(args.length != 4) {
+                try {
+                    链家房屋信息捕获.捕获房屋信息(args);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+        }
         房屋统计信息 查询捕获房屋统计信息 = 链家房屋信息捕获.查询捕获房屋统计信息();
         List<房屋统计信息> 查询房屋价格走势根据批次号 = 链家房屋信息捕获.查询房屋价格走势根据批次号("20170701000000");
         String 创建链家价格走势图文件 = CreateChartServiceImpl.创建链家价格走势图(查询房屋价格走势根据批次号);

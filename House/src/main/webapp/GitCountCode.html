@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Stict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-
+strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>GitCountCode</title>
+</head>
+<body>
+	<form method="get" action="#">
+		<div align="center">
+			<h1 align="center" style="color: pink">git代码贡献统计</h1>
+			<br> 
+			
+			group:
+			<select name="group">
+				<option value="A">选择group A</option>
+				<option value="B">选择group B</option>
+				<option value="C">选择group C</option>
+			</select> 
+			
+			project:
+			<select name="project">
+				<option value="A">选择A project</option>
+				<option value="B">选择B project</option>
+				<option value="C">选择C project</option>
+			</select> 日期范围:<input id="dateRange" name="dateRange" size="40">
+			
+			<table align="center" border="1" width="900px" height="50px">
+				<tr>
+					<!tr是行，td是列>
+					<th>组名称</th>
+					<th>项目名称</th>
+					<th>用户名</th>
+					<th>Git代码统计总行数</th>
+					<th>有效代码行数</th>
+				</tr>
+			</table>
+			
+			<button type="submit">提交</button>
+			
+	</form>
+	</div>
+</body>
+<script type="text/javascript" src="laydate/laydate.js"></script>
+<script type="text/javascript">
+	laydate.render({
+		elem : '#dateRange',
+		type : 'datetime',
+		range : true
+	});
+</script>
+</html>

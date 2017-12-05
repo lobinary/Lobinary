@@ -20,6 +20,8 @@ public class Test {
 	
 	
 	public static void main(String[] args) throws Exception {
+	    
+	    System.out.println(Math.log10(100000000));
 		Integer integer = Integer.parseInt("1");
 
 	       Class x = com.sun.image.codec.jpeg.ImageFormatException.class;

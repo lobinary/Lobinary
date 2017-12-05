@@ -1,0 +1,34 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="urn:wxChannelDeal.wsdl" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ns2="soapenv">
+	<SOAP-ENV:Header>
+		<ns2:headerInput>
+			<customerId>PB100000415</customerId>
+			<customerUserId></customerUserId>
+			<currentBusinessCode>00400000</currentBusinessCode>
+			<channelId>2501</channelId>
+			<tellerId>999999</tellerId>
+			<authTellerId></authTellerId>
+			<flowNo>2014122310075920023</flowNo>
+			<reqTime>1419300479</reqTime>
+			<wangyinflag>0</wangyinflag>
+			<tokenType></tokenType>
+			<challengeCode></challengeCode>
+			<firstPasswd></firstPasswd>
+		</ns2:headerInput>
+	</SOAP-ENV:Header>
+	<SOAP-ENV:Body>
+		<ns1:subAccountQueryDetail>
+			<subAccountQueryDetailInput>
+				<accountNo>6224254511010599628</accountNo>
+				<beginDate />
+				<endDate />
+				<turnPageBeginPos />
+				<turnPageShowNum />
+				<turnPageFlag />
+				<RcvFileNme />
+				<logRecordFlag />
+				<currentBusinessCode>00400000</currentBusinessCode>
+			</subAccountQueryDetailInput>
+		</ns1:subAccountQueryDetail>
+	</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

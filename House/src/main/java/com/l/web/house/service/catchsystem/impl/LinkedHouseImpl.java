@@ -45,12 +45,13 @@ public class LinkedHouseImpl extends 房屋信息捕获基类 {
 
     private final static String 房屋信息来源 = "链家";
     static int index = 0;
+    
     @Resource
     SqlSessionFactory sqlSessionFactory;
 
-    SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-ddHHmmss");
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-ddHHmmss");
 
-    SimpleDateFormat idsdf = new SimpleDateFormat("YYYYMMddHHmmss");
+    SimpleDateFormat idsdf = new SimpleDateFormat("yyyyMMddHHmmss");
 
     private String 所在小区编号S;
 
@@ -239,7 +240,7 @@ public class LinkedHouseImpl extends 房屋信息捕获基类 {
             String 产权年限S = 属性Map.remove("产权年限");
             if (产权年限S != null && !产权年限S.trim().equals("未知"))
                 f.产权年限 = Integer.parseInt(产权年限S.trim().replace("年", ""));
-            SimpleDateFormat sdf挂牌时间 = new SimpleDateFormat("YYYY-MM-dd");
+            SimpleDateFormat sdf挂牌时间 = new SimpleDateFormat("yyyy-MM-dd");
             f.挂牌时间 = sdf挂牌时间.parse(属性Map.remove("挂牌时间"));
             f.交易权属 = 属性Map.remove("交易权属");
             String 上次交易时间 = 属性Map.remove("上次交易");

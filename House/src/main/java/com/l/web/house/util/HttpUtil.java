@@ -13,6 +13,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
+import java.security.Security;
 import java.util.List;
 import java.util.Map;
 
@@ -48,9 +49,14 @@ public class HttpUtil {
 //        uuid = "224ea28c-8b4b-4d21-806b-6b3f8c90d6bf";
 //        String content = HttpUtil.sendGetRequest("https://bj.lianjia.com/ershoufang/pg1p2p1p4p3/");
 //        String content = HttpUtil.sendGet("https://bj.lianjia.com/ershoufang/pg1p2p1p4p3/");
-        String content = HttpUtil.sendGet("http://www.jd.com");
+//        System.out.println(System.getProperty("java.ext.dirs"));
+        String content = HttpUtil.sendGet("https://bj.lianjia.com/ershoufang/pg1p2p1p4p3/");
          System.out.println(content);
+         
+         
         // System.out.println(doGet("http://bj.lianjia.com/ershoufang/pg1l1l2l3l4p1p2"));
+         
+         
     }
 
     private HttpUtil() {

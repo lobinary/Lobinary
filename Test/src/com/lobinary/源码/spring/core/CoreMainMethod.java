@@ -12,6 +12,7 @@ public class CoreMainMethod {
 		ctx = new ClassPathXmlApplicationContext("bean.xml");
 		Person p = ctx.getBean("person",Person.class);//创建bean的引用对象
         p.info();
+        System.out.println(ctx.getBean("&person"));
 	}
 
 }

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+    <script type="text/javascript" src="highcharts.src.js"></script>
+	<style>
+	        div {
+	                   display:inline-block ; 
+	              }
+	</style>
+</head>
+<body>
+    <div style="float: left;width: 49%;">
+	    <table border="1">
+	        <tr>
+	            <th>姓名</th>
+                <th>提交代码数量</th>
+                <th>人员所属分组</th>
+                <th>人员所属岗位</th>
+	        </tr>
+	        <tr>
+	            <td>猫驴子</td>
+                <td>25</td>
+                <td>项目管理组</td>
+                <td>配置管理岗</td>
+	        </tr>
+            <tr>
+                <td>钢蛋</td>
+                <td>50</td>
+                <td>交易平台组</td>
+                <td>软件开发岗</td>
+            </tr>
+            <tr>
+                <td>钢蛋2</td>
+                <td>40</td>
+                <td>交易平台组</td>
+                <td>软件开发岗</td>
+            </tr>
+            <tr>
+                <td>钢蛋3</td>
+                <td>150</td>
+                <td>交易平台组</td>
+                <td>软件开发岗</td>
+            </tr>
+	    </table>
+    </div>
+    <div id="container" style="height:400px;float: right;width: 49%;"></div>
+    
+    <script type="text/javascript">
+ // 基于准备好的dom，初始化echarts实例
+        // 图表配置
+        var options = {
+            chart: {
+                type: 'bar'                          //指定图表的类型，默认是折线图（line）
+            },
+            title: {
+                text: '代码提交行数统计图'                 // 标题
+            },
+            xAxis: {
+                categories: ['猫驴', '钢蛋', '钢蛋2', '钢蛋3']   // x 轴分类
+            },
+            yAxis: {
+                title: {
+                    text: '提交代码行数'                // y 轴标题
+                }
+            },
+            series: [{                              // 数据列
+                name: '所有项目',                        // 数据列名
+                data: [25, 50, 40,150]                     // 数据
+            }]
+        };
+        // 图表初始化函数
+        var chart = Highcharts.chart('container', options);
+    </script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+    <script type="text/javascript" src="echarts.min.js"></script>
+	<style>
+	        div {
+	                   display:inline-block ; 
+	              }
+	</style>
+</head>
+<body>
+    <div style="float: left;width: 49%;">
+	    <table border="1">
+	        <tr>
+	            <th>姓名</th>
+                <th>提交代码数量</th>
+                <th>人员所属分组</th>
+                <th>人员所属岗位</th>
+	        </tr>
+	        <tr>
+	            <td>猫驴子</td>
+                <td>25</td>
+                <td>项目管理组</td>
+                <td>配置管理岗</td>
+	        </tr>
+            <tr>
+                <td>钢蛋</td>
+                <td>50</td>
+                <td>交易平台组</td>
+                <td>软件开发岗</td>
+            </tr>
+            <tr>
+                <td>钢蛋2</td>
+                <td>40</td>
+                <td>交易平台组</td>
+                <td>软件开发岗</td>
+            </tr>
+            <tr>
+                <td>钢蛋3</td>
+                <td>150</td>
+                <td>交易平台组</td>
+                <td>软件开发岗</td>
+            </tr>
+	    </table>
+    </div>
+    <div id="main" style="height:400px;float: right;width: 49%;"></div>
+    
+    <script type="text/javascript">
+ // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+    
+        option = {
+            title: {
+                text: '代码提交行数统计图'
+            },
+            color: ['#3398DB'],
+            tooltip : {
+                trigger: 'axis',
+                axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                    type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis : [
+                {
+                    type : 'category',
+                    data : ['猫驴子', '钢蛋', '钢蛋2', '钢蛋3'],
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value'
+                }
+            ],
+            series : [
+                {
+                    name:'提交代码行数',
+                    type:'bar',
+                    barWidth: '60%',
+                    data:[25, 50, 40, 150]
+                }
+            ]
+        };
+        
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+</html>
