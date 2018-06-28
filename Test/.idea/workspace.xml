@@ -28,11 +28,11 @@
       <find>common</find>
       <find>commons</find>
       <find>FileUtils</find>
-      <find>[2018-05-16 20:18:01,134]</find>
-      <find>(HttpRequest request, HttpClientConnection conn, HttpContext context</find>
+      <find />
+      <find />
       <find>parseHead</find>
-      <find>failed to respond</find>
-      <find>Connection: keep-alive</find>
+      <find />
+      <find />
       <find>Connection:keep-alive</find>
       <find>##########################################################</find>
       <find>Thread-1147</find>
@@ -110,7 +110,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-7" />
     <option name="width" value="974" />
     <option name="height" value="1047" />

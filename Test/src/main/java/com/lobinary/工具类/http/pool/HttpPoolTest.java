@@ -192,9 +192,8 @@ public class HttpPoolTest {
 //            logger.info("准备发送请求");
             s = System.currentTimeMillis();
             httpRequest.addHeader("Authorization", generateAuthorizationInfo());
-            //{"acquiring_bank_id":"1900008751","merchant_id":"11386271","acquiring_bank_appid":"wx2421b1c4370ec43b","channel_id":"24006513",description":"hello wx","notify_url":"https://barcode.nucc.com/notify/wechat","out_trade_no":"12345678901522330588708","trade_type":"NATIVE","payer":{"auth_code":"1234567890"},"amount":{"total":1}}
             String reqData = "{\n" +
-                    "  \"acquiring_bank_id\": \"1900008751\",\n" +
+                    "  \"acquiring_bank_id\": \"123456789\",\n" +
                     "  \"acquiring_bank_appid\": \"wx2421b1c4370ec43b\",\n" +
                     "  \"channel_id\": \"24006513\",\n" +
                     "  \"description\": \"??-??-????????\",\n" +
@@ -263,7 +262,7 @@ public class HttpPoolTest {
      */
     private static String generateAuthorizationInfo() throws Exception {
 //        String sign = AlipaySignature.rsaSign(signatureOriStr,priKey,"UTF-8","RSA2");
-        return "WECHATPAY2-SHA256-RSA2048 mch_id=\"" + "1900008751" +
+        return "WECHATPAY2-SHA256-RSA2048 mch_id=\"" + "123456789" +
                 "\",nonce_str=\"" + "1234567890" +
                 "\",signature=\"" + "1234567890" +
                 "\",timestamp=\"" + getNowSecondsStamp() +
