@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/main/java/com/lobinary/AI/四子棋/AboutFrame.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/lobinary/AI/四子棋/Chess.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/lobinary/AI/四子棋/ChessButton.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/lobinary/AI/四子棋/Chessboard.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/lobinary/AI/四子棋/ExplainFrame.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/lobinary/AI/四子棋/GameInfo.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/lobinary/AI/四子棋/MainFrame.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/lobinary/AI/四子棋/PlayerInfo.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/lobinary/AI/四子棋/SetDialog.java" charset="UTF-8" />
+  </component>
+</project>

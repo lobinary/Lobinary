@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Transaction>
+	<Transaction_Header>
+		<transaction_id><![CDATA[P1JHZF010]]></transaction_id>
+		<SYS_EVT_TRACE_ID><![CDATA[1300269001513947962026714]]></SYS_EVT_TRACE_ID>
+		<tran_response>
+			<status><![CDATA[FAIL]]></status>
+			<code><![CDATA[XDOP1000JH01]]></code>
+			<desc><![CDATA[该笔订单已入商户账，拒绝重复交易]]></desc>
+		</tran_response>
+		<JHZF_KEY><![CDATA[69001513927987026611]]></JHZF_KEY>
+	</Transaction_Header>
+	<Transaction_Body>
+		<response>
+			<MERCHANT_CODE><![CDATA[105881000000020]]></MERCHANT_CODE>
+			<POSB_TERM_NO><![CDATA[00270015]]></POSB_TERM_NO>
+			<BATCH_NO><![CDATA[000000]]></BATCH_NO>
+			<S2P_TRANS_TYPE><![CDATA[ZFB]]></S2P_TRANS_TYPE>
+		</response>
+	</Transaction_Body>
+</Transaction>
