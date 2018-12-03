@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Wed Nov 28 15:05:43 CST 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0167-5923-470b-000008028180 
+on database directory D:\3-ApplicationData\Lobinary\card.db with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
+Loaded from file:/E:/tool/gradle/service_directory/caches/modules-2/files-2.1/org.apache.derby/derby/10.14.2.0/7efad40ef52fbb1f08142f07a83b42d29e47d8ce/derby-10.14.2.0.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_171-b11
+user.dir=E:\tool\Git\Lobinary\spring-boot
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

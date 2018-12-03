@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <MsgHeader>
+        <SignSN>4052421310</SignSN>
+        <SndDt>2018-11-15T14:37:16</SndDt>
+        <MsgTp>bcs.101.001.01</MsgTp>
+    </MsgHeader>
+    <MsgBody>
+        <MrchntCtcterNm>费翔</MrchntCtcterNm>
+        <MrchntCtgyCd>1801</MrchntCtgyCd>
+        <AcceptPartnerId>S000071000000001</AcceptPartnerId>
+        <AccountPartnerId>Z2016911000015</AccountPartnerId>
+        <ReqId>89591111342</ReqId>
+        <TrxDtTm>2018-11-16T14:37:36</TrxDtTm>
+        <ServicePhone>12388883333</ServicePhone>
+        <MrchntNm>CS费翔CS3333</MrchntNm>
+        <MrchntInnerNo>21680002826036</MrchntInnerNo>
+        <AcceptExtension>&lt;ProvinceCode&gt;310000&lt;/ProvinceCode&gt;&lt;CityCode&gt;310100&lt;/CityCode&gt;&lt;AreaCode&gt;310105&lt;/AreaCode&gt;</AcceptExtension>
+        <MrchntShrtNm>CS费翔CS3333</MrchntShrtNm>
+        <MrchntCtcterPhne>12388883333</MrchntCtcterPhne>
+        <MrchntAdr>淞虹路</MrchntAdr>
+    </MsgBody>
+</root>
